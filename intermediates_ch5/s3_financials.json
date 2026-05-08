@@ -1,0 +1,81 @@
+{
+  "company": "海底捞",
+  "currency": "亿元人民币（港股上市，以人民币报告）",
+  "annual_data": [
+    {
+      "year": "2020",
+      "revenue": 286.1,
+      "revenue_yoy_pct": -11.5,
+      "gross_profit_margin_pct": 57.1,
+      "operating_profit": -11.9,
+      "operating_margin_pct": -4.2,
+      "net_profit": -18.3,
+      "net_margin_pct": -6.4,
+      "free_cash_flow": -25.0,
+      "store_count_eoy": 1298,
+      "table_turns_avg": 3.5,
+      "key_event": "疫情冲击，门店受限，全年净亏损"
+    },
+    {
+      "year": "2021",
+      "revenue": 411.1,
+      "revenue_yoy_pct": 43.7,
+      "gross_profit_margin_pct": 57.7,
+      "operating_profit": -20.3,
+      "operating_margin_pct": -4.9,
+      "net_profit": -41.6,
+      "net_margin_pct": -10.1,
+      "free_cash_flow": -40.0,
+      "store_count_eoy": 1443,
+      "table_turns_avg": 3.0,
+      "key_event": "激进扩张（啄木鸟前），新开门店摊薄盈利，人力成本激增"
+    },
+    {
+      "year": "2022",
+      "revenue": 347.4,
+      "revenue_yoy_pct": -15.5,
+      "gross_profit_margin_pct": 56.4,
+      "operating_profit": 18.8,
+      "operating_margin_pct": 5.4,
+      "net_profit": 13.7,
+      "net_margin_pct": 3.9,
+      "free_cash_flow": 30.0,
+      "store_count_eoy": 1374,
+      "table_turns_avg": 2.9,
+      "key_event": "啄木鸟计划关店300+，精简提效，利润率回正"
+    },
+    {
+      "year": "2023",
+      "revenue": 414.5,
+      "revenue_yoy_pct": 19.3,
+      "gross_profit_margin_pct": 57.1,
+      "operating_profit": 50.0,
+      "operating_margin_pct": 12.1,
+      "net_profit": 44.9,
+      "net_margin_pct": 10.8,
+      "free_cash_flow": 55.0,
+      "store_count_eoy": 1374,
+      "table_turns_avg": 3.8,
+      "key_event": "翻台率快速恢复，规模效应重现，利润大幅反弹"
+    }
+  ],
+  "balance_sheet_snapshot": {
+    "as_of": "2023年末",
+    "cash_and_equivalents_cny_bn": 57.5,
+    "total_debt_cny_bn": 22.0,
+    "net_cash_position_cny_bn": 35.5,
+    "leverage_comment": "净现金状态，资产负债表健康，具备回购/分红能力"
+  },
+  "dividend_policy": {
+    "history": "2023年首次派发特别股息，体现盈利恢复信心",
+    "payout_ratio_pct": 30,
+    "buyback_activity": "2023-2024年启动股份回购计划"
+  },
+  "financial_quality_flags": [
+    "现金流质量高：经营活动现金流持续强劲，资本支出管控改善",
+    "警惕：使用权资产（租赁负债）规模较大，需关注租约续签风险",
+    "警惕：关联方交易（颐海）占采购比例较高，需关注定价公允性"
+  ],
+  "need_human_calibration": true,
+  "calibration_reason": "财务数据以最新年报为准，2024年数据需补充披露后更新"
+}

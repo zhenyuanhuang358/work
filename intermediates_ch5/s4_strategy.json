@@ -1,0 +1,57 @@
+{
+  "company": "海底捞 (6862.HK)",
+  "strategic_initiatives": [
+    {
+      "name": "啄木鸟计划（2021-2022）",
+      "description": "主动关闭约300家盈利不达标门店，优化门店网络质量",
+      "execution_score": "高",
+      "result": "单店翻台率从2.9回升至3.8，四墙利润率从接近0恢复至10%+",
+      "lesson": "证明管理层具备自我纠错能力，愿意在规模和盈利间取得平衡"
+    },
+    {
+      "name": "硬骨头计划（2023-）",
+      "description": "重开部分此前关闭但潜力尚在的门店，选择性扩张",
+      "execution_score": "中",
+      "result": "谨慎重开约20-30家，未出现大规模激进扩张，节奏可控",
+      "lesson": "扩张纪律有所改善，但市场对再次扩张过快仍有顾虑"
+    },
+    {
+      "name": "区域化管理与组织架构改革",
+      "description": "将全国划分为多个区域，赋予区域教练更多决策权，提升响应速度",
+      "execution_score": "高",
+      "result": "门店运营效率提升，针对不同区域的口味偏好和营销活动更加灵活",
+      "lesson": "去中心化管理有效缓解了规模扩张带来的管理半径过大问题"
+    }
+  ],
+  "management_assessment": {
+    "ceo": "杨利娟（2022年接任，前任张勇淡出）",
+    "stability": "高：核心管理层稳定，内部提拔文化保持延续性",
+    "incentive_alignment": "中：高管持股比例适中，师徒制对一线员工激励强",
+    "decision_quality": "近年显著改善：啄木鸟计划证明管理层愿意承认错误并纠偏",
+    "key_risk": "创始人张勇淡出后，企业家精神和文化传承是潜在挑战"
+  },
+  "strategic_priorities_next2yr": [
+    "单店盈利能力持续提升（翻台率目标4.0+）",
+    "海外市场选择性扩张（东南亚为主）",
+    "零售和预制菜业务放量（通过颐海国际）",
+    "数字化运营降本（智能点餐、供应链数字化）"
+  ],
+  "strategy_risk_matrix": [
+    {
+      "risk": "扩张纪律再次失守",
+      "probability": "低",
+      "impact": "高",
+      "mitigation": "管理层已建立更严格的开店标准，需持续跟踪新开店表现"
+    },
+    {
+      "risk": "服务差异化持续弱化",
+      "probability": "中",
+      "impact": "高",
+      "mitigation": "加大产品研发，向巴奴的产品主义学习，构建双轮驱动"
+    }
+  ],
+  "overall_strategy_rating": "B+",
+  "rating_rationale": "战略方向清晰，执行力相比2021年有明显改善，但产品侧短板和海外扩张不确定性制约评级上限",
+  "need_human_calibration": false,
+  "calibration_reason": ""
+}

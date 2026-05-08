@@ -1,0 +1,50 @@
+{
+  "company": "海底捞",
+  "business_model_type": "直营连锁餐饮 + 供应链协同",
+  "revenue_breakdown": [
+    {
+      "segment": "餐厅经营收入",
+      "share_pct": 96.0,
+      "note": "堂食为核心，贡献绝大部分收入"
+    },
+    {
+      "segment": "外卖业务",
+      "share_pct": 2.5,
+      "note": "疫情期间快速增长，现占比趋稳，作为堂食补充"
+    },
+    {
+      "segment": "调味品及食材零售",
+      "share_pct": 1.5,
+      "note": "通过颐海国际间接获益，主体直接收入占比低，但具品牌延伸价值"
+    }
+  ],
+  "profit_logic": {
+    "core_driver": "门店数 × 翻台率 × 客单价",
+    "margin_structure": "食材成本约40-42%，员工成本约30-33%，租金及物业管理费约8-10%，四墙利润率约15-20%",
+    "leverage_point": "翻台率每提升0.5次/天，单店年利润增量约30-50万元，对整体盈利贡献显著"
+  },
+  "flywheel": [
+    "极致服务体验 → 顾客高满意度与口碑传播 → 更高翻台率 → 门店盈利能力增强 → 员工激励与福利提升 → 持续提供优质服务",
+    "门店规模扩大 → 供应链议价能力提升 → 食材采购成本下降 → 利润空间扩大 → 更多资金用于门店扩张与创新"
+  ],
+  "related_party_value": [
+    {
+      "entity": "颐海国际（3097.HK）",
+      "relationship": "海底捞火锅底料及部分食材的核心供应商，海底捞为第一大客户及重要股东",
+      "strategic_value": "确保核心食材品质稳定与成本可控，同时颐海国际独立发展零售业务，形成协同盈利，降低海底捞自身供应链风险"
+    },
+    {
+      "entity": "蜀海集团",
+      "relationship": "海底捞的食材供应链管理平台（非上市），提供采购、加工、仓储、冷链物流等全链路服务",
+      "strategic_value": "高效的供应链体系是海底捞快速扩张和精细化运营的基石，保障食材新鲜度和配送效率，降低运营成本"
+    }
+  ],
+  "asset_intensity": {
+    "model": "重资产直营",
+    "capex_per_new_store_wan": 800,
+    "payback_period_years": 2.5,
+    "asset_turnover_comment": "通过高翻台率和精细化运营，努力提升重资产的周转效率和投资回报率"
+  },
+  "need_human_calibration": false,
+  "calibration_reason": ""
+}

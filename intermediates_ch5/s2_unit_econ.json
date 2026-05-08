@@ -1,0 +1,60 @@
+{
+  "model_basis": "标准直营大店（400㎡，约30-35桌）",
+  "scenarios": [
+    {
+      "period": "2019年（峰值）",
+      "table_turns_per_day": 4.8,
+      "avg_spend_per_head_rmb": 105,
+      "annual_revenue_wan": 1581,
+      "cost_breakdown_pct": {
+        "food_cost": 40.2,
+        "labor_cost": 30.5,
+        "rent": 8.1,
+        "other": 7.2
+      },
+      "restaurant_level_margin_pct": 14.0,
+      "restaurant_level_profit_wan": 221
+    },
+    {
+      "period": "2022年（谷底）",
+      "table_turns_per_day": 2.9,
+      "avg_spend_per_head_rmb": 104,
+      "annual_revenue_wan": 963,
+      "cost_breakdown_pct": {
+        "food_cost": 42.0,
+        "labor_cost": 36.0,
+        "rent": 11.0,
+        "other": 8.5
+      },
+      "restaurant_level_margin_pct": 2.5,
+      "restaurant_level_profit_wan": 24
+    },
+    {
+      "period": "2023-2024年（恢复期）",
+      "table_turns_per_day": 3.8,
+      "avg_spend_per_head_rmb": 99,
+      "annual_revenue_wan": 1203,
+      "cost_breakdown_pct": {
+        "food_cost": 41.0,
+        "labor_cost": 33.0,
+        "rent": 9.0,
+        "other": 7.5
+      },
+      "restaurant_level_margin_pct": 9.5,
+      "restaurant_level_profit_wan": 114
+    }
+  ],
+  "sensitivity": {
+    "table_turn_impact": "翻台率每+0.1次/天，单店四墙利润约+8-12万元/年",
+    "asp_impact": "人均消费每+5元，单店四墙利润约+15-20万元/年",
+    "key_bottleneck": "当前翻台率恢复至3.5-4.0区间是利润弹性释放的关键"
+  },
+  "new_store_economics": {
+    "capex_wan": 800,
+    "breakeven_table_turns": 3.2,
+    "irr_at_current_turns_pct": 18,
+    "target_irr_pct": 25
+  },
+  "need_human_calibration": true,
+  "calibration_reason": "单店数据需以海底捞最新财报披露的餐厅层面数据核实"
+}
