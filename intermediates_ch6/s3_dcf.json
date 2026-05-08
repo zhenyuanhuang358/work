@@ -1,0 +1,90 @@
+{
+  "model_currency": "港元（HKD），以人民币财务数据按汇率1.08换算",
+  "wacc_assumptions": {
+    "risk_free_rate_pct": 3.8,
+    "equity_risk_premium_pct": 6.0,
+    "beta": 1.1,
+    "cost_of_equity_pct": 10.4,
+    "cost_of_debt_pct": 3.2,
+    "tax_rate_pct": 25,
+    "target_debt_ratio_pct": 15,
+    "wacc_pct": 9.6
+  },
+  "scenarios": [
+    {
+      "name": "牛市情景",
+      "probability_pct": 20,
+      "key_assumptions": {
+        "revenue_cagr_2024_2028_pct": 10.5,
+        "terminal_ebit_margin_pct": 13.5,
+        "terminal_growth_rate_pct": 3.0,
+        "table_turn_2026e": 4.3,
+        "new_stores_per_year": 80
+      },
+      "fcff_2024e_cny_bn": 5.2,
+      "fcff_2028e_cny_bn": 8.8,
+      "terminal_value_hkd_bn": 165.0,
+      "equity_value_hkd_bn": 152.0,
+      "shares_outstanding_bn": 5.57,
+      "intrinsic_value_per_share_hkd": 27.3,
+      "scenario_description": "翻台率突破4.3次，海外业务实现规模化盈利，品牌创新带动客单价稳步提升"
+    },
+    {
+      "name": "基准情景",
+      "probability_pct": 60,
+      "key_assumptions": {
+        "revenue_cagr_2024_2028_pct": 6.5,
+        "terminal_ebit_margin_pct": 11.5,
+        "terminal_growth_rate_pct": 2.0,
+        "table_turn_2026e": 3.9,
+        "new_stores_per_year": 40
+      },
+      "fcff_2024e_cny_bn": 4.5,
+      "fcff_2028e_cny_bn": 6.2,
+      "terminal_value_hkd_bn": 125.0,
+      "equity_value_hkd_bn": 118.0,
+      "shares_outstanding_bn": 5.57,
+      "intrinsic_value_per_share_hkd": 21.2,
+      "scenario_description": "翻台率维持在3.9-4.0区间，供应链效率持续优化，成本控制保持行业领先"
+    },
+    {
+      "name": "熊市情景",
+      "probability_pct": 20,
+      "key_assumptions": {
+        "revenue_cagr_2024_2028_pct": 2.0,
+        "terminal_ebit_margin_pct": 8.5,
+        "terminal_growth_rate_pct": 1.0,
+        "table_turn_2026e": 3.4,
+        "new_stores_per_year": 10
+      },
+      "fcff_2024e_cny_bn": 3.8,
+      "fcff_2028e_cny_bn": 4.1,
+      "terminal_value_hkd_bn": 85.0,
+      "equity_value_hkd_bn": 82.0,
+      "shares_outstanding_bn": 5.57,
+      "intrinsic_value_per_share_hkd": 14.7,
+      "scenario_description": "行业竞争加剧导致翻台率下滑，海外扩张受阻，利润率因人工与租金成本上升而承压"
+    }
+  ],
+  "probability_weighted_value_hkd": 20.9,
+  "sensitivity_table": {
+    "description": "WACC vs. 终值增长率的目标价敏感性（基准情景）",
+    "wacc_range": [
+      8.6,
+      9.1,
+      9.6,
+      10.1,
+      10.6
+    ],
+    "tgr_range": [
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0
+    ],
+    "note": "WACC每+0.5%，内在价值约下降7-9%；终值增长率每+0.5%，内在价值约上升5-7%"
+  },
+  "need_human_calibration": true,
+  "calibration_reason": "需根据海底捞最新季度翻台率数据及海外分拆上市计划动态调整FCFF预测"
+}

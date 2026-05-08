@@ -1,0 +1,92 @@
+{
+  "comp_set": [
+    {
+      "company": "海底捞",
+      "ticker": "6862.HK",
+      "role": "核心标的",
+      "market_cap_hkd_bn": 100,
+      "ev_hkd_bn": 105,
+      "ebitda_2024e_cny_bn": 8.5,
+      "ev_ebitda_2024e": 11.1,
+      "pe_2024e": 20.0,
+      "store_count": 1374,
+      "ev_per_store_hkd_mn": 76.4,
+      "revenue_growth_2024e_pct": 10,
+      "note": "核心标的，估值相对同业仍有折价，具备修复空间"
+    },
+    {
+      "company": "呷哺呷哺",
+      "ticker": "0520.HK",
+      "role": "同业对标",
+      "market_cap_hkd_bn": 8,
+      "ev_hkd_bn": 10,
+      "ebitda_2024e_cny_bn": 1.5,
+      "ev_ebitda_2024e": 6.0,
+      "pe_2024e": null,
+      "store_count": 800,
+      "ev_per_store_hkd_mn": 12.5,
+      "revenue_growth_2024e_pct": 5,
+      "note": "中低端，盈利能力弱，折价合理"
+    },
+    {
+      "company": "捞王",
+      "ticker": "9622.HK",
+      "role": "同业对标",
+      "market_cap_hkd_bn": 3,
+      "ev_hkd_bn": 3.5,
+      "ebitda_2024e_cny_bn": 0.5,
+      "ev_ebitda_2024e": 6.3,
+      "pe_2024e": 12.0,
+      "store_count": 180,
+      "ev_per_store_hkd_mn": 19.4,
+      "revenue_growth_2024e_pct": 8,
+      "note": "细分赛道，规模小，流动性折价"
+    },
+    {
+      "company": "百胜中国",
+      "ticker": "9987.HK",
+      "role": "跨品类参考",
+      "market_cap_hkd_bn": 150,
+      "ev_hkd_bn": 145,
+      "ebitda_2024e_cny_bn": 12.5,
+      "ev_ebitda_2024e": 10.4,
+      "pe_2024e": 22.0,
+      "store_count": 13000,
+      "ev_per_store_hkd_mn": 11.2,
+      "revenue_growth_2024e_pct": 6,
+      "note": "西式快餐龙头，护城河更强，估值溢价合理"
+    },
+    {
+      "company": "九毛九",
+      "ticker": "9922.HK",
+      "role": "同业对标",
+      "market_cap_hkd_bn": 10,
+      "ev_hkd_bn": 9,
+      "ebitda_2024e_cny_bn": 1.2,
+      "ev_ebitda_2024e": 6.8,
+      "pe_2024e": 14.0,
+      "store_count": 550,
+      "ev_per_store_hkd_mn": 16.4,
+      "revenue_growth_2024e_pct": 12,
+      "note": "太二酸菜鱼差异化定位，增速更快"
+    }
+  ],
+  "peer_median": {
+    "ev_ebitda": 6.6,
+    "pe": 14.0,
+    "ev_per_store_hkd_mn": 14.5
+  },
+  "target_justified_multiples": {
+    "ev_ebitda_justified": 13.0,
+    "pe_justified": 20.0,
+    "premium_rationale": "海底捞护城河最强（宽护城河评级）、规模最大、翻台率恢复弹性最大，理应享有同业溢价50-100%"
+  },
+  "implied_price_range_hkd": {
+    "low": 18.0,
+    "mid": 21.5,
+    "high": 25.0,
+    "basis": "EV/EBITDA 11-15x区间对应目标价范围"
+  },
+  "need_human_calibration": true,
+  "calibration_reason": "市值、EV和EBITDA数据需以最新财报和Wind/Bloomberg共识预测核实"
+}

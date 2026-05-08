@@ -1,0 +1,47 @@
+{
+  "current_price_hkd": 16.8,
+  "price_date": "2024年5月",
+  "valuation_summary": [
+    {
+      "method": "相对估值（EV/EBITDA中枢）",
+      "weight_pct": 40,
+      "implied_value_hkd": 21.5
+    },
+    {
+      "method": "DCF基准情景",
+      "weight_pct": 40,
+      "implied_value_hkd": 21.2
+    },
+    {
+      "method": "DCF概率加权",
+      "weight_pct": 20,
+      "implied_value_hkd": 20.9
+    }
+  ],
+  "weighted_target_price_hkd": 21.5,
+  "target_price_range_hkd": {
+    "low": 18.0,
+    "mid": 21.5,
+    "high": 25.0
+  },
+  "upside_pct": 27.98,
+  "dividend_yield_pct": 2.2,
+  "total_return_pct": 30.18,
+  "rating": "买入",
+  "rating_rationale": "海底捞通过精细化运营实现盈利能力显著修复，翻台率回升趋势稳健。当前股价处于历史估值中枢下方，考虑到其在火锅赛道的绝对龙头地位及现金流创造能力，当前价格具备极高安全边际与向上弹性。",
+  "key_catalysts": [
+    "翻台率持续维持在4.0次/天以上水平",
+    "海外业务分拆上市预期或资本运作",
+    "成本控制措施进一步优化利润率",
+    "暑期及节假日消费旺季表现超预期"
+  ],
+  "key_risks_to_rating": [
+    "宏观消费疲软导致客单价持续下滑",
+    "原材料价格大幅波动影响毛利率",
+    "食品安全事件引发品牌声誉受损",
+    "新店扩张策略不及预期"
+  ],
+  "rating_change": "维持买入",
+  "need_human_calibration": true,
+  "calibration_reason": "目标价计算基于当前市场环境，需根据后续财报披露的最新经营数据及宏观利率环境进行动态调整"
+}
