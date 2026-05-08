@@ -1,0 +1,63 @@
+{
+  "penetration_overview": "中国火锅市场渗透率较高，但区域、城市级别及不同人群消费习惯间存在显著差异，且连锁化率仍有较大提升空间。整体增速趋缓至个位数，但连锁化率提升和新渠道拓展提供结构性增长机会。",
+  "by_city_tier": [
+    {
+      "tier": "一线城市",
+      "penetration_level": "高",
+      "chain_ratio_pct": 45,
+      "growth_potential": "低",
+      "note": "市场饱和，竞争激烈，增量来自存量品牌替换及高端化、特色化趋势。人均消费频次相对稳定。"
+    },
+    {
+      "tier": "新一线/二线",
+      "penetration_level": "中高",
+      "chain_ratio_pct": 35,
+      "growth_potential": "中",
+      "note": "核心增量市场，消费升级驱动，连锁品牌加速渗透。年轻及中高收入人群消费频次较高。"
+    },
+    {
+      "tier": "三线城市",
+      "penetration_level": "中",
+      "chain_ratio_pct": 20,
+      "growth_potential": "高",
+      "note": "消费升级明显，品牌火锅接受度快速提升，市场教育空间大。中等收入人群消费频次增长快。"
+    },
+    {
+      "tier": "四线及以下",
+      "penetration_level": "低",
+      "chain_ratio_pct": 10,
+      "growth_potential": "高",
+      "note": "长期白地，但客单价和盈利模型需适配当地消费水平，下沉市场潜力待挖掘。"
+    }
+  ],
+  "international_benchmarks": [
+    {
+      "country": "日本",
+      "metric": "餐饮连锁化率",
+      "value_pct": 55,
+      "implication": "中国餐饮连锁化率（目前约20%）仍有约35个百分点的长期提升空间，火锅品类作为优势赛道有望率先受益。"
+    },
+    {
+      "country": "美国",
+      "metric": "人均餐饮支出占可支配收入比",
+      "value_pct": 6.5,
+      "implication": "中国约4.5%，提升空间约2个百分点，对应约数千亿增量市场，火锅作为社交餐饮重要组成部分将持续受益。"
+    }
+  ],
+  "store_count_ceiling": {
+    "current_chain_stores_hotpot": 150000,
+    "estimated_ceiling": 250000,
+    "ceiling_basis": "基于中国人口规模及餐饮消费习惯，结合火锅品类市场渗透率提升空间，预计总门店数上限（含非连锁）",
+    "years_to_ceiling": "8-12年"
+  },
+  "core_target_ceiling": {
+    "brand": "海底捞",
+    "current_stores": 1374,
+    "estimated_store_ceiling": 2200,
+    "ceiling_basis": "参照麦当劳/肯德基等成熟连锁餐饮品牌在中国的门店密度模型，结合火锅品类特性及海底捞品牌定位，主要集中在一二线城市及部分三线城市的核心商圈。",
+    "revenue_at_ceiling_cny_bn": 650,
+    "key_constraint": "优质点位供给有限，人均消费天花板约120-130元，以及品牌老化、创新不足带来的竞争风险。不同年龄/收入层消费者对海底捞的接受度存在差异。"
+  },
+  "need_human_calibration": true,
+  "calibration_reason": "天花板估算高度依赖假设，需结合公司管理层指引和三方测算交叉验证，尤其是在市场竞争加剧、消费趋势变化和宏观经济不确定性背景下。人群维度分析需更细致数据支撑。"
+}

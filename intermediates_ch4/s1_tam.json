@@ -1,0 +1,33 @@
+{
+  "base_year": "2023",
+  "currency": "亿元人民币",
+  "top_down": {
+    "china_catering_total_market": 52890,
+    "hotpot_share_pct": 13.5,
+    "tam_estimate": 7140,
+    "data_source": "国家统计局+弗若斯特沙利文估算"
+  },
+  "bottom_up": {
+    "total_hotpot_stores_china": 500000,
+    "avg_annual_revenue_per_store_wan": 120,
+    "tam_estimate": 6000,
+    "data_source": "美团研究院+行业协会数据估算"
+  },
+  "tam_consensus": 6500,
+  "sam": {
+    "chainable_market_share_pct": 30,
+    "sam_estimate": 1950,
+    "rationale": "连锁化率约30%，即可标准化复制的品牌所能触达的市场"
+  },
+  "som": {
+    "target_brand": "海底捞",
+    "current_revenue": 414.5,
+    "market_share_of_sam_pct": 21.3,
+    "som_ceiling_3yr": 600,
+    "rationale": "在翻台率恢复和门店适度扩张假设下，3年内营收天花板估算"
+  },
+  "market_growth_rate_cagr_pct": 5.5,
+  "growth_rate_basis": "2023-2028E，参考餐饮行业整体增速+火锅连锁化提升",
+  "need_human_calibration": true,
+  "calibration_reason": "TAM需以最新国家统计局餐饮数据和第三方报告交叉验证"
+}
