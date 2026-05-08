@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="第3章：模糊指令 vs. 精确指令" font-family="Noto Sans SC, Source Han Sans SC, PingFang SC, system-ui, sans-serif">
+  <defs>
+    <filter id="soft-shadow" x="-8%" y="-12%" width="116%" height="128%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#111827" flood-opacity="0.08"/>
+    </filter>
+    <pattern id="dot-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#e8e4da" opacity="0.85"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#1f4e79" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+  <rect width="1200" height="675" fill="#f5f4ed"/>
+  <rect x="1" y="1" width="1198" height="673" rx="18" fill="#faf9f5" stroke="#d9d6cc" stroke-width="1.6"/>
+  <rect x="1" y="1" width="1198" height="673" rx="18" fill="url(#dot-grid)" opacity="0.34"/>
+  <rect x="72" y="206" width="1056" height="390" rx="16" fill="#f5f4ed" stroke="#d9d6cc" stroke-width="1.1" opacity="0.82"/>
+  <text x="84" y="82" fill="#1f4e79" font-size="12" font-weight="800" letter-spacing="1.2">第3章</text>
+  <text x="1116" y="82" text-anchor="end" fill="#5f6673" font-size="11" font-weight="700" letter-spacing="1">教学图示</text>
+  <rect x="84" y="100" width="54" height="4" rx="2" fill="#1f4e79"/>
+  <text x="84.0" y="136.0" text-anchor="start" fill="#111827" font-size="31" font-weight="800"><tspan x="84.0" dy="0">第3章：模糊指令 vs. 精确指令</tspan></text>
+  <text x="84.0" y="178.0" text-anchor="start" fill="#5f6673" font-size="15" font-weight="500"><tspan x="84.0" dy="0">精确化指令消除歧义，让输出稳定可控</tspan></text>
+  <rect x="94" y="222" width="492" height="344" rx="12" fill="#faf9f5" stroke="#d9d6cc" stroke-width="1.6"/>
+  <rect x="94" y="222" width="492" height="58" rx="12" fill="#1f4e79" opacity="0.96"/>
+  <rect x="94" y="262" width="492" height="18" fill="#1f4e79" opacity="0.96"/>
+  <text x="122.0" y="258.0" text-anchor="start" fill="#ffffff" font-size="21" font-weight="800"><tspan x="122.0" dy="0">Option 1</tspan></text>
+  <circle cx="130" cy="318" r="6" fill="#1f4e79"/>
+  <text x="150.0" y="324.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="150.0" dy="0">写短一点</tspan></text>
+  <circle cx="130" cy="364" r="6" fill="#1f4e79"/>
+  <text x="150.0" y="370.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="150.0" dy="0">帮我分析</tspan></text>
+  <circle cx="130" cy="410" r="6" fill="#1f4e79"/>
+  <text x="150.0" y="416.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="150.0" dy="0">专业一点</tspan></text>
+  <circle cx="130" cy="456" r="6" fill="#1f4e79"/>
+  <text x="150.0" y="462.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="150.0" dy="0">写篇文章</tspan></text>
+  <rect x="614" y="222" width="492" height="344" rx="12" fill="#faf9f5" stroke="#d9d6cc" stroke-width="1.6"/>
+  <rect x="614" y="222" width="492" height="58" rx="12" fill="#6f7682" opacity="0.96"/>
+  <rect x="614" y="262" width="492" height="18" fill="#6f7682" opacity="0.96"/>
+  <text x="642.0" y="258.0" text-anchor="start" fill="#ffffff" font-size="21" font-weight="800"><tspan x="642.0" dy="0">Option 2</tspan></text>
+  <circle cx="650" cy="318" r="6" fill="#6f7682"/>
+  <text x="670.0" y="324.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="670.0" dy="0">控制在150字以内</tspan></text>
+  <circle cx="650" cy="364" r="6" fill="#6f7682"/>
+  <text x="670.0" y="370.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="670.0" dy="0">从流动性、盈利性、成长性三个维度分析</tspan></text>
+  <circle cx="650" cy="410" r="6" fill="#6f7682"/>
+  <text x="670.0" y="416.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="670.0" dy="0">使用行业术语，面向有5年经验的产品经理</tspan></text>
+  <circle cx="650" cy="456" r="6" fill="#6f7682"/>
+  <text x="670.0" y="462.0" text-anchor="start" fill="#111827" font-size="17" font-weight="600"><tspan x="670.0" dy="0">写一篇800字的行业分析，结构：背景→问题→建议</tspan></text>
+</svg>

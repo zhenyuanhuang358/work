@@ -1,0 +1,50 @@
+{
+  "topic": "GPT-5.5 提示词工程：从入门到进阶",
+  "audience": {
+    "level": "beginner-to-intermediate",
+    "role": "中文用户、知识工作者、AI爱好者",
+    "prior_knowledge": "了解ChatGPT基本使用，无编程要求",
+    "target_outcome": "能够系统掌握GPT-5.5提示词写作技巧，写出高质量、稳定可复用的提示词"
+  },
+  "language": "zh-CN",
+  "user_materials": {
+    "notes": [],
+    "urls": [],
+    "files": [],
+    "named_references": [],
+    "must_use": [],
+    "nice_to_use": [],
+    "do_not_use": [],
+    "style_references": [],
+    "sufficiency_tier": "thin"
+  },
+  "scope": {
+    "desired_length": "5000-10000 中文字符",
+    "chapter_count": "7",
+    "time_budget": "",
+    "must_include": [
+      "提示词基本结构",
+      "思维链推理 Chain-of-Thought",
+      "少样本学习 Few-shot",
+      "GPT-5.5新能力适配",
+      "实战工作流",
+      "常见错误"
+    ],
+    "avoid": ["纯学术术语堆砌", "需要编程能力的内容"]
+  },
+  "research": {
+    "priority_rule": "无用户材料，执行完整来源梯队研究",
+    "source_layers": ["官方文档", "论文", "GitHub", "实践博客"],
+    "required_domains": ["openai.com", "arxiv.org"],
+    "forbidden_domains": [],
+    "freshness_requirement": "2024-2025年最新实践",
+    "external_research_level": "full-source-ladder"
+  },
+  "visuals": {
+    "one_visual_per_chapter": true,
+    "preferred_types": ["flow", "layer", "comparison", "matrix", "cycle"],
+    "style_notes": "frontend-slides风格，ink-blue强调色，暖白背景，衬线标题"
+  },
+  "outputs": ["markdown", "html"],
+  "citation_style": "人类可读参考资料节"
+}

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>GPT-5.5 提示词工程：从入门到进阶</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">:root {
+color-scheme: light;
+--bg: #f5f4ed;
+--surface: #faf9f5;
+--ink: #111827;
+--muted: #5e5d59;
+--accent: #1b365d;
+--line: #e8e5da;
+--line-strong: #d1cfc5;
+--code-bg: #f2eee6;
+--toc-width: clamp(196px, 19vw, 252px);
+--reading-width: 820px;
+--page-gap: clamp(28px, 4vw, 56px);
+--shell-pad-x: clamp(18px, 3vw, 44px);
+--layout-width: calc(var(--toc-width) + var(--page-gap) + var(--reading-width));
+--body-size: clamp(16px, 1.05vw, 18px);
+--small-size: clamp(12px, 0.85vw, 14px);
+--h1-size: clamp(2rem, 4.2vw, 3.55rem);
+--h2-size: clamp(1.55rem, 2.7vw, 2.25rem);
+--h3-size: clamp(1.1rem, 1.7vw, 1.35rem);
+}
+@page {
+size: A4;
+margin: 20mm 22mm 22mm;
+background: #f5f4ed;
+}
+html {
+background: var(--bg);
+scroll-behavior: smooth;
+}
+body {
+margin: 0;
+padding: 0;
+color: var(--ink);
+font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+font-size: var(--body-size);
+line-height: 1.54;
+letter-spacing: 0;
+}
+.report-shell {
+display: grid;
+grid-template-columns: var(--toc-width) minmax(0, var(--reading-width));
+column-gap: var(--page-gap);
+align-items: start;
+width: min(calc(100% - (var(--shell-pad-x) * 2)), var(--layout-width));
+margin: 0 auto;
+padding: clamp(32px, 5vw, 72px) 0 80px;
+}
+.report-shell--no-toc {
+display: block;
+max-width: var(--reading-width);
+}
+.article-body {
+min-width: 0;
+max-width: var(--reading-width);
+}
+nav#TOC {
+position: sticky;
+top: clamp(32px, 5vw, 72px);
+width: auto;
+max-height: calc(100vh - 48px);
+overflow: auto;
+padding: 2px 0 2px 14px;
+border-left: 2px solid var(--line-strong);
+background: transparent;
+}
+nav#TOC ul {
+margin: 0;
+padding: 0;
+list-style: none;
+}
+nav#TOC li {
+margin: 0;
+padding: 0;
+font-size: var(--small-size);
+line-height: 1.34;
+}
+nav#TOC li li {
+margin-left: 12px;
+font-size: calc(var(--small-size) * 0.92);
+}
+nav#TOC a {
+display: block;
+padding: 5px 0;
+color: var(--muted);
+text-decoration: none;
+}
+nav#TOC a:hover {
+color: var(--accent);
+}
+h1,
+h2,
+h3,
+h4 {
+color: var(--ink);
+font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+font-weight: 700;
+letter-spacing: 0;
+line-height: 1.16;
+scroll-margin-top: 36px;
+}
+h1 {
+margin: 0 0 10px;
+font-size: var(--h1-size);
+}
+.doc-date {
+margin: 0 0 24px;
+padding-bottom: 18px;
+border-bottom: 2px solid var(--accent);
+color: var(--muted);
+font-size: var(--small-size);
+line-height: 1.4;
+}
+h1 + p,
+.doc-date + p {
+margin-top: 0;
+color: var(--muted);
+font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+line-height: 1.58;
+}
+h2 {
+margin-top: 56px;
+padding-top: 22px;
+border-top: 1px solid var(--line);
+font-size: var(--h2-size);
+}
+h3 {
+margin-top: 30px;
+font-size: var(--h3-size);
+}
+h4 {
+margin-top: 24px;
+font-size: 1rem;
+}
+p,
+li {
+font-size: 1rem;
+}
+p {
+margin: 0 0 1em;
+}
+ul,
+ol {
+padding-left: 1.24em;
+}
+li + li {
+margin-top: 0.28em;
+}
+a {
+color: var(--accent);
+text-decoration-thickness: 1px;
+text-underline-offset: 0.18em;
+}
+blockquote {
+margin: 24px 0;
+padding: 12px 18px;
+border-left: 3px solid var(--accent);
+background: var(--surface);
+color: var(--ink);
+}
+figure {
+margin: 28px 0 10px;
+}
+figure > img,
+p > img,
+img {
+display: block;
+}
+figure > img,
+p > img {
+width: 100%;
+max-width: 100%;
+height: auto;
+margin: 0 auto;
+border: 0;
+border-radius: 8px;
+background: transparent;
+}
+figure > figcaption[aria-hidden="true"] {
+display: none;
+}
+figcaption,
+.caption,
+figure + p,
+p:has(> img) + p {
+max-width: 720px;
+margin: 10px auto 30px;
+color: var(--muted);
+font-size: var(--small-size);
+text-align: center;
+}
+.table-wrap {
+max-width: 100%;
+margin: 26px 0 30px;
+overflow-x: auto;
+border: 1px solid var(--line);
+border-radius: 8px;
+background: transparent;
+}
+table {
+width: 100%;
+min-width: 680px;
+margin: 0;
+border-collapse: separate;
+border-spacing: 0;
+border: 0;
+background: var(--surface);
+font-size: 0.92rem;
+}
+col[style] {
+width: auto !important;
+}
+th,
+td {
+padding: 11px 13px;
+border: 0;
+border-right: 1px solid var(--line);
+border-bottom: 1px solid var(--line);
+line-height: 1.48;
+vertical-align: top;
+overflow-wrap: anywhere;
+}
+th {
+background: #eef2f7;
+color: var(--ink);
+font-size: 0.88rem;
+font-weight: 700;
+text-align: left;
+}
+td {
+background: var(--surface);
+}
+th:last-child,
+td:last-child {
+border-right: 0;
+}
+tbody tr:last-child td {
+border-bottom: 0;
+}
+tbody tr:nth-child(even) td {
+background: #f7f5ee;
+}
+tbody td:first-child {
+color: var(--ink);
+font-weight: 700;
+}
+code {
+padding: 0.08em 0.28em;
+border-radius: 4px;
+background: var(--code-bg);
+color: #7c2d12;
+font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+font-size: 0.9em;
+}
+pre {
+overflow-x: auto;
+margin: 24px 0;
+padding: 16px;
+border: 1px solid #20283b;
+border-radius: 6px;
+background: #111827;
+color: #f9fafb;
+}
+pre code {
+padding: 0;
+background: transparent;
+color: inherit;
+}
+hr {
+margin: 40px 0;
+border: 0;
+border-top: 1px solid var(--line);
+}
+@media (max-width: 980px) {
+.report-shell,
+.report-shell--no-toc {
+display: block;
+max-width: var(--reading-width);
+width: auto;
+margin: 0 auto;
+padding: clamp(24px, 5vw, 48px) clamp(18px, 4vw, 44px) 72px;
+}
+.article-body {
+max-width: none;
+}
+nav#TOC {
+position: sticky;
+top: 0;
+z-index: 10;
+width: auto;
+max-height: 38vh;
+margin: 0 0 24px;
+padding: 10px 0;
+border-left: 0;
+border-bottom: 1px solid var(--line-strong);
+background: var(--bg);
+}
+}
+@media (max-width: 640px) {
+.report-shell,
+.report-shell--no-toc {
+padding: 22px 16px 56px;
+}
+h1 {
+font-size: clamp(1.75rem, 10vw, 2.6rem);
+}
+.doc-date {
+margin-bottom: 20px;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+*,
+*::before,
+*::after {
+transition-duration: 0.01ms !important;
+animation-duration: 0.01ms !important;
+}
+html {
+scroll-behavior: auto;
+}
+}
+@media print {
+html,
+body {
+background: #f5f4ed;
+}
+body {
+display: block;
+max-width: none;
+padding: 0;
+font-size: 10pt;
+line-height: 1.52;
+}
+.report-shell,
+.report-shell--no-toc,
+.article-body {
+display: block;
+width: auto;
+max-width: none;
+margin: 0;
+padding: 0;
+}
+nav#TOC {
+display: none;
+}
+h1,
+h2,
+h3 {
+break-after: avoid;
+}
+h1 {
+font-size: 34pt;
+line-height: 1.12;
+}
+.doc-date {
+margin: 0 0 16pt;
+padding-bottom: 10pt;
+font-size: 8.5pt;
+}
+h2 {
+font-size: 18pt;
+line-height: 1.22;
+}
+h3 {
+font-size: 12.5pt;
+line-height: 1.3;
+}
+figure {
+margin: 18pt 0 8pt;
+}
+figure + p,
+p:has(> img) + p {
+margin: 6pt auto 18pt;
+font-size: 8.5pt;
+}
+.table-wrap {
+overflow: visible;
+margin: 16pt 0 18pt;
+border-radius: 6pt;
+}
+table {
+min-width: 0;
+font-size: 8.8pt;
+}
+th,
+td {
+padding: 6pt 7pt;
+line-height: 1.38;
+}
+img,
+.table-wrap,
+blockquote,
+pre {
+break-inside: avoid;
+}
+a {
+color: var(--ink);
+text-decoration: none;
+}
+}
+</style>
+</head>
+<body>
+<div class="report-shell">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#gpt-5.5-提示词工程从入门到进阶" id="toc-gpt-5.5-提示词工程从入门到进阶">GPT-5.5
+提示词工程：从入门到进阶</a>
+<ul>
+<li><a href="#第1章-提示词工程的基本认知" id="toc-第1章-提示词工程的基本认知">第1章 提示词工程的基本认知</a>
+<ul>
+<li><a href="#语言模型究竟在做什么" id="toc-语言模型究竟在做什么">1.1
+语言模型究竟在做什么</a></li>
+<li><a href="#为什么你的提示词时好时坏" id="toc-为什么你的提示词时好时坏">1.2 为什么你的提示词时好时坏</a></li>
+<li><a href="#gpt-5.5-时代为什么提示词更重要了" id="toc-gpt-5.5-时代为什么提示词更重要了">1.3 GPT-5.5
+时代，为什么提示词更重要了</a></li>
+</ul></li>
+<li><a href="#第2章-提示词的四要素结构" id="toc-第2章-提示词的四要素结构">第2章 提示词的四要素结构</a>
+<ul>
+<li><a href="#rtcf-框架一套通用的提示词结构" id="toc-rtcf-框架一套通用的提示词结构">2.1 RTCF
+框架：一套通用的提示词结构</a></li>
+<li><a href="#角色role让模型进入专业状态" id="toc-角色role让模型进入专业状态">2.2
+角色（Role）：让模型进入专业状态</a></li>
+<li><a href="#任务task用动词开头精确描述行动" id="toc-任务task用动词开头精确描述行动">2.3
+任务（Task）：用动词开头，精确描述行动</a></li>
+<li><a href="#上下文context给模型做决策所需的信息" id="toc-上下文context给模型做决策所需的信息">2.4
+上下文（Context）：给模型做决策所需的信息</a></li>
+<li><a href="#格式format控制输出提升可用性" id="toc-格式format控制输出提升可用性">2.5
+格式（Format）：控制输出，提升可用性</a></li>
+<li><a href="#rtcf-完整示例" id="toc-rtcf-完整示例">2.6 RTCF
+完整示例</a></li>
+</ul></li>
+<li><a href="#第3章-指令精确化消除歧义" id="toc-第3章-指令精确化消除歧义">第3章 指令精确化——消除歧义</a>
+<ul>
+<li><a href="#模糊指令为什么会失败" id="toc-模糊指令为什么会失败">3.1
+模糊指令为什么会失败</a></li>
+<li><a href="#六种精确化技巧" id="toc-六种精确化技巧">3.2
+六种精确化技巧</a></li>
+<li><a href="#结构标记的力量" id="toc-结构标记的力量">3.3
+结构标记的力量</a></li>
+</ul></li>
+<li><a href="#第4章-思维链推理激活深度思考" id="toc-第4章-思维链推理激活深度思考">第4章 思维链推理——激活深度思考</a>
+<ul>
+<li><a href="#为什么复杂推理容易出错" id="toc-为什么复杂推理容易出错">4.1 为什么复杂推理容易出错</a></li>
+<li><a href="#零样本思维链一句话激活推理" id="toc-零样本思维链一句话激活推理">4.2
+零样本思维链：一句话激活推理</a></li>
+<li><a href="#有样本思维链用示例展示推理过程" id="toc-有样本思维链用示例展示推理过程">4.3
+有样本思维链：用示例展示推理过程</a></li>
+<li><a href="#何时使用思维链" id="toc-何时使用思维链">4.4
+何时使用思维链</a></li>
+</ul></li>
+<li><a href="#第5章-少样本学习用示例调教风格" id="toc-第5章-少样本学习用示例调教风格">第5章
+少样本学习——用示例调教风格</a>
+<ul>
+<li><a href="#什么是少样本学习" id="toc-什么是少样本学习">5.1
+什么是少样本学习</a></li>
+<li><a href="#少样本提示词的标准结构" id="toc-少样本提示词的标准结构">5.2 少样本提示词的标准结构</a></li>
+<li><a href="#选择好示例的三个原则" id="toc-选择好示例的三个原则">5.3
+选择好示例的三个原则</a></li>
+<li><a href="#零样本单样本少样本的选择" id="toc-零样本单样本少样本的选择">5.4
+零样本、单样本、少样本的选择</a></li>
+<li><a href="#少样本的高级用法正反例结合" id="toc-少样本的高级用法正反例结合">5.5
+少样本的高级用法：正反例结合</a></li>
+</ul></li>
+<li><a href="#第6章-gpt-5.5-的新能力与提示词适配" id="toc-第6章-gpt-5.5-的新能力与提示词适配">第6章 GPT-5.5
+的新能力与提示词适配</a>
+<ul>
+<li><a href="#gpt-5.5-的四大能力升级" id="toc-gpt-5.5-的四大能力升级">6.1 GPT-5.5 的四大能力升级</a></li>
+<li><a href="#系统提示词system-prompt的重要性" id="toc-系统提示词system-prompt的重要性">6.2 系统提示词（System
+Prompt）的重要性</a></li>
+<li><a href="#避免-gpt-5.5-的过度谨慎" id="toc-避免-gpt-5.5-的过度谨慎">6.3 避免 GPT-5.5 的过度谨慎</a></li>
+</ul></li>
+<li><a href="#第7章-实战工作流从初稿到精调" id="toc-第7章-实战工作流从初稿到精调">第7章 实战工作流——从初稿到精调</a>
+<ul>
+<li><a href="#提示词迭代四步法" id="toc-提示词迭代四步法">7.1
+提示词迭代四步法</a></li>
+<li><a href="#五种常见反模式" id="toc-五种常见反模式">7.2
+五种常见反模式</a></li>
+<li><a href="#构建个人提示词库" id="toc-构建个人提示词库">7.3
+构建个人提示词库</a></li>
+<li><a href="#进阶链式提示词" id="toc-进阶链式提示词">7.4
+进阶：链式提示词</a></li>
+</ul></li>
+<li><a href="#实践任务" id="toc-实践任务">实践任务</a></li>
+<li><a href="#延伸阅读" id="toc-延伸阅读">延伸阅读</a></li>
+</ul></li>
+</ul>
+</nav>
+<main class="article-body">
+<h1 id="gpt-5.5-提示词工程从入门到进阶">GPT-5.5
+提示词工程：从入门到进阶</h1>
+<p class="doc-date">更新日期：2026年5月8日</p>
+<p>2026年5月8日</p>
+<hr />
+<p>你是否遇到过这样的情况：同事用 GPT-5.5
+写出了结构清晰、论据充分的商业分析报告，而你问了同一个问题，得到的却是五行废话？</p>
+<p>模型是同一个，差距只在于提示词。</p>
+<p>提示词工程不是玄学，也不是”魔法咒语”。它是一套可以学习、可以系统化的上下文设计方法。本教程从零开始，带你建立正确的认知框架，掌握核心结构技巧，并针对
+GPT-5.5
+的新能力做出适配——读完后，你将能独立写出稳定、可复用的高质量提示词。</p>
+<hr />
+<h2 id="第1章-提示词工程的基本认知">第1章 提示词工程的基本认知</h2>
+<h3 id="语言模型究竟在做什么">1.1 语言模型究竟在做什么</h3>
+<p>要写好提示词，首先要理解模型在”读”你的话时到底发生了什么。</p>
+<p>GPT-5.5
+本质上是一个极其复杂的”下一个词预测器”。当你输入一段文字，模型并不像人一样”理解”含义，而是基于海量训练数据，计算在当前上下文之后，哪个词（token）出现的概率最高。</p>
+<p>这意味着什么？<strong>模型输出的质量，很大程度上取决于你给它提供的上下文质量。</strong>
+你的提示词就是模型生成答案时唯一可以依赖的参照系。</p>
+<p>举个例子：</p>
+<blockquote>
+<p><strong>提示词 A</strong>：分析一下这个产品。</p>
+<p><strong>提示词
+B</strong>：你是一位有10年经验的产品经理。请从用户体验、市场定位和竞争优势三个维度分析以下产品，每个维度给出2-3个具体观点，用编号列表呈现。产品描述：[产品信息]</p>
+</blockquote>
+<p>同样一个模型，提示词 B 得到的答案会在结构、深度和可用性上远超提示词
+A。</p>
+<h3 id="为什么你的提示词时好时坏">1.2 为什么你的提示词时好时坏</h3>
+<p>很多人发现，同样的提示词，今天管用，明天失效。这通常有以下几个原因：</p>
+<ul>
+<li><strong>上下文不完整</strong>：模型在缺乏背景信息时会”脑补”，而脑补的方向不可控。</li>
+<li><strong>任务描述模糊</strong>：词语有多种解读方式，模型会选择训练数据中最常见的那种，未必是你想要的。</li>
+<li><strong>格式要求缺失</strong>：没有指定输出格式，模型每次的输出结构都可能不同。</li>
+<li><strong>角色设定缺失</strong>：没有告诉模型”以什么身份回答”，模型会用默认的通用助手身份，专业深度不足。</li>
+</ul>
+<p><strong>核心认知：提示词工程就是上下文设计。</strong>
+你的目标是给模型提供足够清晰、足够完整的上下文，让它的”下一个词预测”朝着你想要的方向走。</p>
+<h3 id="gpt-5.5-时代为什么提示词更重要了">1.3 GPT-5.5
+时代，为什么提示词更重要了</h3>
+<p>有一种误解认为：模型越聪明，提示词越不重要。实际上恰恰相反。</p>
+<p>模型能力越强，对高质量提示词的响应就越精准，同时对低质量提示词的”容忍度”也越低——它不再会帮你猜测你真正想问的是什么，而是严格按照你写的去做。GPT-5.5
+具备更强的指令遵循能力，这意味着你写什么，它就做什么，好提示词和差提示词之间的输出差距被放大了。</p>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDHnq6DvvJror63oqIDmqKHlnovlpITnkIbmtYHnqIsiIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU0MsIFNvdXJjZSBIYW4gU2FucyBTQywgUGluZ0ZhbmcgU0MsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiI+CiAgPGRlZnM+CiAgICA8ZmlsdGVyIGlkPSJzb2Z0LXNoYWRvdyIgeD0iLTglIiB5PSItMTIlIiB3aWR0aD0iMTE2JSIgaGVpZ2h0PSIxMjglIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjUiIHN0ZERldmlhdGlvbj0iNyIgZmxvb2QtY29sb3I9IiMxMTE4MjciIGZsb29kLW9wYWNpdHk9IjAuMDgiLz4KICAgIDwvZmlsdGVyPgogICAgPHBhdHRlcm4gaWQ9ImRvdC1ncmlkIiB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8Y2lyY2xlIGN4PSIxLjUiIGN5PSIxLjUiIHI9IjEuMiIgZmlsbD0iI2U4ZTRkYSIgb3BhY2l0eT0iMC44NSIvPgogICAgPC9wYXR0ZXJuPgogICAgPG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSIxMiIgbWFya2VySGVpZ2h0PSIxMiIgcmVmWD0iMTAiIHJlZlk9IjYiIG9yaWVudD0iYXV0byIgbWFya2VyVW5pdHM9InN0cm9rZVdpZHRoIj4KICAgICAgPHBhdGggZD0iTTIsMiBMMTAsNiBMMiwxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2NzUiIGZpbGw9IiNmNWY0ZWQiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNiIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIxMTk4IiBoZWlnaHQ9IjY3MyIgcng9IjE4IiBmaWxsPSJ1cmwoI2RvdC1ncmlkKSIgb3BhY2l0eT0iMC4zNCIvPgogIDxyZWN0IHg9IjcyIiB5PSIyMDYiIHdpZHRoPSIxMDU2IiBoZWlnaHQ9IjM5MCIgcng9IjE2IiBmaWxsPSIjZjVmNGVkIiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS4xIiBvcGFjaXR5PSIwLjgyIi8+CiAgPHRleHQgeD0iODQiIHk9IjgyIiBmaWxsPSIjMWY0ZTc5IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iMS4yIj7nrKwx56ugPC90ZXh0PgogIDx0ZXh0IHg9IjExMTYiIHk9IjgyIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMSI+5pWZ5a2m5Zu+56S6PC90ZXh0PgogIDxyZWN0IHg9Ijg0IiB5PSIxMDAiIHdpZHRoPSI1NCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9Ijg0LjAiIHk9IjEzNi4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI4NC4wIiBkeT0iMCI+56ysMeeroO+8muivreiogOaooeWei+WkhOeQhua1geeoizwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9Ijg0LjAiIHk9IjE3OC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI1MDAiPjx0c3BhbiB4PSI4NC4wIiBkeT0iMCI+5LuO55So5oi36L6T5YWl5Yiw5qih5Z6L6L6T5Ye677yM5bGV56S65o+Q56S66K+N5aaC5L2V5Yaz5a6a5LiK5LiL5paH5pa55ZCRPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTY4IiB5PSIyMjIiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPui2iuW+gOS4i+i2iuaOpei/keW6leWxguacuuWItu+8jOi2iuW+gOS4iui2iuaOpei/keeUqOaIt+WPr+ingee7k+aenDwvdGV4dD4KICA8cmVjdCB4PSIxNjguMCIgeT0iMjM2LjAiIHdpZHRoPSI4NjQuMCIgaGVpZ2h0PSI1NC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxyZWN0IHg9IjE2OC4wIiB5PSIyMzYuMCIgd2lkdGg9IjciIGhlaWdodD0iNTQuMCIgcng9IjMuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjE5OC4wIiB5PSIyNzAuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzgwIj48dHNwYW4geD0iMTk4LjAiIGR5PSIwIj7nlKjmiLfovpPlhaU8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIxMDA4LjAiIHk9IjI2OC4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iMTAwOC4wIiBkeT0iMCI+5L2g5YaZ55qE5o+Q56S66K+N5paH5a2XPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iMTk2LjAiIHk9IjMwMi4wIiB3aWR0aD0iODA4LjAiIGhlaWdodD0iNTQuMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSIxOTYuMCIgeT0iMzAyLjAiIHdpZHRoPSI3IiBoZWlnaHQ9IjU0LjAiIHJ4PSIzLjUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIyMjYuMCIgeT0iMzM2LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9Ijc4MCI+PHRzcGFuIHg9IjIyNi4wIiBkeT0iMCI+VG9rZW7ljJY8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI5ODAuMCIgeT0iMzM0LjAiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSI5ODAuMCIgZHk9IjAiPuaWh+Wtl+i9rOaNouS4uuaooeWei+WPr+WkhOeQhueahOaVsOWtl+W6j+WIlzwvdHNwYW4+PC90ZXh0PgogIDxyZWN0IHg9IjIyNC4wIiB5PSIzNjguMCIgd2lkdGg9Ijc1Mi4wIiBoZWlnaHQ9IjU0LjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPHJlY3QgeD0iMjI0LjAiIHk9IjM2OC4wIiB3aWR0aD0iNyIgaGVpZ2h0PSI1NC4wIiByeD0iMy41IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMjU0LjAiIHk9IjQwMi4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSI3ODAiPjx0c3BhbiB4PSIyNTQuMCIgZHk9IjAiPuS4iuS4i+aWh+eQhuinozwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9Ijk1Mi4wIiB5PSI0MDAuMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9Ijk1Mi4wIiBkeT0iMCI+5qih5Z6L6K+75Y+W5omA5pyJ6L6T5YWl77yM5bu656uL5YWz6IGUPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iMjUyLjAiIHk9IjQzNC4wIiB3aWR0aD0iNjk2LjAiIGhlaWdodD0iNTQuMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSIyNTIuMCIgeT0iNDM0LjAiIHdpZHRoPSI3IiBoZWlnaHQ9IjU0LjAiIHJ4PSIzLjUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIyODIuMCIgeT0iNDY4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9Ijc4MCI+PHRzcGFuIHg9IjI4Mi4wIiBkeT0iMCI+5qaC546H6aKE5rWLPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iOTI0LjAiIHk9IjQ2Ni4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iOTI0LjAiIGR5PSIwIj7orqHnrpfkuIvkuIDkuKrmnIDlj6/og73nmoTor408L3RzcGFuPjwvdGV4dD4KICA8cmVjdCB4PSIyODAuMCIgeT0iNTAwLjAiIHdpZHRoPSI2NDAuMCIgaGVpZ2h0PSI1NC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxyZWN0IHg9IjI4MC4wIiB5PSI1MDAuMCIgd2lkdGg9IjciIGhlaWdodD0iNTQuMCIgcng9IjMuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjMxMC4wIiB5PSI1MzQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzgwIj48dHNwYW4geD0iMzEwLjAiIGR5PSIwIj7ovpPlh7rnlJ/miJA8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI4OTYuMCIgeT0iNTMyLjAiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSI4OTYuMCIgZHk9IjAiPumAkOivjeeUn+aIkO+8jOebtOWIsOS7u+WKoeWujOaIkDwvdHNwYW4+PC90ZXh0Pgo8L3N2Zz4K" alt="第1章：语言模型处理流程" />
+<figcaption aria-hidden="true">第1章：语言模型处理流程</figcaption>
+</figure>
+<p><em>图 1.1：从你的文字到模型输出——提示词决定了这条路径的方向</em></p>
+<p><strong>常见误区</strong>：认为越长的提示词越好。长度不是关键，信息密度和结构清晰度才是。</p>
+<p><strong>本章检查点</strong>：你能用一句话解释”为什么提示词会影响模型输出质量”吗？</p>
+<hr />
+<h2 id="第2章-提示词的四要素结构">第2章 提示词的四要素结构</h2>
+<h3 id="rtcf-框架一套通用的提示词结构">2.1 RTCF
+框架：一套通用的提示词结构</h3>
+<p>经过大量实践验证，一条高质量的提示词通常包含四个核心要素：</p>
+<div class="table-wrap"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>要素</th>
+<th>英文</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>角色</td>
+<td>Role</td>
+<td>设定模型的身份和专业背景</td>
+<td>你是一位资深数据分析师</td>
+</tr>
+<tr class="even">
+<td>任务</td>
+<td>Task</td>
+<td>明确告诉模型要做什么</td>
+<td>分析以下销售数据，找出增长趋势</td>
+</tr>
+<tr class="odd">
+<td>上下文</td>
+<td>Context</td>
+<td>提供完成任务所需的背景</td>
+<td>这是我们Q3的月度销售数据，目标市场是华东地区</td>
+</tr>
+<tr class="even">
+<td>格式</td>
+<td>Format</td>
+<td>指定输出的结构和样式</td>
+<td>以Markdown表格呈现，包含趋势、原因和建议三列</td>
+</tr>
+</tbody>
+</table></div>
+<p>这四个要素不必严格按顺序排列，但在一条完整的提示词中，它们都应该出现。</p>
+<h3 id="角色role让模型进入专业状态">2.2
+角色（Role）：让模型进入专业状态</h3>
+<p>角色设定不是让模型”假装”成某个人，而是激活它在特定领域的知识储备和表达风格。</p>
+<p><strong>有效的角色设定方式</strong>：</p>
+<pre><code>你是一位拥有15年经验的品牌策划顾问，擅长为消费品公司制定品牌升级方案。</code></pre>
+<p><strong>弱效的角色设定方式</strong>：</p>
+<pre><code>你是一个专家。</code></pre>
+<p>角色设定越具体，模型调用的知识越精准。可以加入：领域、年限、擅长方向、服务过的客户类型。</p>
+<h3 id="任务task用动词开头精确描述行动">2.3
+任务（Task）：用动词开头，精确描述行动</h3>
+<p>任务描述是提示词的核心。它应该以<strong>动作动词</strong>开头，并明确说明”做什么”和”对什么做”。</p>
+<div class="table-wrap"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>弱</th>
+<th>强</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>帮我看看这篇文章</td>
+<td>找出这篇文章中逻辑不连贯的段落，并说明原因</td>
+</tr>
+<tr class="even">
+<td>写个营销文案</td>
+<td>为这款咖啡机写一段80字的小红书种草文案，突出”5分钟快速出杯”的核心卖点</td>
+</tr>
+<tr class="odd">
+<td>总结一下</td>
+<td>用5个要点总结这份报告的核心结论，每点不超过20字</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="上下文context给模型做决策所需的信息">2.4
+上下文（Context）：给模型做决策所需的信息</h3>
+<p>模型无法主动获取信息，你不给它的东西它就不知道。上下文包括：</p>
+<ul>
+<li><strong>背景信息</strong>：这个任务发生在什么场景下</li>
+<li><strong>约束条件</strong>：有哪些限制（预算、受众、时间）</li>
+<li><strong>已知信息</strong>：你已经做了什么，现在卡在哪里</li>
+<li><strong>目标</strong>：这个输出最终用来做什么</li>
+</ul>
+<p><strong>实用技巧</strong>：在复杂任务中，用分隔符（如
+<code>---</code> 或
+<code>###</code>）将上下文和任务指令分开，让结构更清晰。</p>
+<h3 id="格式format控制输出提升可用性">2.5
+格式（Format）：控制输出，提升可用性</h3>
+<p>不指定格式，模型每次的输出结构都可能不同，难以直接使用。常用的格式控制方式：</p>
+<ul>
+<li><strong>列表</strong>：<code>以编号列表呈现，每条不超过30字</code></li>
+<li><strong>表格</strong>：<code>以Markdown表格呈现，包含X、Y、Z三列</code></li>
+<li><strong>长度</strong>：<code>控制在300字以内</code> /
+<code>至少500字</code></li>
+<li><strong>语气</strong>：<code>用专业但不失亲切的语气</code> /
+<code>严肃的学术风格</code></li>
+<li><strong>结构</strong>：<code>分为背景、分析、建议三个部分</code></li>
+</ul>
+<h3 id="rtcf-完整示例">2.6 RTCF 完整示例</h3>
+<p>以下是一条完整使用 RTCF 框架的提示词：</p>
+<pre><code>[角色] 你是一位有8年经验的用户体验设计师，熟悉SaaS产品的用户旅程设计。
+
+[任务] 请针对以下用户反馈，找出3个最核心的痛点，并为每个痛点提出一个可落地的改进建议。
+
+[上下文] 
+---
+这是我们的项目管理工具近期收到的用户反馈（共50条），主要用户是5-20人的创业团队：
+[粘贴反馈内容]
+---
+
+[格式] 以Markdown格式输出，结构为：痛点标题 → 痛点描述（2句话）→ 改进建议（1个具体行动）。</code></pre>
+<p>这条提示词清晰、可复用，换一批反馈内容就能直接再用。</p>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDLnq6DvvJpSVENG5Zub6KaB57Sg57uT5p6EIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNDLCBTb3VyY2UgSGFuIFNhbnMgU0MsIFBpbmdGYW5nIFNDLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYiPgogIDxkZWZzPgogICAgPGZpbHRlciBpZD0ic29mdC1zaGFkb3ciIHg9Ii04JSIgeT0iLTEyJSIgd2lkdGg9IjExNiUiIGhlaWdodD0iMTI4JSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSI1IiBzdGREZXZpYXRpb249IjciIGZsb29kLWNvbG9yPSIjMTExODI3IiBmbG9vZC1vcGFjaXR5PSIwLjA4Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJkb3QtZ3JpZCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPGNpcmNsZSBjeD0iMS41IiBjeT0iMS41IiByPSIxLjIiIGZpbGw9IiNlOGU0ZGEiIG9wYWNpdHk9IjAuODUiLz4KICAgIDwvcGF0dGVybj4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTIiIG1hcmtlckhlaWdodD0iMTIiIHJlZlg9IjEwIiByZWZZPSI2IiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJzdHJva2VXaWR0aCI+CiAgICAgIDxwYXRoIGQ9Ik0yLDIgTDEwLDYgTDIsMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjc1IiBmaWxsPSIjZjVmNGVkIi8+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjExOTgiIGhlaWdodD0iNjczIiByeD0iMTgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0idXJsKCNkb3QtZ3JpZCkiIG9wYWNpdHk9IjAuMzQiLz4KICA8cmVjdCB4PSI3MiIgeT0iMjA2IiB3aWR0aD0iMTA1NiIgaGVpZ2h0PSIzOTAiIHJ4PSIxNiIgZmlsbD0iI2Y1ZjRlZCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC44MiIvPgogIDx0ZXh0IHg9Ijg0IiB5PSI4MiIgZmlsbD0iIzFmNGU3OSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMiI+56ysMueroDwvdGV4dD4KICA8dGV4dCB4PSIxMTE2IiB5PSI4MiIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPuaVmeWtpuWbvuekujwvdGV4dD4KICA8cmVjdCB4PSI4NCIgeT0iMTAwIiB3aWR0aD0iNTQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI4NC4wIiB5PSIxMzYuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iODQuMCIgZHk9IjAiPuesrDLnq6DvvJpSVENG5Zub6KaB57Sg57uT5p6EPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iODQuMCIgeT0iMTc4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjUwMCI+PHRzcGFuIHg9Ijg0LjAiIGR5PSIwIj7op5LoibLjgIHku7vliqHjgIHkuIrkuIvmlofjgIHmoLzlvI/lm5vopoHntKDmnoTmiJDlrozmlbTmj5DnpLror408L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI5NCIgeT0iMjUyIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj7ku47ovpPlhaXliLDnu5PmnpznmoTmnIDnn63lrabkuaDot6/lvoQ8L3RleHQ+CiAgPGxpbmUgeDE9Ijk0IiB5MT0iMjc0IiB4Mj0iMTEwNiIgeTI9IjI3NCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIvPgogIDxsaW5lIHgxPSIyOTAuMCIgeTE9IjQwOC4wIiB4Mj0iMjkyLjAiIHkyPSI0MDguMCIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8cmVjdCB4PSI5NC4wIiB5PSIzMzQuMCIgd2lkdGg9IjE4OC4wIiBoZWlnaHQ9IjE0OC4wIiByeD0iOCIgZmlsbD0iI2Y3ZjVlZSIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxyZWN0IHg9Ijk0LjAiIHk9IjMzNC4wIiB3aWR0aD0iMTg4LjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDxjaXJjbGUgY3g9IjEyMC4wIiBjeT0iMzYyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMTIwLjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iMTIwLjAiIGR5PSIwIj4xPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTQ2LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSIxNDYuMCIgZHk9IjAiPuinkuiJsiBSb2xlPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTE2LjAiIHk9IjQ1NC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSIxMTYuMCIgZHk9IjAiPuiuvuWumuS4k+S4mui6q+S7veS4juiDjOaZrzwvdHNwYW4+PC90ZXh0PgogIDxsaW5lIHgxPSI0OTYuMCIgeTE9IjQwOC4wIiB4Mj0iNDk4LjAiIHkyPSI0MDguMCIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8cmVjdCB4PSIzMDAuMCIgeT0iMzM0LjAiIHdpZHRoPSIxODguMCIgaGVpZ2h0PSIxNDguMCIgcng9IjgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8Y2lyY2xlIGN4PSIzMjYuMCIgY3k9IjM2Mi4wIiByPSIxNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjMyNi4wIiB5PSIzNjcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjMyNi4wIiBkeT0iMCI+MjwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjM1Mi4wIiB5PSIzNjcuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzYwIj48dHNwYW4geD0iMzUyLjAiIGR5PSIwIj7ku7vliqEgVGFzazwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjMyMi4wIiB5PSI0NTQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iMzIyLjAiIGR5PSIwIj7nlKjliqjor43mmI7noa7or7TmmI7opoHlgZrku4DkuYg8L3RzcGFuPjwvdGV4dD4KICA8bGluZSB4MT0iNzAyLjAiIHkxPSI0MDguMCIgeDI9IjcwNC4wIiB5Mj0iNDA4LjAiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHJlY3QgeD0iNTA2LjAiIHk9IjMzNC4wIiB3aWR0aD0iMTg4LjAiIGhlaWdodD0iMTQ4LjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPGNpcmNsZSBjeD0iNTMyLjAiIGN5PSIzNjIuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI1MzIuMCIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI1MzIuMCIgZHk9IjAiPjM8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI1NTguMCIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9Ijc2MCI+PHRzcGFuIHg9IjU1OC4wIiBkeT0iMCI+5LiK5LiL5paHIENvbnRleHQ8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI1MjguMCIgeT0iNDU0LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjUyOC4wIiBkeT0iMCI+5o+Q5L6b6IOM5pmv44CB57qm5p2f5LiO5bey55+l5L+h5oGvPC90c3Bhbj48L3RleHQ+CiAgPGxpbmUgeDE9IjkwOC4wIiB5MT0iNDA4LjAiIHgyPSI5MTAuMCIgeTI9IjQwOC4wIiBzdHJva2U9IiMxZjRlNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDxyZWN0IHg9IjcxMi4wIiB5PSIzMzQuMCIgd2lkdGg9IjE4OC4wIiBoZWlnaHQ9IjE0OC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9IjczOC4wIiBjeT0iMzYyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iNzM4LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iNzM4LjAiIGR5PSIwIj40PC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iNzY0LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSI3NjQuMCIgZHk9IjAiPuagvOW8jyBGb3JtYXQ8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI3MzQuMCIgeT0iNDU0LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjczNC4wIiBkeT0iMCI+5oyH5a6a6L6T5Ye655qE57uT5p6E5LiO5qC35byPPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iOTE4LjAiIHk9IjMzNC4wIiB3aWR0aD0iMTg4LjAiIGhlaWdodD0iMTQ4LjAiIHJ4PSI4IiBmaWxsPSIjZjdmNWVlIiBzdHJva2U9IiMxZjRlNzkiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPHJlY3QgeD0iOTE4LjAiIHk9IjMzNC4wIiB3aWR0aD0iMTg4LjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDxjaXJjbGUgY3g9Ijk0NC4wIiBjeT0iMzYyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iOTQ0LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iOTQ0LjAiIGR5PSIwIj41PC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iOTcwLjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSI5NzAuMCIgZHk9IjAiPumrmOi0qOmHj+i+k+WHujwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9Ijk0MC4wIiB5PSI0NTQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iOTQwLjAiIGR5PSIwIj7nu5PmnoTmuIXmmbDjgIHlj6/lpI3nlKjnmoTnu5Pmnpw8L3RzcGFuPjwvdGV4dD4KPC9zdmc+Cg==" alt="第2章：RTCF四要素结构" />
+<figcaption aria-hidden="true">第2章：RTCF四要素结构</figcaption>
+</figure>
+<p><em>图
+2.1：RTCF框架——角色、任务、上下文、格式四要素构成完整提示词</em></p>
+<p><strong>常见误区</strong>：认为角色设定是”没用的客套话”。实验证明，在专业任务中，有角色设定的提示词输出质量平均提升20-40%。</p>
+<p><strong>本章检查点</strong>：拿出你最近用过的一条提示词，它包含RTCF四要素中的几个？缺少的部分补上后，对比两次输出。</p>
+<hr />
+<h2 id="第3章-指令精确化消除歧义">第3章 指令精确化——消除歧义</h2>
+<h3 id="模糊指令为什么会失败">3.1 模糊指令为什么会失败</h3>
+<p>“写一篇文章”——多长？什么风格？给谁看？什么主题？</p>
+<p>每一处模糊，都是模型随机选择的机会。模型不会问你”你是什么意思”，它会直接做出一个选择，而那个选择未必是你想要的。</p>
+<p>精确化指令的核心原则：<strong>能量化的就量化，能限定的就限定，能举例的就举例。</strong></p>
+<h3 id="六种精确化技巧">3.2 六种精确化技巧</h3>
+<p><strong>技巧一：量化约束</strong></p>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>模糊</th>
+<th>精确</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>写短一点</td>
+<td>控制在150字以内</td>
+</tr>
+<tr class="even">
+<td>写详细一点</td>
+<td>至少包含5个具体例子</td>
+</tr>
+<tr class="odd">
+<td>专业一点</td>
+<td>使用行业术语，面向有3年以上工作经验的产品经理</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>技巧二：正面+负面双重约束</strong></p>
+<p>只说”做什么”往往不够，也要说”不做什么”：</p>
+<pre><code>写一篇产品介绍，突出易用性和性价比。
+不要使用&quot;颠覆性&quot;、&quot;革命性&quot;等夸张词汇。
+不要提及竞品名称。</code></pre>
+<p><strong>技巧三：提供参考标准</strong></p>
+<pre><code>以《哈佛商业评论》的写作风格为参考——逻辑严谨，有数据支撑，结论明确。</code></pre>
+<p><strong>技巧四：分隔符隔离内容与指令</strong></p>
+<p>当提示词中既有指令又有待处理内容时，用分隔符明确区分：</p>
+<pre><code>请将以下文本翻译成英文，保持原文的正式语气。
+
+===待翻译内容===
+[你的文本]
+===结束===</code></pre>
+<p><strong>技巧五：步骤化复杂任务</strong></p>
+<p>不要把所有要求塞进一句话，分步说清楚：</p>
+<pre><code>请按以下步骤完成这个任务：
+第一步：阅读以下市场报告，列出3个关键数据点。
+第二步：基于这3个数据点，分析当前市场的主要机会。
+第三步：针对每个机会，提出一个可行的切入策略。</code></pre>
+<p><strong>技巧六：指定受众</strong></p>
+<pre><code>请用小学五年级学生能理解的语言解释量子纠缠。</code></pre>
+<p>vs.</p>
+<pre><code>请面向物理学博士生解释量子纠缠的最新研究进展。</code></pre>
+<p>同一个主题，受众不同，模型会调用完全不同的知识层次和表达方式。</p>
+<h3 id="结构标记的力量">3.3 结构标记的力量</h3>
+<p>在长提示词中，使用 Markdown
+标题、列表和分隔符，能显著提升模型的理解准确度：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## 你的角色</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>资深财务分析师，专注于企业估值</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## 任务</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>分析以下公司的财务健康状况</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## 评估维度</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>流动性（流动比率、速动比率）</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>盈利能力（净利润率、ROE）</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>成长性（收入增长率、利润增长率）</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 输出格式</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>每个维度：指标数值 → 行业对比 → 一句评价</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">财务数据</span><span class="co">]</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>---</span></code></pre></div>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDPnq6DvvJrmqKHns4rmjIfku6QgdnMuIOeyvuehruaMh+S7pCIgZm9udC1mYW1pbHk9Ik5vdG8gU2FucyBTQywgU291cmNlIEhhbiBTYW5zIFNDLCBQaW5nRmFuZyBTQywgc3lzdGVtLXVpLCBzYW5zLXNlcmlmIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9InNvZnQtc2hhZG93IiB4PSItOCUiIHk9Ii0xMiUiIHdpZHRoPSIxMTYlIiBoZWlnaHQ9IjEyOCUiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iNSIgc3RkRGV2aWF0aW9uPSI3IiBmbG9vZC1jb2xvcj0iIzExMTgyNyIgZmxvb2Qtb3BhY2l0eT0iMC4wOCIvPgogICAgPC9maWx0ZXI+CiAgICA8cGF0dGVybiBpZD0iZG90LWdyaWQiIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxjaXJjbGUgY3g9IjEuNSIgY3k9IjEuNSIgcj0iMS4yIiBmaWxsPSIjZThlNGRhIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICA8L3BhdHRlcm4+CiAgICA8bWFya2VyIGlkPSJhcnJvdyIgbWFya2VyV2lkdGg9IjEyIiBtYXJrZXJIZWlnaHQ9IjEyIiByZWZYPSIxMCIgcmVmWT0iNiIgb3JpZW50PSJhdXRvIiBtYXJrZXJVbml0cz0ic3Ryb2tlV2lkdGgiPgogICAgICA8cGF0aCBkPSJNMiwyIEwxMCw2IEwyLDEwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxZjRlNzkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiAvPgogICAgPC9tYXJrZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgZmlsbD0iI2Y1ZjRlZCIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIxMTk4IiBoZWlnaHQ9IjY3MyIgcng9IjE4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS42Ii8+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjExOTgiIGhlaWdodD0iNjczIiByeD0iMTgiIGZpbGw9InVybCgjZG90LWdyaWQpIiBvcGFjaXR5PSIwLjM0Ii8+CiAgPHJlY3QgeD0iNzIiIHk9IjIwNiIgd2lkdGg9IjEwNTYiIGhlaWdodD0iMzkwIiByeD0iMTYiIGZpbGw9IiNmNWY0ZWQiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjEiIG9wYWNpdHk9IjAuODIiLz4KICA8dGV4dCB4PSI4NCIgeT0iODIiIGZpbGw9IiMxZjRlNzkiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiIGxldHRlci1zcGFjaW5nPSIxLjIiPuesrDPnq6A8L3RleHQ+CiAgPHRleHQgeD0iMTExNiIgeT0iODIiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSI3MDAiIGxldHRlci1zcGFjaW5nPSIxIj7mlZnlrablm77npLo8L3RleHQ+CiAgPHJlY3QgeD0iODQiIHk9IjEwMCIgd2lkdGg9IjU0IiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iODQuMCIgeT0iMTM2LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIzMSIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9Ijg0LjAiIGR5PSIwIj7nrKwz56ug77ya5qih57OK5oyH5LukIHZzLiDnsr7noa7mjIfku6Q8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI4NC4wIiB5PSIxNzguMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjE1IiBmb250LXdlaWdodD0iNTAwIj48dHNwYW4geD0iODQuMCIgZHk9IjAiPueyvuehruWMluaMh+S7pOa2iOmZpOatp+S5ie+8jOiuqei+k+WHuueos+WumuWPr+aOpzwvdHNwYW4+PC90ZXh0PgogIDxyZWN0IHg9Ijk0IiB5PSIyMjIiIHdpZHRoPSI0OTIiIGhlaWdodD0iMzQ0IiByeD0iMTIiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSI5NCIgeT0iMjIyIiB3aWR0aD0iNDkyIiBoZWlnaHQ9IjU4IiByeD0iMTIiIGZpbGw9IiMxZjRlNzkiIG9wYWNpdHk9IjAuOTYiLz4KICA8cmVjdCB4PSI5NCIgeT0iMjYyIiB3aWR0aD0iNDkyIiBoZWlnaHQ9IjE4IiBmaWxsPSIjMWY0ZTc5IiBvcGFjaXR5PSIwLjk2Ii8+CiAgPHRleHQgeD0iMTIyLjAiIHk9IjI1OC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSIxMjIuMCIgZHk9IjAiPk9wdGlvbiAxPC90c3Bhbj48L3RleHQ+CiAgPGNpcmNsZSBjeD0iMTMwIiBjeT0iMzE4IiByPSI2IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMTUwLjAiIHk9IjMyNC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI2MDAiPjx0c3BhbiB4PSIxNTAuMCIgZHk9IjAiPuWGmeefreS4gOeCuTwvdHNwYW4+PC90ZXh0PgogIDxjaXJjbGUgY3g9IjEzMCIgY3k9IjM2NCIgcj0iNiIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjE1MC4wIiB5PSIzNzAuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNjAwIj48dHNwYW4geD0iMTUwLjAiIGR5PSIwIj7luK7miJHliIbmnpA8L3RzcGFuPjwvdGV4dD4KICA8Y2lyY2xlIGN4PSIxMzAiIGN5PSI0MTAiIHI9IjYiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIxNTAuMCIgeT0iNDE2LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjYwMCI+PHRzcGFuIHg9IjE1MC4wIiBkeT0iMCI+5LiT5Lia5LiA54K5PC90c3Bhbj48L3RleHQ+CiAgPGNpcmNsZSBjeD0iMTMwIiBjeT0iNDU2IiByPSI2IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMTUwLjAiIHk9IjQ2Mi4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI2MDAiPjx0c3BhbiB4PSIxNTAuMCIgZHk9IjAiPuWGmeevh+aWh+eroDwvdHNwYW4+PC90ZXh0PgogIDxyZWN0IHg9IjYxNCIgeT0iMjIyIiB3aWR0aD0iNDkyIiBoZWlnaHQ9IjM0NCIgcng9IjEyIiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS42Ii8+CiAgPHJlY3QgeD0iNjE0IiB5PSIyMjIiIHdpZHRoPSI0OTIiIGhlaWdodD0iNTgiIHJ4PSIxMiIgZmlsbD0iIzZmNzY4MiIgb3BhY2l0eT0iMC45NiIvPgogIDxyZWN0IHg9IjYxNCIgeT0iMjYyIiB3aWR0aD0iNDkyIiBoZWlnaHQ9IjE4IiBmaWxsPSIjNmY3NjgyIiBvcGFjaXR5PSIwLjk2Ii8+CiAgPHRleHQgeD0iNjQyLjAiIHk9IjI1OC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMjEiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI2NDIuMCIgZHk9IjAiPk9wdGlvbiAyPC90c3Bhbj48L3RleHQ+CiAgPGNpcmNsZSBjeD0iNjUwIiBjeT0iMzE4IiByPSI2IiBmaWxsPSIjNmY3NjgyIi8+CiAgPHRleHQgeD0iNjcwLjAiIHk9IjMyNC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI2MDAiPjx0c3BhbiB4PSI2NzAuMCIgZHk9IjAiPuaOp+WItuWcqDE1MOWtl+S7peWGhTwvdHNwYW4+PC90ZXh0PgogIDxjaXJjbGUgY3g9IjY1MCIgY3k9IjM2NCIgcj0iNiIgZmlsbD0iIzZmNzY4MiIvPgogIDx0ZXh0IHg9IjY3MC4wIiB5PSIzNzAuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNjAwIj48dHNwYW4geD0iNjcwLjAiIGR5PSIwIj7ku47mtYHliqjmgKfjgIHnm4jliKnmgKfjgIHmiJDplb/mgKfkuInkuKrnu7TluqbliIbmnpA8L3RzcGFuPjwvdGV4dD4KICA8Y2lyY2xlIGN4PSI2NTAiIGN5PSI0MTAiIHI9IjYiIGZpbGw9IiM2Zjc2ODIiLz4KICA8dGV4dCB4PSI2NzAuMCIgeT0iNDE2LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9IjYwMCI+PHRzcGFuIHg9IjY3MC4wIiBkeT0iMCI+5L2/55So6KGM5Lia5pyv6K+t77yM6Z2i5ZCR5pyJNeW5tOe7j+mqjOeahOS6p+WTgee7j+eQhjwvdHNwYW4+PC90ZXh0PgogIDxjaXJjbGUgY3g9IjY1MCIgY3k9IjQ1NiIgcj0iNiIgZmlsbD0iIzZmNzY4MiIvPgogIDx0ZXh0IHg9IjY3MC4wIiB5PSI0NjIuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNjAwIj48dHNwYW4geD0iNjcwLjAiIGR5PSIwIj7lhpnkuIDnr4c4MDDlrZfnmoTooYzkuJrliIbmnpDvvIznu5PmnoTvvJrog4zmma/ihpLpl67popjihpLlu7rorq48L3RzcGFuPjwvdGV4dD4KPC9zdmc+Cg==" alt="第3章：模糊指令与精确指令对比" />
+<figcaption aria-hidden="true">第3章：模糊指令与精确指令对比</figcaption>
+</figure>
+<p><em>图 3.1：同一任务，模糊指令与精确指令的输出质量对比</em></p>
+<p><strong>常见误区</strong>：提示词越长越好。关键不在于长度，而在于每一句话都有信息量。冗余的客套话（“你好，麻烦你……”）不会提升质量。</p>
+<p><strong>本章检查点</strong>：找一条你写过的模糊提示词，用本章的六种技巧逐一检查，哪些技巧可以应用？</p>
+<hr />
+<h2 id="第4章-思维链推理激活深度思考">第4章
+思维链推理——激活深度思考</h2>
+<h3 id="为什么复杂推理容易出错">4.1 为什么复杂推理容易出错</h3>
+<p>直接问模型一个需要多步推理的问题，它往往会”跳步”——直接给出看起来合理但实际上错误的答案。</p>
+<p>这是因为模型的生成过程是线性的，每个词都依赖前面的词。如果没有显式的推理步骤，模型会”走捷径”，用统计上最可能的答案糊弄你。</p>
+<p><strong>示例</strong>：</p>
+<blockquote>
+<p>问：小明有5个苹果，给了小红2个，小红又从市场买了3个，现在小红有几个苹果？</p>
+</blockquote>
+<p>直接问，模型可能答 3 或
+5，因为它没有追踪”小红原本有几个”这个隐含信息。</p>
+<h3 id="零样本思维链一句话激活推理">4.2
+零样本思维链：一句话激活推理</h3>
+<p>2022年，研究人员发现，只需在提示词末尾加上”让我们一步一步思考（Let’s
+think step by
+step）“，就能显著提升模型在推理任务上的准确率。这就是<strong>零样本思维链（Zero-shot
+Chain-of-Thought）</strong>。</p>
+<p>中文版效果同样显著：</p>
+<pre><code>小明有5个苹果，给了小红2个，小红又从市场买了3个，现在小红有几个苹果？
+
+请一步一步思考，列出每一步的计算过程，再给出最终答案。</code></pre>
+<p>这个简单的补充，让模型在生成答案之前先”推理”，从而减少跳步错误。</p>
+<h3 id="有样本思维链用示例展示推理过程">4.3
+有样本思维链：用示例展示推理过程</h3>
+<p>当任务更复杂时，可以在提示词中加入一个或多个示例，展示你期望的推理路径。这就是<strong>有样本思维链（Few-shot
+CoT）</strong>。</p>
+<pre><code>下面是一个分析产品策略的例子：
+
+问：产品A定价偏高，销量下滑，应该怎么办？
+推理过程：
+1. 先确认问题：销量下滑是否真的由定价引起（排除其他因素如竞品、市场变化）
+2. 分析定价空间：成本结构允许降价吗？降多少不影响品牌定位？
+3. 考虑替代方案：能否通过增加附加价值（捆绑服务）来提升性价比感知？
+4. 给出建议：建议先小范围测试8折活动，监测转化率变化。
+
+---
+
+现在请用同样的推理方式分析：
+问：[你的问题]</code></pre>
+<h3 id="何时使用思维链">4.4 何时使用思维链</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr class="header">
+<th>适合用思维链</th>
+<th>不需要思维链</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>数学计算、逻辑推理</td>
+<td>简单翻译、格式转换</td>
+</tr>
+<tr class="even">
+<td>多步骤决策分析</td>
+<td>事实查询</td>
+</tr>
+<tr class="odd">
+<td>需要权衡多个因素的判断</td>
+<td>创意写作（思维链会限制发散）</td>
+</tr>
+<tr class="even">
+<td>代码调试</td>
+<td>简单分类任务</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>GPT-5.5 注意事项</strong>：GPT-5.5
+已内置了一定程度的自动推理能力，对于中等复杂度的问题，你可能不需要显式触发思维链。但对于高度复杂的多步骤任务，仍然建议显式要求”一步一步分析”。</p>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDTnq6DvvJpDaGFpbi1vZi1UaG91Z2h05o6o55CG5rWB56iLIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNDLCBTb3VyY2UgSGFuIFNhbnMgU0MsIFBpbmdGYW5nIFNDLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYiPgogIDxkZWZzPgogICAgPGZpbHRlciBpZD0ic29mdC1zaGFkb3ciIHg9Ii04JSIgeT0iLTEyJSIgd2lkdGg9IjExNiUiIGhlaWdodD0iMTI4JSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSI1IiBzdGREZXZpYXRpb249IjciIGZsb29kLWNvbG9yPSIjMTExODI3IiBmbG9vZC1vcGFjaXR5PSIwLjA4Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJkb3QtZ3JpZCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPGNpcmNsZSBjeD0iMS41IiBjeT0iMS41IiByPSIxLjIiIGZpbGw9IiNlOGU0ZGEiIG9wYWNpdHk9IjAuODUiLz4KICAgIDwvcGF0dGVybj4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTIiIG1hcmtlckhlaWdodD0iMTIiIHJlZlg9IjEwIiByZWZZPSI2IiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJzdHJva2VXaWR0aCI+CiAgICAgIDxwYXRoIGQ9Ik0yLDIgTDEwLDYgTDIsMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjc1IiBmaWxsPSIjZjVmNGVkIi8+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjExOTgiIGhlaWdodD0iNjczIiByeD0iMTgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0idXJsKCNkb3QtZ3JpZCkiIG9wYWNpdHk9IjAuMzQiLz4KICA8cmVjdCB4PSI3MiIgeT0iMjA2IiB3aWR0aD0iMTA1NiIgaGVpZ2h0PSIzOTAiIHJ4PSIxNiIgZmlsbD0iI2Y1ZjRlZCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC44MiIvPgogIDx0ZXh0IHg9Ijg0IiB5PSI4MiIgZmlsbD0iIzFmNGU3OSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMiI+56ysNOeroDwvdGV4dD4KICA8dGV4dCB4PSIxMTE2IiB5PSI4MiIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPuaVmeWtpuWbvuekujwvdGV4dD4KICA8cmVjdCB4PSI4NCIgeT0iMTAwIiB3aWR0aD0iNTQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI4NC4wIiB5PSIxMzYuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iODQuMCIgZHk9IjAiPuesrDTnq6DvvJpDaGFpbi1vZi1UaG91Z2h05o6o55CG5rWB56iLPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iODQuMCIgeT0iMTc4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjUwMCI+PHRzcGFuIHg9Ijg0LjAiIGR5PSIwIj7mgJ3nu7Tpk77lsIbljZXmraXot7Pot4Pmi4bop6PkuLrlj6/ov73ouKrnmoTmjqjnkIbpk748L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI5NCIgeT0iMjUyIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNzAwIj7ku47ovpPlhaXliLDnu5PmnpznmoTmnIDnn63lrabkuaDot6/lvoQ8L3RleHQ+CiAgPGxpbmUgeDE9Ijk0IiB5MT0iMjc0IiB4Mj0iMTEwNiIgeTI9IjI3NCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIvPgogIDxsaW5lIHgxPSIyNTUuNyIgeTE9IjQwOC4wIiB4Mj0iMjU3LjciIHkyPSI0MDguMCIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8cmVjdCB4PSI5NC4wIiB5PSIzMzQuMCIgd2lkdGg9IjE1My43IiBoZWlnaHQ9IjE0OC4wIiByeD0iOCIgZmlsbD0iI2Y3ZjVlZSIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxyZWN0IHg9Ijk0LjAiIHk9IjMzNC4wIiB3aWR0aD0iMTUzLjciIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDxjaXJjbGUgY3g9IjEyMC4wIiBjeT0iMzYyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMTIwLjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iMTIwLjAiIGR5PSIwIj4xPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTQ2LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSIxNDYuMCIgZHk9IjAiPuWkjeadgumXrumimDwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjExNi4wIiB5PSI0NTQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iMTE2LjAiIGR5PSIwIj7pnIDopoHlpJrmraXmjqjnkIbnmoTku7vliqE8L3RzcGFuPjwvdGV4dD4KICA8bGluZSB4MT0iNDI3LjMiIHkxPSI0MDguMCIgeDI9IjQyOS4zIiB5Mj0iNDA4LjAiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHJlY3QgeD0iMjY1LjciIHk9IjMzNC4wIiB3aWR0aD0iMTUzLjciIGhlaWdodD0iMTQ4LjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPGNpcmNsZSBjeD0iMjkxLjciIGN5PSIzNjIuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIyOTEuNyIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSIyOTEuNyIgZHk9IjAiPjI8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIzMTcuNyIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9Ijc2MCI+PHRzcGFuIHg9IjMxNy43IiBkeT0iMCI+6Kem5Y+R5o6o55CGPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMjg3LjciIHk9IjQ1NC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSIyODcuNyIgZHk9IjAiPiZxdW90O+ivt+S4gOatpeS4gOatpeaAneiAgyZxdW90OzwvdHNwYW4+PC90ZXh0PgogIDxsaW5lIHgxPSI1OTkuMCIgeTE9IjQwOC4wIiB4Mj0iNjAxLjAiIHkyPSI0MDguMCIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8cmVjdCB4PSI0MzcuMyIgeT0iMzM0LjAiIHdpZHRoPSIxNTMuNyIgaGVpZ2h0PSIxNDguMCIgcng9IjgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8Y2lyY2xlIGN4PSI0NjMuMyIgY3k9IjM2Mi4wIiByPSIxNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjQ2My4zIiB5PSIzNjcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjQ2My4zIiBkeT0iMCI+MzwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjQ4OS4zIiB5PSIzNjcuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzYwIj48dHNwYW4geD0iNDg5LjMiIGR5PSIwIj7mraXpqqTkuIA8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI0NTkuMyIgeT0iNDU0LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjQ1OS4zIiBkeT0iMCI+5ouG6Kej56ys5LiA5Liq5a2Q6Zeu6aKYPC90c3Bhbj48L3RleHQ+CiAgPGxpbmUgeDE9Ijc3MC43IiB5MT0iNDA4LjAiIHgyPSI3NzIuNyIgeTI9IjQwOC4wIiBzdHJva2U9IiMxZjRlNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDxyZWN0IHg9IjYwOS4wIiB5PSIzMzQuMCIgd2lkdGg9IjE1My43IiBoZWlnaHQ9IjE0OC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9IjYzNS4wIiBjeT0iMzYyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iNjM1LjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iNjM1LjAiIGR5PSIwIj40PC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iNjYxLjAiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSI2NjEuMCIgZHk9IjAiPuatpemqpOS6jDwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjYzMS4wIiB5PSI0NTQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iNjMxLjAiIGR5PSIwIj7ln7rkuo7mraXpqqTkuIDnu6fnu63mjqjov5s8L3RzcGFuPjwvdGV4dD4KICA8bGluZSB4MT0iOTQyLjMiIHkxPSI0MDguMCIgeDI9Ijk0NC4zIiB5Mj0iNDA4LjAiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHJlY3QgeD0iNzgwLjciIHk9IjMzNC4wIiB3aWR0aD0iMTUzLjciIGhlaWdodD0iMTQ4LjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPGNpcmNsZSBjeD0iODA2LjciIGN5PSIzNjIuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI4MDYuNyIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI4MDYuNyIgZHk9IjAiPjU8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI4MzIuNyIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9Ijc2MCI+PHRzcGFuIHg9IjgzMi43IiBkeT0iMCI+5q2l6aqkTjwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjgwMi43IiB5PSI0NTQuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iODAyLjciIGR5PSIwIj7lrozmiJDmiYDmnInmjqjnkIbmraXpqqQ8L3RzcGFuPjwvdGV4dD4KICA8cmVjdCB4PSI5NTIuMyIgeT0iMzM0LjAiIHdpZHRoPSIxNTMuNyIgaGVpZ2h0PSIxNDguMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSI5NTIuMyIgeT0iMzM0LjAiIHdpZHRoPSIxNTMuNyIgaGVpZ2h0PSI1IiByeD0iMi41IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPGNpcmNsZSBjeD0iOTc4LjMiIGN5PSIzNjIuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI5NzguMyIgeT0iMzY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI5NzguMyIgZHk9IjAiPjY8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIxMDA0LjMiIHk9IjM2Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSIxMDA0LjMiIGR5PSIwIj7mnIDnu4jnrZTmoYg8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI5NzQuMyIgeT0iNDU0LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9Ijk3NC4zIiBkeT0iMCI+5Z+65LqO5a6M5pW05o6o55CG5b6X5Ye657uT6K66PC90c3Bhbj48L3RleHQ+Cjwvc3ZnPgo=" alt="第4章：Chain-of-Thought推理流程" />
+<figcaption aria-hidden="true">第4章：Chain-of-Thought推理流程</figcaption>
+</figure>
+<p><em>图 4.1：思维链推理将一步跳跃拆解为可追踪的推理链</em></p>
+<p><strong>常见误区</strong>：在所有提示词里都加”一步一步思考”。简单任务加思维链会让输出变得冗长，适得其反。</p>
+<p><strong>本章检查点</strong>：选一个你工作中常遇到的推理类问题，尝试用零样本思维链和有样本思维链各写一条提示词，对比输出。</p>
+<hr />
+<h2 id="第5章-少样本学习用示例调教风格">第5章
+少样本学习——用示例调教风格</h2>
+<h3 id="什么是少样本学习">5.1 什么是少样本学习</h3>
+<p>少样本学习（Few-shot
+Prompting）是指在提示词中提供几个”输入-输出”示例，让模型学习你期望的模式，然后应用到新的输入上。</p>
+<p>这是最接近”无代码微调”的提示词技巧——你不需要修改模型，只需要在提示词里展示几个好的例子，模型就会模仿。</p>
+<h3 id="少样本提示词的标准结构">5.2 少样本提示词的标准结构</h3>
+<pre><code>[说明]：以下是邮件主题行的写作规范，请按照这个风格，为每封邮件生成一个主题行。
+
+[示例1]
+邮件内容：通知团队Q3 OKR复盘会议时间
+主题行：【必读】Q3 OKR复盘 | 11月15日 14:00 会议室3
+
+[示例2]  
+邮件内容：请技术团队协助修复生产环境bug
+主题行：【紧急】生产环境P0 bug | 需要后端支持
+
+[示例3]
+邮件内容：分享最新的竞品分析报告
+主题行：【参考】竞品分析报告 | 2025年11月版本
+
+---
+[新任务]
+邮件内容：邀请客户参加产品发布会
+主题行：</code></pre>
+<p>这种结构让模型学会了：使用【标签】、用”|“分隔信息、保持简洁的规律。</p>
+<h3 id="选择好示例的三个原则">5.3 选择好示例的三个原则</h3>
+<p><strong>原则一：代表性</strong>——示例应该覆盖任务的典型情况，不要只选最简单的例子。</p>
+<p><strong>原则二：多样性</strong>——如果任务有多种变体，示例应该涵盖不同的情况，避免模型过度拟合某一种模式。</p>
+<p><strong>原则三：正确性</strong>——示例中的输出必须是你真正想要的，模型会严格模仿，错误的示例会导致系统性错误。</p>
+<h3 id="零样本单样本少样本的选择">5.4 零样本、单样本、少样本的选择</h3>
+<div class="table-wrap"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方式</th>
+<th>示例数量</th>
+<th>适用场景</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>零样本（Zero-shot）</td>
+<td>0</td>
+<td>任务清晰，无特殊风格要求</td>
+<td>依赖模型默认理解</td>
+</tr>
+<tr class="even">
+<td>单样本（One-shot）</td>
+<td>1</td>
+<td>有特定格式要求，任务较简单</td>
+<td>示例要足够典型</td>
+</tr>
+<tr class="odd">
+<td>少样本（Few-shot）</td>
+<td>2-5</td>
+<td>有复杂风格/格式要求</td>
+<td>示例数量超过5个效果提升递减</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>实用建议</strong>：从零样本开始，如果输出风格不符合预期，逐步增加示例数量。通常2-3个示例就足够建立模式。</p>
+<h3 id="少样本的高级用法正反例结合">5.5
+少样本的高级用法：正反例结合</h3>
+<p>在示例中加入反例，可以更精确地定义边界：</p>
+<pre><code>写产品文案的规则：
+
+✅ 好的示例：
+输入：无线耳机，主打降噪
+输出：戴上它，世界安静了。
+
+❌ 不要这样写：
+输入：无线耳机，主打降噪
+输出：革命性技术突破！业界领先的降噪耳机，让您享受无与伦比的沉浸式体验！
+
+---
+现在请为以下产品写文案：
+输入：便携榨汁机，主打户外使用
+输出：</code></pre>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDXnq6DvvJrpm7bmoLfmnKwv5bCR5qC35pys5pWI5p6c5a+55q+UIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNDLCBTb3VyY2UgSGFuIFNhbnMgU0MsIFBpbmdGYW5nIFNDLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYiPgogIDxkZWZzPgogICAgPGZpbHRlciBpZD0ic29mdC1zaGFkb3ciIHg9Ii04JSIgeT0iLTEyJSIgd2lkdGg9IjExNiUiIGhlaWdodD0iMTI4JSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSI1IiBzdGREZXZpYXRpb249IjciIGZsb29kLWNvbG9yPSIjMTExODI3IiBmbG9vZC1vcGFjaXR5PSIwLjA4Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJkb3QtZ3JpZCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPGNpcmNsZSBjeD0iMS41IiBjeT0iMS41IiByPSIxLjIiIGZpbGw9IiNlOGU0ZGEiIG9wYWNpdHk9IjAuODUiLz4KICAgIDwvcGF0dGVybj4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTIiIG1hcmtlckhlaWdodD0iMTIiIHJlZlg9IjEwIiByZWZZPSI2IiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJzdHJva2VXaWR0aCI+CiAgICAgIDxwYXRoIGQ9Ik0yLDIgTDEwLDYgTDIsMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjc1IiBmaWxsPSIjZjVmNGVkIi8+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjExOTgiIGhlaWdodD0iNjczIiByeD0iMTgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0idXJsKCNkb3QtZ3JpZCkiIG9wYWNpdHk9IjAuMzQiLz4KICA8cmVjdCB4PSI3MiIgeT0iMjA2IiB3aWR0aD0iMTA1NiIgaGVpZ2h0PSIzOTAiIHJ4PSIxNiIgZmlsbD0iI2Y1ZjRlZCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC44MiIvPgogIDx0ZXh0IHg9Ijg0IiB5PSI4MiIgZmlsbD0iIzFmNGU3OSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMiI+56ysNeeroDwvdGV4dD4KICA8dGV4dCB4PSIxMTE2IiB5PSI4MiIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPuaVmeWtpuWbvuekujwvdGV4dD4KICA8cmVjdCB4PSI4NCIgeT0iMTAwIiB3aWR0aD0iNTQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI4NC4wIiB5PSIxMzYuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iODQuMCIgZHk9IjAiPuesrDXnq6DvvJrpm7bmoLfmnKwv5bCR5qC35pys5pWI5p6c5a+55q+UPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iODQuMCIgeT0iMTc4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjUwMCI+PHRzcGFuIHg9Ijg0LjAiIGR5PSIwIj7kuI3lkIzmoLfmnKzmlbDph4/lr7novpPlh7rpo47moLzkuIDoh7TmgKfnmoTlvbHlk408L3RzcGFuPjwvdGV4dD4KICA8bGluZSB4MT0iNjAwIiB5MT0iMjIwIiB4Mj0iNjAwIiB5Mj0iNTg4IiBzdHJva2U9IiNjOWM0YjgiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxsaW5lIHgxPSI4NiIgeTE9IjQwNiIgeDI9IjExMTQiIHkyPSI0MDYiIHN0cm9rZT0iI2M5YzRiOCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPHJlY3QgeD0iMTA0LjAiIHk9IjIzNi4wIiB3aWR0aD0iNDcyLjAiIGhlaWdodD0iMTQyLjAiIHJ4PSI4IiBmaWxsPSIjZjdmNWVlIiBzdHJva2U9IiMxZjRlNzkiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPHJlY3QgeD0iMTA0LjAiIHk9IjIzNi4wIiB3aWR0aD0iNDcyLjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDxjaXJjbGUgY3g9IjEzMC4wIiBjeT0iMjY0LjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMTMwLjAiIHk9IjI2OS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iMTMwLjAiIGR5PSIwIj4xPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTU2LjAiIHk9IjI2OS4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSIxNTYuMCIgZHk9IjAiPlF1YWRyYW50IDE8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIxMjYuMCIgeT0iMzUwLjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjEyNi4wIiBkeT0iMCI+5L6d6LWW5qih5Z6L6buY6K6k6aOO5qC877yM6YCC5ZCI6YCa55So5Lu75YqhPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iNjI0LjAiIHk9IjIzNi4wIiB3aWR0aD0iNDcyLjAiIGhlaWdodD0iMTQyLjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPGNpcmNsZSBjeD0iNjUwLjAiIGN5PSIyNjQuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI2NTAuMCIgeT0iMjY5LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI2NTAuMCIgZHk9IjAiPjI8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI2NzYuMCIgeT0iMjY5LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9Ijc2MCI+PHRzcGFuIHg9IjY3Ni4wIiBkeT0iMCI+UXVhZHJhbnQgMjwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjY0Ni4wIiB5PSIzNTAuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iNjQ2LjAiIGR5PSIwIj7lu7rnq4vln7rmnKzpo47moLzlj4LogIPvvIzpgILlkIjnroDljZXmoLzlvI/ku7vliqE8L3RzcGFuPjwvdGV4dD4KICA8cmVjdCB4PSIxMDQuMCIgeT0iNDI0LjAiIHdpZHRoPSI0NzIuMCIgaGVpZ2h0PSIxNDIuMCIgcng9IjgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8Y2lyY2xlIGN4PSIxMzAuMCIgY3k9IjQ1Mi4wIiByPSIxNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjEzMC4wIiB5PSI0NTcuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjEzMC4wIiBkeT0iMCI+MzwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjE1Ni4wIiB5PSI0NTcuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzYwIj48dHNwYW4geD0iMTU2LjAiIGR5PSIwIj5RdWFkcmFudCAzPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTI2LjAiIHk9IjUzOC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSIxMjYuMCIgZHk9IjAiPumjjuagvOS4gOiHtOaAp+mrmO+8jOacgOaOqOiNkOeahOm7mOiupOmAieaLqTwvdHNwYW4+PC90ZXh0PgogIDxyZWN0IHg9IjYyNC4wIiB5PSI0MjQuMCIgd2lkdGg9IjQ3Mi4wIiBoZWlnaHQ9IjE0Mi4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9IjY1MC4wIiBjeT0iNDUyLjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iNjUwLjAiIHk9IjQ1Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iNjUwLjAiIGR5PSIwIj40PC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iNjc2LjAiIHk9IjQ1Ny4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSI2NzYuMCIgZHk9IjAiPlF1YWRyYW50IDQ8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI2NDYuMCIgeT0iNTM4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjY0Ni4wIiBkeT0iMCI+6L656ZmF5pWI55uK6YCS5YeP77yM5raI6ICX5aSn6YeP5LiK5LiL5paHPC90c3Bhbj48L3RleHQ+Cjwvc3ZnPgo=" alt="第5章：零样本与少样本效果对比" />
+<figcaption aria-hidden="true">第5章：零样本与少样本效果对比</figcaption>
+</figure>
+<p><em>图 5.1：不同样本数量对输出风格一致性的影响</em></p>
+<p><strong>常见误区</strong>：示例太多导致提示词过长，消耗大量上下文窗口。GPT-5.5
+的上下文窗口大，但每次对话的成本（时间和
+token）仍然存在，精选2-3个高质量示例优于堆砌10个平庸示例。</p>
+<p><strong>本章检查点</strong>：选一个你工作中有固定输出风格要求的任务，用少样本提示词写出一套可复用的模板。</p>
+<hr />
+<h2 id="第6章-gpt-5.5-的新能力与提示词适配">第6章 GPT-5.5
+的新能力与提示词适配</h2>
+<h3 id="gpt-5.5-的四大能力升级">6.1 GPT-5.5 的四大能力升级</h3>
+<p>相比上一代模型，GPT-5.5
+在以下四个维度有显著提升，每一项都对提示词写法产生了影响：</p>
+<p><strong>升级一：指令遵循能力大幅增强</strong></p>
+<p>GPT-5.5 能更严格地执行复杂、多条件的指令。这意味着： -
+你可以写更复杂的格式要求，它会更准确地遵守 -
+但同时，它不再”自作聪明”地帮你补全模糊的意图，你写什么它就做什么</p>
+<p><strong>适配建议</strong>：不要依赖模型猜测你的意图，把所有要求显式写出来。</p>
+<p><strong>升级二：长上下文理解（128K+ tokens）</strong></p>
+<p>GPT-5.5 可以处理超长的文档、对话历史或代码库。</p>
+<p><strong>适配建议</strong>： -
+可以将完整的参考文档粘贴进去，而不是摘要 -
+在长对话中，定期用”请基于我们今天所有的讨论”来提醒模型利用上下文 -
+但注意：即使上下文窗口大，模型对靠近末尾的信息更敏感，重要信息放在最后或开头</p>
+<p><strong>升级三：多模态输入</strong></p>
+<p>GPT-5.5 可以理解图片、图表、截图等视觉内容。</p>
+<p><strong>图文混合提示词示例</strong>：</p>
+<pre><code>[上传图片：竞品App截图]
+
+请分析这张截图中的UI设计：
+1. 导航结构：用户主流程是什么？
+2. 视觉层级：主要操作路径是否清晰？
+3. 改进机会：指出3个可以优化的地方，并说明理由。</code></pre>
+<p><strong>升级四：更强的自主推理能力</strong></p>
+<p>GPT-5.5
+在处理开放性问题时，能主动拆解问题、规划步骤，不需要你每次都手动写”一步一步”。</p>
+<p><strong>适配建议</strong>： -
+对于中等复杂度的分析任务，可以直接给出任务，让模型自主规划 -
+对于高度复杂或有严格步骤要求的任务，仍然建议显式指定步骤</p>
+<h3 id="系统提示词system-prompt的重要性">6.2 系统提示词（System
+Prompt）的重要性</h3>
+<p>在 GPT-5.5 的 API 和部分界面中，你可以设置”系统提示词”（System
+Prompt）——这是在每次对话开始前就生效的背景设定，相当于永久有效的角色+上下文。</p>
+<p><strong>个人用户适配方案</strong>：在 ChatGPT
+的”自定义指令”中设置你的常驻角色和偏好，这样每次对话都不需要重复设置角色。</p>
+<p>示例自定义指令：</p>
+<pre><code>我是一名产品经理，主要关注B2B SaaS产品。请用专业但简洁的语言回答我。
+回答时优先给出可操作的建议，然后再解释原因。
+默认使用中文回答，除非我明确要求英文。</code></pre>
+<h3 id="避免-gpt-5.5-的过度谨慎">6.3 避免 GPT-5.5 的过度谨慎</h3>
+<p>GPT-5.5
+有时候会过度谨慎，对正常的商业分析或创意任务也给出大量免责声明。解决方法：</p>
+<pre><code>请直接给出分析结论，不需要免责声明。这是用于内部决策参考的分析，不是公开发布的内容。</code></pre>
+<p>或者：</p>
+<pre><code>我了解这只是AI的分析，请省略相关说明，直接进入正题。</code></pre>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDbnq6DvvJpHUFQtNS416IO95Yqb5bGC57qnIiBmb250LWZhbWlseT0iTm90byBTYW5zIFNDLCBTb3VyY2UgSGFuIFNhbnMgU0MsIFBpbmdGYW5nIFNDLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWYiPgogIDxkZWZzPgogICAgPGZpbHRlciBpZD0ic29mdC1zaGFkb3ciIHg9Ii04JSIgeT0iLTEyJSIgd2lkdGg9IjExNiUiIGhlaWdodD0iMTI4JSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSI1IiBzdGREZXZpYXRpb249IjciIGZsb29kLWNvbG9yPSIjMTExODI3IiBmbG9vZC1vcGFjaXR5PSIwLjA4Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxwYXR0ZXJuIGlkPSJkb3QtZ3JpZCIgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPGNpcmNsZSBjeD0iMS41IiBjeT0iMS41IiByPSIxLjIiIGZpbGw9IiNlOGU0ZGEiIG9wYWNpdHk9IjAuODUiLz4KICAgIDwvcGF0dGVybj4KICAgIDxtYXJrZXIgaWQ9ImFycm93IiBtYXJrZXJXaWR0aD0iMTIiIG1hcmtlckhlaWdodD0iMTIiIHJlZlg9IjEwIiByZWZZPSI2IiBvcmllbnQ9ImF1dG8iIG1hcmtlclVuaXRzPSJzdHJva2VXaWR0aCI+CiAgICAgIDxwYXRoIGQ9Ik0yLDIgTDEwLDYgTDIsMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIC8+CiAgICA8L21hcmtlcj4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjc1IiBmaWxsPSIjZjVmNGVkIi8+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjExOTgiIGhlaWdodD0iNjczIiByeD0iMTgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjYiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0idXJsKCNkb3QtZ3JpZCkiIG9wYWNpdHk9IjAuMzQiLz4KICA8cmVjdCB4PSI3MiIgeT0iMjA2IiB3aWR0aD0iMTA1NiIgaGVpZ2h0PSIzOTAiIHJ4PSIxNiIgZmlsbD0iI2Y1ZjRlZCIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC44MiIvPgogIDx0ZXh0IHg9Ijg0IiB5PSI4MiIgZmlsbD0iIzFmNGU3OSIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCIgbGV0dGVyLXNwYWNpbmc9IjEuMiI+56ysNueroDwvdGV4dD4KICA8dGV4dCB4PSIxMTE2IiB5PSI4MiIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCIgbGV0dGVyLXNwYWNpbmc9IjEiPuaVmeWtpuWbvuekujwvdGV4dD4KICA8cmVjdCB4PSI4NCIgeT0iMTAwIiB3aWR0aD0iNTQiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI4NC4wIiB5PSIxMzYuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjMxIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iODQuMCIgZHk9IjAiPuesrDbnq6DvvJpHUFQtNS416IO95Yqb5bGC57qnPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iODQuMCIgeT0iMTc4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxNSIgZm9udC13ZWlnaHQ9IjUwMCI+PHRzcGFuIHg9Ijg0LjAiIGR5PSIwIj5HUFQtNS415Zub5aSn6IO95Yqb5Y2H57qn5LiO5a+55bqU5o+Q56S66K+N6YCC6YWN562W55WlPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iMTY4IiB5PSIyMjIiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI3MDAiPui2iuW+gOS4i+i2iuaOpei/keW6leWxguacuuWItu+8jOi2iuW+gOS4iui2iuaOpei/keeUqOaIt+WPr+ingee7k+aenDwvdGV4dD4KICA8cmVjdCB4PSIxNjguMCIgeT0iMjM2LjAiIHdpZHRoPSI4NjQuMCIgaGVpZ2h0PSI1NC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxyZWN0IHg9IjE2OC4wIiB5PSIyMzYuMCIgd2lkdGg9IjciIGhlaWdodD0iNTQuMCIgcng9IjMuNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjE5OC4wIiB5PSIyNzAuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE5IiBmb250LXdlaWdodD0iNzgwIj48dHNwYW4geD0iMTk4LjAiIGR5PSIwIj7mjIfku6TpgbXlvqrlop7lvLo8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIxMDA4LjAiIHk9IjI2OC4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iMTAwOC4wIiBkeT0iMCI+6YCC6YWN77ya5pi+5byP5YaZ5Ye65omA5pyJ6KaB5rGC77yM5LiN5L6d6LWW5qih5Z6L54yc5rWLPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iMTk2LjAiIHk9IjMwMi4wIiB3aWR0aD0iODA4LjAiIGhlaWdodD0iNTQuMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSIxOTYuMCIgeT0iMzAyLjAiIHdpZHRoPSI3IiBoZWlnaHQ9IjU0LjAiIHJ4PSIzLjUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIyMjYuMCIgeT0iMzM2LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9Ijc4MCI+PHRzcGFuIHg9IjIyNi4wIiBkeT0iMCI+6ZW/5LiK5LiL5paH77yIMTI4SyvvvIk8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI5ODAuMCIgeT0iMzM0LjAiIHRleHQtYW5jaG9yPSJlbmQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTMiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSI5ODAuMCIgZHk9IjAiPumAgumFje+8mueymOi0tOWujOaVtOaWh+aho++8jOmHjeimgeS/oeaBr+aUvummluWwvjwvdHNwYW4+PC90ZXh0PgogIDxyZWN0IHg9IjIyNC4wIiB5PSIzNjguMCIgd2lkdGg9Ijc1Mi4wIiBoZWlnaHQ9IjU0LjAiIHJ4PSI4IiBmaWxsPSIjZmFmOWY1IiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS40IiBmaWx0ZXI9InVybCgjc29mdC1zaGFkb3cpIi8+CiAgPHJlY3QgeD0iMjI0LjAiIHk9IjM2OC4wIiB3aWR0aD0iNyIgaGVpZ2h0PSI1NC4wIiByeD0iMy41IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iMjU0LjAiIHk9IjQwMi4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTkiIGZvbnQtd2VpZ2h0PSI3ODAiPjx0c3BhbiB4PSIyNTQuMCIgZHk9IjAiPuWkmuaooeaAgeeQhuinozwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9Ijk1Mi4wIiB5PSI0MDAuMCIgdGV4dC1hbmNob3I9ImVuZCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMyIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9Ijk1Mi4wIiBkeT0iMCI+6YCC6YWN77ya5Zu+5paH5re35ZCI5o+Q56S66K+N77yM5o+P6L+w6KeG6KeJ5YiG5p6Q6KeS5bqmPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iMjUyLjAiIHk9IjQzNC4wIiB3aWR0aD0iNjk2LjAiIGhlaWdodD0iNTQuMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSIyNTIuMCIgeT0iNDM0LjAiIHdpZHRoPSI3IiBoZWlnaHQ9IjU0LjAiIHJ4PSIzLjUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSIyODIuMCIgeT0iNDY4LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxOSIgZm9udC13ZWlnaHQ9Ijc4MCI+PHRzcGFuIHg9IjI4Mi4wIiBkeT0iMCI+6Ieq5Li75o6o55CG6IO95YqbPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iOTI0LjAiIHk9IjQ2Ni4wIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iNTYwIj48dHNwYW4geD0iOTI0LjAiIGR5PSIwIj7pgILphY3vvJrkuK3nrYnku7vliqHlj6/nnIHnlaVDb1TvvIzlpI3mnYLku7vliqHku43pnIDmmL7lvI88L3RzcGFuPjwvdGV4dD4KPC9zdmc+Cg==" alt="第6章：GPT-5.5能力层级" />
+<figcaption aria-hidden="true">第6章：GPT-5.5能力层级</figcaption>
+</figure>
+<p><em>图 6.1：GPT-5.5 的四层能力升级与对应的提示词适配策略</em></p>
+<p><strong>常见误区</strong>：认为模型越新，就不需要写好提示词了。能力升级让好提示词产生更好的输出，但无法弥补差提示词的缺陷。</p>
+<p><strong>本章检查点</strong>：你目前最常用的3条提示词，哪些可以利用
+GPT-5.5 的新能力进行升级？</p>
+<hr />
+<h2 id="第7章-实战工作流从初稿到精调">第7章
+实战工作流——从初稿到精调</h2>
+<h3 id="提示词迭代四步法">7.1 提示词迭代四步法</h3>
+<p>写好提示词不是一蹴而就的，而是一个持续迭代的过程。</p>
+<p><strong>第一步：写初稿</strong></p>
+<p>用 RTCF 框架快速写出第一条提示词，不追求完美，先跑起来。</p>
+<p><strong>第二步：测试</strong></p>
+<p>用同一条提示词测试3-5次，观察： -
+输出是否稳定（每次结果是否大致相同） - 输出是否满足你的核心需求 -
+哪些部分总是出问题</p>
+<p><strong>第三步：诊断</strong></p>
+<p>输出不好时，定位问题所在：</p>
+<div class="table-wrap"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>问题现象</th>
+<th>可能原因</th>
+<th>解决方向</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>答案太笼统</td>
+<td>角色设定不够专业，任务描述太模糊</td>
+<td>强化角色专业背景，量化任务要求</td>
+</tr>
+<tr class="even">
+<td>格式乱</td>
+<td>格式要求不明确</td>
+<td>用具体模板或示例定义格式</td>
+</tr>
+<tr class="odd">
+<td>答非所问</td>
+<td>上下文不足，模型猜测方向错误</td>
+<td>补充背景信息，消除歧义词</td>
+</tr>
+<tr class="even">
+<td>推理出错</td>
+<td>没有引导推理步骤</td>
+<td>加入思维链或分步指令</td>
+</tr>
+<tr class="odd">
+<td>风格不对</td>
+<td>缺少少样本示例</td>
+<td>加入2-3个风格示例</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>第四步：迭代</strong></p>
+<p>每次只改一个变量，这样你才能知道是哪个改动起了作用。</p>
+<h3 id="五种常见反模式">7.2 五种常见反模式</h3>
+<p><strong>反模式一：万能提示词依赖</strong></p>
+<p>复制别人的”万能提示词”而不理解其原理。这类提示词在原作者的场景下有效，但换了任务或场景可能完全失效。</p>
+<p><strong>正确做法</strong>：学会拆解好提示词的结构，理解每一部分的作用，再根据自己的需求改写。</p>
+<p><strong>反模式二：一次性塞入所有要求</strong></p>
+<pre><code>帮我写一篇文章，要专业、有深度、有数据支撑、结构清晰、3000字、面向CEO、要有故事性、还要有行动建议、不要废话……</code></pre>
+<p>要求越堆越多，但没有优先级，模型很难全部兼顾。</p>
+<p><strong>正确做法</strong>：确定最核心的3-5个要求，其余可以在后续对话中迭代。</p>
+<p><strong>反模式三：忽视对话上下文</strong></p>
+<p>在一次对话中，你已经建立了很好的上下文，但下一次对话又从零开始，每次重复解释。</p>
+<p><strong>正确做法</strong>：将稳定有效的提示词保存下来，建立个人提示词库。</p>
+<p><strong>反模式四：不测试稳定性</strong></p>
+<p>只测试一次，输出好就以为提示词没问题。</p>
+<p><strong>正确做法</strong>：同一条提示词至少测试3次，稳定输出才算通过。</p>
+<p><strong>反模式五：忽视负面约束</strong></p>
+<p>只说”要做什么”，不说”不要做什么”，导致模型在你不想要的方向上发挥。</p>
+<p><strong>正确做法</strong>：对于有明确边界的任务，正负约束都要写清楚。</p>
+<h3 id="构建个人提示词库">7.3 构建个人提示词库</h3>
+<p>高效使用 GPT-5.5 的人，都有自己的提示词库。建议用以下结构组织：</p>
+<pre><code>提示词库/
+├── 日常工作/
+│   ├── 邮件撰写模板
+│   ├── 会议纪要整理
+│   └── 周报生成
+├── 内容创作/
+│   ├── 小红书文案
+│   ├── 公众号选题
+│   └── 演讲稿框架
+└── 分析决策/
+    ├── 竞品分析
+    ├── 数据解读
+    └── 方案评估</code></pre>
+<p>每条提示词记录：<strong>任务描述 + 提示词正文 + 适用场景 +
+注意事项</strong>。</p>
+<h3 id="进阶链式提示词">7.4 进阶：链式提示词</h3>
+<p>对于复杂任务，不要试图用一条提示词完成所有工作。将任务拆分为多个步骤，每个步骤用一条提示词，后一条用前一条的输出作为输入。</p>
+<pre><code>步骤1提示词：分析这份竞品报告，列出5个关键洞察。
+→ 得到输出A
+
+步骤2提示词：基于以下5个洞察[粘贴输出A]，制定我们产品的差异化策略。
+→ 得到输出B
+
+步骤3提示词：将这个策略[粘贴输出B]转化为一份500字的内部沟通文档。</code></pre>
+<p>链式提示词每一步都可以审查和修正，最终输出质量远高于一步到位的尝试。</p>
+<figure>
+<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjY3NSIgdmlld0JveD0iMCAwIDEyMDAgNjc1IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuesrDfnq6DvvJrmj5DnpLror43ov63ku6Plm5vmraXlvqrnjq8iIGZvbnQtZmFtaWx5PSJOb3RvIFNhbnMgU0MsIFNvdXJjZSBIYW4gU2FucyBTQywgUGluZ0ZhbmcgU0MsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiI+CiAgPGRlZnM+CiAgICA8ZmlsdGVyIGlkPSJzb2Z0LXNoYWRvdyIgeD0iLTglIiB5PSItMTIlIiB3aWR0aD0iMTE2JSIgaGVpZ2h0PSIxMjglIj4KICAgICAgPGZlRHJvcFNoYWRvdyBkeD0iMCIgZHk9IjUiIHN0ZERldmlhdGlvbj0iNyIgZmxvb2QtY29sb3I9IiMxMTE4MjciIGZsb29kLW9wYWNpdHk9IjAuMDgiLz4KICAgIDwvZmlsdGVyPgogICAgPHBhdHRlcm4gaWQ9ImRvdC1ncmlkIiB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8Y2lyY2xlIGN4PSIxLjUiIGN5PSIxLjUiIHI9IjEuMiIgZmlsbD0iI2U4ZTRkYSIgb3BhY2l0eT0iMC44NSIvPgogICAgPC9wYXR0ZXJuPgogICAgPG1hcmtlciBpZD0iYXJyb3ciIG1hcmtlcldpZHRoPSIxMiIgbWFya2VySGVpZ2h0PSIxMiIgcmVmWD0iMTAiIHJlZlk9IjYiIG9yaWVudD0iYXV0byIgbWFya2VyVW5pdHM9InN0cm9rZVdpZHRoIj4KICAgICAgPHBhdGggZD0iTTIsMiBMMTAsNiBMMiwxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWY0ZTc5IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgLz4KICAgIDwvbWFya2VyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2NzUiIGZpbGw9IiNmNWY0ZWQiLz4KICA8cmVjdCB4PSIxIiB5PSIxIiB3aWR0aD0iMTE5OCIgaGVpZ2h0PSI2NzMiIHJ4PSIxOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNiIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIxMTk4IiBoZWlnaHQ9IjY3MyIgcng9IjE4IiBmaWxsPSJ1cmwoI2RvdC1ncmlkKSIgb3BhY2l0eT0iMC4zNCIvPgogIDxyZWN0IHg9IjcyIiB5PSIyMDYiIHdpZHRoPSIxMDU2IiBoZWlnaHQ9IjM5MCIgcng9IjE2IiBmaWxsPSIjZjVmNGVkIiBzdHJva2U9IiNkOWQ2Y2MiIHN0cm9rZS13aWR0aD0iMS4xIiBvcGFjaXR5PSIwLjgyIi8+CiAgPHRleHQgeD0iODQiIHk9IjgyIiBmaWxsPSIjMWY0ZTc5IiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iMS4yIj7nrKw356ugPC90ZXh0PgogIDx0ZXh0IHg9IjExMTYiIHk9IjgyIiB0ZXh0LWFuY2hvcj0iZW5kIiBmaWxsPSIjNWY2NjczIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iMSI+5pWZ5a2m5Zu+56S6PC90ZXh0PgogIDxyZWN0IHg9Ijg0IiB5PSIxMDAiIHdpZHRoPSI1NCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9Ijg0LjAiIHk9IjEzNi4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMzEiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI4NC4wIiBkeT0iMCI+56ysN+eroO+8muaPkOekuuivjei/reS7o+Wbm+atpeW+queOrzwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9Ijg0LjAiIHk9IjE3OC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTUiIGZvbnQtd2VpZ2h0PSI1MDAiPjx0c3BhbiB4PSI4NC4wIiBkeT0iMCI+5YaZ4oaS5rWL4oaS6K+K5pat4oaS5pS54oCU4oCU5oyB57ut6L+t5Luj5piv5o+Q56S66K+N5bel56iL55qE5qC45b+D5pa55rOVPC90c3Bhbj48L3RleHQ+CiAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iNDA4IiByPSIxNjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjIiIHN0cm9rZS1kYXNoYXJyYXk9IjUgOSIvPgogIDxwYXRoIGQ9Ik02OTQuMCwyNzMuMCBRNzEzLjUsMzAyLjAgNzQ2LjAsMjg5LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzZmNzY4MiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPHBhdGggZD0iTTgxNS44LDM2OC4wIFE3NzQuMiw0MDMuNCA3NzIuMiw0NTguMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNmY3NjgyIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgbWFya2VyLWVuZD0idXJsKCNhcnJvdykiLz4KICA8cGF0aCBkPSJNNjU0LjAsNTA4LjAgUTYwMC4wLDQ4Ni4wIDU0Ni4wLDUwOC4wIiBmaWxsPSJub25lIiBzdHJva2U9IiM2Zjc2ODIiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93KSIvPgogIDxwYXRoIGQ9Ik00ODAuMCw0NTguMCBRNTQ1LjIsMzg2LjggNTcyLjAsMjk0LjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzZmNzY4MiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hcmtlci1lbmQ9InVybCgjYXJyb3cpIi8+CiAgPGNpcmNsZSBjeD0iNjAwIiBjeT0iNDA4IiByPSI4NiIgZmlsbD0iI2Y3ZjVlZSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDx0ZXh0IHg9IjYwMC4wIiB5PSI0MDQuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjYwMC4wIiBkeT0iMCI+5oyB57ut5LyY5YyWPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iNTE0LjAiIHk9IjIwMi4wIiB3aWR0aD0iMTcyLjAiIGhlaWdodD0iODQuMCIgcng9IjgiIGZpbGw9IiNmN2Y1ZWUiIHN0cm9rZT0iIzFmNGU3OSIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8cmVjdCB4PSI1MTQuMCIgeT0iMjAyLjAiIHdpZHRoPSIxNzIuMCIgaGVpZ2h0PSI1IiByeD0iMi41IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPGNpcmNsZSBjeD0iNTQwLjAiIGN5PSIyMzAuMCIgcj0iMTUiIGZpbGw9IiMxZjRlNzkiLz4KICA8dGV4dCB4PSI1NDAuMCIgeT0iMjM1LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmZmZmYiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI4MDAiPjx0c3BhbiB4PSI1NDAuMCIgZHk9IjAiPjE8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI1NjYuMCIgeT0iMjM1LjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzExMTgyNyIgZm9udC1zaXplPSIxNyIgZm9udC13ZWlnaHQ9Ijc2MCI+PHRzcGFuIHg9IjU2Ni4wIiBkeT0iMCI+5YaZ5Yid56i/PC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iNTM2LjAiIHk9IjI1OC4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiM1ZjY2NzMiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtd2VpZ2h0PSI1NjAiPjx0c3BhbiB4PSI1MzYuMCIgZHk9IjAiPueUqFJUQ0bmoYbmnrblv6vpgJ/lhpnlh7rnrKzkuIDniYg8L3RzcGFuPjwvdGV4dD4KICA8cmVjdCB4PSI3NTQuMCIgeT0iMjc2LjAiIHdpZHRoPSIxNzIuMCIgaGVpZ2h0PSI4NC4wIiByeD0iOCIgZmlsbD0iI2ZhZjlmNSIgc3Ryb2tlPSIjZDlkNmNjIiBzdHJva2Utd2lkdGg9IjEuNCIgZmlsdGVyPSJ1cmwoI3NvZnQtc2hhZG93KSIvPgogIDxjaXJjbGUgY3g9Ijc4MC4wIiBjeT0iMzA0LjAiIHI9IjE1IiBmaWxsPSIjMWY0ZTc5Ii8+CiAgPHRleHQgeD0iNzgwLjAiIHk9IjMwOS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmZmZmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iODAwIj48dHNwYW4geD0iNzgwLjAiIGR5PSIwIj4yPC90c3Bhbj48L3RleHQ+CiAgPHRleHQgeD0iODA2LjAiIHk9IjMwOS4wIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGZpbGw9IiMxMTE4MjciIGZvbnQtc2l6ZT0iMTciIGZvbnQtd2VpZ2h0PSI3NjAiPjx0c3BhbiB4PSI4MDYuMCIgZHk9IjAiPua1i+ivlTPmrKE8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI3NzYuMCIgeT0iMzMyLjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9Ijc3Ni4wIiBkeT0iMCI+6KeC5a+f6L6T5Ye656iz5a6a5oCn5ZKM6LSo6YePPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iNjYyLjAiIHk9IjQ2Ni4wIiB3aWR0aD0iMTcyLjAiIGhlaWdodD0iODQuMCIgcng9IjgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8Y2lyY2xlIGN4PSI2ODguMCIgY3k9IjQ5NC4wIiByPSIxNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjY4OC4wIiB5PSI0OTkuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjY4OC4wIiBkeT0iMCI+MzwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjcxNC4wIiB5PSI0OTkuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzYwIj48dHNwYW4geD0iNzE0LjAiIGR5PSIwIj7or4rmlq3pl67popg8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSI2ODQuMCIgeT0iNTIyLjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjY4NC4wIiBkeT0iMCI+5a6a5L2N6KeS6ImyL+S7u+WKoS/kuIrkuIvmlocv5qC85byP5ZOq6YeM5Ye65LqG6Zeu6aKYPC90c3Bhbj48L3RleHQ+CiAgPHJlY3QgeD0iMzY2LjAiIHk9IjQ2Ni4wIiB3aWR0aD0iMTcyLjAiIGhlaWdodD0iODQuMCIgcng9IjgiIGZpbGw9IiNmYWY5ZjUiIHN0cm9rZT0iI2Q5ZDZjYyIgc3Ryb2tlLXdpZHRoPSIxLjQiIGZpbHRlcj0idXJsKCNzb2Z0LXNoYWRvdykiLz4KICA8Y2lyY2xlIGN4PSIzOTIuMCIgY3k9IjQ5NC4wIiByPSIxNSIgZmlsbD0iIzFmNGU3OSIvPgogIDx0ZXh0IHg9IjM5Mi4wIiB5PSI0OTkuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZmZmZiIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjgwMCI+PHRzcGFuIHg9IjM5Mi4wIiBkeT0iMCI+NDwvdHNwYW4+PC90ZXh0PgogIDx0ZXh0IHg9IjQxOC4wIiB5PSI0OTkuMCIgdGV4dC1hbmNob3I9InN0YXJ0IiBmaWxsPSIjMTExODI3IiBmb250LXNpemU9IjE3IiBmb250LXdlaWdodD0iNzYwIj48dHNwYW4geD0iNDE4LjAiIGR5PSIwIj7ov63ku6PmlLnov5s8L3RzcGFuPjwvdGV4dD4KICA8dGV4dCB4PSIzODguMCIgeT0iNTIyLjAiIHRleHQtYW5jaG9yPSJzdGFydCIgZmlsbD0iIzVmNjY3MyIgZm9udC1zaXplPSIxMiIgZm9udC13ZWlnaHQ9IjU2MCI+PHRzcGFuIHg9IjM4OC4wIiBkeT0iMCI+5q+P5qyh5Y+q5pS55LiA5Liq5Y+Y6YeP77yM5a+55q+U5YmN5ZCO5pWI5p6cPC90c3Bhbj48L3RleHQ+Cjwvc3ZnPgo=" alt="第7章：提示词迭代循环" />
+<figcaption aria-hidden="true">第7章：提示词迭代循环</figcaption>
+</figure>
+<p><em>图 7.1：写→测→诊断→改——提示词迭代的四步循环</em></p>
+<p><strong>常见误区</strong>：认为提示词写好了就永久有效。模型版本更新、任务场景变化都可能让原有提示词失效，定期审查提示词库是好习惯。</p>
+<p><strong>本章检查点</strong>：选一个你工作中最高频的任务，完整走一遍”写初稿→测试3次→诊断→迭代”的流程，记录每次改动和原因。</p>
+<hr />
+<h2 id="实践任务">实践任务</h2>
+<p>完成以下三个练习，巩固本教程的核心内容：</p>
+<p><strong>练习一（识别）</strong></p>
+<p>拿出你最近用过的3条提示词，用 RTCF 框架逐一分析： - 哪个要素缺失？ -
+缺失的部分补上后，输出有什么变化？</p>
+<p>评估标准：能准确识别至少2条提示词中的结构缺陷。</p>
+<p><strong>练习二（改写）</strong></p>
+<p>将以下模糊提示词改写为精确版本，并对比两次输出： &gt;
+原版：帮我分析一下最近的市场趋势</p>
+<p>改写要求：加入角色、量化任务、指定上下文、定义格式。</p>
+<p>评估标准：改写后的提示词包含 RTCF
+全部四要素，输出质量有明显提升。</p>
+<p><strong>练习三（应用）</strong></p>
+<p>为你工作中一个高频任务构建一条”生产级”提示词： 1. 用 RTCF
+框架写出初稿 2. 加入2个少样本示例 3. 对需要推理的部分加入思维链 4.
+测试3次，记录输出稳定性 5. 将最终版本存入你的提示词库</p>
+<p>评估标准：提示词在3次测试中输出结构一致，能直接应用于实际工作。</p>
+<hr />
+<h2 id="延伸阅读">延伸阅读</h2>
+<ul>
+<li><strong>OpenAI Prompt Engineering
+Guide</strong>（platform.openai.com/docs/guides/prompt-engineering）——官方六大策略，最权威的入门参考</li>
+<li><strong>dair-ai/Prompt-Engineering-Guide</strong>（github.com/dair-ai/Prompt-Engineering-Guide）——社区维护的综合指南，含大量实用模板和最新进展</li>
+<li><strong>Chain-of-Thought Prompting Elicits Reasoning in
+LLMs</strong>（arxiv.org/abs/2201.11903）——思维链技术的原始论文，理解技术原理的必读文献</li>
+<li><strong>Large Language Models are Zero-Shot
+Reasoners</strong>（arxiv.org/abs/2205.11916）——“Let’s think step by
+step”背后的研究，简单有效</li>
+</ul>
+</main>
+</div>
+</body>
+</html>
