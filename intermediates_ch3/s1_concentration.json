@@ -1,0 +1,44 @@
+{
+  "market_share_basis": "按营收估算",
+  "top_players": [
+    {
+      "rank": 1,
+      "brand": "海底捞",
+      "market_share_pct": 3.5,
+      "store_count_approx": 1350
+    },
+    {
+      "rank": 2,
+      "brand": "呷哺呷哺集团",
+      "market_share_pct": 1.2,
+      "store_count_approx": 1000
+    },
+    {
+      "rank": 3,
+      "brand": "巴奴毛肚火锅",
+      "market_share_pct": 0.5,
+      "store_count_approx": 150
+    },
+    {
+      "rank": 4,
+      "brand": "捞王锅物料理",
+      "market_share_pct": 0.3,
+      "store_count_approx": 180
+    },
+    {
+      "rank": 5,
+      "brand": "小龙坎老火锅",
+      "market_share_pct": 0.2,
+      "store_count_approx": 800
+    }
+  ],
+  "cr3_pct": 5.2,
+  "cr5_pct": 5.7,
+  "hhi_estimate": 150,
+  "structure_type": "高度分散",
+  "concentration_trend": "缓慢集中：头部连锁扩张，但区域品牌仍大量存在，品类天然不易集中",
+  "fragmentation_reason": "火锅门槛较低，口味偏好地域差异大，本地小店长期占据大部分份额",
+  "investment_implication": "高分散格局意味着头部品牌市占率提升空间大，但整合速度慢；龙头应以单店盈利为先，而非激进扩张",
+  "need_human_calibration": true,
+  "calibration_reason": "市场份额数据需参照弗若斯特沙利文/欧睿等第三方报告核实"
+}

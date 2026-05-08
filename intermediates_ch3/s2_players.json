@@ -1,0 +1,68 @@
+{
+  "comparison_basis": "2023-2024年公开财报及市场调研数据综合估算",
+  "players": [
+    {
+      "brand": "海底捞",
+      "ticker": "6862.HK",
+      "positioning": "中高端，全客群，主打极致服务和社交体验",
+      "price_band_rmb": "人均100-130元",
+      "store_count": 1374,
+      "avg_table_turns_per_day": 3.8,
+      "avg_spend_per_head_rmb": 109.2,
+      "estimated_revenue_cny_bn": 41.45,
+      "core_differentiation": "极致服务体验和等位文化，强大的供应链和标准化管理体系",
+      "key_weakness": "服务溢价空间收窄，客单价下行压力，部分门店盈利能力恢复不及预期"
+    },
+    {
+      "brand": "呷哺呷哺",
+      "ticker": "0520.HK",
+      "positioning": "中端，个人/小团体，高性价比小火锅",
+      "price_band_rmb": "人均60-80元",
+      "store_count": 800,
+      "avg_table_turns_per_day": 2.6,
+      "avg_spend_per_head_rmb": 70.1,
+      "estimated_revenue_cny_bn": 3.0,
+      "core_differentiation": "吧台式小火锅模式，高性价比，适合单人/双人快餐式就餐",
+      "key_weakness": "品牌定位模糊，产品创新不足，同店销售增长乏力，受子品牌拖累"
+    },
+    {
+      "brand": "巴奴毛肚火锅",
+      "ticker": "N/A",
+      "positioning": "中高端，主打产品主义，毛肚特色火锅",
+      "price_band_rmb": "人均130-180元",
+      "store_count": 100,
+      "avg_table_turns_per_day": 3.2,
+      "avg_spend_per_head_rmb": 145,
+      "estimated_revenue_cny_bn": "N/A",
+      "core_differentiation": "强调“产品主义”，以毛肚为核心爆品，差异化食材和创新菜品",
+      "key_weakness": "门店数量少，扩张速度较慢，品牌知名度区域性强，供应链管理挑战"
+    },
+    {
+      "brand": "捞王锅物料理",
+      "ticker": "9622.HK",
+      "positioning": "中高端，主打猪肚鸡火锅，养生滋补",
+      "price_band_rmb": "人均140-190元",
+      "store_count": 180,
+      "avg_table_turns_per_day": 2.8,
+      "avg_spend_per_head_rmb": 150,
+      "estimated_revenue_cny_bn": 1.7,
+      "core_differentiation": "专注于猪肚鸡火锅细分赛道，强调“胡椒猪肚鸡”的养生滋补特色",
+      "key_weakness": "品类相对小众，受众面不如传统火锅广，口味适应性有局限，北方市场拓展挑战"
+    },
+    {
+      "brand": "小龙坎老火锅",
+      "ticker": "N/A",
+      "positioning": "中端，川味老火锅，主打麻辣重口味和市井文化",
+      "price_band_rmb": "人均90-120元",
+      "store_count": 800,
+      "avg_table_turns_per_day": 2.7,
+      "avg_spend_per_head_rmb": 105,
+      "estimated_revenue_cny_bn": "N/A",
+      "core_differentiation": "浓郁的川味老火锅体验，强烈的品牌文化和复古装修风格",
+      "key_weakness": "加盟模式导致品控和服务质量参差不齐，食品安全问题频发，品牌口碑受损"
+    }
+  ],
+  "core_target_competitive_summary": "火锅品类竞争激烈且高度分散，海底捞在规模和服务标准化上仍具优势，但面临客单价下行和模仿者挑战；巴奴和捞王以产品差异化切入中高端市场；呷哺呷哺和小龙坎则分别以性价比和特色口味占据中端市场，但均面临品牌老化或品控难题。",
+  "need_human_calibration": true,
+  "calibration_reason": "部分非上市公司数据为市场估算，需以最新财报或调研数据核实。"
+}
