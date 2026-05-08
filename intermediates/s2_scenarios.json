@@ -1,0 +1,74 @@
+{
+  "total_scenarios": 5,
+  "scenarios": [
+    {
+      "id": 1,
+      "name": "朋友聚会",
+      "trigger": "朋友/同事聚餐，寻求热闹、有互动感的用餐体验",
+      "target_group": "20-40岁城市白领，3-8人团体",
+      "avg_spend_rmb": 160,
+      "revenue_weight_pct": 40,
+      "competitive_advantage": "极致服务、丰富互动（如变脸、拉面）、等位文化形成社交谈资、多样化锅底菜品",
+      "brand_examples": [
+        "海底捞",
+        "凑凑"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "家庭欢聚",
+      "trigger": "周末/节假日家庭聚餐，需要舒适、适合老少皆宜的用餐环境",
+      "target_group": "25-55岁家庭用户，4-10人团体",
+      "avg_spend_rmb": 180,
+      "revenue_weight_pct": 30,
+      "competitive_advantage": "儿童乐园、贴心服务（如照顾老人小孩）、大桌位、私密包间、菜品丰富度",
+      "brand_examples": [
+        "海底捞",
+        "大龙燚"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "情侣约会",
+      "trigger": "情侣约会，寻求轻松、有情调且能互动的餐饮体验",
+      "target_group": "20-35岁年轻情侣，2人",
+      "avg_spend_rmb": 150,
+      "revenue_weight_pct": 15,
+      "competitive_advantage": "氛围感营造、特色锅底/小吃、拍照打卡点、贴心服务、互动性",
+      "brand_examples": [
+        "海底捞",
+        "凑凑"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "个人简餐",
+      "trigger": "个人或小团体午餐/晚餐，想吃火锅但时间有限或人数不多",
+      "target_group": "20-45岁上班族、学生，1-2人",
+      "avg_spend_rmb": 90,
+      "revenue_weight_pct": 10,
+      "competitive_advantage": "一人一锅、套餐选择、快速出餐、性价比、便捷性",
+      "brand_examples": [
+        "呷哺呷哺",
+        "海底捞(部分门店)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "商务宴请",
+      "trigger": "非正式商务宴请、团队聚餐，需要私密性好、服务周到的环境",
+      "target_group": "30-50岁商务人士，4-10人团体",
+      "avg_spend_rmb": 250,
+      "revenue_weight_pct": 5,
+      "competitive_advantage": "私密包间、高品质食材、专业服务、酒水搭配、彰显品味",
+      "brand_examples": [
+        "海底捞(高端门店)",
+        "部分精品火锅"
+      ]
+    }
+  ],
+  "dominant_scenario": "朋友聚会",
+  "scenario_insight": "火锅品类本质上是社交货币，口味标准化让消费者注意力转移到氛围体验",
+  "need_human_calibration": false,
+  "calibration_reason": ""
+}
