@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<!-- ==================================================================
+     中国餐饮行业现状深度剖析与2026年转型拐点展望报告
+     Kami · Equity Report 模板 · 中文行业研报版
+     ================================================================== -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>中国餐饮行业 · 2026年行业研报</title>
+<meta name="author" content="行业研究部">
+<meta name="description" content="中国餐饮行业从规模扩张红利向效率驱动存量周期跨越的深度剖析，2026年三大结构性拐点前瞻。">
+<meta name="keywords" content="中国餐饮,行业研报,2026,海底捞,连锁化,存量竞争">
+<meta name="generator" content="Kami">
+<style>
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: "TsangerJinKai02";
+    src: url("https://cdn.jsdelivr.net/gh/tw93/Kami@main/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm 18mm 18mm 18mm;
+    background: #f5f4ed;
+    @bottom-center {
+      content: counter(page) "  ·  中国餐饮行业研报 2026";
+      font-family: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+      font-size: 9pt;
+      color: #6b6a64;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5f4ed;
+    --ivory:     #faf9f5;
+    --near-black:#141413;
+    --dark-warm: #3d3d3a;
+    --olive:     #504e49;
+    --stone:     #6b6a64;
+    --brand:     #1B365D;
+    --border:    #e8e6dc;
+    --border-soft:#e5e3d8;
+    --tag-bg:    #E4ECF5;
+    --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
+    --sans: var(--serif);
+  }
+
+  html, body { background: var(--parchment); }
+
+  @media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 16mm 18mm 18mm 18mm; }
+  }
+
+  body {
+    color: var(--near-black);
+    font-family: var(--serif);
+    font-size: 10pt;
+    line-height: 1.55;
+    letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
+  }
+
+  strong { font-weight: 500; }
+  .hl { color: var(--brand); font-weight: 500; }
+
+  /* ========== HEADER ========== */
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14pt;
+    border-left: 2.5pt solid var(--brand);
+    border-radius: 1.5pt;
+    padding-left: 8pt;
+  }
+  .ticker-block { flex: 1; }
+  .ticker-eyebrow {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 1pt;
+    text-transform: uppercase;
+    margin-bottom: 4pt;
+  }
+  .ticker-name {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1.15;
+    margin-bottom: 4pt;
+  }
+  .ticker-sub {
+    font-size: 10pt;
+    color: var(--olive);
+    line-height: 1.4;
+  }
+  .price-block {
+    text-align: right;
+    padding-top: 4pt;
+  }
+  .price-current {
+    font-family: var(--serif);
+    font-size: 22pt;
+    font-weight: 500;
+    color: var(--near-black);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .price-change {
+    font-size: 9.5pt;
+    font-weight: 500;
+    margin-top: 3pt;
+    color: var(--stone);
+  }
+
+  /* ========== METRICS ========== */
+  .metrics {
+    display: flex;
+    gap: 14pt;
+    margin-bottom: 16pt;
+    padding: 6pt 0;
+    border-top: 0.3pt dotted var(--border);
+    border-bottom: 0.3pt dotted var(--border);
+  }
+  .metric { flex: 1; display: flex; align-items: baseline; gap: 4pt; }
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 15pt;
+    font-weight: 500;
+    color: var(--brand);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .metric-label { font-size: 9pt; color: var(--olive); line-height: 1.3; }
+
+  /* ========== SECTIONS ========== */
+  h2 {
+    font-family: var(--serif);
+    font-size: 14pt;
+    font-weight: 500;
+    color: var(--near-black);
+    margin: 18pt 0 6pt 0;
+    border-bottom: 0.3pt solid var(--border);
+    padding-bottom: 3pt;
+    break-after: avoid;
+  }
+  h3 {
+    font-size: 11.5pt;
+    font-weight: 500;
+    color: var(--dark-warm);
+    margin: 12pt 0 4pt 0;
+    break-after: avoid;
+  }
+  p { margin: 0 0 7pt 0; line-height: 1.55; widows: 2; orphans: 2; }
+  ul, ol { margin: 4pt 0 8pt 0; padding-left: 18pt; line-height: 1.55; }
+  ul li::marker { color: var(--brand); }
+  ol li::marker { color: var(--brand); font-weight: 500; }
+  li { margin-bottom: 3pt; }
+
+  /* ========== TAG ========== */
+  .tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--brand);
+    font-size: 8.5pt;
+    font-weight: 500;
+    padding: 1pt 6pt;
+    border-radius: 3pt;
+    margin-right: 3pt;
+  }
+
+  /* ========== TABLE ========== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin: 8pt 0;
+    break-inside: avoid;
+  }
+  table th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--dark-warm);
+    padding: 5pt 7pt;
+    border-bottom: 1pt solid var(--border);
+  }
+  table td {
+    padding: 4pt 7pt;
+    border-bottom: 0.3pt solid var(--border-soft);
+    vertical-align: top;
+  }
+  table.compact th { padding: 3pt 6pt; font-size: 8.5pt; }
+  table.compact td { padding: 3pt 6pt; font-size: 8.5pt; line-height: 1.4; }
+  table.striped tbody tr:nth-child(even) td { background: var(--ivory); }
+  table.financial td:not(:first-child),
+  table.financial th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ========== CALLOUT ========== */
+  .callout {
+    background: var(--ivory);
+    border-left: 2pt solid var(--brand);
+    padding: 8pt 12pt;
+    border-radius: 3pt;
+    margin: 10pt 0;
+    line-height: 1.55;
+    break-inside: avoid;
+    font-size: 10pt;
+  }
+
+  /* ========== FIGURE ========== */
+  figure { margin: 12pt 0; break-inside: avoid; }
+  figcaption {
+    font-size: 9pt;
+    color: var(--stone);
+    margin-top: 4pt;
+    text-align: center;
+  }
+
+  /* ========== RISK GRID ========== */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8pt;
+    margin: 8pt 0;
+  }
+  .risk-item {
+    padding: 6pt 10pt;
+    background: var(--ivory);
+    border-radius: 3pt;
+    break-inside: avoid;
+  }
+  .risk-label {
+    font-size: 9pt;
+    font-weight: 500;
+    color: var(--brand);
+    margin-bottom: 2pt;
+  }
+  .risk-desc { font-size: 9pt; color: var(--olive); line-height: 1.45; }
+
+  /* ========== ANALYST BOX ========== */
+  .analyst-box {
+    background: var(--ivory);
+    border-left: 1.4pt solid var(--brand);
+    border-radius: 4pt;
+    padding: 10pt 14pt;
+    margin: 12pt 0;
+    break-inside: avoid;
+  }
+  .analyst-label {
+    font-size: 9pt;
+    color: var(--brand);
+    letter-spacing: 0.5pt;
+    text-transform: uppercase;
+    margin-bottom: 5pt;
+    font-weight: 500;
+  }
+
+  /* ========== TWO-COL ========== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14pt; }
+
+  /* ========== FOOTER ========== */
+  .report-footer {
+    margin-top: 16pt;
+    padding-top: 6pt;
+    border-top: 0.3pt dotted var(--border);
+    font-size: 9pt;
+    color: var(--stone);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .page-break { break-before: page; }
+  .section-divider {
+    height: 0.3pt;
+    background: var(--border);
+    margin: 14pt 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<div class="report-header">
+  <div class="ticker-block">
+    <div class="ticker-eyebrow">行业深度研报 · 餐饮消费</div>
+    <div class="ticker-name">中国餐饮行业 2026</div>
+    <div class="ticker-sub">
+      从规模扩张红利向效率驱动存量的周期性跨越 · 结构性拐点深度前瞻
+    </div>
+  </div>
+  <div class="price-block">
+    <div class="price-current">5.57 万亿</div>
+    <div class="price-change">2024年行业总规模（人民币）</div>
+    <div class="price-change" style="margin-top:4pt;">发布日期：2026年5月</div>
+  </div>
+</div>
+
+<!-- ========== METRICS ========== -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-value">5.3%</div>
+    <div class="metric-label">2024年<br>收入增速</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">22%</div>
+    <div class="metric-label">餐饮<br>连锁化率</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">1,680万</div>
+    <div class="metric-label">市场主体<br>存量（家）</div>
+  </div>
+  <div class="metric">
+    <div class="metric-value">3.2%</div>
+    <div class="metric-label">2025E<br>预测增速</div>
+  </div>
+</div>
+
+<!-- ========== 核心论点 ========== -->
+<h2>核心论点</h2>
+<p>中国餐饮行业正式告别"增量时代"——2024年总收入 <span class="hl">5.57万亿元</span>，同比增长5.3%，较2023年疫后报复性增长的 <span class="hl">20.4%</span> 大幅回落。行业已从依靠开店即可获利的供给红利期，全面迈入供给过剩、优胜劣汰加剧的 <span class="hl">存量竞争时代</span>。2025年增速预计进一步放缓至3.2%，甚至低于GDP预期增速。</p>
+
+<div class="callout">
+  <strong>投资关键词：</strong>存量、效率、质价比。2026年为结构性拐点年——去产能收尾、监管合规落地、AI技术规模化应用，三重力量共同推动行业完成从"量的迷信"向"质与利极致追求"的历史性跨越。建议在此节点进行结构性换仓，从扩张型资产转向<strong>效率型与生态型</strong>餐饮资产。
+</div>
+
+<!-- ========== 宏观趋势图 ========== -->
+<h2>增速换挡：行业收入增速趋势（2023—2026E）</h2>
+<figure>
+  <!-- 折线图 · 餐饮行业收入增速 · Scale: max=25%, 1%=11.2px, y=320-value×11.2 -->
+  <!-- X: 2023=140, 2024=300, 2025E=460, 2026E=620 · Y: 92, 261, 284, 286 -->
+  <svg viewBox="0 0 680 390" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+    <rect width="100%" height="100%" fill="#f5f4ed"/>
+
+    <!-- Grid -->
+    <line x1="60" y1="320" x2="640" y2="320" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="264" x2="640" y2="264" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="208" x2="640" y2="208" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="152" x2="640" y2="152" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="96"  x2="640" y2="96"  stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="40"  x2="640" y2="40"  stroke="#e8e7e1" stroke-width="0.8"/>
+
+    <!-- Vertical guides -->
+    <line x1="140" y1="40" x2="140" y2="320" stroke="#e8e7e1" stroke-width="0.5" stroke-dasharray="3 4"/>
+    <line x1="300" y1="40" x2="300" y2="320" stroke="#e8e7e1" stroke-width="0.5" stroke-dasharray="3 4"/>
+    <line x1="460" y1="40" x2="460" y2="320" stroke="#e8e7e1" stroke-width="0.5" stroke-dasharray="3 4"/>
+    <line x1="620" y1="40" x2="620" y2="320" stroke="#e8e7e1" stroke-width="0.5" stroke-dasharray="3 4"/>
+
+    <!-- Y-axis labels -->
+    <text x="52" y="324" fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">0%</text>
+    <text x="52" y="268" fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">5%</text>
+    <text x="52" y="212" fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">10%</text>
+    <text x="52" y="156" fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">15%</text>
+    <text x="52" y="100" fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">20%</text>
+    <text x="52" y="44"  fill="#6b6a64" font-size="9" font-family="inherit" text-anchor="end">25%</text>
+
+    <!-- Baseline -->
+    <line x1="60" y1="320" x2="640" y2="320" stroke="#141413" stroke-width="0.8"/>
+
+    <!-- Shaded area under line -->
+    <polygon points="140,92 300,261 460,284 620,286 620,320 460,320 300,320 140,320"
+      fill="#1B365D" fill-opacity="0.06"/>
+
+    <!-- Main line (brand) -->
+    <polyline
+      points="140,92 300,261 460,284 620,286"
+      fill="none" stroke="#1B365D" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Data dots -->
+    <circle cx="140" cy="92"  r="5" fill="#1B365D" stroke="#f5f4ed" stroke-width="1.5"/>
+    <circle cx="300" cy="261" r="5" fill="#1B365D" stroke="#f5f4ed" stroke-width="1.5"/>
+    <circle cx="460" cy="284" r="5" fill="#1B365D" stroke="#f5f4ed" stroke-width="1.5"/>
+    <circle cx="620" cy="286" r="6" fill="#1B365D" stroke="#f5f4ed" stroke-width="1.5"/>
+
+    <!-- Value labels -->
+    <text x="140" y="80"  fill="#1B365D" font-size="10" font-family="inherit" font-weight="500" text-anchor="middle">20.4%</text>
+    <text x="300" y="249" fill="#1B365D" font-size="10" font-family="inherit" font-weight="500" text-anchor="middle">5.3%</text>
+    <text x="460" y="272" fill="#1B365D" font-size="10" font-family="inherit" font-weight="500" text-anchor="middle">3.2%E</text>
+    <text x="620" y="274" fill="#504e49" font-size="10" font-family="inherit" text-anchor="middle">~3.0%E</text>
+
+    <!-- X labels -->
+    <text x="140" y="340" fill="#141413" font-size="10" font-family="inherit" text-anchor="middle">2023</text>
+    <text x="300" y="340" fill="#141413" font-size="10" font-family="inherit" text-anchor="middle">2024</text>
+    <text x="460" y="340" fill="#141413" font-size="10" font-family="inherit" text-anchor="middle">2025E</text>
+    <text x="620" y="340" fill="#141413" font-size="10" font-family="inherit" text-anchor="middle">2026E</text>
+
+    <!-- Annotation: "降挡" -->
+    <line x1="200" y1="175" x2="250" y2="220" stroke="#504e49" stroke-width="0.8" stroke-dasharray="3 3"/>
+    <text x="155" y="172" fill="#504e49" font-size="9" font-family="inherit">"降挡"加速</text>
+
+    <!-- Legend -->
+    <line x1="60" y1="365" x2="640" y2="365" stroke="#e8e7e1" stroke-width="0.8"/>
+    <line x1="60" y1="378" x2="84" y2="378" stroke="#1B365D" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="72" cy="378" r="3.5" fill="#1B365D"/>
+    <text x="92" y="382" fill="#504e49" font-size="9" font-family="inherit">全国餐饮收入同比增速（%）</text>
+  </svg>
+  <figcaption>疫后报复性反弹已消耗完毕，增速加速向GDP增速靠拢并可能跌破，行业"降挡"趋势明确。</figcaption>
+</figure>
+
+<!-- ========== 宏观数据表 ========== -->
+<h2>宏观核心数据监测（2024—2025）</h2>
+<table class="striped">
+  <thead>
+    <tr>
+      <th>指标维度</th>
+      <th>2024年实际值</th>
+      <th>2025年预测 / 上半年值</th>
+      <th>趋势研判</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>全国餐饮总收入</strong></td>
+      <td>5.57 万亿元</td>
+      <td>约 5.79 万亿元</td>
+      <td>增速 5.3%→3.2% 换挡</td>
+    </tr>
+    <tr>
+      <td>餐饮连锁化率</td>
+      <td>22%</td>
+      <td>突破 24%</td>
+      <td>规模化优势成存量护城河</td>
+    </tr>
+    <tr>
+      <td>市场主体存量</td>
+      <td>1,680.6 万家</td>
+      <td>1,614 万家（Q3）</td>
+      <td>深度去产能阶段开启</td>
+    </tr>
+    <tr>
+      <td><strong>餐饮大盘均价</strong></td>
+      <td>42.6 元</td>
+      <td>33.0 元（Q3）</td>
+      <td>价格中枢显著下移 −22.5%</td>
+    </tr>
+    <tr>
+      <td>广东省餐饮收入</td>
+      <td>9,800 亿元（全国第一）</td>
+      <td>连锁化率达 32%</td>
+      <td>湾区模式预示全国演进方向</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 品类分化 ========== -->
+<div class="page-break"></div>
+<h2>品类结构性分化：优胜劣汰加速</h2>
+
+<p>存量竞争环境下，不同餐饮品类表现高度分化。火锅、小吃快餐在逆境中维持扩张，而烧烤与现制饮品面临严重回调。2025年Q3景气指数显示行业整体转弱，但内部结构性机会依然活跃。</p>
+
+<h3>火锅赛道：高溢价向极致性价比的垂直坠落</h3>
+<p>2024年全国火锅市场规模 <span class="hl">6,180亿元</span>，同比增长4.2%，但门店总数在2025年8月骤降至 <span class="hl">36.2万家</span>，较年初减少3.8万家。行业平均人均消费从2022年峰值约98元降至2025年Q3约 <span class="hl">76元</span>（−22%），"平价火锅"（人均50—70元）品牌加速扩张，对中高端品牌形成双向挤压。</p>
+
+<h3>中式正餐："烟火气"复兴与山野系崛起</h3>
+<p>消费者对标准化预制菜的审美疲劳推动"江西小炒"、"湘式小炒"等烟火气餐饮复兴，抖音相关话题播放量突破 <span class="hl">180亿次</span>，"小江溪"、"蓝边碗"等区域性连锁品牌快速涌现。云贵菜门店数已达 <span class="hl">4.2万家</span>，反映都市消费者对松弛感与真实体验的强烈诉求。</p>
+
+<h3>小吃快餐与米线：韧性赛道的连锁化机遇</h3>
+<p>小吃快餐2026年市场规模预计达 <span class="hl">10,800亿元</span>，是餐饮行业中韧性最强的基石赛道。米线赛道预计2026年规模增至 <span class="hl">850亿元</span>，蒙自源以超1,200家门店领跑，但前十品牌市占率不足25%，75%门店仍为夫妻店，低集中度为连锁品牌提供广阔下沉空间。<span class="hl">15—28元价格带</span>是品牌化进阶的黄金赛道。</p>
+
+<h3>现制饮品：数据繁荣与盈利焦虑并存</h3>
+<p>唯一实现连续三季度门店正增长的赛道，2025年规模突破 <span class="hl">3,300亿元</span>。瑞幸咖啡2025年营收约380亿元，突破 <span class="hl">2.1万店</span>大关成为国内首个咖啡品牌；但赛道9月景气指数跌至低位，外卖配送成本挤压利润率，盈利焦虑蔓延。</p>
+
+<!-- ========== 消费者趋势 ========== -->
+<h2>消费者端：从"感性悦己"到"理性价值"</h2>
+
+<p>2025年的中国餐饮消费者变得空前"精明"。<span class="hl">62%</span>的消费者愿意为尝试新品牌转换选择，低品牌忠诚度倒逼企业保持极高产品迭代频率；人均餐饮消费同比下降<span class="hl">11.5%</span>，但对食品安全底线未降低——"质价比"已取代单纯"低价"成为第一优先级。</p>
+
+<div class="two-col">
+  <div>
+    <h3>情绪价值溢价</h3>
+    <p style="font-size:9.5pt;"><span class="hl">57.6%</span>的消费者倾向于寻找能带来幸福感的产品。餐后惊喜服务、个性化场景布置和品牌叙事，成为获取额外溢价的关键。消费者愿意为"活人感"买单。</p>
+  </div>
+  <div>
+    <h3>健康清洁标签</h3>
+    <p style="font-size:9.5pt;">蛋白质与膳食纤维需求显著增长。2026年预制菜新规全面落地，要求"三减"并严控添加剂，是对消费者"洁净标签"诉求的制度化回应。</p>
+  </div>
+</div>
+
+<table class="compact striped" style="margin-top:8pt;">
+  <thead>
+    <tr>
+      <th>消费趋势</th>
+      <th>核心数据</th>
+      <th>行业影响</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>健康关注度</td>
+      <td>蛋白质需求显著增长</td>
+      <td>倒逼供应链端食材升级</td>
+    </tr>
+    <tr>
+      <td><strong>价格敏感度</strong></td>
+      <td>人均消费下降 11.5%</td>
+      <td>推动高溢价餐饮向下兼容</td>
+    </tr>
+    <tr>
+      <td>情绪价值偏好</td>
+      <td>57.6% 关注餐后惊喜</td>
+      <td>增加非标准化服务成本</td>
+    </tr>
+    <tr>
+      <td>数字化依赖</td>
+      <td>5.15亿 AI 用户</td>
+      <td>GEO 将成为品牌直连消费者的新路径</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 企业策略 ========== -->
+<div class="page-break"></div>
+<h2>企业策略：从盲目扩张到防御型深度经营</h2>
+
+<p>头部餐饮企业已放弃单纯规模竞赛，普遍采纳 <strong>5S 经营原则</strong>：<span class="tag">Simplify 精简SKU</span><span class="tag">Standardize 标准化出品</span><span class="tag">Scale-down 小店模型</span><span class="tag">Subsidize 数字获客</span><span class="tag">Synergize 供应链协同</span></p>
+
+<h3>海底捞（6862.HK）：巨头的分形扩张与管理实验</h3>
+<p>翻台率维持 <span class="hl">3.8次/天</span>，人均消费承压至约97元。公司加大零售及海外业务布局，探索"小店模型"覆盖下沉市场。2022年"啄木鸟计划"关闭约300家低效门店，证明管理层战略纠错能力；2023年"硬骨头计划"谨慎重开，扩张纪律显著改善。核心风险：服务差异化被模仿、产品侧被巴奴等追赶形成双重压力。</p>
+
+<h3>百胜中国：RGM 3.0 效率竞速</h3>
+<p>2025年启动"RGM 3.0"战略，目标2026年门店总数超 <span class="hl">两万家</span>。"前端分层、后端聚合"——AI工具"Q睿"自动化管理库存与排班，大幅提升运营效率，是技术赋能降本的行业标杆。</p>
+
+<h3>瑞幸咖啡：规模屏障的护城河逻辑</h3>
+<p>突破 <span class="hl">2.1万店</span>，成国内首个达此规模的咖啡品牌。门店规模赋予其原材料议价权与新品渗透统治力，但单季度利润受外卖大战挤压，需持续观察利润率健康度。</p>
+
+<h3>餐饮出海：寻找内卷之外的全球增量</h3>
+<p>蜜雪冰城海外门店突破 <span class="hl">4,500家</span>，进入中亚市场。喜茶布局伦敦、纽约，将中国茶饮品牌化为全球文化符号。出海的本质是中式餐饮标准化、数字化运营体系对海外市场的能力输出——移动支付、私域流量运营形成竞争壁垒。</p>
+
+<!-- ========== 2026赛道预测 ========== -->
+<h2>2026年细分赛道规模预测</h2>
+
+<!-- 横向条形图 · 2026年赛道规模 · 以万亿为单位 -->
+<!-- Scale: max=3.0万亿, chart width=500px, 1万亿=166.7px -->
+<figure>
+  <svg viewBox="0 0 620 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+    <rect width="100%" height="100%" fill="#f5f4ed"/>
+
+    <!-- Y labels & bars (x-start=120, bar-height=28, gap=12) -->
+
+    <!-- 餐饮供应链: 3.0万亿 → 500px -->
+    <text x="115" y="34" fill="#3d3d3a" font-size="9.5" font-family="inherit" text-anchor="end">餐饮供应链</text>
+    <rect x="120" y="14" width="500" height="26" rx="2" fill="#1B365D"/>
+    <text x="626" y="32" fill="#1B365D" font-size="9" font-family="inherit" font-weight="500">3.0万亿</text>
+
+    <!-- 团餐赛道: 2.0万亿 → 333px -->
+    <text x="115" y="82" fill="#3d3d3a" font-size="9.5" font-family="inherit" text-anchor="end">团餐赛道</text>
+    <rect x="120" y="62" width="333" height="26" rx="2" fill="#1B365D" fill-opacity="0.75"/>
+    <text x="459" y="80" fill="#504e49" font-size="9" font-family="inherit" font-weight="500">2.0万亿</text>
+
+    <!-- 小吃快餐: 1.08万亿 → 180px -->
+    <text x="115" y="130" fill="#3d3d3a" font-size="9.5" font-family="inherit" text-anchor="end">小吃快餐</text>
+    <rect x="120" y="110" width="180" height="26" rx="2" fill="#1B365D" fill-opacity="0.55"/>
+    <text x="306" y="128" fill="#504e49" font-size="9" font-family="inherit" font-weight="500">1.08万亿</text>
+
+    <!-- 火锅品类: 0.65万亿 → 108px -->
+    <text x="115" y="178" fill="#3d3d3a" font-size="9.5" font-family="inherit" text-anchor="end">火锅品类</text>
+    <rect x="120" y="158" width="108" height="26" rx="2" fill="#1B365D" fill-opacity="0.40"/>
+    <text x="234" y="176" fill="#504e49" font-size="9" font-family="inherit" font-weight="500">~0.65万亿</text>
+
+    <!-- 现制饮品: 0.38万亿 → 63px -->
+    <text x="115" y="226" fill="#3d3d3a" font-size="9.5" font-family="inherit" text-anchor="end">现制饮品</text>
+    <rect x="120" y="206" width="63" height="26" rx="2" fill="#1B365D" fill-opacity="0.30"/>
+    <text x="189" y="224" fill="#504e49" font-size="9" font-family="inherit" font-weight="500">约3,800亿</text>
+
+    <!-- Baseline -->
+    <line x1="120" y1="10" x2="120" y2="240" stroke="#141413" stroke-width="0.8"/>
+
+    <!-- Scale marks -->
+    <line x1="120" y1="246" x2="620" y2="246" stroke="#e8e7e1" stroke-width="0.5"/>
+    <text x="120"  y="258" fill="#6b6a64" font-size="8" text-anchor="middle">0</text>
+    <text x="287"  y="258" fill="#6b6a64" font-size="8" text-anchor="middle">1万亿</text>
+    <text x="453"  y="258" fill="#6b6a64" font-size="8" text-anchor="middle">2万亿</text>
+    <text x="620"  y="258" fill="#6b6a64" font-size="8" text-anchor="middle">3万亿</text>
+  </svg>
+  <figcaption>2026年细分赛道预测规模（人民币），餐饮供应链与团餐赛道为最大增量来源。</figcaption>
+</figure>
+
+<table class="compact striped">
+  <thead>
+    <tr>
+      <th>赛道</th>
+      <th style="text-align:right;">2026E 规模</th>
+      <th style="text-align:right;">CAGR</th>
+      <th>关键成功因素</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>团餐赛道</strong></td>
+      <td style="text-align:right;">2.0 万亿元+</td>
+      <td style="text-align:right;">8.5%</td>
+      <td>政策红利、银发适老布局</td>
+    </tr>
+    <tr>
+      <td>小吃快餐</td>
+      <td style="text-align:right;">1.08 万亿元</td>
+      <td style="text-align:right;">6.2%</td>
+      <td>极致模型、下沉市场渗透</td>
+    </tr>
+    <tr>
+      <td>现制饮品</td>
+      <td style="text-align:right;">约 3,800 亿元</td>
+      <td style="text-align:right;">14.6%</td>
+      <td>供应链密度、产品创新速度</td>
+    </tr>
+    <tr>
+      <td><strong>餐饮供应链</strong></td>
+      <td style="text-align:right;">3.0 万亿元</td>
+      <td style="text-align:right;">12.0%</td>
+      <td>规模经济、数智化赋能</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ========== 风险提示 ========== -->
+<h2>风险提示</h2>
+<div class="risk-grid">
+  <div class="risk-item">
+    <div class="risk-label">消费持续降级</div>
+    <div class="risk-desc">宏观经济承压导致消费者向更低价格带迁移，中高端餐饮客流与客单价双重承压，高溢价品牌估值中枢面临下移。</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">门店过剩去化缓慢</div>
+    <div class="risk-desc">1,680万家门店存量庞大，若去产能节奏慢于预期，将延续价格战并持续侵蚀行业利润率，头部品牌单店经济模型恢复期拉长。</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">食品安全黑天鹅</div>
+    <div class="risk-desc">预制菜新规落地、监管趋严背景下，食品安全事件对品牌的冲击更为致命，且在社交媒体传播下声誉损失难以量化。</div>
+  </div>
+  <div class="risk-item">
+    <div class="risk-label">技术替代节奏不及预期</div>
+    <div class="risk-desc">AI与机器人规模化应用依赖餐饮企业的资本开支意愿，若技术落地慢于预期，人力成本压力将持续高企，制约利润率改善空间。</div>
+  </div>
+</div>
+
+<!-- ========== 战略建议 ========== -->
+<h2>2026年三大核心拐点</h2>
+<ol>
+  <li><strong>去产能完成拐点</strong>：预计门店总数2026年Q1触底，行业进入以效率为导向的扩张新周期，规模屏障重要性超越单店竞争。</li>
+  <li><strong>监管合规拐点</strong>：预制菜新规全面落地、食品安全监管升级，倒逼供应链透明化，具备全产业链协同能力的企业率先受益。</li>
+  <li><strong>技术应用拐点</strong>：AI大模型与机器人技术在餐饮端规模化应用，GEO（生成式引擎优化）取代部分美团/点评搜索功能，开启降本增效新纪元。</li>
+</ol>
+
+<!-- ========== 分析师总结 ========== -->
+<div class="analyst-box">
+  <div class="analyst-label">战略建议</div>
+  <p style="margin-bottom:6pt;">当前行业并非单纯下行周期，而是"去腐生肌"的进化过程。建议机构在2026年拐点节点进行结构性换仓，从扩张型餐饮资产转向以下三类：</p>
+  <ol style="margin:0;padding-left:16pt;">
+    <li style="margin-bottom:4pt;"><strong>全产业链协同型企业</strong>——未来是供应链对供应链的竞争，后端聚合能力决定2026年复苏速度（参考：百胜中国）。</li>
+    <li style="margin-bottom:4pt;"><strong>情绪附加值细分赛道</strong>——消费者愿为"活人感"溢价。地方特色小吃、山野系非标体验餐厅具备极强品牌爆发力。</li>
+    <li style="margin-bottom:0;"><strong>数智化 + 财务韧性资产</strong>——成功跑通5S模型、现金流稳健的企业，将在洗牌结束后成为新周期的收割者。</li>
+  </ol>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<div class="report-footer">
+  <span>本报告仅供参考，不构成投资建议。数据来源：国家统计局、红餐产业研究院、各上市公司公告。</span>
+  <span>行业研究部 · 2026年5月</span>
+</div>
+
+</body>
+</html>
