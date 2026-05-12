@@ -81,6 +81,28 @@ description: |
 | 输出完整分析报告（标的分析 + 策略建议） | `references/analysis-template.md` |
 | 生成《今日美股期权机会》每日扫描报告 | `references/daily-scan-template.md` |
 | 市场进入极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
+| 需要获取 IV Rank / 期权链 / 异常流数据时 | `references/data-sources.md` |
+| 记录开仓/平仓、查看当前敞口、更新持仓日志 | `references/position-journal.md` |
+
+---
+
+## 能力边界（重要）
+
+**本 skill 是分析决策框架，不是自动交易程序。**
+
+| 用户期望 | 实际能力 | 补充说明 |
+|---------|---------|---------|
+| 「每天自动扫描」 | 需用户触发「今日期权机会」 | 说一句话即可，不需手动搜索 |
+| 「实时 IV Rank」 | 通过 WebSearch 抓取，有 15-20 分钟延迟 | 执行前在经纪商平台二次确认 |
+| 「精确 Greeks」 | 基于 Black-Scholes 估算，非实时 | 以 TastyTrade/ThinkorSwim 显示为准 |
+| 「自动记录持仓」 | 需用户告知开平仓信息 | 说「记录开仓：[参数]」即维护 |
+| 「下单执行」 | 不可，仅提供决策建议 | 需在经纪商平台手动执行 |
+
+**使用建议**：
+- 每天开盘前说「今日期权机会」→ 获取扫描报告
+- 决定做某笔交易前说「分析 [标的]」→ 获取完整分析
+- 开仓后说「记录开仓」→ 维护持仓日志
+- VIX 异动时说「市场异常，怎么处理」→ 触发风控协议
 
 ---
 
