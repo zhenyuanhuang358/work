@@ -301,6 +301,105 @@ SAMPLE_DATA = {
             },
         },
     },
+    "PLTR": {
+        "company": {
+            "name": "Palantir Technologies Inc.",
+            "ticker": "PLTR",
+            "sector": "Technology",
+            "industry": "Software — Infrastructure",
+            "description": (
+                "Palantir builds data analytics and AI platforms for government and commercial clients. "
+                "Its two core products — Gotham (government) and Foundry (commercial) — are complemented "
+                "by AIP (AI Platform), launched in 2023, which drives AI adoption in enterprise workflows. "
+                "Palantir has been GAAP profitable since Q3 2023 and joined the S&P 500 in September 2024."
+            ),
+            "market_cap_b": 262,
+            "employees": 3750,
+            "ceo": "Alexander Karp",
+        },
+        "financials": {
+            "quarter": "Q1 2025",
+            "period_end": "March 31, 2025",
+            "revenue_m": 884,
+            "revenue_prev_quarter_m": 828,
+            "revenue_prev_year_m": 634,
+            "revenue_growth_yoy_pct": 39.4,
+            "revenue_growth_qoq_pct": 6.8,
+            "gross_profit_m": 716,
+            "gross_margin_pct": 81.0,
+            "gross_margin_prev_year_pct": 80.7,
+            "operating_income_m": 176,
+            "operating_margin_pct": 19.9,
+            "net_income_m": 214,
+            "net_margin_pct": 24.2,
+            "eps_diluted": 0.08,
+            "eps_prev_year": 0.05,
+            "eps_growth_yoy_pct": 60.0,
+            "free_cash_flow_m": 370,
+            "cash_and_equivalents_m": 5400,
+            "capex_m": 8,
+            "r_and_d_m": 155,
+            "debt_total_m": 0,
+            "segments": [
+                {"name": "US Government", "revenue_m": 373, "growth_yoy_pct": 45.0},
+                {"name": "US Commercial", "revenue_m": 255, "growth_yoy_pct": 71.0},
+                {"name": "International Government", "revenue_m": 165, "growth_yoy_pct": 9.0},
+                {"name": "International Commercial", "revenue_m": 91, "growth_yoy_pct": 15.0},
+            ],
+            "historical_quarters": [
+                {"period": "Q1 2025", "revenue_m": 884,  "gross_margin_pct": 81.0, "eps": 0.08, "operating_margin_pct": 19.9},
+                {"period": "Q4 2024", "revenue_m": 828,  "gross_margin_pct": 80.3, "eps": 0.14, "operating_margin_pct": 16.8},
+                {"period": "Q3 2024", "revenue_m": 726,  "gross_margin_pct": 81.7, "eps": 0.10, "operating_margin_pct": 16.0},
+                {"period": "Q2 2024", "revenue_m": 678,  "gross_margin_pct": 81.3, "eps": 0.09, "operating_margin_pct": 14.5},
+                {"period": "Q1 2024", "revenue_m": 634,  "gross_margin_pct": 80.7, "eps": 0.05, "operating_margin_pct": 11.3},
+                {"period": "Q4 2023", "revenue_m": 608,  "gross_margin_pct": 82.0, "eps": 0.04, "operating_margin_pct": 10.4},
+                {"period": "Q3 2023", "revenue_m": 558,  "gross_margin_pct": 81.4, "eps": 0.03, "operating_margin_pct": 8.8},
+                {"period": "Q2 2023", "revenue_m": 533,  "gross_margin_pct": 80.1, "eps": 0.01, "operating_margin_pct": 2.6},
+            ],
+            "guidance": {
+                "next_quarter": "Q2 2025",
+                "revenue_midpoint_m": 936,
+                "revenue_range": "$934M – $938M",
+                "gross_margin_pct": None,
+                "gross_margin_guidance": "Adj. Operating Margin ~41%",
+                "management_commentary": (
+                    "The US is experiencing an AI revolution and Palantir is at the center of it. "
+                    "US Commercial revenue is accelerating as AIP boot camps convert to enterprise contracts. "
+                    "Government spending is expanding — DOGE is a net positive as agencies seek efficiency software. "
+                    "We are raising full-year 2025 revenue guidance to $3.89B–$3.902B and US Commercial to $1.079B+. "
+                    "Our rule of 40 score of 83 reflects the combination of growth and profitability that few software "
+                    "companies of our scale have achieved."
+                ),
+            },
+            "consensus": {
+                "revenue_estimate_m": 862,
+                "eps_estimate": 0.13,
+                "beat_revenue_pct": 2.5,
+                "beat_eps_pct": 0.0,
+            },
+        },
+        "context": {
+            "recent_news": [
+                "PLTR added to S&P 500 in September 2024, driving institutional buying",
+                "AIP boot camp model generating rapid enterprise customer acquisition",
+                "DOGE government efficiency initiative expanding Palantir's federal footprint",
+                "NATO and allied governments accelerating defense AI procurement",
+                "US Commercial customer count grew 65% YoY to 382 customers in Q1 2025",
+            ],
+            "valuation": {
+                "pe_ttm": 590.0,
+                "pe_forward": 150.0,
+                "ev_revenue_ttm": 72.0,
+                "ev_ebitda_ttm": 210.0,
+                "price_to_book": 28.0,
+                "debt_to_equity": 0.0,
+                "current_ratio": 6.2,
+                "roe": 12.4,
+                "peer_avg_pe_forward": 45.0,
+                "five_year_avg_pe": 0,
+            },
+        },
+    },
     "AAPL": {
         "company": {
             "name": "Apple Inc.",
