@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlphaFlow — Equity Research</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0D1B2A; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
+  h1 { font-size: 2.5rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  h1 span { color: #C9A84C; }
+  .subtitle { color: #7A9BBF; font-size: 0.875rem; margin-top: 8px; }
+  .card { background: #112236; border: 1px solid #1A3A55; border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; margin-top: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  label { display: block; color: #7A9BBF; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  input { width: 100%; background: #0D1B2A; border: 1px solid #1A6B9A; border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 1.125rem; font-weight: 700; font-family: monospace; letter-spacing: 0.15em; text-transform: uppercase; outline: none; }
+  input:focus { border-color: #C9A84C; }
+  input:disabled { opacity: 0.5; }
+  button.primary { width: 100%; background: #1A6B9A; color: #fff; border: none; border-radius: 8px; padding: 12px; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; margin-top: 16px; transition: opacity 0.2s; }
+  button.primary:hover:not(:disabled) { opacity: 0.85; }
+  button.primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .steps { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+  .step { display: flex; align-items: center; gap: 12px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: #1A3A55; flex-shrink: 0; transition: all 0.3s; }
+  .dot.done { background: #2ECC71; }
+  .dot.active { background: #C9A84C; box-shadow: 0 0 8px #C9A84C88; animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .step-label { font-size: 0.875rem; color: #3A5A75; transition: color 0.3s; }
+  .step-label.done { color: #2ECC71; }
+  .step-label.active { color: #C9A84C; font-weight: 600; }
+  .complete-box { display: flex; flex-direction: column; gap: 16px; }
+  .badge { display: inline-block; background: #0D3320; color: #2ECC71; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; }
+  .ticker-label { font-size: 1.125rem; font-weight: 700; color: #fff; }
+  .ticker-label span { color: #C9A84C; }
+  .summary { color: #7A9BBF; font-size: 0.875rem; line-height: 1.6; max-height: 100px; overflow: hidden; }
+  a.download { display: flex; align-items: center; justify-content: center; gap: 8px; background: #C9A84C; color: #0D1B2A; border-radius: 8px; padding: 12px; font-size: 0.875rem; font-weight: 700; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: opacity 0.2s; }
+  a.download:hover { opacity: 0.9; }
+  button.reset { background: none; border: none; color: #7A9BBF; font-size: 0.75rem; text-decoration: underline; cursor: pointer; align-self: center; }
+  .error-box { background: #2A1010; border: 1px solid #8B2020; border-radius: 8px; padding: 12px 16px; color: #FF6B6B; font-size: 0.875rem; }
+  button.retry { width: 100%; background: #1A3A55; color: #7A9BBF; border: none; border-radius: 8px; padding: 10px; font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; margin-top: 12px; }
+  .header { text-align: center; }
+  .footer { color: #2A4A65; font-size: 0.75rem; margin-top: 24px; }
+  #api-config { margin-bottom: 20px; }
+  #api-config input { font-size: 0.8rem; font-family: monospace; letter-spacing: 0; text-transform: none; font-weight: 400; color: #7A9BBF; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Alpha<span>Flow</span></h1>
+  <p class="subtitle">Institutional-grade equity research — in seconds</p>
+</div>
+
+<div class="card">
+  <div id="api-config">
+    <label>Backend URL</label>
+    <input type="text" id="api-base" value="http://localhost:8000" placeholder="http://localhost:8000">
+  </div>
+
+  <div id="view-idle">
+    <label>Ticker Symbol</label>
+    <input type="text" id="ticker" placeholder="e.g. NVDA" maxlength="5" autocomplete="off" spellcheck="false">
+    <button class="primary" id="btn-submit">Generate Report</button>
+  </div>
+
+  <div id="view-processing" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <span class="ticker-label">Analyzing <span id="proc-ticker"></span></span>
+      <span style="color:#7A9BBF;font-size:0.75rem;animation:pulse 1.2s infinite">Running…</span>
+    </div>
+    <div class="steps" id="steps-list"></div>
+  </div>
+
+  <div id="view-complete" style="display:none">
+    <div class="complete-box">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="ticker-label">Report Ready — <span id="done-ticker" style="color:#C9A84C"></span></span>
+        <span class="badge">COMPLETE</span>
+      </div>
+      <p class="summary" id="done-summary"></p>
+      <a class="download" id="download-link" href="#" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+      <button class="reset" id="btn-reset">Analyze another ticker</button>
+    </div>
+  </div>
+
+  <div id="view-error" style="display:none">
+    <div class="error-box" id="error-msg"></div>
+    <button class="retry" id="btn-retry">Try Again</button>
+  </div>
+</div>
+
+<p class="footer">For informational purposes only. Not investment advice.</p>
+
+<script>
+const STEPS = [
+  {key:'fetch_company_data', label:'Fetch Financial Data'},
+  {key:'fetch_transcript',   label:'Fetch Earnings Transcript'},
+  {key:'extract_metrics',    label:'Extract Key Metrics'},
+  {key:'analyze_tone',       label:'Analyze Management Tone'},
+  {key:'generate_memo',      label:'Generate Research Memo'},
+  {key:'export_pdf',         label:'Export PDF Report'},
+];
+
+let pollTimer = null;
+let currentReportId = null;
+
+function apiBase() { return document.getElementById('api-base').value.replace(/\/$/, ''); }
+
+function show(id) {
+  ['view-idle','view-processing','view-complete','view-error'].forEach(v => {
+    document.getElementById(v).style.display = v === id ? 'block' : 'none';
+  });
+}
+
+function buildSteps() {
+  const list = document.getElementById('steps-list');
+  list.innerHTML = STEPS.map(s =>
+    `<div class="step"><div class="dot" id="dot-${s.key}"></div><span class="step-label" id="lbl-${s.key}">${s.label}</span></div>`
+  ).join('');
+}
+
+function updateSteps(currentStep, status) {
+  const currentIdx = STEPS.findIndex(s => s.key === currentStep);
+  STEPS.forEach((s, i) => {
+    const dot = document.getElementById('dot-'+s.key);
+    const lbl = document.getElementById('lbl-'+s.key);
+    if (!dot) return;
+    const done = status === 'complete' || i < currentIdx;
+    const active = i === currentIdx && status !== 'complete';
+    dot.className = 'dot' + (done?' done':active?' active':'');
+    lbl.className = 'step-label' + (done?' done':active?' active':'');
+  });
+}
+
+async function submitTicker() {
+  const ticker = document.getElementById('ticker').value.trim().toUpperCase();
+  if (!ticker) return;
+  document.getElementById('ticker').disabled = true;
+  document.getElementById('btn-submit').disabled = true;
+
+  try {
+    const res = await fetch(apiBase()+'/analyze', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ticker})
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.detail||'Request failed'); }
+    const data = await res.json();
+    currentReportId = data.report_id;
+    document.getElementById('proc-ticker').textContent = ticker;
+    buildSteps();
+    show('view-processing');
+    startPolling(currentReportId);
+  } catch(e) {
+    document.getElementById('error-msg').textContent = 'Error: '+e.message;
+    show('view-error');
+    document.getElementById('ticker').disabled = false;
+    document.getElementById('btn-submit').disabled = false;
+  }
+}
+
+function startPolling(reportId) {
+  pollTimer = setInterval(async () => {
+    try {
+      const res = await fetch(apiBase()+'/report/'+reportId);
+      if (!res.ok) return;
+      const data = await res.json();
+      updateSteps(data.current_step, data.status);
+      if (data.status === 'complete') {
+        clearInterval(pollTimer);
+        document.getElementById('done-ticker').textContent = data.ticker;
+        document.getElementById('done-summary').textContent = (data.summary||'').slice(0,200);
+        document.getElementById('download-link').href = apiBase()+'/report/'+reportId+'/download';
+        show('view-complete');
+      } else if (data.status === 'error') {
+        clearInterval(pollTimer);
+        document.getElementById('error-msg').textContent = 'Error: '+(data.error||'Pipeline failed');
+        show('view-error');
+      }
+    } catch {}
+  }, 1500);
+}
+
+function reset() {
+  clearInterval(pollTimer);
+  currentReportId = null;
+  document.getElementById('ticker').value = '';
+  document.getElementById('ticker').disabled = false;
+  document.getElementById('btn-submit').disabled = false;
+  show('view-idle');
+}
+
+document.getElementById('btn-submit').onclick = submitTicker;
+document.getElementById('ticker').onkeydown = e => { if(e.key==='Enter') submitTicker(); };
+document.getElementById('ticker').oninput = e => { e.target.value = e.target.value.toUpperCase(); };
+document.getElementById('btn-reset').onclick = reset;
+document.getElementById('btn-retry').onclick = reset;
+</script>
+</body>
+</html>
