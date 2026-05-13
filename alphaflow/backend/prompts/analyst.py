@@ -69,37 +69,51 @@ Requirements:
 - Concise paragraphs, no bullet-point padding
 - Avoid generic statements — every sentence must add analytical value
 - Focus on investment implications, not just description
-- Quantify claims wherever possible
+- Quantify ALL claims: margins, growth rates, multiples, dollar figures
+- If historical_quarters data is provided, MUST analyze multi-quarter trends explicitly
+- Comment on whether current margins/growth represent acceleration or deceleration vs. trend
+- Highlight any inflection points in the historical data
 
 Structure your memo with these exact sections:
 
 ## Executive Summary
-One paragraph. The single most important takeaway for an investor.
+One paragraph. The single most important takeaway for an investor. Lead with the number that matters most.
 
 ## Key Financial Metrics
-Structured data summary of the quarter's results vs. expectations.
+Markdown table: Metric | This Quarter | Prior Quarter | Year Ago | YoY Change
+
+## Revenue & Margin Trend
+If historical data provided: 2 paragraphs analyzing the trajectory over 6-8 quarters.
+Call out: Is growth accelerating or decelerating? Are margins expanding or compressing?
+What does the trend imply about the business model at scale?
 
 ## Earnings Highlights
-2-3 paragraphs. What drove results. Which segments outperformed/underperformed.
+2-3 paragraphs. What drove results. Segment breakdown with specific revenue and growth figures.
+Which segments surprised? Which disappointed?
 
 ## Guidance Analysis
-1-2 paragraphs. Management's forward outlook. Is it conservative or aggressive? Why?
+1-2 paragraphs. Management's forward outlook. Is guidance conservative (vs. history of beats)?
+What is the implied sequential growth? What assumptions underpin it?
+
+## Balance Sheet & Cash Flow
+1 paragraph. FCF conversion, cash position, debt load, capital return activity.
 
 ## Risks
-Paragraph form. Top 3 risks: macro, competitive, execution. Be specific.
+Paragraph form. Top 3 risks: macro, competitive, execution. Be specific and quantify where possible.
 
 ## Valuation Commentary
-1 paragraph. Current valuation context. P/E, EV/Revenue multiples vs. peers and history.
+1 paragraph. Current P/E, EV/Revenue, EV/EBITDA vs. peers and vs. own history.
+Is the stock cheap or expensive relative to its growth rate (PEG ratio implied)?
 
 ## Investment Thesis
 
-**Bull Case:** [specific catalyst + price target implication]
+**Bull Case:** [specific catalyst + % upside with rationale]
 
-**Base Case:** [central scenario + expected return]
+**Base Case:** [central scenario + expected 12-month return]
 
-**Bear Case:** [downside scenario + risk to thesis]
+**Bear Case:** [downside scenario + % drawdown risk]
 
-**Recommendation:** [Clear BUY / HOLD / SELL with one-sentence rationale]
+**Recommendation:** [Clear BUY / HOLD / SELL with one-sentence rationale and key metric to watch]
 
 ---
 
@@ -109,5 +123,5 @@ Financial Data:
 Management Tone Analysis:
 {tone}
 
-Company Context:
+Company Context (including historical quarters if available):
 {context}"""

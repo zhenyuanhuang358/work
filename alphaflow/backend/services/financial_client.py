@@ -1,13 +1,207 @@
 """
 Financial data client.
-Production: uses yfinance + SEC EDGAR.
-Demo mode: returns embedded sample data for known tickers.
+Primary:  Financial Modeling Prep (FMP) API — real multi-quarter data.
+Fallback: Embedded sample data for offline / sandbox environments.
 """
+import os
 import httpx
-import json
 from typing import Optional
 
-# Sample data for demo — real NVDA Q1 FY2026 figures (quarter ended Apr 27, 2025)
+FMP_BASE = "https://financialmodelingprep.com/api/v3"
+
+
+def _fmp_key() -> Optional[str]:
+    return os.environ.get("FMP_API_KEY")
+
+
+async def _fmp_get(path: str, params: dict = {}) -> dict | list:
+    key = _fmp_key()
+    if not key:
+        raise RuntimeError("FMP_API_KEY not set")
+    async with httpx.AsyncClient(timeout=15) as client:
+        r = await client.get(f"{FMP_BASE}{path}", params={"apikey": key, **params})
+        r.raise_for_status()
+        return r.json()
+
+
+async def get_company_data(ticker: str) -> dict:
+    ticker = ticker.upper()
+
+    if _fmp_key():
+        try:
+            return await _fetch_fmp(ticker)
+        except Exception as e:
+            # network blocked or key issue — fall through to sample data
+            if ticker in SAMPLE_DATA:
+                return SAMPLE_DATA[ticker]
+            raise ValueError(f"FMP fetch failed for {ticker}: {e}")
+
+    if ticker in SAMPLE_DATA:
+        return SAMPLE_DATA[ticker]
+
+    raise ValueError(
+        f"'{ticker}' not in demo data and FMP_API_KEY not set. "
+        f"Set FMP_API_KEY or use: {list(SAMPLE_DATA.keys())}"
+    )
+
+
+async def _fetch_fmp(ticker: str) -> dict:
+    """Fetch comprehensive data from FMP for any ticker."""
+    # Parallel fetch all endpoints
+    import asyncio
+    profile_task     = _fmp_get(f"/profile/{ticker}")
+    income_task      = _fmp_get(f"/income-statement/{ticker}", {"period": "quarter", "limit": 8})
+    balance_task     = _fmp_get(f"/balance-sheet-statement/{ticker}", {"period": "quarter", "limit": 4})
+    cashflow_task    = _fmp_get(f"/cash-flow-statement/{ticker}", {"period": "quarter", "limit": 4})
+    metrics_task     = _fmp_get(f"/key-metrics/{ticker}", {"period": "quarter", "limit": 4})
+    ratios_task      = _fmp_get(f"/ratios/{ticker}", {"period": "quarter", "limit": 1})
+    surprises_task   = _fmp_get(f"/earnings-surprises/{ticker}")
+    estimates_task   = _fmp_get(f"/analyst-estimates/{ticker}", {"period": "quarter", "limit": 2})
+
+    (profile, income, balance, cashflow,
+     metrics, ratios, surprises, estimates) = await asyncio.gather(
+        profile_task, income_task, balance_task, cashflow_task,
+        metrics_task, ratios_task, surprises_task, estimates_task,
+        return_exceptions=True
+    )
+
+    def safe_list(v): return v if isinstance(v, list) else []
+    profile    = profile[0]   if isinstance(profile, list) and profile else {}
+    income     = safe_list(income)
+    balance    = safe_list(balance)
+    cashflow   = safe_list(cashflow)
+    metrics    = safe_list(metrics)
+    ratios     = safe_list(ratios)
+    surprises  = safe_list(surprises)
+    estimates  = safe_list(estimates)
+
+    if not income:
+        raise ValueError(f"No income data for {ticker}")
+
+    q0  = income[0]   # most recent quarter
+    q1  = income[1]   if len(income) > 1 else {}
+    q4  = income[4]   if len(income) > 4 else {}   # year-ago quarter
+    b0  = balance[0]  if balance else {}
+    cf0 = cashflow[0] if cashflow else {}
+    m0  = metrics[0]  if metrics else {}
+    r0  = ratios[0]   if ratios else {}
+
+    def v(d, k, div=1): return round((d.get(k) or 0) / div, 2) if div != 1 else (d.get(k) or 0)
+
+    rev     = v(q0, "revenue", 1e6)
+    rev_q1  = v(q1, "revenue", 1e6)
+    rev_yoy = v(q4, "revenue", 1e6)
+    gp      = v(q0, "grossProfit", 1e6)
+    oi      = v(q0, "operatingIncome", 1e6)
+    ni      = v(q0, "netIncome", 1e6)
+    fcf     = v(cf0, "freeCashFlow", 1e6)
+    capex   = abs(v(cf0, "capitalExpenditure", 1e6))
+    rnd     = v(q0, "researchAndDevelopmentExpenses", 1e6)
+    cash    = v(b0, "cashAndCashEquivalents", 1e6)
+    eps     = q0.get("eps") or 0
+    eps_yoy = q4.get("eps") or 0
+
+    gm_pct    = round(gp / rev * 100, 1) if rev else 0
+    gm_yoy    = round(v(q4, "grossProfit", 1e6) / max(v(q4, "revenue", 1e6), 1) * 100, 1)
+    om_pct    = round(oi / rev * 100, 1) if rev else 0
+    nm_pct    = round(ni / rev * 100, 1) if rev else 0
+    rev_g_yoy = round((rev - rev_yoy) / rev_yoy * 100, 1) if rev_yoy else 0
+    rev_g_qoq = round((rev - rev_q1) / rev_q1 * 100, 1) if rev_q1 else 0
+    eps_g_yoy = round((eps - eps_yoy) / abs(eps_yoy) * 100, 1) if eps_yoy else 0
+
+    # Historical quarters for trend analysis
+    history = []
+    for q in income[:8]:
+        qrev = (q.get("revenue") or 0) / 1e6
+        qgp  = (q.get("grossProfit") or 0) / 1e6
+        history.append({
+            "period": q.get("period", "") + " " + str(q.get("calendarYear", "")),
+            "date": q.get("date", ""),
+            "revenue_m": round(qrev, 0),
+            "gross_margin_pct": round(qgp / qrev * 100, 1) if qrev else 0,
+            "eps": q.get("eps") or 0,
+            "operating_margin_pct": round((q.get("operatingIncome") or 0) / max(q.get("revenue") or 1, 1) * 100, 1),
+        })
+
+    # Surprise data — most recent
+    latest_surprise = surprises[0] if surprises else {}
+    beat_rev  = round((latest_surprise.get("actualEarningResult", 0) - latest_surprise.get("estimatedEarning", 0)) / max(abs(latest_surprise.get("estimatedEarning") or 1), 1) * 100, 1) if latest_surprise else None
+    # Note: surprises endpoint returns EPS beats not revenue; use analyst estimates for revenue
+    next_est = estimates[0] if estimates else {}
+
+    return {
+        "company": {
+            "name": profile.get("companyName", ticker),
+            "ticker": ticker,
+            "sector": profile.get("sector", ""),
+            "industry": profile.get("industry", ""),
+            "description": profile.get("description", ""),
+            "market_cap_b": round((profile.get("mktCap") or 0) / 1e9, 1),
+            "employees": profile.get("fullTimeEmployees", 0),
+            "exchange": profile.get("exchangeShortName", ""),
+            "ceo": profile.get("ceo", ""),
+            "website": profile.get("website", ""),
+        },
+        "financials": {
+            "quarter": f"{q0.get('period','')} {q0.get('calendarYear','')}",
+            "period_end": q0.get("date", ""),
+            "revenue_m": rev,
+            "revenue_prev_quarter_m": rev_q1,
+            "revenue_prev_year_m": rev_yoy,
+            "revenue_growth_yoy_pct": rev_g_yoy,
+            "revenue_growth_qoq_pct": rev_g_qoq,
+            "gross_profit_m": gp,
+            "gross_margin_pct": gm_pct,
+            "gross_margin_prev_year_pct": gm_yoy,
+            "operating_income_m": oi,
+            "operating_margin_pct": om_pct,
+            "net_income_m": ni,
+            "net_margin_pct": nm_pct,
+            "eps_diluted": eps,
+            "eps_prev_year": eps_yoy,
+            "eps_growth_yoy_pct": eps_g_yoy,
+            "free_cash_flow_m": fcf,
+            "cash_and_equivalents_m": cash,
+            "capex_m": capex,
+            "r_and_d_m": rnd,
+            "debt_total_m": v(b0, "totalDebt", 1e6),
+            "segments": [],  # FMP segments require premium endpoint
+            "guidance": {
+                "next_quarter": f"Next Quarter",
+                "revenue_midpoint_m": round((next_est.get("revenueAvg") or 0) / 1e6, 0) or None,
+                "revenue_range": f"Analyst est: ${round((next_est.get('revenueLow') or 0)/1e9,1)}B – ${round((next_est.get('revenueHigh') or 0)/1e9,1)}B" if next_est else "See latest earnings call",
+                "gross_margin_pct": None,
+                "gross_margin_guidance": "See latest earnings call transcript",
+                "management_commentary": "See latest earnings call transcript for management commentary.",
+            },
+            "consensus": {
+                "revenue_estimate_m": round((next_est.get("revenueAvg") or 0) / 1e6, 0) or None,
+                "eps_estimate": next_est.get("epsAvg"),
+                "beat_revenue_pct": None,
+                "beat_eps_pct": beat_rev,
+            },
+            "historical_quarters": history,
+        },
+        "context": {
+            "recent_news": [],
+            "valuation": {
+                "pe_ttm": round(m0.get("peRatio") or 0, 1),
+                "pe_forward": round(r0.get("priceEarningsRatio") or 0, 1),
+                "ev_revenue_ttm": round(m0.get("evToSales") or 0, 1),
+                "ev_ebitda_ttm": round(m0.get("enterpriseValueOverEBITDA") or 0, 1),
+                "price_to_book": round(m0.get("pbRatio") or 0, 1),
+                "debt_to_equity": round(m0.get("debtToEquity") or 0, 2),
+                "current_ratio": round(m0.get("currentRatio") or 0, 2),
+                "roe": round((m0.get("roe") or 0) * 100, 1),
+                "peer_avg_pe_forward": 0,
+                "five_year_avg_pe": 0,
+            },
+        },
+    }
+
+
+# ── Embedded sample data (offline / sandbox fallback) ────────────────────────
+
 SAMPLE_DATA = {
     "NVDA": {
         "company": {
@@ -46,6 +240,7 @@ SAMPLE_DATA = {
             "cash_and_equivalents_m": 37793,
             "capex_m": 697,
             "r_and_d_m": 3497,
+            "debt_total_m": 8462,
             "segments": [
                 {"name": "Data Center", "revenue_m": 39106, "growth_yoy_pct": 73.0},
                 {"name": "Gaming", "revenue_m": 3803, "growth_yoy_pct": 42.0},
@@ -53,10 +248,20 @@ SAMPLE_DATA = {
                 {"name": "Automotive", "revenue_m": 567, "growth_yoy_pct": 72.0},
                 {"name": "OEM & Other", "revenue_m": 37, "growth_yoy_pct": -32.0},
             ],
+            "historical_quarters": [
+                {"period": "Q1 FY2026", "revenue_m": 44062, "gross_margin_pct": 74.8, "eps": 0.76, "operating_margin_pct": 62.5},
+                {"period": "Q4 FY2025", "revenue_m": 39331, "gross_margin_pct": 73.5, "eps": 0.89, "operating_margin_pct": 61.1},
+                {"period": "Q3 FY2025", "revenue_m": 35082, "gross_margin_pct": 74.6, "eps": 0.78, "operating_margin_pct": 61.8},
+                {"period": "Q2 FY2025", "revenue_m": 30040, "gross_margin_pct": 75.1, "eps": 0.67, "operating_margin_pct": 62.0},
+                {"period": "Q1 FY2025", "revenue_m": 26044, "gross_margin_pct": 64.6, "eps": 0.44, "operating_margin_pct": 54.1},
+                {"period": "Q4 FY2024", "revenue_m": 22103, "gross_margin_pct": 76.0, "eps": 0.52, "operating_margin_pct": 61.6},
+                {"period": "Q3 FY2024", "revenue_m": 18120, "gross_margin_pct": 74.0, "eps": 0.40, "operating_margin_pct": 57.5},
+                {"period": "Q2 FY2024", "revenue_m": 13507, "gross_margin_pct": 70.1, "eps": 0.25, "operating_margin_pct": 50.3},
+            ],
             "guidance": {
                 "next_quarter": "Q2 FY2026",
                 "revenue_midpoint_m": 45000,
-                "revenue_range": "$44.5B - $45.5B",
+                "revenue_range": "$44.5B – $45.5B",
                 "gross_margin_pct": 74.6,
                 "gross_margin_guidance": "~74.6% GAAP, ~76.0% non-GAAP",
                 "management_commentary": (
@@ -87,6 +292,10 @@ SAMPLE_DATA = {
                 "pe_forward": 33.5,
                 "ev_revenue_ttm": 29.8,
                 "ev_ebitda_ttm": 47.1,
+                "price_to_book": 28.4,
+                "debt_to_equity": 0.41,
+                "current_ratio": 4.2,
+                "roe": 119.4,
                 "peer_avg_pe_forward": 28.0,
                 "five_year_avg_pe": 55.0,
             },
@@ -100,8 +309,8 @@ SAMPLE_DATA = {
             "industry": "Consumer Electronics",
             "description": (
                 "Apple designs, manufactures, and markets smartphones, personal computers, "
-                "tablets, wearables, and accessories. The company also provides software, "
-                "services, and digital content. Services segment has become a key growth driver."
+                "tablets, wearables, and accessories worldwide. Services segment includes "
+                "App Store, Apple Music, iCloud, and Apple TV+."
             ),
             "market_cap_b": 3180,
             "employees": 164000,
@@ -128,6 +337,7 @@ SAMPLE_DATA = {
             "cash_and_equivalents_m": 53770,
             "capex_m": 3200,
             "r_and_d_m": 7870,
+            "debt_total_m": 101300,
             "segments": [
                 {"name": "iPhone", "revenue_m": 69140, "growth_yoy_pct": 1.0},
                 {"name": "Services", "revenue_m": 26340, "growth_yoy_pct": 14.0},
@@ -135,12 +345,19 @@ SAMPLE_DATA = {
                 {"name": "iPad", "revenue_m": 8089, "growth_yoy_pct": 15.0},
                 {"name": "Wearables & Home", "revenue_m": 11745, "growth_yoy_pct": -2.0},
             ],
+            "historical_quarters": [
+                {"period": "Q1 FY2025", "revenue_m": 124300, "gross_margin_pct": 46.9, "eps": 2.40, "operating_margin_pct": 31.9},
+                {"period": "Q4 FY2024", "revenue_m": 94900, "gross_margin_pct": 46.2, "eps": 1.64, "operating_margin_pct": 29.6},
+                {"period": "Q3 FY2024", "revenue_m": 85777, "gross_margin_pct": 46.3, "eps": 1.40, "operating_margin_pct": 29.6},
+                {"period": "Q2 FY2024", "revenue_m": 90753, "gross_margin_pct": 46.6, "eps": 1.53, "operating_margin_pct": 30.8},
+                {"period": "Q1 FY2024", "revenue_m": 119575, "gross_margin_pct": 45.9, "eps": 2.18, "operating_margin_pct": 31.5},
+            ],
             "guidance": {
                 "next_quarter": "Q2 FY2025",
                 "revenue_midpoint_m": None,
                 "revenue_range": "Low-to-mid single digit YoY growth",
                 "gross_margin_pct": 46.5,
-                "gross_margin_guidance": "46.0% - 47.0% GAAP",
+                "gross_margin_guidance": "46.0% – 47.0% GAAP",
                 "management_commentary": (
                     "Services revenue reached an all-time high with over 1 billion paid subscriptions. "
                     "iPhone 16 cycle demand remains healthy globally. "
@@ -168,113 +385,13 @@ SAMPLE_DATA = {
                 "pe_forward": 29.8,
                 "ev_revenue_ttm": 8.6,
                 "ev_ebitda_ttm": 24.5,
+                "price_to_book": 48.2,
+                "debt_to_equity": 1.87,
+                "current_ratio": 0.87,
+                "roe": 157.4,
                 "peer_avg_pe_forward": 26.0,
                 "five_year_avg_pe": 28.0,
             },
         },
     },
 }
-
-
-async def get_company_data(ticker: str) -> dict:
-    """Return company financials. Production: calls real APIs. Demo: sample data."""
-    ticker = ticker.upper()
-
-    if ticker in SAMPLE_DATA:
-        return SAMPLE_DATA[ticker]
-
-    # Production path — try yfinance
-    try:
-        return await _fetch_yfinance(ticker)
-    except Exception:
-        raise ValueError(
-            f"Ticker '{ticker}' not found. Demo supports: {list(SAMPLE_DATA.keys())}. "
-            "Deploy to production for full ticker coverage."
-        )
-
-
-async def _fetch_yfinance(ticker: str) -> dict:
-    """Fetch real data via yfinance (requires network access)."""
-    import yfinance as yf
-
-    stock = yf.Ticker(ticker)
-    info = stock.info
-    fin = stock.quarterly_financials
-    cf = stock.quarterly_cashflow
-
-    if fin.empty:
-        raise ValueError(f"No financial data for {ticker}")
-
-    q0, q1 = fin.columns[0], fin.columns[1] if len(fin.columns) > 1 else fin.columns[0]
-    q_year_ago = fin.columns[3] if len(fin.columns) > 3 else fin.columns[-1]
-
-    def safe(df, row, col):
-        try:
-            return float(df.loc[row, col]) / 1e6
-        except Exception:
-            return 0.0
-
-    rev = safe(fin, "Total Revenue", q0)
-    rev_qoq = safe(fin, "Total Revenue", q1)
-    rev_yoy = safe(fin, "Total Revenue", q_year_ago)
-
-    return {
-        "company": {
-            "name": info.get("longName", ticker),
-            "ticker": ticker,
-            "sector": info.get("sector", ""),
-            "industry": info.get("industry", ""),
-            "description": info.get("longBusinessSummary", ""),
-            "market_cap_b": round(info.get("marketCap", 0) / 1e9, 1),
-            "employees": info.get("fullTimeEmployees", 0),
-        },
-        "financials": {
-            "quarter": str(q0.date()),
-            "period_end": str(q0.date()),
-            "revenue_m": rev,
-            "revenue_prev_quarter_m": rev_qoq,
-            "revenue_prev_year_m": rev_yoy,
-            "revenue_growth_yoy_pct": round((rev - rev_yoy) / rev_yoy * 100, 1) if rev_yoy else 0,
-            "revenue_growth_qoq_pct": round((rev - rev_qoq) / rev_qoq * 100, 1) if rev_qoq else 0,
-            "gross_profit_m": safe(fin, "Gross Profit", q0),
-            "gross_margin_pct": round(safe(fin, "Gross Profit", q0) / rev * 100, 1) if rev else 0,
-            "gross_margin_prev_year_pct": 0,
-            "operating_income_m": safe(fin, "Operating Income", q0),
-            "operating_margin_pct": round(safe(fin, "Operating Income", q0) / rev * 100, 1) if rev else 0,
-            "net_income_m": safe(fin, "Net Income", q0),
-            "net_margin_pct": round(safe(fin, "Net Income", q0) / rev * 100, 1) if rev else 0,
-            "eps_diluted": info.get("trailingEps", 0),
-            "eps_prev_year": 0,
-            "eps_growth_yoy_pct": 0,
-            "free_cash_flow_m": safe(cf, "Free Cash Flow", q0) if "Free Cash Flow" in cf.index else 0,
-            "cash_and_equivalents_m": info.get("totalCash", 0) / 1e6,
-            "capex_m": 0,
-            "r_and_d_m": safe(fin, "Research And Development", q0),
-            "segments": [],
-            "guidance": {
-                "next_quarter": "Next Quarter",
-                "revenue_midpoint_m": None,
-                "revenue_range": "Management did not provide specific guidance",
-                "gross_margin_pct": None,
-                "gross_margin_guidance": "Not provided",
-                "management_commentary": "See latest earnings call transcript for management commentary.",
-            },
-            "consensus": {
-                "revenue_estimate_m": None,
-                "eps_estimate": None,
-                "beat_revenue_pct": None,
-                "beat_eps_pct": None,
-            },
-        },
-        "context": {
-            "recent_news": [],
-            "valuation": {
-                "pe_ttm": info.get("trailingPE", 0),
-                "pe_forward": info.get("forwardPE", 0),
-                "ev_revenue_ttm": info.get("enterpriseToRevenue", 0),
-                "ev_ebitda_ttm": info.get("enterpriseToEbitda", 0),
-                "peer_avg_pe_forward": 0,
-                "five_year_avg_pe": 0,
-            },
-        },
-    }
