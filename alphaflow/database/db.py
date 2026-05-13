@@ -63,7 +63,8 @@ async def update_report_step(report_id: str, step: str, status: str):
     now = datetime.utcnow().isoformat()
     with _conn() as conn:
         conn.execute(
-            "UPDATE reports SET status='processing', current_step=? WHERE id=?",
+            "UPDATE reports SET status='processing', current_step=? "
+            "WHERE id=? AND status NOT IN ('complete','error')",
             (step, report_id),
         )
         conn.execute(
