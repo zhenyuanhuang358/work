@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAPL Q2 FY2026 · AlphaFlow Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── 墨水经典 Monocle ── */
+  :root {
+    --ink:        #0a0a0b;
+    --paper:      #f1efea;
+    --paper-tint: #e8e5de;
+    --ink-tint:   #18181a;
+    --rule:       rgba(10,10,11,.14);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── Deck shell ── */
+  .deck {
+    position: relative;
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: min(177.78vh, 100vw);
+    height: min(56.25vw, 100vh);
+    background: var(--paper);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* ── Hairline top rule ── */
+  .slide::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  /* ── Folio ── */
+  .folio {
+    position: absolute; bottom: 2.4%; right: 2.8%;
+    font-size: 0.62vw; color: var(--ink); opacity: .45;
+    font-family: 'Inter', sans-serif; letter-spacing: .1em;
+    font-weight: 400;
+  }
+
+  /* ── Topic bar ── */
+  .topic-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5.5%;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3.2%;
+    border-bottom: 1px solid var(--rule);
+  }
+  .topic-bar .pub { font-size: .62vw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .55; font-weight: 500; }
+  .topic-bar .date { font-size: .62vw; letter-spacing: .08em; color: var(--ink); opacity: .4; }
+
+  /* ── Kicker ── */
+  .kicker {
+    font-size: .68vw; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink); opacity: .55; font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: .6vw;
+  }
+
+  /* ──────────────────────────────────────────
+     L01 HERO COVER
+  ────────────────────────────────────────── */
+  .l01 {
+    align-items: center; justify-content: center;
+    text-align: center; padding: 8% 12%;
+  }
+  .l01 .headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 6.5vw; font-weight: 900; line-height: 1.0;
+    color: var(--ink); letter-spacing: -.02em;
+    margin-bottom: .8vw;
+  }
+  .l01 .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 2vw; font-weight: 400; font-style: italic;
+    color: var(--ink); opacity: .7;
+    margin-bottom: 2vw;
+  }
+  .l01 .lead {
+    font-size: .95vw; line-height: 1.75; color: var(--ink); opacity: .75;
+    max-width: 55%; margin: 0 auto 3vw;
+  }
+  .l01 .meta-row {
+    display: flex; align-items: center; justify-content: center; gap: 2.4vw;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.6vw; margin-top: .5vw;
+  }
+  .l01 .meta-item { font-size: .68vw; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .5; }
+  .l01 .meta-item.highlight { opacity: 1; font-weight: 600; color: var(--ink); }
+  .meta-sep { width: 1px; height: 1.2vw; background: var(--ink); opacity: .2; }
+
+  /* ──────────────────────────────────────────
+     L02 ACT DIVIDER
+  ────────────────────────────────────────── */
+  .l02 {
+    align-items: flex-start; justify-content: center;
+    padding: 10% 8% 8%;
+  }
+  .l02 .big-headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 9vw; font-weight: 900; line-height: .95;
+    color: var(--ink); letter-spacing: -.03em;
+    margin-bottom: 2.5vw;
+  }
+  .l02 .quote-line {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15vw; font-style: italic;
+    color: var(--ink); opacity: .65;
+    max-width: 52%; line-height: 1.6;
+    padding-left: 1.4vw;
+    border-left: 2px solid var(--ink);
+  }
+
+  /* inverted */
+  .l02.inv { background: var(--ink); }
+  .l02.inv .big-headline { color: var(--paper); }
+  .l02.inv .quote-line { color: var(--paper); opacity: .65; border-color: var(--paper); }
+  .l02.inv .kicker { color: var(--paper); }
+  .l02.inv .folio { color: var(--paper); }
+  .l02.inv::before { background: var(--paper); }
+  .l02.inv .topic-bar { border-color: rgba(241,239,234,.15); }
+  .l02.inv .topic-bar .pub { color: var(--paper); }
+  .l02.inv .topic-bar .date { color: var(--paper); }
+
+  /* ──────────────────────────────────────────
+     L03 BIG NUMBERS GRID
+  ────────────────────────────────────────── */
+  .l03 {
+    padding: 8% 6% 6%;
+    justify-content: flex-start;
+  }
+  .l03 .grid-header { margin-bottom: 2.5vw; }
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    flex: 1;
+    margin: 0 0 3%;
+  }
+  .num-card {
+    background: var(--paper);
+    padding: 2.2vw 2.4vw;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .num-card .label { font-size: .68vw; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .5; margin-bottom: .6vw; }
+  .num-card .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6vw; font-weight: 900; line-height: 1;
+    color: var(--ink); letter-spacing: -.02em;
+  }
+  .num-card .note { font-size: .72vw; color: var(--ink); opacity: .55; margin-top: .5vw; }
+  .num-card.tinted { background: var(--paper-tint); }
+
+  /* ──────────────────────────────────────────
+     L06 BAR CHART TREND
+  ────────────────────────────────────────── */
+  .l06 { padding: 8% 6% 6%; justify-content: flex-start; }
+  .flow-header { margin-bottom: 2.5vw; }
+  .flow-steps {
+    display: flex; align-items: flex-end; gap: 0;
+    flex: 1; overflow: hidden;
+  }
+  .flow-step {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; border-left: 1px solid var(--rule);
+    padding: 0 1vw 1vw;
+    position: relative;
+  }
+  .flow-step:last-child { border-right: 1px solid var(--rule); }
+  .flow-step .step-num { font-size: .6vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .35; margin-bottom: .8vw; font-style: italic; font-family: 'Playfair Display', serif; }
+  .flow-step .bar-wrap { width: 100%; display: flex; align-items: flex-end; justify-content: center; height: 16vw; }
+  .flow-step .bar {
+    width: 60%; background: var(--paper-tint);
+    position: relative;
+  }
+  .flow-step.current .bar { background: var(--ink); }
+  .flow-step .bar-val {
+    position: absolute; top: -1.6vw; left: 50%; transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: .95vw; font-weight: 700; color: var(--ink);
+    white-space: nowrap;
+  }
+  .flow-step.current .bar-val { color: var(--ink); font-weight: 900; }
+  .flow-step .step-label { font-size: .62vw; color: var(--ink); opacity: .55; margin-top: .8vw; text-align: center; letter-spacing: .04em; }
+  .flow-step.current .step-label { opacity: 1; font-weight: 600; }
+
+  /* ──────────────────────────────────────────
+     L07 HERO QUESTION
+  ────────────────────────────────────────── */
+  .l07 { align-items: center; justify-content: center; padding: 8% 10%; }
+  .l07 .question {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 5.5vw; font-weight: 900; line-height: 1.15;
+    color: var(--ink); letter-spacing: -.02em;
+    text-align: center;
+  }
+  .l07 .q-note { font-size: .82vw; color: var(--ink); opacity: .4; margin-top: 2.5vw; letter-spacing: .1em; text-transform: uppercase; text-align: center; }
+
+  /* ──────────────────────────────────────────
+     L08 BIG QUOTE
+  ────────────────────────────────────────── */
+  .l08 { align-items: flex-start; justify-content: center; padding: 10% 9%; }
+  .l08 .big-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2vw; font-weight: 700; font-style: italic;
+    line-height: 1.3; color: var(--ink); letter-spacing: -.01em;
+    max-width: 80%; margin-bottom: 2.5vw;
+  }
+  .l08 .translation { font-size: .88vw; color: var(--ink); opacity: .5; max-width: 72%; line-height: 1.6; margin-bottom: 1.8vw; }
+  .l08 .attribution { font-size: .75vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .45; }
+
+  /* ──────────────────────────────────────────
+     L09 BEFORE / AFTER
+  ────────────────────────────────────────── */
+  .l09 { flex-direction: row; padding: 0; }
+  .l09-panel {
+    flex: 1; padding: 10% 4% 8% 5%;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--rule);
+  }
+  .l09-panel.after { opacity: 1; border-right: none; background: var(--paper-tint); }
+  .l09-panel.before { opacity: .45; }
+  .l09-panel .panel-tag { font-size: .68vw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .55; margin-bottom: 1.5vw; font-weight: 500; }
+  .l09-panel .panel-headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 2.8vw; font-weight: 900; color: var(--ink); margin-bottom: 2vw; line-height: 1.1;
+  }
+  .l09-panel .stat-row { display: flex; flex-direction: column; gap: .8vw; }
+  .l09-panel .stat { display: flex; align-items: baseline; gap: .6vw; }
+  .l09-panel .stat-val { font-family: 'Playfair Display', serif; font-size: 2.2vw; font-weight: 700; color: var(--ink); }
+  .l09-panel .stat-label { font-size: .72vw; color: var(--ink); opacity: .55; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ──────────────────────────────────────────
+     L04 LEFT+RIGHT LAYOUT
+  ────────────────────────────────────────── */
+  .l04 { flex-direction: row; padding: 0; }
+  .l04-left { flex: 8; padding: 9% 4% 8% 6%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
+  .l04-right { flex: 4; padding: 8% 4%; display: flex; flex-direction: column; justify-content: center; background: var(--paper-tint); }
+  .l04-left .section-kicker { margin-bottom: 1vw; }
+  .l04-left .section-head {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 2.8vw; font-weight: 900; color: var(--ink); line-height: 1.1; margin-bottom: 1.5vw;
+  }
+  .l04-left .body-text { font-size: .82vw; line-height: 1.8; color: var(--ink); opacity: .72; margin-bottom: 1.8vw; }
+  .l04-left .callout {
+    background: var(--paper-tint); padding: 1.2vw 1.5vw;
+    border-left: 3px solid var(--ink);
+    font-size: .78vw; line-height: 1.7; color: var(--ink); opacity: .8;
+  }
+
+  /* ── Risk matrix ── */
+  .risk-list { display: flex; flex-direction: column; gap: 1.2vw; }
+  .risk-item { display: flex; flex-direction: column; gap: .3vw; }
+  .risk-item .r-label { font-size: .6vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .45; }
+  .risk-item .r-title { font-size: .82vw; font-weight: 600; color: var(--ink); }
+  .risk-item .r-bar { height: 3px; background: var(--rule); margin-top: .3vw; }
+  .risk-item .r-bar-fill { height: 100%; background: var(--ink); }
+
+  /* ── Scenario boxes ── */
+  .thesis-grid { display: flex; flex-direction: column; gap: 1vw; }
+  .thesis-box { padding: .9vw 1.1vw; display: flex; flex-direction: column; gap: .3vw; }
+  .thesis-box.bull { background: var(--paper-tint); border-left: 3px solid #1a6b3a; }
+  .thesis-box.base { background: var(--paper-tint); border-left: 3px solid var(--ink); }
+  .thesis-box.bear { background: var(--paper-tint); border-left: 3px solid #8b2020; }
+  .thesis-box .t-tag { font-size: .58vw; letter-spacing: .1em; text-transform: uppercase; opacity: .55; font-weight: 600; }
+  .thesis-box.bull .t-tag { color: #1a6b3a; }
+  .thesis-box.base .t-tag { color: var(--ink); }
+  .thesis-box.bear .t-tag { color: #8b2020; }
+  .thesis-box .t-val { font-family: 'Playfair Display', serif; font-size: 1.3vw; font-weight: 700; color: var(--ink); }
+  .thesis-box .t-desc { font-size: .65vw; color: var(--ink); opacity: .6; line-height: 1.5; }
+
+  /* ── Recommendation slide ── */
+  .l01.reco .headline { font-size: 5vw; }
+  .buy-badge {
+    display: inline-block;
+    background: var(--ink); color: var(--paper);
+    font-size: .9vw; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 700; padding: .5vw 1.5vw;
+    margin-bottom: 1.5vw; font-family: 'Inter', sans-serif;
+  }
+  .watch-box {
+    border: 1px solid var(--rule); padding: 1.2vw 2vw; margin-top: 1vw;
+    font-size: .78vw; color: var(--ink); opacity: .7; line-height: 1.6;
+  }
+
+  /* ── Services visual ── */
+  .services-bars { display: flex; flex-direction: column; gap: .8vw; margin-top: 1.5vw; }
+  .svc-bar-row { display: flex; align-items: center; gap: .8vw; }
+  .svc-bar-label { font-size: .62vw; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); opacity: .55; width: 5vw; text-align: right; flex-shrink: 0; }
+  .svc-bar-track { flex: 1; height: 6px; background: var(--rule); }
+  .svc-bar-fill { height: 100%; background: var(--ink); }
+  .svc-bar-val { font-family: 'Playfair Display', serif; font-size: .78vw; font-weight: 700; color: var(--ink); width: 3vw; flex-shrink: 0; }
+
+  /* ── Nav ── */
+  .nav {
+    position: fixed; bottom: 2vh; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 1.2vw;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(10,10,11,.12); border: 1px solid rgba(10,10,11,.2);
+    color: #0a0a0b; width: 2.8vw; height: 2.8vw; min-width: 36px; min-height: 36px;
+    font-size: 1vw; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .nav button:hover { background: rgba(10,10,11,.22); }
+  .nav .progress { font-size: .62vw; color: #0a0a0b; opacity: .5; letter-spacing: .1em; font-family: 'Inter', sans-serif; min-width: 3.5vw; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- S01 · L01 Hero Cover -->
+  <div class="slide l01 active" id="s1">
+    <div class="topic-bar"><span class="pub">AlphaFlow Equity Research</span><span class="date">May 2026</span></div>
+    <div class="kicker">Equity Research · AAPL · NASDAQ</div>
+    <div class="headline">Apple<br>Inc.</div>
+    <div class="subtitle">Q2 FY2026 Financial Analysis</div>
+    <div class="lead">季度营收 $1,112亿，毛利率 49.3% 创历史新高。Services 连续增长，EPS +21.8%。苹果不再只是硬件周期——它正在成为一台永动的利润率膨胀机器。</div>
+    <div class="meta-row">
+      <span class="meta-item">AAPL</span><div class="meta-sep"></div>
+      <span class="meta-item">NASDAQ · Consumer Tech</span><div class="meta-sep"></div>
+      <span class="meta-item">Q2 FY2026</span><div class="meta-sep"></div>
+      <span class="meta-item highlight">Rating: BUY</span><div class="meta-sep"></div>
+      <span class="meta-item">Filed: May 1, 2026</span>
+    </div>
+    <div class="folio">01 / 12</div>
+  </div>
+
+  <!-- S02 · L02 Act Divider -->
+  <div class="slide l02" id="s2">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Part I · 财务表现</span></div>
+    <div class="kicker">Part I</div>
+    <div class="big-headline">毛利率<br>新高</div>
+    <div class="quote-line">49.3%——苹果有史以来最高的单季毛利率。<br>三年前这个数字是 43%。Services 改变了这家公司的基因。</div>
+    <div class="folio">02 / 12</div>
+  </div>
+
+  <!-- S03 · L03 Big Numbers Grid -->
+  <div class="slide l03" id="s3">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Core Metrics · Q2 FY2026</span></div>
+    <div class="grid-header"><div class="kicker">Q2 FY2026 · Key Financial Metrics</div></div>
+    <div class="numbers-grid">
+      <div class="num-card tinted">
+        <div class="label">季度营收</div>
+        <div class="value">$1,112<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">+16.6% YoY · vs $954亿 去年同期</div>
+      </div>
+      <div class="num-card">
+        <div class="label">毛利率</div>
+        <div class="value">49.3<span style="font-size:2vw">%</span></div>
+        <div class="note">历史新高 · +220bp YoY · 指引 49–50%</div>
+      </div>
+      <div class="num-card">
+        <div class="label">经营利润率</div>
+        <div class="value">32.3<span style="font-size:2vw">%</span></div>
+        <div class="note">+150bp YoY · 经营利润 $358.9亿</div>
+      </div>
+      <div class="num-card">
+        <div class="label">稀释每股收益</div>
+        <div class="value">$2.01</div>
+        <div class="note">+21.8% YoY · vs $1.65 去年同期</div>
+      </div>
+      <div class="num-card tinted">
+        <div class="label">自由现金流</div>
+        <div class="value">$270<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">FCF Margin ~24.3%</div>
+      </div>
+      <div class="num-card">
+        <div class="label">股票回购</div>
+        <div class="value">$290<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">单季回购历史第二高 · 股东回报机器</div>
+      </div>
+    </div>
+    <div class="folio">03 / 12</div>
+  </div>
+
+  <!-- S04 · L07 Hero Question -->
+  <div class="slide l07" id="s4">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">The Real Question</span></div>
+    <div class="question">Services 驱动的<br>利润率扩张<br>能持续吗？</div>
+    <div class="q-note">49.3% 已经给出了答案 · 指引上限 50%</div>
+    <div class="folio">04 / 12</div>
+  </div>
+
+  <!-- S05 · L06 Bar Chart — 8季度毛利率趋势 -->
+  <div class="slide l06" id="s5">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Gross Margin Trend</span></div>
+    <div class="flow-header"><div class="kicker">毛利率 · 8季度趋势 · Q3 FY2024 → Q2 FY2026</div></div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <span class="step-num">№ 1</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 46.3/52)"><span class="bar-val">46.3%</span></div></div>
+        <span class="step-label">Q3<br>FY2024</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 2</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 46.2/52)"><span class="bar-val">46.2%</span></div></div>
+        <span class="step-label">Q4<br>FY2024</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 3</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 46.9/52)"><span class="bar-val">46.9%</span></div></div>
+        <span class="step-label">Q1<br>FY2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 4</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 47.1/52)"><span class="bar-val">47.1%</span></div></div>
+        <span class="step-label">Q2<br>FY2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 5</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 46.5/52)"><span class="bar-val">46.5%</span></div></div>
+        <span class="step-label">Q3<br>FY2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 6</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 47.2/52)"><span class="bar-val">47.2%</span></div></div>
+        <span class="step-label">Q4<br>FY2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 7</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 48.1/52)"><span class="bar-val">48.1%</span></div></div>
+        <span class="step-label">Q1<br>FY2026</span>
+      </div>
+      <div class="flow-step current">
+        <span class="step-num">№ 8</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 49.3/52)"><span class="bar-val">49.3%</span></div></div>
+        <span class="step-label">Q2<br>FY2026<br>▲ 新高</span>
+      </div>
+    </div>
+    <div class="folio">05 / 12</div>
+  </div>
+
+  <!-- S06 · L09 Before / After -->
+  <div class="slide l09" id="s6">
+    <div class="topic-bar" style="position:absolute;top:0;left:0;right:0;z-index:2"><span class="pub">AlphaFlow · AAPL</span><span class="date">Two Narratives · The Transformation</span></div>
+    <div class="l09-panel before" style="padding-top:12%">
+      <div class="panel-tag">2020–2022 · Before</div>
+      <div class="panel-headline">一家靠<br>iPhone<br>驱动的周期股</div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-val">43%</span><span class="stat-label">毛利率上限</span></div>
+        <div class="stat"><span class="stat-val">~15%</span><span class="stat-label">Services 营收占比</span></div>
+        <div class="stat"><span class="stat-val">$1.40</span><span class="stat-label">季度EPS</span></div>
+        <div class="stat"><span class="stat-val" style="font-size:1.2vw;opacity:.7">"硬件周期太依赖换机节奏"</span></div>
+      </div>
+    </div>
+    <div class="l09-panel after" style="padding-top:12%">
+      <div class="panel-tag">2026 Q2 · After</div>
+      <div class="panel-headline">Services<br>主导的<br>利润率机器</div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-val">49.3%</span><span class="stat-label">毛利率 · 历史新高</span></div>
+        <div class="stat"><span class="stat-val">~26%</span><span class="stat-label">Services 营收占比</span></div>
+        <div class="stat"><span class="stat-val">$2.01</span><span class="stat-label">季度EPS</span></div>
+        <div class="stat"><span class="stat-val" style="font-size:1.2vw">"全球最大软件订阅平台"</span></div>
+      </div>
+    </div>
+    <div class="folio">06 / 12</div>
+  </div>
+
+  <!-- S07 · L02 Act Divider (inverted) -->
+  <div class="slide l02 inv" id="s7">
+    <div class="topic-bar"><span class="pub" style="color:var(--paper);opacity:.55">AlphaFlow · AAPL</span><span class="date" style="color:var(--paper);opacity:.4">Part II · 估值与情景</span></div>
+    <div class="kicker" style="color:var(--paper)">Part II</div>
+    <div class="big-headline">三种<br>情景</div>
+    <div class="quote-line">$3.3 万亿市值已经在定价某种未来。<br>Apple Intelligence 是变量——它能让一台利润机器变成增长引擎吗？</div>
+    <div class="folio" style="color:var(--paper)">07 / 12</div>
+  </div>
+
+  <!-- S08 · L03 Valuation Grid -->
+  <div class="slide l03" id="s8">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Valuation · May 2026</span></div>
+    <div class="grid-header"><div class="kicker">估值指标 · 当前水平</div></div>
+    <div class="numbers-grid">
+      <div class="num-card tinted">
+        <div class="label">市盈率 (TTM)</div>
+        <div class="value">28<span style="font-size:2vw">x</span></div>
+        <div class="note">TTM EPS ~$8.27 · 科技股溢价合理</div>
+      </div>
+      <div class="num-card">
+        <div class="label">EV / 自由现金流</div>
+        <div class="value">32<span style="font-size:2vw">x</span></div>
+        <div class="note">年化 FCF ~$1,050亿 · 现金回报强劲</div>
+      </div>
+      <div class="num-card">
+        <div class="label">FCF 收益率</div>
+        <div class="value">3.2<span style="font-size:2vw">%</span></div>
+        <div class="note">vs 10年美债 4.3% · 存在溢价</div>
+      </div>
+      <div class="num-card">
+        <div class="label">牛市目标价</div>
+        <div class="value">$240</div>
+        <div class="note">AI 超级周期 + Services 加速 · +25%</div>
+      </div>
+      <div class="num-card tinted">
+        <div class="label">基准目标价</div>
+        <div class="value">$215</div>
+        <div class="note">Services 稳增长 + 回购支撑 · +12%</div>
+      </div>
+      <div class="num-card">
+        <div class="label">熊市目标价</div>
+        <div class="value">$175</div>
+        <div class="note">中国失速 + 监管打压 · -9%</div>
+      </div>
+    </div>
+    <div class="folio">08 / 12</div>
+  </div>
+
+  <!-- S09 · L08 Big Quote — Tim Cook -->
+  <div class="slide l08" id="s9">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Management Voice</span></div>
+    <div class="kicker">CEO · Tim Cook · Q2 FY2026 Earnings Call · May 1, 2026</div>
+    <div class="big-q">"Our gross margin of 49.3% is the highest we have ever reported. Services reached an all-time revenue record, and Apple Intelligence is rolling out to more languages — we are just getting started."</div>
+    <div class="translation">我们 49.3% 的毛利率是历史最高水平。Services 创下营收历史新高，Apple Intelligence 正在向更多语言推出——我们才刚刚开始。</div>
+    <div class="attribution">Tim Cook — CEO, Apple Inc. · May 1, 2026</div>
+    <div class="folio">09 / 12</div>
+  </div>
+
+  <!-- S10 · L04 Investment Thesis + Scenario Grid -->
+  <div class="slide l04" id="s10">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Investment Thesis</span></div>
+    <div class="l04-left">
+      <div class="kicker section-kicker">投资逻辑</div>
+      <div class="section-head">三个结构性<br>驱动力</div>
+      <div class="body-text">
+        <strong>① Services 复利机器</strong><br>
+        App Store、iCloud、Apple TV+、Apple Music 合计订阅用户超 10 亿。每新增 $1 Services 收入，毛利贡献约 $0.73，是硬件的 2 倍以上。Services 占总营收从 2020 年 15% 升至今天 26%，趋势未逆转。<br><br>
+        <strong>② Apple Intelligence 换机催化</strong><br>
+        AI 功能限于 iPhone 15 Pro 以上机型，全球存量 iPhone 仍有大量低端机型未升级。Apple Intelligence 的语言扩展（中、日、韩）将在 H2 2026 触发亚洲市场换机潮。<br><br>
+        <strong>③ 回购即 EPS 永动机</strong><br>
+        单季 $290 亿回购，相当于年化 1.5% 流通股减少。在营收温和增长的情况下，回购本身可支撑 EPS 中双位数增速。
+      </div>
+      <div class="callout">关键催化剂：Apple Intelligence 中文版 (Q3 2026) · Vision Pro 2 (Q4 2026) · Services 季度营收突破 $300 亿</div>
+    </div>
+    <div class="l04-right">
+      <div class="kicker" style="margin-bottom:1.2vw">情景分析</div>
+      <div class="thesis-grid">
+        <div class="thesis-box bull">
+          <span class="t-tag">牛市 · Apple Intelligence 超级周期</span>
+          <span class="t-val">目标价 $240</span>
+          <span class="t-desc">AI 换机潮推动 iPhone 单位增长 8%+，Services 加速至 20%+ 增速，GM 突破 51%。</span>
+        </div>
+        <div class="thesis-box base">
+          <span class="t-tag">基准 · Services 稳步扩张</span>
+          <span class="t-val">目标价 $215</span>
+          <span class="t-desc">iPhone 稳定，Services 维持 13-15% 增速，GM 维持 49-50%，回购持续。</span>
+        </div>
+        <div class="thesis-box bear">
+          <span class="t-tag">熊市 · 中国失速 + 监管</span>
+          <span class="t-val">目标价 $175</span>
+          <span class="t-desc">华为竞争加剧，EU DMA 打压 App Store，iPhone 中国市占率持续下滑。</span>
+        </div>
+      </div>
+    </div>
+    <div class="folio">10 / 12</div>
+  </div>
+
+  <!-- S11 · L04 Risk Matrix -->
+  <div class="slide l04" id="s11">
+    <div class="topic-bar"><span class="pub">AlphaFlow · AAPL</span><span class="date">Risk Assessment</span></div>
+    <div class="l04-left">
+      <div class="kicker section-kicker">风险矩阵</div>
+      <div class="section-head">四大<br>核心风险</div>
+      <div class="body-text">
+        <strong>中国市场竞争</strong>（最大风险）：华为 Mate 系列持续抢占高端市场，苹果中国营收已连续下滑。Apple Intelligence 不支持中文叠加 AI 管制，对大陆市场恢复形成结构性阻力。<br><br>
+        <strong>EU DMA 监管</strong>：欧盟数字市场法要求开放旁加载，动摇 App Store 护城河。罚款风险最高达全球营收 10%。<br><br>
+        <strong>AI 差异化不足</strong>：若 Apple Intelligence 体验不如 Google Gemini / Samsung AI，换机催化剂逻辑失效，iPhone 周期仍受制于硬件规格迭代。<br><br>
+        <strong>估值溢价风险</strong>：28x P/E 已高于历史均值。若利率上行或整体科技股杀估值，苹果难以幸免。
+      </div>
+      <div class="callout">综合判断：上述风险均为已知风险，市场已部分定价。核心逻辑（Services 复利 + 回购）的确定性高于不确定性。维持 BUY。</div>
+    </div>
+    <div class="l04-right">
+      <div class="kicker" style="margin-bottom:1.2vw">风险评级</div>
+      <div class="risk-list">
+        <div class="risk-item">
+          <span class="r-label">风险烈度</span>
+          <span class="r-title">中国竞争 / 市场份额</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">风险烈度</span>
+          <span class="r-title">EU 监管 / DMA 执行</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">风险烈度</span>
+          <span class="r-title">AI 差异化 / 换机失速</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:60%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">风险烈度</span>
+          <span class="r-title">估值溢价 / 利率敏感性</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:55%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">风险烈度</span>
+          <span class="r-title">供应链 / 台积电集中度</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:40%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="folio">11 / 12</div>
+  </div>
+
+  <!-- S12 · L01 Recommendation (Reco) -->
+  <div class="slide l01 reco" id="s12">
+    <div class="topic-bar"><span class="pub">AlphaFlow Equity Research</span><span class="date">May 2026</span></div>
+    <div class="kicker">Final Recommendation · AAPL · NASDAQ</div>
+    <div class="buy-badge">BUY</div>
+    <div class="headline">Apple Inc.<br>目标价 $215</div>
+    <div class="subtitle">毛利率 49.3% 历史新高 · Services 复利 · 回购机器</div>
+    <div class="lead">苹果不再是纯硬件周期股。Services 每季度贡献接近 30% 的总营收和超过 40% 的毛利润，GM 天花板不断被打破。Apple Intelligence 是可选期权——即使不触发换机潮，Services 复利和 $290 亿季度回购也足以支撑 EPS 双位数增长。风险可控，确定性领先于大多数科技标的。</div>
+    <div class="watch-box">
+      关键观察指标：Q3 FY2026 Services 收入是否超 $265 亿 · Apple Intelligence 中文版用户留存 · 中国市场季度环比是否企稳 · GM 指引是否维持 49%+
+    </div>
+    <div class="meta-row">
+      <span class="meta-item">AAPL</span><div class="meta-sep"></div>
+      <span class="meta-item">目标价 $215 (+12%)</span><div class="meta-sep"></div>
+      <span class="meta-item">牛市 $240 (+25%)</span><div class="meta-sep"></div>
+      <span class="meta-item">熊市 $175 (−9%)</span><div class="meta-sep"></div>
+      <span class="meta-item highlight">评级: BUY</span>
+    </div>
+    <div class="folio">12 / 12</div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- Nav -->
+<div class="nav">
+  <button id="prev" aria-label="Previous">←</button>
+  <span class="progress" id="prog">01 / 12</span>
+  <button id="next" aria-label="Next">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const prog   = document.getElementById('prog');
+  const total  = slides.length;
+  let cur = 0;
+
+  function go(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + total) % total;
+    slides[cur].classList.add('active');
+    prog.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    location.hash = 's' + (cur + 1);
+  }
+
+  document.getElementById('next').addEventListener('click', () => go(cur + 1));
+  document.getElementById('prev').addEventListener('click', () => go(cur - 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(cur + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(cur - 1);
+  });
+
+  // Hash sync on load
+  const hash = location.hash.replace('#s', '');
+  if (hash && !isNaN(hash)) go(parseInt(hash) - 1);
+</script>
+</body>
+</html>
