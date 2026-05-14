@@ -7,248 +7,75 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:    #08131f;
-    --bg2:   #0b1a2b;
-    --card:  #0e2038;
-    --card2: #112540;
-    --bdr:   rgba(201,168,76,.16);
-    --bdr2:  rgba(255,255,255,.05);
-    --gold:  #C9A84C;
-    --green: #00D4AA;
-    --blue:  #4A9EFF;
-    --text:  #DCE8F8;
-    --t2:    #7A9BBF;
-    --t3:    #3E5E7A;
-    --mono:  'JetBrains Mono', monospace;
+  :root{
+    --bg:#08131f;--bg2:#0b1a2b;--card:#0e2038;--card2:#112540;
+    --bdr:rgba(201,168,76,.16);--bdr2:rgba(255,255,255,.05);
+    --gold:#C9A84C;--green:#00D4AA;--text:#DCE8F8;--t2:#7A9BBF;--t3:#3E5E7A;
+    --mono:'JetBrains Mono',monospace;
   }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    background-image:
-      linear-gradient(rgba(201,168,76,.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* Header */
-  .hdr {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--bdr);
-    padding: 0 40px;
-    height: 58px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .hdr-brand {
-    display: flex; align-items: center; gap: 14px;
-  }
-  .brand-logo {
-    background: var(--gold);
-    color: var(--bg);
-    font-family: var(--mono);
-    font-size: 12px; font-weight: 700;
-    letter-spacing: .1em;
-    padding: 5px 10px;
-  }
-  .brand-name { font-size: 14px; font-weight: 600; letter-spacing: .02em; }
-  .brand-sub  { font-size: 10px; color: var(--t2); letter-spacing: .1em; text-transform: uppercase; margin-top: 1px; }
-  .hdr-stats  { display: flex; gap: 28px; align-items: center; }
-  .stat { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
-  .stat-val { font-family: var(--mono); font-size: 16px; font-weight: 600; color: var(--gold); }
-  .stat-lbl { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); }
-
-  /* Main */
-  .main { padding: 32px 40px 60px; max-width: 1440px; margin: 0 auto; }
-
-  /* Filter bar */
-  .filter-bar {
-    display: flex; gap: 12px; align-items: center;
-    margin-bottom: 28px; flex-wrap: wrap;
-  }
-  .filter-lbl { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--t3); margin-right: 4px; }
-  .filter-btn {
-    background: var(--card);
-    border: 1px solid var(--bdr2);
-    color: var(--t2);
-    font-size: 11px; font-weight: 500;
-    padding: 5px 14px; cursor: pointer;
-    transition: all .2s;
-    letter-spacing: .04em;
-    font-family: 'Inter', sans-serif;
-  }
-  .filter-btn:hover { border-color: var(--bdr); color: var(--text); }
-  .filter-btn.active { background: var(--bdr); border-color: var(--gold); color: var(--gold); }
-
-  /* Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 20px;
-  }
-
-  /* Artifact card */
-  .acard {
-    background: var(--card);
-    border: 1px solid var(--bdr2);
-    display: flex; flex-direction: column;
-    transition: border-color .2s, background .2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .acard:hover { border-color: var(--bdr); background: var(--card2); }
-  .acard::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: var(--gold); opacity: 0; transition: opacity .2s;
-  }
-  .acard:hover::before { opacity: 1; }
-
-  /* Preview thumbnail */
-  .thumb-wrap {
-    width: 100%; padding-top: 56.25%; /* 16:9 */
-    position: relative; overflow: hidden;
-    background: #0a1828;
-    border-bottom: 1px solid var(--bdr2);
-  }
-  .thumb-wrap img {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: top;
-    transition: transform .4s ease;
-  }
-  .acard:hover .thumb-wrap img { transform: scale(1.02); }
-  .thumb-placeholder {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 8px;
-  }
-  .thumb-placeholder .ph-ticker {
-    font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--gold); opacity: .25;
-  }
-  .thumb-placeholder .ph-style {
-    font-size: 10px; letter-spacing: .1em; color: var(--t3); text-transform: uppercase;
-  }
-
-  /* Style badge overlay */
-  .style-badge {
-    position: absolute; top: 10px; right: 10px;
-    background: rgba(8,19,31,.75);
-    border: 1px solid var(--bdr);
-    color: var(--gold); font-size: 9px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    padding: 3px 8px; font-family: var(--mono);
-    backdrop-filter: blur(4px);
-  }
-
-  /* Card body */
-  .card-body { padding: 18px 20px 16px; display: flex; flex-direction: column; flex: 1; gap: 10px; }
-
-  .card-ticker-row { display: flex; align-items: center; gap: 10px; }
-  .card-ticker {
-    background: var(--gold);
-    color: var(--bg);
-    font-family: var(--mono);
-    font-size: 11px; font-weight: 700;
-    letter-spacing: .1em; padding: 3px 9px;
-  }
-  .card-period { font-size: 11px; color: var(--t2); font-family: var(--mono); }
-  .card-rating {
-    margin-left: auto;
-    font-size: 10px; font-weight: 700;
-    letter-spacing: .1em; font-family: var(--mono);
-    border: 1px solid rgba(0,212,170,.35);
-    background: rgba(0,212,170,.08);
-    color: var(--green); padding: 2px 9px;
-  }
-
-  .card-title { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.35; }
-
-  .card-summary { font-size: 11px; color: var(--t2); line-height: 1.55; }
-
-  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag {
-    font-size: 9px; letter-spacing: .07em; text-transform: uppercase;
-    color: var(--t3); background: rgba(255,255,255,.04);
-    border: 1px solid var(--bdr2); padding: 2px 8px;
-  }
-
-  .card-actions {
-    display: flex; gap: 8px; margin-top: 4px;
-    padding-top: 12px; border-top: 1px solid var(--bdr2);
-  }
-  .btn {
-    flex: 1; text-decoration: none; text-align: center;
-    font-size: 10px; font-weight: 600; letter-spacing: .1em;
-    text-transform: uppercase; font-family: var(--mono);
-    padding: 7px 10px; transition: all .15s; cursor: pointer;
-    border: 1px solid var(--bdr2); color: var(--t2);
-    background: transparent;
-  }
-  .btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.05); }
-  .btn.primary { border-color: var(--bdr); color: var(--text); background: rgba(255,255,255,.04); }
-  .btn.primary:hover { border-color: var(--gold); color: var(--gold); }
-
-  /* Date separator */
-  .date-sep {
-    grid-column: 1 / -1;
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: -4px; margin-top: 8px;
-  }
-  .date-sep span { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); font-family: var(--mono); white-space: nowrap; }
-  .date-sep::before, .date-sep::after { content: ''; flex: 1; height: 1px; background: var(--bdr2); }
-
-  /* Instructions section */
-  .how-to {
-    background: var(--card);
-    border: 1px solid var(--bdr2);
-    padding: 24px 28px;
-    margin-top: 32px;
-  }
-  .how-to h2 { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--t2); margin-bottom: 16px; font-weight: 500; }
-  .pipeline {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0;
-  }
-  .pipe-step {
-    display: flex; flex-direction: column; align-items: center;
-    border-right: 1px solid var(--bdr2); padding: 12px 8px;
-    position: relative;
-  }
-  .pipe-step:last-child { border-right: none; }
-  .pipe-step::after {
-    content: '→';
-    position: absolute; right: -8px; top: 50%; transform: translateY(-50%);
-    color: var(--t3); font-size: 11px; z-index: 1;
-  }
-  .pipe-step:last-child::after { display: none; }
-  .pipe-num { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--gold); opacity: .4; margin-bottom: 6px; }
-  .pipe-label { font-size: 10px; font-weight: 600; color: var(--text); text-align: center; margin-bottom: 4px; }
-  .pipe-cmd { font-family: var(--mono); font-size: 9px; color: var(--t3); text-align: center; line-height: 1.5; }
-
-  .cmds { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
-  .cmd-row { display: flex; align-items: baseline; gap: 12px; }
-  .cmd-label { font-size: 9.5px; color: var(--t3); letter-spacing: .06em; width: 100px; flex-shrink: 0; }
-  code {
-    font-family: var(--mono); font-size: 11px; color: var(--t2);
-    background: rgba(255,255,255,.04); border: 1px solid var(--bdr2);
-    padding: 3px 10px; white-space: nowrap;
-  }
-
-  /* Footer */
-  .ftr {
-    border-top: 1px solid var(--bdr2);
-    padding: 14px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .ftr-l { font-size: 9.5px; color: var(--t3); letter-spacing: .07em; }
-  .ftr-r { font-size: 9.5px; color: var(--t3); font-family: var(--mono); }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;
+    background-image:linear-gradient(rgba(201,168,76,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.02) 1px,transparent 1px);
+    background-size:40px 40px}
+  .hdr{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:0 40px;height:58px;
+    display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .hdr-brand{display:flex;align-items:center;gap:14px}
+  .brand-logo{background:var(--gold);color:var(--bg);font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;padding:5px 10px}
+  .brand-name{font-size:14px;font-weight:600;letter-spacing:.02em}
+  .brand-sub{font-size:10px;color:var(--t2);letter-spacing:.1em;text-transform:uppercase;margin-top:1px}
+  .hdr-stats{display:flex;gap:28px;align-items:center}
+  .stat{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+  .stat-val{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--gold)}
+  .stat-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+  .main{padding:32px 40px 60px;max-width:1440px;margin:0 auto}
+  .filter-bar{display:flex;gap:12px;align-items:center;margin-bottom:28px;flex-wrap:wrap}
+  .filter-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-right:4px}
+  .filter-btn{background:var(--card);border:1px solid var(--bdr2);color:var(--t2);font-size:11px;font-weight:500;
+    padding:5px 14px;cursor:pointer;transition:all .2s;letter-spacing:.04em;font-family:'Inter',sans-serif}
+  .filter-btn:hover{border-color:var(--bdr);color:var(--text)}
+  .filter-btn.active{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:20px}
+  .acard{background:var(--card);border:1px solid var(--bdr2);display:flex;flex-direction:column;transition:border-color .2s,background .2s;position:relative;overflow:hidden}
+  .acard:hover{border-color:var(--bdr);background:var(--card2)}
+  .acard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+  .acard:hover::before{opacity:1}
+  .thumb-wrap{width:100%;padding-top:56.25%;position:relative;overflow:hidden;background:#0a1828;border-bottom:1px solid var(--bdr2)}
+  .thumb-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s ease}
+  .acard:hover .thumb-wrap img{transform:scale(1.02)}
+  .thumb-placeholder{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+  .ph-ticker{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--gold);opacity:.25}
+  .ph-style{font-size:10px;letter-spacing:.1em;color:var(--t3);text-transform:uppercase}
+  .style-badge{position:absolute;top:10px;right:10px;background:rgba(8,19,31,.75);border:1px solid var(--bdr);
+    color:var(--gold);font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;font-family:var(--mono);backdrop-filter:blur(4px)}
+  .card-body{padding:18px 20px 16px;display:flex;flex-direction:column;flex:1;gap:10px}
+  .card-ticker-row{display:flex;align-items:center;gap:10px}
+  .card-ticker{background:var(--gold);color:var(--bg);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;padding:3px 9px}
+  .card-period{font-size:11px;color:var(--t2);font-family:var(--mono)}
+  .card-rating{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.1em;font-family:var(--mono);
+    border:1px solid rgba(0,212,170,.35);background:rgba(0,212,170,.08);color:var(--green);padding:2px 9px}
+  .card-title{font-size:14px;font-weight:600;color:var(--text);line-height:1.35}
+  .card-summary{font-size:11px;color:var(--t2);line-height:1.55}
+  .card-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--t3);background:rgba(255,255,255,.04);border:1px solid var(--bdr2);padding:2px 8px}
+  .card-actions{display:flex;gap:8px;margin-top:4px;padding-top:12px;border-top:1px solid var(--bdr2)}
+  .btn{flex:1;text-decoration:none;text-align:center;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    font-family:var(--mono);padding:7px 10px;transition:all .15s;cursor:pointer;border:1px solid var(--bdr2);color:var(--t2);background:transparent}
+  .btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.05)}
+  .btn.primary{border-color:var(--bdr);color:var(--text);background:rgba(255,255,255,.04)}
+  .btn.primary:hover{border-color:var(--gold);color:var(--gold)}
+  .date-sep{grid-column:1/-1;display:flex;align-items:center;gap:14px;margin-bottom:-4px;margin-top:8px}
+  .date-sep span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);font-family:var(--mono);white-space:nowrap}
+  .date-sep::before,.date-sep::after{content:'';flex:1;height:1px;background:var(--bdr2)}
+  .how-to{background:var(--card);border:1px solid var(--bdr2);padding:24px 28px;margin-top:32px}
+  .how-to h2{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:16px;font-weight:500}
+  .cmds{display:flex;flex-direction:column;gap:8px}
+  .cmd-row{display:flex;align-items:baseline;gap:12px}
+  .cmd-lbl{font-size:9.5px;color:var(--t3);letter-spacing:.06em;width:110px;flex-shrink:0}
+  code{font-family:var(--mono);font-size:11px;color:var(--t2);background:rgba(255,255,255,.04);border:1px solid var(--bdr2);padding:3px 10px;white-space:nowrap}
+  .ftr{border-top:1px solid var(--bdr2);padding:14px 40px;display:flex;justify-content:space-between;align-items:center}
+  .ftr-l{font-size:9.5px;color:var(--t3);letter-spacing:.07em}
+  .ftr-r{font-size:9.5px;color:var(--t3);font-family:var(--mono)}
+  .empty{grid-column:1/-1;text-align:center;padding:60px;color:var(--t3);font-family:var(--mono);font-size:13px}
 </style>
 </head>
 <body>
@@ -262,41 +89,33 @@
     </div>
   </div>
   <div class="hdr-stats">
-    <div class="stat"><div class="stat-val" id="total-count">3</div><div class="stat-lbl">Artifacts</div></div>
+    <div class="stat"><div class="stat-val" id="visible-count">3</div><div class="stat-lbl">Artifacts</div></div>
     <div class="stat"><div class="stat-val">2</div><div class="stat-lbl">Tickers</div></div>
-    <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Styles</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-lbl">Dates</div></div>
   </div>
 </header>
 
 <div class="main">
-
-  <!-- Filter bar -->
   <div class="filter-bar">
     <span class="filter-lbl">Filter</span>
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="editorial">Editorial Deck</button>
-    <button class="filter-btn" data-filter="dataviz">DataViz</button>
+    <button class="filter-btn active" data-filter="all">All (3)</button>
     <button class="filter-btn" data-filter="AAPL">AAPL</button>
     <button class="filter-btn" data-filter="PLTR">PLTR</button>
+    <button class="filter-btn" data-filter="editorial">Editorial</button>
+    <button class="filter-btn" data-filter="dataviz">Dataviz</button>
+    <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+    
   </div>
 
-  <!-- Artifact grid -->
   <div class="grid" id="grid">
-
-    <!-- Date separator -->
-    <div class="date-sep">
-      <span>2026-05-14</span>
-    </div>
-
-    <!-- PLTR Q1 2026 Editorial -->
-    <div class="acard" data-tags="editorial PLTR slides">
+    
+    <div class="date-sep"><span>2026-05-14</span></div>
+    <div class="acard" data-tags="guizang-editorial PLTR equity AI SaaS editorial slides" data-date="2026-05-14">
       <div class="thumb-wrap">
-        <img src="research/2026-05-14/PLTR-Q1-2026-Editorial/preview.png"
-             alt="PLTR Q1 2026 Editorial"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="research/2026-05-14/PLTR-Q1-2026-Editorial/preview.png" alt="Palantir Q1 2026 · Editorial Research Deck" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="thumb-placeholder" style="display:none">
           <div class="ph-ticker">PLTR</div>
-          <div class="ph-style">Editorial Deck</div>
+          <div class="ph-style">guizang-editorial</div>
         </div>
         <div class="style-badge">12 Slides</div>
       </div>
@@ -306,32 +125,20 @@
           <div class="card-period">Q1 2026</div>
           <div class="card-rating">BUY</div>
         </div>
-        <div class="card-title">Palantir Q1 2026<br>Editorial Research Deck</div>
-        <div class="card-summary">Revenue $1.63B +84.7% YoY · OM 46.2% · EPS $0.34 +325%<br>靛蓝瓷 Indigo Porcelain palette · 杂志 × 电子墨水风格</div>
-        <div class="card-tags">
-          <span class="tag">equity</span>
-          <span class="tag">AI</span>
-          <span class="tag">SaaS</span>
-          <span class="tag">editorial</span>
-          <span class="tag">guizang</span>
-        </div>
+        <div class="card-title">Palantir Q1 2026 · Editorial Research Deck</div>
+        <div class="card-summary">Revenue $1.63B +84.7% YoY · OM 46.2% · EPS $0.34 +325% · Target $130</div>
+        <div class="card-tags"><span class="tag">equity</span><span class="tag">AI</span><span class="tag">SaaS</span><span class="tag">editorial</span><span class="tag">slides</span></div>
         <div class="card-actions">
-          <a class="btn primary" href="research/2026-05-14/PLTR-Q1-2026-Editorial/index.html" target="_blank">↗ Open</a>
-          <a class="btn" href="research/2026-05-14/PLTR-Q1-2026-Editorial/export.pdf" download>↓ PDF</a>
-          <a class="btn" href="research/2026-05-14/PLTR-Q1-2026-Editorial/preview.png" download>↓ PNG</a>
+          <a class="btn primary" href="research/2026-05-14/PLTR-Q1-2026-Editorial/index.html" target="_blank">↗ Open</a><a class="btn" href="research/2026-05-14/PLTR-Q1-2026-Editorial/export.pdf" download>↓ PDF</a><a class="btn" href="research/2026-05-14/PLTR-Q1-2026-Editorial/preview.png" download>↓ PNG</a>
         </div>
       </div>
     </div>
-
-    <!-- AAPL Q2 2026 Editorial -->
-    <div class="acard" data-tags="editorial AAPL slides">
+    <div class="acard" data-tags="guizang-editorial AAPL equity consumer-tech services editorial slides" data-date="2026-05-14">
       <div class="thumb-wrap">
-        <img src="research/2026-05-14/AAPL-Q2-2026-Editorial/preview.png"
-             alt="AAPL Q2 2026 Editorial"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="research/2026-05-14/AAPL-Q2-2026-Editorial/preview.png" alt="Apple Q2 FY2026 · Editorial Research Deck" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="thumb-placeholder" style="display:none">
           <div class="ph-ticker">AAPL</div>
-          <div class="ph-style">Editorial Deck</div>
+          <div class="ph-style">guizang-editorial</div>
         </div>
         <div class="style-badge">12 Slides</div>
       </div>
@@ -341,34 +148,22 @@
           <div class="card-period">Q2 FY2026</div>
           <div class="card-rating">BUY</div>
         </div>
-        <div class="card-title">Apple Q2 FY2026<br>Editorial Research Deck</div>
-        <div class="card-summary">Revenue $111.2B +16.6% YoY · GM 49.3% ATH · EPS $2.01 +21.8%<br>墨水经典 Monocle palette · 杂志 × 电子墨水风格</div>
-        <div class="card-tags">
-          <span class="tag">equity</span>
-          <span class="tag">consumer-tech</span>
-          <span class="tag">services</span>
-          <span class="tag">editorial</span>
-          <span class="tag">guizang</span>
-        </div>
+        <div class="card-title">Apple Q2 FY2026 · Editorial Research Deck</div>
+        <div class="card-summary">Revenue $111.2B +16.6% YoY · GM 49.3% ATH · EPS $2.01 +21.8% · Target $215</div>
+        <div class="card-tags"><span class="tag">equity</span><span class="tag">consumer-tech</span><span class="tag">services</span><span class="tag">editorial</span><span class="tag">slides</span></div>
         <div class="card-actions">
-          <a class="btn primary" href="research/2026-05-14/AAPL-Q2-2026-Editorial/index.html" target="_blank">↗ Open</a>
-          <a class="btn" href="research/2026-05-14/AAPL-Q2-2026-Editorial/export.pdf" download>↓ PDF</a>
-          <a class="btn" href="research/2026-05-14/AAPL-Q2-2026-Editorial/preview.png" download>↓ PNG</a>
+          <a class="btn primary" href="research/2026-05-14/AAPL-Q2-2026-Editorial/index.html" target="_blank">↗ Open</a><a class="btn" href="research/2026-05-14/AAPL-Q2-2026-Editorial/export.pdf" download>↓ PDF</a><a class="btn" href="research/2026-05-14/AAPL-Q2-2026-Editorial/preview.png" download>↓ PNG</a>
         </div>
       </div>
     </div>
-
-    <!-- AAPL DataViz -->
-    <div class="acard" data-tags="dataviz AAPL dashboard">
+    <div class="acard" data-tags="bloomberg-dark AAPL equity consumer-tech dataviz dashboard charts" data-date="2026-05-14">
       <div class="thumb-wrap">
-        <img src="research/2026-05-14/AAPL-Q2-2026-DataViz/preview.png"
-             alt="AAPL Q2 2026 DataViz"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <img src="research/2026-05-14/AAPL-Q2-2026-DataViz/preview.png" alt="Apple Q2 FY2026 · Bloomberg DataViz Dashboard" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="thumb-placeholder" style="display:none">
           <div class="ph-ticker">AAPL</div>
-          <div class="ph-style">DataViz</div>
+          <div class="ph-style">bloomberg-dark</div>
         </div>
-        <div class="style-badge">Dashboard</div>
+        <div class="style-badge">bloomberg-dark</div>
       </div>
       <div class="card-body">
         <div class="card-ticker-row">
@@ -376,106 +171,59 @@
           <div class="card-period">Q2 FY2026</div>
           <div class="card-rating">BUY</div>
         </div>
-        <div class="card-title">Apple Q2 FY2026<br>Bloomberg DataViz Dashboard</div>
-        <div class="card-summary">4 interactive SVG charts · 5-KPI hero row · Revenue mix donut<br>Bloomberg dark navy + gold · hover tooltips</div>
-        <div class="card-tags">
-          <span class="tag">equity</span>
-          <span class="tag">dataviz</span>
-          <span class="tag">dashboard</span>
-          <span class="tag">charts</span>
-          <span class="tag">bloomberg</span>
-        </div>
+        <div class="card-title">Apple Q2 FY2026 · Bloomberg DataViz Dashboard</div>
+        <div class="card-summary">Revenue $111.2B · GM 49.3% ATH · EPS $2.01 · 4 interactive charts · Target $215</div>
+        <div class="card-tags"><span class="tag">equity</span><span class="tag">consumer-tech</span><span class="tag">dataviz</span><span class="tag">dashboard</span><span class="tag">charts</span></div>
         <div class="card-actions">
-          <a class="btn primary" href="research/2026-05-14/AAPL-Q2-2026-DataViz/index.html" target="_blank">↗ Open</a>
-          <a class="btn" href="research/2026-05-14/AAPL-Q2-2026-DataViz/export.pdf" download>↓ PDF</a>
-          <a class="btn" href="research/2026-05-14/AAPL-Q2-2026-DataViz/preview.png" download>↓ PNG</a>
+          <a class="btn primary" href="research/2026-05-14/AAPL-Q2-2026-DataViz/index.html" target="_blank">↗ Open</a><a class="btn" href="research/2026-05-14/AAPL-Q2-2026-DataViz/export.pdf" download>↓ PDF</a><a class="btn" href="research/2026-05-14/AAPL-Q2-2026-DataViz/preview.png" download>↓ PNG</a>
         </div>
-      </div>
-    </div>
-
-  </div><!-- /grid -->
-
-  <!-- Workflow instructions -->
-  <div class="how-to">
-    <h2>完整工作流 · Generate → Save → Preview → Export</h2>
-    <div class="pipeline">
-      <div class="pipe-step">
-        <div class="pipe-num">01</div>
-        <div class="pipe-label">Prompt</div>
-        <div class="pipe-cmd">写研报/海报<br>需求给 AI</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">02</div>
-        <div class="pipe-label">Generate</div>
-        <div class="pipe-cmd">Claude Code<br>输出 HTML</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">03</div>
-        <div class="pipe-label">Save</div>
-        <div class="pipe-cmd">save.sh<br>自动归档</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">04</div>
-        <div class="pipe-label">Preview</div>
-        <div class="pipe-cmd">preview.sh<br>浏览器打开</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">05</div>
-        <div class="pipe-label">Screenshot</div>
-        <div class="pipe-cmd">screenshot.js<br>自动截图 PNG</div>
-      </div>
-      <div class="pipe-step">
-        <div class="pipe-num">06</div>
-        <div class="pipe-label">Export</div>
-        <div class="pipe-cmd">pdf.js<br>导出 PDF</div>
-      </div>
-    </div>
-    <div class="cmds">
-      <div class="cmd-row">
-        <span class="cmd-label">保存新成果</span>
-        <code>./scripts/save.sh research NVDA-Q1-2026 /tmp/nvda.html --screenshot --pdf</code>
-      </div>
-      <div class="cmd-row">
-        <span class="cmd-label">本地预览</span>
-        <code>./scripts/preview.sh 8000</code>
-        <span style="font-size:10px;color:var(--t3);margin-left:8px">→ http://localhost:8000</span>
-      </div>
-      <div class="cmd-row">
-        <span class="cmd-label">单独截图</span>
-        <code>node ./scripts/screenshot.js ./research/2026-05-14/AAPL-Q2-2026-DataViz/index.html</code>
-      </div>
-      <div class="cmd-row">
-        <span class="cmd-label">导出 PDF</span>
-        <code>node ./scripts/pdf.js ./research/2026-05-14/PLTR-Q1-2026-Editorial/index.html --landscape</code>
       </div>
     </div>
   </div>
 
-</div><!-- /main -->
+  <div class="how-to">
+    <h2>工作流 · 一条命令保存新成果</h2>
+    <div class="cmds">
+      <div class="cmd-row">
+        <span class="cmd-lbl">保存 + 截图 + PDF</span>
+        <code>./scripts/save.sh research NVDA-Q1-2026 /path/to/nvda.html --screenshot --pdf</code>
+      </div>
+      <div class="cmd-row">
+        <span class="cmd-lbl">重建画廊</span>
+        <code>python3 scripts/refresh-index.py</code>
+      </div>
+      <div class="cmd-row">
+        <span class="cmd-lbl">本地预览</span>
+        <code>./scripts/preview.sh 8000  →  http://localhost:8000</code>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer class="ftr">
-  <div class="ftr-l">ALPHAFLOW ARTIFACT LIBRARY · PRIVATE DESIGN CORPUS · ALL RIGHTS RESERVED</div>
-  <div class="ftr-r">LAST UPDATED: 2026-05-14</div>
+  <div class="ftr-l">ALPHAFLOW ARTIFACT LIBRARY · 3 ARTIFACTS · PRIVATE DESIGN CORPUS</div>
+  <div class="ftr-r">AUTO-GENERATED 2026-05-14</div>
 </footer>
 
 <script>
-// Filter logic
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    const cards  = document.querySelectorAll('.acard');
-    let visible  = 0;
-    cards.forEach(c => {
-      const tags = c.dataset.tags || '';
-      const show = filter === 'all' || tags.toLowerCase().includes(filter.toLowerCase());
-      c.style.display = show ? '' : 'none';
-      if (show) visible++;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      let n = 0;
+      document.querySelectorAll('.acard').forEach(c => {
+        const show = f === 'all' || (c.dataset.tags||'').toLowerCase().includes(f.toLowerCase());
+        c.style.display = show ? '' : 'none';
+        if (show) n++;
+      });
+      document.querySelectorAll('.date-sep').forEach(sep => {
+        const next = sep.nextElementSibling;
+        sep.style.display = (next && next.style.display !== 'none') ? '' : 'none';
+      });
+      document.getElementById('visible-count').textContent = n;
     });
-    document.getElementById('total-count').textContent = visible;
   });
-});
 </script>
 </body>
 </html>

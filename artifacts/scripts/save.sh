@@ -67,5 +67,12 @@ fi
 echo ""
 echo "🗂  Artifact saved:"
 ls -la "$DEST_DIR"
+
+# Auto-rebuild gallery INDEX
+echo ""
+echo "🔄 Rebuilding INDEX.html..."
+python3 "$SCRIPT_DIR/refresh-index.py"
+
 echo ""
 echo "📂 Open: file://$DEST_DIR/index.html"
+echo "🗂  Gallery: file://$ARTIFACTS_DIR/INDEX.html"
