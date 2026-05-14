@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLTR Q1 2026 · AlphaFlow Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── 靛蓝瓷 Indigo Porcelain ── */
+  :root {
+    --ink:        #0a1f3d;
+    --paper:      #f1f3f5;
+    --paper-tint: #e4e8ec;
+    --ink-tint:   #152a4a;
+    --rule:       rgba(10,31,61,.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: #1a1a1a;
+    font-family: 'Inter', 'Noto Sans SC', sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── Deck shell ── */
+  .deck {
+    position: relative;
+    width: 100vw; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .slide {
+    position: absolute;
+    width: min(177.78vh, 100vw);
+    height: min(56.25vw, 100vh);
+    background: var(--paper);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* ── Hairline top rule ── */
+  .slide::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--ink);
+  }
+
+  /* ── Folio ── */
+  .folio {
+    position: absolute; bottom: 2.4%; right: 2.8%;
+    font-size: 0.62vw; color: var(--ink); opacity: .45;
+    font-family: 'Inter', sans-serif; letter-spacing: .1em;
+    font-weight: 400;
+  }
+
+  /* ── Topic bar ── */
+  .topic-bar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 5.5%;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 3.2%;
+    border-bottom: 1px solid var(--rule);
+  }
+  .topic-bar .pub { font-size: .62vw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .55; font-weight: 500; }
+  .topic-bar .date { font-size: .62vw; letter-spacing: .08em; color: var(--ink); opacity: .4; }
+
+  /* ── Kicker ── */
+  .kicker {
+    font-size: .68vw; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink); opacity: .55; font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: .6vw;
+  }
+
+  /* ──────────────────────────────────────────
+     L01 HERO COVER
+  ────────────────────────────────────────── */
+  .l01 {
+    align-items: center; justify-content: center;
+    text-align: center; padding: 8% 12%;
+  }
+  .l01 .headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 6.5vw; font-weight: 900; line-height: 1.0;
+    color: var(--ink); letter-spacing: -.02em;
+    margin-bottom: .8vw;
+  }
+  .l01 .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 2vw; font-weight: 400; font-style: italic;
+    color: var(--ink); opacity: .7;
+    margin-bottom: 2vw;
+  }
+  .l01 .lead {
+    font-size: .95vw; line-height: 1.75; color: var(--ink); opacity: .75;
+    max-width: 55%; margin: 0 auto 3vw;
+  }
+  .l01 .meta-row {
+    display: flex; align-items: center; justify-content: center; gap: 2.4vw;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.6vw; margin-top: .5vw;
+  }
+  .l01 .meta-item { font-size: .68vw; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .5; }
+  .l01 .meta-item.highlight { opacity: 1; font-weight: 600; color: var(--ink); }
+  .meta-sep { width: 1px; height: 1.2vw; background: var(--ink); opacity: .2; }
+
+  /* ──────────────────────────────────────────
+     L02 ACT DIVIDER
+  ────────────────────────────────────────── */
+  .l02 {
+    align-items: flex-start; justify-content: center;
+    padding: 10% 8% 8%;
+  }
+  .l02 .big-headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 9vw; font-weight: 900; line-height: .95;
+    color: var(--ink); letter-spacing: -.03em;
+    margin-bottom: 2.5vw;
+  }
+  .l02 .quote-line {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15vw; font-style: italic;
+    color: var(--ink); opacity: .65;
+    max-width: 52%; line-height: 1.6;
+    padding-left: 1.4vw;
+    border-left: 2px solid var(--ink);
+  }
+
+  /* inverted */
+  .l02.inv { background: var(--ink); }
+  .l02.inv .big-headline { color: var(--paper); }
+  .l02.inv .quote-line { color: var(--paper); opacity: .65; border-color: var(--paper); }
+  .l02.inv .kicker { color: var(--paper); }
+  .l02.inv .folio { color: var(--paper); }
+  .l02.inv::before { background: var(--paper); }
+  .l02.inv .topic-bar { border-color: rgba(241,243,245,.15); }
+  .l02.inv .topic-bar .pub { color: var(--paper); }
+  .l02.inv .topic-bar .date { color: var(--paper); }
+
+  /* ──────────────────────────────────────────
+     L03 BIG NUMBERS GRID
+  ────────────────────────────────────────── */
+  .l03 {
+    padding: 8% 6% 6%;
+    justify-content: flex-start;
+  }
+  .l03 .grid-header { margin-bottom: 2.5vw; }
+  .numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    flex: 1;
+    margin: 0 0 3%;
+  }
+  .num-card {
+    background: var(--paper);
+    padding: 2.2vw 2.4vw;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .num-card .label { font-size: .68vw; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: .5; margin-bottom: .6vw; }
+  .num-card .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6vw; font-weight: 900; line-height: 1;
+    color: var(--ink); letter-spacing: -.02em;
+  }
+  .num-card .note { font-size: .72vw; color: var(--ink); opacity: .55; margin-top: .5vw; }
+  .num-card.tinted { background: var(--paper-tint); }
+
+  /* ──────────────────────────────────────────
+     L06 PIPELINE / FLOW
+  ────────────────────────────────────────── */
+  .l06 { padding: 8% 6% 6%; justify-content: flex-start; }
+  .flow-header { margin-bottom: 2.5vw; }
+  .flow-steps {
+    display: flex; align-items: flex-end; gap: 0;
+    flex: 1; overflow: hidden;
+  }
+  .flow-step {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; border-left: 1px solid var(--rule);
+    padding: 0 1vw 1vw;
+    position: relative;
+  }
+  .flow-step:last-child { border-right: 1px solid var(--rule); }
+  .flow-step .step-num { font-size: .6vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .35; margin-bottom: .8vw; font-style: italic; font-family: 'Playfair Display', serif; }
+  .flow-step .bar-wrap { width: 100%; display: flex; align-items: flex-end; justify-content: center; height: 16vw; }
+  .flow-step .bar {
+    width: 60%; background: var(--paper-tint);
+    position: relative;
+    transition: none;
+  }
+  .flow-step.current .bar { background: var(--ink); }
+  .flow-step .bar-val {
+    position: absolute; top: -1.6vw; left: 50%; transform: translateX(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: .95vw; font-weight: 700; color: var(--ink);
+    white-space: nowrap;
+  }
+  .flow-step.current .bar-val { color: var(--ink); font-weight: 900; }
+  .flow-step .step-label { font-size: .62vw; color: var(--ink); opacity: .55; margin-top: .8vw; text-align: center; letter-spacing: .04em; }
+  .flow-step.current .step-label { opacity: 1; font-weight: 600; }
+
+  /* ──────────────────────────────────────────
+     L07 HERO QUESTION
+  ────────────────────────────────────────── */
+  .l07 { align-items: center; justify-content: center; padding: 8% 10%; }
+  .l07 .question {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 5.5vw; font-weight: 900; line-height: 1.15;
+    color: var(--ink); letter-spacing: -.02em;
+    text-align: center;
+  }
+  .l07 .q-note { font-size: .82vw; color: var(--ink); opacity: .4; margin-top: 2.5vw; letter-spacing: .1em; text-transform: uppercase; text-align: center; }
+
+  /* ──────────────────────────────────────────
+     L08 BIG QUOTE
+  ────────────────────────────────────────── */
+  .l08 { align-items: flex-start; justify-content: center; padding: 10% 9%; }
+  .l08 .big-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6vw; font-weight: 700; font-style: italic;
+    line-height: 1.3; color: var(--ink); letter-spacing: -.01em;
+    max-width: 80%; margin-bottom: 2.5vw;
+  }
+  .l08 .translation { font-size: .88vw; color: var(--ink); opacity: .5; max-width: 70%; line-height: 1.6; margin-bottom: 1.8vw; }
+  .l08 .attribution { font-size: .75vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .45; }
+
+  /* ──────────────────────────────────────────
+     L09 BEFORE / AFTER
+  ────────────────────────────────────────── */
+  .l09 { flex-direction: row; padding: 0; }
+  .l09-panel {
+    flex: 1; padding: 10% 4% 8% 5%;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--rule);
+  }
+  .l09-panel.after { opacity: 1; border-right: none; background: var(--paper-tint); }
+  .l09-panel.before { opacity: .45; }
+  .l09-panel .panel-tag { font-size: .68vw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); opacity: .55; margin-bottom: 1.5vw; font-weight: 500; }
+  .l09-panel .panel-headline {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 2.8vw; font-weight: 900; color: var(--ink); margin-bottom: 2vw; line-height: 1.1;
+  }
+  .l09-panel .stat-row { display: flex; flex-direction: column; gap: .8vw; }
+  .l09-panel .stat { display: flex; align-items: baseline; gap: .6vw; }
+  .l09-panel .stat-val { font-family: 'Playfair Display', serif; font-size: 2.2vw; font-weight: 700; color: var(--ink); }
+  .l09-panel .stat-label { font-size: .72vw; color: var(--ink); opacity: .55; letter-spacing: .06em; text-transform: uppercase; }
+
+  /* ──────────────────────────────────────────
+     L04 QUOTE + VISUAL
+  ────────────────────────────────────────── */
+  .l04 { flex-direction: row; padding: 0; }
+  .l04-left { flex: 8; padding: 9% 4% 8% 6%; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--rule); }
+  .l04-right { flex: 4; padding: 8% 4%; display: flex; flex-direction: column; justify-content: center; background: var(--paper-tint); }
+  .l04-left .section-kicker { margin-bottom: 1vw; }
+  .l04-left .section-head {
+    font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    font-size: 2.8vw; font-weight: 900; color: var(--ink); line-height: 1.1; margin-bottom: 1.5vw;
+  }
+  .l04-left .body-text { font-size: .82vw; line-height: 1.8; color: var(--ink); opacity: .72; margin-bottom: 1.8vw; }
+  .l04-left .callout {
+    background: var(--paper-tint); padding: 1.2vw 1.5vw;
+    border-left: 3px solid var(--ink);
+    font-size: .78vw; line-height: 1.7; color: var(--ink); opacity: .8;
+  }
+
+  /* ── Risk matrix ── */
+  .risk-list { display: flex; flex-direction: column; gap: 1.2vw; }
+  .risk-item { display: flex; flex-direction: column; gap: .3vw; }
+  .risk-item .r-label { font-size: .6vw; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); opacity: .45; }
+  .risk-item .r-title { font-size: .82vw; font-weight: 600; color: var(--ink); }
+  .risk-item .r-bar { height: 3px; background: var(--rule); margin-top: .3vw; }
+  .risk-item .r-bar-fill { height: 100%; background: var(--ink); }
+
+  /* ── Thesis boxes ── */
+  .thesis-grid { display: flex; flex-direction: column; gap: 1vw; }
+  .thesis-box { padding: .9vw 1.1vw; display: flex; flex-direction: column; gap: .3vw; }
+  .thesis-box.bull { background: var(--paper-tint); border-left: 3px solid #1a6b3a; }
+  .thesis-box.base { background: var(--paper-tint); border-left: 3px solid var(--ink); }
+  .thesis-box.bear { background: var(--paper-tint); border-left: 3px solid #8b2020; }
+  .thesis-box .t-tag { font-size: .58vw; letter-spacing: .1em; text-transform: uppercase; opacity: .55; font-weight: 600; }
+  .thesis-box.bull .t-tag { color: #1a6b3a; }
+  .thesis-box.base .t-tag { color: var(--ink); }
+  .thesis-box.bear .t-tag { color: #8b2020; }
+  .thesis-box .t-val { font-family: 'Playfair Display', serif; font-size: 1.3vw; font-weight: 700; color: var(--ink); }
+  .thesis-box .t-desc { font-size: .65vw; color: var(--ink); opacity: .6; line-height: 1.5; }
+
+  /* ── Recommendation slide ── */
+  .l01.reco .headline { font-size: 5vw; }
+  .buy-badge {
+    display: inline-block;
+    background: var(--ink); color: var(--paper);
+    font-size: .9vw; letter-spacing: .2em; text-transform: uppercase;
+    font-weight: 700; padding: .5vw 1.5vw;
+    margin-bottom: 1.5vw; font-family: 'Inter', sans-serif;
+  }
+  .watch-box {
+    border: 1px solid var(--rule); padding: 1.2vw 2vw; margin-top: 1vw;
+    font-size: .78vw; color: var(--ink); opacity: .7; line-height: 1.6;
+  }
+
+  /* ── Nav ── */
+  .nav {
+    position: fixed; bottom: 2vh; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 1.2vw;
+    z-index: 100;
+  }
+  .nav button {
+    background: rgba(10,31,61,.12); border: 1px solid rgba(10,31,61,.2);
+    color: #0a1f3d; width: 2.8vw; height: 2.8vw; min-width: 36px; min-height: 36px;
+    font-size: 1vw; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .nav button:hover { background: rgba(10,31,61,.22); }
+  .nav .progress { font-size: .62vw; color: #0a1f3d; opacity: .5; letter-spacing: .1em; font-family: 'Inter', sans-serif; min-width: 3.5vw; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- S01 · L01 Hero Cover -->
+  <div class="slide l01 active" id="s1">
+    <div class="topic-bar"><span class="pub">AlphaFlow Equity Research</span><span class="date">May 2026</span></div>
+    <div class="kicker">Equity Research · PLTR · NYSE</div>
+    <div class="headline">Palantir<br>Technologies</div>
+    <div class="subtitle">Q1 2026 Financial Analysis</div>
+    <div class="lead">Revenue surged 84.7% YoY to $1.63B. Operating margin hit 46.2% — up from 19.9% a year ago. EPS grew 325%. This is no longer a growth story — it is a profitability story at unprecedented scale.</div>
+    <div class="meta-row">
+      <span class="meta-item">PLTR</span><div class="meta-sep"></div>
+      <span class="meta-item">NYSE · AI Infrastructure</span><div class="meta-sep"></div>
+      <span class="meta-item">Q1 FY2026</span><div class="meta-sep"></div>
+      <span class="meta-item highlight">Rating: BUY</span><div class="meta-sep"></div>
+      <span class="meta-item">Filed: May 5, 2026</span>
+    </div>
+    <div class="folio">01 / 12</div>
+  </div>
+
+  <!-- S02 · L02 Act Divider -->
+  <div class="slide l02" id="s2">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">Part I · 财务表现</span></div>
+    <div class="kicker">Part I</div>
+    <div class="big-headline">营收<br>翻倍</div>
+    <div class="quote-line">从 $8.84亿 到 $16.3亿，整整一年。<br>在这个量级保持 85% 的增速，软件史上几乎没有先例。</div>
+    <div class="folio">02 / 12</div>
+  </div>
+
+  <!-- S03 · L03 Big Numbers Grid -->
+  <div class="slide l03" id="s3">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">Core Metrics · Q1 2026</span></div>
+    <div class="grid-header"><div class="kicker">Q1 2026 · Key Financial Metrics</div></div>
+    <div class="numbers-grid">
+      <div class="num-card tinted">
+        <div class="label">季度营收</div>
+        <div class="value">$16.3<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">+84.7% YoY · +16.1% QoQ</div>
+      </div>
+      <div class="num-card">
+        <div class="label">毛利率</div>
+        <div class="value">86.8<span style="font-size:2vw">%</span></div>
+        <div class="note">+5.8pp YoY · 连续8季度稳定在80%+</div>
+      </div>
+      <div class="num-card">
+        <div class="label">经营利润率</div>
+        <div class="value">46.2<span style="font-size:2vw">%</span></div>
+        <div class="note">较去年同期 +26.3pp · 两年涨32pp</div>
+      </div>
+      <div class="num-card">
+        <div class="label">稀释每股收益</div>
+        <div class="value">$0.34</div>
+        <div class="note">+325% YoY · vs 去年同期 $0.08</div>
+      </div>
+      <div class="num-card tinted">
+        <div class="label">自由现金流</div>
+        <div class="value">$5.2<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">FCF Margin ~31.8%</div>
+      </div>
+      <div class="num-card">
+        <div class="label">现金储备</div>
+        <div class="value">$68<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">零负债 · 净现金 $68亿</div>
+      </div>
+    </div>
+    <div class="folio">03 / 12</div>
+  </div>
+
+  <!-- S04 · L07 Hero Question -->
+  <div class="slide l07" id="s4">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">The Real Question</span></div>
+    <div class="question">AI 软件能在<br>$16 亿季度营收时<br>保持 46% 的利润率吗？</div>
+    <div class="q-note">Palantir 已经用数字给出了答案</div>
+    <div class="folio">04 / 12</div>
+  </div>
+
+  <!-- S05 · L06 Pipeline — 8季度经营利润率 -->
+  <div class="slide l06" id="s5">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">Operating Margin Trend</span></div>
+    <div class="flow-header"><div class="kicker">经营利润率 · 8季度趋势 · Q2 2024 → Q1 2026</div></div>
+    <div class="flow-steps">
+      <div class="flow-step" style="--h:14.5">
+        <span class="step-num">№ 1</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 14.5/50)"><span class="bar-val">14.5%</span></div></div>
+        <span class="step-label">Q2<br>2024</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 2</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 16.0/50)"><span class="bar-val">16.0%</span></div></div>
+        <span class="step-label">Q3<br>2024</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 3</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 16.8/50)"><span class="bar-val">16.8%</span></div></div>
+        <span class="step-label">Q4<br>2024</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 4</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 19.9/50)"><span class="bar-val">19.9%</span></div></div>
+        <span class="step-label">Q1<br>2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 5</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 26.8/50)"><span class="bar-val">26.8%</span></div></div>
+        <span class="step-label">Q2<br>2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 6</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 33.3/50)"><span class="bar-val">33.3%</span></div></div>
+        <span class="step-label">Q3<br>2025</span>
+      </div>
+      <div class="flow-step">
+        <span class="step-num">№ 7</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 40.9/50)"><span class="bar-val">40.9%</span></div></div>
+        <span class="step-label">Q4<br>2025</span>
+      </div>
+      <div class="flow-step current">
+        <span class="step-num">№ 8</span>
+        <div class="bar-wrap"><div class="bar" style="height:calc(16vw * 46.2/50)"><span class="bar-val">46.2%</span></div></div>
+        <span class="step-label">Q1<br>2026<br>▲ 现在</span>
+      </div>
+    </div>
+    <div class="folio">05 / 12</div>
+  </div>
+
+  <!-- S06 · L09 Before / After -->
+  <div class="slide l09" id="s6">
+    <div class="topic-bar" style="position:absolute;top:0;left:0;right:0;z-index:2"><span class="pub">AlphaFlow · PLTR</span><span class="date">Two Years · The Transformation</span></div>
+    <div class="l09-panel before" style="padding-top:12%">
+      <div class="panel-tag">2024 · Before</div>
+      <div class="panel-headline">一家被<br>质疑的<br>成长股</div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-val">$678M</span><span class="stat-label">季度营收</span></div>
+        <div class="stat"><span class="stat-val">14.5%</span><span class="stat-label">经营利润率</span></div>
+        <div class="stat"><span class="stat-val">$0.09</span><span class="stat-label">EPS</span></div>
+        <div class="stat"><span class="stat-val" style="font-size:1.2vw;opacity:.7">"过度估值的政府承包商"</span></div>
+      </div>
+    </div>
+    <div class="l09-panel after" style="padding-top:12%">
+      <div class="panel-tag">2026 Q1 · After</div>
+      <div class="panel-headline">AI 操作<br>系统级<br>基础设施</div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-val">$1.63B</span><span class="stat-label">季度营收</span></div>
+        <div class="stat"><span class="stat-val">46.2%</span><span class="stat-label">经营利润率</span></div>
+        <div class="stat"><span class="stat-val">$0.34</span><span class="stat-label">EPS</span></div>
+        <div class="stat"><span class="stat-val" style="font-size:1.2vw">"S&P500 · 机构标配"</span></div>
+      </div>
+    </div>
+    <div class="folio">06 / 12</div>
+  </div>
+
+  <!-- S07 · L02 Act Divider (inverted) -->
+  <div class="slide l02 inv" id="s7">
+    <div class="topic-bar"><span class="pub" style="color:var(--paper);opacity:.55">AlphaFlow · PLTR</span><span class="date" style="color:var(--paper);opacity:.4">Part II · 估值与风险</span></div>
+    <div class="kicker" style="color:var(--paper)">Part II</div>
+    <div class="big-headline">三种<br>情景</div>
+    <div class="quote-line">估值已在定价之中。<br>执行力，是唯一还没有定价的变量。</div>
+    <div class="folio" style="color:var(--paper)">07 / 12</div>
+  </div>
+
+  <!-- S08 · L03 Valuation Grid -->
+  <div class="slide l03" id="s8">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">Valuation · May 2026</span></div>
+    <div class="grid-header"><div class="kicker">估值指标 · 当前水平</div></div>
+    <div class="numbers-grid">
+      <div class="num-card tinted">
+        <div class="label">远期市盈率</div>
+        <div class="value">110<span style="font-size:2vw">x</span></div>
+        <div class="note">同行均值 45x · 溢价 144%</div>
+      </div>
+      <div class="num-card">
+        <div class="label">EV / Revenue TTM</div>
+        <div class="value">55<span style="font-size:2vw">x</span></div>
+        <div class="note">顶级软件公司通常 10-20x</div>
+      </div>
+      <div class="num-card">
+        <div class="label">EV / EBITDA TTM</div>
+        <div class="value">130<span style="font-size:2vw">x</span></div>
+        <div class="note">反映市场对持续扩张的预期</div>
+      </div>
+      <div class="num-card">
+        <div class="label">市值</div>
+        <div class="value">$3,700<span style="font-size:1.5vw">亿</span></div>
+        <div class="note">NYSE · 全球前20大科技公司</div>
+      </div>
+      <div class="num-card tinted">
+        <div class="label">隐含 PEG</div>
+        <div class="value">1.3<span style="font-size:2vw">x</span></div>
+        <div class="note">基于 85% 收入增速 · 并不离谱</div>
+      </div>
+      <div class="num-card">
+        <div class="label">净现金</div>
+        <div class="value">$68<span style="font-size:1.8vw">亿</span></div>
+        <div class="note">零负债 · 流动比率 7.1x</div>
+      </div>
+    </div>
+    <div class="folio">08 / 12</div>
+  </div>
+
+  <!-- S09 · L08 Big Quote — Karp -->
+  <div class="slide l08" id="s9">
+    <div class="topic-bar"><span class="pub">AlphaFlow · PLTR</span><span class="date">Management Tone</span></div>
+    <div class="big-q">"Palantir is the default AI operating system for the US government and enterprise."</div>
+    <div class="translation">Palantir 是美国政府和企业默认的 AI 操作系统。——这不是比喻，这是公司的市场定位声明。管理层基调评级：极度乐观（9/10）。</div>
+    <div class="attribution">Alexander Karp, CEO · Q1 2026 Earnings Call · May 5, 2026</div>
+    <div class="folio">09 / 12</div>
+  </div>
+
+  <!-- S10 · L04 Investment Thesis -->
+  <div class="slide l04" id="s10">
+    <div class="topic-bar" style="position:absolute;top:0;left:0;right:0;z-index:2"><span class="pub">AlphaFlow · PLTR</span><span class="date">Investment Thesis</span></div>
+    <div class="l04-left" style="padding-top:12%">
+      <div class="section-kicker kicker">三种情景</div>
+      <div class="section-head">牛熊基准<br>全景推演</div>
+      <div class="body-text">当前 110x 远期 PE 意味着市场已为持续高增长定价。任何执行偏差都可能触发估值压缩。但隐含 PEG 1.3x 在 85% 增速面前并不贵。关键变量只有一个：<strong>季度环比增速能否持续在 10%+？</strong></div>
+      <div class="callout">监控指标：每季度 QoQ 营收增速。跌破 10% → 重新评估；维持 15%+ → 估值支撑充分。</div>
+    </div>
+    <div class="l04-right">
+      <div class="thesis-grid">
+        <div class="thesis-box bull">
+          <span class="t-tag">Bull Case</span>
+          <span class="t-val">+40%</span>
+          <span class="t-desc">AIP 渗透率持续提升，QoQ 稳定 15%+，经营利润率突破 50%</span>
+        </div>
+        <div class="thesis-box base">
+          <span class="t-tag">Base Case</span>
+          <span class="t-val">+15~20%</span>
+          <span class="t-desc">按指引交付，增速 40~50%，利润率稳定在 45~50%</span>
+        </div>
+        <div class="thesis-box bear">
+          <span class="t-tag">Bear Case</span>
+          <span class="t-val">−30~45%</span>
+          <span class="t-desc">大厂竞争加剧或政府预算收紧，增速跌破 30%，估值收缩</span>
+        </div>
+      </div>
+    </div>
+    <div class="folio">10 / 12</div>
+  </div>
+
+  <!-- S11 · L04 Risks -->
+  <div class="slide l04" id="s11">
+    <div class="topic-bar" style="position:absolute;top:0;left:0;right:0;z-index:2"><span class="pub">AlphaFlow · PLTR</span><span class="date">Key Risks</span></div>
+    <div class="l04-left" style="padding-top:12%">
+      <div class="section-kicker kicker">风险矩阵</div>
+      <div class="section-head">三大核心<br>风险</div>
+      <div class="body-text">高估值对应高预期，任何负面偏差都会被放大。以下三个风险是当前最值得盯住的变量，一旦出现信号，评级将立即下调。</div>
+      <div class="callout">当前风险总体可控，执行力是核心变量。季报是最重要的风险检验窗口。</div>
+    </div>
+    <div class="l04-right">
+      <div class="risk-list">
+        <div class="risk-item">
+          <span class="r-label">Risk 01 · 竞争</span>
+          <span class="r-title">超级大厂进场 AI 企业软件</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:65%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">Risk 02 · 政策</span>
+          <span class="r-title">美国政府 AI 预算收缩或转向</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:45%"></div></div>
+        </div>
+        <div class="risk-item">
+          <span class="r-label">Risk 03 · 估值</span>
+          <span class="r-title">增速低于预期触发多重压缩</span>
+          <div class="r-bar"><div class="r-bar-fill" style="width:80%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="folio">11 / 12</div>
+  </div>
+
+  <!-- S12 · L01 Recommendation -->
+  <div class="slide l01 reco" id="s12">
+    <div class="topic-bar"><span class="pub">AlphaFlow Equity Research</span><span class="date">May 2026 · Final</span></div>
+    <div class="kicker">Investment Conclusion · PLTR · NYSE</div>
+    <div class="buy-badge">BUY</div>
+    <div class="headline">持续买入<br>等回调加仓</div>
+    <div class="lead">营收翻倍 + 利润率接近 50%，在 $16亿+季度营收的量级上，这个组合在企业软件史上几乎没有先例。估值溢价有理由，但需要执行力持续兑现。</div>
+    <div class="watch-box">核心监控指标：季度环比营收增速（QoQ）。维持 ≥10% → 估值支撑充分；连续两季跌破 10% → 下调评级。下一个检验窗口：Q2 2026 财报（预计 2026年8月）。</div>
+    <div class="meta-row" style="margin-top:1.5vw">
+      <span class="meta-item">目标评级：BUY</span><div class="meta-sep"></div>
+      <span class="meta-item">数据来源：FMP · Q1 2026 Filing</span><div class="meta-sep"></div>
+      <span class="meta-item highlight">AlphaFlow Research · May 2026</span>
+    </div>
+    <div class="folio">12 / 12</div>
+  </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button id="btn-prev" onclick="go(-1)">←</button>
+  <span class="progress" id="prog">1 / 12</span>
+  <button id="btn-next" onclick="go(1)">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let cur = 0;
+
+  function show(n) {
+    slides[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    document.getElementById('prog').textContent = (cur + 1) + ' / ' + slides.length;
+    location.hash = cur + 1;
+  }
+
+  function go(d) { show(cur + d); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(-1);
+  });
+
+  // Restore from hash
+  const h = parseInt(location.hash.replace('#',''));
+  if (h >= 1 && h <= slides.length) show(h - 1);
+</script>
+</body>
+</html>
