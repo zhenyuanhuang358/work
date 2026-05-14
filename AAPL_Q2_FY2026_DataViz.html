@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AAPL Q2 FY2026 · AlphaFlow DataViz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #08131f;
+    --bg2:     #0b1a2b;
+    --card:    #0e2038;
+    --card2:   #112540;
+    --border:  rgba(201,168,76,.18);
+    --border2: rgba(255,255,255,.05);
+    --gold:    #C9A84C;
+    --gold2:   #E8D080;
+    --gold-a:  rgba(201,168,76,.15);
+    --green:   #00D4AA;
+    --green-a: rgba(0,212,170,.12);
+    --red:     #FF6B6B;
+    --blue:    #4A9EFF;
+    --purple:  #9B6FFF;
+    --orange:  #FF9B6F;
+    --text:    #DCE8F8;
+    --text2:   #7A9BBF;
+    --text3:   #3E5E7A;
+    --mono:    'JetBrains Mono', 'Courier New', monospace;
+    --serif:   'Playfair Display', Georgia, serif;
+    --sans:    'Inter', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    /* subtle grid texture */
+    background-image:
+      linear-gradient(rgba(201,168,76,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── Header ── */
+  .hdr {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    backdrop-filter: blur(8px);
+  }
+  .hdr-l { display: flex; align-items: center; gap: 18px; }
+  .ticker {
+    background: var(--gold);
+    color: var(--bg);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    padding: 4px 12px;
+  }
+  .hdr-name { font-size: 14px; font-weight: 600; letter-spacing: .02em; }
+  .hdr-sub { font-size: 10px; color: var(--text2); letter-spacing: .12em; text-transform: uppercase; margin-top: 1px; }
+  .hdr-r { display: flex; align-items: center; gap: 20px; }
+  .buy-badge {
+    border: 1px solid rgba(0,212,170,.4);
+    background: var(--green-a);
+    color: var(--green);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .15em;
+    padding: 3px 12px;
+    text-transform: uppercase;
+    font-family: var(--mono);
+  }
+  .hdr-date { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+  /* ── Main wrapper ── */
+  .main { padding: 28px 40px 40px; max-width: 1440px; margin: 0 auto; }
+
+  /* ── KPI row ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 22px;
+  }
+  .kpi {
+    background: var(--card);
+    padding: 18px 22px 16px;
+    position: relative;
+    cursor: default;
+    transition: background .2s;
+  }
+  .kpi:hover { background: var(--card2); }
+  .kpi::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); opacity: 0;
+    transition: opacity .2s;
+  }
+  .kpi:hover::after { opacity: 1; }
+  .kpi-lbl { font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--text2); margin-bottom: 9px; font-weight: 500; }
+  .kpi-val { font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--text); letter-spacing: -.02em; line-height: 1; margin-bottom: 6px; }
+  .kpi-val.gold { color: var(--gold); }
+  .kpi-val.green { color: var(--green); }
+  .kpi-chg { font-size: 10.5px; font-weight: 500; display: flex; align-items: center; gap: 4px; color: var(--green); }
+  .kpi-note { font-size: 9px; color: var(--text3); margin-top: 2px; letter-spacing: .03em; }
+  .kpi-star { position: absolute; top: 10px; right: 12px; font-size: 9px; background: var(--gold-a); border: 1px solid var(--border); color: var(--gold); padding: 1px 7px; letter-spacing: .1em; text-transform: uppercase; font-family: var(--mono); }
+
+  /* ── Chart grid ── */
+  .chart-row { display: grid; gap: 16px; margin-bottom: 16px; }
+  .chart-row-2 { grid-template-columns: 1fr 1fr; }
+  .chart-row-32 { grid-template-columns: 3fr 2fr; }
+
+  .ccard {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    padding: 22px 24px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ccard::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: .35;
+  }
+  .ccard-lbl { font-size: 9.5px; letter-spacing: .13em; text-transform: uppercase; color: var(--text2); margin-bottom: 4px; font-weight: 500; }
+  .ccard-head {
+    font-family: var(--serif);
+    font-size: 17px; font-weight: 700; color: var(--text);
+    margin-bottom: 18px; line-height: 1.2;
+  }
+  .ccard-head em { font-style: normal; color: var(--gold); }
+
+  .chart-wrap { width: 100%; }
+  .chart-wrap svg { display: block; width: 100%; overflow: visible; }
+
+  /* ── Valuation bar ── */
+  .val-bar {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px 32px;
+    display: grid;
+    grid-template-columns: 90px 1fr 200px;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .val-rating-lbl { font-size: 9.5px; text-transform: uppercase; letter-spacing: .13em; color: var(--text3); margin-bottom: 4px; }
+  .val-rating-val { font-family: var(--mono); font-size: 32px; font-weight: 700; color: var(--green); letter-spacing: .1em; }
+
+  .val-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .vm { display: flex; flex-direction: column; gap: 3px; }
+  .vm-lbl { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--text3); }
+  .vm-val { font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--text); }
+  .vm-val.gold { color: var(--gold); }
+  .vm-note { font-size: 9.5px; color: var(--text2); }
+
+  .val-scenarios { display: flex; flex-direction: column; gap: 8px; }
+  .sc { display: flex; align-items: center; gap: 10px; }
+  .sc-tag { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 2px 8px; font-family: var(--mono); }
+  .sc-tag.bull { background: var(--green-a); border: 1px solid rgba(0,212,170,.3); color: var(--green); }
+  .sc-tag.base { background: var(--gold-a); border: 1px solid rgba(201,168,76,.3); color: var(--gold); }
+  .sc-tag.bear { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.25); color: var(--red); }
+  .sc-val { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text); width: 40px; }
+  .sc-desc { font-size: 9.5px; color: var(--text3); }
+
+  /* ── Footer ── */
+  .ftr {
+    border-top: 1px solid var(--border2);
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .ftr-l { font-size: 9.5px; color: var(--text3); letter-spacing: .07em; }
+  .ftr-r { font-size: 9.5px; color: var(--text3); font-family: var(--mono); }
+
+  /* Tooltip */
+  .tt {
+    position: fixed; pointer-events: none;
+    background: var(--bg2); border: 1px solid var(--border);
+    padding: 8px 12px; font-size: 11px; font-family: var(--mono);
+    color: var(--text); opacity: 0; transition: opacity .15s;
+    z-index: 300; white-space: nowrap;
+  }
+  .tt.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="hdr">
+  <div class="hdr-l">
+    <div class="ticker">AAPL</div>
+    <div>
+      <div class="hdr-name">Apple Inc. · Equity Research Dashboard</div>
+      <div class="hdr-sub">Q2 FY2026 · NASDAQ · Consumer Technology</div>
+    </div>
+  </div>
+  <div class="hdr-r">
+    <div class="buy-badge">BUY</div>
+    <div class="hdr-date">AlphaFlow Research · 2026-05-14</div>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- KPI Row -->
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="kpi-lbl">季度营收 Revenue</div>
+      <div class="kpi-val">$111.2B</div>
+      <div class="kpi-chg">↑ +16.6% YoY</div>
+      <div class="kpi-note">vs $95.4B Q2 FY2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-star">ATH</div>
+      <div class="kpi-lbl">毛利率 Gross Margin</div>
+      <div class="kpi-val gold">49.3%</div>
+      <div class="kpi-chg">↑ +220bp YoY</div>
+      <div class="kpi-note">历史最高 · 指引 49–50%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">经营利润率 Op. Margin</div>
+      <div class="kpi-val">32.3%</div>
+      <div class="kpi-chg">↑ +150bp YoY</div>
+      <div class="kpi-note">Op. Income $35.9B</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">稀释EPS Diluted EPS</div>
+      <div class="kpi-val">$2.01</div>
+      <div class="kpi-chg">↑ +21.8% YoY</div>
+      <div class="kpi-note">vs $1.65 Q2 FY2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">自由现金流 FCF</div>
+      <div class="kpi-val green">$27.0B</div>
+      <div class="kpi-chg">↑ FCF Margin 24.3%</div>
+      <div class="kpi-note">回购 $29B/季 · 资本回报强劲</div>
+    </div>
+  </div>
+
+  <!-- Row 1: Revenue + Gross Margin -->
+  <div class="chart-row chart-row-2">
+    <div class="ccard">
+      <div class="ccard-lbl">Revenue Trend · 8 Quarters</div>
+      <div class="ccard-head">营收 8 季度趋势 <em>$111.2B +16.6%</em></div>
+      <div class="chart-wrap">
+        <svg id="rev-svg" viewBox="0 0 680 195" height="195"></svg>
+      </div>
+    </div>
+    <div class="ccard">
+      <div class="ccard-lbl">Gross Margin Expansion · 8 Quarters</div>
+      <div class="ccard-head">毛利率扩张 <em>49.3% 历史新高</em></div>
+      <div class="chart-wrap">
+        <svg id="gm-svg" viewBox="0 0 680 195" height="195"></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Row 2: EPS + Revenue Mix -->
+  <div class="chart-row chart-row-32">
+    <div class="ccard">
+      <div class="ccard-lbl">EPS Trend · 8 Quarters</div>
+      <div class="ccard-head">每股盈利趋势 <em>$2.01 +21.8% YoY</em></div>
+      <div class="chart-wrap">
+        <svg id="eps-svg" viewBox="0 0 680 195" height="195"></svg>
+      </div>
+    </div>
+    <div class="ccard">
+      <div class="ccard-lbl">Revenue Mix · Q2 FY2026</div>
+      <div class="ccard-head">营收结构 <em>Services 26%</em></div>
+      <div class="chart-wrap">
+        <svg id="donut-svg" viewBox="0 0 400 195" height="195"></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Valuation Summary -->
+  <div class="val-bar">
+    <div>
+      <div class="val-rating-lbl">Rating</div>
+      <div class="val-rating-val">BUY</div>
+    </div>
+    <div class="val-metrics">
+      <div class="vm">
+        <div class="vm-lbl">目标价 Target</div>
+        <div class="vm-val gold">$215</div>
+        <div class="vm-note">+12% 上行空间</div>
+      </div>
+      <div class="vm">
+        <div class="vm-lbl">P/E TTM</div>
+        <div class="vm-val">28x</div>
+        <div class="vm-note">TTM EPS ~$8.27</div>
+      </div>
+      <div class="vm">
+        <div class="vm-lbl">EV / FCF</div>
+        <div class="vm-val">32x</div>
+        <div class="vm-note">年化 FCF ~$105B</div>
+      </div>
+      <div class="vm">
+        <div class="vm-lbl">FCF Yield</div>
+        <div class="vm-val">3.2%</div>
+        <div class="vm-note">回购 $29B/季</div>
+      </div>
+    </div>
+    <div class="val-scenarios">
+      <div class="sc"><div class="sc-tag bull">牛市</div><div class="sc-val">$240</div><div class="sc-desc">AI换机 · GM突破51%</div></div>
+      <div class="sc"><div class="sc-tag base">基准</div><div class="sc-val">$215</div><div class="sc-desc">Services稳增 · 回购支撑</div></div>
+      <div class="sc"><div class="sc-tag bear">熊市</div><div class="sc-val">$175</div><div class="sc-desc">中国失速 · EU DMA</div></div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<footer class="ftr">
+  <div class="ftr-l">ALPHAFLOW EQUITY RESEARCH · AAPL Q2 FY2026 · FOR INFORMATIONAL PURPOSES ONLY · NOT INVESTMENT ADVICE</div>
+  <div class="ftr-r">DATA AS OF 2026-05-01 · ALPHAFLOW © 2026</div>
+</footer>
+
+<div class="tt" id="tooltip"></div>
+
+<script>
+// ─── Data ───────────────────────────────────────────────
+const QTR = ['Q3 FY24','Q4 FY24','Q1 FY25','Q2 FY25','Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26'];
+const REV = [85.8, 94.9, 124.3, 95.4, 94.0, 102.5, 143.8, 111.2];
+const GM  = [46.3, 46.2, 46.9, 47.1, 46.5, 47.2, 48.1, 49.3];
+const EPS = [1.40, 1.64, 2.40, 1.65, 1.57, 1.85, 2.84, 2.01];
+
+// ─── Colors ─────────────────────────────────────────────
+const C = {
+  gold:    '#C9A84C',
+  gold2:   '#E8D080',
+  goldA:   'rgba(201,168,76,.18)',
+  goldAA:  'rgba(201,168,76,.06)',
+  green:   '#00D4AA',
+  blue:    '#4A9EFF',
+  purple:  '#9B6FFF',
+  orange:  '#FF9B6F',
+  text:    '#DCE8F8',
+  text2:   '#7A9BBF',
+  text3:   '#3E5E7A',
+  bg:      '#0e2038',
+  grid:    'rgba(255,255,255,.05)',
+  axis:    'rgba(255,255,255,.10)',
+  mono:    'JetBrains Mono, Courier New, monospace',
+};
+
+// ─── SVG helpers ─────────────────────────────────────────
+const NS = 'http://www.w3.org/2000/svg';
+
+function el(tag, attrs = {}, text = null) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+  if (text !== null) e.textContent = text;
+  return e;
+}
+
+function lerp(v, inA, inB, outA, outB) {
+  return ((v - inA) / (inB - inA)) * (outB - outA) + outA;
+}
+
+function linPath(pts) {
+  return 'M ' + pts.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' L ');
+}
+
+function addDefs(svg) {
+  const d = el('defs');
+  svg.insertBefore(d, svg.firstChild);
+  return d;
+}
+
+function linearGrad(defs, id, x1, y1, x2, y2, stops) {
+  const lg = el('linearGradient', {id, x1, y1, x2, y2, gradientUnits:'userSpaceOnUse'});
+  stops.forEach(([off, col, opa]) => lg.appendChild(el('stop', {offset: off, 'stop-color': col, 'stop-opacity': opa})));
+  defs.appendChild(lg);
+}
+
+// ─── Tooltip ─────────────────────────────────────────────
+const tooltip = document.getElementById('tooltip');
+function showTT(e, html) {
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  moveTT(e);
+}
+function moveTT(e) {
+  tooltip.style.left = (e.clientX + 16) + 'px';
+  tooltip.style.top  = (e.clientY - 10) + 'px';
+}
+function hideTT() { tooltip.classList.remove('show'); }
+
+// ─── Chart 1: Revenue Line Chart ──────────────────────────
+function drawRevenue() {
+  const svg = document.getElementById('rev-svg');
+  const W=680, H=195, pL=52, pR=16, pT=28, pB=44;
+  const cW = W-pL-pR, cH = H-pT-pB;
+  const N = REV.length;
+  const minV=70, maxV=158;
+  const defs = addDefs(svg);
+
+  // Gradient fill
+  linearGrad(defs,'rev-fill', pL,0, pL,pT+cH, [
+    ['0%',  C.gold,  .18],
+    ['100%',C.gold,  .01],
+  ]);
+
+  // Grid
+  [80,100,120,140].forEach(v => {
+    const y = lerp(v, maxV, minV, pT, pT+cH);
+    svg.appendChild(el('line', {x1:pL, y1:y.toFixed(1), x2:W-pR, y2:y.toFixed(1), stroke:C.grid, 'stroke-width':1}));
+    svg.appendChild(el('text', {x:pL-7, y:(y+4).toFixed(1), 'text-anchor':'end', fill:C.text3, 'font-size':9.5, 'font-family':C.mono}, `$${v}B`));
+  });
+
+  // Compute points
+  const pts = REV.map((v,i) => [
+    pL + (i/(N-1)) * cW,
+    lerp(v, maxV, minV, pT, pT+cH)
+  ]);
+
+  // Area
+  const areaD = `M ${pL},${pT+cH} L ${pts.map(([x,y])=>`${x.toFixed(1)},${y.toFixed(1)}`).join(' L ')} L ${W-pR},${pT+cH} Z`;
+  svg.appendChild(el('path', {d:areaD, fill:'url(#rev-fill)'}));
+
+  // Line
+  svg.appendChild(el('path', {d:linPath(pts), fill:'none', stroke:C.gold, 'stroke-width':2, 'stroke-linejoin':'round'}));
+
+  // Holiday quarter annotation (Q1 = fiscal Q1, peak season)
+  [2, 6].forEach(i => {
+    const x = pts[i][0];
+    svg.appendChild(el('line', {x1:x.toFixed(1), y1:pT, x2:x.toFixed(1), y2:pT+cH, stroke:'rgba(201,168,76,.15)', 'stroke-width':1, 'stroke-dasharray':'3 3'}));
+    svg.appendChild(el('text', {x:(x+3).toFixed(1), y:(pT+10).toFixed(1), fill:'rgba(201,168,76,.35)', 'font-size':8, 'font-family':C.mono, 'font-weight':500}, 'HOLIDAY'));
+  });
+
+  // Dots + hover targets
+  pts.forEach(([x,y], i) => {
+    const isLast = i === N-1;
+    const r = isLast ? 5 : 3.5;
+    if (isLast) {
+      svg.appendChild(el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r:11, fill:'none', stroke:C.gold, 'stroke-width':.7, opacity:.2}));
+      svg.appendChild(el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r:7, fill:'none', stroke:C.gold, 'stroke-width':.7, opacity:.15}));
+    }
+    svg.appendChild(el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r, fill:isLast?C.gold:C.bg, stroke:C.gold, 'stroke-width':isLast?0:1.5}));
+
+    // Value label
+    const lab = el('text', {x:x.toFixed(1), y:(y-9).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text2, 'font-size':isLast?11:9, 'font-family':C.mono, 'font-weight':isLast?700:400});
+    lab.textContent = `$${REV[i]}B`;
+    svg.appendChild(lab);
+
+    // Invisible hover area
+    const hit = el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r:14, fill:'transparent', style:'cursor:crosshair'});
+    hit.addEventListener('mouseenter', e => showTT(e, `<strong style="color:${C.gold}">${QTR[i]}</strong><br>Revenue: <strong>$${REV[i]}B</strong>`));
+    hit.addEventListener('mousemove', moveTT);
+    hit.addEventListener('mouseleave', hideTT);
+    svg.appendChild(hit);
+
+    // X-axis
+    const xl = el('text', {x:x.toFixed(1), y:(pT+cH+16).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text3, 'font-size':8.5, 'font-family':C.mono});
+    xl.textContent = QTR[i];
+    svg.appendChild(xl);
+  });
+}
+
+// ─── Chart 2: Gross Margin Area Chart ────────────────────
+function drawGM() {
+  const svg = document.getElementById('gm-svg');
+  const W=680, H=195, pL=54, pR=16, pT=28, pB=44;
+  const cW = W-pL-pR, cH = H-pT-pB;
+  const N = GM.length;
+  const minV=45.2, maxV=50.3;
+  const defs = addDefs(svg);
+
+  linearGrad(defs,'gm-fill', pL,0, pL,pT+cH, [
+    ['0%',  C.gold,  .25],
+    ['100%',C.gold,  .02],
+  ]);
+
+  // Grid
+  [46, 47, 48, 49, 50].forEach(v => {
+    const y = lerp(v, maxV, minV, pT, pT+cH);
+    svg.appendChild(el('line', {x1:pL, y1:y.toFixed(1), x2:W-pR, y2:y.toFixed(1), stroke:C.grid, 'stroke-width':1}));
+    svg.appendChild(el('text', {x:pL-7, y:(y+4).toFixed(1), 'text-anchor':'end', fill:C.text3, 'font-size':9.5, 'font-family':C.mono}, `${v}%`));
+  });
+
+  const pts = GM.map((v,i) => [
+    pL + (i/(N-1)) * cW,
+    lerp(v, maxV, minV, pT, pT+cH)
+  ]);
+
+  // Area
+  const areaD = `M ${pL},${pT+cH} L ${pts.map(([x,y])=>`${x.toFixed(1)},${y.toFixed(1)}`).join(' L ')} L ${W-pR},${pT+cH} Z`;
+  svg.appendChild(el('path', {d:areaD, fill:'url(#gm-fill)'}));
+
+  // Line
+  svg.appendChild(el('path', {d:linPath(pts), fill:'none', stroke:C.gold, 'stroke-width':2.2, 'stroke-linejoin':'round'}));
+
+  // Trend baseline annotation
+  const baselineY = lerp(46.6, maxV, minV, pT, pT+cH);
+  svg.appendChild(el('line', {x1:pL, y1:baselineY.toFixed(1), x2:(W-pR).toFixed(1), y2:baselineY.toFixed(1), stroke:'rgba(201,168,76,.25)', 'stroke-width':1, 'stroke-dasharray':'6 4'}));
+  svg.appendChild(el('text', {x:pL+4, y:(baselineY-5).toFixed(1), fill:'rgba(201,168,76,.4)', 'font-size':8, 'font-family':C.mono}, 'FY2024 BASELINE ~46.5%'));
+
+  // Dots
+  pts.forEach(([x,y], i) => {
+    const isLast = i === N-1;
+    const r = isLast ? 5.5 : 3.5;
+    if (isLast) {
+      svg.appendChild(el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r:11, fill:'none', stroke:C.gold, 'stroke-width':.8, opacity:.25}));
+    }
+    svg.appendChild(el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r, fill:isLast?C.gold:C.bg, stroke:C.gold, 'stroke-width':isLast?0:1.5}));
+
+    const lab = el('text', {x:x.toFixed(1), y:(y-9).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text2, 'font-size':isLast?11:9, 'font-family':C.mono, 'font-weight':isLast?700:400});
+    lab.textContent = `${GM[i]}%`;
+    svg.appendChild(lab);
+
+    if (isLast) {
+      const badge = el('text', {x:(x+10).toFixed(1), y:(y-16).toFixed(1), fill:C.green, 'font-size':8.5, 'font-family':C.mono, 'font-weight':700});
+      badge.textContent = '▲ ATH';
+      svg.appendChild(badge);
+    }
+
+    const hit = el('circle', {cx:x.toFixed(1), cy:y.toFixed(1), r:14, fill:'transparent', style:'cursor:crosshair'});
+    hit.addEventListener('mouseenter', e => showTT(e, `<strong style="color:${C.gold}">${QTR[i]}</strong><br>Gross Margin: <strong>${GM[i]}%</strong>`));
+    hit.addEventListener('mousemove', moveTT);
+    hit.addEventListener('mouseleave', hideTT);
+    svg.appendChild(hit);
+
+    const xl = el('text', {x:x.toFixed(1), y:(pT+cH+16).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text3, 'font-size':8.5, 'font-family':C.mono});
+    xl.textContent = QTR[i];
+    svg.appendChild(xl);
+  });
+}
+
+// ─── Chart 3: EPS Bar Chart ───────────────────────────────
+function drawEPS() {
+  const svg = document.getElementById('eps-svg');
+  const W=680, H=195, pL=52, pR=16, pT=28, pB=44;
+  const cW = W-pL-pR, cH = H-pT-pB;
+  const N = EPS.length;
+  const maxV=3.1;
+  const defs = addDefs(svg);
+
+  const slotW = cW / N;
+  const bW    = slotW * 0.58;
+  const bOff  = (slotW - bW) / 2;
+
+  // Grid
+  [1.0, 1.5, 2.0, 2.5, 3.0].forEach(v => {
+    const y = lerp(v, maxV, 0, pT, pT+cH);
+    svg.appendChild(el('line', {x1:pL, y1:y.toFixed(1), x2:W-pR, y2:y.toFixed(1), stroke:C.grid, 'stroke-width':1}));
+    svg.appendChild(el('text', {x:pL-7, y:(y+4).toFixed(1), 'text-anchor':'end', fill:C.text3, 'font-size':9.5, 'font-family':C.mono}, `$${v.toFixed(1)}`));
+  });
+
+  // Baseline
+  const baseY = pT + cH;
+  svg.appendChild(el('line', {x1:pL, y1:baseY, x2:W-pR, y2:baseY, stroke:C.axis, 'stroke-width':1}));
+
+  EPS.forEach((v, i) => {
+    const isLast = i === N-1;
+    const x = pL + i*slotW + bOff;
+    const bH = (v / maxV) * cH;
+    const y = pT + cH - bH;
+    const gradId = `eps-g-${i}`;
+
+    linearGrad(defs, gradId, x, y, x, pT+cH, [
+      ['0%',   isLast ? C.gold : 'rgba(201,168,76,.7)', 1],
+      ['100%', isLast ? C.gold : 'rgba(201,168,76,.3)', 1],
+    ]);
+
+    const bar = el('rect', {x:x.toFixed(1), y:y.toFixed(1), width:bW.toFixed(1), height:bH.toFixed(1), fill:`url(#${gradId})`});
+    svg.appendChild(bar);
+
+    // Highlight last bar with top cap
+    if (isLast) {
+      svg.appendChild(el('rect', {x:x.toFixed(1), y:y.toFixed(1), width:bW.toFixed(1), height:2, fill:C.gold2}));
+    }
+
+    const lab = el('text', {x:(x+bW/2).toFixed(1), y:(y-7).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text2, 'font-size':isLast?11:9, 'font-family':C.mono, 'font-weight':isLast?700:400});
+    lab.textContent = `$${v.toFixed(2)}`;
+    svg.appendChild(lab);
+
+    const hit = el('rect', {x:x.toFixed(1), y:pT, width:bW.toFixed(1), height:cH+pB*0.5, fill:'transparent', style:'cursor:crosshair'});
+    hit.addEventListener('mouseenter', e => showTT(e, `<strong style="color:${C.gold}">${QTR[i]}</strong><br>EPS: <strong>$${v.toFixed(2)}</strong>`));
+    hit.addEventListener('mousemove', moveTT);
+    hit.addEventListener('mouseleave', hideTT);
+    svg.appendChild(hit);
+
+    const xl = el('text', {x:(x+bW/2).toFixed(1), y:(pT+cH+16).toFixed(1), 'text-anchor':'middle', fill:isLast?C.gold:C.text3, 'font-size':8.5, 'font-family':C.mono});
+    xl.textContent = QTR[i];
+    svg.appendChild(xl);
+  });
+
+  // Growth annotation: peak holiday
+  [2, 6].forEach(i => {
+    const x = pL + i*slotW + slotW/2;
+    const bH = (EPS[i] / maxV) * cH;
+    const y  = pT + cH - bH;
+    svg.appendChild(el('line', {x1:x.toFixed(1), y1:pT, x2:x.toFixed(1), y2:(y-4).toFixed(1), stroke:'rgba(201,168,76,.15)', 'stroke-width':1, 'stroke-dasharray':'3 3'}));
+  });
+}
+
+// ─── Chart 4: Revenue Mix Donut ───────────────────────────
+function drawDonut() {
+  const svg = document.getElementById('donut-svg');
+  const cx=120, cy=97, ro=82, ri=50;
+  const W=400, H=195;
+
+  const segs = [
+    { label:'iPhone',    pct:53, color:C.gold   },
+    { label:'Services',  pct:26, color:C.green  },
+    { label:'Mac',       pct:8,  color:C.blue   },
+    { label:'iPad',      pct:8,  color:C.purple },
+    { label:'Wearables', pct:5,  color:C.orange },
+  ];
+
+  let angle = -Math.PI / 2;
+
+  segs.forEach(seg => {
+    const sweep = (seg.pct / 100) * 2 * Math.PI;
+    const end   = angle + sweep;
+    const lf    = sweep > Math.PI ? 1 : 0;
+
+    const x1 = cx + ro * Math.cos(angle);
+    const y1 = cy + ro * Math.sin(angle);
+    const x2 = cx + ro * Math.cos(end);
+    const y2 = cy + ro * Math.sin(end);
+    const x3 = cx + ri * Math.cos(end);
+    const y3 = cy + ri * Math.sin(end);
+    const x4 = cx + ri * Math.cos(angle);
+    const y4 = cy + ri * Math.sin(angle);
+
+    const d = [
+      `M ${x1.toFixed(2)},${y1.toFixed(2)}`,
+      `A ${ro},${ro} 0 ${lf} 1 ${x2.toFixed(2)},${y2.toFixed(2)}`,
+      `L ${x3.toFixed(2)},${y3.toFixed(2)}`,
+      `A ${ri},${ri} 0 ${lf} 0 ${x4.toFixed(2)},${y4.toFixed(2)}`,
+      'Z'
+    ].join(' ');
+
+    const path = el('path', {d, fill:seg.color, stroke:'#0e2038', 'stroke-width':2, opacity:.9, style:'cursor:crosshair'});
+    path.addEventListener('mouseenter', e => showTT(e, `<strong style="color:${seg.color}">${seg.label}</strong>: <strong>${seg.pct}%</strong>`));
+    path.addEventListener('mousemove', moveTT);
+    path.addEventListener('mouseleave', hideTT);
+    svg.appendChild(path);
+
+    angle = end;
+  });
+
+  // Center
+  svg.appendChild(el('text', {x:cx, y:(cy-10), 'text-anchor':'middle', fill:C.gold, 'font-size':20, 'font-family':C.mono, 'font-weight':700}, '26%'));
+  svg.appendChild(el('text', {x:cx, y:(cy+8),  'text-anchor':'middle', fill:C.green, 'font-size':9, 'font-family':C.mono, 'font-weight':600}, 'SERVICES'));
+  svg.appendChild(el('text', {x:cx, y:(cy+22), 'text-anchor':'middle', fill:C.text3, 'font-size':8.5, 'font-family':C.mono}, 'REVENUE MIX'));
+
+  // Legend
+  const lx=240, ly=20;
+  segs.forEach((seg, i) => {
+    const y = ly + i*32;
+    svg.appendChild(el('rect', {x:lx, y, width:9, height:9, fill:seg.color}));
+    svg.appendChild(el('text', {x:lx+15, y:y+9, fill:C.text2, 'font-size':11, 'font-family':'Inter, sans-serif'}, seg.label));
+    svg.appendChild(el('text', {x:lx+145, y:y+9, 'text-anchor':'end', fill:C.text, 'font-size':11, 'font-family':C.mono, 'font-weight':600}, `${seg.pct}%`));
+
+    // Mini bar
+    const barMaxW = 80;
+    svg.appendChild(el('rect', {x:lx, y:y+13, width:barMaxW, height:2, fill:'rgba(255,255,255,.05)'}));
+    svg.appendChild(el('rect', {x:lx, y:y+13, width:(seg.pct/53*barMaxW).toFixed(1), height:2, fill:seg.color, opacity:.6}));
+  });
+}
+
+// ─── Init ────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  drawRevenue();
+  drawGM();
+  drawEPS();
+  drawDonut();
+});
+</script>
+</body>
+</html>
