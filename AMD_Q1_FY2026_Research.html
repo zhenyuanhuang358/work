@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMD Q1 FY2026 · Research</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --ink:    #0a0a0b;
+  --paper:  #f1efea;
+  --copper: #8b6c42;
+  --gold:   #c9a84c;
+  --dim:    #6b6460;
+  --rule:   rgba(139,108,66,.22);
+  --red:    #7a2218;
+  --green:  #1e4a2a;
+}
+
+html, body { width:100%; height:100%; overflow:hidden; background:var(--ink); }
+
+/* ── deck shell ── */
+.deck { width:100%; height:100%; position:relative; }
+
+.slide {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column;
+  background:var(--paper);
+  opacity:0; pointer-events:none;
+  transition:opacity .45s ease;
+  font-family:'Georgia','Times New Roman',serif;
+}
+.slide.active { opacity:1; pointer-events:all; }
+
+/* ── folio ── */
+.folio {
+  position:absolute; bottom:36px; right:48px;
+  font-size:10px; letter-spacing:.18em;
+  color:var(--dim); text-transform:uppercase;
+}
+
+/* ── nav arrows ── */
+.nav {
+  position:fixed; top:50%; transform:translateY(-50%);
+  z-index:100; cursor:pointer; padding:16px 10px;
+  color:rgba(10,10,11,.25); font-size:18px;
+  user-select:none; transition:color .2s;
+}
+.nav:hover { color:var(--copper); }
+.nav.prev { left:16px; }
+.nav.next { right:16px; }
+
+/* ════════════════════════════════
+   L01 — HERO COVER
+════════════════════════════════ */
+.l01 {
+  justify-content:space-between;
+  padding:64px 72px 48px;
+  background:var(--ink);
+  color:var(--paper);
+}
+.l01 .eyebrow {
+  font-size:10px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--gold);
+}
+.l01 .title {
+  margin-top:auto; margin-bottom:auto;
+}
+.l01 h1 {
+  font-size:clamp(52px,7vw,96px);
+  line-height:.92; letter-spacing:-.03em;
+  font-weight:400;
+}
+.l01 .sub {
+  margin-top:28px; font-size:15px;
+  color:rgba(241,239,234,.55);
+  letter-spacing:.06em; max-width:480px;
+}
+.l01 .meta-row {
+  display:flex; gap:36px; align-items:flex-end;
+  flex-wrap:wrap;
+}
+.l01 .ticker {
+  font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold);
+  display:flex; flex-direction:column; gap:4px;
+}
+.l01 .price-big {
+  font-size:28px; letter-spacing:-.02em;
+  color:var(--paper);
+}
+.l01 .rule-line {
+  height:1px; background:rgba(201,168,76,.3);
+  margin:32px 0;
+}
+
+/* ════════════════════════════════
+   L02 — DIVIDER (dark)
+════════════════════════════════ */
+.l02 {
+  background:var(--ink);
+  color:var(--paper);
+  justify-content:center; align-items:center;
+  text-align:center; padding:80px;
+}
+.l02 .chapter {
+  font-size:10px; letter-spacing:.35em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:28px;
+}
+.l02 h2 {
+  font-size:clamp(36px,5.5vw,72px);
+  line-height:1.05; letter-spacing:-.02em;
+  max-width:760px;
+}
+.l02 .tagline {
+  margin-top:28px; font-size:14px;
+  color:rgba(241,239,234,.5); letter-spacing:.05em;
+  max-width:520px;
+}
+
+/* ════════════════════════════════
+   L03 — BIG NUMBERS GRID
+════════════════════════════════ */
+.l03 { padding:56px 72px; }
+.l03 .header {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:40px;
+}
+.l03 .grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--rule);
+  border:1px solid var(--rule); flex:1;
+}
+.l03 .cell {
+  background:var(--paper); padding:32px 28px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.l03 .kpi-label {
+  font-size:10px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--dim);
+}
+.l03 .kpi-val {
+  font-size:clamp(32px,4vw,52px);
+  letter-spacing:-.03em; line-height:1;
+  color:var(--ink);
+}
+.l03 .kpi-note {
+  font-size:12px; color:var(--dim);
+  font-style:italic;
+}
+.l03 .kpi-delta {
+  font-size:11px; letter-spacing:.05em;
+  font-style:normal;
+}
+.kpi-delta.up   { color:var(--green); }
+.kpi-delta.flat { color:var(--dim); }
+
+/* ════════════════════════════════
+   L04 — HERO QUESTION
+════════════════════════════════ */
+.l04 {
+  background:var(--ink); color:var(--paper);
+  justify-content:center; align-items:flex-start;
+  padding:80px 88px;
+}
+.l04 .q-label {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:32px;
+}
+.l04 h2 {
+  font-size:clamp(32px,4.5vw,62px);
+  line-height:1.12; letter-spacing:-.02em;
+  max-width:860px;
+}
+.l04 .answer {
+  margin-top:36px; font-size:15px;
+  color:rgba(241,239,234,.6); max-width:640px;
+  line-height:1.75;
+}
+
+/* ════════════════════════════════
+   L05 — 8Q CHART
+════════════════════════════════ */
+.l05 { padding:52px 72px 60px; }
+.l05 .chart-title {
+  font-size:10px; letter-spacing:.25em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:6px;
+}
+.l05 .chart-sub {
+  font-size:13px; color:var(--dim);
+  margin-bottom:36px; font-style:italic;
+}
+.chart-wrap { display:flex; gap:0; align-items:flex-end; flex:1; }
+.bar-col {
+  display:flex; flex-direction:column;
+  align-items:center; gap:8px; flex:1;
+}
+.bar-outer {
+  width:100%; display:flex; align-items:flex-end;
+  height:260px;
+}
+.bar-inner {
+  width:72%; margin:0 auto;
+  background:var(--copper);
+  position:relative; min-height:4px;
+  transition:height .6s ease;
+}
+.bar-inner.highlight { background:var(--gold); }
+.bar-inner.dim-bar   { background:rgba(139,108,66,.4); }
+.bar-val {
+  position:absolute; top:-24px; left:50%;
+  transform:translateX(-50%);
+  font-size:11px; white-space:nowrap;
+  color:var(--ink); letter-spacing:.02em;
+}
+.bar-q {
+  font-size:10px; letter-spacing:.1em;
+  color:var(--dim); text-align:center;
+}
+.bar-gm {
+  font-size:10px; color:var(--copper);
+  font-style:italic;
+}
+.chart-legend {
+  display:flex; gap:24px; margin-top:20px;
+  font-size:11px; color:var(--dim); align-items:center;
+}
+.legend-swatch {
+  width:14px; height:10px; display:inline-block;
+  margin-right:6px; vertical-align:middle;
+}
+
+/* ════════════════════════════════
+   L06 — BEFORE / AFTER
+════════════════════════════════ */
+.l06 { padding:56px 72px; }
+.l06 .ba-header {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:40px;
+}
+.ba-grid {
+  display:grid; grid-template-columns:1fr 56px 1fr;
+  gap:0; flex:1; align-items:center;
+}
+.ba-side {
+  padding:36px 32px;
+  border:1px solid var(--rule);
+  height:100%;
+}
+.ba-side.before { background:rgba(122,34,24,.04); }
+.ba-side.after  { background:rgba(30,74,42,.04); }
+.ba-tag {
+  font-size:9px; letter-spacing:.28em;
+  text-transform:uppercase; margin-bottom:24px;
+}
+.ba-tag.b { color:var(--red); }
+.ba-tag.a { color:var(--green); }
+.ba-period {
+  font-size:13px; color:var(--dim);
+  font-style:italic; margin-bottom:28px;
+}
+.ba-item {
+  display:flex; justify-content:space-between;
+  align-items:baseline; padding:14px 0;
+  border-bottom:1px solid var(--rule);
+}
+.ba-item:last-child { border:none; }
+.ba-item .bi-label {
+  font-size:12px; color:var(--dim); letter-spacing:.04em;
+}
+.ba-item .bi-val {
+  font-size:22px; letter-spacing:-.02em;
+}
+.bi-val.red { color:var(--red); }
+.bi-val.grn { color:var(--green); }
+.ba-arrow {
+  display:flex; justify-content:center;
+  align-items:center; font-size:28px;
+  color:var(--gold);
+}
+
+/* ════════════════════════════════
+   L07 — INVERTED DIVIDER (light)
+════════════════════════════════ */
+.l07 {
+  background:var(--paper);
+  justify-content:center; align-items:center;
+  text-align:center; padding:72px;
+  border:1px solid var(--rule);
+}
+.l07 .chapter {
+  font-size:10px; letter-spacing:.35em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:24px;
+}
+.l07 h2 {
+  font-size:clamp(28px,4vw,54px);
+  letter-spacing:-.02em; line-height:1.1;
+  color:var(--ink); max-width:720px;
+}
+.l07 .tagline {
+  margin-top:24px; font-size:14px;
+  color:var(--dim); letter-spacing:.04em;
+  max-width:540px; line-height:1.7;
+}
+.l07 .deal-badges {
+  display:flex; gap:20px; justify-content:center;
+  margin-top:40px; flex-wrap:wrap;
+}
+.deal-badge {
+  border:1px solid var(--rule); padding:12px 24px;
+  font-size:12px; letter-spacing:.08em;
+  color:var(--dim);
+}
+.deal-badge strong {
+  display:block; font-size:20px;
+  color:var(--ink); letter-spacing:-.01em;
+  margin-bottom:4px;
+}
+
+/* ════════════════════════════════
+   L08 — VALUATION GRID
+════════════════════════════════ */
+.l08 { padding:52px 72px; }
+.l08 .v-header {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:40px;
+}
+.v-scenarios {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1px; background:var(--rule);
+  border:1px solid var(--rule); margin-bottom:32px;
+}
+.v-cell {
+  background:var(--paper); padding:32px 28px;
+}
+.v-case {
+  font-size:9px; letter-spacing:.3em;
+  text-transform:uppercase; margin-bottom:16px;
+}
+.v-case.bull { color:var(--green); }
+.v-case.base { color:var(--copper); }
+.v-case.bear { color:var(--red); }
+.v-price {
+  font-size:48px; letter-spacing:-.03em;
+  line-height:1; margin-bottom:12px;
+}
+.v-price.bull { color:var(--green); }
+.v-price.base { color:var(--ink); }
+.v-price.bear { color:var(--red); }
+.v-desc { font-size:12px; color:var(--dim); line-height:1.6; }
+.v-current {
+  display:flex; align-items:center; gap:20px;
+  padding:20px 28px; border:1px solid var(--rule);
+  background:rgba(139,108,66,.05);
+}
+.v-current-label {
+  font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--dim);
+}
+.v-current-price {
+  font-size:32px; letter-spacing:-.02em; color:var(--ink);
+}
+.v-current-note {
+  font-size:12px; color:var(--dim); font-style:italic;
+  margin-left:auto;
+}
+.v-rating {
+  display:inline-block; padding:6px 20px;
+  border:1px solid var(--green); color:var(--green);
+  font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; margin-left:auto;
+}
+
+/* ════════════════════════════════
+   L09 — QUOTE
+════════════════════════════════ */
+.l09 {
+  background:var(--ink); color:var(--paper);
+  justify-content:center; align-items:center;
+  padding:80px 96px; text-align:center;
+}
+.l09 .q-mark {
+  font-size:72px; line-height:.6;
+  color:var(--gold); opacity:.5;
+  margin-bottom:28px;
+}
+.l09 blockquote {
+  font-size:clamp(18px,2.8vw,26px);
+  line-height:1.55; letter-spacing:.01em;
+  max-width:780px; font-weight:400;
+  color:rgba(241,239,234,.9);
+}
+.l09 cite {
+  display:block; margin-top:36px;
+  font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--gold);
+  font-style:normal;
+}
+
+/* ════════════════════════════════
+   L10 — THESIS GRID
+════════════════════════════════ */
+.l10 { padding:52px 72px; }
+.l10 .t-header {
+  display:flex; justify-content:space-between;
+  align-items:baseline; margin-bottom:32px;
+}
+.l10 .t-title {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--copper);
+}
+.thesis-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px; background:var(--rule);
+  border:1px solid var(--rule); flex:1;
+}
+.thesis-cell {
+  background:var(--paper); padding:24px 28px;
+}
+.thesis-num {
+  font-size:32px; color:var(--rule);
+  letter-spacing:-.03em; line-height:1;
+  margin-bottom:12px;
+  font-family:'Georgia',serif;
+}
+.thesis-head {
+  font-size:13px; font-weight:400;
+  color:var(--ink); margin-bottom:8px;
+  letter-spacing:.02em;
+}
+.thesis-body {
+  font-size:12px; color:var(--dim);
+  line-height:1.7;
+}
+
+/* ════════════════════════════════
+   L11 — RISK MATRIX
+════════════════════════════════ */
+.l11 { padding:52px 72px; }
+.l11 .r-header {
+  font-size:10px; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--copper);
+  margin-bottom:32px;
+}
+.risk-table { width:100%; border-collapse:collapse; flex:1; }
+.risk-table th {
+  font-size:9px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--dim);
+  padding:10px 16px; text-align:left;
+  border-bottom:1px solid var(--rule);
+  font-weight:400;
+}
+.risk-table td {
+  padding:14px 16px; font-size:13px;
+  border-bottom:1px solid var(--rule);
+  vertical-align:top;
+}
+.risk-table td:first-child { color:var(--ink); font-weight:400; }
+.risk-table td:nth-child(2) { color:var(--dim); font-size:12px; line-height:1.6; }
+.risk-dot {
+  display:inline-block; width:8px; height:8px;
+  border-radius:50%; margin-right:6px;
+}
+.dot-h { background:#7a2218; }
+.dot-m { background:#b8860b; }
+.dot-l { background:#1e4a2a; }
+
+/* ════════════════════════════════
+   L12 — RECOMMENDATION
+════════════════════════════════ */
+.l12 {
+  background:var(--ink); color:var(--paper);
+  padding:64px 80px; justify-content:space-between;
+}
+.l12 .rec-top {
+  font-size:10px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--gold);
+}
+.l12 .rec-body { margin:auto 0; }
+.l12 .rec-label {
+  font-size:11px; letter-spacing:.25em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:16px;
+}
+.l12 .rec-word {
+  font-size:clamp(72px,10vw,140px);
+  letter-spacing:-.04em; line-height:.88;
+  color:var(--paper);
+}
+.l12 .rec-sub {
+  margin-top:20px; font-size:14px;
+  color:rgba(241,239,234,.5);
+  max-width:540px; line-height:1.7;
+}
+.l12 .rec-bottom {
+  display:flex; gap:40px; flex-wrap:wrap;
+}
+.l12 .rec-stat {
+  display:flex; flex-direction:column; gap:6px;
+}
+.l12 .rs-label {
+  font-size:9px; letter-spacing:.22em;
+  text-transform:uppercase; color:rgba(241,239,234,.4);
+}
+.l12 .rs-val {
+  font-size:20px; letter-spacing:-.01em;
+  color:var(--paper);
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ══ SLIDE 01 — COVER ══ -->
+<div class="slide l01 active" id="s1">
+  <div class="eyebrow">Advanced Micro Devices · NASDAQ: AMD · Q1 FY2026 研究报告</div>
+  <div class="title">
+    <h1>数据中心<br>的第二极</h1>
+    <p class="sub">当英伟达独占AI算力市场，AMD 用 EPYC 与 Instinct 双引擎，在最激烈的赛道上切走了属于自己的那块蛋糕。</p>
+  </div>
+  <div class="rule-line"></div>
+  <div class="meta-row">
+    <div class="ticker">
+      <span>当前股价</span>
+      <span class="price-big">$434.32</span>
+    </div>
+    <div class="ticker">
+      <span>52W 区间</span>
+      <span class="price-big">$107 – $469</span>
+    </div>
+    <div class="ticker">
+      <span>分析师目标</span>
+      <span class="price-big">$460</span>
+    </div>
+    <div class="ticker">
+      <span>评级</span>
+      <span class="price-big" style="color:var(--gold)">BUY</span>
+    </div>
+  </div>
+  <div class="folio">01 / 12</div>
+</div>
+
+<!-- ══ SLIDE 02 — DIVIDER ══ -->
+<div class="slide l02" id="s2">
+  <div class="chapter">Section I · 季度业绩</div>
+  <h2>数据中心营收<br>同比暴增 57%</h2>
+  <p class="tagline">这不是追赶，这是重构竞争格局。<br>AMD 正在用 AI 芯片重新定义自己的天花板。</p>
+  <div class="folio" style="color:rgba(241,239,234,.3)">02 / 12</div>
+</div>
+
+<!-- ══ SLIDE 03 — BIG NUMBERS ══ -->
+<div class="slide l03" id="s3" style="display:flex;flex-direction:column;">
+  <div class="header">Q1 FY2026 核心指标 · 截至 2026-03-28</div>
+  <div class="grid">
+    <div class="cell">
+      <div class="kpi-label">季度营收</div>
+      <div class="kpi-val">$10.25B</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ +38% YoY</span> &nbsp;超预期 $9.89B</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">数据中心营收</div>
+      <div class="kpi-val">$5.8B</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ +57% YoY</span> &nbsp;营收占比 57%</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">非 GAAP EPS</div>
+      <div class="kpi-val">$1.37</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ 超预期 $1.29</span></div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">GAAP 毛利率</div>
+      <div class="kpi-val">52.8%</div>
+      <div class="kpi-note"><span class="kpi-delta flat">Q4: 54.3%</span> &nbsp;非 GAAP 指引 56%</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">Q2 2026 营收指引</div>
+      <div class="kpi-val">$11.2B</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ 超预期 $10.52B</span> &nbsp;+46% YoY</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">财报后股价反应</div>
+      <div class="kpi-val">+16%</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ 单日涨幅</span> &nbsp;2026-05-05 盘后</div>
+    </div>
+  </div>
+  <div class="folio">03 / 12</div>
+</div>
+
+<!-- ══ SLIDE 04 — HERO QUESTION ══ -->
+<div class="slide l04" id="s4">
+  <div class="q-label">The Central Question</div>
+  <h2>AMD 能从英伟达手里<br>真正抢走多少<br>AI 芯片市场份额？</h2>
+  <p class="answer">英伟达数据中心季度营收已超 $350 亿，AMD 同期为 $58 亿——差距仍是 6:1。但这个问题的答案不取决于"谁的芯片更强"，而取决于"谁能满足中大型客户的价格敏感性与软件生态需求"。Meta 选择了 AMD，这是一个信号。</p>
+  <div class="folio" style="color:rgba(241,239,234,.3)">04 / 12</div>
+</div>
+
+<!-- ══ SLIDE 05 — 8Q CHART ══ -->
+<div class="slide l05" id="s5" style="display:flex;flex-direction:column;">
+  <div class="chart-title">八季度营收趋势</div>
+  <div class="chart-sub">单位：十亿美元 · 柱顶标注毛利率（GAAP）</div>
+  <div class="chart-wrap" id="chart"></div>
+  <div class="chart-legend">
+    <span><span class="legend-swatch" style="background:rgba(139,108,66,.4)"></span>历史季度</span>
+    <span><span class="legend-swatch" style="background:var(--copper)"></span>近四季</span>
+    <span><span class="legend-swatch" style="background:var(--gold)"></span>最新季度 Q1 2026</span>
+  </div>
+  <div class="folio">05 / 12</div>
+</div>
+
+<!-- ══ SLIDE 06 — BEFORE / AFTER ══ -->
+<div class="slide l06" id="s6" style="display:flex;flex-direction:column;">
+  <div class="ba-header">转折点 · Q2 2025 危机 vs Q1 2026 蜕变</div>
+  <div class="ba-grid" style="flex:1;">
+    <div class="ba-side before" style="display:flex;flex-direction:column;">
+      <div class="ba-tag b">Before · Q2 2025</div>
+      <div class="ba-period">2025年6月 · 至暗时刻</div>
+      <div class="ba-item">
+        <span class="bi-label">季度营收</span>
+        <span class="bi-val red">$7.69B</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">GAAP 毛利率</span>
+        <span class="bi-val red">39.8%</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">营业利润</span>
+        <span class="bi-val red">−$134M</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">GAAP EPS</span>
+        <span class="bi-val red">$0.54</span>
+      </div>
+      <div class="ba-item" style="border:none;margin-top:auto;">
+        <span class="bi-label" style="font-size:11px;line-height:1.6;color:var(--dim)">存货减值 + Xilinx 摊销冲击，含 $834M 税收优惠撑起净利润</span>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after" style="display:flex;flex-direction:column;">
+      <div class="ba-tag a">After · Q1 2026</div>
+      <div class="ba-period">2026年3月 · 全面蜕变</div>
+      <div class="ba-item">
+        <span class="bi-label">季度营收</span>
+        <span class="bi-val grn">$10.25B</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">GAAP 毛利率</span>
+        <span class="bi-val grn">52.8%</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">营业利润</span>
+        <span class="bi-val grn">$1,476M</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">非 GAAP EPS</span>
+        <span class="bi-val grn">$1.37</span>
+      </div>
+      <div class="ba-item" style="border:none;margin-top:auto;">
+        <span class="bi-label" style="font-size:11px;line-height:1.6;color:var(--dim)">数据中心 $5.8B 占营收 57%，Instinct GPU 规模化交付</span>
+      </div>
+    </div>
+  </div>
+  <div class="folio">06 / 12</div>
+</div>
+
+<!-- ══ SLIDE 07 — DIVIDER LIGHT (Meta Deal) ══ -->
+<div class="slide l07" id="s7">
+  <div class="chapter">Section II · 结构性催化剂</div>
+  <h2>Meta 选择了 AMD</h2>
+  <p class="tagline">2026年2月，Meta 与 AMD 签署 6GW 定制 GPU 采购协议，基于 MI450 架构 + EPYC Venice，H2 2026 开始交货。这不是试用，这是战略押注。</p>
+  <div class="deal-badges">
+    <div class="deal-badge"><strong>6 GW</strong>GPU 算力规模</div>
+    <div class="deal-badge"><strong>MI450</strong>定制架构</div>
+    <div class="deal-badge"><strong>H2 2026</strong>开始交付</div>
+    <div class="deal-badge"><strong>EPYC Venice</strong>第六代服务器 CPU</div>
+  </div>
+  <div class="folio">07 / 12</div>
+</div>
+
+<!-- ══ SLIDE 08 — VALUATION ══ -->
+<div class="slide l08" id="s8" style="display:flex;flex-direction:column;">
+  <div class="v-header">估值与目标价区间</div>
+  <div class="v-scenarios">
+    <div class="v-cell">
+      <div class="v-case bull">Bull Case</div>
+      <div class="v-price bull">$520</div>
+      <div class="v-desc">Meta 大单顺利交付、非 GAAP GM 突破 58%、EPYC 服务器 CPU 市占率超 35%、AI 推理市场爆发带动 Instinct 出货加速</div>
+    </div>
+    <div class="v-cell" style="background:rgba(139,108,66,.04);">
+      <div class="v-case base">Base Case</div>
+      <div class="v-price base">$460</div>
+      <div class="v-desc">Q2 指引 $11.2B 顺利兑现、非 GAAP GM 稳在 55–57%、数据中心营收维持 +40% 以上增速、NVDA 竞争压力可控</div>
+    </div>
+    <div class="v-cell">
+      <div class="v-case bear">Bear Case</div>
+      <div class="v-price bear">$340</div>
+      <div class="v-desc">出口管制升级冲击数据中心业务、MI450 量产延迟、NVDA Blackwell 大幅拉开性能差距、宏观衰退压制资本支出</div>
+    </div>
+  </div>
+  <div class="v-current">
+    <div>
+      <div class="v-current-label">当前股价</div>
+      <div class="v-current-price">$434.32</div>
+    </div>
+    <div style="width:1px;background:var(--rule);align-self:stretch;margin:0 20px;"></div>
+    <div>
+      <div class="v-current-label">非 GAAP 前瞻 P/E</div>
+      <div class="v-current-price">~65x</div>
+    </div>
+    <div style="width:1px;background:var(--rule);align-self:stretch;margin:0 20px;"></div>
+    <div>
+      <div class="v-current-label">上行空间（Base）</div>
+      <div class="v-current-price" style="color:var(--green)">+5.9%</div>
+    </div>
+    <div class="v-rating">BUY</div>
+  </div>
+  <div class="folio">08 / 12</div>
+</div>
+
+<!-- ══ SLIDE 09 — QUOTE ══ -->
+<div class="slide l09" id="s9">
+  <div class="q-mark">"</div>
+  <blockquote>We are seeing strong and broad-based demand for our AI accelerators and EPYC CPUs across cloud, enterprise and government customers globally. The ramp of our Instinct MI300 series remains on track and we are increasingly confident in our ability to address the rapidly growing AI compute market.</blockquote>
+  <cite>Lisa Su · CEO, Advanced Micro Devices · Q1 2026 Earnings Call</cite>
+  <div class="folio" style="color:rgba(241,239,234,.3)">09 / 12</div>
+</div>
+
+<!-- ══ SLIDE 10 — THESIS ══ -->
+<div class="slide l10" id="s10" style="display:flex;flex-direction:column;">
+  <div class="t-header">
+    <div class="t-title">投资逻辑 · 四大支柱</div>
+  </div>
+  <div class="thesis-grid" style="flex:1;">
+    <div class="thesis-cell">
+      <div class="thesis-num">01</div>
+      <div class="thesis-head">AI 算力双寡头格局正在形成</div>
+      <div class="thesis-body">英伟达主导高端训练，AMD 凭借性价比与 ROCm 软件栈切入推理市场。超大型云厂商不希望单一供应商，AMD 是天然的第二供应商选择，且已被 Meta、微软、Google Cloud 验证。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">02</div>
+      <div class="thesis-head">EPYC 服务器 CPU 持续抢占 Intel 市场</div>
+      <div class="thesis-body">AMD 预测服务器 CPU TAM 到 2030 年超 $1,200 亿，年复合增速 >35%。EPYC Genoa/Bergamo/Turin 系列已成为主流数据中心标配，Q2 2026 服务器 CPU 同比增速预计超 70%。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">03</div>
+      <div class="thesis-head">毛利率结构性改善</div>
+      <div class="thesis-body">从 Q2 2025 的 39.8%（含一次性冲击）到 Q1 2026 的 52.8%，Q2 2026 非 GAAP 指引 56%。产品组合向高毛利 GPU / EPYC 迁移，随规模效应扩大，利润率仍有上行空间。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">04</div>
+      <div class="thesis-head">Meta 6GW 大单提供 H2 2026 业绩能见度</div>
+      <div class="thesis-body">定制 MI450 GPU 从 H2 2026 开始大规模交付，为全年业绩提供强力背书。Meta 的选择不仅是采购，更是对 AMD ROCm 软件生态的信任投票，可能引导其他超大型客户跟进。</div>
+    </div>
+  </div>
+  <div class="folio">10 / 12</div>
+</div>
+
+<!-- ══ SLIDE 11 — RISK MATRIX ══ -->
+<div class="slide l11" id="s11" style="display:flex;flex-direction:column;">
+  <div class="r-header">风险矩阵</div>
+  <table class="risk-table" style="flex:1;">
+    <thead>
+      <tr>
+        <th>风险因素</th>
+        <th>分析</th>
+        <th style="width:80px;">影响</th>
+        <th style="width:80px;">概率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NVDA Blackwell 性能差距拉大</td>
+        <td>B200/GB200 在训练任务性能仍大幅领先，AMD 依赖价格优势和推理场景切入，若 NVDA 降价则竞争优势收窄</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+      </tr>
+      <tr>
+        <td>AI 芯片出口管制升级</td>
+        <td>黄仁勋随特朗普访华，政策走向仍不明朗。若管制扩大至 AMD Instinct，将直接冲击数据中心营收</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+      </tr>
+      <tr>
+        <td>高估值，容错率低</td>
+        <td>非 GAAP 前瞻 P/E ~65x，市场已充分定价增长预期。任何季度指引下调将触发大幅回调（参考 Q2 2025 经历）</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+        <td><span class="risk-dot dot-l"></span>低</td>
+      </tr>
+      <tr>
+        <td>MI450 量产 / 交付延迟</td>
+        <td>定制芯片量产存在良率和供应链风险，若 Meta 大单交付节奏慢于预期，H2 2026 业绩将承压</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+        <td><span class="risk-dot dot-l"></span>低</td>
+      </tr>
+      <tr>
+        <td>R&D 费用持续爬升</td>
+        <td>Q1 2026 R&D 达 $23.97 亿（占营收 23.4%），高研发投入短期压缩 GAAP 利润率，但为长期竞争力所必须</td>
+        <td><span class="risk-dot dot-l"></span>低</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="folio">11 / 12</div>
+</div>
+
+<!-- ══ SLIDE 12 — RECOMMENDATION ══ -->
+<div class="slide l12" id="s12">
+  <div class="rec-top">Advanced Micro Devices · NASDAQ: AMD · AlphaFlow Research</div>
+  <div class="rec-body">
+    <div class="rec-label">投资评级</div>
+    <div class="rec-word">BUY</div>
+    <div class="rec-sub">AMD 正处于数据中心双引擎（Instinct GPU + EPYC CPU）爆发的早期阶段。Meta 大单提供 H2 2026 业绩能见度，Q2 指引 $11.2B 远超预期，毛利率改善趋势明确。高估值是主要风险，但增速支撑当前定价。</div>
+  </div>
+  <div class="rec-bottom">
+    <div class="rec-stat">
+      <span class="rs-label">目标价（Base）</span>
+      <span class="rs-val">$460</span>
+    </div>
+    <div class="rec-stat">
+      <span class="rs-label">当前价</span>
+      <span class="rs-val">$434.32</span>
+    </div>
+    <div class="rec-stat">
+      <span class="rs-label">上行空间</span>
+      <span class="rs-val">+5.9%</span>
+    </div>
+    <div class="rec-stat">
+      <span class="rs-label">关键催化剂</span>
+      <span class="rs-val">Q2 财报 · 8月</span>
+    </div>
+    <div class="rec-stat">
+      <span class="rs-label">报告日期</span>
+      <span class="rs-val">2026-05-15</span>
+    </div>
+  </div>
+  <div class="folio">12 / 12</div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- nav -->
+<div class="nav prev" id="prev">&#8592;</div>
+<div class="nav next" id="nxt">&#8594;</div>
+
+<script>
+// ── 8Q chart ──
+const quarters=[
+  {q:'Q2\'24',rev:5.84,gm:49.1,type:'dim'},
+  {q:'Q3\'24',rev:6.82,gm:50.1,type:'dim'},
+  {q:'Q4\'24',rev:7.66,gm:51.3,type:'dim'},
+  {q:'Q1\'25',rev:7.44,gm:50.8,type:'dim'},
+  {q:'Q2\'25',rev:7.69,gm:39.8,type:'normal'},
+  {q:'Q3\'25',rev:9.25,gm:51.7,type:'normal'},
+  {q:'Q4\'25',rev:10.27,gm:54.3,type:'normal'},
+  {q:'Q1\'26',rev:10.25,gm:52.8,type:'highlight'},
+];
+const maxRev=Math.max(...quarters.map(d=>d.rev));
+const chartEl=document.getElementById('chart');
+quarters.forEach(d=>{
+  const pct=(d.rev/maxRev)*100;
+  const col=document.createElement('div');
+  col.className='bar-col';
+  col.innerHTML=`
+    <div class="bar-outer">
+      <div class="bar-inner ${d.type==='highlight'?'highlight':d.type==='dim'?'dim-bar':''}"
+           style="height:${pct}%">
+        <div class="bar-val">$${d.rev}B</div>
+      </div>
+    </div>
+    <div class="bar-q">${d.q}</div>
+    <div class="bar-gm">${d.gm}%</div>
+  `;
+  chartEl.appendChild(col);
+});
+
+// ── navigation ──
+const slides=document.querySelectorAll('.slide');
+let cur=0;
+function go(n){
+  slides[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');
+}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('nxt').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')   go(cur-1);
+});
+// touch swipe
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>40) go(cur+(dx<0?1:-1));
+});
+</script>
+</body>
+</html>
