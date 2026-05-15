@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日美股期权机会 · 2026-05-15</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+  :root {
+    --parchment-light: #f8f0dc;
+    --parchment-mid:   #f0e3c0;
+    --parchment-dark:  #e4d09a;
+    --parchment-edge:  #c9aa72;
+    --ink-primary:     #1e100a;
+    --ink-secondary:   #4a2e18;
+    --ink-tertiary:    #7a5230;
+    --ink-faint:       #a87a50;
+    --red-ink:         #7a1c0f;
+    --green-ink:       #1a4a2a;
+    --blue-ink:        #1a2e5a;
+    --gold-rule:       #b89040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    background: #2a1f12;
+    min-height: 100vh;
+  }
+
+  body {
+    font-family: 'Noto Serif SC', 'Noto Serif', Georgia, serif;
+    background: var(--parchment-light);
+    color: var(--ink-primary);
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 64px 72px;
+    position: relative;
+    line-height: 1.85;
+
+    /* Parchment texture layers */
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 20% 10%,  #fdf6e8 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 90%,  #f5e3b8 0%, transparent 60%),
+      radial-gradient(ellipse at 60% 40%,  #f8f0dc 0%, transparent 70%),
+      linear-gradient(160deg, #faf3e2 0%, #f0e3c0 40%, #f5e9cc 70%, #ede0b4 100%);
+
+    box-shadow:
+      inset 0 0 80px rgba(100, 60, 10, 0.08),
+      inset 3px 3px 20px rgba(150, 90, 20, 0.06),
+      0 8px 40px rgba(0,0,0,0.5),
+      0 2px 8px rgba(0,0,0,0.3);
+
+    /* Aged edge */
+    border: 1px solid var(--parchment-edge);
+  }
+
+  /* Paper grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Horizontal rules — gold ink line */
+  hr {
+    border: none;
+    border-top: 1px solid var(--gold-rule);
+    opacity: 0.6;
+    margin: 32px 0;
+  }
+  hr.heavy {
+    border-top: 2px solid var(--gold-rule);
+    opacity: 0.8;
+  }
+  hr.double {
+    border-top: 3px double var(--gold-rule);
+    opacity: 0.75;
+  }
+
+  /* Header */
+  .doc-header {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 2px double var(--gold-rule);
+    position: relative;
+  }
+
+  .doc-header .seal {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-family: 'IM Fell English', serif;
+    margin-bottom: 14px;
+  }
+
+  .doc-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--ink-primary);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .doc-header .subtitle {
+    font-size: 13px;
+    color: var(--ink-tertiary);
+    letter-spacing: 0.08em;
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 12.5px;
+    color: var(--ink-secondary);
+    flex-wrap: wrap;
+  }
+
+  .meta-row span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-row .label {
+    color: var(--ink-faint);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    font-style: italic;
+  }
+
+  /* Sentiment badge */
+  .sentiment-bar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  .badge {
+    padding: 4px 14px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    border: 1px solid currentColor;
+    font-style: italic;
+  }
+  .badge.warn  { color: var(--red-ink);   border-color: rgba(122,28,15,0.4);  background: rgba(122,28,15,0.05); }
+  .badge.bull  { color: var(--green-ink); border-color: rgba(26,74,42,0.4);   background: rgba(26,74,42,0.05); }
+  .badge.neut  { color: var(--blue-ink);  border-color: rgba(26,46,90,0.35);  background: rgba(26,46,90,0.04); }
+
+  /* Section headers */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    margin: 36px 0 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-rule);
+    opacity: 0.5;
+    max-width: 28px;
+  }
+
+  .section-title .num {
+    font-family: 'IM Fell English', serif;
+    font-size: 20px;
+    color: var(--gold-rule);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .section-subtitle {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-bottom: 20px;
+    padding-left: 4px;
+  }
+
+  /* Trade cards */
+  .trade-card {
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(184,144,64,0.35);
+    border-left: 3px solid var(--gold-rule);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .trade-card.warning {
+    border-left-color: var(--red-ink);
+    background: rgba(122,28,15,0.03);
+  }
+
+  .trade-card.primary {
+    border-left-color: var(--green-ink);
+    background: rgba(26,74,42,0.03);
+  }
+
+  .trade-ticker {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink-primary);
+    margin-bottom: 2px;
+  }
+
+  .trade-strat {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border: 1px solid rgba(168,122,80,0.4);
+    padding: 1px 8px;
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  .trade-body {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.9;
+  }
+
+  .trade-body strong {
+    color: var(--ink-primary);
+    font-weight: 600;
+  }
+
+  .trade-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(184,144,64,0.25);
+    font-size: 12.5px;
+  }
+
+  .trade-row .kv {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+  }
+
+  .trade-row .kv .k {
+    color: var(--ink-faint);
+    font-style: italic;
+    font-size: 11.5px;
+  }
+
+  .trade-row .kv .v {
+    color: var(--ink-primary);
+    font-weight: 600;
+  }
+
+  .trade-row .kv .v.ok   { color: var(--green-ink); }
+  .trade-row .kv .v.warn { color: var(--red-ink); }
+  .trade-row .kv .v.note { color: var(--ink-tertiary); }
+
+  .trade-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: rgba(122,28,15,0.05);
+    border-left: 2px solid rgba(122,28,15,0.3);
+    font-size: 12px;
+    color: var(--red-ink);
+    font-style: italic;
+  }
+
+  .trade-note.info {
+    background: rgba(26,46,90,0.05);
+    border-left-color: rgba(26,46,90,0.3);
+    color: var(--blue-ink);
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 16px 0;
+  }
+
+  thead tr {
+    border-bottom: 2px solid var(--gold-rule);
+  }
+
+  thead th {
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink-secondary);
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(184,144,64,0.2);
+  }
+
+  tbody tr:hover {
+    background: rgba(255,255,255,0.3);
+  }
+
+  tbody td {
+    padding: 9px 10px;
+    color: var(--ink-secondary);
+    vertical-align: top;
+  }
+
+  tbody td:first-child {
+    font-weight: 700;
+    color: var(--ink-primary);
+    letter-spacing: 0.06em;
+  }
+
+  .tag-yes  { color: var(--green-ink); font-weight: 700; }
+  .tag-no   { color: var(--red-ink);   font-weight: 700; }
+  .tag-warn { color: #8b6900;          font-weight: 700; }
+
+  /* Priority list */
+  .priority-list {
+    counter-reset: pri;
+    list-style: none;
+    margin: 12px 0;
+  }
+
+  .priority-list li {
+    counter-increment: pri;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(184,144,64,0.15);
+    font-size: 13px;
+    color: var(--ink-secondary);
+  }
+
+  .priority-list li::before {
+    content: counter(pri);
+    font-family: 'IM Fell English', serif;
+    font-size: 18px;
+    color: var(--gold-rule);
+    font-style: italic;
+    line-height: 1.2;
+    min-width: 18px;
+  }
+
+  .priority-list li strong {
+    color: var(--ink-primary);
+  }
+
+  /* Risk callout */
+  .risk-box {
+    background: rgba(122,28,15,0.04);
+    border: 1px solid rgba(122,28,15,0.2);
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+
+  .risk-box p {
+    font-size: 13px;
+    color: var(--ink-secondary);
+    line-height: 1.8;
+    padding: 4px 0;
+  }
+
+  .risk-box p::before {
+    content: '— ';
+    color: var(--red-ink);
+  }
+
+  /* Account status */
+  .account-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(184,144,64,0.3);
+    border: 1px solid rgba(184,144,64,0.3);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .account-cell {
+    background: var(--parchment-light);
+    padding: 14px 16px;
+    background-image: linear-gradient(160deg, #faf3e2, #f0e3c0);
+  }
+
+  .account-cell .ac-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-bottom: 5px;
+  }
+
+  .account-cell .ac-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink-primary);
+    letter-spacing: 0.04em;
+  }
+
+  .account-cell .ac-cap {
+    font-size: 11px;
+    color: var(--ink-tertiary);
+    margin-top: 2px;
+  }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 2px double var(--gold-rule);
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-style: italic;
+    line-height: 2;
+    letter-spacing: 0.05em;
+  }
+
+  /* Drop cap for intro */
+  .drop-cap::first-letter {
+    font-family: 'IM Fell English', serif;
+    font-size: 52px;
+    float: left;
+    line-height: 0.78;
+    margin-right: 6px;
+    margin-top: 5px;
+    color: var(--ink-secondary);
+  }
+
+  /* Info block */
+  .info-block {
+    background: rgba(26,46,90,0.04);
+    border: 1px solid rgba(26,46,90,0.15);
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 12.5px;
+    color: var(--blue-ink);
+    line-height: 1.9;
+  }
+
+  .decorative-rule {
+    text-align: center;
+    color: var(--gold-rule);
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    margin: 28px 0;
+    opacity: 0.6;
+    font-family: 'IM Fell English', serif;
+  }
+
+  @media print {
+    html { background: white; }
+    body { margin: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<div class="doc-header">
+  <div class="seal">Private Research · AlphaFlow Options Intelligence</div>
+  <h1>今日美股期权机会</h1>
+  <div class="subtitle">Daily Options Opportunity Scan</div>
+  <div class="meta-row">
+    <span><span class="label">日期</span> 2026-05-15 · 周五</span>
+    <span><span class="label">SPY</span> $741.72</span>
+    <span><span class="label">QQQ</span> $710.32</span>
+    <span><span class="label">VIX</span> 17.90</span>
+  </div>
+  <div class="sentiment-bar">
+    <span class="badge bull">Risk-On 偏中性</span>
+    <span class="badge warn">CPI 超预期 +3.8%</span>
+    <span class="badge neut">降息预期后推</span>
+  </div>
+</div>
+
+<!-- ═══════════════ INTRO ═══════════════ -->
+<p class="drop-cap" style="font-size:13.5px; color:var(--ink-secondary); line-height:1.9;">
+  大盘近月上涨 8.75%，贸易协议乐观情绪推动，VIX 17.90 仍处低-中位。然 4 月 CPI 同比 +3.8% 高于预期，降息窗口持续推迟，科技估值面临重估压力。今日 8:30/9:15 ET 将有帝国制造业与工业产出数据落地，建议数据公布前不开新仓。整体策略：以信用价差为主，严控单笔最大亏损于 $425 以内。
+</p>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ SECTION I ═══════════════ -->
+<div class="section-title"><span class="num">I</span>收权利金机会</div>
+<div class="section-subtitle">高 IV Rank 标的，卖 CSP 或 Covered Call，稳定收取时间价值</div>
+
+<!-- NVDA CSP (with warning) -->
+<div class="trade-card warning">
+  <div class="trade-ticker">NVDA</div>
+  <div class="trade-strat">Cash-Secured Put</div>
+  <div class="trade-body">
+    IV Rank 估算 ~70+，AI 叙事支撑，近期横盘蓄势，支撑位约 $900–920 区域明确。理论卖 $900 Put 5/30 可收约 $350–500 权利金。
+  </div>
+  <div class="trade-row">
+    <div class="kv"><span class="k">参考行权价</span><span class="v">$900 Put · 5/30</span></div>
+    <div class="kv"><span class="k">权利金估算</span><span class="v">$350–500</span></div>
+    <div class="kv"><span class="k">最大亏损</span><span class="v warn">~$90,000 (CSP)</span></div>
+    <div class="kv"><span class="k">胜率 PoP</span><span class="v">~68–72%</span></div>
+  </div>
+  <div class="trade-note">⚠ 直接 CSP 资金占用 $90,000，远超本账户规模。强烈建议改用 Bull Put Spread（见第二节机会一）。</div>
+</div>
+
+<!-- AMD CSP (with warning) -->
+<div class="trade-card warning">
+  <div class="trade-ticker">AMD</div>
+  <div class="trade-strat">Cash-Secured Put</div>
+  <div class="trade-body">
+    IV Rank 偏高 (~60+)，股价 $150 区间，半导体轮动受益，$140 支撑扎实。卖 $140 Put 5/30 可收约 $120–180 权利金。
+  </div>
+  <div class="trade-row">
+    <div class="kv"><span class="k">参考行权价</span><span class="v">$140 Put · 5/30</span></div>
+    <div class="kv"><span class="k">权利金估算</span><span class="v">$120–180</span></div>
+    <div class="kv"><span class="k">最大亏损</span><span class="v warn">~$14,000 (CSP)</span></div>
+    <div class="kv"><span class="k">胜率 PoP</span><span class="v">~72%</span></div>
+  </div>
+  <div class="trade-note">⚠ 保证金占用约 $14,000，同样超账户上限。CPI 超预期可能拖累科技，建议用价差替代。</div>
+</div>
+
+<div class="info-block">
+  <strong>账户规模提示：</strong>$8,500 账户对大多数单股 CSP 资金占用过高（一合约 = 控制 100 股）。<strong>本账户最优路径：信用价差（第二节）为主战场，每笔最大亏损精确控制在 $250–425。</strong>
+</div>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ SECTION II ═══════════════ -->
+<div class="section-title"><span class="num">II</span>高胜率信用价差</div>
+<div class="section-subtitle">有限风险，天然适配小账户，精确控制单笔最大亏损于 $425 以内 ← 本账户主战场</div>
+
+<!-- NVDA Bull Put Spread -->
+<div class="trade-card primary">
+  <div class="trade-ticker">NVDA &nbsp;<span style="font-size:13px; font-weight:400; color:var(--ink-faint)">Bull Put Spread</span></div>
+  <div class="trade-strat">Bull Put Spread · 中性偏涨</div>
+  <div class="trade-body">
+    IV Rank 高 → 权利金厚；$900 支撑位经历多次测试；AI 支出叙事完整。调整版缩至 $5 价差宽度，亏损精确合规。
+  </div>
+  <div class="trade-row">
+    <div class="kv"><span class="k">卖出</span><span class="v">$900 Put · 5/30</span></div>
+    <div class="kv"><span class="k">买入</span><span class="v">$895 Put · 5/30</span></div>
+    <div class="kv"><span class="k">净权利金</span><span class="v ok">~$60–80/合约</span></div>
+    <div class="kv"><span class="k">最大亏损</span><span class="v ok">~$420 ✓ 合规</span></div>
+    <div class="kv"><span class="k">最大盈利</span><span class="v">$60–80</span></div>
+    <div class="kv"><span class="k">胜率 PoP</span><span class="v">~70%</span></div>
+  </div>
+  <div class="trade-note info">NVDA 财报约 5/28，本仓位到期日 5/30 跨越财报——若做此仓，考虑提前至 5/23 到期以规避 IV Crush。</div>
+</div>
+
+<!-- QQQ Bear Call Spread -->
+<div class="trade-card primary">
+  <div class="trade-ticker">QQQ &nbsp;<span style="font-size:13px; font-weight:400; color:var(--ink-faint)">Bear Call Spread</span></div>
+  <div class="trade-strat">Bear Call Spread · 谨慎偏空</div>
+  <div class="trade-body">
+    CPI 4月 +3.8% 超预期 → 降息预期推后 → 科技估值压制；QQQ 近月 +8.75% 已超买，短期上行动力减弱。
+  </div>
+  <div class="trade-row">
+    <div class="kv"><span class="k">卖出</span><span class="v">$720 Call · 5/30</span></div>
+    <div class="kv"><span class="k">买入</span><span class="v">$725 Call · 5/30</span></div>
+    <div class="kv"><span class="k">净权利金</span><span class="v ok">~$80–120/合约</span></div>
+    <div class="kv"><span class="k">最大亏损</span><span class="v ok">~$380–420 ✓ 合规</span></div>
+    <div class="kv"><span class="k">R/R 比</span><span class="v">0.20–0.30 : 1</span></div>
+    <div class="kv"><span class="k">胜率 PoP</span><span class="v">~65%</span></div>
+  </div>
+  <div class="trade-note">贸易乐观情绪仍可能继续推高 QQQ。严格设止损：价差亏损达 50% 时平仓。</div>
+</div>
+
+<!-- SPY Iron Condor -->
+<div class="trade-card primary">
+  <div class="trade-ticker">SPY &nbsp;<span style="font-size:13px; font-weight:400; color:var(--ink-faint)">Iron Condor</span></div>
+  <div class="trade-strat">Iron Condor · 区间震荡收息</div>
+  <div class="trade-body">
+    VIX 17.90 权利金不薄，SPY 大涨后可能进入消化期，适合区间策略。上下各 $5 价差宽度，单侧触发最大亏损合规。
+  </div>
+  <div class="trade-row">
+    <div class="kv"><span class="k">上档：卖 $755 C / 买 $760 C</span><span class="v">5/30</span></div>
+    <div class="kv"><span class="k">下档：卖 $725 P / 买 $720 P</span><span class="v">5/30</span></div>
+    <div class="kv"><span class="k">净权利金</span><span class="v ok">~$150–200 合计</span></div>
+    <div class="kv"><span class="k">最大亏损</span><span class="v ok">~$300–350（单侧）✓</span></div>
+    <div class="kv"><span class="k">盈亏平衡区间</span><span class="v">$723–$757</span></div>
+    <div class="kv"><span class="k">胜率 PoP</span><span class="v">~60–65%</span></div>
+  </div>
+  <div class="trade-note info">今日 8:30 ET 帝国制造业 + 9:15 ET 工业产出数据可能触发单边突破。<strong>数据落地前不入场。</strong></div>
+</div>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ SECTION III ═══════════════ -->
+<div class="section-title"><span class="num">III</span>财报波动机会</div>
+<div class="section-subtitle">今日及本周财报标的，评估是否存在 IV 错误定价机会</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>标的</th>
+      <th>财报日期</th>
+      <th>IV Rank 估算</th>
+      <th>Expected Move</th>
+      <th>机会类型</th>
+      <th>推荐？</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CSCO</td>
+      <td>本周三（已公布）</td>
+      <td>报后 IV Crush</td>
+      <td>±4%</td>
+      <td>—</td>
+      <td><span class="tag-no">✗ 已过</span></td>
+    </tr>
+    <tr>
+      <td>其余大标的</td>
+      <td>财报季基本结束</td>
+      <td>IV 回落中</td>
+      <td>—</td>
+      <td>—</td>
+      <td><span class="tag-no">✗ 等下季</span></td>
+    </tr>
+    <tr>
+      <td><strong>NVDA</strong></td>
+      <td>约 5/28（下季）</td>
+      <td>IV 正在上升</td>
+      <td>±8–10%</td>
+      <td>财报前价差锁高 IV</td>
+      <td><span class="tag-warn">◎ 5/21 再看</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="info-block">
+  <strong>NVDA 财报布局窗口：</strong>约 5/21 开始，IV Rank 将随财报临近持续走高。策略：在财报前 5–7 天卖信用价差锁定高 IV，财报后 IV Crush 获利。具体参数届时重新分析。
+</div>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ SECTION IV ═══════════════ -->
+<div class="section-title"><span class="num">IV</span>异常期权流信号</div>
+<div class="section-subtitle">今日大额扫单、异常成交量、机构博弈信号</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>标的</th>
+      <th>异常信号</th>
+      <th>方向</th>
+      <th>规模</th>
+      <th>可跟随？</th>
+      <th>跟随方式</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SFM</td>
+      <td>6月 $100/$105 Call，成交量 38× 均值</td>
+      <td>表面看涨</td>
+      <td>大额扫单</td>
+      <td><span class="tag-warn">⚠ 谨慎</span></td>
+      <td>Bull Put Spread $95/$90 替代</td>
+    </tr>
+    <tr>
+      <td>PHM</td>
+      <td>$115 Put · 5/15 到期，大额</td>
+      <td>看跌/对冲</td>
+      <td>机构规模</td>
+      <td><span class="tag-no">✗ 今日到期</span></td>
+      <td>观察后续结构</td>
+    </tr>
+    <tr>
+      <td>MCD</td>
+      <td>大额 Put Sweep</td>
+      <td>看跌</td>
+      <td>机构</td>
+      <td><span class="tag-warn">⚠ 条件性</span></td>
+      <td>Bear Call Spread（需 IV Rank &gt;40）</td>
+    </tr>
+    <tr>
+      <td>AMZN</td>
+      <td>大额 Put Sweep</td>
+      <td>看跌/对冲</td>
+      <td>机构</td>
+      <td><span class="tag-no">✗</span></td>
+      <td>期权金额超本账户上限</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="risk-box" style="border-color:rgba(26,46,90,0.2); background:rgba(26,46,90,0.03);">
+  <p style="color:var(--blue-ink);"><strong>SFM：</strong>食品零售异常买 Call，但结构偏价差，可能是 delta 对冲，不宜盲目跟涨</p>
+  <p style="color:var(--blue-ink);"><strong>PHM+MCD+AMZN：</strong>机构 Put Sweep 可能对冲房地产/消费暴露，或押注降息推迟影响——与今日 CPI 超预期数据吻合</p>
+  <p style="color:var(--blue-ink);"><strong>MCD 可执行：</strong>若 IV Rank 确认 &gt;40，可做 Bear Call Spread（如卖 $335 C / 买 $340 C，5/30 到期）</p>
+</div>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ RISK ═══════════════ -->
+<div class="section-title"><span class="num" style="color:var(--red-ink);">!</span>今日风险提示</div>
+
+<div class="risk-box">
+  <p><strong>CPI 4月 +3.8% 超预期</strong> — 降息预期推后，科技/成长股估值压制。Bull Put Spread 支撑位选择时留多一档缓冲</p>
+  <p><strong>今日重要数据（8:30 ET 帝国制造业 / 9:15 ET 工业产出）</strong> — 数据发布前严禁开新仓，等待方向明朗后再行动</p>
+  <p><strong>VIX 17.90 偏低</strong> — 权利金收益率不算特别丰厚，挑选性执行，不为做而做</p>
+  <p><strong>贸易协议乐观情绪</strong> — 若谈判出现反转，SPY/QQQ 快速回调风险；Iron Condor 上档 Call 一侧优先于下档 Put 一侧</p>
+</div>
+
+<div class="decorative-rule">— ✦ —</div>
+
+<!-- ═══════════════ ACCOUNT ═══════════════ -->
+<div class="section-title"><span class="num">V</span>账户状态与执行优先级</div>
+
+<div class="account-grid">
+  <div class="account-cell">
+    <div class="ac-label">账户规模</div>
+    <div class="ac-value">$8,500</div>
+    <div class="ac-cap">总资产</div>
+  </div>
+  <div class="account-cell">
+    <div class="ac-label">单笔最大亏损上限</div>
+    <div class="ac-value">$425</div>
+    <div class="ac-cap">账户 5%</div>
+  </div>
+  <div class="account-cell">
+    <div class="ac-label">总敞口上限</div>
+    <div class="ac-value">$2,550</div>
+    <div class="ac-cap">账户 30%</div>
+  </div>
+  <div class="account-cell">
+    <div class="ac-label">今日已开仓敞口</div>
+    <div class="ac-value">$0</div>
+    <div class="ac-cap">待数据后决策</div>
+  </div>
+  <div class="account-cell">
+    <div class="ac-label">建议今日新增（2–3笔）</div>
+    <div class="ac-value">~$900</div>
+    <div class="ac-cap">数据平稳后</div>
+  </div>
+  <div class="account-cell">
+    <div class="ac-label">保证金充裕度</div>
+    <div class="ac-value" style="color:var(--green-ink);">充裕</div>
+    <div class="ac-cap">未触及上限</div>
+  </div>
+</div>
+
+<p style="font-size:12px; color:var(--ink-faint); font-style:italic; margin: 8px 0 20px;">若总敞口接近 $2,550，本日优先观察，不加新仓。</p>
+
+<p style="font-size:13.5px; font-weight:600; color:var(--ink-secondary); margin-bottom:10px; letter-spacing:0.05em;">今日执行优先级</p>
+
+<ol class="priority-list">
+  <li><strong>等待 8:30/9:15 ET 数据落地</strong>，方向明朗后再开仓</li>
+  <li><strong>首选：SPY Iron Condor</strong>（区间最清晰，R/R 合理，$300–350 最大亏损）</li>
+  <li><strong>次选：QQQ Bear Call Spread</strong>（CPI 逻辑支撑，$380–420 最大亏损）</li>
+  <li><strong>观察：MCD Bear Call Spread</strong>（等 IV Rank 确认 &gt;40 再入场）</li>
+  <li><strong>前瞻：NVDA 财报布局</strong>（5/21 前后 IV 上升时再建信用价差）</li>
+</ol>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="doc-footer">
+  <div style="letter-spacing:0.3em; margin-bottom:6px;">· · · ✦ · · ·</div>
+  本报告仅作决策参考，不构成投资建议。所有交易需在经纪商平台手动执行并二次确认实时 Greeks 与 IV。<br>
+  Greeks 估算基于 Black-Scholes，以 TastyTrade / ThinkorSwim 实时显示为准。<br><br>
+  <em>AlphaFlow Options Intelligence · Generated 2026-05-15 · Private Use Only</em>
+</div>
+
+</body>
+</html>
