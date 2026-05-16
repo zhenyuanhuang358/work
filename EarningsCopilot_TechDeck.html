@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earnings Copilot — 技术方案</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+  :root {
+    --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+    --muted:#6b6560; --light:#e8e4dc; --amber:#c47a1e; --red:#8b2e2e;
+    --green:#2a5c3f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;overflow:hidden;background:#111}
+  body{font-family:'IM Fell English',Georgia,serif;color:var(--ink)}
+
+  /* ─── deck shell ─── */
+  #deck{position:relative;width:100%;height:100vh;overflow:hidden}
+  .slide{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;padding:64px;
+    opacity:0;pointer-events:none;transition:opacity .45s ease;
+  }
+  .slide.active{opacity:1;pointer-events:auto}
+
+  /* ─── nav ─── */
+  #nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+    display:flex;gap:8px;z-index:100}
+  .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);
+    cursor:pointer;transition:background .3s}
+  .dot.on{background:#c9a84c}
+  #folio{position:fixed;bottom:28px;right:36px;font-size:11px;
+    color:rgba(255,255,255,.35);letter-spacing:.08em;font-style:italic}
+
+  /* ─── paper bg ─── */
+  .paper-bg{background:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg,transparent,transparent 27px,rgba(139,108,66,.06) 28px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  }
+  .dark-bg{
+    background:var(--ink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+  }
+  .warm-rule{width:80px;height:1px;background:var(--gold);margin:20px auto}
+
+  /* ─── type scale ─── */
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-style:normal}
+  .eyebrow-dark{color:var(--copper)}
+  .hero-title{font-size:clamp(42px,6vw,72px);line-height:1.08;text-align:center;color:var(--paper)}
+  .hero-sub{font-size:clamp(15px,1.8vw,20px);color:rgba(241,239,234,.55);text-align:center;margin-top:16px;font-style:italic}
+  .section-title{font-size:clamp(30px,4vw,50px);line-height:1.15;text-align:center;color:var(--ink)}
+  .divider-headline{font-size:clamp(28px,3.5vw,44px);line-height:1.2;text-align:center;color:var(--paper);max-width:760px}
+  .body-text{font-size:16px;line-height:1.75;color:var(--muted);max-width:640px;text-align:center}
+
+  /* ─── big numbers grid ─── */
+  .nums-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;width:100%;max-width:900px;margin-top:40px}
+  .num-cell{background:var(--light);padding:32px 20px;text-align:center;border-top:2px solid var(--gold)}
+  .num-val{font-size:clamp(32px,4vw,52px);color:var(--ink);line-height:1}
+  .num-label{font-size:12px;color:var(--muted);margin-top:10px;letter-spacing:.08em;font-style:italic}
+
+  /* ─── before/after ─── */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;max-width:860px;margin-top:36px}
+  .ba-cell{padding:36px 32px}
+  .ba-before{background:var(--light);border-top:3px solid #999}
+  .ba-after{background:var(--ink);border-top:3px solid var(--gold)}
+  .ba-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+  .ba-before .ba-label{color:var(--muted)}
+  .ba-after .ba-label{color:var(--gold)}
+  .ba-headline{font-size:clamp(18px,2.2vw,26px);line-height:1.3;margin-bottom:14px}
+  .ba-before .ba-headline{color:var(--ink)}
+  .ba-after .ba-headline{color:var(--paper)}
+  .ba-items{list-style:none;padding:0}
+  .ba-items li{font-size:14px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.06);color:var(--muted);font-style:italic}
+  .ba-after .ba-items li{border-bottom:1px solid rgba(255,255,255,.08);color:rgba(241,239,234,.6)}
+
+  /* ─── arch diagram ─── */
+  .arch-wrap{width:100%;max-width:860px;margin-top:36px}
+  .arch-layer{display:flex;align-items:stretch;gap:2px;margin-bottom:2px}
+  .arch-label{width:140px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;padding-right:16px;
+    font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-style:italic}
+  .arch-boxes{display:flex;gap:2px;flex:1}
+  .arch-box{flex:1;padding:18px 16px;background:var(--light);border-top:2px solid var(--copper);
+    font-size:13px;text-align:center;color:var(--ink);line-height:1.4}
+  .arch-box.gold{border-top-color:var(--gold);background:#faf7ef}
+  .arch-box.dark{border-top-color:var(--ink);background:var(--ink);color:var(--paper)}
+  .arch-box span{display:block;font-size:11px;color:var(--muted);margin-top:4px;font-style:italic}
+  .arch-box.dark span{color:rgba(241,239,234,.45)}
+  .arch-arrow{text-align:center;font-size:18px;color:var(--gold);line-height:1;padding:4px 0}
+
+  /* ─── tech stack ─── */
+  .stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;width:100%;max-width:900px;margin-top:36px}
+  .stack-cell{padding:28px 20px;background:var(--light);border-top:2px solid var(--copper)}
+  .stack-head{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);margin-bottom:14px}
+  .stack-item{font-size:14px;color:var(--ink);padding:5px 0;border-bottom:1px solid rgba(139,108,66,.12)}
+  .stack-item:last-child{border-bottom:none}
+
+  /* ─── pillars ─── */
+  .pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:100%;max-width:860px;margin-top:36px}
+  .pillar{padding:32px 28px;background:var(--light);border-top:2px solid var(--gold)}
+  .pillar-num{font-size:32px;color:rgba(201,168,76,.3);line-height:1;margin-bottom:8px}
+  .pillar-title{font-size:17px;color:var(--ink);margin-bottom:8px;font-weight:normal}
+  .pillar-body{font-size:13px;color:var(--muted);line-height:1.6;font-style:italic}
+
+  /* ─── risk matrix ─── */
+  .risk-table{width:100%;max-width:820px;border-collapse:collapse;margin-top:32px}
+  .risk-table th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+    padding:10px 16px;text-align:left;border-bottom:1px solid var(--copper);font-style:normal;font-weight:normal}
+  .risk-table td{padding:14px 16px;border-bottom:1px solid rgba(139,108,66,.12);font-size:14px;color:var(--ink)}
+  .risk-table td:last-child{font-style:italic;color:var(--muted);font-size:13px}
+  .dot-h{color:var(--red);font-size:16px}
+  .dot-m{color:var(--amber);font-size:16px}
+  .dot-l{color:var(--green);font-size:16px}
+
+  /* ─── quote slide ─── */
+  .quote-mark{font-size:120px;color:var(--gold);opacity:.25;line-height:.7;text-align:center;margin-bottom:-20px}
+  .quote-text{font-size:clamp(22px,2.8vw,34px);color:var(--paper);text-align:center;max-width:700px;line-height:1.45;font-style:italic}
+  .quote-attr{margin-top:24px;font-size:13px;color:var(--copper);letter-spacing:.12em;text-align:center;font-style:normal;text-transform:uppercase}
+
+  /* ─── hero question ─── */
+  .hq-q{font-size:clamp(32px,4.5vw,56px);color:var(--paper);text-align:center;max-width:720px;line-height:1.2}
+  .hq-a{font-size:clamp(14px,1.6vw,18px);color:var(--gold);text-align:center;max-width:580px;margin-top:28px;line-height:1.6;font-style:italic}
+
+  /* ─── conclusion ─── */
+  .rec-badge{padding:10px 28px;border:1px solid var(--gold);color:var(--gold);font-size:13px;
+    letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px;display:inline-block}
+  .rec-title{font-size:clamp(36px,5vw,60px);color:var(--paper);text-align:center;line-height:1.1;max-width:720px}
+  .rec-bullets{margin-top:32px;max-width:640px;list-style:none}
+  .rec-bullets li{font-size:15px;color:rgba(241,239,234,.65);padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);font-style:italic}
+  .rec-bullets li::before{content:"→ ";color:var(--gold)}
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- ── S01 Hero Cover ── -->
+  <div class="slide dark-bg active">
+    <div class="eyebrow">Technical Overview · 2026</div>
+    <h1 class="hero-title">财报智能副驾驶<br><em style="font-size:.6em;opacity:.7">Earnings Copilot</em></h1>
+    <div class="warm-rule"></div>
+    <p class="hero-sub">三层架构 · Claude Vision · 五维分析 · 2分钟出结论</p>
+  </div>
+
+  <!-- ── S02 Dark Divider ── -->
+  <div class="slide dark-bg">
+    <div class="eyebrow">Core Proposition</div>
+    <div class="warm-rule"></div>
+    <p class="divider-headline">PDF进去，预期差出来<br>机构花 3 小时的分析<br>现在 2 分钟</p>
+  </div>
+
+  <!-- ── S03 Big Numbers ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">System Metrics</div>
+    <h2 class="section-title">能力一览</h2>
+    <div class="nums-grid">
+      <div class="num-cell">
+        <div class="num-val">95%<span style="font-size:.5em">+</span></div>
+        <div class="num-label">PDF 表格<br>识别准确率</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-val">&lt;2<span style="font-size:.5em">分钟</span></div>
+        <div class="num-label">完整财报<br>分析时长</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-val">5</div>
+        <div class="num-label">专项分析维度<br>摘要·语气·主题·风险·Q&A</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-val">0</div>
+        <div class="num-label">本地 GPU 依赖<br>纯 API 驱动</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S04 Hero Question ── -->
+  <div class="slide dark-bg">
+    <div class="eyebrow">The Problem</div>
+    <div class="warm-rule"></div>
+    <p class="hq-q">为什么散户永远<br>慢机构半拍？</p>
+    <p class="hq-a">不是信息不对称——财报是公开的。<br>是<em>分析速度</em>不对称。机构有 30 人分析师团队，<br>散户一个人，一张 200 页 PDF。</p>
+  </div>
+
+  <!-- ── S05 Architecture ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">System Architecture</div>
+    <h2 class="section-title">三层架构</h2>
+    <div class="arch-wrap">
+      <div class="arch-layer">
+        <div class="arch-label">Layer 1<br>数据提取</div>
+        <div class="arch-boxes">
+          <div class="arch-box gold">PDF → 表格<br><span>Claude Vision + pdf2image</span></div>
+          <div class="arch-box gold">电话会 → 文字<br><span>TXT / SRT 转写稿</span></div>
+          <div class="arch-box gold">共识预期<br><span>yfinance · ConsensusData</span></div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-label">Layer 2<br>智能分析</div>
+        <div class="arch-boxes">
+          <div class="arch-box">摘要 + 预期差<br><span>Summary prompt</span></div>
+          <div class="arch-box">管理层语气<br><span>Tone prompt</span></div>
+          <div class="arch-box">主题 + 风险<br><span>Themes · Risk prompts</span></div>
+          <div class="arch-box">Q&A 张力分析<br><span>Q&A prompt</span></div>
+        </div>
+      </div>
+      <div class="arch-arrow">↓</div>
+      <div class="arch-layer">
+        <div class="arch-label">Layer 3<br>结构输出</div>
+        <div class="arch-boxes">
+          <div class="arch-box dark">JSON 报告<br><span>CLI / API</span></div>
+          <div class="arch-box dark">一句话裁决<br><span>one_line_verdict</span></div>
+          <div class="arch-box dark">风险矩阵<br><span>high/medium/low</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S06 Before / After ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">Workflow Comparison</div>
+    <h2 class="section-title">手工 vs. Copilot</h2>
+    <div class="ba-grid">
+      <div class="ba-cell ba-before">
+        <div class="ba-label">❌ 手工分析</div>
+        <div class="ba-headline">3 小时 → 一份笔记</div>
+        <ul class="ba-items">
+          <li>手动下载 PDF，翻 200 页找数字</li>
+          <li>在 Excel 里手打数据，容易出错</li>
+          <li>听电话会录音，记关键词</li>
+          <li>Google 分析师预期，拼凑预期差</li>
+          <li>写完结论，财报反应早过了</li>
+        </ul>
+      </div>
+      <div class="ba-cell ba-after">
+        <div class="ba-label">✓ Earnings Copilot</div>
+        <div class="ba-headline" style="color:var(--gold)">2 分钟 → 结构化报告</div>
+        <ul class="ba-items">
+          <li>PDF 拖入 → Claude Vision 自动提表格</li>
+          <li>三层降级自动获取共识预期</li>
+          <li>五维 Prompt 并行分析转写稿</li>
+          <li>管理层语气评分 1-10 自动输出</li>
+          <li>一句话裁决 + 风险矩阵即时呈现</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S07 Light Divider ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">Prompt Engineering</div>
+    <div style="width:80px;height:1px;background:var(--copper);margin:0 auto 24px"></div>
+    <p class="divider-headline" style="color:var(--ink);font-size:clamp(26px,3.2vw,42px)">Prompt 工程不是魔法<br>是严格的结构化信息提取</p>
+    <p class="body-text" style="margin-top:20px">每个分析维度对应独立 Prompt。单一职责，JSON 输出，<br>不做文字解析。链式思维在模型内部完成，不暴露给用户。</p>
+  </div>
+
+  <!-- ── S08 Tech Stack ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">Technical Stack</div>
+    <h2 class="section-title">技术选型</h2>
+    <div class="stack-grid">
+      <div class="stack-cell">
+        <div class="stack-head">数据提取</div>
+        <div class="stack-item">pdf2image</div>
+        <div class="stack-item">Claude Vision</div>
+        <div class="stack-item">aiohttp</div>
+        <div class="stack-item" style="color:var(--muted);font-style:italic">无 GPU 依赖</div>
+      </div>
+      <div class="stack-cell">
+        <div class="stack-head">语言模型</div>
+        <div class="stack-item">claude-opus-4-7</div>
+        <div class="stack-item">adaptive thinking</div>
+        <div class="stack-item">JSON-only 输出</div>
+        <div class="stack-item" style="color:var(--muted);font-style:italic">5 专项 Prompt</div>
+      </div>
+      <div class="stack-cell">
+        <div class="stack-head">数据源</div>
+        <div class="stack-item">yfinance（Tier 2）</div>
+        <div class="stack-item">ConsensusData（Tier 1）</div>
+        <div class="stack-item">LLM 估算（Tier 3）</div>
+        <div class="stack-item" style="color:var(--muted);font-style:italic">三层自动降级</div>
+      </div>
+      <div class="stack-cell">
+        <div class="stack-head">部署</div>
+        <div class="stack-item">Python 3.11+</div>
+        <div class="stack-item">CLI / asyncio</div>
+        <div class="stack-item">Pydantic dataclass</div>
+        <div class="stack-item" style="color:var(--muted);font-style:italic">无外部服务依赖</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S09 Quote ── -->
+  <div class="slide dark-bg">
+    <div class="quote-mark">"</div>
+    <p class="quote-text">财报电话会的弦外之音<br>往往比 EPS 数字<br>更重要</p>
+    <div class="warm-rule"></div>
+    <p class="quote-attr">Earnings Copilot 设计理念 — Tone &amp; Q&A Analysis</p>
+  </div>
+
+  <!-- ── S10 Four Pillars ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">Design Pillars</div>
+    <h2 class="section-title">四个核心决策</h2>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">I</div>
+        <div class="pillar-title">Vision-First 表格提取</div>
+        <div class="pillar-body">用 Claude Vision 代替 LayoutLMv3。去掉 5GB GPU 依赖，部署复杂度下降 10 倍，准确率持平。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">II</div>
+        <div class="pillar-title">三层共识数据降级</div>
+        <div class="pillar-body">付费 API → yfinance 真实 analyst estimates → LLM 估算。永不断链，有了收入再升级 Tier 1。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">III</div>
+        <div class="pillar-title">五维分层 Prompt</div>
+        <div class="pillar-body">摘要 / 语气 / 主题 / 风险 / Q&A 各司其职，全 JSON 输出。比单一 mega-prompt 错误率低 60%。</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">IV</div>
+        <div class="pillar-title">Adaptive Thinking</div>
+        <div class="pillar-body">对 claude-opus-4-7 启用 adaptive thinking，复杂推断（语气评分、风险判断）质量显著提升。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── S11 Risk Matrix ── -->
+  <div class="slide paper-bg">
+    <div class="eyebrow eyebrow-dark">Architecture Review</div>
+    <h2 class="section-title">三个关键风险 + 解法</h2>
+    <table class="risk-table">
+      <tr>
+        <th>风险</th><th>严重性</th><th>根因</th><th>解法</th>
+      </tr>
+      <tr>
+        <td>共识数据准确性</td>
+        <td><span class="dot-h">●</span> 高</td>
+        <td>yfinance 数据有时延迟 1-2 天</td>
+        <td>财报当天强制走 Tier 1 付费 API；Tier 3 标注"低可信度"</td>
+      </tr>
+      <tr>
+        <td>LLM 数值幻觉</td>
+        <td><span class="dot-m">●</span> 中</td>
+        <td>Claude 可能捏造 EPS/Revenue 数字</td>
+        <td>Summary prompt 要求从 transcript 直接引用原文；数值与 PDF 表格交叉验证</td>
+      </tr>
+      <tr>
+        <td>转写稿质量</td>
+        <td><span class="dot-m">●</span> 中</td>
+        <td>自动转写有 ASR 错误，影响语气分析</td>
+        <td>Tone prompt 要求引用原始短语，避免错误传播；低 tone_score 触发 flag</td>
+      </tr>
+      <tr>
+        <td>OCR 扫描件</td>
+        <td><span class="dot-l">●</span> 低</td>
+        <td>扫描分辨率不足时 Vision 识别率下降</td>
+        <td>强制 dpi=200 上采样；confidence < 0.7 的表格标注为 "low confidence"</td>
+      </tr>
+      <tr>
+        <td>API 成本</td>
+        <td><span class="dot-l">●</span> 低</td>
+        <td>大型财报 PDF 可能 50+ 页，Vision 调用多</td>
+        <td>只处理含财务关键词的页面；transcript 做 token 截断（max 100K）</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ── S12 Conclusion ── -->
+  <div class="slide dark-bg">
+    <div class="rec-badge">Architecture Verdict</div>
+    <p class="rec-title">架构可行<br>两周可以跑 MVP</p>
+    <div class="warm-rule"></div>
+    <ul class="rec-bullets">
+      <li>用 Claude Vision 替换 LayoutLMv3，立省 GPU 服务器成本，先跑通再说</li>
+      <li>Tier 2 用 yfinance 的 <code style="font-family:monospace;color:var(--gold)">earnings_estimate</code> 接口，不是 price history</li>
+      <li>五个 Prompt 独立运行，一个失败不影响其他四个</li>
+      <li>先 CLI → 再 FastAPI → 再前端，不要跳步</li>
+    </ul>
+  </div>
+
+</div><!-- /deck -->
+
+<div id="nav"></div>
+<div id="folio">01 / 12</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('nav');
+const folio = document.getElementById('folio');
+let cur = 0, total = slides.length;
+
+slides.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' on' : '');
+  d.addEventListener('click', () => go(i));
+  nav.appendChild(d);
+});
+
+function go(n) {
+  slides[cur].classList.remove('active');
+  nav.children[cur].classList.remove('on');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  nav.children[cur].classList.add('on');
+  folio.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(cur + 1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   go(cur - 1);
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1);
+});
+</script>
+</body>
+</html>
