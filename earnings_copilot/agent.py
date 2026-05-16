@@ -103,10 +103,13 @@ async def _execute_tool(name: str, inputs: dict, anthropic_client: anthropic.Ant
             transcript=inputs["transcript"],
         )
         # analyze_earnings_call is sync; run in thread to not block event loop
+        # Propagate auth: read the auth_token property (Bearer) first, then api_key
+        _auth_token = getattr(anthropic_client, "auth_token", None)
+        _api_key    = None if _auth_token else getattr(anthropic_client, "api_key", None)
         loop = asyncio.get_event_loop()
         analysis = await loop.run_in_executor(
             None,
-            lambda: analyze_earnings_call(ctx, api_key=anthropic_client.api_key),
+            lambda: analyze_earnings_call(ctx, api_key=_api_key, auth_token=_auth_token),
         )
         return json.dumps({
             "headline":         analysis.headline,
@@ -177,18 +180,27 @@ Rules:
 async def run_agent(
     user_message: str,
     api_key: Optional[str] = None,
+    auth_token: Optional[str] = None,
+    model: str = "claude-opus-4-7",
     verbose: bool = True,
 ) -> str:
     """
     Run the Earnings Copilot agent on a user query.
     Returns the agent's final text response.
+
+    auth_token: Claude Code OAuth token (Bearer). Use when api_key is not available.
     """
-    client = anthropic.Anthropic(api_key=api_key) if api_key else anthropic.Anthropic()
+    if auth_token:
+        client = anthropic.Anthropic(auth_token=auth_token)
+    elif api_key:
+        client = anthropic.Anthropic(api_key=api_key)
+    else:
+        client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
     messages = [{"role": "user", "content": user_message}]
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model=model,
             max_tokens=4096,
             system=SYSTEM_PROMPT,
             tools=TOOLS,

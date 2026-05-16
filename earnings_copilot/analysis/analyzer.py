@@ -37,24 +37,61 @@ def _call(client: anthropic.Anthropic, prompt: str, section: str) -> dict:
     print(f"  [{section}] calling Claude...", flush=True)
     t0 = time.time()
 
-    response = client.messages.create(
+    create_kwargs: dict = dict(
         model=MODEL,
         max_tokens=MAX_TOKENS,
-        thinking={"type": "adaptive"},
         messages=[{"role": "user", "content": prompt}],
     )
+    # adaptive thinking only supported on Opus 4.6+ and Sonnet 4.6+
+    if "opus" in MODEL or "sonnet-4-6" in MODEL:
+        create_kwargs["thinking"] = {"type": "adaptive"}
+
+    response = client.messages.create(**create_kwargs)
 
     raw = next(
         (b.text for b in response.content if hasattr(b, "text")),
         "",
     ).strip()
 
+    # Strip markdown fences
     raw = re.sub(r"^```(?:json)?\s*", "", raw)
     raw = re.sub(r"\s*```$", "", raw)
 
+    # Extract the first complete JSON object (handles trailing prose)
+    def extract_json(s: str) -> dict:
+        # Try direct parse first
+        try:
+            return json.loads(s)
+        except json.JSONDecodeError:
+            pass
+        # Find first '{' and scan for balanced closing '}'
+        start = s.find("{")
+        if start == -1:
+            raise ValueError("No JSON object found")
+        depth, in_str, escape = 0, False, False
+        for i, ch in enumerate(s[start:], start):
+            if escape:
+                escape = False
+                continue
+            if ch == "\\" and in_str:
+                escape = True
+                continue
+            if ch == '"' and not escape:
+                in_str = not in_str
+                continue
+            if in_str:
+                continue
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    return json.loads(s[start : i + 1])
+        raise ValueError("Unbalanced JSON braces")
+
     try:
-        result = json.loads(raw)
-    except json.JSONDecodeError as e:
+        result = extract_json(raw)
+    except (ValueError, json.JSONDecodeError) as e:
         raise ValueError(f"[{section}] JSON parse failed: {e}\nRaw:\n{raw[:500]}")
 
     elapsed = time.time() - t0
@@ -120,12 +157,18 @@ def _parse_questions(raw: dict) -> list[AnalystQuestion]:
 def analyze_earnings_call(
     ctx: PromptContext,
     api_key: Optional[str] = None,
+    auth_token: Optional[str] = None,
 ) -> EarningsCallAnalysis:
     """
     Run all five analysis prompts and assemble a complete EarningsCallAnalysis.
     Each section is independent — a failure in one doesn't block the others.
     """
-    client = anthropic.Anthropic(api_key=api_key) if api_key else anthropic.Anthropic()
+    if auth_token:
+        client = anthropic.Anthropic(auth_token=auth_token)
+    elif api_key:
+        client = anthropic.Anthropic(api_key=api_key)
+    else:
+        client = anthropic.Anthropic()
 
     summary_raw = _call(client, build_summary_prompt(ctx), "Summary")
     tone_raw = _call(client, build_tone_prompt(ctx), "Tone")
