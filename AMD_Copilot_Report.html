@@ -322,6 +322,152 @@
     </div>
   </div>
 
+  <!-- TARGET PRICE -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-zh">目标价与情景估值</span>
+      <span class="section-en">Price Target · Bull / Base / Bear Scenarios</span>
+    </div>
+
+    <!-- price range bar -->
+    <svg viewBox="0 0 820 130" width="100%" style="display:block;font-family:'IM Fell English',Georgia,serif;margin-bottom:8px">
+      <!-- scale: $200–$560, range=360. usable width=680px (x:100→780). 1$=1.889px -->
+      <!-- $200=x100, $300=x289, $340=x264 wait let me redo -->
+      <!-- x = 100 + (price - 200) * (680/360) = 100 + (price-200)*1.889 -->
+      <!-- $340 → 100+(140*1.889)=364.4 -->
+      <!-- $434 → 100+(234*1.889)=542.0 (current) -->
+      <!-- $460 → 100+(260*1.889)=591.1 (base) -->
+      <!-- $520 → 100+(320*1.889)=704.5 (bull) -->
+      <!-- $200 → 100, $560 → 780 -->
+
+      <!-- axis -->
+      <line x1="100" y1="72" x2="780" y2="72" stroke="#d4cfc6" stroke-width="1.5"/>
+      <!-- axis ticks -->
+      <line x1="100" y1="72" x2="100" y2="78" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="100" y="90" text-anchor="middle" font-size="9" fill="#6b6560">$200</text>
+      <line x1="289" y1="72" x2="289" y2="78" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="289" y="90" text-anchor="middle" font-size="9" fill="#6b6560">$300</text>
+      <line x1="478" y1="72" x2="478" y2="78" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="478" y="90" text-anchor="middle" font-size="9" fill="#6b6560">$400</text>
+      <line x1="667" y1="72" x2="667" y2="78" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="667" y="90" text-anchor="middle" font-size="9" fill="#6b6560">$500</text>
+      <line x1="780" y1="72" x2="780" y2="78" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="780" y="90" text-anchor="middle" font-size="9" fill="#6b6560">$560</text>
+
+      <!-- range band: bear $340 to bull $520 -->
+      <!-- $340 → 100+(140*1.889)=364.5 -->
+      <!-- $520 → 100+(320*1.889)=704.4 -->
+      <rect x="364" y="60" width="340" height="24" fill="#e8e4dc" rx="2"/>
+
+      <!-- bear marker $340 -->
+      <line x1="364" y1="46" x2="364" y2="84" stroke="#8b2e2e" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <circle cx="364" cy="72" r="5" fill="#8b2e2e"/>
+      <text x="364" y="42" text-anchor="middle" font-size="10" fill="#8b2e2e">$340</text>
+      <text x="364" y="32" text-anchor="middle" font-size="9"  fill="#8b2e2e" font-style="italic">熊市 Bear</text>
+
+      <!-- base marker $460 -->
+      <!-- $460 → 100+(260*1.889)=591.1 -->
+      <line x1="591" y1="46" x2="591" y2="84" stroke="#8b6c42" stroke-width="2"/>
+      <circle cx="591" cy="72" r="6" fill="#8b6c42"/>
+      <text x="591" y="42" text-anchor="middle" font-size="11" fill="#8b6c42">$460</text>
+      <text x="591" y="32" text-anchor="middle" font-size="9"  fill="#8b6c42" font-style="italic">基准 Base</text>
+
+      <!-- bull marker $520 -->
+      <line x1="704" y1="46" x2="704" y2="84" stroke="#2a5c3f" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <circle cx="704" cy="72" r="5" fill="#2a5c3f"/>
+      <text x="704" y="42" text-anchor="middle" font-size="10" fill="#2a5c3f">$520</text>
+      <text x="704" y="32" text-anchor="middle" font-size="9"  fill="#2a5c3f" font-style="italic">牛市 Bull</text>
+
+      <!-- current price $434 marker -->
+      <!-- $434 → 100+(234*1.889)=542.0 -->
+      <line x1="542" y1="36" x2="542" y2="88" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="542,88 537,98 547,98" fill="#0a0a0b"/>
+      <text x="542" y="110" text-anchor="middle" font-size="10" fill="#0a0a0b">$434</text>
+      <text x="542" y="122" text-anchor="middle" font-size="9"  fill="#6b6560" font-style="italic">现价 Current</text>
+    </svg>
+
+    <!-- scenario cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--rule);border:1px solid var(--rule);margin-top:4px">
+
+      <!-- bear -->
+      <div style="background:var(--paper);padding:22px 18px;border-top:3px solid var(--red)">
+        <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:8px">熊市 Bear Case</div>
+        <div style="font-size:36px;color:var(--red);line-height:1;margin-bottom:4px">$340</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">较现价 -21.7%</div>
+        <div style="font-size:13px;color:var(--ink);line-height:1.65">
+          NVIDIA 竞争加剧导致 MI300X 定价压力；中国出口管制扩大，可寻址市场显著收窄；
+          MI350 良率爬坡不及预期，H2 交付延迟；嵌入式复苏推迟至 2027 年。
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;font-style:italic">
+          FY2026 EPS ~$4.8 · P/E ~71x
+        </div>
+      </div>
+
+      <!-- base -->
+      <div style="background:var(--paper);padding:22px 18px;border-top:3px solid var(--copper)">
+        <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--copper);margin-bottom:8px">基准 Base Case</div>
+        <div style="font-size:36px;color:var(--copper);line-height:1;margin-bottom:4px">$460</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">较现价 +5.9%</div>
+        <div style="font-size:13px;color:var(--ink);line-height:1.65">
+          数据中心保持 40–50% 增速，MI350 H2 顺利量产；EPYC 继续从 Intel 夺取服务器份额；
+          嵌入式 Q3 起企稳；毛利率全年维持 53–55%。
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;font-style:italic">
+          FY2026 EPS ~$5.8 · P/E ~79x
+        </div>
+      </div>
+
+      <!-- bull -->
+      <div style="background:var(--paper);padding:22px 18px;border-top:3px solid var(--green)">
+        <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:8px">牛市 Bull Case</div>
+        <div style="font-size:36px;color:var(--green);line-height:1;margin-bottom:4px">$520</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:14px;font-style:italic">较现价 +19.7%</div>
+        <div style="font-size:13px;color:var(--ink);line-height:1.65">
+          Instinct 超周期加速，MI350 表现超预期，赢得新一批超大规模云厂商训练合同；
+          ROCm 生态突破带来客户切换；毛利率迈向 57%；嵌入式强劲复苏。
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:10px;font-style:italic">
+          FY2026 EPS ~$6.8 · P/E ~76x
+        </div>
+      </div>
+
+    </div>
+
+    <!-- assumption table -->
+    <table style="width:100%;border-collapse:collapse;margin-top:20px;font-size:13px">
+      <tr>
+        <th style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:7px 12px;text-align:left;border-bottom:1px solid var(--copper);font-weight:normal">关键假设 · Key Assumption</th>
+        <th style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);padding:7px 12px;text-align:center;border-bottom:1px solid var(--copper);font-weight:normal">熊市 Bear</th>
+        <th style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);padding:7px 12px;text-align:center;border-bottom:1px solid var(--copper);font-weight:normal">基准 Base</th>
+        <th style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);padding:7px 12px;text-align:center;border-bottom:1px solid var(--copper);font-weight:normal">牛市 Bull</th>
+      </tr>
+      <tr style="border-bottom:1px solid var(--rule)">
+        <td style="padding:10px 12px;color:var(--ink)">FY2026 数据中心增速 · DC Revenue Growth</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--red)">+20%</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--copper)">+45%</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--green)">+65%</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--rule)">
+        <td style="padding:10px 12px;color:var(--ink)">FY2026 非 GAAP 毛利率 · Non-GAAP GM</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--red)">51%</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--copper)">54%</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--green)">57%</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--rule)">
+        <td style="padding:10px 12px;color:var(--ink)">MI350 H2 放量 · MI350 Ramp</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--red)">延迟 / Delayed</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--copper)">顺利 / On Track</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--green)">超预期 / Upside</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px;color:var(--ink)">嵌入式复苏 · Embedded Recovery</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--red)">推迟至 2027</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--copper)">Q3 FY2026</td>
+        <td style="padding:10px 12px;text-align:center;color:var(--green)">Q2–Q3 FY2026</td>
+      </tr>
+    </table>
+  </div>
+
   <!-- verdict -->
   <div class="verdict-box">
     <div class="verdict-eyebrow-zh">Earnings Copilot · 一句话裁决</div>
