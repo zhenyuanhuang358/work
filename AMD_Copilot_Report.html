@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMD Q1 FY2026 — Earnings Copilot</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+  :root {
+    --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+    --muted:#6b6560; --light:#e8e4dc; --red:#8b2e2e; --green:#2a5c3f; --amber:#c47a1e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--paper);color:var(--ink);
+    font-family:'IM Fell English',Georgia,serif;min-height:100vh}
+
+  /* ── page shell ── */
+  .page{max-width:860px;margin:0 auto;padding:64px 48px 100px}
+
+  /* ── masthead ── */
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:36px}
+  .masthead-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px}
+  .pub-name{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .pub-date{font-size:11px;color:var(--muted);font-style:italic}
+  .headline{font-size:clamp(28px,4vw,46px);line-height:1.12;margin:16px 0 10px}
+  .subhead{font-size:16px;color:var(--muted);font-style:italic;line-height:1.5}
+  .meta-row{display:flex;gap:24px;margin-top:14px;flex-wrap:wrap}
+  .meta-pill{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 12px;border:1px solid var(--copper);color:var(--copper)}
+  .verdict-pill{background:var(--green);border-color:var(--green);color:#fff}
+  .verdict-pill.cautious{background:var(--amber);border-color:var(--amber)}
+  .verdict-pill.bearish{background:var(--red);border-color:var(--red)}
+
+  /* ── stat bar ── */
+  .stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--copper);border:1px solid var(--copper);margin:28px 0}
+  .stat-cell{background:var(--paper);padding:18px 16px;text-align:center}
+  .stat-val{font-size:clamp(22px,3vw,32px);line-height:1;color:var(--ink)}
+  .stat-val.beat{color:var(--green)}
+  .stat-val.miss{color:var(--red)}
+  .stat-val.inline{color:var(--amber)}
+  .stat-label{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.06em;font-style:italic}
+
+  /* ── body text ── */
+  .section{margin:32px 0}
+  .section-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:6px;margin-bottom:16px}
+  .body-text{font-size:15px;line-height:1.75;color:var(--ink)}
+  .body-text p{margin-bottom:14px}
+
+  /* ── tone meter ── */
+  .tone-row{display:flex;align-items:center;gap:16px;margin:12px 0}
+  .tone-label{font-size:13px;color:var(--muted);width:80px;flex-shrink:0;font-style:italic}
+  .tone-track{flex:1;height:6px;background:var(--light);border-radius:3px;overflow:hidden}
+  .tone-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--amber),var(--green))}
+  .tone-score{font-size:15px;color:var(--ink);width:32px;text-align:right}
+
+  /* ── risk table ── */
+  .risk-table{width:100%;border-collapse:collapse;margin-top:8px}
+  .risk-table th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--copper);
+    font-style:normal;font-weight:normal}
+  .risk-table td{padding:12px;border-bottom:1px solid rgba(139,108,66,.12);
+    font-size:14px;color:var(--ink);vertical-align:top}
+  .risk-table td:last-child{font-style:italic;color:var(--muted);font-size:12px}
+  .dot-h{color:var(--red)} .dot-m{color:var(--amber)} .dot-l{color:var(--green)}
+  .new-badge{font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--red);color:#fff;padding:1px 5px;margin-left:6px;vertical-align:middle}
+
+  /* ── themes chips ── */
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .chip{padding:5px 14px;border:1px solid var(--copper);font-size:13px;
+    color:var(--copper);font-style:italic}
+
+  /* ── qa section ── */
+  .qa-item{margin-bottom:20px;padding:16px;background:var(--light);border-left:3px solid var(--gold)}
+  .qa-firm{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+  .qa-q{font-size:14px;color:var(--ink);margin-bottom:8px}
+  .qa-signal{font-size:12px;color:var(--red);font-style:italic}
+
+  /* ── verdict box ── */
+  .verdict-box{background:var(--ink);padding:36px;margin:40px 0}
+  .verdict-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+  .verdict-text{font-size:clamp(16px,2vw,22px);color:var(--paper);line-height:1.5;font-style:italic}
+
+  /* ── copilot note ── */
+  .copilot-note{margin-top:60px;padding-top:20px;border-top:1px solid var(--copper);
+    font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- masthead -->
+  <div class="masthead">
+    <div class="masthead-top">
+      <span class="pub-name">Earnings Copilot · 财报分析</span>
+      <span class="pub-date">2026-05-16 · AI Generated · claude-haiku-4-5-20251001</span>
+    </div>
+    <h1 class="headline">AMD Q1 FY2026<br>数据中心加速，EPS超预期 8.7%</h1>
+    <p class="subhead">营收 $10.25B (+36% YoY)，数据中心 $5.8B (+57% YoY)，<br>
+      Q2 指引 $11.2B 大幅超共识预期 $10.7B</p>
+    <div class="meta-row">
+      <span class="meta-pill">AMD · NASDAQ</span>
+      <span class="meta-pill">Q1 FY2026 · May 5, 2026</span>
+      <span class="meta-pill verdict-pill">BUY</span>
+      <span class="meta-pill">语气评分 8/10</span>
+    </div>
+  </div>
+
+  <!-- stat bar -->
+  <div class="stat-bar">
+    <div class="stat-cell">
+      <div class="stat-val beat">+8.7%</div>
+      <div class="stat-label">EPS 超预期<br>$1.37 vs $1.26E</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val beat">+2.5%</div>
+      <div class="stat-label">营收超预期<br>$10.25B vs $10.0BE</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">$11.2B</div>
+      <div class="stat-label">Q2 营收指引<br>共识预期仅 $10.7B</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">54%</div>
+      <div class="stat-label">Q2 非GAAP毛利率<br>环比 +120bps</div>
+    </div>
+  </div>
+
+  <!-- agent verdict -->
+  <div class="verdict-box">
+    <div class="verdict-eyebrow">Earnings Copilot · One-Line Verdict</div>
+    <p class="verdict-text">AMD delivered a clean beat on the back of explosive data center growth (57% YoY), with raised Q2 guidance supporting AI accelerator momentum narrative. Gross margins expanding toward long-term 55%+ target. However, software competitiveness vs. NVIDIA, geopolitical export controls, and execution risk on MI350 ramp are material watch-items for sustainability of this outperformance.</p>
+  </div>
+
+  <!-- full analysis -->
+  <div class="section">
+    <div class="section-label">完整分析</div>
+    <div class="body-text"><hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="font-size:1.1em">**AMD Q1 FY2026 EARNINGS ANALYSIS**</strong></p>
+<p><strong style="color:var(--copper)">**HEADLINE VERDICT**</strong></p>
+<p style="padding-left:18px">→ ✅ <strong>Strong Beat + Raised Guidance</strong> — AMD exceeded both EPS and revenue expectations on record data center performance, with Q2 guidance pointing to continued acceleration.</p>
+<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="color:var(--copper)">**EXPECTATION GAPS**</strong></p>
+<p>| Metric | Actual | Estimate | Gap | Verdict |</p>
+<p>|--------|--------|----------|-----|---------|</p>
+<p>| <strong>EPS (non-GAAP)</strong> | $1.37 | $1.26 | +8.7% | <strong>Beat</strong> |</p>
+<p>| <strong>Revenue</strong> | $10.25B | $10.0B | +2.5% | <strong>In-line/Minor Beat</strong> |</p>
+<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="color:var(--copper)">**SEGMENT PERFORMANCE HIGHLIGHTS**</strong></p>
+<p><strong>Data Center (the story): $5.8B (+57% YoY)</strong></p>
+<p style="padding-left:18px">→ - Instinct MI300X GPU accelerators exceeded expectations</p>
+<p style="padding-left:18px">→ - Strong wins: Microsoft, Meta, Oracle Cloud</p>
+<p style="padding-left:18px">→ - Meta commitment: $6B data center revenue in H2 2026 (MI450 + EPYC Venice co-deploy)</p>
+<p style="padding-left:18px">→ - EPYC CPUs continuing market share gains</p>
+<p><strong>Client: $2.3B (+68% YoY)</strong></p>
+<p style="padding-left:18px">→ - Ryzen AI PC adoption accelerating ahead of Windows refresh cycle</p>
+<p><strong>Gaming: $563M (-69% YoY)</strong></p>
+<p style="padding-left:18px">→ - Semi-custom cycle wind-down; management expects Q2 trough</p>
+<p><strong>Embedded: $823M (flat sequentially)</strong></p>
+<p style="padding-left:18px">→ - Inventory normalization extending longer than anticipated</p>
+<p style="padding-left:18px">→ - Recovery expected Q3; dependent on softer industrial/automotive demand</p>
+<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="color:var(--copper)">**MANAGEMENT TONE: 8/10 (Bullish)**</strong></p>
+<p>Lisa Su projects confidence with concrete wins, quantified commitments ($6B Meta deal), and assertive competitive positioning. Management raised sequential guidance ($11.2B Q2 vs. $10.25B Q1), signaling near-term momentum conviction. Margin expansion narrative supported by data center mix acceleration.</p>
+<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="color:var(--copper)">**KEY RISKS**</strong></p>
+<p>1. <strong>Software Ecosystem Gap vs. NVIDIA</strong> — Acknowledged by management as "real" but "closing." ROCm parity claims limited to inference workloads; customer lock-in risk remains material.</p>
+<p>2. <strong>MI350 Execution Risk</strong> — Next-gen GPU launch H2 2026 must deliver performance gains and ramp as "significant revenue contributor" on aggressive timeline.</p>
+<p>3. <strong>China Export Controls</strong> — Management refused to quantify, calling it "meaningful." Geopolitical headwind to addressable market; compliance dependencies add execution uncertainty.</p>
+<p>4. <strong>Embedded Recovery Delay</strong> — Prior forecasts missed; Q3 recovery now dependent on uncertain industrial/automotive demand normalization.</p>
+<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
+<p><strong style="color:var(--copper)">**BOTTOM LINE**</strong></p>
+<p>AMD delivered a clean beat on the back of explosive data center growth (57% YoY), with raised Q2 guidance supporting AI accelerator momentum narrative. Gross margins expanding toward long-term 55%+ target. However, software competitiveness vs. NVIDIA, geopolitical export controls, and execution risk on MI350 ramp are material watch-items for sustainability of this outperformance.</p></div>
+  </div>
+
+  <!-- management tone -->
+  <div class="section">
+    <div class="section-label">管理层语气分析</div>
+    <div class="tone-row">
+      <span class="tone-label">信心指数</span>
+      <div class="tone-track"><div class="tone-fill" style="width:80%"></div></div>
+      <span class="tone-score">8/10</span>
+    </div>
+    <p class="body-text" style="margin-top:14px;font-size:14px;color:var(--muted)">Lisa Su projects confidence with concrete wins, quantified commitments ($6B Meta deal), and assertive competitive positioning. Management raised sequential guidance ($11.2B Q2 vs. $10.25B Q1), signaling near-term momentum conviction. Margin expansion narrative supported by data center mix accelerati</p>
+  </div>
+
+  <!-- key themes -->
+  <div class="section">
+    <div class="section-label">核心主题</div>
+    <div class="chips"><span class="chip">数据中心 +57% YoY</span><span class="chip">Instinct MI300X加速</span><span class="chip">EPYC Venice份额提升</span><span class="chip">游戏分部触底</span><span class="chip">Embedded库存消化</span><span class="chip">MI350 H2上市</span><span class="chip">毛利率持续扩张</span></div>
+  </div>
+
+  <!-- risk table -->
+  <div class="section">
+    <div class="section-label">风险矩阵</div>
+    <table class="risk-table">
+      <tr><th>风险</th><th>严重性</th><th>描述</th></tr>
+      
+      <tr>
+        <td><span class="dot-h">●</span> 高</td>
+        <td><strong>NVDA竞争压力</strong></td>
+        <td>MI300X在训练负载上仍落后B200；ROCm生态系统差距未完全弥合</td>
+      </tr>
+      <tr>
+        <td><span class="dot-h">●</span> 高<span class="new-badge">NEW</span></td>
+        <td><strong>中国出口管制</strong></td>
+        <td>受限版本Instinct芯片营收贡献有限，政策风险持续</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中</td>
+        <td><strong>Embedded复苏延迟</strong></td>
+        <td>库存消化比预期更长，工业/汽车终端需求疲软</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中</td>
+        <td><strong>游戏分部低谷</strong></td>
+        <td>半定制业务风险敞口下降，但品牌GPU复苏时间线不确定</td>
+      </tr>
+      <tr>
+        <td><span class="dot-l">●</span> 低</td>
+        <td><strong>GAAP vs Non-GAAP差距</strong></td>
+        <td>$0.53/股调整项主要来自股权激励+Xilinx摊销，需持续关注</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- qa tension -->
+  <div class="section">
+    <div class="section-label">分析师追问 · 张力区域</div>
+    
+    <div class="qa-item">
+      <div class="qa-firm">Timothy Arcuri — UBS</div>
+      <div class="qa-q">MI300X vs H100/B200 竞争定位？</div>
+      <div class="qa-signal">管理层回应: Lisa Su 承认 ROCm 生态差距但强调推理负载 TCO 优势，未直接比较 B200 性能</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">Aaron Rakers — Wells Fargo</div>
+      <div class="qa-q">中国出口管制对营收影响有多大？</div>
+      <div class="qa-signal">管理层回应: Lisa Su 拒绝披露中国营收数字，仅称 'significant portion'，明显回避具体数据</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">Matt Ramsay — TD Cowen</div>
+      <div class="qa-q">Embedded 恢复时间线是否有下行风险？</div>
+      <div class="qa-signal">管理层回应: Jean Hu 承认恢复比预期慢，Q2 可能是收入低点，工业/汽车端需求不确定性高</div>
+    </div>
+  </div>
+
+  <!-- copilot note -->
+  <div class="copilot-note">
+    <span>Earnings Copilot · 由 Claude 生成 · 仅供参考，不构成投资建议</span>
+    <span>分析耗时 76.8s · 2026-05-16</span>
+  </div>
+
+</div>
+</body>
+</html>
