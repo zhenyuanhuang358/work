@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBRS · Cerebras Systems Research</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42;
+  --gold:#c9a84c; --dim:#6b6460; --rule:rgba(139,108,66,.22);
+  --red:#7a2218; --green:#1e4a2a; --amber:#7a4a00;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);}
+.deck{width:100%;height:100%;position:relative;}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  background:var(--paper);opacity:0;pointer-events:none;
+  transition:opacity .45s ease;font-family:'Georgia','Times New Roman',serif;
+}
+.slide.active{opacity:1;pointer-events:all;}
+.folio{position:absolute;bottom:36px;right:48px;font-size:10px;
+  letter-spacing:.18em;color:var(--dim);text-transform:uppercase;}
+.nav{position:fixed;top:50%;transform:translateY(-50%);z-index:100;
+  cursor:pointer;padding:16px 10px;color:rgba(10,10,11,.25);
+  font-size:18px;user-select:none;transition:color .2s;}
+.nav:hover{color:var(--copper);}
+.nav.prev{left:16px;} .nav.next{right:16px;}
+
+/* L01 COVER */
+.l01{justify-content:space-between;padding:64px 72px 48px;
+  background:var(--ink);color:var(--paper);}
+.l01 .eyebrow{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+.l01 h1{font-size:clamp(48px,6.5vw,90px);line-height:.92;letter-spacing:-.03em;font-weight:400;}
+.l01 .sub{margin-top:28px;font-size:14px;color:rgba(241,239,234,.55);
+  letter-spacing:.05em;max-width:520px;line-height:1.7;}
+.l01 .meta-row{display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap;}
+.l01 .ticker{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);display:flex;flex-direction:column;gap:4px;}
+.l01 .price-big{font-size:26px;letter-spacing:-.02em;color:var(--paper);}
+.l01 .rule-line{height:1px;background:rgba(201,168,76,.3);margin:32px 0;}
+.ipo-tag{display:inline-block;border:1px solid var(--gold);padding:4px 14px;
+  font-size:10px;letter-spacing:.2em;color:var(--gold);margin-bottom:20px;text-transform:uppercase;}
+
+/* L02 DARK DIVIDER */
+.l02{background:var(--ink);color:var(--paper);justify-content:center;
+  align-items:center;text-align:center;padding:80px;}
+.l02 .chapter{font-size:10px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:28px;}
+.l02 h2{font-size:clamp(34px,5vw,68px);line-height:1.06;letter-spacing:-.02em;max-width:740px;}
+.l02 .tagline{margin-top:28px;font-size:14px;color:rgba(241,239,234,.5);
+  letter-spacing:.05em;max-width:520px;line-height:1.7;}
+.l02 .ipo-stats{display:flex;gap:40px;justify-content:center;margin-top:44px;flex-wrap:wrap;}
+.ipo-stat{text-align:center;}
+.ipo-stat .is-val{font-size:36px;letter-spacing:-.03em;color:var(--gold);}
+.ipo-stat .is-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(241,239,234,.4);margin-top:6px;}
+
+/* L03 BIG NUMBERS */
+.l03{padding:52px 72px;}
+.l03 .header{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:36px;}
+.l03 .grid{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);border:1px solid var(--rule);flex:1;}
+.cell{background:var(--paper);padding:28px 24px;display:flex;flex-direction:column;gap:8px;}
+.kpi-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);}
+.kpi-val{font-size:clamp(28px,3.8vw,48px);letter-spacing:-.03em;line-height:1;color:var(--ink);}
+.kpi-note{font-size:12px;color:var(--dim);font-style:italic;}
+.kpi-delta{font-size:11px;letter-spacing:.04em;}
+.up{color:var(--green);} .dn{color:var(--red);} .flat{color:var(--dim);}
+.warn{color:var(--amber);}
+
+/* L04 HERO QUESTION */
+.l04{background:var(--ink);color:var(--paper);justify-content:center;
+  align-items:flex-start;padding:80px 88px;}
+.l04 .q-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;}
+.l04 h2{font-size:clamp(28px,4vw,56px);line-height:1.12;letter-spacing:-.02em;max-width:860px;}
+.l04 .answer{margin-top:36px;font-size:14px;color:rgba(241,239,234,.6);
+  max-width:680px;line-height:1.8;}
+.conc-bar{margin-top:32px;display:flex;gap:0;height:12px;border-radius:2px;overflow:hidden;width:680px;}
+.conc-seg{height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:9px;letter-spacing:.08em;color:rgba(241,239,234,.9);}
+
+/* L05 REVENUE CHART */
+.l05{padding:52px 72px 60px;}
+.l05 .chart-title{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--copper);margin-bottom:6px;}
+.l05 .chart-sub{font-size:13px;color:var(--dim);margin-bottom:36px;font-style:italic;}
+.chart-wrap{display:flex;gap:0;align-items:flex-end;flex:1;}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;}
+.bar-outer{width:100%;display:flex;align-items:flex-end;height:240px;}
+.bar-inner{width:60%;margin:0 auto;background:var(--copper);position:relative;min-height:4px;}
+.bar-inner.hi{background:var(--gold);}
+.bar-inner.dim-b{background:rgba(139,108,66,.35);}
+.bar-val{position:absolute;top:-24px;left:50%;transform:translateX(-50%);
+  font-size:11px;white-space:nowrap;color:var(--ink);}
+.bar-q{font-size:11px;letter-spacing:.08em;color:var(--dim);text-align:center;}
+.bar-note{font-size:10px;color:var(--copper);font-style:italic;}
+.chart-legend{display:flex;gap:24px;margin-top:20px;font-size:11px;color:var(--dim);align-items:center;}
+.ls{width:14px;height:10px;display:inline-block;margin-right:6px;vertical-align:middle;}
+
+/* L06 BEFORE/AFTER */
+.l06{padding:52px 72px;}
+.l06 .ba-header{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:36px;}
+.ba-grid{display:grid;grid-template-columns:1fr 52px 1fr;gap:0;flex:1;align-items:center;}
+.ba-side{padding:32px 28px;border:1px solid var(--rule);height:100%;}
+.ba-side.before{background:rgba(122,34,24,.04);}
+.ba-side.after{background:rgba(30,74,42,.04);}
+.ba-tag{font-size:9px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px;}
+.ba-tag.b{color:var(--red);} .ba-tag.a{color:var(--green);}
+.ba-period{font-size:13px;color:var(--dim);font-style:italic;margin-bottom:24px;}
+.ba-item{display:flex;justify-content:space-between;align-items:baseline;
+  padding:12px 0;border-bottom:1px solid var(--rule);}
+.ba-item:last-child{border:none;}
+.bi-label{font-size:12px;color:var(--dim);}
+.bi-val{font-size:20px;letter-spacing:-.02em;}
+.bi-val.red{color:var(--red);} .bi-val.grn{color:var(--green);} .bi-val.amb{color:var(--amber);}
+.ba-arrow{display:flex;justify-content:center;align-items:center;font-size:26px;color:var(--gold);}
+
+/* L07 LIGHT DIVIDER */
+.l07{background:var(--paper);justify-content:center;align-items:center;
+  text-align:center;padding:64px;border:1px solid var(--rule);}
+.l07 .chapter{font-size:10px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:24px;}
+.l07 h2{font-size:clamp(26px,3.8vw,52px);letter-spacing:-.02em;line-height:1.1;
+  color:var(--ink);max-width:720px;}
+.l07 .tagline{margin-top:22px;font-size:13px;color:var(--dim);max-width:580px;line-height:1.75;}
+.tech-badges{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+.tech-badge{border:1px solid var(--rule);padding:14px 22px;font-size:12px;
+  letter-spacing:.06em;color:var(--dim);}
+.tech-badge strong{display:block;font-size:22px;color:var(--ink);
+  letter-spacing:-.01em;margin-bottom:4px;}
+
+/* L08 VALUATION */
+.l08{padding:48px 72px;}
+.l08 .v-header{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:36px;}
+.v-scenarios{display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:24px;}
+.v-cell{background:var(--paper);padding:28px 24px;}
+.v-case{font-size:9px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:14px;}
+.v-case.bull{color:var(--green);} .v-case.base{color:var(--copper);} .v-case.bear{color:var(--red);}
+.v-price{font-size:44px;letter-spacing:-.03em;line-height:1;margin-bottom:10px;}
+.v-price.bull{color:var(--green);} .v-price.base{color:var(--ink);} .v-price.bear{color:var(--red);}
+.v-desc{font-size:12px;color:var(--dim);line-height:1.6;}
+.v-current{display:flex;align-items:center;gap:20px;padding:18px 24px;
+  border:1px solid var(--rule);background:rgba(139,108,66,.04);}
+.v-current-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);}
+.v-current-price{font-size:28px;letter-spacing:-.02em;color:var(--ink);}
+.v-rating{display:inline-block;padding:6px 18px;border:1px solid var(--amber);
+  color:var(--amber);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-left:auto;}
+.v-divider{width:1px;background:var(--rule);align-self:stretch;margin:0 16px;}
+
+/* L09 QUOTE */
+.l09{background:var(--ink);color:var(--paper);justify-content:center;
+  align-items:center;padding:80px 96px;text-align:center;}
+.l09 .q-mark{font-size:72px;line-height:.6;color:var(--gold);opacity:.5;margin-bottom:28px;}
+.l09 blockquote{font-size:clamp(17px,2.6vw,24px);line-height:1.6;letter-spacing:.01em;
+  max-width:800px;font-weight:400;color:rgba(241,239,234,.9);}
+.l09 cite{display:block;margin-top:36px;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-style:normal;}
+
+/* L10 THESIS */
+.l10{padding:48px 72px;}
+.l10 .t-header{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:28px;}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--rule);border:1px solid var(--rule);flex:1;}
+.thesis-cell{background:var(--paper);padding:22px 26px;}
+.thesis-num{font-size:30px;color:var(--rule);letter-spacing:-.03em;
+  line-height:1;margin-bottom:10px;font-family:'Georgia',serif;}
+.thesis-head{font-size:13px;color:var(--ink);margin-bottom:7px;letter-spacing:.02em;}
+.thesis-body{font-size:12px;color:var(--dim);line-height:1.7;}
+
+/* L11 RISK */
+.l11{padding:48px 72px;}
+.l11 .r-header{font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:28px;}
+.risk-table{width:100%;border-collapse:collapse;flex:1;}
+.risk-table th{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  padding:8px 14px;text-align:left;border-bottom:1px solid var(--rule);font-weight:400;}
+.risk-table td{padding:13px 14px;font-size:13px;border-bottom:1px solid var(--rule);vertical-align:top;}
+.risk-table td:first-child{color:var(--ink);}
+.risk-table td:nth-child(2){color:var(--dim);font-size:12px;line-height:1.6;}
+.risk-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;}
+.dot-h{background:#7a2218;} .dot-m{background:#b8860b;} .dot-l{background:#1e4a2a;}
+
+/* L12 RECOMMENDATION */
+.l12{background:var(--ink);color:var(--paper);padding:60px 80px;justify-content:space-between;}
+.l12 .rec-top{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);}
+.l12 .rec-body{margin:auto 0;}
+.l12 .rec-label{font-size:11px;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:14px;}
+.l12 .rec-word{font-size:clamp(64px,9vw,128px);letter-spacing:-.04em;
+  line-height:.88;color:var(--paper);}
+.l12 .rec-sub{margin-top:18px;font-size:13px;color:rgba(241,239,234,.5);
+  max-width:560px;line-height:1.75;}
+.l12 .rec-bottom{display:flex;gap:36px;flex-wrap:wrap;}
+.rec-stat{display:flex;flex-direction:column;gap:5px;}
+.rs-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(241,239,234,.35);}
+.rs-val{font-size:18px;letter-spacing:-.01em;color:var(--paper);}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- S01 COVER -->
+<div class="slide l01 active" id="s1">
+  <div class="eyebrow">Cerebras Systems · NASDAQ: CBRS · IPO 研究报告</div>
+  <div style="margin-top:24px;">
+    <div class="ipo-tag">2026年最大科技 IPO · 昨日上市</div>
+    <h1>芯片里的<br>一张整晶圆</h1>
+    <p class="sub">当全球 AI 推理市场呼唤更快的响应速度，Cerebras 把整块晶圆变成一颗芯片，用 900,000 个核心和 1,200 tokens/秒的推理速度，挑战英伟达的 GPU 世界观。</p>
+  </div>
+  <div class="rule-line"></div>
+  <div class="meta-row">
+    <div class="ticker"><span>当前股价</span><span class="price-big">$279.72</span></div>
+    <div class="ticker"><span>IPO 定价</span><span class="price-big">$185</span></div>
+    <div class="ticker"><span>首日收盘</span><span class="price-big">$311.07</span></div>
+    <div class="ticker"><span>评级</span><span class="price-big" style="color:var(--amber)">HOLD</span></div>
+  </div>
+  <div class="folio">01 / 12</div>
+</div>
+
+<!-- S02 DIVIDER -->
+<div class="slide l02" id="s2">
+  <div class="chapter">Section I · IPO 首日</div>
+  <h2>开盘 +89%，<br>首日收涨 +68%</h2>
+  <p class="tagline">2026年最大科技 IPO，首日市值冲破 $950 亿。<br>但第二天股价已回落 10%——市场在重新定价。</p>
+  <div class="ipo-stats">
+    <div class="ipo-stat"><div class="is-val">$185</div><div class="is-label">IPO 定价</div></div>
+    <div class="ipo-stat"><div class="is-val">$350</div><div class="is-label">开盘价</div></div>
+    <div class="ipo-stat"><div class="is-val">$311</div><div class="is-label">首日收盘</div></div>
+    <div class="ipo-stat"><div class="is-val">$5.55B</div><div class="is-label">募资金额</div></div>
+    <div class="ipo-stat"><div class="is-val">$95B</div><div class="is-label">首日市值峰值</div></div>
+  </div>
+  <div class="folio" style="color:rgba(241,239,234,.3)">02 / 12</div>
+</div>
+
+<!-- S03 BIG NUMBERS -->
+<div class="slide l03" id="s3" style="display:flex;flex-direction:column;">
+  <div class="header">核心财务指标 · 2025 全年 + Q1 2026</div>
+  <div class="grid">
+    <div class="cell">
+      <div class="kpi-label">2025 全年营收</div>
+      <div class="kpi-val">$510M</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ +76% YoY</span>（2024: $290M）</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">Q1 2026 营收</div>
+      <div class="kpi-val">$333M</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ +46% YoY</span> &nbsp;超预期 $316M</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">合同未履行义务（RPO）</div>
+      <div class="kpi-val">$24.6B</div>
+      <div class="kpi-note"><span class="kpi-delta up">48× 2025 年营收</span> &nbsp;已锁定未来收入</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">2025 净利润（归母）</div>
+      <div class="kpi-val">$87.9M</div>
+      <div class="kpi-note"><span class="kpi-delta up">↑ 扭亏</span>（2024: -$481.6M）</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">2025 营业亏损</div>
+      <div class="kpi-val">−$146M</div>
+      <div class="kpi-note"><span class="kpi-delta warn">运营层面仍亏损</span> &nbsp;非现金项目致净利润转正</div>
+    </div>
+    <div class="cell">
+      <div class="kpi-label">OpenAI 大单规模</div>
+      <div class="kpi-val">$20B+</div>
+      <div class="kpi-note"><span class="kpi-delta up">750MW 推理算力</span> &nbsp;可扩展至 2GW</div>
+    </div>
+  </div>
+  <div class="folio">03 / 12</div>
+</div>
+
+<!-- S04 HERO QUESTION -->
+<div class="slide l04" id="s4">
+  <div class="q-label">The Central Risk</div>
+  <h2>2025年 86% 的营收<br>来自两家阿联酋机构——<br>这是增长还是隐雷？</h2>
+  <p class="answer">MBZUAI（穆罕默德·本·扎耶德人工智能大学）占 2025 年营收 62%，G42（阿布扎比 AI 集团）占 24%。两者同属阿联酋主权 AI 生态，高度关联。这是 Cerebras 最大的单一风险：客户集中度。</p>
+  <div class="conc-bar">
+    <div class="conc-seg" style="width:62%;background:#7a2218;">MBZUAI 62%</div>
+    <div class="conc-seg" style="width:24%;background:#b8860b;">G42 24%</div>
+    <div class="conc-seg" style="width:14%;background:rgba(30,74,42,.7);">其他 14%</div>
+  </div>
+  <p style="margin-top:14px;font-size:12px;color:rgba(241,239,234,.4);font-style:italic;">2025 年营收结构 · 正在多元化（OpenAI / AWS 加入）</p>
+  <div class="folio" style="color:rgba(241,239,234,.3)">04 / 12</div>
+</div>
+
+<!-- S05 REVENUE CHART -->
+<div class="slide l05" id="s5" style="display:flex;flex-direction:column;">
+  <div class="chart-title">营收增长轨迹</div>
+  <div class="chart-sub">单位：百万美元 · Q1 2026 为单季数据（年化 $1.33B）</div>
+  <div class="chart-wrap" id="chart"></div>
+  <div class="chart-legend">
+    <span><span class="ls" style="background:rgba(139,108,66,.35)"></span>历史年度</span>
+    <span><span class="ls" style="background:var(--copper)"></span>2025 全年</span>
+    <span><span class="ls" style="background:var(--gold)"></span>Q1 2026（单季）</span>
+  </div>
+  <div class="folio">05 / 12</div>
+</div>
+
+<!-- S06 BEFORE/AFTER -->
+<div class="slide l06" id="s6" style="display:flex;flex-direction:column;">
+  <div class="ba-header">客户结构重构 · UAE 集中 → 科技巨头多元化</div>
+  <div class="ba-grid" style="flex:1;">
+    <div class="ba-side before" style="display:flex;flex-direction:column;">
+      <div class="ba-tag b">Before · 2024–2025</div>
+      <div class="ba-period">阿联酋主权 AI 生态 · 高度集中</div>
+      <div class="ba-item">
+        <span class="bi-label">G42 营收占比</span><span class="bi-val red">85%</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">MBZUAI + G42（2025）</span><span class="bi-val red">86%</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">营业亏损</span><span class="bi-val red">−$146M</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">客户数量</span><span class="bi-val amb">极少</span>
+      </div>
+      <div class="ba-item" style="border:none;margin-top:auto;">
+        <span class="bi-label" style="font-size:11px;line-height:1.6;color:var(--dim)">地缘政治敞口极高，任何中东 AI 政策变化都直接冲击营收</span>
+      </div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-side after" style="display:flex;flex-direction:column;">
+      <div class="ba-tag a">After · 2026+</div>
+      <div class="ba-period">头部科技客户加入 · 多元化开始</div>
+      <div class="ba-item">
+        <span class="bi-label">OpenAI MRA 规模</span><span class="bi-val grn">$20B+</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">AWS 协议状态</span><span class="bi-val amb">绑定条款（未收官）</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">RPO 合同积压</span><span class="bi-val grn">$24.6B</span>
+      </div>
+      <div class="ba-item">
+        <span class="bi-label">Q1 2026 增速</span><span class="bi-val grn">+46% YoY</span>
+      </div>
+      <div class="ba-item" style="border:none;margin-top:auto;">
+        <span class="bi-label" style="font-size:11px;line-height:1.6;color:var(--dim)">OpenAI 成为新锚点客户，AWS 一旦落地将打开超大型云厂商市场</span>
+      </div>
+    </div>
+  </div>
+  <div class="folio">06 / 12</div>
+</div>
+
+<!-- S07 TECH DIVIDER -->
+<div class="slide l07" id="s7">
+  <div class="chapter">Section II · 技术护城河</div>
+  <h2>整块晶圆，一颗芯片</h2>
+  <p class="tagline">WSE-3（Wafer-Scale Engine）将一整块硅晶圆制成单芯片，彻底消除芯片间通信延迟。推理速度 1,200–2,000 tokens/秒，是 H100 的 13–20 倍。在延迟敏感的推理场景，这不是渐进改良，是架构革命。</p>
+  <div class="tech-badges">
+    <div class="tech-badge"><strong>4万亿</strong>晶体管</div>
+    <div class="tech-badge"><strong>90万</strong>AI 计算核心</div>
+    <div class="tech-badge"><strong>44 GB</strong>片上内存</div>
+    <div class="tech-badge"><strong>57×</strong>大于最大 GPU</div>
+    <div class="tech-badge"><strong>13–20×</strong>推理速度（vs H100）</div>
+  </div>
+  <div class="folio">07 / 12</div>
+</div>
+
+<!-- S08 VALUATION -->
+<div class="slide l08" id="s8" style="display:flex;flex-direction:column;">
+  <div class="v-header">估值与目标价区间</div>
+  <div class="v-scenarios">
+    <div class="v-cell">
+      <div class="v-case bull">Bull Case</div>
+      <div class="v-price bull">$420</div>
+      <div class="v-desc">OpenAI 750MW 订单全额兑现、AWS 协议关闭并拉动超大型云厂商跟进、2027 年营收突破 $4B、推理市场快速扩张。以 105× 2026E P/S 定价。</div>
+    </div>
+    <div class="v-cell" style="background:rgba(139,108,66,.04);">
+      <div class="v-case base">Base Case</div>
+      <div class="v-price base">$300</div>
+      <div class="v-desc">Q2 指引顺利兑现、客户结构逐步多元化、2026 年营收 $1.3B、运营亏损持续但收窄。以 65× 2026E P/S 定价，接近当前水平。</div>
+    </div>
+    <div class="v-cell">
+      <div class="v-case bear">Bear Case</div>
+      <div class="v-price bear">$145</div>
+      <div class="v-desc">UAE 客户收缩（地缘风险）、AWS 协议流产、NVDA 推出针对推理的专用产品、高利率环境压缩高风险科技估值。跌破 IPO 价。</div>
+    </div>
+  </div>
+  <div class="v-current">
+    <div><div class="v-current-label">当前股价</div><div class="v-current-price">$279.72</div></div>
+    <div class="v-divider"></div>
+    <div><div class="v-current-label">2026E P/S（年化 $1.33B）</div><div class="v-current-price">~64×</div></div>
+    <div class="v-divider"></div>
+    <div><div class="v-current-label">IPO 后回落幅度</div><div class="v-current-price" style="color:var(--red)">−10%</div></div>
+    <div class="v-rating">HOLD</div>
+  </div>
+  <div class="folio">08 / 12</div>
+</div>
+
+<!-- S09 QUOTE -->
+<div class="slide l09" id="s9">
+  <div class="q-mark">"</div>
+  <blockquote>The world is moving to inference, and inference is moving to Cerebras. Our Wafer-Scale Engine delivers inference at a speed that no cluster of GPUs can match for latency-sensitive applications. The OpenAI partnership and AWS agreement validate that the largest AI companies in the world are betting on a different architecture.</blockquote>
+  <cite>Andrew Feldman · CEO &amp; Co-Founder, Cerebras Systems · IPO Roadshow, May 2026</cite>
+  <div class="folio" style="color:rgba(241,239,234,.3)">09 / 12</div>
+</div>
+
+<!-- S10 THESIS -->
+<div class="slide l10" id="s10" style="display:flex;flex-direction:column;">
+  <div class="t-header">投资逻辑 · 四大支柱（也是四大赌注）</div>
+  <div class="thesis-grid" style="flex:1;">
+    <div class="thesis-cell">
+      <div class="thesis-num">01</div>
+      <div class="thesis-head">推理即下一个平台战争</div>
+      <div class="thesis-body">AI 从训练转向推理的趋势不可逆。推理场景对延迟极度敏感（每毫秒成本巨大），WSE 的片内通信架构在这个场景天然占优。OpenAI 以 $20B 协议验证了这个判断。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">02</div>
+      <div class="thesis-head">$24.6B 合同积压提供业绩能见度</div>
+      <div class="thesis-body">RPO 是 2025 年全年营收的 48 倍，意味着未来数年收入高度确定。即便以保守的 5 年兑现周期计算，每年隐含 $5B 营收天花板，当前估值不算离谱。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">03</div>
+      <div class="thesis-head">无法复制的晶圆级架构</div>
+      <div class="thesis-body">WSE 是 TSMC 独家工艺，设计专利壁垒极高。英伟达不会、也无法简单复制晶圆级架构——因为这要求彻底重写软件栈与封装体系，是数年级别的研发工程。</div>
+    </div>
+    <div class="thesis-cell">
+      <div class="thesis-num">04</div>
+      <div class="thesis-head">从阿联酋到 OpenAI + AWS 的客户升级</div>
+      <div class="thesis-body">客户结构正在从主权 AI 客户向全球顶级科技公司迁移。OpenAI 和 AWS 一旦成为稳定客户，估值锚点从"单一主权客户"跃升为"全球推理基础设施供应商"，估值天花板完全不同。</div>
+    </div>
+  </div>
+  <div class="folio">10 / 12</div>
+</div>
+
+<!-- S11 RISK MATRIX -->
+<div class="slide l11" id="s11" style="display:flex;flex-direction:column;">
+  <div class="r-header">风险矩阵</div>
+  <table class="risk-table" style="flex:1;">
+    <thead>
+      <tr>
+        <th>风险因素</th>
+        <th>分析</th>
+        <th style="width:72px">影响</th>
+        <th style="width:72px">概率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>客户超高集中度</td>
+        <td>2025 年 86% 收入来自两家关联 UAE 机构。任何地缘政治变化、中东 AI 政策收紧或 G42/MBZUAI 资金问题都将直接冲击营收</td>
+        <td><span class="risk-dot dot-h"></span>极高</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+      </tr>
+      <tr>
+        <td>运营层面持续亏损</td>
+        <td>2025 年营业亏损 -$146M，净利润转正依赖非现金会计项目。若 OpenAI/AWS 订单兑现节奏慢，现金消耗压力将上升</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+      </tr>
+      <tr>
+        <td>AWS 协议尚未关闭</td>
+        <td>当前状态为"绑定条款单"，不是正式合同。若谈判破裂，股价将大幅承压，因超大型云市场进入预期已被计入估值</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+        <td><span class="risk-dot dot-l"></span>低</td>
+      </tr>
+      <tr>
+        <td>NVDA 反击推理市场</td>
+        <td>英伟达正通过 NIM 微服务与 GB200 NVL72 强化推理竞争力，Cerebras 的延迟优势可能随 NVDA 产品迭代而收窄</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+      </tr>
+      <tr>
+        <td>IPO 锁定期解禁（+180天）</td>
+        <td>约 180 天后内部人及早期投资者解禁，届时抛售压力可能压低股价，约为 2026年11月前后</td>
+        <td><span class="risk-dot dot-m"></span>中</td>
+        <td><span class="risk-dot dot-h"></span>高</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="folio">11 / 12</div>
+</div>
+
+<!-- S12 RECOMMENDATION -->
+<div class="slide l12" id="s12">
+  <div class="rec-top">Cerebras Systems · NASDAQ: CBRS · AlphaFlow Research · 2026-05-15</div>
+  <div class="rec-body">
+    <div class="rec-label">投资评级</div>
+    <div class="rec-word" style="color:var(--amber)">HOLD</div>
+    <div class="rec-sub">技术护城河真实、$24.6B 合同积压确定、推理叙事强劲——但 86% 客户集中度、运营持续亏损、64× P/S 估值，在 IPO 热情消退后需要时间消化。等待 AWS 协议关闭 或 Q2 2026 财报再建仓更安全。</div>
+  </div>
+  <div class="rec-bottom">
+    <div class="rec-stat"><span class="rs-label">目标价（Base）</span><span class="rs-val">$300</span></div>
+    <div class="rec-stat"><span class="rs-label">当前价</span><span class="rs-val">$279.72</span></div>
+    <div class="rec-stat"><span class="rs-label">IPO 价</span><span class="rs-val">$185</span></div>
+    <div class="rec-stat"><span class="rs-label">关键催化剂</span><span class="rs-val">AWS 落地 · Q2 财报</span></div>
+    <div class="rec-stat"><span class="rs-label">锁定期解禁</span><span class="rs-val">~2026-11</span></div>
+  </div>
+  <div class="folio">12 / 12</div>
+</div>
+
+</div>
+
+<div class="nav prev" id="prev">&#8592;</div>
+<div class="nav next" id="nxt">&#8594;</div>
+
+<script>
+// chart
+const data=[
+  {q:'2022E',v:40,type:'dim-b'},
+  {q:'2023E',v:103,type:'dim-b'},
+  {q:'2024',v:290,type:'dim-b'},
+  {q:'2025',v:510,type:'normal'},
+  {q:'Q1\'26',v:333,type:'hi',note:'单季'},
+];
+const maxV=Math.max(...data.map(d=>d.v));
+const cw=document.getElementById('chart');
+data.forEach(d=>{
+  const pct=(d.v/maxV)*100;
+  const col=document.createElement('div');
+  col.className='bar-col';
+  col.innerHTML=`
+    <div class="bar-outer">
+      <div class="bar-inner ${d.type}" style="height:${pct}%">
+        <div class="bar-val">$${d.v}M</div>
+      </div>
+    </div>
+    <div class="bar-q">${d.q}</div>
+    ${d.note?`<div class="bar-note">${d.note}</div>`:''}
+  `;
+  cw.appendChild(col);
+});
+
+// nav
+const slides=document.querySelectorAll('.slide');
+let cur=0;
+function go(n){
+  slides[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');
+}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('nxt').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') go(cur-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>40) go(cur+(dx<0?1:-1));
+});
+</script>
+</body>
+</html>
