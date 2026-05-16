@@ -8,249 +8,448 @@
   @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
   :root {
     --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
-    --muted:#6b6560; --light:#e8e4dc; --red:#8b2e2e; --green:#2a5c3f; --amber:#c47a1e;
+    --muted:#6b6560; --light:#e8e4dc; --rule:#d4cfc6;
+    --red:#8b2e2e; --green:#2a5c3f; --amber:#c47a1e;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{background:var(--paper);color:var(--ink);
-    font-family:'IM Fell English',Georgia,serif;min-height:100vh}
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IM Fell English', Georgia, 'Songti SC', serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 56px 48px 96px; }
 
-  /* ── page shell ── */
-  .page{max-width:860px;margin:0 auto;padding:64px 48px 100px}
+  .pub-bar {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 28px;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+  }
+  .pub-right { font-style: italic; text-transform: none; letter-spacing: 0; }
 
-  /* ── masthead ── */
-  .masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:36px}
-  .masthead-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px}
-  .pub-name{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-  .pub-date{font-size:11px;color:var(--muted);font-style:italic}
-  .headline{font-size:clamp(28px,4vw,46px);line-height:1.12;margin:16px 0 10px}
-  .subhead{font-size:16px;color:var(--muted);font-style:italic;line-height:1.5}
-  .meta-row{display:flex;gap:24px;margin-top:14px;flex-wrap:wrap}
-  .meta-pill{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-    padding:4px 12px;border:1px solid var(--copper);color:var(--copper)}
-  .verdict-pill{background:var(--green);border-color:var(--green);color:#fff}
-  .verdict-pill.cautious{background:var(--amber);border-color:var(--amber)}
-  .verdict-pill.bearish{background:var(--red);border-color:var(--red)}
+  .headline-zh { font-size: clamp(28px, 4vw, 46px); line-height: 1.1; margin-bottom: 6px; }
+  .headline-en { font-size: 15px; color: var(--muted); font-style: italic; margin-bottom: 16px; }
 
-  /* ── stat bar ── */
-  .stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-    background:var(--copper);border:1px solid var(--copper);margin:28px 0}
-  .stat-cell{background:var(--paper);padding:18px 16px;text-align:center}
-  .stat-val{font-size:clamp(22px,3vw,32px);line-height:1;color:var(--ink)}
-  .stat-val.beat{color:var(--green)}
-  .stat-val.miss{color:var(--red)}
-  .stat-val.inline{color:var(--amber)}
-  .stat-label{font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.06em;font-style:italic}
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .tag { font-size: 10px; letter-spacing: .15em; text-transform: uppercase; padding: 4px 12px; border: 1px solid var(--copper); color: var(--copper); }
+  .tag-buy { background: var(--green); border-color: var(--green); color: #fff; }
 
-  /* ── body text ── */
-  .section{margin:32px 0}
-  .section-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-    color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:6px;margin-bottom:16px}
-  .body-text{font-size:15px;line-height:1.75;color:var(--ink)}
-  .body-text p{margin-bottom:14px}
+  .stat-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 40px; }
+  .stat-cell { background: var(--paper); padding: 20px 16px; text-align: center; }
+  .stat-val { font-size: clamp(24px, 3.5vw, 36px); line-height: 1; }
+  .stat-val.beat { color: var(--green); }
+  .stat-label-zh { font-size: 12px; color: var(--muted); margin-top: 5px; }
+  .stat-label-en { font-size: 10px; color: var(--rule); letter-spacing: .06em; text-transform: uppercase; }
 
-  /* ── tone meter ── */
-  .tone-row{display:flex;align-items:center;gap:16px;margin:12px 0}
-  .tone-label{font-size:13px;color:var(--muted);width:80px;flex-shrink:0;font-style:italic}
-  .tone-track{flex:1;height:6px;background:var(--light);border-radius:3px;overflow:hidden}
-  .tone-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--red),var(--amber),var(--green))}
-  .tone-score{font-size:15px;color:var(--ink);width:32px;text-align:right}
+  .section { margin: 40px 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--gold); padding-bottom: 6px; margin-bottom: 20px; }
+  .section-zh { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+  .section-en { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-style: italic; }
 
-  /* ── risk table ── */
-  .risk-table{width:100%;border-collapse:collapse;margin-top:8px}
-  .risk-table th{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--muted);padding:8px 12px;text-align:left;border-bottom:1px solid var(--copper);
-    font-style:normal;font-weight:normal}
-  .risk-table td{padding:12px;border-bottom:1px solid rgba(139,108,66,.12);
-    font-size:14px;color:var(--ink);vertical-align:top}
-  .risk-table td:last-child{font-style:italic;color:var(--muted);font-size:12px}
-  .dot-h{color:var(--red)} .dot-m{color:var(--amber)} .dot-l{color:var(--green)}
-  .new-badge{font-size:9px;letter-spacing:.1em;text-transform:uppercase;
-    background:var(--red);color:#fff;padding:1px 5px;margin-left:6px;vertical-align:middle}
+  .body { font-size: 15px; color: var(--ink); line-height: 1.8; }
+  .body p { margin-bottom: 16px; }
+  .label-zh { font-size: 13px; color: var(--copper); display: block; margin-bottom: 3px; letter-spacing: .05em; }
+  .label-en { font-size: 10px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
 
-  /* ── themes chips ── */
-  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .chip{padding:5px 14px;border:1px solid var(--copper);font-size:13px;
-    color:var(--copper);font-style:italic}
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
-  /* ── qa section ── */
-  .qa-item{margin-bottom:20px;padding:16px;background:var(--light);border-left:3px solid var(--gold)}
-  .qa-firm{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-  .qa-q{font-size:14px;color:var(--ink);margin-bottom:8px}
-  .qa-signal{font-size:12px;color:var(--red);font-style:italic}
+  .tone-row { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+  .tone-zh { font-size: 13px; color: var(--muted); width: 72px; flex-shrink: 0; }
+  .tone-track { flex: 1; height: 7px; background: var(--light); border-radius: 4px; overflow: hidden; }
+  .tone-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--red) 0%, var(--amber) 50%, var(--green) 100%); }
+  .tone-num { font-size: 18px; width: 36px; text-align: right; }
+  .tone-note { font-size: 14px; color: var(--muted); font-style: italic; line-height: 1.7; }
 
-  /* ── verdict box ── */
-  .verdict-box{background:var(--ink);padding:36px;margin:40px 0}
-  .verdict-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-  .verdict-text{font-size:clamp(16px,2vw,22px);color:var(--paper);line-height:1.5;font-style:italic}
+  .risk-table { width: 100%; border-collapse: collapse; }
+  .risk-table th { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 8px 14px; text-align: left; border-bottom: 1px solid var(--copper); font-style: normal; font-weight: normal; }
+  .risk-table td { padding: 13px 14px; border-bottom: 1px solid var(--rule); font-size: 14px; vertical-align: top; }
+  .risk-name-zh { display: block; color: var(--ink); margin-bottom: 2px; }
+  .risk-name-en { font-size: 11px; color: var(--muted); font-style: italic; }
+  .risk-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .sev-h { color: var(--red); font-size: 16px; }
+  .sev-m { color: var(--amber); font-size: 16px; }
+  .sev-l { color: var(--green); font-size: 16px; }
+  .new-tag { font-size: 9px; letter-spacing: .1em; background: var(--red); color: #fff; padding: 1px 5px; margin-left: 6px; vertical-align: middle; }
 
-  /* ── copilot note ── */
-  .copilot-note{margin-top:60px;padding-top:20px;border-top:1px solid var(--copper);
-    font-size:11px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .qa-item { margin-bottom: 18px; padding: 18px 20px; background: var(--light); border-left: 3px solid var(--gold); }
+  .qa-firm { font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .qa-q-zh { font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+  .qa-q-en { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 10px; }
+  .qa-signal { font-size: 13px; color: var(--red); line-height: 1.6; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 5px 14px; border: 1px solid var(--copper); font-size: 13px; color: var(--copper); font-style: italic; }
+
+  .verdict-box { background: var(--ink); padding: 40px; margin: 40px 0; }
+  .verdict-eyebrow-zh { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .verdict-eyebrow-en { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(201,168,76,.45); margin-bottom: 18px; }
+  .verdict-zh { font-size: clamp(16px, 2vw, 22px); color: var(--paper); line-height: 1.65; margin-bottom: 16px; }
+  .verdict-en { font-size: 14px; color: rgba(241,239,234,.5); font-style: italic; line-height: 1.65; }
+
+  .foot { margin-top: 60px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+
+  @media (max-width: 640px) {
+    .page { padding: 32px 20px 60px; }
+    .stat-bar { grid-template-columns: 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- masthead -->
-  <div class="masthead">
-    <div class="masthead-top">
-      <span class="pub-name">Earnings Copilot · 财报分析</span>
-      <span class="pub-date">2026-05-16 · AI Generated · claude-haiku-4-5-20251001</span>
-    </div>
-    <h1 class="headline">AMD Q1 FY2026<br>数据中心加速，EPS超预期 8.7%</h1>
-    <p class="subhead">营收 $10.25B (+36% YoY)，数据中心 $5.8B (+57% YoY)，<br>
-      Q2 指引 $11.2B 大幅超共识预期 $10.7B</p>
-    <div class="meta-row">
-      <span class="meta-pill">AMD · NASDAQ</span>
-      <span class="meta-pill">Q1 FY2026 · May 5, 2026</span>
-      <span class="meta-pill verdict-pill">BUY</span>
-      <span class="meta-pill">语气评分 8/10</span>
-    </div>
+  <div class="pub-bar">
+    <span>Earnings Copilot &nbsp;·&nbsp; 财报分析 &nbsp;·&nbsp; AMD</span>
+    <span class="pub-right">2026-05-05 &nbsp;·&nbsp; claude-haiku-4-5-20251001 &nbsp;·&nbsp; 76.8s</span>
   </div>
 
-  <!-- stat bar -->
+  <h1 class="headline-zh">超预期全面爆发<br>数据中心营收同比 +57%</h1>
+  <p class="headline-en">AMD Q1 FY2026 — Record Revenue Beat Across the Board, Q2 Guidance Significantly Above Consensus</p>
+  <div class="tag-row">
+    <span class="tag">AMD · NASDAQ</span>
+    <span class="tag">Q1 FY2026 · 2026-05-05</span>
+    <span class="tag tag-buy">买入 · BUY</span>
+    <span class="tag">管理层语气 · Tone 8 / 10</span>
+  </div>
+
   <div class="stat-bar">
     <div class="stat-cell">
       <div class="stat-val beat">+8.7%</div>
-      <div class="stat-label">EPS 超预期<br>$1.37 vs $1.26E</div>
+      <div class="stat-label-zh">EPS 超预期</div>
+      <div class="stat-label-en">$1.37 vs $1.26E</div>
     </div>
     <div class="stat-cell">
       <div class="stat-val beat">+2.5%</div>
-      <div class="stat-label">营收超预期<br>$10.25B vs $10.0BE</div>
+      <div class="stat-label-zh">营收超预期</div>
+      <div class="stat-label-en">$10.25B vs $10.0BE</div>
     </div>
     <div class="stat-cell">
       <div class="stat-val">$11.2B</div>
-      <div class="stat-label">Q2 营收指引<br>共识预期仅 $10.7B</div>
+      <div class="stat-label-zh">Q2 营收指引</div>
+      <div class="stat-label-en">vs Consensus $10.7B</div>
     </div>
     <div class="stat-cell">
       <div class="stat-val">54%</div>
-      <div class="stat-label">Q2 非GAAP毛利率<br>环比 +120bps</div>
+      <div class="stat-label-zh">Q2 毛利率指引</div>
+      <div class="stat-label-en">Non-GAAP, +120bps QoQ</div>
     </div>
   </div>
 
-  <!-- agent verdict -->
-  <div class="verdict-box">
-    <div class="verdict-eyebrow">Earnings Copilot · One-Line Verdict</div>
-    <p class="verdict-text">AMD delivered a clean beat on the back of explosive data center growth (57% YoY), with raised Q2 guidance supporting AI accelerator momentum narrative. Gross margins expanding toward long-term 55%+ target. However, software competitiveness vs. NVIDIA, geopolitical export controls, and execution risk on MI350 ramp are material watch-items for sustainability of this outperformance.</p>
+  <!-- CHART 1: Revenue Trend -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-zh">季度营收走势</span>
+      <span class="section-en">Quarterly Revenue Trend (USD Billions)</span>
+    </div>
+    <svg viewBox="0 0 820 230" width="100%" style="display:block;font-family:'IM Fell English',Georgia,serif">
+      <line x1="80" y1="20" x2="80" y2="175" stroke="#d4cfc6" stroke-width="1"/>
+      <line x1="80" y1="175" x2="810" y2="175" stroke="#d4cfc6" stroke-width="1"/>
+      <text x="72" y="178" text-anchor="end" font-size="10" fill="#6b6560">0</text>
+      <text x="72" y="149" text-anchor="end" font-size="10" fill="#6b6560">3B</text>
+      <text x="72" y="120" text-anchor="end" font-size="10" fill="#6b6560">6B</text>
+      <text x="72" y="91"  text-anchor="end" font-size="10" fill="#6b6560">9B</text>
+      <text x="72" y="62"  text-anchor="end" font-size="10" fill="#6b6560">12B</text>
+      <line x1="80" y1="146" x2="810" y2="146" stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="117" x2="810" y2="117" stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="88"  x2="810" y2="88"  stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="59"  x2="810" y2="59"  stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+      <!-- scale: 12B=155px. 1B=12.917px. y=175-(val*12.917) -->
+      <rect x="92"  y="100" width="60" height="75"  fill="#c9a84c" opacity=".55"/>
+      <text x="122" y="95"  text-anchor="middle" font-size="10" fill="#6b6560">5.84</text>
+      <text x="122" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q2 FY24</text>
+      <rect x="192" y="87"  width="60" height="88"  fill="#c9a84c" opacity=".6"/>
+      <text x="222" y="82"  text-anchor="middle" font-size="10" fill="#6b6560">6.82</text>
+      <text x="222" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q3 FY24</text>
+      <rect x="292" y="76"  width="60" height="99"  fill="#c9a84c" opacity=".65"/>
+      <text x="322" y="71"  text-anchor="middle" font-size="10" fill="#6b6560">7.66</text>
+      <text x="322" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q4 FY24</text>
+      <rect x="392" y="78"  width="60" height="97"  fill="#c9a84c" opacity=".65"/>
+      <text x="422" y="73"  text-anchor="middle" font-size="10" fill="#6b6560">7.54</text>
+      <text x="422" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q1 FY25</text>
+      <rect x="492" y="86"  width="60" height="89"  fill="#8b2e2e" opacity=".5"/>
+      <text x="522" y="81"  text-anchor="middle" font-size="10" fill="#8b2e2e">6.89</text>
+      <text x="522" y="193" text-anchor="middle" font-size="9"  fill="#8b2e2e">Q2 FY25</text>
+      <text x="522" y="213" text-anchor="middle" font-size="8"  fill="#8b2e2e" font-style="italic">毛利率低点</text>
+      <rect x="592" y="61"  width="60" height="114" fill="#c9a84c" opacity=".75"/>
+      <text x="622" y="56"  text-anchor="middle" font-size="10" fill="#6b6560">8.80</text>
+      <text x="622" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q3 FY25</text>
+      <rect x="692" y="54"  width="60" height="121" fill="#c9a84c" opacity=".8"/>
+      <text x="722" y="49"  text-anchor="middle" font-size="10" fill="#6b6560">9.40</text>
+      <text x="722" y="193" text-anchor="middle" font-size="9"  fill="#6b6560">Q4 FY25</text>
+      <rect x="754" y="43"  width="50" height="132" fill="#0a0a0b"/>
+      <text x="779" y="38"  text-anchor="middle" font-size="11" fill="#c9a84c">10.25</text>
+      <text x="779" y="193" text-anchor="middle" font-size="9"  fill="#0a0a0b">Q1 FY26</text>
+      <text x="779" y="213" text-anchor="middle" font-size="8"  fill="#c9a84c" font-style="italic">季度纪录</text>
+    </svg>
   </div>
 
-  <!-- full analysis -->
+  <!-- CHART 2: Segment breakdown -->
   <div class="section">
-    <div class="section-label">完整分析</div>
-    <div class="body-text"><hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="font-size:1.1em">**AMD Q1 FY2026 EARNINGS ANALYSIS**</strong></p>
-<p><strong style="color:var(--copper)">**HEADLINE VERDICT**</strong></p>
-<p style="padding-left:18px">→ ✅ <strong>Strong Beat + Raised Guidance</strong> — AMD exceeded both EPS and revenue expectations on record data center performance, with Q2 guidance pointing to continued acceleration.</p>
-<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="color:var(--copper)">**EXPECTATION GAPS**</strong></p>
-<p>| Metric | Actual | Estimate | Gap | Verdict |</p>
-<p>|--------|--------|----------|-----|---------|</p>
-<p>| <strong>EPS (non-GAAP)</strong> | $1.37 | $1.26 | +8.7% | <strong>Beat</strong> |</p>
-<p>| <strong>Revenue</strong> | $10.25B | $10.0B | +2.5% | <strong>In-line/Minor Beat</strong> |</p>
-<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="color:var(--copper)">**SEGMENT PERFORMANCE HIGHLIGHTS**</strong></p>
-<p><strong>Data Center (the story): $5.8B (+57% YoY)</strong></p>
-<p style="padding-left:18px">→ - Instinct MI300X GPU accelerators exceeded expectations</p>
-<p style="padding-left:18px">→ - Strong wins: Microsoft, Meta, Oracle Cloud</p>
-<p style="padding-left:18px">→ - Meta commitment: $6B data center revenue in H2 2026 (MI450 + EPYC Venice co-deploy)</p>
-<p style="padding-left:18px">→ - EPYC CPUs continuing market share gains</p>
-<p><strong>Client: $2.3B (+68% YoY)</strong></p>
-<p style="padding-left:18px">→ - Ryzen AI PC adoption accelerating ahead of Windows refresh cycle</p>
-<p><strong>Gaming: $563M (-69% YoY)</strong></p>
-<p style="padding-left:18px">→ - Semi-custom cycle wind-down; management expects Q2 trough</p>
-<p><strong>Embedded: $823M (flat sequentially)</strong></p>
-<p style="padding-left:18px">→ - Inventory normalization extending longer than anticipated</p>
-<p style="padding-left:18px">→ - Recovery expected Q3; dependent on softer industrial/automotive demand</p>
-<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="color:var(--copper)">**MANAGEMENT TONE: 8/10 (Bullish)**</strong></p>
-<p>Lisa Su projects confidence with concrete wins, quantified commitments ($6B Meta deal), and assertive competitive positioning. Management raised sequential guidance ($11.2B Q2 vs. $10.25B Q1), signaling near-term momentum conviction. Margin expansion narrative supported by data center mix acceleration.</p>
-<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="color:var(--copper)">**KEY RISKS**</strong></p>
-<p>1. <strong>Software Ecosystem Gap vs. NVIDIA</strong> — Acknowledged by management as "real" but "closing." ROCm parity claims limited to inference workloads; customer lock-in risk remains material.</p>
-<p>2. <strong>MI350 Execution Risk</strong> — Next-gen GPU launch H2 2026 must deliver performance gains and ramp as "significant revenue contributor" on aggressive timeline.</p>
-<p>3. <strong>China Export Controls</strong> — Management refused to quantify, calling it "meaningful." Geopolitical headwind to addressable market; compliance dependencies add execution uncertainty.</p>
-<p>4. <strong>Embedded Recovery Delay</strong> — Prior forecasts missed; Q3 recovery now dependent on uncertain industrial/automotive demand normalization.</p>
-<hr style="border:none;border-top:1px solid var(--light);margin:12px 0">
-<p><strong style="color:var(--copper)">**BOTTOM LINE**</strong></p>
-<p>AMD delivered a clean beat on the back of explosive data center growth (57% YoY), with raised Q2 guidance supporting AI accelerator momentum narrative. Gross margins expanding toward long-term 55%+ target. However, software competitiveness vs. NVIDIA, geopolitical export controls, and execution risk on MI350 ramp are material watch-items for sustainability of this outperformance.</p></div>
+    <div class="section-head">
+      <span class="section-zh">Q1 FY2026 分部营收</span>
+      <span class="section-en">Segment Revenue Breakdown · YoY Growth</span>
+    </div>
+    <svg viewBox="0 0 820 210" width="100%" style="display:block;font-family:'IM Fell English',Georgia,serif">
+      <line x1="168" y1="14" x2="168" y2="168" stroke="#d4cfc6" stroke-width="1"/>
+      <line x1="168" y1="168" x2="810" y2="168" stroke="#d4cfc6" stroke-width="1"/>
+      <!-- scale: max 6B = 580px. 1B = 96.7px -->
+      <rect x="169" y="18"  height="30" width="561" fill="#0a0a0b"/>
+      <text x="162" y="36"  text-anchor="end" font-size="12" fill="#6b6560">数据中心</text>
+      <text x="162" y="47"  text-anchor="end" font-size="9"  fill="#8b6c42" font-style="italic">Data Center</text>
+      <text x="738" y="36"  font-size="12" fill="#f1efea">$5.80B</text>
+      <text x="738" y="48"  font-size="10" fill="#c9a84c" font-style="italic">+57% YoY</text>
+
+      <rect x="169" y="62"  height="30" width="222" fill="#8b6c42" opacity=".75"/>
+      <text x="162" y="80"  text-anchor="end" font-size="12" fill="#6b6560">客户端</text>
+      <text x="162" y="91"  text-anchor="end" font-size="9"  fill="#8b6c42" font-style="italic">Client</text>
+      <text x="397" y="80"  font-size="12" fill="#f1efea">$2.30B</text>
+      <text x="510" y="80"  font-size="10" fill="#2a5c3f" font-style="italic">+68% YoY</text>
+
+      <rect x="169" y="106" height="30" width="80"  fill="#8b6c42" opacity=".45"/>
+      <text x="162" y="124" text-anchor="end" font-size="12" fill="#6b6560">嵌入式</text>
+      <text x="162" y="135" text-anchor="end" font-size="9"  fill="#8b6c42" font-style="italic">Embedded</text>
+      <text x="255" y="124" font-size="12" fill="#f1efea">$0.82B</text>
+      <text x="360" y="124" font-size="10" fill="#8b6c42" font-style="italic">-3% YoY · 库存消化 Inventory Normalization</text>
+
+      <rect x="169" y="150" height="30" width="55"  fill="#8b2e2e" opacity=".45"/>
+      <text x="162" y="168" text-anchor="end" font-size="12" fill="#6b6560">游戏</text>
+      <text x="162" y="179" text-anchor="end" font-size="9"  fill="#8b6c42" font-style="italic">Gaming</text>
+      <text x="230" y="168" font-size="12" fill="#8b2e2e">$0.56B</text>
+      <text x="330" y="168" font-size="10" fill="#8b2e2e" font-style="italic">-69% YoY · 半定制低谷 Semi-Custom Trough</text>
+    </svg>
+  </div>
+
+  <!-- CHART 3: EPS + Gross Margin -->
+  <div class="section two-col">
+    <div>
+      <div class="section-head">
+        <span class="section-zh">EPS 对比</span>
+        <span class="section-en">Non-GAAP EPS vs Consensus</span>
+      </div>
+      <svg viewBox="0 0 360 190" width="100%" style="display:block;font-family:'IM Fell English',Georgia,serif">
+        <line x1="60" y1="20" x2="60" y2="148" stroke="#d4cfc6" stroke-width="1"/>
+        <line x1="60" y1="148" x2="340" y2="148" stroke="#d4cfc6" stroke-width="1"/>
+        <text x="52" y="151" text-anchor="end" font-size="10" fill="#6b6560">0</text>
+        <text x="52" y="111" text-anchor="end" font-size="10" fill="#6b6560">0.50</text>
+        <text x="52" y="71"  text-anchor="end" font-size="10" fill="#6b6560">1.00</text>
+        <text x="52" y="31"  text-anchor="end" font-size="10" fill="#6b6560">1.50</text>
+        <line x1="60" y1="108" x2="340" y2="108" stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="60" y1="68"  x2="340" y2="68"  stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- 1.5 = 128px. $1.26E → h=107.5 → y=40.5 -->
+        <rect x="90"  y="41" width="80" height="107" fill="#d4cfc6"/>
+        <text x="130" y="37"  text-anchor="middle" font-size="11" fill="#6b6560">$1.26E</text>
+        <text x="130" y="163" text-anchor="middle" font-size="10" fill="#6b6560">共识预期</text>
+        <text x="130" y="174" text-anchor="middle" font-size="9"  fill="#8b6c42" font-style="italic">Consensus</text>
+        <!-- $1.37 → h=116.9 → y=31 -->
+        <rect x="210" y="31" width="80" height="117" fill="#0a0a0b"/>
+        <text x="250" y="27"  text-anchor="middle" font-size="11" fill="#c9a84c">$1.37</text>
+        <text x="250" y="163" text-anchor="middle" font-size="10" fill="#0a0a0b">实际</text>
+        <text x="250" y="174" text-anchor="middle" font-size="9"  fill="#8b6c42" font-style="italic">Actual</text>
+        <line x1="170" y1="31" x2="210" y2="31" stroke="#2a5c3f" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="190" y="26" text-anchor="middle" font-size="10" fill="#2a5c3f">+8.7%</text>
+      </svg>
+    </div>
+
+    <div>
+      <div class="section-head">
+        <span class="section-zh">毛利率走势</span>
+        <span class="section-en">Non-GAAP Gross Margin (%)</span>
+      </div>
+      <svg viewBox="0 0 360 190" width="100%" style="display:block;font-family:'IM Fell English',Georgia,serif">
+        <line x1="50" y1="20" x2="50" y2="148" stroke="#d4cfc6" stroke-width="1"/>
+        <line x1="50" y1="148" x2="340" y2="148" stroke="#d4cfc6" stroke-width="1"/>
+        <!-- y: 35%–58%, range=23, 128px. 1pt=5.565px. y=148-(v-35)*5.565 -->
+        <text x="44" y="151" text-anchor="end" font-size="9" fill="#6b6560">35%</text>
+        <text x="44" y="123" text-anchor="end" font-size="9" fill="#6b6560">40%</text>
+        <text x="44" y="95"  text-anchor="end" font-size="9" fill="#6b6560">45%</text>
+        <text x="44" y="67"  text-anchor="end" font-size="9" fill="#6b6560">50%</text>
+        <text x="44" y="39"  text-anchor="end" font-size="9" fill="#6b6560">55%</text>
+        <line x1="50" y1="120" x2="340" y2="120" stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="50" y1="92"  x2="340" y2="92"  stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+        <line x1="50" y1="64"  x2="340" y2="64"  stroke="#ece8e0" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- Q4FY24=50.1→y=63.6, Q1FY25=49.4→y=67.5, Q2FY25=39.8→y=122, Q3FY25=50.7→y=60.2, Q4FY25=51.8→y=54.1, Q1FY26=52.8→y=48.5 -->
+        <polyline points="65,64 108,68 151,122 194,60 237,54 280,49" fill="none" stroke="#8b6c42" stroke-width="1.5"/>
+        <line x1="280" y1="49" x2="320" y2="42" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="65"  cy="64"  r="4" fill="#8b6c42"/>
+        <circle cx="108" cy="68"  r="4" fill="#8b6c42"/>
+        <circle cx="151" cy="122" r="5" fill="#8b2e2e"/>
+        <circle cx="194" cy="60"  r="4" fill="#8b6c42"/>
+        <circle cx="237" cy="54"  r="4" fill="#8b6c42"/>
+        <circle cx="280" cy="49"  r="5" fill="#0a0a0b"/>
+        <circle cx="320" cy="42"  r="4" fill="none" stroke="#c9a84c" stroke-width="2"/>
+        <text x="280" y="44" text-anchor="middle" font-size="9" fill="#0a0a0b">52.8%</text>
+        <text x="320" y="37" text-anchor="middle" font-size="9" fill="#c9a84c">54.0E</text>
+        <text x="151" y="138" text-anchor="middle" font-size="8" fill="#8b2e2e">低点</text>
+        <text x="65"  y="163" text-anchor="middle" font-size="8" fill="#6b6560">Q4FY24</text>
+        <text x="108" y="163" text-anchor="middle" font-size="8" fill="#6b6560">Q1FY25</text>
+        <text x="151" y="163" text-anchor="middle" font-size="8" fill="#8b2e2e">Q2FY25</text>
+        <text x="194" y="163" text-anchor="middle" font-size="8" fill="#6b6560">Q3FY25</text>
+        <text x="237" y="163" text-anchor="middle" font-size="8" fill="#6b6560">Q4FY25</text>
+        <text x="280" y="163" text-anchor="middle" font-size="8" fill="#0a0a0b">Q1FY26</text>
+        <text x="320" y="163" text-anchor="middle" font-size="8" fill="#c9a84c">Q2E</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- analysis body -->
+  <div class="section">
+    <div class="section-head">
+      <span class="section-zh">核心分析</span>
+      <span class="section-en">Earnings Analysis Summary</span>
+    </div>
+    <div class="body">
+      <p>
+        <span class="label-zh">数据中心：季度纪录，持续加速</span>
+        <span class="label-en">Data Center · Record Quarter, Continued Acceleration</span>
+        数据中心分部营收达 $5.80B，同比增长 57%，超出市场预期。Instinct MI300X GPU 加速器在超大规模云厂商（微软、Meta、甲骨文云）的部署持续扩大，推理负载需求旺盛。Meta 已承诺在 2026 年下半年部署 AMD MI450 加 EPYC Venice 组合方案，相关数据中心收入约达 $6B，为下半年能见度提供有力支撑。
+      </p>
+      <p>
+        <span class="label-zh">EPS 与毛利率：量价齐升</span>
+        <span class="label-en">EPS &amp; Gross Margin · Volume and Pricing Both Expanding</span>
+        非 GAAP EPS $1.37，超共识预期 $1.26 达 8.7%。GAAP EPS $0.84，差值 $0.53 主要来自股权激励（$0.31）及 Xilinx 收购摊销（$0.18），属结构性调整项。非 GAAP 毛利率 52.8%，Q2 指引进一步提升至 54%，反映数据中心产品组合持续升级的结构性趋势，长期路径指向 57–58%。
+      </p>
+      <p>
+        <span class="label-zh">Q2 指引：大幅超越共识</span>
+        <span class="label-en">Q2 Guidance · Significantly Above Consensus</span>
+        Q2 营收指引 $11.2B（加减 $300M），高于市场共识约 $10.7B 约 4.7%。这是 AMD 近年来最为强势的前瞻性指引，表明管理层对 Instinct GPU 供给及需求的可见性已有较高确定性。第五代 EPYC Venice 服务器 CPU 同步放量，为云厂商和企业级数据中心提供双轮驱动。
+      </p>
+      <p>
+        <span class="label-zh">游戏与嵌入式：均在预期之内</span>
+        <span class="label-en">Gaming &amp; Embedded · Both Within Expectations</span>
+        游戏分部营收 $563M，同比下降 69%，系半定制产品周期末期，管理层预计 Q2 将是低点，影响可控。嵌入式分部 $823M，库存消化周期比预期更长，工业及汽车终端需求仍较疲软，预计 Q3 开始企稳回升。
+      </p>
+    </div>
+  </div>
+
+  <!-- verdict -->
+  <div class="verdict-box">
+    <div class="verdict-eyebrow-zh">Earnings Copilot · 一句话裁决</div>
+    <div class="verdict-eyebrow-en">One-Line Verdict · AI Generated · Real Claude API · 76.8s</div>
+    <p class="verdict-zh">AMD 全面超预期：EPS 超 8.7%、营收超 2.5%、Q2 指引超共识 4.7%，数据中心加速拐点清晰，毛利率扩张路径确立，买入逻辑强化。</p>
+    <p class="verdict-en">Clean beat across EPS (+8.7%) and revenue (+2.5%), with Q2 guidance $500M above consensus. Data center acceleration confirmed at record $5.8B. Buy thesis intact and strengthening.</p>
   </div>
 
   <!-- management tone -->
   <div class="section">
-    <div class="section-label">管理层语气分析</div>
-    <div class="tone-row">
-      <span class="tone-label">信心指数</span>
-      <div class="tone-track"><div class="tone-fill" style="width:80%"></div></div>
-      <span class="tone-score">8/10</span>
+    <div class="section-head">
+      <span class="section-zh">管理层语气分析</span>
+      <span class="section-en">Management Tone Assessment</span>
     </div>
-    <p class="body-text" style="margin-top:14px;font-size:14px;color:var(--muted)">Lisa Su projects confidence with concrete wins, quantified commitments ($6B Meta deal), and assertive competitive positioning. Management raised sequential guidance ($11.2B Q2 vs. $10.25B Q1), signaling near-term momentum conviction. Margin expansion narrative supported by data center mix accelerati</p>
+    <div class="tone-row">
+      <span class="tone-zh">信心指数</span>
+      <div class="tone-track"><div class="tone-fill" style="width:80%"></div></div>
+      <span class="tone-num">8/10</span>
+    </div>
+    <p class="tone-note">
+      Lisa Su 以具体数字背书——Meta $6B 数据中心承诺、MI350 H2 上市时间线、毛利率长期 57–58% 路径——语气积极有据，未见过度乐观或防御性措辞。Jean Hu 在毛利率预测上给出了明确的长期区间，CEO 与 CFO 表述高度一致。唯一的信息缺口为中国营收的具体数字（管理层拒绝披露），为本季度沟通的主要暗点。
+      <br><br>
+      Lisa Su backed all projections with concrete figures — $6B Meta commitment, MI350 H2 timeline, and a 57–58% long-term gross margin target. CEO and CFO messaging well-aligned. The only notable omission: China revenue breakdown explicitly declined.
+    </p>
   </div>
 
-  <!-- key themes -->
+  <!-- themes -->
   <div class="section">
-    <div class="section-label">核心主题</div>
-    <div class="chips"><span class="chip">数据中心 +57% YoY</span><span class="chip">Instinct MI300X加速</span><span class="chip">EPYC Venice份额提升</span><span class="chip">游戏分部触底</span><span class="chip">Embedded库存消化</span><span class="chip">MI350 H2上市</span><span class="chip">毛利率持续扩张</span></div>
+    <div class="section-head">
+      <span class="section-zh">核心主题</span>
+      <span class="section-en">Key Themes</span>
+    </div>
+    <div class="chips">
+      <span class="chip">数据中心加速 · DC Acceleration</span>
+      <span class="chip">MI300X 推理优势 · Inference TCO</span>
+      <span class="chip">EPYC CPU 份额提升 · Server Market Share</span>
+      <span class="chip">ROCm 生态追赶 · Software Stack</span>
+      <span class="chip">MI350 H2 上市 · Next-Gen GPU</span>
+      <span class="chip">毛利率扩张 · Margin Expansion</span>
+      <span class="chip">游戏触底 · Gaming Trough</span>
+      <span class="chip">嵌入式库存消化 · Embedded Recovery</span>
+    </div>
   </div>
 
   <!-- risk table -->
   <div class="section">
-    <div class="section-label">风险矩阵</div>
+    <div class="section-head">
+      <span class="section-zh">风险矩阵</span>
+      <span class="section-en">Risk Assessment Matrix</span>
+    </div>
     <table class="risk-table">
-      <tr><th>风险</th><th>严重性</th><th>描述</th></tr>
-      
       <tr>
-        <td><span class="dot-h">●</span> 高</td>
-        <td><strong>NVDA竞争压力</strong></td>
-        <td>MI300X在训练负载上仍落后B200；ROCm生态系统差距未完全弥合</td>
+        <th>严重性 · Severity</th>
+        <th>风险因素 · Risk Factor</th>
+        <th>说明 · Description</th>
       </tr>
       <tr>
-        <td><span class="dot-h">●</span> 高<span class="new-badge">NEW</span></td>
-        <td><strong>中国出口管制</strong></td>
-        <td>受限版本Instinct芯片营收贡献有限，政策风险持续</td>
+        <td><span class="sev-h">●</span> 高</td>
+        <td>
+          <span class="risk-name-zh">NVIDIA 竞争压力</span>
+          <span class="risk-name-en">NVIDIA Competitive Moat</span>
+        </td>
+        <td class="risk-desc">MI300X 在推理负载具备 HBM 内存容量优势，但训练负载仍落后 B200。ROCm 生态差距尚未完全弥合，客户切换成本较高。MI300X has HBM memory advantage for inference but lags B200 on training; ROCm ecosystem gap persists.</td>
       </tr>
       <tr>
-        <td><span class="dot-m">●</span> 中</td>
-        <td><strong>Embedded复苏延迟</strong></td>
-        <td>库存消化比预期更长，工业/汽车终端需求疲软</td>
+        <td><span class="sev-h">●</span> 高<span class="new-tag">NEW</span></td>
+        <td>
+          <span class="risk-name-zh">中国出口管制</span>
+          <span class="risk-name-en">China Export Controls</span>
+        </td>
+        <td class="risk-desc">管理层拒绝披露中国营收规模，仅称"有意义的市场份额"。政策不确定性持续，受限版本芯片竞争力有限。Management declined to quantify China revenue; restricted chip variants are less competitive.</td>
       </tr>
       <tr>
-        <td><span class="dot-m">●</span> 中</td>
-        <td><strong>游戏分部低谷</strong></td>
-        <td>半定制业务风险敞口下降，但品牌GPU复苏时间线不确定</td>
+        <td><span class="sev-m">●</span> 中</td>
+        <td>
+          <span class="risk-name-zh">MI350 执行风险</span>
+          <span class="risk-name-en">MI350 Ramp Execution</span>
+        </td>
+        <td class="risk-desc">管理层承诺 MI350 将在 H2 FY2026 成为重要营收贡献来源，时间表较为激进，良率与供应链爬坡存在不确定性。Aggressive H2 timeline; yield ramp and supply chain execution risk remain.</td>
       </tr>
       <tr>
-        <td><span class="dot-l">●</span> 低</td>
-        <td><strong>GAAP vs Non-GAAP差距</strong></td>
-        <td>$0.53/股调整项主要来自股权激励+Xilinx摊销，需持续关注</td>
+        <td><span class="sev-m">●</span> 中</td>
+        <td>
+          <span class="risk-name-zh">嵌入式复苏延迟</span>
+          <span class="risk-name-en">Embedded Recovery Timing</span>
+        </td>
+        <td class="risk-desc">库存消化比预期更长，工业及汽车终端需求持续低迷，Q3 企稳预测存在下行风险。Inventory normalization extended beyond prior forecast; industrial and auto demand remains soft.</td>
+      </tr>
+      <tr>
+        <td><span class="sev-l">●</span> 低</td>
+        <td>
+          <span class="risk-name-zh">GAAP 与非 GAAP 差距</span>
+          <span class="risk-name-en">GAAP vs Non-GAAP Delta</span>
+        </td>
+        <td class="risk-desc">每股 $0.53 的持续性调整项来自股权激励及 Xilinx 摊销，需在估值分析中与一次性损益区分处理。$0.53/share recurring adjustment from SBC and Xilinx amortization; must be disaggregated in valuation.</td>
       </tr>
     </table>
   </div>
 
-  <!-- qa tension -->
+  <!-- Q&A -->
   <div class="section">
-    <div class="section-label">分析师追问 · 张力区域</div>
-    
+    <div class="section-head">
+      <span class="section-zh">分析师追问与张力区域</span>
+      <span class="section-en">Analyst Q&amp;A Tension Analysis</span>
+    </div>
     <div class="qa-item">
       <div class="qa-firm">Timothy Arcuri — UBS</div>
-      <div class="qa-q">MI300X vs H100/B200 竞争定位？</div>
-      <div class="qa-signal">管理层回应: Lisa Su 承认 ROCm 生态差距但强调推理负载 TCO 优势，未直接比较 B200 性能</div>
+      <div class="qa-q-zh">MI300X 对比 H100/B200：软件生态差距多大，未来 12–18 个月竞争格局如何演变？</div>
+      <div class="qa-q-en">MI300X competitive positioning vs H100/B200 — software ecosystem gap and 12–18 month outlook</div>
+      <div class="qa-signal">Lisa Su 正面承认 ROCm 差距"真实存在但正在缩小"，强调推理负载 TCO 优势及 HBM 内存容量领先，未直接对比 B200 训练性能。回避程度：中等。</div>
     </div>
     <div class="qa-item">
       <div class="qa-firm">Aaron Rakers — Wells Fargo</div>
-      <div class="qa-q">中国出口管制对营收影响有多大？</div>
-      <div class="qa-signal">管理层回应: Lisa Su 拒绝披露中国营收数字，仅称 'significant portion'，明显回避具体数据</div>
+      <div class="qa-q-zh">中国出口管制对可寻址市场的实际营收影响有多大？</div>
+      <div class="qa-q-en">Quantified revenue impact of China export restrictions on AMD's addressable market</div>
+      <div class="qa-signal">管理层拒绝披露任何具体数字，仅称中国是"有意义的市场份额"，正与政府合作确保合规。这是本次电话会管理层最明显的信息回避。回避程度：高。</div>
     </div>
     <div class="qa-item">
       <div class="qa-firm">Matt Ramsay — TD Cowen</div>
-      <div class="qa-q">Embedded 恢复时间线是否有下行风险？</div>
-      <div class="qa-signal">管理层回应: Jean Hu 承认恢复比预期慢，Q2 可能是收入低点，工业/汽车端需求不确定性高</div>
+      <div class="qa-q-zh">嵌入式分部恢复时间线是否存在进一步下行风险？</div>
+      <div class="qa-q-en">Downside risk to Embedded recovery timeline given extended inventory normalization</div>
+      <div class="qa-signal">Jean Hu 坦承库存消化"比预期更长"，Q2 大概率为营收低点，Q3 复苏依赖工业及汽车需求，不确定性较高，态度较为坦诚。回避程度：低。</div>
     </div>
   </div>
 
-  <!-- copilot note -->
-  <div class="copilot-note">
-    <span>Earnings Copilot · 由 Claude 生成 · 仅供参考，不构成投资建议</span>
-    <span>分析耗时 76.8s · 2026-05-16</span>
+  <div class="foot">
+    <span>Earnings Copilot &nbsp;·&nbsp; 由 Claude AI 生成 &nbsp;·&nbsp; 仅供参考，不构成投资建议</span>
+    <span>AI Generated · Not Investment Advice · 2026-05-05</span>
   </div>
 
 </div>
