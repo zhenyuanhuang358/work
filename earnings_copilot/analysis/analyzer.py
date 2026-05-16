@@ -198,4 +198,8 @@ def analyze_earnings_call(
         analyst_questions=_parse_questions(qa_raw),
         tension_areas=qa_raw.get("tension_areas", []),
         one_line_verdict=summary_raw.get("one_line_verdict", ""),
+        yoy_revenue_growth_pct=summary_raw.get("yoy_revenue_growth_pct"),
+        gross_margin_pct=summary_raw.get("gross_margin_pct"),
+        next_quarter_gross_margin_pct=summary_raw.get("next_quarter_gross_margin_pct"),
+        segments=summary_raw.get("segments", []),
     )

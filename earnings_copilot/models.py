@@ -86,6 +86,11 @@ class EarningsCallAnalysis:
     analyst_questions: list[AnalystQuestion]
     tension_areas: list[str]
     one_line_verdict: str
+    # Financial detail fields (extracted by summary prompt)
+    yoy_revenue_growth_pct: Optional[float] = None
+    gross_margin_pct: Optional[float] = None
+    next_quarter_gross_margin_pct: Optional[float] = None
+    segments: list = field(default_factory=list)  # [{name, revenue_millions, yoy_pct}]
 
 
 @dataclass

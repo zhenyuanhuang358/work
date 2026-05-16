@@ -47,6 +47,16 @@ Extract a structured summary. Return ONLY valid JSON matching this schema exactl
   "revenue_actual_millions": <float or null>,
   "eps_gap_pct": <positive = beat, negative = miss, null if no estimate>,
   "revenue_gap_pct": <positive = beat, negative = miss, null if no estimate>,
+  "yoy_revenue_growth_pct": <float or null — revenue YoY growth % as stated or implied>,
+  "gross_margin_pct": <float or null — current quarter gross margin %, non-GAAP preferred>,
+  "next_quarter_gross_margin_pct": <float or null — guided gross margin for next quarter, if mentioned>,
+  "segments": [
+    {{
+      "name": "<segment name, e.g. 'Data Center', 'Client', 'Gaming'>",
+      "revenue_millions": <float>,
+      "yoy_pct": <float or null — YoY growth %>
+    }}
+  ],
   "guidance": {{
     "next_quarter_revenue_millions": <float or null>,
     "next_quarter_eps": <float or null>,
@@ -61,7 +71,12 @@ Extract a structured summary. Return ONLY valid JSON matching this schema exactl
     "<third>"
   ],
   "one_line_verdict": "<institutional-grade one-liner: e.g. 'Beat on EPS, miss on revenue, guidance cut — net negative'>"
-}}"""
+}}
+
+Notes:
+- segments: include ALL business segments mentioned with revenue figures; use [] if none disclosed
+- gross_margin_pct: extract the exact figure stated; do not estimate
+- yoy_revenue_growth_pct: use the figure stated by management, not your calculation"""
 
 
 # ── Template 2: Management Tone Analysis ─────────────────────────────────────
