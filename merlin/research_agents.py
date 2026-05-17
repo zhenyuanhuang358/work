@@ -7,7 +7,6 @@ Orchestrator → Scout (web_search) → Analyst + Forensic (parallel) → Strate
 import json
 import re
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from typing import Optional
 
@@ -23,7 +22,12 @@ from merlin.research_prompts import (
 )
 
 MODEL = "claude-opus-4-7"
+MODEL_LIGHT = "claude-sonnet-4-6"  # Analyst + Forensic: lighter model, less rate pressure
 MAX_TOKENS = 4096
+MAX_TOKENS_SCOUT = 8192       # Scout: web search results + JSON output
+MAX_TOKENS_STRATEGIST = 8192  # Strategist: 11 answers + executive summary
+FINDINGS_CAP = 6000           # Max chars of raw findings passed to Analyst/Forensic
+FINDINGS_TRUNCATE = 10000     # Max chars passed to Strategist
 
 
 @dataclass
@@ -76,7 +80,7 @@ def _clean(raw: str) -> str:
 
 
 def _call_plain(client: anthropic.Anthropic, prompt: str, label: str) -> dict:
-    """Plain LLM call with adaptive thinking, no tools."""
+    """Plain LLM call with adaptive thinking, no tools. Retries on rate limit."""
     print(f"  [{label}] calling...", flush=True)
     t0 = time.time()
     kwargs = dict(
@@ -86,62 +90,150 @@ def _call_plain(client: anthropic.Anthropic, prompt: str, label: str) -> dict:
     )
     if "opus" in MODEL or "sonnet-4-6" in MODEL:
         kwargs["thinking"] = {"type": "adaptive"}
-    response = client.messages.create(**kwargs)
-    raw = next((b.text for b in response.content if hasattr(b, "text")), "").strip()
+
+    wait = 15
+    for attempt in range(5):
+        try:
+            response = client.messages.create(**kwargs)
+            break
+        except anthropic.RateLimitError:
+            if attempt == 4:
+                raise
+            print(f"  [{label}] rate limited, retrying in {wait}s...", flush=True)
+            time.sleep(wait)
+            wait *= 2
+
+    raw = next((b.text for b in response.content if getattr(b, "type", "") == "text"), "").strip()
+    result = _extract_json(_clean(raw))
+    print(f"  [{label}] done in {time.time()-t0:.1f}s", flush=True)
+    return result
+
+
+def _call_light(client: anthropic.Anthropic, prompt: str, label: str) -> dict:
+    """Uses MODEL_LIGHT (Sonnet) for Analyst/Forensic — no thinking, larger output budget."""
+    print(f"  [{label}] calling...", flush=True)
+    t0 = time.time()
+    # No thinking here: these are structured extraction tasks, not reasoning-heavy.
+    # Thinking eats into max_tokens budget; we need the full budget for JSON output.
+    kwargs = dict(
+        model=MODEL_LIGHT,
+        max_tokens=7000,
+        messages=[{"role": "user", "content": prompt}],
+    )
+
+    wait = 10
+    for attempt in range(5):
+        try:
+            response = client.messages.create(**kwargs)
+            break
+        except anthropic.RateLimitError:
+            if attempt == 4:
+                raise
+            print(f"  [{label}] rate limited, retrying in {wait}s...", flush=True)
+            time.sleep(wait)
+            wait *= 2
+
+    raw = next((b.text for b in response.content if getattr(b, "type", "") == "text"), "").strip()
+    result = _extract_json(_clean(raw))
+    print(f"  [{label}] done in {time.time()-t0:.1f}s", flush=True)
+    return result
+
+
+def _call_plain_large(client: anthropic.Anthropic, prompt: str, label: str) -> dict:
+    """Like _call_plain but with larger token budget for long outputs."""
+    print(f"  [{label}] calling...", flush=True)
+    t0 = time.time()
+    kwargs = dict(
+        model=MODEL,
+        max_tokens=MAX_TOKENS_STRATEGIST,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    if "opus" in MODEL or "sonnet-4-6" in MODEL:
+        kwargs["thinking"] = {"type": "adaptive"}
+
+    wait = 15
+    for attempt in range(5):
+        try:
+            response = client.messages.create(**kwargs)
+            break
+        except anthropic.RateLimitError:
+            if attempt == 4:
+                raise
+            print(f"  [{label}] rate limited, retrying in {wait}s...", flush=True)
+            time.sleep(wait)
+            wait *= 2
+
+    raw = next((b.text for b in response.content if getattr(b, "type", "") == "text"), "").strip()
     result = _extract_json(_clean(raw))
     print(f"  [{label}] done in {time.time()-t0:.1f}s", flush=True)
     return result
 
 
 def _call_scout(client: anthropic.Anthropic, prompt: str) -> dict:
-    """Scout call with web_search tool enabled."""
+    """Scout call with web_search server-side tool.
+
+    web_search_20250305 is a server-side tool: Anthropic executes searches
+    automatically and returns the complete response (including tool results and
+    final text) in a single API call — no client-side agentic loop needed.
+    Falls back to plain reasoning if the tool is unavailable.
+    """
     print("  [Scout] searching...", flush=True)
     t0 = time.time()
 
-    tools = [{"type": "web_search_20250305", "name": "web_search", "max_uses": 10}]
-    messages = [{"role": "user", "content": prompt}]
+    def _extract_text(content) -> str:
+        # Only extract TextBlock (not ServerToolUseBlock or WebSearchToolResultBlock)
+        parts = []
+        for b in content:
+            btype = getattr(b, "type", "")
+            if btype == "text" and getattr(b, "text", ""):
+                parts.append(b.text)
+        return "".join(parts).strip()
 
-    # Agentic loop: keep going until stop_reason is end_turn or no more tool calls
-    while True:
-        kwargs = dict(
+    # Try with web_search tool first
+    try:
+        response = client.messages.create(
+            model=MODEL,
+            max_tokens=MAX_TOKENS_SCOUT,
+            tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+            messages=[{"role": "user", "content": prompt}],
+        )
+        final_text = _extract_text(response.content)
+
+        # If stop_reason is tool_use (model wants more turns), continue loop
+        messages = [{"role": "user", "content": prompt}]
+        messages.append({"role": "assistant", "content": response.content})
+        # server_tool_use stop_reason means Anthropic is still processing — re-poll
+        while response.stop_reason in ("tool_use", "server_tool_use"):
+            tool_results = [
+                {"type": "tool_result", "tool_use_id": b.id, "content": ""}
+                for b in response.content
+                if getattr(b, "type", "") in ("tool_use", "server_tool_use")
+            ]
+            if not tool_results:
+                break
+            messages.append({"role": "user", "content": tool_results})
+            response = client.messages.create(
+                model=MODEL,
+                max_tokens=MAX_TOKENS_SCOUT,
+                tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
+                messages=messages,
+            )
+            messages.append({"role": "assistant", "content": response.content})
+            final_text = _extract_text(response.content)
+
+    except Exception as e:
+        print(f"  [Scout] web_search unavailable ({e}), falling back to reasoning...", flush=True)
+        # Fallback: plain reasoning without live search
+        fallback_prompt = (
+            "You cannot search the web. Answer using your training knowledge. "
+            "Be explicit about confidence and data currency.\n\n" + prompt
+        )
+        response = client.messages.create(
             model=MODEL,
             max_tokens=MAX_TOKENS,
-            tools=tools,
-            messages=messages,
+            messages=[{"role": "user", "content": fallback_prompt}],
         )
-        # thinking not compatible with tool use loop in same turn; skip here
-        response = client.messages.create(**kwargs)
-
-        messages.append({"role": "assistant", "content": response.content})
-
-        if response.stop_reason == "end_turn":
-            break
-
-        # Handle tool use blocks
-        tool_results = []
-        has_tool_use = False
-        for block in response.content:
-            if block.type == "tool_use":
-                has_tool_use = True
-                # web_search results are provided automatically by Anthropic's server-side tool
-                # They come back as tool_result blocks in the next turn
-                # We just need to acknowledge them
-                tool_results.append({
-                    "type": "tool_result",
-                    "tool_use_id": block.id,
-                    "content": "Search executed by server.",
-                })
-
-        if not has_tool_use:
-            break
-
-        messages.append({"role": "user", "content": tool_results})
-
-    # Extract final text from last assistant message
-    final_text = ""
-    for block in response.content:
-        if hasattr(block, "text"):
-            final_text += block.text
+        final_text = _extract_text(response.content)
 
     result = _extract_json(_clean(final_text))
     print(f"  [Scout] done in {time.time()-t0:.1f}s", flush=True)
@@ -170,35 +262,24 @@ def run_research(
     print("\n[Phase 2] Scout gathering intelligence...", flush=True)
     scout_raw = _call_scout(client, build_scout_prompt(ctx, sections_json))
     findings = scout_raw.get("findings", [])
-    findings_json = json.dumps(findings, ensure_ascii=False, indent=2)
+    findings_json_full = json.dumps(findings, ensure_ascii=False, indent=2)
 
-    # Phase 3: Analyst + Forensic in parallel
-    print("\n[Phase 3] Analyst + Forensic running in parallel...", flush=True)
-    analyst_result, forensic_result = {}, {}
+    # Truncate findings for downstream agents to keep prompts manageable
+    def _cap(s: str, limit: int) -> str:
+        return s[:limit] + "\n...[truncated]" if len(s) > limit else s
 
-    def run_analyst():
-        return _call_plain(client, build_analyst_prompt(ctx, findings_json), "Analyst")
+    findings_json = _cap(findings_json_full, FINDINGS_CAP)
 
-    def run_forensic():
-        # Forensic needs findings but not analysis yet — run with empty analysis
-        return _call_plain(
-            client,
-            build_forensic_prompt(ctx, findings_json, "[]"),
-            "Forensic",
-        )
+    # Phase 3: Analyst then Forensic — use lighter model to avoid rate limit after Scout
+    print("\n[Phase 3] Analyst running...", flush=True)
+    analyst_result = _call_light(client, build_analyst_prompt(ctx, findings_json), "Analyst")
 
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        futures = {
-            pool.submit(run_analyst): "analyst",
-            pool.submit(run_forensic): "forensic",
-        }
-        for future in as_completed(futures):
-            label = futures[future]
-            result = future.result()
-            if label == "analyst":
-                analyst_result = result
-            else:
-                forensic_result = result
+    print("\n[Phase 3] Forensic running...", flush=True)
+    forensic_result = _call_light(
+        client,
+        build_forensic_prompt(ctx, findings_json, "[]"),
+        "Forensic",
+    )
 
     analysis = analyst_result.get("analysis", [])
     red_flags = forensic_result.get("red_flags", [])
@@ -207,10 +288,11 @@ def run_research(
     forensic_json = json.dumps({"red_flags": red_flags}, ensure_ascii=False, indent=2)
 
     # Phase 4: Strategist — synthesize and write final answers
+    findings_for_strategist = _cap(findings_json_full, FINDINGS_TRUNCATE)
     print("\n[Phase 4] Strategist synthesizing...", flush=True)
-    strategy_raw = _call_plain(
+    strategy_raw = _call_plain_large(
         client,
-        build_strategist_prompt(ctx, findings_json, analysis_json, forensic_json),
+        build_strategist_prompt(ctx, findings_for_strategist, analysis_json, forensic_json),
         "Strategist",
     )
 
