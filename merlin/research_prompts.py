@@ -88,20 +88,29 @@ Return ONLY valid JSON:
 
 ANALYST_TEMPLATE = """\
 You are a senior financial and market analyst. Your job: extract quantitative insight
-and structured conclusions from the raw intelligence below about {company_name}.
+and structured conclusions from the intelligence below about {company_name}.
 
-<raw_intelligence>
+PRIORITY RULE: Proprietary/exclusive materials (marked <exclusive_materials>) are
+first-party or expert sources — treat them as ground truth. Web search findings are
+secondary and should only fill gaps not covered by exclusive materials.
+
+<exclusive_materials>
+{background_text}
+</exclusive_materials>
+
+<web_intelligence>
 {findings_json}
-</raw_intelligence>
+</web_intelligence>
 
 <original_outline>
 {outline_text}
 </original_outline>
 
 For each section:
+- Lead with data from exclusive materials if available; supplement with web intelligence
 - Identify the 2-3 most important data points that answer the client's question
 - Quantify wherever possible (growth rates, market share, margins, absolute figures)
-- Flag where data is estimated vs confirmed
+- Flag where data is estimated vs confirmed, and whether it comes from exclusive or public sources
 - Note the trend direction (improving / stable / deteriorating / unclear)
 
 Return ONLY valid JSON:
@@ -124,9 +133,17 @@ FORENSIC_TEMPLATE = """\
 You are a forensic analyst and skeptic. Your job: find what doesn't add up in the
 research findings about {company_name}.
 
-<all_findings>
+IMPORTANT: Exclusive materials (marked <exclusive_materials>) carry higher evidentiary
+weight than public web findings. Contradictions between exclusive materials and public
+narrative are especially significant — flag them as high severity.
+
+<exclusive_materials>
+{background_text}
+</exclusive_materials>
+
+<web_findings>
 {findings_json}
-</all_findings>
+</web_findings>
 
 <analyst_conclusions>
 {analysis_json}
@@ -134,10 +151,10 @@ research findings about {company_name}.
 
 Look for:
 1. DATA CONTRADICTIONS — two facts that can't both be true
-2. NARRATIVE VS DATA — management says X but numbers suggest Y
-3. SUSPICIOUSLY ABSENT — important topics the research couldn't find anything on
-4. TIMING ANOMALIES — something changed suddenly without explanation
-5. SOURCE CONFLICTS — different sources give conflicting figures
+2. NARRATIVE VS DATA — management says X but exclusive/web data suggests Y
+3. EXCLUSIVE VS PUBLIC GAP — exclusive materials reveal something public sources miss or contradict
+4. SUSPICIOUSLY ABSENT — important topics missing from all sources
+5. TIMING ANOMALIES — something changed suddenly without explanation
 
 For each red flag:
 - State the contradiction precisely
@@ -165,13 +182,25 @@ STRATEGIST_TEMPLATE = """\
 You are a senior partner at a top consulting firm. You have received research from three
 specialist agents about {company_name}. Your job: write the final client-facing answers.
 
+SOURCE HIERARCHY (strictly follow):
+1. <exclusive_materials> — first-party or expert source, highest confidence, use directly
+2. <analyst_conclusions> — distilled from both exclusive and web sources
+3. <web_intelligence> — public data, lower confidence, use to fill gaps only
+
+When exclusive materials directly answer a question, lead with that. Be explicit:
+"According to exclusive materials: ..." vs "Based on public data: ..."
+
+<exclusive_materials>
+{background_text}
+</exclusive_materials>
+
 <client_outline>
 {outline_text}
 </client_outline>
 
-<intelligence_findings>
+<web_intelligence>
 {findings_json}
-</intelligence_findings>
+</web_intelligence>
 
 <analyst_conclusions>
 {analysis_json}
@@ -183,7 +212,8 @@ specialist agents about {company_name}. Your job: write the final client-facing 
 
 For EACH question in the client outline:
 - Write a direct, substantive answer (not "it depends")
-- Lead with the conclusion, then support with data
+- Lead with exclusive material data if available, then supplement with public data
+- Clearly distinguish exclusive vs public sources in your answer
 - Flag uncertainties explicitly rather than hedging
 - Note if a red flag is relevant to this answer
 
@@ -230,6 +260,7 @@ def build_analyst_prompt(ctx: ResearchContext, findings_json: str) -> str:
         company_name=ctx.company_name,
         findings_json=findings_json,
         outline_text=ctx.outline_text,
+        background_text=ctx.background_text or "（无独家资料）",
     )
 
 
@@ -238,6 +269,7 @@ def build_forensic_prompt(ctx: ResearchContext, findings_json: str, analysis_jso
         company_name=ctx.company_name,
         findings_json=findings_json,
         analysis_json=analysis_json,
+        background_text=ctx.background_text or "（无独家资料）",
     )
 
 
@@ -253,4 +285,5 @@ def build_strategist_prompt(
         findings_json=findings_json,
         analysis_json=analysis_json,
         forensic_json=forensic_json,
+        background_text=ctx.background_text or "（无独家资料）",
     )
