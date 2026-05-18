@@ -18,6 +18,20 @@ class MerlinContext:
     interviewee_role: Optional[str] = None
 
 
+# Appended to every prompt — enforces synchronized bilingual output
+_BILINGUAL = """
+
+BILINGUAL OUTPUT RULE (mandatory):
+For every text field (not integers, not category codes like "high/medium/low"):
+Write the content in BOTH English and Chinese, in this exact format:
+  "English text ||| 中文翻译"
+
+Example:
+  "company_overview": "Luckin Coffee is China's largest coffee chain by store count, operating 31,000+ stores with a digital-first model. ||| 瑞幸咖啡是中国门店数量最多的咖啡连锁，拥有31,000余家门店，以数字化为核心驱动。"
+
+Do NOT skip the ||| separator. Do NOT write English-only or Chinese-only for any text field."""
+
+
 # ── Prompt 1: Company Brief ───────────────────────────────────────────────────
 
 BRIEF_TEMPLATE = """\
@@ -40,21 +54,21 @@ Do NOT make up facts not present in the materials. Use null if data is unavailab
 Return ONLY valid JSON:
 
 {{
-  "company_overview": "<2-3 sentences: what the company does, business model, scale>",
+  "company_overview": "<2-3 sentences bilingual: what the company does, business model, scale>",
   "recent_events": [
-    "<most recent important event — earnings, news, leadership change, product launch>",
-    "<second event>",
-    "<third event>"
+    "<most recent important event — bilingual>",
+    "<second event — bilingual>",
+    "<third event — bilingual>"
   ],
   "key_metrics": [
-    "<metric 1, e.g. 'Revenue $10B, +36% YoY'>",
-    "<metric 2, e.g. 'Gross margin 52.8%'>",
-    "<metric 3>",
-    "<metric 4>"
+    "<metric 1, e.g. 'Revenue ¥34.5B, +38% YoY ||| 营收344.75亿，同比+38%'>",
+    "<metric 2 — bilingual>",
+    "<metric 3 — bilingual>",
+    "<metric 4 — bilingual>"
   ],
-  "strategic_narrative": "<the story management is telling: what is the company positioning itself as, and why now?>",
-  "context_gaps": "<what important information is missing that would change the analysis if known>"
-}}"""
+  "strategic_narrative": "<the story management is telling — bilingual>",
+  "context_gaps": "<what important information is missing — bilingual>"
+}}""" + _BILINGUAL
 
 
 # ── Prompt 2: Core Issues ─────────────────────────────────────────────────────
@@ -84,14 +98,14 @@ Return ONLY valid JSON with 3-5 issues, ordered by importance:
 {{
   "core_issues": [
     {{
-      "title": "<concise issue name, 5-8 words>",
-      "why_it_matters": "<one sentence: what decision or view changes if this is resolved>",
-      "evidence": "<specific data points or observations that make this a real issue>",
+      "title": "<concise issue name, 5-8 words — bilingual>",
+      "why_it_matters": "<one sentence: what decision or view changes — bilingual>",
+      "evidence": "<specific data points or observations — bilingual>",
       "impact": <integer 1-5, 5 = highest impact on meeting outcome>,
       "certainty": <integer 1-5, 5 = most certain this issue exists>
     }}
   ]
-}}"""
+}}""" + _BILINGUAL
 
 
 # ── Prompt 3: Risk & Contradiction Detection ──────────────────────────────────
@@ -110,22 +124,13 @@ You are a forensic analyst. Your job: find what doesn't add up.
 Look specifically for these four types of problems:
 
 1. METRIC CONTRADICTIONS — two numbers that tell conflicting stories
-   Example: revenue up 30% but gross margin down 5pp → pricing pressure or cost issue
-
 2. NARRATIVE vs DATA GAPS — management says X but the numbers suggest Y
-   Example: "AI-driven growth" but AI revenue is 3% of total
-
 3. TIMING ANOMALIES — something changed suddenly, or didn't change when it should have
-   Example: capex jumped 3× the quarter before revenue acceleration
-
 4. OMISSION SIGNALS — important topics conspicuously absent from materials
-   Example: company talks about "market expansion" but never mentions market share
 
 For each risk, provide:
 - The exact data tension (what are the two conflicting signals)
-- The innocent explanation
-- The concerning explanation
-- The one question that separates the two explanations
+- The one question that separates the innocent from the concerning explanation
 
 Return ONLY valid JSON:
 
@@ -133,13 +138,13 @@ Return ONLY valid JSON:
   "risks": [
     {{
       "category": "<financial|strategic|operational|competitive|governance|other>",
-      "description": "<what the risk is in one sentence>",
-      "contradiction": "<the specific data tension: 'X says A, but Y says B'>",
-      "verification_question": "<the single most targeted question to resolve this in the interview>",
+      "description": "<what the risk is in one sentence — bilingual>",
+      "contradiction": "<the specific data tension: 'X says A, but Y says B' — bilingual>",
+      "verification_question": "<the single most targeted question to resolve this — bilingual>",
       "severity": "<high|medium|low>"
     }}
   ]
-}}"""
+}}""" + _BILINGUAL
 
 
 # ── Prompt 4: Question Tree ───────────────────────────────────────────────────
@@ -168,18 +173,18 @@ Return ONLY valid JSON with 4-6 questions, ordered by priority (1 = ask first):
 {{
   "questions": [
     {{
-      "question": "<the specific, targeted question>",
-      "purpose": "<what you're actually trying to learn — the real question behind the question>",
+      "question": "<the specific, targeted question — bilingual>",
+      "purpose": "<what you're actually trying to learn — bilingual>",
       "follow_ups": [
-        "<follow-up if answer is vague>",
-        "<follow-up if they deflect to another topic>"
+        "<follow-up if answer is vague — bilingual>",
+        "<follow-up if they deflect — bilingual>"
       ],
-      "evasion_signal": "<how they will likely dodge this: e.g. 'will cite industry headwinds', 'will give forward guidance instead'>",
-      "breakthrough": "<how to push through: e.g. 'ask for the specific Q number', 'ask what the internal target was'>",
+      "evasion_signal": "<how they will likely dodge this — bilingual>",
+      "breakthrough": "<how to push through — bilingual>",
       "priority": <integer 1-6>
     }}
   ]
-}}"""
+}}""" + _BILINGUAL
 
 
 # ── Prompt 5: Interview Strategy ──────────────────────────────────────────────
@@ -202,27 +207,24 @@ You are a senior partner briefing a junior analyst 30 minutes before an importan
 Your job: give the analyst the strategic frame for this meeting.
 
 The central hypothesis is the ONE THING that, if true, changes everything.
-Example: "The real question is whether their unit economics actually improve with scale,
-         or whether management is papering over a structurally broken model with growth."
-
 The opening strategy should be the first 60 seconds: how to frame the conversation
 to maximize candor and reduce defensive responses.
 
 Return ONLY valid JSON:
 
 {{
-  "central_hypothesis": "<the one bet to test: what would change your view completely if confirmed?>",
-  "opening_strategy": "<how to open the conversation to build trust and reduce defensiveness — specific, not generic>",
+  "central_hypothesis": "<the one bet to test — bilingual>",
+  "opening_strategy": "<how to open the conversation — specific, not generic — bilingual>",
   "key_themes": [
-    "<theme 1: 4-6 words>",
-    "<theme 2>",
-    "<theme 3>",
-    "<theme 4>",
-    "<theme 5>"
+    "<theme 1: 4-6 words — bilingual>",
+    "<theme 2 — bilingual>",
+    "<theme 3 — bilingual>",
+    "<theme 4 — bilingual>",
+    "<theme 5 — bilingual>"
   ],
   "confidence_score": <integer 1-10, reflecting how much useful material was available for prep>,
-  "confidence_reasoning": "<one sentence: why this score — e.g. 'Limited financials available, strong qualitative context'>"
-}}"""
+  "confidence_reasoning": "<one sentence: why this score — bilingual>"
+}}""" + _BILINGUAL
 
 
 # ── Builders ──────────────────────────────────────────────────────────────────

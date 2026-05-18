@@ -25,8 +25,6 @@ from merlin.models import CoreIssue, InterviewQuestion, MerlinAnalysis, RiskItem
 from merlin.prompts import MerlinContext
 
 # ── Feedback URL ──────────────────────────────────────────────────────────────
-# After deploying feedback.html to Netlify, replace with your actual URL.
-# e.g. "https://merlin-feedback.netlify.app"
 FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
 
 
@@ -40,6 +38,21 @@ def _get_auth() -> dict:
     if key:
         return {"api_key": key}
     return {}
+
+
+# ── Bilingual helpers ─────────────────────────────────────────────────────────
+
+def _bi(text: str) -> str:
+    """Render 'English ||| 中文' as stacked bilingual HTML."""
+    if " ||| " in text:
+        en, zh = text.split(" ||| ", 1)
+        return f'<span class="bi-en">{en.strip()}</span><span class="bi-zh">{zh.strip()}</span>'
+    return text
+
+
+def _en(text: str) -> str:
+    """Extract English part of bilingual string (for compact SVG labels)."""
+    return text.split(" ||| ", 1)[0].strip() if " ||| " in text else text
 
 
 # ── SVG Charts ────────────────────────────────────────────────────────────────
@@ -71,10 +84,10 @@ def _svg_issue_matrix(issues: list[CoreIssue]) -> str:
         cx = x(issue.certainty)
         cy = y(issue.impact)
         color = colors[i % len(colors)]
-        label = issue.title[:18] + "…" if len(issue.title) > 18 else issue.title
+        title_plain = _en(issue.title)
+        label = title_plain[:18] + "…" if len(title_plain) > 18 else title_plain
         dots += f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="14" fill="{color}" fill-opacity="0.85" stroke="#f1efea" stroke-width="2"/>'
         dots += f'<text x="{cx:.0f}" y="{cy:.0f}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#f1efea" font-weight="bold">{i+1}</text>'
-        # label below
         dots += f'<text x="{cx:.0f}" y="{cy+22:.0f}" text-anchor="middle" font-size="9" fill="#4a3f35">{label}</text>'
 
     axis_labels = "".join(
@@ -116,7 +129,8 @@ def _svg_risk_heatmap(risks: list[RiskItem]) -> str:
         sev = risk.severity.lower()
         color = sev_color.get(sev, "#6b5a47")
         bar_w = sev_width.get(sev, 150)
-        label = f"[{risk.category.upper()[:3]}] {risk.description}"
+        desc_plain = _en(risk.description)
+        label = f"[{risk.category.upper()[:3]}] {desc_plain}"
         label = label[:62] + "…" if len(label) > 62 else label
         rows += f'''
   <rect x="{pad_l}" y="{ry}" width="{bar_w}" height="28" fill="{color}" fill-opacity="0.18" rx="4"/>
@@ -148,8 +162,10 @@ def _svg_question_tree(questions: list[InterviewQuestion]) -> str:
         ry = pad_t + i * row_h
         color = colors[i % len(colors)]
         num = str(q.priority)
-        text = q.question[:72] + "…" if len(q.question) > 72 else q.question
-        purpose = q.purpose[:62] + "…" if len(q.purpose) > 62 else q.purpose
+        q_plain = _en(q.question)
+        p_plain = _en(q.purpose)
+        text = q_plain[:72] + "…" if len(q_plain) > 72 else q_plain
+        purpose = p_plain[:62] + "…" if len(p_plain) > 62 else p_plain
         rows += f'''
   <rect x="20" y="{ry}" width="480" height="{row_h-8}" fill="{color}" fill-opacity="0.08" rx="6" stroke="{color}" stroke-width="1" stroke-opacity="0.3"/>
   <circle cx="44" cy="{ry+28}" r="14" fill="{color}" fill-opacity="0.85"/>
@@ -174,16 +190,12 @@ def _svg_confidence_gauge(score: int) -> str:
         rad = math.radians(angle_deg)
         return cx + r * math.cos(rad), cy - r * math.sin(rad)
 
-    # 180° arc from left to right (π to 0)
-    # map score 1-10 → 180° to 0°
     angle = 180 - (score - 1) / 9 * 180
     ex, ey = arc_point(angle)
 
     color = "#8b2e2e" if score <= 3 else ("#c47a1e" if score <= 6 else "#2a5c3f")
 
-    # background arc
     bg_arc = f'M {arc_point(180)[0]:.1f},{arc_point(180)[1]:.1f} A {r} {r} 0 0 1 {arc_point(0)[0]:.1f},{arc_point(0)[1]:.1f}'
-    # filled arc
     large = 1 if (180 - angle) > 180 else 0
     fill_arc = f'M {arc_point(180)[0]:.1f},{arc_point(180)[1]:.1f} A {r} {r} 0 {large} 1 {ex:.1f},{ey:.1f}'
 
@@ -239,9 +251,9 @@ def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
         <div class="issue-card">
           <div class="issue-num">{i}</div>
           <div class="issue-body">
-            <div class="issue-title">{issue.title}</div>
-            <div class="issue-why">{issue.why_it_matters}</div>
-            <div class="issue-evidence">{issue.evidence}</div>
+            <div class="issue-title">{_bi(issue.title)}</div>
+            <div class="issue-why">{_bi(issue.why_it_matters)}</div>
+            <div class="issue-evidence">{_bi(issue.evidence)}</div>
             <div class="issue-bars">
               <span class="bar-label">影响 Impact</span> {impact_bars}
               <span class="bar-label" style="margin-left:16px">确定性 Certainty</span> {cert_bars}
@@ -255,38 +267,38 @@ def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
         risk_rows += f'''
         <tr>
           <td><span class="sev-badge {sc}">{_sev_zh(risk.severity)}</span></td>
-          <td><strong>{risk.category.upper()}</strong><br><span class="risk-desc">{risk.description}</span></td>
-          <td class="risk-tension">{risk.contradiction}</td>
-          <td class="risk-q">{risk.verification_question}</td>
+          <td><strong>{risk.category.upper()}</strong><br><span class="risk-desc">{_bi(risk.description)}</span></td>
+          <td class="risk-tension">{_bi(risk.contradiction)}</td>
+          <td class="risk-q">{_bi(risk.verification_question)}</td>
         </tr>'''
 
     q_cards = ""
     for q in a.questions:
-        fups = "".join(f'<li>{fu}</li>' for fu in q.follow_ups)
+        fups = "".join(f'<li>{_bi(fu)}</li>' for fu in q.follow_ups)
         q_cards += f'''
         <div class="q-card">
           <div class="q-priority">Q{q.priority}</div>
           <div class="q-body">
-            <div class="q-text">{q.question}</div>
-            <div class="q-purpose"><span class="label-zh">目的</span> <span class="label-en">Purpose</span> {q.purpose}</div>
+            <div class="q-text">{_bi(q.question)}</div>
+            <div class="q-purpose"><span class="label-zh">目的</span> <span class="label-en">Purpose</span> {_bi(q.purpose)}</div>
             <div class="q-meta-row">
-              <div><span class="label-zh">规避信号</span> <span class="label-en">Evasion</span> {q.evasion_signal}</div>
-              <div><span class="label-zh">突破策略</span> <span class="label-en">Breakthrough</span> {q.breakthrough}</div>
+              <div><span class="label-zh">规避信号</span> <span class="label-en">Evasion</span> {_bi(q.evasion_signal)}</div>
+              <div><span class="label-zh">突破策略</span> <span class="label-en">Breakthrough</span> {_bi(q.breakthrough)}</div>
             </div>
             <ul class="q-followups">{fups}</ul>
           </div>
         </div>'''
 
     theme_chips = "".join(
-        f'<span class="theme-chip">{t}</span>' for t in a.key_themes
+        f'<span class="theme-chip">{_bi(t)}</span>' for t in a.key_themes
     )
 
     metrics_html = "".join(
-        f'<div class="metric-item">{m}</div>' for m in a.key_metrics
+        f'<div class="metric-item">{_bi(m)}</div>' for m in a.key_metrics
     )
 
     events_html = "".join(
-        f'<li>{e}</li>' for e in a.recent_events
+        f'<li>{_bi(e)}</li>' for e in a.recent_events
     )
 
     conf_color = "#8b2e2e" if a.confidence_score <= 3 else ("#c47a1e" if a.confidence_score <= 6 else "#2a5c3f")
@@ -338,6 +350,10 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .chart-wrap{{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px; margin-bottom:16px;}}
 .chart-wrap svg{{width:100%; height:auto; display:block;}}
 
+/* Bilingual stacked text */
+.bi-en{{display:block;}}
+.bi-zh{{display:block; font-size:0.88em; color:#6b5a47; margin-top:3px;}}
+
 /* Overview */
 .overview-text{{font-size:14px; line-height:1.7; margin-bottom:12px;}}
 .metrics-grid{{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-bottom:16px;}}
@@ -351,7 +367,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .issue-num{{width:32px; height:32px; border-radius:50%; background:var(--copper); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:bold; flex-shrink:0;}}
 .issue-body{{flex:1;}}
 .issue-title{{font-size:15px; font-weight:bold; margin-bottom:4px;}}
-.issue-why{{font-size:13px; color:var(--copper); margin-bottom:6px; font-style:italic;}}
+.issue-why{{font-size:13px; color:var(--copper); margin-bottom:6px;}}
 .issue-evidence{{font-size:12px; color:#4a3f35; margin-bottom:8px; line-height:1.5;}}
 .issue-bars{{display:flex; align-items:center; gap:4px; flex-wrap:wrap;}}
 .bar-label{{font-size:10px; color:#6b5a47; letter-spacing:.04em;}}
@@ -367,16 +383,16 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .sev-high{{background:#8b2e2e22; color:#8b2e2e; border:1px solid #8b2e2e66;}}
 .sev-med{{background:#c47a1e22; color:#c47a1e; border:1px solid #c47a1e66;}}
 .sev-low{{background:#2a5c3f22; color:#2a5c3f; border:1px solid #2a5c3f66;}}
-.risk-desc{{color:#4a3f35; font-style:italic;}}
+.risk-desc{{color:#4a3f35;}}
 .risk-tension{{color:#6b5a47;}}
-.risk-q{{color:var(--copper); font-style:italic;}}
+.risk-q{{color:var(--copper);}}
 
 /* Question tree */
 .q-card{{display:flex; gap:14px; padding:16px; background:var(--bg); border:1px solid var(--border); margin-bottom:12px; border-radius:4px;}}
 .q-priority{{font-size:22px; font-weight:bold; color:var(--copper); min-width:36px; text-align:center;}}
 .q-body{{flex:1;}}
 .q-text{{font-size:14px; font-weight:bold; margin-bottom:6px; line-height:1.5;}}
-.q-purpose{{font-size:12px; color:var(--copper); margin-bottom:8px; font-style:italic;}}
+.q-purpose{{font-size:12px; color:var(--copper); margin-bottom:8px;}}
 .q-meta-row{{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; font-size:11px; color:#4a3f35;}}
 .q-followups{{font-size:11px; color:#6b5a47; padding-left:16px; line-height:1.6;}}
 
@@ -388,6 +404,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .hypothesis-box{{background:var(--ink); color:var(--paper); padding:20px 24px; margin-bottom:20px; border-radius:4px;}}
 .hypothesis-label{{font-size:10px; color:var(--gold); letter-spacing:.12em; margin-bottom:8px;}}
 .hypothesis-text{{font-size:16px; line-height:1.6;}}
+.hypothesis-text .bi-zh{{color:#c4bfb6;}}
 .opening-box{{background:var(--bg); border:1px solid var(--copper); border-left:4px solid var(--copper); padding:16px 20px; margin-bottom:16px;}}
 .opening-label{{font-size:10px; color:var(--copper); letter-spacing:.1em; margin-bottom:6px;}}
 .opening-text{{font-size:13px; line-height:1.6;}}
@@ -419,7 +436,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 <div class="tag-row">
   <span class="tag">{a.meeting_purpose}</span>
   <span class="tag">置信度 {a.confidence_score}/10</span>
-  {"".join(f'<span class="tag">{t}</span>' for t in a.key_themes[:3])}
+  {"".join(f'<span class="tag">{_en(t)}</span>' for t in a.key_themes[:3])}
 </div>
 
 <!-- 3. Stat bar -->
@@ -446,7 +463,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 <div class="section">
   <div class="section-zh">公司概况</div>
   <div class="section-en">COMPANY OVERVIEW</div>
-  <div class="overview-text">{a.company_overview}</div>
+  <div class="overview-text">{_bi(a.company_overview)}</div>
   <div class="two-col">
     <div>
       <div class="label-zh">关键指标 <span class="label-en">Key Metrics</span></div>
@@ -458,7 +475,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
     </div>
   </div>
   <div class="label-zh" style="margin-top:14px">管理层叙事 <span class="label-en">Strategic Narrative</span></div>
-  <div class="overview-text" style="margin-top:6px; font-style:italic; color:var(--copper)">{a.strategic_narrative}</div>
+  <div class="overview-text" style="margin-top:6px; color:var(--copper)">{_bi(a.strategic_narrative)}</div>
 </div>
 
 <!-- 5. Issue Matrix SVG -->
@@ -501,17 +518,17 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
   <div class="section-en">INTERVIEW STRATEGY</div>
   <div class="hypothesis-box">
     <div class="hypothesis-label">核心假设 CENTRAL HYPOTHESIS</div>
-    <div class="hypothesis-text">{a.central_hypothesis}</div>
+    <div class="hypothesis-text">{_bi(a.central_hypothesis)}</div>
   </div>
   <div class="opening-box">
     <div class="opening-label">开场策略 OPENING STRATEGY（前60秒）</div>
-    <div class="opening-text">{a.opening_strategy}</div>
+    <div class="opening-text">{_bi(a.opening_strategy)}</div>
   </div>
   <div class="two-col">
     <div class="chart-wrap">{svg_gauge}</div>
     <div style="padding:16px; background:var(--bg); border:1px solid var(--border); border-radius:6px;">
       <div class="label-zh">置信度说明 <span class="label-en">Confidence Reasoning</span></div>
-      <div style="font-size:13px; margin-top:8px; line-height:1.6; color:#4a3f35">{a.confidence_reasoning}</div>
+      <div style="font-size:13px; margin-top:8px; line-height:1.6; color:#4a3f35">{_bi(a.confidence_reasoning)}</div>
       <div class="label-zh" style="margin-top:16px">核心主题 <span class="label-en">Key Themes</span></div>
       <div style="margin-top:8px">{theme_chips}</div>
     </div>
@@ -522,7 +539,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 <div class="section">
   <div class="section-zh">信息缺口</div>
   <div class="section-en">CONTEXT GAPS</div>
-  <div class="gaps-box">{a.context_gaps}</div>
+  <div class="gaps-box">{_bi(a.context_gaps)}</div>
 </div>
 
 <!-- Footer -->

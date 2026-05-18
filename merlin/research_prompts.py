@@ -8,6 +8,20 @@ from dataclasses import dataclass
 from typing import Optional
 
 
+# Appended to the Strategist template — enforces synchronized bilingual output
+_BILINGUAL = """
+
+BILINGUAL OUTPUT RULE (mandatory):
+For every text field (not integers, not category codes like "high/medium/low"):
+Write the content in BOTH English and Chinese, in this exact format:
+  "English text ||| 中文翻译"
+
+Example:
+  "executive_summary": "Haidilao's premium positioning faces margin pressure from rising labor costs. ||| 海底捞的高端定位正面临劳动力成本上升带来的利润压力。"
+
+Do NOT skip the ||| separator. Do NOT write English-only or Chinese-only for any text field."""
+
+
 @dataclass
 class ResearchContext:
     company_name: str
@@ -223,19 +237,19 @@ Also write:
 
 Return ONLY valid JSON:
 {{
-  "executive_summary": "<3-5 sentences: headline findings + key surprises + main gaps>",
-  "data_verdict": "<one sentence on overall research quality>",
+  "executive_summary": "<3-5 sentences: headline findings + key surprises + main gaps — bilingual>",
+  "data_verdict": "<one sentence on overall research quality — bilingual>",
   "answers": [
     {{
       "section_id": <integer>,
-      "answer": "<direct, substantive answer to the client's question>",
-      "supporting_data": ["<data point 1>", "<data point 2>"],
-      "red_flags": ["<relevant red flag if any>"],
+      "answer": "<direct, substantive answer to the client's question — bilingual>",
+      "supporting_data": ["<data point 1 — bilingual>", "<data point 2 — bilingual>"],
+      "red_flags": ["<relevant red flag if any — bilingual>"],
       "confidence": "<high|medium|low>",
-      "caveat": "<one sentence: what would change this answer>"
+      "caveat": "<one sentence: what would change this answer — bilingual>"
     }}
   ]
-}}"""
+}}""" + _BILINGUAL
 
 
 # ── Builders ──────────────────────────────────────────────────────────────────

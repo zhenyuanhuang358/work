@@ -111,6 +111,16 @@ def _svg_agent_flow() -> str:
 </svg>'''
 
 
+# ── Bilingual helpers ─────────────────────────────────────────────────────────
+
+def _bi(text: str) -> str:
+    """Render 'English ||| 中文' as stacked bilingual HTML."""
+    if " ||| " in text:
+        en, zh = text.split(" ||| ", 1)
+        return f'<span class="bi-en">{en.strip()}</span><span class="bi-zh">{zh.strip()}</span>'
+    return text
+
+
 # ── HTML Report ───────────────────────────────────────────────────────────────
 
 def _conf_badge(conf: str) -> str:
@@ -144,11 +154,11 @@ def generate_research_html(r: ResearchResult, slug: str = "") -> str:
         data_points = ans.get("supporting_data", [])
         flags = ans.get("red_flags", [])
 
-        dp_html = "".join(f'<li>{dp}</li>' for dp in data_points)
+        dp_html = "".join(f'<li>{_bi(dp)}</li>' for dp in data_points)
         flag_html = ""
         if flags:
             flag_html = "".join(
-                f'<div class="ans-flag">⚑ {f}</div>' for f in flags if f
+                f'<div class="ans-flag">⚑ {_bi(f)}</div>' for f in flags if f
             )
 
         answer_cards += f'''
@@ -158,10 +168,10 @@ def generate_research_html(r: ResearchResult, slug: str = "") -> str:
             <span class="ans-title">{title}</span>
             {_conf_badge(conf)}
           </div>
-          <div class="ans-body">{answer}</div>
+          <div class="ans-body">{_bi(answer)}</div>
           {"<ul class='ans-data'>" + dp_html + "</ul>" if dp_html else ""}
           {flag_html}
-          {"<div class='ans-caveat'>注意 · " + caveat + "</div>" if caveat else ""}
+          {"<div class='ans-caveat'>注意 · " + _bi(caveat) + "</div>" if caveat else ""}
         </div>'''
 
     # Red flag rows
@@ -183,8 +193,8 @@ def generate_research_html(r: ResearchResult, slug: str = "") -> str:
         <tr>
           <td><span style="color:{sc};font-weight:bold">{sev_zh.get(sev,"?")} </span></td>
           <td>{ftype}</td>
-          <td>{flag.get("description","")}</td>
-          <td style="color:var(--copper);font-style:italic">{flag.get("resolution_question","")}</td>
+          <td>{_bi(flag.get("description",""))}</td>
+          <td style="color:var(--copper)">{_bi(flag.get("resolution_question",""))}</td>
         </tr>'''
 
     integ_color = _integrity_color(r.overall_integrity)
@@ -226,10 +236,14 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .section-en{{font-size:11px; color:var(--copper); letter-spacing:.1em; margin-bottom:16px;}}
 .chart-wrap{{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px; margin-bottom:16px;}}
 .chart-wrap svg{{width:100%; height:auto; display:block;}}
+/* Bilingual stacked text */
+.bi-en{{display:block;}}
+.bi-zh{{display:block; font-size:0.88em; color:#6b5a47; margin-top:3px;}}
 /* Executive summary */
 .exec-box{{background:var(--ink); color:var(--paper); padding:20px 24px; margin-bottom:20px; border-radius:4px;}}
 .exec-label{{font-size:10px; color:var(--gold); letter-spacing:.12em; margin-bottom:8px;}}
 .exec-text{{font-size:14px; line-height:1.7;}}
+.exec-text .bi-zh{{color:#c4bfb6;}}
 .verdict-box{{background:var(--bg); border:1px solid var(--copper); border-left:4px solid var(--copper); padding:12px 18px; margin-bottom:20px; font-size:13px; color:#4a3f35; font-style:italic;}}
 /* Answer cards */
 .ans-card{{background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:18px; margin-bottom:14px;}}
@@ -299,9 +313,9 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
   <div class="section-en">EXECUTIVE SUMMARY</div>
   <div class="exec-box">
     <div class="exec-label">战略家综合判断 STRATEGIST SYNTHESIS</div>
-    <div class="exec-text">{r.executive_summary}</div>
+    <div class="exec-text">{_bi(r.executive_summary)}</div>
   </div>
-  <div class="verdict-box">{r.data_verdict}</div>
+  <div class="verdict-box">{_bi(r.data_verdict)}</div>
 </div>
 
 <!-- Section confidence -->
