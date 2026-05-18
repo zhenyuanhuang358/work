@@ -27,7 +27,7 @@ from merlin.prompts import MerlinContext
 # ── Feedback URL ──────────────────────────────────────────────────────────────
 # After deploying feedback.html to Netlify, replace with your actual URL.
 # e.g. "https://merlin-feedback.netlify.app"
-FEEDBACK_URL = "https://your-site.netlify.app"
+FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────

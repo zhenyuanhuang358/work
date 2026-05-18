@@ -22,7 +22,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
-FEEDBACK_URL = "https://your-site.netlify.app"
+FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 

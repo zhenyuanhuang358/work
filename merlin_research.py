@@ -23,7 +23,7 @@ from pathlib import Path
 from merlin.research_agents import ResearchResult, run_research
 from merlin.research_prompts import ResearchContext
 
-FEEDBACK_URL = "https://your-site.netlify.app"
+FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
