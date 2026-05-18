@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>产品反馈 · Merlin & Earner</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════
+     部署说明（Deploy Instructions）
+
+     1. 前往 netlify.com，注册免费账户（用 GitHub 登录最快）
+     2. 进入 Dashboard → 点击 "Add new site" → "Deploy manually"
+     3. 把【这个 HTML 文件】拖入上传框
+     4. 部署完成后，Netlify 给你一个免费域名，例如：
+        https://amazing-merlin-abc123.netlify.app
+     5. 可以在 Site settings → Domain management 改成你想要的子域名
+        例如：https://merlin-feedback.netlify.app
+     6. 所有表单提交会出现在 Netlify Dashboard → Forms 标签
+        同时发送邮件到你的注册邮箱
+
+     把你的 Netlify 域名填入 merlin.py / merlin_research.py / earner.py 的
+     FEEDBACK_URL 变量（文件底部有提示）
+     ═══════════════════════════════════════════════════════ -->
+
+<style>
+:root {
+  --ink: #0a0a0b;
+  --paper: #f1efea;
+  --copper: #8b6c42;
+  --gold: #c9a84c;
+  --green: #2a5c3f;
+  --red: #8b2e2e;
+  --amber: #c47a1e;
+  --bg: #f9f7f3;
+  --border: #d4cfc8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IM Fell English', Georgia, serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px;
+}
+.card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card-header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 28px 32px;
+}
+.logo { font-size: 13px; letter-spacing: .18em; color: var(--gold); margin-bottom: 10px; }
+.header-title { font-size: 22px; line-height: 1.3; margin-bottom: 6px; }
+.header-sub { font-size: 12px; color: #a09080; letter-spacing: .06em; }
+
+.card-body { padding: 32px; }
+
+.q-block { margin-bottom: 28px; }
+.q-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
+.q-hint { font-size: 11px; color: var(--copper); margin-bottom: 10px; font-style: italic; }
+
+/* Star rating */
+.stars { display: flex; gap: 8px; }
+.stars input[type="radio"] { display: none; }
+.stars label {
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--border);
+  transition: color .15s;
+  line-height: 1;
+}
+.stars input[type="radio"]:checked ~ label,
+.stars label:hover,
+.stars label:hover ~ label { color: var(--gold); }
+.stars { flex-direction: row-reverse; justify-content: flex-end; }
+.stars label:hover,
+.stars label:hover ~ label { color: var(--gold); }
+.stars input[type="radio"]:checked + label,
+.stars input[type="radio"]:checked + label ~ label { color: var(--gold); }
+
+/* Checkbox options */
+.check-grid { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.check-item:hover { border-color: var(--copper); }
+.check-item input { accent-color: var(--copper); width: 16px; height: 16px; }
+.check-item span { font-size: 13px; }
+
+/* Radio options */
+.radio-grid { display: flex; flex-direction: column; gap: 8px; }
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.radio-item:hover { border-color: var(--copper); }
+.radio-item input { accent-color: var(--copper); width: 16px; height: 16px; }
+.radio-item input:checked + span { color: var(--copper); font-weight: bold; }
+.radio-item:has(input:checked) { border-color: var(--copper); background: #f5ede0; }
+.radio-item span { font-size: 13px; }
+
+/* Select */
+select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  appearance: none;
+  cursor: pointer;
+}
+select:focus { outline: 1px solid var(--copper); border-color: var(--copper); }
+
+/* Textarea */
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 90px;
+}
+textarea:focus { outline: 1px solid var(--copper); border-color: var(--copper); }
+textarea::placeholder { color: #9a8f82; font-style: italic; }
+
+/* Submit */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: .06em;
+  cursor: pointer;
+  transition: background .15s;
+  margin-top: 8px;
+}
+.submit-btn:hover { background: #2a2520; }
+
+/* Divider */
+.divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+/* Thank you state */
+.thankyou {
+  display: none;
+  text-align: center;
+  padding: 40px 32px;
+}
+.thankyou-icon { font-size: 48px; margin-bottom: 16px; }
+.thankyou-title { font-size: 22px; margin-bottom: 8px; }
+.thankyou-sub { font-size: 13px; color: var(--copper); }
+
+.product-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: .1em;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-header">
+    <div class="logo">MERLIN &amp; EARNER</div>
+    <div class="header-title">这份分析对你有用吗？</div>
+    <div class="header-sub">3 分钟反馈 · 帮助产品变得更好 · Product Feedback</div>
+  </div>
+
+  <!-- Netlify form — name="feedback" is required for Netlify to detect it -->
+  <form
+    name="feedback"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    id="feedback-form"
+    onsubmit="handleSubmit(event)"
+  >
+    <!-- Honeypot anti-spam -->
+    <input type="hidden" name="form-name" value="feedback">
+    <p style="display:none"><input name="bot-field"></p>
+
+    <!-- Hidden: which product & report ID (auto-filled by report link) -->
+    <input type="hidden" name="product" id="field-product" value="">
+    <input type="hidden" name="report_id" id="field-report-id" value="">
+
+    <div class="card-body">
+
+      <!-- Q0: Which product -->
+      <div class="q-block">
+        <label class="q-label">你使用的是哪个产品？</label>
+        <div class="radio-grid">
+          <label class="radio-item">
+            <input type="radio" name="product_select" value="Merlin 访谈作战包" required>
+            <span><span class="product-tag">MERLIN</span>访谈作战包 — 见客户前的准备</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="product_select" value="Merlin 客户提纲研究">
+            <span><span class="product-tag">MERLIN</span>客户提纲研究 — 按提纲逐条回答</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="product_select" value="Earner 财报分析">
+            <span><span class="product-tag">EARNER</span>财报分析 — 财报电话会议解析</span>
+          </label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Q1: Usefulness rating -->
+      <div class="q-block">
+        <label class="q-label">这份分析有多大帮助？</label>
+        <span class="q-hint">How useful was this analysis?</span>
+        <div class="stars">
+          <input type="radio" name="usefulness" id="s5" value="5" required>
+          <label for="s5" title="非常有用">★</label>
+          <input type="radio" name="usefulness" id="s4" value="4">
+          <label for="s4" title="有用">★</label>
+          <input type="radio" name="usefulness" id="s3" value="3">
+          <label for="s3" title="一般">★</label>
+          <input type="radio" name="usefulness" id="s2" value="2">
+          <label for="s2" title="帮助不大">★</label>
+          <input type="radio" name="usefulness" id="s1" value="1">
+          <label for="s1" title="没有帮助">★</label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Q2: Which parts were used -->
+      <div class="q-block">
+        <label class="q-label">你实际用了哪些部分？（可多选）</label>
+        <span class="q-hint">Which sections did you actually use?</span>
+        <div class="check-grid">
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="公司概况 / 关键指标">
+            <span>公司概况 / 关键指标</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="核心议题 / 风险检测">
+            <span>核心议题 / 风险检测</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="访谈问题树">
+            <span>访谈问题树</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="中心假设 / 开场策略">
+            <span>中心假设 / 开场策略</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="逐条回答客户提纲">
+            <span>逐条回答客户提纲</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="财报分析 / 目标价情景">
+            <span>财报分析 / 目标价情景</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" name="used_parts" value="几乎全部用了">
+            <span>几乎全部用了</span>
+          </label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Q3: Sean Ellis Test -->
+      <div class="q-block">
+        <label class="q-label">如果这个工具消失了，你会有多失望？</label>
+        <span class="q-hint">Sean Ellis Test — If this tool disappeared, how would you feel?</span>
+        <div class="radio-grid">
+          <label class="radio-item">
+            <input type="radio" name="disappointment" value="非常失望，我很依赖它" required>
+            <span>😢 非常失望，我很依赖它</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="disappointment" value="有些失望，但能找到替代">
+            <span>😐 有些失望，但能找到替代</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="disappointment" value="无所谓，还好">
+            <span>🤷 无所谓，还好</span>
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="disappointment" value="完全不在乎">
+            <span>😶 完全不在乎</span>
+          </label>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Q4: Willingness to pay -->
+      <div class="q-block">
+        <label class="q-label">你愿意为这样一份报告付多少钱？</label>
+        <span class="q-hint">What would you pay per report?</span>
+        <select name="willingness_to_pay" required>
+          <option value="" disabled selected>请选择...</option>
+          <option value="免费才用">免费才用</option>
+          <option value="¥99 以内">¥99 以内 — 轻度使用</option>
+          <option value="¥99–¥299">¥99–¥299 — 值得付费</option>
+          <option value="¥299–¥599">¥299–¥599 — 省了我很多时间</option>
+          <option value="¥599 以上">¥599 以上 — 替代了专业服务</option>
+        </select>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Q5: Open text -->
+      <div class="q-block">
+        <label class="q-label">最想改进的一点？（选填）</label>
+        <span class="q-hint">One thing you'd most want improved</span>
+        <textarea
+          name="improvement"
+          placeholder="比如：某个章节分析太浅 / 想要更多数字 / 中文表达有点奇怪……"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">提交反馈 Submit →</button>
+
+    </div>
+  </form>
+
+  <!-- Thank you state -->
+  <div class="thankyou" id="thankyou">
+    <div class="thankyou-icon">✦</div>
+    <div class="thankyou-title">谢谢你的反馈</div>
+    <div class="thankyou-sub">每一条回答都会推动产品变得更好。<br>Thank you — your feedback shapes the product.</div>
+  </div>
+</div>
+
+<script>
+// Auto-fill product & report_id from URL params
+// e.g. ?product=Merlin&report=CATL_20260518
+(function () {
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('product')) {
+    document.getElementById('field-product').value = p.get('product');
+    // Pre-select matching radio
+    const radios = document.querySelectorAll('input[name="product_select"]');
+    radios.forEach(r => {
+      if (r.value.includes(p.get('product'))) r.checked = true;
+    });
+  }
+  if (p.get('report')) {
+    document.getElementById('field-report-id').value = p.get('report');
+  }
+})();
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  try {
+    await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(data).toString(),
+    });
+  } catch (_) {
+    // Netlify handles this — silence network errors in dev
+  }
+
+  form.style.display = 'none';
+  document.getElementById('thankyou').style.display = 'block';
+}
+</script>
+</body>
+</html>

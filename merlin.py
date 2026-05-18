@@ -24,6 +24,11 @@ from merlin.analyzer import analyze
 from merlin.models import CoreIssue, InterviewQuestion, MerlinAnalysis, RiskItem
 from merlin.prompts import MerlinContext
 
+# ── Feedback URL ──────────────────────────────────────────────────────────────
+# After deploying feedback.html to Netlify, replace with your actual URL.
+# e.g. "https://merlin-feedback.netlify.app"
+FEEDBACK_URL = "https://your-site.netlify.app"
+
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
@@ -215,8 +220,10 @@ def _sev_zh(sev: str) -> str:
     return {"high": "高风险", "medium": "中风险", "low": "低风险"}.get(sev.lower(), sev)
 
 
-def generate_html(a: MerlinAnalysis) -> str:
+def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
     date_str = datetime.now().strftime("%Y-%m-%d")
+    feedback_url = FEEDBACK_URL
+    feedback_slug = f"{slug}_{date_str}" if slug else date_str
 
     issue_rows = ""
     for i, issue in enumerate(a.core_issues, 1):
@@ -521,7 +528,15 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 <!-- Footer -->
 <div class="footer">
   <span>Merlin AI Consulting Preparation System</span>
-  <span>{a.company_name} &middot; {a.meeting_purpose} &middot; {date_str}</span>
+  <span>
+    {a.company_name} &middot; {a.meeting_purpose} &middot; {date_str}
+    &nbsp;&nbsp;
+    <a href="{feedback_url}?product=Merlin&amp;report={feedback_slug}"
+       target="_blank"
+       style="color:var(--copper);text-decoration:none;border-bottom:1px solid var(--copper)">
+      这份报告有用吗？反馈 →
+    </a>
+  </span>
 </div>
 
 </body>
@@ -565,7 +580,7 @@ def main():
 
     slug = re.sub(r"[^A-Za-z0-9_-]", "_", args.company)[:30]
     output_path = args.output or f"{slug}_Merlin_Brief.html"
-    Path(output_path).write_text(generate_html(analysis), encoding="utf-8")
+    Path(output_path).write_text(generate_html(analysis, slug=slug), encoding="utf-8")
     print(f"\nDone → {output_path}")
 
 

@@ -22,6 +22,7 @@ from datetime import date
 from pathlib import Path
 from typing import Optional
 
+FEEDBACK_URL = "https://your-site.netlify.app"
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
@@ -788,7 +789,15 @@ def generate_html(analysis, consensus, current_price: Optional[float], elapsed: 
   <!-- 14. Footer -->
   <div class="footer">
     <span>财报猎手 Earner &nbsp;·&nbsp; 由 Claude AI 生成 &nbsp;·&nbsp; 仅供参考，不构成投资建议</span>
-    <span>分析耗时 {elapsed:.1f}s &nbsp;·&nbsp; {today}</span>
+    <span>
+      分析耗时 {elapsed:.1f}s &nbsp;·&nbsp; {today}
+      &nbsp;&nbsp;
+      <a href="{FEEDBACK_URL}?product=Earner&amp;report={analysis.ticker}_{today}"
+         target="_blank"
+         style="color:var(--copper);text-decoration:none;border-bottom:1px solid var(--copper)">
+        这份报告有用吗？反馈 →
+      </a>
+    </span>
   </div>
 
 </div>
