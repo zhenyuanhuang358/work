@@ -227,6 +227,69 @@ Return ONLY valid JSON:
 }}""" + _BILINGUAL
 
 
+# ── Prompt 6: Critic ─────────────────────────────────────────────────────────
+# Independent context — Critic never sees how the Builder reached its conclusions.
+# Goal: prove the brief is wrong, generic, or insufficient. Not to help. To fail it.
+
+CRITIC_TEMPLATE = """\
+You are an adversarial quality critic reviewing an interview brief produced by an AI system.
+Your mission: find every weakness. You WANT to fail this brief.
+
+<context>
+Company: {company_name}
+Meeting purpose: {meeting_purpose}
+</context>
+
+<brief_to_critique>
+{analysis_json}
+</brief_to_critique>
+
+Look specifically for these five failure modes:
+
+1. GENERIC QUESTIONS — questions that could apply to any company in this sector,
+   not specifically to {company_name}. Flag each one.
+2. UNTESTABLE HYPOTHESES — a central hypothesis you cannot confirm or deny
+   in a single 60-minute conversation.
+3. IRRELEVANT ISSUES — core issues not connected to {meeting_purpose}.
+4. OVERCONFIDENT ANALYSIS — claims presented as verified fact when they are speculation.
+5. MISSED OBVIOUS SIGNALS — risks or issues any informed analyst would flag
+   that this brief completely ignored.
+
+Quality score rubric (be strict):
+- 9-10: Every question references specific {company_name} data; hypothesis is crisp
+        and testable in one meeting; all issues directly serve {meeting_purpose}
+- 7-8: Mostly specific; minor generic elements; hypothesis broadly testable
+- 5-6: Several generic questions; hypothesis partially testable; some drift from purpose
+- 3-4: Majority of questions could apply to any peer company
+- 1-2: Generic throughout; could have been written for any company in this industry
+
+adjusted_confidence = your independent read of how trustworthy this brief is
+(may be lower than the builder's self-reported score if you found serious issues)
+
+Return ONLY valid JSON:
+
+{{
+  "verdict": "<pass|conditional_pass|fail>",
+  "quality_score": <integer 1-10>,
+  "adjusted_confidence": <integer 1-10>,
+  "failures": [
+    {{
+      "section": "<brief|issues|risks|questions|strategy>",
+      "issue": "<specific problem — bilingual>",
+      "severity": "<critical|major|minor>"
+    }}
+  ],
+  "strengths": [
+    "<genuinely strong element — bilingual>"
+  ],
+  "critic_note": "<one sentence overall verdict — bilingual>"
+}}
+
+pass = ship immediately
+conditional_pass = usable with noted caveats
+fail = do not use without substantial revision""" + _BILINGUAL
+
+
 # ── Builders ──────────────────────────────────────────────────────────────────
 
 def build_brief_prompt(ctx: MerlinContext) -> str:
@@ -267,4 +330,12 @@ def build_strategy_prompt(ctx: MerlinContext) -> str:
         company_name=ctx.company_name,
         meeting_purpose=ctx.meeting_purpose,
         background_text=ctx.background_text,
+    )
+
+
+def build_critic_prompt(ctx: MerlinContext, analysis_json: str) -> str:
+    return CRITIC_TEMPLATE.format(
+        company_name=ctx.company_name,
+        meeting_purpose=ctx.meeting_purpose,
+        analysis_json=analysis_json,
     )

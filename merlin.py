@@ -21,7 +21,7 @@ from datetime import datetime
 from pathlib import Path
 
 from merlin.analyzer import analyze
-from merlin.models import CoreIssue, InterviewQuestion, MerlinAnalysis, RiskItem
+from merlin.models import CoreIssue, CriticVerdict, InterviewQuestion, MerlinAnalysis, RiskItem
 from merlin.prompts import MerlinContext
 
 # ── Feedback URL ──────────────────────────────────────────────────────────────
@@ -232,6 +232,56 @@ def _sev_zh(sev: str) -> str:
     return {"high": "高风险", "medium": "中风险", "low": "低风险"}.get(sev.lower(), sev)
 
 
+def _render_critic(v: CriticVerdict | None) -> str:
+    if v is None:
+        return ""
+
+    verdict_map = {
+        "pass": ("PASS 验证通过", "verdict-pass", "critic-verdict-pass"),
+        "conditional_pass": ("CONDITIONAL 有条件通过", "verdict-conditional", "critic-verdict-conditional"),
+        "fail": ("FAIL 验证失败", "verdict-fail", "critic-verdict-fail"),
+    }
+    badge_text, badge_cls, header_cls = verdict_map.get(
+        v.verdict, ("UNKNOWN", "verdict-conditional", "critic-verdict-conditional")
+    )
+
+    failure_items = ""
+    for f in v.failures:
+        sev_cls = f"failure-sev-{f.severity}"
+        failure_items += f'''
+          <li class="critic-failure">
+            <span class="failure-section">{f.section}</span>
+            <span class="{sev_cls}" style="min-width:52px;font-size:9px;font-weight:bold;letter-spacing:.04em;padding-top:2px">{f.severity.upper()}</span>
+            <span>{_bi(f.issue)}</span>
+          </li>'''
+
+    strengths_html = "".join(
+        f'<span class="strength-chip">{_bi(s)}</span>' for s in v.strengths
+    )
+
+    return f'''
+      <div class="critic-box critic-header {header_cls}" style="border-radius:6px;overflow:hidden;border:2px solid;">
+        <div class="critic-header {header_cls}" style="display:flex;align-items:center;gap:16px;padding:14px 20px;">
+          <span class="verdict-badge {badge_cls}">{badge_text}</span>
+          <div class="critic-scores">
+            <div class="critic-score-item">
+              <span class="critic-score-val" style="color:#6b5a47">{v.quality_score}/10</span>
+              <span style="font-size:9px;letter-spacing:.06em">质量评分 QUALITY</span>
+            </div>
+            <div class="critic-score-item">
+              <span class="critic-score-val" style="color:#8b6c42">{v.adjusted_confidence}/10</span>
+              <span style="font-size:9px;letter-spacing:.06em">Critic 置信度</span>
+            </div>
+          </div>
+        </div>
+        <div class="critic-body">
+          <div class="critic-note">{_bi(v.critic_note)}</div>
+          {"<ul class='critic-failures'>" + failure_items + "</ul>" if failure_items else ""}
+          {"<div class='critic-strengths'>" + strengths_html + "</div>" if strengths_html else ""}
+        </div>
+      </div>'''
+
+
 def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
     date_str = datetime.now().strftime("%Y-%m-%d")
     feedback_url = FEEDBACK_URL
@@ -307,6 +357,15 @@ def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
     svg_risk = _svg_risk_heatmap(a.risks)
     svg_qtree = _svg_question_tree(a.questions)
     svg_gauge = _svg_confidence_gauge(a.confidence_score)
+
+    if a.critic_verdict:
+        critic_section = f'''<div class="section">
+  <div class="section-zh">独立质量验证</div>
+  <div class="section-en">INDEPENDENT CRITIC VERIFICATION · 独立上下文，目标是证明 Builder 是错的</div>
+  {_render_critic(a.critic_verdict)}
+</div>'''
+    else:
+        critic_section = ""
 
     return f'''<!DOCTYPE html>
 <html lang="zh-CN">
@@ -418,6 +477,30 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 /* Two-col grid */
 .two-col{{display:grid; grid-template-columns:1fr 1fr; gap:20px;}}
 
+/* Critic verdict */
+.critic-box{{border:2px solid var(--border); border-radius:6px; overflow:hidden; margin-bottom:20px;}}
+.critic-header{{display:flex; align-items:center; gap:16px; padding:14px 20px;}}
+.critic-verdict-pass{{background:#2a5c3f22; border-color:#2a5c3f;}}
+.critic-verdict-conditional{{background:#c47a1e18; border-color:#c47a1e;}}
+.critic-verdict-fail{{background:#8b2e2e18; border-color:#8b2e2e;}}
+.verdict-badge{{font-size:11px; font-weight:bold; padding:3px 12px; border-radius:2px; letter-spacing:.1em;}}
+.verdict-pass{{background:#2a5c3f; color:#f1efea;}}
+.verdict-conditional{{background:#c47a1e; color:#f1efea;}}
+.verdict-fail{{background:#8b2e2e; color:#f1efea;}}
+.critic-scores{{display:flex; gap:16px; font-size:12px; color:#6b5a47; flex:1;}}
+.critic-score-item{{text-align:center;}}
+.critic-score-val{{font-size:20px; font-weight:bold; display:block;}}
+.critic-body{{padding:0 20px 16px;}}
+.critic-note{{font-size:13px; color:#4a3f35; margin-bottom:14px; font-style:italic;}}
+.critic-failures{{list-style:none; padding:0; margin-bottom:12px;}}
+.critic-failure{{display:flex; gap:10px; padding:7px 0; border-bottom:1px solid var(--border); font-size:12px;}}
+.failure-section{{font-size:9px; font-weight:bold; letter-spacing:.06em; color:#6b5a47; min-width:56px; padding-top:2px; text-transform:uppercase;}}
+.failure-sev-critical{{color:#8b2e2e;}}
+.failure-sev-major{{color:#c47a1e;}}
+.failure-sev-minor{{color:#2a5c3f;}}
+.critic-strengths{{display:flex; flex-wrap:wrap; gap:6px;}}
+.strength-chip{{background:#2a5c3f18; border:1px solid #2a5c3f44; padding:3px 10px; border-radius:12px; font-size:11px; color:#2a5c3f;}}
+
 /* Footer */
 .footer{{margin-top:48px; border-top:1px solid var(--border); padding-top:16px; font-size:11px; color:#6b5a47; display:flex; justify-content:space-between;}}
 </style>
@@ -455,7 +538,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
   </div>
   <div class="stat-cell">
     <div class="stat-val" style="color:{conf_color}">{a.confidence_score}/10</div>
-    <div class="stat-lbl">准备置信度 CONFIDENCE</div>
+    <div class="stat-lbl">{"Critic " + str(a.critic_verdict.adjusted_confidence) + "/10" if a.critic_verdict and a.critic_verdict.adjusted_confidence != a.confidence_score else "准备置信度 CONFIDENCE"}</div>
   </div>
 </div>
 
@@ -541,6 +624,9 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
   <div class="section-en">CONTEXT GAPS</div>
   <div class="gaps-box">{_bi(a.context_gaps)}</div>
 </div>
+
+<!-- 10. Critic Verification -->
+{critic_section}
 
 <!-- Footer -->
 <div class="footer">

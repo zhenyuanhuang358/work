@@ -3,6 +3,23 @@ from typing import Optional
 
 
 @dataclass
+class CriticFailure:
+    section: str     # "brief" | "issues" | "risks" | "questions" | "strategy"
+    issue: str       # what's wrong (bilingual)
+    severity: str    # "critical" | "major" | "minor"
+
+
+@dataclass
+class CriticVerdict:
+    verdict: str              # "pass" | "conditional_pass" | "fail"
+    quality_score: int        # 1-10, Critic's independent assessment
+    adjusted_confidence: int  # may be lower than Builder's confidence_score
+    failures: list[CriticFailure]
+    strengths: list[str]
+    critic_note: str          # one-sentence overall verdict (bilingual)
+
+
+@dataclass
 class CoreIssue:
     title: str
     why_it_matters: str
@@ -53,3 +70,6 @@ class MerlinAnalysis:
     key_themes: list[str]
     confidence_score: int     # 1-10, analyst confidence in prep quality
     confidence_reasoning: str  # why this score
+
+    # Critic verification (added after Builder's 5-step pass)
+    critic_verdict: Optional[CriticVerdict] = None
