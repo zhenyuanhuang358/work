@@ -237,12 +237,12 @@ def _render_critic(v: CriticVerdict | None) -> str:
         return ""
 
     verdict_map = {
-        "pass": ("PASS 验证通过", "verdict-pass", "critic-verdict-pass"),
-        "conditional_pass": ("CONDITIONAL 有条件通过", "verdict-conditional", "critic-verdict-conditional"),
-        "fail": ("FAIL 验证失败", "verdict-fail", "critic-verdict-fail"),
+        "pass": ("PASS 验证通过", "verdict-pass", "#2a5c3f"),
+        "conditional_pass": ("CONDITIONAL 有条件通过", "verdict-conditional", "#c47a1e"),
+        "fail": ("FAIL 验证失败", "verdict-fail", "#8b2e2e"),
     }
-    badge_text, badge_cls, header_cls = verdict_map.get(
-        v.verdict, ("UNKNOWN", "verdict-conditional", "critic-verdict-conditional")
+    badge_text, badge_cls, accent = verdict_map.get(
+        v.verdict, ("UNKNOWN", "verdict-conditional", "#c47a1e")
     )
 
     failure_items = ""
@@ -251,7 +251,7 @@ def _render_critic(v: CriticVerdict | None) -> str:
         failure_items += f'''
           <li class="critic-failure">
             <span class="failure-section">{f.section}</span>
-            <span class="{sev_cls}" style="min-width:52px;font-size:9px;font-weight:bold;letter-spacing:.04em;padding-top:2px">{f.severity.upper()}</span>
+            <span class="{sev_cls}" style="min-width:52px;font-size:9px;font-weight:bold;letter-spacing:.04em;flex-shrink:0">{f.severity.upper()}</span>
             <span>{_bi(f.issue)}</span>
           </li>'''
 
@@ -260,8 +260,8 @@ def _render_critic(v: CriticVerdict | None) -> str:
     )
 
     return f'''
-      <div class="critic-box critic-header {header_cls}" style="border-radius:6px;overflow:hidden;border:2px solid;">
-        <div class="critic-header {header_cls}" style="display:flex;align-items:center;gap:16px;padding:14px 20px;">
+      <div class="critic-box" style="border:2px solid {accent};">
+        <div class="critic-header" style="background:{accent}18;">
           <span class="verdict-badge {badge_cls}">{badge_text}</span>
           <div class="critic-scores">
             <div class="critic-score-item">
@@ -269,7 +269,7 @@ def _render_critic(v: CriticVerdict | None) -> str:
               <span style="font-size:9px;letter-spacing:.06em">质量评分 QUALITY</span>
             </div>
             <div class="critic-score-item">
-              <span class="critic-score-val" style="color:#8b6c42">{v.adjusted_confidence}/10</span>
+              <span class="critic-score-val" style="color:{accent}">{v.adjusted_confidence}/10</span>
               <span style="font-size:9px;letter-spacing:.06em">Critic 置信度</span>
             </div>
           </div>
@@ -478,7 +478,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .two-col{{display:grid; grid-template-columns:1fr 1fr; gap:20px;}}
 
 /* Critic verdict */
-.critic-box{{border:2px solid var(--border); border-radius:6px; overflow:hidden; margin-bottom:20px;}}
+.critic-box{{border-radius:6px; margin-bottom:20px;}}
 .critic-header{{display:flex; align-items:center; gap:16px; padding:14px 20px;}}
 .critic-verdict-pass{{background:#2a5c3f22; border-color:#2a5c3f;}}
 .critic-verdict-conditional{{background:#c47a1e18; border-color:#c47a1e;}}
