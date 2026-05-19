@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Situational Awareness LP — Q1 2026 13F Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0b;
+  --paper: #f1efea;
+  --copper: #8b6c42;
+  --gold: #c9a84c;
+  --green: #2a5c3f;
+  --green-light: #d4e8dd;
+  --red: #8b2e2e;
+  --red-light: #f0d8d8;
+  --amber: #c47a1e;
+  --amber-light: #f5e6cc;
+  --divider: rgba(139,108,66,0.25);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'IM Fell English', Georgia, serif;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 40px 28px 80px;
+  line-height: 1.6;
+}
+
+/* ── Pub Bar ── */
+.pub-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 10px;
+  margin-bottom: 28px;
+}
+
+/* ── Title ── */
+.report-title {
+  font-size: 2.2rem;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.report-subtitle {
+  font-size: 1rem;
+  color: var(--copper);
+  font-style: italic;
+  margin-bottom: 4px;
+}
+.report-meta {
+  font-size: 0.78rem;
+  color: #777;
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--divider);
+  color: var(--copper);
+}
+.tag-contrarian { background: #f5e6cc; border-color: var(--amber); color: var(--amber); }
+.tag-high { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.tag-infrastructure { background: var(--green-light); border-color: var(--green); color: var(--green); }
+
+/* ── Stat Bar ── */
+.stat-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--divider);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.stat-cell {
+  background: var(--paper);
+  padding: 18px 20px;
+  text-align: center;
+}
+.stat-value {
+  font-size: 1.9rem;
+  font-weight: normal;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-value.positive { color: var(--green); }
+.stat-value.negative { color: var(--red); }
+.stat-label-en {
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 2px;
+}
+.stat-label-zh {
+  font-size: 0.72rem;
+  color: #888;
+}
+
+/* ── Section ── */
+.section {
+  margin-bottom: 44px;
+}
+.section-header {
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+.section-zh {
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: var(--ink);
+}
+.section-en {
+  font-size: 0.72rem;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-top: 2px;
+}
+
+/* ── SVG charts ── */
+.chart-wrap {
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.chart-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 16px;
+}
+
+/* ── Two-column layout ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+  .stat-bar { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Position table ── */
+.pos-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.pos-table th {
+  text-align: left;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border-bottom: 1px solid var(--divider);
+  padding: 6px 10px 6px 0;
+  font-weight: normal;
+}
+.pos-table td {
+  padding: 9px 10px 9px 0;
+  border-bottom: 1px solid rgba(139,108,66,0.1);
+  vertical-align: top;
+}
+.pos-table tr:last-child td { border-bottom: none; }
+.ticker {
+  font-weight: bold;
+  font-size: 0.95rem;
+  display: block;
+}
+.pos-name {
+  font-size: 0.75rem;
+  color: var(--copper);
+  font-style: italic;
+}
+.value-cell { font-variant-numeric: tabular-nums; }
+.badge-new {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--amber-light);
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  border-radius: 2px;
+  padding: 2px 5px;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+.badge-increased {
+  font-size: 0.65rem;
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid var(--green);
+  border-radius: 2px;
+  padding: 2px 5px;
+  margin-left: 6px;
+}
+.badge-short {
+  font-size: 0.65rem;
+  background: var(--red-light);
+  color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+
+/* ── Analysis paragraphs ── */
+.analysis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+@media (max-width: 680px) { .analysis-grid { grid-template-columns: 1fr; } }
+.analysis-card {
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  padding: 20px;
+}
+.analysis-card-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.analysis-card-title-zh { font-size: 0.85rem; color: var(--ink); font-style: normal; }
+.bi-en { display: block; font-size: 0.9rem; color: var(--ink); line-height: 1.6; }
+.bi-zh { display: block; font-size: 0.82rem; color: #5a4c3a; margin-top: 8px; line-height: 1.65; }
+
+/* ── Red Flags ── */
+.flag-list { list-style: none; }
+.flag-item {
+  border-left: 3px solid var(--amber);
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background: var(--amber-light);
+  border-radius: 0 4px 4px 0;
+}
+.flag-item.high { border-left-color: var(--red); background: var(--red-light); }
+.flag-item.info { border-left-color: var(--green); background: var(--green-light); }
+.flag-title { font-size: 0.88rem; font-weight: bold; margin-bottom: 3px; }
+.flag-body { font-size: 0.82rem; color: #4a3a2a; line-height: 1.55; }
+.flag-zh { font-size: 0.78rem; color: #6a5a4a; margin-top: 5px; }
+
+/* ── Verdict Box ── */
+.verdict-box {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 6px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+}
+.verdict-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.verdict-main {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.verdict-zh {
+  font-size: 0.9rem;
+  color: rgba(241,239,234,0.65);
+  line-height: 1.65;
+}
+
+/* ── Divider ── */
+.rule { border: none; border-top: 1px solid var(--divider); margin: 32px 0; }
+
+/* ── Portfolio structure visual ── */
+.struct-bar {
+  height: 28px;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  margin: 16px 0 8px;
+}
+.struct-long {
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: white;
+  letter-spacing: 0.05em;
+}
+.struct-short {
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: white;
+  letter-spacing: 0.05em;
+}
+.struct-legend {
+  display: flex;
+  gap: 24px;
+  font-size: 0.78rem;
+  color: var(--copper);
+}
+.struct-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+/* ── Footer ── */
+.footer {
+  font-size: 0.72rem;
+  color: var(--copper);
+  text-align: center;
+  border-top: 1px solid var(--divider);
+  padding-top: 20px;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<!-- Pub Bar -->
+<div class="pub-bar">
+  <span>13F Institutional Holdings Analysis · Q1 2026</span>
+  <span>Filed: 2026-05-15 · Accepted: 2026-05-18 · Period: 2026-03-31</span>
+</div>
+
+<!-- Title -->
+<h1 class="report-title">Situational Awareness LP</h1>
+<div class="report-subtitle">Leopold Aschenbrenner — Q1 2026 13F Holdings Analysis</div>
+<div class="report-meta">SEC Form 13F · CIK: 0002073822 · AUM: $13.7B 13F Portfolio</div>
+
+<div class="tag-row">
+  <span class="tag tag-contrarian">Contrarian Thesis</span>
+  <span class="tag tag-infrastructure">AI Infrastructure Long</span>
+  <span class="tag tag-high">Semiconductor Short</span>
+  <span class="tag">29 Holdings · 10 New</span>
+  <span class="tag">Barbell Strategy</span>
+</div>
+
+<!-- Stat Bar -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-value">$13.7B</div>
+    <div class="stat-label-en">13F Portfolio Value</div>
+    <div class="stat-label-zh">13F 持仓总市值</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-value positive">$5.52B</div>
+    <div class="stat-label-en">Long Equity</div>
+    <div class="stat-label-zh">多头股权持仓</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-value negative">$8.46B</div>
+    <div class="stat-label-en">Put Options (Notional)</div>
+    <div class="stat-label-zh">看跌期权名义规模</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-value positive">+148%</div>
+    <div class="stat-label-en">QoQ Portfolio Growth</div>
+    <div class="stat-label-zh">较上季度增幅</div>
+  </div>
+</div>
+
+<!-- Portfolio Structure -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">持仓结构概览</div>
+    <div class="section-en">Portfolio Structure Overview</div>
+  </div>
+  <div class="struct-bar">
+    <div class="struct-long" style="width: 39.5%">LONG $5.52B</div>
+    <div class="struct-short" style="width: 60.5%">SHORT (PUTS) $8.46B</div>
+  </div>
+  <div class="struct-legend">
+    <span><span class="struct-dot" style="background:var(--green)"></span>多头：AI 基础设施 / 能源 / 算力</span>
+    <span><span class="struct-dot" style="background:var(--red)"></span>空头（看跌期权）：半导体芯片层</span>
+  </div>
+  <p style="margin-top:14px; font-size:0.82rem; color:#666; font-style:italic;">
+    注：put options 在 13F 中按名义价值披露，并非期权权利金本身。实际空头敞口取决于 delta、到期日及行权价，真实净空头风险通常远小于名义规模。
+    <br>Note: Put notional in 13F reflects underlying exposure, not premium paid. Actual short delta is smaller.
+  </p>
+</div>
+
+<!-- Long Positions Chart -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">多头持仓 — 按市值排序（Top 6）</div>
+    <div class="section-en">Long Equity Positions — By Market Value</div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Top Long Positions · Q1 2026</div>
+    <svg width="100%" height="230" viewBox="0 0 700 230" font-family="'IM Fell English',Georgia,serif">
+      <!-- BE -->
+      <text x="110" y="28" text-anchor="end" font-size="12" fill="#0a0a0b">BE (Bloom Energy)</text>
+      <rect x="118" y="14" width="510" height="20" rx="2" fill="#2a5c3f"/>
+      <text x="636" y="28" font-size="11" fill="#2a5c3f">$934M</text>
+
+      <!-- SanDisk -->
+      <text x="110" y="68" text-anchor="end" font-size="12" fill="#0a0a0b">SanDisk</text>
+      <rect x="118" y="54" width="395" height="20" rx="2" fill="#2a5c3f"/>
+      <text x="521" y="68" font-size="11" fill="#2a5c3f">$724M</text>
+
+      <!-- CoreWeave -->
+      <text x="110" y="108" text-anchor="end" font-size="12" fill="#0a0a0b">CoreWeave</text>
+      <rect x="118" y="94" width="303" height="20" rx="2" fill="#2a5c3f"/>
+      <text x="429" y="108" font-size="11" fill="#2a5c3f">$556M</text>
+
+      <!-- Core Scientific -->
+      <text x="110" y="148" text-anchor="end" font-size="12" fill="#0a0a0b">Core Scientific</text>
+      <rect x="118" y="134" width="229" height="20" rx="2" fill="#3d7a56"/>
+      <text x="355" y="148" font-size="11" fill="#3d7a56">$419M</text>
+
+      <!-- IREN -->
+      <text x="110" y="188" text-anchor="end" font-size="12" fill="#0a0a0b">IREN</text>
+      <rect x="118" y="174" width="68" height="20" rx="2" fill="#5a9970"/>
+      <text x="194" y="188" font-size="11" fill="#5a9970">11.7M shs</text>
+
+      <!-- Riot Platforms -->
+      <text x="110" y="228" text-anchor="end" font-size="12" fill="#0a0a0b">Riot Platforms</text>
+      <rect x="118" y="214" width="42" height="20" rx="2" fill="#5a9970"/>
+      <text x="168" y="228" font-size="11" fill="#5a9970">$78M</text>
+    </svg>
+  </div>
+
+<!-- Long Positions Table -->
+  <table class="pos-table">
+    <thead>
+      <tr>
+        <th>Ticker / Name</th>
+        <th>Sector Theme</th>
+        <th>Value / Shares</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="ticker">BE</span><span class="pos-name">Bloom Energy</span></td>
+        <td>AI 数据中心电力 / Fuel Cell Power</td>
+        <td class="value-cell">$879M equity<br><span style="font-size:0.8rem; color:var(--copper)">+ $55M calls · 6.5M shares</span></td>
+        <td><span class="badge-increased">+176% QoQ</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">SNDK</span><span class="pos-name">SanDisk (WD Spinoff)</span></td>
+        <td>AI 存储 / Flash Storage for AI</td>
+        <td class="value-cell">$724.4M</td>
+        <td><span class="badge-new">New / Large</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">CRWV</span><span class="pos-name">CoreWeave</span></td>
+        <td>AI 云算力 / GPU Cloud</td>
+        <td class="value-cell">$556.1M</td>
+        <td><span class="badge-new">New</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">CORZ</span><span class="pos-name">Core Scientific</span></td>
+        <td>BTC→HPC 转型算力 / Bitcoin Miner → AI HPC</td>
+        <td class="value-cell">26.01M shares<br><span style="font-size:0.8rem; color:var(--copper)">~$418.7M</span></td>
+        <td><span class="badge-increased">Held / Increased</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">CLSK</span><span class="pos-name">CleanSpark</span></td>
+        <td>BTC 矿工 / Bitcoin Miner</td>
+        <td class="value-cell">10,635,739 shares</td>
+        <td><span class="badge-new">New</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">IREN</span><span class="pos-name">IREN (Iris Energy)</span></td>
+        <td>BTC→HPC 矿工 / Renewable Miner → AI HPC</td>
+        <td class="value-cell">11.70M shares</td>
+        <td><span class="badge-new">New</span></td>
+      </tr>
+      <tr>
+        <td><span class="ticker">RIOT</span><span class="pos-name">Riot Platforms</span></td>
+        <td>BTC 矿工 / Bitcoin Miner</td>
+        <td class="value-cell">$78.1M · 11.50M shares</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">APLD</span><span class="pos-name">Applied Digital</span></td>
+        <td>AI 数据中心 / AI Data Centers</td>
+        <td class="value-cell">—</td>
+        <td>Held</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">HUT</span><span class="pos-name">Hut 8</span></td>
+        <td>BTC→HPC 算力 / Miner → HPC</td>
+        <td class="value-cell">—</td>
+        <td>Held</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">KEEL</span><span class="pos-name">Bitfarms (rebranded)</span></td>
+        <td>BTC 矿工 / Bitcoin Miner</td>
+        <td class="value-cell">19.88M shares</td>
+        <td>Held</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">BTDR</span><span class="pos-name">BitDeer Technologies</span></td>
+        <td>AI 算力芯片+矿机 / Mining→AI Chip</td>
+        <td class="value-cell">3.44M shares</td>
+        <td>Held</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">CIFR</span><span class="pos-name">Cipher Mining</span></td>
+        <td>BTC 矿工 / Bitcoin Miner</td>
+        <td class="value-cell">—</td>
+        <td>Held</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Short Positions Chart -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">空头持仓（Put Options）— 按名义价值排序</div>
+    <div class="section-en">Short Positions (Put Options) — By Notional Value</div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">Put Option Positions · Q1 2026 (Notional Exposure)</div>
+    <svg width="100%" height="230" viewBox="0 0 700 230" font-family="'IM Fell English',Georgia,serif">
+      <!-- SMH -->
+      <text x="90" y="28" text-anchor="end" font-size="12" fill="#0a0a0b">SMH ETF</text>
+      <rect x="98" y="14" width="510" height="20" rx="2" fill="#8b2e2e"/>
+      <text x="616" y="28" font-size="11" fill="#8b2e2e">$2.04B</text>
+
+      <!-- NVDA -->
+      <text x="90" y="68" text-anchor="end" font-size="12" fill="#0a0a0b">NVDA</text>
+      <rect x="98" y="54" width="393" height="20" rx="2" fill="#8b2e2e"/>
+      <text x="499" y="68" font-size="11" fill="#8b2e2e">$1.57B</text>
+
+      <!-- ORCL -->
+      <text x="90" y="108" text-anchor="end" font-size="12" fill="#0a0a0b">ORCL</text>
+      <rect x="98" y="94" width="268" height="20" rx="2" fill="#a84040"/>
+      <text x="374" y="108" font-size="11" fill="#a84040">$1.07B</text>
+
+      <!-- AVGO -->
+      <text x="90" y="148" text-anchor="end" font-size="12" fill="#0a0a0b">AVGO</text>
+      <rect x="98" y="134" width="253" height="20" rx="2" fill="#a84040"/>
+      <text x="359" y="148" font-size="11" fill="#a84040">$1.01B</text>
+
+      <!-- AMD -->
+      <text x="90" y="188" text-anchor="end" font-size="12" fill="#0a0a0b">AMD</text>
+      <rect x="98" y="174" width="242" height="20" rx="2" fill="#c05050"/>
+      <text x="348" y="188" font-size="11" fill="#c05050">$969M</text>
+
+      <!-- Others -->
+      <text x="90" y="228" text-anchor="end" font-size="12" fill="#0a0a0b">MU/ASML/INTC/GLW/TSM</text>
+      <rect x="98" y="214" width="148" height="20" rx="2" fill="#d47070"/>
+      <text x="254" y="228" font-size="11" fill="#d47070">~$1.8B total</text>
+    </svg>
+  </div>
+
+  <table class="pos-table">
+    <thead>
+      <tr>
+        <th>Ticker</th>
+        <th>Name / Category</th>
+        <th>Notional</th>
+        <th>% of Puts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="ticker">SMH</span></td>
+        <td>VanEck Semiconductor ETF <span class="badge-short">PUT</span></td>
+        <td class="value-cell">$2.04B</td>
+        <td>24.1%</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">NVDA</span></td>
+        <td>NVIDIA — GPU Leader <span class="badge-short">PUT</span></td>
+        <td class="value-cell">$1.57B</td>
+        <td>18.6%</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">ORCL</span></td>
+        <td>Oracle — Cloud / AI Database <span class="badge-short">PUT</span></td>
+        <td class="value-cell">$1.07B</td>
+        <td>12.7%</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">AVGO</span></td>
+        <td>Broadcom — Custom AI Chips <span class="badge-short">PUT</span></td>
+        <td class="value-cell">$1.01B</td>
+        <td>12.0%</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">AMD</span></td>
+        <td>AMD — GPU / CPU <span class="badge-short">PUT</span></td>
+        <td class="value-cell">$969M</td>
+        <td>11.5%</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">MU</span></td>
+        <td>Micron — AI Memory / HBM <span class="badge-short">PUT</span></td>
+        <td class="value-cell">—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">ASML</span></td>
+        <td>ASML — EUV Lithography <span class="badge-short">PUT</span></td>
+        <td class="value-cell">—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">INTC</span></td>
+        <td>Intel — CPU / Foundry <span class="badge-short">PUT</span></td>
+        <td class="value-cell">—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">GLW</span></td>
+        <td>Corning — Optical Fiber / Glass <span class="badge-short">PUT</span></td>
+        <td class="value-cell">—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="ticker">TSM</span></td>
+        <td>TSMC — Foundry Leader <span class="badge-short">PUT</span></td>
+        <td class="value-cell">—</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="rule">
+
+<!-- Investment Thesis Analysis -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">投资逻辑解构</div>
+    <div class="section-en">Investment Thesis Deconstruction</div>
+  </div>
+
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <div class="analysis-card-title">
+        <span>①</span>
+        <span class="analysis-card-title-zh">核心命题：基础设施层是真正的瓶颈</span>
+      </div>
+      <span class="bi-en">Aschenbrenner's thesis — first laid out in his 2024 "Situational Awareness" essay — holds that AI progress will hit physical limits, not algorithmic ones. The scarce resource is power and compute capacity, not chip design. Whoever controls the electrons and the racks wins.</span>
+      <span class="bi-zh">Aschenbrenner 的核心论点（源自其2024年论文《态势感知》）：AI 进步将撞上物理瓶颈，而非算法瓶颈。稀缺的是电力与算力容量，而非芯片设计能力。掌控电子和机架者胜。</span>
+    </div>
+
+    <div class="analysis-card">
+      <div class="analysis-card-title">
+        <span>②</span>
+        <span class="analysis-card-title-zh">多头逻辑：能源 + 算力基础设施</span>
+      </div>
+      <span class="bi-en">The largest position — Bloom Energy at $934M — is a fuel cell company pivoting to data center power supply. CoreWeave ($556M) is pure-play AI GPU cloud. The dozen Bitcoin miner holdings (Core Scientific, IREN, Riot, CleanSpark, KEEL, Hut 8, etc.) represent miners pivoting hash infrastructure into AI HPC capacity: GPUs in, ASICs out.</span>
+      <span class="bi-zh">最大持仓 Bloom Energy（$934M）是一家正转型数据中心供电的燃料电池企业；CoreWeave（$556M）是纯粹的 AI GPU 云服务商；十余家比特币矿工（Core Scientific、IREN、Riot 等）代表的是"以哈希算力换 HPC 算力"的转型逻辑：用 GPU 替代 ASIC。</span>
+    </div>
+
+    <div class="analysis-card">
+      <div class="analysis-card-title">
+        <span>③</span>
+        <span class="analysis-card-title-zh">空头逻辑：芯片层将被商品化</span>
+      </div>
+      <span class="bi-en">$8.46B in puts targets the semiconductor design layer: NVDA, AMD, AVGO for AI chips; ASML, MU, TSM for supply chain; plus SMH ETF for sector-wide exposure. The implicit bet: today's premium GPU/chip valuations are a temporary monopoly rent, not a moat. As architectures commoditize and new entrants (custom silicon, cheaper GPUs) arrive, margins compress.</span>
+      <span class="bi-zh">$84.6亿看跌期权直指半导体设计层：NVDA、AMD、AVGO（AI 芯片）；ASML、MU、TSM（供应链）；SMH ETF 提供行业整体空头敞口。隐含押注：当前 GPU/芯片的超额溢价是暂时的垄断租金，而非护城河。随着架构商品化与新进入者涌现，利润率终将承压。</span>
+    </div>
+
+    <div class="analysis-card">
+      <div class="analysis-card-title">
+        <span>④</span>
+        <span class="analysis-card-title-zh">哑铃结构：国家安全叙事驱动的不对称押注</span>
+      </div>
+      <span class="bi-en">The portfolio is a classic barbell: concentrated long bets on the infrastructure layer (power, capacity, storage) paired with broad shorts on the chip layer. Aschenbrenner believes AI is a national security-level race, implying governments will pour capital into infrastructure (helping longs) while chip export controls and commoditization erode chip premiums (helping shorts). Missing: no hyperscaler (MSFT, GOOG, AMZN, META) longs — he appears to bet infrastructure owners over platform aggregators.</span>
+      <span class="bi-zh">组合呈现经典哑铃结构：集中做多基础设施层（电力、算力、存储），同时广泛做空芯片层。Aschenbrenner 认为 AI 是国家安全级别的竞争，政府将持续向基础设施注资（利好多头），而芯片出口管制与商品化将侵蚀芯片溢价（利好空头）。值得注意：无任何超大型云厂商（MSFT、GOOG、AMZN、META）多头——他似乎押注基础设施所有者而非平台聚合者。</span>
+    </div>
+  </div>
+
+  <!-- SanDisk / ORCL anomaly -->
+  <div class="analysis-card" style="margin-bottom: 20px;">
+    <div class="analysis-card-title">
+      <span>⑤</span>
+      <span class="analysis-card-title-zh">异常持仓解读：SanDisk 多头 vs. Oracle 空头</span>
+    </div>
+    <span class="bi-en">Two positions merit special attention. SanDisk ($724M long) — spun off from Western Digital in 2024 — is a bet on flash storage for AI model training and inference: model weights, KV-caches, and training datasets require massive, fast storage. As model sizes grow, storage becomes infrastructure. Conversely, the large Oracle PUT ($1.07B) is surprising given ORCL's AI database momentum — it may signal a view that Oracle's current cloud/AI valuation multiple is stretched, or hedge against enterprise software re-rating as AI agents reduce license spend.</span>
+    <span class="bi-zh">两个持仓值得特别关注。SanDisk（$7.24亿多头）——2024年从西部数据分拆——押注 AI 训练与推理对闪存存储的需求：模型权重、KV 缓存、训练数据集均需要大规模高速存储，随着模型规模增长，存储本身成为基础设施。反观 Oracle 的大额看跌期权（$10.7亿），鉴于 ORCL 的 AI 数据库势头，此举颇为意外——或表明 Oracle 当前云/AI 估值倍数过高，或对企业软件重定价（AI 智能体减少授权支出）提供对冲。</span>
+  </div>
+</div>
+
+<!-- QoQ Changes -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">环比变化 — Q4 2025 → Q1 2026</div>
+    <div class="section-en">Quarter-over-Quarter Changes</div>
+  </div>
+  <ul class="flag-list">
+    <li class="flag-item high">
+      <div class="flag-title">Portfolio Size: +148% QoQ — Explosive Capital Deployment</div>
+      <div class="flag-body">Total 13F portfolio grew from ~$5.52B (Q4 2025) to $13.7B (Q1 2026). This implies either massive new LP capital inflows or leveraged expansion of put positions. A 2.5× growth in one quarter is extraordinary for a fund of this size.</div>
+      <div class="flag-zh">持仓总规模从Q4 2025的~$55.2亿暴增至$137亿，单季增幅148%。暗示或有大规模新LP资金流入，或杠杆式扩大期权头寸。对此规模基金而言，单季2.5倍增长极为罕见。</div>
+    </li>
+    <li class="flag-item">
+      <div class="flag-title">Bloom Energy: +176% Position Increase — Highest Conviction Bet</div>
+      <div class="flag-body">BE grew from a meaningful position to $934M, making it the single largest holding. Fuel cell / distributed energy for data centers is the thesis crystallizing. Adds of $55M in calls suggest further upside optionality was purchased.</div>
+      <div class="flag-zh">Bloom Energy 头寸规模环比+176%，成为最大单一持仓（$9.34亿）。燃料电池/分布式能源供应数据中心的逻辑持续强化，另购入$5500万看涨期权，表明对更大上行空间有进一步押注。</div>
+    </li>
+    <li class="flag-item">
+      <div class="flag-title">10 New Positions Added — SanDisk, CoreWeave, CleanSpark, IREN etc.</div>
+      <div class="flag-body">The addition of SanDisk and CoreWeave as $500M+ positions suggests Q1 2026 was a significant thesis-building quarter. Both are recent IPO/spinoff situations with limited institutional coverage, suggesting Aschenbrenner is taking early positions in AI infrastructure plays before consensus forms.</div>
+      <div class="flag-zh">新增10个持仓，其中SanDisk和CoreWeave均超5亿美元。两者均属近期IPO/分拆，机构覆盖有限，表明Aschenbrenner在市场形成共识前抢先布局AI基础设施标的。</div>
+    </li>
+    <li class="flag-item info">
+      <div class="flag-title">Put Scale Dominates: 61% of Portfolio is Short Semiconductor</div>
+      <div class="flag-body">The sheer size of the put book ($8.46B notional vs $5.52B longs) means this is structurally a short-semiconductor fund with AI infrastructure longs as the "upside." The fund profits if AI infrastructure names outperform while chip names underperform — a spread trade, not just a long AI play.</div>
+      <div class="flag-zh">看跌期权规模（$84.6亿名义）超过多头持仓（$55.2亿），结构上本质是"空半导体+多AI基础设施"的价差交易，而非单纯的AI多头。基金盈利条件：AI基础设施跑赢，半导体芯片层跑输。</div>
+    </li>
+  </ul>
+</div>
+
+<!-- Risk Flags -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-zh">风险与质疑</div>
+    <div class="section-en">Risk Flags & Counterarguments</div>
+  </div>
+  <ul class="flag-list">
+    <li class="flag-item high">
+      <div class="flag-title">⚠ Shorting NVDA at Scale: Timing Risk is Enormous</div>
+      <div class="flag-body">$1.57B notional NVDA puts is one of the largest public short positions against NVIDIA. History shows shorting NVDA prematurely has been catastrophic for many funds. If the AI capex cycle continues for 2-3 more years, these puts expire worthless while longs need to compound to offset.</div>
+      <div class="flag-zh">$15.7亿名义NVDA看跌是最大规模公开做空英伟达之一。过早做空英伟达的历史教训惨烈。若AI资本支出周期再延续2-3年，期权到期归零，而多头需快速复利才能弥补损失。</div>
+    </li>
+    <li class="flag-item">
+      <div class="flag-title">⚠ Crypto Miner Concentration — Correlation Risk</div>
+      <div class="flag-body">6+ Bitcoin miner positions create correlation risk: if BTC sells off sharply, all these names fall together even if their HPC thesis is intact. The fund may believe BTC price is a red herring for HPC capacity value, but the market will sell miners regardless of the distinction.</div>
+      <div class="flag-zh">6个以上比特币矿工持仓形成相关性集中风险：若BTC大幅下跌，即便HPC算力转型逻辑完好，这些标的将同步下跌。基金或认为BTC价格与HPC算力价值无关，但市场不会做此区分。</div>
+    </li>
+    <li class="flag-item">
+      <div class="flag-title">⚠ Shorting ORCL and GLW is Unusual — Thesis Inconsistency?</div>
+      <div class="flag-body">Oracle runs major AI cloud infrastructure (OCI) actively courted by AI labs. Corning manufactures fiber optic cables critical for data center interconnects — arguably infrastructure, not commodity. Shorting these alongside semiconductor chip designers raises questions about the coherence of the "short supply chain" thesis.</div>
+      <div class="flag-zh">Oracle 积极运营 OCI AI 云基础设施；Corning 生产数据中心互联所需光纤——这两者与纯粹的"芯片商品化"叙事不完全吻合。同时做空这些标的，使空头逻辑的一致性存疑。</div>
+    </li>
+    <li class="flag-item info">
+      <div class="flag-title">✓ Intellectual Coherence: The Thesis Directly Derives from Published Work</div>
+      <div class="flag-body">Unlike many hedge funds where the portfolio is opaque, Aschenbrenner published his full intellectual thesis in "Situational Awareness" (June 2024). The Q1 2026 13F is remarkably consistent with that thesis: power infrastructure long, chip layer short, government-driven AI buildout as catalyst. This is rare epistemic transparency.</div>
+      <div class="flag-zh">不同于大多数持仓晦暗的对冲基金，Aschenbrenner于2024年6月公开发表了完整的思想框架《态势感知》。Q1 2026的13F与该框架高度一致：多头电力基础设施，空头芯片层，以政府主导的AI基础设施建设为催化剂。这种认知透明度在行业内极为罕见。</div>
+    </li>
+  </ul>
+</div>
+
+<!-- Verdict Box -->
+<div class="verdict-box">
+  <div class="verdict-label">Analyst Verdict · 分析师裁决</div>
+  <div class="verdict-main">
+    Situational Awareness LP is running the most intellectually coherent AI contrarian trade visible in public markets: a barbell structure that bets the AI race commoditizes chip design while permanently concentrating demand for physical infrastructure — power, capacity, and storage. The +148% QoQ growth and 10 new positions suggest Q1 2026 was a full conviction deployment quarter, not incremental tilting.
+  </div>
+  <div class="verdict-zh">
+    态势感知LP正在公开市场上运行最具内在逻辑一致性的AI反向交易：哑铃结构押注AI竞赛将使芯片设计商品化，同时永久性地将需求集中于实体基础设施——电力、算力与存储。单季+148%的增幅与10个新建仓位表明，Q1 2026是全面建仓而非边际调整。关键风险在于时机：做空NVDA与AVGO在AI资本支出周期顶部之前均为不对称下行风险；但若芯片重新定价先于市场预期到来，回报将同样不对称。
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Data Source: SEC EDGAR Form 13F · CIK 0002073822 · Filed 2026-05-15 · Period ending 2026-03-31</p>
+  <p style="margin-top:6px">13F disclosures are quarterly snapshots; positions may have changed materially since filing date.</p>
+  <p style="margin-top:6px; color: var(--copper);">Put notional values reflect underlying equity exposure, not option premiums paid. Actual delta exposure is smaller.</p>
+  <p style="margin-top:8px; font-style:italic; color:#aaa;">Generated by Merlin Analysis Engine · 2026-05-19</p>
+</div>
+
+</body>
+</html>
