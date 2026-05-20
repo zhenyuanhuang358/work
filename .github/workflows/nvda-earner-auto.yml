@@ -4,9 +4,7 @@ name: NVDA Auto Earner
 # 英伟达财报通常在美股收盘后（16:00–17:00 ET）发布
 
 on:
-  schedule:
-    - cron: '30 21 * * *'
-  workflow_dispatch:        # 允许手动触发
+  workflow_dispatch:        # 仅手动触发
 
 jobs:
   earner:
