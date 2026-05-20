@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOMC 会议纪要深度解读 — 2026年4月29日</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e; --bg:#f9f7f3;
+  --border:#d4cfc8; --purple:#6b4f8c;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--paper); color:var(--ink); font-family:'IM Fell English',Georgia,serif; max-width:920px; margin:0 auto; padding:36px 28px;}
+/* Pub bar */
+.pub-bar{display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:32px;}
+.pub-logo{font-size:20px; letter-spacing:.14em; color:var(--copper);}
+.pub-meta{font-size:11px; color:var(--copper); text-align:right; line-height:1.7;}
+/* Title */
+.report-title{font-size:36px; line-height:1.12; margin-bottom:6px;}
+.report-subtitle{font-size:13px; color:var(--copper); letter-spacing:.1em; margin-bottom:18px;}
+.tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px;}
+.tag{border:1px solid var(--copper); color:var(--copper); font-size:11px; padding:3px 12px; border-radius:2px; letter-spacing:.06em;}
+.tag-red{border-color:var(--red); color:var(--red);}
+.tag-green{border-color:var(--green); color:var(--green);}
+.tag-amber{border-color:var(--amber); color:var(--amber);}
+/* Stat bar */
+.stat-bar{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:36px;}
+.stat-cell{background:var(--bg); border:1px solid var(--border); padding:16px; text-align:center;}
+.stat-val{font-size:28px; font-weight:bold; color:var(--copper);}
+.stat-lbl{font-size:10px; color:#6b5a47; margin-top:3px; letter-spacing:.06em; line-height:1.5;}
+/* Sections */
+.section{margin-bottom:40px;}
+.section-zh{font-size:20px; font-weight:bold; border-bottom:1px solid var(--border); padding-bottom:5px; margin-bottom:5px;}
+.section-en{font-size:11px; color:var(--copper); letter-spacing:.1em; margin-bottom:18px;}
+.chart-wrap{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:10px; margin-bottom:16px;}
+.chart-wrap svg{width:100%; height:auto; display:block;}
+/* Bilingual */
+.bi-en{display:block;}
+.bi-zh{display:block; font-size:.88em; color:#6b5a47; margin-top:3px;}
+/* Executive summary */
+.exec-box{background:var(--ink); color:var(--paper); padding:22px 28px; margin-bottom:22px; border-radius:4px;}
+.exec-label{font-size:10px; color:var(--gold); letter-spacing:.14em; margin-bottom:10px;}
+.exec-text{font-size:14px; line-height:1.8;}
+.exec-text .bi-zh{color:#c4bfb6;}
+.verdict-box{background:var(--bg); border:1px solid var(--copper); border-left:4px solid var(--copper); padding:14px 20px; margin-bottom:22px; font-size:13px; color:#4a3f35; font-style:italic; line-height:1.7;}
+/* Vote grid */
+.vote-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+.vote-card{background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:16px;}
+.vote-card-title{font-size:12px; letter-spacing:.08em; color:var(--copper); margin-bottom:10px;}
+.vote-name{font-size:13px; font-weight:bold; margin-bottom:2px;}
+.vote-role{font-size:10px; color:#6b5a47; margin-bottom:6px;}
+.vote-reason{font-size:12px; color:#4a3f35; line-height:1.6; border-left:3px solid var(--border); padding-left:10px;}
+.vote-reason.cut{border-color:var(--green);}
+.vote-reason.hawk{border-color:var(--red);}
+/* Risk table */
+.risk-table{width:100%; border-collapse:collapse; font-size:12px;}
+.risk-table th{background:var(--ink); color:var(--paper); padding:9px 12px; text-align:left; font-size:11px; letter-spacing:.07em;}
+.risk-table td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; line-height:1.6;}
+.risk-table tr:nth-child(even) td{background:var(--bg);}
+/* Powell box */
+.powell-box{background:#f5f0fb; border:1px solid var(--purple); border-left:4px solid var(--purple); padding:16px 20px; border-radius:4px; margin-bottom:16px;}
+.powell-label{font-size:10px; color:var(--purple); letter-spacing:.1em; margin-bottom:8px;}
+.powell-quote{font-size:14px; font-style:italic; line-height:1.8; color:var(--ink);}
+.powell-sub{font-size:11px; color:#6b5a47; margin-top:8px;}
+/* Verdict final */
+.verdict-final{background:var(--ink); color:var(--paper); border-radius:4px; padding:24px 28px; margin-bottom:24px;}
+.verdict-final-label{font-size:10px; color:var(--gold); letter-spacing:.14em; margin-bottom:12px;}
+.verdict-final-text{font-size:15px; line-height:1.8;}
+.verdict-final-text .bi-zh{color:#c4bfb6; font-size:.88em;}
+.verdict-en{color:#c4bfb6; font-size:.82em; font-style:italic; display:block; margin-top:6px;}
+/* Footer */
+.footer{margin-top:52px; border-top:1px solid var(--border); padding-top:18px; font-size:11px; color:#6b5a47; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+</style>
+</head>
+<body>
+
+<!-- Pub Bar -->
+<div class="pub-bar">
+  <div class="pub-logo">MERLIN MACRO</div>
+  <div class="pub-meta">
+    美联储货币政策深度解读 &nbsp;·&nbsp; 2026年4月29日<br>
+    FOMC MINUTES ANALYSIS &nbsp;·&nbsp; MAY 20, 2026
+  </div>
+</div>
+
+<!-- Title -->
+<div class="report-title">美联储4月会议纪要</div>
+<div class="report-subtitle">FOMC MINUTES — APRIL 28–29, 2026 · DEEP ANALYSIS</div>
+<div class="tag-row">
+  <span class="tag">利率按兵不动 HOLD</span>
+  <span class="tag tag-red">8比4 历史性分裂</span>
+  <span class="tag tag-amber">滞胀风险上升</span>
+  <span class="tag">CPI 3.3% ↑</span>
+  <span class="tag tag-red">Powell 宣布留任</span>
+</div>
+
+<!-- Stat bar -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-val">3.625%</div>
+    <div class="stat-lbl">联邦基金利率中值<br>FED FUNDS RATE MID</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val" style="color:var(--red)">8–4</div>
+    <div class="stat-lbl">投票结果<br>1992年来最大分裂</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val" style="color:var(--amber)">3.3%</div>
+    <div class="stat-lbl">CPI 同比（3月）<br>前月 2.4%</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val">4.3%</div>
+    <div class="stat-lbl">失业率（3月）<br>UNEMPLOYMENT RATE</div>
+  </div>
+</div>
+
+<!-- SVG 1: 利率路径 -->
+<div class="section">
+  <div class="section-zh">联邦基金利率路径</div>
+  <div class="section-en">FED FUNDS RATE TRAJECTORY</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 860 200" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background -->
+      <rect width="860" height="200" fill="#f9f7f3"/>
+      <!-- Grid lines -->
+      <line x1="80" y1="30" x2="820" y2="30" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="70" x2="820" y2="70" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="110" x2="820" y2="110" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="150" x2="820" y2="150" stroke="#e8e4de" stroke-width="1"/>
+      <!-- Y labels -->
+      <text x="72" y="34" text-anchor="end" font-size="10" fill="#6b5a47">4.50%</text>
+      <text x="72" y="74" text-anchor="end" font-size="10" fill="#6b5a47">4.00%</text>
+      <text x="72" y="114" text-anchor="end" font-size="10" fill="#6b5a47">3.50%</text>
+      <text x="72" y="154" text-anchor="end" font-size="10" fill="#6b5a47">3.00%</text>
+      <!-- Rate line: 5.25→5.25→4.75→4.50→4.25→4.00→3.75→3.625→3.625→3.625 -->
+      <!-- Meetings: Jun24, Sep24, Nov24, Dec24, Jan25, Mar25, May25, Sep25, Nov25, Jan26, Mar26, Apr26 -->
+      <!-- Scale: 3.0%=150, 4.5%=30, per 0.5%=40px -->
+      <!-- 5.25% = 30 - 30 = 0 (off chart, cap at 5.25%->0) let me recalculate -->
+      <!-- Y = 150 - (rate - 3.0) / 0.5 * 40 -->
+      <!-- 5.25 -> 150 - 2.25/0.5*40 = 150-180 = -30 (clip) -->
+      <!-- 4.50 -> 150 - 1.5/0.5*40 = 150-120 = 30 -->
+      <!-- 4.25 -> 150 - 1.25/0.5*40 = 150-100 = 50 -->
+      <!-- 4.00 -> 150 - 1.0/0.5*40 = 150-80 = 70 -->
+      <!-- 3.75 -> 150 - 0.75/0.5*40 = 150-60 = 90 -->
+      <!-- 3.625-> 150 - 0.625/0.5*40 = 150-50 = 100 -->
+      <!-- 3.50 -> 150 - 0.5/0.5*40 = 150-40 = 110 -->
+      <!-- X positions for 10 meetings evenly from 100 to 800 -->
+      <polyline
+        points="100,30 160,30 220,50 280,70 340,90 400,100 460,100 520,100 580,100 640,100 700,100 760,100"
+        fill="none" stroke="#8b6c42" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- Cut markers -->
+      <circle cx="220" cy="50" r="5" fill="#2a5c3f"/>
+      <circle cx="280" cy="70" r="5" fill="#2a5c3f"/>
+      <circle cx="340" cy="90" r="5" fill="#2a5c3f"/>
+      <circle cx="400" cy="100" r="5" fill="#2a5c3f"/>
+      <!-- Hold markers -->
+      <circle cx="100" cy="30" r="5" fill="#8b6c42"/>
+      <circle cx="160" cy="30" r="5" fill="#8b6c42"/>
+      <circle cx="460" cy="100" r="4" fill="#c47a1e"/>
+      <circle cx="520" cy="100" r="4" fill="#c47a1e"/>
+      <circle cx="580" cy="100" r="4" fill="#c47a1e"/>
+      <circle cx="640" cy="100" r="4" fill="#c47a1e"/>
+      <circle cx="700" cy="100" r="4" fill="#c47a1e"/>
+      <!-- Current meeting highlight -->
+      <circle cx="760" cy="100" r="7" fill="none" stroke="#8b2e2e" stroke-width="2"/>
+      <circle cx="760" cy="100" r="4" fill="#8b2e2e"/>
+      <!-- X labels -->
+      <text x="100" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jun'24</text>
+      <text x="160" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jul'24</text>
+      <text x="220" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Sep'24</text>
+      <text x="280" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Nov'24</text>
+      <text x="340" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Dec'24</text>
+      <text x="400" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jan'25</text>
+      <text x="460" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Mar'25</text>
+      <text x="520" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">May'25</text>
+      <text x="580" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jan'26</text>
+      <text x="640" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Feb'26</text>
+      <text x="700" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Mar'26</text>
+      <text x="760" y="185" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">Apr'26</text>
+      <!-- Legend -->
+      <circle cx="100" cy="168" r="4" fill="#2a5c3f"/>
+      <text x="108" y="172" font-size="9" fill="#6b5a47">降息 Cut</text>
+      <circle cx="170" cy="168" r="4" fill="#c47a1e"/>
+      <text x="178" y="172" font-size="9" fill="#6b5a47">暂停 Hold</text>
+      <circle cx="240" cy="168" r="4" fill="#8b2e2e"/>
+      <text x="248" y="172" font-size="9" fill="#6b5a47">本次会议</text>
+      <!-- Current rate label -->
+      <text x="775" y="97" font-size="10" fill="#8b2e2e" font-weight="bold">3.50–3.75%</text>
+    </svg>
+  </div>
+</div>
+
+<!-- SVG 2: CPI vs 目标 -->
+<div class="section">
+  <div class="section-zh">通胀走势 vs 2% 目标</div>
+  <div class="section-en">CPI TRAJECTORY vs 2% TARGET</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 860 200" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <rect width="860" height="200" fill="#f9f7f3"/>
+      <!-- Grid -->
+      <line x1="80" y1="30" x2="820" y2="30" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="65" x2="820" y2="65" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="100" x2="820" y2="100" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="135" x2="820" y2="135" stroke="#e8e4de" stroke-width="1"/>
+      <line x1="80" y1="163" x2="820" y2="163" stroke="#8b6c42" stroke-width="1" stroke-dasharray="5,4"/>
+      <!-- Y labels -->
+      <text x="72" y="34" text-anchor="end" font-size="10" fill="#6b5a47">4.0%</text>
+      <text x="72" y="69" text-anchor="end" font-size="10" fill="#6b5a47">3.5%</text>
+      <text x="72" y="104" text-anchor="end" font-size="10" fill="#6b5a47">3.0%</text>
+      <text x="72" y="139" text-anchor="end" font-size="10" fill="#6b5a47">2.5%</text>
+      <text x="72" y="167" text-anchor="end" font-size="10" fill="#8b6c42">2.0%</text>
+      <!-- 2% target line label -->
+      <text x="822" y="167" font-size="9" fill="#8b6c42" font-style="italic">目标</text>
+      <!-- CPI data: scale Y = 163 - (cpi - 2.0)/0.5 * 35 -->
+      <!-- 2.4->163-(0.4/0.5)*35=163-28=135 -->
+      <!-- 2.6->163-(0.6/0.5)*35=163-42=121 -->
+      <!-- 2.8->163-(0.8/0.5)*35=163-56=107 -->
+      <!-- 2.5->163-(0.5/0.5)*35=163-35=128 -->
+      <!-- 2.9->163-(0.9/0.5)*35=163-63=100 -->
+      <!-- 3.0->163-(1.0/0.5)*35=163-70=93 -->
+      <!-- 2.7->163-(0.7/0.5)*35=163-49=114 -->
+      <!-- 2.4->135 -->
+      <!-- 3.3->163-(1.3/0.5)*35=163-91=72 -->
+      <!-- X positions: 8 months from Jun25 to Mar26, spacing 90 -->
+      <polyline
+        points="120,135 210,121 300,107 390,128 480,100 570,93 660,135 750,72"
+        fill="none" stroke="#c47a1e" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- Data points -->
+      <circle cx="120" cy="135" r="4" fill="#c47a1e"/>
+      <circle cx="210" cy="121" r="4" fill="#c47a1e"/>
+      <circle cx="300" cy="107" r="4" fill="#c47a1e"/>
+      <circle cx="390" cy="128" r="4" fill="#c47a1e"/>
+      <circle cx="480" cy="100" r="4" fill="#c47a1e"/>
+      <circle cx="570" cy="93" r="4" fill="#c47a1e"/>
+      <circle cx="660" cy="135" r="4" fill="#2a5c3f"/>
+      <!-- Last point (Mar26 - big jump) highlighted -->
+      <circle cx="750" cy="72" r="7" fill="none" stroke="#8b2e2e" stroke-width="2"/>
+      <circle cx="750" cy="72" r="4" fill="#8b2e2e"/>
+      <text x="755" y="65" font-size="10" fill="#8b2e2e" font-weight="bold">3.3%</text>
+      <text x="755" y="78" font-size="9" fill="#8b2e2e">↑ 单月+0.9ppt</text>
+      <!-- X labels -->
+      <text x="120" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jun'25</text>
+      <text x="210" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Aug'25</text>
+      <text x="300" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Oct'25</text>
+      <text x="390" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Nov'25</text>
+      <text x="480" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Dec'25</text>
+      <text x="570" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Jan'26</text>
+      <text x="660" y="185" text-anchor="middle" font-size="9" fill="#6b5a47">Feb'26</text>
+      <text x="750" y="185" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">Mar'26</text>
+    </svg>
+  </div>
+</div>
+
+<!-- SVG 3: 投票分布 -->
+<div class="section">
+  <div class="section-zh">8比4历史性分裂投票</div>
+  <div class="section-en">HISTORIC 8–4 VOTE SPLIT · MOST DISSENTS SINCE 1992</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 860 130" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <rect width="860" height="130" fill="#f9f7f3"/>
+      <!-- 12 seats as circles -->
+      <!-- Row 1: 8 YES votes (hold + easing bias) -->
+      <text x="30" y="45" font-size="11" fill="#6b5a47" font-style="italic">赞成（维持+宽松偏向）</text>
+      <circle cx="260" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="300" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="340" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="380" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="420" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="460" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="500" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <circle cx="540" cy="38" r="16" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <text x="400" y="43" text-anchor="middle" font-size="13" fill="#8b6c42" font-weight="bold">8</text>
+      <!-- Row 2: 4 dissents -->
+      <text x="30" y="105" font-size="11" fill="#6b5a47" font-style="italic">异见</text>
+      <!-- Miran: cut (green) -->
+      <circle cx="260" cy="98" r="16" fill="#2a5c3f" fill-opacity="0.2" stroke="#2a5c3f" stroke-width="1.5"/>
+      <text x="260" y="102" text-anchor="middle" font-size="9" fill="#2a5c3f">降息</text>
+      <!-- Hammack, Kashkari, Logan: no easing bias (red) -->
+      <circle cx="300" cy="98" r="16" fill="#8b2e2e" fill-opacity="0.2" stroke="#8b2e2e" stroke-width="1.5"/>
+      <circle cx="340" cy="98" r="16" fill="#8b2e2e" fill-opacity="0.2" stroke="#8b2e2e" stroke-width="1.5"/>
+      <circle cx="380" cy="98" r="16" fill="#8b2e2e" fill-opacity="0.2" stroke="#8b2e2e" stroke-width="1.5"/>
+      <text x="340" y="102" text-anchor="middle" font-size="9" fill="#8b2e2e">去宽松</text>
+      <!-- Labels -->
+      <text x="260" y="122" text-anchor="middle" font-size="8" fill="#2a5c3f">Miran</text>
+      <text x="300" y="122" text-anchor="middle" font-size="8" fill="#8b2e2e">Hammack</text>
+      <text x="340" y="122" text-anchor="middle" font-size="8" fill="#8b2e2e">Kashkari</text>
+      <text x="380" y="122" text-anchor="middle" font-size="8" fill="#8b2e2e">Logan</text>
+      <!-- Legend right -->
+      <circle cx="620" cy="35" r="8" fill="#2a5c3f" fill-opacity="0.2" stroke="#2a5c3f" stroke-width="1.5"/>
+      <text x="634" y="39" font-size="10" fill="#2a5c3f">主张降息 25bp</text>
+      <circle cx="620" cy="58" r="8" fill="#8b2e2e" fill-opacity="0.2" stroke="#8b2e2e" stroke-width="1.5"/>
+      <text x="634" y="62" font-size="10" fill="#8b2e2e">反对保留宽松偏向</text>
+      <circle cx="620" cy="81" r="8" fill="#8b6c42" fill-opacity="0.2" stroke="#8b6c42" stroke-width="1.5"/>
+      <text x="634" y="85" font-size="10" fill="#8b6c42">维持 + 宽松偏向（多数）</text>
+    </svg>
+  </div>
+
+  <!-- Vote cards -->
+  <div class="vote-grid">
+    <div class="vote-card">
+      <div class="vote-card-title">异见 · 主张降息</div>
+      <div class="vote-name">Stephen Miran</div>
+      <div class="vote-role">Fed理事 · Governor · 2025年9月上任</div>
+      <div class="vote-reason cut">主张立即降息25bp。自上任以来五次会议五次异见，是委员会中唯一持续鸽派声音。逻辑：关税与能源冲击将抑制需求，增长风险优先于通胀风险。</div>
+    </div>
+    <div class="vote-card">
+      <div class="vote-card-title">异见 · 反对宽松偏向（×3）</div>
+      <div class="vote-name">Hammack · Kashkari · Logan</div>
+      <div class="vote-role">克利夫兰 / 明尼阿波利斯 / 达拉斯联储主席</div>
+      <div class="vote-reason hawk">三人支持维持利率不变，但反对声明中保留"未来可能降息"的前瞻指引措辞。逻辑：通胀3.3%且上行，现在承诺宽松方向为时过早，应彻底移除宽松偏向。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Executive Summary -->
+<div class="section">
+  <div class="section-zh">核心判断</div>
+  <div class="section-en">CORE ASSESSMENT</div>
+  <div class="exec-box">
+    <div class="exec-label">深度解读 MACRO INTELLIGENCE</div>
+    <div class="exec-text">
+      <span class="bi-en">This meeting marks a structural policy paralysis: inflation at 3.3% bars rate cuts, while tariff-driven demand weakness and Middle East-driven energy shock bars rate hikes. The Committee is trapped.</span>
+      <span class="bi-zh">这次会议标志着结构性政策僵局：通胀3.3%封死了降息空间，关税抑制需求、中东能源冲击又压缩了加息选项。Fed被锁死在区间内，等待外部冲击自我消化。</span>
+    </div>
+  </div>
+  <div class="verdict-box">
+    四次供给冲击叠加（疫情→俄乌→关税→伊朗油价），任何单一框架都无法准确定价Fed下一步——这是2026年最难做的宏观交易背景。
+    <span style="display:block;margin-top:6px;font-size:11px;color:#8b6c42;">Four sequential supply shocks have destroyed the Fed's ability to rely on any single policy framework. This is the hardest macro environment for rate-path pricing since 2022.</span>
+  </div>
+</div>
+
+<!-- SVG 4: 四重冲击时间轴 -->
+<div class="section">
+  <div class="section-zh">四重供给冲击时间轴</div>
+  <div class="section-en">FOUR SUPPLY SHOCKS · POWELL'S FRAMEWORK</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 860 120" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <rect width="860" height="120" fill="#f9f7f3"/>
+      <!-- Timeline line -->
+      <line x1="60" y1="60" x2="800" y2="60" stroke="#d4cfc8" stroke-width="2"/>
+      <polygon points="800,56 812,60 800,64" fill="#d4cfc8"/>
+      <!-- Shock 1: Pandemic 2020 -->
+      <circle cx="130" cy="60" r="18" fill="#8b2e2e" fill-opacity="0.15" stroke="#8b2e2e" stroke-width="1.5"/>
+      <text x="130" y="56" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">疫情</text>
+      <text x="130" y="68" text-anchor="middle" font-size="8" fill="#8b2e2e">2020</text>
+      <text x="130" y="90" text-anchor="middle" font-size="9" fill="#6b5a47">COVID-19</text>
+      <!-- Shock 2: Ukraine 2022 -->
+      <circle cx="310" cy="60" r="18" fill="#8b2e2e" fill-opacity="0.15" stroke="#8b2e2e" stroke-width="1.5"/>
+      <text x="310" y="56" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">俄乌</text>
+      <text x="310" y="68" text-anchor="middle" font-size="8" fill="#8b2e2e">2022</text>
+      <text x="310" y="90" text-anchor="middle" font-size="9" fill="#6b5a47">Ukraine War</text>
+      <!-- Shock 3: Tariffs 2025 -->
+      <circle cx="530" cy="60" r="18" fill="#c47a1e" fill-opacity="0.15" stroke="#c47a1e" stroke-width="1.5"/>
+      <text x="530" y="56" text-anchor="middle" font-size="9" fill="#c47a1e" font-weight="bold">关税</text>
+      <text x="530" y="68" text-anchor="middle" font-size="8" fill="#c47a1e">2025</text>
+      <text x="530" y="90" text-anchor="middle" font-size="9" fill="#6b5a47">Trump Tariffs</text>
+      <!-- Shock 4: Iran/Oil 2026 -->
+      <circle cx="730" cy="60" r="18" fill="#8b2e2e" fill-opacity="0.3" stroke="#8b2e2e" stroke-width="2"/>
+      <text x="730" y="56" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">伊朗</text>
+      <text x="730" y="68" text-anchor="middle" font-size="8" fill="#8b2e2e">2026</text>
+      <text x="730" y="90" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">Iran Oil Shock ←NOW</text>
+      <!-- NOW marker -->
+      <line x1="730" y1="15" x2="730" y2="40" stroke="#8b2e2e" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="730" y="12" text-anchor="middle" font-size="9" fill="#8b2e2e" font-weight="bold">当前</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Risk matrix -->
+<div class="section">
+  <div class="section-zh">风险矩阵</div>
+  <div class="section-en">RISK MATRIX</div>
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th>风险 RISK</th>
+        <th>方向 DIR</th>
+        <th>严重度</th>
+        <th>政策含义 IMPLICATION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>中东冲突升级</strong><br><em style="font-size:11px;color:#6b5a47">Middle East Escalation</em></td>
+        <td style="color:#8b2e2e;font-weight:bold">通胀↑<br>增长↓</td>
+        <td><span style="color:#8b2e2e;font-weight:bold">高</span></td>
+        <td>双向锁死，滞胀情景概率最大，降息窗口推迟至2027年</td>
+      </tr>
+      <tr>
+        <td><strong>关税持续传导</strong><br><em style="font-size:11px;color:#6b5a47">Tariff Pass-Through</em></td>
+        <td style="color:#c47a1e;font-weight:bold">核心CPI↑</td>
+        <td><span style="color:#c47a1e;font-weight:bold">中高</span></td>
+        <td>核心CPI 2.6%尚未完全反映关税二次传导，全年有上行至3%+风险</td>
+      </tr>
+      <tr>
+        <td><strong>Fed独立性威胁</strong><br><em style="font-size:11px;color:#6b5a47">Fed Independence Risk</em></td>
+        <td style="color:#8b2e2e;font-weight:bold">信任↓</td>
+        <td><span style="color:#8b2e2e;font-weight:bold">高（制度）</span></td>
+        <td>Powell留任阻断政治任命，但法律攻防未完，美元信用溢价上升</td>
+      </tr>
+      <tr>
+        <td><strong>FOMC内部分裂加剧</strong><br><em style="font-size:11px;color:#6b5a47">FOMC Fragmentation</em></td>
+        <td style="color:#c47a1e;font-weight:bold">前瞻指引↓</td>
+        <td><span style="color:#c47a1e;font-weight:bold">中</span></td>
+        <td>8-4分裂令市场无法锚定路径预期，利率波动率(MOVE Index)将持续偏高</td>
+      </tr>
+      <tr>
+        <td><strong>劳动力市场转弱</strong><br><em style="font-size:11px;color:#6b5a47">Labor Market Softening</em></td>
+        <td style="color:#2a5c3f;font-weight:bold">增长↓</td>
+        <td><span style="color:#2a5c3f;font-weight:bold">低（当前）</span></td>
+        <td>3月+17.8万仍健康，但若连续两月低于10万则给Miran一方提供弹药</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Powell box -->
+<div class="section">
+  <div class="section-zh">鲍威尔留任声明</div>
+  <div class="section-en">POWELL'S STATEMENT ON STAYING AS GOVERNOR</div>
+  <div class="powell-box">
+    <div class="powell-label">DIRECT QUOTE · 原话</div>
+    <div class="powell-quote">"The things that have happened in the last three months, they have left me no choice but to stay until I see them through, at least that long."</div>
+    <div class="powell-sub">— Jerome Powell，4月29日发布会，宣布在主席任期5月15日结束后以理事身份留任</div>
+  </div>
+  <table class="risk-table">
+    <thead>
+      <tr><th>维度</th><th>含义</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>直接影响</strong></td>
+        <td>阻断Trump提名Kevin Warsh等政治盟友填补理事席位，维持现有票权结构</td>
+      </tr>
+      <tr>
+        <td><strong>法律背景</strong></td>
+        <td>Trump政府对Fed独立性发起"史无前例的法律攻击"，Powell称Fed已诉诸法院且"尚未结束"</td>
+      </tr>
+      <tr>
+        <td><strong>市场信号</strong></td>
+        <td>短期为Fed独立性背书，长期不确定性未消；美元及美债对Fed政治风险溢价定价不足</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Forward guidance -->
+<div class="section">
+  <div class="section-zh">前瞻判断：降息路径</div>
+  <div class="section-en">RATE CUT PATH ASSESSMENT</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 860 140" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <rect width="860" height="140" fill="#f9f7f3"/>
+      <!-- Three scenarios as horizontal bars -->
+      <!-- Bear (no cut 2026) -->
+      <rect x="80" y="20" width="560" height="28" fill="#8b2e2e" fill-opacity="0.12" rx="3"/>
+      <rect x="80" y="20" width="560" height="28" fill="none" stroke="#8b2e2e" stroke-width="1" rx="3"/>
+      <text x="88" y="39" font-size="11" fill="#8b2e2e" font-weight="bold">熊市情景 BEAR</text>
+      <text x="280" y="39" font-size="11" fill="#8b2e2e">2026年零降息，滞胀迫使Fed观望全年</text>
+      <text x="648" y="39" font-size="11" fill="#8b2e2e" font-weight="bold">35%</text>
+      <!-- Base (1 cut late 2026) -->
+      <rect x="80" y="57" width="560" height="28" fill="#8b6c42" fill-opacity="0.12" rx="3"/>
+      <rect x="80" y="57" width="560" height="28" fill="none" stroke="#8b6c42" stroke-width="1" rx="3"/>
+      <text x="88" y="76" font-size="11" fill="#8b6c42" font-weight="bold">基准情景 BASE</text>
+      <text x="280" y="76" font-size="11" fill="#8b6c42">2026年Q4降息1次25bp，能源价格回落触发</text>
+      <text x="648" y="76" font-size="11" fill="#8b6c42" font-weight="bold">45%</text>
+      <!-- Bull (2 cuts H2 2026) -->
+      <rect x="80" y="94" width="560" height="28" fill="#2a5c3f" fill-opacity="0.12" rx="3"/>
+      <rect x="80" y="94" width="560" height="28" fill="none" stroke="#2a5c3f" stroke-width="1" rx="3"/>
+      <text x="88" y="113" font-size="11" fill="#2a5c3f" font-weight="bold">牛市情景 BULL</text>
+      <text x="280" y="113" font-size="11" fill="#2a5c3f">中东局势缓和+能源回落，Q3+Q4各降25bp</text>
+      <text x="648" y="113" font-size="11" fill="#2a5c3f" font-weight="bold">20%</text>
+      <!-- Trigger labels -->
+      <text x="88" y="134" font-size="9" fill="#6b5a47">触发条件：CPI再度突破3.5% 或 能源价格持续高企</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Final verdict -->
+<div class="verdict-final">
+  <div class="verdict-final-label">宏观裁定 MACRO VERDICT</div>
+  <div class="verdict-final-text">
+    基准情景（45%）：四季度单次降息，前提是中东局势部分缓和、能源价格从峰值回落、核心CPI重归2.5%以下。短期内持有久期资产需要更高风险溢价补偿。
+    <span class="bi-zh">FOMC的政策僵局不会在3个月内打破——没有一个方向的票数能形成压倒性多数。下一个信息窗口是5月CPI数据（6月13日公布）和伊朗局势演变。</span>
+    <span class="verdict-en">Base case (45%): one 25bp cut in Q4 2026, contingent on partial Middle East de-escalation and energy normalization. Duration risk premium is underpriced at current levels. Watch May CPI (June 13) and Iran ceasefire signals as the next binary catalysts.</span>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <span>Merlin Macro · FOMC 深度解读</span>
+  <span>数据来源：Federal Reserve / CNBC / Oxford Economics · 2026-05-20</span>
+</div>
+
+</body>
+</html>
