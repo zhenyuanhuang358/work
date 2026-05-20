@@ -23,30 +23,24 @@ from pathlib import Path
 from typing import Optional
 
 FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
-ITICK_TOKEN = os.environ.get("ITICK_TOKEN", "")
+FINNHUB_TOKEN = os.environ.get("FINNHUB_TOKEN", "")
 
-# ── iTick real-time price ─────────────────────────────────────────────────────
+# ── Finnhub real-time price ───────────────────────────────────────────────────
 
-def fetch_itick_price(ticker: str) -> Optional[float]:
-    """Fetch real-time last price from api0.itick.org. Returns None if token missing or call fails."""
-    if not ITICK_TOKEN:
+def fetch_finnhub_price(ticker: str) -> Optional[float]:
+    """Fetch real-time last price from finnhub.io. Returns None if token missing or call fails."""
+    if not FINNHUB_TOKEN:
         return None
     import urllib.request
     import json as _json
-    url = f"https://api0.itick.org/stock/quote?region=US&code={ticker.upper()}"
+    url = f"https://finnhub.io/api/v1/quote?symbol={ticker.upper()}&token={FINNHUB_TOKEN}"
     try:
-        req = urllib.request.Request(
-            url,
-            headers={"token": ITICK_TOKEN, "accept": "application/json"},
-        )
+        req = urllib.request.Request(url, headers={"accept": "application/json"})
         with urllib.request.urlopen(req, timeout=6) as resp:
-            payload = _json.loads(resp.read())
-        d = payload.get("data", payload)
-        if isinstance(d, list):
-            d = d[0] if d else {}
-        # try common field names across iTick response versions
-        for key in ("lastPrice", "lp", "last", "close", "c", "price"):
-            if d.get(key) is not None:
+            d = _json.loads(resp.read())
+        # Finnhub quote: c=current price, pc=previous close
+        for key in ("c", "l", "pc"):
+            if d.get(key):
                 return float(d[key])
     except Exception:
         pass
@@ -860,12 +854,12 @@ async def main():
     args = parser.parse_args()
 
     if args.price is None:
-        fetched = fetch_itick_price(args.ticker)
+        fetched = fetch_finnhub_price(args.ticker)
         if fetched:
-            print(f"  [iTick] 自动获取 {args.ticker.upper()} 实时股价: ${fetched}")
+            print(f"  [Finnhub] 自动获取 {args.ticker.upper()} 实时股价: ${fetched}")
             args.price = fetched
         else:
-            print("  [iTick] 未配置 ITICK_TOKEN 或拉取失败，--price 为空（目标价模型将跳过）")
+            print("  [Finnhub] 未配置 FINNHUB_TOKEN 或拉取失败，--price 为空（目标价模型将跳过）")
 
     transcript_path = Path(args.transcript)
     if not transcript_path.exists():

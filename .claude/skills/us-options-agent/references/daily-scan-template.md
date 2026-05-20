@@ -7,39 +7,31 @@
 
 ## 扫描清单（分两轨，顺序不可颠倒）
 
-### 第一轨：iTick API — 实时价格（先执行，价格必须从这里来）
+### 第一轨：Finnhub API — 实时价格（先执行，价格必须从这里来）
 
-> ⚠️ 价格数据**只用 iTick**，不用 WebSearch 代替。WebSearch 的价格有延迟且容易出错。
-> 需要配置环境变量 `ITICK_TOKEN`，通过 WebFetch 调用以下端点：
+> ⚠️ 价格数据**只用 Finnhub**，不用 WebSearch 代替。WebSearch 的价格有延迟且容易出错。
+> 需要配置环境变量 `FINNHUB_TOKEN`，通过 WebFetch 调用以下端点：
 
-| 数据 | iTick 端点 | 说明 |
-|------|-----------|------|
-| 大盘实时价 | `https://api0.itick.org/stock/quote?region=US&code=SPY` | SPY 当前价 / 涨跌幅 |
-| 纳斯达克 | `https://api0.itick.org/stock/quote?region=US&code=QQQ` | QQQ 当前价 / 涨跌幅 |
-| VIX 指数 | `https://api0.itick.org/index/quote?region=US&code=VIX` | VIX 数值 |
-| 候选标的价格 | `https://api0.itick.org/stock/quote?region=US&code={TICKER}` | 每个候选标的单独拉 |
-| 批量拉取 | `https://api0.itick.org/stock/quotes?region=US&codes=SPY,QQQ,PLTR,...` | 多标的一次拉完 |
+| 数据 | Finnhub 端点 | 说明 |
+|------|-------------|------|
+| 大盘实时价 | `https://finnhub.io/api/v1/quote?symbol=SPY&token={FINNHUB_TOKEN}` | SPY 当前价 / 涨跌幅 |
+| 纳斯达克 | `https://finnhub.io/api/v1/quote?symbol=QQQ&token={FINNHUB_TOKEN}` | QQQ 当前价 / 涨跌幅 |
+| VIX 指数 | `https://finnhub.io/api/v1/quote?symbol=VIX&token={FINNHUB_TOKEN}` | VIX 数值 |
+| 候选标的价格 | `https://finnhub.io/api/v1/quote?symbol={TICKER}&token={FINNHUB_TOKEN}` | 每个候选标的单独拉 |
 
-**请求方式**（WebFetch 调用）：
-```
-URL: https://api0.itick.org/stock/quote?region=US&code=SPY
-Headers: token: {ITICK_TOKEN}, accept: application/json
-```
+**响应字段**：`c`=当前价 · `d`=涨跌额 · `dp`=涨跌幅% · `h`/`l`=当日高低
 
-响应字段优先级：`lastPrice` → `lp` → `last` → `close`
-涨跌幅字段：`changePercent` → `cp` → `chgPct`
-
-**如果 ITICK_TOKEN 未配置或调用失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
+**如果 FINNHUB_TOKEN 未配置或调用失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
 
 ---
 
-### 第二轨：WebSearch — IV / 异常流 / 财报 / 宏观（iTick 不覆盖的数据）
+### 第二轨：WebSearch — IV / 异常流 / 财报 / 宏观（Finnhub 不覆盖的数据）
 
 1. `[候选标的] IV rank site:marketchameleon.com` — IV Rank（最关键，每个标的必查）
 2. `unusual options activity today` — 异常期权流
 3. `earnings this week [日期]` — 本周财报日历
 4. `宏观 美联储 经济数据 本周` — 宏观风险
-5. `VIX trend today` — VIX 趋势背景（补充 iTick 数值）
+5. `VIX trend today` — VIX 趋势背景（补充 Finnhub 数值）
 
 ---
 

@@ -4,29 +4,24 @@
 
 ---
 
-## ⭐ iTick 实时行情 API（新增核心来源）
+## ⭐ Finnhub 实时行情 API（核心价格来源）
 
-**Base URL**：`https://api0.itick.org`
-**认证**：HTTP Header `token: {ITICK_TOKEN}`（环境变量 `ITICK_TOKEN`）
-**文档**：[docs.itick.org/en](https://docs.itick.org/en)
+**Base URL**：`https://finnhub.io/api/v1`
+**认证**：Query 参数 `token={FINNHUB_TOKEN}`（环境变量 `FINNHUB_TOKEN`）
+**免费版限额**：60次/分钟，美股实时报价无延迟，无 IP 白名单限制
 
-| 数据类型 | Endpoint | 参数示例 | 说明 |
-|---------|---------|---------|------|
-| 实时股价 | `GET /stock/quote` | `?region=US&code=AAPL` | 美股实时报价，lastPrice / close |
-| 批量股价 | `GET /stock/quotes` | `?region=US&codes=AAPL,NVDA` | 多标的批量拉取 |
-| 港股报价 | `GET /stock/quote` | `?region=HK&code=700` | 腾讯=700，港股代码 |
-| 历史 K 线 | `GET /stock/klines` | `?region=US&code=AAPL&period=day` | 日线/周线历史数据 |
-| 外汇实时 | `GET /forex/quotes` | `?codes=EURUSD,USDCNY` | 全球外汇对 |
-| 加密货币 | `GET /crypto/quote` | `?code=BTC` | 主流币实时价 |
-| 指数 | `GET /index/quote` | `?region=US&code=SPX` | 大盘指数 |
-| WebSocket | `wss://api0.itick.org/stock` | subscribe: {region, code} | 低延迟实时推送 |
+| 数据类型 | Endpoint | 示例 | 说明 |
+|---------|---------|------|------|
+| 实时股价 | `GET /quote` | `?symbol=AAPL&token=...` | `c`=当前价，`d`=涨跌额，`dp`=涨跌幅% |
+| 公司概况 | `GET /stock/profile2` | `?symbol=AAPL&token=...` | 市值、行业 |
+| 财报日历 | `GET /calendar/earnings` | `?from=2026-05-20&to=2026-05-27&token=...` | 本周财报安排 |
 
-**覆盖市场**：美股（US）/ 港股（HK）/ A 股（CN）/ 新加坡 / 日本 / 全球外汇 / 加密货币 / 指数
+**响应字段**（`/quote`）：`c`=当前价 · `d`=涨跌额 · `dp`=涨跌幅% · `h`/`l`=当日高低 · `pc`=昨收
 
 **在本 skill 中的用途**：
-- 获取标的实时价格（替代 Yahoo Finance 搜索，更快更准）
-- 在日扫报告中确认股价范围，避免用搜索结果的延迟数据
-- `earner.py` 已集成：当 `--price` 未提供时自动调用，需配置 `ITICK_TOKEN` 环境变量
+- 所有标的实时价格（SPY、QQQ、VIX 及候选个股）
+- 防止 WebSearch 抓取到严重偏差的延迟价格
+- `earner.py` 已集成：`--price` 未提供时自动调用，需配置 `FINNHUB_TOKEN` 环境变量
 
 **搜索方式（无 Token 时）**：继续使用 WebSearch，格式不变。
 
