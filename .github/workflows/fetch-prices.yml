@@ -2,8 +2,12 @@ name: Fetch Stock Prices
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # every 5 minutes
-  workflow_dispatch:       # allow manual trigger
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'stock_prices.json'  # prevent infinite loop
 
 permissions:
   contents: write
@@ -24,7 +28,11 @@ jobs:
           import os
           from datetime import datetime, timezone
 
-          token = os.environ["FINNHUB_TOKEN"]
+          token = os.environ.get("FINNHUB_TOKEN", "")
+          if not token:
+              print("ERROR: FINNHUB_TOKEN secret not set")
+              exit(1)
+
           tickers = ["SPY", "QQQ", "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "IWM", "GLD"]
 
           results = {}
@@ -34,15 +42,17 @@ jobs:
                   req = urllib.request.Request(url, headers={"accept": "application/json"})
                   with urllib.request.urlopen(req, timeout=8) as resp:
                       d = json.loads(resp.read())
+                  price = d.get("c")
+                  chg_pct = d.get("dp") or 0.0
                   results[ticker] = {
-                      "price": d.get("c"),
+                      "price": price,
                       "change": d.get("d"),
-                      "changePct": d.get("dp"),
+                      "changePct": chg_pct,
                       "high": d.get("h"),
                       "low": d.get("l"),
                       "prevClose": d.get("pc"),
                   }
-                  print(f"{ticker}: ${d.get('c')} ({d.get('dp'):+.2f}%)")
+                  print(f"{ticker}: ${price} ({chg_pct:+.2f}%)")
               except Exception as e:
                   print(f"{ticker}: ERROR {e}")
                   results[ticker] = {"price": None, "error": str(e)}
@@ -61,5 +71,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stock_prices.json
-          git diff --cached --quiet || git commit -m "chore: update stock prices $(date -u '+%Y-%m-%d %H:%M UTC')" --no-verify
+          git diff --cached --quiet || git commit -m "chore: update stock prices $(date -u '+%Y-%m-%d %H:%M UTC') [skip ci]"
           git push
