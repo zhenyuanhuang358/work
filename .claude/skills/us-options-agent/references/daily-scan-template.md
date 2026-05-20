@@ -7,21 +7,36 @@
 
 ## 扫描清单（分两轨，顺序不可颠倒）
 
-### 第一轨：Finnhub API — 实时价格（先执行，价格必须从这里来）
+### 第一轨：GitHub 缓存文件 — 实时价格（先执行，价格必须从这里来）
 
-> ⚠️ 价格数据**只用 Finnhub**，不用 WebSearch 代替。WebSearch 的价格有延迟且容易出错。
-> 需要配置环境变量 `FINNHUB_TOKEN`，通过 WebFetch 调用以下端点：
+> ⚠️ 价格数据**只用这个文件**，不用 WebSearch 代替。WebSearch 价格有延迟且容易出错。
+> GitHub Action 每5分钟自动从 Finnhub 抓取并更新此文件。
 
-| 数据 | Finnhub 端点 | 说明 |
-|------|-------------|------|
-| 大盘实时价 | `https://finnhub.io/api/v1/quote?symbol=SPY&token={FINNHUB_TOKEN}` | SPY 当前价 / 涨跌幅 |
-| 纳斯达克 | `https://finnhub.io/api/v1/quote?symbol=QQQ&token={FINNHUB_TOKEN}` | QQQ 当前价 / 涨跌幅 |
-| VIX 指数 | `https://finnhub.io/api/v1/quote?symbol=VIX&token={FINNHUB_TOKEN}` | VIX 数值 |
-| 候选标的价格 | `https://finnhub.io/api/v1/quote?symbol={TICKER}&token={FINNHUB_TOKEN}` | 每个候选标的单独拉 |
+**读取方式**（WebFetch 调用）：
+```
+URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
+```
 
-**响应字段**：`c`=当前价 · `d`=涨跌额 · `dp`=涨跌幅% · `h`/`l`=当日高低
+**文件结构**：
+```json
+{
+  "updated_at": "2026-05-20T09:27:37Z",
+  "prices": {
+    "SPY":  { "price": 733.73, "changePct": -0.67, "high": 737.65, "low": 731.53 },
+    "QQQ":  { "price": 701.53, ... },
+    "NVDA": { "price": 220.61, ... },
+    "PLTR": { "price": 135.26, ... },
+    "TSLA": { "price": 404.11, ... },
+    "AAPL": { "price": 298.97, ... },
+    "AMD":  { "price": 414.05, ... },
+    "IWM":  { "price": 273.00, ... },
+    "GLD":  { "price": 411.50, ... }
+  }
+}
+```
 
-**如果 FINNHUB_TOKEN 未配置或调用失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
+检查 `updated_at` 时间戳，若超过15分钟则注明「价格可能延迟」。
+**如果文件读取失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
 
 ---
 

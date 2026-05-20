@@ -19,11 +19,15 @@
 **响应字段**（`/quote`）：`c`=当前价 · `d`=涨跌额 · `dp`=涨跌幅% · `h`/`l`=当日高低 · `pc`=昨收
 
 **在本 skill 中的用途**：
-- 所有标的实时价格（SPY、QQQ、VIX 及候选个股）
-- 防止 WebSearch 抓取到严重偏差的延迟价格
-- `earner.py` 已集成：`--price` 未提供时自动调用，需配置 `FINNHUB_TOKEN` 环境变量
+- 所有标的实时价格通过 GitHub Action 每5分钟自动抓取并缓存到：
+  `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json`
+- 日扫报告直接 WebFetch 读取该文件，无需 token，无沙箱限制
+- `earner.py` 已集成：`--price` 未提供时直接调用 Finnhub（需本地配置 `FINNHUB_TOKEN`）
 
-**搜索方式（无 Token 时）**：继续使用 WebSearch，格式不变。
+**覆盖标的**：SPY · QQQ · NVDA · PLTR · TSLA · AAPL · AMD · IWM · GLD（每5分钟更新）
+**新增标的**：在 `.github/workflows/fetch-prices.yml` 的 `tickers` 列表中添加即可。
+
+**搜索方式（文件读取失败时）**：继续使用 WebSearch，格式不变。
 
 ---
 
