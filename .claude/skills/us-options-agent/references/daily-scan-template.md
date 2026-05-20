@@ -1,19 +1,45 @@
 # 每日扫描模板：《今日美股期权机会》
 
 用户触发「今日期权机会」「每日扫描」「今天有什么机会」时，
-按此格式用 WebSearch 搜索以下维度后输出报告。
+**严格按以下顺序**执行数据获取，然后输出报告。
 
 ---
 
-## 扫描清单（先搜索再输出）
+## 扫描清单（分两轨，顺序不可颠倒）
 
-搜索以下内容：
-1. `VIX 今日 数值 趋势`
-2. `美股 今日 大盘 走势 SPY QQQ`
-3. `今日 财报 美股 earnings date`
-4. `期权 异常 扫单 unusual options activity today`
-5. `IV Rank 高 美股 ETF today`
-6. `宏观 美联储 经济数据 本周`
+### 第一轨：iTick API — 实时价格（先执行，价格必须从这里来）
+
+> ⚠️ 价格数据**只用 iTick**，不用 WebSearch 代替。WebSearch 的价格有延迟且容易出错。
+> 需要配置环境变量 `ITICK_TOKEN`，通过 WebFetch 调用以下端点：
+
+| 数据 | iTick 端点 | 说明 |
+|------|-----------|------|
+| 大盘实时价 | `https://api0.itick.org/stock/quote?region=US&code=SPY` | SPY 当前价 / 涨跌幅 |
+| 纳斯达克 | `https://api0.itick.org/stock/quote?region=US&code=QQQ` | QQQ 当前价 / 涨跌幅 |
+| VIX 指数 | `https://api0.itick.org/index/quote?region=US&code=VIX` | VIX 数值 |
+| 候选标的价格 | `https://api0.itick.org/stock/quote?region=US&code={TICKER}` | 每个候选标的单独拉 |
+| 批量拉取 | `https://api0.itick.org/stock/quotes?region=US&codes=SPY,QQQ,PLTR,...` | 多标的一次拉完 |
+
+**请求方式**（WebFetch 调用）：
+```
+URL: https://api0.itick.org/stock/quote?region=US&code=SPY
+Headers: token: {ITICK_TOKEN}, accept: application/json
+```
+
+响应字段优先级：`lastPrice` → `lp` → `last` → `close`
+涨跌幅字段：`changePercent` → `cp` → `chgPct`
+
+**如果 ITICK_TOKEN 未配置或调用失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
+
+---
+
+### 第二轨：WebSearch — IV / 异常流 / 财报 / 宏观（iTick 不覆盖的数据）
+
+1. `[候选标的] IV rank site:marketchameleon.com` — IV Rank（最关键，每个标的必查）
+2. `unusual options activity today` — 异常期权流
+3. `earnings this week [日期]` — 本周财报日历
+4. `宏观 美联储 经济数据 本周` — 宏观风险
+5. `VIX trend today` — VIX 趋势背景（补充 iTick 数值）
 
 ---
 
