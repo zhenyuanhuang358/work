@@ -34,7 +34,7 @@ from merlin.prompts import (
 
 MODEL = "claude-opus-4-7"
 MAX_TOKENS = 8192
-CHECKPOINT_DIR = Path("/tmp/merlin_checkpoints")
+CHECKPOINT_DIR = Path(__file__).parent.parent / "merlin_checkpoints"
 
 
 # ── Core API call ─────────────────────────────────────────────────────────────

@@ -1,9 +1,10 @@
 """
-Merlin Research Mode — four-agent prompts for client outline research.
+Merlin Research Mode — five-agent prompts for client outline research.
 
-Orchestrator → Scout (web_search) → Analyst + Forensic (parallel) → Strategist
+Orchestrator → Scout (web_search) → Analyst + Forensic → Strategist → Critic
 """
 
+import json
 from dataclasses import dataclass
 from typing import Optional
 
@@ -250,6 +251,66 @@ Return ONLY valid JSON:
     }}
   ]
 }}""" + _BILINGUAL
+
+
+# ── Critic (独立验证) ──────────────────────────────────────────────────────────
+
+CRITIC_TEMPLATE = """\
+You are an independent critic. You have received a research report about {company_name}.
+You did NOT participate in producing it — you are seeing only the final output.
+
+Your only job: find what is wrong, incomplete, or unsubstantiated in these answers.
+Do NOT be constructive. Do NOT explain what the Builder should have done.
+Find failures. Prove the report wrong.
+
+<client_sections>
+{sections_json}
+</client_sections>
+
+<strategist_answers>
+{deliverable}
+</strategist_answers>
+
+For each failure you find, classify it:
+- unanswered: the question was not addressed
+- unsupported: claim made without data to back it
+- contradictory: two answers or claims conflict
+- overconfident: high confidence rating is not warranted by evidence cited
+- incomplete: answer is superficial and misses the core of the question
+
+Rate severity: fatal (invalidates the answer) | major (significantly weakens it) | minor (cosmetic issue)
+
+Overall verdict: pass | conditional_pass | fail
+- pass: all answers substantive, confidence ratings warranted, no fatal/major failures
+- conditional_pass: usable but has ≥1 major failure requiring acknowledgment
+- fail: ≥1 fatal failure or systematic pattern of unsupported claims
+
+Return ONLY valid JSON:
+{{
+  "verdict": "<pass|conditional_pass|fail>",
+  "quality_score": <integer 1-10>,
+  "failures": [
+    {{
+      "section_id": <integer or null>,
+      "type": "<unanswered|unsupported|contradictory|overconfident|incomplete>",
+      "issue": "<precise statement of what is wrong>",
+      "severity": "<fatal|major|minor>"
+    }}
+  ],
+  "strengths": ["<one genuine strength of the report>"],
+  "critic_note": "<one sentence: the single most important thing wrong with this report, or 'No critical issues' if clean>"
+}}"""
+
+
+def build_research_critic_prompt(ctx: ResearchContext, deliverable: str) -> str:
+    sections_json = json.dumps([{"id": i + 1, "question": line.strip()}
+                                 for i, line in enumerate(ctx.outline_text.strip().splitlines())
+                                 if line.strip()], ensure_ascii=False)
+    return CRITIC_TEMPLATE.format(
+        company_name=ctx.company_name,
+        sections_json=sections_json,
+        deliverable=deliverable,
+    )
 
 
 # ── Builders ──────────────────────────────────────────────────────────────────

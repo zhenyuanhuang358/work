@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Merlin Research Mode — four-agent client outline research.
+Merlin Research Mode — five-agent client outline research.
 
 Usage:
     python merlin_research.py "<COMPANY>" --outline <file> [options]
@@ -79,13 +79,14 @@ def _svg_section_confidence(sections: list, answers: list) -> str:
 
 
 def _svg_agent_flow() -> str:
-    """Static four-agent pipeline diagram."""
-    W, H = 520, 100
+    """Static five-agent pipeline diagram."""
+    W, H = 640, 100
     agents = [
-        ("情报员", "Scout", 70, "#8b6c42"),
-        ("分析师", "Analyst", 210, "#2a5c3f"),
-        ("侦探", "Forensic", 350, "#8b2e2e"),
-        ("战略家", "Strategist", 490, "#4a6fa5"),
+        ("情报员", "Scout",      60,  "#8b6c42"),
+        ("分析师", "Analyst",   180,  "#2a5c3f"),
+        ("侦探",   "Forensic",  300,  "#8b2e2e"),
+        ("战略家", "Strategist",420,  "#4a6fa5"),
+        ("评审",   "Critic",    540,  "#6b4f8c"),
     ]
     nodes = ""
     for zh, en, cx, color in agents:
@@ -95,9 +96,9 @@ def _svg_agent_flow() -> str:
   <text x="{cx}" y="60" text-anchor="middle" font-size="9" fill="{color}" font-style="italic">{en}</text>'''
 
     arrows = ""
-    xs = [70, 210, 350]
+    xs = [60, 180, 300, 420]
     for x in xs:
-        arrows += f'<line x1="{x+28}" y1="50" x2="{x+112}" y2="50" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>'
+        arrows += f'<line x1="{x+28}" y1="50" x2="{x+92}" y2="50" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>'
 
     return f'''<svg viewBox="0 0 {W} {H}" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -202,6 +203,57 @@ def generate_research_html(r: ResearchResult, slug: str = "") -> str:
     med_count = sum(1 for a in r.answers if a.get("confidence") == "medium")
     low_count = sum(1 for a in r.answers if a.get("confidence") == "low")
 
+    # Critic verdict block
+    cv = r.critic_verdict or {}
+    cv_verdict = cv.get("verdict", "skipped")
+    cv_score = cv.get("quality_score", "—")
+    cv_note = cv.get("critic_note", "")
+    cv_failures = cv.get("failures", [])
+    cv_verdict_class = {
+        "pass": "critic-verdict-pass",
+        "conditional_pass": "critic-verdict-conditional",
+        "fail": "critic-verdict-fail",
+    }.get(cv_verdict, "critic-verdict-conditional")
+    cv_verdict_zh = {
+        "pass": "通过",
+        "conditional_pass": "有条件通过",
+        "fail": "未通过",
+        "skipped": "已跳过",
+    }.get(cv_verdict, cv_verdict)
+    cv_failure_html = ""
+    for f in cv_failures:
+        sev = f.get("severity", "minor")
+        sev_cls = f"critic-sev-{sev}"
+        sev_zh = {"fatal": "致命", "major": "重大", "minor": "轻微"}.get(sev, sev)
+        ftype_zh = {
+            "unanswered": "未作答",
+            "unsupported": "无依据",
+            "contradictory": "自相矛盾",
+            "overconfident": "置信过高",
+            "incomplete": "回答不完整",
+        }.get(f.get("type", ""), f.get("type", ""))
+        cv_failure_html += f'''
+        <div class="critic-failure">
+          <span class="critic-sev {sev_cls}">{sev_zh}</span>
+          <span style="color:var(--copper);min-width:80px">{ftype_zh}</span>
+          <span>{f.get("issue","")}</span>
+        </div>'''
+    critic_section_html = f'''
+<div class="section">
+  <div class="section-zh">评审验证</div>
+  <div class="section-en">CRITIC VERIFICATION</div>
+  <div class="critic-box">
+    <div class="critic-header">
+      <span>独立评审 · INDEPENDENT CRITIC</span>
+      <span class="{cv_verdict_class}">{cv_verdict_zh.upper()} &nbsp; 质量分 {cv_score}/10</span>
+    </div>
+    <div class="critic-body">
+      {"<div class='critic-note'>" + cv_note + "</div>" if cv_note else ""}
+      {cv_failure_html if cv_failure_html else "<div style='color:#2a5c3f;font-size:12px'>No failures identified by Critic.</div>"}
+    </div>
+  </div>
+</div>'''
+
     svg_conf = _svg_section_confidence(r.sections, r.answers)
     svg_flow = _svg_agent_flow()
 
@@ -245,6 +297,20 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 .exec-text{{font-size:14px; line-height:1.7;}}
 .exec-text .bi-zh{{color:#c4bfb6;}}
 .verdict-box{{background:var(--bg); border:1px solid var(--copper); border-left:4px solid var(--copper); padding:12px 18px; margin-bottom:20px; font-size:13px; color:#4a3f35; font-style:italic;}}
+/* Critic verdict */
+.critic-box{{border:1px solid #6b4f8c; border-radius:4px; overflow:hidden; margin-bottom:16px;}}
+.critic-header{{background:#6b4f8c; color:#fff; padding:10px 16px; font-size:12px; letter-spacing:.08em; display:flex; justify-content:space-between; align-items:center;}}
+.critic-verdict-pass{{color:#a8f0c6; font-weight:bold;}}
+.critic-verdict-conditional{{color:#ffe08a; font-weight:bold;}}
+.critic-verdict-fail{{color:#ffaaaa; font-weight:bold;}}
+.critic-body{{padding:14px 16px; background:var(--bg); font-size:13px;}}
+.critic-note{{font-style:italic; color:#4a3f35; margin-bottom:10px;}}
+.critic-failure{{display:flex; gap:8px; padding:6px 0; border-bottom:1px solid var(--border); font-size:12px;}}
+.critic-failure:last-child{{border-bottom:none;}}
+.critic-sev{{font-weight:bold; min-width:50px;}}
+.critic-sev-fatal{{color:#8b2e2e;}}
+.critic-sev-major{{color:#c47a1e;}}
+.critic-sev-minor{{color:#2a5c3f;}}
 /* Answer cards */
 .ans-card{{background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:18px; margin-bottom:14px;}}
 .ans-header{{display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;}}
@@ -267,7 +333,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 <!-- Pub Bar -->
 <div class="pub-bar">
   <div class="pub-logo">MERLIN RESEARCH</div>
-  <div class="pub-meta">客户提纲研究报告 &nbsp;|&nbsp; {date_str} &nbsp;|&nbsp; 四智能体协作</div>
+  <div class="pub-meta">客户提纲研究报告 &nbsp;|&nbsp; {date_str} &nbsp;|&nbsp; 五智能体协作</div>
 </div>
 
 <!-- Title -->
@@ -302,8 +368,8 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 
 <!-- Agent pipeline diagram -->
 <div class="section">
-  <div class="section-zh">四智能体协作流程</div>
-  <div class="section-en">FOUR-AGENT PIPELINE</div>
+  <div class="section-zh">五智能体协作流程</div>
+  <div class="section-en">FIVE-AGENT PIPELINE</div>
   <div class="chart-wrap">{svg_flow}</div>
 </div>
 
@@ -349,8 +415,10 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
   </table>
 </div>
 
+{critic_section_html}
+
 <div class="footer">
-  <span>Merlin Research Mode · 四智能体协作</span>
+  <span>Merlin Research Mode · 五智能体协作</span>
   <span>
     {r.company_name} · {date_str}
     &nbsp;&nbsp;

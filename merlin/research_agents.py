@@ -1,13 +1,17 @@
 """
-Merlin Research Mode — four-agent execution engine.
+Merlin Research Mode — five-agent execution engine.
 
-Orchestrator → Scout (web_search) → Analyst + Forensic (parallel) → Strategist
+Orchestrator → Scout (web_search) → Analyst + Forensic → Strategist → Critic
+
+Critic runs with independent context (sees only final answers, not how they were built).
+State is persisted after each phase so runs can resume from the last checkpoint.
 """
 
 import json
 import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Optional
 
 import anthropic
@@ -17,9 +21,27 @@ from merlin.research_prompts import (
     build_analyst_prompt,
     build_forensic_prompt,
     build_orchestrator_prompt,
+    build_research_critic_prompt,
     build_scout_prompt,
     build_strategist_prompt,
 )
+
+CHECKPOINT_DIR = Path(__file__).parent.parent / "merlin_research_checkpoints"
+
+
+def _save_phase(slug: str, phase: str, data: dict) -> None:
+    d = CHECKPOINT_DIR / slug
+    d.mkdir(parents=True, exist_ok=True)
+    (d / f"{phase}.json").write_text(json.dumps(data, ensure_ascii=False, indent=2))
+    print(f"  [checkpoint] saved {phase}", flush=True)
+
+
+def _load_phase(slug: str, phase: str) -> Optional[dict]:
+    p = CHECKPOINT_DIR / slug / f"{phase}.json"
+    if p.exists():
+        print(f"  [checkpoint] resuming from {phase}", flush=True)
+        return json.loads(p.read_text())
+    return None
 
 MODEL = "claude-opus-4-7"
 MODEL_LIGHT = "claude-sonnet-4-6"  # Analyst + Forensic: lighter model, less rate pressure
@@ -42,6 +64,7 @@ class ResearchResult:
     answers: list           # strategist output
     executive_summary: str
     data_verdict: str
+    critic_verdict: Optional[dict] = None
 
 
 def _extract_json(s: str) -> dict:
@@ -240,6 +263,36 @@ def _call_scout(client: anthropic.Anthropic, prompt: str) -> dict:
     return result
 
 
+def _run_research_critic(
+    client: anthropic.Anthropic,
+    ctx: ResearchContext,
+    sections: list,
+    answers: list,
+    executive_summary: str,
+) -> Optional[dict]:
+    """
+    Critic runs with independent context — it sees ONLY the sections (questions)
+    and the Strategist's final answers. No Scout findings, no Analyst/Forensic data.
+    Goal: prove the answers are wrong or incomplete.
+    """
+    deliverable = json.dumps({
+        "sections": [
+            {"id": s.get("id"), "question": s.get("question"), "category": s.get("category")}
+            for s in sections
+        ],
+        "answers": answers,
+        "executive_summary": executive_summary,
+    }, ensure_ascii=False, indent=2)
+
+    prompt = build_research_critic_prompt(ctx, deliverable)
+    try:
+        raw = _call_plain(client, prompt, "Critic")
+    except Exception as e:
+        print(f"  [Critic] failed: {e}", flush=True)
+        return None
+    return raw
+
+
 def run_research(
     ctx: ResearchContext,
     api_key: Optional[str] = None,
@@ -252,34 +305,55 @@ def run_research(
     else:
         client = anthropic.Anthropic()
 
+    slug = re.sub(r"[^A-Za-z0-9_-]", "_", ctx.company_name)[:20].strip("_") or \
+           format(abs(hash(ctx.company_name)), "x")[:8]
+
+    def _cap(s: str, limit: int) -> str:
+        return s[:limit] + "\n...[truncated]" if len(s) > limit else s
+
     # Phase 1: Orchestrator — parse and classify the outline
     print("\n[Phase 1] Orchestrator parsing outline...", flush=True)
-    orch_raw = _call_plain(client, build_orchestrator_prompt(ctx), "Orchestrator")
+    cached = _load_phase(slug, "orchestrator")
+    if cached:
+        orch_raw = cached
+    else:
+        orch_raw = _call_plain(client, build_orchestrator_prompt(ctx), "Orchestrator")
+        _save_phase(slug, "orchestrator", orch_raw)
     sections = orch_raw.get("sections", [])
     sections_json = json.dumps(sections, ensure_ascii=False, indent=2)
 
     # Phase 2: Scout — web search per section
     print("\n[Phase 2] Scout gathering intelligence...", flush=True)
-    scout_raw = _call_scout(client, build_scout_prompt(ctx, sections_json))
+    cached = _load_phase(slug, "scout")
+    if cached:
+        scout_raw = cached
+    else:
+        scout_raw = _call_scout(client, build_scout_prompt(ctx, sections_json))
+        _save_phase(slug, "scout", scout_raw)
     findings = scout_raw.get("findings", [])
     findings_json_full = json.dumps(findings, ensure_ascii=False, indent=2)
-
-    # Truncate findings for downstream agents to keep prompts manageable
-    def _cap(s: str, limit: int) -> str:
-        return s[:limit] + "\n...[truncated]" if len(s) > limit else s
-
     findings_json = _cap(findings_json_full, FINDINGS_CAP)
 
     # Phase 3: Analyst then Forensic — use lighter model to avoid rate limit after Scout
     print("\n[Phase 3] Analyst running...", flush=True)
-    analyst_result = _call_light(client, build_analyst_prompt(ctx, findings_json), "Analyst")
+    cached = _load_phase(slug, "analyst")
+    if cached:
+        analyst_result = cached
+    else:
+        analyst_result = _call_light(client, build_analyst_prompt(ctx, findings_json), "Analyst")
+        _save_phase(slug, "analyst", analyst_result)
 
     print("\n[Phase 3] Forensic running...", flush=True)
-    forensic_result = _call_light(
-        client,
-        build_forensic_prompt(ctx, findings_json, "[]"),
-        "Forensic",
-    )
+    cached = _load_phase(slug, "forensic")
+    if cached:
+        forensic_result = cached
+    else:
+        forensic_result = _call_light(
+            client,
+            build_forensic_prompt(ctx, findings_json, "[]"),
+            "Forensic",
+        )
+        _save_phase(slug, "forensic", forensic_result)
 
     analysis = analyst_result.get("analysis", [])
     red_flags = forensic_result.get("red_flags", [])
@@ -290,11 +364,32 @@ def run_research(
     # Phase 4: Strategist — synthesize and write final answers
     findings_for_strategist = _cap(findings_json_full, FINDINGS_TRUNCATE)
     print("\n[Phase 4] Strategist synthesizing...", flush=True)
-    strategy_raw = _call_plain_large(
-        client,
-        build_strategist_prompt(ctx, findings_for_strategist, analysis_json, forensic_json),
-        "Strategist",
-    )
+    cached = _load_phase(slug, "strategist")
+    if cached:
+        strategy_raw = cached
+    else:
+        strategy_raw = _call_plain_large(
+            client,
+            build_strategist_prompt(ctx, findings_for_strategist, analysis_json, forensic_json),
+            "Strategist",
+        )
+        _save_phase(slug, "strategist", strategy_raw)
+
+    answers = strategy_raw.get("answers", [])
+    executive_summary = strategy_raw.get("executive_summary", "")
+
+    # Phase 5: Critic — independent verification with fresh context
+    print("\n[Phase 5] Critic verifying...", flush=True)
+    cached = _load_phase(slug, "critic")
+    if cached:
+        critic_raw = cached
+    else:
+        critic_raw = _run_research_critic(client, ctx, sections, answers, executive_summary)
+        if critic_raw:
+            _save_phase(slug, "critic", critic_raw)
+
+    verdict_str = (critic_raw or {}).get("verdict", "skipped")
+    print(f"  [Critic] verdict: {verdict_str}", flush=True)
 
     return ResearchResult(
         company_name=ctx.company_name,
@@ -304,7 +399,8 @@ def run_research(
         analysis=analysis,
         red_flags=red_flags,
         overall_integrity=overall_integrity,
-        answers=strategy_raw.get("answers", []),
-        executive_summary=strategy_raw.get("executive_summary", ""),
+        answers=answers,
+        executive_summary=executive_summary,
         data_verdict=strategy_raw.get("data_verdict", ""),
+        critic_verdict=critic_raw,
     )
