@@ -23,6 +23,34 @@ from pathlib import Path
 from typing import Optional
 
 FEEDBACK_URL = "https://spontaneous-youtiao-b9cde9.netlify.app"
+ITICK_TOKEN = os.environ.get("ITICK_TOKEN", "")
+
+# ── iTick real-time price ─────────────────────────────────────────────────────
+
+def fetch_itick_price(ticker: str) -> Optional[float]:
+    """Fetch real-time last price from api0.itick.org. Returns None if token missing or call fails."""
+    if not ITICK_TOKEN:
+        return None
+    import urllib.request
+    import json as _json
+    url = f"https://api0.itick.org/stock/quote?region=US&code={ticker.upper()}"
+    try:
+        req = urllib.request.Request(
+            url,
+            headers={"token": ITICK_TOKEN, "accept": "application/json"},
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            payload = _json.loads(resp.read())
+        d = payload.get("data", payload)
+        if isinstance(d, list):
+            d = d[0] if d else {}
+        # try common field names across iTick response versions
+        for key in ("lastPrice", "lp", "last", "close", "c", "price"):
+            if d.get(key) is not None:
+                return float(d[key])
+    except Exception:
+        pass
+    return None
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
 
@@ -830,6 +858,14 @@ async def main():
     parser.add_argument("--output",    metavar="FILE",
                         help="输出路径（默认: {TICKER}_Copilot_Report.html）")
     args = parser.parse_args()
+
+    if args.price is None:
+        fetched = fetch_itick_price(args.ticker)
+        if fetched:
+            print(f"  [iTick] 自动获取 {args.ticker.upper()} 实时股价: ${fetched}")
+            args.price = fetched
+        else:
+            print("  [iTick] 未配置 ITICK_TOKEN 或拉取失败，--price 为空（目标价模型将跳过）")
 
     transcript_path = Path(args.transcript)
     if not transcript_path.exists():
