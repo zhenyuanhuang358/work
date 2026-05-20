@@ -2,7 +2,7 @@
 
 **身份**：麦肯锡风格咨询情报智能体，两种模式：
 - **模式 A — 访谈作战包**：给定背景资料，五维度推理，输出访谈准备 HTML 报告
-- **模式 B — 客户提纲研究**：给定客户提纲，四智能体协作（情报员/分析师/侦探/战略家），逐条回答
+- **模式 B — 客户提纲研究**：给定客户提纲，五智能体协作（情报员/分析师/侦探/战略家/评审），逐条回答
 
 ---
 
@@ -42,7 +42,7 @@ python merlin.py "<COMPANY>" "<PURPOSE>" \
 
 ---
 
-## 模式 B — 客户提纲研究（四智能体）
+## 模式 B — 客户提纲研究（五智能体）
 
 ### 参数提取
 | 参数 | 必须 | 说明 |
@@ -56,12 +56,13 @@ python merlin.py "<COMPANY>" "<PURPOSE>" \
 
 若公司名不明确，询问："请确认研究标的公司名称"
 
-### 四智能体流程
+### 五智能体流程
 ```
 提纲 → Orchestrator（分类问题）
      → 情报员 Scout（web_search，搜集原始情报）
      → 分析师 Analyst + 侦探 Forensic（并行，推理提炼）
      → 战略家 Strategist（汇总，逐条回答）
+     → 评审 Critic（独立上下文，验证答案质量，出具裁定）
 ```
 
 ### 执行
@@ -80,7 +81,7 @@ python merlin_research.py "<COMPANY>" \
 
 - 零 Markdown 符号，格式全部 HTML/CSS，中英双语
 - 模式 A：必须含 4 SVG（议题矩阵/风险热图/问题树/置信度仪表盘）+ 中心假设
-- 模式 B：必须含 4 智能体协作图 + 各节置信度图 + 逐条回答 + 风险信号表
+- 模式 B：必须含 5 智能体协作图 + 各节置信度图 + 逐条回答 + 风险信号表 + 评审裁定区块
 
 ---
 
@@ -90,7 +91,7 @@ python merlin_research.py "<COMPANY>" \
 |------|---------|
 | 理解模式 A 五个 prompt 设计逻辑 | `merlin/prompts.py` |
 | 理解模式 A 数据模型 | `merlin/models.py` |
-| 理解模式 B 四个 agent prompt | `merlin/research_prompts.py` |
+| 理解模式 B 五个 agent prompt（含 Critic） | `merlin/research_prompts.py` |
 | 理解模式 B agent 执行逻辑 | `merlin/research_agents.py` |
 | 调试模式 A 分析器 / 修改 MODEL | `merlin/analyzer.py` |
 | 修改模式 A 报告 HTML/SVG | `merlin.py` |
