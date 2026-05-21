@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>主题乐园调研报告 · 长隆·海昌 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0a0a0b;
+  --paper: #f1efea;
+  --copper: #8b6c42;
+  --gold: #c9a84c;
+  --green: #2a5c3f;
+  --red: #8b2e2e;
+  --amber: #c47a1e;
+  --muted: #6b6460;
+  --border: #d4cec6;
+  --card: #faf8f4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+/* ── Pub bar ── */
+.pub-bar {
+  border-bottom: 2px solid var(--ink);
+  padding: 14px 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 11.5px;
+  color: var(--muted);
+  letter-spacing: .08em;
+}
+.pub-brand { color: var(--copper); font-size: 13px; }
+
+/* ── Title ── */
+.title-block { padding: 34px 0 22px; border-bottom: 1px solid var(--border); }
+.title-en {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 12px;
+  color: var(--copper);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.title-zh { font-size: 30px; font-weight: bold; letter-spacing: .02em; line-height: 1.25; margin-bottom: 10px; }
+.tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.tag {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: .06em;
+}
+.tag.amber { border-color: var(--amber); color: var(--amber); }
+.tag.red   { border-color: var(--red);   color: var(--red);   }
+.tag.green { border-color: var(--green);  color: var(--green);  }
+
+/* ── Stat bar ── */
+.stat-bar {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border: 1px solid var(--border);
+  margin: 28px 0;
+}
+.stat-cell { padding: 18px 16px; border-right: 1px solid var(--border); }
+.stat-cell:last-child { border-right: none; }
+.s-en {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+.s-zh { font-size: 11px; color: var(--muted); display: block; margin-bottom: 5px; }
+.s-val { font-size: 22px; font-weight: bold; line-height: 1.2; }
+.s-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.c-red { color: var(--red); }
+.c-grn { color: var(--green); }
+.c-amb { color: var(--amber); }
+
+/* ── Section header ── */
+.section { margin: 40px 0 0; }
+.sec-hdr {
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 6px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.sec-zh { font-size: 17px; font-weight: bold; }
+.sec-en {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 12px;
+  color: var(--copper);
+  letter-spacing: .08em;
+}
+
+/* ── Notice ── */
+.notice {
+  background: #f5f0e6;
+  border-left: 3px solid var(--amber);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #5a5040;
+  line-height: 1.6;
+}
+.notice strong { color: var(--amber); }
+
+/* ── Tables ── */
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+thead tr { background: var(--ink); color: var(--paper); }
+thead th {
+  padding: 10px 13px;
+  text-align: left;
+  font-weight: normal;
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 11.5px;
+  letter-spacing: .06em;
+}
+tbody tr:nth-child(even) { background: #f2efe8; }
+tbody td { padding: 10px 13px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.55; }
+.badge {
+  display: inline-block;
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 9.5px;
+  padding: 1px 5px;
+  letter-spacing: .04em;
+  vertical-align: middle;
+  margin-left: 4px;
+  position: relative;
+  top: -1px;
+}
+.badge-official { background: var(--green); color: #fff; }
+.badge-predict  { background: var(--amber); color: #fff; }
+.badge-gap      { background: var(--red);   color: #fff; }
+.note { font-size: 11px; color: var(--muted); display: block; margin-top: 3px; line-height: 1.45; }
+
+/* ── Chart wrap ── */
+.chart-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 22px 24px 18px;
+  margin: 18px 0;
+}
+.chart-title {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 11px;
+  color: var(--copper);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.charts-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+
+/* ── Detail rows ── */
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.dcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 16px 18px;
+}
+.dcard-title {
+  font-size: 13.5px;
+  font-weight: bold;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.drow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--border);
+  font-size: 12.5px;
+  gap: 10px;
+}
+.drow:last-child { border-bottom: none; }
+.dk { color: var(--muted); flex-shrink: 0; }
+.dv { font-weight: bold; text-align: right; }
+
+/* ── Verdict ── */
+.verdict {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 30px 34px;
+  margin: 40px 0;
+}
+.v-en {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 11px;
+  letter-spacing: .16em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.v-zh { font-size: 19px; font-weight: bold; margin-bottom: 22px; }
+.v-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.v-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.v-num {
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 30px;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  width: 30px;
+}
+.v-text { font-size: 14px; line-height: 1.65; }
+.v-text strong { color: var(--gold); }
+
+/* ── Recs table ── */
+.rec-table td:first-child { color: var(--muted); width: 35%; }
+
+/* ── Footer ── */
+.footer {
+  margin-top: 50px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-family: 'IM Fell English',Georgia,serif;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+}
+.src-item { font-size: 12px; color: var(--muted); padding: 5px 0; border-bottom: 1px dotted var(--border); }
+.src-item a { color: var(--copper); text-decoration: none; }
+.src-item a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- Pub Bar -->
+<div class="pub-bar">
+  <span class="pub-brand">行业调研系统</span>
+  <span>主题乐园行业 · 客户委托 · 2026年5月21日</span>
+  <span>长隆集团 · 海昌海洋公园 02255.HK</span>
+</div>
+
+<!-- Title -->
+<div class="title-block">
+  <div class="title-en">Theme Park Industry Research · 2025 Annual Data</div>
+  <div class="title-zh">主题乐园行业调研报告<br>长隆集团 · 海昌海洋公园 2025年</div>
+  <div class="tag-row">
+    <span class="tag">游客人次</span>
+    <span class="tag">营业收入</span>
+    <span class="tag amber">长隆：非上市·财务不可得</span>
+    <span class="tag green">海昌：港股 02255.HK</span>
+    <span class="tag red">个园分部数据：均未单独披露</span>
+  </div>
+</div>
+
+<!-- Stat Bar -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <span class="s-en">Haichang 2025 Revenue</span>
+    <span class="s-zh">海昌全集团营收（2025年）</span>
+    <div class="s-val c-red">15.49<span style="font-size:14px;font-weight:normal;">亿元</span></div>
+    <div class="s-sub c-red">▼ 14.8% 同比</div>
+  </div>
+  <div class="stat-cell">
+    <span class="s-en">Haichang 2024 Visitors</span>
+    <span class="s-zh">海昌入园人次（2024年实绩）</span>
+    <div class="s-val">1,079<span style="font-size:14px;font-weight:normal;">万人</span></div>
+    <div class="s-sub c-grn">▲ 16.1% vs 2023</div>
+  </div>
+  <div class="stat-cell">
+    <span class="s-en">Chimelong Est. Visitors</span>
+    <span class="s-zh">长隆集团年接待（整体估算）</span>
+    <div class="s-val c-amb">4,000+<span style="font-size:14px;font-weight:normal;">万人</span></div>
+    <div class="s-sub">非上市·估算值</div>
+  </div>
+  <div class="stat-cell">
+    <span class="s-en">Chimelong Revenue</span>
+    <span class="s-zh">长隆集团营收</span>
+    <div class="s-val c-red" style="font-size:16px;">不可得</div>
+    <div class="s-sub">非上市·未披露</div>
+  </div>
+</div>
+
+<!-- Data Notice -->
+<div class="notice">
+  <strong>数据质量声明</strong><br>
+  <strong>长隆集团</strong>为非上市私营企业，无任何公开财务数据；游客人次依赖行业报告及媒体公开数据推断，标注【预测】。
+  <strong>海昌海洋公园</strong>（02255.HK）2025年全年总收入有年报披露；但各景区分部的入园人次及收入均未单独公开，
+  仅可从节假日公告推算，标注【数据缺口】。以下数据已尽最大可能采集。
+</div>
+
+<!-- Section 1: Core Table Chimelong -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">一、长隆集团旗下景区</span>
+    <span class="sec-en">Chimelong Group · Four Parks</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>景区名称</th>
+        <th>2025年游客人次（万人）</th>
+        <th>数据标注</th>
+        <th>2025年营业收入</th>
+        <th>数据标注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>珠海长隆海洋王国</strong></td>
+        <td>
+          <strong>1,200 – 1,350万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">基准：2023年实绩1,242.1万（全球第六）；清远新园开业对客群影响有限</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">【二手·媒体+行业报告推断】</span></td>
+        <td><strong>不可得</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">非上市·未披露</span></td>
+      </tr>
+      <tr>
+        <td><strong>长隆野生动物世界</strong></td>
+        <td>
+          <strong>450 – 600万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">广州度假区两园合计年接待超1,000万；野生动物世界主攻亲子，占比约45–50%</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">【二手·媒体推断】</span></td>
+        <td><strong>不可得</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">非上市·未披露</span></td>
+      </tr>
+      <tr>
+        <td><strong>广州长隆欢乐世界</strong></td>
+        <td>
+          <strong>500 – 650万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">广州度假区两园合计超1,000万；欢乐世界面向泛娱乐，频次更高，占比约50–55%</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">【二手·媒体推断】</span></td>
+        <td><strong>不可得</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">非上市·未披露</span></td>
+      </tr>
+      <tr>
+        <td><strong>长隆飞船乐园</strong></td>
+        <td>
+          <strong>200 – 350万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">2024年7月新开，2025年首满年运营；室内大型主题乐园首年客流类比估算</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">【类比估算】</span></td>
+        <td><strong>不可得</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">非上市·未披露</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Chimelong Chart -->
+<div class="chart-wrap">
+  <div class="chart-title">长隆各景区 2025 年客流估算（中间值，万人）</div>
+  <svg width="100%" viewBox="0 0 800 210" font-family="'IM Fell English',Georgia,serif" font-size="12">
+    <!-- Background grid -->
+    <line x1="160" y1="20" x2="160" y2="175" stroke="#d4cec6" stroke-width="1"/>
+    <line x1="330" y1="20" x2="330" y2="175" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+    <line x1="500" y1="20" x2="500" y2="175" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+    <line x1="670" y1="20" x2="670" y2="175" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+
+    <!-- X-axis labels (万人) -->
+    <text x="160" y="190" text-anchor="middle" fill="#6b6460" font-size="10">0</text>
+    <text x="330" y="190" text-anchor="middle" fill="#6b6460" font-size="10">500万</text>
+    <text x="500" y="190" text-anchor="middle" fill="#6b6460" font-size="10">1,000万</text>
+    <text x="670" y="190" text-anchor="middle" fill="#6b6460" font-size="10">1,500万</text>
+
+    <!-- 珠海长隆海洋王国: midpoint 1275万, max=1500 → 1275/1500 * (670-160) = 432.45px -->
+    <rect x="160" y="24" width="433" height="28" fill="#8b6c42" opacity=".85"/>
+    <!-- range band -->
+    <rect x="160" y="24" width="408" height="28" fill="#8b6c42" opacity=".2"/>
+    <rect x="568" y="30" width="51" height="16" fill="#8b6c42" opacity=".25"/>
+    <text x="148" y="43" text-anchor="end" fill="#0a0a0b" font-size="12">珠海长隆海洋王国</text>
+    <text x="600" y="43" fill="#0a0a0b" font-size="12" font-weight="bold">1,275万</text>
+
+    <!-- 广州长隆欢乐世界: midpoint 575万 → 575/1500 * 510 = 195.5px -->
+    <rect x="160" y="64" width="196" height="28" fill="#c9a84c" opacity=".85"/>
+    <rect x="160" y="64" width="170" height="28" fill="#c9a84c" opacity=".2"/>
+    <rect x="330" y="70" width="51" height="16" fill="#c9a84c" opacity=".25"/>
+    <text x="148" y="83" text-anchor="end" fill="#0a0a0b" font-size="12">广州长隆欢乐世界</text>
+    <text x="364" y="83" fill="#0a0a0b" font-size="12" font-weight="bold">575万</text>
+
+    <!-- 长隆野生动物世界: midpoint 525万 → 178.5px -->
+    <rect x="160" y="104" width="179" height="28" fill="#c47a1e" opacity=".85"/>
+    <rect x="160" y="104" width="153" height="28" fill="#c47a1e" opacity=".2"/>
+    <rect x="313" y="110" width="51" height="16" fill="#c47a1e" opacity=".25"/>
+    <text x="148" y="123" text-anchor="end" fill="#0a0a0b" font-size="12">长隆野生动物世界</text>
+    <text x="347" y="123" fill="#0a0a0b" font-size="12" font-weight="bold">525万</text>
+
+    <!-- 长隆飞船乐园: midpoint 275万 → 93.5px -->
+    <rect x="160" y="144" width="94" height="28" fill="#6b6460" opacity=".7"/>
+    <rect x="160" y="144" width="68" height="28" fill="#6b6460" opacity=".15"/>
+    <rect x="228" y="150" width="51" height="16" fill="#6b6460" opacity=".2"/>
+    <text x="148" y="163" text-anchor="end" fill="#0a0a0b" font-size="12">长隆飞船乐园</text>
+    <text x="262" y="163" fill="#0a0a0b" font-size="12" font-weight="bold">275万</text>
+
+    <!-- Legend note -->
+    <rect x="600" y="155" width="12" height="10" fill="#8b6c42" opacity=".25"/>
+    <text x="616" y="164" fill="#6b6460" font-size="9">估算区间</text>
+    <rect x="650" y="155" width="12" height="10" fill="#8b6c42" opacity=".85"/>
+    <text x="666" y="164" fill="#6b6460" font-size="9">中间值</text>
+  </svg>
+</div>
+
+<!-- Section 2: Haichang -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">二、海昌集团旗下景区</span>
+    <span class="sec-en">Haichang Ocean Park · 02255.HK</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>景区名称</th>
+        <th>2025年游客人次（万人）</th>
+        <th>数据标注</th>
+        <th>2025年营业收入</th>
+        <th>数据标注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>上海海昌海洋公园</strong></td>
+        <td>
+          <strong>约 510 – 580万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">集团合计约930–970万估算；上海为旗舰园，历年占集团入园约55–60%；节假日：春节期间27万人次、单日峰值5.2万</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">集团合并披露，未分园区</span></td>
+        <td><strong>未单独披露</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">财报合并，分部不可得</span></td>
+      </tr>
+      <tr>
+        <td><strong>郑州海昌海洋公园</strong></td>
+        <td>
+          <strong>约 370 – 440万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">集团合计余量；郑州园2023年下半年开业，2025年为第二个完整年；五一假期入园超16.5万、单日峰值3.8万</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">集团合并披露，未分园区</span></td>
+        <td><strong>未单独披露</strong> <span class="badge badge-gap">缺口</span></td>
+        <td><span style="font-size:12px;color:var(--muted);">财报合并，分部不可得</span></td>
+      </tr>
+      <tr style="background:#f0ede5;">
+        <td><strong>集团合计（参考）</strong></td>
+        <td>
+          <strong>约 930 – 970万</strong>
+          <span class="badge badge-predict">预测</span>
+          <span class="note">2024年实绩1,079万；2025H1确认人次下降；全年按-10~-14%推算</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--muted);">方向性推断</span></td>
+        <td>
+          <strong>15.49亿元</strong>
+          <span class="badge badge-official">官方</span>
+          <span class="note">同比 ▼14.8%；亏损约7.5亿</span>
+        </td>
+        <td><span style="font-size:12px;color:var(--green);">【一手·2025年度业绩公告】</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Charts 2-col -->
+<div class="charts-2col">
+  <!-- Left: Revenue trend -->
+  <div class="chart-wrap" style="margin:0;">
+    <div class="chart-title">海昌年度营收趋势（亿元）</div>
+    <svg width="100%" viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif">
+      <!-- grid -->
+      <line x1="60" y1="20" x2="60" y2="160" stroke="#d4cec6" stroke-width="1"/>
+      <line x1="60" y1="20" x2="340" y2="20" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="60" x2="340" y2="60" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="100" x2="340" y2="100" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="140" x2="340" y2="140" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="160" x2="340" y2="160" stroke="#d4cec6" stroke-width="1"/>
+      <!-- y labels: 0,5,10,15,20 → max 20亿, height 140px -->
+      <text x="55" y="164" text-anchor="end" font-size="9" fill="#6b6460">0</text>
+      <text x="55" y="144" text-anchor="end" font-size="9" fill="#6b6460">5</text>
+      <text x="55" y="104" text-anchor="end" font-size="9" fill="#6b6460">10</text>
+      <text x="55" y="64" text-anchor="end" font-size="9" fill="#6b6460">15</text>
+      <text x="55" y="24" text-anchor="end" font-size="9" fill="#6b6460">20亿</text>
+
+      <!-- 2023: 18.16 → height = 18.16/20 * 140 = 127.1 → y=160-127=33 -->
+      <rect x="80" y="33" width="55" height="127" fill="#8b6c42" opacity=".7"/>
+      <text x="107" y="28" text-anchor="middle" font-size="10" fill="#8b6c42" font-weight="bold">18.2</text>
+      <text x="107" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2023</text>
+
+      <!-- 2024: 18.18 → same ~127 -->
+      <rect x="160" y="33" width="55" height="127" fill="#8b6c42" opacity=".85"/>
+      <text x="187" y="28" text-anchor="middle" font-size="10" fill="#8b6c42" font-weight="bold">18.2</text>
+      <text x="187" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2024</text>
+
+      <!-- 2025: 15.49 → height = 15.49/20 * 140 = 108.4 → y=160-108=52 -->
+      <rect x="240" y="52" width="55" height="108" fill="#8b2e2e" opacity=".8"/>
+      <text x="267" y="46" text-anchor="middle" font-size="10" fill="#8b2e2e" font-weight="bold">15.5</text>
+      <text x="267" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2025</text>
+
+      <!-- Down arrow -->
+      <text x="267" y="185" text-anchor="middle" font-size="9" fill="#8b2e2e">▼14.8%</text>
+    </svg>
+  </div>
+
+  <!-- Right: 2025 Visitor trend -->
+  <div class="chart-wrap" style="margin:0;">
+    <div class="chart-title">海昌年度入园人次趋势（万人）</div>
+    <svg width="100%" viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif">
+      <!-- grid: max 1200万 -->
+      <line x1="60" y1="20" x2="60" y2="160" stroke="#d4cec6" stroke-width="1"/>
+      <line x1="60" y1="20" x2="340" y2="20" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="55" x2="340" y2="55" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="90" x2="340" y2="90" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="125" x2="340" y2="125" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="160" x2="340" y2="160" stroke="#d4cec6" stroke-width="1"/>
+      <text x="55" y="164" text-anchor="end" font-size="9" fill="#6b6460">0</text>
+      <text x="55" y="129" text-anchor="end" font-size="9" fill="#6b6460">300</text>
+      <text x="55" y="94" text-anchor="end" font-size="9" fill="#6b6460">600</text>
+      <text x="55" y="59" text-anchor="end" font-size="9" fill="#6b6460">900</text>
+      <text x="55" y="24" text-anchor="end" font-size="9" fill="#6b6460">1,200万</text>
+
+      <!-- 2023: 928万（推算）→ 928/1200*140=108 → y=160-108=52 -->
+      <rect x="80" y="52" width="55" height="108" fill="#8b6c42" opacity=".7"/>
+      <text x="107" y="47" text-anchor="middle" font-size="10" fill="#8b6c42" font-weight="bold">928</text>
+      <text x="107" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2023</text>
+      <text x="107" y="185" text-anchor="middle" font-size="9" fill="#6b6460">推算</text>
+
+      <!-- 2024: 1079万 → 1079/1200*140=125.9 → y=34 -->
+      <rect x="160" y="34" width="55" height="126" fill="#2a5c3f" opacity=".8"/>
+      <text x="187" y="28" text-anchor="middle" font-size="10" fill="#2a5c3f" font-weight="bold">1,079</text>
+      <text x="187" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2024</text>
+      <text x="187" y="185" text-anchor="middle" font-size="9" fill="#2a5c3f">▲16.1%</text>
+
+      <!-- 2025: 950万（中间估）→ 950/1200*140=110.8 → y=49 -->
+      <rect x="240" y="49" width="55" height="111" fill="#8b2e2e" opacity=".7"/>
+      <!-- range band -->
+      <rect x="240" y="49" width="55" height="9" fill="#8b2e2e" opacity=".2"/>
+      <rect x="240" y="151" width="55" height="9" fill="#8b2e2e" opacity=".2"/>
+      <text x="267" y="43" text-anchor="middle" font-size="10" fill="#8b2e2e" font-weight="bold">~950</text>
+      <text x="267" y="175" text-anchor="middle" font-size="10" fill="#6b6460">2025E</text>
+      <text x="267" y="185" text-anchor="middle" font-size="9" fill="#8b2e2e">▼预估</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Section 3: Haichang Detail -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">三、海昌海洋公园财务详解（2025年度）</span>
+    <span class="sec-en">Haichang · Revenue Breakdown · FY2025</span>
+  </div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">📊 营收构成拆分（2025年全年）<span class="badge badge-official" style="font-size:9px;">一手·年报</span></div>
+      <div class="drow"><span class="dk">门票销售</span><span class="dv">约 8.00 亿元 <span style="color:var(--red);font-size:11px;">▼10.6%</span></span></div>
+      <div class="drow"><span class="dk">酒店运营</span><span class="dv">约 1.80 亿元 <span style="color:var(--red);font-size:11px;">▼2.95%</span></span></div>
+      <div class="drow"><span class="dk">园内游乐收费</span><span class="dv">约 1.70 亿元 <span style="color:var(--red);font-size:11px;">▼12.8%</span></span></div>
+      <div class="drow"><span class="dk">食品及饮品</span><span class="dv">约 1.67 亿元 <span style="color:var(--red);font-size:11px;">▼31.8%</span></span></div>
+      <div class="drow"><span class="dk">货品销售</span><span class="dv">约 1.23 亿元 <span style="color:var(--red);font-size:11px;">▼7.1%</span></span></div>
+      <div class="drow"><span class="dk">文旅服务及解决方案</span><span class="dv">约 0.72 亿元 <span style="color:var(--red);font-size:11px;">▼45.9%</span></span></div>
+      <div class="drow" style="background:#f0ede5;border-radius:2px;"><span class="dk"><strong>合计</strong></span><span class="dv"><strong>15.49 亿元</strong></span></div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">📋 关键经营指标对比</div>
+      <div class="drow"><span class="dk">2024年总收入</span><span class="dv">18.18 亿元</span></div>
+      <div class="drow"><span class="dk">2025年总收入</span><span class="dv c-red">15.49 亿元 ▼14.8%</span></div>
+      <div class="drow"><span class="dk">2024年入园人次</span><span class="dv">1,079 万人 ▲16.1%</span></div>
+      <div class="drow"><span class="dk">2025年入园人次（估）</span><span class="dv c-amb">约930–970万【预测】</span></div>
+      <div class="drow"><span class="dk">2025年H1亏损</span><span class="dv c-red">2.95亿元（同比+250%）</span></div>
+      <div class="drow"><span class="dk">2025年全年亏损</span><span class="dv c-red">约 7.5 亿元</span></div>
+      <div class="drow"><span class="dk">上海公园·春节客流</span><span class="dv">27万人次（峰值5.2万/日）</span></div>
+      <div class="drow"><span class="dk">郑州公园·五一客流</span><span class="dv">16.5万人次（峰值3.8万/日）</span></div>
+    </div>
+  </div>
+
+  <!-- Revenue breakdown SVG -->
+  <div class="chart-wrap">
+    <div class="chart-title">海昌 2025 年收入构成（亿元）· 各类别同比降幅</div>
+    <svg width="100%" viewBox="0 0 800 200" font-family="'IM Fell English',Georgia,serif" font-size="11">
+      <!-- max 9亿, width 500px range: 200 to 700 -->
+      <line x1="200" y1="15" x2="200" y2="165" stroke="#d4cec6" stroke-width="1"/>
+      <line x1="256" y1="15" x2="256" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <line x1="311" y1="15" x2="311" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <line x1="367" y1="15" x2="367" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <line x1="422" y1="15" x2="422" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <line x1="478" y1="15" x2="478" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <line x1="533" y1="15" x2="533" y2="165" stroke="#d4cec6" stroke-width=".5" stroke-dasharray="3,2"/>
+      <text x="200" y="178" text-anchor="middle" font-size="9" fill="#6b6460">0</text>
+      <text x="311" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2亿</text>
+      <text x="422" y="178" text-anchor="middle" font-size="9" fill="#6b6460">4亿</text>
+      <text x="533" y="178" text-anchor="middle" font-size="9" fill="#6b6460">6亿</text>
+      <text x="645" y="178" text-anchor="middle" font-size="9" fill="#6b6460">8亿</text>
+
+      <!-- 门票: 8.0亿 → 8/9*500 = 444.4 → x=200, w=444 -->
+      <rect x="200" y="20" width="444" height="20" fill="#8b6c42" opacity=".8"/>
+      <text x="196" y="35" text-anchor="end" fill="#0a0a0b" font-size="11">门票销售</text>
+      <text x="649" y="34" fill="#0a0a0b" font-size="11" font-weight="bold">8.00亿</text>
+      <text x="750" y="34" fill="#8b2e2e" font-size="10">▼10.6%</text>
+
+      <!-- 酒店: 1.80 → 100 -->
+      <rect x="200" y="48" width="100" height="20" fill="#c9a84c" opacity=".8"/>
+      <text x="196" y="63" text-anchor="end" fill="#0a0a0b" font-size="11">酒店运营</text>
+      <text x="305" y="62" fill="#0a0a0b" font-size="11" font-weight="bold">1.80亿</text>
+      <text x="750" y="62" fill="#8b2e2e" font-size="10">▼2.95%</text>
+
+      <!-- 园内游乐: 1.70 → 94.4 -->
+      <rect x="200" y="76" width="94" height="20" fill="#c47a1e" opacity=".8"/>
+      <text x="196" y="91" text-anchor="end" fill="#0a0a0b" font-size="11">园内游乐收费</text>
+      <text x="299" y="90" fill="#0a0a0b" font-size="11" font-weight="bold">1.70亿</text>
+      <text x="750" y="90" fill="#8b2e2e" font-size="10">▼12.8%</text>
+
+      <!-- 食品饮品: 1.67 → 92.8 -->
+      <rect x="200" y="104" width="93" height="20" fill="#6b6460" opacity=".7"/>
+      <text x="196" y="119" text-anchor="end" fill="#0a0a0b" font-size="11">食品及饮品</text>
+      <text x="298" y="118" fill="#0a0a0b" font-size="11" font-weight="bold">1.67亿</text>
+      <text x="750" y="118" fill="#8b2e2e" font-size="10">▼31.8%</text>
+
+      <!-- 货品: 1.23 → 68.3 -->
+      <rect x="200" y="132" width="68" height="20" fill="#6b6460" opacity=".5"/>
+      <text x="196" y="147" text-anchor="end" fill="#0a0a0b" font-size="11">货品销售</text>
+      <text x="273" y="146" fill="#0a0a0b" font-size="11" font-weight="bold">1.23亿</text>
+      <text x="750" y="146" fill="#8b2e2e" font-size="10">▼7.1%</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Section 4: Chimelong detail -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">四、长隆集团背景数据（非上市·参考锚点）</span>
+    <span class="sec-en">Chimelong · Reference Anchors · Non-listed</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>数据点</th>
+        <th>数值</th>
+        <th>时间</th>
+        <th>来源标注</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>集团年总接待量</td>
+        <td><strong>超 4,000 万人次</strong></td>
+        <td>集团整体（多年）</td>
+        <td>【二手·媒体】集团官方表述</td>
+      </tr>
+      <tr>
+        <td>珠海长隆（横琴）实绩</td>
+        <td><strong>1,242.1 万人次</strong>，全球主题公园第六</td>
+        <td>2023年</td>
+        <td>【二手·媒体】珠海市文旅数据</td>
+      </tr>
+      <tr>
+        <td>广州长隆度假区（两园合计）</td>
+        <td><strong>年接待超 1,000 万人次</strong></td>
+        <td>近年</td>
+        <td>【二手·媒体】</td>
+      </tr>
+      <tr>
+        <td>清远长隆（2025年春节新开）</td>
+        <td>预计年接待 <strong>800 万人次</strong></td>
+        <td>2025年起</td>
+        <td>【二手·媒体】集团规划表述</td>
+      </tr>
+      <tr>
+        <td>长隆飞船乐园</td>
+        <td>2024年7月正式开业，无公开客流数据</td>
+        <td>2024年起</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>集团营业收入</td>
+        <td><strong>完全不可得</strong></td>
+        <td>—</td>
+        <td>非上市企业，未披露任何财务数据</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Verdict box -->
+<div class="verdict">
+  <div class="v-en">Research Verdict · Executive Summary</div>
+  <div class="v-zh">执行摘要：三条关键判断</div>
+
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text">
+      <strong>海昌2025年经营明显恶化，消费降级冲击次消费更甚于主消费。</strong>
+      总收入同比降14.8%至15.49亿元，连续亏损7.5亿。拆分来看，门票收入仅降10.6%（主消费具刚性），
+      但食品饮品降31.8%、文旅服务降45.9%（次消费随意愿下行急速萎缩），揭示客单价结构性下移而非单纯客流问题。
+      入园人次预估降至930–970万，但无官方全年数据确认。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：2025年度业绩公告（一手财报）</span>
+    </div>
+  </div>
+
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text">
+      <strong>长隆维持绝对领先体量，珠海旗舰园仍是华南最强单体，但财务数据系统性不可得。</strong>
+      集团整体估算4,000万+人次，珠海长隆海洋王国单园约1,200–1,350万人次，
+      2025年清远新园开业不直接影响度假型客群。飞船乐园首满年客流估200–350万，尚处爬坡期。
+      所有财务数据均不可得，营收须由渠道访谈或草根调研补充。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：珠海市文旅局统计、媒体公开报道</span>
+    </div>
+  </div>
+
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text">
+      <strong>客户提纲要求的"按单景区披露数据"在公开渠道均无法直接满足。</strong>
+      长隆非上市不公开，海昌上市但不分园区披露。精确数据须通过：①海昌IR直接咨询；
+      ②TEA/AECOM年度报告（全球主题公园游客量权威来源，每年5–6月发布）；③专家访谈补长隆缺口。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">本报告数据已尽公开渠道可得范围最大化采集</span>
+    </div>
+  </div>
+</div>
+
+<!-- Section 5: Gaps -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">五、数据缺口补全建议</span>
+    <span class="sec-en">Data Gap Remediation</span>
+  </div>
+
+  <table class="rec-table">
+    <thead>
+      <tr>
+        <th>缺口项</th>
+        <th>推荐补数路径</th>
+        <th>预计可得性</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>海昌各园区入园人次（分部）</td>
+        <td>①直接阅读港交所披露2025年年报原文（附注可能有园区说明）；②联系IR（ir@haichangoceanpark.com）</td>
+        <td><span style="color:var(--amber);">中等</span>——财报未分部披露，IR或可提供</td>
+      </tr>
+      <tr>
+        <td>珠海长隆海洋王国精确人次</td>
+        <td>TEA/AECOM 《Global Attractions Attendance Report》（每年5–6月发布，珠海长隆历年在榜）</td>
+        <td><span style="color:var(--green);">较高</span>——该报告专项统计全球前25游客量</td>
+      </tr>
+      <tr>
+        <td>广州长隆各园区人次拆分</td>
+        <td>①珠海/广州市文旅局年度统计公报；②专家访谈（旅游规划行业渠道）</td>
+        <td><span style="color:var(--amber);">中等</span>——地方政府数据滞后，访谈更快</td>
+      </tr>
+      <tr>
+        <td>长隆集团营业收入</td>
+        <td>①招股书（若有IPO进程）；②业内财务顾问渠道；③券商收入估算模型（人次×人均消费）</td>
+        <td><span style="color:var(--red);">较低</span>——无IPO计划则正规渠道几乎不可得</td>
+      </tr>
+      <tr>
+        <td>长隆飞船乐园首年客流</td>
+        <td>珠海市旅游主管部门；媒体节假日报道汇总估算</td>
+        <td><span style="color:var(--amber);">中等</span>——节假日数据可拼凑但无全年口径</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Sources -->
+<div class="section">
+  <div class="sec-hdr">
+    <span class="sec-zh">来源索引</span>
+    <span class="sec-en">Sources</span>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--green);">[一手·财报]</span>
+    <a href="https://www.thepaper.cn/newsDetail_forward_32868919">澎湃新闻：海昌海洋公园2025年收入约15.49亿元（引用年度业绩公告）</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--green);">[一手·财报]</span>
+    <a href="https://finance.sina.com.cn/roll/2025-04-03/doc-inerwrzr1561243.shtml">新浪财经：海昌海洋公园2024年入园人次增长16%，净亏损扩大至7.4亿</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--green);">[一手·财报]</span>
+    <a href="https://cj.sina.com.cn/articles/view/1644983660/620c756c02001oobg">新浪财经：海昌海洋公园2025年中期业绩，收入6.86亿，亏损2.95亿</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--green);">[一手·公告]</span>
+    <a href="https://m.tech.china.com/hea/articles/20250901/202509011723739.html">中华网：海昌海洋公园2025年中期业绩公告全文</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="https://www.zgcsb.com/news/shouYe/2025-03/31/ma_580653.html">中国城市网：海昌海洋公园2024年收入18.18亿元，上海公园二期预计2026年开业</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="http://zh.bendibao.com/tour/202377/86062.shtm">珠海本地宝：珠海长隆海洋王国历年游客接待数据</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="https://ttgchina.com/2025/02/06/%E6%B8%85%E8%BF%9C%E9%95%BF%E9%9A%86%E5%9B%BD%E9%99%85%E6%97%85%E6%B8%B8%E5%BA%A6%E5%81%87%E5%8C%BA%E5%BC%80%E5%B9%95/">TTG China：清远长隆国际旅游度假区开幕报道</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="https://www.21jingji.com/article/20250227/herald/f2928ad361614bc18ce6df1e9e7fd9f4.html">21经济网：港迪首盈利，新乐园崛起，主题公园竞争力评价</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="https://m.traveldaily.cn/article/186481">环球旅讯：年亏7亿，海昌海洋公园慌不慌？</a>
+  </div>
+  <div class="src-item">
+    <span style="color:var(--amber);">[二手·媒体]</span>
+    <a href="https://hea.china.com/articles/20251223/202512231786099.html">中华网：海昌海洋公园（02255.HK）利空出尽是拐点，治理焕新再出发</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <span>行业调研系统 · 客户委托输出</span>
+  <span>数据截止日期：2026年5月21日</span>
+  <span>长隆集团 · 海昌海洋公园 02255.HK</span>
+</div>
+
+</body>
+</html>
