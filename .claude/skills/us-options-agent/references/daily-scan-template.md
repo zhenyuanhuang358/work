@@ -5,12 +5,35 @@
 
 ---
 
-## 扫描清单（分两轨，顺序不可颠倒）
+## 扫描清单（分三轨，顺序不可颠倒）
 
-### 第一轨：GitHub 缓存文件 — 实时价格（先执行，价格必须从这里来）
+### 第零轨：触发 GitHub Action 刷新价格缓存（每次必做，最先执行）
+
+> ⚠️ GitHub Actions 定时任务有时延迟，缓存可能已过时数小时。
+> **每次扫描前必须主动触发一次更新，再读取。**
+
+**触发方式**：用 `mcp__github__push_files` 推一个 trigger 文件到 main 分支：
+```json
+owner: "zhenyuanhuang358"
+repo:  "work"
+branch: "main"
+message: "trigger: refresh stock prices for options scan [当前日期]"
+files: [{"path": "price_fetch_trigger.txt", "content": "[当前日期时间] triggered by options scan pre-fetch"}]
+```
+
+推送后，**使用 Bash Monitor 轮询等待**，直到 `stock_prices.json` 的 `updated_at` 时间戳刷新：
+```bash
+until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json" \
+  | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if d['updated_at'] > '[当前日期]T00:00:00' else 1)" \
+  2>/dev/null; do sleep 5; done && echo "prices updated"
+```
+通常 60–90 秒内完成。等到 `prices updated` 再继续。
+
+---
+
+### 第一轨：GitHub 缓存文件 — 实时价格（触发更新后再读）
 
 > ⚠️ 价格数据**只用这个文件**，不用 WebSearch 代替。WebSearch 价格有延迟且容易出错。
-> GitHub Action 每5分钟自动从 Finnhub 抓取并更新此文件。
 
 **读取方式**（WebFetch 调用）：
 ```
