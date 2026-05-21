@@ -181,26 +181,41 @@ def _svg_segment_bars(segments: list) -> str:
         return '<p style="color:#9b9590;font-style:italic;font-size:13px;padding:12px 0">分部营收未在财报中单独披露 / Segment revenue not separately disclosed</p>'
 
     max_rev = max(s["revenue_millions"] for s in segments)
-    bar_h, gap = 20, 12
-    name_w, chart_w, yoy_w = 140, 380, 120
-    W = name_w + chart_w + yoy_w + 20
-    total_h = len(segments) * (bar_h + gap) + 30
+    bar_h, gap = 20, 14
+    name_w  = 150   # left label column width
+    chart_w = 320   # bar drawing area
+    val_w   = 72    # fixed dollar-value column (always right of bar area)
+    yoy_w   = 80    # fixed YoY column (always rightmost)
+    W = name_w + chart_w + val_w + yoy_w
+    total_h = len(segments) * (bar_h + gap) + 20
 
     rows = ""
     for i, seg in enumerate(segments):
-        y = 16 + i * (bar_h + gap)
+        y = 10 + i * (bar_h + gap)
+        cy = y + bar_h - 5          # baseline for all text in this row
         bw = max(4, int(seg["revenue_millions"] / max_rev * chart_w))
-        rev_str = f"${seg['revenue_millions']/1000:.2f}B" if seg["revenue_millions"] >= 1000 else f"${seg['revenue_millions']:.0f}M"
+
+        rev_str = (f"${seg['revenue_millions']/1000:.2f}B"
+                   if seg["revenue_millions"] >= 1000
+                   else f"${seg['revenue_millions']:.0f}M")
+
         yoy = seg.get("yoy_pct")
+        yoy_str = ""
         if yoy is not None:
             yoy_color = "#2a5c3f" if yoy > 0 else "#8b2e2e"
-            yoy_str = f'<text x="{name_w + chart_w + 12}" y="{y+15}" font-size="11" fill="{yoy_color}">{("+" if yoy>0 else "")}{yoy:.0f}% YoY</text>'
-        else:
-            yoy_str = ""
+            sign = "+" if yoy > 0 else ""
+            # Fixed column: always starts at name_w + chart_w + val_w
+            yoy_str = (f'<text x="{name_w + chart_w + val_w}" y="{cy}" '
+                       f'font-size="11" fill="{yoy_color}">{sign}{yoy:.0f}% YoY</text>')
 
-        rows += f'<text x="{name_w - 8}" y="{y+15}" text-anchor="end" font-size="12" fill="#0a0a0b">{seg["name"]}</text>'
+        # Label (right-aligned)
+        rows += (f'<text x="{name_w - 8}" y="{cy}" text-anchor="end" '
+                 f'font-size="12" fill="#0a0a0b">{seg["name"]}</text>')
+        # Bar
         rows += f'<rect x="{name_w}" y="{y}" width="{bw}" height="{bar_h}" fill="#0a0a0b"/>'
-        rows += f'<text x="{name_w + bw + 6}" y="{y+14}" font-size="11" fill="#8b6c42">{rev_str}</text>'
+        # Dollar value — fixed column, always starts right of chart_w (never follows bar end)
+        rows += (f'<text x="{name_w + chart_w + 6}" y="{cy}" '
+                 f'font-size="11" fill="#8b6c42">{rev_str}</text>')
         rows += yoy_str
 
     return f'''<svg width="100%" viewBox="0 0 {W} {total_h}" font-family="'IM Fell English',Georgia,serif">
