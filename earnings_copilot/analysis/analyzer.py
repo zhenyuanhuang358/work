@@ -29,7 +29,7 @@ from earnings_copilot.analysis.prompts import (
 )
 
 MODEL = "claude-opus-4-7"
-MAX_TOKENS = 2048
+MAX_TOKENS = 8192
 
 
 def _call(client: anthropic.Anthropic, prompt: str, section: str) -> dict:

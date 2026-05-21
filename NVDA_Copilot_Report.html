@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVDA Q1 FY2027 — 财报猎手 Earner</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+  :root {
+    --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+    --muted:#6b6560; --light:#e8e4dc; --red:#8b2e2e; --green:#2a5c3f; --amber:#c47a1e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--paper);color:var(--ink);
+    font-family:'IM Fell English',Georgia,serif;min-height:100vh}
+  .page{max-width:880px;margin:0 auto;padding:60px 48px 100px}
+
+  .pub-bar{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+    border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:28px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+
+  .headline{font-size:clamp(26px,4vw,44px);line-height:1.1;margin:0 0 12px}
+  .subhead{font-size:15px;color:var(--muted);font-style:italic;line-height:1.65;margin-bottom:18px}
+  .tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+  .tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:4px 12px;border:1px solid var(--copper);color:var(--copper)}
+  .verdict-pill{background:var(--green);border-color:var(--green);color:#fff}
+  .verdict-pill.cautious{background:var(--amber);border-color:var(--amber)}
+  .verdict-pill.bearish{background:var(--red);border-color:var(--red)}
+
+  .stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--copper);border:1px solid var(--copper);margin:0 0 36px}
+  .stat-cell{background:var(--paper);padding:16px;text-align:center}
+  .stat-val{font-size:clamp(20px,3vw,30px);line-height:1.1}
+  .stat-val.beat{color:var(--green)} .stat-val.miss{color:var(--red)}
+  .stat-val.inline{color:var(--amber)}
+  .stat-label{font-size:10px;color:var(--muted);margin-top:6px;font-style:italic;line-height:1.5}
+
+  .section{margin:36px 0}
+  .section-label{margin-bottom:14px;border-bottom:1px solid var(--gold);padding-bottom:6px}
+  .section-zh{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .section-en{font-size:11px;font-style:italic;color:var(--muted);margin-left:10px}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media(max-width:620px){.two-col{grid-template-columns:1fr}}
+
+  .body-text{font-size:15px;line-height:1.8}
+  .body-text p{margin-bottom:14px}
+  .label-zh{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--copper);margin-right:6px}
+  .label-en{font-size:10px;font-style:italic;color:var(--muted);margin-right:8px}
+
+  .tone-row{display:flex;align-items:center;gap:14px;margin:10px 0}
+  .tone-label{font-size:12px;color:var(--muted);width:72px;flex-shrink:0;font-style:italic}
+  .tone-track{flex:1;height:5px;background:var(--light);border-radius:3px;overflow:hidden}
+  .tone-fill{height:100%;border-radius:3px;
+    background:linear-gradient(90deg,var(--red),var(--amber),var(--green))}
+  .tone-score{font-size:14px;width:36px;text-align:right}
+
+  .verdict-box{background:var(--ink);padding:32px 36px;margin:36px 0}
+  .verdict-eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:10px}
+  .verdict-text{font-size:clamp(15px,2vw,20px);color:var(--paper);
+    line-height:1.6;font-style:italic}
+  .verdict-en{font-size:12px;color:rgba(241,239,234,.4);margin-top:8px;font-style:italic}
+
+  .risk-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}
+  .risk-table th{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    padding:8px 10px;text-align:left;border-bottom:1px solid var(--copper);font-weight:normal}
+  .risk-table td{padding:11px 10px;border-bottom:1px solid rgba(139,108,66,.1);vertical-align:top}
+  .dot-h{color:var(--red)} .dot-m{color:var(--amber)} .dot-l{color:var(--green)}
+  .new-badge{font-size:9px;letter-spacing:.07em;text-transform:uppercase;
+    background:var(--red);color:#fff;padding:1px 5px;margin-left:4px;vertical-align:middle}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .chip{padding:5px 14px;border:1px solid var(--copper);font-size:13px;
+    color:var(--copper);font-style:italic}
+
+  .qa-item{margin-bottom:16px;padding:14px 16px;background:var(--light);
+    border-left:3px solid var(--gold)}
+  .qa-firm{font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:6px;font-family:monospace}
+  .qa-q{font-size:14px;line-height:1.55;margin-bottom:6px}
+  .qa-signal{font-size:12px;color:var(--red);font-style:italic}
+  .tension-item{font-size:14px;padding:8px 0;
+    border-bottom:1px solid rgba(139,108,66,.1);font-style:italic}
+
+  .scenario-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--copper);border:1px solid var(--copper);margin:20px 0}
+  .scenario-card{background:var(--paper);padding:20px 16px}
+  .sc-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:10px}
+  .sc-label em{font-style:normal;margin-left:6px;color:var(--muted)}
+  .sc-price{font-size:clamp(22px,3vw,32px);margin-bottom:8px;line-height:1.2}
+  .sc-updown{display:block;font-size:12px;margin-top:2px}
+  .scenario-card.bear .sc-price{color:var(--red)}
+  .scenario-card.bull .sc-price{color:var(--green)}
+  .sc-logic{font-size:13px;color:var(--ink);line-height:1.5;
+    margin-bottom:8px;font-style:italic}
+  .sc-meta{font-size:11px;color:var(--muted)}
+
+  .assumption-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+  .assumption-table th{padding:8px 12px;text-align:center;
+    border-bottom:2px solid var(--copper);font-weight:normal;
+    color:var(--muted);font-size:10px;letter-spacing:.09em;text-transform:uppercase}
+  .assumption-table th:first-child{text-align:left}
+  .assumption-table td{padding:10px 12px;border-bottom:1px solid rgba(139,108,66,.1);
+    text-align:center}
+  .assumption-table td:first-child{text-align:left;font-style:italic}
+  .assumption-table em{font-style:normal;color:var(--muted);font-size:11px;margin-left:6px}
+
+  .footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--copper);
+    font-size:11px;color:var(--muted);display:flex;
+    justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 1. Pub Bar -->
+  <div class="pub-bar">
+    <span>财报猎手 Earner &nbsp;·&nbsp; Earnings Intelligence</span>
+    <span>2026-05-21 &nbsp;·&nbsp; AI-Generated Research &nbsp;·&nbsp; Not Investment Advice</span>
+  </div>
+
+  <!-- 2. Headline + Tags -->
+  <h1 class="headline">NVDA Q1 FY2027<br>NVIDIA crushes Q1 FY2027 with $81.6B revenue (+85% YoY), beats consensus, and guides Q2 to $91B as agentic AI and enterprise deployments drive structural shift in data center demand.</h1>
+  <p class="subhead">Massive beat across all metrics with structural upside (ACIE parity with Hyperscale, $1T pipeline visibility), margins stable, guidance raised 16% QoQ—highly constructive, though China zero-revenue assumption and Rubin transition risk merit monitoring.</p>
+  <div class="tag-row">
+    <span class="tag">NVDA · 美股</span>
+    <span class="tag">Q1 FY2027</span>
+    <span class="tag verdict-pill">BUY</span>
+    <span class="tag">语气评分 9/10</span>
+  </div>
+
+  <!-- 3. Stat Bar -->
+  <div class="stat-bar">
+    <div class="stat-cell">
+      <div class="stat-val beat">+6.2%</div>
+      <div class="stat-label">EPS 超/低预期<br>$1.87 vs $1.76E</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val beat">+3.5%</div>
+      <div class="stat-label">营收超/低预期<br>$81.60B 实际</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">$91.0B</div>
+      <div class="stat-label">下季营收指引<br>Next Quarter Guide</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">75.0%</div>
+      <div class="stat-label">当季毛利率<br>Non-GAAP GM</div>
+    </div>
+  </div>
+
+  <!-- 4. Revenue Trend (8 quarters) -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">季度营收走势</span>
+      <span class="section-en">Quarterly Revenue Trend</span>
+    </div>
+    <svg width="100%" viewBox="0 0 720 230" font-family="'IM Fell English',Georgia,serif">
+  <line x1="27" y1="159" x2="693" y2="159" stroke="#8b6c42" stroke-width="1"/>
+  <rect x="33" y="118" width="62" height="41" fill="#d8d3ca"/><rect x="107" y="112" width="62" height="47" fill="#d8d3ca"/><rect x="181" y="104" width="62" height="55" fill="#d8d3ca"/><rect x="255" y="94" width="62" height="65" fill="#d8d3ca"/><rect x="329" y="84" width="62" height="75" fill="#d8d3ca"/><rect x="403" y="71" width="62" height="88" fill="#d8d3ca"/><rect x="477" y="56" width="62" height="103" fill="#d8d3ca"/><rect x="551" y="39" width="62" height="120" fill="#0a0a0b"/><rect x="625" y="25" width="62" height="134" fill="none" stroke="#8b6c42" stroke-width="1.5" stroke-dasharray="4,3"/><text x="64" y="114" text-anchor="middle" font-size="9.5" fill="#9b9590">$27.8B</text><text x="138" y="108" text-anchor="middle" font-size="9.5" fill="#9b9590">$32.4B</text><text x="212" y="100" text-anchor="middle" font-size="9.5" fill="#9b9590">$37.8B</text><text x="286" y="90" text-anchor="middle" font-size="9.5" fill="#9b9590">$44.1B</text><text x="360" y="80" text-anchor="middle" font-size="9.5" fill="#9b9590">$51.4B</text><text x="434" y="67" text-anchor="middle" font-size="9.5" fill="#9b9590">$60.0B</text><text x="508" y="52" text-anchor="middle" font-size="9.5" fill="#9b9590">$70.0B</text><text x="582" y="35" text-anchor="middle" font-size="9.5" fill="#0a0a0b">$81.6B</text><text x="656" y="21" text-anchor="middle" font-size="9.5" fill="#8b6c42">$91.0B</text><text x="64" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q2'25</text><text x="138" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q3'25</text><text x="212" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q4'25</text><text x="286" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q1'26</text><text x="360" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q2'26</text><text x="434" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q3'26</text><text x="508" y="175" text-anchor="middle" font-size="9.5" fill="#9b9590" font-weight="normal">Q4'26</text><text x="582" y="175" text-anchor="middle" font-size="9.5" fill="#0a0a0b" font-weight="bold">Q1'27</text><text x="656" y="175" text-anchor="middle" font-size="9.5" fill="#8b6c42" font-weight="bold">Q2'27E</text><text x="8" y="220" font-size="9" fill="#aaa8a3" font-style="italic">* 浅色柱为估算值，基于YoY增速推算</text>
+</svg>
+  </div>
+
+  <!-- 5. Segment Breakdown -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">分部营收</span>
+      <span class="section-en">Segment Revenue Breakdown</span>
+    </div>
+    <svg width="100%" viewBox="0 0 660 190" font-family="'IM Fell English',Georgia,serif">
+  <text x="132" y="31" text-anchor="end" font-size="12" fill="#0a0a0b">Data Center</text><rect x="140" y="16" width="380" height="20" fill="#0a0a0b"/><text x="526" y="30" font-size="11" fill="#8b6c42">$75.20B</text><text x="532" y="31" font-size="11" fill="#2a5c3f">+92% YoY</text><text x="132" y="63" text-anchor="end" font-size="12" fill="#0a0a0b">Data Center - Hyperscale</text><rect x="140" y="48" width="192" height="20" fill="#0a0a0b"/><text x="338" y="62" font-size="11" fill="#8b6c42">$38.00B</text><text x="132" y="95" text-anchor="end" font-size="12" fill="#0a0a0b">Data Center - ACIE (AI Clouds, Industrial, Enterprise)</text><rect x="140" y="80" width="186" height="20" fill="#0a0a0b"/><text x="332" y="94" font-size="11" fill="#8b6c42">$37.00B</text><text x="132" y="127" text-anchor="end" font-size="12" fill="#0a0a0b">Edge Computing</text><rect x="140" y="112" width="32" height="20" fill="#0a0a0b"/><text x="178" y="126" font-size="11" fill="#8b6c42">$6.40B</text><text x="532" y="127" font-size="11" fill="#2a5c3f">+29% YoY</text><text x="132" y="159" text-anchor="end" font-size="12" fill="#0a0a0b">Edge Computing - Gaming</text><rect x="140" y="144" width="18" height="20" fill="#0a0a0b"/><text x="164" y="158" font-size="11" fill="#8b6c42">$3.70B</text><text x="532" y="159" font-size="11" fill="#2a5c3f">+47% YoY</text>
+</svg>
+  </div>
+
+  <!-- 6. EPS Comparison + Gross Margin (two-col) -->
+  <div class="section two-col">
+    <div>
+      <div class="section-label">
+        <span class="section-zh">EPS 对比</span>
+        <span class="section-en">Consensus vs Actual</span>
+      </div>
+      <svg width="100%" viewBox="0 0 300 186" font-family="'IM Fell English',Georgia,serif">
+  <line x1="32" y1="142" x2="268" y2="142" stroke="#8b6c42" stroke-width="1"/>
+  <rect x="40" y="52" width="96" height="90" fill="#8b6c42"/><text x="88" y="46" text-anchor="middle" font-size="13" fill="#8b6c42" font-weight="normal">$1.76</text><text x="88" y="156" text-anchor="middle" font-size="10" fill="#6b6560">共识预期</text><text x="88" y="169" text-anchor="middle" font-size="10" fill="#6b6560">Consensus</text><rect x="164" y="47" width="96" height="95" fill="#2a5c3f"/><text x="212" y="41" text-anchor="middle" font-size="13" fill="#2a5c3f" font-weight="bold">$1.87</text><text x="212" y="156" text-anchor="middle" font-size="10" fill="#6b6560">实际 EPS</text><text x="212" y="169" text-anchor="middle" font-size="10" fill="#6b6560">Actual</text>
+</svg>
+    </div>
+    <div>
+      <div class="section-label">
+        <span class="section-zh">毛利率走势</span>
+        <span class="section-en">Gross Margin Trend</span>
+      </div>
+      <svg width="100%" viewBox="0 0 300 185" font-family="'IM Fell English',Georgia,serif">
+  <path d="M100,95 L200,95" fill="none" stroke="#0a0a0b" stroke-width="2"/><circle cx="100" cy="95" r="5" fill="#0a0a0b" stroke="#0a0a0b" stroke-width="1.5"/><text x="100" y="84" text-anchor="middle" font-size="12" fill="#0a0a0b" font-weight="bold">75.0%</text><text x="100" y="155" text-anchor="middle" font-size="10" fill="#6b6560">当季</text><text x="100" y="168" text-anchor="middle" font-size="10" fill="#6b6560">Q1 Act.</text><circle cx="200" cy="95" r="5" fill="none" stroke="#8b6c42" stroke-width="1.5" stroke-dasharray="5,3"/><text x="200" y="84" text-anchor="middle" font-size="12" fill="#8b6c42" font-weight="normal">75.0%</text><text x="200" y="155" text-anchor="middle" font-size="10" fill="#6b6560">下季指引</text><text x="200" y="168" text-anchor="middle" font-size="10" fill="#6b6560">Q2 Guide</text>
+</svg>
+    </div>
+  </div>
+
+  <!-- 7. Core Analysis -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">核心分析</span>
+      <span class="section-en">Core Analysis</span>
+    </div>
+    <div class="body-text">
+      <p>
+        <span class="label-zh">业绩总结</span><span class="label-en">Results Summary</span>
+        NVDA Q1 FY2027：NVIDIA crushes Q1 FY2027 with $81.6B revenue (+85% YoY), beats consensus, and guides Q2 to $91B as agentic AI and enterprise deployments drive structural shift in data center demand.
+        EPS $1.87（共识 $1.76，+6.2%），
+        营收 $81.60B（+3.5%）。
+        YoY 营收增速 +85%。
+      </p>
+      <p>
+        <span class="label-zh">前瞻指引</span><span class="label-en">Forward Guidance</span>
+        下季营收指引 $91.0B。
+      </p>
+      <p>
+        <span class="label-zh">管理层基调</span><span class="label-en">Management Tone</span>
+        Jensen Huang uses superlative language ('outstanding,' 'remarkable,' 'extraordinary') and makes definitive statements about market transformation ('Agentic AI has arrived,' 'demand has gone parabolic'). He emphasizes structural shifts and $1 trillion visibility with confidence. Colette Kress reinforces optimism through record metrics and stable guidance, with minimal hedging on core assumptions.
+      </p>
+      <p>
+        <span class="label-zh">核心主题</span><span class="label-en">Key Themes</span>
+        Agentic AI Driving Inference Dominance · ACIE as Structural Market Parity · $1 Trillion Blackwell/Rubin Pipeline Visibility · China Revenue Exclusion with Robust Ex-China Growth · Edge Computing as Next Growth Wave
+      </p>
+    </div>
+  </div>
+
+  <!-- 8. Target Price Scenarios -->
+  
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">目标价 · 三情景</span>
+      <span class="section-en">Price Target — 12-Month Scenarios</span>
+    </div>
+    <svg width="100%" viewBox="0 0 680 110" font-family="'IM Fell English',Georgia,serif">
+  <rect x="145" y="46" width="347" height="10" fill="#e8e4dc" rx="2"/>
+  <rect x="145" y="44" width="88" height="14" fill="#d8d3ca" rx="1" opacity="0.6"/><circle cx="145" cy="51" r="5" fill="#8b2e2e"/><text x="145" y="32" text-anchor="middle" font-size="13" fill="#8b2e2e" font-weight="normal">$190</text><text x="145" y="80" text-anchor="middle" font-size="10" fill="#6b6560">熊市 Bear</text><circle cx="321" cy="51" r="7" fill="#0a0a0b"/><text x="321" y="32" text-anchor="middle" font-size="13" fill="#0a0a0b" font-weight="bold">$232</text><text x="321" y="80" text-anchor="middle" font-size="10" fill="#6b6560">基准 Base</text><circle cx="492" cy="51" r="5" fill="#2a5c3f"/><text x="492" y="32" text-anchor="middle" font-size="13" fill="#2a5c3f" font-weight="normal">$273</text><text x="492" y="80" text-anchor="middle" font-size="10" fill="#6b6560">牛市 Bull</text><polygon points="273,44 267,33 279,33" fill="#c9a84c"/><text x="273" y="22" text-anchor="middle" font-size="10" fill="#c9a84c">现价 $221</text>
+</svg>
+    <div class="scenario-cards">
+      <div class="scenario-card bear">
+        <div class="sc-label">熊市 <em>Bear</em></div>
+        <div class="sc-price">$190<br><span class="sc-updown" style="color:#8b2e2e">-13.9% vs 现价</span></div>
+        <div class="sc-logic">增长放缓，竞争加剧，毛利率承压</div>
+        <div class="sc-meta">Forward EPS × 低估值倍数</div>
+      </div>
+      <div class="scenario-card base">
+        <div class="sc-label">基准 <em>Base</em></div>
+        <div class="sc-price">$232<br><span class="sc-updown" style="color:#2a5c3f">+5.1% vs 现价</span></div>
+        <div class="sc-logic">当前增长趋势延续，毛利率稳步扩张</div>
+        <div class="sc-meta">Forward EPS × 当前 P/E</div>
+      </div>
+      <div class="scenario-card bull">
+        <div class="sc-label">牛市 <em>Bull</em></div>
+        <div class="sc-price">$273<br><span class="sc-updown" style="color:#2a5c3f">+23.7% vs 现价</span></div>
+        <div class="sc-logic">超预期增长，新品催化，估值重评</div>
+        <div class="sc-meta">Forward EPS × 高估值倍数</div>
+      </div>
+    </div>
+    <table class="assumption-table">
+      <tr>
+        <th>核心假设 <em>Key Assumption</em></th>
+        <th>熊市 <em>Bear</em></th>
+        <th>基准 <em>Base</em></th>
+        <th>牛市 <em>Bull</em></th>
+      </tr>
+      <tr><td>Forward EPS (年化)</td>
+          <td>$7.07</td><td>$7.85</td><td>$8.64</td></tr>
+      <tr><td>估值 P/E 倍数</td>
+          <td>低 (−18%)</td><td>维持现值</td><td>高 (+18%)</td></tr>
+      <tr><td>营收增长路径</td>
+          <td>低于指引</td><td>符合指引</td><td>超越指引</td></tr>
+      <tr><td>毛利率趋势</td>
+          <td>承压 / 持平</td><td>稳步扩张</td><td>超预期扩张</td></tr>
+    </table>
+  </div>
+
+  <!-- 9. Verdict Box -->
+  <div class="verdict-box">
+    <div class="verdict-eyebrow">财报猎手 Earner &nbsp;·&nbsp; Verdict</div>
+    <p class="verdict-text">Massive beat across all metrics with structural upside (ACIE parity with Hyperscale, $1T pipeline visibility), margins stable, guidance raised 16% QoQ—highly constructive, though China zero-revenue assumption and Rubin transition risk merit monitoring.</p>
+    <p class="verdict-en">NVDA Q1 FY2027 &nbsp;·&nbsp; Tone: bullish 9/10</p>
+  </div>
+
+  <!-- 10. Management Tone -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">管理层语气</span>
+      <span class="section-en">Management Tone Analysis</span>
+    </div>
+    <div class="tone-row">
+      <span class="tone-label">信心指数</span>
+      <div class="tone-track">
+        <div class="tone-fill" style="width:90%"></div>
+      </div>
+      <span class="tone-score">9/10</span>
+    </div>
+    <p class="body-text" style="margin-top:12px;font-size:14px;color:var(--muted)">
+      Jensen Huang uses superlative language ('outstanding,' 'remarkable,' 'extraordinary') and makes definitive statements about market transformation ('Agentic AI has arrived,' 'demand has gone parabolic'). He emphasizes structural shifts and $1 trillion visibility with confidence. Colette Kress reinforces optimism through record metrics and stable guidance, with minimal hedging on core assumptions.
+    </p>
+  </div>
+
+  <!-- 11. Key Themes -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">核心主题</span>
+      <span class="section-en">Key Themes</span>
+    </div>
+    <div class="chips"><span class="chip">Agentic AI Driving Inference Dominance</span><span class="chip">ACIE as Structural Market Parity</span><span class="chip">$1 Trillion Blackwell/Rubin Pipeline Visibility</span><span class="chip">China Revenue Exclusion with Robust Ex-China Growth</span><span class="chip">Edge Computing as Next Growth Wave</span><span class="chip">Margin Stability at Scale</span><span class="chip">No Digestion Risk From Blackwell Pull-Forward</span></div>
+  </div>
+
+  <!-- 12. Risk Matrix -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">风险矩阵</span>
+      <span class="section-en">Risk Matrix</span>
+    </div>
+    <table class="risk-table">
+      <tr>
+        <th>严重性</th>
+        <th>类别 <em style="font-style:italic;font-size:9px;font-weight:normal">Category</em></th>
+        <th>描述 <em style="font-style:italic;font-size:9px;font-weight:normal">Description</em></th>
+      </tr>
+      
+      <tr>
+        <td><span class="dot-h">●</span> 高</td>
+        <td><strong>geopolitical</strong></td>
+        <td>U.S. export regulations to China eliminate Data Center compute revenue, with zero revenue assumed in guidance and no upside modeled unless policy changes.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-h">●</span> 高</td>
+        <td><strong>execution</strong></td>
+        <td>Rapid sequential growth of 85-92% year-over-year creates supply chain, manufacturing, and operational scaling risks despite management assertions of supply chain efficiency.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中<span class="new-badge">NEW</span></td>
+        <td><strong>competitive</strong></td>
+        <td>Agentic AI workload shift to inference-dominant model (vs. balanced training) may not sustain indefinitely as competitors improve inference efficiency or custom silicon emerges.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中<span class="new-badge">NEW</span></td>
+        <td><strong>financial</strong></td>
+        <td>ACIE segment reached $37 billion (50% of Data Center) in one quarter with 31% sequential growth; sustainability of this growth rate and risk of market saturation in enterprise/AI-native cloud segments unclear.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中</td>
+        <td><strong>execution</strong></td>
+        <td>Rubin platform ramp timeline not specified; delayed ramp or technical issues could create inventory/revenue recognition risks if Blackwell demand pull-forward creates overstock.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中<span class="new-badge">NEW</span></td>
+        <td><strong>financial</strong></td>
+        <td>$1 trillion revenue pipeline visibility is forward-looking and subject to execution risk; excludes LPX, CPX, and Vera CPU standalone racks, suggesting full TAM may be significantly larger and harder to quantify.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中</td>
+        <td><strong>competitive</strong></td>
+        <td>Increased customer adoption of Blackwell by all major hyperscalers and cloud providers simultaneously may accelerate commoditization and margin compression risk.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中</td>
+        <td><strong>regulatory</strong></td>
+        <td>U.S. export restrictions on AI compute to China could expand to additional geographies (sovereign AI programs in 40+ countries) or tighten further, limiting addressable market.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-l">●</span> 低</td>
+        <td><strong>financial</strong></td>
+        <td>Edge Computing gaming segment declined 13% sequentially; reliance on seasonal patterns and new verticals (automotive, AI-RAN, robotics) to drive Edge growth is unproven at scale.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-l">●</span> 低</td>
+        <td><strong>financial</strong></td>
+        <td>Gross margins held flat at 75% non-GAAP despite 20% sequential revenue growth; future product mix transitions (Rubin ramp) may create margin pressure during transition periods.</td>
+      </tr>
+      <tr>
+        <td><span class="dot-m">●</span> 中<span class="new-badge">NEW</span></td>
+        <td><strong>other</strong></td>
+        <td>Management uses expansive language ('parabolic demand,' 'remarkable milestone,' 'extraordinary opportunity') that may create unrealistic expectations and increase downside risk if growth moderates.</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 13. Analyst Q&A -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-zh">分析师追问 · 张力区域</span>
+      <span class="section-en">Analyst Q&amp;A — Tension Analysis</span>
+    </div>
+    
+    <div class="qa-item">
+      <div class="qa-firm">Morgan Stanley &nbsp;·&nbsp; 回应直接度 ▓▓▓▓▓ 5/5</div>
+      <div class="qa-q">Is ACIE growth driven by one-time deployments or recurring infrastructure spend?</div>
+      <div class="qa-signal">管理层正面回应</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">Goldman Sachs &nbsp;·&nbsp; 回应直接度 ▓▓░░░ 2/5</div>
+      <div class="qa-q">What is the China DC compute assumption and is there upside if trade policy changes?</div>
+      <div class="qa-signal">deflected policy speculation ('we don't speculate on policy outcomes'); pivoted to ex-China growth strength to minimize China dependency narrative</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">BofA &nbsp;·&nbsp; 回应直接度 ▓▓▓░░ 3/5</div>
+      <div class="qa-q">What is the timeline for Rubin ramp and does Blackwell demand pull-forward create digestion risk?</div>
+      <div class="qa-signal">no specific Rubin timeline given ('on track' is vague); reframed digestion risk as theoretical by explaining fundamental demand drivers</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">JPMorgan &nbsp;·&nbsp; 回应直接度 ▓▓▓▓░ 4/5</div>
+      <div class="qa-q">What is the growth algorithm for Edge Computing given gaming's 13% sequential decline?</div>
+      <div class="qa-signal">normalized gaming decline as seasonal rather than structural</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-firm">Citi &nbsp;·&nbsp; 回应直接度 ▓▓▓▓▓ 5/5</div>
+      <div class="qa-q">Where are you seeing concrete revenue contribution from agentic AI vs. traditional model training?</div>
+      <div class="qa-signal">管理层正面回应</div>
+    </div>
+    <div style="margin-top:20px"><div class="section-label"><span class="section-zh">主要张力</span><span class="section-en">Tension Areas</span></div><div class="tension-item">⟶ China revenue assumption — Goldman Sachs pressed on policy upside, but management fully deflected with 'no speculation' stance and pivot to ex-China momentum</div><div class="tension-item">⟶ Digestion/saturation risk — BofA and implicit concern about Blackwell pull-forward, which Jensen dismissed by reframing infrastructure as perpetual rather than cyclical</div><div class="tension-item">⟶ Edge Computing deceleration — JPMorgan's gaming sequential decline (-13%) signaled potential weakness, but management normalized it as seasonal and redirected to emerging categories</div></div>
+  </div>
+
+  <!-- 14. Footer -->
+  <div class="footer">
+    <span>财报猎手 Earner &nbsp;·&nbsp; 由 Claude AI 生成 &nbsp;·&nbsp; 仅供参考，不构成投资建议</span>
+    <span>
+      分析耗时 52.9s &nbsp;·&nbsp; 2026-05-21
+      &nbsp;&nbsp;
+      <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=Earner&amp;report=NVDA_2026-05-21"
+         target="_blank"
+         style="color:var(--copper);text-decoration:none;border-bottom:1px solid var(--copper)">
+        这份报告有用吗？反馈 →
+      </a>
+    </span>
+  </div>
+
+</div>
+</body>
+</html>
