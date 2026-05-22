@@ -39,13 +39,25 @@ description: |
 | **专家访谈格式** | 用户明确要Q&A/访谈风格 | `references/expert-interview-format.md` |
 
 **按需加载：**
+- 不确定去哪找数据 / 触发 GitHub Action → `references/data-sources.md`
+- 需要估算非上市收入 / 分部推算 / 验证数据合理性 → `references/industry-benchmarks.md`
 - 指标定义有疑问 → `references/metric-definitions.md`
-- 不确定去哪找数据 → `references/data-sources.md`
 - 生成 HTML 报告（每次必做）→ `references/report-template.md`
 
 ---
 
-## Phase 0：解析提纲
+## Phase 0：解析提纲 & 数据预备
+
+### Step 0.0：检查本地缓存（上市公司必做）
+
+对每个**上市公司**目标，先查 `research_cache/_manifest.json`：
+- 若该 ticker 存在且 `updated_at` < 24小时 → 直接读 `research_cache/[slug].json`，跳到 Step 0.1
+- 否则 → 用 `mcp__github__push_files` 推 `research_fetch_trigger.json` 触发 GitHub Action，轮询等待缓存刷新，再继续
+
+```json
+// research_fetch_trigger.json 格式
+{"tickers": ["02255.HK", "9988.HK"], "triggered_at": "[ISO时间]", "triggered_by": "research-agent"}
+```
 
 ### Step 0.1：提取基本信息
 
