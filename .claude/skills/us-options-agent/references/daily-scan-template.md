@@ -7,10 +7,22 @@
 
 ## 扫描清单（分三轨，顺序不可颠倒）
 
+### 第零步：读持仓日志（出报告前必做）
+
+读取 `references/position-journal.md`，提取：
+- 当前总风险敞口（各仓位最大亏损之和）
+- 距上限 $2,550 的剩余空间
+- 有无需要关注的仓位（接近止损 / 即将到期）
+
+在报告的「账户状态提醒」部分用实际数字填写，而非模板占位符。
+若日志显示敞口已满 → 本日只输出观察，不推荐新仓。
+
+---
+
 ### 第零轨：触发 GitHub Action 刷新价格缓存（每次必做，最先执行）
 
 > ⚠️ GitHub Actions 定时任务有时延迟，缓存可能已过时数小时。
-> **每次扫描前必须主动触发一次更新，再读取。**
+> **每次扫描前必须主动触发一次更新，等到价格刷新后才能出报告。**
 
 **触发方式**：用 `mcp__github__push_files` 推一个 trigger 文件到 main 分支：
 ```json
@@ -21,13 +33,20 @@ message: "trigger: refresh stock prices for options scan [当前日期]"
 files: [{"path": "price_fetch_trigger.txt", "content": "[当前日期时间] triggered by options scan pre-fetch"}]
 ```
 
-推送后，**使用 Bash Monitor 轮询等待**，直到 `stock_prices.json` 的 `updated_at` 时间戳刷新：
+推送后，**使用 Bash 轮询等待**，直到 `stock_prices.json` 的 `updated_at` 超过今日零点：
 ```bash
 until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if d['updated_at'] > '[当前日期]T00:00:00' else 1)" \
   2>/dev/null; do sleep 5; done && echo "prices updated"
 ```
-通常 60–90 秒内完成。等到 `prices updated` 再继续。
+
+> 🔴 **硬性规则：不等到 `prices updated` 出现，绝不出报告。**
+> - 不设超时时间——等多久都要等
+> - 不用缓存数据降级
+> - 不先出"临时版"再更新
+> - 只出一份报告，价格确认新鲜后一次性完成
+
+**等待期间并行执行第二轨**（IV / 异常流 / 财报 / 宏观 WebSearch 不依赖价格，可同步进行）。
 
 ---
 
@@ -40,13 +59,15 @@ until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/sto
 URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
 ```
 
-**文件结构**：
+**文件结构**（含新增的 VIX + 10年期国债收益率）：
 ```json
 {
-  "updated_at": "2026-05-20T09:27:37Z",
+  "updated_at": "2026-05-22T09:27:37Z",
+  "vix": 18.5,
+  "treasury_10y": 4.38,
   "prices": {
     "SPY":  { "price": 733.73, "changePct": -0.67, "high": 737.65, "low": 731.53 },
-    "QQQ":  { "price": 701.53, ... },
+    "QQQ":  { "price": 701.53, "changePct": -0.82, ... },
     "NVDA": { "price": 220.61, ... },
     "PLTR": { "price": 135.26, ... },
     "TSLA": { "price": 404.11, ... },
@@ -58,18 +79,19 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 }
 ```
 
-检查 `updated_at` 时间戳，若超过15分钟则注明「价格可能延迟」。
-**如果文件读取失败**：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
+`vix` 直接填入报告头部；`treasury_10y` 用于判断利率环境与 risk-on/off 背景。
+**如果文件读取失败**（WebFetch 报错）：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
 
 ---
 
 ### 第二轨：WebSearch — IV / 异常流 / 财报 / 宏观（Finnhub 不覆盖的数据）
 
-1. `[候选标的] IV rank site:marketchameleon.com` — IV Rank（最关键，每个标的必查）
+**可在等待第零轨价格更新期间并行执行：**
+
+1. `[候选标的] IV rank site:marketchameleon.com` — IV Rank（最关键，每个标的必查，优先 marketchameleon）
 2. `unusual options activity today` — 异常期权流
 3. `earnings this week [日期]` — 本周财报日历
 4. `宏观 美联储 经济数据 本周` — 宏观风险
-5. `VIX trend today` — VIX 趋势背景（补充 Finnhub 数值）
 
 ---
 
@@ -77,7 +99,8 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 
 **日期**：[YYYY-MM-DD]
 **大盘**：SPY $[X]（[+/-]%）| QQQ $[X]（[+/-]%）
-**VIX**：[数值]（[低/中/高]，[解读一句话]）
+**VIX**：[stock_prices.json.vix]（[<15低/15-25中/25-35高/>35极高]，[解读一句话]）
+**10年期国债**：[stock_prices.json.treasury_10y]%（[利率环境一句话]）
 **市场情绪**：[Risk-on / Risk-off / 中性]
 
 ---

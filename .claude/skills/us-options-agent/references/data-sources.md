@@ -33,17 +33,22 @@
 
 ## IV Rank / IV Percentile（最重要）
 
-| 来源 | 地址 | 免费？ | 数据质量 | 说明 |
-|------|------|-------|---------|------|
-| Market Chameleon | marketchameleon.com | 免费基础版 | ★★★★★ | IV Rank、IV Percentile、历史IV图，最推荐 |
-| Barchart | barchart.com/stocks/quotes/[代码]/options | 免费 | ★★★★ | IV Rank 在期权页面右侧，有 Put/Call 比率 |
-| TastyTrade | tastytrade.com | 需开户（免费） | ★★★★★ | 开户后有完整 IV Rank 工具 |
-| ThinkorSwim | TD Ameritrade 平台 | 需开户（免费） | ★★★★★ | thinkScript 可扫描 IV Rank > N 的标的 |
+**来源优先级（按序使用，前一个失败再用下一个）**：
 
-**搜索方式（无账户时）**：
+| 优先级 | 来源 | 搜索方式 | 免费？ | 说明 |
+|--------|------|---------|-------|------|
+| **#1 首选** | Market Chameleon | `[代码] IV rank site:marketchameleon.com` | 免费基础版 | IV Rank、IV Percentile、历史IV走势图，数据最全，**每次必先查这里** |
+| **#2 备选** | Barchart | `[代码] implied volatility barchart` | 免费 | IV Rank 在期权页面右侧；若 marketchameleon 无结果用此补充 |
+| **#3 验证** | Finviz | `[代码] IV finviz options` | 免费基础 | 与 marketchameleon 数值差距 >10% 时，取两者均值并注明差异 |
+| **#4 精确值** | TastyTrade / ThinkorSwim | 经纪商平台 | 需开户 | 执行前在平台二次确认，特别是 Iron Condor 等精确度要求高的策略 |
+
+> **冲突处理**：若两个来源 IV Rank 相差 >10（如 24% vs 51%），两个数值都列出，
+> 以 marketchameleon 为准，并注明「来源有分歧，执行前在平台确认」。
+> 不得取平均或选高值来降低风险阈值。
+
+**搜索模板（每次必查，逐个标的执行）**：
 ```
 [代码] IV rank site:marketchameleon.com
-[代码] implied volatility rank today
 ```
 
 ---
@@ -83,13 +88,22 @@ unusual options activity today site:unusualwhales.com
 
 ## VIX 与宏观数据
 
-| 数据 | 来源 | 搜索关键词 |
-|------|------|-----------|
-| VIX 实时 | CBOE / Yahoo Finance | `VIX 今日 数值` |
+| 数据 | 主要来源 | 备注 |
+|------|---------|------|
+| **VIX 实时** | `stock_prices.json` 顶层 `vix` 字段 | GitHub Action 与股价同步更新，无需额外搜索 |
+| **10年期国债收益率** | `stock_prices.json` 顶层 `treasury_10y` 字段 | 同上，^TNX via yfinance |
 | 财报日历 | Earnings Whispers | `earnings calendar this week` |
 | 经济数据日历 | Investing.com | `economic calendar this week` |
 | 美联储动态 | Fed官网 / CNBC | `fed meeting date next` |
-| Expected Move | Market Chameleon / TastyTrade | `[代码] expected move this week` |
+| Expected Move | Market Chameleon | `[代码] expected move this week` |
+
+**VIX 解读参考**：
+| VIX 区间 | 市场状态 | 卖方策略建议 |
+|---------|---------|------------|
+| < 15 | 低波动、乐观 | IV 偏低，权利金少，谨慎开新仓 |
+| 15–25 | 正常 | 正常操作 |
+| 25–35 | 高波动、恐慌 | IV 偏高利好卖方，但风险也大，缩减仓位 |
+| > 35 | 极端恐慌 | 触发极端市场协议，见 `extreme-market-protocol.md` |
 
 ---
 
