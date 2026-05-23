@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>餐饮组织风险雷达</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0d1117; color: #e6edf3; overflow: hidden; }
+
+/* ── Layout ── */
+#app { display: flex; flex-direction: column; height: 100vh; }
+
+header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 24px; border-bottom: 1px solid #21262d;
+  background: #161b22; flex-shrink: 0;
+}
+.logo {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, #f85149 0%, #f0883e 100%);
+  display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.brand { font-size: 15px; font-weight: 600; }
+.brand-sub { font-size: 12px; color: #8b949e; margin-left: 6px; }
+.status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
+.dot { width: 7px; height: 7px; background: #3fb950; border-radius: 50%; }
+
+main { display: flex; flex: 1; overflow: hidden; }
+
+/* ── Chat ── */
+#chat-section { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+#messages {
+  flex: 1; overflow-y: auto; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+
+.msg { display: flex; gap: 12px; max-width: 760px; }
+.msg.user { flex-direction: row-reverse; align-self: flex-end; }
+
+.avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+  background: #21262d; border: 1px solid #30363d;
+}
+.msg.assistant .avatar {
+  background: linear-gradient(135deg, #f85149, #f0883e); border: none;
+}
+
+.bubble {
+  background: #21262d; border: 1px solid #30363d;
+  border-radius: 12px; padding: 12px 16px;
+  font-size: 14px; line-height: 1.65; color: #e6edf3;
+  white-space: pre-wrap; word-break: break-word;
+}
+.msg.user .bubble {
+  background: #1f6feb; border-color: transparent;
+  border-radius: 12px 2px 12px 12px;
+}
+.msg.assistant .bubble { border-radius: 2px 12px 12px 12px; }
+
+.diag-cta {
+  margin-top: 10px; padding: 8px 12px;
+  background: rgba(63, 185, 80, 0.08); border: 1px solid rgba(63, 185, 80, 0.25);
+  border-radius: 8px; font-size: 13px; color: #3fb950; cursor: default;
+}
+
+/* typing */
+.dots { display: flex; gap: 4px; padding: 4px 0; }
+.dots span {
+  width: 6px; height: 6px; background: #8b949e; border-radius: 50%;
+  animation: bounce 1.2s ease-in-out infinite;
+}
+.dots span:nth-child(2) { animation-delay: .2s; }
+.dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+/* ── Input ── */
+#input-area {
+  padding: 14px 24px; border-top: 1px solid #21262d;
+  background: #161b22; display: flex; gap: 10px; align-items: flex-end;
+}
+#user-input {
+  flex: 1; background: #21262d; border: 1px solid #30363d;
+  border-radius: 10px; padding: 10px 14px; font-size: 14px;
+  color: #e6edf3; resize: none; min-height: 44px; max-height: 120px;
+  line-height: 1.5; font-family: inherit; transition: border-color .2s;
+}
+#user-input:focus { outline: none; border-color: #388bfd; }
+#user-input::placeholder { color: #484f58; }
+
+#send-btn {
+  width: 44px; height: 44px; background: #1f6feb; border: none;
+  border-radius: 10px; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background .2s;
+}
+#send-btn:hover { background: #388bfd; }
+#send-btn:disabled { background: #21262d; cursor: not-allowed; }
+#send-btn svg { width: 18px; height: 18px; fill: white; }
+
+/* ── Diagnosis Panel ── */
+#diag-panel {
+  width: 0; overflow: hidden; flex-shrink: 0;
+  background: #161b22; border-left: 1px solid #21262d;
+  transition: width .35s cubic-bezier(.4,0,.2,1);
+  position: relative;
+}
+#diag-panel.open { width: 390px; overflow-y: auto; }
+
+#diag-inner { width: 390px; }
+
+.diag-head {
+  padding: 20px 20px 16px; border-bottom: 1px solid #21262d;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  position: sticky; top: 0; background: #161b22; z-index: 1;
+}
+.diag-label { font-size: 11px; font-weight: 600; color: #8b949e; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.diag-name { font-size: 20px; font-weight: 700; }
+
+.badge {
+  padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  flex-shrink: 0; white-space: nowrap; margin-top: 4px;
+}
+.badge-high   { background: rgba(248,81,73,.12);  color: #f85149; border: 1px solid rgba(248,81,73,.3);  }
+.badge-medium { background: rgba(240,136,62,.12); color: #f0883e; border: 1px solid rgba(240,136,62,.3); }
+.badge-low    { background: rgba(63,185,80,.12);  color: #3fb950; border: 1px solid rgba(63,185,80,.3);  }
+
+.diag-body { padding: 20px; display: flex; flex-direction: column; gap: 22px; }
+
+.sec-label { font-size: 11px; font-weight: 600; color: #8b949e; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 9px; }
+
+.core-text { font-size: 14px; line-height: 1.7; color: #e6edf3; }
+
+.signals { display: flex; flex-direction: column; gap: 7px; }
+.signal-item { display: flex; gap: 8px; font-size: 13px; color: #c9d1d9; line-height: 1.5; }
+.signal-item::before { content: "◈"; color: #f0883e; flex-shrink: 0; }
+
+.action-cards { display: flex; flex-direction: column; gap: 8px; }
+.acard { border-radius: 10px; padding: 12px 14px; border: 1px solid; }
+.acard.now   { background: rgba(248,81,73,.05);  border-color: rgba(248,81,73,.18);  }
+.acard.week  { background: rgba(240,136,62,.05); border-color: rgba(240,136,62,.18); }
+.acard.month { background: rgba(88,166,255,.05); border-color: rgba(88,166,255,.18); }
+.acard-label { font-size: 11px; font-weight: 700; letter-spacing: .5px; margin-bottom: 7px; }
+.acard.now   .acard-label { color: #f85149; }
+.acard.week  .acard-label { color: #f0883e; }
+.acard.month .acard-label { color: #58a6ff; }
+.aitem { font-size: 13px; color: #c9d1d9; line-height: 1.55; padding-left: 14px; position: relative; margin-bottom: 3px; }
+.aitem::before { content: "→"; position: absolute; left: 0; color: #8b949e; }
+
+.forecast-box {
+  background: rgba(248,81,73,.04); border: 1px solid rgba(248,81,73,.15);
+  border-radius: 10px; padding: 14px;
+}
+.forecast-text { font-size: 13px; color: #c9d1d9; line-height: 1.65; }
+
+#reset-btn {
+  width: calc(100% - 40px); margin: 0 20px 20px;
+  background: none; border: 1px solid #30363d; border-radius: 8px;
+  padding: 9px; font-size: 13px; color: #8b949e; cursor: pointer;
+  transition: all .2s; font-family: inherit;
+}
+#reset-btn:hover { border-color: #58a6ff; color: #58a6ff; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="logo">📡</div>
+    <span class="brand">餐饮组织风险雷达</span>
+    <span class="brand-sub">连锁餐饮经营决策 Copilot</span>
+    <div class="status"><div class="dot"></div>在线</div>
+  </header>
+
+  <main>
+    <!-- Chat -->
+    <div id="chat-section">
+      <div id="messages"></div>
+      <div id="input-area">
+        <textarea id="user-input" placeholder="描述你观察到的经营异常…" rows="1"></textarea>
+        <button id="send-btn" onclick="send()">
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Diagnosis Panel -->
+    <div id="diag-panel">
+      <div id="diag-inner">
+        <div class="diag-head">
+          <div>
+            <div class="diag-label">诊断结果</div>
+            <div class="diag-name" id="d-name">—</div>
+          </div>
+          <div class="badge" id="d-badge">—</div>
+        </div>
+        <div class="diag-body">
+          <div>
+            <div class="sec-label">核心判断</div>
+            <div class="core-text" id="d-core">—</div>
+          </div>
+          <div>
+            <div class="sec-label">匹配信号</div>
+            <div class="signals" id="d-signals"></div>
+          </div>
+          <div>
+            <div class="sec-label">行动协议</div>
+            <div class="action-cards">
+              <div class="acard now">
+                <div class="acard-label">⚡ 立即执行</div>
+                <div id="a-now"></div>
+              </div>
+              <div class="acard week">
+                <div class="acard-label">📅 7 日内</div>
+                <div id="a-week"></div>
+              </div>
+              <div class="acard month">
+                <div class="acard-label">🗓 30 日内</div>
+                <div id="a-month"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="sec-label">风险预警</div>
+            <div class="forecast-box">
+              <div class="forecast-text" id="d-forecast">—</div>
+            </div>
+          </div>
+        </div>
+        <button id="reset-btn" onclick="reset()">↺ 重新开始诊断</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const WELCOME = `你好。我是餐饮组织风险雷达。
+
+告诉我你最近观察到的经营异常——门店数据、团队状态、管理问题，任何让你感觉「有点不对劲」的事情都可以。`;
+
+let history = [];
+let streaming = false;
+
+// ── Init ──
+window.addEventListener('load', () => {
+  addMsg('assistant', WELCOME);
+
+  const ta = document.getElementById('user-input');
+  ta.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+  });
+  ta.addEventListener('input', () => {
+    ta.style.height = 'auto';
+    ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
+  });
+});
+
+// ── UI helpers ──
+function addMsg(role, text) {
+  const wrap = document.createElement('div');
+  wrap.className = `msg ${role}`;
+  const icon = role === 'assistant' ? '📡' : '👤';
+  wrap.innerHTML = `
+    <div class="avatar">${icon}</div>
+    <div class="bubble">${esc(text)}</div>
+  `;
+  document.getElementById('messages').appendChild(wrap);
+  scrollBottom();
+  return wrap;
+}
+
+function addTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg assistant';
+  wrap.id = 'typing';
+  wrap.innerHTML = `
+    <div class="avatar">📡</div>
+    <div class="bubble"><div class="dots"><span></span><span></span><span></span></div></div>
+  `;
+  document.getElementById('messages').appendChild(wrap);
+  scrollBottom();
+}
+
+function scrollBottom() {
+  const el = document.getElementById('messages');
+  el.scrollTop = el.scrollHeight;
+}
+
+function esc(t) {
+  if (!t) return '';
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+
+// ── Send ──
+async function send() {
+  if (streaming) return;
+  const ta = document.getElementById('user-input');
+  const text = ta.value.trim();
+  if (!text) return;
+
+  streaming = true;
+  document.getElementById('send-btn').disabled = true;
+  ta.value = ''; ta.style.height = 'auto';
+
+  addMsg('user', text);
+  history.push({ role: 'user', content: text });
+  addTyping();
+
+  let full = '';
+  let msgWrap = null;
+
+  try {
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history })
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buf += dec.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop() ?? '';
+
+      for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+        const raw = line.slice(6).trim();
+        if (raw === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed.error) throw new Error(parsed.error);
+          if (parsed.text) {
+            full += parsed.text;
+            if (!msgWrap) {
+              document.getElementById('typing')?.remove();
+              msgWrap = addMsg('assistant', '');
+            }
+            // Strip diagnosis block from visible text
+            const display = full.replace(/```diagnosis[\s\S]*?```/g, '').trim();
+            msgWrap.querySelector('.bubble').innerHTML = esc(display);
+            scrollBottom();
+          }
+        } catch (_) {}
+      }
+    }
+
+    if (full) {
+      history.push({ role: 'assistant', content: full });
+      parseDiagnosis(full, msgWrap);
+    }
+
+  } catch (err) {
+    document.getElementById('typing')?.remove();
+    addMsg('assistant', `连接出错：${err.message}\n\n请确认后端已启动（uvicorn main:app --reload）`);
+  }
+
+  streaming = false;
+  document.getElementById('send-btn').disabled = false;
+  document.getElementById('user-input').focus();
+}
+
+// ── Parse & render diagnosis ──
+function parseDiagnosis(text, wrap) {
+  const m = text.match(/```diagnosis\n?([\s\S]*?)\n?```/);
+  if (!m) return;
+
+  let d;
+  try { d = JSON.parse(m[1]); } catch (e) { console.error('Diagnosis JSON parse failed', e); return; }
+
+  // Clean message bubble
+  const clean = text.replace(/```diagnosis[\s\S]*?```/, '').trim();
+  if (wrap) {
+    const bubble = wrap.querySelector('.bubble');
+    bubble.innerHTML = esc(clean);
+    const cta = document.createElement('div');
+    cta.className = 'diag-cta';
+    cta.textContent = '📊 诊断报告已生成 →';
+    bubble.appendChild(cta);
+  }
+
+  // Risk badge
+  const rl = (d.risk_level || '中').trim();
+  const cls = rl === '高' ? 'badge-high' : rl === '低' ? 'badge-low' : 'badge-medium';
+  document.getElementById('d-name').textContent = d.archetype_name || '—';
+  const badge = document.getElementById('d-badge');
+  badge.textContent = `风险${rl}`;
+  badge.className = `badge ${cls}`;
+
+  document.getElementById('d-core').textContent = d.core_diagnosis || '—';
+
+  // Signals
+  const sigEl = document.getElementById('d-signals');
+  sigEl.innerHTML = (d.matched_signals || [])
+    .map(s => `<div class="signal-item">${esc(s)}</div>`).join('');
+
+  // Actions
+  renderActions('a-now',   d.actions?.immediate);
+  renderActions('a-week',  d.actions?.seven_days);
+  renderActions('a-month', d.actions?.thirty_days);
+
+  document.getElementById('d-forecast').textContent = d.risk_forecast || '—';
+
+  // Open panel
+  document.getElementById('diag-panel').classList.add('open');
+}
+
+function renderActions(id, items) {
+  document.getElementById(id).innerHTML = (items || [])
+    .map(a => `<div class="aitem">${esc(a)}</div>`).join('');
+}
+
+// ── Reset ──
+function reset() {
+  history = [];
+  document.getElementById('messages').innerHTML = '';
+  document.getElementById('diag-panel').classList.remove('open');
+  addMsg('assistant', WELCOME);
+}
+</script>
+</body>
+</html>
