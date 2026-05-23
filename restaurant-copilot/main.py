@@ -7,13 +7,15 @@ import json
 import os
 from pathlib import Path
 
-import anthropic
+from google import genai
+from google.genai import types
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 
 app = FastAPI()
-client = anthropic.Anthropic()
+client = genai.Client(api_key=os.environ["GOOGLE_API_KEY"])
+MODEL = "gemini-2.5-flash"
 
 ARCHETYPES = json.loads(
     (Path(__file__).parent / "archetypes.json").read_text(encoding="utf-8")
@@ -89,18 +91,28 @@ async def root():
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
-    messages = [{"role": m.role, "content": m.content} for m in request.messages]
+    contents = [
+        types.Content(
+            role="user" if m.role == "user" else "model",
+            parts=[types.Part(text=m.content)],
+        )
+        for m in request.messages
+    ]
 
     def generate():
         try:
-            with client.messages.stream(
-                model="claude-opus-4-7",
-                max_tokens=2048,
-                system=SYSTEM_PROMPT,
-                messages=messages,
-            ) as stream:
-                for text in stream.text_stream:
-                    yield f"data: {json.dumps({'text': text}, ensure_ascii=False)}\n\n"
+            stream = client.models.generate_content_stream(
+                model=MODEL,
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT,
+                    max_output_tokens=2048,
+                    temperature=0.7,
+                ),
+            )
+            for chunk in stream:
+                if chunk.text:
+                    yield f"data: {json.dumps({'text': chunk.text}, ensure_ascii=False)}\n\n"
             yield "data: [DONE]\n\n"
         except Exception as e:
             yield f"data: {json.dumps({'error': str(e)}, ensure_ascii=False)}\n\n"
