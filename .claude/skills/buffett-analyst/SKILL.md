@@ -28,23 +28,34 @@ description: |
 
 ### Phase 0：数据采集（每次必做，先于一切分析）
 
-确认股票代码/名称后，**并行搜索**以下数据，采集完成前不启动任何分析：
+确认股票代码/名称后，**先做一步，再并行搜索**：
 
-**财务数据（近3年，必须来自官方来源）**
+**前置：确认财年结束月份**
+`[代码] fiscal year end month`
+→ 非12月结束的公司，后续搜索词要调整年份（如 NVIDIA FY2025 = 2025年1月结束）
+
+**并行搜索（采集完成前不启动任何分析）**：
+
+**财务数据（最近3个完整财年，来自官方来源）**
 - 港股：`[公司名] annual report 2023 2024 2025 hkex.com.hk`
-- 美股：`[代码] 10-K 2024 2025 site:sec.gov` + `macrotrends.net [代码]`
-- A股：`[公司名] 年报 2023 2024 cninfo.com.cn`
+- 美股：`[代码] 10-K site:sec.gov` + `macrotrends.net [代码]`
+- A股：`[公司名] 年报 cninfo.com.cn`
 
 提取（来源必须标注）：
 - 营收 / 毛利润 / 营业利润 / 净利润（三年）
+- **D&A（折旧摊销）**（三年）← 计算 Owner Earnings 必需
 - 自由现金流 = 经营现金流 - Capex（三年）
+- **现金及等价物**（最新财年末）← 计算 EV 必需
 - ROE / ROIC（三年均值）
 - 有息负债 / 总资产 / 股东权益
 - 在外流通股数 + 当前股价 = 当前市值
 
 **竞争格局**：`[品牌] 竞争对手 市占率 2025 2026`
+额外搜索：`[主要竞争对手代码] EV/FCF multiple 2026`（用于 4B 相对估值）
 
-**管理层**：`[CEO名字] 资本分配 回购 并购 股权` + 近2年重大资本决策
+**管理层**：
+- `[CEO名字] capital allocation buyback acquisition equity stake`
+- `[代码] earnings call transcript Q4 [最新财年]`（用于 3C 沟通诚实度评分）
 
 **⚠️ 硬性规则：所有数字必须标注来源（年报页码 / 网站）。无来源 = 不可用。**
 
@@ -64,7 +75,7 @@ description: |
 ### Phase 2：所有者盈余与内在价值
 
 加载 `references/owner-earnings-model.md`，计算：
-- Owner Earnings = 净利润 + D&A - Capex ± 运营资本变化
+- Owner Earnings = 净利润 + D&A - **维护性** Capex ± 运营资本变化
 - 运行两情景 DCF（保守 / 基准）
 - 输出：**内在价值区间** + **当前安全边际（%）**
 
