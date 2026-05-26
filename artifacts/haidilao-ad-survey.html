@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞 · 广告主调研问卷作答</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0b;
+    --paper: #f1efea;
+    --copper: #8b6c42;
+    --gold: #c9a84c;
+    --surface: #e8e4dc;
+    --deep: #1e1a14;
+    --green: #2a5c3f;
+    --amber: #c47a1e;
+    --red: #8b2e2e;
+    --muted: #6b6456;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Songti SC', 'STSong', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── Header ── */
+  .pub-bar {
+    background: var(--deep);
+    color: var(--gold);
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    padding: 8px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero {
+    background: var(--deep);
+    padding: 48px 40px 36px;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .hero-brand {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    color: var(--copper);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--paper);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .hero-sub {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .hero-tags {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 11px;
+    padding: 3px 10px;
+    font-family: 'IM Fell English', Georgia, serif;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 40px 80px;
+  }
+
+  /* ── Section ── */
+  .section {
+    margin-bottom: 40px;
+  }
+
+  .section-header {
+    border-left: 3px solid var(--gold);
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+
+  .section-zh {
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--ink);
+  }
+
+  .section-en {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    color: var(--copper);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ── Question card ── */
+  .q-card {
+    background: white;
+    border: 1px solid #d8d2c8;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .q-header {
+    background: var(--surface);
+    padding: 10px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    border-bottom: 1px solid #d8d2c8;
+  }
+
+  .q-num {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    color: var(--copper);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    min-width: 28px;
+  }
+
+  .q-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .q-body {
+    padding: 16px 18px;
+  }
+
+  .answer-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .answer-check {
+    background: var(--green);
+    color: white;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .answer-text {
+    font-size: 14px;
+    color: var(--ink);
+    font-weight: bold;
+  }
+
+  .answer-note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f7f4ef;
+    border-left: 2px solid var(--copper);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ── Ranking table ── */
+  .rank-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .rank-table th {
+    background: var(--deep);
+    color: var(--gold);
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  .rank-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e0dbd2;
+    vertical-align: middle;
+  }
+
+  .rank-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .rank-table tr:nth-child(even) td {
+    background: #faf8f4;
+  }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
+    font-family: 'IM Fell English', Georgia, serif;
+    margin: 0 3px;
+  }
+
+  .rank-1 { background: var(--gold); color: var(--deep); }
+  .rank-2 { background: var(--copper); color: white; }
+  .rank-3 { background: var(--surface); color: var(--ink); border: 1px solid var(--copper); }
+  .rank-4 { background: #e8e4dc; color: var(--muted); }
+  .rank-5 { background: #f0ede7; color: var(--muted); }
+
+  /* ── NPS table ── */
+  .nps-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .nps-table th {
+    background: var(--deep);
+    color: var(--gold);
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: normal;
+  }
+
+  .nps-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e0dbd2;
+  }
+
+  .nps-table tr:last-child td { border-bottom: none; }
+  .nps-table tr:nth-child(even) td { background: #faf8f4; }
+
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .score-fill {
+    height: 8px;
+    background: var(--gold);
+    opacity: 0.8;
+  }
+
+  .score-num {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-weight: bold;
+    color: var(--copper);
+    min-width: 20px;
+  }
+
+  /* ── Stat bar ── */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--surface);
+    border: 1px solid #d8d2c8;
+    margin-bottom: 32px;
+  }
+
+  .stat-cell {
+    background: white;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 22px;
+    color: var(--copper);
+    font-weight: bold;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* ── Multi-check list ── */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid #d8d2c8;
+    margin: 32px 0;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--deep);
+    color: var(--muted);
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 16px 40px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span>HAIDILAO · ADVERTISER SURVEY RESPONSE</span>
+  <span>2026 · INTERNAL USE ONLY</span>
+</div>
+
+<div class="hero">
+  <div class="hero-brand">海底捞国际控股 · 市场营销部</div>
+  <div class="hero-title">广告主调研问卷 · 高管作答版</div>
+  <div class="hero-sub">Advertiser Survey — Executive Response · May 2026</div>
+  <div class="hero-tags">
+    <span class="tag">预算规模 &gt;1亿元</span>
+    <span class="tag">种草优先策略</span>
+    <span class="tag">小红书第一选择</span>
+    <span class="tag">五大平台全覆盖</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Stat bar -->
+  <div class="stat-bar">
+    <div class="stat-cell">
+      <span class="stat-val">5</span>
+      <span class="stat-label">投放平台数</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-val">&gt;1亿</span>
+      <span class="stat-label">年度广告预算</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-val">50%+</span>
+      <span class="stat-label">种草预算占比</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-val">↑↑</span>
+      <span class="stat-label">2026预算趋势</span>
+    </div>
+  </div>
+
+  <!-- Section 1: 基础投放情况 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">基础投放情况</div>
+      <div class="section-en">Platform & Budget Overview</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q1</span>
+        <span class="q-text">贵公司合作/投放过的平台【多选；必选小红书】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">抖音</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">快手</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">哔哩哔哩 / B站</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">微博</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书</div></div>
+        </div>
+        <div class="answer-note">五大平台全覆盖。海底捞用户画像宽泛，不做平台取舍，采取差异化内容策略分别运营。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q2</span>
+        <span class="q-text">2025年广告预算规模</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">大于1亿元</div></div>
+        <div class="answer-note">海底捞全国1600+门店，全年整体营销预算（含线上线下）远超1亿量级。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q3</span>
+        <span class="q-text">2025年预算 vs 2024年</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">增加了</div></div>
+        <div class="answer-note">2025年品牌年轻化策略提速，内容营销与KOL合作预算双向加码。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q4</span>
+        <span class="q-text">2026年广告预算变化</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">会增加</div></div>
+        <div class="answer-note">海外扩张与下沉市场双线推进，整体投放规模预计持续增长。</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 2: 广告类型偏好 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">广告类型偏好</div>
+      <div class="section-en">Ad Format Preferences</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q5</span>
+        <span class="q-text">最有价值的广告效果类型</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">种草广告</div></div>
+        <div class="answer-note">海底捞的核心增长逻辑是「体验→分享→决策」。用户在选择到哪家火锅吃之前会主动搜索口碑、探店视频和真实评价。种草广告直接介入这个决策链路，比纯品牌曝光的转化路径更短，比转化广告的信任度更高。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q6</span>
+        <span class="q-text">最有价值的广告形式类型</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">KOL广告</div></div>
+        <div class="answer-note">餐饮品类的转化本质上依赖「人推荐给人」。海底捞每年在抖音星图、小红书蒲公英上的达人合作是最核心的投放形式。用户看到真实探店内容，比看Banner决策更快、信任度更高。</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 3: 种草预算 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">种草广告预算</div>
+      <div class="section-en">Seeding Ad Budget Allocation</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q7</span>
+        <span class="q-text">2025年种草广告预算占总广告预算比例</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">50%及以上</div></div>
+        <div class="answer-note">海底捞内容营销已是核心战略，达人探店、KOC种草、UGC激励合计占总预算过半。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q8</span>
+        <span class="q-text">2025年种草预算比例 vs 2024年</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">增加</div></div>
+        <div class="answer-note">效果数据验证了种草ROI，预算持续向内容侧迁移。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q9</span>
+        <span class="q-text">2026年种草预算比例变化</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">增加</div></div>
+        <div class="answer-note">搜索前置行为（消费者吃饭前先刷小红书/抖音）趋势在加强，种草投入的战略优先级只会更高。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q10</span>
+        <span class="q-text">投放种草广告首先想到的平台 + 第一选择</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">抖音</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">微博</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">哔哩哔哩 / B站</div></div>
+        </div>
+        <div class="answer-note" style="margin-top:12px">
+          <strong>第一选择：小红书</strong><br>
+          餐饮决策场景中，小红书是用户主动搜索「哪家好吃」的首要入口。海底捞在小红书的探店笔记、新品上桌内容、服务体验分享形成了持续的自然流量池，种草效率最高。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 4: ROI评估 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">ROI评估体系</div>
+      <div class="section-en">ROI Measurement Framework</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q11</span>
+        <span class="q-text">评估广告效果时，应计入ROI的结果【多选】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">投放平台站内的转化</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">投放结束后持续产生的搜索、互动与进店</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">跨平台全链路带来的总生意增量</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">由内容带来的品牌认知或心智提升</div></div>
+        </div>
+        <div class="answer-note">海底捞不做纯曝光考核。ROI评估核心是「进店」——无论来自哪个路径，最终落脚到门店客流和桌均消费。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q12</span>
+        <span class="q-text">如何评估小红书广告投放ROI【多选】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">以搜索心智提升（品牌词/产品词搜索量）为核心指标</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">以内容长尾价值（优质笔记持续带来的自然流量）为核心指标</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">以全渠道生意增长（跳转外部平台的转化）为核心指标</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">以品牌长期价值（用户好感度、品牌认知）为核心指标</div></div>
+        </div>
+        <div class="answer-note">小红书上一篇高质量探店笔记可以持续带来6–12个月的自然搜索流量，这个长尾价值是我们评估投放效果的核心维度。同时监测「海底捞」及「海底捞新品」搜索指数变化，作为心智占领的量化指标。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q13</span>
+        <span class="q-text">小红书广告ROI评估的核心区别【多选】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书广告具有长尾效应，内容可长期持续产生价值</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书广告价值会外溢并转化到其他平台</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书广告会建立用户心智，转化路径更长但用户质量更高</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">小红书搜索广告可承接种草流量，形成「种草-搜索」闭环</div></div>
+        </div>
+        <div class="answer-note">海底捞在小红书投放的本质是「心智预埋」：用户今天看到一篇探店内容，可能两周后和朋友聚餐时才会想起来选海底捞。这个滞后转化在其他平台很难追踪，但小红书的搜索闭环让我们能看到完整路径。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q14</span>
+        <span class="q-text">在小红书投放种草广告后观察到的效果【多选】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">品牌词/产品词搜索量明显提升</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">用户收藏、评论等深度互动增加</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">优质笔记持续获得自然流量</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">品牌认知度和好感度提升</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">新客获取成本降低</div></div>
+        </div>
+        <div class="answer-note">每次有新品或节日营销活动，小红书上的搜索峰值都会滞后3–7天出现，印证了「看到内容→主动搜索」的自然决策周期。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q15</span>
+        <span class="q-text">小红书搜索广告对种草效果的承接作用</span>
+      </div>
+      <div class="q-body">
+        <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">搜索广告能有效承接种草流量，转化效率高</div></div>
+        <div class="answer-note">用户刷到探店内容后转入搜索，此时搜索广告的意图承接非常精准。种草和搜索在同一平台内形成闭环，是小红书区别于其他平台的核心价值。</div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q16</span>
+        <span class="q-text">选择社交媒体平台最重要的5个指标【最多选5项】</span>
+      </div>
+      <div class="q-body">
+        <div class="check-list">
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">目标客群精准：平台用户画像与品牌契合度高</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">用户消费决策的心智强：平台用户在购买前习惯在该平台获取信息</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">内容真实性和社区信任度高：用户对平台内容信任，广告抵触感低</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">KOL影响力强：平台KOL推广有效，可提升长期品牌影响力或直接促成转化</div></div>
+          <div class="answer-line"><div class="answer-check">✓</div><div class="answer-text">销售转化效果好：平台广告可有效提升销售转化</div></div>
+        </div>
+        <div class="answer-note">餐饮品类广告不需要最大的曝光，需要最对的人在最容易做决策的时候看到。小红书胜在「决策心智」和「内容信任度」，这两点是海底捞加大小红书投入的核心原因。</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 5: 平台排名 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">平台综合排名</div>
+      <div class="section-en">Platform Rankings · Q17–Q25</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q17–25</span>
+        <span class="q-text">各维度平台排名汇总（基于Q1所选5个平台）</span>
+      </div>
+      <div class="q-body" style="padding:0">
+        <table class="rank-table">
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>第1</th>
+              <th>第2</th>
+              <th>第3</th>
+              <th>第4</th>
+              <th>第5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Q17 整体合作偏好</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">B</span>B站</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+            <tr>
+              <td>Q18 目标客群精准</td>
+              <td><span class="rank-badge rank-1">红</span>小红书</td>
+              <td><span class="rank-badge rank-2">抖</span>抖音</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">B</span>B站</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+            <tr>
+              <td>Q19 激发用户兴趣</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">B</span>B站</td>
+              <td><span class="rank-badge rank-4">微</span>微博</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+            <tr>
+              <td>Q20 销售转化效果</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">快</span>快手</td>
+              <td><span class="rank-badge rank-4">微</span>微博</td>
+              <td><span class="rank-badge rank-5">B</span>B站</td>
+            </tr>
+            <tr>
+              <td>Q21 广告产品多样</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">快</span>快手</td>
+              <td><span class="rank-badge rank-5">B</span>B站</td>
+            </tr>
+            <tr>
+              <td>Q22 投放机制智能</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">快</span>快手</td>
+              <td><span class="rank-badge rank-5">B</span>B站</td>
+            </tr>
+            <tr>
+              <td>Q23 KOL影响力</td>
+              <td><span class="rank-badge rank-1">抖</span>抖音</td>
+              <td><span class="rank-badge rank-2">红</span>小红书</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">B</span>B站</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+            <tr>
+              <td>Q24 用户消费决策心智</td>
+              <td><span class="rank-badge rank-1">红</span>小红书</td>
+              <td><span class="rank-badge rank-2">抖</span>抖音</td>
+              <td><span class="rank-badge rank-3">微</span>微博</td>
+              <td><span class="rank-badge rank-4">B</span>B站</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+            <tr>
+              <td>Q25 内容真实性/社区信任度</td>
+              <td><span class="rank-badge rank-1">红</span>小红书</td>
+              <td><span class="rank-badge rank-2">B</span>B站</td>
+              <td><span class="rank-badge rank-3">抖</span>抖音</td>
+              <td><span class="rank-badge rank-4">微</span>微博</td>
+              <td><span class="rank-badge rank-5">快</span>快手</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="answer-note" style="margin:0; border-left:none; border-top:1px solid #d8d2c8; padding:14px 18px">
+          抖音在规模和转化上领先，但小红书在「决策心智」与「内容信任度」两个与餐饮强相关的维度排名第一。这是海底捞对两个平台差异化定位的核心判断：抖音做曝光与即时转化，小红书做心智沉淀与口碑积累。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Section 6: NPS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-zh">平台推荐意愿评分</div>
+      <div class="section-en">Platform NPS · Q26</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-header">
+        <span class="q-num">Q26</span>
+        <span class="q-text">向同行推荐各广告投放平台的可能性（0–10分）</span>
+      </div>
+      <div class="q-body" style="padding:0">
+        <table class="nps-table">
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th>评分</th>
+              <th>核心理由</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>小红书</strong></td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-fill" style="width:90px"></div>
+                  <span class="score-num">9</span>
+                </div>
+              </td>
+              <td>餐饮品类ROI最可见，长尾内容价值高，「种草-搜索」闭环完整</td>
+            </tr>
+            <tr>
+              <td><strong>抖音</strong></td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-fill" style="width:90px"></div>
+                  <span class="score-num">9</span>
+                </div>
+              </td>
+              <td>规模最大，转化链路成熟，直播带货+算法投放组合效率高</td>
+            </tr>
+            <tr>
+              <td><strong>微博</strong></td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-fill" style="width:60px"></div>
+                  <span class="score-num">6</span>
+                </div>
+              </td>
+              <td>话题传播与品牌事件有价值，但餐饮决策直接转化相对弱</td>
+            </tr>
+            <tr>
+              <td><strong>哔哩哔哩 / B站</strong></td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-fill" style="width:60px"></div>
+                  <span class="score-num">6</span>
+                </div>
+              </td>
+              <td>年轻客群质量好，但餐饮内容消费场景相对弱，ROI偏长线</td>
+            </tr>
+            <tr>
+              <td><strong>快手</strong></td>
+              <td>
+                <div class="score-bar">
+                  <div class="score-fill" style="width:50px"></div>
+                  <span class="score-num">5</span>
+                </div>
+              </td>
+              <td>下沉市场覆盖有价值，但与海底捞品牌调性契合度相对偏低</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  海底捞国际控股有限公司 · 市场营销部 · 本文件仅供内部使用 · 2026
+</div>
+
+</body>
+</html>
