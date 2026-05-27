@@ -93,7 +93,7 @@ description: |
 ### Phase 3：巴菲特评分卡
 
 加载 `references/berkshire-score.md`，四维评分（满分 100）：
-- Business Quality（30）/ Management（25）/ Financial Health（30）/ Price vs Value（15）
+- Business Quality（30）/ Financial Health（30）/ Management Quality（25）/ Price vs Value（15）
 
 ---
 
