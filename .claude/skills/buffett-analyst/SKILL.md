@@ -76,7 +76,9 @@ description: |
 
 加载 `references/owner-earnings-model.md`，计算：
 - Owner Earnings = 净利润 + D&A - **维护性** Capex ± 运营资本变化
-- 运行两情景 DCF（保守 / 基准）
+- **⚠️ 先检查「估值失效条件」**（FCF 三年连负 / 营收波动 > 50% / 高负债低息保 / 技术颠覆期）
+  - 条件触发 → 跳过标准 DCF，按替代估值顺序执行（EV/FCF → 正态化 FCF → EV/EBITDA）
+  - 条件未触发 → 正常运行两情景 DCF（保守 / 基准）
 - 输出：**内在价值区间** + **当前安全边际（%）**
 
 ---
