@@ -5,6 +5,16 @@
 
 ---
 
+## 字体加载（`<head>` 中必须添加）
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+```
+
+`IM Fell English` 为 Google Fonts 字体，缺少此链接会静默降级到 Georgia，排版风格大幅变化。
+
+---
+
 ## 视觉规范（与 earner 报告统一）
 
 | 元素 | 规范 |
@@ -67,6 +77,12 @@
 - 数值标注在 bar 右侧固定列位（不要跟随 bar 宽度），防止重叠
 - 下降值标红（`#8b2e2e`），上升标绿（`#2a5c3f`），估算标琥珀（`#c47a1e`）
 - 图表内所有文字 font-size ≤ 12，轴标签 ≤ 10
+- **SVG 内 `fill="var(--green)"` 等 CSS 变量不工作**：在 SVG 标签内用 `<style>` 块声明变量，或直接使用十六进制值（`fill="#2a5c3f"`）
+
+**缺失数据点处理（不留空白 gap）**：
+- 用虚线描边 bar：`stroke="#c47a1e" stroke-dasharray="4,3" fill="rgba(196,122,30,0.2)"`
+- bar 顶部标注`【推算】`文字（`font-size="8" fill="#c47a1e"`）
+- 空白 gap 会让读者误以为图表错误，必须用推算占位
 
 ---
 
@@ -115,7 +131,11 @@ body { background:var(--paper); color:var(--ink);
 
 ---
 
-## 数据缺口补全建议表（固定格式）
+## 数据缺口补全建议表（条件输出）
+
+> **若报告无`【数据缺口】`标注（数据已全量获取），可省略此章节。**
+
+
 
 ```html
 <table>
@@ -133,6 +153,17 @@ body { background:var(--paper); color:var(--ink);
   </tbody>
 </table>
 ```
+
+---
+
+## 多品牌报告结构
+
+当提纲涉及 ≥2 个品牌时，调整固定 Section 顺序：
+
+1. **Stat Bar** 改为对比格式：每格显示"品牌 A vs. 品牌 B"的核心指标（门店数/营收/增速）
+2. **每个品牌单独一个 `<section class="brand-block">` 块**：含品牌小标题 + 类型标签 + 独立数据表 + SVG 图表
+3. **对比矩阵**（客户提纲含"对比"要求时必加）：横列品牌，纵列关键指标，放在所有品牌块之后，用 `<section class="comparison-matrix">` 包裹
+4. **执行摘要裁决框**包含所有品牌的综合判断，结论需点明品牌间的核心差异
 
 ---
 
