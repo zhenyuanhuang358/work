@@ -8,6 +8,8 @@
 
 **用途**：门店列表、开业时间、城市、选址梯度、扩张速率
 
+⚠️ **访问说明**：窄门餐眼部分功能需注册账号；完整门店列表导出需付费会员。免费版可查看品牌概况和近期趋势，详细历史数据建议付费或用 WebSearch 补充。
+
 ```
 搜索方式：
 直接访问：https://www.narrow-door.cn/brand/[品牌名]
@@ -30,6 +32,8 @@
 
 **用途**：批量地址转坐标，计算门店间距离
 
+⚠️ **访问说明**：极海需注册企业账户，批量地理编码为付费功能。可用高德/百度开放 API 免费替代（每日限额内免费）。
+
 ```
 搜索方式：
 访问：https://geohey.com 或 极海地理数据平台
@@ -39,14 +43,19 @@
 2. 批量地理编码 → 获取经纬度
 3. Python 计算距离矩阵（核心代码见下方）
 
-距离计算 Python 代码片段：
+距离计算 Python 代码片段（需先安装：pip install geopy）：
 from geopy.distance import geodesic
 def min_distance(new_store_coord, existing_stores_coords):
     distances = [geodesic(new_store_coord, s).km for s in existing_stores_coords]
     return min(distances) if distances else None
 
+注意：门店数量 > 500 家时，上述 O(n) 写法较慢，建议用空间索引：
+from scipy.spatial import cKDTree  # pip install scipy
+import numpy as np
+# 将坐标转换为 numpy array 后用 cKDTree 加速最近邻查询
+
 备用方案（极海不可访问时）：
-- 高德地图/百度地图开放 API（批量地理编码）
+- 高德地图/百度地图开放 API（批量地理编码，日均免费额度约 1 万次）
 - 大众点评地图视图：切换"地图"模式，目测主要城市门店密度
   → 重点城市各做一个样本：北京/上海/成都/深圳
 ```
