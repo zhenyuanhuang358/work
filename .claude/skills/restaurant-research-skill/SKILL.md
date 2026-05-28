@@ -42,7 +42,7 @@ description: |
 - 不确定去哪找数据 / 触发 GitHub Action → `references/data-sources.md`
 - 需要估算非上市收入 / 分部推算 / 验证数据合理性 → `references/industry-benchmarks.md`
 - 指标定义有疑问 → `references/metric-definitions.md`
-- 提纲涉及产业链/上下游/供应链/竞争格局 → `references/industry-chain.md`
+- 提纲明确涉及上下游/供应链分析（而非仅提及"竞争格局"） → `references/industry-chain.md`
 - 提纲涉及用户画像/口碑/社媒/舆情/消费者状态 → `references/social-signals.md`
 - 生成 HTML 报告（每次必做）→ `references/report-template.md`
 
@@ -56,7 +56,7 @@ description: |
 - 若文件不存在（首次运行或缓存清空）→ 直接触发 GitHub Action，不需等待判断
 - 若该 ticker 存在且 `updated_at` < 24小时 → 直接读 `research_cache/[slug].json`，跳到 Step 0.1
 - 否则 → 用 `mcp__github__push_files` 推 `research_fetch_trigger.json` 触发 GitHub Action，轮询等待缓存刷新，再继续
-- **超时处理**：5 分钟后仍未更新 → 假设 Action 失败，走 WebSearch/聚合站降级路径，报告顶部注明"财务数据来自网络检索，非实时缓存"
+- **超时处理**：5 分钟后仍未更新 → 假设 Action 失败，走 WebSearch 降级路径（聚合站：A/H股用同花顺或东方财富；美股用 macrotrends.net），报告顶部注明"财务数据来自网络检索，非实时缓存"
 
 ```json
 // research_fetch_trigger.json 格式
@@ -71,8 +71,8 @@ description: |
 
 | 提纲类型 | 处理方式 |
 |---------|---------|
-| **详细型**（给出具体数据点） | 严格按提纲结构，补充所需数据 |
-| **方向型**（只给品牌名+大方向） | 自动展开为8个标准维度 |
+| **详细型**（列出 ≥5 个具体数据项或指标） | 严格按提纲结构，补充所需数据 |
+| **方向型**（仅品牌名+大方向，或 <5 个数据项） | 自动展开为8个标准维度 |
 | **专家访谈型**（Q&A/访谈格式） | 加载 `references/expert-interview-format.md` |
 
 **方向型默认展开8维度：**
