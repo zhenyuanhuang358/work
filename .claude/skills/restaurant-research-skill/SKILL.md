@@ -42,6 +42,8 @@ description: |
 - 不确定去哪找数据 / 触发 GitHub Action → `references/data-sources.md`
 - 需要估算非上市收入 / 分部推算 / 验证数据合理性 → `references/industry-benchmarks.md`
 - 指标定义有疑问 → `references/metric-definitions.md`
+- 提纲涉及产业链/上下游/供应链/竞争格局 → `references/industry-chain.md`
+- 提纲涉及用户画像/口碑/社媒/舆情/消费者状态 → `references/social-signals.md`
 - 生成 HTML 报告（每次必做）→ `references/report-template.md`
 
 ---
@@ -75,6 +77,10 @@ description: |
 
 **方向型默认展开8维度：**
 经营规模概览 · 核心经营指标 · 扩张节奏与质量 · 盈利能力 · 战略动向 · 竞争格局 · 同比环比变化 · 预期与催化剂
+
+**含以下关键词时，在对应维度追加模块：**
+- "产业链 / 上下游 / 供应链" → 在竞争格局后追加产业链梳理（加载 `industry-chain.md`）
+- "用户 / 消费者 / 口碑 / 社媒" → 在核心经营指标后追加社媒情绪扫描（加载 `social-signals.md`）
 
 ### Step 0.3：解析确认（条件触发）
 
@@ -199,6 +205,9 @@ description: |
 □ 所有关键数据标注了来源和日期？
 □ 数据缺口已用【分析预测】补充，非留空？
 □ 战略描述区分"已落地"和"规划中"？
+□ 提纲含产业链/供应链 → 产业链梳理表已输出，含议价力判断？
+□ 提纲含用户/口碑/社媒 → 各平台情绪分布已量化，含对比基准期的变化？
+□ 社媒信号已做反直觉解读（不只是描述现象）？
 □ Markdown 末尾有来源索引？
 □ HTML 文件已生成并推送给用户？
 □ HTML 包含 SVG 图表（趋势/拆分数据不得纯文字）？
