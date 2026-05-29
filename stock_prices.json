@@ -1,61 +1,61 @@
 {
-  "updated_at": "2026-05-28T22:55:56.663889Z",
-  "vix": 15.74,
-  "treasury_10y": 4.46,
+  "updated_at": "2026-05-29T16:40:18.483939Z",
+  "vix": 15.37,
+  "treasury_10y": 4.44,
   "prices": {
     "SPY": {
-      "price": 754.6,
-      "changePct": 0.55,
-      "high": 755.15,
-      "low": 749.23
+      "price": 757.56,
+      "changePct": 0.39,
+      "high": 758.08,
+      "low": 754.69
     },
     "QQQ": {
-      "price": 735.6,
-      "changePct": 0.84,
-      "high": 736.6,
-      "low": 726.41
+      "price": 739.27,
+      "changePct": 0.5,
+      "high": 741.63,
+      "low": 735.25
     },
     "NVDA": {
-      "price": 214.25,
-      "changePct": 0.78,
-      "high": 215.52,
-      "low": 211.22
+      "price": 216.81,
+      "changePct": 1.19,
+      "high": 217.35,
+      "low": 212.81
     },
     "PLTR": {
-      "price": 143.34,
-      "changePct": 8.17,
-      "high": 145,
-      "low": 133
+      "price": 156.5,
+      "changePct": 9.18,
+      "high": 157.78,
+      "low": 145.79
     },
     "TSLA": {
-      "price": 442.1,
-      "changePct": 0.4,
-      "high": 443.96,
-      "low": 436.3
+      "price": 438.21,
+      "changePct": -0.88,
+      "high": 441.07,
+      "low": 428.14
     },
     "AAPL": {
-      "price": 312.51,
-      "changePct": 0.53,
-      "high": 312.8,
-      "low": 309.57
+      "price": 311.58,
+      "changePct": -0.3,
+      "high": 315,
+      "low": 310.42
     },
     "AMD": {
-      "price": 518.09,
-      "changePct": 4.55,
-      "high": 527.2,
-      "low": 493.52
+      "price": 511,
+      "changePct": -1.37,
+      "high": 522,
+      "low": 507.57
     },
     "IWM": {
-      "price": 292.03,
-      "changePct": 0.57,
-      "high": 292.74,
-      "low": 287.98
+      "price": 290.3,
+      "changePct": -0.59,
+      "high": 291.58,
+      "low": 288.33
     },
     "GLD": {
-      "price": 412.77,
-      "changePct": 1.05,
-      "high": 414.51,
-      "low": 405.41
+      "price": 419.57,
+      "changePct": 1.65,
+      "high": 421.82,
+      "low": 415.08
     }
   }
 }
