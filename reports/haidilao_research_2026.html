@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞调研报告 2026 · Haidilao Research</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.8;max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+
+/* PUB BAR */
+.pub-bar{background:var(--ink);color:var(--paper);padding:10px 20px;
+  display:flex;justify-content:space-between;align-items:center;font-size:12px;
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.06em;margin-bottom:0;}
+.pub-bar .logo{color:var(--gold);font-size:14px;font-style:italic;}
+
+/* TITLE BLOCK */
+.title-block{padding:36px 0 24px;border-bottom:2px solid var(--ink);}
+.title-zh{font-family:'IM Fell English',Georgia,serif;font-size:30px;font-weight:normal;
+  letter-spacing:.02em;line-height:1.3;margin-bottom:6px;}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:14px;
+  color:var(--muted);font-style:italic;margin-bottom:16px;}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;}
+.tag{display:inline-block;border:1px solid var(--copper);color:var(--copper);
+  font-size:11px;padding:2px 8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.04em;}
+.tag.green{border-color:var(--green);color:var(--green);}
+.tag.red{border-color:var(--red);color:var(--red);}
+.tag.amber{border-color:var(--amber);color:var(--amber);}
+
+/* STAT BAR */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin:24px 0;}
+.stat-cell{background:var(--card);padding:18px 16px;}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;
+  font-family:'IM Fell English',Georgia,serif;margin-bottom:4px;}
+.stat-value{font-size:24px;font-family:'IM Fell English',Georgia,serif;font-weight:normal;line-height:1.1;}
+.stat-change{font-size:12px;margin-top:4px;}
+.up{color:var(--green);} .dn{color:var(--red);} .flat{color:var(--amber);}
+
+/* NOTICE */
+.notice{border-left:4px solid var(--amber);padding:12px 16px;background:rgba(196,122,30,.06);
+  margin:20px 0;font-size:13px;line-height:1.7;}
+.notice strong{color:var(--amber);}
+
+/* SECTION */
+section{margin:36px 0;}
+.section-zh{font-family:'IM Fell English',Georgia,serif;font-size:20px;font-weight:normal;
+  border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:16px;letter-spacing:.01em;}
+.section-en{font-size:11px;color:var(--muted);font-style:italic;display:block;margin-top:2px;
+  font-family:'IM Fell English',Georgia,serif;}
+.sub-zh{font-family:'IM Fell English',Georgia,serif;font-size:16px;font-weight:normal;
+  margin:20px 0 10px;color:var(--copper);}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;}
+th{background:var(--ink);color:var(--paper);padding:8px 10px;text-align:left;
+  font-weight:normal;font-family:'IM Fell English',Georgia,serif;font-size:12px;letter-spacing:.04em;}
+td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:rgba(250,248,244,.7);}
+tr:hover td{background:rgba(196,122,30,.05);}
+
+/* BADGE */
+.badge{display:inline-block;font-size:10px;padding:1px 5px;border-radius:2px;
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.03em;margin-left:4px;vertical-align:middle;}
+.badge-official{background:var(--green);color:#fff;}
+.badge-predict{background:var(--amber);color:#fff;}
+.badge-gap{background:var(--red);color:#fff;}
+
+/* CHART */
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:20px 16px;
+  margin:16px 0;overflow-x:auto;}
+.chart-title{font-size:12px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;
+  letter-spacing:.04em;margin-bottom:12px;}
+
+/* DETAIL GRID */
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.dcard{background:var(--card);border:1px solid var(--border);padding:16px;}
+.dcard-title{font-size:12px;color:var(--copper);font-family:'IM Fell English',Georgia,serif;
+  letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;}
+.dcard-body{font-size:13.5px;line-height:1.7;}
+
+/* LABEL */
+.label-zh{font-weight:bold;color:var(--copper);}
+.label-en{font-size:11px;color:var(--muted);font-style:italic;}
+
+/* VERDICT */
+.verdict{background:var(--ink);color:var(--paper);padding:28px 28px 20px;margin:32px 0;}
+.verdict .v-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;
+  color:rgba(241,239,234,.5);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
+.verdict .v-zh{font-family:'IM Fell English',Georgia,serif;font-size:18px;
+  color:var(--gold);margin-bottom:20px;}
+.verdict .v-item{display:flex;gap:16px;margin-bottom:16px;padding-bottom:16px;
+  border-bottom:1px solid rgba(241,239,234,.1);}
+.verdict .v-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.verdict .v-num{font-family:'IM Fell English',Georgia,serif;font-size:28px;
+  color:var(--gold);line-height:1;min-width:32px;opacity:.7;}
+.verdict .v-text{font-size:14px;line-height:1.7;}
+.verdict .v-text strong{color:var(--gold);display:block;margin-bottom:4px;font-size:15px;}
+
+/* GAP TABLE */
+.gap-section table td{font-size:13px;}
+
+/* SOURCES */
+.sources{font-size:12px;color:var(--muted);border-top:1px solid var(--border);
+  padding-top:16px;margin-top:32px;line-height:1.9;}
+
+/* FOOTER */
+footer{margin-top:48px;padding-top:20px;border-top:2px solid var(--ink);
+  font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);
+  display:flex;justify-content:space-between;}
+
+@media(max-width:680px){
+  .stat-bar{grid-template-columns:1fr 1fr;}
+  .detail-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. PUB BAR -->
+<div class="pub-bar">
+  <span class="logo">消费行业调研</span>
+  <span>海底捞 06862.HK · 港股上市 · 火锅连锁</span>
+  <span>2026-05-29</span>
+</div>
+
+<!-- 2. TITLE BLOCK -->
+<div class="title-block">
+  <div class="title-zh">海底捞调研报告：开店策略、翻台率、创新激励与红石榴第二曲线</div>
+  <div class="title-en">Haidilao Research — Expansion Strategy, Turnover Targets, Innovation Incentives & Red Pomegranate Second Curve</div>
+  <div class="tag-row">
+    <span class="tag">港股上市 · 06862.HK</span>
+    <span class="tag green">2025年报已发布</span>
+    <span class="tag amber">数据基准：2025全年 + 2026年最新动态</span>
+    <span class="tag">火锅连锁 · A类上市公司</span>
+  </div>
+</div>
+
+<!-- 3. STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-label">2025年营收</div>
+    <div class="stat-value">¥432亿</div>
+    <div class="stat-change up">+1.1% 同比</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">2025年净利润</div>
+    <div class="stat-value">¥40.5亿</div>
+    <div class="stat-change dn">−14.0% 同比</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">翻台率（2025全年）</div>
+    <div class="stat-value">3.9次</div>
+    <div class="stat-change dn">↓ 2024年4.1次</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">加盟门店（2025底）</div>
+    <div class="stat-value">79家</div>
+    <div class="stat-change up">↑ 2024年底13家</div>
+  </div>
+</div>
+
+<!-- 4. NOTICE -->
+<div class="notice">
+  <strong>数据质量声明：</strong>
+  2025年全年财报（2026年3月发布）为一手数据，标注
+  <span class="badge badge-official">官方</span>；
+  2023年数据由2024年报同比反推，标注
+  <span class="badge badge-predict">推算</span>；
+  未披露指标（如创新激励具体费用、翻台率目标值）经行业经验推断，标注
+  <span class="badge badge-predict">预测</span>；
+  无法获取的数据标注
+  <span class="badge badge-gap">缺口</span>。
+  两个客单价口径并存（大陆 vs 含港澳台），报告中均已注明口径。
+</div>
+
+<!-- 5. CORE DATA TABLE -->
+<section>
+  <div class="section-zh">核心经营数据
+    <span class="section-en">Key Operating Metrics · 2023–2025</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>指标</th><th>2025全年</th><th>2025H1</th><th>2024全年</th><th>同比变化</th><th>来源</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>营业收入</td>
+        <td>¥432.25亿 <span class="badge badge-official">官方</span></td>
+        <td>¥207.03亿</td>
+        <td>¥427.55亿</td>
+        <td class="up">+1.1%</td>
+        <td>2025/2024年报</td>
+      </tr>
+      <tr>
+        <td>归母净利润</td>
+        <td>¥40.5亿 <span class="badge badge-official">官方</span></td>
+        <td>¥17.55亿</td>
+        <td>¥47.00亿</td>
+        <td class="dn">−14.0%</td>
+        <td>2025/2024年报</td>
+      </tr>
+      <tr>
+        <td>核心经营利润</td>
+        <td>¥54.03亿 <span class="badge badge-official">官方</span></td>
+        <td>¥24.08亿</td>
+        <td>¥62.30亿</td>
+        <td class="dn">−13.3%</td>
+        <td>2025/2024年报</td>
+      </tr>
+      <tr>
+        <td>门店总数（期末）</td>
+        <td>1,383家 <span class="badge badge-official">官方</span></td>
+        <td>—</td>
+        <td>1,368家</td>
+        <td class="up">净+15家</td>
+        <td>2025/2024年报</td>
+      </tr>
+      <tr>
+        <td>自营门店</td>
+        <td>1,304家</td>
+        <td>—</td>
+        <td>1,355家</td>
+        <td class="dn">净−51家</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>加盟门店</td>
+        <td>79家</td>
+        <td>—</td>
+        <td>13家</td>
+        <td class="up">净+66家</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>翻台率（自营整体）</td>
+        <td>3.9次/天 <span class="badge badge-official">官方</span></td>
+        <td>3.8次/天</td>
+        <td>4.1次/天</td>
+        <td class="dn">−0.2次</td>
+        <td>2025/2024年报</td>
+      </tr>
+      <tr>
+        <td>客单价（整体含港澳台）</td>
+        <td>¥97.7元 <span class="badge badge-official">官方</span></td>
+        <td>¥97.9元</td>
+        <td>~¥97.5元</td>
+        <td class="up">+¥0.2</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>客单价（大陆口径）</td>
+        <td>未单独披露</td>
+        <td>未单独披露</td>
+        <td>¥95.7元</td>
+        <td class="dn">−1.7%（vs 2023年¥97.3）</td>
+        <td>2024年报</td>
+      </tr>
+      <tr>
+        <td>接待顾客人次</td>
+        <td>3.84亿 <span class="badge badge-official">官方</span></td>
+        <td>—</td>
+        <td>4.15亿</td>
+        <td class="dn">−7.5%</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>其他餐厅收入（红石榴）</td>
+        <td>¥15.21亿 <span class="badge badge-official">官方</span></td>
+        <td>¥5.97亿</td>
+        <td>¥4.83亿</td>
+        <td class="up">+214.6%</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>外卖收入</td>
+        <td>¥26.58亿 <span class="badge badge-official">官方</span></td>
+        <td>—</td>
+        <td>约¥12.5亿（推算）</td>
+        <td class="up">+111.9%</td>
+        <td>2025年报</td>
+      </tr>
+      <tr>
+        <td>红石榴子品牌门店（期末）</td>
+        <td>207家（20个品牌）<span class="badge badge-official">官方</span></td>
+        <td>126家（14品类）</td>
+        <td>0家（8月启动）</td>
+        <td class="up">—</td>
+        <td>2025年报/中报</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 6. SVG CHARTS -->
+<section>
+  <div class="section-zh">数据可视化
+    <span class="section-en">Charts — Revenue, Profit, Turnover Rate, Spending by City Tier</span>
+  </div>
+
+  <!-- Chart 1: Revenue & Net Profit 2023-2025 -->
+  <div class="chart-wrap">
+    <div class="chart-title">营收 vs 净利润趋势（2023–2025，单位：亿元）</div>
+    <svg viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg"
+         font-family="'IM Fell English',Georgia,serif">
+      <style>
+        .ax{stroke:#d4cec6;stroke-width:1;}
+        .grid{stroke:#d4cec6;stroke-dasharray:4,3;stroke-width:.5;}
+      </style>
+      <!-- axes -->
+      <line class="ax" x1="60" y1="20" x2="60" y2="220"/>
+      <line class="ax" x1="60" y1="220" x2="780" y2="220"/>
+      <!-- y-axis grid 50/100/200/300/400/450亿 -->
+      <!-- max ~450, height 200px, so 1亿 = 200/450 px = 0.444 -->
+      <line class="grid" x1="60" y1="176" x2="780" y2="176"/><text x="50" y="179" font-size="9" fill="#6b6460" text-anchor="end">100</text>
+      <line class="grid" x1="60" y1="131" x2="780" y2="131"/><text x="50" y="134" font-size="9" fill="#6b6460" text-anchor="end">200</text>
+      <line class="grid" x1="60" y1="87" x2="780" y2="87"/><text x="50" y="90" font-size="9" fill="#6b6460" text-anchor="end">300</text>
+      <line class="grid" x1="60" y1="42" x2="780" y2="42"/><text x="50" y="45" font-size="9" fill="#6b6460" text-anchor="end">400</text>
+      <!-- year labels -->
+      <text x="200" y="240" font-size="11" fill="#6b6460" text-anchor="middle">2023年</text>
+      <text x="440" y="240" font-size="11" fill="#6b6460" text-anchor="middle">2024年</text>
+      <text x="680" y="240" font-size="11" fill="#6b6460" text-anchor="middle">2025年</text>
+      <!-- legend -->
+      <rect x="90" y="8" width="12" height="10" fill="#8b6c42"/>
+      <text x="106" y="17" font-size="10" fill="#6b6460">营收</text>
+      <rect x="160" y="8" width="12" height="10" fill="#2a5c3f"/>
+      <text x="176" y="17" font-size="10" fill="#6b6460">净利润</text>
+      <rect x="240" y="8" width="12" height="10" fill="#8b2e2e"/>
+      <text x="256" y="17" font-size="10" fill="#6b6460">净利润（下降）</text>
+
+      <!-- 2023 Revenue ¥414.7亿（推算）= (414.7/450)*200 = 184.3px from top → y = 220-184.3=35.7 -->
+      <rect x="120" y="36" width="80" height="184" fill="#8b6c42" opacity=".7" stroke="#c47a1e" stroke-dasharray="4,3" stroke-width="1"/>
+      <text x="160" y="32" font-size="8" fill="#c47a1e" text-anchor="middle">【推算】</text>
+      <text x="220" y="57" font-size="10" fill="#faf8f4" text-anchor="middle" transform="rotate(-90,220,110)">¥414.7亿</text>
+      <!-- 2023 Net Profit ¥44.9亿（推算）= (44.9/450)*200=20px → y=200 -->
+      <rect x="205" y="200" width="80" height="20" fill="#2a5c3f" opacity=".7" stroke="#c47a1e" stroke-dasharray="4,3" stroke-width="1"/>
+      <text x="245" y="196" font-size="8" fill="#c47a1e" text-anchor="middle">【推算】</text>
+      <text x="245" y="213" font-size="9" fill="#faf8f4" text-anchor="middle">¥44.9亿</text>
+
+      <!-- 2024 Revenue ¥427.55亿 = (427.55/450)*200=190.2px → y=220-190.2=29.8 -->
+      <rect x="360" y="30" width="80" height="190" fill="#8b6c42" opacity=".9"/>
+      <text x="400" y="26" font-size="9" fill="#8b6c42" text-anchor="middle" font-style="italic">¥427.6亿</text>
+      <!-- 2024 Net Profit ¥47.0亿 = (47.0/450)*200=20.9px → y=199.1 -->
+      <rect x="445" y="199" width="80" height="21" fill="#2a5c3f" opacity=".9"/>
+      <text x="485" y="195" font-size="9" fill="#2a5c3f" text-anchor="middle" font-style="italic">¥47.0亿</text>
+
+      <!-- 2025 Revenue ¥432.25亿 = (432.25/450)*200=192.1px → y=27.9 -->
+      <rect x="600" y="28" width="80" height="192" fill="#8b6c42" opacity=".9"/>
+      <text x="640" y="24" font-size="9" fill="#8b6c42" text-anchor="middle" font-style="italic">¥432.3亿</text>
+      <!-- 2025 Net Profit ¥40.5亿 = (40.5/450)*200=18px → y=202 -->
+      <rect x="685" y="202" width="80" height="18" fill="#8b2e2e" opacity=".9"/>
+      <text x="725" y="198" font-size="9" fill="#8b2e2e" text-anchor="middle" font-style="italic">¥40.5亿 ▼</text>
+    </svg>
+  </div>
+
+  <!-- Chart 2: Turnover Rate Trend -->
+  <div class="chart-wrap">
+    <div class="chart-title">翻台率趋势（次/天）— 2023至2025H1</div>
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg"
+         font-family="'IM Fell English',Georgia,serif">
+      <!-- axes -->
+      <line stroke="#d4cec6" x1="80" y1="20" x2="80" y2="160"/>
+      <line stroke="#d4cec6" x1="80" y1="160" x2="750" y2="160"/>
+      <!-- y-grid: 3.0,3.5,4.0,4.5 → max=5, height=140 → 1单位=28px -->
+      <!-- y=160 is 0, so 3.0 = 160-84=76, 3.5=160-98=62, 4.0=160-112=48, 4.5=160-126=34 -->
+      <line stroke="#d4cec6" stroke-dasharray="4,3" stroke-width=".5" x1="80" y1="76" x2="750" y2="76"/>
+      <text x="70" y="79" font-size="9" fill="#6b6460" text-anchor="end">3.0</text>
+      <line stroke="#d4cec6" stroke-dasharray="4,3" stroke-width=".5" x1="80" y1="62" x2="750" y2="62"/>
+      <text x="70" y="65" font-size="9" fill="#6b6460" text-anchor="end">3.5</text>
+      <line stroke="#d4cec6" stroke-dasharray="4,3" stroke-width=".5" x1="80" y1="48" x2="750" y2="48"/>
+      <text x="70" y="51" font-size="9" fill="#6b6460" text-anchor="end">4.0</text>
+      <line stroke="#d4cec6" stroke-dasharray="4,3" stroke-width=".5" x1="80" y1="34" x2="750" y2="34"/>
+      <text x="70" y="37" font-size="9" fill="#6b6460" text-anchor="end">4.5</text>
+      <!-- data points: 2023=3.8, 2024=4.1, 2025H1=3.8, 2025=3.9 -->
+      <!-- x positions: 150, 300, 500, 680 -->
+      <!-- y: 3.8→160-106.4=53.6, 4.1→160-114.8=45.2, 3.8→53.6, 3.9→160-109.2=50.8 -->
+      <polyline points="150,53.6 300,45.2 500,53.6 680,50.8"
+        fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+      <!-- dots -->
+      <circle cx="150" cy="53.6" r="5" fill="#8b6c42"/>
+      <circle cx="300" cy="45.2" r="5" fill="#2a5c3f"/>
+      <circle cx="500" cy="53.6" r="5" fill="#8b2e2e"/>
+      <circle cx="680" cy="50.8" r="5" fill="#8b2e2e"/>
+      <!-- labels -->
+      <text x="150" y="44" font-size="10" fill="#8b6c42" text-anchor="middle">3.8</text>
+      <text x="300" y="36" font-size="10" fill="#2a5c3f" text-anchor="middle">4.1 ▲</text>
+      <text x="500" y="44" font-size="10" fill="#8b2e2e" text-anchor="middle">3.8</text>
+      <text x="680" y="41" font-size="10" fill="#8b2e2e" text-anchor="middle">3.9 ▼</text>
+      <!-- x labels -->
+      <text x="150" y="178" font-size="10" fill="#6b6460" text-anchor="middle">2023年</text>
+      <text x="300" y="178" font-size="10" fill="#6b6460" text-anchor="middle">2024年</text>
+      <text x="500" y="178" font-size="10" fill="#6b6460" text-anchor="middle">2025H1</text>
+      <text x="680" y="178" font-size="10" fill="#6b6460" text-anchor="middle">2025全年</text>
+      <!-- baseline annotation -->
+      <text x="760" y="51" font-size="8" fill="#d4cec6">—健康区间下限</text>
+    </svg>
+  </div>
+
+  <!-- Chart 3: Customer Spending by City Tier (2025H1) -->
+  <div class="chart-wrap">
+    <div class="chart-title">客单价分城市层级（2025年H1，元/人，含同比）</div>
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg"
+         font-family="'IM Fell English',Georgia,serif">
+      <!-- horizontal bar chart, 4 rows -->
+      <!-- max = 220, chart width = 500, scale: 1元 = 500/220 = 2.27px -->
+      <!-- rows at y: 40, 80, 120, 160 -->
+      <!-- axis -->
+      <line stroke="#d4cec6" x1="120" y1="20" x2="120" y2="185"/>
+      <line stroke="#d4cec6" x1="120" y1="185" x2="670" y2="185"/>
+      <!-- grid at 50, 100, 150, 200 -->
+      <line stroke="#d4cec6" stroke-dasharray="3,3" stroke-width=".5" x1="234" y1="20" x2="234" y2="185"/>
+      <text x="234" y="195" font-size="8" fill="#6b6460" text-anchor="middle">50</text>
+      <line stroke="#d4cec6" stroke-dasharray="3,3" stroke-width=".5" x1="348" y1="20" x2="348" y2="185"/>
+      <text x="348" y="195" font-size="8" fill="#6b6460" text-anchor="middle">100</text>
+      <line stroke="#d4cec6" stroke-dasharray="3,3" stroke-width=".5" x1="461" y1="20" x2="461" y2="185"/>
+      <text x="461" y="195" font-size="8" fill="#6b6460" text-anchor="middle">150</text>
+      <line stroke="#d4cec6" stroke-dasharray="3,3" stroke-width=".5" x1="575" y1="20" x2="575" y2="185"/>
+      <text x="575" y="195" font-size="8" fill="#6b6460" text-anchor="middle">200</text>
+
+      <!-- 一线 ¥105.2 = 105.2*2.27=238.8px -->
+      <text x="115" y="43" font-size="10" fill="#6b6460" text-anchor="end">一线城市</text>
+      <rect x="120" y="28" width="239" height="22" fill="#8b6c42" opacity=".85"/>
+      <text x="368" y="43" font-size="10" fill="#0a0a0b">¥105.2 <tspan fill="#2a5c3f" font-size="9">+1.1%</tspan></text>
+
+      <!-- 二线 ¥96.9 = 220.1px -->
+      <text x="115" y="83" font-size="10" fill="#6b6460" text-anchor="end">二线城市</text>
+      <rect x="120" y="68" width="220" height="22" fill="#8b6c42" opacity=".7"/>
+      <text x="349" y="83" font-size="10" fill="#0a0a0b">¥96.9 <tspan fill="#c47a1e" font-size="9">+0.1%</tspan></text>
+
+      <!-- 三线及以下 ¥91.6 = 207.9px -->
+      <text x="115" y="123" font-size="10" fill="#6b6460" text-anchor="end">三线及以下</text>
+      <rect x="120" y="108" width="208" height="22" fill="#8b6c42" opacity=".55"/>
+      <text x="337" y="123" font-size="10" fill="#0a0a0b">¥91.6 <tspan fill="#c47a1e" font-size="9">+0.2%</tspan></text>
+
+      <!-- 港澳台 ¥205.8 = 467.2px → cap at 550 -->
+      <text x="115" y="163" font-size="10" fill="#6b6460" text-anchor="end">港澳台</text>
+      <rect x="120" y="148" width="467" height="22" fill="#c9a84c" opacity=".8"/>
+      <text x="596" y="163" font-size="10" fill="#0a0a0b">¥205.8 <tspan fill="#2a5c3f" font-size="9">+4.1%</tspan></text>
+    </svg>
+  </div>
+
+  <!-- Chart 4: Red Pomegranate Growth -->
+  <div class="chart-wrap">
+    <div class="chart-title">红石榴计划门店增长与其他餐厅收入</div>
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg"
+         font-family="'IM Fell English',Georgia,serif">
+      <!-- dual: bars for stores, line for revenue -->
+      <line stroke="#d4cec6" x1="80" y1="20" x2="80" y2="165"/>
+      <line stroke="#d4cec6" x1="80" y1="165" x2="750" y2="165"/>
+
+      <!-- bars: max stores 210, height 145, scale: 1家 = 0.69px -->
+      <!-- bar x positions: 150, 350, 580 -->
+      <!-- 2024H1: N/A, 2025H1: 126, 2025年底: 207 -->
+
+      <!-- legend -->
+      <rect x="90" y="8" width="12" height="10" fill="#c9a84c" opacity=".8"/>
+      <text x="106" y="17" font-size="9" fill="#6b6460">门店数（左轴）</text>
+      <line x1="220" y1="13" x2="240" y2="13" stroke="#8b6c42" stroke-width="2"/>
+      <circle cx="230" cy="13" r="3" fill="#8b6c42"/>
+      <text x="246" y="17" font-size="9" fill="#6b6460">其他餐厅收入亿元（右参考）</text>
+
+      <!-- 2025H1 bar: 126家 = 86.9px → y = 165-87 = 78 -->
+      <rect x="250" y="78" width="100" height="87" fill="#c9a84c" opacity=".75"/>
+      <text x="300" y="74" font-size="10" fill="#8b6c42" text-anchor="middle">126家</text>
+      <text x="300" y="180" font-size="10" fill="#6b6460" text-anchor="middle">2025H1</text>
+
+      <!-- 2025年底 bar: 207家 = 142.8px → y = 165-143 = 22 -->
+      <rect x="500" y="22" width="100" height="143" fill="#c9a84c" opacity=".9"/>
+      <text x="550" y="18" font-size="10" fill="#8b6c42" text-anchor="middle">207家</text>
+      <text x="550" y="180" font-size="10" fill="#6b6460" text-anchor="middle">2025年底</text>
+
+      <!-- revenue dots: 2024=4.83亿, 2025H1=5.97亿, 2025=15.21亿 -->
+      <!-- revenue scale: max 16, height 145, 1亿=9.06px -->
+      <!-- 2024: x=100, y=165-4.83*9.06=165-43.7=121 -->
+      <!-- 2025H1: x=300, y=165-5.97*9.06=165-54.1=110.9 -->
+      <!-- 2025: x=550, y=165-15.21*9.06=165-137.8=27.2 -->
+      <polyline points="100,121 300,110.9 550,27.2"
+        fill="none" stroke="#8b6c42" stroke-width="2" stroke-dasharray="5,3"/>
+      <circle cx="100" cy="121" r="4" fill="#8b6c42"/>
+      <text x="100" y="115" font-size="9" fill="#8b6c42" text-anchor="middle">¥4.8亿</text>
+      <text x="100" y="180" font-size="10" fill="#6b6460" text-anchor="middle">2024</text>
+      <circle cx="300" cy="110.9" r="4" fill="#8b6c42"/>
+      <text x="300" y="105" font-size="9" fill="#8b6c42" text-anchor="middle">¥5.97亿</text>
+      <circle cx="550" cy="27.2" r="4" fill="#8b2e2e"/>
+      <text x="550" y="22" font-size="9" fill="#8b2e2e" text-anchor="middle">¥15.21亿 ▲214%</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 7. DETAIL GRID — 7 outline chapters -->
+<section>
+  <div class="section-zh">七大议题详解
+    <span class="section-en">Seven Research Chapters — Per Client Outline</span>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div class="sub-zh">一、开店长期目标</div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">1.1 主品牌 · 红石榴开店规模</div>
+      <div class="dcard-body">
+        <span class="label-zh">主品牌</span>
+        <span class="label-en">Haidilao Hotpot</span><br>
+        2025年底自营1,304家（较2024年1,355家净减51家）；加盟79家（较2024年13家净增66家）。管理层采取"优质减量"策略，主动关闭低效自营门店，转以加盟模式弥补规模。主品牌规模锁定在1,200–1,400家区间，短期不追求数量突破。<br><br>
+        <span class="label-zh">红石榴计划</span>
+        <span class="label-en">Red Pomegranate Sub-brands</span><br>
+        2024年8月启动→2025H1 126家（14品类）→2025年底 207家（20品牌）。2026年重点：海鲜大排档（已开约8家，目标500家）、寿司（翻台率6+次/天，目标100家）。
+        <span class="badge badge-predict">预测</span> 管理层表述"有望实现"非硬性计划，建议以IR核实时间节点。
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">1.2 城市/区域/店型分布</div>
+      <div class="dcard-body">
+        <table>
+          <tr><th>市场层级</th><th>主要策略</th></tr>
+          <tr><td>一线城市</td><td>臻选高端店（粤式火锅，客单价¥700，北京首店2025H2）</td></tr>
+          <tr><td>二线城市</td><td>主品牌主阵地，主题门店改造（200+家）</td></tr>
+          <tr><td>三线/县级</td><td>加盟下沉（70%+申请来自三线以下）；举高高自助¥59.9/人</td></tr>
+          <tr><td>港澳台</td><td>客单价¥205.8，保持高端定位</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="dcard" style="grid-column:1/-1;">
+      <div class="dcard-title">1.3 开店激励机制</div>
+      <div class="dcard-body">
+        <span class="label-zh">连住利益（传统核心）</span>：店长薪酬"低底薪+高分红"，收入直接与本店利润+徒弟/徒孙门店业绩挂钩。孵化新店长后可选择"本店分成"或"从徒弟门店获更高提成"，形成裂变激励。<br><br>
+        <span class="label-zh">多管店机制（2024-2025新推）</span>：绩效优秀店长可同时管理2-4家门店（主品牌+子品牌组合），提升收入同时降低单店管理成本。<br><br>
+        <span class="label-zh">红石榴创业激励（新模式）</span>：①提案门槛：1页Excel/手写 ②股权激励+分红权+薪酬保障+风险共担 ③里程碑加码：0→1家股权奖励，2-10家追加股权比例，成熟期品牌利润分红权 ④创业创新委员会统一管理。
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 2 -->
+  <div class="sub-zh">二、年内翻台率目标及长期目标</div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">历史与当前数据</div>
+      <div class="dcard-body">
+        <table>
+          <tr><th>时间</th><th>翻台率</th><th>同比</th></tr>
+          <tr><td>2023年</td><td>3.8次/天</td><td>—（恢复期）</td></tr>
+          <tr><td>2024年</td><td class="up">4.1次/天</td><td class="up">+0.3次</td></tr>
+          <tr><td>2025H1</td><td class="dn">3.8次/天</td><td class="dn">↓</td></tr>
+          <tr><td>2025全年</td><td class="dn">3.9次/天</td><td class="dn">-0.2次</td></tr>
+        </table>
+        2025年分城市均约3.9次；港澳台4.3次相对较强。
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">管理层指引及长期目标</div>
+      <div class="dcard-body">
+        <span class="badge badge-gap">缺口</span> 管理层在2025年度业绩会未公开具体翻台率数值目标。<br><br>
+        <span class="badge badge-predict">预测</span> 健康经营区间：4.0–4.5次/天（2024年4.1为近年高点，不易持续突破）。<br><br>
+        2026年张勇主导策略转向多品牌收入结构优化，而非单一押注主品牌翻台提升。接待顾客人次2025年已下降7.5%，表明消费端流量恢复有限，翻台率短期上限约4.0–4.1次。
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 3 -->
+  <div class="sub-zh">三、客单价展望</div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">3.1 当前同比/环比水平</div>
+      <div class="dcard-body">
+        <table>
+          <tr><th>口径</th><th>2025H1</th><th>2024全年</th><th>2023全年</th></tr>
+          <tr><td>整体（含港澳台）</td><td>¥97.9 <span class="up">+0.5%</span></td><td>¥97.5</td><td>—</td></tr>
+          <tr><td>大陆口径</td><td>未单独披露</td><td>¥95.7</td><td>¥97.3</td></tr>
+          <tr><td>一线城市</td><td>¥105.2 <span class="up">+1.1%</span></td><td>¥104.0</td><td>¥105.7</td></tr>
+          <tr><td>二线城市</td><td>¥96.9 <span class="flat">+0.1%</span></td><td>¥96.9</td><td>¥98.3</td></tr>
+          <tr><td>三线及以下</td><td>¥91.6 <span class="flat">+0.2%</span></td><td>¥91.4</td><td>¥92.8</td></tr>
+        </table>
+        口径说明：整体口径含港澳台（¥205.8/人），显著高于大陆均值；两口径数据来自官方财报，非矛盾。
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">3.2 全年展望（2026）</div>
+      <div class="dcard-body">
+        2025全年已实现：¥97.7元（整体口径，+¥0.2 vs 2024）。<br><br>
+        <span class="badge badge-predict">预测</span> 2026年展望：<br>
+        · 整体客单价维持¥95–98区间，无大幅提升条件<br>
+        · 大陆消费降级压力：接待人次-7.5%，价格敏感度上升<br>
+        · 平价场景拓展（举高高¥59.9/位、社区外卖）会下拉整体均值<br>
+        · 高端探索（臻选店¥700/位）体量极小，结构拉升作用有限<br>
+        · 增长主要靠顾客人次恢复驱动，非客单价上涨
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 4 -->
+  <div class="sub-zh">四、红石榴后续规划</div>
+  <div class="dcard" style="margin-bottom:16px;">
+    <div class="dcard-title">当前状态 → 2026年重点品牌</div>
+    <div class="dcard-body">
+      <table>
+        <tr><th>品牌/项目</th><th>当前门店</th><th>翻台率</th><th>目标规模</th><th>阶段</th></tr>
+        <tr><td>海鲜大排档</td><td>约8家（广州/上海/青岛/武汉等）</td><td>未披露</td><td>500家 <span class="badge badge-predict">预测</span></td><td>快速扩张中</td></tr>
+        <tr><td>寿司品牌</td><td>2025年7月启动，数量未披露</td><td class="up">6+次/天</td><td>100家 <span class="badge badge-predict">预测</span></td><td>验证完成，待扩张</td></tr>
+        <tr><td>焰请烤肉铺子等</td><td>含于207家总数</td><td>未披露</td><td>—</td><td>持续运营</td></tr>
+      </table>
+      <br>
+      张勇"五多战略"：<strong>多品牌</strong>（20子品牌矩阵）+ <strong>多品类</strong>（烤肉/寿司/炸鸡/烘焙/大排档）+ <strong>多场景</strong>（高端臻选¥700 + 平价自助¥60 + 社区外卖）+ <strong>多渠道</strong>（到店+外卖+私域）+ <strong>多消费人群</strong>（覆盖¥60–700消费层级）。<br><br>
+      并购意向：已公开表示寻求并购优质餐饮资产（2025年业绩会），尚未披露具体标的。
+    </div>
+  </div>
+
+  <!-- Chapter 5 -->
+  <div class="sub-zh">五、加盟店规划</div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">发展历程与规模</div>
+      <div class="dcard-body">
+        <table>
+          <tr><th>时间</th><th>加盟门店数</th><th>关键节点</th></tr>
+          <tr><td>2024年初</td><td>0家</td><td>正式宣布开放加盟</td></tr>
+          <tr><td>2024年底</td><td class="up">13家</td><td>首次在年报披露</td></tr>
+          <tr><td>2025年底</td><td class="up">79家</td><td>快速扩张 +66家</td></tr>
+        </table>
+        累计申请超2万份，实际开放极少比例，筛选极严。70%+申请来自三线及以下/县级城市。
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">加盟政策核心设计</div>
+      <div class="dcard-body">
+        <span class="label-zh">模式：强托管</span>——总部派驻管理服务团队，非品牌授权加盟。<br><br>
+        <span class="label-zh">四维筛选标准：</span><br>
+        ① 认同企业文化价值观<br>
+        ② 具有长期发展意愿<br>
+        ③ 具备多店财务基础（约¥1,000万+投入门槛，非官方公布数）<br>
+        ④ 有地方物业资源 + 企业管理经验<br><br>
+        <span class="label-zh">管理层策略：</span>不设具体数量目标，重质量而非数量。
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 6 -->
+  <div class="sub-zh">六、创始人张勇回归原因及战略规划</div>
+  <div class="dcard" style="margin-bottom:16px;">
+    <div class="dcard-title">回归时间线与背景压力</div>
+    <div class="dcard-body">
+      <table>
+        <tr><th>时间</th><th>事件</th></tr>
+        <tr><td>2018年</td><td>张勇卸任CEO，施永宏等接班</td></tr>
+        <tr><td>2022-2025</td><td>四年三换CEO（苟轶群等），公司历经扩张失序→收缩整合</td></tr>
+        <tr><td>2026年1月13日</td><td>张勇正式接任CEO，兼任董事会主席（双重身份）</td></tr>
+      </table>
+      <br>
+      <span class="label-zh">压力指标</span>：2025年净利润-14%（¥40.5亿），翻台率从4.1→3.9，顾客人次-7.5%，增收不增利。<br><br>
+      <span class="label-zh">战略定位</span>：张勇重返定位为多业务协同的"连接器"——主品牌运营+红石榴孵化+潜在并购，需要创始人级别的决策权与资源整合能力。
+    </div>
+  </div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">五多战略落地优先级</div>
+      <div class="dcard-body">
+        <ol style="padding-left:16px;line-height:2;">
+          <li><strong>多品牌：</strong>主品牌现金牛 + 红石榴成长引擎</li>
+          <li><strong>多品类：</strong>2026年重点——海鲜大排档</li>
+          <li><strong>多场景：</strong>高端臻选店 + 平价自助 + 社区外卖</li>
+          <li><strong>多渠道：</strong>外卖已+111.9%，继续加码（已布局1,200+外卖站点）</li>
+          <li><strong>多人群：</strong>覆盖¥60–¥700全消费层级</li>
+        </ol>
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">2026年具体落地动作</div>
+      <div class="dcard-body">
+        · 海鲜大排档：在上海、青岛、武汉等城市持续落地<br>
+        · 寿司品牌：向100家目标推进<br>
+        · AI应用：已开发50个AI应用，2026年持续深化<br>
+        · 并购：公开寻求优质餐饮资产（标的未披露）<br>
+        · 董事会年轻化：少帅上位配合张勇系一线决策<br><br>
+        <span class="badge badge-predict">预测</span> 张勇在位期间（至少2026-2027年），战略重心将维持在多品牌协同而非主品牌单一翻台提升。
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter 7 -->
+  <div class="sub-zh">七、创新激励</div>
+  <div class="detail-grid">
+    <div class="dcard">
+      <div class="dcard-title">7.1 创新激励具体机制（2024年落地）</div>
+      <div class="dcard-body">
+        <span class="label-zh">红石榴计划核心激励：</span><br>
+        · 提案门槛极低：1页Excel/手写提案<br>
+        · 分阶段股权激励：<br>
+        &nbsp;&nbsp;— 0→1阶段（验证期）：创始人股权奖励<br>
+        &nbsp;&nbsp;— 2→10家门店：追加股权比例<br>
+        &nbsp;&nbsp;— 成熟期：品牌经营利润分红权<br>
+        · 薪酬保障保底，风险共担（非全职创业）<br>
+        · 创业创新委员会：统一审批、激励发放、进度追踪<br><br>
+        <span class="label-zh">多管店叠加：</span>创业骨干可同时管理原门店收益，降低试错成本。
+      </div>
+    </div>
+    <div class="dcard">
+      <div class="dcard-title">7.2 今年激励调整 · 7.3 创新费用</div>
+      <div class="dcard-body">
+        <span class="badge badge-gap">缺口</span> 7.2：管理层未在公开披露中说明2025年具体调整条款。<br><br>
+        从结果倒推：2025年其他餐厅收入+214.6%（¥15.21亿），20个品牌207家门店，激励机制持续发酵，调整幅度未减弱。<br><br>
+        <span class="badge badge-gap">缺口</span> 7.3：创新激励费用未单独披露科目。<br><br>
+        <span class="badge badge-predict">估算</span>隐含亏损推算：2025年其他餐厅收入¥15.21亿，成长期品牌通常亏损5-15%，隐含亏损约¥0.76亿–¥2.28亿（误差大，仅供量级参考）。股权激励费用计入SG&A，未拆分披露。
+      </div>
+    </div>
+    <div class="dcard" style="grid-column:1/-1;">
+      <div class="dcard-title">7.4 2026年创新规划</div>
+      <div class="dcard-body">
+        · <strong>AI应用：</strong>已开发50个AI应用，2026年继续深化落地（来源：2025年度业绩发布会）<br>
+        · <strong>大排档：</strong>2026年最重要的品牌孵化落地，张勇亲自主导<br>
+        · <strong>并购：</strong>外部优质餐饮资产收购，补充红石榴品类（标的未披露）<br>
+        · <strong>主题门店：</strong>2025年已完成200+家改造，2026年继续向差异化运营推进<br><br>
+        <span class="badge badge-predict">预测</span>创新战略演进：2024年是"内部创业孵化期"，2025年进入"规模验证期"（207家），2026年以海鲜大排档为旗手进入"规模扩张期"。主品牌利润贡献压力下，子品牌必须在2-3年内达到正现金流以支撑整体估值。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. VERDICT -->
+<div class="verdict">
+  <div class="v-en">Research Verdict · Executive Summary</div>
+  <div class="v-zh">执行摘要：4条核心判断</div>
+
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text">
+      <strong>主品牌进入"以质换量"成熟期，规模天花板约1,300–1,400家自营</strong>
+      2025年底自营净减51家，主动关闭低效门店；加盟以强托管下沉三线/县级市场，填补规模缺口（13→79家）。翻台率从4.1→3.9次/天，顾客人次-7.5%，主品牌核心指标全面承压。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：2025年报（官方，2026年3月）· 门店净增/净减数据</span>
+    </div>
+  </div>
+
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text">
+      <strong>红石榴是唯一高增长板块，但规模化成功率存在不确定性</strong>
+      2025年其他餐厅收入+214.6%（¥15.21亿），207家门店，增速强劲；但主品牌利润-14%（¥40.5亿），内部输血压力上升。海鲜大排档"500家目标"周期可能需3-5年，成功标志是在非一线城市实现正店层面利润。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：2025年报其他餐厅收入数据 · 管理层说明会披露</span>
+    </div>
+  </div>
+
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text">
+      <strong>客单价已企稳但非升级，大陆消费降级压力未消</strong>
+      整体口径2025年¥97.7（+¥0.2），但因含港澳台高客单价（¥205.8）的结构性拉升，大陆客单价2024年已从¥97.3降至¥95.7。2026年举高高（¥59.9）和社区外卖扩张将进一步压低均值。增长引擎须依赖人次恢复而非单价上涨。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：2025年中报城市分层数据 · 2024年报大陆口径</span>
+    </div>
+  </div>
+
+  <div class="v-item">
+    <div class="v-num">4</div>
+    <div class="v-text">
+      <strong>张勇回归是创始人对"增收不增利"的直接干预，战略重心在多品牌协同而非主品牌复辟</strong>
+      四年三换CEO后张勇亲自上阵，双重身份（主席+CEO）设计为应对主品牌收缩+子品牌孵化的协同难题。五多战略本质是以轻资产多品类对冲主品牌翻台率下行；创新激励（股权+分红）成本已隐含在SG&A中，2026年规模进一步扩大。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px;">依据：2026年1月管理层公告 · 媒体深度报道（36氪/澎湃/新浪）</span>
+    </div>
+  </div>
+</div>
+
+<!-- 9. DATA GAP TABLE -->
+<section class="gap-section">
+  <div class="section-zh">数据缺口补全建议
+    <span class="section-en">Data Gap Recommendations</span>
+  </div>
+  <table>
+    <thead><tr>
+      <th>缺口项</th><th>推荐补数路径</th><th>预计可得性</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>翻台率年内具体目标值（管理层指引）</td>
+        <td>2026年中期业绩会文字记录；IR邮件问询（investor@haidilao.com）</td>
+        <td><span style="color:var(--amber);">中等</span>（管理层通常避免给硬性目标）</td>
+      </tr>
+      <tr>
+        <td>2025年创新激励具体费用</td>
+        <td>财报附注"员工薪酬及激励"章节；或单独致函IR询问SG&A拆分</td>
+        <td><span style="color:var(--red);">较低</span>（通常不单独披露）</td>
+      </tr>
+      <tr>
+        <td>2025年大陆口径客单价</td>
+        <td>2025年报原文（按地区分类）；2025H1中报已有分城市数据</td>
+        <td><span style="color:var(--green);">较高</span>（可从年报分地区数据中提取）</td>
+      </tr>
+      <tr>
+        <td>红石榴各子品牌利润率（是否盈利）</td>
+        <td>2026年中期业绩会；或查询具体子品牌媒体深度报道（窄播/虎嗅）</td>
+        <td><span style="color:var(--red);">较低</span>（处于成长期，通常不单独披露）</td>
+      </tr>
+      <tr>
+        <td>加盟店AUV（单店月均销售额）</td>
+        <td>加盟商论坛（天眼查加盟信息、红餐网加盟版块）; 与加盟商一对一访谈</td>
+        <td><span style="color:var(--amber);">中等</span>（非官方渠道可得）</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 10. SOURCES -->
+<div class="sources">
+  <strong>来源索引</strong><br>
+  1. 海底捞2025年年报（2026年3月发布）— 营收/净利润/门店/翻台率/客单价全年数据 <span class="badge badge-official">官方</span><br>
+  2. 海底捞2025年中期报告（2025年8月25日）— H1营收/净利润/翻台率/分城市客单价 <span class="badge badge-official">官方</span><br>
+  3. 海底捞2024年年报（2025年3月26日）— 2024年全量数据基准 <span class="badge badge-official">官方</span><br>
+  4. 新浪财经 2026-03-24 — "海底捞2025年实现营收432.25亿元，利润承压"<br>
+  5. 36氪 2026-01-15 — "四年换了3次CEO，张勇亲自上阵：海底捞2026年要做大排档"<br>
+  6. 澎湃新闻 2026-01 — "张勇回归，少帅上位：海底捞的第二曲线能否真的跑通"<br>
+  7. 证券时报 2025 — "海底捞2024年营收利润双增长，首次披露加盟店进展"<br>
+  8. 证券时报（周兆呈访谈）— "两万份申请，70%来自三线城市，解码开放加盟战略"<br>
+  9. 21经济网 2025-11-07 — "焦虑海底捞，欲批量制造餐饮品牌"<br>
+  10. 虎嗅网 2025 — 红石榴计划创业激励机制详解<br>
+  11. 财联社 业绩发布会直播 — "已开发50个AI应用，寻求并购优质资产"<br>
+  12. 华尔街见闻 — "海底捞以价换量，客单价降回8年前"<br>
+  13. 小牛行研 — "2025年中报点评：主业客单价企稳，红石榴计划成效突出"<br>
+  14. 新京报 2026 — "海底捞利润波动，创始人回归、新业务拓展能否让石榴成熟"
+</div>
+
+<!-- 11. FOOTER -->
+<footer>
+  <span>海底捞调研报告 · Haidilao Research 2026 · 消费行业调研</span>
+  <span>数据截止：2025年全年报 / 动态截止 2026年5月</span>
+</footer>
+
+</body>
+</html>
