@@ -22,7 +22,6 @@
 - 所有标的实时价格通过 GitHub Action 每5分钟自动抓取并缓存到：
   `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json`
 - 日扫报告直接 WebFetch 读取该文件，无需 token，无沙箱限制
-- `earner.py` 已集成：`--price` 未提供时直接调用 Finnhub（需本地配置 `FINNHUB_TOKEN`）
 
 **覆盖标的**：SPY · QQQ · NVDA · PLTR · TSLA · AAPL · AMD · IWM · GLD（每5分钟更新）
 **新增标的**：在 `.github/workflows/fetch-prices.yml` 的 `tickers` 列表中添加即可。
