@@ -1,13 +1,20 @@
 # 用户偏好与经验档案
 
 > 本文档基于所有历史对话复盘提炼，每次 Code 会话自动加载，无需重复说明。
-> 最后更新：2026-06-02
+> 最后更新：2026-06-03
 
 ---
 
 ## 一、执行经验总结
 
 ### 1.1 数据质量事故
+
+**规则：每次期权扫描前必须先更新 GitHub 价格缓存（2026-06-03 确认）**
+- 触发方式：`mcp__github__push_files` 推 `price_fetch_trigger.txt` 到 main 分支
+- 等待方式：轮询 `stock_prices.json` 的 `updated_at` 超过当日零点后才出报告
+- 不允许用旧缓存直接出报告，不允许 WebSearch 价格代替
+
+---
 
 **事故：PLTR 股价错误（2026-05-19）**
 - 问题：WebSearch 返回延迟数据，报告显示 PLTR ~$22，实际价格 $135.58
@@ -164,6 +171,10 @@
 ### 数据规则
 
 ```
+R-D0: 期权扫描前 → 必须先触发 GitHub Action 更新价格缓存，等 updated_at 刷新后才出报告
+      触发：push price_fetch_trigger.txt 到 main 分支
+      验证：轮询 stock_prices.json updated_at > 当日零点
+
 R-D1: 股票实时价格 → 必须从 iTick API 拉取，不得用 WebSearch 代替
       端点：api0.itick.org/stock/quote?region=US&code={ticker}
       Token：已配置在 .env (ITICK_TOKEN)
