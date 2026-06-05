@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVGO 博通 Q2 FY2026 | Earner Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --border:rgba(139,108,66,0.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Songti SC','SimSong',Georgia,serif;background:var(--paper);color:var(--ink);font-size:14.5px;line-height:1.65}
+.wrap{max-width:920px;margin:0 auto;padding:0 26px}
+
+/* Pub Bar */
+.pub-bar{background:var(--ink);color:var(--paper);padding:9px 0;font-family:'IM Fell English',Georgia,serif;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase}
+.pub-bar .wrap{display:flex;justify-content:space-between}
+
+/* Header */
+.hdr{padding:28px 0 20px;border-bottom:2.5px solid var(--ink);margin-bottom:0}
+.co-badge{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);font-family:'IM Fell English',Georgia,serif;margin-bottom:6px}
+.title-zh{font-size:26px;font-weight:700;line-height:1.25;margin-bottom:4px}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:15px;color:var(--copper);margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.tag{padding:3px 9px;border:1px solid var(--ink);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-family:'IM Fell English',Georgia,serif}
+.t-miss{background:var(--red);color:#f1efea;border-color:var(--red)}
+.t-warn{background:var(--amber);color:#f1efea;border-color:var(--amber)}
+
+/* Stat Bar */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);border:1.5px solid var(--ink);margin:22px 0}
+.stat{padding:15px 18px;border-right:1px solid var(--ink)}
+.stat:last-child{border-right:none}
+.sl-en{font-family:'IM Fell English',Georgia,serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);margin-bottom:4px}
+.sl-zh{font-size:10.5px;color:#666;margin-bottom:6px}
+.sv{font-family:'IM Fell English',Georgia,serif;font-size:25px;font-weight:bold;line-height:1}
+.sd{font-size:11.5px;margin-top:4px}
+.up{color:var(--green)} .dn{color:var(--red)} .warn{color:var(--amber)}
+
+/* Alert Box */
+.alert-box{border-left:4px solid var(--red);padding:14px 18px;background:rgba(139,46,46,0.06);margin:0 0 24px}
+.alert-title{font-family:'IM Fell English',Georgia,serif;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.alert-body{font-size:13px;line-height:1.7}
+
+/* Section */
+.sec{margin:28px 0}
+.sec-hdr{display:flex;align-items:baseline;gap:11px;border-bottom:1px solid var(--border);padding-bottom:7px;margin-bottom:18px}
+.sz{font-family:'Songti SC',Georgia,serif;font-size:16px;font-weight:700}
+.se{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:11.5px;color:var(--copper)}
+
+/* Chart box */
+.cb{border:1px solid var(--border);padding:18px;background:#fff}
+.ct{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--copper);font-family:'IM Fell English',Georgia,serif;margin-bottom:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* Analysis */
+.ab{margin-bottom:18px}
+.lz{font-weight:700;font-size:13.5px}
+.le{font-style:italic;font-size:10.5px;color:var(--copper);font-family:'IM Fell English',Georgia,serif;margin-left:7px}
+.badge{display:inline-block;font-size:9.5px;padding:1px 5px;border:1px solid;margin-left:4px;vertical-align:middle}
+.b1{border-color:var(--green);color:var(--green)}
+.b2{border-color:var(--copper);color:var(--copper)}
+.b3{border-color:var(--amber);color:var(--amber)}
+.b4{border-color:var(--red);color:var(--red)}
+
+/* Scenarios */
+.scen{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:18px}
+.sc{padding:18px;border:1px solid var(--ink)}
+.sc-bear{border-left:4px solid var(--red)}
+.sc-base{border-left:4px solid var(--amber)}
+.sc-bull{border-left:4px solid var(--green)}
+.sc-lbl{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-family:'IM Fell English',Georgia,serif;margin-bottom:7px}
+.sc-p{font-size:30px;font-family:'IM Fell English',Georgia,serif;font-weight:bold;line-height:1;margin-bottom:5px}
+.sc-d{font-size:12.5px;margin-bottom:11px}
+.sc-l{font-size:11.5px;color:#555;line-height:1.55}
+.sc-f{font-size:10px;color:#aaa;margin-top:7px}
+
+/* Verdict */
+.verdict{background:var(--ink);color:var(--paper);padding:30px;margin:28px 0}
+.vl{font-family:'IM Fell English',Georgia,serif;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:11px}
+.vm{font-family:'Songti SC',Georgia,serif;font-size:18px;font-weight:700;line-height:1.5;margin-bottom:7px}
+.ven{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:12.5px;color:rgba(241,239,234,.55);margin-bottom:15px}
+.vd{font-size:12.5px;color:rgba(241,239,234,.85);line-height:1.75}
+.vf{margin-top:18px;padding-top:14px;border-top:1px solid rgba(201,168,76,.3);font-size:10.5px;color:rgba(241,239,234,.45)}
+.vf a{color:var(--gold);text-decoration:none}
+
+/* Tone */
+.tone-out{background:#e8e5e0;height:7px;border-radius:4px;margin:7px 0;overflow:hidden}
+.tone-in{height:100%;border-radius:4px}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{padding:5px 11px;border:1px solid var(--border);font-size:11.5px;font-family:'IM Fell English',Georgia,serif}
+
+/* Risk */
+.rt{width:100%;border-collapse:collapse;font-size:12.5px}
+.rt th{background:var(--ink);color:var(--paper);padding:9px 13px;text-align:left;font-family:'IM Fell English',Georgia,serif;font-size:10.5px;letter-spacing:.09em}
+.rt td{padding:9px 13px;border-bottom:1px solid var(--border)}
+.rt tr:last-child td{border-bottom:none}
+.rh{color:var(--red);font-weight:bold}
+.rm{color:var(--amber)}
+.rl{color:var(--green)}
+
+/* QA */
+.qa{border-left:3px solid var(--copper);padding:13px 15px;margin-bottom:11px;background:rgba(139,108,66,.05)}
+.qa-q{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:12.5px;color:var(--copper);margin-bottom:5px}
+.qa-a{font-size:12.5px;line-height:1.65}
+
+/* Assumption Table */
+.at{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px}
+.at th{background:rgba(10,10,11,.09);padding:7px 11px;font-family:'IM Fell English',Georgia,serif;font-size:10px;border:1px solid var(--border);text-align:center}
+.at td{padding:7px 11px;border:1px solid var(--border);text-align:center}
+.at tr:nth-child(odd) td{background:rgba(255,255,255,.5)}
+
+/* Footer */
+.footer{border-top:2px solid var(--ink);padding:18px 0;margin-top:36px;font-size:10.5px;color:#999;display:flex;justify-content:space-between;font-family:'IM Fell English',Georgia,serif}
+</style>
+</head>
+<body>
+
+<!-- 1. Pub Bar -->
+<div class="pub-bar">
+  <div class="wrap">
+    <span>Earner Copilot · Institutional Research</span>
+    <span>AVGO · Nasdaq · Q2 FY2026 · 财报日：2026-06-03</span>
+    <span>分析日期：2026-06-04</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- 2. Header -->
+<div class="hdr">
+  <div class="co-badge">AVGO · Broadcom Inc. · 博通公司</div>
+  <div class="title-zh">博通 Q2 FY2026：业绩达标，但 FY27 指引未上调——市场暴跌 14% 是机会还是警示？</div>
+  <div class="title-en">Broadcom Q2 FY2026 — In-Line Quarter, Maintained FY27 AI Guidance Triggers 14% Post-Earnings Selloff</div>
+  <div class="tags">
+    <span class="tag t-miss">盘后 ▼14% 卖压</span>
+    <span class="tag t-warn">FY27 AI 指引维持未上调</span>
+    <span class="tag">语气评分 72 / 100</span>
+    <span class="tag">营收 +48% YoY</span>
+    <span class="tag">Q3 指引 $294 亿 +84%</span>
+    <span class="tag">FCF 46%</span>
+  </div>
+</div>
+
+<!-- Alert -->
+<div class="alert-box" style="margin-top:20px">
+  <div class="alert-title">⚠ 核心事件：Sell-the-News 触发 ▼14%</div>
+  <div class="alert-body">
+    AVGO 盘后暴跌 14%，当前交易于 <strong>$407.06</strong>（日内区间 $403–$479）。Q2 业绩本身达标，Q3 指引 $294 亿 (+84% YoY) 亦属强劲，但管理层 <strong>维持</strong> FY2027 AI 营收展望为"超过 $1,000 亿"，未上调至市场期待的 $1,200–1,300 亿区间。这是典型的"达标不超预期即利空"——买入预期已被过度定价，当前跌幅为估值重置而非基本面恶化。
+  </div>
+</div>
+
+<!-- 3. Stat Bar -->
+<div class="stat-bar">
+  <div class="stat">
+    <div class="sl-en">Net Revenue Q2</div>
+    <div class="sl-zh">季度营收</div>
+    <div class="sv">$22.2B</div>
+    <div class="sd up">▲ +48% YoY · 达标</div>
+  </div>
+  <div class="stat">
+    <div class="sl-en">Non-GAAP EPS</div>
+    <div class="sl-zh">非GAAP摊薄每股</div>
+    <div class="sv">$2.44</div>
+    <div class="sd warn">持平共识 $2.42–2.44</div>
+  </div>
+  <div class="stat">
+    <div class="sl-en">Free Cash Flow</div>
+    <div class="sl-zh">自由现金流</div>
+    <div class="sv">$10.3B</div>
+    <div class="sd up">▲ FCF Margin 46% · +60% YoY</div>
+  </div>
+  <div class="stat">
+    <div class="sl-en">Q3 FY26 Guide</div>
+    <div class="sl-zh">Q3 营收指引</div>
+    <div class="sv" style="color:var(--amber)">$29.4B</div>
+    <div class="sd warn">+84% YoY · 强但未超 $30B 预期</div>
+  </div>
+</div>
+
+<!-- 4. Revenue Trend -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">季度营收走势</span><span class="se">Quarterly Revenue — 8 Quarters + Q3E</span></div>
+  <div class="cb">
+    <div class="ct">Net Revenue ($ Billions) · Q3 FY24 – Q2 FY26 · Q3 FY26E 指引</div>
+    <svg width="100%" height="230" viewBox="0 0 840 230" font-family="'IM Fell English',Georgia,serif">
+      <!-- Y-axis: 0–32B, height=200px bottom@215, 1B=6.25px -->
+      <text x="32" y="18" font-size="9.5" fill="#999" text-anchor="middle">30B</text>
+      <text x="32" y="80" font-size="9.5" fill="#999" text-anchor="middle">25B</text>
+      <text x="32" y="143" font-size="9.5" fill="#999" text-anchor="middle">20B</text>
+      <text x="32" y="205" font-size="9.5" fill="#999" text-anchor="middle">15B</text>
+      <line x1="50" y1="15" x2="830" y2="15" stroke="#e8e5e0" stroke-width="0.5"/>
+      <line x1="50" y1="77" x2="830" y2="77" stroke="#e8e5e0" stroke-width="0.5"/>
+      <line x1="50" y1="140" x2="830" y2="140" stroke="#e8e5e0" stroke-width="0.5"/>
+      <line x1="50" y1="203" x2="830" y2="203" stroke="#e8e5e0" stroke-width="1"/>
+      <!-- Bars w=70, gap=20, start x=60 -->
+      <!-- scale: bottom=215, 1B=6.25px -->
+      <!-- Q3F24: 13.1 → h=81.9 → y=133.1 -->
+      <rect x="62" y="133" width="70" height="82" fill="#c9a84c" opacity="0.45"/>
+      <text x="97" y="127" font-size="9" fill="#999" text-anchor="middle">$13.1B</text>
+      <text x="97" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q3F24</text>
+      <!-- Q4F24: 14.1 → h=88.1 → y=126.9 -->
+      <rect x="152" y="127" width="70" height="88" fill="#c9a84c" opacity="0.5"/>
+      <text x="187" y="121" font-size="9" fill="#999" text-anchor="middle">$14.1B</text>
+      <text x="187" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q4F24</text>
+      <!-- Q1F25: 14.92 → h=93.3 → y=121.7 -->
+      <rect x="242" y="122" width="70" height="93" fill="#c9a84c" opacity="0.6"/>
+      <text x="277" y="116" font-size="9" fill="#888" text-anchor="middle">$14.9B</text>
+      <text x="277" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q1F25</text>
+      <!-- Q2F25: 15.0 → h=93.8 → y=121.3 -->
+      <rect x="332" y="121" width="70" height="94" fill="#c9a84c" opacity="0.65"/>
+      <text x="367" y="115" font-size="9" fill="#888" text-anchor="middle">$15.0B</text>
+      <text x="367" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q2F25</text>
+      <!-- Q3F25: 16.0 → h=100 → y=115 -->
+      <rect x="422" y="115" width="70" height="100" fill="#c9a84c" opacity="0.7"/>
+      <text x="457" y="109" font-size="9" fill="#888" text-anchor="middle">$16.0B</text>
+      <text x="457" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q3F25*</text>
+      <!-- Q4F25: 16.0 → same -->
+      <rect x="512" y="115" width="70" height="100" fill="#c9a84c" opacity="0.7"/>
+      <text x="547" y="109" font-size="9" fill="#888" text-anchor="middle">$16.0B</text>
+      <text x="547" y="224" font-size="8.5" fill="#aaa" text-anchor="middle">Q4F25*</text>
+      <!-- Q1F26: 19.31 → h=120.7 → y=94.3 -->
+      <rect x="602" y="94" width="70" height="121" fill="#8b6c42" opacity="0.85"/>
+      <text x="637" y="88" font-size="9" fill="#555" text-anchor="middle">$19.3B</text>
+      <text x="637" y="224" font-size="8.5" fill="#888" text-anchor="middle">Q1F26</text>
+      <!-- Q2F26: 22.19 → h=138.7 → y=76.3 -->
+      <rect x="692" y="76" width="70" height="139" fill="#2a5c3f"/>
+      <text x="727" y="70" font-size="9.5" fill="#2a5c3f" font-weight="bold" text-anchor="middle">$22.2B</text>
+      <text x="727" y="224" font-size="8.5" fill="#2a5c3f" font-weight="bold" text-anchor="middle">Q2F26</text>
+      <!-- Q3F26E guidance: 29.4 → h=183.8 → y=31.2 (dashed) -->
+      <rect x="782" y="31" width="70" height="184" fill="#c9a84c" opacity="0.2" stroke="#c47a1e" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="817" y="25" font-size="9.5" fill="#c47a1e" font-weight="bold" text-anchor="middle">$29.4B</text>
+      <text x="817" y="224" font-size="8.5" fill="#c47a1e" font-weight="bold" text-anchor="middle">Q3F26E↑</text>
+      <text x="62" y="224" font-size="7.5" fill="#bbb">*估计值</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 5. Segment Revenue -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">分部营收拆分</span><span class="se">Revenue by Segment · Q2 FY26 vs Q2 FY25</span></div>
+  <div class="cb">
+    <div class="ct">Segment Revenue · YoY Growth Rate</div>
+    <svg width="100%" height="165" viewBox="0 0 750 165" font-family="'IM Fell English',Georgia,serif">
+      <!-- Max 20B = 400px, 1B=20px -->
+      <!-- Semiconductor Solutions -->
+      <text x="10" y="30" font-size="12" fill="#0a0a0b" font-weight="bold">半导体解决方案</text>
+      <text x="10" y="44" font-size="10" fill="#999" font-style="italic">Semiconductor Solutions</text>
+      <!-- FY25: 8.408B → 168px -->
+      <rect x="230" y="20" width="168" height="14" fill="#c9a84c" opacity="0.45"/>
+      <text x="402" y="31" font-size="9.5" fill="#aaa" dx="4">$8.4B (Q2 FY25)</text>
+      <!-- FY26: 15.009B → 300px -->
+      <rect x="230" y="37" width="300" height="14" fill="#2a5c3f"/>
+      <text x="534" y="49" font-size="10" fill="#2a5c3f" font-weight="bold" dx="4">$15.0B ▲ +79%</text>
+      <!-- AI sub-note -->
+      <text x="230" y="68" font-size="9.5" fill="#c47a1e">└ AI 半导体贡献：$10.8B (+143% YoY) — 上季超出管理层自身预测</text>
+
+      <!-- Infrastructure Software -->
+      <text x="10" y="100" font-size="12" fill="#0a0a0b" font-weight="bold">基础设施软件 (VMware)</text>
+      <text x="10" y="114" font-size="10" fill="#999" font-style="italic">Infrastructure Software</text>
+      <!-- FY25: 6.596B → 132px -->
+      <rect x="230" y="90" width="132" height="14" fill="#c9a84c" opacity="0.45"/>
+      <text x="366" y="101" font-size="9.5" fill="#aaa" dx="4">$6.6B (Q2 FY25)</text>
+      <!-- FY26: 7.178B → 144px -->
+      <rect x="230" y="107" width="144" height="14" fill="#8b6c42" opacity="0.75"/>
+      <text x="378" y="119" font-size="10" fill="#8b6c42" dx="4">$7.2B ▲ +9% — 整合摩擦隐忧</text>
+
+      <!-- Legend -->
+      <rect x="230" y="145" width="12" height="12" fill="#c9a84c" opacity="0.45"/>
+      <text x="246" y="155" font-size="9" fill="#aaa">Q2 FY25 基期</text>
+      <rect x="340" y="145" width="12" height="12" fill="#2a5c3f"/>
+      <text x="356" y="155" font-size="9" fill="#2a5c3f">Q2 FY26 实际</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 6. EPS + Gross Margin -->
+<div class="sec">
+  <div class="two">
+    <!-- EPS Chart -->
+    <div class="cb">
+      <div class="ct">Non-GAAP EPS · 共识 vs 实际</div>
+      <svg width="100%" height="170" viewBox="0 0 340 170" font-family="'IM Fell English',Georgia,serif">
+        <!-- scale: 0-3.0, bottom=155, h=120, 1$=40px -->
+        <!-- Consensus: $2.42 → h=96.8 → y=58 -->
+        <rect x="50" y="58" width="75" height="97" fill="#c9a84c" opacity="0.4"/>
+        <text x="87" y="52" font-size="11.5" fill="#999" text-anchor="middle">$2.42E</text>
+        <text x="87" y="168" font-size="9.5" fill="#aaa" text-anchor="middle">共识 Consensus</text>
+        <!-- Actual: $2.44 → h=97.6 → y=57.4 -->
+        <rect x="195" y="57" width="75" height="98" fill="#8b6c42" opacity="0.8"/>
+        <text x="232" y="51" font-size="11.5" fill="#555" text-anchor="middle">$2.44A</text>
+        <text x="232" y="168" font-size="9.5" fill="#888" text-anchor="middle">实际 Actual</text>
+        <!-- Beat label -->
+        <text x="170" y="34" font-size="10" fill="#8b6c42" text-anchor="middle">微超 +$0.02 (+0.8%)</text>
+        <text x="170" y="23" font-size="9" fill="#aaa" text-anchor="middle">（市场期待更大幅度超越）</text>
+        <line x1="15" y1="155" x2="325" y2="155" stroke="#0a0a0b" stroke-width="1"/>
+      </svg>
+    </div>
+    <!-- Gross Margin Trend -->
+    <div class="cb">
+      <div class="ct">Non-GAAP 毛利率走势 (%)</div>
+      <svg width="100%" height="170" viewBox="0 0 340 170" font-family="'IM Fell English',Georgia,serif">
+        <!-- Y: 75-82%, range=7%, h=120px, 1%=17.14px, bottom=155 -->
+        <!-- Q1F25:79.4→y=155-(4.4×17.14)=155-75.4=79.6 -->
+        <!-- Q2F25:79.4→79.6 -->
+        <!-- Q3F25:78.5→y=155-(3.5×17.14)=155-60=95 -->
+        <!-- Q4F25:78.0→y=155-(3×17.14)=155-51.4=103.6 -->
+        <!-- Q1F26:77.0→y=155-(2×17.14)=155-34.3=120.7 -->
+        <!-- Q2F26:77.1→y=155-(2.1×17.14)=155-36=119 -->
+        <polyline points="30,80 92,80 154,95 216,104 278,121 310,119" fill="none" stroke="#c9a84c" stroke-width="2"/>
+        <circle cx="30" cy="80" r="4" fill="#c9a84c"/>
+        <circle cx="92" cy="80" r="4" fill="#c9a84c"/>
+        <circle cx="154" cy="95" r="4" fill="#c9a84c"/>
+        <circle cx="216" cy="104" r="4" fill="#c9a84c"/>
+        <circle cx="278" cy="121" r="4" fill="#8b6c42"/>
+        <circle cx="310" cy="119" r="4" fill="#2a5c3f"/>
+        <text x="30" y="73" font-size="8.5" fill="#aaa" text-anchor="middle">79.4%</text>
+        <text x="92" y="73" font-size="8.5" fill="#aaa" text-anchor="middle">79.4%</text>
+        <text x="154" y="88" font-size="8.5" fill="#aaa" text-anchor="middle">78.5%</text>
+        <text x="216" y="97" font-size="8.5" fill="#aaa" text-anchor="middle">78.0%</text>
+        <text x="278" y="114" font-size="8.5" fill="#888" text-anchor="middle">77.0%</text>
+        <text x="310" y="112" font-size="8.5" fill="#2a5c3f" text-anchor="middle" font-weight="bold">77.1%</text>
+        <text x="30" y="163" font-size="7.5" fill="#bbb" text-anchor="middle">Q1F25</text>
+        <text x="92" y="163" font-size="7.5" fill="#bbb" text-anchor="middle">Q2F25</text>
+        <text x="154" y="163" font-size="7.5" fill="#bbb" text-anchor="middle">Q3F25*</text>
+        <text x="216" y="163" font-size="7.5" fill="#bbb" text-anchor="middle">Q4F25*</text>
+        <text x="278" y="163" font-size="7.5" fill="#888" text-anchor="middle">Q1F26</text>
+        <text x="310" y="163" font-size="7.5" fill="#2a5c3f" text-anchor="middle">Q2F26</text>
+        <line x1="10" y1="155" x2="330" y2="155" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="10" y="22" font-size="8.5" fill="#c47a1e">趋势：半导体占比↑导致混合毛利率温和下行</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 7. Core Analysis -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">核心分析</span><span class="se">Five-Dimension Deep Dive</span></div>
+
+  <div class="ab">
+    <span class="lz">维度一：为什么股价跌了 14%——业绩好，但预期更高</span>
+    <span class="le">Sell-the-News Dynamics</span>
+    <span class="badge b4">【推断·分析预测】</span>
+    <p style="margin-top:8px;font-size:13.5px;line-height:1.72">
+      Q2 业绩本身没有问题：营收 $221.9 亿（+48%），Non-GAAP EPS $2.44，FCF $102.6 亿（46% margin）——均符合或微超市场共识。问题在于<strong>管理层对 FY2027 AI 收入的指引维持在"超过 $1,000 亿"</strong>，未上调。市场在过去数月已将 FY27 AI 营收预期定价在 $1,200–$1,300 亿区间（基于 Q3 指引外推的线性加速假设），若不上调即视为"低于预期"。这是 $470→$407 的唯一核心原因，与基本面无关。<span class="badge b4">【一手·财报/市场反应】</span>
+    </p>
+  </div>
+
+  <div class="ab">
+    <span class="lz">维度二：AI 芯片飞轮——$10.8 亿超出管理层自身预测，验证超大规模 XPU 爆发</span>
+    <span class="le">AI Semiconductor Inflection</span>
+    <span class="badge b1">【一手·财报】</span>
+    <p style="margin-top:8px;font-size:13.5px;line-height:1.72">
+      CEO Hock Tan 原文："Q2 semiconductor revenue from AI of $10.8 billion grew 143% year-over-year, <strong>above our forecast</strong>, driven by increasing demand from custom AI accelerators and AI networking."管理层自身预测被超越——这是极强正向信号，意味着超大规模客户（Google TPU、Meta MTIA、Apple、ByteDance 等）的定制 AI 芯片（XPU）订单密度高于博通内部建模。Q3 指引 $294 亿（+84% YoY，QoQ +32%）进一步确认：这不是季节性脉冲，是结构性加速。
+    </p>
+  </div>
+
+  <div class="ab">
+    <span class="lz">维度三：VMware 软件仅 +9%——另一个引擎尚未点火</span>
+    <span class="le">VMware Integration Risk</span>
+    <span class="badge b3">【推断·分析预测】</span>
+    <p style="margin-top:8px;font-size:13.5px;line-height:1.72">
+      基础设施软件（VMware 主体）Q2 营收 $71.8 亿，+9% YoY。博通 2023 年以 $690 亿收购 VMware 的核心论点是："将永久授权迁移为订阅、大幅提价，催生 20%+ 稳定增速"。当前 9% 的表现显示：部分企业客户正在评估或已转向替代方案（Nutanix、OpenStack 等），或迁移进度慢于预期。若软件增速持续在 10% 以下，博通的"双引擎成长"叙事将面临压力，因为软件业务是高毛利的压舱石。<span class="badge b3">【分析预测】</span>
+    </p>
+  </div>
+
+  <div class="ab">
+    <span class="lz">维度四：FCF 机器 + 资本配置——现金积累速度为股东提供缓冲</span>
+    <span class="le">Cash Generation &amp; Balance Sheet</span>
+    <span class="badge b1">【一手·财报】</span>
+    <p style="margin-top:8px;font-size:13.5px;line-height:1.72">
+      Q2 经营现金流 $104.9 亿，FCF $102.6 亿（46% 营收占比），H1 合计 FCF $182.7 亿。现金 $196.3 亿较年初大幅提升。同期：偿还长期债 $12.5 亿、支付股息 $30.9 亿、回购股票 $6 亿。$626.6 亿长期债（VMware 遗产）年化利息成本约 $30 亿，被现金流覆盖超过 6 倍——债务风险可控。当前 $407 价位对应约 $1.93 万亿市值，FCF Yield ≈ $41 亿 × 4 / $1.93 万亿 ≈ 8.5%——对于高成长公司属于罕见高水平。
+    </p>
+  </div>
+</div>
+
+<!-- 8. Target Price -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">目标价三情景（12 个月）</span><span class="se">12-Month Price Target — Three Scenarios · Current $407.06</span></div>
+
+  <!-- SVG Range Bar -->
+  <div class="cb" style="margin-bottom:14px">
+    <svg width="100%" height="85" viewBox="0 0 720 85" font-family="'IM Fell English',Georgia,serif">
+      <!-- Scale: $260-$600, range=340, width=560px, 1$=1.647px, start x=80 -->
+      <!-- Bear $319 → x=80+(319-260)*1.647=80+97=177 -->
+      <!-- Base $435 → x=80+(435-260)*1.647=80+288=368 -->
+      <!-- Bull $580 → x=80+(580-260)*1.647=80+527=607 -->
+      <!-- Current $407 → x=80+(407-260)*1.647=80+242=322 -->
+      <rect x="80" y="38" width="560" height="8" fill="#e8e5e0" rx="4"/>
+      <rect x="177" y="38" width="430" height="8" fill="url(#rg2)" rx="4"/>
+      <defs>
+        <linearGradient id="rg2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#8b2e2e"/>
+          <stop offset="35%" stop-color="#c47a1e"/>
+          <stop offset="100%" stop-color="#2a5c3f"/>
+        </linearGradient>
+      </defs>
+      <circle cx="177" cy="42" r="6" fill="#8b2e2e"/>
+      <text x="177" y="28" font-size="10" fill="#8b2e2e" text-anchor="middle">熊 $319</text>
+      <circle cx="368" cy="42" r="6" fill="#c47a1e"/>
+      <text x="368" y="28" font-size="10" fill="#c47a1e" text-anchor="middle">基 $435</text>
+      <circle cx="607" cy="42" r="6" fill="#2a5c3f"/>
+      <text x="607" y="28" font-size="10" fill="#2a5c3f" text-anchor="middle">牛 $580</text>
+      <!-- Current $407 -->
+      <line x1="322" y1="18" x2="322" y2="55" stroke="#0a0a0b" stroke-width="2" stroke-dasharray="3,2"/>
+      <polygon points="322,55 317,48 327,48" fill="#0a0a0b"/>
+      <text x="322" y="13" font-size="9" fill="#0a0a0b" text-anchor="middle">当前 $407</text>
+      <!-- Axis labels -->
+      <text x="80" y="68" font-size="8.5" fill="#bbb">$260</text>
+      <text x="360" y="68" font-size="8.5" fill="#bbb" text-anchor="middle">$430</text>
+      <text x="640" y="68" font-size="8.5" fill="#bbb" text-anchor="middle">$600</text>
+    </svg>
+  </div>
+
+  <div class="scen">
+    <div class="sc sc-bear">
+      <div class="sc-lbl">熊市 Bear Case</div>
+      <div class="sc-p" style="color:var(--red)">$319</div>
+      <div class="sc-d" style="color:var(--red)">▼ -22% vs 当前 $407</div>
+      <div class="sc-l">FY27 AI 营收停留在 $1,000 亿，VMware 软件加速流失；AI capex 冷却周期触发。FY27E EPS $13.0，22x 保守估值</div>
+      <div class="sc-f">P/E 22x · EPS $13.0 · FY27E</div>
+    </div>
+    <div class="sc sc-base">
+      <div class="sc-lbl">基准 Base Case</div>
+      <div class="sc-p" style="color:var(--amber)">$435</div>
+      <div class="sc-d" style="color:var(--amber)">▲ +7% vs 当前 $407</div>
+      <div class="sc-l">FY27 AI 营收兑现 $1,200 亿，软件提速至 +15%；FCF 持续 46%+，XPU 客户稳定扩张。FY27E EPS $14.5，30x</div>
+      <div class="sc-f">P/E 30x · EPS $14.5 · FY27E</div>
+    </div>
+    <div class="sc sc-bull">
+      <div class="sc-lbl">牛市 Bull Case</div>
+      <div class="sc-p" style="color:var(--green)">$580</div>
+      <div class="sc-d" style="color:var(--green)">▲ +43% vs 当前 $407</div>
+      <div class="sc-l">FY27 AI 突破 $1,500 亿（新客+现有客户加速），VMware ARR 跑赢；市场重估 AI 基础设施供应商倍数。FY27E EPS $14.5，40x</div>
+      <div class="sc-f">P/E 40x · EPS $14.5 · FY27E</div>
+    </div>
+  </div>
+
+  <table class="at">
+    <tr>
+      <th>关键假设</th>
+      <th style="color:var(--red)">熊市</th>
+      <th style="color:var(--amber)">基准</th>
+      <th style="color:var(--green)">牛市</th>
+    </tr>
+    <tr>
+      <td>FY27 AI 半导体营收</td>
+      <td>$1,000 亿（维持不变）</td>
+      <td>$1,200 亿（+20%）</td>
+      <td>$1,500 亿（+50%）</td>
+    </tr>
+    <tr>
+      <td>XPU 活跃客户数</td>
+      <td>2–3 家（量减）</td>
+      <td>4–5 家（新客加入）</td>
+      <td>6–8 家（生态扩张）</td>
+    </tr>
+    <tr>
+      <td>VMware 软件增速 FY27</td>
+      <td>+5%（流失加剧）</td>
+      <td>+15%（订阅提速）</td>
+      <td>+22%（超预期迁移）</td>
+    </tr>
+    <tr>
+      <td>FY27E Non-GAAP EPS</td>
+      <td>$13.0</td>
+      <td>$14.5</td>
+      <td>$14.5</td>
+    </tr>
+  </table>
+  <p style="font-size:10.5px;color:#bbb;margin-top:8px">现价 $407.06 已验证 【一手·市场实时】。FY27E EPS 为分析推断 【分析预测】</p>
+</div>
+
+<!-- 9. Verdict Box -->
+<div class="verdict">
+  <div class="vl">Analyst Verdict · 分析结论</div>
+  <div class="vm">暴跌 14% 是买入窗口，还是泡沫出清？——基本面强劲，但 FY27 不确定性使估值难以锚定</div>
+  <div class="ven">Business execution remains strong; the selloff is a valuation reset driven by unmoved FY27 guidance — not fundamental deterioration</div>
+  <div class="vd">
+    核心结论：<strong>基本面没有变坏，市场在重置预期溢价。</strong>博通的 AI XPU 业务是真实的、加速的——$10.8 亿 Q2 AI 营收超出管理层自身预期，Q3 $294 亿指引是真正的结构性加速。问题是这些本就被市场定价进了 $470 的股价，而 FY27"$1,000 亿+"维持不变意味着 $1,200 亿的期望落空。
+    <br><br>
+    当前 $407 对应约 28x FY27E P/E——对于一家年化 FCF $400 亿+、AI 营收以 100%+ 速度增长的公司，不算便宜也不算贵。<strong>真正的投资判断点是：FY27 AI 营收能否超越 $1,000 亿？</strong>若能（基准/牛市情景），当前是建仓时机；若 AI capex 真正减速（熊市），则当前仍然过贵。
+    <br><br>
+    短期操作建议：<strong>等待 $390–400 区间确认支撑</strong>，分批建仓。不追涨，不恐慌卖出。关注 Q3 FY2026 财报（约 2026 年 9 月）是否上调 FY27 AI 指引——那才是真正的方向信号。
+  </div>
+  <div class="vf">
+    对本报告有反馈？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&report=avgo-q2fy26">点击提交意见</a> &nbsp;|&nbsp; Earner Copilot · 报告生成：2026-06-04
+  </div>
+</div>
+
+<!-- 10. Management Tone -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">管理层语气评分</span><span class="se">Management Tone Assessment · 72 / 100</span></div>
+  <div style="border:1px solid var(--border);padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span style="font-size:14px;font-weight:700">综合语气评分</span>
+      <span style="font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:bold;color:var(--amber)">72 / 100</span>
+    </div>
+    <div class="tone-out">
+      <div class="tone-in" style="width:72%;background:var(--amber)"></div>
+    </div>
+    <p style="font-size:11.5px;color:var(--amber);margin-top:5px;font-family:'IM Fell English',Georgia,serif;font-style:italic">谨慎乐观 Cautiously Bullish — 业务自信，前瞻保守</p>
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div>
+        <div style="font-size:11px;color:#999;margin-bottom:5px">AI业务自信度</div>
+        <div class="tone-out"><div class="tone-in" style="width:90%;background:var(--green)"></div></div>
+        <div style="font-size:11px;margin-top:3px;color:var(--green)">90 / 100</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#999;margin-bottom:5px">前瞻指引置信度</div>
+        <div class="tone-out"><div class="tone-in" style="width:65%;background:var(--amber)"></div></div>
+        <div style="font-size:11px;margin-top:3px;color:var(--amber)">65 / 100（刻意保守）</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#999;margin-bottom:5px">软件业务透明度</div>
+        <div class="tone-out"><div class="tone-in" style="width:55%;background:var(--red)"></div></div>
+        <div style="font-size:11px;margin-top:3px;color:var(--red)">55 / 100（信息不足）</div>
+      </div>
+    </div>
+    <p style="font-size:12.5px;color:#555;margin-top:16px;line-height:1.7">
+      Hock Tan 对 AI 芯片用语强烈自信（"record"、"above our forecast"），CFO 承诺 Q3 非GAAP 营业利润率"稳定在 67%"——在 +32% 环比营收跳升下维持利润率是罕见的运营杠杆信心。但 <strong>FY27 "$1,000 亿+" 指引的维持</strong>是刻意的语言保守，管理层明显选择不设高目标，为执行留出余量。VMware 软件几乎未在发布中被重点提及，信息不透明度偏高。
+    </p>
+  </div>
+</div>
+
+<!-- 11. Key Themes -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">核心投资主题</span><span class="se">Key Investment Themes</span></div>
+  <div class="chips">
+    <span class="chip">AI 定制芯片 (XPU) 飞轮加速</span>
+    <span class="chip">超大规模资本支出持续升级</span>
+    <span class="chip">FCF 机器：46% Margin · $400B+ 年化</span>
+    <span class="chip">FY27 $1,000 亿+ AI 营收可见度</span>
+    <span class="chip">AI 网络 (Jericho3-AI) 协同增强</span>
+    <span class="chip">VMware 订阅迁移——双刃剑</span>
+    <span class="chip">Sell-the-News → 潜在买入窗口</span>
+    <span class="chip">$390–400 支撑位：关键决策点</span>
+  </div>
+</div>
+
+<!-- 12. Risk Matrix -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">风险矩阵</span><span class="se">Risk Assessment Matrix</span></div>
+  <table class="rt">
+    <tr>
+      <th>风险因素</th><th>级别</th><th>概率估算</th><th>监测信号</th>
+    </tr>
+    <tr>
+      <td><strong>FY27 AI 指引未上调 → 持续卖压</strong>：若 Q3 业绩会仍维持 $1,000 亿，股价恐继续承压</td>
+      <td class="rh">高</td><td>45%</td><td>Q3 FY26 发布（约9月）是否上调</td>
+    </tr>
+    <tr>
+      <td><strong>XPU 客户集中风险</strong>：2–3 大客户可能占 AI 营收 80%+，任一下调即冲击</td>
+      <td class="rh">高</td><td>60%（结构性）</td><td>客户多元化披露迹象</td>
+    </tr>
+    <tr>
+      <td><strong>VMware 流失加速</strong>：提价后企业客户向 Nutanix/替代方案迁移</td>
+      <td class="rm">中高</td><td>40%</td><td>软件增速是否回升至 15%+</td>
+    </tr>
+    <tr>
+      <td><strong>AI capex 放缓</strong>：超大规模 ROI 压力 → 2027 订单减少</td>
+      <td class="rm">中</td><td>30%</td><td>Google/Meta/MSFT capex 指引</td>
+    </tr>
+    <tr>
+      <td><strong>市场估值重置</strong>：$407 仍隐含较高增长预期；若宏观收紧，科技估值整体压缩</td>
+      <td class="rm">中</td><td>25%</td><td>Fed 利率路径；纳斯达克 P/E 中枢</td>
+    </tr>
+    <tr>
+      <td><strong>高债务杠杆</strong>：$626 亿长期债，季度利息 $7.5 亿</td>
+      <td class="rl">低</td><td>15%（FCF 覆盖充足）</td><td>FCF/interest coverage 维持 >6x</td>
+    </tr>
+  </table>
+</div>
+
+<!-- 13. Q&A Tension -->
+<div class="sec">
+  <div class="sec-hdr"><span class="sz">电话会关键张力点</span><span class="se">Earnings Call Tension Points — Key Questions</span></div>
+
+  <div class="qa">
+    <div class="qa-q">Q: 为什么 FY2027 AI 收入展望维持"超过 $1,000 亿"，而不上调？是保守还是能见度不足？</div>
+    <div class="qa-a">这是本季最大的 Q&A 张力。管理层的策略一贯是"承诺后交付"（under-promise, over-deliver）。"$1,000 亿+"可能仍是下限而非上限。关键信息是：AI XPU 业务的多季度订单能见度有多远？若 FY27 上半年已有采购订单确认，维持 $1,000 亿+是保守；若能见度仅到 FY26 Q4，则 FY27 数字本身存在不确定性。</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q: Q3 的 $294 亿大跳是单季峰值还是新基线？Q4 指引为何缺失？</div>
+    <div class="qa-a">管理层选择不提供 Q4 指引，这本身是信号。若 Q3 是超大规模客户年度 AI capex 集中采购期（H2 重仓），Q4 可能出现环比回落。反之，若 Q3 代表新运行基线，FY26 全年营收将轻松突破 $1,000 亿，FY27 的 $1,200 亿+变得可见。投资者需要从 CEO 语气判断：Q3 是"平台"还是"台阶"。</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q: VMware 客户留存率和 ARR 具体数据是多少？企业反弹规模可量化吗？</div>
+    <div class="qa-a">管理层几乎未披露 VMware 的细粒度数据。+9% 增速意味着单纯靠提价驱动，而非真正的产品粘性增长。若分析师追问留存率（Gross / Net Revenue Retention），管理层的回答将揭示整合的真实进展。若 NRR < 105%，流失压力将是长期风险；若 NRR > 115%，当前 9% 增速是暂时的过渡期。</div>
+  </div>
+</div>
+
+<!-- 14. Footer -->
+<div class="footer">
+  <span>Earner Copilot · AVGO Q2 FY2026 · 分析日：2026-06-04</span>
+  <span>数据来源：Broadcom 官方 Press Release（一手·财报）| investors.broadcom.com</span>
+  <span>本报告仅供参考，不构成投资建议</span>
+</div>
+
+</div><!-- /wrap -->
+</body>
+</html>
