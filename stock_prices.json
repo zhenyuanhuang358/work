@@ -1,61 +1,61 @@
 {
-  "updated_at": "2026-06-04T22:08:58.166181Z",
-  "vix": 15.4,
-  "treasury_10y": 4.48,
+  "updated_at": "2026-06-05T15:50:13.417632Z",
+  "vix": 16.73,
+  "treasury_10y": 4.54,
   "prices": {
     "SPY": {
-      "price": 757.09,
-      "changePct": 0.38,
-      "high": 758.31,
-      "low": 751.47
+      "price": 746.39,
+      "changePct": -1.41,
+      "high": 752.82,
+      "low": 746.31
     },
     "QQQ": {
-      "price": 740.61,
-      "changePct": -0.48,
-      "high": 743.5,
-      "low": 732.62
+      "price": 720.53,
+      "changePct": -2.71,
+      "high": 731.69,
+      "low": 719.86
     },
     "NVDA": {
-      "price": 218.66,
-      "changePct": 1.82,
-      "high": 221.6,
-      "low": 210.97
+      "price": 208.49,
+      "changePct": -4.65,
+      "high": 214.95,
+      "low": 207.53
     },
     "PLTR": {
-      "price": 141.7,
-      "changePct": -0.35,
-      "high": 146.37,
-      "low": 140.27
+      "price": 137.46,
+      "changePct": -2.99,
+      "high": 141.97,
+      "low": 137.15
     },
     "TSLA": {
-      "price": 418.45,
-      "changePct": -1.24,
-      "high": 426.35,
-      "low": 417.16
+      "price": 401.59,
+      "changePct": -4.03,
+      "high": 424.68,
+      "low": 400.44
     },
     "AAPL": {
-      "price": 311.23,
-      "changePct": 0.31,
-      "high": 313.54,
-      "low": 309.65
+      "price": 313,
+      "changePct": 0.57,
+      "high": 315.17,
+      "low": 311.83
     },
     "AMD": {
-      "price": 523.2,
-      "changePct": -3.56,
-      "high": 532.19,
-      "low": 499.87
+      "price": 486.52,
+      "changePct": -7.01,
+      "high": 505.62,
+      "low": 482.99
     },
     "IWM": {
-      "price": 292.01,
-      "changePct": 1.51,
-      "high": 292.88,
-      "low": 286.66
+      "price": 285.56,
+      "changePct": -2.21,
+      "high": 289.6,
+      "low": 285.27
     },
     "GLD": {
-      "price": 411.27,
-      "changePct": 0.83,
-      "high": 414.37,
-      "low": 409.01
+      "price": 398.25,
+      "changePct": -3.17,
+      "high": 406.94,
+      "low": 397.87
     }
   }
 }
