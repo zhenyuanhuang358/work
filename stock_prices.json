@@ -1,61 +1,61 @@
 {
-  "updated_at": "2026-06-09T15:50:49.714727Z",
-  "vix": 20.42,
-  "treasury_10y": 4.55,
+  "updated_at": "2026-06-09T17:48:33.067880Z",
+  "vix": 20.94,
+  "treasury_10y": 4.53,
   "prices": {
     "SPY": {
-      "price": 731.95,
-      "changePct": -0.98,
+      "price": 731.62,
+      "changePct": -1.03,
       "high": 746.9,
-      "low": 730.48
+      "low": 722.59
     },
     "QQQ": {
-      "price": 703.27,
-      "changePct": -1.79,
+      "price": 699.22,
+      "changePct": -2.35,
       "high": 725.66,
-      "low": 700.6
+      "low": 686.37
     },
     "NVDA": {
-      "price": 205.15,
-      "changePct": -1.67,
+      "price": 204.37,
+      "changePct": -2.05,
       "high": 211.4,
-      "low": 203.22
+      "low": 199.34
     },
     "PLTR": {
-      "price": 130.83,
-      "changePct": -4.13,
+      "price": 130.44,
+      "changePct": -4.42,
       "high": 136.99,
-      "low": 130.34
+      "low": 127.35
     },
     "TSLA": {
-      "price": 395.08,
-      "changePct": -3.39,
+      "price": 392.28,
+      "changePct": -4.08,
       "high": 418.5,
-      "low": 393.02
+      "low": 384.24
     },
     "AAPL": {
-      "price": 291.41,
-      "changePct": -3.36,
+      "price": 289.97,
+      "changePct": -3.84,
       "high": 300.75,
-      "low": 290.92
+      "low": 287.78
     },
     "AMD": {
-      "price": 469.47,
-      "changePct": -4.25,
+      "price": 456.76,
+      "changePct": -6.85,
       "high": 505,
-      "low": 464.39
+      "low": 437.23
     },
     "IWM": {
-      "price": 282.64,
-      "changePct": -0.52,
+      "price": 282.26,
+      "changePct": -0.65,
       "high": 290.87,
-      "low": 281.81
+      "low": 277.62
     },
     "GLD": {
-      "price": 392.91,
-      "changePct": -1.1,
+      "price": 390.89,
+      "changePct": -1.61,
       "high": 400.48,
-      "low": 391.21
+      "low": 388.75
     }
   }
 }
