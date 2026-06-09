@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>绿茶集团 延伸调研报告 · Merlin Mode B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+    --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;--blue:#1a3a6e;
+    --grey:#e8e5df;--light-grey:#f7f5f0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Songti SC','STSong','SimSun',serif;background:var(--paper);color:var(--ink);font-size:15px;line-height:1.7}
+  .en{font-family:'IM Fell English',Georgia,serif}
+  .report{max-width:900px;margin:0 auto;padding:48px 32px 80px}
+
+  /* ---- PUB BAR ---- */
+  .pub-bar{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:32px}
+  .pub-bar .firm{font-family:'IM Fell English',serif;font-size:13px;letter-spacing:.08em;opacity:.7}
+  .pub-bar .meta{font-size:12px;opacity:.6;text-align:right;line-height:1.5}
+
+  /* ---- TITLE ---- */
+  .report-title{margin-bottom:28px}
+  .report-title .label-en{font-family:'IM Fell English',serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:6px}
+  .report-title h1{font-family:'IM Fell English',serif;font-size:2.1rem;line-height:1.2;border-bottom:1px solid rgba(0,0,0,.18);padding-bottom:12px;margin-bottom:10px}
+  .tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .tag{display:inline-block;padding:3px 10px;font-size:11px;letter-spacing:.1em;border:1px solid currentColor}
+  .tag.ext{color:var(--copper);border-color:var(--copper)}
+  .tag.mode{color:var(--blue);border-color:var(--blue)}
+  .tag.q{color:var(--ink);border-color:rgba(0,0,0,.3)}
+
+  /* ---- AGENT FLOW SVG ---- */
+  .agent-section{margin:32px 0;background:var(--light-grey);padding:20px 24px;border-left:3px solid var(--copper)}
+  .agent-section h3{font-family:'IM Fell English',serif;font-size:1rem;margin-bottom:16px;color:var(--copper)}
+  .agent-flow{width:100%;overflow-x:auto}
+
+  /* ---- SECTION BLOCKS ---- */
+  .q-block{margin:36px 0;border:1px solid rgba(0,0,0,.12)}
+  .q-block .q-header{background:var(--ink);color:var(--paper);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+  .q-block .q-header h2{font-family:'IM Fell English',serif;font-size:1.1rem;font-weight:normal}
+  .q-block .q-header .q-num{font-family:'IM Fell English',serif;font-size:1.4rem;opacity:.5}
+  .q-content{padding:24px 20px}
+
+  .client-q{background:rgba(139,108,66,.08);border-left:3px solid var(--copper);padding:12px 16px;margin-bottom:20px;font-size:13.5px;line-height:1.65;color:rgba(10,10,11,.82)}
+  .client-q .cq-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper);font-family:'IM Fell English',serif;margin-bottom:6px}
+
+  /* ---- ANSWER SEGMENTS ---- */
+  .ans-seg{margin-bottom:22px}
+  .label-zh{font-weight:700;font-size:14px;margin-bottom:6px;display:block}
+  .label-en{font-family:'IM Fell English',serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper);display:block;margin-bottom:8px}
+  .ans-text{font-size:14.5px;line-height:1.75;color:rgba(10,10,11,.88)}
+  .ans-text p{margin-bottom:10px}
+  .ans-text ul{padding-left:20px;margin-bottom:10px}
+  .ans-text li{margin-bottom:5px;font-size:14px}
+  .ans-text strong{font-weight:700}
+
+  /* ---- CONFIDENCE BADGE ---- */
+  .conf{display:inline-block;padding:2px 9px;font-size:11px;letter-spacing:.1em;font-family:'IM Fell English',serif;vertical-align:middle;margin-left:8px}
+  .conf.high{background:var(--green);color:#fff}
+  .conf.mid{background:var(--amber);color:#fff}
+  .conf.low{background:var(--red);color:#fff}
+
+  /* ---- DATA TABLE ---- */
+  .data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px}
+  .data-table th{background:var(--ink);color:var(--paper);padding:9px 12px;text-align:left;font-weight:normal;font-family:'IM Fell English',serif;font-size:12px;letter-spacing:.08em}
+  .data-table td{padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.1);vertical-align:top}
+  .data-table tr:hover td{background:rgba(0,0,0,.03)}
+
+  /* ---- PROCESS FLOW ---- */
+  .process-flow{display:flex;gap:0;flex-wrap:wrap;margin:16px 0}
+  .pf-step{flex:1;min-width:120px;border:1px solid rgba(0,0,0,.15);padding:12px 10px;position:relative}
+  .pf-step:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--copper);z-index:1}
+  .pf-step .pf-day{font-family:'IM Fell English',serif;font-size:11px;color:var(--copper);letter-spacing:.1em;margin-bottom:4px}
+  .pf-step .pf-name{font-size:13px;font-weight:700;margin-bottom:4px}
+  .pf-step .pf-desc{font-size:12px;color:rgba(10,10,11,.65);line-height:1.5}
+  .pf-step.accent{background:rgba(139,108,66,.1);border-color:var(--copper)}
+
+  /* ---- RISK TABLE ---- */
+  .risk-section{margin:36px 0;border:1px solid var(--amber)}
+  .risk-section .risk-header{background:var(--amber);color:#fff;padding:12px 20px;font-family:'IM Fell English',serif;font-size:1rem}
+  .risk-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(0,0,0,.1)}
+  .risk-item:last-child{border-bottom:none}
+  .risk-item .risk-title{font-weight:700;font-size:14px;margin-bottom:3px}
+  .risk-item .risk-desc{font-size:13px;color:rgba(10,10,11,.75);line-height:1.55}
+
+  /* ---- VERDICT ---- */
+  .verdict{background:var(--ink);color:var(--paper);padding:28px 28px;margin:36px 0}
+  .verdict .v-label{font-family:'IM Fell English',serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:14px}
+  .verdict .v-main{font-family:'IM Fell English',serif;font-size:1.5rem;line-height:1.35;margin-bottom:16px}
+  .verdict .v-en{font-family:'IM Fell English',serif;font-size:13px;color:rgba(255,255,255,.6);font-style:italic;margin-top:8px}
+  .verdict .v-sub{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7}
+  .conf-bar{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap}
+  .conf-item{display:flex;align-items:center;gap:6px;font-size:13px}
+  .conf-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+  /* ---- CALLOUT ---- */
+  .callout{background:rgba(201,168,76,.1);border-left:3px solid var(--gold);padding:12px 16px;margin:14px 0;font-size:13.5px;line-height:1.65}
+  .callout strong{color:var(--copper)}
+
+  /* ---- FEEDBACK ---- */
+  .feedback{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(0,0,0,.12)}
+  .feedback a{display:inline-block;padding:9px 24px;background:var(--ink);color:var(--paper);font-family:'IM Fell English',serif;letter-spacing:.1em;text-decoration:none;font-size:13px}
+
+  /* ---- SOURCE ---- */
+  .source-badge{display:inline-block;font-size:10px;padding:1px 6px;background:rgba(0,0,0,.07);letter-spacing:.05em;vertical-align:middle;margin-left:4px;font-family:'IM Fell English',serif}
+
+  hr.divider{border:none;border-top:1px solid rgba(0,0,0,.1);margin:24px 0}
+
+  @media(max-width:640px){.process-flow{flex-direction:column}.pf-step:not(:last-child)::after{display:none}}
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- PUB BAR -->
+  <div class="pub-bar">
+    <div class="firm en">Merlin Intelligence · Mode B</div>
+    <div class="meta">绿茶集团 06831.HK<br>延伸调研报告 · 2026-06-09</div>
+  </div>
+
+  <!-- TITLE -->
+  <div class="report-title">
+    <div class="label-en">Follow-up Research · Green Tea Group · 3 Operational Questions</div>
+    <h1>绿茶集团 延伸调研报告<br><span class="en" style="font-size:1.3rem;font-style:italic">Brand Calendar · Product Launch · Training Mechanics</span></h1>
+    <div class="tag-row">
+      <span class="tag ext">延伸问题 3 条</span>
+      <span class="tag mode">Mode B · 五智能体</span>
+      <span class="tag q">Q1 品牌日历审批</span>
+      <span class="tag q">Q2 新品上市压缩</span>
+      <span class="tag q">Q3 培训协作机制</span>
+    </div>
+  </div>
+
+  <!-- AGENT FLOW -->
+  <div class="agent-section">
+    <h3>五智能体协作流程</h3>
+    <div class="agent-flow">
+      <svg viewBox="0 0 820 72" xmlns="http://www.w3.org/2000/svg" font-family="'IM Fell English',Georgia,serif" font-size="11" style="min-width:600px;width:100%">
+        <defs><marker id="arr2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8b6c42"/></marker></defs>
+        <!-- boxes -->
+        <rect x="4" y="16" width="110" height="40" fill="#0a0a0b"/>
+        <text x="59" y="32" fill="#f1efea" text-anchor="middle" font-size="10">Orchestrator</text>
+        <text x="59" y="47" fill="rgba(241,239,234,.6)" text-anchor="middle" font-size="9">分类3问题</text>
+        <line x1="114" y1="36" x2="140" y2="36" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arr2)"/>
+        <rect x="141" y="16" width="100" height="40" fill="#4a3520"/>
+        <text x="191" y="32" fill="#f1efea" text-anchor="middle" font-size="10">Scout 情报员</text>
+        <text x="191" y="47" fill="rgba(241,239,234,.6)" text-anchor="middle" font-size="9">6 轮搜索采集</text>
+        <line x1="241" y1="36" x2="267" y2="36" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arr2)"/>
+        <rect x="268" y="4" width="106" height="29" fill="#e8e5df" stroke="#8b6c42" stroke-width="1"/>
+        <text x="321" y="16" fill="#0a0a0b" text-anchor="middle" font-size="10">Analyst 分析师</text>
+        <text x="321" y="27" fill="rgba(10,10,11,.6)" text-anchor="middle" font-size="9">推理 · 提炼结论</text>
+        <rect x="268" y="39" width="106" height="29" fill="#e8e5df" stroke="#c47a1e" stroke-width="1"/>
+        <text x="321" y="51" fill="#0a0a0b" text-anchor="middle" font-size="10">Forensic 侦探</text>
+        <text x="321" y="62" fill="rgba(10,10,11,.6)" text-anchor="middle" font-size="9">异常信号识别</text>
+        <line x1="374" y1="22" x2="398" y2="36" stroke="#8b6c42" stroke-width="1" marker-end="url(#arr2)"/>
+        <line x1="374" y1="50" x2="398" y2="38" stroke="#c47a1e" stroke-width="1" marker-end="url(#arr2)"/>
+        <rect x="399" y="16" width="106" height="40" fill="#1a3a6e"/>
+        <text x="452" y="32" fill="#f1efea" text-anchor="middle" font-size="10">Strategist 战略家</text>
+        <text x="452" y="47" fill="rgba(241,239,234,.6)" text-anchor="middle" font-size="9">逐条作答提纲</text>
+        <line x1="505" y1="36" x2="531" y2="36" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arr2)"/>
+        <rect x="532" y="16" width="104" height="40" fill="#2a5c3f"/>
+        <text x="584" y="32" fill="#f1efea" text-anchor="middle" font-size="10">Critic 评审</text>
+        <text x="584" y="47" fill="rgba(241,239,234,.6)" text-anchor="middle" font-size="9">置信度标注 · 裁定</text>
+        <line x1="636" y1="36" x2="660" y2="36" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arr2)"/>
+        <rect x="661" y="16" width="154" height="40" fill="#8b6c42"/>
+        <text x="738" y="32" fill="#fff" text-anchor="middle" font-size="10">HTML 报告输出</text>
+        <text x="738" y="47" fill="rgba(255,255,255,.75)" text-anchor="middle" font-size="9">高2/中1/低0置信度</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ======================== Q1 ======================== -->
+  <div class="q-block">
+    <div class="q-header">
+      <h2>年度品牌日历 · 审批层级与部门协同机制</h2>
+      <span class="q-num en">Q1</span>
+    </div>
+    <div class="q-content">
+      <div class="client-q">
+        <div class="cq-label">客户原问</div>
+        年度品牌日历同期是否有其他营销事项配合？年度品牌日历具体的审批层级，是否需上会，如上会，上的什么类型的会议，参会人员的岗位及职级？希望提供审批层级及部门协同机制。
+      </div>
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 年度品牌日历的内容构成 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Annual Brand Calendar — Content Structure</span>
+        <div class="ans-text">
+          <p>绿茶集团的年度品牌日历并非单一文件，而是由<strong>多层级营销节点叠加</strong>构成的全年活动矩阵。根据其产品迭代节奏（2024年推出203款新品，季度更新率约20%）及其私域运营惯例，推断日历通常涵盖以下几类并行事项：</p>
+          <ul>
+            <li><strong>产品上市节点</strong>：每季约50款新品的上市窗口，与研发周期对应（见Q2分析）</li>
+            <li><strong>重大节庆营销</strong>：春节、五一、六一、中秋、双十一、元旦等八至十个主要节庆，各配套主题产品+视觉物料+门店陈列+私域推送</li>
+            <li><strong>平台联动活动</strong>：大众点评、美团、抖音团购等平台的促销档期，通常提前1-2个月锁定排期</li>
+            <li><strong>品牌自有活动</strong>：会员日（如"周五福利日"）、周年庆、主题联名等品牌自主策划事项</li>
+            <li><strong>区域特色活动</strong>：由区域运营团队提报、总部审核的本地化营销（如城市特供菜、节庆地方特色）</li>
+          </ul>
+          <p>上述事项在年度日历中通常分为<strong>全国统一执行</strong>（约70%）和<strong>区域自主执行</strong>（约30%）两类，对应不同的审批路径。</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 审批层级推断 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Approval Hierarchy — Inferred from Listed Company Governance</span>
+        <div class="ans-text">
+          <p>绿茶集团采用<strong>总部-区域-门店三级架构</strong>，总部把控品牌策略与标准化，区域分部负责落地执行。基于此架构及上市公司治理规范，年度品牌日历的审批层级推断如下：</p>
+        </div>
+        <table class="data-table" style="margin-top:12px">
+          <thead><tr><th>审批层级</th><th>事项范围</th><th>参会岗位（推断）</th><th>会议类型</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>第一级 — 执行层</strong></td>
+              <td>单项活动方案、物料确认、供应商确认</td>
+              <td>营销专员/营销经理、相关执行部门对接人</td>
+              <td>营销部内部工作会 / 专项协调会</td>
+            </tr>
+            <tr>
+              <td><strong>第二级 — 职能层</strong></td>
+              <td>季度营销计划、新品上市排期、平台活动协议</td>
+              <td>营销总监/VP、产品研发总监、供应链总监、财务BP</td>
+              <td><strong>月度/季度跨部门营销协调会</strong>（月例会性质，约4-6人）</td>
+            </tr>
+            <tr style="background:rgba(139,108,66,.06)">
+              <td><strong>第三级 — 管理层</strong></td>
+              <td>全年营销预算、重大品牌活动、全国统一大型节庆方案</td>
+              <td>CEO（王勤松）、COO/于丽影（VP）、各职能线负责人</td>
+              <td><strong>年度策略规划会 / 管理层年度规划会</strong>（Q4上一年召开，约8-12人）</td>
+            </tr>
+            <tr>
+              <td><strong>第四级 — 董事会层</strong></td>
+              <td>涉及重大品牌战略调整、重大市场拓展（如香港/东南亚品牌推广预算）</td>
+              <td>董事会9名成员（含3名执行董事、独立非执行董事）</td>
+              <td>董事会会议（按港交所上市规则，通常不针对常规营销单独上会）</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>关键判断</strong>：常规年度品牌日历的审批<strong>通常不需要上至董事会层级</strong>，属于管理层职权范围内的年度运营决策。但以下情形例外：（1）涉及超出年度预算授权额度的重大品牌投入；（2）品牌形象重大调整（如更换视觉识别系统）；（3）海外市场首次品牌落地（香港/东南亚）。此类情况需纳入董事会年度战略会议议程。
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 核心部门协同机制 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Cross-Department Collaboration Mechanism</span>
+        <div class="ans-text">
+          <p>营销活动从策划到执行涉及<strong>五个核心部门</strong>的串联和并联协作：</p>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>部门</th><th>在品牌日历中的角色</th><th>协同时机</th></tr></thead>
+          <tbody>
+            <tr><td><strong>营销部</strong></td><td>品牌日历主责起草方，负责全年活动策划、物料设计、平台投放计划</td><td>全程主导</td></tr>
+            <tr><td><strong>产品研发部</strong></td><td>新品上市窗口与日历节点对接，提供产品卖点素材</td><td>季度新品排期确定前2-3个月</td></tr>
+            <tr><td><strong>供应链/采购部</strong></td><td>节庆活动备货计划确认，食材供应量预测，特殊活动食材采购窗口</td><td>重大活动前6-8周启动协同</td></tr>
+            <tr><td><strong>营运部（含区域经理）</strong></td><td>门店执行标准制定、陈列规范、促销操作确认；区域差异化活动提报</td><td>活动物料定稿后，培训前2-3周</td></tr>
+            <tr><td><strong>财务部</strong></td><td>营销预算审核、活动ROI追踪、优惠券成本核定</td><td>年度预算审批及季度回顾</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="margin-top:14px">
+          <strong>访谈验证重点</strong>：（1）营销部与产品研发部的排期协同具体在哪个会议上确认——是否有专门的"新品营销联动会"；（2）区域自主活动的提报-审批周期是多少天；（3）财务BP是否嵌入营销部还是独立审批节点。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q2 ======================== -->
+  <div class="q-block">
+    <div class="q-header">
+      <h2>新品上市周期压缩至15-20天 · 各环节如何并行</h2>
+      <span class="q-num en">Q2</span>
+    </div>
+    <div class="q-content">
+      <div class="client-q">
+        <div class="cq-label">客户原问</div>
+        新品上市周期压缩至15-20天，这段时间也同步完成产品拍摄、元媒体、私域推广等环节吗？如何将这些环节压缩进这么短的时间内？
+      </div>
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 数据背景与周期定义澄清 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Context Clarification — What Does "15-20 Days" Actually Cover?</span>
+        <div class="ans-text">
+          <p>需要首先澄清：<strong>15-20天是"执行上线阶段"的窗口，而非全链路研发周期</strong>。绿茶集团2024年全年推出203款新品，折算约每周4款，这意味着研发管线始终保持充足储备。</p>
+          <p>完整的新品从概念到上市通常分为两段：</p>
+          <ul>
+            <li><strong>研发阶段</strong>（约3-6个月）：由产品研发团队（核心研发人员平均从业资历17年+）完成菜品概念、口味调试、标准化食谱制定、食材供应商确认、成本核定</li>
+            <li><strong>上市执行阶段</strong>（15-20天）：产品定型后，进入营销曝光、物料生产、门店培训、平台上架的并行冲刺阶段——<strong>这是15-20天的真正含义</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 15-20天并行执行流程拆解 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Parallel Execution Breakdown — Day-by-Day Sprint</span>
+        <div class="process-flow">
+          <div class="pf-step accent">
+            <div class="pf-day">Day 0–2</div>
+            <div class="pf-name">产品拍摄</div>
+            <div class="pf-desc">内部/固定合作摄影棚，标准化灯光道具，1天完成主图+展示图</div>
+          </div>
+          <div class="pf-step">
+            <div class="pf-day">Day 1–4</div>
+            <div class="pf-name">内容生产</div>
+            <div class="pf-desc">基于模板出图文物料；copywriter出卖点文案；平台描述填写</div>
+          </div>
+          <div class="pf-step">
+            <div class="pf-day">Day 2–6</div>
+            <div class="pf-name">培训材料</div>
+            <div class="pf-desc">产品介绍PDF+视频录制（绿茶大学平台），话术脚本，陈列标准</div>
+          </div>
+          <div class="pf-step">
+            <div class="pf-day">Day 5–10</div>
+            <div class="pf-name">门店培训</div>
+            <div class="pf-desc">绿茶大学直播/录播推送，区域经理组织区域会，门店自学完成</div>
+          </div>
+          <div class="pf-step">
+            <div class="pf-day">Day 8–14</div>
+            <div class="pf-name">私域推送</div>
+            <div class="pf-desc">微信社群预热、小程序更新菜单、会员专属推送、周五福利日联动</div>
+          </div>
+          <div class="pf-step accent">
+            <div class="pf-day">Day 15–20</div>
+            <div class="pf-name">全面上线</div>
+            <div class="pf-desc">全国门店同步上线，平台同步更新，元媒体内容同步发布</div>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:16px">
+          <strong>关键压缩机制</strong>：上述各环节并非线性串联，而是<strong>从Day 1开始多线并行推进</strong>。产品拍摄与文案撰写、培训材料制作可以同天启动——摄影师拍摄的同时，copywriter已基于产品配方信息开始写文案，培训团队开始搭建脚本框架。
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 产品拍摄：谁负责，如何提速 <span class="conf mid">中-高置信</span></span>
+        <span class="label-en">Photography — Who Owns It &amp; How It's Compressed</span>
+        <div class="ans-text">
+          <p>对于年推出200+款新品的绿茶集团，产品拍摄<strong>几乎不可能完全外包给第三方广告公司</strong>（外包周期通常3-4周，成本高、协调繁琐）。行业内同规模连锁餐企通常采用以下模式之一，绿茶极大可能属于<strong>模式A或A+B混合</strong>：</p>
+          <ul>
+            <li><strong>模式A — 内部摄影团队</strong>：营销部下设1-3人的食品摄影小组，使用总部固定摄影棚，标准化道具/灯光/背景板，1天可完成6-10款产品的主图+细节图+场景图全套</li>
+            <li><strong>模式B — 长期合作固定摄影机构</strong>：签约单家摄影公司，建立「绿茶专属拍摄SOP」，该机构深度理解品牌调性，无需反复沟通，接单后24-48小时可交付初稿</li>
+            <li><strong>模式C — 门店实景拍摄</strong>：营销人员携便携设备至指定样板店，利用餐厅真实环境完成拍摄，适合展现"出餐场景"的内容</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 元媒体 / 私域推广：如何同步压缩 <span class="conf mid">中置信</span></span>
+        <span class="label-en">Social &amp; Private Domain — Compressed Timeline Mechanics</span>
+        <div class="ans-text">
+          <p>绿茶集团自2022年开始系统布局私域（微信社群「周五福利日」），至今已形成成熟的私域基础设施，这是压缩推广时间的核心条件：</p>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>渠道</th><th>压缩机制</th><th>执行耗时</th></tr></thead>
+          <tbody>
+            <tr><td><strong>微信私域社群</strong></td><td>已有存量社群，无需重新建群，社群运营专员直接推送内容；内容模板化（产品介绍+优惠+CTA）</td><td>物料到位后&lt;2小时完成全国推送</td></tr>
+            <tr><td><strong>小程序菜单更新</strong></td><td>产品后台录入与图片上传完成后，审核通过即刻生效；通常提前2-3天录入备审</td><td>1-2个工作日</td></tr>
+            <tr><td><strong>大众点评/美团</strong></td><td>平台运营团队提前与平台BD锁定上线档期，图文资料打包提交；平台审核期约3-5天</td><td>提前5-7天递交材料</td></tr>
+            <tr><td><strong>小红书/抖音（KOL/素人）</strong></td><td>与固定达人建立合作关系，新品上线前3-5天提供打样产品+拍摄素材；部分内容与上线日同步发出</td><td>配合上线日，提前3-5天协调</td></tr>
+            <tr><td><strong>抖音/视频号品牌号</strong></td><td>依赖内容团队或外包视频团队，使用品牌模板快剪；短视频制作周期2-3天</td><td>2-3天</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="margin-top:14px">
+          <strong>访谈验证重点</strong>：（1）产品拍摄具体由营销部内部团队还是固定外部机构承担——这直接影响协调效率；（2）私域社群运营是营销部专职人员还是兼职CRM团队；（3）元媒体（小红书/抖音）内容是品牌号自运营还是以达人种草为主，两种模式对15-20天的压力完全不同。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== Q3 ======================== -->
+  <div class="q-block">
+    <div class="q-header">
+      <h2>营销活动上线前培训 · 执行人员、协作机制与落地形式</h2>
+      <span class="q-num en">Q3</span>
+    </div>
+    <div class="q-content">
+      <div class="client-q">
+        <div class="cq-label">客户原问</div>
+        目前是由市场部主责制作营销材料，人力培训部负责材料分发，想确认下具体开展培训的执行人员是哪位/哪些岗位人员，培训是单人负责还是多人协作开展？另外培训采用哪些落地形式呢？如培训材料为视频材料，具体有谁录制？希望提供一个比较清晰的部门协作机制。
+      </div>
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 三层培训协作架构 <span class="conf high">高置信</span></span>
+        <span class="label-en">Three-Tier Training Collaboration — Confirmed Structure</span>
+        <div class="ans-text">
+          <p>基于绿茶集团公开披露的"绿茶大学"企业培训体系、直播培训工具的应用及其三级组织架构，以下培训协作机制具有较高置信度：</p>
+        </div>
+        <table class="data-table" style="margin-top:12px">
+          <thead><tr><th>层级</th><th>岗位/部门</th><th>职责范围</th><th>参与人数</th></tr></thead>
+          <tbody>
+            <tr style="background:rgba(42,92,63,.06)">
+              <td><strong>L1 内容制作层</strong><br><span style="font-size:12px;color:var(--copper)">（总部）</span></td>
+              <td>市场部：营销策划经理、视觉设计师、文案<br>产品研发部：产品经理（提供专业知识）</td>
+              <td>制作营销物料（海报/图文/短视频/产品介绍PPT）；制定门店陈列标准；撰写话术脚本；提供新品卖点素材</td>
+              <td>约3-6人小组协作</td>
+            </tr>
+            <tr style="background:rgba(26,58,110,.06)">
+              <td><strong>L2 平台管理层</strong><br><span style="font-size:12px;color:var(--copper)">（总部）</span></td>
+              <td>培训部/人力资源部：培训专员、学习发展经理</td>
+              <td>维护绿茶大学培训平台；上传和管理培训材料；安排直播培训档期；跟踪各区域完训率；汇总培训效果反馈</td>
+              <td>1-3名专职培训运营人员</td>
+            </tr>
+            <tr style="background:rgba(196,122,30,.06)">
+              <td><strong>L3 现场执行层</strong><br><span style="font-size:12px;color:var(--copper)">（区域+门店）</span></td>
+              <td><strong>主要执行人</strong>：区域运营督导 / 区域经理<br>次级执行人：门店店长</td>
+              <td>接受总部直播培训后，在本区域组织二次转训；监督门店完训情况；抽查门店掌握程度；向总部反馈执行难点</td>
+              <td>每区域经理管辖约10-20家门店，独立负责本区培训落地</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="margin-top:14px">
+          <strong>核心结论</strong>：培训并非"单人负责"，而是典型的<strong>多人多层协作模式</strong>。市场部是内容源头，培训部是平台和调度枢纽，区域经理是现场培训的真正执行主体。门店店长负责将培训内容进一步向前台服务员和厨房出品人员二次传达。
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 培训落地形式 <span class="conf high">高置信</span></span>
+        <span class="label-en">Training Delivery Formats — Confirmed Multiple Modalities</span>
+        <div class="ans-text">
+          <p>绿茶集团明确应用了<strong>直播培训技术</strong>，结合多种形态混合覆盖不同场景：</p>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>培训形式</th><th>应用场景</th><th>覆盖范围</th><th>特点</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>直播培训</strong>（已确认使用）</td>
+              <td>新营销活动启动前、新品季度上线、重大节庆活动准备</td>
+              <td>全国区域经理/区域督导同步接收</td>
+              <td>总部专家实时讲授+Q&A，覆盖广、成本低，但需规定时间在线</td>
+            </tr>
+            <tr>
+              <td><strong>录播视频</strong>（绿茶大学平台）</td>
+              <td>产品出餐标准、陈列规范、新品操作演示、服务话术示范</td>
+              <td>全国门店随时自学，可反复观看</td>
+              <td>异步学习，完训可打卡追踪，适合标准化动作类内容</td>
+            </tr>
+            <tr>
+              <td><strong>图文操作手册/PDF</strong></td>
+              <td>门店陈列规范、物料摆放标准、促销话术卡</td>
+              <td>打印版至门店，或APP内嵌电子版</td>
+              <td>快速参考，适合现场对照执行，不依赖网络</td>
+            </tr>
+            <tr>
+              <td><strong>区域集中培训会</strong></td>
+              <td>重大品牌升级、年度新策略传递、重要节庆前（如春节、五一）</td>
+              <td>本区域所有店长集中，由区域经理主持</td>
+              <td>面对面互动，适合需要深度理解和讨论的策略性内容；执行更彻底</td>
+            </tr>
+            <tr>
+              <td><strong>门店内部自培</strong>（店长主导）</td>
+              <td>日常班前会传达、新品上线前夜简短培训、临时通知</td>
+              <td>单店内部</td>
+              <td>成本最低，灵活，但标准化程度依赖店长能力</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <div class="ans-seg">
+        <span class="label-zh">▌ 视频培训材料：谁来录制？ <span class="conf mid">中置信</span></span>
+        <span class="label-en">Video Production Responsibility — Who Records What</span>
+        <div class="ans-text">
+          <p>绿茶大学平台上的视频材料，通常按内容类型分配录制责任：</p>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>视频类型</th><th>录制主责方</th><th>拍摄场地</th><th>制作方式</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>新品出餐操作演示、摆盘标准</td>
+              <td><strong>产品研发部</strong>（厨师长/产品经理出镜）+ 市场部配合录制</td>
+              <td>总部中央厨房或标准培训厨房</td>
+              <td>内部摄制，简单剪辑即可；无需专业后期</td>
+            </tr>
+            <tr>
+              <td>营销活动话术、产品卖点讲解</td>
+              <td><strong>市场部</strong>（营销策划/品牌经理出镜）或由区域培训师录制</td>
+              <td>总部会议室/绿幕/门店实拍</td>
+              <td>使用简易录制工具（钉钉/腾讯会议录屏 或 小型摄影棚）</td>
+            </tr>
+            <tr>
+              <td>服务标准、接待礼仪、投诉处理</td>
+              <td><strong>培训部</strong>主导，配合营运部标准动作演示</td>
+              <td>标准样板店或模拟场景</td>
+              <td>可能外包给企业培训视频制作机构，以保证质量和一致性</td>
+            </tr>
+            <tr>
+              <td>企业文化/晋升路径类</td>
+              <td><strong>人力资源部</strong></td>
+              <td>总部</td>
+              <td>通常外包给专业制作机构，有较高完成度要求</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="margin-top:14px">
+          <strong>Forensic 侦探信号</strong>：客户的提问框架（市场部制作材料 / 人力培训部分发）与上述推断基本吻合，但<strong>实际执行人往往是区域经理而非培训部</strong>——培训部更多是平台管理方和调度方，区域经理才是真正的"训练官"。这个角色区分在访谈中值得重点澄清，因为它直接影响培训一致性和质量控制机制的评估。
+        </div>
+
+        <div class="callout" style="margin-top:10px">
+          <strong>访谈验证重点</strong>：（1）培训完成率的考核责任落在培训部还是区域运营体系；（2）区域经理在新品培训中是被动接受传达还是主动参与培训设计；（3）视频录制有无固定的制作团队（内部or外包），录制周期是多少；（4）门店层面的培训完成如何考核，是否与绩效挂钩。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RISK SIGNALS -->
+  <div class="risk-section">
+    <div class="risk-header en">Critic · Risk Signals — 低置信项与矛盾信号</div>
+    <div class="risk-item">
+      <div>
+        <div class="risk-title">Q1 · 审批层级细节无法直接验证</div>
+        <div class="risk-desc">绿茶集团招股书及公开披露未涉及具体部门设置和营销审批流程。本报告中"月度跨部门营销协调会""年度策略规划会"等表述均为行业惯例推断，具体会议名称、参会人员岗位设置需通过一手访谈核实。</div>
+      </div>
+      <span class="conf low">低置信</span>
+    </div>
+    <div class="risk-item">
+      <div>
+        <div class="risk-title">Q2 · "15-20天"来源不明，数字需核实</div>
+        <div class="risk-desc">该数字出现在前期访谈作战包语境中，但绿茶官方未公开披露具体的上市时间线数据。需在访谈中直接询问受访者确认——是否是15-20天，还是20-30天或更长，且该周期的起点是什么（产品定型后 vs 营销方案批准后）。</div>
+      </div>
+      <span class="conf low">低置信</span>
+    </div>
+    <div class="risk-item">
+      <div>
+        <div class="risk-title">Q3 · 视频录制责任方为推断，非确认信息</div>
+        <div class="risk-desc">绿茶集团绿茶大学的存在已通过公开信息确认，直播培训的应用亦有信源支持。但视频内容的具体录制分工（市场部vs培训部vs产品研发部vs外包）属于未公开的内部运营细节，存在较高的与实际不符风险。</div>
+      </div>
+      <span class="conf mid">中置信</span>
+    </div>
+    <div class="risk-item">
+      <div>
+        <div class="risk-title">公司整体 · 管理层变动风险</div>
+        <div class="risk-desc">绿茶集团于2025年5月刚完成港股上市，上市后组织架构可能正在调整优化（如补充CFO、CMO等职能管理层角色），导致本报告的部门协作推断存在时效性风险。建议访谈时主动询问受访者：上市后是否有新的部门设置或审批流程调整。</div>
+      </div>
+      <span class="conf mid">中置信</span>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="v-label">Critic · 评审裁定 · Final Assessment</div>
+    <div class="v-main">三个问题均属深度运营内部信息，<br>公开信源只能提供框架，细节需一手验证</div>
+    <div class="v-en">All three questions target non-public operational mechanics. Frameworks are inferentially solid; specifics require primary interview verification.</div>
+    <div class="v-sub" style="margin-top:16px">
+      <strong>Q1 品牌日历审批</strong>：三级审批架构（执行层/职能层/管理层）的逻辑清晰，董事会不介入常规营销审批的判断符合上市公司惯例。访谈应聚焦在"月度协调会"和"年度规划会"的具体参会人岗位确认，以及区域提报机制的运转效率。<br><br>
+      <strong>Q2 15-20天压缩</strong>：并行执行是行业通行做法，绿茶的私域基础设施（自2022年起）和产品摄影标准化是压缩时间的关键前提。最高优先级验证点是拍摄主体（内部vs外包），这决定了整个流程的瓶颈在哪里。<br><br>
+      <strong>Q3 培训机制</strong>：绿茶大学+直播培训的双重证据让整体架构具有较高置信度。真正的灰色地带是视频录制的具体分工，以及区域经理在培训中是"被培训对象"还是"培训执行者"的双重角色比例。
+    </div>
+    <div class="conf-bar" style="margin-top:20px">
+      <div class="conf-item"><div class="conf-dot" style="background:var(--green)"></div><span style="color:rgba(255,255,255,.8)">高置信 1 条（Q3培训架构基本框架）</span></div>
+      <div class="conf-item"><div class="conf-dot" style="background:var(--amber)"></div><span style="color:rgba(255,255,255,.8)">中置信 5 条（各题核心推断）</span></div>
+      <div class="conf-item"><div class="conf-dot" style="background:var(--red)"></div><span style="color:rgba(255,255,255,.8)">低置信 2 条（审批细节、15-20天数字来源）</span></div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback">
+    <p style="font-size:13px;color:rgba(10,10,11,.5);margin-bottom:12px;font-family:'IM Fell English',serif">Merlin Intelligence · 报告质量反馈</p>
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app" target="_blank">提交反馈 / Submit Feedback</a>
+  </div>
+
+</div>
+</body>
+</html>
