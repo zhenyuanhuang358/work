@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绿茶集团 — Merlin 客户提纲研究报告</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0b;
+    --paper: #f1efea;
+    --copper: #8b6c42;
+    --gold: #c9a84c;
+    --cream: #e8e4dc;
+    --muted: #6b6560;
+    --high: #2a5c3f;
+    --mid: #7a5c1e;
+    --low: #8b2e2e;
+    --agent-bg: #1a1815;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); color: var(--ink); font-family: 'Songti SC', 'SimSun', Georgia, serif; font-size: 15px; line-height: 1.75; }
+
+  /* PUB BAR */
+  .pub-bar { background: var(--ink); color: var(--paper); padding: 10px 40px; display: flex; justify-content: space-between; align-items: center; font-family: 'IM Fell English', Georgia, serif; font-size: 12px; letter-spacing: 0.08em; }
+  .pub-bar .brand { color: var(--gold); font-size: 13px; font-style: italic; }
+
+  /* HEADER */
+  .header { padding: 52px 60px 36px; border-bottom: 2px solid var(--ink); }
+  .header .mode-tag { font-family: 'IM Fell English', serif; font-size: 11px; color: var(--copper); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
+  .header h1 { font-family: 'IM Fell English', Georgia, serif; font-size: 38px; font-weight: 400; color: var(--ink); line-height: 1.15; }
+  .header h1 .en { font-size: 17px; color: var(--muted); font-style: italic; display: block; margin-top: 6px; font-weight: 400; }
+  .header .meta-row { margin-top: 22px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .header .meta-item { font-size: 12px; color: var(--muted); font-family: 'IM Fell English', serif; }
+  .header .meta-item strong { color: var(--copper); }
+
+  /* FIVE-AGENT DIAGRAM */
+  .agent-section { background: var(--agent-bg); padding: 40px 60px; }
+  .agent-section h2 { font-family: 'IM Fell English', serif; color: var(--gold); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 28px; font-weight: 400; }
+
+  /* MAIN CONTENT */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 60px; }
+
+  /* SECTION */
+  .section { padding: 48px 0 32px; border-bottom: 1px solid var(--cream); }
+  .section:last-of-type { border-bottom: none; }
+  .section-header { margin-bottom: 28px; }
+  .section-header .q-num { font-family: 'IM Fell English', serif; font-size: 11px; color: var(--copper); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  .section-header h2 { font-family: 'IM Fell English', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--ink); }
+  .section-header h2 .zh { display: block; font-size: 20px; margin-bottom: 4px; }
+  .section-header h2 .en { font-size: 14px; color: var(--muted); font-style: italic; font-weight: 400; }
+
+  /* CONFIDENCE BADGE */
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 2px; font-family: 'IM Fell English', serif; font-size: 11px; letter-spacing: 0.08em; margin-left: 10px; vertical-align: middle; }
+  .badge-high { background: var(--high); color: #fff; }
+  .badge-mid { background: var(--mid); color: #fff; }
+  .badge-low { background: var(--low); color: #fff; }
+  .badge-source { background: var(--cream); color: var(--muted); border: 1px solid #ccc8c0; }
+
+  /* FLOW STAGES */
+  .flow-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin: 24px 0; }
+  .flow-stage { border: 1px solid var(--cream); padding: 16px 14px; position: relative; }
+  .flow-stage:not(:last-child)::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: var(--copper); font-size: 16px; z-index: 1; }
+  .flow-stage .stage-num { font-family: 'IM Fell English', serif; font-size: 10px; color: var(--copper); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .flow-stage .stage-name { font-size: 14px; font-weight: bold; color: var(--ink); margin-bottom: 6px; }
+  .flow-stage .stage-en { font-family: 'IM Fell English', serif; font-size: 11px; color: var(--muted); font-style: italic; margin-bottom: 8px; }
+  .flow-stage .stage-detail { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .flow-stage.highlight { background: #f7f4ee; border-color: var(--copper); }
+
+  /* DETAIL TABLE */
+  .detail-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+  .detail-table th { background: var(--ink); color: var(--paper); padding: 10px 14px; text-align: left; font-family: 'IM Fell English', serif; font-weight: 400; font-size: 12px; letter-spacing: 0.08em; }
+  .detail-table td { padding: 10px 14px; border-bottom: 1px solid var(--cream); vertical-align: top; line-height: 1.6; }
+  .detail-table tr:nth-child(even) td { background: #faf8f5; }
+  .detail-table .col-phase { color: var(--copper); font-weight: bold; white-space: nowrap; }
+  .detail-table .col-time { color: var(--muted); font-family: 'IM Fell English', serif; font-size: 12px; white-space: nowrap; }
+
+  /* COLLAB BLOCK */
+  .collab-block { background: #faf8f5; border-left: 3px solid var(--copper); padding: 18px 22px; margin: 16px 0; }
+  .collab-block .collab-title { font-family: 'IM Fell English', serif; font-size: 12px; color: var(--copper); letter-spacing: 0.1em; margin-bottom: 10px; }
+  .collab-block ul { padding-left: 18px; }
+  .collab-block ul li { margin-bottom: 5px; font-size: 13.5px; line-height: 1.6; }
+
+  /* MARKETING FLOW */
+  .mkt-stage { border: 1px solid var(--cream); margin-bottom: 16px; }
+  .mkt-stage-header { display: flex; align-items: center; gap: 14px; padding: 14px 20px; background: #faf8f5; border-bottom: 1px solid var(--cream); }
+  .mkt-stage-num { width: 28px; height: 28px; background: var(--copper); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'IM Fell English', serif; font-size: 13px; flex-shrink: 0; }
+  .mkt-stage-title { font-weight: bold; font-size: 15px; }
+  .mkt-stage-en { font-family: 'IM Fell English', serif; font-style: italic; color: var(--muted); font-size: 13px; }
+  .mkt-stage-body { padding: 16px 20px; }
+  .mkt-row { display: grid; grid-template-columns: 120px 1fr 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--cream); font-size: 13px; }
+  .mkt-row:last-child { border-bottom: none; }
+  .mkt-label { color: var(--copper); font-size: 12px; font-family: 'IM Fell English', serif; font-weight: bold; padding-top: 2px; }
+  .mkt-content { line-height: 1.6; }
+  .mkt-tool { background: var(--cream); padding: 2px 8px; border-radius: 2px; font-size: 11px; font-family: 'IM Fell English', serif; color: var(--muted); display: inline-block; margin: 2px 2px 2px 0; }
+
+  /* RISK TABLE */
+  .risk-section { background: var(--ink); color: var(--paper); padding: 40px 60px; }
+  .risk-section h2 { font-family: 'IM Fell English', serif; color: var(--gold); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 24px; font-weight: 400; }
+  .risk-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .risk-table th { color: var(--gold); font-family: 'IM Fell English', serif; font-weight: 400; padding: 8px 14px; border-bottom: 1px solid #333; text-align: left; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .risk-table td { padding: 12px 14px; border-bottom: 1px solid #1e1c19; vertical-align: top; line-height: 1.6; color: #ddd; }
+  .risk-table tr:last-child td { border-bottom: none; }
+  .risk-level { padding: 2px 8px; border-radius: 2px; font-size: 11px; font-family: 'IM Fell English', serif; }
+  .risk-level.low-conf { background: rgba(139,46,46,0.3); color: #ffaaaa; }
+  .risk-level.mid-conf { background: rgba(122,92,30,0.3); color: #ffd580; }
+
+  /* VERDICT */
+  .verdict { background: #1a1815; border: 1px solid var(--gold); padding: 32px 40px; margin: 0 60px 0; }
+  .verdict h2 { font-family: 'IM Fell English', serif; color: var(--gold); font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
+  .verdict-body { font-size: 15px; color: var(--paper); line-height: 1.8; }
+  .verdict-body .en { color: var(--muted); font-family: 'IM Fell English', serif; font-style: italic; font-size: 13px; margin-top: 12px; display: block; }
+  .verdict-stats { display: flex; gap: 32px; margin-top: 20px; padding-top: 20px; border-top: 1px solid #333; }
+  .verdict-stat { text-align: center; }
+  .verdict-stat .num { font-family: 'IM Fell English', serif; font-size: 28px; color: var(--gold); }
+  .verdict-stat .label { font-size: 11px; color: var(--muted); margin-top: 4px; font-family: 'IM Fell English', serif; letter-spacing: 0.08em; }
+
+  /* FOOTER */
+  footer { padding: 28px 60px; border-top: 1px solid var(--cream); display: flex; justify-content: space-between; align-items: center; font-family: 'IM Fell English', serif; font-size: 11px; color: var(--muted); margin-top: 40px; }
+
+  /* INLINE NOTE */
+  .note { font-family: 'IM Fell English', serif; font-style: italic; font-size: 12px; color: var(--muted); margin-top: 8px; padding-left: 12px; border-left: 2px solid var(--cream); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 1px; background: var(--copper); opacity: 0.3; }
+  .tl-item { position: relative; margin-bottom: 18px; }
+  .tl-item::before { content: ''; position: absolute; left: -20px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--copper); }
+  .tl-item .tl-head { font-weight: bold; font-size: 14px; color: var(--ink); }
+  .tl-item .tl-time { font-family: 'IM Fell English', serif; font-size: 11px; color: var(--copper); margin-left: 10px; font-style: italic; }
+  .tl-item .tl-body { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 16px 0; }
+
+  p { margin-bottom: 12px; font-size: 14px; line-height: 1.8; }
+  ul.body-list { padding-left: 20px; margin: 8px 0 16px; }
+  ul.body-list li { margin-bottom: 6px; font-size: 13.5px; line-height: 1.65; }
+
+  .kv-row { display: flex; gap: 8px; margin-bottom: 8px; align-items: flex-start; font-size: 13.5px; }
+  .kv-key { color: var(--copper); font-weight: bold; white-space: nowrap; min-width: 90px; }
+</style>
+</head>
+<body>
+
+<!-- PUB BAR -->
+<div class="pub-bar">
+  <span class="brand">Merlin — AI 咨询情报系统</span>
+  <span>绿茶集团（06831.HK）· 模式 B 客户提纲研究 · 2026-06-08</span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="mode-tag">Mode B · 五智能体客户提纲研究 / Five-Agent Research</div>
+  <h1>
+    <span class="zh">绿茶集团运营全流程研究</span>
+    <span class="en">Green Tea Group — Operational Process Research Report</span>
+  </h1>
+  <div class="meta-row">
+    <div class="meta-item"><strong>研究标的</strong> 绿茶集团有限公司（06831.HK）</div>
+    <div class="meta-item"><strong>行业</strong> 休闲中式连锁餐饮</div>
+    <div class="meta-item"><strong>提纲维度</strong> 开店全流程 / 营销活动全流程</div>
+    <div class="meta-item"><strong>数据截至</strong> 2025 年 IPO 招股书 + 2025 中期报告</div>
+  </div>
+</div>
+
+<!-- FIVE-AGENT FLOW SVG -->
+<div class="agent-section">
+  <h2>五智能体协作流程 / Five-Agent Collaboration</h2>
+  <svg viewBox="0 0 860 100" xmlns="http://www.w3.org/2000/svg" font-family="'IM Fell English',Georgia,serif" style="width:100%;max-width:860px;display:block;">
+    <!-- Boxes -->
+    <rect x="10" y="20" width="130" height="60" rx="4" fill="#2a2620" stroke="#c9a84c" stroke-width="1"/>
+    <rect x="185" y="20" width="130" height="60" rx="4" fill="#2a2620" stroke="#8b6c42" stroke-width="1"/>
+    <rect x="360" y="20" width="130" height="60" rx="4" fill="#2a2620" stroke="#8b6c42" stroke-width="1"/>
+    <rect x="535" y="20" width="130" height="60" rx="4" fill="#2a2620" stroke="#8b6c42" stroke-width="1"/>
+    <rect x="710" y="20" width="130" height="60" rx="4" fill="#2a2620" stroke="#c9a84c" stroke-width="1"/>
+    <!-- Arrows -->
+    <line x1="140" y1="50" x2="182" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="315" y1="50" x2="357" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="490" y1="50" x2="532" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <line x1="665" y1="50" x2="707" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#8b6c42"/></marker></defs>
+    <!-- Labels -->
+    <text x="75" y="44" fill="#c9a84c" font-size="11" text-anchor="middle">Orchestrator</text>
+    <text x="75" y="60" fill="#a89070" font-size="10" text-anchor="middle">问题分类</text>
+    <text x="250" y="44" fill="#ddd" font-size="11" text-anchor="middle">Scout</text>
+    <text x="250" y="60" fill="#a89070" font-size="10" text-anchor="middle">情报员·采集</text>
+    <text x="425" y="40" fill="#ddd" font-size="10.5" text-anchor="middle">Analyst +</text>
+    <text x="425" y="54" fill="#ddd" font-size="10.5" text-anchor="middle">Forensic</text>
+    <text x="425" y="68" fill="#a89070" font-size="10" text-anchor="middle">分析·侦探</text>
+    <text x="600" y="44" fill="#ddd" font-size="11" text-anchor="middle">Strategist</text>
+    <text x="600" y="60" fill="#a89070" font-size="10" text-anchor="middle">战略家·综合</text>
+    <text x="775" y="44" fill="#c9a84c" font-size="11" text-anchor="middle">Critic</text>
+    <text x="775" y="60" fill="#a89070" font-size="10" text-anchor="middle">评审·裁定</text>
+  </svg>
+  <div style="font-family:'IM Fell English',serif;font-size:12px;color:#6b6060;margin-top:16px;">
+    提纲分类：Q1/Q3（开店流程）→ 事实类＋推断类 &nbsp;|&nbsp; Q2/Q4（营销活动）→ 推断类为主，部分事实验证
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+<!-- ==================== Q1+Q3: 开店全流程 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="q-num">Q1 / Q3 · 开店流程</div>
+    <h2>
+      <span class="zh">开店全流程：网络规划 → 开发 → 试营业</span>
+      <span class="en">Store Opening End-to-End: Network Planning → Site Development → Soft Launch</span>
+    </h2>
+    <span class="badge badge-high">高置信 High</span>
+    <span class="badge badge-source">来源：IPO 招股书 + 行业 SOP</span>
+  </div>
+
+  <p>绿茶集团开店全流程分为五大阶段，从城市网络规划到正式营业，通常历时约 <strong>4–6 个月</strong>。2023 年平均现金回收期已优化至 <strong>14.8 个月</strong>（历史均值 19.2 个月），新店 <strong>1–2 个月</strong>内即可达到收支平衡。</p>
+
+  <!-- 5-stage flow -->
+  <div class="flow-grid">
+    <div class="flow-stage highlight">
+      <div class="stage-num">PHASE 01</div>
+      <div class="stage-name">网络规划</div>
+      <div class="stage-en">Network Planning</div>
+      <div class="stage-detail">年度开店目标制定、城市优先级矩阵、门店格局规划</div>
+    </div>
+    <div class="flow-stage">
+      <div class="stage-num">PHASE 02</div>
+      <div class="stage-name">选址开发</div>
+      <div class="stage-en">Site Development</div>
+      <div class="stage-detail">商圈调研、客流测算、租约谈判与签订</div>
+    </div>
+    <div class="flow-stage">
+      <div class="stage-num">PHASE 03</div>
+      <div class="stage-name">筹建装修</div>
+      <div class="stage-en">Construction</div>
+      <div class="stage-detail">标准化设计施工、设备采购、证照办理</div>
+    </div>
+    <div class="flow-stage">
+      <div class="stage-num">PHASE 04</div>
+      <div class="stage-name">人员配置</div>
+      <div class="stage-en">Staffing</div>
+      <div class="stage-detail">店长任命、员工招募、岗前培训</div>
+    </div>
+    <div class="flow-stage highlight">
+      <div class="stage-num">PHASE 05</div>
+      <div class="stage-name">试营业</div>
+      <div class="stage-en">Soft Launch</div>
+      <div class="stage-detail">内部压测、邀请制试运营、正式开业</div>
+    </div>
+  </div>
+
+  <!-- DETAILED BREAKDOWN -->
+  <table class="detail-table" style="margin-top:28px;">
+    <thead>
+      <tr>
+        <th style="width:110px;">阶段</th>
+        <th style="width:80px;">参考时长</th>
+        <th>核心动作</th>
+        <th>关键控制点</th>
+        <th>负责部门</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="col-phase">① 网络规划</td>
+        <td class="col-time">年度</td>
+        <td>
+          制定全年开店数量目标（2025 年 150 家）；城市评分矩阵：市场规模 × 竞争密度 × 租金水平；<br>
+          门店格局规划：87% 小型店（≤450㎡），约 50% 布局三线及以下城市；<br>
+          与集团战略对齐，资源预分配（资金、人员）
+        </td>
+        <td>
+          城市分级标准一致性；租金上限设定（建议 ≤ 营业额 20%）；年度配额分解至区域
+        </td>
+        <td>战略/拓展部</td>
+      </tr>
+      <tr>
+        <td class="col-phase">② 选址开发</td>
+        <td class="col-time">1–2 个月</td>
+        <td>
+          目标商圈调研：购物中心、社区底商、交通枢纽；<br>
+          客流量、消费能级、竞对分布评估；<br>
+          进入意向谈判 → 租约条款确认（租期、免租期、递增约定、物业配合保障）；<br>
+          签订租赁协议，报总部审批
+        </td>
+        <td>
+          租金坪效模型测算通过；周边同类门店饱和度；物业方提供排烟/强电/上下水条件确认
+        </td>
+        <td>拓展部 + 法务 + 财务</td>
+      </tr>
+      <tr>
+        <td class="col-phase">③ 筹建装修</td>
+        <td class="col-time">2–3 个月</td>
+        <td>
+          标准化 SI 图纸下发（江南水乡风格，品牌统一视觉）；<br>
+          本地施工团队管理，按阶段验收（隐蔽工程、水电、面层）；<br>
+          设备采购：POS 终端、厨房设备、数字化管理硬件；<br>
+          食品经营许可证、消防验收、营业执照等证照办理
+        </td>
+        <td>
+          装修标准合规性（品牌 SI 偏差率）；隐蔽工程质量验收；证照办结时间节点
+        </td>
+        <td>工程部 + 采购部 + 行政</td>
+      </tr>
+      <tr>
+        <td class="col-phase">④ 人员配置</td>
+        <td class="col-time">1–2 个月</td>
+        <td>
+          店长任命或内部晋升：门店管理人员最优配比落地；<br>
+          批量招募本地员工，依据绿茶标准化岗位配比；<br>
+          岗前集中培训：服务 SOP、产品标准、食品安全；<br>
+          供应链系统账号开通，门店数字化工具接入
+        </td>
+        <td>
+          店长资质达标；核心岗位（大厨/前厅主管）到岗率；培训通过率考核
+        </td>
+        <td>人力资源 + 培训部 + 运营</td>
+      </tr>
+      <tr>
+        <td class="col-phase">⑤ 试营业</td>
+        <td class="col-time">1–4 周</td>
+        <td>
+          内部压力测试：模拟高峰客流、出餐效率、服务动线；<br>
+          邀请制试营业：内部员工、供应商、媒体试吃；<br>
+          问题汇总 → 整改闭环 → 正式开业；<br>
+          开业营销动作配合（详见营销流程）；<br>
+          目标：开业 1–2 个月内实现收支平衡
+        </td>
+        <td>
+          出餐时间 ≤ 标准值；菜品还原度评分；顾客满意度 NPS 基准值；首月翻台率达标
+        </td>
+        <td>运营部 + 品质部 + 市场部</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    侦探异常信号：招股书披露开店数据显示签约租赁协议与实际开业存在约 1–2 个月滞差（"已签 37 家、其中 27 家已开始装修"同期数据印证），说明选址-装修-开业三段节奏普遍紧凑但非完全流水线化，证照办理可能是最主要瓶颈。
+  </div>
+
+  <!-- 数字化支持 -->
+  <div class="collab-block" style="margin-top:20px;">
+    <div class="collab-title">📡 开店流程数字化工具 / Digital Tools</div>
+    <div class="two-col">
+      <div>
+        <strong>选址阶段</strong>
+        <ul class="body-list">
+          <li>商圈数据平台（客流热力、POI 密度分析）</li>
+          <li>内部选址评分系统（租金坪效模型）</li>
+          <li>OA 系统：总部审批工作流</li>
+        </ul>
+      </div>
+      <div>
+        <strong>筹建/开业阶段</strong>
+        <ul class="body-list">
+          <li>工程进度管理系统（阶段验收打卡）</li>
+          <li>POS 收银系统接入（美团/微信/支付宝）</li>
+          <li>供应链中台账号开通（采购订单、库存）</li>
+          <li>厨房管理系统（KDS 厨显）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note" style="margin-top:8px;">置信说明：具体工具品牌（如 POS 系统供应商、选址数据来源）未在公开资料中披露，需访谈确认。</div>
+  </div>
+</div>
+
+<!-- ==================== Q2+Q4: 营销活动全流程 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="q-num">Q2 / Q4 · 营销活动流程</div>
+    <h2>
+      <span class="zh">营销活动全流程：规划 → 产品 → 供应链 → 营运 → 培训 → 门店落地 → 考核</span>
+      <span class="en">Marketing Campaign End-to-End: Planning → Product → Supply Chain → Operations → Training → In-Store → Assessment</span>
+    </h2>
+    <span class="badge badge-mid">中置信 Medium</span>
+    <span class="badge badge-source">来源：IPO 招股书 + 行业对标推断</span>
+  </div>
+
+  <p>绿茶营销的核心抓手是<strong>「产品常变常新」</strong>：2022–2024 年分别新推 172、168、203 道菜品，以季度为周期驱动营销节奏。以下为七阶段完整协作框架，结合绿茶已披露信息及行业最佳实践。</p>
+
+  <!-- STAGE 1: 规划 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">1</div>
+      <div>
+        <div class="mkt-stage-title">营销规划</div>
+        <div class="mkt-stage-en">Campaign Planning &amp; Brand Calendar</div>
+      </div>
+      <span class="badge badge-mid" style="margin-left:auto;">中置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          年度品牌日历制定：以季度新品上市为主轴，叠加节气营销（春节/端午/中秋）、节日主题（母亲节/情人节）、品牌周年活动；<br>
+          主题确定：新品系列命名、视觉主题色调、营销卖点提炼；<br>
+          预算分配：各渠道（外卖平台、私域、内容种草、门店物料）资源配比
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>市场部</strong> 主导；品牌部提供视觉调性；<br>研发部同步启动产品开发（同期进行）</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：上线时间节点锁定（倒排工期）；渠道投入 ROI 预测模型通过财务审批</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">项目管理系统（钉钉/飞书）</span>
+          <span class="mkt-tool">美团/大众点评商家后台</span>
+          <span class="mkt-tool">私域数据平台</span>
+          <span class="mkt-tool">财务预算系统</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 2: 产品配合 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">2</div>
+      <div>
+        <div class="mkt-stage-title">产品配合</div>
+        <div class="mkt-stage-en">Product Development &amp; Menu Alignment</div>
+      </div>
+      <span class="badge badge-high" style="margin-left:auto;">高置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          研发部启动新品开发（年均 200+ 道）：创意提案 → 初版配方 → 内部盲测 → 小范围门店试销（部分城市）→ 数据评估 → 全国上线/淘汰决策；<br>
+          SKU 规划：上市品、退市品、保留品三类菜单动态管理；<br>
+          定价策略：与整体客单价区间（人均 60–80 元）保持一致性；<br>
+          菜单设计更新：菜谱、点餐牌、外卖菜单同步
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>研发部</strong> 主导；<strong>采购部</strong> 同步确认食材可得性和成本；<strong>品质部</strong> 食品安全评估</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：新品出品标准化（SOP 化食谱）；食材采购可保障性确认；小范围试销数据阈值（复购率/好评率达标才全国推）</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">菜品研发管理系统</span>
+          <span class="mkt-tool">门店销售数据分析平台</span>
+          <span class="mkt-tool">美团/大众点评菜品评分追踪</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 3: 供应链配合 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">3</div>
+      <div>
+        <div class="mkt-stage-title">供应链配合</div>
+        <div class="mkt-stage-en">Supply Chain Alignment</div>
+      </div>
+      <span class="badge badge-mid" style="margin-left:auto;">中置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          新品食材来源确认：绿茶依托约 200 家第三方食品加工厂 + 区域直采；<br>
+          需求预测：按历史门店客流模型，预测新品上线后各区域食材消耗量；<br>
+          备货与配送计划：供应链中台统筹全国配送节奏；<br>
+          库存预警：数字化采购订单 + 全域库存管理系统实时追踪；<br>
+          食材溯源管理：品质部负责来源合规性（食品安全合规）
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>供应链部</strong> 主导；<strong>研发部</strong> 提供食材规格书；<strong>财务部</strong> 控制食材成本率</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：新品食材全国铺货到位率（目标 100% 开业当天到货）；食材成本率未超 BOM 设定上限；供应商备货周期 ≤ 活动启动提前量</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">供应链中台（采购订单数字化）</span>
+          <span class="mkt-tool">全域库存管理系统</span>
+          <span class="mkt-tool">门店补货系统</span>
+          <span class="mkt-tool">食材溯源平台</span>
+        </div>
+      </div>
+      <div class="note">侦探信号：绿茶目前尚无自营中央厨房，计划用 IPO 募资 HKD 2 亿建设（覆盖 90% 半成品供应）。中央厨房建成前，跨区域供应链协调复杂度较高，是当前营销活动供应链配合的最大瓶颈。</div>
+    </div>
+  </div>
+
+  <!-- STAGE 4: 营运配合 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">4</div>
+      <div>
+        <div class="mkt-stage-title">营运配合</div>
+        <div class="mkt-stage-en">Operations Alignment</div>
+      </div>
+      <span class="badge badge-mid" style="margin-left:auto;">中置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          门店排班调整：大型营销活动（如新品首发周）预估客流增加，营运中心下发排班指引；<br>
+          出品效率管控：厨房流程再造（新品上线可能改变出菜动线）；<br>
+          服务标准更新：涉及活动的接待话术、推荐话术同步；<br>
+          外卖渠道运营：美团/饿了么平台新品上架、主图拍摄、活动报名
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>运营部</strong> 主导；<strong>市场部</strong> 提供活动素材；<strong>供应链部</strong> 确认食材到位</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：活动期间出餐时间达标率；外卖评分保持 4.7+；新品推荐率（服务员主动推荐比例）</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">餐厅管理系统（排班/收银）</span>
+          <span class="mkt-tool">美团商家后台（外卖运营）</span>
+          <span class="mkt-tool">抖音/小红书团购后台</span>
+          <span class="mkt-tool">KDS 厨房显示系统</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 5: 培训 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">5</div>
+      <div>
+        <div class="mkt-stage-title">培训</div>
+        <div class="mkt-stage-en">Training &amp; Capability Build</div>
+      </div>
+      <span class="badge badge-mid" style="margin-left:auto;">中置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          活动前 7–14 天：培训部下发新品培训材料（标准食谱视频 + 要点手册）；<br>
+          店长培训：区域督导 → 店长（Master Trainer 制）；<br>
+          员工二次培训：店长 → 前厅/后厨员工（到店实操）；<br>
+          考核验收：实操考核（出品还原度）+ 理论测验（产品知识）；<br>
+          新员工培训：绿茶岗位 SOP 手册标准化培训体系
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>培训部</strong> 主导；<strong>研发部</strong> 提供食谱培训素材；<strong>运营部</strong> 负责到店实操验收</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：培训覆盖率（活动上线前所有门店完训）；出品考核通过率 ≥ 目标值；未通过门店不得上线新品</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">企业学习平台（视频课程）</span>
+          <span class="mkt-tool">培训完成率追踪系统</span>
+          <span class="mkt-tool">企业微信/钉钉（实时通知）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 6: 门店落地 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">6</div>
+      <div>
+        <div class="mkt-stage-title">门店落地</div>
+        <div class="mkt-stage-en">In-Store Execution</div>
+      </div>
+      <span class="badge badge-mid" style="margin-left:auto;">中置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          物料到店：菜单更新（桌牌/台卡/菜谱册更换）、主题装饰（贴纸/吊旗）；<br>
+          外部渠道同步：外卖平台新品上架确认、大众点评图文更新；<br>
+          私域运营：门店企业微信社群推送活动信息；<br>
+          开业首日执行：全体员工到岗，区域督导或运营管理人员驻场支持；<br>
+          实时巡检：区域督导现场 or 远程视频巡检
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>市场部</strong> 物料发送；<strong>运营部</strong> 驻场支持；<strong>IT/数字化部</strong> 系统上线确认</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：活动物料到店率（上线前 100% 到位）；菜单更新准确性；外卖/线上渠道同步上线时间一致性</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">门店巡检系统（拍照上传）</span>
+          <span class="mkt-tool">OA 物料配送跟踪</span>
+          <span class="mkt-tool">外卖平台商家后台</span>
+          <span class="mkt-tool">企业微信私域运营</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE 7: 考核 -->
+  <div class="mkt-stage">
+    <div class="mkt-stage-header">
+      <div class="mkt-stage-num">7</div>
+      <div>
+        <div class="mkt-stage-title">考核与复盘</div>
+        <div class="mkt-stage-en">Assessment &amp; Post-Campaign Review</div>
+      </div>
+      <span class="badge badge-low" style="margin-left:auto;">低置信</span>
+    </div>
+    <div class="mkt-stage-body">
+      <div class="mkt-row">
+        <div class="mkt-label">核心动作</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          新品销售数据追踪：活动期间各门店新品点单量、占比、带动整体翻台率变化；<br>
+          顾客反馈汇总：美团/大众点评评论关键词分析；<br>
+          成本核算：食材成本率核对、活动 ROI 计算；<br>
+          门店达标考核：新品推荐率、物料执行合规、服务评分；<br>
+          季度复盘：新品留存（保留/调整/下架）决策
+        </div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">协作点</div>
+        <div class="mkt-content"><strong>市场部 + 运营部</strong> 联合复盘；<strong>研发部</strong> 根据销售数据决定 SKU 存留；<strong>财务部</strong> ROI 核算</div>
+        <div class="mkt-content"><strong>关键控制点</strong>：新品留存率（销售占比达到阈值才保留）；同店收入环比变化；翻台率达标情况</div>
+      </div>
+      <div class="mkt-row">
+        <div class="mkt-label">数字化工具</div>
+        <div class="mkt-content" style="grid-column:2/-1;">
+          <span class="mkt-tool">BI 数据看板（门店销售分析）</span>
+          <span class="mkt-tool">美团/点评数据中台</span>
+          <span class="mkt-tool">财务 ERP 成本核算</span>
+        </div>
+      </div>
+      <div class="note">低置信原因：绿茶公开资料中未披露具体 KPI 体系和考核权重，以上框架基于行业最佳实践推断，需访谈确认实际执行机制。</div>
+    </div>
+  </div>
+
+</div><!-- end section -->
+</div><!-- end container -->
+
+<!-- RISK TABLE -->
+<div class="risk-section">
+  <h2>Critic 风险信号表 — 低置信与矛盾项 / Risk Signals &amp; Low-Confidence Items</h2>
+  <table class="risk-table">
+    <thead>
+      <tr>
+        <th style="width:180px;">信号</th>
+        <th style="width:80px;">置信</th>
+        <th>具体问题</th>
+        <th>访谈验证建议</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#ffd580;">数字化工具名称未确认</td>
+        <td><span class="risk-level low-conf">低</span></td>
+        <td>IPO 资料仅提及"搭建了覆盖移动端支付、餐厅管理、供应配送和厨房管理的数字管理系统"，未披露具体供应商或系统名称。IT 升级预算仅 HKD 4,030 万（远低于扩店和中央厨房投入），数字化成熟度存疑。</td>
+        <td>直接问：当前用什么 POS 系统？供应链用哪家 SaaS？营销部门有没有 CRM 或 CDP？</td>
+      </tr>
+      <tr>
+        <td style="color:#ffd580;">KPI 考核体系黑箱</td>
+        <td><span class="risk-level low-conf">低</span></td>
+        <td>未有公开资料披露绿茶的门店 KPI 权重分布（翻台率/客单价/好评率/新品推荐率各占比例），也未见针对小店格局（≤450㎡）的专项考核调整。</td>
+        <td>直接问：店长月度考核有几个维度？翻台率和新品销售哪个权重更高？下沉市场小店与大店考核一不一样？</td>
+      </tr>
+      <tr>
+        <td style="color:#ffaaaa;">供应链 vs. 营销节奏矛盾</td>
+        <td><span class="risk-level mid-conf">中</span></td>
+        <td>绿茶年均推新 200+ 道，但中央厨房尚未建成，依赖 200+ 第三方供应商。高频推新 × 分散供应链 = 新品上线时食材到位率和品质一致性风险较高，与其"标准化复制"战略存在内在矛盾。</td>
+        <td>直接问：新品上线时供应链到位率达到多少？出现食材短缺怎么处理？中央厨房建成后对营销节奏有什么影响？</td>
+      </tr>
+      <tr>
+        <td style="color:#ffaaaa;">快速扩张 vs. 翻台率下滑</td>
+        <td><span class="risk-level mid-conf">中</span></td>
+        <td>2022–2024 年门店翻台率下滑约 8%，同期门店数量大幅增长。营销活动（新品/季度推广）对翻台率提振效果在公开数据中尚未见有效验证。</td>
+        <td>直接问：季度新品上线期间翻台率有没有明显变化？营销活动的首要 KPI 是营收还是新客获取？</td>
+      </tr>
+      <tr>
+        <td style="color:#ffd580;">部门协作机制未公开</td>
+        <td><span class="risk-level low-conf">低</span></td>
+        <td>招股书和公开报道中未见绿茶的具体组织架构图，研发-供应链-运营-市场四部门的跨部门协作机制（会议机制、决策链路、冲突解决）全为推断。</td>
+        <td>直接问：新品从研发到上市，谁有否决权？供应链备货量由谁拍板？市场活动跨部门联动是周会还是项目制？</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- VERDICT -->
+<div class="container">
+<div style="padding: 40px 0 0;">
+  <div class="verdict">
+    <h2>Critic 评审裁定 / Assessment Verdict</h2>
+    <div class="verdict-body">
+      绿茶集团的两大核心流程均可通过 IPO 资料 + 行业框架重建骨架，但<strong>内部协作机制和数字化工具细节均为推断</strong>，需一手访谈验证。
+      开店流程高置信度较高：选址-租约-装修-开业的四段结构清晰，平均回收期 14.8 个月是可信的财务锚点。
+      营销流程中置信：产品创新节奏（年均 200+ 新品）和供应链依赖 200+ 第三方的结构性矛盾是最值得深挖的访谈方向。
+      <span class="en">Skeleton of both processes is reconstructable from public data; however, internal cross-department mechanics, digital tool specifics, and KPI weights all require primary interviews to confirm. The supply chain–marketing cadence tension is the highest-value investigation angle.</span>
+    </div>
+    <div class="verdict-stats">
+      <div class="verdict-stat">
+        <div class="num" style="color:#2a5c3f;">2</div>
+        <div class="label">高置信条</div>
+      </div>
+      <div class="verdict-stat">
+        <div class="num" style="color:#c9a84c;">5</div>
+        <div class="label">中置信条</div>
+      </div>
+      <div class="verdict-stat">
+        <div class="num" style="color:#8b2e2e;">3</div>
+        <div class="label">低置信条</div>
+      </div>
+      <div class="verdict-stat">
+        <div class="num">5</div>
+        <div class="label">风险信号</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <span>Merlin — AI 咨询情报系统 · 绿茶集团客户提纲研究 · 2026-06-08</span>
+  <span style="font-style:italic;">本报告为 AI 辅助研究输出，结论含推断成分，建议结合一手访谈使用</span>
+</footer>
+
+</body>
+</html>
