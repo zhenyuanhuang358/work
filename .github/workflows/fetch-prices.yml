@@ -2,74 +2,41 @@ name: Fetch Stock Prices
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    # Every 5 minutes Mon–Fri 13:30–21:05 UTC (= 9:30am–5:05pm ET)
+    - cron: '*/5 13-21 * * 1-5'
   push:
     branches: [main]
-    paths-ignore:
-      - 'stock_prices.json'  # prevent infinite loop
-
-permissions:
-  contents: write
+    paths:
+      - price_fetch_trigger.txt
+  workflow_dispatch:
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch prices from Finnhub
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance requests -q
+
+      - name: Fetch prices
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+        run: python3 scripts/fetch_prices.py
+
+      - name: Commit stock_prices.json
         run: |
-          python3 - <<'EOF'
-          import urllib.request
-          import json
-          import os
-          from datetime import datetime, timezone
-
-          token = os.environ.get("FINNHUB_TOKEN", "")
-          if not token:
-              print("ERROR: FINNHUB_TOKEN secret not set")
-              exit(1)
-
-          tickers = ["SPY", "QQQ", "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "IWM", "GLD"]
-
-          results = {}
-          for ticker in tickers:
-              url = f"https://finnhub.io/api/v1/quote?symbol={ticker}&token={token}"
-              try:
-                  req = urllib.request.Request(url, headers={"accept": "application/json"})
-                  with urllib.request.urlopen(req, timeout=8) as resp:
-                      d = json.loads(resp.read())
-                  price = d.get("c")
-                  chg_pct = d.get("dp") or 0.0
-                  results[ticker] = {
-                      "price": price,
-                      "change": d.get("d"),
-                      "changePct": chg_pct,
-                      "high": d.get("h"),
-                      "low": d.get("l"),
-                      "prevClose": d.get("pc"),
-                  }
-                  print(f"{ticker}: ${price} ({chg_pct:+.2f}%)")
-              except Exception as e:
-                  print(f"{ticker}: ERROR {e}")
-                  results[ticker] = {"price": None, "error": str(e)}
-
-          output = {
-              "updated_at": datetime.now(timezone.utc).isoformat(),
-              "prices": results,
-          }
-          with open("stock_prices.json", "w") as f:
-              json.dump(output, f, indent=2)
-          print("Written stock_prices.json")
-          EOF
-
-      - name: Commit and push
-        run: |
-          git config user.name  "github-actions[bot]"
+          git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
           git add stock_prices.json
-          git diff --cached --quiet || git commit -m "chore: update stock prices $(date -u '+%Y-%m-%d %H:%M UTC') [skip ci]"
+          git diff --cached --quiet && echo "nothing to commit" || \
+            git commit -m "chore: refresh stock prices $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
           git push
