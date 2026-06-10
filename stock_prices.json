@@ -1,76 +1,78 @@
 {
-  "updated_at": "2026-06-09T15:03:27.179491+00:00",
+  "updated_at": "2026-06-10T04:51:09.207261Z",
+  "vix": 19.87,
+  "treasury_10y": 4.53,
   "prices": {
     "SPY": {
-      "price": 737.14,
-      "change": -2.08,
-      "changePct": -0.2814,
+      "price": 737.05,
+      "change": -2.17,
+      "changePct": -0.29,
       "high": 746.9,
-      "low": 734.65,
+      "low": 722.59,
       "prevClose": 739.22
     },
     "QQQ": {
-      "price": 709.68,
-      "change": -6.39,
-      "changePct": -0.8924,
+      "price": 707.83,
+      "change": -8.24,
+      "changePct": -1.15,
       "high": 725.66,
-      "low": 707.16,
+      "low": 686.37,
       "prevClose": 716.07
     },
     "NVDA": {
-      "price": 206.1,
-      "change": -2.54,
-      "changePct": -1.2174,
+      "price": 208.19,
+      "change": -0.45,
+      "changePct": -0.22,
       "high": 211.4,
-      "low": 204.85,
+      "low": 199.34,
       "prevClose": 208.64
     },
     "PLTR": {
-      "price": 132.75,
-      "change": -3.72,
-      "changePct": -2.7259,
+      "price": 132.07,
+      "change": -4.4,
+      "changePct": -3.22,
       "high": 136.99,
-      "low": 132.37,
+      "low": 127.35,
       "prevClose": 136.47
     },
     "TSLA": {
-      "price": 401.98,
-      "change": -6.97,
-      "changePct": -1.7044,
+      "price": 396.68,
+      "change": -12.27,
+      "changePct": -3.0,
       "high": 418.5,
-      "low": 401.627,
+      "low": 384.24,
       "prevClose": 408.95
     },
     "AAPL": {
-      "price": 292.83,
-      "change": -8.71,
-      "changePct": -2.8885,
+      "price": 290.55,
+      "change": -10.99,
+      "changePct": -3.64,
       "high": 300.75,
-      "low": 291.8,
+      "low": 287.78,
       "prevClose": 301.54
     },
     "AMD": {
-      "price": 477.48,
-      "change": -12.85,
-      "changePct": -2.6207,
+      "price": 475.5,
+      "change": -14.82,
+      "changePct": -3.02,
       "high": 505,
-      "low": 473.76,
+      "low": 437.23,
       "prevClose": 490.33
     },
     "IWM": {
-      "price": 285.39,
-      "change": 1.28,
-      "changePct": 0.4505,
+      "price": 285.02,
+      "change": 0.91,
+      "changePct": 0.32,
       "high": 290.87,
-      "low": 284.15,
+      "low": 277.62,
       "prevClose": 284.11
     },
     "GLD": {
-      "price": 393.94,
-      "change": -3.33,
-      "changePct": -0.8382,
+      "price": 390.78,
+      "change": -6.49,
+      "changePct": -1.63,
       "high": 400.48,
-      "low": 392.641,
+      "low": 388.75,
       "prevClose": 397.27
     }
   }
