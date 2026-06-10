@@ -114,5 +114,6 @@ description: |
 □ 目标价三情景有明确 P/S 或 P/E 假设？
 □ 港股报告：RMB vs HKD 单位一致，无混用？
 □ 文件名无特殊字符（无 `.HK`、`/` 等）？
+□ 反馈链接已附在 Verdict Box 下方？（https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&report={slug}）
 □ SendUserFile 已执行？
 ```

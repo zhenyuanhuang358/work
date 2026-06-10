@@ -47,9 +47,11 @@ def fetch_equity_finnhub(ticker: str, token: str) -> dict | None:
         if d.get("c") and d["c"] > 0:
             return {
                 "price": round(d["c"], 2),
-                "changePct": round(d.get("dp", 0), 2),
-                "high": round(d.get("h", 0), 2),
-                "low": round(d.get("l", 0), 2),
+                "change": round(d.get("d") or 0, 2),
+                "changePct": round(d.get("dp") or 0, 2),
+                "high": round(d.get("h") or 0, 2),
+                "low": round(d.get("l") or 0, 2),
+                "prevClose": round(d.get("pc") or 0, 2),
             }
     except Exception as e:
         print(f"  Finnhub error for {ticker}: {e}")
@@ -67,12 +69,15 @@ def fetch_equity_yfinance(ticker: str) -> dict | None:
         high = info.get("dayHigh") or info.get("regularMarketDayHigh")
         low = info.get("dayLow") or info.get("regularMarketDayLow")
         if price:
+            change = round(float(price) - float(prev), 2) if prev else 0
             change_pct = round((price - prev) / prev * 100, 2) if prev else 0
             return {
                 "price": round(float(price), 2),
+                "change": change,
                 "changePct": change_pct,
                 "high": round(float(high), 2) if high else None,
                 "low": round(float(low), 2) if low else None,
+                "prevClose": round(float(prev), 2) if prev else None,
             }
     except Exception as e:
         print(f"  yfinance error for {ticker}: {e}")

@@ -93,7 +93,7 @@ description: |
 | 用户期望 | 实际能力 | 补充说明 |
 |---------|---------|---------|
 | 「每天自动扫描」 | 需用户触发「今日期权机会」 | 说一句话即可，不需手动搜索 |
-| 「实时股价」 | **Finnhub API 直接拉取**（需 `FINNHUB_TOKEN`） | SPY/QQQ/VIX/个股，实时准确；详见 `references/data-sources.md` |
+| 「实时股价」 | **GitHub Action 缓存读取**（Finnhub 后端，无需本地 token） | 触发刷新→轮询→读 `stock_prices.json`；详见 `references/data-sources.md` |
 | 「实时 IV Rank」 | WebSearch 抓取，15-20 分钟延迟 | 执行前在经纪商平台二次确认 |
 | 「精确 Greeks」 | 基于 Black-Scholes 估算，非实时 | 以 TastyTrade/ThinkorSwim 显示为准 |
 | 「自动记录持仓」 | 需用户告知开平仓信息 | 说「记录开仓：[参数]」即维护 |

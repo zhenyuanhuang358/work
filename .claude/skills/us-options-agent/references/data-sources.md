@@ -19,12 +19,29 @@
 **响应字段**（`/quote`）：`c`=当前价 · `d`=涨跌额 · `dp`=涨跌幅% · `h`/`l`=当日高低 · `pc`=昨收
 
 **在本 skill 中的用途**：
-- 所有标的实时价格通过 GitHub Action 每5分钟自动抓取并缓存到：
+- **不要在沙箱内直接调用 Finnhub API**——价格统一走 GitHub Action 缓存：
+  Action 内运行 `scripts/fetch_prices.py`（Finnhub 主源 + yfinance 兜底）写入
   `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json`
-- 日扫报告直接 WebFetch 读取该文件，无需 token，无沙箱限制
+- 日扫报告直接读取该文件（curl 或 WebFetch），无需 token，无沙箱限制
+- 缓存机制依赖 main 分支上的 `scripts/fetch_prices.py` + `.github/workflows/fetch-prices.yml`；
+  **修改本地脚本后必须同步推到 main，否则 Action 仍跑旧版**（2026-06-10 踩坑：本地加了 VIX 字段但 main 未部署，缓存长期缺 vix）
 
 **覆盖标的**：SPY · QQQ · NVDA · PLTR · TSLA · AAPL · AMD · IWM · GLD（每5分钟更新）
 **新增标的**：在 `.github/workflows/fetch-prices.yml` 的 `tickers` 列表中添加即可。
+
+**缓存 JSON 结构**（与 `scripts/fetch_prices.py` 输出一致）：
+```json
+{
+  "updated_at": "2026-06-09T15:03:27Z",
+  "vix": 18.92,
+  "treasury_10y": 4.41,
+  "prices": {
+    "SPY": { "price": 737.14, "change": -2.08, "changePct": -0.28,
+             "high": 746.9, "low": 734.65, "prevClose": 739.22 }
+  }
+}
+```
+（`vix` / `treasury_10y` 为 null 时表示 yfinance 拉取失败，VIX 改用 WebSearch 兜底并在报告注明）
 
 **搜索方式（文件读取失败时）**：继续使用 WebSearch，格式不变。
 

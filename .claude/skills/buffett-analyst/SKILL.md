@@ -103,7 +103,7 @@ description: |
 
 加载 `references/output-template.md`，生成结构化报告。
 
-用户说「出 HTML」时：用深色编辑风格输出 HTML——配色 ink `#0a0a0b` / paper `#f1efea` / copper `#8b6c42` / gold `#c9a84c`，字体 IM Fell English + Songti SC，SVG 图表（价格锚点区间图、护城河评分条、三年财务趋势图），零 Markdown 符号，完整规范见 `references/output-template.md`。
+用户说「出 HTML」时：用深色编辑风格输出 HTML——配色 ink `#0a0a0b` / paper `#f1efea` / copper `#8b6c42` / gold `#c9a84c`，字体 IM Fell English + Songti SC，SVG 图表（价格锚点区间图、护城河评分条、三年财务趋势图），零 Markdown 符号，结论区块下方必附反馈链接 `https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report={slug}`，完整规范见 `references/output-template.md`。
 默认输出：Markdown 结构化报告。
 
 ---

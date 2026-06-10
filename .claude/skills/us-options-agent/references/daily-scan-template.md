@@ -59,14 +59,15 @@ until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/sto
 URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
 ```
 
-**文件结构**（含新增的 VIX + 10年期国债收益率）：
+**文件结构**（含 VIX + 10年期国债收益率）：
 ```json
 {
   "updated_at": "2026-05-22T09:27:37Z",
   "vix": 18.5,
   "treasury_10y": 4.38,
   "prices": {
-    "SPY":  { "price": 733.73, "changePct": -0.67, "high": 737.65, "low": 731.53 },
+    "SPY":  { "price": 733.73, "change": -4.95, "changePct": -0.67,
+              "high": 737.65, "low": 731.53, "prevClose": 738.68 },
     "QQQ":  { "price": 701.53, "changePct": -0.82, ... },
     "NVDA": { "price": 220.61, ... },
     "PLTR": { "price": 135.26, ... },
@@ -80,6 +81,7 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 ```
 
 `vix` 直接填入报告头部；`treasury_10y` 用于判断利率环境与 risk-on/off 背景。
+**若 `vix` / `treasury_10y` 字段缺失或为 null**（yfinance 拉取失败）：VIX 改用 WebSearch 兜底，并在报告头部注明「VIX 来自 WebSearch，非缓存」。
 **如果文件读取失败**（WebFetch 报错）：在报告顶部注明「价格来自 WebSearch，需在平台二次确认」，然后 WebSearch 兜底。
 
 ---

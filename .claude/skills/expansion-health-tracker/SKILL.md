@@ -124,7 +124,7 @@ description: |
 1. **三层信号汇总表**（当前读数 + 健康/危险判断 + 市场是否定价 + 领先财报幅度）
 2. **一句话判断**（定价缺口方向 + 预计何时被市场定价）
 3. **标的替换检查清单**（下一个分析标的的参数替换项）
-4. （可选）HTML 报告，保存到 `reports/[slug]_expansion_[YYYY].html`
+4. （可选）HTML 报告，保存到 `reports/[slug]_expansion_[YYYY].html`，结论区块下方必附反馈链接 `https://spontaneous-youtiao-b9cde9.netlify.app?product=expansion&report={slug}`
 
 ---
 

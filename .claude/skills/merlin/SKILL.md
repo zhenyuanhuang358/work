@@ -90,6 +90,8 @@ description: |
 **通用要求**：
 - 零 Markdown 符号，格式全部 HTML/CSS，中英双语
 - 视觉规范与 earner 报告一致（ink/paper/copper/gold 色板，IM Fell English + Songti SC）
+- 反馈链接必附：裁定/结论区块下方加反馈入口
+  `https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report={slug}`
 
 **模式 A 必须包含**：
 - 4 SVG 图表：议题优先矩阵 / 风险热图 / 问题树 / 置信度仪表盘

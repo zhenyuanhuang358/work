@@ -1,7 +1,7 @@
 # 用户偏好与经验档案
 
 > 本文档基于所有历史对话复盘提炼，每次 Code 会话自动加载，无需重复说明。
-> 最后更新：2026-06-03
+> 最后更新：2026-06-10
 
 ---
 
@@ -175,10 +175,11 @@ R-D0: 期权扫描前 → 必须先触发 GitHub Action 更新价格缓存，等
       触发：push price_fetch_trigger.txt 到 main 分支
       验证：轮询 stock_prices.json updated_at > 当日零点
 
-R-D1: 股票实时价格 → 必须从 iTick API 拉取，不得用 WebSearch 代替
-      端点：api0.itick.org/stock/quote?region=US&code={ticker}
-      Token：已配置在 .env (ITICK_TOKEN)
-      服务器出口 IP：34.135.250.196（已加 iTick 白名单）
+R-D1: 股票实时价格 → 必须从 GitHub 缓存 stock_prices.json 读取，不得用 WebSearch 代替
+      缓存地址：https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
+      后端：GitHub Action 运行 scripts/fetch_prices.py（Finnhub 主源 + yfinance 兜底）
+      缓存外标的：WebSearch 兜底，报告中注明「需在平台二次确认」
+      （历史：2026-05 曾用 iTick API，已废弃；.env 现存 FINNHUB_TOKEN）
 
 R-D2: 港股财务数据 → 优先聚合站（aastocks / futu.io / 雪球），不要先试 hkexnews PDF
 
@@ -240,8 +241,8 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 
 | 项目 | 值 |
 |------|---|
-| iTick Token | `ITICK_TOKEN`（存于 `/home/user/work/.env`） |
-| 服务器出口 IP | `34.135.250.196` |
+| Finnhub Token | `FINNHUB_TOKEN`（存于 `/home/user/work/.env` + GitHub Secrets） |
+| 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json` |
 | 反馈表单 URL | `https://spontaneous-youtiao-b9cde9.netlify.app` |
 | Git 工作分支 | `claude/install-claude-hud-d51E6` |
 | 研究缓存路径 | `research_cache/{slug}.json` |

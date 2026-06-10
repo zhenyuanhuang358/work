@@ -211,5 +211,6 @@ description: |
 □ Markdown 末尾有来源索引？
 □ HTML 文件已生成并推送给用户？
 □ HTML 包含 SVG 图表（趋势/拆分数据不得纯文字）？
+□ 反馈链接已附在结论区块下方？（https://spontaneous-youtiao-b9cde9.netlify.app?product=research&report={slug}）
 □ 没有无信息量的模糊表述？
 ```
