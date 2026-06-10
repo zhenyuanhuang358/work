@@ -290,11 +290,11 @@ def generate_html(a: MerlinAnalysis, slug: str = "") -> str:
     issue_rows = ""
     for i, issue in enumerate(a.core_issues, 1):
         impact_bars = "".join(
-            f'<span class="bar{"  filled" if j <= issue.impact else ""}"></span>'
+            f'<span class="bar{" filled" if j <= issue.impact else ""}"></span>'
             for j in range(1, 6)
         )
         cert_bars = "".join(
-            f'<span class="bar{"  filled" if j <= issue.certainty else ""}"></span>'
+            f'<span class="bar{" filled" if j <= issue.certainty else ""}"></span>'
             for j in range(1, 6)
         )
         issue_rows += f'''
@@ -682,7 +682,11 @@ def main():
     analysis = analyze(ctx, **auth)
 
     slug = re.sub(r"[^A-Za-z0-9_-]", "_", args.company)[:30]
-    output_path = args.output or f"{slug}_Merlin_Brief.html"
+    if args.output:
+        output_path = args.output
+    else:
+        Path("reports").mkdir(exist_ok=True)
+        output_path = f"reports/{slug}_Merlin_Brief.html"
     Path(output_path).write_text(generate_html(analysis, slug=slug), encoding="utf-8")
     print(f"\nDone → {output_path}")
 

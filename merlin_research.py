@@ -437,7 +437,7 @@ body{{background:var(--paper); color:var(--ink); font-family:'IM Fell English',G
 # ── CLI ───────────────────────────────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="Merlin Research — four-agent client outline research")
+    parser = argparse.ArgumentParser(description="Merlin Research — five-agent client outline research")
     parser.add_argument("company", help="Company name")
     parser.add_argument("--outline", required=True, help="Client outline / questionnaire file")
     parser.add_argument("--background", default=None, help="Optional pre-loaded background materials")
@@ -473,7 +473,11 @@ def main():
     result = run_research(ctx, **auth)
 
     slug = re.sub(r"[^A-Za-z0-9_-]", "_", args.company)[:30]
-    output_path = args.output or f"{slug}_Research_Report.html"
+    if args.output:
+        output_path = args.output
+    else:
+        Path("reports").mkdir(exist_ok=True)
+        output_path = f"reports/{slug}_Research_Report.html"
     Path(output_path).write_text(generate_research_html(result, slug=slug), encoding="utf-8")
     print(f"\nDone → {output_path}")
 

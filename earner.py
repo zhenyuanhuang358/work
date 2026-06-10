@@ -39,9 +39,10 @@ def fetch_finnhub_price(ticker: str) -> Optional[float]:
         with urllib.request.urlopen(req, timeout=6) as resp:
             d = _json.loads(resp.read())
         # Finnhub quote: c=current price, pc=previous close
-        for key in ("c", "l", "pc"):
-            if d.get(key):
-                return float(d[key])
+        # Never use l (day low) as a price fallback — it's a different metric
+        val = d.get("c") or d.get("pc")
+        if val and float(val) > 0:
+            return float(val)
     except Exception:
         pass
     return None
@@ -915,7 +916,7 @@ async def main():
     print("="*60)
 
     t0 = time.time()
-    loop = asyncio.get_event_loop()
+    loop = asyncio.get_running_loop()
     analysis = await loop.run_in_executor(
         None,
         lambda: analyze_earnings_call(
@@ -934,7 +935,11 @@ async def main():
 
     html = generate_html(analysis, consensus, args.price, elapsed)
 
-    out_path = args.output or f"{args.ticker.upper()}_Copilot_Report.html"
+    if args.output:
+        out_path = args.output
+    else:
+        Path("reports").mkdir(exist_ok=True)
+        out_path = f"reports/{args.ticker.upper()}_Copilot_Report.html"
     Path(out_path).write_text(html, encoding="utf-8")
     print(f"\n✓ 报告已生成: {out_path}")
 
