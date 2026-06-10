@@ -1,0 +1,92 @@
+name: NVDA Auto Earner
+
+# 每天 21:30 UTC = 北京时间 05:30 = 纽约时间 17:30 EDT
+# 英伟达财报通常在美股收盘后（16:00–17:00 ET）发布
+
+on:
+  workflow_dispatch:        # 仅手动触发
+
+jobs:
+  earner:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests beautifulsoup4 lxml
+
+      - name: Fetch NVDA transcript
+        run: python scripts/fetch_nvda_earnings.py
+
+      - name: Check for new transcript
+        id: check
+        run: |
+          if [ -f nvda_transcript_new.txt ]; then
+            echo "new=true" >> "$GITHUB_OUTPUT"
+            echo "quarter=$(cat nvda_quarter.txt)" >> "$GITHUB_OUTPUT"
+            echo "price=$(cat nvda_price.txt)" >> "$GITHUB_OUTPUT"
+            echo "✅ New transcript found: $(cat nvda_quarter.txt)"
+          else
+            echo "new=false" >> "$GITHUB_OUTPUT"
+            echo "⏭️  No new transcript — skipping analysis"
+          fi
+
+      - name: Run Earner analysis
+        if: steps.check.outputs.new == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+        run: |
+          QUARTER="${{ steps.check.outputs.quarter }}"
+          PRICE="${{ steps.check.outputs.price }}"
+
+          # Use array to avoid eval and shell injection risks
+          ARGS=(python earner.py NVDA "NVIDIA Corporation" "$QUARTER"
+            --transcript nvda_transcript_new.txt
+            --output NVDA_Copilot_Report.html)
+          if [ -n "$PRICE" ]; then
+            ARGS+=(--price "$PRICE")
+          fi
+
+          echo "Running: ${ARGS[*]}"
+          "${ARGS[@]}"
+
+      - name: Rename report with date
+        if: steps.check.outputs.new == 'true'
+        id: rename
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          QUARTER="${{ steps.check.outputs.quarter }}"
+          SLUG=$(echo "$QUARTER" | tr ' ' '_')
+          if [ -f NVDA_Copilot_Report.html ]; then
+            cp NVDA_Copilot_Report.html "NVDA_${SLUG}_${DATE}_Report.html"
+            echo "report_file=NVDA_${SLUG}_${DATE}_Report.html" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit results
+        if: steps.check.outputs.new == 'true'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add nvda_transcript.hash nvda_quarter.txt nvda_price.txt || true
+          git add NVDA_Copilot_Report.html || true
+          git add NVDA_*_Report.html || true
+          # nvda_transcript_new.txt is ephemeral and can be large — do not commit it
+
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+
+          QUARTER="${{ steps.check.outputs.quarter }}"
+          git pull --rebase origin main || true
+          git commit -m "auto: NVDA Earner report — $QUARTER [skip ci]"
+          git push
+          echo "✅ Report committed and pushed"
