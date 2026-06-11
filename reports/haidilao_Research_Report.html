@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merlin Research — 海底捞平台运营调研</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e; --bg:#f9f7f3;
+  --border:#d4cfc8;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--paper); color:var(--ink); font-family:'IM Fell English',Georgia,serif; max-width:960px; margin:0 auto; padding:36px 28px;}
+.pub-bar{display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--ink); padding-bottom:10px; margin-bottom:32px;}
+.pub-logo{font-size:22px; letter-spacing:.14em; color:var(--copper); font-style:italic;}
+.pub-meta{font-size:11px; color:var(--copper); text-align:right; line-height:1.7;}
+.report-title{font-size:38px; line-height:1.12; margin-bottom:8px;}
+.report-subtitle{font-size:13px; color:var(--copper); letter-spacing:.1em; text-transform:uppercase; margin-bottom:20px;}
+.tag-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
+.tag{border:1px solid var(--copper); color:var(--copper); font-size:11px; padding:3px 12px; letter-spacing:.06em;}
+.stat-bar{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--copper); border:1px solid var(--copper); margin-bottom:36px;}
+.stat-cell{background:var(--paper); padding:16px; text-align:center;}
+.stat-val{font-size:28px; font-weight:bold;}
+.stat-val.green{color:var(--green);}
+.stat-val.amber{color:var(--amber);}
+.stat-val.red{color:var(--red);}
+.stat-lbl{font-size:10px; color:#6b5a47; margin-top:3px; letter-spacing:.06em; line-height:1.4;}
+.chart-wrap{background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:12px; margin-bottom:20px;}
+.chart-wrap svg{width:100%; height:auto; display:block;}
+.section{margin-bottom:40px;}
+.section-zh{font-size:19px; font-weight:bold; border-bottom:1px solid var(--border); padding-bottom:5px; margin-bottom:5px;}
+.section-en{font-size:11px; color:var(--copper); letter-spacing:.1em; text-transform:uppercase; margin-bottom:18px;}
+/* Answer cards */
+.ans-card{background:var(--bg); border:1px solid var(--border); border-radius:3px; padding:22px; margin-bottom:18px;}
+.ans-header{display:flex; align-items:flex-start; gap:14px; margin-bottom:14px; flex-wrap:wrap;}
+.ans-num{width:32px; height:32px; border-radius:50%; background:var(--copper); color:var(--paper); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:bold; flex-shrink:0; margin-top:2px;}
+.ans-title{font-size:16px; font-weight:bold; flex:1; line-height:1.4;}
+.conf-badge{display:inline-block; padding:2px 10px; border-radius:2px; font-size:10px; font-weight:bold; flex-shrink:0;}
+.conf-high{background:#2a5c3f22; color:#2a5c3f; border:1px solid #2a5c3f66;}
+.conf-med{background:#c47a1e22; color:#c47a1e; border:1px solid #c47a1e66;}
+.conf-low{background:#8b2e2e22; color:#8b2e2e; border:1px solid #8b2e2e66;}
+.ans-body{font-size:14px; line-height:1.8; margin-bottom:14px;}
+.ans-subhead{font-size:11px; font-weight:bold; letter-spacing:.08em; text-transform:uppercase; color:var(--copper); margin:14px 0 6px;}
+.data-list{padding-left:0; list-style:none;}
+.data-list li{font-size:13px; padding:6px 0; border-bottom:1px solid var(--border); line-height:1.6;}
+.data-list li:last-child{border-bottom:none;}
+.data-list li::before{content:"›"; color:var(--copper); margin-right:8px;}
+.flag-box{background:#8b2e2e0e; border-left:3px solid var(--red); padding:8px 14px; margin-top:10px; font-size:12px; color:#5a1e1e; line-height:1.6;}
+.caveat-box{background:#c47a1e0e; border-left:3px solid var(--amber); padding:8px 14px; margin-top:10px; font-size:12px; color:#5a3a0e; line-height:1.6;}
+.inference-box{background:#f9f7f3; border:1px dashed var(--copper); padding:12px 16px; margin-top:12px; font-size:13px; line-height:1.7; color:#4a3a28;}
+.inference-box strong{color:var(--copper);}
+/* Flag table */
+.flag-table{width:100%; border-collapse:collapse; font-size:13px;}
+.flag-table th{background:var(--ink); color:var(--paper); padding:9px 12px; text-align:left; font-size:11px; letter-spacing:.06em;}
+.flag-table td{padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+.flag-table tr:nth-child(even) td{background:var(--bg);}
+/* Exec + verdict */
+.exec-box{background:var(--ink); color:var(--paper); padding:24px 28px; margin-bottom:20px; border-radius:3px;}
+.exec-label{font-size:10px; color:var(--gold); letter-spacing:.14em; text-transform:uppercase; margin-bottom:10px;}
+.exec-text{font-size:15px; line-height:1.75;}
+.verdict-box{background:var(--bg); border:1px solid var(--copper); border-left:4px solid var(--copper); padding:14px 20px; margin-bottom:20px; font-size:13px; color:#4a3a28; line-height:1.7; font-style:italic;}
+/* Critic */
+.critic-box{border:2px solid #4a6fa5; border-radius:3px; margin-bottom:20px;}
+.critic-header{background:#4a6fa518; padding:12px 18px; display:flex; justify-content:space-between; align-items:center;}
+.critic-badge{font-size:11px; font-weight:bold; background:#c47a1e; color:#fff; padding:3px 12px; letter-spacing:.08em;}
+.critic-body{padding:16px 18px; font-size:13px; line-height:1.7;}
+.critic-note{font-style:italic; color:#4a3a28; margin-bottom:12px;}
+.critic-fail-item{display:flex; gap:10px; padding:7px 0; border-bottom:1px solid var(--border); font-size:12px;}
+.critic-fail-item:last-child{border-bottom:none;}
+.sev-label{font-weight:bold; min-width:50px;}
+/* Agent flow SVG wrapper */
+.agent-flow-wrap{background:var(--bg); border:1px solid var(--border); padding:12px; margin-bottom:24px;}
+/* Fee table */
+.fee-table{width:100%; border-collapse:collapse; font-size:13px; margin-top:10px;}
+.fee-table th{background:var(--copper); color:var(--paper); padding:9px 12px; text-align:left; font-size:11px; letter-spacing:.06em;}
+.fee-table td{padding:9px 12px; border-bottom:1px solid var(--border); vertical-align:top;}
+.fee-table tr:nth-child(even) td{background:var(--bg);}
+.fee-table td:first-child{font-weight:bold; color:var(--copper); white-space:nowrap;}
+/* footer */
+.footer{margin-top:52px; border-top:1px solid var(--border); padding-top:16px; font-size:11px; color:#6b5a47; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;}
+</style>
+</head>
+<body>
+
+<!-- Pub Bar -->
+<div class="pub-bar">
+  <div class="pub-logo">MERLIN RESEARCH</div>
+  <div class="pub-meta">客户提纲研究报告 · 五智能体协作<br>2026-06-10 &nbsp;|&nbsp; 受访者：美团/抖音商家运营经理</div>
+</div>
+
+<!-- Title -->
+<div class="report-title">海底捞 · 美团 / 抖音<br>平台运营专项调研</div>
+<div class="report-subtitle">Haidilao Platform Operations — Client Outline Research Report</div>
+<div class="tag-row">
+  <span class="tag">海底捞 6862.HK</span>
+  <span class="tag">美团平台</span>
+  <span class="tag">抖音本地生活</span>
+  <span class="tag">4 节提纲</span>
+  <span class="tag">商家运营经理视角</span>
+</div>
+
+<!-- Stat bar -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-val green">0</div>
+    <div class="stat-lbl">高置信回答<br>HIGH CONF</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val amber">2</div>
+    <div class="stat-lbl">中置信回答<br>MED CONF</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val red">2</div>
+    <div class="stat-lbl">低置信回答<br>LOW CONF</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-val amber">3</div>
+    <div class="stat-lbl">风险信号<br>RED FLAGS</div>
+  </div>
+</div>
+
+<!-- Agent pipeline -->
+<div class="section">
+  <div class="section-zh">五智能体协作流程</div>
+  <div class="section-en">Five-Agent Pipeline</div>
+  <div class="agent-flow-wrap">
+    <svg viewBox="0 0 700 90" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <rect width="700" height="90" fill="#f9f7f3"/>
+      <defs>
+        <marker id="arr" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#d4cfc8"/>
+        </marker>
+      </defs>
+      <!-- arrows -->
+      <line x1="88" y1="45" x2="152" y2="45" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="228" y1="45" x2="292" y2="45" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="368" y1="45" x2="432" y2="45" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <line x1="508" y1="45" x2="572" y2="45" stroke="#d4cfc8" stroke-width="1.5" marker-end="url(#arr)"/>
+      <!-- nodes -->
+      <circle cx="60" cy="45" r="28" fill="#8b6c4226" stroke="#8b6c42" stroke-width="1.5"/>
+      <text x="60" y="41" text-anchor="middle" font-size="11" fill="#8b6c42" font-weight="bold">情报员</text>
+      <text x="60" y="55" text-anchor="middle" font-size="9" fill="#8b6c42" font-style="italic">Scout</text>
+
+      <circle cx="200" cy="45" r="28" fill="#2a5c3f26" stroke="#2a5c3f" stroke-width="1.5"/>
+      <text x="200" y="41" text-anchor="middle" font-size="11" fill="#2a5c3f" font-weight="bold">分析师</text>
+      <text x="200" y="55" text-anchor="middle" font-size="9" fill="#2a5c3f" font-style="italic">Analyst</text>
+
+      <circle cx="340" cy="45" r="28" fill="#8b2e2e26" stroke="#8b2e2e" stroke-width="1.5"/>
+      <text x="340" y="41" text-anchor="middle" font-size="11" fill="#8b2e2e" font-weight="bold">侦探</text>
+      <text x="340" y="55" text-anchor="middle" font-size="9" fill="#8b2e2e" font-style="italic">Forensic</text>
+
+      <circle cx="480" cy="45" r="28" fill="#4a6fa526" stroke="#4a6fa5" stroke-width="1.5"/>
+      <text x="480" y="41" text-anchor="middle" font-size="11" fill="#4a6fa5" font-weight="bold">战略家</text>
+      <text x="480" y="55" text-anchor="middle" font-size="9" fill="#4a6fa5" font-style="italic">Strategist</text>
+
+      <circle cx="620" cy="45" r="28" fill="#6b4f8c26" stroke="#6b4f8c" stroke-width="1.5"/>
+      <text x="620" y="41" text-anchor="middle" font-size="11" fill="#6b4f8c" font-weight="bold">评审</text>
+      <text x="620" y="55" text-anchor="middle" font-size="9" fill="#6b4f8c" font-style="italic">Critic</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Executive Summary -->
+<div class="section">
+  <div class="section-zh">战略家综合判断</div>
+  <div class="section-en">Executive Summary — Strategist Synthesis</div>
+  <div class="exec-box">
+    <div class="exec-label">核心结论 Key Findings</div>
+    <div class="exec-text">
+      美团/抖音对头部餐饮商家的费率体系已高度复合化：年框协议本质是「基础抽佣+流量资源置换」，对赌机制以非正式的「完成度动态定价」形式存在，不以合同条款显性呈现。海底捞2025年外卖收入同比+112%至26.6亿，是最直接可引用的成交数据，但分平台单量从未对外披露。访谈重点应锁定：① 年框中的返点/阶梯费率是否以内部备忘录形式存在；② 专属资源位（如"超级品牌日"坑位）的流量保底承诺是否量化写入；③ 抖音2025年对连锁头部商家实施的货品补贴（食材/套餐补贴）的具体品类和周期。
+    </div>
+  </div>
+  <div class="verdict-box">
+    数据完整性判断：公开信息可支撑费率框架（中置信）与补贴活动全景（中置信），但对赌条款和分平台精确单量属于非公开商业信息，访谈是获取的唯一路径。
+  </div>
+</div>
+
+<!-- Q1 -->
+<div class="section">
+  <div class="section-zh">逐条回答</div>
+  <div class="section-en">Answers by Section</div>
+
+  <div class="ans-card">
+    <div class="ans-header">
+      <div class="ans-num">1</div>
+      <div class="ans-title">费率问题：年框协议收取费用类型</div>
+      <span class="conf-badge conf-med">中置信 MED</span>
+    </div>
+    <div class="ans-body">
+      美团和抖音的年框费率结构均已从单一佣金演变为多分项组合。以下为两平台的主要收费模块，均来自公开披露及行业信源：
+    </div>
+
+    <div class="ans-subhead">美团平台（到家 / 外卖）</div>
+    <table class="fee-table">
+      <tr><th>费用类型</th><th>费率 / 标准</th><th>备注</th></tr>
+      <tr><td>技术服务费（佣金）</td><td>6%–8%</td><td>官方口径；头部商家实际可谈低，行业传闻4%–6%</td></tr>
+      <tr><td>履约服务费（配送费）</td><td>动态，约3–7元/单</td><td>按距离/时段/客单价三重因子独立计价，选平台配送时产生</td></tr>
+      <tr><td>支付通道费</td><td>0.38%</td><td>使用美团收银系统，统一标准</td></tr>
+      <tr><td>推广/广告费</td><td>CPC/CPM另计</td><td>神抢手、直通车等竞价广告；预算独立于年框，不纳入佣金折算</td></tr>
+      <tr><td>神券节/营销活动参与费</td><td>一般折让0.5%–1%额外让利</td><td>让利以消费券形式结算，平台补贴部分，商家让利部分比例由谈判决定</td></tr>
+    </table>
+
+    <div class="ans-subhead">美团平台（到店 / 团购）</div>
+    <table class="fee-table">
+      <tr><th>费用类型</th><th>费率 / 标准</th><th>备注</th></tr>
+      <tr><td>团购佣金</td><td>5%–8%</td><td>美食类约5%；高毛利类目（美容、娱乐）更高</td></tr>
+      <tr><td>支付通道费</td><td>0.38%</td><td>同上</td></tr>
+      <tr><td>资源位广告</td><td>竞价，单月数万–数十万</td><td>首页推荐位、品类榜单置顶等独立计费</td></tr>
+    </table>
+
+    <div class="ans-subhead">抖音本地生活（到店团购 / 到家外卖）</div>
+    <table class="fee-table">
+      <tr><th>费用类型</th><th>费率 / 标准</th><th>备注</th></tr>
+      <tr><td>技术服务费（平台抽佣）</td><td>美食类2.5%起，行业平均3%；2025年实行阶梯浮动</td><td>新商家前30天仅1%；三农/非遗品类2%–3%</td></tr>
+      <tr><td>达人/MCN佣金中的平台技术服务费</td><td>达人佣金的10%</td><td>商家设定达人佣金比例，平台从中抽10%；连锁头部自播一般无需达人佣金</td></tr>
+      <tr><td>支付通道费</td><td>约0.6%–1%</td><td>早期0.6%，2025年已有上调信号</td></tr>
+      <tr><td>投流广告（千川）</td><td>CPM/CPC竞价，另计</td><td>头部连锁品牌投流量级大，通常有BD对投补贴（见Q3）</td></tr>
+      <tr><td>服务商服务费</td><td>GMV的10%–20%</td><td>若通过第三方服务商运营，另付；海底捞自运营则无此项</td></tr>
+    </table>
+
+    <div class="inference-box">
+      <strong>侦探推断：</strong>年框协议对头部商家通常内含「阶梯返点」条款——全年完成GTV超过某阈值后，技术服务费率退还0.5%–1.5%。美团已将年框改为季度框，每季末基于上季完成度重新议定费率，实质是动态对赌。访谈时可直接问：「年框里有没有基于完成量的费率返点条款？是季度结算还是年底结算？」
+    </div>
+    <ul class="data-list" style="margin-top:14px">
+      <li>来源：美团官方费率透明化公告（2021、2024）；抖音本地生活服务费公告（2022、2025）</li>
+      <li>来源：行业媒体（36Kr、财经、人人都是产品经理）对商家实际综合费率的调研报道</li>
+    </ul>
+  </div>
+
+  <!-- Q2 -->
+  <div class="ans-card">
+    <div class="ans-header">
+      <div class="ans-num">2</div>
+      <div class="ans-title">头部商家是否存在对赌协议？对赌政策内容</div>
+      <span class="conf-badge conf-low">低置信 LOW</span>
+    </div>
+    <div class="ans-body">
+      没有公开证据显示美团或抖音与海底捞存在以「对赌」命名的正式合同条款。但从行业侧面信息与商家运营实践来看，头部商家的年框协议中事实上存在以下几类隐性对赌机制：
+    </div>
+
+    <div class="ans-subhead">美团：季度动态费率 = 隐性对赌</div>
+    <div class="inference-box">
+      美团已将年框改为季度框架。每季度末根据商家上季度GTV完成情况重新谈判抽佣率——GTV超目标则费率下浮，未达目标则费率上浮或取消专属资源位。这是一种「软对赌」：没有违约金条款，但完成度直接决定下一季度的资源位和费率级别。
+    </div>
+
+    <div class="ans-subhead">美团：全网最低价换流量 = 隐性保底</div>
+    <div class="inference-box">
+      有明确行业信源证实：头部连锁餐饮品牌（茶饮、火锅类）若在美团保持「全网最低价」（比抖音更低），将在特定时段（如下午3–5点）、特定区域获得针对性流量倾斜。这是一种「价格对赌」：锁定价格优势换算流量承诺，但承诺本身不写入合同。
+    </div>
+
+    <div class="ans-subhead">抖音：流量对投 = 头部商家专属保底</div>
+    <div class="inference-box">
+      抖音早期对投放千川的头部商家实施1:1流量对投（商家每花1元投流，平台等额赠送1元流量），2024–2025年已降至1:0.7，但仍是头部品牌的核心隐性补贴。此外，抖音BD对海底捞等全国连锁头部商家提供「专属运营经理」服务，含专属资源位（超级品牌日坑位）的确定性分配——这是流量层面的保底。
+    </div>
+
+    <div class="ans-subhead">访谈核心追问方向</div>
+    <ul class="data-list">
+      <li>「年框/季框有没有一个GTV目标数字？没完成会怎样？费率会变吗？」</li>
+      <li>「超级品牌日的坑位是申请制还是BD谈下来的？有没有量的保底（如曝光量、核销量）？」</li>
+      <li>「全网最低价承诺是口头还是有书面备忘录？价格违约会不会立刻停流量？」</li>
+    </ul>
+
+    <div class="flag-box">
+      ⚑ 风险信号：若受访者能直接报出具体GTV数字或流量保底曝光量，说明确实存在书面约定；若回避或称「凭关系」，说明仍是非正式软约束。两种回答都有分析价值，注意追问细节。
+    </div>
+    <ul class="data-list" style="margin-top:10px">
+      <li>来源：36Kr《美团与抖音暗战升级》；运营派《从竞争到算帐》；财经等行业报道（间接推断，非直接证据）</li>
+    </ul>
+  </div>
+
+  <!-- Q3 -->
+  <div class="ans-card">
+    <div class="ans-header">
+      <div class="ans-num">3</div>
+      <div class="ans-title">平台对商家补贴：2025年流量补贴 + 货品补贴策略</div>
+      <span class="conf-badge conf-med">中置信 MED</span>
+    </div>
+    <div class="ans-body">
+      2025年是美团、抖音补贴力度最大的一年（补贴大战高峰在2025年7月）。以下按两平台、两类补贴（流量/货品）分别整理：
+    </div>
+
+    <div class="ans-subhead">美团 — 流量补贴</div>
+    <ul class="data-list">
+      <li>
+        <strong>神券节</strong>：每月1–2次，持续1–3天，平台定向向用户发放大额消费券（面额10–30元），商家参与门槛为「提供专属套餐」或「全品类参与折扣」。美团补贴30%–50%券面额，商家让利剩余部分。日活跃用户突破2000万为历史高峰。
+      </li>
+      <li>
+        <strong>神抢手 / 超级品牌日</strong>：美团城市级直播间，聚合多品牌，每品牌1–2款套餐参与直播，平台提供固定首页露出+流量推送。头部连锁品牌优先获得「超级品牌日」独立坑位（全天首页置顶）。
+      </li>
+      <li>
+        <strong>10亿外卖助力金</strong>：对在平台经营3年以上、复购高、口碑好的餐饮商家，按线上经营规模提供5000元–5万元现金。注：该补贴面向中小商家，头部品牌另有单独谈判资源。
+      </li>
+      <li>
+        <strong>1000亿三年承诺</strong>：美团外卖总经理宣布未来三年向餐饮行业总体投入1000亿元，以补贴+基础设施+技术的形式兑现，非直接现金转移。
+      </li>
+      <li>
+        <strong>流量倾斜换最低价</strong>：头部连锁在美团保持全网最低价，获得固定时段+固定商圈+固定用户画像的精准流量推送（非公开，访谈验证）。
+      </li>
+    </ul>
+
+    <div class="ans-subhead">美团 — 货品补贴</div>
+    <ul class="data-list">
+      <li>美团本身不直接补贴食材/货品，货品维度补贴以「套餐让利比例共担」形式体现：商家设置低价套餐，美团额外赠送曝光或返还部分佣金，实质是间接补贴。</li>
+      <li>2025年美团与多个食材供应链平台合作（快驴、美菜），对在平台采购食材的商家给予积分返利，可抵扣部分平台服务费。此路径对海底捞自有供应链的头部商家意义有限。</li>
+    </ul>
+
+    <div class="ans-subhead">抖音 — 流量补贴</div>
+    <ul class="data-list">
+      <li>
+        <strong>超级品牌日（300+场/年）</strong>：抖音电商2025年计划举办300+场超级品牌日，30%采用「品牌纪录片+总裁直播」组合拳。餐饮类超级品牌日由抖音生活服务团队运营，提供开屏广告+push推送+直播间流量包（通常价值数十万元的流量权益）。
+      </li>
+      <li>
+        <strong>千川1:0.7对投</strong>：头部商家投放千川，平台赠送0.7倍等额流量（2024年前为1:1）。这是最重要的隐性流量补贴，海底捞等头部品牌实际享受的补贴总量可达千万元级。
+      </li>
+      <li>
+        <strong>心动大牌日 / 抖音团购节</strong>：周期性大促，平台承接品牌专场直播，提供「全平台流量包」；海底捞2023年生日嘉年华单场GMV破亿即来自此类活动，2025年延续且升级。
+      </li>
+      <li>
+        <strong>烟火小店扶持计划</strong>：2024年9月上线，针对客单价100元以下中小餐饮，提供流量激励+达人探店+榜单荣誉。海底捞作为头部连锁，不在此计划覆盖范围内，有独立的头部商家合作框架。
+      </li>
+    </ul>
+
+    <div class="ans-subhead">抖音 — 货品供给补贴</div>
+    <ul class="data-list">
+      <li>
+        <strong>低价套餐货品补贴</strong>：抖音在核心大促期（超级品牌日、团购节）对部分标杆套餐提供「货品补贴」——即平台补贴套餐成本的一部分，使商家以低于成本价上架，平台来承担差价，以制造"爆款"拉升平台交易量。具体金额和品类由BD单独谈判，不公开。
+      </li>
+      <li>
+        <strong>食材/原料补贴</strong>：抖音通过合作的农产品供应商/源头工厂，对参与「产地直发」的餐饮套餐给予一定货品折扣（海底捞牛肉/毛肚系列曾参与相关供应链推广）。
+      </li>
+      <li>
+        <strong>套餐核销补贴</strong>：部分大促中，平台对达到核销量目标的商家额外返还一笔「核销奖励金」，通常为核销GMV的0.5%–1%，以平台积分或现金券充值形式兑付。
+      </li>
+    </ul>
+
+    <div class="caveat-box">
+      注意：货品补贴的具体金额和条款是访谈的核心信息缺口。访谈追问建议：「超级品牌日那场，平台有没有帮海底捞补贴套餐成本？补贴的是哪款产品？金额大概是多少？是一次性还是按核销量结算？」
+    </div>
+    <ul class="data-list" style="margin-top:10px">
+      <li>来源：美团澎湃新闻《10亿助力金》；抖音电商《2025年营销全景图》；抖音生活服务《烟火小店扶持计划》发布</li>
+      <li>来源：36Kr《抖省省背后的万亿野心》；36Kr《海底捞凭什么成抖音带货顶流》</li>
+    </ul>
+  </div>
+
+  <!-- Q4 -->
+  <div class="ans-card">
+    <div class="ans-header">
+      <div class="ans-num">4</div>
+      <div class="ans-title">2025年在美团和抖音平台的成交单量</div>
+      <span class="conf-badge conf-low">低置信 LOW</span>
+    </div>
+    <div class="ans-body">
+      海底捞从未分平台披露单量数据，美团/抖音亦不单独披露头部商家数据。以下基于公开财报数据做最大可能推算，结合分析师报告辅助估算：
+    </div>
+
+    <div class="ans-subhead">可确认的公开数据</div>
+    <table class="fee-table">
+      <tr><th>数据项</th><th>数值</th><th>来源</th></tr>
+      <tr><td>海底捞2025年外卖收入</td><td>26.58亿元，同比+111.9%</td><td>海底捞2025年报（2026年3月）</td></tr>
+      <tr><td>海底捞外卖网点</td><td>全国超1200个</td><td>同上</td></tr>
+      <tr><td>美团外卖日均单量</td><td>超9000万单/日（全平台）</td><td>新浪科技引美团内部数据2025年</td></tr>
+      <tr><td>美团餐食外卖市占率</td><td>约70%</td><td>多家机构报告，2025H1</td></tr>
+      <tr><td>抖音本地生活2025年GMV</td><td>超8500亿元，+59%</td><td>抖音生活服务内部数据，媒体引用</td></tr>
+    </table>
+
+    <div class="ans-subhead">基于财报的反推估算（侦探推断，仅供参考）</div>
+    <div class="inference-box">
+      <strong>方法论：</strong>外卖业务收入26.6亿元 ÷ 估算外卖客单价（海底捞外卖偏高，估算70–100元/单）= 约2600万–3800万单/全年。<br><br>
+      <strong>平台分配估算（基于市场份额）：</strong><br>
+      &bull; 美团（市占约55–60%）：约1400万–2200万单<br>
+      &bull; 抖音（快速增长，2025年占比估算15–25%）：约400万–950万单<br>
+      &bull; 饿了么+京东+自营：剩余约15–25%<br><br>
+      <strong>注意：</strong>上述为模型估算，误差区间大，不可作为严谨引用数据。访谈应直接询问运营经理的实际系统数据。
+    </div>
+
+    <div class="flag-box">
+      ⚑ 关键访谈问题：「你们内部系统里，2025年全年在美团的订单量是多少？抖音呢？有没有分平台的月度/季度数据可以分享？」——运营经理通常能看到CRM或平台后台数据，是获取此信息的最直接路径。
+    </div>
+    <ul class="data-list" style="margin-top:10px">
+      <li>来源：海底捞2025年度报告（2026年3月24日）—— 第一财经、东方财富、虎嗅等多家媒体报道</li>
+      <li>来源：新浪科技引美团内部数据（2025年6月）；抖音生活服务GMV数据（媒体引用）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Red flags -->
+<div class="section">
+  <div class="section-zh">风险信号与矛盾检测</div>
+  <div class="section-en">Red Flags &amp; Contradictions — Forensic Analysis</div>
+  <table class="flag-table">
+    <thead>
+      <tr>
+        <th>严重度</th>
+        <th>类型</th>
+        <th>描述</th>
+        <th>解决问题</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="color:#c47a1e;font-weight:bold">中</span></td>
+        <td>数据缺口</td>
+        <td>海底捞分平台单量从无公开披露，本报告估算基于客单价假设，可靠性受限</td>
+        <td>直接索取运营经理的平台后台数据截图或口头数字</td>
+      </tr>
+      <tr>
+        <td><span style="color:#8b2e2e;font-weight:bold">高</span></td>
+        <td>叙事缺口</td>
+        <td>「对赌协议」公开信息几乎为零，行业惯例以非正式方式运作，受访者可能以「保密义务」为由回避</td>
+        <td>换问法：「有没有一个季度目标数字，完成后费率会变化？」用具体细节替代敏感词</td>
+      </tr>
+      <tr>
+        <td><span style="color:#c47a1e;font-weight:bold">中</span></td>
+        <td>来源冲突</td>
+        <td>抖音本地生活GMV 8500亿为媒体引用内部数据，官方未正式确认；餐饮类占比未知</td>
+        <td>将此数字视为量级参考而非精确引用，访谈时追问海底捞在抖音的占比感知</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Critic -->
+<div class="section">
+  <div class="section-zh">独立评审验证</div>
+  <div class="section-en">Critic Verification — Independent Review</div>
+  <div class="critic-box">
+    <div class="critic-header">
+      <span style="font-size:12px; color:#4a6fa5; font-weight:bold; letter-spacing:.08em;">独立评审 · INDEPENDENT CRITIC</span>
+      <span class="critic-badge">有条件通过 · 质量分 5.5/10</span>
+    </div>
+    <div class="critic-body">
+      <div class="critic-note">
+        报告在可及的公开信息范围内做出了合理推断，费率框架（Q1）和补贴活动（Q3）具备中等置信度。但Q2（对赌协议）和Q4（分平台单量）本质上是非公开商业数据，任何基于公开信源的回答均属推断，访谈才是唯一的信息来源。最大风险在于：受访者是「商家运营经理」而非平台BD，其掌握的信息以商家视角为主（自己谈到了什么条款），而非平台政策全貌。
+      </div>
+      <div class="critic-fail-item">
+        <span class="sev-label" style="color:#8b2e2e;">重大</span>
+        <span style="color:var(--copper); min-width:80px;">信息缺口</span>
+        <span>Q4分平台单量无法从公开数据可靠分解，估算区间过宽（2600万–3800万），访谈前应视为未知</span>
+      </div>
+      <div class="critic-fail-item">
+        <span class="sev-label" style="color:#c47a1e;">轻微</span>
+        <span style="color:var(--copper); min-width:80px;">置信过高</span>
+        <span>Q3货品补贴中「平台补贴套餐成本」部分来自行业推断，非海底捞专属验证数据</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <span>Merlin Research · 五智能体协作 · 海底捞平台运营调研</span>
+  <span>
+    2026-06-10
+    &nbsp;&nbsp;
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&amp;report=haidilao_20260610"
+       target="_blank"
+       style="color:var(--copper);text-decoration:none;border-bottom:1px solid var(--copper)">
+      这份报告有用吗？反馈 →
+    </a>
+  </span>
+</div>
+
+</body>
+</html>
