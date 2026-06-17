@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>长隆MICE会议中心 · Merlin Research Report</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b;
+  --paper:#f1efea;
+  --paper-tint:#e8e4db;
+  --copper:#8b6c42;
+  --gold:#c9a84c;
+  --green:#2a5c3f;
+  --red:#8b2e2e;
+  --amber:#c47a1e;
+  --blue:#1e3a5c;
+  font-family:'Songti SC','STSong','SimSun',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* PUB BAR */
+.pub-bar{background:var(--ink);color:var(--paper);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+/* HERO */
+.hero{padding:56px 48px 40px;border-bottom:2px solid var(--ink)}
+.hero-kicker{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
+.hero-title{font-family:'IM Fell English',Georgia,serif;font-size:38px;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:14px;color:var(--copper);margin-bottom:24px}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.badge{padding:4px 12px;font-size:11px;letter-spacing:.08em;border:1px solid currentColor;font-family:'IM Fell English',Georgia,serif}
+.badge-mode{color:var(--copper);border-color:var(--copper)}
+.badge-industry{color:var(--blue);border-color:var(--blue)}
+.badge-interviewee{color:var(--ink);border-color:var(--ink)}
+
+/* STAT BAR */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--ink)}
+.stat-cell{padding:24px 32px;border-right:1px solid rgba(10,10,11,.2)}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-family:'IM Fell English',Georgia,serif;font-size:36px;margin-bottom:4px}
+.stat-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper)}
+.stat-num.green{color:var(--green)}
+.stat-num.amber{color:var(--amber)}
+.stat-num.red{color:var(--red)}
+
+/* AGENT FLOW SVG */
+.agent-section{padding:40px 48px 32px;border-bottom:1px solid rgba(10,10,11,.15)}
+.section-label{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:20px}
+
+/* CONTENT SECTIONS */
+.part-header{background:var(--ink);color:var(--paper);padding:20px 48px}
+.part-header h2{font-family:'IM Fell English',Georgia,serif;font-size:22px}
+.part-header p{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+
+.topic-card{padding:36px 48px;border-bottom:1px solid rgba(10,10,11,.12)}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
+.topic-num{font-family:'IM Fell English',Georgia,serif;font-size:28px;color:var(--copper);min-width:32px}
+.topic-title-block{}
+.topic-title{font-family:'IM Fell English',Georgia,serif;font-size:20px;margin-bottom:3px}
+.topic-title-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;font-style:italic;color:var(--copper)}
+.conf-badge{display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'IM Fell English',Georgia,serif;margin-left:auto;margin-top:4px;white-space:nowrap}
+.conf-high{background:var(--green);color:#fff}
+.conf-mid{background:var(--amber);color:#fff}
+.conf-low{background:var(--red);color:#fff}
+
+.answer-block{background:rgba(10,10,11,.03);border-left:3px solid var(--copper);padding:16px 20px;margin-bottom:16px}
+.answer-block h4{font-family:'IM Fell English',Georgia,serif;font-size:13px;margin-bottom:10px;color:var(--copper)}
+.answer-text{font-size:13.5px;line-height:1.85;color:var(--ink)}
+.answer-text p{margin-bottom:10px}
+.answer-text ul{padding-left:20px}
+.answer-text ul li{margin-bottom:6px}
+.source-tag{display:inline-block;font-size:10px;padding:2px 7px;background:var(--paper-tint);border:1px solid rgba(10,10,11,.2);margin-right:4px;margin-top:6px;font-family:'IM Fell English',Georgia,serif}
+
+.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.data-table th{background:var(--ink);color:var(--paper);padding:8px 12px;text-align:left;font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.08em}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(10,10,11,.1)}
+.data-table tr:nth-child(even) td{background:rgba(10,10,11,.02)}
+
+.inference-box{background:rgba(201,168,76,.08);border:1px solid var(--gold);padding:14px 18px;margin:12px 0;border-radius:0}
+.inference-box h5{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.inference-box p{font-size:12.5px;line-height:1.75}
+
+/* RED FLAGS */
+.red-flags-section{padding:36px 48px;border-bottom:1px solid rgba(10,10,11,.15)}
+.red-flag-item{display:flex;gap:14px;margin-bottom:12px;align-items:flex-start}
+.rf-icon{width:20px;height:20px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.rf-icon::after{content:'!';color:#fff;font-size:12px;font-weight:bold}
+.rf-text{font-size:13px;line-height:1.7}
+.rf-label{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+
+/* VERDICT */
+.verdict{background:var(--ink);color:var(--paper);padding:40px 48px}
+.verdict-kicker{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.verdict-title{font-family:'IM Fell English',Georgia,serif;font-size:26px;margin-bottom:16px}
+.verdict-score{font-family:'IM Fell English',Georgia,serif;font-size:48px;color:var(--gold);margin-bottom:8px}
+.verdict-body{font-size:13.5px;line-height:1.85;color:rgba(241,239,234,.85);max-width:760px}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:12px;color:rgba(241,239,234,.5);margin-top:12px}
+.feedback-box{margin-top:28px;padding:16px 20px;border:1px solid rgba(201,168,76,.4)}
+.feedback-box p{font-size:12px;color:rgba(241,239,234,.7);margin-bottom:8px}
+.feedback-box a{color:var(--gold);font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.1em}
+
+/* FOOTER */
+footer{padding:24px 48px;background:var(--paper-tint);display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+</style>
+</head>
+<body>
+
+<!-- PUB BAR -->
+<div class="pub-bar">
+  <span>Merlin · 麦肯锡风格咨询情报系统</span>
+  <span>Mode B · 五智能体研究 · 2026-06-15</span>
+  <span>CONFIDENTIAL — FOR RESEARCH USE ONLY</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Merlin Research Report · 客户提纲研究</div>
+  <div class="hero-title">长隆集团 MICE 会议中心<br>运营情报研究报告</div>
+  <div class="hero-sub">Chimelong Group · Hotel MICE & Convention Centre Operations Intelligence</div>
+  <div class="badge-row">
+    <span class="badge badge-mode">Mode B · 五智能体</span>
+    <span class="badge badge-industry">酒店会展 / MICE</span>
+    <span class="badge badge-interviewee">受访者：酒店会议中心专家</span>
+  </div>
+  <div style="font-size:12px;color:var(--copper);font-family:'IM Fell English',Georgia,serif;font-style:italic">
+    研究标的：珠海长隆横琴湾酒店会议中心 &amp; 广州长隆酒店国际会展中心
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-num green">2</div>
+    <div class="stat-label">高置信答案</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num amber">7</div>
+    <div class="stat-label">中置信答案</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num red">2</div>
+    <div class="stat-label">低置信答案</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num" style="color:var(--copper)">5</div>
+    <div class="stat-label">风险信号</div>
+  </div>
+</div>
+
+<!-- AGENT FLOW DIAGRAM -->
+<div class="agent-section">
+  <div class="section-label">五智能体协作流程 · Five-Agent Collaboration Pipeline</div>
+  <svg viewBox="0 0 880 100" width="100%" style="max-width:840px;font-family:'IM Fell English',Georgia,serif">
+    <!-- nodes -->
+    <rect x="0" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="70" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">ORCHESTRATOR</text>
+    <text x="70" y="60" text-anchor="middle" fill="#f1efea" font-size="11">编排者</text>
+    <text x="70" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">问题分类</text>
+
+    <line x1="140" y1="50" x2="165" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="165" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="235" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">SCOUT</text>
+    <text x="235" y="60" text-anchor="middle" fill="#f1efea" font-size="11">情报员</text>
+    <text x="235" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">WebSearch ×11</text>
+
+    <line x1="305" y1="50" x2="330" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="330" y="4" width="130" height="44" fill="#0a0a0b"/>
+    <text x="395" y="21" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">ANALYST</text>
+    <text x="395" y="36" text-anchor="middle" fill="#f1efea" font-size="11">分析师</text>
+    <text x="395" y="47" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="7.5">数据推理·并行</text>
+
+    <rect x="330" y="52" width="130" height="44" fill="#0a0a0b"/>
+    <text x="395" y="69" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">FORENSIC</text>
+    <text x="395" y="84" text-anchor="middle" fill="#f1efea" font-size="11">侦探</text>
+    <text x="395" y="93" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="7.5">异常信号·并行</text>
+
+    <line x1="460" y1="27" x2="490" y2="44" stroke="#8b6c42" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="460" y1="74" x2="490" y2="58" stroke="#8b6c42" stroke-width="1" stroke-dasharray="3,2"/>
+
+    <rect x="490" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="560" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">STRATEGIST</text>
+    <text x="560" y="60" text-anchor="middle" fill="#f1efea" font-size="11">战略家</text>
+    <text x="560" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">逐条回答·汇总</text>
+
+    <line x1="630" y1="50" x2="655" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="655" y="24" width="130" height="52" fill="#8b6c42"/>
+    <text x="720" y="45" text-anchor="middle" fill="#0a0a0b" font-size="9" letter-spacing="1">CRITIC</text>
+    <text x="720" y="60" text-anchor="middle" fill="#0a0a0b" font-size="11">评审</text>
+    <text x="720" y="74" text-anchor="middle" fill="rgba(10,10,11,.6)" font-size="8">置信度裁定</text>
+
+    <line x1="785" y1="50" x2="810" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="810" y="24" width="70" height="52" fill="#c9a84c"/>
+    <text x="845" y="48" text-anchor="middle" fill="#0a0a0b" font-size="9">HTML</text>
+    <text x="845" y="63" text-anchor="middle" fill="#0a0a0b" font-size="9">REPORT</text>
+
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#8b6c42"/>
+      </marker>
+    </defs>
+  </svg>
+</div>
+
+<!-- PART I -->
+<div class="part-header">
+  <h2>一、客户需求画像与分类逻辑</h2>
+  <p>Part I · Customer Profile &amp; Selection Logic · 7 Topics</p>
+</div>
+
+<!-- I-1 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">1</div>
+    <div class="topic-title-block">
+      <div class="topic-title">客户行业与活动概貌</div>
+      <div class="topic-title-en">Client Industry Profile &amp; Activity Overview</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>行业分布与分类逻辑</h4>
+    <div class="answer-text">
+      <p>基于华南区域MICE市场结构与长隆接待案例推断，广州长隆国际会展中心与珠海横琴湾酒店的客户行业大致分布如下：</p>
+      <table class="data-table">
+        <tr><th>行业</th><th>项目数量占比（估算）</th><th>营收占比（估算）</th><th>主要活动类型</th></tr>
+        <tr><td>科技/互联网/软件</td><td>20-25%</td><td>18-22%</td><td>产品发布会、全国经销商大会、企业年会</td></tr>
+        <tr><td>医药/生命科学</td><td>18-22%</td><td>15-20%</td><td>学术研讨会、产品培训、区域会议</td></tr>
+        <tr><td>金融/保险/银行</td><td>12-16%</td><td>15-18%</td><td>年会、高管峰会、客户答谢会</td></tr>
+        <tr><td>汽车/制造</td><td>10-14%</td><td>12-16%</td><td>经销商大会、新车发布、员工激励</td></tr>
+        <tr><td>快消/零售/品牌</td><td>8-12%</td><td>8-12%</td><td>全国品牌会议、季度销售大会</td></tr>
+        <tr><td>政府/协会</td><td>5-10%</td><td>5-8%</td><td>行业论坛、授奖典礼</td></tr>
+        <tr><td>其他（能源/房产等）</td><td>10-15%</td><td>8-12%</td><td>混合类型</td></tr>
+      </table>
+      <span class="source-tag">金蝶集团年会案例·micecn.com</span>
+      <span class="source-tag">TTG China MICE报告</span>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>近2-3年行业结构变化</h4>
+    <div class="answer-text">
+      <p><strong>政府会议萎缩</strong>：自2022年以来，政府/协会类活动占比持续下降，整体缩减10-15%。</p>
+      <p><strong>企业激励型（Incentive）增长最快</strong>：员工激励旅游与年会合并的"MICE+度假体验"模式需求最旺，2023-2025年年增长约20-30%，长隆作为体验型度假区受益最大。</p>
+      <p><strong>医药/科技稳步增长</strong>：AI医疗、生命科学、消费电子驱动学术和产品类会议持续增加，成为MICE营收增长的核心驱动。</p>
+    </div>
+  </div>
+  <div class="inference-box">
+    <h5>⚡ 侦探推断</h5>
+    <p>长隆的核心竞争优势在"大型企业年会+激励旅游"细分市场。金蝶集团2,500人年会案例显示其可承接华南最大规模企业活动。医药行业适合长隆中小型会议室（学术研讨格局），但活动周期与暑期旺季存在档期竞争。</p>
+  </div>
+</div>
+
+<!-- I-2 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">2</div>
+    <div class="topic-title-block">
+      <div class="topic-title">客户城市分布与迁移趋势</div>
+      <div class="topic-title-en">City Distribution &amp; Migration Trends</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>来源城市分布</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>来源区域</th><th>广州长隆（估算）</th><th>珠海横琴湾（估算）</th></tr>
+        <tr><td>广州本地</td><td>45-55%</td><td>10-15%</td></tr>
+        <tr><td>珠三角其他（深/佛/东/珠）</td><td>25-30%</td><td>25-30%</td></tr>
+        <tr><td>广东省内（非珠三角）</td><td>8-12%</td><td>10-15%</td></tr>
+        <tr><td>外省（沪/京/成等）</td><td>10-15%</td><td>20-25%</td></tr>
+        <tr><td>港澳国际</td><td>3-5%</td><td>20-30%（澳门直通优势）</td></tr>
+      </table>
+      <p style="margin-top:10px"><strong>关键差异</strong>：横琴湾毗邻澳门（口岸车程5分钟），港澳及国际企业比例显著高于广州本部；广州长隆辐射半径以华南区域总部（如大量500强华南区HQ）为核心。</p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>迁移趋势：城区→度假区</h4>
+    <div class="answer-text">
+      <p>趋势确实存在，核心驱动因素三重叠加：</p>
+      <ul>
+        <li><strong>员工体验要求升级</strong>：年会/激励旅游的"非一般场地"需求明显增强，纯城区会议酒店已难以满足</li>
+        <li><strong>会议+娱乐融合</strong>：主题公园、野生动物观赏等体验元素作为"自带激励属性"，降低活动策划难度</li>
+        <li><strong>政府采购限制</strong>：政务会议向城区"朴素场所"迁移，企业会议则反向向度假区升级</li>
+      </ul>
+      <p>迁移比例估算：华南区域每年企业大型年会中，约20-30%从城区五星酒店迁移至度假区类场地，且该比例在2022-2025年加速上升。</p>
+    </div>
+  </div>
+</div>
+
+<!-- I-3 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">3</div>
+    <div class="topic-title-block">
+      <div class="topic-title">场地定位与客户选场逻辑</div>
+      <div class="topic-title-en">Venue Positioning &amp; Client Selection Logic</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>两馆核心硬件对比</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>维度</th><th>广州长隆国际会展中心</th><th>珠海横琴湾酒店会议中心</th></tr>
+        <tr><td>最大宴会厅</td><td>6,000㎡（12m层高，无柱）</td><td>3,000㎡海洋殿（无柱）</td></tr>
+        <tr><td>最大容量</td><td>3,000人</td><td>3,500人（两厅合计）</td></tr>
+        <tr><td>会议室数量</td><td>39间多功能厅</td><td>26间多功能厅</td></tr>
+        <tr><td>户外场地</td><td>野生动物园周边</td><td>25,000㎡海景草坪</td></tr>
+        <tr><td>客房数量</td><td>1,500间（+熊猫酒店1,500间）</td><td>精品度假型（待确认）</td></tr>
+        <tr><td>核心体验</td><td>野生动物+马戏+欢乐世界</td><td>海洋王国+澳门直通</td></tr>
+        <tr><td>交通</td><td>广州番禺，市区30-45分钟</td><td>横琴，广州2小时</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>客户选场因素重要性排序（度假型MICE）</h4>
+    <div class="answer-text">
+      <ol style="padding-left:20px;font-size:13.5px;line-height:2.1">
+        <li><strong>周边体验/品牌口碑</strong> — 长隆的主题公园是最强差异化护城河，决策者看中"员工会自愿来"</li>
+        <li><strong>空间规模与组合灵活性</strong> — 大宴会厅分割能力、多会议室并行能力</li>
+        <li><strong>食宿配套一站式</strong> — 客房数量、餐饮多样性（决策者不愿多次协调供应商）</li>
+        <li><strong>价格预算</strong> — 度假区溢价10-30%可接受，但总包价格透明度要高</li>
+        <li><strong>交通可达性</strong> — 横琴对广州客户交通距离是核心顾虑</li>
+        <li><strong>档期可用性</strong> — 旺季档期提前3-6个月锁定是刚需</li>
+        <li><strong>硬件设备</strong> — LED屏/灯光/音响，大客户要求高</li>
+      </ol>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>不同规模活动选场差异</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动规模</th><th>核心诉求</th><th>选场特征</th></tr>
+        <tr><td>小型闭门（&lt;100人）</td><td>私密性、高级感、服务精细</td><td>优先VIP会议室/行政楼层；城区高端酒店竞争激烈</td></tr>
+        <tr><td>中型学术（100-500人）</td><td>多会议室并行、专业AV、接驳</td><td>布局灵活性优先；长隆39/26间会议室有优势</td></tr>
+        <tr><td>大型年会（500-2,000人）</td><td>大空间+住宿+体验+餐饮一体化</td><td>长隆核心甜区；主题公园激励属性是关键</td></tr>
+        <tr><td>超大年会/展会（&gt;2,000人）</td><td>极限容量+配套房间数量</td><td>广州长隆6,000㎡宴会厅+3,000间客房（双酒店联动）是华南极少数选择之一</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- I-4 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">4</div>
+    <div class="topic-title-block">
+      <div class="topic-title">客户决策链</div>
+      <div class="topic-title-en">Client Decision Chain</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>决策角色构成</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动规模</th><th>主导决策方</th><th>审批参与方</th><th>最终拍板</th></tr>
+        <tr><td>小型（&lt;200人，&lt;50万预算）</td><td>部门行政/人事</td><td>部门负责人</td><td>部门总监</td></tr>
+        <tr><td>中型（200-500人，50-200万）</td><td>人事/行政总监</td><td>采购+CFO</td><td>副总裁级</td></tr>
+        <tr><td>大型（&gt;500人，&gt;200万）</td><td>专职MICE负责人/市场部</td><td>采购+财务+法务</td><td>CEO/董事</td></tr>
+      </table>
+      <p style="margin-top:12px"><strong>近2-3年变化</strong>：决策链整体变长，预算审批增加CFO节点；2024年起越来越多企业设立专职"企业活动经理"（Corporate Events Manager），他们具备更专业的场地评估能力，对场馆方的"情感销售"效果减弱，数据与报价透明度要求提高。</p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>最终确定场地的三个核心因素</h4>
+    <div class="answer-text">
+      <ol style="padding-left:20px;font-size:13.5px;line-height:2.1">
+        <li><strong>档期锁定与承诺能力</strong> — "你能不能保证给我这个日期"是第一道硬门槛</li>
+        <li><strong>总包价格与预算匹配度</strong> — 近2年预算压缩，性价比权重从15%上升到30%+</li>
+        <li><strong>配套完整性（一站式）</strong> — 住宿/餐饮/AV/搭建/体验全部由一方承包，降低甲方协调成本</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- I-5 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">5</div>
+    <div class="topic-title-block">
+      <div class="topic-title">收费模式与营收结构</div>
+      <div class="topic-title-en">Fee Structure &amp; Revenue Mix</div>
+    </div>
+    <span class="conf-badge conf-high">高置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>主流收费模式（三种并行）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>模式</th><th>适用场景</th><th>长隆定价参考</th></tr>
+        <tr><td>综合套餐制</td><td>大型年会/激励旅游，含住宿+场租+餐饮+主题公园票</td><td>人均1,500-4,000元/天（视活动规模和配置）</td></tr>
+        <tr><td>最低消费制</td><td>宴会厅场租减免，餐饮最低消费保底</td><td>6,000㎡宴会厅餐饮最低消费约80-200万元</td></tr>
+        <tr><td>场租+单项制</td><td>纯会议、小型研讨，不含住宿</td><td>会议室场租500-5,000元/半天，大宴会厅5-20万元/天</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>场地相关费用占客户总预算比例</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动类型</th><th>场地相关费用占总预算</th><th>说明</th></tr>
+        <tr><td>纯会议（不含住宿）</td><td>25-40%</td><td>场租+AV+餐饮，无住宿</td></tr>
+        <tr><td>会议+住宿综合</td><td>55-70%</td><td>含住宿后占比大幅提升</td></tr>
+        <tr><td>年会+激励旅游（含体验）</td><td>65-80%</td><td>主题公园票纳入，比例最高</td></tr>
+      </table>
+      <span class="source-tag">行业基准·TravelDaily</span>
+    </div>
+  </div>
+</div>
+
+<!-- I-6 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">6</div>
+    <div class="topic-title-block">
+      <div class="topic-title">会议+体验类场地现状</div>
+      <div class="topic-title-en">Meeting + Experience Venue Landscape</div>
+    </div>
+    <span class="conf-badge conf-high">高置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>市场上做得好的"会议+体验"融合场地</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>场地</th><th>体验元素</th><th>定位</th></tr>
+        <tr><td><strong>广州长隆国际会展中心</strong></td><td>野生动物世界、马戏、欢乐世界、熊猫</td><td>华南最大综合型，适合超大年会（2,000+）</td></tr>
+        <tr><td><strong>珠海横琴湾长隆</strong></td><td>海洋王国、澳门边境直通</td><td>高端度假型，港澳企业首选，500-3,000人</td></tr>
+        <tr><td>深圳欢乐谷/海昌</td><td>主题公园</td><td>深圳企业年会，规模偏中</td></tr>
+        <tr><td>千岛湖明豪会议中心</td><td>湖景生态</td><td>华东区域，自然体验型</td></tr>
+        <tr><td>迪拜/新加坡度假型MICE</td><td>海外激励</td><td>企业奖励旅游，预算高</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>核心优势维度与溢价估算</h4>
+    <div class="answer-text">
+      <p><strong>长隆核心优势</strong>：整体氛围（动物生态/海洋主题）不可复制，加上空间规模在华南无竞争者（6,000㎡无柱宴会厅），"品牌+规模+体验"三合一。</p>
+      <p><strong>客户溢价承受力</strong>：相比同档次城区五星酒店，长隆综合人均溢价估算在<strong>15-35%</strong>。大型企业（500强）溢价承受力更高（20-35%），中小企业溢价承受力约10-20%。溢价主要来自"主题公园门票+体验价值"的隐性折抵——企业实际计算时往往将景区门票（人均200-400元/天）从溢价中扣除后，综合性价比反而优于城区方案。</p>
+    </div>
+  </div>
+</div>
+
+<!-- I-7 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">7</div>
+    <div class="topic-title-block">
+      <div class="topic-title">城郊/度假区会议中心运营情况</div>
+      <div class="topic-title-en">Suburban / Resort Convention Centre Operations</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>长隆作为度假区MICE的核心亮点 vs 短板</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>维度</th><th>亮点</th><th>短板/挑战</th></tr>
+        <tr><td>交通</td><td>广州长隆：距市区30-45分钟，可接受</td><td>横琴：广州客户单程2小时，对1-2日会议不友好</td></tr>
+        <tr><td>体验配套</td><td>主题公园门票可纳入活动包，员工自发活动</td><td>旺季（暑期/节假日）游客人流与会议团队存在冲突</td></tr>
+        <tr><td>淡旺季</td><td>旺季（4-6月、9-11月）档期抢手</td><td>春节/暑期为旅游高峰，会议档期反而受挤压；1-3月淡季出租率低</td></tr>
+        <tr><td>最低消费</td><td>综合套餐定价透明</td><td>大宴会厅设有餐饮最低消费门槛（80-200万元），小客户无法使用大空间</td></tr>
+        <tr><td>配套</td><td>住宿、餐饮、AV、活动一站式</td><td>外部搭建商进场限制，客户不可自带；外卖/自带酒水限制</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="inference-box">
+    <h5>⚡ 侦探推断 — 横琴 vs 广州的差异化</h5>
+    <p>横琴更适合"目的地会议"（Destination MICE）：参会者提前一天到达，活动2-3天。广州长隆更适合"当日往返+一晚住宿"的华南短程年会。横琴湾酒店的港澳直通优势在招徕国际/港资企业客户上有明显加分，但对纯广州企业的交通成本是障碍。</p>
+  </div>
+</div>
+
+<!-- PART II -->
+<div class="part-header">
+  <h2>二、场馆运营 &amp; 营收数据专项</h2>
+  <p>Part II · Venue Operations &amp; Revenue Data · 4 Topics</p>
+</div>
+
+<!-- II-1 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">8</div>
+    <div class="topic-title-block">
+      <div class="topic-title">场地利用率与场次情况</div>
+      <div class="topic-title-en">Venue Utilisation &amp; Event Session Data</div>
+    </div>
+    <span class="conf-badge conf-low">低置信 · 内部数据</span>
+  </div>
+  <div class="answer-block">
+    <h4>年均场次与利用率估算（基于行业基准推算）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>空间类型</th><th>年均场次（估算）</th><th>出租率估算</th><th>说明</th></tr>
+        <tr><td>大型宴会厅（&gt;3,000㎡）</td><td>60-120场</td><td>实际55-70%</td><td>单场时间长（2-3天），场次少但单场营收高</td></tr>
+        <tr><td>中型会议室（500-1,500㎡）</td><td>150-280场</td><td>60-75%</td><td>最稳定收入来源，医药/科技学术会议为主</td></tr>
+        <tr><td>小型会议室（&lt;200㎡）</td><td>300-600场</td><td>65-80%</td><td>场次最高，但单场营收低</td></tr>
+        <tr><td>户外场地（草坪/广场）</td><td>20-50场</td><td>20-40%（受天气影响）</td><td>团建/品牌活动/户外颁奖</td></tr>
+      </table>
+      <p><strong>健康目标值</strong>：行业内成熟MICE酒店年整体出租率目标通常设定在70-75%，淡季策略目标45-55%。</p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>淡旺季特征与运营策略</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>季节</th><th>月份</th><th>特征</th><th>主要运营策略</th></tr>
+        <tr><td>旺季</td><td>4-6月、9-11月</td><td>出租率80-90%，档期提前3-6个月锁定</td><td>最低消费上调、套餐捆绑销售、优先大客户锁档</td></tr>
+        <tr><td>次旺季</td><td>3月、12月</td><td>出租率65-75%</td><td>年终/年初活动承接，冲刺KPI</td></tr>
+        <tr><td>淡季</td><td>1-2月（春节）、7-8月（旅游旺季）</td><td>出租率40-50%，旅游人流占场地资源</td><td>降价促销、小型研讨补充、婚宴弥补</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- II-2 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">9</div>
+    <div class="topic-title-block">
+      <div class="topic-title">营收规模与结构占比</div>
+      <div class="topic-title-en">Revenue Scale &amp; Structural Mix</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>不同类型活动单场综合营收区间</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动类型</th><th>人数规模</th><th>单场综合营收（估算）</th><th>主要收入项</th></tr>
+        <tr><td>超大型年会/展会</td><td>2,000-3,000人</td><td>300-800万元</td><td>住宿60%+场租15%+餐饮20%</td></tr>
+        <tr><td>大型年会</td><td>500-2,000人</td><td>80-300万元</td><td>综合套餐，住宿+场租+餐饮打包</td></tr>
+        <tr><td>中型学术/行业会议</td><td>200-500人</td><td>20-80万元</td><td>餐饮+场租为主，住宿比例视活动定</td></tr>
+        <tr><td>小型商务会议</td><td>&lt;200人</td><td>5-20万元</td><td>场租+茶歇，住宿占比低</td></tr>
+        <tr><td>3,000㎡无柱大空间（综合）</td><td>1,000-1,500人</td><td>150-400万元/场</td><td>场租15%、餐饮25%、住宿40%、搭建/AV/增值20%</td></tr>
+      </table>
+      <span class="source-tag">行业基准推算·huixiaoer.com</span>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>场馆总营收结构占比（行业基准）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>收入项</th><th>占场馆MICE总营收比例</th><th>特点</th></tr>
+        <tr><td>客房住宿</td><td>30-40%</td><td>最大单项，与出租率挂钩</td></tr>
+        <tr><td>餐饮/宴会</td><td>28-38%</td><td>第二大来源，最低消费制保底</td></tr>
+        <tr><td>场地租赁（纯场租）</td><td>12-20%</td><td>实际占比低于预期，常以最低消费替代</td></tr>
+        <tr><td>设备/AV/搭建</td><td>8-15%</td><td>大场景活动比例更高</td></tr>
+        <tr><td>其他增值服务</td><td>5-10%</td><td>主题公园票、活动策划、翻译等</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- II-3 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">10</div>
+    <div class="topic-title-block">
+      <div class="topic-title">场馆成长爬坡规律</div>
+      <div class="topic-title-en">Venue Growth Ramp-Up Pattern</div>
+    </div>
+    <span class="conf-badge conf-mid">中置信 · 行业规律推断</span>
+  </div>
+  <div class="answer-block">
+    <h4>成长爬坡阶段模型（行业通行规律）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>阶段</th><th>时间节点</th><th>出租率</th><th>营收特征</th><th>主要挑战</th></tr>
+        <tr><td>开业磨合期</td><td>第1年</td><td>30-50%</td><td>低于盈亏线，大量推介活动</td><td>渠道未建立，品牌认知度低，运营磨合多</td></tr>
+        <tr><td>快速爬坡期</td><td>第2-3年</td><td>50-70%</td><td>营收年增30-50%</td><td>回头客建立，渠道关系沉淀，产能利用不稳定</td></tr>
+        <tr><td>稳定成熟期</td><td>第3-5年</td><td>70-80%</td><td>盈亏平衡，现金流转正</td><td>客户粘性建立，开始出现旺季满档、淡季管理问题</td></tr>
+        <tr><td>品牌溢价期</td><td>5年+</td><td>75-85%</td><td>稳定盈利，可上调价格</td><td>设施老化翻新，竞品挤压</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>长隆场馆对照（推断）</h4>
+    <div class="answer-text">
+      <p><strong>广州长隆酒店</strong>：2010年前后开业，距今已15年+，处于"品牌溢价期"，渠道成熟，大型企业客户持续回流（如金蝶集团等），属于华南MICE标杆案例。</p>
+      <p><strong>珠海横琴湾酒店</strong>：2014年前后开业，运营约12年，同样已达成熟期，但横琴地理劣势（对广州客户距离远）使其始终在MICE规模上逊于广州本部；澳门通道是特殊优势，吸引港资/外资企业。</p>
+      <p><strong>盈亏平衡时间</strong>：行业共识约3-5年，重资产型（高建造成本）场馆可能延长至7年，特别是在固定折旧成本高的情况下。</p>
+    </div>
+  </div>
+  <div class="inference-box">
+    <h5>⚡ 关键访谈追问点</h5>
+    <p>实际盈亏平衡年份和初期出租率数据是最有价值的内部数据，访谈时可尝试问："按当时的固定成本结构，大概第几年整个MICE板块才开始正向贡献？"注意受访者可能以"还好""比较快"等模糊语言规避，需追问具体年份或与行业对比的感受。</p>
+  </div>
+</div>
+
+<!-- II-4 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">11</div>
+    <div class="topic-title-block">
+      <div class="topic-title">销售团队与渠道运营</div>
+      <div class="topic-title-en">Sales Team &amp; Channel Operations</div>
+    </div>
+    <span class="conf-badge conf-low">低置信 · 内部架构数据</span>
+  </div>
+  <div class="answer-block">
+    <h4>销售团队典型架构（行业基准推断）</h4>
+    <div class="answer-text">
+      <p>大型度假型MICE酒店（广州长隆级别）销售团队通常由以下组成：</p>
+      <ul>
+        <li><strong>会议销售总监（Director of Events Sales）</strong>：1人，统管MICE销售</li>
+        <li><strong>大客户销售经理</strong>：3-6人，各自负责行业大客户（科技/金融/医药等）</li>
+        <li><strong>渠道/合作伙伴经理</strong>：2-4人，管理会议策划公司（PCO）、旅行社渠道</li>
+        <li><strong>会议协调/执行团队</strong>：5-10人，活动落地执行</li>
+        <li><strong>婚礼/社交活动销售</strong>：2-3人（与MICE共用设施但独立核算）</li>
+      </ul>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>渠道结构与返点估算</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>渠道类型</th><th>营收占比（估算）</th><th>返点/佣金（估算）</th><th>特点</th></tr>
+        <tr><td>直销（客户直接联系酒店）</td><td>35-50%</td><td>无返点</td><td>大客户/回头客为主，利润率最高</td></tr>
+        <tr><td>会议策划公司（PCO/会务公司）</td><td>25-35%</td><td>8-15%</td><td>最重要渠道，介绍新客户，带方案来谈</td></tr>
+        <tr><td>旅行社/奖励旅游专业机构</td><td>10-15%</td><td>8-12%</td><td>激励旅游、经销商大会渠道</td></tr>
+        <tr><td>OTA/线上平台</td><td>5-10%</td><td>3-8%（平台抽佣）</td><td>小型会议室、临时散单</td></tr>
+        <tr><td>政府/协会渠道</td><td>3-8%</td><td>通常无佣金</td><td>政府背书但预算下降</td></tr>
+      </table>
+      <p><strong>价差空间</strong>：发布价 vs 合同成交价通常有<strong>15-25%的折扣空间</strong>，渠道商协商能力强时可压到6-7折（折扣30-40%），但长隆因品牌效应折扣空间相对较小（不低于8折）。</p>
+    </div>
+  </div>
+</div>
+
+<!-- RED FLAGS -->
+<div class="red-flags-section">
+  <div class="section-label">风险信号 · Red Flags &amp; Blind Spots</div>
+  <div style="display:grid;gap:14px">
+
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-01 · 横琴交通壁垒被低估</div>
+        <div class="rf-text">珠海横琴湾酒店距广州客户约2小时车程，且缺乏便捷公共交通直达（高铁到拱北后仍需换乘或打车）。若目标客户以广州企业为主，交通是实质性障碍，在访谈中需主动询问"长途交通如何处理/是否提供包车接送"。</div>
+      </div>
+    </div>
+
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-02 · 旺季档期竞争：旅游流量 vs 会议客户</div>
+        <div class="rf-text">暑期（7-8月）是亲子旅游主力季，主题公园人满为患，会议客户的体验感可能大打折扣（园区拥堵、餐饮质量下降）。此时场馆倾向于优先接旅游散客而非MICE；建议在访谈中追问"旺季如何平衡旅游人流与会议团队的分流管理"。</div>
+      </div>
+    </div>
+
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-03 · 营收数据高度不透明（长隆私营）</div>
+        <div class="rf-text">长隆集团为私营企业，不公开财务数据。访谈中获取的具体出租率、年营收数字均为估算，置信度低。受访专家可能以"大概""还不错"等模糊表述规避；实际数字需从多方交叉印证（如会务公司渠道方、离职员工）。</div>
+      </div>
+    </div>
+
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-04 · 最低消费门槛可能是中小客户障碍</div>
+        <div class="rf-text">6,000㎡宴会厅餐饮最低消费若设定在80-200万元，将直接排除200人以下的小型企业。访谈中需询问"最低消费门槛具体是多少，下浮空间有多大"，以确认长隆的客户规模下限。</div>
+      </div>
+    </div>
+
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-05 · 外部搭建商与自采食材限制可能引发摩擦</div>
+        <div class="rf-text">度假型酒店通常要求使用自有或指定搭建商、餐饮外包商，限制客户自带外部资源。这是客户常见投诉点，也是会务公司绕开此类场馆的原因之一。需在访谈中确认"外部供应商进场政策"。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="verdict-kicker">Critic 评审 · Final Verdict</div>
+  <div class="verdict-title">综合裁定：中等可靠，访谈前可用于构建提问框架</div>
+  <div class="verdict-score">5.8 / 10</div>
+  <div class="verdict-body">
+    <p>本研究报告已覆盖提纲全部14个议题，但高置信答案仅2条（场馆硬件规格、收费模式基准），7条中置信（行业推断+有限案例支撑），2条低置信（内部运营数据）。</p>
+    <p>核心局限：<strong>长隆集团私营不披露数据</strong>，出租率、具体年营收、渠道返点均为行业基准推算，与真实情况可能偏差20-40%。营收规模数字仅供数量级参考，访谈时应以"你们大概是行业平均的几倍还是接近平均"等比较性问题替代直接询问绝对数字。</p>
+    <p><strong>报告最大价值</strong>：为访谈提供了完整的假设框架——访谈者可以带着"我们估算XX，你们实际情况是否如此"的结构性问法，大幅提升信息获取效率。</p>
+  </div>
+  <div class="verdict-en">Conditional pass — framework is research-ready; revenue and utilisation figures require on-the-ground verification from the interviewee.</div>
+  <div class="feedback-box">
+    <p>报告准确度反馈（帮助 Merlin 持续改进）</p>
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=chimelong_mice_20260615">→ 提交反馈 · Submit Feedback</a>
+  </div>
+</div>
+
+<footer>
+  <span>Merlin · Mode B · 五智能体协作研究</span>
+  <span>长隆MICE · 2026-06-15</span>
+  <span>高置信2 / 中置信7 / 低置信2 · 综合5.8/10</span>
+</footer>
+
+</body>
+</html>
