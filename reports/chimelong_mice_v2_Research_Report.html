@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>长隆MICE会议中心 v2 · 定价参数专项 · Merlin Research</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b;--paper:#f1efea;--paper-tint:#e8e4db;
+  --copper:#8b6c42;--gold:#c9a84c;--green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;--blue:#1e3a5c;
+  font-family:'Songti SC','STSong','SimSun',serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);min-height:100vh}
+.pub-bar{background:var(--ink);color:var(--paper);padding:8px 48px;display:flex;justify-content:space-between;align-items:center;font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.hero{padding:56px 48px 40px;border-bottom:2px solid var(--ink)}
+.hero-kicker{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper);margin-bottom:16px}
+.hero-title{font-family:'IM Fell English',Georgia,serif;font-size:36px;line-height:1.15;margin-bottom:10px}
+.hero-sub{font-size:14px;color:var(--copper);margin-bottom:20px}
+.v2-note{background:rgba(201,168,76,.1);border:1px solid var(--gold);padding:12px 18px;font-size:12.5px;line-height:1.7;margin-top:8px}
+.v2-note strong{color:var(--copper)}
+.badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.badge{padding:4px 12px;font-size:11px;letter-spacing:.08em;border:1px solid currentColor;font-family:'IM Fell English',Georgia,serif}
+.badge-mode{color:var(--copper);border-color:var(--copper)}
+.badge-industry{color:var(--blue);border-color:var(--blue)}
+.badge-interviewee{color:var(--ink);border-color:var(--ink)}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--ink)}
+.stat-cell{padding:24px 32px;border-right:1px solid rgba(10,10,11,.2)}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-family:'IM Fell English',Georgia,serif;font-size:36px;margin-bottom:4px}
+.stat-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--copper)}
+.stat-num.green{color:var(--green)}.stat-num.amber{color:var(--amber)}.stat-num.red{color:var(--red)}
+.agent-section{padding:36px 48px 28px;border-bottom:1px solid rgba(10,10,11,.15)}
+.section-label{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:18px}
+.part-header{background:var(--ink);color:var(--paper);padding:20px 48px}
+.part-header h2{font-family:'IM Fell English',Georgia,serif;font-size:22px}
+.part-header p{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.topic-card{padding:34px 48px;border-bottom:1px solid rgba(10,10,11,.12)}
+.topic-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.topic-num{font-family:'IM Fell English',Georgia,serif;font-size:28px;color:var(--copper);min-width:32px}
+.topic-title{font-family:'IM Fell English',Georgia,serif;font-size:19px;margin-bottom:3px}
+.topic-title-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;font-style:italic;color:var(--copper)}
+.conf-badge{display:inline-block;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-family:'IM Fell English',Georgia,serif;margin-left:auto;margin-top:4px;white-space:nowrap}
+.conf-high{background:var(--green);color:#fff}.conf-mid{background:var(--amber);color:#fff}.conf-low{background:var(--red);color:#fff}
+.new-tag{display:inline-block;background:var(--blue);color:#fff;font-size:9px;padding:2px 7px;letter-spacing:.1em;margin-left:8px;font-family:'IM Fell English',Georgia,serif;vertical-align:middle}
+.answer-block{background:rgba(10,10,11,.03);border-left:3px solid var(--copper);padding:16px 20px;margin-bottom:16px}
+.answer-block h4{font-family:'IM Fell English',Georgia,serif;font-size:13px;margin-bottom:10px;color:var(--copper)}
+.answer-text{font-size:13.5px;line-height:1.85}
+.answer-text p{margin-bottom:10px}
+.answer-text ul,.answer-text ol{padding-left:20px}
+.answer-text li{margin-bottom:6px}
+.source-tag{display:inline-block;font-size:10px;padding:2px 7px;background:var(--paper-tint);border:1px solid rgba(10,10,11,.2);margin-right:4px;margin-top:6px;font-family:'IM Fell English',Georgia,serif}
+.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12.5px}
+.data-table th{background:var(--ink);color:var(--paper);padding:8px 12px;text-align:left;font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.08em}
+.data-table td{padding:8px 12px;border-bottom:1px solid rgba(10,10,11,.1)}
+.data-table tr:nth-child(even) td{background:rgba(10,10,11,.02)}
+.data-table .hl{background:rgba(201,168,76,.12)!important;font-weight:bold}
+.inference-box{background:rgba(201,168,76,.08);border:1px solid var(--gold);padding:14px 18px;margin:12px 0}
+.inference-box h5{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.inference-box p{font-size:12.5px;line-height:1.75}
+/* weighting chart */
+.weight-chart{margin:16px 0}
+.weight-row{display:flex;align-items:center;margin-bottom:10px;gap:12px}
+.weight-name{width:130px;font-size:13px;text-align:right}
+.weight-bar-track{flex:1;height:26px;background:var(--paper-tint);position:relative}
+.weight-bar-fill{height:100%;display:flex;align-items:center;padding-left:10px;color:#fff;font-family:'IM Fell English',Georgia,serif;font-size:13px}
+.red-flags-section{padding:34px 48px;border-bottom:1px solid rgba(10,10,11,.15)}
+.red-flag-item{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.rf-icon{width:20px;height:20px;background:var(--red);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.rf-icon::after{content:'!';color:#fff;font-size:12px;font-weight:bold}
+.rf-text{font-size:13px;line-height:1.7}
+.rf-label{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.verdict{background:var(--ink);color:var(--paper);padding:40px 48px}
+.verdict-kicker{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.verdict-title{font-family:'IM Fell English',Georgia,serif;font-size:24px;margin-bottom:16px}
+.verdict-score{font-family:'IM Fell English',Georgia,serif;font-size:48px;color:var(--gold);margin-bottom:8px}
+.verdict-body{font-size:13.5px;line-height:1.85;color:rgba(241,239,234,.85);max-width:760px}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;font-size:12px;color:rgba(241,239,234,.5);margin-top:12px}
+.feedback-box{margin-top:28px;padding:16px 20px;border:1px solid rgba(201,168,76,.4)}
+.feedback-box p{font-size:12px;color:rgba(241,239,234,.7);margin-bottom:8px}
+.feedback-box a{color:var(--gold);font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:.1em}
+footer{padding:24px 48px;background:var(--paper-tint);display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--copper)}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span>Merlin · 麦肯锡风格咨询情报系统</span>
+  <span>Mode B · v2 定价参数专项 · 2026-06-18</span>
+  <span>CONFIDENTIAL — FOR RESEARCH USE ONLY</span>
+</div>
+
+<div class="hero">
+  <div class="hero-kicker">Merlin Research Report v2 · 客户提纲研究（精修版）</div>
+  <div class="hero-title">长隆集团 MICE 会议中心<br>定价参数与渠道专项研究</div>
+  <div class="hero-sub">Chimelong Group · MICE Pricing Parameters &amp; Channel Deep-Dive</div>
+  <div class="badge-row">
+    <span class="badge badge-mode">Mode B · 五智能体</span>
+    <span class="badge badge-industry">酒店会展 / MICE</span>
+    <span class="badge badge-interviewee">受访者：酒店会议中心专家</span>
+  </div>
+  <div class="v2-note">
+    <strong>本版变化</strong>：客户在新提纲中将问题收窄为可量化的硬参数。本报告聚焦四项新增量化要求——<strong>① 四要素100分权重分配</strong>、<strong>② 三档场地具体场租区间 + 附加收费</strong>、<strong>③ IP溢价百分比区间</strong>、<strong>④ 代理渠道返点比例</strong>。其余结构性问题已在 v1 报告（chimelong_mice）中覆盖，此处仅保留与定价相关的精炼回答。
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat-cell"><div class="stat-num green">1</div><div class="stat-label">高置信答案</div></div>
+  <div class="stat-cell"><div class="stat-num amber">7</div><div class="stat-label">中置信答案</div></div>
+  <div class="stat-cell"><div class="stat-num red">2</div><div class="stat-label">低置信答案</div></div>
+  <div class="stat-cell"><div class="stat-num" style="color:var(--copper)">4</div><div class="stat-label">风险信号</div></div>
+</div>
+
+<div class="agent-section">
+  <div class="section-label">五智能体协作流程 · Five-Agent Pipeline（v2 定向补强）</div>
+  <svg viewBox="0 0 880 100" width="100%" style="max-width:840px;font-family:'IM Fell English',Georgia,serif">
+    <rect x="0" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="70" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">ORCHESTRATOR</text>
+    <text x="70" y="60" text-anchor="middle" fill="#f1efea" font-size="11">编排者</text>
+    <text x="70" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">识别新增量化项</text>
+    <line x1="140" y1="50" x2="165" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="165" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="235" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">SCOUT</text>
+    <text x="235" y="60" text-anchor="middle" fill="#f1efea" font-size="11">情报员</text>
+    <text x="235" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">定价/返点/溢价</text>
+    <line x1="305" y1="50" x2="330" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="330" y="4" width="130" height="44" fill="#0a0a0b"/>
+    <text x="395" y="21" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">ANALYST</text>
+    <text x="395" y="36" text-anchor="middle" fill="#f1efea" font-size="11">分析师</text>
+    <text x="395" y="47" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="7.5">单价模型推算</text>
+    <rect x="330" y="52" width="130" height="44" fill="#0a0a0b"/>
+    <text x="395" y="69" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">FORENSIC</text>
+    <text x="395" y="84" text-anchor="middle" fill="#f1efea" font-size="11">侦探</text>
+    <text x="395" y="93" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="7.5">隐性收费排查</text>
+    <line x1="460" y1="27" x2="490" y2="44" stroke="#8b6c42" stroke-width="1" stroke-dasharray="3,2"/>
+    <line x1="460" y1="74" x2="490" y2="58" stroke="#8b6c42" stroke-width="1" stroke-dasharray="3,2"/>
+    <rect x="490" y="24" width="140" height="52" fill="#0a0a0b"/>
+    <text x="560" y="45" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">STRATEGIST</text>
+    <text x="560" y="60" text-anchor="middle" fill="#f1efea" font-size="11">战略家</text>
+    <text x="560" y="74" text-anchor="middle" fill="rgba(241,239,234,.5)" font-size="8">参数区间汇总</text>
+    <line x1="630" y1="50" x2="655" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="655" y="24" width="130" height="52" fill="#8b6c42"/>
+    <text x="720" y="45" text-anchor="middle" fill="#0a0a0b" font-size="9" letter-spacing="1">CRITIC</text>
+    <text x="720" y="60" text-anchor="middle" fill="#0a0a0b" font-size="11">评审</text>
+    <text x="720" y="74" text-anchor="middle" fill="rgba(10,10,11,.6)" font-size="8">置信度裁定</text>
+    <line x1="785" y1="50" x2="810" y2="50" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="810" y="24" width="70" height="52" fill="#c9a84c"/>
+    <text x="845" y="48" text-anchor="middle" fill="#0a0a0b" font-size="9">HTML</text>
+    <text x="845" y="63" text-anchor="middle" fill="#0a0a0b" font-size="9">REPORT</text>
+    <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8b6c42"/></marker></defs>
+  </svg>
+</div>
+
+<!-- PART I -->
+<div class="part-header">
+  <h2>一、客户需求画像与选场逻辑</h2>
+  <p>Part I · Customer Profile &amp; Venue Selection</p>
+</div>
+
+<!-- 1 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">1</div>
+    <div><div class="topic-title">客户行业与活动概貌</div><div class="topic-title-en">Client Industry &amp; Activity Overview</div></div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>行业分布与近2-3年变化</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>行业</th><th>项目占比（估算）</th><th>主力活动类型</th><th>趋势</th></tr>
+        <tr><td>科技/互联网</td><td>20-25%</td><td>经销商大会、产品发布</td><td>↑ 增长</td></tr>
+        <tr><td>医药/生命科学</td><td>18-22%</td><td>学术研讨、产品培训</td><td>↑ 增长</td></tr>
+        <tr><td>金融/保险</td><td>12-16%</td><td>年会、客户答谢</td><td>→ 平稳</td></tr>
+        <tr><td>汽车/制造</td><td>10-14%</td><td>经销商大会、激励旅游</td><td>→ 平稳</td></tr>
+        <tr><td>快消/零售</td><td>8-12%</td><td>品牌会议、销售大会</td><td>↑ 增长</td></tr>
+        <tr><td>政府/协会</td><td>5-10%</td><td>论坛、颁奖</td><td>↓ 萎缩</td></tr>
+      </table>
+      <p><strong>核心变化</strong>：政府会议萎缩10-15%；企业激励型（年会+度假体验）增长最快（年增20-30%），是长隆体验型场地的核心受益赛道。</p>
+      <span class="source-tag">金蝶2,500人年会案例</span><span class="source-tag">TTG China MICE</span>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>不同规模活动典型特征</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>规模</th><th>人数</th><th>使用面积</th><th>典型时长</th><th>占比（估）</th></tr>
+        <tr><td>小型商务</td><td>&lt;200人</td><td>&lt;500㎡</td><td>半天-1天</td><td>40-50%</td></tr>
+        <tr><td>中型会议</td><td>200-500人</td><td>500-1,500㎡</td><td>1-2天</td><td>25-35%</td></tr>
+        <tr><td>大型年会</td><td>500-2,000人</td><td>1,500-4,000㎡</td><td>2-3天</td><td>15-20%</td></tr>
+        <tr><td>超大会展</td><td>2,000-3,000人</td><td>6,000㎡</td><td>2-3天</td><td>3-8%</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">2</div>
+    <div><div class="topic-title">客户城市分布与迁移趋势</div><div class="topic-title-en">City Distribution &amp; Migration</div></div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>来源城市 + 城区→度假区迁移</h4>
+    <div class="answer-text">
+      <p><strong>广州长隆</strong>：广州本地45-55%、珠三角25-30%、外省10-15%。<strong>珠海横琴湾</strong>：外地客户50%+，港澳/国际20-30%（澳门口岸5分钟直通）。</p>
+      <p><strong>迁移趋势确认存在</strong>：华南区域企业大型年会中，约 <strong>20-30%</strong> 已从城区五星酒店迁移至度假区类场地，2022-2025加速。三大驱动：①员工体验升级要求 ②会议+娱乐融合降低策划难度 ③政企会议分流（政务向朴素场所、企业向度假区升级）。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">3</div>
+    <div><div class="topic-title">场地选场逻辑 + 四要素权重<span class="new-tag">NEW</span></div><div class="topic-title-en">Selection Logic &amp; 4-Factor Weighting</div></div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>★ 四大核心要素 100分权重分配（度假型MICE场景）</h4>
+    <div class="answer-text">
+      <p>客户明确要求：价格、空间、特色IP、配套住宿四要素均分100分。基于度假型MICE的实际决策权重推断：</p>
+      <div class="weight-chart">
+        <div class="weight-row">
+          <div class="weight-name">特色IP/体验</div>
+          <div class="weight-bar-track"><div class="weight-bar-fill" style="width:30%;background:var(--copper)">30分</div></div>
+        </div>
+        <div class="weight-row">
+          <div class="weight-name">配套住宿</div>
+          <div class="weight-bar-track"><div class="weight-bar-fill" style="width:28%;background:var(--blue)">28分</div></div>
+        </div>
+        <div class="weight-row">
+          <div class="weight-name">价格预算</div>
+          <div class="weight-bar-track"><div class="weight-bar-fill" style="width:25%;background:var(--amber)">25分</div></div>
+        </div>
+        <div class="weight-row">
+          <div class="weight-name">空间规模/组合</div>
+          <div class="weight-bar-track"><div class="weight-bar-fill" style="width:17%;background:var(--green)">17分</div></div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--copper)"><strong>权重逻辑说明</strong>：选度假区MICE的客户，特色IP本身就是首要动机（否则会选城区），故IP权重最高（30）；住宿与IP高度绑定（参会者需就近住宿体验乐园），权重次之（28）；价格在2024年后预算压缩背景下升至25；空间规模虽是硬门槛，但一旦满足容量需求就不再是差异化因素，权重最低（17）。</p>
+      <p style="font-size:12px;color:var(--red)">⚠ 此为推断值，非内部真实打分。访谈时建议直接请专家给出他心中的四要素分值，与本推断对照。</p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>不同行业选场偏好 + 三大核心因素</h4>
+    <div class="answer-text">
+      <ul>
+        <li><strong>科技/快消</strong>：偏好强IP体验场地（员工激励属性），长隆首选</li>
+        <li><strong>医药</strong>：偏好多间中小会议室并行（学术分会场），重AV与私密性</li>
+        <li><strong>金融</strong>：偏好高端调性+私密，对IP需求较低，可能更看重城区便利</li>
+      </ul>
+      <p><strong>最终拍板三大因素</strong>：① 档期锁定承诺能力 ② 总包价格与预算匹配 ③ 一站式配套完整性。近2-3年价格权重显著上升（15%→30%+）。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 4 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">4</div>
+    <div><div class="topic-title">收费模式与核心定价参数<span class="new-tag">NEW · 核心</span></div><div class="topic-title-en">Pricing Models &amp; Core Rate Card</div></div>
+    <span class="conf-badge conf-high">高置信 · 行业基准</span>
+  </div>
+  <div class="answer-block">
+    <h4>主流收费模式（四种并行）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>模式</th><th>适用场景</th><th>长隆倾向</th></tr>
+        <tr><td>一价全包（人头打包）</td><td>大型年会+激励旅游，含住宿+场租+餐饮+乐园票</td><td>★ 主推，人均1,500-4,000元/天</td></tr>
+        <tr><td>按天包场</td><td>纯会展、展览，整厅按天</td><td>常用</td></tr>
+        <tr><td>餐饮最低消费抵场租</td><td>宴会型活动，场租减免换餐饮保底</td><td>★ 宴会厅常用</td></tr>
+        <tr><td>按小时计费</td><td>小型短时会议</td><td>较少，仅小会议室</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>★ 三档场地单日基础场租区间（五星级行业基准推算）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>场地</th><th>单价基准</th><th>淡季单日场租</th><th>旺季单日场租</th></tr>
+        <tr class="hl"><td>3,000㎡无柱大厅</td><td>50-100元/㎡/天</td><td>15-22万元</td><td>22-35万元</td></tr>
+        <tr><td>中型宴会厅（500-1,500㎡）</td><td>30-50元/㎡/天</td><td>2-7万元</td><td>3-10万元</td></tr>
+        <tr><td>小型会议室（&lt;200㎡）</td><td>20-30元/㎡/天 或整间</td><td>3,000-8,000元</td><td>5,000-1.2万元</td></tr>
+      </table>
+      <p style="font-size:12px;color:var(--copper)">注：以上为五星级酒店行业单价基准推算的"标价"。长隆作为IP溢价场地，实际标价可能再上浮15-30%；但大客户综合套餐谈判后，场租常被并入一价全包或被最低消费抵扣，"纯场租"很少单独足额收取。旺季（4-6月、9-11月）周末较淡季上浮20-50%。</p>
+      <span class="source-tag">五星酒店场租基准·liubaikongjian/huixiaoer</span>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>★ 主要附加收费标准（行业基准）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>附加项</th><th>收费标准（行业基准）</th></tr>
+        <tr><td>搭建管理费/进场费</td><td>1,000-5,000元/场，或按搭建面积计；大型展可达搭建费的10-20%</td></tr>
+        <tr><td>超时费</td><td>每超1小时按场地费的10-20%收取</td></tr>
+        <tr><td>场地押金</td><td>场地费的20-50%，活动后15-30天退还</td></tr>
+        <tr><td>设备调试费</td><td>500-1,000元/场</td></tr>
+        <tr><td>清洁费</td><td>每㎡10-20元（大场景活动）</td></tr>
+        <tr><td>外部供应商管理费</td><td>若允许外部搭建商，常收10-15%场地管理费</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>场地相关费用占客户总预算比例</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动类型</th><th>场地相关费用占总预算</th></tr>
+        <tr><td>纯会议（不含住宿）</td><td>25-40%</td></tr>
+        <tr><td>会议+住宿综合</td><td>55-70%</td></tr>
+        <tr><td>年会+激励旅游（含乐园体验）</td><td>65-80%</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 5 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">5</div>
+    <div><div class="topic-title">会议+体验现状 + IP溢价<span class="new-tag">NEW</span></div><div class="topic-title-en">Experience Venues &amp; IP Premium</div></div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>市场上"会议+体验"标杆场地</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>场地</th><th>IP/体验元素</th><th>定位</th></tr>
+        <tr><td>广州长隆国际会展中心</td><td>野生动物、马戏、欢乐世界、熊猫</td><td>华南最大综合型（2,000+超大年会）</td></tr>
+        <tr><td>珠海横琴湾长隆</td><td>海洋王国、澳门直通</td><td>高端度假型，港澳企业首选</td></tr>
+        <tr><td>三亚亚特兰蒂斯</td><td>水世界、水族馆、演艺八大业态</td><td>高端会奖一站式</td></tr>
+        <tr><td>上海/北京迪士尼度假区</td><td>迪士尼IP</td><td>顶级IP溢价标杆</td></tr>
+        <tr><td>千岛湖明豪</td><td>湖景生态</td><td>华东自然体验型</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>★ IP溢价百分比区间（核心问题）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>溢价维度</th><th>区间</th><th>依据</th></tr>
+        <tr class="hl"><td>综合打包报价 vs 普通城区五星</td><td>+15% ~ +35%</td><td>500强大客户承受力20-35%，中小企业10-20%</td></tr>
+        <tr><td>体验类附加服务单项溢价</td><td>+20% ~ +50%</td><td>定制乐园包场、专属演艺、夜场体验</td></tr>
+        <tr><td>住宿溢价（亲子/体验属性）</td><td>+20%以上</td><td>同程亲子游报告：体验型住宿人均高20%+</td></tr>
+        <tr><td>顶级IP旺季住宿（参照迪士尼）</td><td>+100%以上</td><td>节假日极端值，非常态</td></tr>
+      </table>
+      <p style="font-size:12.5px"><strong>关键洞察</strong>：长隆IP溢价的"隐性折抵"逻辑——企业实际计算时会把乐园门票（人均200-400元/天）从溢价中扣除。扣除后，长隆综合性价比往往优于城区方案，这是其能维持15-35%溢价却不流失客户的核心原因。</p>
+      <span class="source-tag">同程亲子游消费报告2021</span><span class="source-tag">迪士尼度假区定价</span>
+    </div>
+  </div>
+</div>
+
+<!-- PART II -->
+<div class="part-header">
+  <h2>二、场馆运营 &amp; 营收数据专项</h2>
+  <p>Part II · Operations &amp; Revenue Data</p>
+</div>
+
+<!-- 6 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">6</div>
+    <div><div class="topic-title">场地利用率与场次</div><div class="topic-title-en">Utilisation &amp; Sessions</div></div>
+    <span class="conf-badge conf-low">低置信 · 内部数据</span>
+  </div>
+  <div class="answer-block">
+    <h4>年均场次与出租率（行业基准推算）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>空间</th><th>年均场次</th><th>出租率</th></tr>
+        <tr><td>大型展厅/宴会厅</td><td>60-120场</td><td>55-70%</td></tr>
+        <tr><td>中型会议室</td><td>150-280场</td><td>60-75%</td></tr>
+        <tr><td>小型会议室</td><td>300-600场</td><td>65-80%</td></tr>
+      </table>
+      <p><strong>整体出租率</strong>：成熟MICE酒店年均健康目标70-75%，淡季45-55%。</p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>淡旺季差距与策略</h4>
+    <div class="answer-text">
+      <p><strong>旺季</strong>（4-6月、9-11月）：出租率80-90%，提前3-6个月锁档，上调最低消费、捆绑套餐。<strong>淡季</strong>（1-2月春节、7-8月旅游高峰）：出租率40-50%，旅游人流挤占场地资源，降价促销、婚宴补充。淡旺季出租率差距可达<strong>30-40个百分点</strong>。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">7</div>
+    <div><div class="topic-title">营收规模与结构占比</div><div class="topic-title-en">Revenue Scale &amp; Mix</div></div>
+    <span class="conf-badge conf-mid">中置信</span>
+  </div>
+  <div class="answer-block">
+    <h4>单场综合营收 + 总营收结构</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>活动类型</th><th>单场综合营收（估算）</th></tr>
+        <tr><td>大型会展（2,000-3,000人）</td><td>300-800万元</td></tr>
+        <tr><td>中型会议（200-500人）</td><td>20-80万元</td></tr>
+        <tr><td>小型商务（&lt;200人）</td><td>5-20万元</td></tr>
+      </table>
+      <table class="data-table">
+        <tr><th>收入项</th><th>占总营收</th></tr>
+        <tr><td>客房住宿</td><td>30-40%</td></tr>
+        <tr><td>餐饮/宴会</td><td>28-38%</td></tr>
+        <tr><td>场地租赁</td><td>12-20%</td></tr>
+        <tr><td>设备/搭建</td><td>8-15%</td></tr>
+        <tr><td>其他增值（乐园票/策划）</td><td>5-10%</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 8 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">8</div>
+    <div><div class="topic-title">场馆成长爬坡规律<span class="new-tag">量化补强</span></div><div class="topic-title-en">Growth Ramp-Up</div></div>
+    <span class="conf-badge conf-mid">中置信 · 行业规律</span>
+  </div>
+  <div class="answer-block">
+    <h4>爬坡阶段 + 前三年增速（相对成熟期百分比）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>阶段</th><th>时间</th><th>出租率</th><th>营收/场次（相对成熟期）</th></tr>
+        <tr><td>开业磨合期</td><td>第1年</td><td>30-50%</td><td>成熟期的 40-55%</td></tr>
+        <tr><td>快速爬坡期</td><td>第2年</td><td>50-60%</td><td>成熟期的 60-75%</td></tr>
+        <tr><td>快速爬坡期</td><td>第3年</td><td>60-70%</td><td>成熟期的 80-90%</td></tr>
+        <tr><td>稳定成熟期</td><td>第3-5年</td><td>70-80%</td><td>基准100%</td></tr>
+      </table>
+      <p><strong>盈亏平衡</strong>：行业共识3-5年；重资产高折旧场馆可延至7年。<strong>初期主要难点</strong>：渠道未建立、品牌认知度低、运营磨合多、淡旺季管理经验不足。</p>
+    </div>
+  </div>
+  <div class="inference-box">
+    <h5>⚡ 访谈追问点</h5>
+    <p>实际盈亏平衡年份是最有价值的内部数据。受访者易用"还好/比较快"规避，需追问具体年份或与行业对比的感受："按当时固定成本，大概第几年MICE板块开始正向贡献？"</p>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="topic-card">
+  <div class="topic-header">
+    <div class="topic-num">9</div>
+    <div><div class="topic-title">销售团队与渠道返点<span class="new-tag">NEW</span></div><div class="topic-title-en">Sales Team &amp; Channel Rebate</div></div>
+    <span class="conf-badge conf-low">低置信 · 内部数据</span>
+  </div>
+  <div class="answer-block">
+    <h4>销售团队架构 + 直销/渠道分工</h4>
+    <div class="answer-text">
+      <p>大型度假MICE酒店典型配置：会议销售总监1人 + 大客户经理3-6人（按行业分工） + 渠道经理2-4人（管PCO/旅行社） + 执行团队5-10人 + 婚礼社交2-3人。<strong>直销负责大客户/回头客（利润最高），渠道负责拓新与方案获客。</strong></p>
+    </div>
+  </div>
+  <div class="answer-block">
+    <h4>★ 渠道营收占比 + 代理返点比例区间（核心问题）</h4>
+    <div class="answer-text">
+      <table class="data-table">
+        <tr><th>渠道</th><th>营收占比（估算）</th><th>常规返点/佣金</th></tr>
+        <tr><td>直销</td><td>35-50%</td><td>无返点</td></tr>
+        <tr class="hl"><td>会议策划公司（PCO/会务）</td><td>25-35%</td><td>8-15%</td></tr>
+        <tr class="hl"><td>旅行社/奖励旅游机构</td><td>10-15%</td><td>8-12%</td></tr>
+        <tr><td>OTA/线上平台</td><td>5-10%</td><td>3-8%（平台抽佣）</td></tr>
+        <tr><td>政府/协会</td><td>3-8%</td><td>通常无佣金</td></tr>
+      </table>
+      <p><strong>★ 代理渠道常规返点区间结论</strong>：行业惯例 <strong>8-15%</strong>，主流落在 <strong>10% 左右</strong>。大单/战略PCO可阶梯上浮至12-15%；长隆因品牌强势，返点相对克制（多在8-12%）。</p>
+      <p><strong>价差空间</strong>：发布价 vs 成交价通常有15-25%折扣空间；长隆品牌效应使折扣空间较小（一般不低于8折）。</p>
+      <span class="source-tag">酒店佣金行业惯例</span><span class="source-tag">PCO渠道结构</span>
+    </div>
+  </div>
+</div>
+
+<!-- RED FLAGS -->
+<div class="red-flags-section">
+  <div class="section-label">风险信号 · Red Flags（定价数据专项）</div>
+  <div style="display:grid;gap:14px">
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-01 · 场租"标价"≠"成交价"</div>
+        <div class="rf-text">本报告场租区间为五星级行业单价基准推算的标价。长隆实际很少单独足额收纯场租——大客户场租多被并入一价全包或被餐饮最低消费抵扣。访谈时务必区分"对外标价"和"实际成交净价"，后者可能比标价低30-50%。</div>
+      </div>
+    </div>
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-02 · IP溢价存在"隐性折抵"，直接百分比易误导</div>
+        <div class="rf-text">长隆名义溢价15-35%，但企业会扣除乐园门票价值（人均200-400元/天）后重算性价比。若访谈只问"贵多少"，会得到偏高数字；应追问"扣除乐园票折抵后，净溢价还有多少"。</div>
+      </div>
+    </div>
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-03 · 四要素权重为推断值，非内部真实打分</div>
+        <div class="rf-text">100分权重分配（IP30/住宿28/价格25/空间17）是基于度假型MICE决策逻辑的推断。不同行业客户差异极大（金融客户IP权重可能仅10分）。访谈时应请专家按其实际经验给分，并区分客户类型。</div>
+      </div>
+    </div>
+    <div class="red-flag-item">
+      <div class="rf-icon"></div>
+      <div>
+        <div class="rf-label">RF-04 · 返点与出租率均为私营企业未披露数据</div>
+        <div class="rf-text">长隆为私营集团，渠道返点、实际出租率、盈亏年份均无公开来源，本报告为行业基准推算，与真实值可能偏差20-40%。建议从会务公司渠道方交叉印证返点真实水位。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="verdict-kicker">Critic 评审 · Final Verdict</div>
+  <div class="verdict-title">综合裁定：定价框架可用，绝对数字需现场校准</div>
+  <div class="verdict-score">6.0 / 10</div>
+  <div class="verdict-body">
+    <p>本 v2 报告针对客户收窄后的量化提纲，补强了四项硬参数：四要素权重、三档场租区间+附加收费、IP溢价百分比、代理返点比例。其中"收费模式与定价参数"升至高置信（有五星级行业单价基准支撑）。</p>
+    <p>核心局限不变：<strong>长隆私营不披露数据</strong>，场租标价、返点、出租率均为行业基准推算。最大价值在于为访谈提供"带数字的对照框架"——访谈者可用"我们估算3,000㎡大厅旺季约22-35万/天、代理返点约10%，你们实际是高还是低"这类锚定式提问，把专家从"模糊回答"逼向"具体校正"，大幅提升单位时间信息密度。</p>
+  </div>
+  <div class="verdict-en">Conditional pass — pricing framework is interview-ready; list-price vs net-price gap and IP premium offset must be clarified on the ground.</div>
+  <div class="feedback-box">
+    <p>报告准确度反馈（帮助 Merlin 持续改进）</p>
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=chimelong_mice_v2_20260618">→ 提交反馈 · Submit Feedback</a>
+  </div>
+</div>
+
+<footer>
+  <span>Merlin · Mode B · v2 定价参数专项</span>
+  <span>长隆MICE · 2026-06-18</span>
+  <span>高置信1 / 中置信7 / 低置信2 · 综合6.0/10</span>
+</footer>
+
+</body>
+</html>
