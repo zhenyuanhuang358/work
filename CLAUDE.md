@@ -100,6 +100,14 @@
 
 ---
 
+# Critic 质量门控
+
+**每次 `SendUserFile` 推送 HTML 研究报告前，必须先运行 `.claude/skills/critic/SKILL.md`，输出裁定结果（PASS / CONDITIONAL / REWRITE），再决定是否推送。**
+
+适用范围：Merlin / Earner / restaurant-research / buffett-analyst 生成的所有 HTML 报告。
+
+---
+
 # 记忆中心 Memory
 
 **记忆的家**：`memory/`（读写约定见 `memory/README.md`）
