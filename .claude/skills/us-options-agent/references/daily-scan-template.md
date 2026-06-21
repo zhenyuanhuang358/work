@@ -9,7 +9,7 @@
 
 ### 第零步：读持仓日志（出报告前必做）
 
-读取 `references/position-journal.md`，提取：
+读取 `memory/state/options-journal.md`，提取：
 - 当前总风险敞口（各仓位最大亏损之和）
 - 距上限 $2,550 的剩余空间
 - 有无需要关注的仓位（接近止损 / 即将到期）

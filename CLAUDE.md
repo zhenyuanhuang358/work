@@ -100,14 +100,16 @@
 
 ---
 
-# 用户偏好与经验档案
+# 记忆中心 Memory
 
-**完整档案**：`.claude/user-profile.md`
+**记忆的家**：`memory/`（读写约定见 `memory/README.md`）
 
-每次新会话必须读取此文件，继承以下内容：
-- 历史执行教训（数据错误、报告遗漏、Bug修复模式）
-- UI/产品设计偏好（字体、配色、留白原则、双语规则）
-- 可复用规则清单（R-D1~5 / R-R1~5 / R-E1~5 / R-C1~4）
-- 关键配置速查（iTick Token、反馈链接、Git分支等）
+跨会话、跨 skill 的记忆统一存于 `memory/`，不再散落在 `.claude/` 或各 skill 的 `references/`。
 
-**加载时机**：每个会话第一次执行任何任务前，先读 `.claude/user-profile.md`。
+| 文件 | 何时读 |
+|------|--------|
+| `memory/profile.md` | **每个会话第一次执行任何任务前必读**——历史教训、UI/产品偏好、可复用规则（R-D/R-R/R-E/R-C）、配置速查 |
+| `memory/state/options-journal.md` | 期权扫描 / 持仓相关任务前 |
+| `memory/state/research-ledger.md` | 研究某公司前 grep，继承已有结论，不从零重做 |
+
+**写入**：出现新事故/纠正 → 追加 `profile.md`；开平仓 → 更新 `options-journal.md`；交付研究报告 → 追加 `research-ledger.md`。详见 `memory/README.md`。

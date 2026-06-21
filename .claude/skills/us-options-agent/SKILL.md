@@ -82,7 +82,7 @@ description: |
 | 生成《今日美股期权机会》每日扫描报告 | `references/daily-scan-template.md` |
 | 市场进入极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
 | 需要获取 IV Rank / 期权链 / 异常流数据时 | `references/data-sources.md` |
-| 记录开仓/平仓、查看当前敞口、更新持仓日志 | `references/position-journal.md` |
+| 记录开仓/平仓、查看当前敞口、更新持仓日志 | `memory/state/options-journal.md` |
 
 ---
 
