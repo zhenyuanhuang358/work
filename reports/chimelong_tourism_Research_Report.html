@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长隆旅游度假区 · Chimelong Tourism Resort — Merlin 研究报告</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0b;
+    --paper: #f1efea;
+    --paper-tint: #e8e4dc;
+    --copper: #8b6c42;
+    --gold: #c9a84c;
+    --green: #2a5c3f;
+    --red: #8b2e2e;
+    --amber: #c47a1e;
+    --muted: #6b6560;
+    --border: #d4cfc7;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Songti SC', 'STSong', 'SimSun', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+  .en { font-family: 'IM Fell English', Georgia, serif; }
+
+  /* PUB BAR */
+  .pub-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin: 0 -24px 0;
+  }
+  .pub-bar .badge {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+  }
+
+  /* TITLE BLOCK */
+  .title-block {
+    padding: 48px 0 32px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .kicker {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--copper);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .main-title-zh {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .main-title-en {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 16px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .tag {
+    padding: 3px 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--border);
+    font-family: 'IM Fell English', Georgia, serif;
+  }
+  .tag.mode-b { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tag.private { background: var(--amber); color: white; border-color: var(--amber); }
+  .tag.confidence { border-color: var(--copper); color: var(--copper); }
+
+  /* AGENT FLOW */
+  .section { margin: 40px 0; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+  }
+  .section-zh { font-size: 18px; font-weight: bold; }
+  .section-en { font-family: 'IM Fell English', Georgia, serif; font-size: 13px; color: var(--muted); font-style: italic; }
+
+  /* ANSWER BLOCKS */
+  .answer-block {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .answer-q {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .q-num {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 20px;
+    color: var(--copper);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .confidence-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-family: 'IM Fell English', Georgia, serif;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .badge-high { background: var(--green); color: white; }
+  .badge-mid { background: var(--amber); color: white; }
+  .badge-low { background: var(--red); color: white; }
+
+  .answer-body { font-size: 14.5px; line-height: 1.8; }
+  .answer-body p { margin-bottom: 10px; }
+  .answer-body strong { color: var(--ink); }
+  .label-zh {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--copper);
+    margin-right: 4px;
+  }
+  .label-en {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    margin-right: 8px;
+  }
+  .source-row {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'IM Fell English', Georgia, serif;
+  }
+  .src-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 10px;
+    border: 1px solid var(--border);
+    margin: 0 3px 3px 0;
+  }
+  .src-official { border-color: var(--green); color: var(--green); }
+  .src-estimate { border-color: var(--amber); color: var(--amber); }
+  .src-search { border-color: var(--copper); color: var(--copper); }
+
+  /* DATA TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 14px 0;
+  }
+  .data-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: normal;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  .data-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .data-table tr:nth-child(even) td { background: var(--paper-tint); }
+
+  /* COMPETITOR GRID */
+  .competitor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .comp-card {
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+  }
+  .comp-tier {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-family: 'IM Fell English', Georgia, serif;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .comp-name { font-weight: bold; font-size: 14px; margin-bottom: 6px; }
+  .comp-stat { font-size: 12.5px; color: var(--ink); }
+  .comp-flag { font-size: 11px; color: var(--red); margin-top: 4px; }
+  .comp-strength { font-size: 11px; color: var(--green); margin-top: 4px; }
+  .tier-intl { border-left: 3px solid var(--amber); }
+  .tier-top { border-left: 3px solid var(--gold); }
+  .tier-mid { border-left: 3px solid var(--copper); }
+  .tier-weak { border-left: 3px solid var(--red); }
+
+  /* RISK TABLE */
+  .risk-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 14px 0;
+  }
+  .risk-table th {
+    background: #2a1a0a;
+    color: var(--paper);
+    padding: 8px 12px;
+    text-align: left;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .risk-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 12.5px;
+  }
+  .risk-high { color: var(--red); font-weight: bold; }
+  .risk-mid { color: var(--amber); }
+  .risk-low { color: var(--green); }
+
+  /* VERDICT BOX */
+  .verdict-box {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px 36px;
+    margin: 40px 0 24px;
+  }
+  .verdict-title {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .verdict-score {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .verdict-label { font-size: 13px; color: rgba(241,239,234,0.6); margin-bottom: 20px; font-family: 'IM Fell English', Georgia, serif; font-style: italic; }
+  .verdict-main { font-size: 15px; line-height: 1.8; margin-bottom: 20px; }
+  .verdict-flags {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+    margin-top: 16px;
+  }
+  .verdict-flags-title {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .flag-item {
+    font-size: 13px;
+    color: rgba(241,239,234,0.8);
+    margin-bottom: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .flag-item::before { content: "▸"; position: absolute; left: 0; color: var(--gold); }
+  .verdict-en {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 12px;
+    color: rgba(241,239,234,0.45);
+    font-style: italic;
+    margin-top: 16px;
+  }
+
+  /* FEEDBACK */
+  .feedback-row {
+    text-align: center;
+    margin: 20px 0;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .feedback-row a {
+    color: var(--copper);
+    text-decoration: none;
+    border-bottom: 1px solid var(--copper);
+  }
+
+  /* CONFIDENCE SUMMARY */
+  .conf-summary {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .conf-item {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+  }
+  .conf-count { font-size: 28px; font-family: 'IM Fell English', Georgia, serif; }
+  .conf-desc { font-size: 11px; color: var(--muted); }
+
+  /* OPPORTUNITY CARDS */
+  .opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .opp-card {
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    background: white;
+  }
+  .opp-num { font-family: 'IM Fell English', Georgia, serif; font-size: 22px; color: var(--gold); }
+  .opp-title { font-weight: bold; font-size: 13.5px; margin: 4px 0; }
+  .opp-desc { font-size: 12.5px; color: var(--muted); }
+
+  /* FOOTNOTE */
+  .footnote {
+    font-size: 11.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 16px;
+    font-family: 'IM Fell English', Georgia, serif;
+    font-style: italic;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  .highlight-box {
+    background: var(--paper-tint);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 13.5px;
+  }
+
+  .sub-answer {
+    margin: 10px 0 10px 16px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+  .sub-q {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--copper);
+    margin-bottom: 4px;
+  }
+  .sub-a { font-size: 14px; line-height: 1.75; }
+
+  @media (max-width: 600px) {
+    .competitor-grid, .opp-grid { grid-template-columns: 1fr; }
+    .conf-summary { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PUB BAR -->
+<div class="pub-bar">
+  <span class="en">MERLIN · MODE B · FIVE-AGENT RESEARCH</span>
+  <span class="badge">2026-06-22</span>
+</div>
+
+<!-- TITLE BLOCK -->
+<div class="title-block">
+  <div class="kicker">Chimelong Tourism Resort · Competitive Intelligence</div>
+  <div class="main-title-zh">长隆旅游度假区业务情况调研</div>
+  <div class="main-title-en">Corporate Overview &amp; Industry Landscape — Chimelong Group</div>
+  <div class="tag-row">
+    <span class="tag mode-b en">Mode B · Client Outline</span>
+    <span class="tag private en">Private Co · Non-Listed</span>
+    <span class="tag confidence en">Confidence 6.0 / 10</span>
+    <span class="tag en">Theme Park &amp; Resort · Greater Bay Area</span>
+  </div>
+</div>
+
+<!-- FIVE-AGENT FLOW SVG -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-zh">五智能体协作流程</span>
+    <span class="section-en">Five-Agent Workflow</span>
+  </div>
+  <svg viewBox="0 0 860 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif;">
+    <defs>
+      <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#8b6c42"/>
+      </marker>
+    </defs>
+    <!-- Nodes -->
+    <rect x="0" y="20" width="130" height="38" fill="#0a0a0b" rx="0"/>
+    <text x="65" y="35" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">ORCHESTRATOR</text>
+    <text x="65" y="50" text-anchor="middle" fill="#f1efea" font-size="9">分类问题</text>
+
+    <line x1="130" y1="39" x2="155" y2="39" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <rect x="155" y="20" width="110" height="38" fill="#2a5c3f" rx="0"/>
+    <text x="210" y="35" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">SCOUT</text>
+    <text x="210" y="50" text-anchor="middle" fill="#f1efea" font-size="9">情报员·采集</text>
+
+    <line x1="265" y1="39" x2="290" y2="39" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <rect x="290" y="20" width="110" height="38" fill="#8b6c42" rx="0"/>
+    <text x="345" y="35" text-anchor="middle" fill="#f1efea" font-size="9" letter-spacing="1">ANALYST+FORENSIC</text>
+    <text x="345" y="50" text-anchor="middle" fill="#f1efea" font-size="9">分析师+侦探·并行</text>
+
+    <line x1="400" y1="39" x2="425" y2="39" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <rect x="425" y="20" width="110" height="38" fill="#c47a1e" rx="0"/>
+    <text x="480" y="35" text-anchor="middle" fill="#f1efea" font-size="9" letter-spacing="1">STRATEGIST</text>
+    <text x="480" y="50" text-anchor="middle" fill="#f1efea" font-size="9">战略家·整合</text>
+
+    <line x1="535" y1="39" x2="560" y2="39" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <rect x="560" y="20" width="110" height="38" fill="#8b2e2e" rx="0"/>
+    <text x="615" y="35" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">CRITIC</text>
+    <text x="615" y="50" text-anchor="middle" fill="#f1efea" font-size="9">评审·裁定</text>
+
+    <line x1="670" y1="39" x2="695" y2="39" stroke="#8b6c42" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+    <rect x="695" y="20" width="130" height="38" fill="#0a0a0b" rx="0"/>
+    <text x="760" y="35" text-anchor="middle" fill="#c9a84c" font-size="9" letter-spacing="1">REPORT</text>
+    <text x="760" y="50" text-anchor="middle" fill="#f1efea" font-size="9">研究报告·交付</text>
+  </svg>
+  <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:6px;font-family:'IM Fell English',Georgia,serif;font-style:italic;">
+    Scout 执行 10+ 次 WebSearch 跨数据源情报采集 · Forensic 识别异常信号 · Critic 独立置信度校验
+  </p>
+</div>
+
+<!-- ======= Q1 公司情况 ======= -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-zh">提纲一：公司情况</span>
+    <span class="section-en">Question 1 — Corporate Overview</span>
+  </div>
+
+  <!-- Q1.1 业务板块 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">1.1</span>
+      <div>
+        公司整体业务板块介绍
+        <span class="confidence-badge badge-high en">高置信 HIGH</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p>长隆集团旗下旅游度假区业务形成<strong>六大板块</strong>，以主题乐园为核心，形成"一园多业"全产业链闭环：</p>
+      <table class="data-table">
+        <tr>
+          <th>业务板块</th>
+          <th>主要载体</th>
+          <th>核心资产</th>
+        </tr>
+        <tr>
+          <td><strong>主题乐园（入场票）</strong></td>
+          <td>广州长隆·珠海长隆·清远长隆</td>
+          <td>欢乐世界 / 海洋王国 / 野生动物世界 / 水上乐园 / 森林王国</td>
+        </tr>
+        <tr>
+          <td><strong>度假酒店</strong></td>
+          <td>集团自营酒店群</td>
+          <td>企鹅酒店 / 横琴湾酒店 / 长颈鹿城堡酒店等，总客房超 5,000 间</td>
+        </tr>
+        <tr>
+          <td><strong>文化演艺</strong></td>
+          <td>长隆国际马戏</td>
+          <td>全球规模最大的常驻马戏演出，年演出 3,000+ 场</td>
+        </tr>
+        <tr>
+          <td><strong>餐饮特色经营</strong></td>
+          <td>园区内餐饮、节庆活动餐饮</td>
+          <td>主题餐厅 / 节日限定 / 宴会</td>
+        </tr>
+        <tr>
+          <td><strong>商务会展（MICE）</strong></td>
+          <td>广州国际会展中心 · 珠海横琴湾</td>
+          <td>6,000㎡无柱宴会厅（广州）/ 3,000㎡海洋殿（珠海）</td>
+        </tr>
+        <tr>
+          <td><strong>商业零售</strong></td>
+          <td>万博商务区</td>
+          <td>万博综合商圈（2025 年引入广州第二座 K11）</td>
+        </tr>
+      </table>
+      <p style="margin-top:10px;"><span class="label-zh">核心定位</span><span class="label-en">Positioning</span>集团官方定位为"世界级文化旅游品牌 3.0"，以<strong>超大型综合旅游度假区</strong>为标准，拒绝单一景点模式——游客到场后住宿、餐饮、演艺、购物全部在园区内消费，形成强闭环。</p>
+      <p><span class="label-zh">动物 IP 是稀缺护城河</span><span class="label-en">Moat</span>旗下拥有大熊猫、白鲸、企鹅、北极熊等世界级珍稀动物资源，这是长隆与纯娱乐类主题公园最核心的差异化，且具备不可复制性。</p>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">长隆集团官网</span>
+      <span class="src-badge src-search">前瞻产业研究院 2021</span>
+      <span class="src-badge src-search">广州日报 2024-10</span>
+    </div>
+  </div>
+
+  <!-- Q1.2 近年业务体量 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">1.2</span>
+      <div>
+        近年业务体量
+        <span class="confidence-badge badge-mid en">中置信 MID</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p><span class="label-zh">游客量（可查证）</span><span class="label-en">Visitor Volume</span></p>
+      <table class="data-table">
+        <tr><th>时段</th><th>游客量</th><th>同比增速</th><th>备注</th></tr>
+        <tr><td>2022 年</td><td>~1,460 万人次</td><td>—</td><td>疫情管控影响，基数低</td></tr>
+        <tr><td>2023 年</td><td><strong>3,609 万人次</strong></td><td><strong>+148%</strong></td><td>全球主题公园 TOP10 增速第一</td></tr>
+        <tr><td>2024 年 1-8 月</td><td>3,018 万人次</td><td>+9%（同期）</td><td>清远长隆尚未开业，广珠两地</td></tr>
+        <tr><td>2024 年全年（估）</td><td>约 4,000 万人次</td><td>约 +10%</td><td>含部分清远试营业数据</td></tr>
+      </table>
+      <p style="margin-top:10px;"><span class="label-zh">营收（推算，低置信）</span><span class="label-en">Revenue (Estimated)</span>长隆为私营非上市公司，从不披露财务数字。以下为推算：</p>
+      <div class="highlight-box">
+        推算逻辑：长隆内部称"门票收入占总营收不足 40%"。若取 2023 年客流 3,609 万人次、人均门票约 260 元，门票收入约 <strong>94 亿元</strong>，则总营收约 <strong>235-250 亿元</strong>（门票占 40% 口径）。<br>
+        保守口径（门票+酒店为主，餐饮/零售弱）：100-150 亿元。<br>
+        <strong>区间：100-250 亿元，中值约 150-180 亿元（置信度：低）。</strong>
+      </div>
+      <p>对比参照：华侨城 2024 年营收 544 亿元（含大量房地产），文旅业务占比约 30%，文旅纯收入约 163 亿元；长隆纯文旅体量与华侨城文旅板块属同一量级，但长隆无地产拖累，整体健康度更优。</p>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">2024 中国主题公园竞争力评价报告</span>
+      <span class="src-badge src-search">21 财经 2024-07</span>
+      <span class="src-badge src-estimate">营收为模型推算，非官方披露</span>
+    </div>
+  </div>
+
+  <!-- Q1.3 各业务占比 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">1.3</span>
+      <div>
+        各业务大致占比情况
+        <span class="confidence-badge badge-low en">低置信 LOW</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p>无官方披露。以下为行业对标推断，仅供参考：</p>
+      <table class="data-table">
+        <tr>
+          <th>业务板块</th>
+          <th>估算占比</th>
+          <th>推断依据</th>
+        </tr>
+        <tr>
+          <td>主题乐园门票及配套（含年卡）</td>
+          <td>&lt;40%（官方表述）</td>
+          <td>长隆集团内部说法，具体数字不明</td>
+        </tr>
+        <tr>
+          <td>度假酒店</td>
+          <td>约 25-30%</td>
+          <td>广州 1,500 间 + 珠海 1,500 间 + 清远 2 万间目标；RevPAR 约 350-500 元</td>
+        </tr>
+        <tr>
+          <td>餐饮</td>
+          <td>约 15-20%</td>
+          <td>园区封闭性强，餐饮垄断定价，客均消费高</td>
+        </tr>
+        <tr>
+          <td>商业零售 + 演艺 + MICE</td>
+          <td>约 10-20%</td>
+          <td>国际马戏是收费演出；MICE 为企业及政府团队</td>
+        </tr>
+      </table>
+      <p style="margin-top:10px;">注：国内主题公园行业平均门票收入占比约 <strong>70%</strong>（行业数据），长隆低于行业均值，说明非票二次消费货币化已走在国内前列，但仍远低于迪士尼（门票:餐饮:零售 约 3:3:4）的理想结构。</p>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-search">21 财经 2024-07（"门票不足40%"引用）</span>
+      <span class="src-badge src-estimate">占比为行业对标推断，非官方数字</span>
+    </div>
+  </div>
+
+  <!-- Q1.4 增长是否达预期 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">1.4</span>
+      <div>
+        业务增长情况 · 是否达预期 · 若不及，主要原因
+        <span class="confidence-badge badge-mid en">中置信 MID</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <div class="sub-answer">
+        <div class="sub-q">2023 年：超预期恢复</div>
+        <div class="sub-a">后疫情补偿性需求集中释放，3,609 万人次同比 +148%，是全球主题公园 TOP10 中增速第一。港澳游客回流、深圳自驾客显著增长（深中通道通车后珠海长隆深圳游客 +40%）。该年表现属于结构性一次性高点。</div>
+      </div>
+      <div class="sub-answer">
+        <div class="sub-q">2024 年：增速显著放缓，可能低于年初目标</div>
+        <div class="sub-a">
+          <p>1-8 月仅录得 +9%（vs 2023 全年 +148%）。行业整体 2024 年游客量 -1.76%、营收 -3.74%（90 家样本），长隆相对跑赢大盘，但绝对增速已从高速回归正常化。</p>
+          <p>二次消费（餐饮/零售/体验项目）行业普遍下滑 10-30%，影响人均消费。</p>
+        </div>
+      </div>
+      <p><span class="label-zh">不及预期的四大原因</span><span class="label-en">Underperformance Drivers</span></p>
+      <table class="data-table">
+        <tr><th>#</th><th>原因</th><th>性质</th></tr>
+        <tr>
+          <td>①</td>
+          <td>补偿性需求退潮——2023 年一次性释放已完成，2024 年回归常态</td>
+          <td>周期性（可预见）</td>
+        </tr>
+        <tr>
+          <td>②</td>
+          <td>消费降级压力——游客人均消费下降，二次消费（纪念品/特色体验）缩减 10-30%</td>
+          <td>宏观结构性</td>
+        </tr>
+        <tr>
+          <td>③</td>
+          <td>清远长隆开业延迟且初期口碑有负面——首批游客反馈硬件配套不成熟，2 万客房远未建成</td>
+          <td>项目执行风险</td>
+        </tr>
+        <tr>
+          <td>④</td>
+          <td>竞争加剧——北京环球进入稳定期，上海迪士尼扩园，各地新乐园开业截流客源</td>
+          <td>竞争结构性</td>
+        </tr>
+      </table>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-search">21 财经 2024-07</span>
+      <span class="src-badge src-search">新华网 2024-11 行业数据</span>
+      <span class="src-badge src-search">腾讯新闻 2025-01 清远口碑</span>
+      <span class="src-badge src-estimate">判断部分为分析推断</span>
+    </div>
+  </div>
+
+  <!-- Q1.5 未来规划 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">1.5</span>
+      <div>
+        未来业务发展规划 · 重点发展方向
+        <span class="confidence-badge badge-high en">高置信 HIGH</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p>长隆集团已公开的三大战略方向：</p>
+      <div class="sub-answer">
+        <div class="sub-q">方向一：清远长隆——第三极扩张（在建，最高优先级）</div>
+        <div class="sub-a">
+          <p>总投资超 <strong>300 亿元</strong>，规划占地 <strong>8.6 万亩</strong>（是广州长隆的数倍），远期规划 <strong>2 万间客房</strong>、年接待游客 <strong>3,000 万人次</strong>。</p>
+          <p>2025 年 1 月首期开业（长隆森林王国+森林大自驾+长颈鹿城堡酒店+森林温泉），以"自然野趣+汽车自驾营地"为差异化，避开与广珠两地直接竞争。</p>
+          <p>首期年接待目标 800 万人次，预计占清远 2024 年全年客流总量的 41%，对清远文旅具有城市颠覆性意义。</p>
+        </div>
+      </div>
+      <div class="sub-answer">
+        <div class="sub-q">方向二：广州"一心四园"扩容</div>
+        <div class="sub-a">新建 43 公顷超级乐园，与现有欢乐世界/水上乐园/野生动物世界共同构成"一心四园"格局，规划已获广州市审批通过。</div>
+      </div>
+      <div class="sub-answer">
+        <div class="sub-q">方向三：品牌 3.0 ——迈向世界级</div>
+        <div class="sub-a">官方宣言"打造世界级中国民族文旅品牌"，核心举措包括：①原创 IP 深度开发（基于动物资产）；②入境游开拓（大湾区政策窗口）；③万博商务区商业生态完善（K11 等高端商业落地）。</div>
+      </div>
+      <div class="highlight-box">
+        <strong>战略判断：</strong>清远长隆是"长隆 2.0 生意模式"的实验场——从单一度假区升级为生态旅游+汽车营地+全龄段康养的超大型目的地，若成功将使集团年接待量突破 5,000-6,000 万，进入全球主题公园集团 TOP3 射程。
+      </div>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">21 财经 2024-09（龚良庆表态）</span>
+      <span class="src-badge src-official">广州日报 2024-10（广州扩容规划）</span>
+      <span class="src-badge src-official">TTG China 2025-02（清远开业）</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Q2 行业情况 ======= -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-zh">提纲二：行业情况</span>
+    <span class="section-en">Question 2 — Industry Landscape</span>
+  </div>
+
+  <!-- Q2.1 行业发展 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">2.1</span>
+      <div>
+        近年行业发展情况
+        <span class="confidence-badge badge-high en">高置信 HIGH</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p>中国主题公园行业经历三个明确阶段：</p>
+      <table class="data-table">
+        <tr><th>阶段</th><th>时段</th><th>核心驱动</th><th>关键数据</th></tr>
+        <tr>
+          <td><strong>疫情重创期</strong></td>
+          <td>2020-2022</td>
+          <td>政策管控，客流锁死</td>
+          <td>行业收入腰斩，长隆等头部靠酒店+会展续命</td>
+        </tr>
+        <tr>
+          <td><strong>强力反弹期</strong></td>
+          <td>2023</td>
+          <td>补偿性需求+入境/跨城游复苏</td>
+          <td>86 家样本：游客 +71.84%，营收 +97.86%（303.89 亿元）</td>
+        </tr>
+        <tr>
+          <td><strong>回调正常化</strong></td>
+          <td>2024</td>
+          <td>补偿需求退潮+消费降级</td>
+          <td>90 家样本：游客 -1.76%（1.28 亿），营收 -3.74%（292.52 亿）</td>
+        </tr>
+      </table>
+      <p style="margin-top:10px;"><span class="label-zh">行业最大结构性问题</span><span class="label-en">Structural Issue</span>国内主题公园门票收入平均占比约 <strong>70%</strong>（vs 迪士尼 33%），二次消费货币化严重不足。结果是客流波动直接映射为营收波动，经营抗风险能力弱。2024 年行业 22% 亏损率（385 家统计样本中）印证了这一分化。</p>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">2024 中国主题公园竞争力评价报告（主题公园研究院）</span>
+      <span class="src-badge src-search">新浪财经 2024-11</span>
+    </div>
+  </div>
+
+  <!-- Q2.2 市场规模增速预期 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">2.2</span>
+      <div>
+        行业整体市场规模 · 增速 · 未来发展预期
+        <span class="confidence-badge badge-mid en">中置信 MID</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p><span class="label-zh">当前规模（窄口径）</span><span class="label-en">Current Scale (Narrow)</span>2024 年 90 家统计样本营收 <strong>292.52 亿元</strong>（主要是门票+直营消费，不含酒店和间接产业链）。</p>
+      <p><span class="label-zh">全产业链口径</span><span class="label-en">Full Value Chain</span>若含酒店、餐饮、零售、演艺等配套，2025 年市场规模预计超 <strong>900 亿元</strong>；Research and Markets 预测：CAGR 7.2%，到 2027 年突破 500 亿（窄口径）。</p>
+      <p><span class="label-zh">市场渗透率天花板</span><span class="label-en">Penetration Gap</span>中国主题公园市场渗透率约 <strong>27%</strong>（人均年游览次数/可及人口），而美国约 68%，日本约 65%。这一 41 个百分点的差距，意味着在中产收入持续增长的假设下，行业长期空间依然巨大。</p>
+      <table class="data-table">
+        <tr><th>指标</th><th>2024 年现状</th><th>2025 年预测</th><th>置信度</th></tr>
+        <tr>
+          <td>游客量（统计样本）</td>
+          <td>约 1.28 亿人次</td>
+          <td>+10-20%（研究院预测）</td>
+          <td>中</td>
+        </tr>
+        <tr>
+          <td>行业营收（窄口径）</td>
+          <td>292.52 亿元</td>
+          <td>+5-15%（研究院预测）</td>
+          <td>中</td>
+        </tr>
+        <tr>
+          <td>亏损企业占比</td>
+          <td>约 22%</td>
+          <td>有望下降（弱者退出）</td>
+          <td>低</td>
+        </tr>
+      </table>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">2024 中国主题公园竞争力评价报告</span>
+      <span class="src-badge src-search">艾媒咨询 2025</span>
+      <span class="src-badge src-estimate">预测数据为机构推算，存在不确定性</span>
+    </div>
+  </div>
+
+  <!-- Q2.3 主要玩家 竞争格局 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">2.3</span>
+      <div>
+        行业主要玩家 · 竞争格局
+        <span class="confidence-badge badge-high en">高置信 HIGH</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <p>竞争格局呈<strong>三层塔形结构</strong>：</p>
+      <div class="competitor-grid">
+        <!-- International tier -->
+        <div class="comp-card tier-intl">
+          <div class="comp-tier">第一层 · 国际顶流 IP</div>
+          <div class="comp-name">上海迪士尼乐园</div>
+          <div class="comp-stat">竞争力评分：<strong>100 分</strong>（行业第一）</div>
+          <div class="comp-stat">票价：400-500+ 元/人，IP 授权壁垒最高</div>
+          <div class="comp-strength">▲ 全球 IP 矩阵，二次消费率最高</div>
+        </div>
+        <div class="comp-card tier-intl">
+          <div class="comp-tier">第一层 · 国际顶流 IP</div>
+          <div class="comp-name">北京环球影城</div>
+          <div class="comp-stat">竞争力评分：<strong>89.86 分</strong>（行业第二）</div>
+          <div class="comp-stat">已进入稳定盈利期（2024 年首盈利）</div>
+          <div class="comp-strength">▲ 哈利波特等强 IP，高溢价能力</div>
+        </div>
+        <!-- Top domestic -->
+        <div class="comp-card tier-top">
+          <div class="comp-tier">第二层 · 本土头部</div>
+          <div class="comp-name">长隆集团（本文标的）</div>
+          <div class="comp-stat">竞争力评分：珠海海洋王国 <strong>41 分</strong></div>
+          <div class="comp-stat">2023 年客流：3,609 万，全球 TOP5</div>
+          <div class="comp-strength">▲ 稀缺动物资源 IP，广珠清三极布局</div>
+        </div>
+        <div class="comp-card tier-top">
+          <div class="comp-tier">第二层 · 本土头部</div>
+          <div class="comp-name">华强方特</div>
+          <div class="comp-stat">全球游客量第 2（~8,000 万），45 家乐园</div>
+          <div class="comp-stat">2024 年扣非净利润 -21%；单园盈利能力弱</div>
+          <div class="comp-flag">▼ 扩张激进（2024 年新开 9 家），摊薄效应</div>
+        </div>
+        <div class="comp-card tier-top">
+          <div class="comp-tier">第二层 · 本土头部（地产拖累）</div>
+          <div class="comp-name">华侨城（欢乐谷系列）</div>
+          <div class="comp-stat">2024 年营收 544 亿（含地产）</div>
+          <div class="comp-stat">文旅客流：8,081 万；归母净利 <strong>-86.62 亿</strong></div>
+          <div class="comp-flag">▼ 房地产债务拖累，双线承压</div>
+        </div>
+        <!-- Weak players -->
+        <div class="comp-card tier-weak">
+          <div class="comp-tier">第三层 · 垂直细分 / 困境</div>
+          <div class="comp-name">海昌海洋公园</div>
+          <div class="comp-stat">2024 年营收 18.18 亿，净亏损 7.4 亿（-275%）</div>
+          <div class="comp-flag">▼ 重度亏损扩大，战略方向摇摆</div>
+        </div>
+      </div>
+      <p><span class="label-zh">长隆在竞争格局中的定位</span><span class="label-en">Chimelong's Position</span></p>
+      <p>长隆是<strong>本土头部中商业模式最健康的一家</strong>：无地产负债包袱（vs 华侨城）、扩张节奏谨慎（vs 方特）、动物 IP 护城河难以复制（vs 海昌）。与迪士尼/环球的 41 分 vs 100 分差距，主要在于自主 IP 深度和国际品牌知名度，而非运营能力。</p>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-official">2024 中国主题公园竞争力评价报告</span>
+      <span class="src-badge src-official">华侨城 2024 年报（上市公司公告）</span>
+      <span class="src-badge src-search">36 氪 2025-02</span>
+      <span class="src-badge src-search">北京新闻 2025-04（方特业绩）</span>
+    </div>
+  </div>
+
+  <!-- Q2.4 未来行业机会点 -->
+  <div class="answer-block">
+    <div class="answer-q">
+      <span class="q-num">2.4</span>
+      <div>
+        未来行业机会点预期
+        <span class="confidence-badge badge-mid en">中置信 MID</span>
+      </div>
+    </div>
+    <div class="answer-body">
+      <div class="opp-grid">
+        <div class="opp-card">
+          <div class="opp-num">01</div>
+          <div class="opp-title">大湾区入境游结构性红利</div>
+          <div class="opp-desc">港珠澳大桥+深中通道+大湾区一体化政策，珠海长隆港澳游客 2024 年 +200%，深圳客 +40%。入境游全面开放将进一步放量。长隆是大湾区最大受益者之一。</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-num">02</div>
+          <div class="opp-title">IP 变现深化——从门票到衍生品</div>
+          <div class="opp-desc">国内门票占收 70% 的结构性弊端正在被顶部玩家主动修正。动物 IP 衍生品（大熊猫/企鹅周边）、联名授权、IP 影视化是下一个增量，迪士尼已证明该路径可行。</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-num">03</div>
+          <div class="opp-title">渗透率提升——下沉市场</div>
+          <div class="opp-desc">当前 27% 渗透率 vs 发达市场 68%，增量空间约 2-3 倍。清远长隆锁定二三线外溢需求，未来向更多省份扩张具备逻辑支撑。</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-num">04</div>
+          <div class="opp-title">体验升级——科技赋能沉浸式</div>
+          <div class="opp-desc">AR/VR/AI 个性化体验正在成为新建乐园标配。技术投入可提升复游率（复游率是超越单次客流的核心 KPI），年卡会员体系是锁客护城河。</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-num">05</div>
+          <div class="opp-title">亲子+科普+康养融合</div>
+          <div class="opp-desc">清远长隆"自然野趣"定位指向家庭亲子科普游，延长停留时长（1 日游→3 日以上），提升人均消费。康养+主题旅游是国内文旅新兴方向。</div>
+        </div>
+        <div class="opp-card">
+          <div class="opp-num">06</div>
+          <div class="opp-title">行业整合——弱者出清</div>
+          <div class="opp-desc">22% 亏损率意味着中小型主题公园持续出清。头部玩家可借机兼并优质地块/IP 授权资产，以资本手段加速规模优势建立。</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-row">
+      <span>来源：</span>
+      <span class="src-badge src-search">环球旅讯 2025-02</span>
+      <span class="src-badge src-search">艾媒咨询 2025</span>
+      <span class="src-badge src-estimate">机会点判断含分析师推断</span>
+    </div>
+  </div>
+</div>
+
+<!-- RISK SIGNAL TABLE -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-zh">风险信号 · Forensic 侦探标注</span>
+    <span class="section-en">Risk Flags &amp; Anomaly Signals</span>
+  </div>
+  <table class="risk-table">
+    <tr>
+      <th>信号</th>
+      <th>内容</th>
+      <th>风险级别</th>
+      <th>来源</th>
+    </tr>
+    <tr>
+      <td><strong>清远首开口碑风险</strong></td>
+      <td>首批游客大量吐槽配套不成熟（停车/餐饮/硬件），2万客房目标仅完成极小部分，首期"空壳感"可能损伤品牌</td>
+      <td class="risk-high">高</td>
+      <td>腾讯新闻 2025-01</td>
+    </tr>
+    <tr>
+      <td><strong>财务透明度极低</strong></td>
+      <td>私营非上市，所有营收/利润数字均为外部推算，无法核实，本报告所有财务数字置信度低</td>
+      <td class="risk-high">高（研究局限）</td>
+      <td>结构性问题</td>
+    </tr>
+    <tr>
+      <td><strong>2024 年增速明显放缓</strong></td>
+      <td>1-8 月仅 +9%，行业均值为负增长，补偿需求已耗尽，常态增速未知</td>
+      <td class="risk-mid">中</td>
+      <td>21 财经 2024-07</td>
+    </tr>
+    <tr>
+      <td><strong>竞争力评分差距大</strong></td>
+      <td>珠海长隆 41 分 vs 迪士尼 100 分，说明用户体验综合感知仍有显著差距，高端客群黏性存疑</td>
+      <td class="risk-mid">中</td>
+      <td>2024 竞争力报告</td>
+    </tr>
+    <tr>
+      <td><strong>清远 300 亿投资回收周期</strong></td>
+      <td>重资产投入，远期 3000 万人次目标宏大，若需求未达预期，投资回收时间可能超 20 年，现金流压力不明</td>
+      <td class="risk-mid">中</td>
+      <td>21 财经 2024-09</td>
+    </tr>
+    <tr>
+      <td><strong>二次消费货币化不足</strong></td>
+      <td>门票占收仍约 40%（集团说法，且优于行业 70%），但绝对值仍远低于迪士尼，消费降级周期更脆弱</td>
+      <td class="risk-low">低</td>
+      <td>行业研究院数据</td>
+    </tr>
+  </table>
+</div>
+
+<!-- VERDICT BOX -->
+<div class="verdict-box">
+  <div class="verdict-title">Critic · 评审裁定 · Research Verdict</div>
+  <div class="verdict-score">6.2<span style="font-size:24px;color:var(--gold);opacity:0.6;">/10</span></div>
+  <div class="verdict-label">综合置信度 · Overall Confidence</div>
+  <div class="verdict-main">
+    <strong>公司层面</strong>：长隆旅游度假区是中国本土主题公园毫无疑问的<strong>商业模式最优标的</strong>——无地产负债、有动物 IP 护城河、运营效率领先、三极扩张布局清晰。2023 年客流 3,609 万全球 TOP5，行业最强复苏证明其核心竞争力扎实。<br><br>
+    <strong>分析局限</strong>：作为非上市私营企业，财务数字严重依赖推算，本报告所有营收/利润/业务占比数字均为估算，<strong>误差区间宽泛</strong>，不可作为精确数字引用。<br><br>
+    <strong>行业层面</strong>：2024 年行业整体轻微回调，但长期渗透率天花板（27% → 68%）和大湾区入境游结构性机会均真实存在。行业分化加速，头部长期受益于中小玩家出清。<br><br>
+    <strong>最大变量</strong>：清远长隆——这是集团押注最重的项目，首期开园口碑有负面信号，未来三年的市场验证至关重要。
+  </div>
+  <div class="verdict-flags">
+    <div class="verdict-flags-title">待核实项 / Low-Confidence Items</div>
+    <div class="flag-item">长隆集团 2024 年实际总营收及分业务营收数字（私营不披露）</div>
+    <div class="flag-item">清远长隆 2025 年实际接待数据 vs 800 万目标（首年运营中）</div>
+    <div class="flag-item">广州"一心四园"超级乐园具体开业时间表</div>
+    <div class="flag-item">门票以外各业务准确占比（仅有"门票&lt;40%"粗口径表述）</div>
+    <div class="flag-item">集团 2024 年是否实现内部增长目标（无官方声明）</div>
+  </div>
+  <div class="verdict-en">High confidence (4 items) · Medium confidence (5 items) · Low confidence (4 items) · Private company structural data gap limits precision throughout.</div>
+</div>
+
+<!-- CONFIDENCE SUMMARY -->
+<div class="conf-summary">
+  <div class="conf-item">
+    <div class="conf-count" style="color:var(--green);">4</div>
+    <div class="conf-desc">高置信结论</div>
+  </div>
+  <div class="conf-item">
+    <div class="conf-count" style="color:var(--amber);">5</div>
+    <div class="conf-desc">中置信结论</div>
+  </div>
+  <div class="conf-item">
+    <div class="conf-count" style="color:var(--red);">4</div>
+    <div class="conf-desc">低置信结论（财务数字）</div>
+  </div>
+  <div class="conf-item">
+    <div class="conf-count" style="color:var(--copper);">6.2</div>
+    <div class="conf-desc">综合置信度 /10</div>
+  </div>
+</div>
+
+<!-- FEEDBACK -->
+<div class="feedback-row">
+  本报告有用吗？请给予反馈以帮助改善研究质量 →
+  <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=chimelong_tourism_20260622" target="_blank">提交反馈</a>
+</div>
+
+<!-- FOOTNOTE -->
+<div class="footnote">
+  本报告由 Merlin 五智能体（Orchestrator · Scout · Analyst · Forensic · Strategist · Critic）协作生成，基于公开信息采集与推理分析。长隆集团为非上市私营企业，所有财务数字均为外部估算，不构成投资建议。数据截至 2026-06-22。
+</div>
+
+</body>
+</html>
