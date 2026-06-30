@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 vs 2025 618 三平台品牌榜单同比研究报告</title>
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --line:rgba(10,10,11,.14); --ink-tint:rgba(10,10,11,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC',Georgia,serif;
+  line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px 80px}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:42px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:14px}
+h1{font-size:46px;line-height:1.12;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:19px;color:#555;font-style:italic;margin-top:10px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.gold{border-color:var(--gold);color:var(--copper)}
+.period-note{margin-top:20px;font-size:13.5px;color:#444;background:var(--ink-tint);
+  border-left:3px solid var(--copper);padding:12px 16px;line-height:1.6}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);margin:34px 0}
+.stat{background:var(--paper);padding:20px 18px}
+.stat-nb{font-size:30px;font-weight:700;letter-spacing:-.01em}
+.stat-nb .unit{font-size:15px;font-weight:400;color:#555;margin-left:3px}
+.stat-label{font-size:12.5px;color:#555;margin-top:5px}
+.stat-label .en{display:block;font-style:italic;font-size:11px;color:#888}
+.stat-delta{font-size:13px;font-weight:600;margin-top:6px}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--amber)}
+section{margin-top:54px}
+.section-zh{font-size:27px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:3px;margin-bottom:22px}
+.section-en::before{content:"— "}
+.label-zh{font-weight:700}
+.label-en{font-style:italic;color:#888;font-size:13px;margin-left:4px}
+p.body{margin-top:14px;font-size:15.5px;color:#1a1a1a}
+.chart-card{border:1px solid var(--line);background:rgba(255,255,255,.35);
+  padding:24px;margin-top:24px}
+.chart-title{font-size:15px;font-weight:700;margin-bottom:4px}
+.chart-sub{font-size:12px;font-style:italic;color:#888;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;margin-top:20px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.rank{font-weight:700;font-size:15px;width:42px;color:var(--copper)}
+.brand{font-weight:600}
+.cn-flag{color:var(--red);font-weight:700;font-size:11px;margin-left:5px;
+  border:1px solid var(--red);border-radius:2px;padding:0 4px}
+.intl-flag{color:#555;font-size:11px;margin-left:5px;
+  border:1px solid #999;border-radius:2px;padding:0 4px}
+.chg-new{color:var(--green);font-weight:700}
+.chg-up{color:var(--green)}
+.chg-down{color:var(--red)}
+.chg-flat{color:#777}
+.conf{display:inline-block;font-size:10.5px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle}
+.conf-h{background:var(--green);color:#fff}
+.conf-m{background:var(--amber);color:#fff}
+.conf-l{background:#999;color:#fff}
+.platform-head{display:flex;align-items:baseline;gap:12px;margin-top:14px;
+  padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.platform-head .nm{font-size:21px;font-weight:700}
+.platform-head .seq{font-size:13px;color:var(--copper);font-weight:600}
+.platform-head .pd{font-size:12px;color:#888;font-style:italic;margin-left:auto}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 18px;margin-top:18px}
+.insight .h{font-weight:700;font-size:15.5px}
+.insight .h .en{font-style:italic;color:#888;font-size:12.5px;font-weight:400;margin-left:6px}
+.insight p{font-size:14.5px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:34px 32px;margin-top:56px;
+  border-radius:3px}
+.verdict .vlabel{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px}
+.verdict h3{font-size:23px;font-weight:700;line-height:1.3}
+.verdict p{font-size:15px;margin-top:14px;color:#d8d4cc}
+.verdict-en{font-size:13px;font-style:italic;color:rgba(255,255,255,.45);margin-top:16px;
+  line-height:1.6}
+.feedback{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);
+  font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:48px;font-size:12.5px;color:#666;border-top:1px solid var(--line);
+  padding-top:20px;line-height:1.8}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--copper);margin-bottom:10px}
+.sources .conf-note{margin-top:14px;background:var(--ink-tint);padding:12px 14px;
+  border-radius:2px}
+footer{margin-top:40px;padding-top:20px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media(max-width:760px){.stat-bar{grid-template-columns:repeat(2,1fr)}
+  .two-col{grid-template-columns:1fr}h1{font-size:34px}.wrap{padding:0 18px 60px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="pub-bar">
+    <span class="src">久谦中台 · 电商情报</span>
+    <span>618 大促复盘专题 · 2026 vs 2025</span>
+    <span>2026-06-30</span>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker">天猫 · 京东 · 抖音 三平台品牌榜单同比研究</div>
+    <h1>2026 年 618 三平台品牌榜单<br>同比与横向对比</h1>
+    <div class="title-en">618 Grand Promotion 2026 vs 2025 — Brand Leaderboards across Tmall, JD &amp; Douyin</div>
+    <div class="tag-row">
+      <span class="tag hot">全网 9340 亿 · 同比 +4.0%</span>
+      <span class="tag">告别价格内卷</span>
+      <span class="tag gold">国货集体突围</span>
+      <span class="tag">国补拉动家电</span>
+      <span class="tag">即时零售 +112%</span>
+    </div>
+    <div class="period-note">
+      <strong>数据周期口径（务必注意，三平台不对齐）：</strong><br>
+      天猫 26年 5.12–6.21 / 25年 5.13–6.20 ｜ 京东 26年 5.13–6.21 / 25年 5.13–6.20 ｜ 抖音 26年 5.15–6.18 / 25年 5.13–6.18。
+      抖音周期较天猫/京东短约 5–7 天，跨平台 GMV 绝对值对比时此差异不可忽略，本报告横向对比以"座次与结构"为主、绝对值为辅。
+    </div>
+  </header>
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat">
+      <div class="stat-nb">9340<span class="unit">亿元</span></div>
+      <div class="stat-label">全网交易总额<span class="en">All-network GMV</span></div>
+      <div class="stat-delta up">▲ +4.0% 同比</div>
+    </div>
+    <div class="stat">
+      <div class="stat-nb">8636<span class="unit">亿元</span></div>
+      <div class="stat-label">综合电商<span class="en">Marketplace e-comm</span></div>
+      <div class="stat-delta flat">▲ +0.9% 同比</div>
+    </div>
+    <div class="stat">
+      <div class="stat-nb">1146<span class="unit">亿元</span></div>
+      <div class="stat-label">家电（第一大品类）<span class="en">Home appliances</span></div>
+      <div class="stat-delta up">国补强拉动</div>
+    </div>
+    <div class="stat">
+      <div class="stat-nb">628<span class="unit">亿元</span></div>
+      <div class="stat-label">即时零售<span class="en">Instant retail</span></div>
+      <div class="stat-delta up">▲ +112.3% 同比</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: 大盘 -->
+  <section>
+    <div class="section-zh">一、大盘格局：增长回归理性，结构性分化加剧</div>
+    <div class="section-en">Macro: growth normalizes, structural divergence widens</div>
+    <p class="body">
+      <span class="label-zh">总量</span><span class="label-en">Topline</span>：
+      据星图数据（Syntun）《2026 年 618 全网销售数据解读报告》，2026 年 618 全网累计销售额
+      <strong>9340 亿元，同比 +4.0%</strong>。其中综合电商（天猫/京东/拼多多/抖音/快手等）8636 亿元、同比仅 +0.9%——
+      传统货架电商已接近天花板；<strong>真正的增量来自即时零售（628 亿元，+112.3%）</strong>，社区团购则继续萎缩（76 亿元，-39.6%）。
+    </p>
+    <p class="body">
+      <span class="label-zh">平台座次</span><span class="label-en">Platform ranking</span>：
+      综合电商内部，<strong>天猫第一、京东第二、抖音第三</strong>。这是一场"告别价格内卷"的 618——
+      多家平台淡化绝对 GMV、转向品牌质量与复购，故各家官方战报口径不一，本报告以星图第三方口径锚定大盘。
+    </p>
+
+    <!-- SVG 1: 渠道结构 -->
+    <div class="chart-card">
+      <div class="chart-title">全网渠道结构与增速 · Channel mix &amp; YoY growth</div>
+      <div class="chart-sub">气泡面积示意体量；颜色示意增速方向（绿=高增 / 琥珀=持平 / 红=下滑）</div>
+      <svg viewBox="0 0 1000 240" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif">
+        <!-- baseline -->
+        <line x1="60" y1="200" x2="960" y2="200" stroke="#0a0a0b" stroke-width="1.5"/>
+        <!-- 综合电商 -->
+        <rect x="90" y="60" width="150" height="140" fill="#8b6c42" opacity="0.85"/>
+        <text x="165" y="48" text-anchor="middle" font-size="15" font-weight="700">8636 亿</text>
+        <text x="165" y="222" text-anchor="middle" font-size="13">综合电商</text>
+        <text x="165" y="184" text-anchor="middle" font-size="12" fill="#fff">+0.9%</text>
+        <!-- 即时零售 -->
+        <rect x="300" y="150" width="150" height="50" fill="#2a5c3f" opacity="0.9"/>
+        <text x="375" y="138" text-anchor="middle" font-size="15" font-weight="700">628 亿</text>
+        <text x="375" y="222" text-anchor="middle" font-size="13">即时零售</text>
+        <text x="375" y="180" text-anchor="middle" font-size="12" fill="#fff">+112.3%</text>
+        <!-- 社区团购 -->
+        <rect x="510" y="184" width="150" height="16" fill="#8b2e2e" opacity="0.85"/>
+        <text x="585" y="172" text-anchor="middle" font-size="15" font-weight="700">76 亿</text>
+        <text x="585" y="222" text-anchor="middle" font-size="13">社区团购</text>
+        <text x="585" y="196" text-anchor="middle" font-size="10" fill="#fff">-39.6%</text>
+        <!-- 全网合计 -->
+        <line x1="710" y1="60" x2="710" y2="200" stroke="#c9a84c" stroke-width="2" stroke-dasharray="4 3"/>
+        <text x="835" y="110" text-anchor="middle" font-size="34" font-weight="700" fill="#0a0a0b">9340 亿</text>
+        <text x="835" y="138" text-anchor="middle" font-size="14" fill="#2a5c3f" font-weight="700">全网 +4.0%</text>
+        <text x="835" y="222" text-anchor="middle" font-size="12" font-style="italic" fill="#888">All-network total</text>
+      </svg>
+    </div>
+
+    <!-- SVG 2: 品类 GMV 排行 -->
+    <div class="chart-card">
+      <div class="chart-title">全网分品类 GMV 排行 · Category GMV ranking (2026)</div>
+      <div class="chart-sub">单位：亿元；家电在国补加持下断层领跑</div>
+      <svg viewBox="0 0 1000 360" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif">
+        <!-- bars: max 1146 -> scale width 760 -->
+        <!-- 家电 1146 -->
+        <text x="150" y="34" text-anchor="end" font-size="13">家电</text>
+        <rect x="160" y="20" width="760" height="22" fill="#8b6c42"/>
+        <text x="930" y="37" font-size="13" font-weight="700">1146</text>
+        <!-- 美容护肤 425 -->
+        <text x="150" y="74" text-anchor="end" font-size="13">美容护肤</text>
+        <rect x="160" y="60" width="282" height="22" fill="#a07b4a"/>
+        <text x="452" y="77" font-size="13" font-weight="700">425</text>
+        <!-- 洗护清洁 242 -->
+        <text x="150" y="114" text-anchor="end" font-size="13">洗护清洁</text>
+        <rect x="160" y="100" width="161" height="22" fill="#a07b4a"/>
+        <text x="331" y="117" font-size="13" font-weight="700">242</text>
+        <!-- 粮油调味 201 -->
+        <text x="150" y="154" text-anchor="end" font-size="13">粮油调味</text>
+        <rect x="160" y="140" width="133" height="22" fill="#b08a55"/>
+        <text x="303" y="157" font-size="13" font-weight="700">201</text>
+        <!-- 营养保健 153 -->
+        <text x="150" y="194" text-anchor="end" font-size="13">营养保健</text>
+        <rect x="160" y="180" width="101" height="22" fill="#b08a55"/>
+        <text x="271" y="197" font-size="13" font-weight="700">153</text>
+        <!-- 香水彩妆 136 -->
+        <text x="150" y="234" text-anchor="end" font-size="13">香水彩妆</text>
+        <rect x="160" y="220" width="90" height="22" fill="#b08a55"/>
+        <text x="260" y="237" font-size="13" font-weight="700">136</text>
+        <!-- 休闲零食 96 -->
+        <text x="150" y="274" text-anchor="end" font-size="13">休闲零食</text>
+        <rect x="160" y="260" width="64" height="22" fill="#c0a070"/>
+        <text x="234" y="277" font-size="13" font-weight="700">96</text>
+        <!-- 宠物食品 84 -->
+        <text x="150" y="314" text-anchor="end" font-size="13">宠物食品</text>
+        <rect x="160" y="300" width="56" height="22" fill="#c0a070"/>
+        <text x="226" y="317" font-size="13" font-weight="700">84</text>
+        <line x1="160" y1="340" x2="920" y2="340" stroke="#0a0a0b" stroke-width="1"/>
+        <text x="160" y="356" font-size="11" fill="#888">0</text>
+        <text x="920" y="356" text-anchor="end" font-size="11" fill="#888">单位：亿元 · 来源：星图数据</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SECTION 2: 三平台横向对比 -->
+  <section>
+    <div class="section-zh">二、三平台横向对比：各守其疆，调性分化</div>
+    <div class="section-en">Cross-platform: distinct strongholds &amp; channel personalities</div>
+
+    <div class="chart-card">
+      <div class="chart-title">平台座次与优势品类 · Platform ranking &amp; category strongholds</div>
+      <div class="chart-sub">综合电商 GMV 座次：天猫 &gt; 京东 &gt; 抖音（星图口径）</div>
+      <svg viewBox="0 0 1000 250" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif">
+        <!-- Tmall -->
+        <rect x="60" y="50" width="270" height="170" fill="none" stroke="#0a0a0b" stroke-width="1.5"/>
+        <text x="80" y="84" font-size="19" font-weight="700">天猫 Tmall</text>
+        <text x="80" y="106" font-size="13" fill="#8b6c42" font-weight="700">综合电商 No.1</text>
+        <text x="80" y="134" font-size="13">强项：美妆 · 服饰 · 大家电</text>
+        <text x="80" y="158" font-size="13">心智：品牌力 · 高端 · 复购</text>
+        <text x="80" y="182" font-size="12.5" fill="#555">365 个品牌成交破亿（+40%）</text>
+        <text x="80" y="204" font-size="12" font-style="italic" fill="#888">Brand equity &amp; premium</text>
+        <!-- JD -->
+        <rect x="365" y="50" width="270" height="170" fill="none" stroke="#0a0a0b" stroke-width="1.5"/>
+        <text x="385" y="84" font-size="19" font-weight="700">京东 JD</text>
+        <text x="385" y="106" font-size="13" fill="#8b6c42" font-weight="700">综合电商 No.2</text>
+        <text x="385" y="134" font-size="13">强项：3C 数码 · 家电</text>
+        <text x="385" y="158" font-size="13">心智：自营 · 履约 · 国补</text>
+        <text x="385" y="182" font-size="12.5" fill="#555">5 亿用户下单 · 83 品牌过 10 亿</text>
+        <text x="385" y="204" font-size="12" font-style="italic" fill="#888">Electronics &amp; fulfillment</text>
+        <!-- Douyin -->
+        <rect x="670" y="50" width="270" height="170" fill="none" stroke="#0a0a0b" stroke-width="1.5"/>
+        <text x="690" y="84" font-size="19" font-weight="700">抖音 Douyin</text>
+        <text x="690" y="106" font-size="13" fill="#8b6c42" font-weight="700">综合电商 No.3</text>
+        <text x="690" y="134" font-size="13">强项：美妆 · 食品 · 滋补</text>
+        <text x="690" y="158" font-size="13">心智：内容种草 · 国货新锐</text>
+        <text x="690" y="182" font-size="12.5" fill="#555">货架 GMV ~2000 亿（占比~50%）</text>
+        <text x="690" y="204" font-size="12" font-style="italic" fill="#888">Content-driven discovery</text>
+        <text x="500" y="34" text-anchor="middle" font-size="13" fill="#8b6c42">综合电商 8636 亿｜+0.9% 同比</text>
+      </svg>
+    </div>
+
+    <div class="insight">
+      <div class="h">通吃品牌 <span class="en">Cross-platform winners</span></div>
+      <p>横跨三平台头部榜单的品牌高度集中于两类：<strong>家电（美的、海尔、格力）</strong>与<strong>头部国货美妆（珀莱雅）</strong>。
+      珀莱雅在天猫连续 3 年护肤第一，同时在抖音稳居国货 TOP1，是唯一在货架电商与内容电商双轨通吃的国货标杆。
+      手机品类则呈"京东主场"特征——苹果、华为、小米三强格局在京东最清晰。</p>
+    </div>
+    <div class="insight">
+      <div class="h">调性差异 <span class="en">Personality gap</span></div>
+      <p>天猫是"<strong>品牌力</strong>"赛场（美妆/服饰复购率超 40%）；京东是"<strong>履约 + 国补</strong>"赛场（3C 家电高端化，高端手机成交 +300%）；
+      抖音是"<strong>内容 + 新锐</strong>"赛场（57 万达人带货 +500%，100 万粉以下中小达人贡献 80%+ 带货额）。同一品牌在三平台的打法不可平移。</p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: 天猫 -->
+  <section>
+    <div class="section-zh">三、天猫榜单：国际大牌与国货并驾，国货头部稳固</div>
+    <div class="section-en">Tmall leaderboards: premium imports vs. surging domestic</div>
+
+    <div class="platform-head">
+      <span class="nm">天猫 · 美妆护肤</span>
+      <span class="seq">全周期 TOP10</span>
+      <span class="pd">周期 5.12–6.21</span>
+    </div>
+    <table>
+      <thead><tr><th>排名</th><th>品牌</th><th>归属</th><th>2025 同期对照</th><th>同比变化</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="brand">修丽可 SkinCeuticals</td><td><span class="intl-flag">国际</span></td><td>TOP6 区间</td><td class="chg-up">▲ 升至榜首</td></tr>
+        <tr><td class="rank">2</td><td class="brand">雅诗兰黛 Estée Lauder</td><td><span class="intl-flag">国际</span></td><td>TOP4</td><td class="chg-up">▲ 高端回暖</td></tr>
+        <tr><td class="rank">3</td><td class="brand">珀莱雅 PROYA</td><td><span class="cn-flag">国货</span></td><td>第 1（蝉联 3 年）</td><td class="chg-down">▽ 让出榜首，仍居国货第一</td></tr>
+        <tr><td class="rank">4</td><td class="brand">兰蔻 Lancôme</td><td><span class="intl-flag">国际</span></td><td>第 2</td><td class="chg-down">▽ 微降</td></tr>
+        <tr><td class="rank">5</td><td class="brand">SK-II</td><td><span class="intl-flag">国际</span></td><td>TOP10 外</td><td class="chg-up">▲ 回归 TOP10</td></tr>
+        <tr><td class="rank">6</td><td class="brand">巴黎欧莱雅 L'Oréal Paris</td><td><span class="intl-flag">国际</span></td><td>第 3</td><td class="chg-down">▽ 下滑</td></tr>
+        <tr><td class="rank">7</td><td class="brand">海蓝之谜 La Mer</td><td><span class="intl-flag">国际</span></td><td>第 5</td><td class="chg-flat">— 基本持平</td></tr>
+        <tr><td class="rank">8</td><td class="brand">赫莲娜 HR</td><td><span class="intl-flag">国际</span></td><td>TOP10 区间</td><td class="chg-flat">— 持平</td></tr>
+        <tr><td class="rank">9–20</td><td class="brand">可复美 · 薇诺娜 · 毛戈平 · 自然堂</td><td><span class="cn-flag">国货</span></td><td>多数在榜</td><td class="chg-up">▲ 国货梯队扩容</td></tr>
+      </tbody>
+    </table>
+    <p class="body" style="font-size:13.5px;color:#666;margin-top:8px">
+      注：天猫美妆存在"第一波"与"全周期"两套榜单且名次不同。第一波 TOP10 为珀莱雅、欧莱雅、兰蔻、雅诗兰黛、修丽可、海蓝之谜、可复美、赫莲娜、卡诗、玉兰油；
+      上表取<strong>全周期</strong>口径（更具复盘价值）。<span class="conf conf-h">高置信·排名</span> <span class="conf conf-l">低置信·精确GMV</span>
+    </p>
+
+    <div class="platform-head" style="margin-top:34px">
+      <span class="nm">天猫 · 家电（大家电 / 小家电）</span>
+      <span class="seq">品牌榜</span>
+    </div>
+    <div class="two-col">
+      <table>
+        <thead><tr><th>大家电</th><th>品牌</th><th>变化</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1–3</td><td class="brand">美的 · 海尔 · 格力</td><td class="chg-flat">蝉联前三</td></tr>
+          <tr><td class="rank">5</td><td class="brand">华凌</td><td class="chg-up">▲ 升 1 位</td></tr>
+          <tr><td class="rank">7</td><td class="brand">TCL</td><td class="chg-up">▲ 升 1 位</td></tr>
+          <tr><td class="rank">前10</td><td class="brand">统帅</td><td class="chg-new">新晋前十</td></tr>
+        </tbody>
+      </table>
+      <table>
+        <thead><tr><th>小家电</th><th>品牌</th><th>变化</th></tr></thead>
+        <tbody>
+          <tr><td class="rank">1–2</td><td class="brand">美的 · 米家</td><td class="chg-flat">稳居冠亚军</td></tr>
+          <tr><td class="rank">3</td><td class="brand">苏泊尔</td><td class="chg-up">▲ 升 1 位</td></tr>
+          <tr><td class="rank">6</td><td class="brand">科沃斯</td><td class="chg-up">▲ 升 2 位</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="platform-head" style="margin-top:34px">
+      <span class="nm">天猫 · 服饰</span>
+      <span class="seq">本土设计师品牌涌入</span>
+    </div>
+    <p class="body">
+      服饰榜最大看点是<strong>本土设计师品牌组团上位</strong>：山下有松新晋即占第 2 位；裘真、之禾、个乐三大中国设计师品牌同步首次入榜，
+      fabrique 上升至第 15 位。箱包品类迭代剧烈，卡思乐、半坡、bagtree、乙颂等本土品牌组团涌入 TOP20。
+      <span class="conf conf-m">中置信</span>
+    </p>
+  </section>
+
+  <!-- SECTION 4: 京东 -->
+  <section>
+    <div class="section-zh">四、京东榜单：3C 家电主场，手机三榜分化</div>
+    <div class="section-en">JD leaderboards: electronics home turf, phone rankings split</div>
+
+    <div class="platform-head">
+      <span class="nm">京东 · 手机</span>
+      <span class="seq">三套口径，名次不同</span>
+      <span class="pd">周期 5.13–6.21</span>
+    </div>
+    <table>
+      <thead><tr><th>口径</th><th>第 1</th><th>第 2</th><th>第 3</th><th>第 4</th><th>看点</th></tr></thead>
+      <tbody>
+        <tr><td>品牌累计销量</td><td class="brand">苹果</td><td class="brand">小米</td><td class="brand">华为</td><td>—</td><td class="chg-flat">走量看小米</td></tr>
+        <tr><td>品牌销售额</td><td class="brand">苹果</td><td class="brand">华为</td><td class="brand">OPPO</td><td class="brand">小米</td><td class="chg-down">小米从去年第 2 滑至第 4</td></tr>
+        <tr><td>单品销量 TOP3</td><td class="brand">iPhone 17 Pro</td><td class="brand">17 Pro Max</td><td class="brand">标准版 17</td><td>—</td><td class="chg-up">苹果包揽前三</td></tr>
+      </tbody>
+    </table>
+    <p class="body" style="font-size:13.5px;color:#666;margin-top:8px">
+      关键背离：<strong>销量看小米（走量），销售额看苹果/华为（高端）</strong>。在国补 + 高端化双驱下，
+      Apple/联想/华为/华硕高端手机成交额同比 +300%。<span class="conf conf-h">高置信·名次</span>
+    </p>
+
+    <div class="platform-head" style="margin-top:34px">
+      <span class="nm">京东 · 家电（10 亿俱乐部）</span>
+      <span class="seq">国补最大受益品类</span>
+    </div>
+    <table>
+      <thead><tr><th>梯队</th><th>品牌</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>成交额 &gt;10 亿（家电）</td><td class="brand">美的 · 海尔 · 海信 · TCL · 格力 · 小米</td><td class="chg-up">国补 + 以旧换新强拉动</td></tr>
+        <tr><td>成交额破亿（家居）</td><td class="brand">九牧 · 喜临门 · 箭牌 · 芝华仕 · 欧普照明 · 恒洁</td><td class="chg-flat">家居稳健</td></tr>
+        <tr><td>全站 &gt;10 亿品牌</td><td class="brand">合计 83 个</td><td class="chg-up">中小商家 15 万 + 增长超 50%</td></tr>
+      </tbody>
+    </table>
+    <div class="insight">
+      <div class="h">同比对照 <span class="en">2025 baseline</span></div>
+      <p>2025 京东 618：整体订单量超 22 亿单、下单用户 +100%、采销直播成交额 +285%、开门红 1 小时带电品类 +380%。
+      2026 年口径转向"5 亿用户下单 + 品牌质量"，弱化绝对增速，<strong>反映京东从"增速叙事"转向"用户规模 + 高端结构"叙事</strong>。
+      <span class="conf conf-m">中置信·同比</span></p>
+    </div>
+  </section>
+
+  <!-- SECTION 5: 抖音 -->
+  <section>
+    <div class="section-zh">五、抖音榜单：国货美妆统治，内容与货架双轮</div>
+    <div class="section-en">Douyin leaderboards: domestic beauty dominance, content + shelf</div>
+
+    <div class="platform-head">
+      <span class="nm">抖音 · 美妆护肤</span>
+      <span class="seq">国货主导</span>
+      <span class="pd">周期 5.15–6.18</span>
+    </div>
+    <table>
+      <thead><tr><th>排名</th><th>品牌</th><th>归属</th><th>2025 同期对照</th><th>变化</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="brand">韩束 KANS</td><td><span class="cn-flag">国货</span></td><td>2025 618 蝉联冠军</td><td class="chg-flat">— 卫冕</td></tr>
+        <tr><td class="rank">2</td><td class="brand">谷雨 GUYU</td><td><span class="cn-flag">国货</span></td><td>上升通道</td><td class="chg-up">▲ 冲上第 2</td></tr>
+        <tr><td class="rank">TOP</td><td class="brand">珀莱雅 PROYA</td><td><span class="cn-flag">国货</span></td><td>头部稳固</td><td class="chg-flat">国货 TOP1（青眼 5 月）</td></tr>
+        <tr><td class="rank">主力</td><td class="brand">可复美 · 薇诺娜 · 丸美 · 科兰黎</td><td><span class="cn-flag">国货</span></td><td>高频复购</td><td class="chg-up">▲ 5 月中 4 月在榜</td></tr>
+      </tbody>
+    </table>
+    <p class="body" style="font-size:13.5px;color:#666;margin-top:8px">
+      重要说明：抖音 <strong>618 专项品牌精确名次未获取到第三方公开榜</strong>，上表采用 2026 年 1–2 月 / 5 月抖音护肤月榜
+      （青眼情报 / 蝉妈妈口径）作近似锚定，<span class="conf conf-l">低置信·618专项名次</span>，引用客户处需注明"非 618 专项窗口"。
+    </p>
+
+    <div class="platform-head" style="margin-top:34px">
+      <span class="nm">抖音 · 滋补营养</span>
+      <span class="seq">传统滋补</span>
+    </div>
+    <table>
+      <thead><tr><th>排名</th><th>品牌</th><th>品类</th><th>变化</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">1</td><td class="brand">阿依舍</td><td>冬虫夏草</td><td class="chg-up">▲ 登顶</td></tr>
+        <tr><td class="rank">前10</td><td class="brand">小仙炖 · 泡小燕</td><td>燕窝</td><td class="chg-flat">— 守住前十</td></tr>
+        <tr><td class="rank">新晋</td><td class="brand">秦仁堂 · 南启山 · 健滋道</td><td>滋补</td><td class="chg-new">新进前十</td></tr>
+      </tbody>
+    </table>
+
+    <div class="insight">
+      <div class="h">抖音 618 结构特征 <span class="en">Structural read</span></div>
+      <p>① <strong>货架电商崛起</strong>：货架 GMV ~2000 亿、占比近 50%，抖音电商正从"纯直播"转向"内容 + 货架"双轮；
+      ② <strong>中小达人挑大梁</strong>：57 万达人带货 +500%，100 万粉以下中小达人贡献超 80% 带货额；
+      ③ 第一阶段破亿美妆品牌 +75%、破亿服饰品牌 +100%，红人女装累计成交 +143%。<span class="conf conf-h">高置信·结构</span></p>
+    </div>
+  </section>
+
+  <!-- SECTION 6: 同比核心洞察 -->
+  <section>
+    <div class="section-zh">六、同比核心洞察：四条主线</div>
+    <div class="section-en">YoY key takeaways: four throughlines</div>
+    <div class="insight">
+      <div class="h">① 国货从"平替"到"中高端"集体突围 <span class="en">Domestic premiumization</span></div>
+      <p>天猫珀莱雅蝉联国货护肤第一并带动可复美/薇诺娜/毛戈平/自然堂梯队入 TOP20；抖音韩束/谷雨/珀莱雅包揽护肤头部；
+      服饰本土设计师品牌（山下有松等）组团登榜。国货叙事已从"低价平替"转向"中高端品牌力"。</p>
+    </div>
+    <div class="insight">
+      <div class="h">② 国补重塑家电 3C 格局 <span class="en">Subsidy reshapes electronics</span></div>
+      <p>家电以 1146 亿元断层领跑全品类；京东高端手机成交 +300%、6 大家电品牌过 10 亿。国补 + 以旧换新把增量集中到头部品牌与高端机型，
+      中腰部承压。</p>
+    </div>
+    <div class="insight">
+      <div class="h">③ 增长引擎从"货架"切换到"即时零售" <span class="en">Instant retail as new engine</span></div>
+      <p>综合电商仅 +0.9%、近天花板；即时零售 +112.3% 成为全网 +4.0% 的主要拉动项。平台竞争焦点正从"大促 GMV"转向"即时履约 + 高频复购"。</p>
+    </div>
+    <div class="insight">
+      <div class="h">④ 三平台口径"去 GMV 化"，复盘需用第三方锚定 <span class="en">De-emphasizing GMV</span></div>
+      <p>这是"16 年来最低调 618"：天猫报破亿品牌数、京东报下单用户数、抖音报达人/商家增幅，均淡化绝对 GMV。
+      跨平台对比必须以星图等第三方口径锚定，且注意三平台数据周期不对齐（抖音短 5–7 天）。</p>
+    </div>
+  </section>
+
+  <!-- 风险信号 / 待核实红旗 -->
+  <section>
+    <div class="section-zh">七、风险信号与待核实红旗</div>
+    <div class="section-en">Red flags &amp; items to verify before client delivery</div>
+    <table>
+      <thead><tr><th>#</th><th>待核实红旗</th><th>影响</th><th>建议动作</th></tr></thead>
+      <tbody>
+        <tr><td class="rank">R1</td><td>所有品牌"精确 GMV 绝对值"均为推算——平台不披露单品牌绝对成交额</td><td class="chg-down">高</td><td>填表时标注"估算"，或仅填名次不填绝对额</td></tr>
+        <tr><td class="rank">R2</td><td>抖音 618 护肤专项名次缺第三方公开榜，现用 1–2月 / 5月月榜近似</td><td class="chg-down">中</td><td>向客户说明"非 618 专项窗口"，或补蝉妈妈付费 618 榜</td></tr>
+        <tr><td class="rank">R3</td><td>三平台数据周期不对齐（抖音短 5–7 天），跨平台 GMV 绝对值不可直接横比</td><td class="chg-flat">中</td><td>横向对比仅用座次/结构，已做定性化处理</td></tr>
+        <tr><td class="rank">R4</td><td>2025 同期名次部分为区间推断（如天猫美妆 25 年精确全周期榜未逐一坐实）</td><td class="chg-flat">中</td><td>同比"变化方向"可信，精确名次差需复核</td></tr>
+        <tr><td class="rank">R5</td><td>各平台官方战报口径不一（天猫报破亿品牌数 / 京东报用户数 / 抖音报达人增幅），无统一 GMV</td><td class="chg-flat">低</td><td>已用星图第三方口径锚定大盘</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="vlabel">研究裁定 · Verdict</div>
+    <div style="font-size:14px;color:var(--gold);font-weight:700;margin-bottom:14px;letter-spacing:.02em">
+      综合置信度 6.5 / 10 ｜ 高置信 5 条 · 中置信 4 条 · 低置信 3 条 ｜ Confidence 6.5/10
+    </div>
+    <h3>2026 年 618 是一场"低增长、强分化"的结构性大促：总量 +4.0% 靠即时零售托底，货架电商接近天花板；
+    国货在美妆/服饰完成中高端突围，国补把家电 3C 增量锁定在头部品牌。</h3>
+    <p>三平台各守其疆——天猫拼品牌力、京东拼履约与国补、抖音拼内容与新锐。客户填表时建议：
+    <strong>排名与品类格局可直接采用（中高置信），品牌精确 GMV 须标注为推算，抖音护肤名次须注明为月榜近似。</strong></p>
+    <p class="verdict-en">618 2026 was a low-growth, high-divergence event: +4.0% topline carried by instant retail while marketplace e-commerce plateaued. Domestic brands completed a premiumization breakout in beauty &amp; apparel; national subsidies concentrated appliance/electronics gains in top brands. Use rankings with confidence; treat brand-level GMV as estimates.</p>
+    <div class="feedback">
+      对本报告的数据或结论有反馈？请点击：
+      <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=618_2026_ecommerce_20260630" target="_blank">提交反馈 / Submit feedback</a>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <h4>数据来源与置信度说明 · Sources &amp; Confidence</h4>
+    主要来源：星图数据（Syntun）《2026 年 618 全网销售数据解读报告》、天猫/京东/抖音官方战报、新华网/新浪财经/网经社转载榜单、东方财富美妆 618 专题、青眼情报 / 蝉妈妈（抖音美妆月榜）。
+    <div class="conf-note">
+      <strong>置信度分级：</strong>
+      <span class="conf conf-h">高</span> 大盘 GMV（星图）、天猫美妆全周期 TOP、京东手机三榜、各平台官方战报数字、抖音结构数据；
+      <span class="conf conf-m">中</span> 品类增速、家电/服饰名次、2025 同比对照；
+      <span class="conf conf-l">低</span> 所有品牌"精确 GMV 绝对值"（平台普遍不披露）、抖音 618 护肤专项名次（以月榜近似替代）。<br>
+      <strong>口径提醒：</strong>三平台数据周期不对齐（天猫/京东约 40 天、抖音约 34 天），跨平台绝对值对比已做定性化处理；本报告为公开数据 + 交叉验证推算，颗粒度不等同久谦付费数据库，引用前建议二次核验。
+    </div>
+  </div>
+
+  <footer>
+    <span>久谦中台 · 618 大促复盘专题</span>
+    <span>2026 vs 2025 三平台品牌榜单同比研究</span>
+    <span>生成日期 2026-06-30</span>
+  </footer>
+
+</div>
+</body>
+</html>
