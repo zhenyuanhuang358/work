@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绿茶集团 · 餐饮渠道调研报告</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:40px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:17px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.gold{border-color:var(--gold);color:var(--copper)}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.65}
+.notice b{color:var(--amber)}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin:32px 0}
+.stat{background:var(--card);padding:20px 18px}
+.stat-nb{font-size:28px;font-weight:700;letter-spacing:-.01em}
+.stat-nb .unit{font-size:14px;font-weight:400;color:#555;margin-left:2px}
+.stat-label{font-size:12.5px;color:#555;margin-top:5px}
+.stat-delta{font-size:12.5px;font-weight:600;margin-top:6px}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--amber)}
+section{margin-top:48px}
+.section-zh{font-size:25px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:20px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px}
+.badge-official{background:var(--green)}
+.badge-predict{background:var(--amber)}
+.badge-gap{background:var(--red)}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}
+.dcard{border:1px solid var(--border);background:var(--card);padding:18px 20px}
+.dcard h4{font-size:14.5px;font-weight:700;margin-bottom:8px;color:var(--copper)}
+.dcard p{font-size:13.8px;color:#222}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:16px}
+.insight .h{font-weight:700;font-size:15px}
+.insight .h .en{font-style:italic;color:#888;font-size:12px;font-weight:400;margin-left:5px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.stat-bar{grid-template-columns:repeat(2,1fr)}
+  .detail-grid{grid-template-columns:1fr}h1{font-size:30px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">餐饮渠道调研 · 饮品经销商客户账户情报</span>
+  <span>绿茶集团 · Green Tea Group (6831.HK)</span>
+  <span>2026-07-01</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">客户提纲 · 餐饮筛选表 + 收支访谈表 对应文字调研</div>
+  <h1>绿茶集团渠道调研<br>门店画像 · 在售品牌 · 收支结构 · 品类采购</h1>
+  <div class="title-en">Green Tea Group (6831.HK) — Channel Account Research for Beverage &amp; FMCG Distribution</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 6831.HK</span>
+    <span class="tag">609家门店 · 2025年末</span>
+    <span class="tag gold">同店销售 -0.8%（增长靠开店堆量）</span>
+    <span class="tag">100%直营 · 不加盟</span>
+    <span class="tag" style="border-color:var(--copper);color:var(--copper);font-weight:700">综合置信度 6.5/10</span>
+  </div>
+  <div class="notice">
+    <b>数据质量声明：</b>提纲第一、三部分（门店基本情况、全店收支结构）可从绿茶集团招股书及港交所年报/中报中获取一手数据，本报告已逐项核实标注来源。
+    但客户提纲要求的 <b>2026年1–6月</b> 口径中报<b>尚未发布</b>（绿茶港股中报通常于9月披露，最新可得为2025全年报，2026年3月发布），本报告以最新可得的2025全年报数据替代并明确标注口径。
+    提纲第二、四部分（在售具体饮品品牌、各品类采购/返点/进货渠道）<b>属于非公开渠道数据</b>——绿茶集团未在任何公开财报或招股书中披露具体饮品供应商名称、返点比例或陈列费标准，这部分内容全部基于绿茶的品类定位、菜单结构、供应链模式及行业渠道惯例做<b>分析预测</b>，不是绿茶集团的真实数据，标注见各节徽章。
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-nb">609<span class="unit">家</span></div>
+    <div class="stat-label">门店总数（2025年末）<span class="badge badge-official">官方</span></div>
+    <div class="stat-delta up">▲ +31.0% 同比</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">47.63<span class="unit">亿元</span></div>
+    <div class="stat-label">2025年营收<span class="badge badge-official">官方</span></div>
+    <div class="stat-delta up">▲ +24.1% 同比</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">56.2<span class="unit">元</span></div>
+    <div class="stat-label">客单价（2024年，逐年下滑）<span class="badge badge-official">官方</span></div>
+    <div class="stat-delta down">▽ 2022年62.9元→2024年56.2元</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">-0.8<span class="unit">%</span></div>
+    <div class="stat-label">2025年同店销售增速<span class="badge badge-official">官方</span></div>
+    <div class="stat-delta flat">较2024年 -10.3% 已收窄</div>
+  </div>
+</div>
+
+<!-- 一、门店基本情况 -->
+<section>
+  <div class="section-zh">一、门店基本情况</div>
+  <div class="section-en">Store Profile — matches outline items: city tier / store type / location / size / tables / avg. spend</div>
+
+  <table>
+    <thead><tr><th>提纲问题</th><th>调研结论</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td>城市线级</td><td>全覆盖：中国所有<b>一线城市</b> + 15个<b>新一线</b> + 31个<b>二线</b> + 91个<b>三线及以下</b>城市/县城，覆盖21省4直辖市2自治区及香港特别行政区</td><td><span class="badge badge-official">官方·招股书</span></td></tr>
+      <tr><td>门店类型</td><td><b>100% 直营连锁</b>，不开放加盟（区别于绝大多数下沉扩张的餐饮品牌）</td><td><span class="badge badge-official">官方·招股书/年报</span></td></tr>
+      <tr><td>门店位置/商圈</td><td><b>80%以上门店位于购物中心/商场</b>，未涉足社区底商模式；与商业地产合作换取低租金入驻</td><td><span class="badge badge-official">官方·年报</span><span class="badge badge-predict">预测·选址逻辑</span></td></tr>
+      <tr><td>门店面积</td><td>历史最优效益区间 <b>600–700㎡</b>；近年主推<b>小型门店（&lt;450㎡）</b>控制资本开支，2024年小型门店数（284家）首次超过大型门店，占比近50%</td><td><span class="badge badge-official">官方·年报</span></td></tr>
+      <tr><td>桌数</td><td>【数据缺口】未直接披露。按600–700㎡主力店型、人均消费面积约1.1㎡/座及包厢占比推算，<b>约40–55桌</b>（含4–6个包厢，每包厢6–8人位）</td><td><span class="badge badge-predict">预测·面积推算</span></td></tr>
+      <tr><td>客单价</td><td>2022年62.9元→2023年61.8元→2024年<b>56.2元</b>，<b>连续两年下滑</b>；不同来源区间表述为50–70元或60–80元，本报告以招股书官方口径56.2元（2024年）为准</td><td><span class="badge badge-official">官方·招股书</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="chart-wrap">
+    <div class="chart-title">门店数与客单价走势 · Store count vs. average spend (2022–2025)</div>
+    <div class="chart-sub">门店数持续高速扩张，客单价同步逐年走低——典型"以价换量"信号</div>
+    <svg viewBox="0 0 800 260" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <!-- store count bars, scale: 609 max -> 160px height -->
+      <line x1="60" y1="210" x2="740" y2="210" stroke="#d4cec6" stroke-width="1"/>
+      <!-- 2022: 276 -->
+      <rect x="100" y="138" width="70" height="72" fill="#8b6c42" opacity="0.85"/>
+      <text x="135" y="128" text-anchor="middle" font-size="13" font-weight="700">276</text>
+      <text x="135" y="228" text-anchor="middle" font-size="12">2022</text>
+      <!-- 2023: 360 -->
+      <rect x="260" y="116" width="70" height="94" fill="#8b6c42" opacity="0.85"/>
+      <text x="295" y="106" text-anchor="middle" font-size="13" font-weight="700">360</text>
+      <text x="295" y="228" text-anchor="middle" font-size="12">2023</text>
+      <!-- 2024: 465 -->
+      <rect x="420" y="86" width="70" height="124" fill="#8b6c42" opacity="0.85"/>
+      <text x="455" y="76" text-anchor="middle" font-size="13" font-weight="700">465</text>
+      <text x="455" y="228" text-anchor="middle" font-size="12">2024</text>
+      <!-- 2025: 609 -->
+      <rect x="580" y="45" width="70" height="165" fill="#2a5c3f" opacity="0.9"/>
+      <text x="615" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#2a5c3f">609</text>
+      <text x="615" y="228" text-anchor="middle" font-size="12">2025</text>
+      <text x="60" y="250" font-size="11" fill="#888">门店数（左轴，柱状）</text>
+
+      <!-- avg spend line, scale 62.9 max ~ range 50-65 mapped to y 45-190 -->
+      <polyline points="135,60 295,66 455,96 615,110" fill="none" stroke="#c47a1e" stroke-width="2.5"/>
+      <circle cx="135" cy="60" r="4" fill="#c47a1e"/>
+      <text x="135" y="50" text-anchor="middle" font-size="12" fill="#c47a1e">¥62.9</text>
+      <circle cx="295" cy="66" r="4" fill="#c47a1e"/>
+      <text x="295" y="56" text-anchor="middle" font-size="12" fill="#c47a1e">¥61.8</text>
+      <circle cx="455" cy="96" r="4" fill="#c47a1e"/>
+      <text x="455" y="115" text-anchor="middle" font-size="12" fill="#c47a1e">¥56.2</text>
+      <circle cx="615" cy="110" r="4" fill="#8b2e2e" stroke-dasharray="4,3" stroke="#8b2e2e"/>
+      <text x="655" y="110" text-anchor="middle" font-size="10" fill="#8b2e2e">【缺口】</text>
+      <text x="740" y="60" text-anchor="end" font-size="11" fill="#c47a1e">客单价（右轴，折线）</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 二、在售品牌 -->
+<section>
+  <div class="section-zh">二、店内饮品品类涉及品牌调研</div>
+  <div class="section-en">In-store beverage brand assortment — inference-based, not publicly disclosed</div>
+
+  <div class="notice" style="margin-top:0">
+    绿茶集团<b>从未在任何公开渠道披露具体饮品供应商或品牌名单</b>。本节内容全部为<b>基于品类定位、菜单结构与渠道惯例的分析预测</b>，仅供经销商方向性参考，正式合作前必须通过门店实地拜访或大众点评实拍菜单核实。
+  </div>
+
+  <div class="insight">
+    <div class="h">核心结构性判断 <span class="en">Key structural read</span></div>
+    <p>绿茶是<b>"自制招牌饮品驱动"型中式简餐</b>，非"瓶装饮料补充型"渠道（对比火锅品类如海底捞，正餐场景对第三方瓶装饮料的依赖度天然更低）。绿茶菜单以招牌菜+自制饮品（如绿茶饮品、柠檬水类）为核心卖点之一，瓶装饮料更多承担"刚需补充"角色而非利润中心，这意味着<b>该渠道对经销商的采购量级判断不能直接套用火锅/快餐渠道基准</b>。</p>
+  </div>
+
+  <table>
+    <thead><tr><th>品类</th><th>推断在架可能性</th><th>推断逻辑</th></tr></thead>
+    <tbody>
+      <tr><td>软饮（可乐/雪碧类）</td><td class="center"><b>高</b></td><td>可口可乐系渠道网络全国最强，中式正餐"标配款"心智根深蒂固，大众消费客单价（56元）区间内极少缺席</td></tr>
+      <tr><td>王老吉/凉茶</td><td class="center"><b>中高</b></td><td>大众正餐"防上火"心智+浙菜偏本帮口味，凉茶作为佐餐饮品渗透率通常高于纯碳酸饮料</td></tr>
+      <tr><td>瓶装水（农夫山泉/怡宝）</td><td class="center"><b>高</b></td><td>正餐场景水刚需最强，农夫山泉/怡宝渠道覆盖率全国连锁餐饮中最高，客单价区间不支持景田百岁山等高端水系主推</td></tr>
+      <tr><td>常温奶（伊利/蒙牛等）</td><td class="center"><b>低</b></td><td>正餐场景对常温奶品类无天然消费场景，除非有奶茶类衍生品或儿童套餐搭配，否则大概率不主力陈列</td></tr>
+      <tr><td>能量饮料（红牛/东鹏）</td><td class="center"><b>低</b></td><td>正餐堂食场景对能量饮料需求弱，此品类更多依赖便利店/夜宵场景，绿茶大概率非主推渠道</td></tr>
+      <tr><td>方便面品牌</td><td class="center"><b>极低</b></td><td>绿茶为现制菜品正餐模式，方便面属零售货架品类，与正餐点单逻辑不匹配，基本可排除</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <div class="h">供应链结构对经销商的启示 <span class="en">Implication for distributors</span></div>
+    <p>招股书披露绿茶<b>前五大供应商采购集中度仅18.2%（2024年）、单一最大供应商占比仅4.5%</b>，且公司<b>无自建中央厨房</b>，依赖395家认可供应商+第三方食材加工。这种"高度分散"的供应链结构意味着：<b>饮品类采购大概率不是集团总部统一签订全国性战略框架，而是区域/单店层面自主对接经销商</b>——对饮品经销商而言，切入路径更可能是<b>区域经销商合作或单店直供</b>，而非直接争取集团总部的全国性返佣协议。</p>
+  </div>
+</section>
+
+<!-- 三、全店收支结构 -->
+<section>
+  <div class="section-zh">三、全店收支结构调研</div>
+  <div class="section-en">P&amp;L Structure — outline requested 2026 H1, actual latest available is FY2025 annual report</div>
+
+  <div class="notice" style="margin-top:0">
+    客户提纲要求 <b>2026年1–6月</b> 口径，但绿茶港股中报（覆盖每年1–6月）通常于<b>9月</b>披露，2026年中报预计<b>2026年8–9月</b>发布，目前<b>尚未可得</b>。下表以最新可得的<b>2025全年报</b>（2026年3月发布）数据呈现，口径请注意区分。
+  </div>
+
+  <table>
+    <thead><tr><th>项目</th><th>2024年</th><th>2025年</th><th>同比</th><th>来源</th></tr></thead>
+    <tbody>
+      <tr><td>营业收入</td><td>38.38亿元</td><td><b>47.63亿元</b></td><td class="up">+24.1%</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>原材料及耗材成本占收入比</td><td>33.5%</td><td><b>31.7%</b></td><td class="up">改善-1.8pp</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>毛利率（推算）</td><td>—</td><td><b>≈68.4%</b></td><td>—</td><td><span class="badge badge-predict">推算·毛利润÷营收</span></td></tr>
+      <tr><td>员工成本占收入比</td><td>25.8%</td><td><b>26.1%</b></td><td class="down">上升0.3pp</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>使用权资产折旧（租金相关）占收入比</td><td>—</td><td><b>≈5.1%</b></td><td>相对稳定</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>股东应占净利润</td><td>3.50亿元</td><td><b>4.86亿元</b></td><td class="up">+38.9%</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>经调整净利润</td><td>—</td><td><b>5.09亿元</b></td><td class="up">+41.0%</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>同店销售额增速</td><td>-10.3%</td><td><b>-0.8%</b></td><td class="flat">降幅大幅收窄</td><td><span class="badge badge-official">官方</span></td></tr>
+      <tr><td>外卖收入占比</td><td>18.8%（推算）</td><td><b>25.3%</b></td><td class="up">+6.5pp</td><td><span class="badge badge-official">官方</span></td></tr>
+    </tbody>
+  </table>
+  <p class="body" style="font-size:12.5px;color:#888;margin-top:6px">注：客户提纲要求的"食材收入/酒水饮料收入"拆分、"经销商返点补贴（食材vs酒水分开）"字段，绿茶财报<b>不做此拆分披露</b>，标注【数据缺口】，见文末补全建议。</p>
+
+  <div class="chart-wrap">
+    <div class="chart-title">营收与净利润趋势 · Revenue &amp; net profit trend (2022–2025)</div>
+    <div class="chart-sub">2023年营收跳增+51.1%（疫后恢复+快速开店），2024年增速骤降至+6.9%（同店-10.3%拖累），2025年回升+24.1%（同店降幅收窄至-0.8%）</div>
+    <svg viewBox="0 0 800 260" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="60" y1="210" x2="740" y2="210" stroke="#d4cec6" stroke-width="1"/>
+      <!-- revenue bars scale: max 47.63 -> 165px -->
+      <rect x="100" y="119" width="60" height="91" fill="#8b6c42" opacity="0.85"/>
+      <text x="130" y="109" text-anchor="middle" font-size="12" font-weight="700">23.75亿</text>
+      <text x="130" y="228" text-anchor="middle" font-size="12">2022</text>
+      <rect x="240" y="72" width="60" height="138" fill="#8b6c42" opacity="0.85"/>
+      <text x="270" y="62" text-anchor="middle" font-size="12" font-weight="700">35.89亿</text>
+      <text x="270" y="228" text-anchor="middle" font-size="12">2023</text>
+      <rect x="380" y="62" width="60" height="148" fill="#8b6c42" opacity="0.85"/>
+      <text x="410" y="52" text-anchor="middle" font-size="12" font-weight="700">38.38亿</text>
+      <text x="410" y="228" text-anchor="middle" font-size="12">2024</text>
+      <rect x="520" y="45" width="60" height="165" fill="#2a5c3f" opacity="0.9"/>
+      <text x="550" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="#2a5c3f">47.63亿</text>
+      <text x="550" y="228" text-anchor="middle" font-size="12">2025</text>
+      <!-- net profit small bars overlay as secondary thin bars -->
+      <rect x="165" y="204" width="20" height="6" fill="#c47a1e"/>
+      <text x="175" y="200" text-anchor="middle" font-size="9" fill="#c47a1e">利0.17亿</text>
+      <rect x="305" y="188" width="20" height="22" fill="#c47a1e"/>
+      <text x="315" y="184" text-anchor="middle" font-size="9" fill="#c47a1e">利2.96亿</text>
+      <rect x="445" y="184" width="20" height="26" fill="#c47a1e"/>
+      <text x="455" y="180" text-anchor="middle" font-size="9" fill="#c47a1e">利3.50亿</text>
+      <rect x="585" y="172" width="20" height="38" fill="#c47a1e"/>
+      <text x="595" y="168" text-anchor="middle" font-size="9" fill="#c47a1e">利4.86亿</text>
+      <text x="60" y="250" font-size="11" fill="#888">深色/铜色柱＝营收；橙色小柱＝股东应占净利润（同比例非同轴，仅示意量级）</text>
+    </svg>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">成本结构拆分 · Cost structure breakdown (2024 vs 2025)</div>
+    <div class="chart-sub">原材料成本占比下降反映集采规模效应，员工成本占比小幅上升反映用工成本刚性</div>
+    <svg viewBox="0 0 800 200" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <!-- horizontal bars -->
+      <text x="140" y="44" text-anchor="end" font-size="13">原材料及耗材</text>
+      <rect x="150" y="30" width="335" height="18" fill="#a07b4a"/>
+      <text x="495" y="44" font-size="12" font-weight="700">33.5%（2024）</text>
+      <rect x="150" y="54" width="317" height="18" fill="#2a5c3f"/>
+      <text x="477" y="68" font-size="12" font-weight="700" fill="#2a5c3f">31.7%（2025）</text>
+
+      <text x="140" y="104" text-anchor="end" font-size="13">员工成本</text>
+      <rect x="150" y="90" width="258" height="18" fill="#a07b4a"/>
+      <text x="418" y="104" font-size="12" font-weight="700">25.8%（2024）</text>
+      <rect x="150" y="114" width="261" height="18" fill="#8b2e2e"/>
+      <text x="421" y="128" font-size="12" font-weight="700" fill="#8b2e2e">26.1%（2025）</text>
+
+      <text x="140" y="164" text-anchor="end" font-size="13">租金相关(折旧)</text>
+      <rect x="150" y="150" width="51" height="18" fill="#2a5c3f"/>
+      <text x="211" y="164" font-size="12" font-weight="700">≈5.1%（2025）</text>
+
+      <text x="740" y="190" text-anchor="end" font-size="10" fill="#888">单位：占营业收入百分比</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 四、各品类表现 -->
+<section>
+  <div class="section-zh">四、各饮品品类采购/返点情况调研</div>
+  <div class="section-en">Category-level procurement &amp; rebate — industry benchmark estimates, NOT Green Tea real data</div>
+
+  <div class="notice" style="margin-top:0">
+    <b>本节全部内容均为行业惯例推算</b>，绿茶集团未披露任何品类级饮品采购数据。数值仅供经销商方向性参考，实际返点/费用以门店或区域采购负责人访谈核实为准。
+  </div>
+
+  <table>
+    <thead><tr><th>品类</th><th>销售额占比推断</th><th>返点行业惯例</th><th>陈列/进场费</th><th>推断进货渠道</th></tr></thead>
+    <tbody>
+      <tr><td>瓶装水</td><td class="center">酒水饮料收入中占比较低（刚需低价品类）</td><td class="center">5–10% 年框返点</td><td class="center">正餐渠道少见，多随货折价</td><td>区域经销商/批发商</td></tr>
+      <tr><td>软饮（碳酸/凉茶/果汁）</td><td class="center">酒水饮料收入中占比最高</td><td class="center">8–15% 年框返点</td><td class="center">冰柜/陈列费视商场性质，正餐渠道通常低于商超便利店</td><td>区域经销商为主，部分单店直采</td></tr>
+      <tr><td>功能饮料</td><td class="center">占比极低，非主推品类</td><td class="center">行业惯例5–10%（若配置）</td><td class="center">基本无</td><td>随软饮渠道搭配供货</td></tr>
+      <tr><td>常温奶</td><td class="center">占比极低至基本无</td><td class="center">不适用</td><td class="center">不适用</td><td>不适用</td></tr>
+      <tr><td>啤酒</td><td class="center">正餐佐餐场景，占酒水收入有一定比重</td><td class="center">10–20% 年框返点（餐饮渠道啤酒返点通常高于软饮）</td><td class="center">冰柜/桶装设备资源投放较常见</td><td>啤酒厂商区域经销商，可能有驻店促销资源置换</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight">
+    <div class="h">渠道价值判断 <span class="en">Channel value assessment</span></div>
+    <p>结合门店客单价（56元）、100%直营+区域化供应链结构、以及"自制饮品驱动"的品类定位，绿茶单店<b>饮品品类采购量级大概率低于同客单价的火锅/烧烤类渠道</b>，但<b>609家门店的规模效应</b>（尤其在啤酒/软饮标品品类）仍具备一定的区域集中采购议价空间。建议经销商<b>优先切入啤酒品类</b>（返点空间行业惯例最高、正餐佐餐场景刚需强），而非期望在瓶装水/常温奶上获得可观增量。</p>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Research Verdict · Executive Summary</div>
+  <div class="v-zh">执行摘要：4条关键判断</div>
+  <div style="font-size:13px;color:var(--gold);font-weight:700;margin:-10px 0 16px 0;letter-spacing:.02em">
+    综合置信度 6.5 / 10 ｜ 高置信 7 条（门店/财务官方数据）· 中置信 3 条（推算类）· 低置信 3 条（品牌/品类采购推断）｜ Confidence 6.5/10
+  </div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>绿茶2025年24.1%的营收增长几乎全部来自新开店，而非老店客流回暖。</strong>同店销售2025年仍为-0.8%（2024年为-10.3%），意味着经销商若以"老店追加采购"为增量假设会落空，真实增量应锚定<b>新开门店的首次配置采购</b>（2025年净开144家，计划2026年再开约150–200家）。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：2025全年报营收+24.1%、同店销售-0.8%、门店数+31.0%</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>绿茶不是瓶装饮料友好型渠道，是自制招牌饮品驱动型渠道。</strong>客单价连续两年下滑至56.2元，叠加"以量换质"扩张策略，单店饮品预算大概率有限，瓶装水/软饮更多是刚需补充而非利润品类。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：客单价62.9→56.2元连续下滑、菜单结构以自制饮品为特色卖点</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>供应链高度分散（前五大供应商集中度仅18.2%），意味着饮品采购谈判入口在区域/单店层面，而非集团总部。</strong>经销商应放弃"直接对接绿茶集团总部签全国框架"的路径设想，转而布局区域经销商合作。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：招股书披露前五大供应商采购集中度18.2%、无自建中央厨房</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">4</div>
+    <div class="v-text"><strong>啤酒品类是本渠道最优先的切入点，瓶装水/常温奶潜力有限。</strong>正餐佐餐场景下啤酒返点空间行业惯例最高（10–20%），且609家门店规模已具备区域集中采购议价基础；常温奶品类基本无消费场景，建议不作为重点。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：品类定位推断 + 行业渠道惯例基准（本节数据非绿茶真实数据，需实地核实）</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=research&report=greentea_group_channel_2026" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- 数据缺口补全建议 -->
+<section>
+  <div class="section-zh">数据缺口补全建议</div>
+  <div class="section-en">Recommended paths to close remaining data gaps</div>
+  <table>
+    <thead><tr><th>缺口项</th><th>推荐补数路径</th><th>预计可得性</th></tr></thead>
+    <tbody>
+      <tr><td>2026年1–6月中报数据</td><td>等待2026年8–9月港交所中报披露；或直接联系绿茶集团IR部门索取业绩指引</td><td><span style="color:var(--green)">较高</span></td></tr>
+      <tr><td>具体在售饮品品牌</td><td>实地门店拜访拍摄菜单/酒水单，或大众点评"探店"图片人工核对</td><td><span style="color:var(--green)">较高</span></td></tr>
+      <tr><td>各品类采购成本/返点/进货渠道</td><td>需通过绿茶集团区域采购负责人或门店店长直接访谈获取，非公开渠道无法查证</td><td><span style="color:var(--amber)">中等</span></td></tr>
+      <tr><td>桌数精确值</td><td>门店实地清点，或申请绿茶集团加盟/合作咨询资料包（含标准店型图纸）</td><td><span style="color:var(--amber)">中等</span></td></tr>
+      <tr><td>食材收入/酒水饮料收入拆分</td><td>财报不做此颗粒度披露，只能通过门店POS流水访谈估算</td><td><span style="color:var(--red)">较低</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  绿茶集团招股说明书（港交所披露易，2025年5月）；绿茶集团2025年度业绩公告及年报（2026年3月发布）；绿茶集团2025年中期报告（2025年9月，港交所披露易）；东吴证券/海通国际/SBI China Capital 绿茶集团研究报告（2025–2026）；21世纪经济报道、新浪财经、东方财富、界面新闻、澎湃新闻、乐居财经等媒体对招股书及财报的解读报道。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>门店数、营收、净利润、客单价、翻台率、成本结构占比、供应商集中度、同店销售增速 — 均为一手财报/招股书数据，置信度<b>高</b>。桌数、门店选址逻辑 — 基于面积与商业模式的合理推断，置信度<b>中</b>。具体饮品品牌、各品类采购/返点/进货渠道 — 无公开数据支撑，全部为行业惯例推算，置信度<b>低</b>，正式使用前必须实地核实。
+  </div>
+</div>
+
+<footer>
+  <span>餐饮渠道调研 · 绿茶集团账户情报</span>
+  <span>文字调研报告，未填入原始 Numbers 表格</span>
+  <span>生成日期 2026-07-01</span>
+</footer>
+
+</body>
+</html>
