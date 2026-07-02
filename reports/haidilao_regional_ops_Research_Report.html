@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞运营管理体系与大区运营 · 访谈提纲研究报告</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:38px;line-height:1.16;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:17px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.65}
+.notice b{color:var(--amber)}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin:32px 0}
+.stat{background:var(--card);padding:20px 18px}
+.stat-nb{font-size:27px;font-weight:700;letter-spacing:-.01em}
+.stat-nb .unit{font-size:14px;font-weight:400;color:#555;margin-left:2px}
+.stat-label{font-size:12.5px;color:#555;margin-top:5px}
+.stat-delta{font-size:12.5px;font-weight:600;margin-top:6px}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--amber)}
+section{margin-top:46px}
+.section-zh{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:18px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.qcard{border:1px solid var(--border);background:var(--card);padding:22px 24px;margin-top:22px}
+.qcard .qnum{display:inline-block;font-size:13px;font-weight:700;color:var(--paper);
+  background:var(--ink);border-radius:2px;padding:2px 9px;margin-right:8px}
+.qcard .qtext{font-size:16px;font-weight:700;line-height:1.5}
+.qcard .qanswer{font-size:14.5px;color:#1a1a1a;margin-top:12px;line-height:1.7}
+.qcard .qsrc{font-size:12px;color:#888;margin-top:10px;font-style:italic}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:16px}
+.insight .h{font-weight:700;font-size:15px}
+.insight .h .en{font-style:italic;color:#888;font-size:12px;font-weight:400;margin-left:5px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.stat-bar{grid-template-columns:repeat(2,1fr)}h1{font-size:29px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 客户提纲研究 Mode B</span>
+  <span>海底捞 Haidilao (06862.HK)</span>
+  <span>2026-07-02</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">五智能体协作 · 15条访谈提纲逐条研究</div>
+  <h1>海底捞运营管理体系与大区运营<br>访谈准备研究报告</h1>
+  <div class="title-en">Haidilao Organizational Structure &amp; Regional Operations — Expert Interview Prep Research</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 06862.HK</span>
+    <span class="tag">1383家门店 · 2025年末</span>
+    <span class="tag">2025净利润 -14.0%</span>
+    <span class="tag gold">综合置信度 6.0/10</span>
+  </div>
+  <div class="notice">
+    <b>关键提醒：</b>本提纲多数问题（第2/5/6/8/9/10/11条）直接以第二人称"您"向受访者（大区运营高管）提问，问的是<b>内部机密性质的经验/机制细节</b>（内部KPI跟踪、诊断SOP、淘汰标准、薪酬考核设计、个人经营目标）——这类信息海底捞作为港股上市公司<b>不会也不需要公开披露</b>。本报告已尽力从财报、招股书、管理层业绩会原话、权威财经媒体交叉验证中找到可支撑的公开事实和结构性证据，但<b>无法替代受访者本人的回答</b>，凡属机密性问题均已明确标注，并给出基于海底捞既往公开信息的方向性背景假设供访谈参考，不得据此当作海底捞真实数据引用。
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-nb">1383<span class="unit">家</span></div>
+    <div class="stat-label">门店总数（2025年末，自营1304+加盟79）<span class="badge badge-high">高</span></div>
+    <div class="stat-delta up">2024末1368家</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">3.9<span class="unit">次/天</span></div>
+    <div class="stat-label">2025年整体翻台率<span class="badge badge-high">高</span></div>
+    <div class="stat-delta down">2024为4.1，未达4.0达标线</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">432.25<span class="unit">亿元</span></div>
+    <div class="stat-label">2025年营收（+1.1%）<span class="badge badge-high">高</span></div>
+    <div class="stat-delta down">净利润40.42亿，-14.0%</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">15.21<span class="unit">亿元</span></div>
+    <div class="stat-label">红石榴计划(多品牌)收入<span class="badge badge-high">高</span></div>
+    <div class="stat-delta up">▲ +214.6% 同比</div>
+  </div>
+</div>
+
+<!-- 五智能体协作流程 -->
+<section>
+  <div class="section-zh">研究方法：五智能体协作流程</div>
+  <div class="section-en">Five-agent collaborative research pipeline</div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 1000 160" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#8b6c42"/>
+        </marker>
+      </defs>
+      <rect x="10" y="55" width="165" height="55" fill="none" stroke="#0a0a0b" stroke-width="1.3"/>
+      <text x="92" y="78" text-anchor="middle" font-size="13" font-weight="700">Orchestrator</text>
+      <text x="92" y="96" text-anchor="middle" font-size="11" fill="#555">提纲分类：事实/内部机密</text>
+      <line x1="175" y1="82" x2="205" y2="82" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="207" y="30" width="165" height="55" fill="none" stroke="#0a0a0b" stroke-width="1.3"/>
+      <text x="289" y="53" text-anchor="middle" font-size="13" font-weight="700">Scout 情报员</text>
+      <text x="289" y="71" text-anchor="middle" font-size="11" fill="#555">7路并行WebSearch</text>
+      <line x1="372" y1="57" x2="402" y2="82" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="404" y="30" width="185" height="55" fill="none" stroke="#0a0a0b" stroke-width="1.3"/>
+      <text x="496" y="53" text-anchor="middle" font-size="13" font-weight="700">Analyst 分析师</text>
+      <text x="496" y="71" text-anchor="middle" font-size="11" fill="#555">财务/组织架构推理</text>
+      <line x1="589" y1="57" x2="619" y2="82" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="404" y="90" width="185" height="55" fill="none" stroke="#8b2e2e" stroke-width="1.3"/>
+      <text x="496" y="113" text-anchor="middle" font-size="13" font-weight="700" fill="#8b2e2e">Forensic 侦探</text>
+      <text x="496" y="131" text-anchor="middle" font-size="11" fill="#555">识别矛盾/数据缺口</text>
+      <line x1="589" y1="117" x2="619" y2="92" stroke="#8b2e2e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="621" y="55" width="175" height="55" fill="none" stroke="#0a0a0b" stroke-width="1.3"/>
+      <text x="708" y="78" text-anchor="middle" font-size="13" font-weight="700">Strategist 战略家</text>
+      <text x="708" y="96" text-anchor="middle" font-size="11" fill="#555">逐条汇总回答</text>
+      <line x1="796" y1="82" x2="826" y2="82" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <rect x="828" y="55" width="165" height="55" fill="none" stroke="#c9a84c" stroke-width="1.6"/>
+      <text x="910" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#8b6c42">Critic 评审</text>
+      <text x="910" y="96" text-anchor="middle" font-size="11" fill="#555">置信度裁定 6.0/10</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 逐条回答 -->
+<section>
+  <div class="section-zh">逐条回答</div>
+  <div class="section-en">Question-by-question research findings</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q1</span><span class="qtext">整体运营管理体系划分标准与组织架构职责边界</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      架构经历多次演变：<b>2016年</b>确立"总部-教练-抱团小组(5–18家师徒制门店)-餐厅"四段扁平模式；<b>2021年</b>啄木鸟计划关店反思"师徒制开店利益链"后，回归"总部-大区经理-家族长/小区经理-店长"；<b>2023年</b>再改为"区域教练制"，打掉中间层，截至2023年末门店按地理划分为<b>19个片区</b>，大区经理负责辖区运营、新店辅导、店经理任命。<b>2026年1月</b>张勇重任CEO后，媒体报道出现"前台(市场攻坚)-中台(智能战略)-后台(基石业务)"协同表述，但这是媒体解读性总结，<b>未证实为公司官方原始措辞</b>。当前（2026年）"大区"层级是否仍正式存在、确切数量与辖区范围——<b>公开渠道未找到最新确认，需访谈本人核实</b>。
+    </div>
+    <div class="qsrc">来源：21经济网《海底捞变阵》、凤凰网蓝鲸访谈("19个片区"仅搜索摘要未二次核实)、虎嗅2026-03-31。19个片区数字建议访谈中核实。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q2</span><span class="qtext">大区首席运营官的职责与分工</span><span class="badge badge-low">低置信/需访谈</span></div>
+    <div class="qanswer">
+      <b>重要澄清</b>：海底捞公开披露的"COO"是按<b>境内外地理维度</b>划分，而非国内"华南/华北大区COO"——2022年3月任命李瑜（大陆地区首席运营官，2007年入职，历任门店经理/大区经理）与王金平（港澳台及海外首席运营官，2008年入职）。此外公司曾提出"<b>轮值COO计划</b>"（大区经理/职能部长/委员会主任满足条件可参与轮值），但该计划2024–2026年是否仍在运行<b>未找到最新公开确认</b>。若受访者的title是"华南大区首席运营官"，这是该地区COO与总部/省市负责人/店经理的具体分工——<b>纯内部机制，无公开数据，需受访者直接回答</b>。
+    </div>
+    <div class="qsrc">来源：中国基金报2022-03-02、乐居财经、澎湃新闻(轮值COO历史报道)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q3</span><span class="qtext">华南大区覆盖省市、城市层级、门店数量与经营水平</span><span class="badge badge-gap">数据缺口</span></div>
+    <div class="qanswer">
+      <b>核心发现：海底捞财报不按"华南/华北"这类国内地理大区披露数据</b>，仅按"<b>一线/二线/三线及以下城市 + 港澳台</b>"披露分部信息（符合港交所分部报告最低要求，多次搜索确认为"确实未披露"而非"搜索遗漏"）。因此"华南大区门店数/营收/翻台率"<b>无法从公开渠道获取</b>，只能给出替代性背景：华南潮汕牛肉火锅品类全国门店超35,000家(+25.7%)、本土品牌八合里海记牛肉火锅超200家店(华南占比约70%，二手转述)；行业报告称华南火锅市场份额约占全国14.8%、门店密度低于全国均值。若需精确数字，<b>必须由受访者直接提供</b>。
+    </div>
+    <div class="qsrc">来源：每经网2026-03-24(分部披露口径)、红餐产业研究院《区域火锅观察报告2026》(二手转述，原文403无法核验)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q4</span><span class="qtext">不同大区运营管理差异；总部统一要求 vs 区域自主权</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      虽无"华南vs华北"直接对比数据，但财报<b>按城市线级</b>的经营差异可作为区域差异的量化替代证据：2024年一线/二线/三线及以下客单价104/96.9/91.4元，翻台率4.0/4.1/4.0次/天，<b>同店销售增速1.8%/1.6%/6.6%</b>（下沉市场增速最快但客单价、坪效最低）。组织层面，"区域教练制"（2023年改革）赋予大区教练更贴近一线的现场巡视、考核、辅导权，隐含总部统一KPI标准+区域自主执行的分权模式，但<b>具体哪些是"总部强制统一"、哪些是"区域可自主调整"，无公开细则，需访谈</b>。
+    </div>
+    <div class="qsrc">来源：东方财富证券研报(城市线级数据)、界面新闻(组织架构报道)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q5</span><span class="qtext">大区日常跟踪指标；区域内城市间经营差异</span><span class="badge badge-mid">中置信（前半部分需访谈）</span></div>
+    <div class="qanswer">
+      大区/门店层面具体跟踪哪些指标、跟踪频率、内部仪表盘设计——<b>纯内部机制，无公开数据，需受访者回答</b>。但财报证实的公开KPI体系（翻台率、客单价、同店销售增速、员工成本/原材料成本占比）为访谈提供了对标框架。<b>城市间差异量化证据</b>：三线及以下同店销售增速+6.6%远高于一线+1.8%，但三线及以下客单价（91.4元）、坪效（同店日均销售额从80.4千元降至76.0千元/25年报进一步降至7.6万元/日）为自营门店中最低——呈现"以量补价"的结构性特征。
+    </div>
+    <div class="qsrc">来源：东方财富证券研报、每经网2026-03-24。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q6</span><span class="qtext">城市/门店经营低于预期的诊断流程；长期未改善门店的处理机制</span><span class="badge badge-high">高置信（历史事件）+ 中置信（当前机制）</span></div>
+    <div class="qanswer">
+      具体诊断维度拆解、复盘SOP——<b>内部机制，需访谈</b>。但海底捞有两次公开的门店淘汰机制先例：<b>啄木鸟计划</b>（2021年11月，关停约300家门店，休整期最长不超2年，筛选维度为外部客流量+周边门店密度+财务数据）与<b>硬骨头计划</b>（2022年9月，重新评估选址/物业/人员/面积，逐步复开，2022财年新开24+复开48-再关50=净增22家）。<b>关键发现：该机制2025年仍在持续运作</b>——2025年年内新开自营餐厅仅79家，同时<b>85家自营餐厅因经营未达预期主动关停或商业地标迁/设施老旧而搬迁</b>，说明"淘汰/关店"已从2021年的一次性运动式行动，演变为常态化的年度运营机制。历史上门店考核有ABC三级（C店店长下季度不得开新店，食安事故自动评C），近期报道称已改为<b>A/B/C/D/E五级</b>（二手转述，未见官方原文确认）。<b>近期具体事件</b>：2026年1–4月员工爆料门店"点炮制度"及自费赔偿投诉问题，公司排查<b>1300+家门店，发现4起并予以退款</b>——这是关于问题门店排查机制运作方式的一个具体、时间上很新的实证案例，建议访谈中追问"点炮制度"是否是官方术语及排查标准。
+    </div>
+    <div class="qsrc">来源：澎湃新闻2021-11-05、每经网2021、东方财富证券研报2022、21经济网2026-04-15("弱化对门店考核")、东方财富2026-04-17("点炮制度"排查事件)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q7</span><span class="qtext">全国业绩最佳/垫底大区及原因</span><span class="badge badge-gap">数据缺口</span></div>
+    <div class="qanswer">
+      同Q3，无"大区"维度排名数据。替代性回答：按<b>城市线级</b>，三线及以下城市门店数（571家）和营收占比（41.6%）已<b>反超一二线</b>，是当前"量"的贡献主力，但"质"（客单价、坪效）垫底；二线城市门店487家、营收占比36.9%，客单价（96.9元）和翻台率（4.1次/天，2024年数据）表现相对均衡，是当前经营质量较优的分部。若受访者能提供国内大区口径的真实排名，<b>价值远高于本报告能提供的替代数据</b>，建议作为访谈重点追问。
+    </div>
+    <div class="qsrc">来源：每经网2026-03-24、南方财经/21财经系。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q8</span><span class="qtext">2026年区域/集团经营目标</span><span class="badge badge-mid">中置信（集团层面）+ 数据缺口（区域层面）</span></div>
+    <div class="qanswer">
+      受访者所负责区域的具体目标——<b>需访谈回答</b>。集团层面2026年管理层表态：<b>不设具体开店数量目标</b>（"先跑店型，再开店"），主品牌延续"啄木鸟计划"红线（整体翻台率低于4.0次/天不规模化开新店）；子品牌方向明确——<b>大排档模型未来3年目标500家、寿司模型未来2年目标100家</b>；核心方向定调为"<b>极致质价比</b>"。这是2026年3月31日业绩说明会管理层原话，<b>较为可信的一手信息</b>。
+    </div>
+    <div class="qsrc">来源：北京商报2026-03-31、东方财富网2026年报观察、光大证券研报2026-03-05。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q9</span><span class="qtext">新店拓展各阶段运营团队介入分工</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      具体介入节点/分工边界——<b>内部流程，需访谈</b>。可用作背景的公开信息：大区教练/大区经理承担新店辅导职责（2023年区域教练制明确此为核心职责之一）；师徒制下"老店帮新店拓展与经营"是历史筹备模式（虽然该机制的利益链问题是2021年关店根因之一，改革后弱化但未完全取消）。<b>新兴信息</b>：多品牌孵化采用双轨制——"<b>掌勺人体系</b>"（员工自主创业驱动）与"<b>百姓厨房体系</b>"（总部主导策划推动），这是理解运营团队如何介入新业态孵化的重要框架，但主品牌新店的传统拓展流程细节仍属机密。国内加盟审核极度审慎：2024年3月推出以来收到超2万份申请，<b>仅批准13家</b>（截至2024年末），2025年才增至41→79家。<b>主品牌新店/老店改造侧面证据</b>：董事会副主席周兆呈2026-04-08采访中承认"翻台率下降是管理层做得不好"，推行"<b>一店一策</b>"，累计改造200+特色主题店（鲜切店/夜宵店重点城市全覆盖，新增亲子店、宠物友好店），侧面印证运营团队在门店层面的持续介入方式正从"标准化复制"转向"差异化定制"。
+    </div>
+    <div class="qsrc">来源：新浪财经2025-07-21(周兆呈访谈)、北京商报2026-03-31(红石榴计划双轨机制)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q10</span><span class="qtext">新店爬坡周期管理；稳定经营状态判断标准</span><span class="badge badge-mid">中置信（具体周期需访谈）</span></div>
+    <div class="qanswer">
+      精确的爬坡周期天数/月数标准——<b>公开渠道未找到，需访谈</b>。可支撑的公开信号：<b>2024年新开门店平均翻台率4.4次/天，高于老店整体水平</b>，说明新店筛选和爬坡执行本身有一定成效；公司层面用"整体翻台率4.0次/天"作为<b>是否规模化开新店</b>的门槛（而非单店爬坡验收标准）。二手报道称新店约6个月考核一次，核心指标是<b>会员占比需达60%以上</b>（销售额不作为核心考核项），但<b>此数字未经官方文件核实，建议访谈中核实真伪</b>。<b>参照案例</b>：红石榴计划子品牌大排档模型9家店翻台率达5.5–6次/日、如鮨寿司翻台率6次/天以上，均显著高于主品牌3.9次/天，可作为"新业态爬坡表现优于主品牌"的量化对比。
+    </div>
+    <div class="qsrc">来源：CBNData(翻台率红线)、财经媒体二手转述(会员占比60%标准，置信度较低)、证券时报2026-03-24(子品牌翻台率)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q11</span><span class="qtext">大区/门店薪酬激励与考核机制设计及近年调整</span><span class="badge badge-mid">中置信（历史机制）+ 数据缺口（当前具体方案）</span></div>
+    <div class="qanswer">
+      具体考核指标权重设计——<b>需访谈</b>。公开历史信息可作背景：海底捞著名的<b>计件工资制</b>（非管理层按劳动量计酬，如传菜0.4元/盘、服务生3元/顾客——2017年前后费率，可能已随通胀调整）与<b>师徒制</b>（店长可从徒弟/徒孙门店业绩中提成）。<b>关键警示</b>：2021年管理层公开承认，"师徒制开店利益链"（师父从徒弟新店提成的激励，客观上鼓励盲目开店）是300家门店选址失误的重要根因之一——这意味着薪酬机制近年<b>大概率已围绕"抑制盲目开店冲动"做过调整</b>。杨利娟任内（2022–2024）改革方向为"<b>低底薪、高分红</b>"，推动店长等向内部合伙人转变，弱化对门店的传统KPI考核（21经济网2026-04-15标题即为"在利润下滑中弱化对门店考核"）。<b>具体机制补充</b>：媒体报道存在"<b>四色卡</b>"季度考核制度——店长未达月度营收目标扣分红5点（二手转述，未见官方原文，建议核实）；降本效果可量化：门店平均员工数从疫情前148人降至2025年91人，2025年员工总数净减11,558人（12.56万→较2024年13.72万人）。
+    </div>
+    <div class="qsrc">来源：华恒智信研究、新浪财经2019-09-19(店长晋升薪酬)、界面新闻2021(师徒制利益链反思)、21经济网2026-04-15。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q12</span><span class="qtext">门店盈利模型最关键变量：翻台率/客单价/人工/租金/食材成本/优惠力度</span><span class="badge badge-high">高置信</span></div>
+    <div class="qanswer">
+      成本结构呈现"两升一稳"格局：<b>原材料及易耗品成本占比持续上升</b>——2023年约34.2%→2024年37.9%→<b>2025年40.5%</b>（管理层归因于外卖/其他餐厅收入占比提升+菜品结构升级）；<b>员工成本占比基本稳定小幅波动</b>——2023年约31.5%→2024年33.0–33.3%→2025年32.6%（员工总数三年从15.37万降至12.56万人，降本增效明显）；传统"租金及相关支出"占比常年维持在<b>1.0–1.2%的极低水平</b>（2024年1.0%），但IFRS16下真实"类租金成本"主要体现为<b>折旧摊销费用率</b>（2024年6.0%，较2023年7.1%下降）。<b>盈亏平衡点</b>：分析师测算翻台率盈亏平衡约3–3.5次/天，公司自定"规模化开店"达标线为4.0次/天，而<b>2025年实际3.9次/天、2024年4.1次/天，近两年均未稳定达标</b>。综合结果：2025年净利率9.35%，较2024年历史高点11.0%明显下滑，核心驱动是原材料成本上升+翻台率下滑双重挤压，而非租金或人工失控。
+    </div>
+    <div class="qsrc">来源：每经网2026-03-24、东吴证券研报2026-03、新浪财经系列点评2025-03。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q13</span><span class="qtext">华南火锅竞争格局特点；不同城市层级主要对手</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      华南呈现"<b>本土品类壁垒 + 全国性品牌低渗透</b>"格局：潮汕牛肉火锅是华南绝对主力（全国门店超35,000家，+25.7%同比，占粤式火锅约2/3份额；广东省门店占该品类全国45.1%），本土龙头<b>八合里海记牛肉火锅</b>超200家店（华南占比约70%，二手转述）；反观全国性连锁品牌在华南渗透普遍偏低——<b>七欣天</b>（华东绝对核心235/256家，华南仅3家）、<b>捞王</b>（江浙沪85.3%，广东仅6家）均以华东为主场；<b>巴奴</b>虽在东莞设华南中央厨房、明确列华南为扩张重点，但具体门店数未公开。粤式火锅（含潮汕打边炉）是国内第三大火锅派系（份额15%，川式65%），行业集中度极低（CR5不足8%，2020年数据）。<b>未找到</b>直接指出"海底捞在华南翻台率/份额低于全国平均"的公开数据，这是需要访谈验证而非可断言的空白点。
+    </div>
+    <div class="qsrc">来源：财新、36氪、界面新闻(各品牌招股书数据)、央广网/21经济网2024-11(红餐产业研究院报告)。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q14</span><span class="qtext">2025/2026门店模型、服务标准、扩张节奏、运营效率的重要变化；2027展望</span><span class="badge badge-high">高置信</span></div>
+    <div class="qanswer">
+      年度关键词演变清晰：<b>2024年报"减量增利"</b>（门店净增放缓、利润率提升至历史高点11.0%）→<b>2025年报"三线扩张"</b>（三线及以下营收占比41.6%反超一二线，但同店坪效持续走弱）→<b>2026年初张勇重返CEO</b>（原CEO苟轶群转任智能中台建设），管理层未推出全新战略，而是"对红石榴计划加码赋能"。运营效率方面最大变化是<b>多品牌矩阵成型</b>：截至2025年末已运营20个子品牌（海鲜大排档/寿司/西式轻食/小火锅/中式快餐等）共207家餐厅，"其他餐厅"收入从4.9亿元增至<b>15.21亿元（+214.6%）</b>，占总营收3.5%；组织重组为"前台(品牌孵化)-中台(资源技术)-后台(主品牌基本盘)"（媒体解读表述，非官方原始措辞，2026-03-24报道杨利娟已辞任特海国际CEO转任海底捞统筹红石榴计划）。<b>数字化/AI是运营效率提升的核心抓手</b>：2024年报业绩会披露已开发<b>50个AI应用</b>，AI智慧巡检系统覆盖全部门店、准确率超95%、全年无差评；自研KPAD数字点货预测系统；供应链OCR+生成式AI识别降本约80%人工；自2023年起与字节跳动火山引擎合作。<b>2025年扩张节奏精确数字</b>：自营新开79家、关停/搬迁85家（自营净减51家，连续两年下滑）；加盟净增66家至79家；总门店净增15家（2024年为净减6家，2025年扩张节奏边际回暖）。<b>2027年可能延续方向</b>（分析师推断，非公司指引）：大排档3年500家、寿司2年100家的既定目标将进入兑现期；主品牌翻台率红线（4.0次/天）预计延续，"淘汰劣质门店+审慎加盟"的常态化机制大概率不变；"极致质价比"定调可能进一步压低客单价以换取翻台率修复。
+    </div>
+    <div class="qsrc">来源：北京商报2026-03-31、东方财富网年报观察、新浪财经2026-01-14/15、每经网2026-03-24。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q15</span><span class="qtext">外部研究海底捞运营能力/门店效率/扩张潜力最容易被误解的地方</span><span class="badge badge-mid">分析师综合判断，非事实陈述</span></div>
+    <div class="qanswer">
+      基于以上研究，本报告识别4个潜在认知误区（供访谈中与受访者交叉验证，非确定结论）：<br><br>
+      <b>① "翻台率下滑=运营能力衰退"</b>——事实上三线及以下城市同店销售增速（+6.6%）远高于一线（+1.8%），下滑更多是"以量补价"的结构性扩张选择，且淘汰机制（2025年85家门店主动关停）证明公司自我纠偏能力并未失效，不宜简单等同于"管理失控"。<br>
+      <b>② "开放加盟=快速扩张信号"</b>——2万份申请仅批准13–79家，落地率不足1%，反映公司对下沉市场可持续性的态度实际上<b>极度审慎</b>，而非外界想象的"加盟驱动的第二轮高速扩张"。<br>
+      <b>③ "华南市场经营较弱"</b>——这是本报告最大的空白发现：公开数据<b>既无法证实也无法证伪</b>此判断（财报不按此维度披露），外部研究者容易将"华南非发源地"的直觉当作"经营数据较差"的事实，这本身就是需要访谈校正的认知偏差。<br>
+      <b>④ "多品牌孵化是转移市场注意力的噱头"</b>——红石榴计划收入两年内从4.9亿增至15.21亿（+214.6%），是真实、高速增长的第二曲线，但当前3.5%的营收占比意味着<b>短期内不足以对冲主品牌下滑</b>，外界既不应低估其增长质量，也不应高估其现阶段的业绩对冲能力。
+    </div>
+    <div class="qsrc">说明：本条为综合全部研究后的分析师判断，供访谈参考，非海底捞公开表态，建议与受访者当面验证。</div>
+  </div>
+</section>
+
+<!-- 数据图表 -->
+<section>
+  <div class="section-zh">关键数据可视化</div>
+  <div class="section-en">Supporting data visualization</div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">分城市线级经营质量对比（2024年报口径）· City-tier performance gap</div>
+    <div class="chart-sub">下沉市场"以量补价"特征明显：同店增速最快，但客单价/坪效最低</div>
+    <svg viewBox="0 0 900 260" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <text x="60" y="30" font-size="13" font-weight="700">客单价（元）</text>
+      <text x="60" y="52" font-size="12">一线</text>
+      <rect x="110" y="40" width="208" height="18" fill="#8b6c42"/>
+      <text x="325" y="53" font-size="12" font-weight="700">104.0</text>
+      <text x="60" y="76" font-size="12">二线</text>
+      <rect x="110" y="64" width="194" height="18" fill="#a07b4a"/>
+      <text x="311" y="77" font-size="12" font-weight="700">96.9</text>
+      <text x="60" y="100" font-size="12">三线及以下</text>
+      <rect x="110" y="88" width="183" height="18" fill="#c47a1e"/>
+      <text x="300" y="101" font-size="12" font-weight="700" fill="#c47a1e">91.4</text>
+
+      <text x="60" y="140" font-size="13" font-weight="700">同店销售增速（%）</text>
+      <text x="60" y="162" font-size="12">一线</text>
+      <rect x="110" y="150" width="36" height="18" fill="#8b6c42"/>
+      <text x="153" y="163" font-size="12" font-weight="700">+1.8%</text>
+      <text x="60" y="186" font-size="12">二线</text>
+      <rect x="110" y="174" width="32" height="18" fill="#a07b4a"/>
+      <text x="149" y="187" font-size="12" font-weight="700">+1.6%</text>
+      <text x="60" y="210" font-size="12">三线及以下</text>
+      <rect x="110" y="198" width="132" height="18" fill="#2a5c3f"/>
+      <text x="249" y="211" font-size="12" font-weight="700" fill="#2a5c3f">+6.6%</text>
+
+      <text x="500" y="240" text-anchor="end" font-size="11" fill="#888">来源：东方财富证券研报转述2024年报数据</text>
+    </svg>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">成本结构演变 2023–2025 · Cost structure evolution</div>
+    <div class="chart-sub">原材料成本占比持续攀升，员工成本占比基本稳定（降本增效抵消部分通胀压力）</div>
+    <svg viewBox="0 0 900 220" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="180" x2="820" y2="180" stroke="#d4cec6" stroke-width="1"/>
+      <!-- 原材料 -->
+      <text x="60" y="34" text-anchor="end" font-size="12">原材料</text>
+      <rect x="80" y="24" width="205" height="16" fill="#c9a84c" opacity="0.5"/>
+      <text x="290" y="36" font-size="12">2023: 34.2%</text>
+      <rect x="80" y="46" width="227" height="16" fill="#c9a84c" opacity="0.75"/>
+      <text x="312" y="58" font-size="12">2024: 37.9%</text>
+      <rect x="80" y="68" width="243" height="16" fill="#8b2e2e"/>
+      <text x="328" y="80" font-size="12" font-weight="700" fill="#8b2e2e">2025: 40.5%</text>
+
+      <!-- 员工成本 -->
+      <text x="60" y="124" text-anchor="end" font-size="12">员工成本</text>
+      <rect x="80" y="114" width="189" height="16" fill="#8b6c42" opacity="0.55"/>
+      <text x="274" y="126" font-size="12">2023: 31.5%</text>
+      <rect x="80" y="136" width="199" height="16" fill="#8b6c42" opacity="0.8"/>
+      <text x="284" y="148" font-size="12">2024: 33.0%</text>
+      <rect x="80" y="158" width="196" height="16" fill="#2a5c3f"/>
+      <text x="281" y="170" font-size="12" font-weight="700" fill="#2a5c3f">2025: 32.6%</text>
+
+      <text x="810" y="200" text-anchor="end" font-size="11" fill="#888">来源：每经网/东吴证券研报转述年报数据</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 风险信号表 -->
+<section>
+  <div class="section-zh">风险信号与待核实事项</div>
+  <div class="section-en">Flags identified by Forensic agent — verify before/during interview</div>
+  <table>
+    <thead><tr><th>#</th><th>风险信号</th><th>说明</th><th>建议动作</th></tr></thead>
+    <tbody>
+      <tr><td>R1</td><td>"华南大区"数据在财报中不存在</td><td>公司只按一二三线城市+港澳台披露，提纲第3/7条假设的"大区"分部数据结构性不存在</td><td>访谈前明确告知客户此维度公开数据缺口，第3/7条以受访者口述为准</td></tr>
+      <tr><td>R2</td><td>"19个片区"、"会员占比60%考核标准"、"A/B/C/D/E五级"均为二手转述</td><td>原始一手来源（公司文件/HKEX PDF）多次尝试WebFetch返回403，无法直接核验</td><td>访谈中直接向受访者核实这三个具体数字/机制的真伪</td></tr>
+      <tr><td>R3</td><td>"红黑榜"术语核实结果与用户预期不符</td><td>搜索"海底捞 红黑榜"指向的是政府市场监管食品安全红黑榜，与海底捞内部管理机制无关</td><td>访谈中确认客户/受访者所指"红黑榜"是否为记忆偏差，或该说法仅存在于未公开的内部文件</td></tr>
+      <tr><td>R4</td><td>2025年租金及折旧摊销占比精确数字缺失</td><td>仅2024年数据（租金1.0%+折旧摊销6.0%）交叉验证充分，2025年同口径数字未找到独立来源</td><td>访谈中或后续从2025年报原文（需HKEX官方渠道）核实</td></tr>
+      <tr><td>R5</td><td>数据来源大量为财经媒体二手转述，非直接抓取HKEX原始公告</td><td>反爬机制导致hkexnews.hk/雪球/东方财富PDF等一手源多次403，只能靠2–3篇独立媒体交叉验证</td><td>关键数字（尤其是引用给客户决策用的）建议正式使用前用HKEX官方渠道或Bloomberg/Wind终端二次核实</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：15条提纲逐条覆盖，高置信6条 / 中置信6条 / 数据缺口3条</div>
+  <div class="v-conf">综合置信度 6.0 / 10 ｜ Confidence 6.0/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>本提纲结构性无法从公开渠道回答的核心是"华南大区"维度——因为海底捞财报根本不按此维度披露。</strong>提纲第3/7条问的"华南覆盖省市/门店数""哪个大区最佳/垫底"在公开信息里没有对应答案，这不是研究不够深入，而是数据结构本身不存在，访谈前应提前与客户对齐这一预期。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：多次搜索确认财报仅按一二三线城市+港澳台披露，无华南华北等地理大区分部</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>2025年财务表现是"增收不增利"的典型样本：营收+1.1%，净利润-14.0%，核心矛盾是原材料成本占比从37.9%升至40.5%，叠加翻台率连续两年未达4.0次/天自定标准。</strong>这为Q12(盈利模型关键变量)提供了扎实的量化答案。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：2025年报官方数据，多家财经媒体一致转述</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>门店淘汰机制并非2021年的一次性运动，2025年仍在常态化运作（85家主动关停 vs 79家新开），是回答Q6最有力的证据。</strong>同时国内加盟极度审慎（2万申请仅批不到80家），说明管理层对规模化扩张的态度明显比外界感知的更保守。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：21经济网2026-04-15、新浪财经2025-07-21管理层原话</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">4</div>
+    <div class="v-text"><strong>提纲中约6条问题（Q2/5/6后半/8前半/9/10/11）问的是纯内部机制，公开研究只能提供"背景假设"而非"确定答案"——这是本次研究的天花板，不是执行不足。</strong>建议访谈时把这些问题列为核心追问点，公开研究部分作为验证受访者回答真实性的交叉参照系。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：港股上市公司信息披露规则不涵盖内部KPI跟踪细则、诊断SOP、薪酬考核设计</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=haidilao_regional_ops_20260702" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  海底捞2025年度业绩公告（2026-03-24发布）、2025年中期报告（2025-08-25发布）、2024年年报；每日经济新闻、新浪财经、中国基金报、21经济网、界面新闻、36氪、北京商报、东方财富网、南方财经/21财经系、澎湃新闻、财联社、银柿财经、钛媒体、证券时报等财经媒体对财报及业绩说明会的转述报道；东吴证券、东方财富证券、光大证券研究报告；红餐产业研究院《区域火锅观察报告2026》《粤式火锅发展与机会研究报告2024》；巴奴/七欣天/捞王招股说明书。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>门店数、营收、净利润、翻台率、客单价、城市线级分部数据、成本结构占比、啄木鸟/硬骨头计划、2026年COO任命、红石榴计划收入 — 均为一手财报数据经2–3篇独立财经媒体交叉验证，置信度<b>高</b>。组织架构历史演变、华南竞争格局、新店城市分布趋势、单店盈利模型 — 多为二手转述或分析师推断，置信度<b>中</b>。华南大区维度数据、内部KPI跟踪细节、诊断SOP、淘汰标准量化线、薪酬考核具体方案、新店爬坡周期天数 — 公开渠道<b>无法获取</b>，已标注为数据缺口，需受访者本人回答。
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 客户提纲研究 Mode B</span>
+  <span>海底捞运营管理体系访谈准备</span>
+  <span>生成日期 2026-07-02</span>
+</footer>
+
+</body>
+</html>
