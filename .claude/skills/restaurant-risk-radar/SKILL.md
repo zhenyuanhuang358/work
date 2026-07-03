@@ -136,3 +136,4 @@ description: |
 | 用户提到利润/营收/成本问题 | `references/archetypes.md` → 利润幻觉 |
 | 用户提到人才/店长/培养问题 | `references/archetypes.md` → 造血失能 |
 | 用户提到文化/价值观/员工风气 | `references/archetypes.md` → 文化断层 |
+| 需要完整诊断案例作参照（输出格式/深度基准） | `references/cases/case-001-400店造血失能.md` |

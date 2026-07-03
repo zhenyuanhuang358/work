@@ -33,7 +33,7 @@
 
 # Earnings Copilot 报告模板标准
 
-**模板文件**：`earnings_copilot/templates/copilot_report_template.html`
+**模板规范内嵌于本节**（14节顺序 + 视觉规范），无独立模板文件；参考实现见 `reports/00538_Copilot_Report.html` / `reports/avgo_Copilot_Report.html`。
 
 每次生成财报分析 HTML 报告，必须严格遵守以下规范：
 

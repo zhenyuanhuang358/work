@@ -29,6 +29,20 @@
 
 ---
 
+**事故：Skill 参数替换破坏 SKILL.md 中的美元数字字面量（2026-07-04 发现并修复）**
+- 问题：us-options-agent/SKILL.md 里的账户金额（美元符+数字，如 8,500 / 2,550）在带 args 调用 Skill 时被当成位置参数替换，渲染成 "PLTR,500" 之类乱码
+- 根因：Skill 工具对 SKILL.md 内容做 `$1 $2...` 位置参数替换，任何"美元符+数字"字面量都会中招
+- 修复：SKILL.md 中一律不写"美元符+数字"；具体金额改由 memory/state/options-journal.md 维护，SKILL.md 只写百分比规则（5%/30%）
+- 教训：**SKILL.md 是会被参数替换渲染的模板，不是普通 Markdown；金额/含美元符文本要么放 references/（Read 加载不受影响），要么用"美元"后缀写法**
+
+**事故：fetch_research_data.py 从未推到 main，research 工作流全部失败（2026-07-04 发现并修复）**
+- 问题：fetch-research-data workflow 每次运行都 failure，research_cache/_manifest.json 长期 404
+- 根因：workflow yml 在 main 上，但它调用的 scripts/fetch_research_data.py 只存在于工作分支——Action 只跑 main 上的代码
+- 修复：把脚本推上 main；本地两个 workflow yml 反向同步 main 的改进版（[skip ci] + pull --rebase）
+- 教训：**这是 1.1 节"本地脚本必须同步推 main"教训的重演，且更隐蔽——不只是"改了要同步"，是"新增文件也要确认部署"。任何 GitHub Action 依赖的文件，创建后第一件事是验证 main 上存在**
+
+---
+
 ### 1.2 报告遗漏问题
 
 **问题：多次报告忘记附反馈链接**

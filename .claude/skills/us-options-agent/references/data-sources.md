@@ -139,7 +139,7 @@ unusual options activity today site:unusualwhales.com
 | 大盘股 | AAPL、TSLA、NVDA、AMZN | 高流动性，IV 波动大 |
 | 波动率产品 | VXX、UVXY | 高风险，仅事件驱动用 |
 
-**$8,500 账户特别提醒**：
+**小账户（约8,500-9,000美元级）特别提醒**：
 - 优先选择股价 < $50 的标的（保证金友好）
 - 或直接用 ETF（SPY 期权也有 mini 版 SPDR）
 - 避免股价 > $200 的标的做 CSP，保证金会占账户比例过大

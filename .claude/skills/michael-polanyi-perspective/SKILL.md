@@ -223,5 +223,21 @@ description: |
 
 ---
 
+## Spoke 加载表
+
+| 场景 | 加载文件 |
+|------|---------|
+| 需要具体年份/事件的传记细节 | `references/timeline.md` |
+| 需要思想师承与影响谱系（师从谁/影响了谁） | `references/genealogy.md` |
+| 按问题类型选择研究框架（知识/组织/科学主张） | `references/research-protocol.md` |
+| 需要引用著作原文观点与出处 | `references/research/01-writings.md` |
+| 需要还原对话场景/辩论风格（如与图灵、波普尔的交锋） | `references/research/02-conversations.md` |
+| 需要模仿表达方式/用词习惯（第一人称扮演时） | `references/research/03-expression-dna.md` |
+| 需要外部评价视角（批评者/继承者怎么看他） | `references/research/04-external-views.md` |
+| 需要人生关键抉择的决策逻辑（弃化学转哲学等） | `references/research/05-decisions.md` |
+| 需要带出处的完整年表（比 timeline.md 更细） | `references/research/06-timeline.md` |
+
+---
+
 > 本Skill由 [女娲 · Skill造人术](https://github.com/alchaincyf/nuwa-skill) 生成
 > 创建者：[花叔](https://x.com/AlchainHust)
