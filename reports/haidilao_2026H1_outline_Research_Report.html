@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞 2026年上半年经营与行业环境 · 客户提纲研究报告</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:36px;line-height:1.18;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:17px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.red{border-color:var(--red);color:var(--red);font-weight:700}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.7}
+.notice b{color:var(--amber)}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin:32px 0}
+.stat{background:var(--card);padding:20px 18px}
+.stat-nb{font-size:25px;font-weight:700;letter-spacing:-.01em}
+.stat-nb .unit{font-size:13px;font-weight:400;color:#555;margin-left:2px}
+.stat-label{font-size:12px;color:#555;margin-top:5px}
+.stat-delta{font-size:12px;font-weight:600;margin-top:6px}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--amber)}
+section{margin-top:46px}
+.section-zh{font-size:23px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:18px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:16px}
+.insight .h{font-weight:700;font-size:15px}
+.insight .h .en{font-style:italic;color:#888;font-size:12px;font-weight:400;margin-left:5px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.stat-bar{grid-template-columns:repeat(2,1fr)}h1{font-size:27px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 客户提纲研究 Mode B</span>
+  <span>海底捞 Haidilao (06862.HK)</span>
+  <span>2026-07-04</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">六条提纲逐条研究 · 2026年上半年经营 + 行业环境</div>
+  <h1>海底捞 2026年上半年经营表现<br>与中国餐饮行业环境研究</h1>
+  <div class="title-en">Haidilao H1 2026 Operations &amp; China Restaurant Industry Landscape — Client Outline Research</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 06862.HK</span>
+    <span class="tag red">2026中报未发布(预计8-9月) · 部分为推算</span>
+    <span class="tag">行业数据：国家统计局1-5月（一手）</span>
+    <span class="tag gold">综合置信 6.0/10</span>
+  </div>
+  <div class="notice">
+    <b>口径说明（先读）：</b>海底捞只披露半年报/年报，2026年中报（1–6月）预计<b>2026年8–9月</b>发布，因此提纲第1/2/4/5条中"2026年6月/上半年"的公司级精确数字目前官方不存在。本报告分三层作答：① <b>真实新数据</b>——本次研究实际抓到了两块高价值一手/准一手信息：<b>国家统计局2026年1–5月餐饮收入数据</b>（回答第6条）和<b>焰请烤肉截至2026年6月30日的门店数与关店数</b>（回答第3条）；② <b>推算模型</b>——翻台率/客单价/同店等按既定方法（H1/H2隐含拆分+季节性假设）给出区间估算，标注假设层数；③ 所有推测均注明"非公司确认事实"，待中报核实。
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-nb">+3.1<span class="unit">%</span></div>
+    <div class="stat-label">全国餐饮收入 1-5月累计增速<span class="badge badge-high">高·统计局</span></div>
+    <div class="stat-delta down">▽ 自1-2月+4.8%逐月回落</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">+0.6<span class="unit">%</span></div>
+    <div class="stat-label">5月单月餐饮收入增速<span class="badge badge-high">高·统计局</span></div>
+    <div class="stat-delta down">接近零增长，压力显性化</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">70<span class="unit">家</span></div>
+    <div class="stat-label">焰请烤肉门店（2026-6-30）<span class="badge badge-high">高·官方小程序</span></div>
+    <div class="stat-delta down">2026年零新开，关店≥19家</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">3.7–3.9<span class="unit">次/天</span></div>
+    <div class="stat-label">2026年6月翻台率（推算区间）<span class="badge badge-gap">推算·4层假设</span></div>
+    <div class="stat-delta flat">季节性淡季，非确认数据</div>
+  </div>
+</div>
+
+<!-- Q1 -->
+<section>
+  <div class="section-zh">一、海底捞 2026年6月经营表现</div>
+  <div class="section-en">Q1 · June 2026 operating performance — no official monthly disclosure; signals + estimation</div>
+  <p class="body">
+    公司级6月精确数据<b>官方不存在</b>（中报8–9月发布）。可用的真实信号与推算如下：
+  </p>
+  <table>
+    <thead><tr><th>信号/指标</th><th>内容</th><th>性质</th></tr></thead>
+    <tbody>
+      <tr><td>行业大盘（6月所处环境）</td><td>全国餐饮收入累计增速连续回落（1-2月+4.8%→1-5月+3.1%），5月单月仅+0.6%——海底捞6月经营所处的需求环境明显偏弱</td><td><span class="badge badge-high">高·统计局</span></td></tr>
+      <tr><td>集团动作信号</td><td>焰请烤肉2026年上半年收缩（关店≥19家、广州3店全关、零新开）——反映集团对亏损/低效业态的"止损纪律"在上半年实际执行，与主品牌85家/年的淘汰机制一脉相承</td><td><span class="badge badge-high">高·媒体核实小程序</span></td></tr>
+      <tr><td>2026年内最近的经营硬数据</td><td>春节假期（2月）翻台率超5次/天创近三年新高，但客单价连续第三年同比下滑——"客流回暖、单价承压"的组合</td><td><span class="badge badge-mid">中·媒体</span></td></tr>
+      <tr><td>6月经营水平估算</td><td>翻台率3.7–3.9次/天、客单价96–97元（详见第二节推算模型）——6月为火锅传统淡季，大概率处于全年低点区间</td><td><span class="badge badge-gap">推算</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight">
+    <div class="h">方向性判断 <span class="en">Directional read</span></div>
+    <p>综合"行业5月单月近零增长 + 火锅6月季节性淡季 + 春节以来客单价持续承压"三个信号，<b>2026年6月海底捞主品牌经营大概率呈现"翻台率处于年内低位、以价换量延续"的状态</b>；但集团层面的看点在副品牌结构调整（大排档扩张 vs 焰请收缩），而非主品牌单月波动。此为分析判断，非公司披露。</p>
+  </div>
+</section>
+
+<!-- Q2 -->
+<section>
+  <div class="section-zh">二、翻台率 · 客单价 · 同店增长</div>
+  <div class="section-en">Q2 · Turnover / avg spend / SSSG — estimation model, anchored on real H1 2025 &amp; FY2025</div>
+  <table>
+    <thead><tr><th>指标</th><th>真实锚点</th><th>2026年6月/H1估算</th><th>假设层数·置信</th></tr></thead>
+    <tbody>
+      <tr><td>翻台率</td><td>2025H1实际3.8次/天；2025全年3.9（隐含H2=4.0）；2026春节峰值超5次/天</td><td class="center"><b>6月约3.7–3.9次/天</b>（春节峰值反推Q1均值4.5-4.8，再按2025年Q1→Q2约-18%季节折扣）</td><td class="center"><span class="badge badge-gap">4层·低</span></td></tr>
+      <tr><td>客单价</td><td>2025H1实际97.9元；2025全年97.7元；2026春节"同比继续小幅下降"（连续第三年）</td><td class="center"><b>H1 2026约96–97元</b>（延续每年约1–2%的温和下滑斜率）</td><td class="center"><span class="badge badge-mid">2层·中低</span></td></tr>
+      <tr><td>同店增长</td><td>2024全年-10.3% → 2025全年-6.8%（降幅收窄）；2025H1营收-3.7%</td><td class="center"><b>H1 2026约-3%～-6%</b>（延续收窄趋势，但行业5月+0.6%的弱需求令下限承压）</td><td class="center"><span class="badge badge-gap">3层·低</span></td></tr>
+    </tbody>
+  </table>
+  <p class="body" style="font-size:13px;color:#888">
+    模型方法与完整推导见前份报告《海底捞运营数据更新》第八节；本表为同一模型，新增"行业5月弱需求"作为同店下限的约束信号。所有数字为区间估算，非公司确认，8–9月中报发布后必须核实修正。
+  </p>
+</section>
+
+<!-- Q3 -->
+<section>
+  <div class="section-zh">三、副品牌开店情况（2026年1–6月）</div>
+  <div class="section-en">Q3 · Sub-brand store rollout: 大排档 / 焰请烤肉 / 举高高 / 如鮨寿司</div>
+
+  <table>
+    <thead><tr><th>副品牌</th><th>业态·定位</th><th>最近真实数据点</th><th>2026年6月末估算</th><th>2026 H1动向判断</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>海底捞大排档</b></td>
+        <td>海鲜大排档火锅，宵夜/全场景</td>
+        <td>2025年12月广州首店；<b>2026年4月全国9家</b>（广州/杭州/上海/青岛/武汉/福州/南宁），翻台率5.5–6次/日；3年目标500家<span class="badge badge-high">高</span></td>
+        <td class="center"><b>约12–14家</b><span class="badge badge-mid">1层外推·中</span></td>
+        <td class="up">扩张中——张勇亲抓的头号新业态，2026年主推</td>
+      </tr>
+      <tr>
+        <td><b>焰请烤肉铺子</b></td>
+        <td>烤肉+服务体验，百元客单价</td>
+        <td><b>截至2026年6月30日全国70家，与2025年同期持平；2026年上半年零新开、关店至少19家，广州3店全关</b>（官方小程序口径，2026-07-01报道）<span class="badge badge-high">高</span></td>
+        <td class="center"><b>70家（真实数）</b></td>
+        <td class="down">收缩调整——2026上半年副品牌矩阵中最明确的负面信号</td>
+      </tr>
+      <tr>
+        <td><b>举高高</b></td>
+        <td>平价自助小火锅，59.9元/位（收购品牌，非自孵化）</td>
+        <td>2025年9月约10余家（10城）+ 30余家同步施工、计划2025年10月前集中开业，重点华中/华东<span class="badge badge-mid">中</span></td>
+        <td class="center"><b>约40–55家</b><span class="badge badge-gap">2层外推·低</span></td>
+        <td class="up">快速铺店期——若2025年10月批量开业兑现，2026H1基数已上台阶；精确数无公开披露</td>
+      </tr>
+      <tr>
+        <td><b>如鮨寿司</b></td>
+        <td>平价寿司（8–28元五档，主力9.9/15元），对标"日料界萨莉亚"</td>
+        <td>2025年7月杭州首店（500㎡+，SKU 200+），开业3个月周末翻台率达8轮；业绩会表态"未来两年有潜力开100家"<span class="badge badge-mid">中</span></td>
+        <td class="center"><b>约10–15家</b><span class="badge badge-gap">2层推算·低</span></td>
+        <td class="up">验证后加速期——单店模型跑通（翻台6次/天+），2026年进入复制阶段；精确数无公开披露</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="chart-wrap">
+    <div class="chart-title">四个副品牌 2026年6月末门店数 · Sub-brand store count (solid = confirmed, dashed = estimated)</div>
+    <div class="chart-sub">焰请为2026-6-30真实数；大排档为4月真实数9家+外推；举高高/如鮨为低置信推算区间中值示意</div>
+    <svg viewBox="0 0 900 240" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="150" y1="210" x2="860" y2="210" stroke="#0a0a0b" stroke-width="1"/>
+      <!-- scale: 70 -> 560px, i.e. 8px per store -->
+      <text x="140" y="44" text-anchor="end" font-size="13">焰请烤肉</text>
+      <rect x="150" y="30" width="560" height="20" fill="#8b2e2e"/>
+      <text x="720" y="45" font-size="13" font-weight="700" fill="#8b2e2e">70家（真实·收缩中，关≥19家）</text>
+
+      <text x="140" y="92" text-anchor="end" font-size="13">举高高</text>
+      <rect x="150" y="78" width="380" height="20" fill="rgba(196,122,30,0.25)" stroke="#c47a1e" stroke-dasharray="5,3" stroke-width="1.5"/>
+      <text x="540" y="93" font-size="13" font-weight="700" fill="#c47a1e">约40–55家【推算】</text>
+
+      <text x="140" y="140" text-anchor="end" font-size="13">大排档</text>
+      <rect x="150" y="126" width="72" height="20" fill="#2a5c3f"/>
+      <rect x="222" y="126" width="32" height="20" fill="rgba(42,92,63,0.25)" stroke="#2a5c3f" stroke-dasharray="5,3" stroke-width="1.5"/>
+      <text x="264" y="141" font-size="13" font-weight="700" fill="#2a5c3f">9家（4月真实）→12–14家【外推】</text>
+
+      <text x="140" y="188" text-anchor="end" font-size="13">如鮨寿司</text>
+      <rect x="150" y="174" width="100" height="20" fill="rgba(196,122,30,0.25)" stroke="#c47a1e" stroke-dasharray="5,3" stroke-width="1.5"/>
+      <text x="260" y="189" font-size="13" font-weight="700" fill="#c47a1e">约10–15家【推算】</text>
+
+      <text x="855" y="232" text-anchor="end" font-size="10" fill="#888">实线=公开确认数；虚线=推算，非公司披露</text>
+    </svg>
+  </div>
+
+  <div class="insight">
+    <div class="h">副品牌矩阵的结构性信号 <span class="en">Portfolio-level read</span></div>
+    <p>2026年上半年副品牌呈"<b>一收三扩</b>"：焰请（客单价百元、重体验业态）收缩，大排档/举高高/如鮨（客单价30–60元区间、极致质价比业态）扩张——<b>资源明确从"高客单体验型"向"平价高翻台型"迁移</b>，与主品牌"极致质价比"定调、以及行业客单价普遍下行（第六节）完全同向。焰请关店不宜简单解读为"红石榴计划失败"，更准确的解读是组合内部的达尔文式再配置：止损纪律与2021年主品牌啄木鸟计划同源。</p>
+  </div>
+</section>
+
+<!-- Q4 -->
+<section>
+  <div class="section-zh">四、各项运营成本变化</div>
+  <div class="section-en">Q4 · Operating cost structure — FY2025 actual + H1 2026 directional inference</div>
+  <table>
+    <thead><tr><th>成本项</th><th>2023</th><th>2024</th><th>2025（最新真实）</th><th>2026 H1方向推断</th></tr></thead>
+    <tbody>
+      <tr><td>原材料及易耗品占收入比</td><td class="center">约34.2%</td><td class="center">37.9%</td><td class="center"><b>40.5%</b>（+2.6pp）<span class="badge badge-high">高</span></td><td class="down">继续承压——外卖/副品牌收入占比提升+价格战压低分母，占比大概率维持40%上下高位<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td>员工成本占收入比</td><td class="center">约31.5%</td><td class="center">33.0%</td><td class="center"><b>32.6%</b>（-0.4pp）<span class="badge badge-high">高</span></td><td class="flat">基本稳定——员工总数三年降2.8万人（15.37万→12.56万）、门店均员工148→91人的降本路径延续<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td>租金及相关支出占收入比</td><td class="center">约1.1%</td><td class="center">1.0%</td><td class="center">2025年精确值未独立披露<span class="badge badge-gap">缺口</span></td><td class="flat">维持约1%低位——品牌方租金议价能力是结构性优势，短期不变<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td>折旧摊销费用率（IFRS16下的"类租金"主体）</td><td class="center">约7.1%</td><td class="center">6.0%</td><td class="center">2025年精确值未独立披露<span class="badge badge-gap">缺口</span></td><td class="flat">缓慢下行——存量门店资产陆续提足折旧，新开店节奏温和不足以逆转<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td>新增成本压力项（行业性）</td><td class="center" colspan="3">—</td><td class="down">外卖平台佣金与补贴投入——2025年外卖收入26.58亿(+111.9%)占比已达25.3%，平台"价格战"下有订单无利润风险上升（中国烹饪协会公开警示）<span class="badge badge-mid">行业推断</span></td></tr>
+    </tbody>
+  </table>
+  <div class="insight">
+    <div class="h">成本结构核心矛盾 <span class="en">The core tension</span></div>
+    <p>海底捞的成本压力<b>不在租金和人工（前者结构性低位、后者管控有效），而在原材料占比的持续爬坡</b>：三年+6.3pp（34.2%→40.5%）。它一半是"分子问题"（鲜切等菜品升级、副品牌供应链爬坡期），一半是"分母问题"（客单价与折扣把收入端压低）。2026年若价格战延续，这个比率难有实质改善——利润弹性将主要取决于翻台率能否回到4.0以上，而非成本端还能挤出多少。此为基于2025年报结构的分析判断。</p>
+  </div>
+</section>
+
+<!-- Q5 -->
+<section>
+  <div class="section-zh">五、主品牌与加盟店开店进展</div>
+  <div class="section-en">Q5 · Main-brand openings &amp; franchising progress</div>
+  <table>
+    <thead><tr><th>口径</th><th>数据</th><th>性质</th></tr></thead>
+    <tbody>
+      <tr><td>2025全年（最近完整真实数据）</td><td>自营新开79家、关停/搬迁85家（自营净减51家）；加盟13→79家（净增66家）；总门店净增15家至1383家</td><td><span class="badge badge-high">高·年报</span></td></tr>
+      <tr><td>2025H1（同期基准）</td><td>新开自营25家+加盟3家、关闭33家，净减5家至1363家——上半年历来是开店淡季</td><td><span class="badge badge-high">高·中报</span></td></tr>
+      <tr><td>2026年公司指引</td><td>业绩会明确<b>不设开店数量目标</b>（"先跑店型，再开店"）；翻台率低于4.0次/天不规模化开新店（啄木鸟红线延续）；加盟"稳健"、无数字目标、优先审核质量</td><td><span class="badge badge-high">高·业绩会</span></td></tr>
+      <tr><td>2026 H1推算</td><td>主品牌净增约0–10家（参照2025年"上半年弱、下半年发力"的节奏与H1历来净减的基数效应，叠加2026年扩张动能边际回暖）；加盟延续单月中个位数净增、H1末或达95–115家</td><td><span class="badge badge-gap">推算·2层假设</span></td></tr>
+    </tbody>
+  </table>
+  <p class="body">
+    <b>加盟的真实定位</b>：2万余份申请累计只批出79家（2025年末），落地率不足0.5%——加盟对海底捞是<b>下沉市场的低资本试错工具</b>（超70%申请来自三线及以下城市），不是规模引擎。董事会副主席周兆呈曾明确表示以现有约1400家门店基数、加盟"最多可能到100家"量级——按此口径，<b>2026年内加盟店大概率逼近但不突破100家</b>。<span class="badge badge-mid">中·管理层原话+推算</span>
+  </p>
+</section>
+
+<!-- Q6 -->
+<section>
+  <div class="section-zh">六、2026上半年中国餐饮行业趋势与挑战</div>
+  <div class="section-en">Q6 · H1 2026 China restaurant industry: trends &amp; challenges — first-hand NBS data</div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">全国餐饮收入累计同比增速逐月回落 · NBS restaurant revenue growth, cumulative YoY (2026)</div>
+    <div class="chart-sub">来源：国家统计局月度发布（一手数据）；5月单月增速仅+0.6%，行业需求端压力显性化</div>
+    <svg viewBox="0 0 900 250" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="80" y1="200" x2="840" y2="200" stroke="#d4cec6" stroke-width="1"/>
+      <line x1="80" y1="200" x2="80" y2="30" stroke="#d4cec6" stroke-width="1"/>
+      <!-- y: 0% at y=200, 5% at y=50 => 30px per 1% -->
+      <!-- points: 1-2月 4.8 (y=56), 1-3月 4.2 (y=74), 1-4月 3.8 (y=86), 1-5月 3.1 (y=107) -->
+      <polyline points="180,56 380,74 580,86 780,107" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+      <circle cx="180" cy="56" r="5" fill="#8b6c42"/>
+      <text x="180" y="42" text-anchor="middle" font-size="14" font-weight="700">+4.8%</text>
+      <text x="180" y="222" text-anchor="middle" font-size="12">1-2月</text>
+      <circle cx="380" cy="74" r="5" fill="#8b6c42"/>
+      <text x="380" y="60" text-anchor="middle" font-size="14" font-weight="700">+4.2%</text>
+      <text x="380" y="222" text-anchor="middle" font-size="12">1-3月</text>
+      <circle cx="580" cy="86" r="5" fill="#8b6c42"/>
+      <text x="580" y="72" text-anchor="middle" font-size="14" font-weight="700">+3.8%</text>
+      <text x="580" y="222" text-anchor="middle" font-size="12">1-4月</text>
+      <circle cx="780" cy="107" r="5" fill="#8b2e2e"/>
+      <text x="780" y="93" text-anchor="middle" font-size="14" font-weight="700" fill="#8b2e2e">+3.1%</text>
+      <text x="780" y="222" text-anchor="middle" font-size="12">1-5月</text>
+      <!-- May single month annotation -->
+      <rect x="640" y="150" width="200" height="36" fill="rgba(139,46,46,0.08)" stroke="#8b2e2e" stroke-width="1"/>
+      <text x="740" y="166" text-anchor="middle" font-size="12" fill="#8b2e2e" font-weight="700">5月单月：4,605亿元，仅+0.6%</text>
+      <text x="740" y="180" text-anchor="middle" font-size="10" fill="#8b2e2e">（接近零增长）</text>
+      <text x="70" y="56" text-anchor="end" font-size="10" fill="#888">5%</text>
+      <text x="70" y="200" text-anchor="end" font-size="10" fill="#888">0%</text>
+    </svg>
+  </div>
+
+  <table>
+    <thead><tr><th>#</th><th>趋势/挑战</th><th>数据支撑</th><th>置信</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>需求增速逐月回落，跑赢大盘但同步降速</b></td><td>餐饮1-5月累计23,488亿元(+3.1%)，虽跑赢社零(+1.4%)，但累计增速从+4.8%逐月下滑，5月单月仅+0.6%</td><td class="center"><span class="badge badge-high">高·统计局</span></td></tr>
+      <tr><td>2</td><td><b>价格战与"内卷"加剧，客单价普降</b></td><td>平台高额补贴引发价格战（中国烹饪协会公开警示"有订单无利润"）；火锅品类首当其冲——海底捞小嗨火锅锅底9.9元、楠火锅/怂火锅荤菜9.9元起，头部品牌客单价集体下探</td><td class="center"><span class="badge badge-mid">中高</span></td></tr>
+      <tr><td>3</td><td><b>火锅进入存量竞争，区域特色品牌崛起</b></td><td>红餐产业研究院《区域火锅观察报告2026》（2026年3月）：赛道整体进入存量竞争，区域特色品牌（潮汕牛肉、地方派系）强势分流全国性品牌</td><td class="center"><span class="badge badge-mid">中高·行业研报</span></td></tr>
+      <tr><td>4</td><td><b>连锁化加速、加盟模式主导扩张</b></td><td>勤策《2026年中国餐饮行业报告》：连锁化进程加速，加盟成为行业主导扩张模式——海底捞的"审慎加盟"（落地率&lt;0.5%）在行业内反而是异类</td><td class="center"><span class="badge badge-mid">中·行业研报</span></td></tr>
+      <tr><td>5</td><td><b>门店生存周期缩短，闭店常态化</b></td><td>行业观察：餐饮门店平均存活周期已从十年前约2年多缩短至约1年半以内；部分头部/高端品牌上半年营收下滑、由盈转亏（注：此项为行业媒体定性描述，无统一官方统计口径）</td><td class="center"><span class="badge badge-low">中低·媒体</span></td></tr>
+      <tr><td>6</td><td><b>外卖/即时零售重塑收入结构</b></td><td>平台补贴使外卖价格低于堂食、客流线上化——对堂食型品牌是成本与流量的双重挤压；海底捞外卖收入+111.9%至占比25.3%（2025年）正是对此的适应动作</td><td class="center"><span class="badge badge-mid">中</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：6条提纲全部作答——2条以一手/准一手数据回答，4条以"真实锚点+推算模型"回答</div>
+  <div class="v-conf">综合置信度 6.0 / 10 ｜ 高置信数据点 9 项 · 中置信 8 项 · 推算区间 6 项（均标注假设层数）｜ Confidence 6.0/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>本次研究最有价值的新发现是焰请烤肉的收缩：截至2026年6月30日全国70家、上半年零新开、关店至少19家（广州3店全关）。</strong>这是提纲六条中唯一精确到"2026年6月"口径的真实公司数据，也是红石榴计划内部"达尔文式再配置"的首个明确案例——资源正从高客单体验型业态转向平价高翻台型业态（大排档/举高高/如鮨均在扩张）。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：2026-07-01东方财富/中华网报道，核自品牌官方小程序</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>行业环境是上半年最确定的坏消息：餐饮收入累计增速逐月回落（+4.8%→+3.1%），5月单月仅+0.6%接近零增长。</strong>叠加平台补贴价格战与存量竞争，海底捞"客单价连续三年下滑"不是个体问题而是行业系统性压力——判断其6月经营时，行业Beta比公司Alpha更主导。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：国家统计局2026年1-5月月度发布（一手）；中国烹饪协会公开表态</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>主品牌翻台率/客单价/同店的"6月数字"均为推算区间（翻台3.7–3.9次/天、客单96–97元、同店-3%～-6%），非公司披露。</strong>公司级精确数据唯一的官方来源是8–9月发布的中报；本报告推算模型的方向性结论——6月处于年内经营低点区间、以价换量延续——比区间内的具体小数更可靠。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：H1/H2隐含拆分+季节性假设组合推算，假设层数已逐项标注</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">4</div>
+    <div class="v-text"><strong>开店层面："主品牌不设数量目标+加盟逼近但难破100家"是2026年的基本盘。</strong>增长故事的主战场已移到副品牌：大排档（3年500家目标、张勇亲抓）与如鮨（2年100家潜力、单店翻台跑通）是下半年最值得跟踪的两条线；焰请则是检验集团止损纪律的反面样本。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：2026-03业绩会管理层表态 + 周兆呈公开访谈 + 本次副品牌数据拼接</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=haidilao_2026H1_outline_20260704" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  国家统计局2026年1–5月社会消费品零售总额月度发布（餐饮收入分项，一手）；东方财富/中华网2026-07-01（焰请烤肉门店数，核自官方小程序）；海底捞2025年度业绩公告及业绩说明会（2026-03-24）、2025年中期报告；证券时报、腾讯新闻、21经济网、虎嗅、36氪、时代周报等对大排档/如鮨/举高高的报道；中国烹饪协会关于平台价格战的公开表态；红餐产业研究院《区域火锅观察报告2026》；勤策消费研究《2026年中国餐饮行业报告》。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>统计局1-5月行业数据、焰请门店数与关店数、海底捞2025年报数字、业绩会表态 — 一手或准一手，置信度<b>高</b>。大排档4月门店数、如鮨首店表现、举高高2025年扩张计划、行业研报趋势 — 媒体/研报交叉验证，置信度<b>中</b>。翻台率/客单价/同店/H1开店/举高高与如鮨6月门店数 — 推算区间，置信度<b>低</b>，已逐项标注假设层数，<b>2026年8–9月中报发布后必须核实修正，不得作为确定事实对外引用</b>。
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 客户提纲研究 Mode B</span>
+  <span>海底捞 2026H1 经营与行业环境 · 六条提纲</span>
+  <span>生成日期 2026-07-04</span>
+</footer>
+
+</body>
+</html>
