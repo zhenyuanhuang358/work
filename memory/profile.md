@@ -38,8 +38,9 @@
 **事故：fetch_research_data.py 从未推到 main，research 工作流全部失败（2026-07-04 发现并修复）**
 - 问题：fetch-research-data workflow 每次运行都 failure，research_cache/_manifest.json 长期 404
 - 根因：workflow yml 在 main 上，但它调用的 scripts/fetch_research_data.py 只存在于工作分支——Action 只跑 main 上的代码
-- 修复：把脚本推上 main；本地两个 workflow yml 反向同步 main 的改进版（[skip ci] + pull --rebase）
-- 教训：**这是 1.1 节"本地脚本必须同步推 main"教训的重演，且更隐蔽——不只是"改了要同步"，是"新增文件也要确认部署"。任何 GitHub Action 依赖的文件，创建后第一件事是验证 main 上存在**
+- 修复：把脚本推上 main（已确认在 main 树中）；本地两个 workflow yml 反向同步 main 的改进版（[skip ci] + pull --rebase）
+- ⚠️ 验证未闭环（2026-07-04）：脚本部署后触发了 06862.HK 测试，但 main 上未出现 "chore: update research cache" 提交，research_cache/ 仍不存在——工作流存在第二层故障（需看 Action 运行日志诊断，当时 GitHub 连接断开无法查看）。**下次会话如需 research 缓存：先查 main 是否有 research_cache/，没有则去 GitHub Actions 页面看 fetch-research-data 最新 run 的失败日志再修**
+- 教训：**这是 1.1 节"本地脚本必须同步推 main"教训的重演，且更隐蔽——不只是"改了要同步"，是"新增文件也要确认部署"。任何 GitHub Action 依赖的文件，创建后第一件事是验证 main 上存在；且修复后必须等到产物真实出现才算闭环**
 
 ---
 
