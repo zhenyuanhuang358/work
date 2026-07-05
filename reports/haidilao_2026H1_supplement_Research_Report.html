@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞补充提纲研究 · 门店主业/外卖/红石榴/管理层</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:35px;line-height:1.18;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:16px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.red{border-color:var(--red);color:var(--red);font-weight:700}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.7}
+.notice b{color:var(--amber)}
+section{margin-top:44px}
+.section-zh{font-size:23px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:16px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.qcard{border:1px solid var(--border);background:var(--card);padding:20px 22px;margin-top:18px}
+.qcard .qnum{display:inline-block;font-size:12.5px;font-weight:700;color:var(--paper);
+  background:var(--ink);border-radius:2px;padding:2px 9px;margin-right:8px}
+.qcard .qtext{font-size:15.5px;font-weight:700;line-height:1.5}
+.qcard .qanswer{font-size:14.5px;color:#1a1a1a;margin-top:11px;line-height:1.7}
+.qcard .qsrc{font-size:12px;color:#888;margin-top:9px;font-style:italic}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:14px}
+.insight .h{font-weight:700;font-size:15px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){h1{font-size:26px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 补充提纲研究</span>
+  <span>海底捞 Haidilao (06862.HK)</span>
+  <span>2026-07-05</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">四大板块 · 承接 2026-07-04《六条提纲研究》的深化补充</div>
+  <h1>海底捞补充提纲研究<br>门店主业 · 外卖业务 · 红石榴计划 · 管理层</h1>
+  <div class="title-en">Haidilao Supplementary Outline — Core Ops / Delivery / Pomegranate Plan / Management</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 06862.HK</span>
+    <span class="tag red">中报8-9月发布 · 部分为推算</span>
+    <span class="tag">承接前份报告，数据不重复展开</span>
+    <span class="tag gold">综合置信 5.8/10</span>
+  </div>
+  <div class="notice">
+    <b>口径说明：</b>与前份报告同源约定——公司级2026年上半年精确数字（翻台/开店/外卖增速/亏损额）官方要到<b>8–9月中报</b>才有，本报告以"最新真实锚点 + 显式假设推算"作答，推算处逐项标注假设层数；<b>外卖净利率与红石榴亏损幅度两项公司从未披露过分部利润，连年报都不会有精确答案</b>，本报告给出的推算区间是访谈前的校准锚，建议以客户访谈实际获取的数字为准。
+  </div>
+</header>
+
+<!-- 板块一 门店主业 -->
+<section>
+  <div class="section-zh">板块一 · 门店主业</div>
+  <div class="section-en">Core restaurant operations — 5 questions</div>
+
+  <div class="qcard">
+    <div><span class="qnum">1.1</span><span class="qtext">6月翻台情况？5、6月下滑的原因？</span><span class="badge badge-gap">推算+归因分析</span></div>
+    <div class="qanswer">
+      <b>6月翻台估算：3.7–3.9次/天</b>（推算模型：2026春节峰值5.2次/天反推Q1均值4.5–4.8，再按2025年Q1→Q2约-18%的季节折扣；4层假设，低置信）。<br><br>
+      <b>5、6月下滑的归因（四因叠加，按权重排序）</b>：<br>
+      ① <b>行业需求陡然走弱（最大变量）</b>——统计局数据：全国餐饮收入5月单月仅+0.6%（接近零增长），累计增速从1-2月+4.8%逐月回落至1-5月+3.1%。这不是海底捞个体问题；<br>
+      ② <b>季节性淡季</b>——火锅Q2历来是全年低点（2025年推算Q2约3.4次/天 vs Q1约4.2），5-6月环比春节回落属正常节律，但今年叠加行业弱需求使降幅更陡；<br>
+      ③ <b>春节高基数的"高开低走"</b>——2026年2月翻台创三年新高（超5次/天），拉高了内部与市场对全年斜率的预期，Q2回落在体感上被放大；<br>
+      ④ <b>平台外卖价格战分流堂食</b>——补贴使外卖价格低于堂食、客流线上化，堂食翻台被结构性抽水（海底捞自身外卖+111.9%的另一面就是堂食客流承压）。
+    </div>
+    <div class="qsrc">依据：统计局1-5月发布（一手）、推算模型（前份报告第八节）、中烹协价格战表态。归因权重排序为分析判断。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">1.2</span><span class="qtext">餐饮大环境体感与公司内部当前判断？</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      <b>大环境（数据侧）</b>：餐饮1-5月累计23,488亿元(+3.1%)，跑赢社零(+1.4%)但逐月降速；平台补贴价格战令行业"有订单无利润"（中国烹饪协会公开警示）；火锅进入存量竞争，区域特色品牌分流全国性品牌（红餐《区域火锅观察报告2026》）。<br>
+      <b>公司内部判断（管理层公开表态拼接）</b>：① 定调"<b>极致质价比</b>"——承认价格带必须下移，主品牌不涨价、副品牌全线30-60元带；② "<b>翻台率下降是管理层做得不好</b>"（周兆呈2026-04原话）——内部把下滑归因于自身供给创新不足而非只怪环境，对应动作是"一店一策"改造200+特色主题店；③ <b>不设开店数量目标</b>、利润波动定性为"战略投入的阶段性结果"——内部对2026年的算盘是牺牲短期利润率换新曲线卡位，而非保利润收缩。
+    </div>
+    <div class="qsrc">依据：统计局、中烹协、红餐研究院（行业）；2026-03业绩会+周兆呈2026-04采访（公司）。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">1.3</span><span class="qtext">上半年总体的开店、翻台、客单情况？</span><span class="badge badge-gap">推算区间</span></div>
+    <div class="qanswer">
+      官方H1数据8-9月发布，推算区间（真实锚点：2025H1翻台3.8/客单97.9元/净开-5家；2025全年翻台3.9/客单97.7元）：<br>
+      · <b>翻台率 H1 2026 ≈ 3.8–4.0次/天</b>（Q1约4.5-4.8高开 + Q2约3.7-3.9回落的加权，略好于去年同期3.8）；<br>
+      · <b>客单价 ≈ 96–97元</b>（连续第三年小幅下滑的斜率延续）；<br>
+      · <b>主品牌净开店 ≈ 0–10家</b>（H1历来是开店淡季，去年同期净减5家，今年扩张动能边际回暖）。<br>
+      组合解读：<b>"量稳价跌"</b>——翻台率同比或小幅改善（春节旺季贡献），但客单价下滑意味着同店收入增长仍难转正（估-3%~-6%）。
+    </div>
+    <div class="qsrc">依据：H1/H2隐含拆分+季节假设推算，非公司披露；8-9月中报核实。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">1.4</span><span class="qtext">直营开店及加盟开店的意愿？</span><span class="badge badge-high">高置信（管理层原话）</span></div>
+    <div class="qanswer">
+      <b>直营</b>：意愿明确克制——业绩会原话"先跑店型，再开店"，2026年不设数量目标；啄木鸟红线延续（整体翻台率低于4.0次/天不规模化开店，而2025年实际3.9，红线尚未解锁）；预期年内维持"中个位数比例"的温和新开+同步淘汰。<br>
+      <b>加盟</b>：审慎试点定位不变——2万余份申请累计只批79家（2025年末），落地率不足0.5%；周兆呈明确"以现有门店基数，加盟最多可能到100家"。<b>判断：2026年内加盟店逼近但不突破100家，加盟是下沉市场低资本试错工具，不是规模引擎</b>。
+    </div>
+    <div class="qsrc">依据：2026-03业绩会、周兆呈2025-07/2026-04公开表态（均为管理层原话转述）。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">1.5</span><span class="qtext">原材料成本、人工成本等核心项的变化？</span><span class="badge badge-high">高置信(2025) + 中置信(H1推断)</span></div>
+    <div class="qanswer">
+      <b>2025年真实数据</b>：原材料占收入比<b>40.5%</b>（三年+6.3pp：34.2%→37.9%→40.5%，最大压力项）；员工成本<b>32.6%</b>（基本稳定，员工总数三年减2.8万人、店均148→91人对冲了单价上涨）；租金约1%低位+折旧摊销约6%缓降。<br>
+      <b>2026 H1方向推断</b>：原材料占比<b>维持40%上下高位难改善</b>——外卖/副品牌占比继续提升（结构性推高）+价格战压低收入分母；人工延续"总量降、效率升"；<b>新增压力项是平台佣金与补贴投入</b>（外卖占比升至6%+后，佣金/配送成本在损益表中的权重首次变得可见）。利润弹性取决于翻台率能否回4.0以上，而非成本端再挤压。
+    </div>
+    <div class="qsrc">依据：2025年报（真实）；H1推断基于结构逻辑，标注为分析判断。</div>
+  </div>
+</section>
+
+<!-- 板块二 外卖业务 -->
+<section>
+  <div class="section-zh">板块二 · 外卖业务</div>
+  <div class="section-en">Delivery business — growth / share / strategy / margin</div>
+
+  <div class="qcard">
+    <div><span class="qnum">2.1</span><span class="qtext">上半年增速及占比？</span><span class="badge badge-mid">真实锚点+推算</span></div>
+    <div class="qanswer">
+      <b>真实锚点</b>：2025全年外卖收入<b>26.58亿元（+111.9%）</b>，占总营收<b>6.1%</b>；2024年反推约12.54亿。全国已建成<b>超1200个外卖网点</b>，覆盖所有主流平台；"下饭火锅菜"（一人食）贡献超<b>55%</b>的外卖收入。<br>
+      <b>2026 H1推算</b>：基数抬高后增速自然回落，但平台补贴大战（2026年上半年行业级变量）对外卖是顺风——估<b>H1同比+40%~+70%，收入约16–20亿元，占比升至7.5%~9%</b>（2层假设：翻倍后增速衰减规律+补贴顺风修正；低置信）。
+    </div>
+    <div class="qsrc">依据：2025年报+一财/新浪（真实）；H1增速为推算，中报核实。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">2.2</span><span class="qtext">未来策略？</span><span class="badge badge-mid">中置信</span></div>
+    <div class="qanswer">
+      从公开动作拼接，外卖策略三条主线：① <b>产品分层</b>——"下饭火锅菜"锚定一人食/工作餐（30-50元带，与堂食百元带错位，避免自我蚕食堂食场景而非价格带）；② <b>网点密度</b>——1200+外卖网点本质是把门店产能"第二次出售"，边际成本低；③ <b>全平台+自有渠道并行</b>——与所有主流平台合作同时保留自有小程序（hi捞送体系），在平台佣金谈判中保留退路。<b>判断：外卖对海底捞是产能利用率工具+价格带下探的试验田，不是独立第二主业</b>——它与红石榴的平价副品牌共同构成"接住消费降级客群"的双通道。
+    </div>
+    <div class="qsrc">依据：年报披露+管理层表态+产品结构分析（策略归纳为分析判断，非公司原话）。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">2.3</span><span class="qtext">净利率水平？</span><span class="badge badge-gap">公司从未披露 · 推算</span></div>
+    <div class="qanswer">
+      <b>公司从未披露外卖分部利润，此数字连中报也不会有</b>——建议列为访谈核心追问。访谈前校准锚（推算）：外卖依托existing门店产能，无独立租金、边际人工低，理论边际经营利润率可达15–25%；但扣除平台佣金（6–8%）、配送与包装、补贴投入后，<b>净利率估算区间8–15%，大概率高于堂食业务当前净利率（集团净利率9.35%）</b>。逻辑：外卖是"增量摊薄固定成本"的生意，只要不打自有补贴，its边际盈利性优于新开一家店。<b>2层假设推算，低置信，仅作访谈参照系，不得引用为事实。</b>
+    </div>
+    <div class="qsrc">依据：成本结构逻辑推算+行业外卖经济模型惯例；无任何公司披露支撑。</div>
+  </div>
+</section>
+
+<!-- 板块三 红石榴计划 -->
+<section>
+  <div class="section-zh">板块三 · 红石榴计划</div>
+  <div class="section-en">Pomegranate Plan — sub-brands / BBQ adjustment / expansion plans / losses</div>
+
+  <div class="qcard">
+    <div><span class="qnum">3.1</span><span class="qtext">主要几个子品牌情况？</span><span class="badge badge-high">高置信（焰请为6月末真实口径）</span></div>
+    <div class="qanswer">
+      矩阵总览：<b>20个子品牌、207家店（2025年末），收入15.21亿（+214.6%，占营收3.5%）</b>。头部四子牌2026年6月状态：<br>
+      · <b>焰请烤肉</b>：70家（2026-6-30真实），上半年零新开、关店≥19家——收缩调整中；<br>
+      · <b>大排档</b>：4月真实9家→6月估12-14家，翻台5.5-6次/日，张勇亲抓，3年500家目标；<br>
+      · <b>举高高</b>（收购的59.9元自助小火锅）：估40-55家（低置信），快速铺店期；<br>
+      · <b>如鮨寿司</b>：估10-15家（低置信），首店周末翻台达8轮、单店模型跑通，2年100家潜力；<br>
+      · 其他：小嗨火锅（9.9元锅底）、苗师兄香锅、小嗨爱炸、榴金川菜馆（4月长沙首店）、煎饼巴士等，2026年落地节奏明显快于2025年。
+    </div>
+    <div class="qsrc">依据：2025年报+2026-07-01焰请报道（官方小程序口径）+证券时报业绩会+推算（举高高/如鮨）。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">3.2</span><span class="qtext">烤肉（焰请）今年的调整策略？</span><span class="badge badge-high">高置信（事实）+ 分析判断（策略解读）</span></div>
+    <div class="qanswer">
+      <b>事实</b>：2026年上半年零新开、关店至少19家（广州3店全关），70家与去年同期持平——官方小程序口径。<br>
+      <b>策略解读</b>：这是<b>"止损收缩、保留火种"</b>而非放弃——① 关店集中在低效城市/商圈（广州整体撤出说明按城市而非按单店做减法）；② 百元客单价的重体验业态与当前"极致质价比"大方向逆风，被动排在资源序列末位；③ 保留70家规模意味着品牌未被判死刑，等待消费环境回暖或模型改造（对照主品牌啄木鸟计划先关店、硬骨头计划再复开的先例）。<b>访谈建议追问：焰请是否会走"硬骨头式"改造复开，还是并入其他品牌/逐步出清。</b>
+    </div>
+    <div class="qsrc">依据：东方财富/中华网2026-07-01（事实）；策略解读为分析判断。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">3.3</span><span class="qtext">大排档和寿司的规划？</span><span class="badge badge-high">高置信（业绩会原话）</span></div>
+    <div class="qanswer">
+      业绩会（2026-03-24）管理层原话级表态：<b>大排档"未来三年有潜力实现500家"</b>（2025年12月广州首店起步，现翻台5.5-6次/日）；<b>如鮨寿司"未来两年有潜力开100家"</b>（翻台6次/天+，主力9.9/15元价位对标"日料界萨莉亚"）。两者是红石榴计划从"孵化验证"转向"市场扩张"阶段的头两个规模化品牌，张勇亲抓大排档、杨利娟2026年4月回归统筹整个红石榴计划——集团把最高管理资源压在了这两条线上。<b>节奏提示：目标措辞是"有潜力"而非承诺，按海底捞"先跑店型再开店"的纪律，实际爬坡若翻台不达标会主动放缓。</b>
+    </div>
+    <div class="qsrc">依据：证券时报/北京商报2026-03业绩会报道、杨利娟人事公告。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">3.4</span><span class="qtext">整体亏损的幅度及减亏策略？</span><span class="badge badge-gap">公司未披露分部利润 · 推算</span></div>
+    <div class="qanswer">
+      <b>公司未单独披露红石榴/其他餐厅的分部利润，亏损额无官方数字</b>——建议列为访谈核心追问。可用的推算框架：<br>
+      · 利润桥证据：2025年核心经营利润62.3→54.03亿（<b>-8.27亿</b>），管理层把下滑归因于"战略投入的阶段性结果，主要用于红石榴多品牌孵化和创新投入"——即新业务拖累是利润降幅的重要构成（但非全部，主品牌同店-6.8%同样拖累）；<br>
+      · 自下而上估算：其他餐厅收入15.21亿，孵化爬坡期门店经营亏损率按10–25%估（1.5–3.8亿），叠加总部孵化费用（品牌研发/团队/供应链搭建）1–2.5亿，<b>红石榴整体年化拖累估算约2.5–6亿元</b>（2层假设，低置信）；<br>
+      · <b>减亏策略（从动作反推）</b>：① 达尔文式组合管理——焰请关19家止损即是减亏动作本身；② 资源集中到单店模型已跑通的品牌（大排档/如鮨翻台5.5-8轮）而非撒胡椒面；③ 供应链复用（蜀海体系支撑举高高59.9元定价）摊薄后台成本；④ "掌勺人"员工创业制把部分孵化风险转为内部合伙分担。
+    </div>
+    <div class="qsrc">依据：2025年报利润桥+管理层归因（真实）；亏损额为推算区间，非公司数据；减亏策略为动作归纳。</div>
+  </div>
+</section>
+
+<!-- 板块四 管理层 -->
+<section>
+  <div class="section-zh">板块四 · 管理层</div>
+  <div class="section-en">Management — Zhang Yong's return: substantive changes &amp; priorities</div>
+
+  <div class="qcard">
+    <div><span class="qnum">4.1</span><span class="qtext">张总回归后目前来看实质的变化？</span><span class="badge badge-high">高置信（动作均有公开记录）</span></div>
+    <div class="qanswer">
+      2026年1月13日张勇重任CEO（苟轶群卸任）至今约半年，可核实的实质变化五项：<br>
+      ① <b>真金白银表态</b>——回归3个月后个人增持不少于1亿港元；<br>
+      ② <b>新业务节奏肉眼可见提速</b>——4月单月落地榴金川菜馆、煎饼巴士两个新品牌（2025年均值约0.8个/月），张勇亲抓大排档项目；<br>
+      ③ <b>高管重新排阵</b>——苟轶群转任集团流程智能化/智能中台建设；杨利娟4月辞任特海国际CEO回归、专职统筹红石榴计划；同日4位女性高管新任执行董事；<br>
+      ④ <b>考核松绑</b>——"在利润下滑中弱化对门店考核"（21经济网2026-04），配合"一店一策"改造200+主题店，把标准化复制转向差异化定制；<br>
+      ⑤ <b>止损纪律同步执行</b>——焰请上半年关19家，说明"加速孵化"与"果断砍亏"并行，不是单边扩张。
+    </div>
+    <div class="qsrc">依据：新浪/36氪2026-01人事公告、证券时报增持报道、21经济网2026-04、杨利娟人事公告、焰请2026-07-01报道。</div>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">4.2</span><span class="qtext">管理重心及业务重心的安排？</span><span class="badge badge-mid">中置信（结构拼接）</span></div>
+    <div class="qanswer">
+      从人事安排反推的分工结构（媒体归纳为"前台-中台-后台"，非公司官方原始措辞）：<br>
+      · <b>张勇（CEO）</b>：压新增长曲线——亲抓大排档等新业态，管"从0到1"；<br>
+      · <b>杨利娟</b>：统筹红石榴计划——管"从1到N"的复制扩张与组合管理（谁加速、谁止损）；<br>
+      · <b>苟轶群</b>：智能中台/流程自动化——管数字化基建（50个AI应用、AI巡检、KPAD等体系的集团化）；<br>
+      · <b>主品牌基本盘</b>：交给既有运营体系按"极致质价比+一店一策+啄木鸟红线"的既定框架运转，不做激进动作。<br>
+      <b>一句话概括：主品牌守住现金流，最高管理资源全部押注第二曲线——2026年是海底捞把"增长故事"从主品牌翻台率正式切换到副品牌矩阵的一年。</b>此判断为结构拼接与分析，建议访谈中直接向受访者验证。
+    </div>
+    <div class="qsrc">依据：人事公告与公开报道拼接；"前中后台"为媒体解读表述。</div>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：4板块16问全部作答——无一留白，推算处均标注假设层数</div>
+  <div class="v-conf">综合置信度 5.8 / 10 ｜ 高置信 7 问 · 中置信 4 问 · 推算为主 5 问 ｜ Confidence 5.8/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>客户问"5、6月下滑的原因"本身透露其已有渠道信息证实下滑——本报告归因框架（行业需求陡弱＞季节性淡季＞春节高基数体感放大＞外卖分流堂食）与统计局5月单月+0.6%的数据完全自洽。</strong>访谈中值得反问受访者：内部把下滑归因于环境还是自身，这决定下半年动作是收缩还是继续投入。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：统计局一手数据+推算模型+管理层"翻台率下降是管理层做得不好"的自我归因表态</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>两个公司从未披露的数字——外卖净利率（估8–15%）与红石榴整体亏损（估年化2.5–6亿）——是本提纲信息价值最高的访谈追问点，任何公开研究都替代不了受访者的一手回答。</strong>本报告给出的推算区间仅作访谈前的校准锚：若受访者报出的数字明显超出区间，值得当场追问口径差异。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：利润桥+成本结构逻辑推算，2层假设，低置信</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>张勇回归半年的实质变化可以用一组对照概括：新品牌落地提速（4月单月2个）与焰请果断关店19家并行——"踩油门"与"踩刹车"同时发生，说明红石榴已从广撒网孵化转入达尔文式组合管理。</strong>管理重心的本质安排是：主品牌守现金流，张勇/杨利娟两位最高层全部押注第二曲线。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：人事公告、增持记录、焰请关店数据的动作拼接（判断部分建议访谈验证）</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=haidilao_2026H1_supplement_20260705" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  海底捞2025年度业绩公告及业绩说明会（2026-03-24）、2025年中期报告；国家统计局2026年1–5月月度发布；第一财经/新浪财经（外卖111.9%、1200网点、下饭火锅菜占55%）；东方财富/中华网2026-07-01（焰请门店与关店数，官方小程序口径）；证券时报（大排档500家/如鮨100家表态、张勇增持）；21经济网2026-04-15（弱化门店考核）；新浪/36氪2026-01（张勇回归人事公告）；中国烹饪协会、红餐产业研究院、勤策消费研究（行业）。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>2025年报数字、焰请6月末门店数、管理层人事与表态、统计局行业数据 — 一手/准一手，置信度<b>高</b>。策略归纳、管理分工结构、H1成本方向 — 公开动作拼接，置信度<b>中</b>。6月翻台、H1开店/客单/外卖增速、外卖净利率、红石榴亏损额 — 推算区间（已标注假设层数），置信度<b>低</b>，其中<b>外卖净利率与红石榴亏损为公司从未披露项，中报也不会有，必须以访谈获取为准</b>。
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 补充提纲研究</span>
+  <span>海底捞 门店主业/外卖/红石榴/管理层 · 16问</span>
+  <span>生成日期 2026-07-05</span>
+</footer>
+
+</body>
+</html>
