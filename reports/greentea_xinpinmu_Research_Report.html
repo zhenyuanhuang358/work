@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绿茶集团 × 新拼姆（拼多多品牌自营）合作全流程研究 v2</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:16px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.red{border-color:var(--red);color:var(--red);font-weight:700}
+.tag.green{border-color:var(--green);color:var(--green);font-weight:700}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(42,92,63,0.08);
+  border-left:3px solid var(--green);padding:14px 18px;line-height:1.7}
+.notice b{color:var(--green)}
+.critical-notice{margin-top:16px;font-size:14px;color:#2a0d0d;background:rgba(139,46,46,0.08);
+  border:1.5px solid var(--red);border-left:5px solid var(--red);padding:16px 20px;line-height:1.75}
+.critical-notice .h{font-weight:700;font-size:15px;color:var(--red);margin-bottom:6px}
+section{margin-top:44px}
+.section-zh{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:16px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:14px}
+.insight .h{font-weight:700;font-size:15px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){h1{font-size:25px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 客户提纲研究 Mode B · v2 实体修正版</span>
+  <span>绿茶集团 (6831.HK) × 新拼姆</span>
+  <span>2026-07-06</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">预制餐品 / 调料包 / 方便食品 · 合作全流程 · 实体已确认为拼多多"新拼姆"</div>
+  <h1>绿茶集团 × 新拼姆 合作全流程研究<br>模式 · 进度 · 选品 · 研发 · 区域 · 定价 · 周期 · UE</h1>
+  <div class="title-en">Green Tea Group × Xinpinmu (PDD Brand Self-Operation) — Full Partnership Lifecycle Research, v2</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 6831.HK</span>
+    <span class="tag green">实体已确认：拼多多"新拼姆"（2026年3月落地上海）</span>
+    <span class="tag red">绿茶×新拼姆合作公开零披露</span>
+    <span class="tag gold">综合置信 5.5/10（v2）</span>
+  </div>
+  <div class="notice">
+    <b>v2 实体修正：</b>客户已确认「新拼姆」为<b>拼多多旗下品牌自营模式</b>——本次检索独立核实其真实性：2026年3月下旬官宣、专门公司落地上海、<b>首期现金注资150亿元、三年计划总投入1000亿元</b>，整合"拼多多+Temu"供应链资源、面向全球市场系统性自营/孵化品牌（新华网/证券时报/36氪等多源一致）。角色转变与客户描述完全一致：平台从"撮合者"变为"品牌总包商"——用消费数据定义产品→出图纸定标准贴自有牌→工厂纯代工零库存→平台买断再卖。前版报告按山姆构建的框架<b>结构高度同源</b>（数据定义选品/深度介入研发/包销绑定），本版按新拼姆真实机制全面替换参数，并新增其独有变量：<b>Temu 出海通道</b>。
+  </div>
+  <div class="critical-notice">
+    <div class="h">⚠ 仍需确认的前提：绿茶×新拼姆合作公开渠道零披露</div>
+    多路检索未发现绿茶集团与新拼姆合作的任何公开记录。两个佐证使"未公开早期合作"判断可信：① 新拼姆首批主力品类是<b>服装</b>，食品/预制餐品属于其扩品类阶段——绿茶若在谈，属早期试点伙伴；② 绿茶自建加工设施规划"90%内供/10%外售"，外售零售化刚起步，与早期试点节奏自洽。本报告仍定位为<b>访谈前全流程校准框架</b>，绿茶侧具体参数以受访者一手回答为准。
+  </div>
+</header>
+
+<!-- 一 合作模式 -->
+<section>
+  <div class="section-zh">一、合作模式：新拼姆的四种介入方式与绿茶的特殊落点</div>
+  <div class="section-en">Partnership models — Xinpinmu's four levers &amp; Green Tea's unusual position</div>
+  <table>
+    <thead><tr><th>新拼姆介入方式（官宣/媒体口径）</th><th>适用对象</th><th>绿茶适配</th></tr></thead>
+    <tbody>
+      <tr><td><b>A. 联合研发</b></td><td>有产品力、缺数据定义能力的厂商</td><td class="center"><b>高</b>——绿茶出配方与餐饮场景验证，新拼姆出消费数据与规格定义<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td><b>B. 深度定制 + 买断包销</b></td><td>"有潜力但缺品牌与数据的工厂"</td><td class="center"><b>高（生产侧）</b>——实际生产方（绿茶190+加工厂或自建设施）按新拼姆标准代工、零库存<span class="badge badge-mid">推断</span></td></tr>
+      <tr><td>C. 产业带直投/产线改造</td><td>需品类升级的产业集群</td><td class="center">低——绿茶非产业带集群</td></tr>
+      <tr><td>D. 贴新拼姆自有品牌</td><td>纯白牌产能</td><td class="center"><b>关键张力点</b>——绿茶的核心资产是品牌，纯贴牌等于把品牌价值让渡给平台，详见下方</td></tr>
+    </tbody>
+  </table>
+  <div class="insight">
+    <div class="h">绿茶落点的核心张力（本报告最重要的模式判断）</div>
+    <p>新拼姆的标准剧本是"平台贴自己的牌"（拼多多自营品牌），但绿茶<b>不是无牌工厂，是有58家门店级认知的上市餐饮品牌</b>——纯贴牌模式下绿茶只赚代工钱、品牌隐身，这与其"零售化打品牌"的IPO战略矛盾。因此最可能的落点是<b>混合模式：「绿茶」品牌授权/联名 + 新拼姆数据定义与买断包销</b>（类似太二×山姆的联名逻辑移植到平台自营体系），或按品类拆分——招牌菜（烤鸡/佛跳墙）挂绿茶联名保品牌，通用型调料包/方便食品贴平台牌走量。<b>访谈第一优先问题：产品挂谁的牌？</b>这决定这笔合作对绿茶是"品牌建设"还是"产能生意"。</p>
+  </div>
+</section>
+
+<!-- 二 合作进度 -->
+<section>
+  <div class="section-zh">二、目前的合作进度</div>
+  <div class="section-en">Current progress — zero disclosure; stage-gate framework adapted to Xinpinmu</div>
+  <p class="body">
+    <b>公开渠道零披露</b><span class="badge badge-gap">核实过的空白</span>。定位坐标：新拼姆2026年3月末才官宣、首批主力品类为服装，<b>食品/预制餐品属扩品类阶段</b>——绿茶若在合作，大概率处于第②–④阶段之间（截至2026年7月，距官宣仅3个多月）。阶段门框架（访谈定位用）：
+  </p>
+  <table>
+    <thead><tr><th>阶段</th><th>内容（新拼姆版）</th><th>典型周期</th><th>访谈定位问题</th></tr></thead>
+    <tbody>
+      <tr><td>① 品类立项/商务接洽</td><td>新拼姆按品类扩张计划邀约，或绿茶主动提案</td><td class="center">1–2月</td><td>谁先找谁？食品品类在新拼姆内部的优先级？</td></tr>
+      <tr><td>② 数据定义/出图纸</td><td>平台用消费数据定义产品方向、口味、规格、价格带，"先画图纸再出团"</td><td class="center">1–3月</td><td>平台给了哪些数据洞察？规格/价格带是谁定的？</td></tr>
+      <tr><td>③ 打样/标准制定/验厂</td><td>按平台标准打样迭代，生产方过新拼姆质量体系（事前标准+过程管控）</td><td class="center">2–4月</td><td>打样几轮？用哪家工厂过审？过程管控怎么落地？</td></tr>
+      <tr><td>④ 首批买断/上线测试</td><td>平台按首单量买断，站内（+Temu）灰度上线测动销</td><td class="center">1–3月</td><td>首单量多大？测试期动销/复购的达标线？</td></tr>
+      <tr><td>⑤ 常态化滚动/扩品</td><td>按销售数据滚动追单、扩SKU、接入Temu海外盘</td><td class="center">持续</td><td>是否已谈Temu通道？追单机制与预测由谁出？</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 三 选品 -->
+<section>
+  <div class="section-zh">三、如何选品</div>
+  <div class="section-en">Product selection — data-defined, PDD price-band constrained</div>
+  <p class="body">
+    <b>机制（客户描述+媒体一致，高置信）</b>：与C2M时代"消费者拼团投票"不同，新拼姆是<b>平台先用消费数据画图纸、定义产品，再向工厂下规范</b>——选品权在平台数据侧。对绿茶的含义：不是"绿茶想卖什么"，而是"拼多多的预制菜/方便食品消费数据缺什么"。结合PDD大盘（价格敏感、家庭装、常温优先于冷链）推断绿茶候选单品排序：
+  </p>
+  <table>
+    <thead><tr><th>候选单品</th><th>PDD适配逻辑</th><th>适配度</th></tr></thead>
+    <tbody>
+      <tr><td><b>招牌调料包/复合调味料</b>（烤鸡腌酱等）</td><td>常温、轻物流、低客单、高复购——完美匹配PDD物流与价格带；平台自营品牌化最容易</td><td class="center"><b>最高——推断为首发品类</b></td></tr>
+      <tr><td><b>方便食品</b>（自热/速食化的招牌菜改造）</td><td>常温或半常温，价格带15–30元，PDD速食大盘体量大</td><td class="center">高</td></tr>
+      <tr><td><b>烤鸡家庭装</b>（冷冻）</td><td>品牌认知强，但冷链履约在PDD体系成本高、破损风险大</td><td class="center">中——依赖新拼姆冷链基建进度</td></tr>
+      <tr><td>佛跳墙年菜</td><td>高客单与PDD价格带错位，仅年货节档期性机会</td><td class="center">中低（档期性）</td></tr>
+    </tbody>
+  </table>
+  <p class="body" style="font-size:13px;color:#888">注意与前版（山姆框架）的选品排序差异：会员店场景下冷冻烤鸡排第一，PDD场景下常温调料包排第一——渠道物流与价格带决定选品，这正是访谈中验证"平台数据如何定义产品"的好切口。</p>
+</section>
+
+<!-- 四 研发生产参与 -->
+<section>
+  <div class="section-zh">四、新拼姆在研发和生产中会参与多少</div>
+  <div class="section-en">How deep does Xinpinmu go — deeper than any traditional channel</div>
+  <p class="body">
+    <b>参与深度超过传统渠道（含山姆），这是新拼姆模式的定义性特征（高置信）</b>。角色对照（客户提供机制+媒体核实）：
+  </p>
+  <table>
+    <thead><tr><th>维度</th><th>C2M时代（2025年前）</th><th>新拼姆时代（2026年3月起）</th></tr></thead>
+    <tbody>
+      <tr><td>谁定义产品</td><td>消费者拼团投票</td><td><b>平台先画图纸再出团</b>（消费数据定义方向/口味/规格/价格带）</td></tr>
+      <tr><td>工厂角色</td><td>自有品牌，自负盈亏</td><td><b>纯代工，按标准生产，零库存风险</b></td></tr>
+      <tr><td>品牌归属</td><td>无品牌/白牌</td><td><b>拼多多自营品牌</b>（绿茶场景下的联名/授权安排待访谈确认）</td></tr>
+      <tr><td>平台角色</td><td>撮合者（收佣金）</td><td><b>品牌总包商（买断再卖）</b></td></tr>
+      <tr><td>质量管控</td><td>事后评价</td><td><b>事前标准+过程管控</b></td></tr>
+    </tbody>
+  </table>
+  <div class="insight">
+    <div class="h">对绿茶的具体含义（推断）</div>
+    <p>① 产品定义权大头在平台——绿茶的配方与餐饮场景经验是输入项而非决定项；② 生产端接受"事前标准+过程管控"意味着绿茶的代工厂要接入新拼姆质量体系（类比媒体案例：合作工厂借平台数据反向定制，库存周期从45天压到15天——平台对生产节奏的介入是实时数据级的）；③ <b>研发投入分担优于传统渠道</b>——平台买断制下打样与产线改造风险部分由确定性订单对冲。访谈重点：图纸/标准的具体颗粒度，以及绿茶在口味还原上有多少话语权。</p>
+  </div>
+</section>
+
+<!-- 五 区域 -->
+<section>
+  <div class="section-zh">五、会卖到哪些区域</div>
+  <div class="section-en">Geographic reach — the Temu channel is Xinpinmu's unique weapon</div>
+  <p class="body">
+    <b>国内</b>：拼多多站内全国覆盖（9亿级用户盘），无传统渠道的分区域铺货概念，上线即全国——下沉市场渗透力远超会员店/KA。<br>
+    <b>国外（本模式独有优势）</b>：新拼姆官宣定位即"整合<b>拼多多+Temu</b>供应链资源、面向全球市场"——绿茶产品可借Temu体系进入美欧日韩东南亚，且按全托管式逻辑<b>绿茶只需国内交仓，出口物流/合规/关税由平台承担</b>。对比前版报告的结论（自主出口净利仅3–7%且需FDA/海运冷链自建），Temu通道把出海从"战略亏损项"变成"与国内相近的正常生意"（UE详见第八节）。<b>限制项</b>：食品出海的当地合规（如美国FDA对肉类预制品的准入远严于日用品）可能约束首批出海SKU为调味料/植物基方便食品，肉类烤鸡出海存在合规门槛——访谈中值得确认平台承诺的出海品类范围。<span class="badge badge-mid">机制高置信+路径推断</span>
+  </p>
+</section>
+
+<!-- 六 定价 -->
+<section>
+  <div class="section-zh">六、如何定价</div>
+  <div class="section-en">Pricing — platform holds pricing power; PDD price band is lower than any prior channel</div>
+  <table>
+    <thead><tr><th>要点</th><th>内容</th><th>置信</th></tr></thead>
+    <tbody>
+      <tr><td>定价权归属</td><td><b>平台（品牌总包商角色）</b>——买断后的零售定价完全由新拼姆决定，绿茶只谈买断价；这与传统渠道"供应商建议零售价"的博弈结构不同</td><td class="center"><span class="badge badge-high">机制确定</span></td></tr>
+      <tr><td>价格带推演</td><td>PDD质价比定位下，预制餐品价格带低于所有前述渠道：烤鸡家庭装推演<b>39.9–49.9元</b>（vs 山姆框架的49.8–59.8）；调料包9.9–19.9元带</td><td class="center"><span class="badge badge-gap">推算</span></td></tr>
+      <tr><td>买断价逻辑</td><td>零售价 ×（1−平台自营毛利假设15%）→ 烤鸡买断价≈<b>39元</b>；平台目标是"帮供应商拿回定价权"叙事下的量价平衡，实际议价力仍强势在平台</td><td class="center"><span class="badge badge-gap">推算·2层假设</span></td></tr>
+      <tr><td>对绿茶品牌价格体系的风险</td><td>PDD低价带若挂"绿茶"联名，可能冲击门店客单价心智（门店56元客单 vs 平台39.9家庭装）——这是比山姆更尖锐的品牌稀释问题，也是判断绿茶是否愿挂牌的关键</td><td class="center"><span class="badge badge-mid">分析判断</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 七 周期 -->
+<section>
+  <div class="section-zh">七、生产 / 交货 / 结算周期</div>
+  <div class="section-en">Production / delivery / settlement — the 90-day settlement is the catch</div>
+  <table>
+    <thead><tr><th>环节</th><th>新拼姆机制（媒体/协议口径）</th><th>对比参照</th></tr></thead>
+    <tbody>
+      <tr><td>订单模式</td><td>平台按销售数据滚动下单，反向定制可把库存周期从45天压至15天（媒体案例）；工厂<b>零库存风险</b></td><td>优于所有传统渠道（KA/会员店均有滞销退换货博弈）</td></tr>
+      <tr><td>交货</td><td>国内交平台仓（含Temu海外单同样国内交仓），冷链品类依赖新拼姆冷链基建进度</td><td>交货义务轻于自营电商（无末端履约）</td></tr>
+      <tr><td>结算</td><td><b>货款先到新拼姆，按实际销售+平台规则结算，周期≤90天</b>（服务协议口径）</td><td class="center"><b>弱于山姆月结30–60天</b>——零库存的代价是现金流后置</td></tr>
+      <tr><td>关键张力</td><td>客户描述"买断包销" vs 协议口径"按实际销售结算"——<b>两者现金流含义完全不同</b>（真买断=交货即确权；按实销=类代销，滞销风险实质仍在供应商侧）。可能是不同合作层级并存</td><td class="center"><span class="badge badge-gap">访谈必辨第一问</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 八 UE对比 -->
+<section>
+  <div class="section-zh">八、同款产品各渠道 UE 结构对比（国内+国外）</div>
+  <div class="section-en">Unit economics — Xinpinmu domestic &amp; Temu overseas vs. traditional channels</div>
+  <p class="body">
+    <b>假设单品：绿茶烤鸡家庭装（2只/约1.2kg，冷冻）</b>；调料包类净利率结构会普遍上浮3–5pp。全部为自下而上推算模型（假设显式展开，非任何一方真实数据）：
+  </p>
+  <table>
+    <thead><tr><th>渠道</th><th>零售价（假设）</th><th>供货/买断价</th><th>品牌方净利率</th><th>单件净利</th><th>结构特征</th></tr></thead>
+    <tbody>
+      <tr><td><b>新拼姆·国内（PDD站内）</b></td><td class="center">45.9元</td><td class="center">≈39.0元（平台自营毛利15%假设）</td><td class="center"><b>≈9%</b></td><td class="center">≈3.5元</td><td>单件净利最薄，但<b>零库存风险+9亿用户盘的量潜力</b>；PDD价格带压价强于所有渠道</td></tr>
+      <tr><td><b>新拼姆·Temu海外</b></td><td class="center">≈9.9美元</td><td class="center">≈42元（海外售价高→买断价上浮）</td><td class="center"><b>≈11%</b></td><td class="center">≈4.6元</td><td><b>本模式的杀手锏</b>：国内交仓即完成义务，出口物流/合规/关税归平台——对比自主出口净利3–7%+FDA自扛，<b>出海UE提升约2倍且零合规负担</b></td></tr>
+      <tr><td>山姆类会员店（前版框架参照）</td><td class="center">59.8元</td><td class="center">≈52.0元</td><td class="center">≈10%</td><td class="center">≈5.2元</td><td>单件净利更高+账期更好（30–60天），但量级封顶于50+家店，无出海通道</td></tr>
+      <tr><td>电商自营（天猫/京东旗舰店）</td><td class="center">69.8元</td><td class="center">—（自营）</td><td class="center">≈11%</td><td class="center">≈7.9元</td><td>名义最高但营销费18%前置、量靠投放买，规模天花板低</td></tr>
+      <tr><td>普通商超KA</td><td class="center">65.8元</td><td class="center">≈47.4元</td><td class="center">≈12%</td><td class="center">≈5.7元</td><td>名义净利率最高但隐性通道费+60–90天账期+退换货，实际最差</td></tr>
+    </tbody>
+  </table>
+
+  <div class="chart-wrap">
+    <div class="chart-title">品牌方单件净利 × 量确定性 × 出海能力 · Per-unit profit vs. volume certainty vs. export access</div>
+    <div class="chart-sub">全部为推算模型；实线=机制上量确定性高（买断/包销），虚线=量不确定</div>
+    <svg viewBox="0 0 900 290" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="170" y1="250" x2="860" y2="250" stroke="#0a0a0b" stroke-width="1"/>
+      <!-- 80px per yuan -->
+      <text x="160" y="44" text-anchor="end" font-size="13">电商自营</text>
+      <rect x="170" y="30" width="632" height="20" fill="rgba(196,122,30,0.3)" stroke="#c47a1e" stroke-dasharray="5,3" stroke-width="1.5"/>
+      <text x="520" y="45" font-size="12" font-weight="700" fill="#c47a1e">≈7.9元 量不稳·营销依赖·无出海</text>
+
+      <text x="160" y="92" text-anchor="end" font-size="13">商超KA</text>
+      <rect x="170" y="78" width="456" height="20" fill="rgba(196,122,30,0.3)" stroke="#c47a1e" stroke-dasharray="5,3" stroke-width="1.5"/>
+      <text x="440" y="93" font-size="12" font-weight="700" fill="#c47a1e">≈5.7元 隐性费用+账期侵蚀·无出海</text>
+
+      <text x="160" y="140" text-anchor="end" font-size="13">山姆类会员店</text>
+      <rect x="170" y="126" width="416" height="20" fill="#8b6c42"/>
+      <text x="596" y="141" font-size="12" font-weight="700" fill="#8b6c42">≈5.2元 包销+账期30-60天·量封顶50+店</text>
+
+      <text x="160" y="188" text-anchor="end" font-size="13">新拼姆·Temu海外</text>
+      <rect x="170" y="174" width="368" height="20" fill="#2a5c3f"/>
+      <text x="548" y="189" font-size="12" font-weight="700" fill="#2a5c3f">≈4.6元 国内交仓出海·合规归平台（自主出口仅2-4元）</text>
+
+      <text x="160" y="236" text-anchor="end" font-size="13">新拼姆·国内</text>
+      <rect x="170" y="222" width="280" height="20" fill="#2a5c3f"/>
+      <text x="460" y="237" font-size="12" font-weight="700" fill="#2a5c3f">≈3.5元 最薄·但零库存+9亿用户量级潜力</text>
+
+      <text x="855" y="272" text-anchor="end" font-size="10" fill="#888">条长=单件净利（元）；绿色实心=买断/包销机制下量确定性高</text>
+    </svg>
+  </div>
+
+  <div class="insight">
+    <div class="h">UE 结论（v2 核心洞察）</div>
+    <p><b>新拼姆给绿茶的不是单件利润（全渠道最薄），而是三样传统渠道给不了的东西</b>：① <b>零库存风险</b>——预制菜零售化最大的死亡原因就是库存滞销，买断制把这个风险移给平台；② <b>量级</b>——9亿用户盘对"10%外售"战略的规模化意义远超50家山姆店；③ <b>出海通道</b>——Temu体系让绿茶以约2倍于自主出口的净利率、零合规负担进入海外市场，这是本模式相对山姆框架的决定性差异。代价同样清晰：<b>定价权完全让渡、结算≤90天现金流后置、以及PDD低价带对品牌心智的稀释风险</b>。访谈最高价值追问：真买断还是按实销结算、产品挂谁的牌、Temu通道是否已在合作范围内。</p>
+  </div>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：实体已确认修正，八环节全流程重构完成——三个访谈必辨问题决定这笔合作的性质</div>
+  <div class="v-conf">综合置信度 5.5 / 10（实体确认↑，合作仍未公开披露）｜ 新拼姆机制高置信 · 绿茶适配为推断 · UE为推算 ｜ Confidence 5.5/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>「产品挂谁的牌」是第一优先访谈问题。</strong>新拼姆标准剧本是贴平台自有品牌，但绿茶是有品牌的上市公司——纯贴牌等于把品牌价值让渡给平台、只赚代工钱，与其零售化战略矛盾；联名/授权模式才能双赢。答案决定这笔合作对绿茶是"品牌建设"还是"产能生意"，两者的估值含义完全不同。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：新拼姆官宣模式（平台贴牌）与绿茶品牌资产的结构性张力分析</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>「真买断还是按实销结算」是第二必辨问题——客户描述与服务协议口径存在张力。</strong>客户理解为"买断包销"（交货即确权、零库存风险），但媒体披露的协议口径是"货款先到新拼姆、按实际销售结算、周期≤90天"——后者实质是类代销，滞销风险仍在供应商侧且现金流后置。两种层级可能并存，绿茶拿到哪种直接决定其UE与现金流质量。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：客户提纲描述 vs 新浪财经等披露的服务协议结算条款</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>Temu 出海通道是新拼姆相对一切传统渠道的决定性差异，也是"国内+国外UE对比"这个提纲问题的核心答案。</strong>推算显示：绿茶借Temu出海净利率约11%（国内交仓、合规归平台），是自主出口（3–7%+FDA自扛）的约2倍——若合作范围含Temu，这笔合作的战略价值主要在海外而非国内（国内单件净利仅约3.5元，全渠道最薄）。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：新拼姆官宣"整合拼多多+Temu面向全球市场"+四渠道UE推算模型（2-3层假设）</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=greentea_xinpinmu_20260706" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  新拼姆官宣及机制：证券时报《拼多多宣布成立"新拼姆"》、新华网（150亿首期/上海落地/整合拼多多+Temu）、36氪、新浪财经《拼多多挣钱，新拼姆来花》（结算≤90天协议口径）、界面新闻/电厂、腾讯新闻（"新质供给版Temu"）、钛媒体、白鲸跨境（千亿投入）；客户提供的模式描述（C2M vs 新拼姆对照表）；绿茶集团招股书及2025年报（190+加工厂、自建设施90%内供/10%外售）；前版报告沿用的可比参照（太二×山姆43元锚、山姆供应商机制、渠道UE基准）。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>新拼姆实体/资金规模/模式机制/结算口径 — 官宣+多源媒体一致，置信度<b>高</b>；绿茶合作模式落点/选品排序/区域路径 — 结构推断，置信度<b>中</b>；五渠道UE模型/价格带推演 — 2–3层假设推算，置信度<b>低</b>，全部为区间示意；<b>绿茶×新拼姆合作的存在与真实条款 — 公开零披露，一切绿茶侧结论以访谈为准。</b>
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 客户提纲研究 Mode B · v2</span>
+  <span>绿茶集团 × 新拼姆（拼多多品牌自营）合作全流程</span>
+  <span>生成日期 2026-07-06</span>
+</footer>
+
+</body>
+</html>
