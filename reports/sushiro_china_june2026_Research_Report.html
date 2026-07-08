@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寿司郎中国区 2026年6月经营研究 · 分区域同店/舆情/客单/排队/翻台</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:34px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:16px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.red{border-color:var(--red);color:var(--red);font-weight:700}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.7}
+.notice b{color:var(--amber)}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin:32px 0}
+.stat{background:var(--card);padding:20px 18px}
+.stat-nb{font-size:25px;font-weight:700;letter-spacing:-.01em}
+.stat-nb .unit{font-size:13px;font-weight:400;color:#555;margin-left:2px}
+.stat-label{font-size:12px;color:#555;margin-top:5px}
+.stat-delta{font-size:12px;font-weight:600;margin-top:6px}
+.up{color:var(--green)} .down{color:var(--red)} .flat{color:var(--amber)}
+section{margin-top:44px}
+.section-zh{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:16px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:14px}
+.insight .h{font-weight:700;font-size:15px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.stat-bar{grid-template-columns:repeat(2,1fr)}h1{font-size:25px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 客户提纲研究 Mode B</span>
+  <span>寿司郎 Sushiro China（Food &amp; Life Companies, 东证3563）</span>
+  <span>2026-07-08</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">2026年6月 · 分区域同店 / 舆情消散 / 客单价 / 排队 / 翻台率</div>
+  <h1>寿司郎中国区 2026年6月经营研究</h1>
+  <div class="title-en">Sushiro China — June 2026 Regional SSS, Sentiment Recovery, Ticket &amp; Queue Trends</div>
+  <div class="tag-row">
+    <span class="tag hot">母公司 F&amp;L Companies · 东证3563</span>
+    <span class="tag">大陆约100家门店（2026年4月底）</span>
+    <span class="tag red">中国区同店官方不披露 · 分区域为推断</span>
+    <span class="tag gold">综合置信 5.5/10</span>
+  </div>
+  <div class="notice">
+    <b>披露口径先讲清（决定各问题的可回答程度）：</b>母公司 F&amp;L 有月次数据传统，但<b>月度披露历来只覆盖寿司郎日本国内既存店</b>（销售额/客数/客单价前年比），<b>中国区同店从不在月度披露范围，"分区域同店"更是结构性不存在的颗粒度</b>；中国数据只出现在季度决算的海外分部（F&amp;L 财年10月–9月，Q3=2026年4–6月，<b>约8月上旬发布</b>——届时也只有大中华合并口径，无分区域）。因此第一问按 R-D6 流程以"真实信号拼接 + 显式假设推断"作答，全部标注置信度；其余四问有较充足的公开信号支撑。
+  </div>
+</header>
+
+<div class="stat-bar">
+  <div class="stat">
+    <div class="stat-nb">~100<span class="unit">家</span></div>
+    <div class="stat-label">大陆门店（2026年4月底，日经）<span class="badge badge-high">高</span></div>
+    <div class="stat-delta up">2025年底约75家 → 4个月+25家</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">-14<span class="unit">%</span></div>
+    <div class="stat-label">3月食安事件母公司股价单日冲击<span class="badge badge-high">高</span></div>
+    <div class="stat-delta down">西单店客流同期约-30%</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">89–150<span class="unit">元</span></div>
+    <div class="stat-label">中国区人均消费区间（多口径）<span class="badge badge-mid">中</span></div>
+    <div class="stat-delta flat">点评口径约90元 / 媒体口径120-150元</div>
+  </div>
+  <div class="stat">
+    <div class="stat-nb">222<span class="unit">家</span></div>
+    <div class="stat-label">大中华区门店目标（2026年9月底前）<span class="badge badge-high">高·公司计划</span></div>
+    <div class="stat-delta up">2025年底大中华171家（含港台）</div>
+  </div>
+</div>
+
+<!-- Q1 -->
+<section>
+  <div class="section-zh">一、6月全国分区域同店情况</div>
+  <div class="section-en">Q1 · Regional same-store sales, June 2026 — structurally undisclosed; signal-based inference</div>
+  <p class="body">
+    <b>官方口径不存在</b><span class="badge badge-gap">结构性缺失</span>：F&amp;L 从不披露中国同店（月次只有日本），Q3 财季（4–6月）合并数据8月上旬才发布且无区域拆分。以下为基于真实信号的推断模型：
+  </p>
+  <div class="insight">
+    <div class="h">先立主线：总量狂奔，同店被稀释</div>
+    <p>2026年前4个月大陆净增约25家门店（75→100，+33%）——如此激进的加密意味着：① 可比同店基数快速缩小（大量门店开业不满一年不进同店池）；② <b>新店对同城老店的客流分流是同店最大的压制变量</b>（尤其北上广深多店城市）。因此判断：<b>6月中国区总销售额同比大概率仍高增（+40%以上，门店数驱动），但同店增速显著低于总增速，一线加密城市同店可能接近持平甚至转负</b>——"总量与同店的剪刀差"是本季度中国区经营的主特征。</p>
+  </div>
+  <table>
+    <thead><tr><th>区域</th><th>信号锚点（真实）</th><th>6月同店方向推断</th><th>置信</th></tr></thead>
+    <tbody>
+      <tr><td><b>华南（广深为主）</b></td><td>2021年首入市场、门店最密、被本地消费者戏称"新粤菜"的粉丝文化；未受3月事件直接波及</td><td class="center"><b>最具韧性：约持平至+5%</b>（品牌热度延续，但门店加密分流最重）</td><td class="center"><span class="badge badge-low">低·推断</span></td></tr>
+      <tr><td><b>华北（北京）</b></td><td><b>3月事件震中</b>（门头沟店寄生虫卵事件），西单店3月客流约-30%；北京门店多为2024-2025年新开</td><td class="center"><b>受创最深、恢复滞后：约-10%~-20%</b>（客流3-4月坑深，6月修复但未回事件前）</td><td class="center"><span class="badge badge-low">低·推断</span></td></tr>
+      <tr><td><b>华东（上海等）</b></td><td>日料竞争最激烈市场（滨寿司/KURA/本土争鲜混战）；食安投诉多发地之一（上海/武汉消费者肠胃炎投诉）</td><td class="center"><b>中间态：约-5%~持平</b>（事件外溢+竞争分流）</td><td class="center"><span class="badge badge-low">低·推断</span></td></tr>
+      <tr><td><b>新进城市（济南/成都等）</b></td><td>济南万象城店3月预约排到4月17日——新市场热度极高</td><td class="center"><b>不构成同店</b>（开业不满一年无同比基数），但贡献总量增速主力</td><td class="center"><span class="badge badge-mid">中</span></td></tr>
+    </tbody>
+  </table>
+  <p class="body" style="font-size:13px;color:#888">上表同店百分比为2-3层假设推断（事件冲击深度锚+恢复斜率假设+分流系数假设），非任何披露数据；8月上旬F&amp;L Q3决算可部分校验大中华合并口径，分区域仍需专家访谈。</p>
+</section>
+
+<!-- Q2 -->
+<section>
+  <div class="section-zh">二、舆情影响是否消散</div>
+  <div class="section-en">Q2 · Has the March food-safety sentiment shock dissipated?</div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">3月"寄生虫卵"事件时间线与恢复轨迹 · Incident timeline &amp; recovery path</div>
+    <div class="chart-sub">事件锚点均为公开报道（高置信）；6月状态为推断</div>
+    <svg viewBox="0 0 960 250" style="width:100%;height:auto" font-family="'IM Fell English',Georgia,serif">
+      <line x1="40" y1="150" x2="930" y2="150" stroke="#0a0a0b" stroke-width="1.5"/>
+      <!-- events -->
+      <circle cx="90" cy="150" r="6" fill="#8b2e2e"/>
+      <text x="90" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#8b2e2e">3/1</text>
+      <text x="90" y="176" text-anchor="middle" font-size="11">北京门头沟店</text>
+      <text x="90" y="190" text-anchor="middle" font-size="11">"寄生虫卵"爆发</text>
+      <circle cx="230" cy="150" r="6" fill="#8b2e2e"/>
+      <text x="230" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#8b2e2e">3/6</text>
+      <text x="230" y="176" text-anchor="middle" font-size="11">母公司股价-14%</text>
+      <text x="230" y="190" text-anchor="middle" font-size="11">西单客流约-30%</text>
+      <circle cx="380" cy="150" r="6" fill="#c47a1e"/>
+      <text x="380" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#c47a1e">3/18</text>
+      <text x="380" y="176" text-anchor="middle" font-size="11">济南店预约仍</text>
+      <text x="380" y="190" text-anchor="middle" font-size="11">排到4/17（需求未垮）</text>
+      <circle cx="520" cy="150" r="6" fill="#c47a1e"/>
+      <text x="520" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#c47a1e">3/23</text>
+      <text x="520" y="176" text-anchor="middle" font-size="11">官方声明：监管检测</text>
+      <text x="520" y="190" text-anchor="middle" font-size="11">"未检出寄生虫"</text>
+      <circle cx="670" cy="150" r="6" fill="#2a5c3f"/>
+      <text x="670" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5c3f">4/28</text>
+      <text x="670" y="176" text-anchor="middle" font-size="11">日经报道大陆100店</text>
+      <text x="670" y="190" text-anchor="middle" font-size="11">扩张叙事覆盖食安叙事</text>
+      <circle cx="850" cy="150" r="7" fill="none" stroke="#2a5c3f" stroke-width="2.5" stroke-dasharray="4,3"/>
+      <text x="850" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5c3f">6月【推断】</text>
+      <text x="850" y="176" text-anchor="middle" font-size="11">热搜层面消散</text>
+      <text x="850" y="190" text-anchor="middle" font-size="11">长尾疤痕留存</text>
+      <text x="40" y="40" font-size="12" fill="#888">舆情烈度示意：</text>
+      <polyline points="90,60 230,48 380,72 520,85 670,105 850,115" fill="none" stroke="#8b2e2e" stroke-width="2" stroke-dasharray="0"/>
+      <text x="930" y="118" text-anchor="end" font-size="10" fill="#8b2e2e">↓烈度递减</text>
+    </svg>
+  </div>
+
+  <p class="body">
+    <b>判断：热搜层面基本消散，但留下两道疤痕</b><span class="badge badge-mid">中置信</span>。消散的证据：① 3月23日监管检测"未检出寄生虫"的官方结论客观上封顶了事件定性；② 4月下旬起舆论叙事已被"大陆第100家店"的扩张故事替代，5-6月无新爆点登上热搜；③ 事件最热时（3月18日）济南新店预约仍排到4月17日——<b>需求端从头到尾没有垮，冲击集中在北京区域和股价层面</b>。<br><br>
+    未消散的疤痕：① <b>常态化食安噪音</b>——12315平台一年200+条食安投诉、上海/武汉消费者肠胃不适投诉在社交平台持续存在，这在事件后被媒体系统性放大过一次，任何新个案的引爆阈值都变低了；② <b>"排队神话"被祛魅一层</b>——3月前媒体叙事是"排队14小时的顶流"，3月后固定加上"食安门"前缀，品牌叙事的纯度回不去了。<b>对6月经营的净影响：全国层面接近零，北京区域仍在爬坑。</b>
+  </p>
+</section>
+
+<!-- Q3 -->
+<section>
+  <div class="section-zh">三、客单价趋势</div>
+  <div class="section-en">Q3 · Average ticket trend</div>
+  <table>
+    <thead><tr><th>锚点</th><th>数据</th><th>置信</th></tr></thead>
+    <tbody>
+      <tr><td>人均消费区间（多口径）</td><td>大众点评口径约<b>90元</b>（89–147元带）；媒体口径120–150元——差异来自是否含酒水/单点热食</td><td class="center"><span class="badge badge-mid">中</span></td></tr>
+      <tr><td>盘价结构</td><td><b>10元盘为主流（80余款）</b>，15/20/28元分档；限时5–8元白碟/8元三文鱼等引流款</td><td class="center"><span class="badge badge-high">高</span></td></tr>
+      <tr><td>6月趋势判断</td><td><b>同比持平至微降（约-3%~0%）</b>：①低价限定款常态化拉低件单价 ②新进下沉城市客群客单天然更低（结构性稀释）③黄牛治理减少"代排溢价"场景 ④无提价动作报道</td><td class="center"><span class="badge badge-low">低·推断</span></td></tr>
+    </tbody>
+  </table>
+  <p class="body">
+    结构性理解：寿司郎在中国的定位是"<b>年轻人的新型中等满足</b>"（约90–120元买一次可晒的日料体验）——它不靠客单价增长赚钱，靠<b>翻台×件数</b>。客单价温和阴跌不是经营恶化信号，而是其"平价大盘+爆款限定"模型的自然输出；真正要盯的是件单数是否同步维持。<span class="badge badge-mid">分析判断</span>
+  </p>
+</section>
+
+<!-- Q4 -->
+<section>
+  <div class="section-zh">四、排队趋势情况</div>
+  <div class="section-en">Q4 · Queue trends — from spectacle back to merely-hot</div>
+  <table>
+    <thead><tr><th>时点</th><th>排队信号（真实锚点）</th></tr></thead>
+    <tbody>
+      <tr><td>2025年（峰值奇观期）</td><td>日排队上千桌至3000桌、最长14–15小时等号、黄牛代排成产业、"周周见郎"成流行语（社媒数十万条笔记）</td></tr>
+      <tr><td>2026年3月（事件期）</td><td>西单店高峰仍需排500–600号（但较此前客流约-30%）；济南新店预约排到一个月后</td></tr>
+      <tr><td>2026年6月（推断）</td><td><b>单店排队量级边际回落，品牌整体仍居商场"排队王"梯队</b></td></tr>
+    </tbody>
+  </table>
+  <p class="body">
+    <b>6月排队回落的三个结构性原因（比舆情更重要）</b><span class="badge badge-mid">中置信·机制推断</span>：
+    ① <b>供给稀释</b>——4个月+25家店直接摊薄单店排队（排队本质是供需缺口，加密开店就是官方"消灭排队"的过程）；② <b>黄牛治理</b>——预约实名/放号规则收紧压缩了人为拥堵；③ <b>事件祛魅</b>——北京区域排队修复慢。支撑项：夏季是日料消费旺季+暑期学生客流，新城市首店仍会复制"现象级排队"。<b>净判断：老店排队号数同比明显下降（可能-30%~-50%），新店排队奇观继续在下沉市场轮播——"排队总量"从存量店转移到增量店。</b>
+  </p>
+</section>
+
+<!-- Q5 -->
+<section>
+  <div class="section-zh">五、翻台率</div>
+  <div class="section-en">Q5 · Table turnover — never disclosed; industry-model estimate</div>
+  <p class="body">
+    <b>回转寿司业态不披露翻台率</b>（F&amp;L 对日本本土也只披露既存店销售/客数/客单，无翻台口径）<span class="badge badge-gap">结构性缺失</span>。行业模型推算<span class="badge badge-low">低置信·2层假设</span>：
+  </p>
+  <table>
+    <thead><tr><th>参数</th><th>假设</th><th>推算</th></tr></thead>
+    <tbody>
+      <tr><td>单桌用餐时长</td><td>回转寿司约60–90分钟/轮（显著快于火锅约2小时）</td><td rowspan="3"><b>排队旺店：约8–11轮/天<br>平均门店：约5–7轮/天</b><br>（口径为"轮/桌/日"，与海底捞火锅翻台3.9次/天属不同业态，不可直接对比）</td></tr>
+      <tr><td>营业时长</td><td>约11–12小时（商场店）</td></tr>
+      <tr><td>满座率</td><td>排队店全天近满座；普通店高峰满座+平峰6-7成</td></tr>
+    </tbody>
+  </table>
+  <p class="body" style="font-size:13px;color:#888">
+    6月方向：与排队趋势同向——老店翻台边际回落（新店分流），整体仍处业态高位。若访谈能拿到寿司郎内部的"组数/坪效"口径数据，价值远高于本推算。
+  </p>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：5问全答——2问结构性缺失已用推断补位，舆情/客单/排队3问有较实信号支撑</div>
+  <div class="v-conf">综合置信度 5.5 / 10 ｜ 高置信锚点 8 项 · 中置信 5 项 · 低置信推断 5 项 ｜ Confidence 5.5/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>"分区域同店"这个颗粒度在公开世界结构性不存在——F&amp;L月次只披露日本既存店，中国区只有季度合并口径（Q3财季8月上旬发布）。</strong>本报告的分区域推断（华南最韧性/北京爬坑/华东中间态）是访谈校准框架，真实数字必须靠受访者。判断主线：门店4个月+33%的加密使"总量高增与同店走弱的剪刀差"成为6月中国区经营的主特征。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：F&amp;L披露口径核实 + 门店扩张轨迹（75→100家）的稀释机制推断</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>舆情判断：热搜层面基本消散（官方"未检出"定性+扩张叙事覆盖+5-6月无新爆点），但北京区域仍在爬坑，且常态化食安投诉使新个案的引爆阈值变低。</strong>最有力的反直觉证据是：事件最热的3月18日，济南新店预约仍排到一个月后——需求端从未垮，冲击集中在震中区域与资本市场。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：事件时间线公开报道（3/1→3/6→3/18→3/23→4/28）交叉验证</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>客单与排队要合在一起读：客单价温和阴跌（-3%~0%）+老店排队号数明显回落（-30%~-50%）不是需求恶化，而是"加密开店消灭排队+平价模型自然输出"的组合结果。</strong>寿司郎的赚钱公式是翻台×件数而非客单，判断其经营质量应盯Q3财报的大中华收入增速与新店爬坡，而非排队奇观的消退。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：盘价结构（10元主流80+款）+供给稀释机制+黄牛治理，推断部分已标注假设层数</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=sushiro_china_june2026_20260708" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  日经中文网2026-04-28（大陆100家门店）；F&amp;L Companies IR（月次披露范围核实、FY26 H1决算2026-05-08、大中华222家目标）；澎湃新闻/21经济网/财中社（3月寄生虫卵事件时间线、股价-14%、西单客流-30%、12315投诉200+条）；腾讯新闻2026-03-18（济南店预约排至4/17）；南方日报2026-03-27、新浪财经2026-01-10（门店扩张与竞争格局）；CBNData/职业餐饮网（盘价结构、人均消费口径）；知乎/华成网（排队3000桌/14小时、"新型中等满足"）；Yahoo香港（"新粤菜"华南粉丝文化）。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>门店数轨迹/3月事件时间线/盘价结构/222家目标 — 一手或多源媒体一致，置信度<b>高</b>；舆情消散判断/排队回落机制/客单区间 — 信号充分但含解读，置信度<b>中</b>；分区域同店百分比/6月客单同比/翻台率轮次 — 2-3层假设推断，置信度<b>低</b>，<b>不得作为确定事实引用</b>；分区域同店与翻台率为结构性缺失项（官方从不披露），推断仅作访谈校准锚，8月上旬F&amp;L Q3决算可校验大中华合并口径。
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 客户提纲研究 Mode B</span>
+  <span>寿司郎中国区 2026年6月经营研究</span>
+  <span>生成日期 2026-07-08</span>
+</footer>
+
+</body>
+</html>
