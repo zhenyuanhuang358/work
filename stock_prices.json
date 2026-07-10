@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-07-10T20:08:50.777225Z",
-  "vix": 15.02,
+  "updated_at": "2026-07-10T21:19:04.184426Z",
+  "vix": 15.03,
   "treasury_10y": 4.57,
   "prices": {
     "SPY": {
-      "price": 754.94,
-      "change": 3.23,
+      "price": 754.95,
+      "change": 3.24,
       "changePct": 0.43,
       "high": 755.42,
       "low": 748.1,
@@ -60,9 +60,9 @@
       "prevClose": 546.72
     },
     "IWM": {
-      "price": 295.95,
-      "change": -1.29,
-      "changePct": -0.43,
+      "price": 295.99,
+      "change": -1.25,
+      "changePct": -0.42,
       "high": 298.21,
       "low": 293.62,
       "prevClose": 297.24
