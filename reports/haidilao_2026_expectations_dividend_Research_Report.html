@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞全年预期与派息研究 · 分部拆解/管理层/开店/派息/催化</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px;
+  -webkit-font-smoothing:antialiased}
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--ink);padding:14px 0;font-size:13px;
+  letter-spacing:.05em;text-transform:uppercase}
+.pub-bar .src{color:var(--copper);font-weight:600}
+header.masthead{padding:38px 0 26px;border-bottom:1px solid var(--border)}
+.kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--copper);margin-bottom:12px}
+h1{font-size:35px;line-height:1.18;font-weight:700;letter-spacing:-.01em}
+.title-en{font-size:16px;color:#555;font-style:italic;margin-top:8px;font-weight:400}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.tag{font-size:12.5px;padding:5px 13px;border:1px solid var(--ink);
+  border-radius:2px;letter-spacing:.04em}
+.tag.hot{background:var(--ink);color:var(--paper)}
+.tag.red{border-color:var(--red);color:var(--red);font-weight:700}
+.tag.gold{border-color:var(--gold);color:var(--copper);font-weight:700}
+.notice{margin-top:20px;font-size:13.5px;color:#3a3a3a;background:rgba(196,122,30,0.08);
+  border-left:3px solid var(--amber);padding:14px 18px;line-height:1.7}
+.notice b{color:var(--amber)}
+section{margin-top:44px}
+.section-zh{font-size:23px;font-weight:700;letter-spacing:-.01em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);
+  letter-spacing:.08em;text-transform:uppercase;margin-top:3px;margin-bottom:16px}
+.section-en::before{content:"— "}
+p.body{margin-top:12px;font-size:15px;color:#1a1a1a}
+table{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--border)}
+th{font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--copper);
+  border-bottom:1.5px solid var(--ink)}
+td.center{text-align:center}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:2px;
+  letter-spacing:.03em;vertical-align:middle;color:#fff;margin-left:5px;white-space:nowrap}
+.badge-high{background:var(--green)}
+.badge-mid{background:var(--amber)}
+.badge-low{background:#999}
+.badge-gap{background:var(--red)}
+.qcard{border:1px solid var(--border);background:var(--card);padding:20px 22px;margin-top:18px}
+.qcard .qnum{display:inline-block;font-size:12.5px;font-weight:700;color:var(--paper);
+  background:var(--ink);border-radius:2px;padding:2px 9px;margin-right:8px}
+.qcard .qtext{font-size:15.5px;font-weight:700;line-height:1.5}
+.qcard .qanswer{font-size:14.5px;color:#1a1a1a;margin-top:11px;line-height:1.7}
+.qcard .qsrc{font-size:12px;color:#888;margin-top:9px;font-style:italic}
+.chart-wrap{border:1px solid var(--border);background:var(--card);
+  padding:22px;margin-top:22px}
+.chart-title{font-size:14.5px;font-weight:700;margin-bottom:3px}
+.chart-sub{font-size:11.5px;font-style:italic;color:#888;margin-bottom:14px}
+.insight{border-left:3px solid var(--gold);padding:4px 0 4px 16px;margin-top:14px}
+.insight .h{font-weight:700;font-size:15px}
+.insight p{font-size:14px;color:#222;margin-top:5px}
+.verdict{background:var(--ink);color:var(--paper);padding:32px 30px;margin-top:52px;border-radius:3px}
+.v-en{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.v-zh{font-size:20px;font-weight:700;margin-bottom:6px}
+.v-conf{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:18px}
+.v-item{display:flex;gap:16px;margin-top:16px}
+.v-num{font-size:22px;font-weight:700;color:var(--gold);min-width:28px}
+.v-text{font-size:14.5px;color:#e5e0d8;line-height:1.65}
+.v-text strong{color:#fff}
+.feedback{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13px}
+.feedback a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.sources{margin-top:44px;font-size:12.5px;color:#666;border-top:1px solid var(--border);
+  padding-top:20px;line-height:1.85}
+.sources h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--copper);margin-bottom:10px}
+footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--ink);
+  font-size:12px;color:#888;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.flow-wrap{border:1px solid var(--border);background:var(--card);padding:20px;margin-top:20px}
+@media(max-width:760px){h1{font-size:26px}}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="src">Merlin 咨询情报 · 客户提纲研究（模式B）</span>
+  <span>海底捞 Haidilao (06862.HK)</span>
+  <span>2026-07-16</span>
+</div>
+
+<header class="masthead">
+  <div class="kicker">全年预期 · 管理层回归 · 开店节奏 · 派息博弈 · 催化图谱</div>
+  <h1>海底捞全年预期与派息研究<br>从"下修的预期"到"省下的钱去哪了"</h1>
+  <div class="title-en">Haidilao FY2026 Expectations &amp; Dividend — Where the Consensus Sits &amp; Where the Freed Capital Goes</div>
+  <div class="tag-row">
+    <span class="tag hot">港股上市 · 06862.HK</span>
+    <span class="tag red">中报8月下旬发布 · H1数据为推算</span>
+    <span class="tag gold">综合置信 6.0/10</span>
+    <span class="tag">承接前三份报告，不重复经营细节</span>
+  </div>
+  <div class="notice">
+    <b>核心结论前置：</b>本提纲的主线是"派息能否改善、省下的开店钱会不会变成超预期派息"。经测算——<b>即便派息率维持2025年的91%不变，2026年派息绝对额也会因净利润恢复增长（+13%~19%）而自动+15%左右</b>。所以派息改善的主引擎是利润恢复，而非"主品牌/红石榴省下的capex腾挪"（后者方向正确但金额有限，海底捞主品牌本就轻资产、红石榴是多年投入而非一次性开支）。真正的近场验证点是<b>约一个月后（8月下旬）的中期派息率</b>：若修复到95%+，则确认拐点。
+  </div>
+</header>
+
+<!-- 五智能体流程 -->
+<div class="flow-wrap">
+  <div class="chart-title">五智能体协作流程 · Five-Agent Research Pipeline</div>
+  <div class="chart-sub">Orchestrator → Scout → Analyst + Forensic → Strategist → Critic</div>
+  <svg viewBox="0 0 1000 130" width="100%" font-family="'IM Fell English',Georgia,serif">
+    <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#8b6c42"/></marker></defs>
+    <g>
+      <rect x="10" y="42" width="150" height="46" fill="#faf8f4" stroke="#0a0a0b"/>
+      <text x="85" y="62" text-anchor="middle" font-size="13" font-weight="700">Orchestrator</text>
+      <text x="85" y="79" text-anchor="middle" font-size="10.5" fill="#6b6460">6问分类：事实/推断/争议</text>
+      <line x1="162" y1="65" x2="196" y2="65" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ar)"/>
+
+      <rect x="200" y="42" width="150" height="46" fill="#faf8f4" stroke="#0a0a0b"/>
+      <text x="275" y="62" text-anchor="middle" font-size="13" font-weight="700">Scout 情报员</text>
+      <text x="275" y="79" text-anchor="middle" font-size="10.5" fill="#6b6460">2025年报/券商/派息记录</text>
+      <line x1="352" y1="65" x2="386" y2="65" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ar)"/>
+
+      <rect x="390" y="20" width="160" height="42" fill="#faf8f4" stroke="#0a0a0b"/>
+      <text x="470" y="38" text-anchor="middle" font-size="12.5" font-weight="700">Analyst 分析师</text>
+      <text x="470" y="53" text-anchor="middle" font-size="10" fill="#6b6460">分部拆解 / 派息桥</text>
+      <rect x="390" y="68" width="160" height="42" fill="#faf8f4" stroke="#0a0a0b"/>
+      <text x="470" y="86" text-anchor="middle" font-size="12.5" font-weight="700">Forensic 侦探</text>
+      <text x="470" y="101" text-anchor="middle" font-size="10" fill="#6b6460">"省钱→派息"漏洞检验</text>
+      <line x1="552" y1="65" x2="586" y2="65" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ar)"/>
+
+      <rect x="590" y="42" width="150" height="46" fill="#faf8f4" stroke="#0a0a0b"/>
+      <text x="665" y="62" text-anchor="middle" font-size="13" font-weight="700">Strategist 战略家</text>
+      <text x="665" y="79" text-anchor="middle" font-size="10.5" fill="#6b6460">逐条作答+概率判断</text>
+      <line x1="742" y1="65" x2="776" y2="65" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ar)"/>
+
+      <rect x="780" y="42" width="150" height="46" fill="#0a0a0b"/>
+      <text x="855" y="62" text-anchor="middle" font-size="13" font-weight="700" fill="#c9a84c">Critic 评审</text>
+      <text x="855" y="79" text-anchor="middle" font-size="10.5" fill="#d4cec6">置信校准+裁定</text>
+    </g>
+  </svg>
+</div>
+
+<!-- 板块一 全年预期与分部拆解 -->
+<section>
+  <div class="section-zh">板块一 · 全年预期调整到什么位置 + 分部收入利润拆解</div>
+  <div class="section-en">Where consensus sits now &amp; segment revenue / profit breakdown</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q1</span><span class="qtext">现在市场对全年的预期调整到什么位置？堂食/翻台、外卖、红石榴各自的收入利润预期，最终全年收入利润预期是多少？</span><span class="badge badge-mid">券商共识(真实) + 分部利润(推算)</span></div>
+    <div class="qanswer">
+      <b>一句话：全年预期已从年初高位下修——收入增速预期从双位数降到高个位数，但净利润仍预期恢复正增长（低基数+成本纪律）。</b><br><br>
+      <b>券商全年总预期（真实，2026年3月年报后更新）</b>：<br>
+      · 国金证券：营收 475.5亿（+10.0%），归母净利 46.0亿（+13.5%），EPS 0.82元，20x PE，目标价 18.94港元；<br>
+      · 光大证券：2026归母净利 47.96亿（EPS 0.86），2027年 52.95亿；<br>
+      · 摩根士丹利：下调目标价至 17.5港元，预计收入增速"下半年才恢复"——代表偏谨慎的下修方；<br>
+      · <b>共识中枢（本报告采用）：全年营收约 465亿元（+7.6%），净利润约 46.5亿元（+15%）</b>。<br><br>
+      <b>分部拆解（收入为真实基数外推、利润贡献为推算，公司不单独披露分部利润）</b>：见下方图表。核心结构判断——<b>主品牌堂食仍贡献约90%的收入和几乎全部经营利润</b>；外卖是"高利润率但小体量"的增量；红石榴是"高增速但仍拖累利润"的投入项。全年利润能否达标，90%取决于主品牌翻台率能否从3.9企稳回4.0，而不取决于两个副业务。
+    </div>
+    <div class="qsrc">依据：国金证券2026-05、光大证券2026-03、大摩2025-07（券商预期，真实）；分部利润拆解为2层假设推算，公司仅披露分部收入。</div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">图一 · 分部收入结构：2025实际 vs 2026预期</div>
+    <div class="chart-sub">单位：亿元人民币。收入为真实基数外推；括号内为占比。红石榴增速最高但绝对体量仍小</div>
+    <svg viewBox="0 0 960 300" width="100%" font-family="'IM Fell English',Georgia,serif">
+      <!-- 轴 -->
+      <line x1="150" y1="20" x2="150" y2="270" stroke="#d4cec6"/>
+      <!-- 主品牌堂食 -->
+      <text x="140" y="48" text-anchor="end" font-size="12.5" font-weight="700">主品牌堂食</text>
+      <rect x="150" y="34" width="620" height="20" fill="#8b6c42"/>
+      <text x="778" y="48" font-size="11.5" fill="#8b6c42">385（89.1%）</text>
+      <rect x="150" y="58" width="638" height="20" fill="#c9a84c"/>
+      <text x="796" y="72" font-size="11.5" fill="#8b6c42">396E（85.2%）+2.9%</text>
+      <!-- 外卖 -->
+      <text x="140" y="110" text-anchor="end" font-size="12.5" font-weight="700">外卖</text>
+      <rect x="150" y="96" width="43" height="20" fill="#2a5c3f"/>
+      <text x="201" y="110" font-size="11.5" fill="#2a5c3f">26.6（6.1%）</text>
+      <rect x="150" y="120" width="56" height="20" fill="#3f7d58"/>
+      <text x="214" y="134" font-size="11.5" fill="#2a5c3f">35E（7.5%）+32%</text>
+      <!-- 红石榴 -->
+      <text x="140" y="172" text-anchor="end" font-size="12.5" font-weight="700">红石榴/其他餐厅</text>
+      <rect x="150" y="158" width="24" height="20" fill="#8b2e2e"/>
+      <text x="182" y="172" font-size="11.5" fill="#8b2e2e">15.2（3.5%）</text>
+      <rect x="150" y="182" width="45" height="20" fill="#b5473f"/>
+      <text x="203" y="196" font-size="11.5" fill="#8b2e2e">28E（6.0%）+84%</text>
+      <!-- 调味品及食材 -->
+      <text x="140" y="234" text-anchor="end" font-size="12.5" font-weight="700">调味品及食材</text>
+      <rect x="150" y="220" width="8" height="20" fill="#6b6460"/>
+      <text x="166" y="234" font-size="11.5" fill="#6b6460">5（1.2%）</text>
+      <rect x="150" y="244" width="10" height="20" fill="#8b857f"/>
+      <text x="168" y="258" font-size="11.5" fill="#6b6460">6E（1.3%）</text>
+      <!-- 图例 -->
+      <rect x="620" y="230" width="12" height="12" fill="#8b6c42"/><text x="638" y="240" font-size="11">2025实际 · 合计432亿</text>
+      <rect x="620" y="250" width="12" height="12" fill="#c9a84c"/><text x="638" y="260" font-size="11">2026预期 · 合计约465亿</text>
+    </svg>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">图二 · 净利润桥：2025实际 40.4亿 → 2026预期 46.5亿</div>
+    <div class="chart-sub">单位：亿元人民币。桥段为推算归因（2层假设）；主品牌企稳是最大正贡献，红石榴仍是负拖累但收窄</div>
+    <svg viewBox="0 0 960 260" width="100%" font-family="'IM Fell English',Georgia,serif">
+      <line x1="40" y1="210" x2="920" y2="210" stroke="#d4cec6"/>
+      <!-- 基准 40.4 -->
+      <rect x="55" y="120" width="95" height="90" fill="#0a0a0b"/>
+      <text x="102" y="112" text-anchor="middle" font-size="12" font-weight="700">40.4</text>
+      <text x="102" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">2025净利</text>
+      <!-- +主品牌翻台企稳 +5.5 -->
+      <rect x="185" y="65" width="95" height="55" fill="#2a5c3f"/>
+      <text x="232" y="57" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5c3f">+5.5</text>
+      <text x="232" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">主品牌企稳</text>
+      <line x1="150" y1="120" x2="185" y2="120" stroke="#999" stroke-dasharray="3"/>
+      <!-- +外卖利润 +2.0 -->
+      <rect x="315" y="45" width="95" height="20" fill="#3f7d58"/>
+      <text x="362" y="38" text-anchor="middle" font-size="12" font-weight="700" fill="#2a5c3f">+2.0</text>
+      <text x="362" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">外卖增量</text>
+      <line x1="280" y1="65" x2="315" y2="65" stroke="#999" stroke-dasharray="3"/>
+      <!-- -红石榴拖累 -1.4（收窄）-->
+      <rect x="445" y="45" width="95" height="30" fill="#8b2e2e"/>
+      <text x="492" y="38" text-anchor="middle" font-size="12" font-weight="700" fill="#8b2e2e">-1.4</text>
+      <text x="492" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">红石榴拖累(收窄)</text>
+      <line x1="410" y1="45" x2="445" y2="45" stroke="#999" stroke-dasharray="3"/>
+      <!-- 其他/成本 -0 -->
+      <rect x="575" y="45" width="95" height="30" fill="#c47a1e"/>
+      <text x="622" y="38" text-anchor="middle" font-size="12" font-weight="700" fill="#c47a1e">±0</text>
+      <text x="622" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">成本/其他</text>
+      <line x1="540" y1="75" x2="575" y2="75" stroke="#999" stroke-dasharray="3"/>
+      <!-- 2026 46.5 -->
+      <rect x="705" y="90" width="95" height="120" fill="#c9a84c"/>
+      <text x="752" y="82" text-anchor="middle" font-size="12" font-weight="700">46.5E</text>
+      <text x="752" y="228" text-anchor="middle" font-size="10.5" fill="#6b6460">2026净利预期</text>
+      <line x1="670" y1="75" x2="705" y2="90" stroke="#999" stroke-dasharray="3"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 板块二 管理层回归 -->
+<section>
+  <div class="section-zh">板块二 · 张勇、杨利娟回归的实质变化，会否体现在上半年报表</div>
+  <div class="section-en">Zhang Yong &amp; Yang Lijuan's return — substance &amp; when it shows in the P&amp;L</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q2</span><span class="qtext">炒了半天两人回归，这半年内部到底发生了什么、有什么实质改变，会不会体现在今年上半年的报表中？</span><span class="badge badge-high">动作高置信 + 报表兑现节奏为判断</span></div>
+    <div class="qanswer">
+      <b>实质变化（五项，均有公开记录）</b>：① 张勇2026年1月13日重任CEO（苟轶群卸任），回归3个月后个人增持不少于1亿港元；② 杨利娟4月辞任特海国际CEO回归、专职统筹红石榴计划，同日4位女性高管新任执行董事；③ 新品牌节奏肉眼可见提速（4月单月落地榴金川菜馆、煎饼巴士两个，2025年均值约0.8个/月）；④ 考核松绑——"利润下滑中弱化门店考核"配合"一店一策"改造200+主题店；⑤ 止损纪律并行——焰请上半年关≥19家。<b>分工：张勇管"0到1"新业态、杨利娟管"1到N"红石榴复制、苟轶群转智能中台、主品牌按既定框架守现金流。</b><br><br>
+      <b>会否体现在上半年（2026 H1）报表——关键判断：会，但呈"投入先行"特征，果实未熟</b>：<br>
+      · <b>会体现的（投入端）</b>：红石榴收入H1或翻倍至12–15亿、销售及孵化费用上升、大概率"增收不增利"或利润改善有限；<br>
+      · <b>不会立即体现的（改善端）</b>：翻台率大幅回升、主品牌同店转正——"一店一策"改造见效是1–2年的事，H1看不到；<br>
+      · <b>不进损益表的</b>：增持是资本市场信号，只影响股本结构与情绪，不影响利润。<br>
+      <b>结论：2026 H1报表最可能是"营收温和增长 + 利润持平或小幅改善"的过渡态，管理层动作的利润兑现要到2026 H2–2027。</b>不要指望半年报就看到张勇回归的"业绩证据"，那会来得更晚。
+    </div>
+    <div class="qsrc">依据：新浪/36氪2026-01人事公告、证券时报增持报道、21经济网2026-04、杨利娟人事公告（动作，真实）；报表兑现节奏为分析判断。</div>
+  </div>
+</section>
+
+<!-- 板块三 开店节奏 -->
+<section>
+  <div class="section-zh">板块三 · 主品牌开店不及预期，红石榴开店是否也不及预期</div>
+  <div class="section-en">Main-brand openings miss — is the Pomegranate rollout also below plan?</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q5</span><span class="qtext">上半年主品牌开店不及预期，全年开店应比预期少。有没有可能红石榴开店也比之前预期要少？</span><span class="badge badge-high">是——焰请关店为硬证据</span></div>
+    <div class="qanswer">
+      <b>直接回答：是，红石榴整体开店大概率也低于年初的激进目标，且呈"品牌间分化"——不是全线放缓，而是高客单收缩、平价高翻台扩张。</b><br><br>
+      <b>主品牌确认放缓</b>：2026年不设开店数量目标，"先跑店型再开店"；啄木鸟红线（整体翻台低于4.0不规模化开店）在3.9的现实下尚未解锁；加盟累计2万余申请只批79家、落地率不足0.5%——加盟不是规模引擎。<br><br>
+      <b>红石榴同样放缓的硬证据</b>：<br>
+      · <b>焰请烤肉：2026上半年零新开、关店≥19家</b>（广州3店全关），70家与去年同期持平——百元客单的重体验业态被排在资源序列末位（官方小程序口径，2026-07-01）；<br>
+      · 但<b>大排档/如鮨/举高高在扩</b>——大排档从4月9家增至6月估12–14家（3年500家目标意味着年均160+，实际爬坡节奏远慢于此）；如鮨2年100家为"有潜力"措辞而非承诺。<br>
+      <b>判断：红石榴2026净增门店大概率低于市场按"500家/100家"目标线性外推的预期</b>——海底捞的纪律是"翻台不达标就主动放缓"，目标是天花板不是排产计划。<b>这一点恰恰是下一板块派息问题的前提。</b>
+    </div>
+    <div class="qsrc">依据：焰请门店数（东方财富/中华网2026-07-01，真实）、业绩会开店表态（真实）；净增低于目标为趋势判断。</div>
+  </div>
+</section>
+
+<!-- 板块四 派息（核心） -->
+<section>
+  <div class="section-zh">板块四 · 派息：从"下半年miss"到能否修复 + 省下的开店钱会不会变成超预期派息</div>
+  <div class="section-en">Dividend — from the H2 miss to recovery, and whether freed capex becomes payout</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q4</span><span class="qtext">去年下半年派息miss了，今年派息有没有可能改善？</span><span class="badge badge-high">派息事实真实 + 改善概率为判断</span></div>
+    <div class="qanswer">
+      <b>先厘清"miss"在哪</b>：2025全年派息率约<b>91%</b>（中期0.338 + 末期0.384港元/股，合计约40.2亿港元≈36.8亿人民币 / 净利40.4亿）。拆半年——<b>H1派息率约98%，但末期（对应H2）派息率降到约86%</b>，明显低于市场延续2024年95%的预期。<b>这就是"下半年miss"</b>，管理层公开归因于"为红石榴计划保留发展资金"。<br><br>
+      <b>2026改善的概率：中高（估约65%修复到95%+）</b>。测算是关键——<b>即便派息率维持91%不变，2026派息绝对额也会因净利润恢复（+15%）而自动增至约42亿人民币（+15%）</b>；若派息率回到95%，派息额约44亿（+20%）。见下方图表。<br>
+      <b>支持改善的因素</b>：① 主品牌capex低（不设开店目标）；② 红石榴没加速（焰请还在关店），预留资金未充分消耗；③ 账上现金常年200亿+、无有息负债压力；④ 张勇增持1亿港元显示股东回报意识；⑤ 历史高派息基因（2023年90%、2024年95%）。<br>
+      <b>压制改善的因素</b>：① 管理层"再创业/多元化投入"叙事仍在，倾向留存；② 红石榴虽慢仍需持续烧钱；③ 若翻台/同店未企稳，管理层可能保守。
+    </div>
+    <div class="qsrc">依据：新浪财经/同花顺派息记录（0.338+0.384港元、末期总额21.4亿港元，真实）；派息率历史（futunn/理杏仁，真实）；改善概率为分析判断。</div>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">图三 · 派息率历史与2026情景 · 核心图</div>
+    <div class="chart-sub">派息率=全年派息/净利润。2024峰值95%→2025降至91%（末期档降为"miss"）；2026三情景。绿色虚线为2024基准</div>
+    <svg viewBox="0 0 960 300" width="100%" font-family="'IM Fell English',Georgia,serif">
+      <!-- Y轴刻度 -->
+      <line x1="70" y1="30" x2="70" y2="250" stroke="#d4cec6"/>
+      <line x1="70" y1="250" x2="910" y2="250" stroke="#0a0a0b"/>
+      <text x="60" y="55" text-anchor="end" font-size="10" fill="#888">100%</text>
+      <line x1="70" y1="50" x2="910" y2="50" stroke="#eee"/>
+      <text x="60" y="105" text-anchor="end" font-size="10" fill="#888">80%</text>
+      <line x1="70" y1="100" x2="910" y2="100" stroke="#eee"/>
+      <text x="60" y="155" text-anchor="end" font-size="10" fill="#888">60%</text>
+      <line x1="70" y1="150" x2="910" y2="150" stroke="#eee"/>
+      <text x="60" y="205" text-anchor="end" font-size="10" fill="#888">40%</text>
+      <line x1="70" y1="200" x2="910" y2="200" stroke="#eee"/>
+      <!-- 2024基准线 95% -->
+      <line x1="70" y1="62.5" x2="910" y2="62.5" stroke="#2a5c3f" stroke-dasharray="5" stroke-width="1"/>
+      <text x="900" y="58" text-anchor="end" font-size="10" fill="#2a5c3f">2024基准 95%</text>
+      <!-- 柱：2019 31 -->
+      <g>
+        <rect x="100" y="172.5" width="55" height="77.5" fill="#b8b0a6"/>
+        <text x="127" y="165" text-anchor="middle" font-size="11" font-weight="700">31%</text>
+        <text x="127" y="266" text-anchor="middle" font-size="10.5">2019</text>
+      </g>
+      <!-- 2021 0 未派息 -->
+      <g>
+        <text x="222" y="243" text-anchor="middle" font-size="10" fill="#8b2e2e">未派</text>
+        <text x="222" y="266" text-anchor="middle" font-size="10.5">2021</text>
+      </g>
+      <!-- 2022 41 -->
+      <g>
+        <rect x="290" y="147.5" width="55" height="102.5" fill="#b8b0a6"/>
+        <text x="317" y="140" text-anchor="middle" font-size="11" font-weight="700">41%</text>
+        <text x="317" y="266" text-anchor="middle" font-size="10.5">2022</text>
+      </g>
+      <!-- 2023 90 -->
+      <g>
+        <rect x="385" y="25" width="55" height="225" fill="#8b6c42"/>
+        <text x="412" y="18" text-anchor="middle" font-size="11" font-weight="700">90%</text>
+        <text x="412" y="266" text-anchor="middle" font-size="10.5">2023</text>
+      </g>
+      <!-- 2024 95 峰值 -->
+      <g>
+        <rect x="480" y="12.5" width="55" height="237.5" fill="#2a5c3f"/>
+        <text x="507" y="8" text-anchor="middle" font-size="11" font-weight="700" fill="#2a5c3f">95%</text>
+        <text x="507" y="266" text-anchor="middle" font-size="10.5">2024</text>
+      </g>
+      <!-- 2025 91 miss -->
+      <g>
+        <rect x="575" y="27.5" width="55" height="222.5" fill="#c47a1e"/>
+        <text x="602" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#c47a1e">91%</text>
+        <text x="602" y="266" text-anchor="middle" font-size="10.5">2025</text>
+        <text x="602" y="279" text-anchor="middle" font-size="9" fill="#8b2e2e">末期86%(miss)</text>
+      </g>
+      <!-- 2026 三情景 -->
+      <g>
+        <rect x="680" y="27.5" width="34" height="222.5" fill="#d4cec6"/>
+        <text x="697" y="20" text-anchor="middle" font-size="9.5" fill="#888">熊91%</text>
+        <rect x="718" y="15.5" width="34" height="234.5" fill="#c9a84c"/>
+        <text x="735" y="10" text-anchor="middle" font-size="9.5" font-weight="700">基95%</text>
+        <rect x="756" y="5" width="34" height="245" fill="#8b6c42"/>
+        <text x="773" y="-1" text-anchor="middle" font-size="9.5" fill="#8b6c42">牛98%</text>
+        <text x="735" y="266" text-anchor="middle" font-size="10.5" font-weight="700">2026E</text>
+      </g>
+      <!-- 派息额标注 -->
+      <text x="735" y="285" text-anchor="middle" font-size="9" fill="#6b6460">派息额 42~46亿(+15~26%)</text>
+    </svg>
+  </div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q6</span><span class="qtext">之前说降派息是为发展红石榴，现在红石榴没加速，那主品牌和红石榴省下的开店资金，会不会转成更超预期的派息？</span><span class="badge badge-mid">方向成立 + 关键修正</span></div>
+    <div class="qanswer">
+      <b>你的逻辑链方向正确，但有一个必须点破的漏洞——"省下的capex"不是2026派息改善的主引擎，利润恢复才是。</b><br><br>
+      <b>逻辑成立的部分</b>：管理层2025年降派息的公开理由确实是"留资金发展红石榴"；而现实是主品牌不设开店目标（capex↓）+ 红石榴没加速（焰请关店，capex也没大增）——预留的发展资金确实没被充分消耗，自由现金流应更充裕，理论上有能力提高派息。<br><br>
+      <b>必须修正的部分（Forensic侦探视角）</b>：<br>
+      ① <b>金额有限</b>——海底捞主品牌本就相对轻资产，单店capex约800万–1000万，即便少开50–80家，省下的也就4–8亿，相对40亿+的净利润是小数；<br>
+      ② <b>红石榴是多年投入而非一次性开支</b>——管理层的"发展红石榴"是3–5年的战略承诺，不会因为某一年慢了就把钱一次性返还，更可能是"递延"而非"取消"；<br>
+      ③ <b>真正的派息增量来自分子</b>——净利润恢复+15%，即便派息率维持91%，派息额就自动+15%（约42亿）。这比"腾挪capex"的贡献大得多也确定得多。<br><br>
+      <b>结论：会改善，但"超预期"要打折看。</b>大概率路径是<b>派息率修复到95%附近（基准情景）+ 净利润增长共同推动派息额+15%~20%</b>；<b>而"特别股息/派息率冲上95%以上"这种真正的超预期，概率约30%</b>——它取决于管理层是否愿意在"再创业"叙事下松口做现金返还，这是个态度问题，不是能力问题。<b>近场验证点：8月下旬中期派息率——若≥95%，则牛市情景（超预期）的概率显著上调。</b>
+    </div>
+    <div class="qsrc">依据：capex测算（单店投资额行业惯例，推算）；管理层战略定调（业绩会，真实）；概率为分析判断，非公司承诺。</div>
+  </div>
+
+  <div class="insight">
+    <div class="h">一句话给客户：派息问题的正确问法</div>
+    <p>不要问"省下的钱会不会变成派息"（会，但金额小），要问"管理层愿不愿意在利润恢复的这一年，把派息率从91%拉回95%+"。前者是现金流问题（答案偏乐观），后者是资本分配态度问题（答案取决于张勇对'再创业'和'股东回报'的排序）。8月下旬的中期派息率就是这个态度的第一次公开表态。</p>
+  </div>
+</section>
+
+<!-- 板块五 催化图谱 -->
+<section>
+  <div class="section-zh">板块五 · 接下来的正面 / 负面催化</div>
+  <div class="section-en">Forward catalyst map — positive vs negative</div>
+
+  <div class="qcard">
+    <div><span class="qnum">Q3</span><span class="qtext">接下来可能还会发生什么？正面催化、负面催化分别有哪些？</span><span class="badge badge-mid">时点确定项高置信 + 结果为判断</span></div>
+    <div class="qanswer">
+      按时间就近与确定性排序，最硬的近场催化是<b>8月下旬的中期业绩+中期派息</b>——它一次性回答"翻台是否企稳""派息是否修复"两个核心问题。详见下表。
+    </div>
+    <table>
+      <thead><tr><th>方向</th><th>催化事件</th><th>时点</th><th>观察重点</th><th>确定性</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--green);font-weight:700">正面</td><td>中期业绩+派息率修复至95%+</td><td>8月下旬</td><td>派息率是否回到95%；红石榴收入是否翻倍</td><td class="center">时点确定</td></tr>
+        <tr><td style="color:var(--green);font-weight:700">正面</td><td>翻台率月度环比企稳回升信号</td><td>Q3–Q4</td><td>是否回到4.0以上、解锁开店红线</td><td class="center">中</td></tr>
+        <tr><td style="color:var(--green);font-weight:700">正面</td><td>大排档/如鮨单店模型跑通、提速</td><td>下半年</td><td>翻台维持5.5–8轮、净增门店斜率</td><td class="center">中</td></tr>
+        <tr><td style="color:var(--green);font-weight:700">正面</td><td>张勇增持完成/加码 + 消费刺激政策</td><td>年内</td><td>增持落地节奏；国补/消费券力度</td><td class="center">中低</td></tr>
+        <tr><td style="color:var(--red);font-weight:700">负面</td><td>5–6月翻台下滑在中报兑现为同店负增长</td><td>8月下旬</td><td>同店销售增速、Q2翻台绝对值</td><td class="center">概率偏高</td></tr>
+        <tr><td style="color:var(--red);font-weight:700">负面</td><td>焰请继续关店 / 计提减值</td><td>年内</td><td>是否出现商誉/固定资产减值</td><td class="center">中</td></tr>
+        <tr><td style="color:var(--red);font-weight:700">负面</td><td>行业价格战持续压制利润率</td><td>持续</td><td>原材料占比是否突破40.5%高位</td><td class="center">中高</td></tr>
+        <tr><td style="color:var(--red);font-weight:700">负面</td><td>加盟落地/红石榴净增低于预期</td><td>年内</td><td>加盟店是否突破100家上限</td><td class="center">中</td></tr>
+      </tbody>
+    </table>
+    <div class="qsrc">依据：业绩发布时点（港交所规则，确定）；催化结果为分析判断。统计局5月餐饮+0.6%、原材料占比40.5%为真实锚点。</div>
+  </div>
+</section>
+
+<!-- 风险信号表 -->
+<section>
+  <div class="section-zh">风险信号表 · Critic 识别的低置信 / 矛盾项</div>
+  <div class="section-en">Risk signals — low-confidence &amp; conflicting items flagged for interview verification</div>
+  <table>
+    <thead><tr><th>信号</th><th>问题</th><th>访谈追问建议</th></tr></thead>
+    <tbody>
+      <tr><td>分部利润无官方口径</td><td>堂食/外卖/红石榴分部利润均为推算，公司只披露分部收入</td><td>请受访者给出红石榴年化亏损额、外卖经营利润率的内部口径</td></tr>
+      <tr><td>派息态度不可量化</td><td>"派息率能否回95%"取决于管理层资本分配态度，无法从财务数据推出</td><td>直接问：管理层内部对"利润恢复年"的派息政策定调是什么</td></tr>
+      <tr><td>H1数据尚未发布</td><td>2026上半年翻台/开店/同店均为推算，中报8月下旬才有</td><td>若受访者有渠道数据，核实Q2翻台绝对值与同店增速</td></tr>
+      <tr><td>capex节省额未验证</td><td>"省下4–8亿"基于单店投资额行业惯例外推，非公司披露</td><td>核实主品牌2026计划capex vs 2025实际</td></tr>
+      <tr><td>券商预期分歧</td><td>目标价17.5（大摩）到18.94（国金）分歧，反映收入恢复时点判断不一</td><td>确认受访者/客户内部对全年营收增速的中枢假设</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<div class="verdict">
+  <div class="v-en">Merlin Critic · Research Verdict</div>
+  <div class="v-zh">评审裁定：提纲6大问全部作答——无一留白，推算处均标注假设层数与来源</div>
+  <div class="v-conf">综合置信度 6.0 / 10 ｜ 高置信 3 问（管理层动作/焰请关店/派息事实）· 中置信 2 问（券商预期/催化）· 推算为主 1 问（分部利润）｜ Confidence 6.0/10</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text"><strong>派息问题的核心不是"钱够不够"（够），而是"管理层愿不愿意"（态度未定）。</strong>即便派息率维持91%不变，2026派息额也因利润+15%而自动+15%——所以"派息改善"几乎是确定的，真正的变量是能否从91%拉回95%+的"超预期"部分，这取决于张勇对"再创业投入"与"股东回报"的排序。8月下旬中期派息率是这个态度的第一次公开表态。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：派息记录+净利预期测算（真实基数）；态度判断建议访谈验证</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text"><strong>客户"省下的capex会变成超预期派息"的逻辑方向对，但金额被高估了——主品牌轻资产、少开50–80家也就省4–8亿，相对40亿+净利是小数；红石榴是多年投入不会一次性返还。</strong>派息增量的大头来自净利润恢复（分子），不是capex腾挪（现金流）。这个修正是本报告对客户原始假设最有价值的纠偏。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：单店capex行业惯例测算+管理层战略定调；金额为推算</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text"><strong>红石榴"没加速"有硬证据（焰请上半年零新开、关≥19家），印证客户判断；但它是"分化放缓"而非全线收缩——高客单焰请收缩、平价大排档/如鮨在扩。</strong>管理层动作的利润兑现要到2026 H2–2027，别指望半年报就看到张勇回归的业绩证据。2026 H1报表最可能是"增收、利润持平或小幅改善"的过渡态。
+      <span style="color:var(--gold);font-size:11px;display:block;margin-top:4px">依据：焰请门店数（真实）+报表兑现节奏判断</span>
+    </div>
+  </div>
+  <div class="feedback">
+    对本报告的数据或结论有反馈？请点击：
+    <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=haidilao_2026_expectations_dividend_20260716" target="_blank">提交反馈 / Submit feedback</a>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sources">
+  <h4>数据来源索引 · Sources</h4>
+  海底捞2025年度业绩公告及业绩说明会（2026-03-24）、2025年中期报告（2025-08）；国金证券2026-05-13研报（营收475.5亿/净利46.0亿/目标价18.94港元）、光大证券2026-03（净利47.96/52.95亿）、摩根士丹利2025-07（目标价17.5港元）；新浪财经/同花顺分红派息记录（中期0.338+末期0.384港元、末期总额21.4亿港元）；富途/理杏仁（派息率历史2019–2024）；东方财富/中华网2026-07-01（焰请门店与关店数，官方小程序口径）；36氪/新浪2026-01及2026-04（张勇回归、杨利娟统筹红石榴、增持1亿港元人事公告）；国家统计局2026年1–5月餐饮数据。
+  <div style="margin-top:14px;background:rgba(196,122,30,0.08);padding:12px 14px;border-radius:2px">
+    <strong>置信度说明：</strong>2025年报数字、派息记录与派息率历史、焰请门店数、管理层人事与增持 — 一手/准一手，置信度<b>高</b>。券商全年预期、催化事件时点 — 公开研报与港交所规则，置信度<b>中高</b>。分部利润拆解、净利润桥、capex节省额、2026派息率情景概率 — 推算（已标注假设层数），置信度<b>中低</b>，其中<b>分部利润与派息态度为公司从未量化披露项，必须以访谈获取为准</b>。全年收入465亿/净利46.5亿为券商共识中枢的单点采用值，精确外观不代表精确程度。
+  </div>
+</div>
+
+<footer>
+  <span>Merlin 咨询情报系统 · 客户提纲研究（模式B）</span>
+  <span>海底捞 全年预期/管理层/开店/派息/催化 · 6大问</span>
+  <span>生成日期 2026-07-16</span>
+</footer>
+
+</body>
+</html>
