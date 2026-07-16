@@ -4,7 +4,7 @@ Fetches equity prices via Finnhub API + VIX/Treasury via yfinance.
 Saves to stock_prices.json.
 
 Tickers tracked:
-  Equities (Finnhub):  SPY QQQ NVDA PLTR TSLA AAPL AMD IWM GLD
+  Equities (Finnhub):  20 tickers - indices/megacaps/mid-price CSP-friendly names
   Indices (yfinance):  ^VIX (CBOE VIX)  ^TNX (10-year Treasury yield)
 """
 
@@ -25,7 +25,14 @@ try:
 except ImportError:
     HAS_YFINANCE = False
 
-EQUITY_TICKERS = ["SPY", "QQQ", "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "IWM", "GLD"]
+EQUITY_TICKERS = [
+    # 指数/大盘
+    "SPY", "QQQ", "IWM", "GLD", "SLV", "TLT", "XLE",
+    # 大盘股（价差策略用）
+    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU",
+    # 中低价高流动性（小账户CSP友好带：股价20-80美元）
+    "SOFI", "HOOD", "INTC", "F", "UBER", "T", "KO",
+]
 
 INDEX_TICKERS = {
     "^VIX": "vix",
