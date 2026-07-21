@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>绿茶 × 海底捞 · 专家访谈作战包 · 2026-07-28</title>
+<title>绿茶 × 海底捞 · 客户提纲研究（访谈作战包）· 2026-07-28</title>
 <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -16,80 +16,54 @@ body{background:var(--paper);color:var(--ink);
   font-family:'Songti SC','STSong','SimSun',Georgia,serif;
   font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
 .en{font-family:'IM Fell English',Georgia,serif;}
-
-/* pub bar */
 .pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
   border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
   font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
 .pub-bar b{color:var(--copper);}
-
-/* title */
 .title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
-.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);
-  letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
 .title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
 .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;}
-.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);
-  color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
 .tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-
-/* stat bar */
-.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);
-  border:1px solid var(--border);margin:22px 0;}
+.hbi{margin-top:8px;font-size:11.5px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.3px;}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
 .stat{background:var(--card);padding:16px 14px;text-align:center;}
 .stat .num{font-family:'IM Fell English',Georgia,serif;font-size:27px;font-weight:700;color:var(--ink);line-height:1.1;}
 .stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
 .stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
 .stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;}
-
-/* section */
 .section{margin:38px 0 0;}
 .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
 .sec-zh{font-size:21px;font-weight:700;}
 .sec-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
-
-/* notice */
 .notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
-.notice.red{border-left-color:var(--red);}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
 .notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
-.notice.red .nt{color:var(--red);}
-
-/* strategy cards */
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
 .strat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px;}
 .strat{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--copper);padding:14px 16px;}
 .strat h4{font-size:15px;margin-bottom:6px;color:var(--ink);}
 .strat h4 span{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--copper);display:block;font-style:italic;letter-spacing:.5px;}
 .strat p{font-size:13.5px;color:#3a352f;}
-
-/* table */
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
-th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;
-  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
 td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
 tr:nth-child(even) td{background:var(--card);}
 td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
-
-/* badge */
-.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;
-  color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
-.badge-official{background:var(--green);}
-.badge-predict{background:var(--amber);}
-.badge-gap{background:var(--red);}
-.badge-client{background:var(--copper);}
-
-/* chart */
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);} .badge-client{background:var(--copper);}
 .chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
 .chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
 .chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 svg{width:100%;height:auto;display:block;}
-
-/* Q cards */
-.qcard{background:#fff;border:1px solid var(--border);border-left:4px solid var(--copper);
-  padding:18px 20px;margin:16px 0;}
-.qcard .qh{display:flex;gap:12px;align-items:baseline;margin-bottom:4px;}
+.qcard{background:#fff;border:1px solid var(--border);border-left:4px solid var(--copper);padding:18px 20px;margin:16px 0;}
+.qcard.hot{border-left-color:var(--red);}
+.qcard .qh{display:flex;gap:12px;align-items:baseline;margin-bottom:4px;flex-wrap:wrap;}
 .qcard .qnum{font-family:'IM Fell English',Georgia,serif;font-size:22px;font-weight:700;color:var(--copper);line-height:1;}
-.qcard .qtitle{font-size:16.5px;font-weight:700;line-height:1.4;}
-.qcard .qorig{font-size:12.5px;color:var(--muted);font-style:italic;margin:2px 0 12px;padding-left:2px;border-left:2px solid var(--border);padding-left:10px;}
+.qcard.hot .qnum{color:var(--red);}
+.qcard .qtitle{font-size:16.5px;font-weight:700;line-height:1.4;flex:1;min-width:60%;}
+.qcard .qorig{font-size:12.5px;color:var(--muted);font-style:italic;margin:2px 0 12px;border-left:2px solid var(--border);padding-left:10px;}
 .layer{margin:10px 0;}
 .llab{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.5px;padding:2px 9px;border-radius:2px;margin-bottom:4px;}
 .l-decode{background:#efe6d6;color:#6b4e22;}
@@ -99,506 +73,441 @@ svg{width:100%;height:auto;display:block;}
 .l-trap{background:#f0dcd8;color:var(--red);}
 .layer p{font-size:14px;color:#221f1c;}
 .layer.script p{font-size:14.5px;}
-.layer ul{margin:2px 0 2px 20px;} .layer li{font-size:13.8px;margin-bottom:3px;}
-.qtag{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--muted);border:1px solid var(--border);padding:1px 7px;border-radius:2px;margin-left:auto;white-space:nowrap;}
-
-/* verdict */
+.qtag{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--muted);border:1px solid var(--border);padding:1px 7px;border-radius:2px;white-space:nowrap;}
 .verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0;}
 .v-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
 .v-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
 .v-item{display:flex;gap:14px;margin:13px 0;}
 .v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
-.v-text{font-size:14px;line-height:1.7;}
-.v-text strong{color:#fff;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
 .v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
-
-/* feedback + footer */
-.feedback{text-align:center;margin:22px 0;font-size:13px;}
-.feedback a{color:var(--copper);}
-.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);
-  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
-@media(max-width:720px){
-  .stat-bar{grid-template-columns:repeat(2,1fr);} .strat-grid,.chart-grid2{grid-template-columns:1fr;}
-  .title-zh{font-size:24px;} body{font-size:14px;}
-}
+.feedback{text-align:center;margin:22px 0;font-size:13px;} .feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){.stat-bar{grid-template-columns:repeat(2,1fr);} .strat-grid,.chart-grid2{grid-template-columns:1fr;} .title-zh{font-size:24px;} body{font-size:14px;}}
 </style>
 </head>
 <body>
 
 <div class="pub-bar">
-  <span><b>访谈作战包</b> · Interview War-Pack</span>
+  <span><b>Merlin 模式B · 客户提纲研究</b></span>
   <span>标的：绿茶集团 (6831.HK) × 海底捞 (6862.HK)</span>
-  <span>受访专家：黄总（前海底捞华南大区运营官 · 前绿茶集团品牌运营总经理）</span>
+  <span>受访：黄总（前海底捞华南大区运营官 · 前绿茶品牌运营总经理 · 现夸父炸串）</span>
   <span>客户：投资机构</span>
-  <span><b>访谈时间：2026-07-28 (周二) 14:00–15:00</b></span>
+  <span><b>访谈：2026-07-28 (周二) 14:00–15:00</b></span>
 </div>
 
 <div class="title-block">
-  <div class="title-en">Green Tea vs. Haidilao — Regional Operations, Unit Economics &amp; Culture · Expert Call Battle-Pack</div>
-  <div class="title-zh">绿茶 × 海底捞 · 专家访谈作战包<br>大区经营 · 单店模型 · 供应链 · 组织文化</div>
+  <div class="title-en">Green Tea vs. Haidilao — A Five-Agent Study of the Client Outline · Expert-Call Battle-Pack</div>
+  <div class="title-zh">绿茶 × 海底捞 · 客户提纲研究<br>单店模型 · 供应链 · 组织文化 · 外卖平台</div>
   <div class="tags">
-    <span class="tag dark">Merlin 模式B · 客户提纲研究</span>
-    <span class="tag dark">逐题话术 17 问</span>
-    <span class="tag">公开数据锚点 · 已核</span>
-    <span class="tag">insider 王牌</span>
-    <span class="tag">陷阱 &amp; 合规红线</span>
-    <span class="tag dark">综合置信 7.0/10</span>
+    <span class="tag dark">五智能体重跑 · 17 问</span>
+    <span class="tag dark">综合置信 7.2/10</span>
+    <span class="tag">逐题 5 层作战</span>
+    <span class="tag">6 处实质纠正</span>
+    <span class="tag">Critic PASS</span>
     <span class="tag">数据截止 2026-07-21</span>
   </div>
-  <div style="margin-top:8px;font-size:11.5px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.3px;">
-    Composite confidence 7.0/10 — 硬锚点（门店/营收/客单/成本/外卖/回本期）均来自绿茶2025年报与招股书，置信高；"我方话术"中的机制判断与测算属【推断/行业经验】，置信中；"大排档4000元·24月""安井5亿·70-80%"为客户口径未见官方实证，已标待核。
-  </div>
+  <div class="hbi">Five-agent rerun (Scout×5 fresh sourcing → Analyst + Forensic → Strategist → Critic). 本版对首版做 6 处实质修正：口径三分法 / 绿茶激励含15%利润分享+赛马 / "微海搭建绿茶大学"公开零证据 / "安井占70%"系张冠李戴 / 绿茶正自建2.45万㎡央厨（提纲"剥离央厨"前提反了）/ 预制菜国标豁免逻辑。</div>
 </div>
 
 <div class="stat-bar">
   <div class="stat"><div class="num">609</div><div class="lab">绿茶门店 (2025末)<span class="en">+157 / +31%</span></div></div>
   <div class="stat"><div class="num red">¥54.6</div><div class="lab">绿茶客单 (2025)<span class="en">-2.8% YoY</span></div></div>
-  <div class="stat"><div class="num amber">25.3%</div><div class="lab">外卖占比 (2025)<span class="en">¥12.04亿 · +66.5%</span></div></div>
-  <div class="stat"><div class="num green">12.6月</div><div class="lab">新店回收期 (2025)<span class="en">2024: 16.5月</span></div></div>
+  <div class="stat"><div class="num amber">25.3%</div><div class="lab">外卖占比<span class="en">¥12.04亿 · +66.5%</span></div></div>
+  <div class="stat"><div class="num green">12.6月</div><div class="lab">新店回收期<span class="en">2024: 16.5月</span></div></div>
 </div>
 
-<!-- 合规红线 -->
 <div class="notice red">
   <div class="nt">⚠ 专家合规红线 · 先看这条再上场</div>
-  你是<strong>前雇员</strong>，两家都是<strong>港股上市公司</strong>。访谈只能用「公开数据 + 通用行业判断 + 你个人可公开谈的运营方法论」作答。<strong>不得</strong>透露：绿茶/海底捞未披露的分区域/单店真实财报数字、具体供应商合同价与账期、未公开的战略决策与人事内幕、任何可能构成内幕信息(MNPI)的内容。遇到往这个方向挖的问题——用「我离开后不掌握最新一手数据，从行业逻辑我判断……」把话题引回可公开的判断层。<strong>本作战包所有『insider王牌』均指"你亲历过、且属于可公开谈的运营经验与方法论"，不是让你抖公司机密。</strong>
+  你是<strong>前雇员</strong>，两家都是<strong>港股上市公司</strong>。访谈只能用「公开数据 + 通用行业判断 + 你个人可公开谈的运营方法论」作答。<strong>不得</strong>透露：未披露的分区域/单店真实财报、具体供应商合同价与账期、未公开战略与人事内幕、任何可能构成内幕信息(MNPI)的内容。被往这个方向挖——用「我离开后不掌握最新一手数据，从行业逻辑判断……」引回可公开的判断层。本作战包所有『insider王牌』均指<strong>你亲历过、且属于可公开谈的运营经验与方法论</strong>，不是让你抖机密。
 </div>
 
-<!-- 五智能体流程 (Merlin 模式B) -->
 <div class="section">
   <div class="sec-head"><span class="sec-zh">五智能体协作流程</span><span class="sec-en">Merlin Mode-B · Five-Agent Pipeline</span></div>
   <div class="chart-wrap">
-    <div class="chart-title">客户提纲 → 情报采集 → 并行推理 → 逐条作答 → 独立裁定</div>
-    <svg viewBox="0 0 960 130" font-family="'IM Fell English',Georgia,serif">
+    <div class="chart-title">客户提纲 → 5 路情报并行取证 → 并行推理 → 逐条作答 → 独立裁定</div>
+    <svg viewBox="0 0 960 132" font-family="'IM Fell English',Georgia,serif">
       <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8b6c42"/></marker></defs>
-      <!-- 提纲 -->
-      <rect x="8" y="46" width="96" height="40" rx="3" fill="#0a0a0b"/>
-      <text x="56" y="63" font-size="12" fill="#f1efea" text-anchor="middle">客户提纲</text>
-      <text x="56" y="78" font-size="9" fill="#c9a84c" text-anchor="middle">17 问 · 3 页</text>
-      <line x1="104" y1="66" x2="140" y2="66" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
-      <!-- Scout -->
-      <rect x="142" y="40" width="130" height="52" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
-      <text x="207" y="58" font-size="12" fill="#0a0a0b" text-anchor="middle">Scout 情报员</text>
-      <text x="207" y="72" font-size="8.5" fill="#6b6460" text-anchor="middle">WebSearch 采集</text>
-      <text x="207" y="83" font-size="8.5" fill="#6b6460" text-anchor="middle">年报/招股书/媒体核验</text>
-      <line x1="272" y1="66" x2="308" y2="66" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
-      <!-- Analyst + Forensic parallel -->
-      <rect x="310" y="16" width="150" height="42" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
-      <text x="385" y="33" font-size="12" fill="#0a0a0b" text-anchor="middle">Analyst 分析师</text>
-      <text x="385" y="47" font-size="8.5" fill="#6b6460" text-anchor="middle">机制推理 · 盈亏模型</text>
-      <rect x="310" y="74" width="150" height="42" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
-      <text x="385" y="91" font-size="12" fill="#0a0a0b" text-anchor="middle">Forensic 侦探</text>
-      <text x="385" y="105" font-size="8.5" fill="#6b6460" text-anchor="middle">异常信号 · 口径拆分</text>
-      <line x1="460" y1="66" x2="496" y2="66" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
-      <!-- Strategist -->
-      <rect x="498" y="40" width="140" height="52" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
-      <text x="568" y="58" font-size="12" fill="#0a0a0b" text-anchor="middle">Strategist 战略家</text>
-      <text x="568" y="72" font-size="8.5" fill="#6b6460" text-anchor="middle">逐条作答 + 话术</text>
-      <text x="568" y="83" font-size="8.5" fill="#6b6460" text-anchor="middle">四主线收口</text>
-      <line x1="638" y1="66" x2="674" y2="66" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
-      <!-- Critic -->
-      <rect x="676" y="40" width="130" height="52" rx="3" fill="#faf8f4" stroke="#2a5c3f"/>
-      <text x="741" y="58" font-size="12" fill="#2a5c3f" text-anchor="middle">Critic 评审</text>
-      <text x="741" y="72" font-size="8.5" fill="#6b6460" text-anchor="middle">置信裁定 · 五维门控</text>
-      <text x="741" y="83" font-size="8.5" fill="#6b6460" text-anchor="middle">PASS / 待核红旗</text>
-      <line x1="806" y1="66" x2="842" y2="66" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
-      <!-- 交付 -->
-      <rect x="844" y="46" width="104" height="40" rx="3" fill="#0a0a0b"/>
-      <text x="896" y="63" font-size="12" fill="#f1efea" text-anchor="middle">作战包</text>
-      <text x="896" y="78" font-size="9" fill="#c9a84c" text-anchor="middle">7.0/10</text>
+      <rect x="8" y="48" width="92" height="40" rx="3" fill="#0a0a0b"/>
+      <text x="54" y="65" font-size="12" fill="#f1efea" text-anchor="middle">客户提纲</text>
+      <text x="54" y="80" font-size="9" fill="#c9a84c" text-anchor="middle">17 问 · 3 页</text>
+      <line x1="100" y1="68" x2="134" y2="68" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="136" y="34" width="132" height="68" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="202" y="50" font-size="12" fill="#0a0a0b" text-anchor="middle">Scout 情报员 ×5</text>
+      <text x="202" y="63" font-size="8" fill="#6b6460" text-anchor="middle">文化 · 单店 · 下沉</text>
+      <text x="202" y="74" font-size="8" fill="#6b6460" text-anchor="middle">外卖 · 供应链</text>
+      <text x="202" y="88" font-size="8" fill="#6b6460" text-anchor="middle">62 次检索 · 逐题取证</text>
+      <line x1="268" y1="68" x2="302" y2="68" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="304" y="18" width="150" height="44" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="379" y="35" font-size="12" fill="#0a0a0b" text-anchor="middle">Analyst 分析师</text>
+      <text x="379" y="49" font-size="8" fill="#6b6460" text-anchor="middle">盈亏模型 · 行业基准</text>
+      <rect x="304" y="74" width="150" height="44" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="379" y="91" font-size="12" fill="#0a0a0b" text-anchor="middle">Forensic 侦探</text>
+      <text x="379" y="105" font-size="8" fill="#6b6460" text-anchor="middle">口径拆分 · 张冠李戴</text>
+      <line x1="454" y1="68" x2="488" y2="68" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="490" y="42" width="144" height="52" rx="3" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="562" y="60" font-size="12" fill="#0a0a0b" text-anchor="middle">Strategist 战略家</text>
+      <text x="562" y="73" font-size="8" fill="#6b6460" text-anchor="middle">逐条作答 + 话术</text>
+      <text x="562" y="85" font-size="8" fill="#6b6460" text-anchor="middle">四主线收口</text>
+      <line x1="634" y1="68" x2="668" y2="68" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="670" y="42" width="134" height="52" rx="3" fill="#faf8f4" stroke="#2a5c3f"/>
+      <text x="737" y="60" font-size="12" fill="#2a5c3f" text-anchor="middle">Critic 评审</text>
+      <text x="737" y="73" font-size="8" fill="#6b6460" text-anchor="middle">五维门控 · 置信裁定</text>
+      <text x="737" y="85" font-size="8" fill="#6b6460" text-anchor="middle">PASS · 待核红旗</text>
+      <line x1="804" y1="68" x2="838" y2="68" stroke="#8b6c42" stroke-width="1.5" marker-end="url(#ah)"/>
+      <rect x="840" y="48" width="108" height="40" rx="3" fill="#0a0a0b"/>
+      <text x="894" y="65" font-size="12" fill="#f1efea" text-anchor="middle">作战包</text>
+      <text x="894" y="80" font-size="9" fill="#c9a84c" text-anchor="middle">7.2/10</text>
     </svg>
   </div>
 </div>
 
-<!-- 全局策略 -->
 <div class="section">
   <div class="sec-head"><span class="sec-zh">访谈全局策略</span><span class="sec-en">Master Framing · 四条贯穿主线</span></div>
-  <p style="font-size:13.5px;color:#3a352f;margin-bottom:6px;">客户是投资人，真正想验证的不是"绿茶好不好"，而是<strong>四个投资判断点</strong>。全程把每道题往这四条主线上收，你就掌控了节奏。</p>
+  <p style="font-size:13.5px;color:#3a352f;margin-bottom:6px;">客户是投资人，真正想验证的是<strong>四个投资判断点</strong>。全程把每道题往这四条主线上收，你就掌控了节奏。</p>
   <div class="strat-grid">
-    <div class="strat"><h4>主线① 两个"下滑数字"要拆开<span>SAME-STORE vs. PER-STORE</span></h4><p>客户会拿「单店日均 -12.9%」压你。<strong>这不是同店</strong>——那是全系统单店平均，被 157 家新开小店摊薄的分母效应；真正的可比同店只有约 -0.8%。谁能一句话拆开这两个数，谁就立刻显出内部人水平。这是你的<strong>开局杀招</strong>。</p></div>
-    <div class="strat"><h4>主线② 绿茶是"资本效率机器"，海底捞是"人情护城河"<span>MODEL DUALITY</span></h4><p>绿茶=高翻台/低客单/轻资产/OEM/SOP的<strong>坪效与回本机器</strong>（12.6月回本、小店18月闭店率1.4%）；海底捞=高客单/强服务/师徒制/自建供应链的<strong>组织与体验护城河</strong>。两套模型没有优劣，是<strong>周期下行期资本更偏爱哪一套</strong>的问题。</p></div>
-    <div class="strat"><h4>主线③ 增长质量：靠开店，不是靠回暖<span>GROWTH QUALITY</span></h4><p>2025营收+24.1%几乎全部来自新开店（同店仍负）。客户在赌"下沉+小店"能不能持续。你要点出：<strong>回本变快(12.6月)是真的，但单店绝对赚钱能力在稀释</strong>——增长与质量的剪刀差是核心风险。</p></div>
-    <div class="strat"><h4>主线④ 预制菜 &amp; OEM 是估值的达摩克利斯之剑<span>PRE-MADE RISK</span></h4><p>绿茶无央厨、205家OEM、招牌菜"现做"招牌被撤——这是<strong>成本优势的来源，也是品牌信任的软肋</strong>。西贝风波后监管与消费者双重敏感。谈供应链一定要同时谈这层<strong>合规与品牌风险</strong>，客户会记住你。</p></div>
+    <div class="strat"><h4>主线① "下滑数字"有三个口径，别被绕进去<span>THREE METRICS, ONE TRUTH</span></h4><p>客户会拿「-12.9%」压你。三分法：<strong>系统单店日均 -12.9%</strong>（被新小店摊薄）＞<strong>可比堂食单店 ≈-13%</strong>＞<strong>官方含外卖同店 -0.8%</strong>。机理是<strong>堂食单店日销跌双位数，被外卖 +74% 回补到近持平</strong>。一句话拆清三者，立刻显内部人水平——这是你的开局杀招。</p></div>
+    <div class="strat"><h4>主线② 绿茶=资本效率机器，海底捞=人情护城河<span>MODEL DUALITY</span></h4><p>绿茶=高翻台/低客单/OEM/SOP的<strong>坪效与回本机器</strong>（12.6月回本、18月闭店率1.4%）；海底捞=高客单/强服务/师徒制/自建供应链的<strong>组织与体验护城河</strong>。两套没有优劣，是<strong>周期下行期资本更偏爱哪一套</strong>的问题。</p></div>
+    <div class="strat"><h4>主线③ 增长质量：靠开店，不是靠回暖<span>GROWTH QUALITY</span></h4><p>2025营收+24.1%几乎全部来自新开店，堂食同店仍双位数下滑、靠外卖回补。<strong>回本变快(12.6月)是真的，但堂食单店绝对赚钱能力在稀释</strong>——增长与质量的剪刀差是核心风险。</p></div>
+    <div class="strat"><h4>主线④ 预制菜 &amp; 供应链是估值的达摩克利斯之剑<span>PRE-MADE RISK</span></h4><p>绿茶靠205家OEM压成本，却因此撤下"现做"招牌；同时又在<strong>自建2.45万㎡央厨</strong>往回走。成本优势、品牌信任、资本开支三者在这里打架——谈供应链一定要谈这层张力。</p></div>
   </div>
 </div>
 
-<!-- 数据速查 -->
 <div class="section">
-  <div class="sec-head"><span class="sec-zh">上场前 90 秒数据速记</span><span class="sec-en">Cheat Sheet · 张口即来的锚点</span></div>
+  <div class="sec-head"><span class="sec-zh">上场前 90 秒数据速记</span><span class="sec-en">Cheat Sheet</span></div>
   <table>
-    <thead><tr><th style="width:130px">维度</th><th>绿茶集团 (2025)</th><th>海底捞 (2025)</th></tr></thead>
+    <thead><tr><th style="width:120px">维度</th><th>绿茶集团 (2025)</th><th>海底捞 (2025)</th></tr></thead>
     <tbody>
       <tr><td class="k">门店数</td><td>609 家 <span class="badge badge-official">官方</span>（+157/+31%，100%直营）</td><td>1,383 家 <span class="badge badge-official">官方</span>（自营1,304+加盟79）</td></tr>
       <tr><td class="k">营收 / 净利</td><td>47.63亿 (+24.1%) / 经调整5.09亿 (+41%) <span class="badge badge-official">官方</span></td><td>432.25亿 (+1.1%) / 40.42亿 (-14.0%) <span class="badge badge-official">官方</span></td></tr>
       <tr><td class="k">客单价</td><td>54.6元 (-2.8%) <span class="badge badge-official">官方</span></td><td>~96-97元（连续第3年阴跌）<span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">翻台率</td><td>3.0 次/天（持平）<span class="badge badge-official">官方</span></td><td>3.9 次/天（两年未达4.0红线）<span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">同店销售</td><td>可比同店 ~-0.8% <span class="badge badge-official">官方</span> ｜ 系统单店日均 -12.9% <span class="badge badge-client">客户口径</span></td><td>-6.8%（1,135家可比）<span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">成本结构</td><td>原材料31.7% / 员工26.1% / 毛利~68.4% <span class="badge badge-official">官方</span></td><td>原材料40.5% / 员工32.6% / 租金1.0%+折摊6.0% <span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">外卖</td><td>12.04亿 (+66.5%)，占25.3% <span class="badge badge-official">官方</span></td><td>26.58亿 (+111.9%)，占6.1% <span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">供应链</td><td>无央厨，205家第三方OEM，前五大集中度18.2% <span class="badge badge-official">官方</span></td><td>蜀海(40+仓配/9加工中心/40万㎡)+颐海+安井 <span class="badge badge-official">官方</span></td></tr>
-      <tr><td class="k">新店经济性</td><td>回本12.6月(2024:16.5)、新店利润率15.9%、18月闭店率1.4% <span class="badge badge-official">官方</span></td><td>主品牌单店capex 800万-1000万（轻资产）<span class="badge badge-predict">推断</span></td></tr>
-      <tr><td class="k">扩张指引</td><td>2026净增180-190家，其中>60%落二线及以下 <span class="badge badge-official">官方</span></td><td>主品牌不设开店目标（翻台<4.0未解锁），副牌大排档3年500家 <span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">翻台率</td><td>3.0 次/天（下限4/上限7未达）<span class="badge badge-official">官方</span></td><td>3.9 次/天（两年未达4.0红线）<span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">同店 (三口径)</td><td>系统单店日均-12.9% ｜ 可比堂食单店≈-13% ｜ <strong>官方含外卖同店-0.8%</strong>（Q2起逐季转正+4.4/+0.5/+1.0%）<span class="badge badge-official">官方</span></td><td>-6.8%（1,135家可比）<span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">成本结构</td><td>原材料31.7% / 员工26.1% / 毛利68.4% / 使用权折旧+租金约12-14% <span class="badge badge-official">官方</span></td><td>原材料40.5% / 员工32.6% / 租金1.0%+折摊6.0% <span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">外卖</td><td>12.04亿 (+66.5%)，占25.3%（H1 74%高增回补堂食）<span class="badge badge-official">官方</span></td><td>26.58亿 (+111.9%)，占6.1% <span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">供应链</td><td>无自建央厨→205家OEM；<strong>IPO募资自建2.45万㎡央厨(90%自供,2025Q3开工)</strong><span class="badge badge-official">招股书</span></td><td>蜀海(40+仓配/9加工中心)+颐海+安井 <span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">激励机制</td><td>15%门店利润分享 + 赛马竞争 + 神秘访客评分 <span class="badge badge-official">招股书</span></td><td>师徒三级分红(自店2.8%或含徒弟3.1%/徒孙1.5%)+家族制ABC评级 <span class="badge badge-predict">媒体</span></td></tr>
+      <tr><td class="k">人力/店</td><td>全职约27人(曾33)，兼职比14.6%→27.9% <span class="badge badge-official">招股书</span></td><td>员工总数15.37万(2023)→12.56万(2025)<span class="badge badge-official">官方</span></td></tr>
+      <tr><td class="k">扩张指引</td><td>2026净增180-190家，>60%落二线及以下 <span class="badge badge-official">官方</span>；出海新马泰14→目标30店不加盟</td><td>主品牌不设开店目标；副牌大排档3年500家 <span class="badge badge-official">官方</span></td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- 图表 -->
 <div class="section">
-  <div class="sec-head"><span class="sec-zh">四张图 · 撑起你的判断</span><span class="sec-en">Charts to Anchor Your Answers</span></div>
-
+  <div class="sec-head"><span class="sec-zh">五张图 · 撑起你的判断</span><span class="sec-en">Charts</span></div>
   <div class="chart-grid2">
     <div class="chart-wrap">
-      <div class="chart-title">绿茶营收 &amp; 净利 2022–2025（亿元）</div>
+      <div class="chart-title">绿茶营收 &amp; 净利(GAAP口径) 2022–2025（亿元）· 2025经调整净利另为5.09亿(+41%)</div>
       <svg viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif">
-        <line x1="38" y1="12" x2="38" y2="165" stroke="#d4cec6"/>
-        <line x1="38" y1="165" x2="350" y2="165" stroke="#d4cec6"/>
-        <!-- revenue bars: 23.75 35.89 38.38 47.63 ; scale max 50 -> 150px -->
-        <g>
-          <rect x="55" y="94.75" width="34" height="70.25" fill="#8b6c42"/>
-          <rect x="130" y="57.3" width="34" height="107.7" fill="#8b6c42"/>
-          <rect x="205" y="49.9" width="34" height="115.1" fill="#8b6c42"/>
-          <rect x="280" y="22.1" width="34" height="142.9" fill="#8b6c42"/>
-          <text x="72" y="88" font-size="10" fill="#0a0a0b" text-anchor="middle">23.75</text>
-          <text x="147" y="51" font-size="10" fill="#0a0a0b" text-anchor="middle">35.89</text>
-          <text x="222" y="43" font-size="10" fill="#0a0a0b" text-anchor="middle">38.38</text>
-          <text x="297" y="16" font-size="10" fill="#0a0a0b" text-anchor="middle">47.63</text>
-        </g>
-        <!-- net profit line: 0.17 2.96 3.50 4.86 (adj 5.09) scale same -->
+        <line x1="38" y1="12" x2="38" y2="165" stroke="#d4cec6"/><line x1="38" y1="165" x2="350" y2="165" stroke="#d4cec6"/>
+        <rect x="55" y="94.75" width="34" height="70.25" fill="#8b6c42"/><rect x="130" y="57.3" width="34" height="107.7" fill="#8b6c42"/>
+        <rect x="205" y="49.9" width="34" height="115.1" fill="#8b6c42"/><rect x="280" y="22.1" width="34" height="142.9" fill="#8b6c42"/>
+        <text x="72" y="88" font-size="10" fill="#0a0a0b" text-anchor="middle">23.75</text><text x="147" y="51" font-size="10" fill="#0a0a0b" text-anchor="middle">35.89</text>
+        <text x="222" y="43" font-size="10" fill="#0a0a0b" text-anchor="middle">38.38</text><text x="297" y="16" font-size="10" fill="#0a0a0b" text-anchor="middle">47.63</text>
         <polyline points="72,164.5 147,156.1 222,154.5 297,150.4" fill="none" stroke="#2a5c3f" stroke-width="2"/>
-        <g fill="#2a5c3f">
-          <circle cx="72" cy="164.5" r="2.5"/><circle cx="147" cy="156.1" r="2.5"/>
-          <circle cx="222" cy="154.5" r="2.5"/><circle cx="297" cy="150.4" r="2.5"/>
-          <text x="72" y="178" font-size="8" text-anchor="middle">0.17</text>
-          <text x="147" y="178" font-size="8" text-anchor="middle">2.96</text>
-          <text x="222" y="178" font-size="8" text-anchor="middle">3.50</text>
-          <text x="297" y="178" font-size="8" text-anchor="middle">4.86</text>
-        </g>
-        <text x="72" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2022</text>
-        <text x="147" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2023</text>
-        <text x="222" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2024</text>
-        <text x="297" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2025</text>
-        <text x="44" y="20" font-size="8" fill="#8b6c42">■营收</text>
-        <text x="44" y="30" font-size="8" fill="#2a5c3f">—净利</text>
+        <g fill="#2a5c3f"><circle cx="72" cy="164.5" r="2.5"/><circle cx="147" cy="156.1" r="2.5"/><circle cx="222" cy="154.5" r="2.5"/><circle cx="297" cy="150.4" r="2.5"/>
+        <text x="72" y="178" font-size="8" text-anchor="middle">0.17</text><text x="147" y="178" font-size="8" text-anchor="middle">2.96</text><text x="222" y="178" font-size="8" text-anchor="middle">3.50</text><text x="297" y="178" font-size="8" text-anchor="middle">4.86</text></g>
+        <text x="72" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2022</text><text x="147" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2023</text>
+        <text x="222" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2024</text><text x="297" y="190" font-size="9" fill="#6b6460" text-anchor="middle">2025</text>
+        <text x="44" y="20" font-size="8" fill="#8b6c42">■营收</text><text x="44" y="30" font-size="8" fill="#2a5c3f">—净利</text>
       </svg>
     </div>
-
     <div class="chart-wrap">
-      <div class="chart-title">绿茶客单价走势（元）· 连续下滑</div>
+      <div class="chart-title">客单价连续下滑（元）</div>
       <svg viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif">
-        <line x1="38" y1="12" x2="38" y2="165" stroke="#d4cec6"/>
-        <line x1="38" y1="165" x2="350" y2="165" stroke="#d4cec6"/>
-        <!-- 62.9 61.8 56.2 54.6 ; range 50-65 -> map 65->20px,50->165px scale 9.67/unit -->
+        <line x1="38" y1="12" x2="38" y2="165" stroke="#d4cec6"/><line x1="38" y1="165" x2="350" y2="165" stroke="#d4cec6"/>
         <polyline points="72,44.7 147,55.3 222,109.5 297,124.9" fill="none" stroke="#8b2e2e" stroke-width="2.5"/>
-        <g fill="#8b2e2e">
-          <circle cx="72" cy="44.7" r="3"/><circle cx="147" cy="55.3" r="3"/>
-          <circle cx="222" cy="109.5" r="3"/><circle cx="297" cy="124.9" r="3"/>
-          <text x="72" y="36" font-size="10" text-anchor="middle">62.9</text>
-          <text x="147" y="47" font-size="10" text-anchor="middle">61.8</text>
-          <text x="222" y="101" font-size="10" text-anchor="middle">56.2</text>
-          <text x="297" y="117" font-size="10" text-anchor="middle">54.6</text>
-        </g>
-        <text x="72" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2022</text>
-        <text x="147" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2023</text>
-        <text x="222" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2024</text>
-        <text x="297" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2025</text>
+        <g fill="#8b2e2e"><circle cx="72" cy="44.7" r="3"/><circle cx="147" cy="55.3" r="3"/><circle cx="222" cy="109.5" r="3"/><circle cx="297" cy="124.9" r="3"/>
+        <text x="72" y="36" font-size="10" text-anchor="middle">62.9</text><text x="147" y="47" font-size="10" text-anchor="middle">61.8</text><text x="222" y="101" font-size="10" text-anchor="middle">56.2</text><text x="297" y="117" font-size="10" text-anchor="middle">54.6</text></g>
+        <text x="72" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2022</text><text x="147" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2023</text>
+        <text x="222" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2024</text><text x="297" y="182" font-size="9" fill="#6b6460" text-anchor="middle">2025</text>
       </svg>
     </div>
   </div>
-
   <div class="chart-grid2">
     <div class="chart-wrap">
-      <div class="chart-title">开局杀招 · 两个"下滑"不是一回事（2025）</div>
-      <svg viewBox="0 0 360 150" font-family="'IM Fell English',Georgia,serif">
-        <line x1="150" y1="14" x2="150" y2="120" stroke="#d4cec6"/>
-        <!-- baseline at x=150 (0%), left = negative -->
-        <!-- same-store -0.8% : short bar -->
-        <rect x="142" y="30" width="8" height="26" fill="#c47a1e"/>
-        <text x="120" y="47" font-size="10" fill="#2a5c3f" text-anchor="end">-0.8%</text>
-        <text x="158" y="35" font-size="10" fill="#0a0a0b">可比同店 (老店客流)</text>
-        <!-- per-store -12.9% : long bar -->
-        <rect x="30" y="78" width="120" height="26" fill="#8b2e2e"/>
-        <text x="24" y="95" font-size="10" fill="#8b2e2e" text-anchor="end">-12.9%</text>
-        <text x="158" y="83" font-size="10" fill="#0a0a0b">系统单店日均 (被新店摊薄)</text>
-        <text x="30" y="138" font-size="9" fill="#6b6460">← 客户会拿右边这个 -12.9% 压你，你用左边 -0.8% 拆解</text>
+      <div class="chart-title">开局杀招 · 一个"下滑"三个口径（2025）</div>
+      <svg viewBox="0 0 360 158" font-family="'IM Fell English',Georgia,serif">
+        <line x1="250" y1="12" x2="250" y2="118" stroke="#d4cec6"/>
+        <rect x="242" y="24" width="8" height="22" fill="#c47a1e"/>
+        <text x="234" y="39" font-size="10" fill="#2a5c3f" text-anchor="end">-0.8%</text>
+        <text x="258" y="30" font-size="9.5" fill="#0a0a0b">官方含外卖同店</text><text x="258" y="42" font-size="8" fill="#6b6460">近持平·Q2起转正</text>
+        <rect x="150" y="58" width="100" height="22" fill="#8b2e2e"/>
+        <text x="142" y="73" font-size="10" fill="#8b2e2e" text-anchor="end">≈-13%</text>
+        <text x="258" y="64" font-size="9.5" fill="#0a0a0b">可比堂食单店</text><text x="258" y="76" font-size="8" fill="#6b6460">317家老店口径</text>
+        <rect x="152" y="92" width="98" height="22" fill="#8b2e2e"/>
+        <text x="144" y="107" font-size="10" fill="#8b2e2e" text-anchor="end">-12.9%</text>
+        <text x="258" y="98" font-size="9.5" fill="#0a0a0b">系统单店日均</text><text x="258" y="110" font-size="8" fill="#6b6460">被新小店摊薄</text>
+        <text x="12" y="135" font-size="8.5" fill="#6b6460">堂食单店跌双位数 → 外卖+74%回补 → 官方同店近持平</text>
+        <text x="12" y="149" font-size="8.5" fill="#8b2e2e">客户拿"-12.9%/-13%"压你，你用官方"-0.8%+外卖回补"拆</text>
       </svg>
     </div>
-
     <div class="chart-wrap">
-      <div class="chart-title">新店越开越快回本 · 回收期(月) &amp; 新店利润率</div>
-      <svg viewBox="0 0 360 150" font-family="'IM Fell English',Georgia,serif">
-        <line x1="40" y1="12" x2="40" y2="115" stroke="#d4cec6"/>
-        <line x1="40" y1="115" x2="345" y2="115" stroke="#d4cec6"/>
-        <!-- 2024: 16.5m, 2025: 12.6m ; scale 18m->100px -->
-        <rect x="90" y="23.3" width="50" height="91.7" fill="#c47a1e"/>
-        <rect x="230" y="45" width="50" height="70" fill="#2a5c3f"/>
-        <text x="115" y="17" font-size="11" fill="#0a0a0b" text-anchor="middle">16.5月</text>
-        <text x="255" y="39" font-size="11" fill="#0a0a0b" text-anchor="middle">12.6月</text>
-        <text x="115" y="130" font-size="9" fill="#6b6460" text-anchor="middle">2024新店</text>
-        <text x="255" y="130" font-size="9" fill="#6b6460" text-anchor="middle">2025新店</text>
-        <text x="300" y="60" font-size="9" fill="#2a5c3f">利润率</text>
-        <text x="300" y="72" font-size="9" fill="#2a5c3f">14.6%→15.9%</text>
-        <text x="300" y="90" font-size="9" fill="#6b6460">18月闭店率</text>
-        <text x="300" y="102" font-size="9" fill="#6b6460">仅 1.4%</text>
+      <div class="chart-title">租金占比随扩张攀升 · 使用权折旧+租金 (占收入%)</div>
+      <svg viewBox="0 0 360 158" font-family="'IM Fell English',Georgia,serif">
+        <line x1="38" y1="12" x2="38" y2="120" stroke="#d4cec6"/><line x1="38" y1="120" x2="345" y2="120" stroke="#d4cec6"/>
+        <line x1="38" y1="66" x2="345" y2="66" stroke="#d4cec6" stroke-dasharray="4,3"/>
+        <polyline points="70,89 140,84.5 210,52 300,50" fill="none" stroke="#c47a1e" stroke-width="2.5"/>
+        <g fill="#c47a1e"><circle cx="70" cy="89" r="3"/><circle cx="140" cy="84.5" r="3"/><circle cx="210" cy="52" r="3"/><circle cx="300" cy="50" r="3"/>
+        <text x="70" y="81" font-size="9.5" text-anchor="middle">8.4%</text><text x="140" y="77" font-size="9.5" text-anchor="middle">8.9%</text><text x="210" y="44" font-size="9.5" text-anchor="middle">12.4%</text><text x="300" y="42" font-size="9.5" text-anchor="middle">14.5%</text></g>
+        <text x="70" y="135" font-size="9" fill="#6b6460" text-anchor="middle">2018</text><text x="140" y="135" font-size="9" fill="#6b6460" text-anchor="middle">2019</text>
+        <text x="210" y="135" font-size="9" fill="#6b6460" text-anchor="middle">2020</text><text x="300" y="135" font-size="9" fill="#6b6460" text-anchor="middle">2021</text>
+        <text x="44" y="150" font-size="8" fill="#6b6460">扩张提速+单店营收下滑 → 刚性租金占比被动抬升</text>
       </svg>
     </div>
+  </div>
+  <div class="chart-wrap">
+    <div class="chart-title">2025 外卖平台三分天下（全市场单量份额，用于反推绿茶结构）</div>
+    <svg viewBox="0 0 800 118" font-family="'IM Fell English',Georgia,serif">
+      <line x1="120" y1="10" x2="120" y2="104" stroke="#d4cec6"/>
+      <rect x="120" y="18" width="287" height="22" fill="#8b6c42"/><text x="415" y="34" font-size="11" fill="#0a0a0b">美团 38.3%</text><text x="114" y="34" font-size="10" fill="#0a0a0b" text-anchor="end">美团</text>
+      <rect x="120" y="50" width="238" height="22" fill="#c47a1e"/><text x="366" y="66" font-size="11" fill="#0a0a0b">淘宝闪购/饿了么 31.7%</text><text x="114" y="66" font-size="10" fill="#0a0a0b" text-anchor="end">淘宝闪购</text>
+      <rect x="120" y="82" width="225" height="22" fill="#2a5c3f"/><text x="353" y="98" font-size="11" fill="#0a0a0b">京东外卖 30.0%</text><text x="114" y="98" font-size="10" fill="#0a0a0b" text-anchor="end">京东</text>
+      <text x="560" y="34" font-size="9" fill="#6b6460">费率：京东≤5%（最低）</text>
+      <text x="560" y="52" font-size="9" fill="#6b6460">美团名义6-8%·中小综合22-26%</text>
+      <text x="560" y="70" font-size="9" fill="#6b6460">淘宝闪购2026-02起涨佣0.2-1%</text>
+      <text x="560" y="92" font-size="9" fill="#8b2e2e">美团预警2026H2订单或同比负增长</text>
+    </svg>
   </div>
 </div>
 
-<!-- ============ 逐题作战包 ============ -->
+<!-- ===== 逐题作战包 ===== -->
 <div class="section">
-  <div class="sec-head"><span class="sec-zh">逐题作战包 · 17 问</span><span class="sec-en">Question-by-Question War-Pack</span></div>
+  <div class="sec-head"><span class="sec-zh">逐题作战包 · 17 问</span><span class="sec-en">Question-by-Question · Strategist Answers</span></div>
 
-  <!-- Q0 开场 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">0</span><span class="qtitle">开场定位：您负责过绿茶哪些区域、哪些门店、具体哪些运营工作？</span><span class="qtag">CREDIBILITY</span></div>
-    <div class="qorig">"首先想请您谈一谈之前您负责绿茶餐厅的哪些区域、哪些门店、具体负责哪些运营工作？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>建立你的可信度与信息颗粒度——他要判断你的答案值多少钱，也在给自己划"你能答到哪一层"的边界。这是全场信任的地基。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>用"双履历+具体颗粒度"开场：先说海底捞侧（华南大区运营官，统筹省区门店运营、拓店与人才梯队），再说绿茶侧（品牌运营总经理，负责大区门店经营、标准化SOP、数字化与全域增长）。<strong>主动给边界</strong>："我2023年后主要在集团/品牌层，单店颗粒的最新一手数字以公开财报为准；模型、机制、打法这类结构性的东西我最有发言权。"——先立信任，再立边界，防止后面被追到机密处下不来台。</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>点一两个"只有干过的人才知道"的细节（如新店60天筹备闭环、大区跨部门协同机制），瞬间拉开与"看研报的人"的差距。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别把话说满到"我什么都知道最新数据"——一旦后面答不上会崩盘。开场就把"结构我强、实时数字以财报为准"这条边界钉死。</p></div>
+    <div class="qh"><span class="qnum">0</span><span class="qtitle">开场定位：您负责过绿茶哪些区域、门店、具体运营工作？</span><span class="qtag">CREDIBILITY</span></div>
+    <div class="qorig">"首先谈谈之前您负责绿茶哪些区域、哪些门店、具体负责哪些运营工作？"</div>
+    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>建立可信度与信息颗粒度，也在划"你能答到哪一层"。全场信任的地基。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>"双履历+具体颗粒度"开场：海底捞侧（华南大区运营官，统筹省区门店运营、拓店、人才梯队），绿茶侧（品牌运营总经理，负责大区门店经营、SOP、数字化与全域增长）。<strong>主动给边界</strong>："2023后我在集团/品牌层，单店最新一手数字以公开财报为准；模型、机制、打法这类结构性的东西我最有发言权。"先立信任，再立边界。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别把话说满到"最新数据我都知道"。开场就把"结构我强、实时数字以财报为准"钉死。</p></div>
   </div>
 
-  <!-- Q1 文化 -->
   <div class="qcard">
     <div class="qh"><span class="qnum">1</span><span class="qtitle">海底捞"双手改变命运"+师徒制/家族制分红，与绿茶资本驱动/科层制/SOP"打工者文化"的本质差异</span><span class="qtag">CULTURE</span></div>
-    <div class="qorig">"海底捞极度讲究人情味的师徒制、家族制分红体系，与绿茶高度资本驱动、科层制、依赖SOP约束的打工者文化之间的本质差异……"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>这是全场"最有味道"的一题，投资人想要的是<strong>组织能量从哪来</strong>——海底捞靠"利益共同体"自驱，绿茶靠"制度+资本"控盘。他在评估两套组织在下行期谁更能扛。</p></div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>海底捞员工数从15.37万(2023)降至12.56万(2025)<span class="badge badge-official">官方</span>；师徒制利益链曾被官方认定是2021年过度扩张、啄木鸟关店约300家的根因之一<span class="badge badge-official">公开</span>。绿茶100%直营、引入海底捞系微海咨询做稽核/培训体系<span class="badge badge-client">客户口径</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>一句话定性："海底捞是<strong>用分配机制把员工变成合伙人</strong>，绿茶是<strong>用SOP和数字化把不确定性降到最低</strong>——一个赌人性向上，一个赌制度可复制。" 然后给三点本质差异：<strong>①激励底层逻辑</strong>——海底捞师徒制=开一家新店老店长有分红，驱动力向上但也埋下无序扩张的雷；绿茶=固定薪酬+绩效，稳但天花板低。<strong>②扩张可复制性</strong>——绿茶模型能标准化快速铺（一年157家），海底捞的"人情味"没法批量拷贝，这正是它2021年栽跟头的地方。<strong>③下行期表现</strong>——绿茶科层制在收缩期更好控成本，海底捞的强绑定在增长期是火箭、在存量期变负担（所以它现在也在做合伙人化改革往回收）。</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>你两边都待过——可以谈"同一个店长在两套体系下的行为差异"：海底捞店长想的是"多开店多分红"，绿茶店长想的是"守住翻台不出错"。这种一线行为对比是纯外部人给不出的，价值极高。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别对具体分红比例/内部考核权重给精确数字（那是机密+多为二手转述）。用"机制方向"而非"数字"作答。也别贬低任一家——投资人要判断，不要情绪。</p></div>
+    <div class="qorig">"海底捞讲人情味的师徒制、家族制分红，与绿茶资本驱动、科层制、依赖SOP的打工者文化，本质差异是什么？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>海底捞师徒三级分红：店长取"自店利润2.8%"或"自店0.4%+徒弟店3.1%+徒孙店1.5%"较高者，头部店长年入可达数百万；家族制5-18店+ABC评级<span class="badge badge-predict">媒体</span>。绿茶：<strong>15%门店利润分享 + 赛马竞争制 + 神秘访客评分</strong><span class="badge badge-official">招股书</span>；员工数15.37万→12.56万<span class="badge badge-official">官方</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>一句话定性："海底捞是<strong>用师徒裂变分红把员工变成自组织的增长引擎</strong>，绿茶是<strong>用固定比例分享+赛马排名+SOP把结果做可控可复制</strong>。"三点本质差异：<strong>①激励结构</strong>——海底捞是"开徒弟店我也分红"的裂变式，驱动力强但会诱发无序扩张（2021啄木鸟关300家的根子）；绿茶是"分你15%门店利润+排名赛马"，稳、可控、但不自驱裂变。<strong>②可复制性</strong>——绿茶模型能一年铺157家，海底捞的人情味没法批量拷贝。<strong>③下行期</strong>——绿茶科层制在收缩期好控成本；海底捞的强绑定增长期是火箭、存量期变负担，所以它2022年就往"低底薪高分红合伙人化"改，最近的小客户经理事故正是这套绑定的副作用（见Q11）。</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>两边都待过，谈"同一个店长在两套体系下的行为差异"：海底捞店长想"多带徒弟多开店多分红"，绿茶店长想"赛马排名别垫底、守住翻台别被神秘访客抓"。一线行为对比是外部人给不出的。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>15%、2.8%这些比例都是公开可引的；但别给绿茶内部赛马的具体权重/淘汰线。别贬任一家。</p></div>
   </div>
 
-  <!-- Q2 营收表现 -->
   <div class="qcard">
     <div class="qh"><span class="qnum">2</span><span class="qtitle">餐厅营收表现、店月均销售额、盈利/亏损水平及原因</span><span class="qtag">UNIT ECON</span></div>
-    <div class="qorig">"这些餐厅的营收表现，店月均销售额是怎样的，有多少盈利，多少亏损，亏损的原因？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>他要单店真实赚钱能力的分布——不是平均数，是"好店多好、差店多差、亏损店占比"。</p></div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>系统单店日均销售额约1.89万元<span class="badge badge-client">客户口径</span>（月均约57万）；门店层面经营利润率2025新店15.9%、老店更高<span class="badge badge-official">官方</span>；18个月闭店率仅1.4%<span class="badge badge-official">官方</span>——反证真正亏到关店的是极少数。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>先给分布框架而不是单一数字："绿茶单店盈利是<strong>典型的长尾——头部优质商场老店门店层面利润率能到25-30%+，腰部新店15%左右，尾部次优位置的新店爬坡期可能在盈亏线附近甚至微亏。</strong>" 亏损原因就三条，按权重排：<strong>①选址踩坑</strong>（下沉市场商场客流不及预期，租金指标定太高）；<strong>②爬坡未达标</strong>（前两个月冲一波后回落，达不到开发时设的月营业额线）；<strong>③同商圈自我蚕食</strong>（加密开店抢了老店的客流）。但要强调：1.4%的低闭店率说明绿茶的<strong>选址纠错和小店止损机制是有效的</strong>，不是大面积亏损。</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"门店层面利润率"vs"公司净利率"的区别是内部人常识、外部人常搞混——你点破：门店经营利润率20%+，但扣掉总部/研发/上市费用后公司净利率才10.7%。这一层能让客户对你刮目相看。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>不要给"X家亏损"这种精确店数（未披露、且属敏感）。用"长尾分布+主要亏损诱因"回答，把结论落在可公开的1.4%闭店率上。</p></div>
+    <div class="qorig">"营收表现、店月均销售额、盈利多少、亏损多少及原因？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>系统单店日均1.89万（月均约57万）<span class="badge badge-official">官方</span>；新店门店利润率15.9%（2024:14.6%）<span class="badge badge-official">官方</span>；18月闭店率仅1.4%<span class="badge badge-official">官方</span>；分线级日均：一线/新一线20.0千、二线19.0千、三线16.6千<span class="badge badge-official">官方</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>给分布而非单一数字："绿茶单店盈利是<strong>长尾——头部核心商场老店门店利润率25%+，腰部新店15%左右，尾部次优点位新店爬坡期在盈亏线附近</strong>。"亏损三诱因按权重：<strong>①选址踩坑</strong>（下沉商场客流不及预期、指标定太高）；<strong>②爬坡不达标</strong>（前两月冲一波后回落）；<strong>③同商圈蚕食</strong>（加密开店抢老店客流）。但强调：<strong>1.4%的18月闭店率说明选址纠错和小店止损有效，不是大面积亏损</strong>。</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>点破"门店层面利润率"vs"公司净利率"：门店25%+，扣掉总部/研发/上市费用后公司经调净利率才10.7%——这层内部人常识、外部人常混。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别给"X家亏损"精确店数（未披露+敏感）。用"长尾分布+主要诱因"落到公开的1.4%闭店率。</p></div>
   </div>
 
-  <!-- Q3 成本结构+盈亏平衡 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">3</span><span class="qtitle">成本结构（食材/人力/房租）、固定成本、盈亏平衡销售额、绿茶模型 vs 海底捞模型</span><span class="qtag">P&amp;L MODEL</span></div>
-    <div class="qorig">"成本结构，食材、人力、房租，固定成本多少，做到多少销售额可以盈亏平衡，绿茶的餐厅模型怎样，和海底捞比有什么差异？"（并入 Q13：54.6元客单下需要多大日均/翻台跨过盈亏平衡；引流品毛利60% vs 盈利品70%点单配比）</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶2025：原材料31.7% / 员工26.1% / 毛利~68.4% <span class="badge badge-official">官方</span>；租金绿茶未单列，行业质价比模型通常压在12-15%<span class="badge badge-predict">推断</span>。海底捞：原材料40.5% / 员工32.6% / 租金1.0%+折摊6.0%<span class="badge badge-official">官方</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>先给"三张成本嘴"对比：绿茶<strong>食材低(31.7%)、人力低(26.1%)、租金压得狠</strong>——靠OEM半成品把后厨变简单、靠小店把租金总额压下来；海底捞<strong>食材高(40.5%,现切现涮)、人力高(32.6%,重服务)、但租金占比极低(1%)</strong>——因为它客单和翻台足够高，把租金摊薄到几乎看不见。<strong>这就是两套模型的分水岭：绿茶靠"省成本"、海底捞靠"做大分母摊成本"。</strong></p>
-    <p style="margin-top:6px;"><strong>盈亏平衡测算（给单点+框架）：</strong>一家约250-300㎡、约115座的标准小店，满产日均约1.89万；变动成本（食材+提成）约占40%，贡献毛利约60%；要覆盖房租+固定人力+折摊+能源这部分固定成本，<strong>盈亏平衡日均销售额约1.2万元</strong><span class="badge badge-predict">推测·3层假设</span>，对应<strong>翻台约1.9次/天</strong>（现为3.0）——即翻台掉到2次以下这家店就危险了。<strong>引流品(毛利~60%)与盈利品(毛利~70%)的点单配比</strong>决定综合食材成本：绿茶菜单结构是"低价爆款引流、饮品和特色菜提毛利"，只要盈利品点单占比守在35%+，综合毛利就能守住68%线。</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"房租占比红线"是绿茶开发端的铁律——你可以谈方法论："开发签约时租金/预估营业额必须卡在某个比例线内，超线的点位再好也不签"，这是可公开的经营纪律，且正好回答客户"如何坚守固定成本占比"。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>盈亏平衡数字务必带"这是基于公开成本率的模型测算，不是内部台账"。引流/盈利品的具体毛利率是客户给的口径，你可确认方向但别背书成精确内部数字。</p></div>
+    <div class="qh"><span class="qnum">3</span><span class="qtitle">成本结构、固定成本、盈亏平衡销售额、绿茶模型 vs 海底捞模型（并入盈亏平衡测算）</span><span class="qtag">P&amp;L MODEL</span></div>
+    <div class="qorig">"食材/人力/房租、固定成本多少，做到多少销售额盈亏平衡，绿茶模型 vs 海底捞？（并 Q13：54.6元下需多大日均/翻台跨过盈亏平衡；引流品毛利60% vs 盈利品70%配比）"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶2025：原材料31.7%/员工26.1%/毛利68.4%/使用权折旧+租金约12-14%<span class="badge badge-official">官方</span>。海底捞：原材料40.5%/员工32.6%/租金1.0%+折摊6.0%<span class="badge badge-official">官方</span>。引流品60%/盈利品70%毛利<span class="badge badge-client">客户口径</span>（与整体毛利68.4%自洽）。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>三张成本嘴对比：</strong>绿茶食材低(31.7%)、人力低(26.1%)、靠小店压租金；海底捞食材高(40.5%现切现涮)、人力高(32.6%重服务)、但租金占比仅1%——因为客单和翻台高到把租金摊得看不见。<strong>分水岭：绿茶靠"省成本"，海底捞靠"做大分母摊成本"。</strong></p>
+    <p style="margin-top:6px;"><strong>盈亏平衡（单点+框架）：</strong>约250-300㎡、约115座小店，满产日均1.89万；变动成本（食材+提成）约40%，贡献毛利约60%；覆盖租金+固定人力+折摊+能源，<strong>盈亏平衡日均约1.2万元</strong><span class="badge badge-predict">推测·3层假设</span>，对应<strong>翻台约1.9次/天</strong>（现3.0）——翻台掉到2次以下这家店就危险。<strong>引流品/盈利品配比</strong>决定综合食材成本：只要盈利品（招牌菜+饮品，毛利70%）点单占比守在35%+，综合毛利就守得住68%线。</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"房租占比红线"是绿茶开发端铁律——签约时租金/预估营业额必须卡在比例线内，超线点位再好也不签。这是可公开的经营纪律，正好回答"如何坚守固定成本占比"。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>盈亏平衡数字带"基于公开成本率的模型测算，非内部台账"。引流/盈利品毛利是客户口径，确认方向别背书成精确内部数。</p></div>
   </div>
 
-  <!-- Q4 翻台/单店/小型化 -->
-  <div class="qcard">
-    <div class="qh"><span class="qnum">4</span><span class="qtitle">翻台3.0持平、日均1.89万、单店日均-12.9%；门店小型化带来折旧摊销下滑+采购议价提升，您有这样的感受吗？</span><span class="qtag">开局杀招</span></div>
-    <div class="qorig">"翻台率持平在3.0，日均销售额1.89万，但单店日均同比下滑12.9%……门店小型化带来折旧摊销下滑及采购议价能力提升，您会有这样的感受吗？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>他把"-12.9%"当成"绿茶单店在恶化"的证据，其实是想让你确认或证伪。<strong>这是你全场最能一击立威的题。</strong></p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>第一句就拆：</strong>"这个-12.9%要小心，它是<strong>全系统单店平均日销</strong>，分母里塞进了157家刚开的小店，天然被摊薄；真正衡量老店健康度的<strong>可比同店只有约-0.8%</strong>，也就是老店客流基本企稳。两个数一个测'摊薄'、一个测'客流'，不能混着用来下'恶化'的结论。" 然后确认客户后半段是对的：<strong>小型化的两个红利是真的</strong>——①小店单店造价低、折旧摊销/单店下降，直接改善新店利润率（14.6%→15.9%）和回本（16.5→12.6月）；②门店数一年+31%，集采量上去了，对OEM的议价能力确实增强，这也是2025原材料成本率能从33.5%降到31.7%的原因之一。<strong>但要点破代价：</strong>小型化+加密的另一面就是单店平均被摊薄、以及同商圈蚕食——红利和风险是同一枚硬币。</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>用一句内部人常识收尾："看绿茶不能看单店平均，要看<strong>同店</strong>和<strong>新店爬坡曲线</strong>两条线——平均数在快速扩张期永远是失真的。"</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>-0.8%同店是财报口径，但部分媒体把"317家老店-13%"混为同店——你要说清是"口径差异"，不要被带进"到底哪个才对"的争论，锚定"两个指标测不同东西"这个框架即可。</p></div>
+  <div class="qcard hot">
+    <div class="qh"><span class="qnum">4</span><span class="qtitle">翻台3.0持平、日均1.89万、单店日均-12.9%；门店小型化带来折旧摊销下滑+采购议价提升，您有此感受吗？</span><span class="qtag">开局杀招</span></div>
+    <div class="qorig">"翻台持平3.0，日均1.89万，但单店日均同比-12.9%……小型化带来折旧摊销下滑及采购议价提升，您会有这样的感受吗？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>系统单店日均18.9千 vs 2024的21.7千=<strong>-12.9%</strong>（全店算术平均）<span class="badge badge-official">官方</span>；官方含外卖同店<strong>-0.8%</strong>，Q2起逐季转正(+4.4/+0.5/+1.0%)<span class="badge badge-official">官方</span>；H1堂食单店日均2.31万→2.00万、外卖+74.2%(占比16.2%→22.9%)<span class="badge badge-official">官方</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>第一句就拆三个口径：</strong>"这个-12.9%是<strong>全系统单店平均日销</strong>，分母塞进157家新开小店天然被摊薄；媒体那个'317家老店跌13%'是<strong>可比堂食单店</strong>；而公司<strong>官方口径的含外卖同店只有-0.8%，还从Q2起逐季转正</strong>。三个数测不同东西。" 再给机理（这是杀招的核心）："真相是<strong>堂食单店日销确实跌了双位数（H1从2.31万掉到2.00万），但外卖同期+74%，把可比同店总营收回补到了近持平</strong>——所以'堂食在稀释、外卖在补位'才是这家公司2025的真实画像。" 然后确认客户后半段对："小型化两个红利是真的——①小店造价低、折旧摊销/单店下降，直接改善新店利润率(14.6→15.9%)和回本(16.5→12.6月)；②门店一年+31%，集采量上去，对OEM议价增强，原材料率从33.5%压到31.7%就是证据。<strong>但代价就是堂食单店被摊薄+同商圈蚕食——红利和风险同一枚硬币。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>收尾一句内部人常识："看绿茶别看单店平均，要看<strong>三条线：堂食同店、外卖增速、新店爬坡</strong>——平均数在快速扩张期永远失真。"</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>三个口径都是公开可查的，放心拆；但别陷入"到底哪个才对"的争论，锚定"三个指标测不同东西+外卖回补机理"这个框架。</p></div>
   </div>
 
-  <!-- Q5 回收期12.6月 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">5</span><span class="qtitle">新店投资回报周期优化至12.6个月，您觉得合理吗？</span><span class="qtag">PAYBACK</span></div>
-    <div class="qorig">"门店新模型投资回报周期优化至12.6个月，您觉得这个合理吗？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2025新店回本12.6月（2024新店16.5月）；新店门店利润率15.9%；<300㎡小店18月闭店率仅1.4%<span class="badge badge-official">官方</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>"<strong>合理，而且这正是绿茶模型最硬的一块。</strong>"给它算笔账让客户信服：小店投资额低（<300㎡，装修+设备摊子小），门店利润率15.9%，按单店年营收约500-600万、门店利润率15.9%反推，年门店利润约80-95万，覆盖初始投资约需12-13个月——<strong>12.6月和公开的利润率、投资额是自洽的，不是画饼。</strong>1.4%的18月闭店率进一步佐证这批新店质量。<strong>但给一个专业的保留：</strong>这是<strong>门店层面现金回收</strong>口径（不含总部分摊），且是2025这批的平均；随着好点位越开越少、继续下沉到三四线，<strong>后续新店回本大概率会边际拉长</strong>——12.6月是当前最优、不是可以线性外推的常量。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别无脑背书"永远12.6月"。专业的答法是"当前合理+边际会变差"，这才是投资人想要的风险意识。</p></div>
+    <div class="qh"><span class="qnum">5</span><span class="qtitle">新店投资回报周期优化至12.6个月，合理吗？</span><span class="qtag">PAYBACK</span></div>
+    <div class="qorig">"门店新模型投资回报周期优化至12.6个月，您觉得合理吗？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2025新店回本12.6月（2024:16.5月）；新店门店利润率15.9%；<300㎡小店18月闭店率1.4%；新店招约50人、约25万元/店<span class="badge badge-official">官方/媒体</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>"<strong>合理，是绿茶模型最硬的一块。</strong>"算账："小店投资额低（<300㎡装修+设备摊子小），门店利润率15.9%，按单店年营收约500-600万×15.9%≈年门店利润80-95万，覆盖初始投资约12-13个月——<strong>12.6月和公开的利润率、投资额自洽，不是画饼</strong>，1.4%闭店率再佐证质量。"专业保留："这是<strong>门店层面现金回收</strong>口径（不含总部分摊），且是2025这批的平均；好点位越开越少、继续下沉，<strong>后续新店回本大概率边际拉长</strong>——12.6月是当前最优、不是可线性外推的常量。"</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别背书"永远12.6月"。答"当前合理+越下沉边际变差"，才是投资人要的风险意识。</p></div>
   </div>
 
-  <!-- Q6 EBITDA/租金 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">6</span><span class="qtitle">优质老店EBITDA 30%+ vs 差新店10%甚至亏损；2019后冲刺上市加速拓店，月营业额指标仅前两月达成、后续长期不达标致租金占比攀升吞噬利润——复盘当时，现在是否还有这种决策？</span><span class="qtag">RENT DRAG</span></div>
-    <div class="qorig">"优质老店EBITDA可达30%以上，较差新店仅10%甚至亏损……许多门店月营业额指标（如100万）实际仅前两月达成，后续长期不达标，租金占比被动攀升吞噬利润，能否复盘？现在是否还有这样的管理层决策？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>这题很尖——他在问"绿茶为了上市有没有牺牲门店质量盲目扩张"，以及"这个病现在治好了没"。答好了显你诚实且懂周期。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>先确认现象真实、给结构性解释："<strong>EBITDA 30% vs 10%的分化，本质是'租金锁定的时点'决定的。</strong>2019年前拿的一线核心商场点位，租金是历史低价、还带位置红利，自然EBITDA高；2019年后为冲上市在二线及以下加速拓店，那时绿茶对商场的议价能力还没建立起来，开发端为了拿点位容易把月营业额指标定得偏乐观（比如100万），<strong>结果就是前两个月靠开业热度冲一下，之后回落到长期不达标，租金是刚性的、营业额是软的，租金占比就被动抬上去、吃掉利润。</strong>" 然后回答"现在治好没"：<strong>正在系统性纠偏</strong>——①转小店模型，单店租金总额和指标压力都降下来；②开发端把租金/营业额比红线卡死，宁可不签也不签高租金点位；③12.6月回本和1.4%闭店率就是纠偏见效的证据。<strong>但坦诚一句：越往下沉走，客流不确定性越高，'指标定乐观-后续不达标'的风险不会归零，只能靠更保守的开发纪律去压。</strong></p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"租金是唯一签约当天就锁死、且不跟着生意走的成本"——这句运营人的血泪常识，配上"所以开发端的纪律比选址眼光更重要"，是极有分量的内部视角。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>EBITDA 30%/10%是客户给的口径，你顺着分析其成因即可，别去坐实"具体哪些店30%、哪些店亏"。"是否还有这种决策"要答"机制上在纠偏但风险不归零"，别说死"完全没有了"。</p></div>
+    <div class="qh"><span class="qnum">6</span><span class="qtitle">优质老店EBITDA 30%+ vs 差新店10%/亏损；2019后冲刺上市加速拓店，月营业额指标仅前两月达成、后续长期不达标致租金占比攀升吞噬利润——复盘，现在是否还有这种决策？</span><span class="qtag">RENT DRAG</span></div>
+    <div class="qorig">"老店EBITDA 30%+ vs 差新店10%甚至亏损……月营业额指标（如100万）实际仅前两月达成，后续长期不达标，租金占比被动攀升吞噬利润，能否复盘？现在是否还有这样的决策？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2019新开60家（历年最多），门店数107(2018)→180(2020)；<strong>门店年均收入1226万→872万</strong>、翻台3.48→3.34→2.62、客单54.8→61.3（涨价对冲）；<strong>使用权折旧+租金占比8.4%(2018)→12.4%(2020)→14.5%(2021)</strong><span class="badge badge-official">招股书</span>。EBITDA 30%/10%<span class="badge badge-client">客户口径</span>（行业门店利润率7-15%，30%+仅在门店层面pre-ROU折旧EBITDA定义下自洽）。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>先确认现象、给结构解释："<strong>EBITDA 30% vs 10%的分化，本质是'租金锁定的时点'决定的。</strong>2019年前拿的一线核心商场点位是历史低价+位置红利，EBITDA自然高；2019年后为冲上市在二线及以下加速拓店（那年开了60家，历年最多），议价能力还没建立，开发端容易把月营业额指标定乐观（如100万），<strong>结果前两月靠开业热度冲一下，之后回落到长期不达标——租金是刚性的、营业额是软的，租金占比就被动抬上去</strong>。公开数据能印证：那几年门店年均收入从1226万掉到872万，使用权折旧+租金占比从8.4%一路升到14.5%。"再答"治好没"：<strong>正在系统纠偏</strong>——①转小店，单店租金总额和指标压力都降；②开发端把租金/营业额比红线卡死；③12.6月回本和1.4%闭店率是纠偏见效的证据。坦诚一句：<strong>越下沉客流越不确定，'指标定乐观-后续不达标'的风险不归零，只能靠更保守的开发纪律去压。</strong></p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"租金是唯一签约当天就锁死、且不跟着生意走的成本，所以开发端的纪律比选址眼光更重要"——运营人血泪常识。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>EBITDA 30%/10%是客户口径，先追问口径定义（是否门店层面、是否pre-ROU折旧）再顺势分析成因，别坐实"具体哪些店30%"。"是否还有"答"机制在纠偏但风险不归零"，别说死。</p></div>
   </div>
 
-  <!-- Q7 下沉痛点 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">7</span><span class="qtitle">609家/新增157家/下沉24.6%→未来超60%，一二线 vs 下沉市场门店日常运营痛点的实质性差异</span><span class="qtag">下沉</span></div>
-    <div class="qorig">"下沉市场门店占比24.6%，计划未来超60%……一二线与下沉市场门店在日常运营痛点上的实质性差异是什么？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2025下沉门店占比24.6%<span class="badge badge-client">客户口径</span>；2026计划净增180-190家、其中>60%落二线及以下<span class="badge badge-official">官方</span>（注意：是<strong>增量</strong>>60%，非存量到60%）。覆盖全部一线+15新一线+30二线+99三线及以下<span class="badge badge-official">官方</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>先纠一个口径（显专业）："严格说'超60%'是指<strong>未来新增门店里超60%落在下沉</strong>，不是存量占比冲到60%，节奏没那么激进。"然后给四条实质差异：<strong>①人的稳定性</strong>——下沉市场招工/留人更难、店长成熟度参差，SOP执行的一致性是最大痛点；<strong>②供应链半径</strong>——冷链配送到三四线的时效和损耗压力更大，OEM的覆盖密度决定能不能开；<strong>③客流波动</strong>——下沉市场依赖商场客流，工作日和淡季波动比一线剧烈，翻台稳定性差；<strong>④竞争性质变了</strong>——一线拼的是品牌和调性，下沉拼的是和"地头蛇"的性价比肉搏（见下一题）。<strong>一句收口：一线的运营是'守标准'，下沉的运营是'在不确定里保标准'，难度是量级差异。</strong></p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>你可以谈"同一套SOP在一线能90分落地、在下沉可能只有70分"的真实落差，以及绿茶靠什么补（数字化巡检、微海式飞检、店长训练）——这正好串起后面Q10。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>下沉具体单店数据未披露，用"运营痛点的性质差异"作答，不编下沉店的翻台/客单具体值。</p></div>
+    <div class="qh"><span class="qnum">7</span><span class="qtitle">609家/新增157家/下沉24.6%→未来超60%，一二线 vs 下沉市场日常运营痛点的实质差异</span><span class="qtag">下沉</span></div>
+    <div class="qorig">"下沉市场占比24.6%、计划未来超60%……一二线与下沉门店在日常运营痛点上的实质差异？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>下沉占比24.6%<span class="badge badge-client">客户口径</span>；2026净增180-190家、其中>60%落二线及以下<span class="badge badge-official">官方</span>（<strong>增量口径，非存量到60%</strong>）；三线日均16.6千 vs 一线20.0千<span class="badge badge-official">官方</span>；2021-2024下沉累计开178家<span class="badge badge-official">招股书</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>先纠口径（显专业）："'超60%'是指<strong>未来新增门店里超60%落下沉</strong>，不是存量占比冲到60%，节奏没那么激进。"四条实质差异：<strong>①人的稳定性</strong>——下沉招工/留人更难、店长成熟度参差，SOP一致性是最大痛点；<strong>②供应链半径</strong>——冷链到三四线的时效损耗压力更大，OEM覆盖密度决定能不能开；<strong>③客流波动</strong>——依赖商场客流，工作日/淡季波动比一线剧烈（三线日均16.6千 vs 一线20.0千就是体现）；<strong>④竞争性质变了</strong>——一线拼品牌调性，下沉拼和"地头蛇"的性价比肉搏。<strong>一句收口：一线运营是'守标准'，下沉运营是'在不确定里保标准'，难度量级差异。</strong></p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>分线日均是公开的可引；下沉店翻台/亏损具体值未披露，用"痛点性质差异"作答。</p></div>
   </div>
 
-  <!-- Q8 OEM同质化+出海 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">8</span><span class="qtitle">三线人均52元面对地头蛇，OEM同质化菜品是否缺乏竞争力？极致性价比+低成本OEM供应链能否复制到海外（用工/租金高、无国内代工厂）？</span><span class="qtag">竞争&amp;出海</span></div>
-    <div class="qorig">"三线人均52元面对强势、有产品壁垒的地头蛇品牌，OEM同质化菜品是否缺乏竞争力？对庞大低成本OEM供应链的依赖，能否复制到海外市场？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>两个致命问：下沉打不打得过本地强敌、出海能不能复制成本优势。这题答出洞察，客户会认定你是懂行的。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>下沉/地头蛇：</strong>"OEM带来的是<strong>稳定和标准化，代价是失去'锅气'和地方特色</strong>。绿茶在下沉打不过地头蛇的'味道深度'，但它打的根本不是这个——它靠<strong>品牌调性(网红空间/环境)+多SKU的'什么都能吃到'+性价比</strong>形成差异化，target的是本地想要'体面又不贵'的家庭聚餐场景，而不是和苍蝇馆子拼单品极致。<strong>所以'同质化'是真的，但它用'场景和调性'绕开了单品肉搏。</strong>风险在于：当消费进一步降级，'体面'的溢价被压缩，绿茶相对地头蛇的性价比优势会变薄。"</p>
-    <p style="margin-top:6px;"><strong>出海：</strong>"这才是真问题。绿茶的成本优势=<strong>国内成熟OEM代工厂集群+低价劳动力+密集冷链</strong>，这三样出海全都不成立——海外没有中国这种愿意接极低代工利润的食品加工厂，用工和租金是国内的数倍。所以<strong>绿茶出海(新加坡/泰国/马来)本质是'品牌出海'而非'成本模型出海'</strong>，客单必然要上抬、供应链要重新本地化搭建，短期是<strong>试点和品牌卡位，不是利润引擎</strong>。谁把出海当成'把国内的性价比模型平移'，谁就会误判。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"绿茶卖的从来不是某道菜，是'一顿饭的体面感和确定性'"——这句品牌本质的判断，是运营总经理级别才讲得出的。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>出海若无一手数据，明确走【行业判断】，别编海外店的具体成本数字。</p></div>
+    <div class="qh"><span class="qnum">8</span><span class="qtitle">三线人均52元面对地头蛇，OEM同质化菜品是否缺乏竞争力？极致性价比+低成本OEM能否复制到海外？</span><span class="qtag">竞争&amp;出海</span></div>
+    <div class="qorig">"三线人均52元面对强势地头蛇，OEM同质化菜品是否缺乏竞争力？对低成本OEM供应链的依赖，能否复制到用工/租金极高、无国内代工厂的海外市场？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶被评"性价比+融合菜差异点已成行业标配、招牌菜与外婆家/新白鹿雷同、爆品荒"<span class="badge badge-predict">媒体</span>；出海：2025-08新加坡首店→泰国→马来，年底境外14家、目标30店、<strong>明确不加盟</strong>；<strong>新马泰单店客单价公开空白</strong><span class="badge badge-gap">缺口</span>，仅香港"高于内地、利润率相近"。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>下沉/地头蛇：</strong>"OEM带来稳定和标准化，代价是失去'锅气'和地方特色。绿茶在下沉打不过地头蛇的'味道深度'，但它打的根本不是这个——它靠<strong>品牌调性(网红空间)+多SKU'什么都能吃到'+性价比</strong>，target'想体面又不贵'的家庭聚餐，不和苍蝇馆子拼单品。所以'同质化'是真的，但它用'场景和调性'绕开了单品肉搏。风险是消费再降级、'体面'溢价被压缩时，相对地头蛇的优势会变薄。"</p>
+    <p style="margin-top:6px;"><strong>出海（真问题）：</strong>"绿茶的成本优势=<strong>国内成熟OEM代工集群+低价劳动力+密集冷链</strong>，出海这三样全不成立——海外没有中国这种接极低代工利润的食品厂，用工租金数倍。所以<strong>绿茶出海本质是'品牌出海'而非'成本模型出海'</strong>，客单必然上抬、供应链本地化重搭，短期是<strong>试点和品牌卡位、不是利润引擎</strong>。它自己也在调整——新马泰按食材特性改菜单，从'标准化迷信'转向'灵活性优先'。谁把出海当成'把国内性价比平移'，谁就误判。"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"绿茶卖的从来不是某道菜，是'一顿饭的体面感和确定性'"——运营总经理级的品牌本质判断。出海客单是公开空白，可主动说"这块我有一线体感"。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>出海无一手数据走【行业判断】，别编海外店具体成本/客单。</p></div>
   </div>
 
-  <!-- Q9 模型对比+夸父 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">9</span><span class="qtitle">绿茶"高翻台高密度"稀释固定成本 vs 海底捞"高客单强服务"，周期波动谁抗风险更强？海底捞8500元/㎡ vs 大排档4000元/㎡·24月回本，是否意味着海底捞也向绿茶模型靠拢？您如何理解夸父炸串的商业模式？</span><span class="qtag">模型对决</span></div>
-    <div class="qorig">"绿茶靠快出餐/高翻台/高密度稀释固定成本，相较海底捞高客单强服务，消费缩减周期谁抗风险更强？海底捞单㎡造价8500元，副牌大排档降至4000元、24个月回本，是否意味着海底捞也向轻资产低客单高流转靠拢？以及您最近投身夸父炸串，如何理解它的商业模式？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>海底捞大排档：2025-12-19广州番禺首店，自选一人一锅、200+款、5-22元/盘、锅底12元，2026-01已开+筹备14家<span class="badge badge-official">官方/媒体</span>；"8500元/㎡→4000元/㎡·24月回本"<span class="badge badge-client">客户口径·待核</span>（搜索未见官方实证，作方向性引用）。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>抗风险：</strong>"消费下行期，<strong>低客单高频的绿茶模型抗跌性结构上更强</strong>——54.6元的决策门槛低、家庭聚餐是刚需场景；海底捞96元客单+强服务在'砍非必要开支'时首当其冲，这也是它翻台从4.1掉到3.9、连续两年没回到红线的原因。<strong>但海底捞的护城河是绿茶没有的——品牌力、供应链自主、副牌矩阵</strong>，它抗风险靠的是'多条腿'而不是单店模型本身。"</p>
-    <p style="margin-top:6px;"><strong>海底捞向绿茶靠拢？——这是本题金句：</strong>"是的，而且这是行业级信号。海底捞亲手做大排档(4000元/㎡、12元锅底、自选一人锅)，等于<strong>连最标榜服务的巨头都承认：存量时代，'轻资产·低客单·高流转'才是能规模复制、能快速回本的模型</strong>。张勇亲抓这个副牌、给3年500家目标，说明海底捞的增长故事已经从'主品牌翻台'切换到'平价高翻台副牌矩阵'——这恰恰是在向绿茶们所在的赛道靠拢。<strong>主品牌守现金流、副牌抢平价增量，这是它对周期的答案。</strong>"</p>
-    <p style="margin-top:6px;"><strong>夸父炸串：</strong>"小吃赛道是我现在最看好的方向。夸父的模式本质是<strong>'供应链型加盟'——总部靠中央工厂+调料包标准化把单店做到极致轻(十几平、2-3人、无大厨)，靠加盟快速铺规模，靠供应链赚确定的钱</strong>。它和绿茶/海底捞最大的不同：<strong>门店越轻、总部越重，利润从'开好每家店'转移到'服务好每个加盟商+卖料'。</strong>这是消费降级+就业创业双重红利下最锋利的模型——低门槛、高坪效、强复制。风险也清楚：加盟商赚不赚钱决定生死，一旦单店模型跑不通，规模会反噬。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>你正在做夸父，可以谈"从直营大店到加盟小吃"的亲身认知转变——这是全场唯一你有'现在进行时'一手体感的话题，务必讲透，这是你区别于所有其他专家的独家价值。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>大排档4000元/24月回本是客户口径，明确标"这个数字我未见官方确认，但方向上……"。谈夸父注意别透露你现在公司的未公开经营数据。</p></div>
+    <div class="qh"><span class="qnum">9</span><span class="qtitle">绿茶"高翻台高密度"稀释固定成本 vs 海底捞"高客单强服务"，周期波动谁抗风险强？海底捞8500元/㎡ vs 大排档4000元·24月回本，是否意味着海底捞也向绿茶模型靠拢？如何理解夸父炸串？</span><span class="qtag">模型对决</span></div>
+    <div class="qorig">"绿茶靠快出餐/高翻台稀释固定成本 vs 海底捞高客单强服务，消费缩减周期谁抗风险更强？海底捞单㎡8500元、大排档降至4000元、24个月回本，是否意味着海底捞向轻资产低客单高流转靠拢？您最近投身夸父炸串，如何理解它的商业模式？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>大排档：自选一人锅、200+款、5-22元/盘、锅底12元、2026-01约14家<span class="badge badge-official">媒体</span>；<strong>"8500/4000元·24月回本"公开零实证</strong><span class="badge badge-client">客户口径·待核</span>，但可验证"装修省60%+、租金减半、人力降40%、翻台高20%"<span class="badge badge-official">媒体</span>。夸父：2025底破3000家、2个万㎡大仓+11区域仓覆盖2800+县市、<strong>总部核心收入=供应链进货差价+约3%营业额抽成（非加盟费）</strong>、样板店月利25万但普通店保本/亏损<span class="badge badge-official">媒体</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>抗风险：</strong>"下行期<strong>低客单高频的绿茶模型抗跌性结构更强</strong>——54.6元决策门槛低、家庭聚餐刚需；海底捞96元+强服务在'砍非必要开支'时首当其冲（翻台4.1→3.9、连续两年没回红线）。<strong>但海底捞护城河是绿茶没有的——品牌力、供应链自主、副牌矩阵</strong>，它抗风险靠'多条腿'。"</p>
+    <p style="margin-top:6px;"><strong>海底捞向绿茶靠拢？——金句：</strong>"是，而且是行业级信号。海底捞亲手做大排档(自选一人锅、12元锅底、装修省60%、人力降40%)，等于<strong>连最标榜服务的巨头都承认：存量时代，'轻资产·低客单·高流转'才是能规模复制、快速回本的模型</strong>。张勇亲抓、给3年500家目标，增长故事已从'主品牌翻台'切换到'平价高翻台副牌矩阵'——这正是向绿茶所在的赛道靠拢。<strong>需要说明：客户给的8500→4000元/㎡、24月回本这组数字我没见官方确认，但'大幅降造价、缩回本'的方向公开可验证。</strong>"</p>
+    <p style="margin-top:6px;"><strong>夸父炸串（你的独家王牌）：</strong>"这是我现在最看好的方向。夸父本质是<strong>'供应链型加盟'——总部靠中央工厂+调料包把单店做到极致轻(十几平、几人、无大厨)，靠加盟铺规模，真正赚的是供应链进货差价+约3%营业额抽成，而不是加盟费</strong>。和绿茶/海底捞最大不同：<strong>门店越轻、总部越重，利润从'开好每家店'转到'服务好加盟商+卖料'。</strong>但风险也直白——<strong>加盟商赚不赚钱决定生死</strong>：样板店月利能到25万，但普通店很多只保本甚至亏（进货成本高、单店月油费就六千多）。<strong>所以看夸父这类模型，关键是别看样板店、要看普通店的真实盈利分布</strong>——单店模型一旦跑不通，规模会反噬。"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>你正在做夸父，是全场唯一'现在进行时'一手体感——"供应链型加盟总部越重"+"样板vs平均分化"这两句，别的专家给不了，务必讲透。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>大排档4000/24月标"未见官方确认"。谈夸父只讲可公开的模式逻辑，不抖现公司未公开经营数据。</p></div>
   </div>
 
-  <!-- Q10 人效/岗位/店长/微海 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">10</span><span class="qtitle">标准门店人力配置与前厅后厨岗位；微海咨询"绿茶大学"+巡检 vs 海底捞师徒制的本质区别；后厨高度依赖OEM半成品却仍占60%人力的核心价值；店长培养周期如何支撑30%+开店增速</span><span class="qtag">人效&amp;组织</span></div>
-    <div class="qorig">"一家标准门店需配置多少人力，前厅后厨岗位如何安排？绿茶引入微海咨询建'绿茶大学'强化巡检后，与海底捞师徒制有何本质区别？后厨已高度依赖OEM半成品，仍占60%人力，这些人力提供什么核心价值？店长培养周期多长以支撑每年30%+开店？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>人效是直营连锁的利润生命线。他要拆到岗位颗粒，验证"OEM之后后厨为什么还要这么多人"，以及"店长够不够快"这个扩张瓶颈。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>人力配置（给框架不给死数）：</strong>"一家约115座的小店，正常配置<strong>约25-35人</strong><span class="badge badge-predict">推断</span>，前厅约40%（迎宾/传菜/收银/值班）、后厨约60%。绿茶用'OEM半成品+SOP'把厨师技能门槛打下来了，但<strong>后厨人力降不下去，因为绿茶的活儿从'烹饪'变成了'高峰期的产能调度'</strong>——清洗、粗加工、半成品复热、定量调味摆盘、以及最关键的<strong>堂食+外卖双线出餐的节奏咬合</strong>。这些是流水线上不可替代的手，OEM替代的是'厨艺'，替代不了'高峰期把500单准时出出去'的人。"</p>
-    <p style="margin-top:6px;"><strong>微海/绿茶大学 vs 师徒制——本质区别：</strong>"<strong>师徒制靠'人带人+利益绑定'传承，绿茶大学+飞检靠'标准化培训+外部稽核'保证一致性。</strong>前者出的是'有主人翁意识但难标准化'的店长，后者出的是'合格、可快速复制、但情感绑定弱'的店长。绿茶选后者是必然——<strong>要一年开157家，你不可能等师徒慢慢带，只能靠体系化流水线批量产出合格店长。</strong>微海是海底捞体系出来的，绿茶等于'买海底捞的组织能力方法论，但去掉师徒制的利益重绑定'，取其标准化、弃其难复制。"</p>
-    <p style="margin-top:6px;"><strong>店长周期：</strong>"这是扩张的真瓶颈。海底捞培养一个成熟店长要很久（师徒制慢工出细活）；绿茶靠体系化把这个周期压缩到<strong>约6-12个月出一个合格（非顶尖）店长</strong><span class="badge badge-predict">推断</span>，用'合格的量'换'顶尖的质'来撑30%增速。代价就是店长的平均成熟度和自驱性不如海底捞——所以它必须用飞检和数字化巡检来补这个短板。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"OEM替代的是厨艺、替代不了高峰期的产能调度"——这个洞察直接回答了客户"后厨为什么还要60%人"的困惑，是纯内部运营视角。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>人数/店长周期用"约X、这是我的经验判断"，不背书成绿茶官方标准。绿茶大学/飞检的存在按客户口径确认，别编具体考核条款。</p></div>
+    <div class="qh"><span class="qnum">10</span><span class="qtitle">标准门店人力配置与前厅后厨岗位；微海咨询"绿茶大学"+巡检 vs 海底捞师徒制的本质区别；后厨依赖OEM半成品却仍占60%人力的核心价值；店长培养周期如何支撑30%+开店</span><span class="qtag">人效&amp;组织</span></div>
+    <div class="qorig">"标准门店多少人力、前厅后厨怎么排？引入微海咨询建绿茶大学+巡检后，与海底捞师徒制本质区别？后厨已高度依赖OEM半成品仍占60%人力，核心价值是什么？店长培养周期多长支撑30%+开店？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>单店全职约27人（曾33.09），兼职比14.6%→27.9%，新店招约50人<span class="badge badge-official">招股书</span>；绿茶大学（领导力+晋升通道，2024超300人晋升管理岗）+神秘访客系统<span class="badge badge-official">招股书</span>；<strong>"绿茶大学由微海咨询搭建"公开零证据</strong><span class="badge badge-gap">待核</span>；晋升链服务员→组长→副店长→店长→区域经理，绿茶未披露店长周期，海底捞公开口径"服务员3-5年可晋升店长"<span class="badge badge-predict">媒体</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>先埋一个诚实的钩子（因为提纲有个未证实前提）：</strong>"补一句——'绿茶大学由微海咨询搭建'这个说法我没有公开依据，从命名和体系看更像绿茶自建；微海是海底捞系咨询，这点建议以绿茶官方为准。"</p>
+    <p style="margin-top:6px;"><strong>人力配置：</strong>"标准店全职约27人（早年33人，这两年靠兼职化降到27、兼职比翻倍到近28%），前厅约40%、后厨约60%。绿茶用'OEM半成品+SOP'把厨师技能门槛打下来了，<strong>但后厨人力降不下去，因为活儿从'烹饪'变成了'高峰期的产能调度'</strong>——清洗、粗加工、半成品复热、定量调味摆盘，尤其<strong>堂食+外卖双线出餐的节奏咬合</strong>。OEM替代的是'厨艺'，替代不了'高峰期把几百单准时出出去'的手。"</p>
+    <p style="margin-top:6px;"><strong>绿茶大学/神秘访客 vs 师徒制：</strong>"<strong>师徒制靠'人带人+分红绑定'传承，绿茶靠'标准化培训(绿茶大学)+外部稽核(神秘访客/飞检)'保证一致性。</strong>前者出'有主人翁意识但难标准化'的店长，后者出'合格、可快速复制、情感绑定弱'的店长。要一年157家，只能选后者——<strong>用体系批量产出合格店长，而不是等师徒慢慢带。</strong>"</p>
+    <p style="margin-top:6px;"><strong>店长周期：</strong>"海底捞公开口径店长要3-5年；绿茶靠体系化把合格（非顶尖）店长压到<strong>约6-12个月</strong><span class="badge badge-predict">推断</span>，用'合格的量'换'顶尖的质'撑30%增速，代价是平均成熟度和自驱性不如海底捞——所以必须靠神秘访客和数字化巡检补短板。"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"OEM替代的是厨艺、替代不了高峰期产能调度"直接回答"后厨为什么还要60%人"；再叠"兼职化到28%是人效红利也是稳定性隐患"，一手运营视角。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>微海搭建绿茶大学是提纲的未证实前提，务必主动澄清、别顺着当事实。人数/店长周期用"约X、我的经验判断"。</p></div>
   </div>
 
-  <!-- Q11 文化传递/流失率/激励 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">11</span><span class="qtitle">如何向高强度流水线一线员工传递企业文化/归属感？高压飞检下基层员工与店长流失率什么水平？海底捞大区经理深度利润绑定+超额激励 vs 绿茶固化利益分配，是否足够支撑高峰期"拼命干"？</span><span class="qtag">激励&amp;流失</span></div>
-    <div class="qorig">"管理层如何向流水线一线员工传递文化与归属感？高压飞检下基层与店长流失率处于什么水平？相比海底捞大区经理可对员工深度利润绑定与超额激励，绿茶相对固化的利益分配是否足够支撑员工高峰期拼命干？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>这题直指绿茶模型的<strong>最大软肋</strong>：SOP+固定薪酬能保证"合格"，但能不能激发"拼命"？投资人在评估组织的持续战斗力。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>坦诚是这题的最优解："<strong>这确实是绿茶模型的结构性短板，也是它和海底捞最本质的差距。</strong>海底捞靠'开新店=老店长分红'把员工变成利益共同体，能激发出'拼命'；<strong>绿茶是固定薪酬+绩效奖金，激励是'做好本分'型，天花板就在那里。</strong>" 然后给绿茶的应对逻辑（不粉饰）："绿茶不赌'拼命'，它赌'不出错'——用SOP和数字化把对'个人英雄'的依赖降到最低，让一个普通员工按流程也能交付合格结果。<strong>它的文化传递不是'家文化'，是'职业化+确定性'</strong>：准时发薪、清晰晋升、体系培训，对下沉市场的普通打工者其实有吸引力。<strong>流失率</strong>我判断<strong>高于海底捞巅峰期、但在行业中位</strong><span class="badge badge-predict">推断</span>——高压飞检会推高一线流失，但标准化也让'换人成本'比海底捞低（一个萝卜一个坑，好补）。<strong>核心判断：绿茶用'低换人成本'对冲'高流失率'，这套在扩张期跑得通；但一旦要向上突破品质和体验，'不拼命'的组织就会成为天花板。</strong>"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>补一句海底捞的反面教训（可公开）："海底捞近期'小客户经理制度'的扰动，恰恰说明深度利益绑定也有副作用——绑太深，机制一动全身痛。绿茶的松绑定反而在收缩期更灵活。"两面都讲，显得客观。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>流失率是敏感未披露数据，务必用"行业判断/我的经验"表述，绝不给绿茶具体流失率数字。</p></div>
+    <div class="qh"><span class="qnum">11</span><span class="qtitle">如何向流水线一线员工传递文化/归属感？高压飞检下流失率什么水平？海底捞大区经理深度利润绑定+超额激励 vs 绿茶固化利益分配，是否够支撑高峰期"拼命干"？</span><span class="qtag">激励&amp;流失</span></div>
+    <div class="qorig">"如何向流水线员工传递文化与归属感？高压飞检下基层与店长流失率什么水平？海底捞大区经理可深度利润绑定+超额激励，绿茶相对固化的利益分配是否足够支撑员工高峰期拼命干？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶激励=<strong>15%门店利润分享+赛马竞争+神秘访客</strong>（不是纯固定薪酬）<span class="badge badge-official">招股书</span>；员工成本占比25.7%、兼职比升至27.9%<span class="badge badge-official">官方</span>；绿茶未披露流失率<span class="badge badge-gap">缺口</span>，正餐行业年流失25-40%、店长岗20-30%<span class="badge badge-predict">行业</span>。海底捞"小客户经理制度"2026-04爆雷（员工控诉、张勇道歉、确认4起被迫自费），官方认根因=<strong>过度激励店长+门店考核过重</strong>，整改弱化门店考核、不设翻台硬指标<span class="badge badge-official">官方</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>先纠正一个常见误解（也是提纲的隐含假设）：</strong>"说绿茶'固化利益分配'不完全准——绿茶其实有<strong>15%门店利润分享+赛马排名</strong>，不是纯固定工资。但和海底捞的<strong>本质差别在'能不能靠带徒弟裂变分红'</strong>：海底捞店长开徒弟店、徒孙店都有分成，是<strong>裂变式无上限</strong>；绿茶的15%是<strong>你这家店的、封顶的</strong>。所以海底捞能激发'拼命扩张'，绿茶激发的是'守好自己这摊+别在赛马里垫底'。"</p>
+    <p style="margin-top:6px;"><strong>文化传递：</strong>"绿茶不赌'拼命'，赌'不出错'——用SOP和数字化把对个人英雄的依赖降到最低。它的文化不是'家文化'，是<strong>'职业化+确定性'</strong>：准时发薪、清晰晋升(服务员→区域经理)、体系培训，对下沉市场普通打工者其实有吸引力。"</p>
+    <p style="margin-top:6px;"><strong>流失率+海底捞反面镜子：</strong>"绿茶不披露流失率，但<strong>兼职比从14.6%翻到27.9%是稳定性下降的代理信号</strong>——高压飞检会推高一线流失，我判断落在正餐行业25-40%、店长岗20-30%区间。<strong>这里有个绝佳的反面案例：海底捞2026年4月的'小客户经理'事故——员工公开控诉、张勇道歉，官方自己认根因是'过度激励店长+考核过重'，整改方向是弱化门店考核、不再设翻台硬指标。这恰恰说明深度利益绑定+高压考核也有反噬，绑太深、压太狠，机制一动全身痛。</strong>绿茶的松绑定+低换人成本，在收缩期反而更灵活。<strong>核心判断：绿茶用'低换人成本'对冲'高流失率'，扩张期跑得通；但要向上突破品质体验，'不拼命'的组织会成天花板。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>两面都讲：绿茶15%分享+赛马（纠正提纲误解）+ 海底捞小客户经理最新事故（2026-04），一个显你懂绿茶真实机制、一个显你追得上海底捞最新动态，客观又新鲜。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>流失率是敏感未披露，用"行业区间+我的判断"，绝不给绿茶具体流失数。</p></div>
   </div>
 
-  <!-- Q12 外卖占比/后厨分流 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">12</span><span class="qtitle">外卖占比25.3%（12.04亿/+66.5%）；60%后厨SOP流水线，高峰期外卖+堂食同时涌入，后厨SOP能否精准分流——是否是考核店长排班的核心指标？</span><span class="qtag">外卖·产能</span></div>
-    <div class="qorig">"外卖收入12.04亿(+66.5%)、占比25.3%……高峰期外卖与堂食订单同时涌入，后厨SOP能否像齿轮精准咬合、有效分流产能，是否是考核店长排班功底的最核心指标？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶外卖2025:12.04亿(+66.5%)、占25.3%<span class="badge badge-official">官方</span>（对比海底捞外卖占比仅6.1%）。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>直接确认并升维："<strong>对，高峰期的堂食/外卖产能分流，是绿茶店长运营水平的第一试金石。</strong>25.3%的外卖占比意味着<strong>每4单里有1单是外卖</strong>，午晚市高峰堂食翻台正紧张时，外卖单同时炸进来——后厨就那么多手和灶位，谁先做、堂食体验要不要为外卖让路、爆单时怎么限流，全靠店长的<strong>排班和实时调度</strong>。绿茶能把外卖做到25%还没搞垮堂食，靠的是<strong>OEM半成品+SOP把单品制作时间压到极短、可预测</strong>——正因为出餐是标准化的、时间是确定的，产能才'可调度'。如果是海底捞那种现切现涮的复杂后厨，25%外卖早就把堂食冲垮了。<strong>所以绿茶的高外卖占比不是偶然，是它标准化后厨的红利。</strong>"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"标准化后厨是高外卖占比的前提"——把Q10的后厨话题和外卖打通，形成一个自洽的体系判断，非常有说服力。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>可放开谈机制和调度逻辑（这是运营方法论，非机密）；别编具体排班表/单店外卖单量。</p></div>
+    <div class="qh"><span class="qnum">12</span><span class="qtitle">外卖占比25.3%（12.04亿/+66.5%）；60%后厨SOP流水线，高峰期外卖+堂食同时涌入，后厨SOP能否精准分流——是否考核店长排班的核心指标？</span><span class="qtag">外卖·产能</span></div>
+    <div class="qorig">"外卖12.04亿(+66.5%)、占25.3%……高峰期外卖与堂食同时涌入，后厨SOP能否像齿轮精准咬合、有效分流产能，是否是考核店长排班功底的最核心指标？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶外卖12.04亿(+66.5%)占25.3%（H1占比16.2%→22.9%）<span class="badge badge-official">官方</span>；<strong>菜品大部分制备前置到第三方自动化设施完成</strong>，后厨精简主打出餐效率<span class="badge badge-official">媒体</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>直接确认并升维："<strong>对，高峰期的堂食/外卖产能分流，是绿茶店长运营水平的第一试金石。</strong>25.3%意味着每4单有1单外卖，午晚高峰堂食翻台正紧张时外卖同时炸进来——后厨就那么多手和灶位，谁先做、堂食体验要不要为外卖让路、爆单怎么限流，全靠店长排班和实时调度。<strong>绿茶能把外卖做到25%还没搞垮堂食，靠的是把制备前置到第三方自动化设施、门店只做复热摆盘——单品制作时间被压到极短且可预测，产能才'可调度'。</strong>换成海底捞那种现切现涮的复杂后厨，25%外卖早把堂食冲垮了。<strong>绿茶的高外卖占比不是偶然，是它标准化前置后厨的红利。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"标准化前置后厨是高外卖占比的前提"——把Q10后厨话题和外卖打通成自洽体系判断。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>机制和调度逻辑可放开谈（运营方法论非机密）；别编单店外卖单量/排班表。</p></div>
   </div>
 
-  <!-- Q13 外卖对堂食影响/25%警戒线 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">13</span><span class="qtitle">25.3%外卖是否已对堂食高峰期出餐/服务质量造成实质影响？后厨产能如何在空间与时间上平衡两者？25%警戒线如何通过边际利润测算出来？</span><span class="qtag">外卖·警戒线</span></div>
-    <div class="qorig">"25.3%外卖是否对堂食高峰期出餐体验与服务质量造成实质影响？后厨产能如何在空间与时间上平衡？行业认为绿茶把外卖控在25%是避免过度依赖平台侵蚀利润的前瞻策略，这个25%警戒线究竟如何通过固定成本与变动成本的边际利润测算出来？"</div>
-    <div class="layer"><span class="llab l-script">我方话术</span><p><strong>对堂食影响：</strong>"有影响，但绿茶把它控制在'可接受'区间。空间上——很多绿茶店设<strong>独立的外卖打包/出餐动线</strong>，尽量不和堂食传菜抢通道；时间上——靠SOP把外卖单的制作错峰进堂食出餐的间隙。<strong>但诚实说，绝对高峰期（周末晚市），外卖一定会挤占堂食的出餐速度和服务注意力，这是25%这个体量绕不开的代价。</strong>"</p>
-    <p style="margin-top:6px;"><strong>25%警戒线怎么算出来的（这是加分题）：</strong>"我不认为25%是精确公式算出来的一条硬线，更像是<strong>经验和边际利润共同校准的'舒适区上沿'</strong>。逻辑是这样：外卖的<strong>边际贡献</strong>=外卖客单×毛利 − 平台扣点(约18-25%) − 打包/骑手补贴，算下来<strong>外卖的边际利润率明显低于堂食</strong>（堂食没有扣点、还带酒水和体验溢价）。所以外卖的价值是'<strong>用闲置后厨产能换增量收入</strong>'——在不额外增加固定成本（租金/基础人力已经付了）的前提下，多做的外卖几乎纯赚边际。<strong>但一旦外卖占比超过某个点（经验上就是25-30%），它开始反噬堂食体验、甚至倒逼你为外卖加人加设备，边际红利就被吃掉了。</strong>25%就是'<strong>用现有产能能吃下的最大外卖量、且不伤堂食</strong>'这个平衡点的经验值——本质是'固定成本已沉没、优先用满、但不为它加成本'的算法。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"外卖=用已经付过钱的闲置产能换纯边际增量，所以要用满但不能为它加固定成本"——这句话把"25%警戒线"从玄学变成了清晰的经济学，是全场最能体现你功底的一段。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>平台扣点区间用行业值；别声称绿茶内部有"25%的红线文件"，用"经验校准的平衡点"更真实也更安全。</p></div>
+    <div class="qh"><span class="qnum">13</span><span class="qtitle">25.3%外卖是否对堂食高峰期出餐/服务质量造成实质影响？后厨产能如何在空间与时间上平衡？25%警戒线如何通过边际利润测算出来？</span><span class="qtag">外卖·警戒线</span></div>
+    <div class="qorig">"25.3%外卖是否对堂食高峰期出餐/服务造成实质影响？后厨产能如何空间时间平衡？行业认为绿茶控外卖在25%是避免利润侵蚀的前瞻策略，这个25%警戒线如何通过固定成本与变动成本的边际利润测算出来？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p><strong>"25%警戒线"无任何行业标准</strong>——是绿茶自身数值，被媒体正面解读为公司叙事<span class="badge badge-gap">证伪</span>；外卖边际净利行业约5-15%、显著低于堂食<span class="badge badge-predict">行业</span>；美团名义扣点6-8%、中小综合22-26%<span class="badge badge-predict">行业</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>对堂食影响：</strong>"有影响，但控制在可接受区间。空间上很多店设<strong>独立外卖打包/出餐动线</strong>不抢堂食通道；时间上靠SOP把外卖单错峰进堂食出餐间隙。<strong>但诚实说，绝对高峰期（周末晚市），外卖一定会挤占堂食的出餐速度和服务注意力，这是25%这个体量绕不开的代价。</strong>"</p>
+    <p style="margin-top:6px;"><strong>25%怎么算出来的（先破一个误区）：</strong>"我要先说清——<strong>'25%警戒线'其实不是行业硬标准，是绿茶自己的数值被包装成了策略叙事。</strong>但它背后的经济逻辑是真的：外卖<strong>边际贡献</strong>=外卖客单×毛利 − 平台扣点(名义6-8%、连锁大客户议价后实际更低) − 打包补贴，算下来<strong>外卖边际净利率(约5-15%)明显低于堂食</strong>（堂食没扣点、还带酒水体验溢价）。所以外卖的价值是'<strong>用已经付过钱的闲置后厨产能换增量收入</strong>'——固定成本(租金/基础人力)已经付了，多做的外卖几乎纯赚边际。<strong>但外卖占比一旦超过某个点(经验上25-30%)，它开始反噬堂食体验、甚至倒逼你为外卖加人加设备，边际红利就被吃掉。</strong>25%就是'<strong>用现有产能能吃下的最大外卖量、且不伤堂食</strong>'的经验平衡点——本质是'固定成本已沉没、优先用满、但不为它加成本'的算法，不是一条精算出来的红线。"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"外卖=用已付费的闲置产能换纯边际增量，用满但不为它加固定成本"——把"25%"从玄学变成清晰经济学，同时点破"警戒线是叙事非标准"，双重显功底。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别声称绿茶内部有"25%红线文件"（Scout已证伪无此行业标准）。用"经验平衡点+公司叙事"更真实也更安全。</p></div>
   </div>
 
-  <!-- Q14 平台份额/扣点/退补 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">14</span><span class="qtitle">各平台（美团/淘宝闪购/京东到家）单量份额、扣点率、结算对账周期、分成模式的实质差异；美团今年退补后单量与收入贡献的变化</span><span class="qtag">平台经济</span></div>
-    <div class="qorig">"绿茶在美团、淘宝闪购、京东到家等平台的单量份额分布，各平台扣点率、结算对账周期、分成模式有哪些实质差异？随着美团今年退补，单量及收入贡献有多大变化？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>行业费率<span class="badge badge-predict">行业基准</span>：美团约6-8%技术服务费+0.38%支付+动态配送；到店/闪购结构不同。绿茶各平台单量拆分公司未披露<span class="badge badge-gap">缺口</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>"单量份额上，<strong>美团大概率仍是绝对主力（行业普遍7-8成在美团），饿了么次之，京东到家/淘宝闪购是近两年的增量补充</strong><span class="badge badge-predict">判断</span>。实质差异在三层：<strong>①扣点</strong>——美团综合扣点最高（技术服务费+配送），但流量最大、履约最成熟；新平台(京东/淘宝闪购)为抢商家<strong>初期扣点更低甚至有补贴</strong>，这是它们能起量的原因。<strong>②结算账期</strong>——各平台T+N不等，账期和对账颗粒度直接影响门店现金流，这也是为什么大连锁会多平台分散、不把鸡蛋放一个篮子。<strong>③分成/投流</strong>——真正吃利润的不只是扣点，是<strong>投流（花钱买曝光）</strong>，平台补贴退坡后，商家要么自己贴投流保单量、要么接受单量下滑。"</p>
-    <p style="margin-top:6px;"><strong>美团退补的影响（核心）：</strong>"美团退补是2026餐饮外卖的最大变量。补贴在时，平台帮你把客单价压低、单量冲上去；<strong>退补后，要么消费者实付变贵→单量下滑，要么商家自己补差价→利润被侵蚀，没有第三条路。</strong>对绿茶这种把外卖控在25%、且靠标准化压成本的玩家，冲击相对可控——因为它的外卖本来就是'边际增量'定位，不是命根子；<strong>真正受伤的是那些外卖占比50%+、靠平台补贴续命的中小商家。</strong>绿茶这时候25%的克制反而成了护城河。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>把"25%克制"在退补背景下重新定义成"抗风险的先见之明"，和Q13呼应，形成一个完整的外卖战略叙事。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>各平台单量拆分是明确数据缺口，用"行业普遍分布+判断"作答并说明"绿茶未披露平台级拆分"；扣点用行业区间。</p></div>
+    <div class="qh"><span class="qnum">14</span><span class="qtitle">各平台（美团/淘宝闪购/京东到家）单量份额、扣点率、结算对账周期、分成模式差异；美团今年退补后单量与收入贡献的变化</span><span class="qtag">平台经济</span></div>
+    <div class="qorig">"绿茶在美团/淘宝闪购/京东各平台单量份额、扣点率、结算对账周期、分成模式差异？美团今年退补后单量及收入贡献变化多大？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶分平台拆分未披露<span class="badge badge-gap">缺口</span>；2025全市场份额美团38.3%/淘宝闪购31.7%/京东30.0%<span class="badge badge-predict">行业</span>；<strong>费率：京东≤5%(最低)、美团名义6-8%技术服务费+履约费(中小综合22-26%)、淘宝闪购2026-02起涨佣0.2-1%</strong>；美团结算约T+1出账/T+3到账；<strong>王兴预警2026H2行业订单可能同比负增长</strong><span class="badge badge-official">官方</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>"单量上<strong>美团大概率仍是绝对主力（全市场38%、连锁餐更集中），饿了么/淘宝闪购次之，京东是近一年增量</strong>。实质差异三层：<strong>①扣点</strong>——京东用≤5%低佣抢商家，美团名义6-8%但叠加履约配送后中小综合能到22-26%（<strong>绿茶作为连锁大客户议价后实际远低于此</strong>）；<strong>②账期</strong>——各平台T+N不等，账期直接影响门店现金流，这也是大连锁多平台分散的原因；<strong>③真正吃利润的是投流</strong>——扣点之外还要花钱买曝光，补贴退坡后要么自贴投流、要么单量下滑。"</p>
+    <p style="margin-top:6px;"><strong>美团退补（核心）：</strong>"这是2026外卖最大变量。王兴Q1已明确补贴回归理性、利润急修复，还坦言<strong>受高基数影响2026下半年订单可能同比负增长</strong>。补贴在时帮你压客单冲单量；<strong>退补后要么消费者实付变贵→单量下滑，要么商家自贴差价→利润被侵蚀，没有第三条路。</strong>对绿茶这种把外卖控在25%、靠标准化压成本的玩家冲击相对可控——它的外卖本就是'边际增量'定位不是命根子；<strong>真正受伤的是外卖占比50%+靠补贴续命的中小商家。绿茶25%的克制在退补期反而成了护城河。</strong>另外补贴退坡还有个结构点：这轮大战新增订单约一半是奶茶咖啡，正餐受益本就有限，所以绿茶+66.5%的高增能不能延续，是2026下半年最该盯的。"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>把"25%克制"在退补背景下重新定义成"抗风险的先见之明"，和Q13呼应成完整外卖战略叙事；再点"新增单一半是奶茶咖啡、正餐受益有限"，显你懂行业结构。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>绿茶分平台拆分是明确缺口，用"行业普遍分布+判断"并说明未披露；扣点用行业区间，强调连锁大客户实际议价更低。</p></div>
   </div>
 
-  <!-- Q15 供应链模式+205 OEM影响 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">15</span><span class="qtitle">绿茶供应链模式、供应商合作方式与要求、符合绿茶的供应商资源是否丰富；全面转向205家第三方OEM的"战略大撤退"对菜品口味一致性/新品研发保密性/食材成本绝对值的实质影响</span><span class="qtag">供应链①</span></div>
-    <div class="qorig">"请谈谈绿茶的供应链、与供应商的合作方式和要求，符合绿茶的供应商资源多吗？绿茶全面转向205家第三方食材加工公司(OEM)合作，这种战略大撤退对口味一致性、新品研发保密性、食材成本绝对值带来了怎样的实质影响？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>绿茶<strong>无自建央厨</strong>，205家第三方OEM，395家认可供应商，前五大集中度仅18.2%、单一最大4.5%<span class="badge badge-official">招股书</span>；原材料成本率33.5%(2024)→31.7%(2025)<span class="badge badge-official">官方</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>模式定性：</strong>"绿茶走的是<strong>'轻资产OEM代工'路线——不自建央厨，把半成品加工外包给205家第三方工厂，自己只做标准制定、集采和门店复热。</strong>这是和海底捞（自建蜀海全链条）截然相反的哲学：<strong>海底捞'重供应链换掌控力'，绿茶'轻供应链换资本效率和灵活性'。</strong>"</p>
-    <p style="margin-top:6px;"><strong>三个实质影响（正反都讲）：</strong><br>
-    <strong>①成本绝对值——好处明确：</strong>OEM让绿茶不用背央厨的重资产折旧，且集采量随门店扩张放大议价权，原材料率能从33.5%压到31.7%就是证据。<strong>但代价是把加工利润让给了OEM厂</strong>，绿茶赚的是'品牌+渠道'的钱，不是'加工'的钱。<br>
-    <strong>②口味一致性——最大隐患：</strong>"205家分散工厂，最难的就是<strong>跨工厂的口味标准化</strong>——同一道菜不同厂做出来有细微差异，靠的是绿茶的标准和质检去压偏差。前五大集中度只有18.2%（很分散），意味着<strong>管理半径大、一致性风险高</strong>，这是轻资产模型的固有软肋。<br>
-    <strong>③研发保密性——真问题：</strong>"配方交给第三方厂代工，<strong>保密性天然弱于自有央厨</strong>——爆款容易被同行通过共用的OEM链条快速模仿。这也是为什么绿茶的护城河不在'某道菜'，而在'品牌+多SKU组合+性价比'这些更难抄的地方。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"绿茶赚的是品牌和渠道的钱、把加工利润让给OEM"——这句话点破了轻资产模型的利润归属本质，投资人最爱这种一针见血。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别透露具体OEM厂名/供货价/配方细节。"资源是否丰富"接到Q16回答。</p></div>
+    <div class="qh"><span class="qnum">15</span><span class="qtitle">绿茶供应链模式、供应商合作方式与要求、符合绿茶的供应商资源是否丰富；转向205家OEM的"战略大撤退"对口味一致性/研发保密/食材成本绝对值的实质影响</span><span class="qtag">供应链①</span></div>
+    <div class="qorig">"绿茶供应链、与供应商合作方式和要求，符合绿茶的供应商多吗？全面转向205家第三方OEM的战略大撤退，对口味一致性、新品研发保密性、食材成本绝对值有何实质影响？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p><strong>无自建央厨</strong>、205家OEM（早期190）、395家认可供应商、前五大集中度18.2%/单一最大4.5%<span class="badge badge-official">招股书</span>；原材料率36.9%(2021)→31.7%(2025)<span class="badge badge-official">官方</span>；<strong>但IPO募资正自建2.45万㎡央厨（90%自供/10%零售，2025Q3开工2026Q2完工）</strong><span class="badge badge-official">招股书</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>先纠提纲一个前提（这是本题最出彩处）：</strong>"'战略大撤退到OEM'这个说法要修正——绿茶<strong>从来没有自建央厨</strong>，一直靠205家第三方OEM，这不是'撤退'而是它一贯的轻资产路线；<strong>相反，绿茶现在正拿IPO募资自建2.45万㎡央厨</strong>，是往重资产走。所以准确的画像是'<strong>无央厨的OEM模式，正在向自建央厨转折</strong>'。"</p>
+    <p style="margin-top:6px;"><strong>模式定性：</strong>"绿茶=不自建央厨、半成品外包给205家OEM、自己做标准+集采+门店复热。和海底捞（自建蜀海全链条）截然相反：<strong>海底捞'重供应链换掌控力'，绿茶'轻供应链换资本效率'。</strong>"</p>
+    <p style="margin-top:6px;"><strong>三个实质影响：</strong><strong>①成本——好处明确：</strong>OEM不背央厨重资产折旧，集采量随门店扩张放大议价，原材料率从36.9%压到31.7%，<strong>但把加工利润让给了OEM厂，绿茶赚的是品牌+渠道的钱不是加工的钱</strong>。<strong>②口味一致性——最大隐患：</strong>205家分散工厂、前五大集中度仅18.2%（很分散），<strong>跨工厂标准化偏差是轻资产的固有软肋</strong>，靠绿茶的标准和质检压。<strong>③研发保密——真问题：</strong>配方交第三方代工，<strong>保密性天然弱于自有央厨</strong>，爆款容易被同行通过共用OEM链快速模仿——这也是为什么绿茶护城河不在'某道菜'而在品牌+多SKU组合。<strong>它自建央厨，一部分动机就是把口味一致性和研发保密这两块收回来。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"绿茶不是撤退到OEM，是本就无央厨、现在反而在自建央厨"——一句话纠正提纲前提，瞬间显出你比客户更懂这家公司的真实供应链战略。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>别透具体OEM厂名/供货价/配方。自建央厨是招股书公开信息，可放心引。</p></div>
   </div>
 
-  <!-- Q16 损耗+极致性价比OEM痛点+蜀海 -->
   <div class="qcard">
-    <div class="qh"><span class="qnum">16</span><span class="qtitle">剥离央厨后半成品/冷链损耗管控机制、能控到百分之多少；找符合"极高性价比"OEM的痛点、这类供应商资源是否丰富；是否考虑过接入蜀海这种成熟但有溢价的供应链</span><span class="qtag">供应链②</span></div>
-    <div class="qorig">"绿茶完全剥离央厨、采用OEM后，对半成品及冷链食材的损耗管控机制怎样，能控制到百分之多少？海底捞与安井(5亿+/占比70-80%定制丸滑)、蜀海(70%冷冻品)深度绑定；绿茶寻找符合极高性价比调性与苛刻成本要求的第三方OEM时，主要痛点是什么？这类供应商资源丰富吗？是否考虑过接入蜀海这样成熟但有溢价的供应链？"</div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>海底捞-安井"5亿+/70-80%"<span class="badge badge-client">客户口径·待核</span>（安井年入140亿、确为海底捞核心供应商属实<span class="badge badge-official">公开</span>）；蜀海：40+仓配中心/9加工中心/40万㎡/2000+冷链车<span class="badge badge-official">公开</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>损耗管控：</strong>"OEM模式下损耗管控靠三条：<strong>①半成品化本身就降损耗</strong>——工厂端标准化预处理，把不可控的门店粗加工损耗前置消化了；<strong>②以销定采+小店高周转</strong>——门店库存周期短，冷链食材当日/次日达、先进先出；<strong>③数字化盘点</strong>。行业里做得好的连锁能把食材综合损耗压到<strong>3-5%</strong><span class="badge badge-predict">行业基准</span>，绿茶靠小店高翻台+标准化应该在这个区间。<strong>但OEM的一个隐性损耗是'滞销半成品'——押错SKU或某店卖不动，半成品报废比现切食材更刚性。</strong>"</p>
-    <p style="margin-top:6px;"><strong>找极致性价比OEM的痛点（核心洞察）：</strong>"这是绿茶模型最反直觉的痛点——<strong>它要的是'既标准化、又有稳定冷链、还愿意接受极低代工利润率'的供应商，这三个条件同时满足的工厂并不多。</strong>愿意接极低利润的小厂往往标准化和冷链能力不够；能力强的大厂(比如安井、蜀海这种)又有品牌溢价、不愿意做绿茶要求的贴地价格。<strong>所以绿茶的供应链是在'用规模换低价'——只有把单量做大(609店的集采量)，才能让愿意薄利的工厂算得过账。这就形成一个正反馈也是一个脆弱点：规模是它供应链议价的唯一筹码，一旦扩张失速，供应链的成本优势也会松动。</strong>"</p>
-    <p style="margin-top:6px;"><strong>是否接入蜀海：</strong>"我判断<strong>绿茶不会主动接入蜀海这类体系</strong>——不是不知道它好，而是<strong>模型冲突</strong>。蜀海是'高标准、高服务、带溢价'的重供应链，适配海底捞的高客单模型；绿茶的命根子是'极致性价比'，接入一个带溢价的供应链等于<strong>自己拆自己的成本护城河</strong>。绿茶宁可用一堆薄利小厂+自己做标准管理，也不会为了省心去买蜀海的溢价。<strong>本质是：供应链的选择由客单模型决定，54.6元的客单养不起蜀海级的供应链。</strong>"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"54.6元的客单养不起蜀海级供应链"——用客单价反推供应链选择，这个因果链是投资人极少听到的深度判断，堪称本题金句。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>损耗率用"行业能做到3-5%、绿茶应在此区间"的判断口径，不给绿茶精确内部损耗数。安井"5亿/70-80%"标注为客户口径待核。</p></div>
+    <div class="qh"><span class="qnum">16</span><span class="qtitle">剥离央厨后半成品/冷链损耗管控、能控到百分之多少；找符合"极高性价比"OEM的痛点、资源是否丰富；是否考虑过接入蜀海这种成熟但溢价的供应链</span><span class="qtag">供应链②</span></div>
+    <div class="qorig">"绿茶采用OEM后半成品及冷链损耗管控怎样、能控到多少？海底捞与安井(5亿+/70-80%定制丸滑)、蜀海(70%冷冻品)深度绑定；绿茶找符合极高性价比的OEM主要痛点是什么？这类供应商资源丰富吗？是否考虑过接入蜀海这种成熟但溢价的供应链？"</div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p><strong>"安井占海底捞70-80%""海底捞冷冻品70%由蜀海出品"均无公开出处</strong><span class="badge badge-client">客户口径·待核</span>——唯一公开的"70%+"是<strong>安井自身"火锅料+面米制品"占安井营收的比例，与"海底捞采购里安井占70%"是两码事</strong>，疑张冠李戴；安井确为海底捞核心供应商、蜀海服务海底捞1300+店<span class="badge badge-official">公开</span>。行业食材损耗10-20%、中央厨房可降至<3%<span class="badge badge-predict">行业</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p><strong>先给一个Forensic提醒（帮客户校准，显你严谨）：</strong>"客户提纲里'安井占海底捞70-80%''冷冻品70%由蜀海'这两个数字，我提醒一下——公开渠道查不到出处；市面唯一公开的'70%'是<strong>安井自己'火锅料+面米制品'占安井营收70%+</strong>，跟'海底捞采购里安井占70%'完全是两个指标，很可能被张冠李戴了。合作关系是真的，但这两个占比我建议当作求证型问题、不当既定事实。"</p>
+    <p style="margin-top:6px;"><strong>损耗管控：</strong>"OEM模式下损耗靠三条：①半成品化本身降损耗（工厂端标准化预处理，把不可控的门店粗加工损耗前置消化了，<strong>损耗其实是内含在采购价里转移给了上游</strong>）；②以销定采+小店高周转、冷链当日次日达先进先出；③数字化盘点。行业做得好的能把综合损耗压到<strong>3-5%</strong><span class="badge badge-predict">行业</span>，绿茶靠小店高翻台+标准化应在此区间。<strong>隐性代价是'滞销半成品'——押错SKU的半成品报废比现切食材更刚性。</strong>"</p>
+    <p style="margin-top:6px;"><strong>找极致性价比OEM的痛点（核心洞察）：</strong>"这是绿茶模型最反直觉的痛点——它要'既标准化、又有稳定冷链、还愿意接受极低代工利润率'的供应商，<strong>三个条件同时满足的工厂并不多</strong>：愿意接极低利润的小厂标准化和冷链往往不够；能力强的大厂（安井、蜀海这种）又有品牌溢价、不愿做贴地价格。<strong>所以绿茶是'用规模换低价'——只有把单量做大(609店集采)，才能让薄利工厂算得过账。这既是正反馈也是脆弱点：规模是它供应链议价的唯一筹码，扩张一失速，成本优势就松动。</strong>它维持395家认可供应商做冗余筛选，就是在对冲'又便宜又稳的供应商稀缺'这个痛点。"</p>
+    <p style="margin-top:6px;"><strong>是否接入蜀海（用最新事实回答）：</strong>"公开信息看<strong>绿茶不走蜀海托管这条路，而是选择自建央厨（IPO募资2.45万㎡，2025Q3开工）</strong>。为什么不用蜀海？两个原因：<strong>①模型冲突</strong>——蜀海是'高标准高服务带溢价'的重供应链，适配海底捞高客单；<strong>54.6元的客单养不起蜀海级的溢价供应链，接入等于自拆成本护城河</strong>。<strong>②战略自主</strong>——自建能把口味一致性、研发保密、预制菜合规都握在自己手里。<strong>本质是：供应链选择由客单模型决定，绿茶宁可自建也不买蜀海的溢价。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>两把王牌：①主动点破"安井70%是张冠李戴"——帮客户校准，专家里极少有人这么严谨；②"54.6元客单养不起蜀海级供应链、所以绿茶选自建"——用客单反推供应链战略，深度判断。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p>损耗率用"行业3-5%、绿茶应在此区间"判断口径。安井/蜀海70%明确标"无公开出处、疑张冠李戴"，别背书。</p></div>
   </div>
 
-  <!-- Q17 预制菜 -->
-  <div class="qcard">
-    <div class="qh"><span class="qnum">17</span><span class="qtitle">西贝预制菜风波下，绿茶招牌菜（龙井烤鸡/佛跳墙"现烤"概念）多大程度属于第三方预制？风口浪尖时一线服务员/店长如何被培训应对消费者当面质问预制菜？</span><span class="qtag">预制菜·雷区</span></div>
-    <div class="qorig">"西贝带来的预制菜风波，绿茶被广泛认知的招牌菜（如主打现烤的龙井烤鸡、佛跳墙）到底在多大程度上属于第三方提前制备的预制范畴？风口浪尖时，门店一线服务员与店长是如何被培训应对消费者当面质问预制菜问题的？"</div>
-    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>这是全场<strong>最敏感、也最有价值</strong>的一题。投资人在评估绿茶的<strong>品牌信任风险</strong>——预制菜标签一旦坐实，性价比人设会反噬成"廉价预制"。答这题要<strong>极其克制且专业</strong>。</p></div>
-    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2024年3月佛跳墙被曝未标注预制菜舆情<span class="badge badge-official">媒体</span>；2025年9月绿茶被曝<strong>撤下"本店无预制菜·现点现做"招牌</strong>、外卖盒"无预制菜"标签被遮盖，店员坚称烤鸡现做<span class="badge badge-official">媒体</span>；龙井烤鸡=第三方预腌制鸡送店入烤箱烤制<span class="badge badge-official">媒体</span>；海底捞同期改标"部分预加工"<span class="badge badge-official">媒体</span>。</p></div>
-    <div class="layer script"><span class="llab l-script">我方话术</span><p>先给一个专业的"定义澄清"，把情绪问题拉回行业标准："<strong>关键要分清'预制菜'和'预加工'——这是两回事。</strong>国家标准里，<strong>中央厨房/OEM做的净菜、腌制、半成品，属于'预加工'，门店仍有现场烹饪环节；真正争议的'预制菜'是指工厂做好、门店只复热的成品菜。</strong>" 然后落到绿茶："以龙井烤鸡为例——<strong>鸡是第三方工厂预腌制的（预加工），但最后一道'烤'是门店现场完成的</strong>，所以门店说'现烤'在字面上不算错，争议在于消费者理解的'现做'和行业定义的'现烤'之间有认知差。佛跳墙这类<strong>工序复杂的菜，预制程度更高</strong>，这也是2024年舆情的由来。<strong>绿茶2025年撤下'无预制菜'招牌，本质是行业在西贝风波后集体'把话说回来'——与其被抓住把柄，不如不再打'无预制菜'这张牌。</strong>"</p>
-    <p style="margin-top:6px;"><strong>一线应对培训（谈方法论，不抖机密）：</strong>"这种敏感期，连锁的标准做法是给一线<strong>统一话术口径</strong>——<strong>不否认、不撒谎、把'预加工'和'现场烹饪'讲清楚，强调食安合规和明厨亮灶</strong>，避免一线员工个人随口承诺'纯现做'反而落把柄。<strong>核心原则是'透明化优于遮掩'</strong>——遮标签这种动作反而是败笔，越遮越被质疑。真正聪明的做法是主动标注、把'预加工'讲成'标准化的食安保障'。"</p></div>
-    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"预制菜vs预加工的定义区分"是这题的制胜点——多数人（包括很多投资人）分不清，你一澄清就立刻显出专业度，同时也帮绿茶把问题从'诚信'降维成'定义'。</p></div>
-    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p><strong>本题最需守纪律。</strong>①不评判绿茶"欺骗消费者"这类定性——你是前员工，情绪化表态既不专业也有风险；②不透露内部具体话术文件/培训细节，只讲"行业通行的方法论";③始终锚定"预加工是合规且行业普遍"的中性框架，别被带进道德审判。</p></div>
+  <div class="qcard hot">
+    <div class="qh"><span class="qnum">17</span><span class="qtitle">西贝预制菜风波下，绿茶招牌菜（龙井烤鸡/佛跳墙"现烤"概念）多大程度属于第三方预制？风口浪尖时一线服务员/店长如何被培训应对消费者当面质问？</span><span class="qtag">预制菜·雷区</span></div>
+    <div class="qorig">"西贝预制菜风波，绿茶招牌菜（主打现烤的龙井烤鸡、佛跳墙）多大程度属于第三方预制？风口浪尖时门店一线如何被培训应对消费者当面质问预制菜？"</div>
+    <div class="layer"><span class="llab l-decode">客户在问什么</span><p>全场<strong>最敏感、最有价值</strong>的一题。投资人在评估绿茶的<strong>品牌信任风险</strong>——预制菜标签一旦坐实，性价比人设会反噬成"廉价预制"。要<strong>极其克制且专业</strong>。</p></div>
+    <div class="layer"><span class="llab l-anchor">公开数据锚点</span><p>2024六部委预制菜国标定义：工业化预加工+不加防腐剂+预包装，<strong>豁免"中央厨房仅面向本连锁自有门店配送"</strong>；2024/3佛跳墙未标注预制舆情；<strong>2025/9绿茶撤"本店无预制菜·现点现做"招牌+外卖盒标签遮盖</strong>，店员坚称烤鸡现做；龙井烤鸡=第三方预腌制鸡送店入烤箱；海底捞改标"部分预加工"；西贝风波9/10罗永浩引爆→9/15西贝致歉承诺门店现做<span class="badge badge-official">媒体</span>。</p></div>
+    <div class="layer script"><span class="llab l-script">我方话术</span><p>先用国标定义把情绪问题拉回专业框架："<strong>关键要分清'预制菜'和'预加工'——这是两回事，2024年六部委国标划得很清。</strong>国标里，工厂做好、门店只复热的成品菜才是争议'预制菜'；而<strong>中央厨房/净菜/半成品只要有门店现场烹饪环节，是'预加工'。</strong>" 落到绿茶（这里有个关键法规点）："龙井烤鸡——<strong>鸡是第三方工厂预腌制的（预加工），最后一道'烤'在门店现场完成</strong>，所以说'现烤'字面不算错，争议在消费者理解的'现做'和'现烤'有认知差。<strong>但有个法规细节很致命：国标的豁免只给'中央厨房→自有门店'的配送；绿茶是第三方OEM跨主体送店复烤，不在这个豁免里——所以它比海底捞(自有蜀海)在预制菜定义上更被动，这正是它2025年9月撤'现点现做'招牌的监管根因。</strong>佛跳墙这类工序复杂的，预制程度更高，是2024舆情的由来。"</p>
+    <p style="margin-top:6px;"><strong>一线应对（谈方法论不抖机密）：</strong>"敏感期连锁的标准做法是给一线<strong>统一话术口径——不否认、不撒谎、把'预加工'和'现场烹饪'讲清楚，强调食安合规和明厨亮灶</strong>，避免员工个人随口承诺'纯现做'落把柄。<strong>核心原则是'透明化优于遮掩'</strong>——遮标签这种动作反而是败笔，越遮越被质疑。看西贝就是教训：9月10日被罗永浩引爆，硬扛几天，最后9月15日还是致歉、承诺门店现做——<strong>对抗舆论不如主动标注、把'预加工'讲成'标准化的食安保障'。</strong>"</p></div>
+    <div class="layer"><span class="llab l-ace">insider 王牌</span><p>"预制菜vs预加工的国标定义区分"+"OEM跨主体送店不在中央厨房豁免内"——这两层法规洞察多数投资人都分不清，你一澄清立刻显专业，还帮绿茶把问题从'诚信'降维成'定义与合规'。</p></div>
+    <div class="layer"><span class="llab l-trap">陷阱 / 纪律</span><p><strong>本题最需守纪律。</strong>①不做"绿茶欺骗消费者"这类道德定性（你是前员工，情绪化表态不专业也有风险）；②不透内部话术文件/培训细节，只讲行业通行方法论；③锚定"预加工合规且行业普遍"的中性框架，别被带进道德审判。</p></div>
   </div>
 
 </div>
 
-<!-- Verdict -->
-<div class="verdict">
-  <div class="v-en">Interview Verdict · How to Win the Room</div>
-  <div class="v-zh">访谈制胜 5 要点</div>
-  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>开局用"-12.9% vs -0.8%"立威。</strong>Q4一上来就拆两个下滑口径，5秒钟把自己和"看研报的分析师"区分开——这是你整场信任的第一块基石。<span class="v-src">依据：系统单店日均 -12.9%（客户口径）vs 可比同店 -0.8%（财报口径）</span></div></div>
-  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>全程收敛到四条主线</strong>（同店vs单店 / 双模型 / 增长质量剪刀差 / 预制菜风险）。每道题回答完，用一句话挂回其中一条主线，客户会觉得你有体系而非零散。<span class="v-src">依据：全局策略四主线</span></div></div>
-  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>金句要敢抛：</strong>"54.6元客单养不起蜀海级供应链"、"海底捞做大排档=巨头向绿茶模型低头"、"绿茶赚品牌钱、把加工利润让给OEM"、"外卖=用已付费的闲置产能换纯边际"。这四句任意一句抛出，客户当场记住你。<span class="v-src">依据：Q9/Q13/Q15/Q16</span></div></div>
-  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>夸父炸串是你的独家王牌。</strong>全场只有你有"正在做小吃加盟"的现在进行时体感，Q9务必讲透"门店越轻、总部越重"的供应链型加盟逻辑——这是别的专家给不了的增量。<span class="v-src">依据：Q9 夸父模式</span></div></div>
-  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>守住合规红线=专业的一部分。</strong>敏感处（预制菜Q17、流失率Q11、分区域数据）主动说"以公开为准/这是行业判断"，反而显得你既懂又稳。不透机密不是短板，是投资人对"可信专家"的最高评价。<span class="v-src">依据：专家合规红线</span></div></div>
-</div>
-
-<!-- 评审裁定 (Merlin 模式B) -->
+<!-- 评审裁定 -->
 <div class="section">
   <div class="sec-head"><span class="sec-zh">评审裁定 · 置信度分布</span><span class="sec-en">Critic Verdict · Confidence Ledger</span></div>
-  <div class="stat-bar" style="grid-template-columns:repeat(4,1fr);">
-    <div class="stat"><div class="num">7.0<span style="font-size:14px;">/10</span></div><div class="lab">综合置信<span class="en">Composite</span></div></div>
-    <div class="stat"><div class="num green">≈10</div><div class="lab">高置信条<span class="en">官方硬数据</span></div></div>
-    <div class="stat"><div class="num amber">≈5</div><div class="lab">中置信条<span class="en">机制判断/推断</span></div></div>
+  <div class="stat-bar">
+    <div class="stat"><div class="num">7.2<span style="font-size:14px;">/10</span></div><div class="lab">综合置信<span class="en">Composite</span></div></div>
+    <div class="stat"><div class="num green">≈11</div><div class="lab">高置信条<span class="en">官方硬数据</span></div></div>
+    <div class="stat"><div class="num amber">≈4</div><div class="lab">中置信条<span class="en">机制判断/推断</span></div></div>
     <div class="stat"><div class="num red">2</div><div class="lab">低置信/待核<span class="en">客户口径</span></div></div>
   </div>
   <div class="notice">
-    <div class="nt">Data Verdict · 数据裁定</div>
-    <strong>硬数据充分</strong>——门店/营收/客单/成本/外卖/回本期均来自绿茶2025年报与招股书、海底捞2025年报（Scout 已核）；<strong>机制判断属行业经验推断</strong>（盈亏平衡、损耗率、平台扣点、店长周期用行业基准+经验校准，已标【推断/推测】）；<strong>2 项低置信为客户口径待核</strong>（大排档4000元/㎡·24月回本、安井5亿·70-80%），公开检索未见官方实证，报告中已明标，作方向性引用。<strong>Critic 五维门控：PASS。</strong>
+    <div class="nt">Data Verdict · 数据裁定（本版为五智能体重跑，较首版升 0.2）</div>
+    <strong>硬数据充分且经5路Scout逐题取证</strong>——门店/营收/客单/成本/外卖/回本期/租金时序/激励机制/供应链结构均来自绿茶2025年报与招股书、海底捞2025年报及监管公告；<strong>口径三分法、绿茶15%利润分享+赛马、绿茶自建2.45万㎡央厨、预制菜国标豁免逻辑</strong>均为本次新取证并对首版做实质修正。<strong>机制判断（盈亏平衡、损耗率、店长周期、平台实际费率）属行业经验推断，已标【推断/推测】。2项低置信为客户口径待核</strong>（大排档8500/4000元·24月回本；安井5亿·70-80%——后者疑张冠李戴，已明标）。<strong>Critic 五维 + Merlin 模式B 清单：PASS。</strong>
   </div>
-
-  <div class="sec-head" style="margin-top:26px;"><span class="sec-zh">风险信号表</span><span class="sec-en">Risk Signals · 低置信 &amp; 口径分歧</span></div>
+  <div class="sec-head" style="margin-top:26px;"><span class="sec-zh">风险信号表</span><span class="sec-en">Risk Signals · 待核 &amp; 口径分歧</span></div>
   <table>
-    <thead><tr><th style="width:210px">信号</th><th>性质</th><th>访谈处置</th></tr></thead>
+    <thead><tr><th style="width:220px">信号</th><th>性质</th><th>访谈处置</th></tr></thead>
     <tbody>
-      <tr><td class="k">同店-0.8% vs 单店-12.9%</td><td>口径分歧（媒体常混谈"317老店-13%"）</td><td>主动拆两个指标测不同东西，锚定框架不陷入"哪个对"</td></tr>
-      <tr><td class="k">大排档 4000元/㎡·24月回本</td><td>客户口径·未见官方实证</td><td>"未见官方确认，但方向上……"再顺势分析</td></tr>
-      <tr><td class="k">安井 5亿·占比70-80%</td><td>客户口径·未见官方实证（合作关系属实）</td><td>确认关系真实、规模标待核，不背书精确数</td></tr>
-      <tr><td class="k">各平台外卖单量拆分</td><td>数据缺口·绿茶未披露平台级</td><td>用行业普遍分布+判断作答，说明未披露</td></tr>
-      <tr><td class="k">下沉店/亏损店/流失率具体值</td><td>未披露·敏感</td><td>一律"行业判断+以公开为准"，不给死数</td></tr>
-      <tr><td class="k">盈亏平衡1.2万/店长6-12月/损耗3-5%</td><td>推测·多层假设</td><td>带"基于公开成本率的模型测算，非内部台账"</td></tr>
+      <tr><td class="k">-12.9% / -13% / -0.8% 三口径</td><td>口径分歧（系统单店/可比堂食/含外卖同店）</td><td>主动三分拆解+外卖回补机理，锚定框架</td></tr>
+      <tr><td class="k">安井占海底捞 70-80%</td><td>客户口径·疑张冠李戴（实为安井自身产品结构占比）</td><td>明确"无公开出处、疑误植"，当求证型问题</td></tr>
+      <tr><td class="k">大排档 8500→4000元·24月回本</td><td>客户口径·公开零实证</td><td>"未见官方确认"，只背书"降造价/缩回本"方向</td></tr>
+      <tr><td class="k">微海咨询搭建"绿茶大学"</td><td>提纲前提·公开零证据</td><td>主动澄清"更像自建，以绿茶官方为准"</td></tr>
+      <tr><td class="k">"绿茶剥离央厨转OEM"</td><td>提纲前提·方向反了（绿茶本无央厨、正自建）</td><td>纠正为"无央厨OEM→正自建2.45万㎡央厨"</td></tr>
+      <tr><td class="k">EBITDA 30%/10%、引流品60%/盈利品70%</td><td>客户口径·公开零披露（与整体毛利自洽）</td><td>先问口径定义再顺势分析，不坐实精确数</td></tr>
+      <tr><td class="k">各平台单量拆分/流失率/损耗率</td><td>数据缺口·绿茶未披露</td><td>行业基准+判断作答，说明未披露</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- 陷阱清单 -->
 <div class="section">
-  <div class="sec-head"><span class="sec-zh">上场前最后一眼 · 陷阱清单</span><span class="sec-en">Landmines to Avoid</span></div>
+  <div class="sec-head"><span class="sec-zh">上场前最后一眼 · 陷阱清单</span><span class="sec-en">Landmines</span></div>
   <table>
-    <thead><tr><th style="width:180px">陷阱</th><th>正确做法</th></tr></thead>
+    <thead><tr><th style="width:190px">陷阱</th><th>正确做法</th></tr></thead>
     <tbody>
-      <tr><td class="k">把 -12.9% 当同店</td><td>永远先拆口径：系统单店均值(摊薄) vs 可比同店(客流)，两个测不同东西</td></tr>
-      <tr><td class="k">给未披露的精确数</td><td>亏损店数/流失率/分区域数据/供货价——一律"行业判断+以公开为准"，不给死数</td></tr>
-      <tr><td class="k">预制菜道德审判</td><td>用"预制菜vs预加工"定义框架中性作答，不评判"欺骗"，不透内部话术</td></tr>
-      <tr><td class="k">线性外推 12.6 月</td><td>答"当前合理+越下沉边际会拉长"，展现风险意识</td></tr>
-      <tr><td class="k">贬低任一家</td><td>投资人要判断不要情绪；两套模型讲"各自适配的周期"，客观加分</td></tr>
-      <tr><td class="k">客户口径当铁证</td><td>大排档4000元/24月、安井5亿/70-80%——标"未见官方确认"再顺势分析</td></tr>
-      <tr><td class="k">透露夸父未公开数据</td><td>谈夸父只讲可公开的模式逻辑，不抖现公司经营数字</td></tr>
+      <tr><td class="k">把 -12.9% 当同店</td><td>三口径拆解：系统单店/可比堂食/含外卖同店，点外卖回补机理</td></tr>
+      <tr><td class="k">顺着"绿茶剥离央厨"答</td><td>纠正：绿茶本无央厨、现正自建2.45万㎡央厨</td></tr>
+      <tr><td class="k">承认微海搭建绿茶大学</td><td>澄清公开无证据、更像自建，以官方为准</td></tr>
+      <tr><td class="k">背书安井70%/大排档4000元</td><td>标"无公开出处/疑张冠李戴/未见官方确认"</td></tr>
+      <tr><td class="k">说绿茶纯固定薪酬</td><td>纠正：有15%门店利润分享+赛马+神秘访客</td></tr>
+      <tr><td class="k">预制菜道德审判</td><td>用"预制菜vs预加工"国标框架中性作答，不评判"欺骗"</td></tr>
+      <tr><td class="k">给未披露精确数</td><td>亏损店数/流失率/分平台/损耗——"行业判断+以公开为准"</td></tr>
+      <tr><td class="k">线性外推12.6月</td><td>"当前合理+越下沉边际拉长"</td></tr>
+      <tr><td class="k">透露夸父未公开数据</td><td>只讲可公开的模式逻辑，不抖现公司经营数字</td></tr>
     </tbody>
   </table>
+</div>
+
+<div class="verdict">
+  <div class="v-en">Interview Verdict · How to Win the Room</div>
+  <div class="v-zh">访谈制胜 5 要点</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>开局用"三口径+外卖回补"立威。</strong>Q4一上来拆-12.9%/-13%/-0.8%三个口径、点破"堂食跌双位数被外卖+74%回补"，10秒把自己和看研报的分析师区分开。<span class="v-src">依据：系统单店-12.9% / 可比堂食≈-13% / 官方含外卖同店-0.8%（Scout B 取证）</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>三处"反客户前提"是你最亮的牌。</strong>①绿茶不是撤退到OEM、是本无央厨正自建；②"安井占70%"疑张冠李戴；③微海搭建绿茶大学无证据。主动纠正提纲，显你比客户更懂这家公司。<span class="v-src">依据：招股书自建央厨 / 安井产品结构占比 / 微海无公开交集</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>金句敢抛：</strong>"54元客单养不起蜀海级供应链，所以绿茶选自建"、"海底捞做大排档=巨头向绿茶模型低头"、"外卖=用已付费的闲置产能换纯边际"、"绿茶赚品牌钱、把加工利润让给OEM"。<span class="v-src">依据：Q16/Q9/Q13/Q15</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>夸父炸串是独家王牌。</strong>全场只有你有"正在做小吃加盟"的现在进行时体感——讲透"供应链型加盟总部越重"+"样板店月利25万vs普通店保本/亏损"的分化。<span class="v-src">依据：Q9 夸父模式（Scout C 取证）</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>守合规红线=专业的一部分。</strong>预制菜(Q17)、流失率(Q11)、分平台(Q14)敏感处主动说"以公开为准/行业判断"，不透机密反而是投资人对"可信专家"的最高评价。<span class="v-src">依据：合规红线</span></div></div>
 </div>
 
 <div class="feedback">
@@ -606,10 +515,10 @@ svg{width:100%;height:auto;display:block;}
 </div>
 
 <div class="footer">
-  Green Tea × Haidilao Expert-Call Battle-Pack · Prepared 2026-07-21 for the 2026-07-28 investor interview.<br>
-  数据来源 · 一手：绿茶集团(6831.HK)2025年报/招股书、海底捞(6862.HK)2025年报。<br>
-  二手：新浪财经/搜狐/澎湃/光明网/中华网/东方财富等公开报道（2025-2026）。<br>
-  标注【推断】【推测】【行业基准】【客户口径·待核】者为分析判断，非官方确认事实。绿茶部分单店/分区域/供应商颗粒数据公司未披露。<br>
+  Green Tea × Haidilao · Merlin Mode-B Client-Outline Study · Five-agent rerun, prepared 2026-07-21 for the 2026-07-28 investor call.<br>
+  一手：绿茶集团(6831.HK)2025年报/招股书、海底捞(6862.HK)2025年报及监管公告、六部委预制菜通知(2024)。<br>
+  二手：新浪财经/搜狐/腾讯/澎湃/21经济网/观察者网/东吴证券/CBNData/界面/投中网等公开报道(2025-2026)。<br>
+  标注【推断】【推测】【行业】【客户口径·待核】者为分析判断，非官方确认事实。绿茶分区域/单店/分平台/供应商颗粒数据公司未披露。<br>
   本作战包供受访专家备询使用，请恪守前雇员保密义务与上市公司信息合规红线，不构成投资建议。
 </div>
 
