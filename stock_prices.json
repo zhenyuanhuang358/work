@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-07-22T20:02:48.890890Z",
-  "vix": 16.88,
+  "updated_at": "2026-07-22T21:17:38.730132Z",
+  "vix": 16.64,
   "treasury_10y": 4.66,
   "prices": {
     "SPY": {
-      "price": 747.47,
-      "change": -0.81,
-      "changePct": -0.11,
+      "price": 747.41,
+      "change": -0.87,
+      "changePct": -0.12,
       "high": 750.02,
       "low": 746.37,
       "prevClose": 748.28
@@ -20,17 +20,17 @@
       "prevClose": 708.97
     },
     "IWM": {
-      "price": 293.77,
-      "change": -2.77,
+      "price": 293.79,
+      "change": -2.75,
       "changePct": -0.93,
       "high": 296.44,
       "low": 293.41,
       "prevClose": 296.54
     },
     "GLD": {
-      "price": 379.04,
-      "change": 4.23,
-      "changePct": 1.13,
+      "price": 379.12,
+      "change": 4.31,
+      "changePct": 1.15,
       "high": 382.22,
       "low": 378.83,
       "prevClose": 374.81
@@ -60,9 +60,9 @@
       "prevClose": 58.5
     },
     "NVDA": {
-      "price": 212.04,
-      "change": 4.75,
-      "changePct": 2.29,
+      "price": 212.06,
+      "change": 4.77,
+      "changePct": 2.3,
       "high": 214.39,
       "low": 204.95,
       "prevClose": 207.29
@@ -132,9 +132,9 @@
       "prevClose": 105.45
     },
     "F": {
-      "price": 14.41,
-      "change": 0.14,
-      "changePct": 0.98,
+      "price": 14.42,
+      "change": 0.15,
+      "changePct": 1.05,
       "high": 14.7,
       "low": 14.26,
       "prevClose": 14.27
