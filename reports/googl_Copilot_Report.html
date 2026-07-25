@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alphabet (GOOGL) Q2 2026 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+
+/* 1 Pub Bar */
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+
+/* 2 Title */
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+
+/* 3 Stat Bar */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:26px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+
+/* 7 分析段落 */
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+
+/* 8 目标价卡片 */
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:29px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+
+/* 9 Verdict */
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+
+/* 10 语气进度条 */
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:130px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+
+/* 11 chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+
+.feedback{text-align:center;margin:22px 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .chart-grid2,.sc-grid{grid-template-columns:1fr;}
+  .title-zh{font-size:24px;} body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>Alphabet Inc. (NASDAQ: GOOGL)</span>
+  <span>Q2 FY2026 · 财报日 2026-07-22（盘后）</span>
+  <span>分析日 2026-07-24</span>
+  <span><b>含持仓联动分析</b></span>
+</div>
+
+<!-- 2 双语标题 + 标签行 -->
+<div class="title-block">
+  <div class="title-en">Alphabet Q2 FY2026 — A $98 Billion Paper Windfall Masks a Two-Cent Operating Miss</div>
+  <div class="title-zh">Alphabet 二季报：980亿"纸面暴利"<br>掩盖了两分钱的经营未达标</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性偏多 Hold+</span>
+    <span class="tag amber">语气评分 62 / 100 审慎乐观</span>
+    <span class="tag">营收超预期 +2.5%</span>
+    <span class="tag">调整EPS 未达标 -1.4%</span>
+    <span class="tag">数据截止 2026-07-24</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num">$1,198亿</div><div class="lab">Q2营收<span class="en">+24% YoY · 超共识+2.5%</span></div></div>
+  <div class="stat"><div class="num green">+82%</div><div class="lab">Google Cloud<span class="en">$248亿 · 利润率20.7%→35.6%</span></div></div>
+  <div class="stat"><div class="num red">-$59亿</div><div class="lab">自由现金流<span class="en">首次转负 · Capex $449亿</span></div></div>
+  <div class="stat"><div class="num amber">$2.85</div><div class="lab">调整后EPS<span class="en">共识$2.89 · 表观EPS $9.11</span></div></div>
+</div>
+
+<!-- 数据质量声明 -->
+<div class="notice red">
+  <div class="nt">⚠ 本季最重要的一件事：表观EPS 与真实经营完全脱钩</div>
+  市面上"EPS $9.11 vs 共识 $2.88，暴击 +216%"的说法在数字上没错，但<strong>几乎全部来自非经营性的股权重估收益</strong>：其他收入录得<strong>净收益 $980亿</strong>（其中股权证券收益 $990.3亿，去年同期仅 $12.9亿）<span class="badge badge-official">财报原文</span>——主因是 Alphabet 持有约14%股权的 <strong>Anthropic 完成 $650亿融资、估值从 $3,800亿跃升至 $9,650亿</strong>，带来约 $820亿账面浮盈，外加 SpaceX 持股增值。<strong>剔除后调整EPS 为 $2.85，反而低于共识 $2.89（-1.4%，小幅未达标）</strong><span class="badge badge-official">媒体核实</span>。本报告独立测算（净利$1,120亿 − 股权收益税后$774亿 ÷ 摊薄股数122.9亿）得 $2.81，与市场口径 $2.85 互验一致，差异仅来自税率假设。<strong>凡是用 $9.11 去算 P/E 的估值结论，全部失真。</strong>
+</div>
+
+<!-- 4 季度营收走势图 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">季度营收走势</span><span class="section-en">Quarterly Revenue Trend · 6 Quarters</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">Alphabet 合并营收（十亿美元）· 连续12个季度双位数增长，增速仍在加速</div>
+    <svg viewBox="0 0 800 260" font-family="'IM Fell English',Georgia,serif">
+      <line x1="52" y1="16" x2="52" y2="200" stroke="#d4cec6"/>
+      <line x1="52" y1="200" x2="780" y2="200" stroke="#d4cec6"/>
+      <line x1="52" y1="108" x2="780" y2="108" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <text x="46" y="204" font-size="9" fill="#6b6460" text-anchor="end">0</text>
+      <text x="46" y="112" font-size="9" fill="#6b6460" text-anchor="end">60</text>
+      <text x="46" y="20" font-size="9" fill="#6b6460" text-anchor="end">120</text>
+      <!-- scale: 120B -> 184px ; bar width 78, gap -->
+      <!-- Q1'25 90.2 -> 138.3 ; Q2'25 96.4 -> 147.8 ; Q3'25 102.3 -> 156.9 ; Q4'25 113.8 -> 174.5 ; Q1'26 109.9 -> 168.5 ; Q2'26 119.8 -> 183.7 -->
+      <g>
+        <rect x="76" y="61.7" width="78" height="138.3" fill="#8b6c42" opacity="0.55"/>
+        <rect x="196" y="52.2" width="78" height="147.8" fill="#8b6c42" opacity="0.55"/>
+        <rect x="316" y="43.1" width="78" height="156.9" fill="#8b6c42" opacity="0.7"/>
+        <rect x="436" y="25.5" width="78" height="174.5" fill="#8b6c42" opacity="0.7"/>
+        <rect x="556" y="31.5" width="78" height="168.5" fill="#8b6c42"/>
+        <rect x="676" y="16.3" width="78" height="183.7" fill="#2a5c3f"/>
+      </g>
+      <g font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="700">
+        <text x="115" y="55">90.2</text><text x="235" y="45">96.4</text><text x="355" y="36">102.3</text>
+        <text x="475" y="19">113.8</text><text x="595" y="25">109.9</text><text x="715" y="11" fill="#2a5c3f">119.8</text>
+      </g>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="115" y="216">Q1 2025</text><text x="235" y="216">Q2 2025</text><text x="355" y="216">Q3 2025</text>
+        <text x="475" y="216">Q4 2025</text><text x="595" y="216">Q1 2026</text><text x="715" y="216">Q2 2026</text>
+      </g>
+      <g font-size="10" text-anchor="middle" fill="#2a5c3f">
+        <text x="115" y="232">+12%</text><text x="235" y="232">+14%</text><text x="355" y="232">+16%</text>
+        <text x="475" y="232">+18%</text><text x="595" y="232">+22%</text><text x="715" y="232" font-weight="700">+24%</text>
+      </g>
+      <text x="52" y="252" font-size="10" fill="#6b6460">同比增速逐季抬升：+12% → +24%，AI 需求带动的加速是真实的</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 5 分部营收图 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分部营收拆解</span><span class="section-en">Segment Breakdown · Q2 2026</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">分部营收（十亿美元）与同比增速 · Cloud 是唯一加速引擎</div>
+    <svg viewBox="0 0 800 200" font-family="'IM Fell English',Georgia,serif">
+      <line x1="150" y1="10" x2="150" y2="180" stroke="#d4cec6"/>
+      <!-- scale: 70B -> 560px -->
+      <!-- Search 63.3 -> 506 ; Cloud 24.8 -> 198 ; YouTube 11.1 -> 89 ; Subs/Devices/Other ~20.6 -> 165 -->
+      <rect x="150" y="20" width="506" height="30" fill="#8b6c42"/>
+      <text x="144" y="40" font-size="12" fill="#0a0a0b" text-anchor="end">搜索及其他</text>
+      <text x="666" y="40" font-size="12" fill="#0a0a0b" font-weight="700">$63.3B</text>
+      <text x="742" y="40" font-size="11" fill="#2a5c3f">+17%</text>
+
+      <rect x="150" y="62" width="198" height="30" fill="#2a5c3f"/>
+      <text x="144" y="82" font-size="12" fill="#0a0a0b" text-anchor="end">Google Cloud</text>
+      <text x="358" y="82" font-size="12" fill="#0a0a0b" font-weight="700">$24.8B</text>
+      <text x="434" y="82" font-size="11" fill="#2a5c3f" font-weight="700">+82%</text>
+
+      <rect x="150" y="104" width="89" height="30" fill="#c47a1e"/>
+      <text x="144" y="124" font-size="12" fill="#0a0a0b" text-anchor="end">YouTube 广告</text>
+      <text x="249" y="124" font-size="12" fill="#0a0a0b" font-weight="700">$11.1B</text>
+      <text x="325" y="124" font-size="11" fill="#c47a1e">+13%</text>
+
+      <rect x="150" y="146" width="165" height="30" fill="#8b6c42" opacity="0.5"/>
+      <text x="144" y="166" font-size="12" fill="#0a0a0b" text-anchor="end">订阅/设备/其他</text>
+      <text x="325" y="166" font-size="12" fill="#0a0a0b" font-weight="700">约$20.6B</text>
+      <text x="410" y="166" font-size="10" fill="#c47a1e">推算</text>
+    </svg>
+  </div>
+  <div class="notice green">
+    <div class="nt">Cloud 才是这份财报的真主角</div>
+    Google Cloud 营收 $248亿（+82%），<strong>经营利润 $88亿、同比增长逾两倍</strong>，利润率从去年同期 20.7% 跃升至 <strong>35.6%</strong><span class="badge badge-official">财报</span>——这不再是"烧钱换增长"，而是规模效应真实兑现。更关键的是<strong>订单储备（backlog）环比增加逾 $500亿，达到 $5,140亿</strong>，管理层称其中<strong>逾50%将在未来24个月确认为收入</strong><span class="badge badge-official">财报</span>。这个数字是判断"AI资本开支是否有回报"最硬的锚——它意味着未来两年约 $2,570亿的收入能见度已经锁定。
+  </div>
+</div>
+
+<!-- 6 EPS 对比 + 营业利润率（两列）-->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">EPS 对比 &amp; 利润率走势</span><span class="section-en">EPS Reality Check &amp; Margin Trend</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">EPS：表观 vs 调整 vs 共识（美元）· 本季核心矛盾</div>
+      <svg viewBox="0 0 380 240" font-family="'IM Fell English',Georgia,serif">
+        <line x1="46" y1="14" x2="46" y2="186" stroke="#d4cec6"/>
+        <line x1="46" y1="186" x2="366" y2="186" stroke="#d4cec6"/>
+        <!-- scale: 10 -> 172px -->
+        <!-- headline 9.11 -> 156.7 ; adjusted 2.85 -> 49.0 ; consensus 2.89 -> 49.7 -->
+        <rect x="72" y="29.3" width="66" height="156.7" fill="#8b2e2e" opacity="0.35"/>
+        <text x="105" y="23" font-size="13" fill="#8b2e2e" text-anchor="middle" font-weight="700">$9.11</text>
+        <text x="105" y="200" font-size="10" fill="#6b6460" text-anchor="middle">表观EPS</text>
+        <text x="105" y="212" font-size="8.5" fill="#8b2e2e" text-anchor="middle">含$980亿股权浮盈</text>
+
+        <rect x="180" y="137" width="66" height="49" fill="#c47a1e"/>
+        <text x="213" y="131" font-size="13" fill="#c47a1e" text-anchor="middle" font-weight="700">$2.85</text>
+        <text x="213" y="200" font-size="10" fill="#6b6460" text-anchor="middle">调整后EPS</text>
+        <text x="213" y="212" font-size="8.5" fill="#6b6460" text-anchor="middle">真实经营口径</text>
+
+        <rect x="288" y="136.3" width="66" height="49.7" fill="none" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="321" y="130" font-size="13" fill="#0a0a0b" text-anchor="middle" font-weight="700">$2.89</text>
+        <text x="321" y="200" font-size="10" fill="#6b6460" text-anchor="middle">市场共识</text>
+        <text x="321" y="212" font-size="8.5" fill="#6b6460" text-anchor="middle">基准线</text>
+
+        <text x="46" y="232" font-size="9.5" fill="#8b2e2e">真实对比是 $2.85 vs $2.89 → 小幅未达标，不是"暴击216%"</text>
+      </svg>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">合并营业利润率（%）· 环比首现压缩</div>
+      <svg viewBox="0 0 380 240" font-family="'IM Fell English',Georgia,serif">
+        <line x1="46" y1="14" x2="46" y2="186" stroke="#d4cec6"/>
+        <line x1="46" y1="186" x2="366" y2="186" stroke="#d4cec6"/>
+        <line x1="46" y1="100" x2="366" y2="100" stroke="#d4cec6" stroke-dasharray="4,3"/>
+        <text x="40" y="190" font-size="9" fill="#6b6460" text-anchor="end">30</text>
+        <text x="40" y="104" font-size="9" fill="#6b6460" text-anchor="end">34</text>
+        <text x="40" y="18" font-size="9" fill="#6b6460" text-anchor="end">38</text>
+        <!-- scale 30-38 -> 186..14 ; 21.5px per pt -->
+        <!-- Q2'25 32.4 -> 134.4 ; Q3'25 33.9 -> 102.2 ; Q4'25 34.5 -> 89.3 ; Q1'26 36.1 -> 55.0 ; Q2'26 34.0 -> 100 -->
+        <polyline points="86,134.4 156,102.2 226,89.3 296,55 356,100" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+        <g fill="#8b6c42">
+          <circle cx="86" cy="134.4" r="3.5"/><circle cx="156" cy="102.2" r="3.5"/><circle cx="226" cy="89.3" r="3.5"/>
+          <circle cx="296" cy="55" r="4" fill="#2a5c3f"/><circle cx="356" cy="100" r="4" fill="#8b2e2e"/>
+        </g>
+        <g font-size="11" text-anchor="middle" font-weight="700">
+          <text x="86" y="126" fill="#8b6c42">32.4</text><text x="156" y="94" fill="#8b6c42">33.9</text>
+          <text x="226" y="81" fill="#8b6c42">34.5</text><text x="296" y="47" fill="#2a5c3f">36.1</text>
+          <text x="356" y="92" fill="#8b2e2e">34.0</text>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="middle">
+          <text x="86" y="202">Q2 25</text><text x="156" y="202">Q3 25</text><text x="226" y="202">Q4 25</text>
+          <text x="296" y="202">Q1 26</text><text x="356" y="202">Q2 26</text>
+        </g>
+        <text x="46" y="224" font-size="9.5" fill="#8b2e2e">Q1 36.1% → Q2 34.0%，环比压缩约2.1pp</text>
+        <text x="46" y="236" font-size="9" fill="#6b6460">主因：折旧攀升 + Q3起启用第三方算力（管理层已预告将有margin压力）</text>
+      </svg>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:6px;">Q2-Q4 2025 营业利润率为按季度营收与营业利润推算 <span class="badge badge-predict">推算</span>；Q1 2026 (36.1%) 与 Q2 2026 (34.0%) 为公司披露值 <span class="badge badge-official">官方</span>。</p>
+</div>
+
+<!-- 7 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">一、市场砸的不是业绩，是"什么时候能回本"</span>
+    <span class="label-en">The Selloff Is About Payback Period, Not Performance</span>
+    <p>把经营层面单独拎出来看，这份财报是<strong>相当强的</strong>：营收 $1,198亿（+24%）超共识 $1,169.3亿约2.5%，营业利润 $408亿（+30%），Cloud +82% 且利润率翻倍到35.6%，backlog 冲到 $5,140亿。<strong>市场却在财报后两个交易日把股价从约 $374 砸到 $317.69（-7.13%单日）</strong>——砸的是<strong>全年资本开支指引从 $1,800-1,900亿 上调到 $1,950-2,050亿</strong>，且管理层明确 2027 年还要"显著增加"。当季 Capex $449亿（翻倍），经营现金流 $391亿覆盖不住，<strong>自由现金流录得 -$59亿，历史首次转负</strong>。这就是同期 TSLA（资本开支翻倍、FCF转负-$10.9亿）被砸 -14% 的同一个剧本：<strong>市场在给整条"AI 烧钱"叙事重新定价，而不是在质疑 Google 的生意</strong>。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">二、"财报质量"问题已经连续两个季度，不是孤例</span>
+    <span class="label-en">Earnings Quality: A Pattern, Not a One-Off</span>
+    <p>这是本次分析最值得你记住的发现。Q2 其他收入净赚 $980亿（股权证券收益 $990.3亿 vs 去年同期 $12.9亿），把净利润推到 $1,120亿（+298%）、表观EPS $9.11。<strong>但翻回上一季：Q1 2026 同样有 $377亿 其他收入、净利 +81%</strong><span class="badge badge-official">官方</span>——<strong>连续两个季度，Alphabet 的账面利润都被 Anthropic / SpaceX 等未上市持股的重估收益大幅灌水</strong>。这类收益<strong>不产生一分钱现金</strong>，却会在市盈率、净利率等指标上制造"极度便宜"的假象（有分析已指出其净利率"55%"的表观数字存在质量问题）。<strong>操作含义：看 Alphabet 只能看营业利润和自由现金流，看净利润和表观EPS会被系统性误导</strong>；同理，一旦 Anthropic 估值回调，同一个科目也会反向砸出巨额账面亏损。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">三、$5,140亿 backlog 是回答"烧钱值不值"的唯一硬证据</span>
+    <span class="label-en">The $514B Backlog Is the Only Hard Answer to the ROI Question</span>
+    <p>管理层这次给出的最有说服力的反驳不是嘴上说的，是 Cloud backlog：<strong>环比增加逾 $500亿至 $5,140亿，且逾50%将在24个月内确认收入</strong>——等于未来两年约 $2,570亿收入能见度已锁。Pichai 的原话是"<em>we are in very early innings of what feels like secular shift</em>"，并解释大客户带来的增量"<em>短期几个月成本可能很高，但在合同全生命周期里是高度 ROI 为正的</em>"。CFO Ashkenazi 则强调只要"<em>看到有吸引力的投资回报就会继续投</em>"，同时承认<strong>"仍处于供给受限环境"、Q3 将启用第三方算力作为过渡（并明确会带来短期利润率压力）</strong>。<strong>翻译成人话：Google 现在是订单太多、算力不够，被迫高价外租产能——这跟"投出去没人要"是两种完全相反的处境，但报表在短期内看起来一样难看。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">四、欧盟 8.9亿欧元罚单：金额无关痛痒，先例才是问题</span>
+    <span class="label-en">The EU Fine: Trivial in Dollars, Meaningful as Precedent</span>
+    <p>7月23日欧盟依《数字市场法案》(DMA) 对 Google 开出 <strong>€8.9亿（约$10亿）</strong> 罚款，拆为搜索自我优待 €4.6亿 + Play 商店限制开发者引流 €4.3亿<span class="badge badge-official">欧盟委员会</span>。<strong>这是 Google 在 DMA 下的首次处罚，也是该法案史上最大罚单。</strong>就财务而言，$10亿对单季营业利润 $408亿的公司是<strong>四舍五入级别</strong>，不构成基本面威胁。真正的意义在于<strong>先例与后续</strong>：首罚落地意味着 DMA 执法机器已经启动，后续针对搜索捆绑、Android、广告技术的调查都可能跟进，且 DMA 罚则上限可达全球营收10%。<strong>这是估值上的"监管折价"因子，属慢变量，不是事件性冲击。</strong></p>
+  </div>
+</div>
+
+<!-- 8 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">目标价三情景（12个月）</span><span class="section-en">Three-Scenario Target Price</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">12个月目标价区间 · 现价 $319.88（2026-07-24）</div>
+    <svg viewBox="0 0 800 150" font-family="'IM Fell English',Georgia,serif">
+      <!-- axis 240..460 mapped to 60..760 -->
+      <line x1="60" y1="86" x2="760" y2="86" stroke="#d4cec6" stroke-width="2"/>
+      <!-- bear 264 -> 60+ (264-240)/220*700 = 136.4 -->
+      <!-- base 343 -> 60+ (343-240)/220*700 = 387.7 -->
+      <!-- bull 430 -> 60+ (430-240)/220*700 = 664.5 -->
+      <!-- current 319.88 -> 60+ (319.88-240)/220*700 = 314.1 -->
+      <!-- strike 290 -> 60+ (290-240)/220*700 = 219.1 -->
+      <rect x="136" y="80" width="529" height="12" fill="#8b6c42" opacity="0.18"/>
+      <g>
+        <line x1="136" y1="66" x2="136" y2="106" stroke="#8b2e2e" stroke-width="2.5"/>
+        <text x="136" y="58" font-size="13" fill="#8b2e2e" text-anchor="middle" font-weight="700">$264</text>
+        <text x="136" y="122" font-size="10" fill="#8b2e2e" text-anchor="middle">熊市 Bear</text>
+        <text x="136" y="134" font-size="9" fill="#6b6460" text-anchor="middle">-17.5%</text>
+      </g>
+      <g>
+        <line x1="388" y1="64" x2="388" y2="108" stroke="#8b6c42" stroke-width="3"/>
+        <text x="388" y="56" font-size="14" fill="#8b6c42" text-anchor="middle" font-weight="700">$343</text>
+        <text x="388" y="122" font-size="10" fill="#8b6c42" text-anchor="middle">基准 Base</text>
+        <text x="388" y="134" font-size="9" fill="#6b6460" text-anchor="middle">+7.2%</text>
+      </g>
+      <g>
+        <line x1="665" y1="66" x2="665" y2="106" stroke="#2a5c3f" stroke-width="2.5"/>
+        <text x="665" y="58" font-size="13" fill="#2a5c3f" text-anchor="middle" font-weight="700">$430</text>
+        <text x="665" y="122" font-size="10" fill="#2a5c3f" text-anchor="middle">牛市 Bull</text>
+        <text x="665" y="134" font-size="9" fill="#6b6460" text-anchor="middle">+34.4%</text>
+      </g>
+      <!-- current price arrow -->
+      <polygon points="314,26 308,14 320,14" fill="#0a0a0b"/>
+      <line x1="314" y1="26" x2="314" y2="80" stroke="#0a0a0b" stroke-width="1.5"/>
+      <text x="314" y="10" font-size="11" fill="#0a0a0b" text-anchor="middle" font-weight="700">现价 $319.88</text>
+      <!-- user strike marker -->
+      <line x1="219" y1="92" x2="219" y2="112" stroke="#c47a1e" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="219" y="126" font-size="10" fill="#c47a1e" text-anchor="middle" font-weight="700">你的行权价 $290</text>
+      <text x="60" y="148" font-size="9.5" fill="#6b6460">注意：熊市情景 $264 位于你的 $290 行权价之下——这是12个月视角的尾部风险，非4周视角</text>
+    </svg>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市情景</b></div>
+      <div class="sp">$264</div>
+      <div class="schg">较现价 −17.5%</div>
+      <div class="slogic">AI 资本开支 ROI 迟迟无法证伪，2027 Capex 继续放大，折旧侵蚀利润率至32%以下，FCF 全年为负；DMA 后续处罚接踵。多重压缩至 <strong>20× FY27E EPS</strong>。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准情景</b></div>
+      <div class="sp">$343</div>
+      <div class="schg">较现价 +7.2%</div>
+      <div class="slogic">Cloud 维持 60%+ 增速、backlog 稳定转化，2027 Capex 见顶，利润率守在34-35%，FCF 于 2027 上半年转正。给予 <strong>26× FY27E EPS</strong>（接近当前远期估值中枢）。</div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市情景</b></div>
+      <div class="sp">$430</div>
+      <div class="schg">较现价 +34.4%</div>
+      <div class="slogic">AI 变现路径清晰（Gemini 订阅 + Cloud AI），$5,140亿 backlog 加速确认，市场从"看 Capex"切换到"看 ROIC"，估值重估至 <strong>32-33× FY27E EPS</strong>。对齐分析师共识目标 $430.89。</div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:180px">关键假设</th><th>熊市</th><th>基准</th><th>牛市</th></tr></thead>
+    <tbody>
+      <tr><td class="k">FY2027E 调整后EPS</td><td>$13.20</td><td>$13.20</td><td>$13.20</td></tr>
+      <tr><td class="k">给予 P/E 倍数</td><td>20×</td><td>26×</td><td>32.5×</td></tr>
+      <tr><td class="k">Cloud 增速（2027）</td><td>降至 35-40%</td><td>维持 55-60%</td><td>保持 65%+</td></tr>
+      <tr><td class="k">自由现金流拐点</td><td>2027全年仍为负</td><td>2027H1 转正</td><td>2026Q4 即转正</td></tr>
+      <tr><td class="k">营业利润率</td><td>跌破32%</td><td>守住34-35%</td><td>回升至37%+</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--muted);">FY2027E 调整后EPS $13.20 为本报告推算 <span class="badge badge-predict">推算</span>：以 H1 2026 调整后EPS 约 $5.52 年化至 FY2026E 约 $11.60，再按 +14% 增长外推；估值倍数参考分析师共识（64位分析师"强力买入"、均值目标价 $430.89、中位 $420 <span class="badge badge-official">公开</span>）与当前远期24.2×的隐含水平校准。</p>
+</div>
+
+<!-- 9 Verdict Box -->
+<div class="verdict">
+  <div class="verdict-en">Earnings Verdict · Executive Summary</div>
+  <div class="verdict-zh">裁决：经营面强于表观，估值面受制于现金流拐点</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text">
+    <strong>别被 $9.11 骗了，真实经营是"营收超预期、EPS小幅未达标"。</strong>表观EPS +216% 的暴击几乎全部来自 Anthropic 等未上市持股的账面重估（其他收入净赚$980亿），剔除后调整EPS $2.85 低于共识 $2.89。且这已是<strong>连续第二个季度</strong>（Q1 亦有$377亿）——看 Alphabet 请只看营业利润和自由现金流。
+    <span class="v-src">依据：财报"其他收入净收益$980亿"、股权证券收益$990.3亿 vs 去年同期$12.9亿；Q1 2026 其他收入$377亿</span>
+  </div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text">
+    <strong>市场砸的是"回本周期"，不是"生意变差"——这两者的区别决定了这是机会还是陷阱。</strong>Capex 指引上调至 $1,950-2,050亿、FCF 首次转负 -$59亿 是砸盘直接原因；但同期 Cloud +82%、利润率20.7%→35.6%、backlog 达 $5,140亿（逾50%将在24个月内确认）。<strong>Google 的处境是"订单太多算力不够、被迫外租产能"，不是"投出去没人要"。</strong>
+    <span class="v-src">依据：Cloud 经营利润$88亿（去年$28亿）；Ashkenazi"仍处供给受限环境、Q3启用第三方算力过渡"</span>
+  </div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text">
+    <strong>技术面已破位，但基本面未破坏——短期看反弹、中期看 FCF 拐点。</strong>股价跌穿 200日均线簇（$343-345，现转为压力位），RSI 31 处超卖；而分析师共识仍是"强力买入"、均值目标 $430.89（KeyBanc上调至$445、BofA上调至$430）。<strong>真正的观察信号只有一个：自由现金流何时转正</strong>——那是"烧钱叙事"翻篇的唯一凭证。
+    <span class="v-src">依据：7/23收盘$317.69(-7.13%)，RSI 31/CCI -306；64位分析师共识目标$430.89</span>
+  </div></div>
+</div>
+
+<div class="feedback">
+  对这份财报分析有补充或修正？ <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&report=googl">点此反馈</a>
+</div>
+
+<!-- 持仓联动 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">你的持仓联动分析</span><span class="section-en">Your Position · GOOGL $290 Put</span></div>
+  <div class="notice green">
+    <div class="nt">结论：这份财报对你的空头看跌仓位是"偏有利"，维持持有，止损纪律不变</div>
+    你持有 <strong>卖出 GOOGL $290 Put，2026-08-21 到期，权利金 $2.75，1张</strong>，当前 Put 报价约 $2.45（浮盈 +$30）。
+  </div>
+  <table>
+    <thead><tr><th style="width:190px">维度</th><th>数值</th><th>对仓位的含义</th></tr></thead>
+    <tbody>
+      <tr><td class="k">安全缓冲</td><td>现价 $319.88 vs 行权价 $290 → <strong>9.34% 价外</strong></td><td>需再跌 9.3% 才触及行权价</td></tr>
+      <tr><td class="k">剩余期限</td><td>28 天（至 8/21）</td><td>时间价值加速衰减，对卖方有利</td></tr>
+      <tr><td class="k">隐含波动</td><td>IV 约 41.8%，IV Rank 约 70 <span class="badge badge-predict">近期数据</span></td><td>IV 处于年内高位 → 卖方收到的权利金偏贵，且财报后IV回落（IV crush）会加速盈利</td></tr>
+      <tr><td class="k">到期概率测算</td><td>28天1σ隐含波动 ±11.6%；$290 位于 <strong>-0.81σ</strong></td><td><strong>PoP 约 79%</strong>（跌破概率约21%）——高于你 &gt;60% 的过滤门槛</td></tr>
+      <tr><td class="k">财报风险</td><td>下次财报 <strong>2026-10-27</strong></td><td>到期日前<strong>无财报干扰</strong>，最大的二元风险已经落地并消化</td></tr>
+      <tr><td class="k">已知窗口内事件</td><td>FOMC 7/28-29（约33%概率加息）、DMA 后续执法</td><td>属噪音级，除非 FOMC 意外加息引发系统性回调</td></tr>
+      <tr><td class="k">止损线</td><td><strong>Put 市值 $8.25</strong>（亏损达权利金2倍=$550）</td><td>当前 $2.45，距止损线仍远</td></tr>
+    </tbody>
+  </table>
+  <div class="notice">
+    <div class="nt">但必须诚实说明两个风险</div>
+    <strong>① 12个月熊市情景 $264 低于你的 $290 行权价</strong>——若 AI 资本开支叙事彻底破裂，标的是有能力跌穿行权价的。不过这是12个月视角，你的期权4周后就到期，两者时间尺度不同，不必据此现在动作。<strong>② 技术面确已破位</strong>：股价跌穿 200 日均线簇（$343-345）后，下方 $330-337 一带支撑也已失守，短期处于"无明确支撑"区域，RSI 超卖只提示反弹概率、不构成保证。<strong>操作建议：维持持有，按 $8.25 止损线机械执行；若 GOOGL 无量下破 $300（缓冲收窄至3.3%以内），提前评估是否止盈离场，不必等到止损线。</strong>
+  </div>
+</div>
+
+<!-- 10 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">管理层语气评分</span><span class="section-en">Management Tone · 62 / 100 审慎乐观</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">前瞻指引完整度 35%</span><span class="tone-bar"><span class="tone-fill green" style="width:78%"></span></span><span class="tone-val">78</span></div>
+    <div class="tone-row"><span class="tone-lab">数据透明度 35%</span><span class="tone-bar"><span class="tone-fill green" style="width:72%"></span></span><span class="tone-val">72</span></div>
+    <div class="tone-row"><span class="tone-lab">战略清晰度 30%</span><span class="tone-bar"><span class="tone-fill amber" style="width:32%"></span></span><span class="tone-val">32</span></div>
+  </div>
+  <p style="font-size:13.5px;color:#3a352f;">
+    <strong>加分项</strong>：Capex 指引给出明确区间（$1,950-2,050亿）而非模糊表述，Cloud backlog 首次量化到 $5,140亿并给出"逾50%在24个月内确认"的转化节奏，主动预告 Q3 第三方算力将带来利润率压力——<strong>不粉饰坏消息，透明度较高</strong>。<br>
+    <strong>扣分项</strong>：对"AI 投资何时体现为自由现金流回正"这一市场最关心的问题，管理层始终未给时间表，Ashkenazi 只以"<em>只要看到有吸引力的回报就会继续投</em>"作答；Pichai 的"<em>very early innings</em>"属愿景表述而非可执行路径。<strong>战略清晰度因此仅得32分——这正是股价被砸的根源：市场要的是回本时间表，管理层给的是长期信念。</strong>
+  </p>
+</div>
+
+<!-- 11 核心主题 chips -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">Cloud +82% 加速</span>
+    <span class="chip pos">Cloud 利润率 20.7%→35.6%</span>
+    <span class="chip pos">Backlog $5,140亿 · 24个月转化逾半</span>
+    <span class="chip pos">营收超共识 +2.5%</span>
+    <span class="chip pos">12个季度连续双位数增长</span>
+    <span class="chip neu">供给受限 · Q3启用第三方算力</span>
+    <span class="chip neu">营业利润率环比 -2.1pp</span>
+    <span class="chip neu">FOMC 7/28-29 加息概率约33%</span>
+    <span class="chip neg">Capex 指引上调至 $1,950-2,050亿</span>
+    <span class="chip neg">自由现金流首次转负 -$59亿</span>
+    <span class="chip neg">调整后EPS 未达共识 -1.4%</span>
+    <span class="chip neg">财报质量存疑（连续两季股权重估灌水）</span>
+    <span class="chip neg">欧盟 DMA 首罚 €8.9亿 · 先例已开</span>
+    <span class="chip neg">技术面跌穿 200 日均线簇</span>
+  </div>
+</div>
+
+<!-- 12 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <thead><tr><th style="width:210px">风险项</th><th style="width:70px">概率</th><th style="width:70px">影响</th><th>监测信号</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">AI Capex 无法证明回报</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>季度 FCF 是否转正；Cloud backlog 转化速度是否达标（逾50%/24个月）；2027 Capex 指引具体数字</td>
+      </tr>
+      <tr>
+        <td class="k">折旧压制利润率</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td>营业利润率是否跌破 33%（Q1 36.1% → Q2 34.0% 已在压缩通道）；第三方算力成本占比</td>
+      </tr>
+      <tr>
+        <td class="k">财报质量：股权收益反转</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td>Anthropic / SpaceX 后续融资估值方向；一旦回调，同一科目将录得巨额账面亏损，制造"业绩暴雷"假象</td>
+      </tr>
+      <tr>
+        <td class="k">DMA 后续执法扩大</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td style="color:var(--green);font-weight:700;">低</td>
+        <td>欧盟对搜索捆绑/Android/广告技术的新立案；DMA 罚则上限达全球营收10%，需关注是否升级</td>
+      </tr>
+      <tr>
+        <td class="k">AI 搜索替代侵蚀广告主业</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>搜索营收增速（本季 +17%，仍健康）；若连续两季降至10%以下则叙事生变</td>
+      </tr>
+      <tr>
+        <td class="k">宏观：利率与AI板块情绪</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td>FOMC 7/28-29 决议；10年期美债收益率（现4.66%）；"七巨头"单周资金流向</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:#3a352f;margin-top:8px;">
+    <strong>双高风险（概率×影响）</strong>：「AI Capex 无法证明回报」与「AI 搜索替代侵蚀广告主业」为影响最高的两项，已在裁决框中体现。前者是当下股价的直接驱动，后者是更长期的结构性威胁但目前尚无恶化迹象（搜索 +17%）。
+  </p>
+</div>
+
+<!-- 13 分析师 Q&A 张力 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分析师 Q&amp;A 张力区域</span><span class="section-en">Analyst Q&amp;A · Points of Tension</span></div>
+  <table>
+    <thead><tr><th style="width:230px">分析师追问方向</th><th>管理层回应</th><th style="width:90px">张力评估</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">Capex 上调这么多，回报周期到底多长？</td>
+        <td>Ashkenazi：「<em>只要我们看到有吸引力的投资回报，就会继续投入</em>」——未给时间表；Pichai：「<em>我们正处于一场跨多领域的长期变革的极早期</em>」</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+      </tr>
+      <tr>
+        <td class="k">FCF 转负是暂时还是新常态？</td>
+        <td>强调 TTM 自由现金流仍有 $533亿、当季经营现金流 $391亿健康，将当季转负归因于 Capex 交付节奏加速</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+      </tr>
+      <tr>
+        <td class="k">供给受限要持续到什么时候？</td>
+        <td>Ashkenazi 承认「<em>仍处于供给受限环境</em>」，Q3 将扩大使用第三方算力作为过渡桥梁，并<strong>主动预告将带来短期利润率压力</strong></td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+      </tr>
+      <tr>
+        <td class="k">大客户合同是否以牺牲毛利换取？</td>
+        <td>Pichai：「<em>短期几个月成本可能非常高，但在合同全生命周期里是高度 ROI 为正的</em>」——间接承认前期利润率承压</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+      </tr>
+      <tr>
+        <td class="k">$980亿其他收入应如何看待？</td>
+        <td>财报中以「<em>主要为股权持仓的净未实现收益</em>」一笔带过，未在电话会上展开讨论其对EPS的扭曲</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:#3a352f;margin-top:8px;">
+    <strong>最大张力点</strong>：管理层用「长期信念」回应「短期回本时间表」的追问，以及对 $980亿账面收益扭曲EPS 一事的低调处理——<strong>这两处的信息真空，正是市场用 -7% 单日跌幅来定价的东西</strong>。
+  </p>
+</div>
+
+<!-- 14 Footer -->
+<div class="footer">
+  Alphabet Inc. (GOOGL) · Q2 FY2026 Earnings Analysis · Generated by Earner (Earnings Copilot) on 2026-07-24.<br>
+  一手来源：Alphabet Q2 2026 财报新闻稿与 8-K（SEC EDGAR）、Q2 2026 业绩电话会记录、欧盟委员会 DMA 处罚公告（2026-07-23）。<br>
+  二手来源：CNBC / Yahoo Finance / Seeking Alpha / Investing.com / Zacks / TipRanks / Barchart / Market Chameleon 等公开报道（2026-07-22 至 07-24）。<br>
+  标注【推算】【近期数据】者为分析推断，非公司确认事实；调整后EPS $2.85 为市场口径，本报告独立测算 $2.81，差异源于税率假设。<br>
+  期权相关测算（PoP 79%、1σ隐含波动）基于对数正态分布近似与 IV 约41.8%假设，未计入波动率偏斜；执行前请在经纪商平台二次确认实际报价与 Greeks。<br>
+  本报告为研究分析，不构成投资建议。期权交易存在损失全部本金乃至更多的风险。
+</div>
+
+</body>
+</html>
