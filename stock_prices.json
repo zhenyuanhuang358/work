@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-07-29T20:03:08.250369Z",
-  "vix": 20.12,
+  "updated_at": "2026-07-29T21:07:48.955089Z",
+  "vix": 20.66,
   "treasury_10y": 4.62,
   "prices": {
     "SPY": {
-      "price": 729.52,
-      "change": -11.34,
-      "changePct": -1.53,
+      "price": 729.46,
+      "change": -11.4,
+      "changePct": -1.54,
       "high": 742.68,
       "low": 729.1,
       "prevClose": 740.86
@@ -20,17 +20,17 @@
       "prevClose": 675.49
     },
     "IWM": {
-      "price": 288.63,
-      "change": -4.74,
-      "changePct": -1.61,
+      "price": 288.57,
+      "change": -4.8,
+      "changePct": -1.64,
       "high": 293.67,
       "low": 288.26,
       "prevClose": 293.37
     },
     "GLD": {
-      "price": 371,
-      "change": 1.63,
-      "changePct": 0.44,
+      "price": 371.08,
+      "change": 1.71,
+      "changePct": 0.46,
       "high": 377.62,
       "low": 366.53,
       "prevClose": 369.37
@@ -52,9 +52,9 @@
       "prevClose": 84.24
     },
     "XLE": {
-      "price": 58.63,
-      "change": 1.06,
-      "changePct": 1.85,
+      "price": 58.65,
+      "change": 1.08,
+      "changePct": 1.88,
       "high": 59.3,
       "low": 58.42,
       "prevClose": 57.57
@@ -100,9 +100,9 @@
       "prevClose": 454.62
     },
     "MU": {
-      "price": 737.91,
-      "change": -82.62,
-      "changePct": -10.07,
+      "price": 739,
+      "change": -81.53,
+      "changePct": -9.94,
       "high": 841.8,
       "low": 737.88,
       "prevClose": 820.53
@@ -116,25 +116,25 @@
       "prevClose": 333.71
     },
     "SOFI": {
-      "price": 15.23,
-      "change": -1.51,
-      "changePct": -9.02,
+      "price": 15.25,
+      "change": -1.49,
+      "changePct": -8.9,
       "high": 15.77,
       "low": 14.01,
       "prevClose": 16.74
     },
     "HOOD": {
-      "price": 89.54,
-      "change": -3.22,
-      "changePct": -3.47,
+      "price": 89.84,
+      "change": -2.92,
+      "changePct": -3.15,
       "high": 93.32,
       "low": 88.6,
       "prevClose": 92.76
     },
     "INTC": {
-      "price": 81.92,
-      "change": -4.38,
-      "changePct": -5.08,
+      "price": 81.88,
+      "change": -4.42,
+      "changePct": -5.12,
       "high": 88.47,
       "low": 81.79,
       "prevClose": 86.3
