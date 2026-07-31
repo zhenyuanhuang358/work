@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple (AAPL) Q3 FY2026 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:26px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:29px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:130px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.feedback{text-align:center;margin:22px 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .chart-grid2,.sc-grid{grid-template-columns:1fr;}
+  .title-zh{font-size:24px;} body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>Apple Inc. (NASDAQ: AAPL)</span>
+  <span>Q3 FY2026 · 财报日 2026-07-30（盘后）</span>
+  <span>分析日 2026-07-31</span>
+  <span><b>库克最后一次电话会</b></span>
+</div>
+
+<!-- 2 双语标题 -->
+<div class="title-block">
+  <div class="title-en">Apple Q3 FY2026 — It Dodged the AI Capex Trap, Then Got Hit by the AI Supply-Chain Bill</div>
+  <div class="title-zh">苹果三季报：躲过了AI资本开支的坑<br>却被AI的供应链账单击中</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性 Hold</span>
+    <span class="tag amber">语气评分 54 / 100 中性偏防御</span>
+    <span class="tag">营收/EPS 双超预期</span>
+    <span class="tag red">指引 +9~11% 低于共识 &gt;12%</span>
+    <span class="tag red">盘后 -5% ~ -6.6%</span>
+    <span class="tag">数据截止 2026-07-31</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num green">$1,094亿</div><div class="lab">Q3营收<span class="en">+16% YoY · 六月季历史最佳</span></div></div>
+  <div class="stat"><div class="num green">$2.02</div><div class="lab">摊薄EPS<span class="en">+29% · 共识$1.88 超预期7.4%</span></div></div>
+  <div class="stat"><div class="num amber">50.1%</div><div class="lab">毛利率<span class="en">共识47.9% · 但靠关税退税</span></div></div>
+  <div class="stat"><div class="num red">+9~11%</div><div class="lab">Q4指引<span class="en">共识&gt;12% · 元件短缺所致</span></div></div>
+</div>
+
+<!-- 数据质量声明 -->
+<div class="notice red">
+  <div class="nt">⚠ 这份财报的真正矛盾：所有当季数字都赢了，但下一季的话把股价打下来了</div>
+  营收、EPS、iPhone、Mac、毛利率<strong>全部超预期</strong>，而且是<strong>史上最强的六月季</strong>——但股价盘后跌 <strong>5%~6.6%</strong>，从本周刚创的历史新高 $344 一路砸向 $310 区间。原因只有一个：<strong>Q4指引给到营收增长 9%~11%，而市场预期是超过 12%</strong>，且管理层把原因说得很直白——<strong>元件短缺</strong>。CFO Kevan Parekh 的原话更刺眼："<strong>毛利率的环比变化，超过100%由内存成本解释</strong>"；库克本人补了一句："<strong>我们预计将付出更高的内存成本</strong>"。<strong>换句话说：50.1%这个漂亮的毛利率里，有关税退税的一次性成分，而真正的趋势是被内存价格往下压。</strong>
+</div>
+
+<!-- 4 季度营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">季度营收走势</span><span class="section-en">Quarterly Revenue · 5 Quarters</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">Apple 合并营收（十亿美元）· FY口径，Q1为12月季（假日季）故最高</div>
+    <svg viewBox="0 0 800 250" font-family="'IM Fell English',Georgia,serif">
+      <line x1="52" y1="16" x2="52" y2="195" stroke="#d4cec6"/>
+      <line x1="52" y1="195" x2="780" y2="195" stroke="#d4cec6"/>
+      <line x1="52" y1="105" x2="780" y2="105" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <text x="46" y="199" font-size="9" fill="#6b6460" text-anchor="end">0</text>
+      <text x="46" y="109" font-size="9" fill="#6b6460" text-anchor="end">75</text>
+      <text x="46" y="20" font-size="9" fill="#6b6460" text-anchor="end">150</text>
+      <!-- scale 150B -> 179px -->
+      <!-- 94.0->112.2 ; 102.5->122.3 ; 143.8->171.6 ; 111.2->132.7 ; 109.42->130.6 -->
+      <g>
+        <rect x="86" y="82.8" width="92" height="112.2" fill="#8b6c42" opacity="0.5"/>
+        <rect x="230" y="72.7" width="92" height="122.3" fill="#8b6c42" opacity="0.5"/>
+        <rect x="374" y="23.4" width="92" height="171.6" fill="#8b6c42" opacity="0.7"/>
+        <rect x="518" y="62.3" width="92" height="132.7" fill="#8b6c42" opacity="0.7"/>
+        <rect x="662" y="64.4" width="92" height="130.6" fill="#2a5c3f"/>
+      </g>
+      <g font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="700">
+        <text x="132" y="76">94.0</text><text x="276" y="66">102.5</text><text x="420" y="17">143.8</text>
+        <text x="564" y="56">111.2</text><text x="708" y="58" fill="#2a5c3f">109.4</text>
+      </g>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="132" y="211">Q3 FY25</text><text x="276" y="211">Q4 FY25</text><text x="420" y="211">Q1 FY26</text>
+        <text x="564" y="211">Q2 FY26</text><text x="708" y="211">Q3 FY26</text>
+        <text x="132" y="223">(25年6月)</text><text x="276" y="223">(25年9月)</text><text x="420" y="223">(25年12月)</text>
+        <text x="564" y="223">(26年3月)</text><text x="708" y="223">(26年6月)</text>
+      </g>
+      <text x="708" y="240" font-size="11" fill="#2a5c3f" text-anchor="middle" font-weight="700">同比 +16.4%</text>
+      <text x="52" y="240" font-size="9.5" fill="#6b6460">Q3 FY26 对比去年同期 $94.0B → 六月季历史新高</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 5 分部营收 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分部营收 vs 市场共识</span><span class="section-en">Segments · Beat or Miss</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">各分部实际值与共识对比（十亿美元）· 绿=超预期 红=未达标</div>
+    <svg viewBox="0 0 800 220" font-family="'IM Fell English',Georgia,serif">
+      <line x1="150" y1="10" x2="150" y2="200" stroke="#d4cec6"/>
+      <!-- scale 60B -> 500px -->
+      <!-- iPhone 54.25 -> 452 ; 服务30.74 -> 256 ; Mac 10.35 -> 86 ; iPad 6.19 -> 52 ; 其他7.89 -> 66 -->
+      <rect x="150" y="18" width="452" height="26" fill="#2a5c3f"/>
+      <text x="144" y="36" font-size="12" fill="#0a0a0b" text-anchor="end">iPhone</text>
+      <text x="610" y="36" font-size="12" fill="#0a0a0b" font-weight="700">$54.25B</text>
+      <text x="690" y="36" font-size="10" fill="#2a5c3f" font-weight="700">+22% ✓超</text>
+
+      <rect x="150" y="54" width="256" height="26" fill="#8b2e2e"/>
+      <text x="144" y="72" font-size="12" fill="#0a0a0b" text-anchor="end">服务</text>
+      <text x="414" y="72" font-size="12" fill="#0a0a0b" font-weight="700">$30.74B</text>
+      <text x="494" y="72" font-size="10" fill="#8b2e2e" font-weight="700">✗ 未达 (共识$31.22B)</text>
+
+      <rect x="150" y="90" width="86" height="26" fill="#2a5c3f"/>
+      <text x="144" y="108" font-size="12" fill="#0a0a0b" text-anchor="end">Mac</text>
+      <text x="244" y="108" font-size="12" fill="#0a0a0b" font-weight="700">$10.35B</text>
+      <text x="324" y="108" font-size="10" fill="#2a5c3f" font-weight="700">✓ 大超 (共识$8.74B)</text>
+
+      <rect x="150" y="126" width="66" height="26" fill="#8b6c42" opacity="0.6"/>
+      <text x="144" y="144" font-size="12" fill="#0a0a0b" text-anchor="end">穿戴/家居/配件</text>
+      <text x="224" y="144" font-size="12" fill="#0a0a0b" font-weight="700">约$7.89B</text>
+      <text x="304" y="144" font-size="10" fill="#c47a1e">倒推</text>
+
+      <rect x="150" y="162" width="52" height="26" fill="#8b2e2e"/>
+      <text x="144" y="180" font-size="12" fill="#0a0a0b" text-anchor="end">iPad</text>
+      <text x="210" y="180" font-size="12" fill="#0a0a0b" font-weight="700">$6.19B</text>
+      <text x="290" y="180" font-size="10" fill="#8b2e2e" font-weight="700">✗ 未达 (共识$6.92B)</text>
+    </svg>
+  </div>
+  <div class="notice red">
+    <div class="nt">大中华区：涨了22.4%，却依然算"未达标"</div>
+    大中华区营收从去年同期 <strong>$154亿 增至 $188.6亿（+22.4%）</strong><span class="badge badge-official">财报</span>——这是实打实的强劲复苏，扭转了此前多个季度的颓势。<strong>但市场共识是 $195.8亿，所以仍被记为"未达预期"。</strong>这说明一件事：<strong>市场对中国市场的预期已经被抬得很高，苹果在中国交出+22%的答卷还不够。</strong>叠加服务业务同样未达标（$307.4亿 vs 共识$312.2亿），<strong>两个最被寄予厚望的增长引擎同时略微失手，这才是估值层面真正被扣分的地方——不是当季数字不好，是"增长故事的两根支柱"都差了一口气。</strong>
+  </div>
+</div>
+
+<!-- 6 EPS + 毛利率 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">EPS 对比 &amp; 毛利率</span><span class="section-en">EPS &amp; Gross Margin</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">摊薄EPS：实际 vs 共识 vs 去年同期（美元）</div>
+      <svg viewBox="0 0 380 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="46" y1="14" x2="46" y2="180" stroke="#d4cec6"/>
+        <line x1="46" y1="180" x2="366" y2="180" stroke="#d4cec6"/>
+        <!-- scale 2.2 -> 166px -->
+        <!-- 1.57->118.5 ; 1.88->141.8 ; 2.02->152.5 -->
+        <rect x="72" y="61.5" width="66" height="118.5" fill="#8b6c42" opacity="0.45"/>
+        <text x="105" y="55" font-size="13" fill="#6b6460" text-anchor="middle" font-weight="700">$1.57</text>
+        <text x="105" y="196" font-size="10" fill="#6b6460" text-anchor="middle">去年同期</text>
+        <text x="105" y="208" font-size="8.5" fill="#6b6460" text-anchor="middle">Q3 FY25(倒推)</text>
+
+        <rect x="180" y="38.2" width="66" height="141.8" fill="none" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="213" y="32" font-size="13" fill="#0a0a0b" text-anchor="middle" font-weight="700">$1.88</text>
+        <text x="213" y="196" font-size="10" fill="#6b6460" text-anchor="middle">市场共识</text>
+
+        <rect x="288" y="27.5" width="66" height="152.5" fill="#2a5c3f"/>
+        <text x="321" y="21" font-size="13" fill="#2a5c3f" text-anchor="middle" font-weight="700">$2.02</text>
+        <text x="321" y="196" font-size="10" fill="#6b6460" text-anchor="middle">实际</text>
+        <text x="321" y="208" font-size="8.5" fill="#2a5c3f" text-anchor="middle">+29% YoY</text>
+
+        <text x="46" y="222" font-size="9.5" fill="#2a5c3f">超共识 +7.4% —— 这是真实的经营超预期</text>
+      </svg>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">毛利率：超预期，但成色和方向都要打问号</div>
+      <svg viewBox="0 0 380 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="52" y1="14" x2="52" y2="150" stroke="#d4cec6"/>
+        <line x1="52" y1="150" x2="366" y2="150" stroke="#d4cec6"/>
+        <!-- scale 44-52 -> 150..14 ; 17px per pt -->
+        <!-- 47.9 -> 83.7 ; 50.1 -> 46.3 -->
+        <rect x="100" y="83.7" width="70" height="66.3" fill="#8b6c42" opacity="0.4"/>
+        <text x="135" y="77" font-size="13" fill="#6b6460" text-anchor="middle" font-weight="700">47.9%</text>
+        <text x="135" y="166" font-size="10" fill="#6b6460" text-anchor="middle">市场共识</text>
+
+        <rect x="240" y="46.3" width="70" height="103.7" fill="#c47a1e"/>
+        <text x="275" y="40" font-size="13" fill="#c47a1e" text-anchor="middle" font-weight="700">50.1%</text>
+        <text x="275" y="166" font-size="10" fill="#6b6460" text-anchor="middle">实际</text>
+
+        <path d="M 310 60 L 350 100" stroke="#8b2e2e" stroke-width="2" stroke-dasharray="4,3"/>
+        <polygon points="350,100 342,94 344,86" fill="#8b2e2e"/>
+        <text x="330" y="118" font-size="10" fill="#8b2e2e" text-anchor="middle" font-weight="700">前瞻承压</text>
+
+        <text x="52" y="188" font-size="9.5" fill="#c47a1e">超预期 +2.2pp，但来源是关税退税（一次性）</text>
+        <text x="52" y="202" font-size="9.5" fill="#8b2e2e">CFO：毛利率环比变化「超过100%由内存成本解释」</text>
+        <text x="52" y="216" font-size="9.5" fill="#8b2e2e">库克：「我们预计将付出更高的内存成本」</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 资本开支对比图（本报告签名图表） -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">苹果在AI资本开支叙事中的独特位置</span><span class="section-en">The 51× Capex Gap</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">2026年资本开支计划对比（十亿美元）· 苹果是唯一没有下场烧钱的巨头</div>
+    <svg viewBox="0 0 800 230" font-family="'IM Fell English',Georgia,serif">
+      <line x1="120" y1="10" x2="120" y2="185" stroke="#d4cec6"/>
+      <!-- scale 200B -> 620px -->
+      <rect x="120" y="18" width="620" height="26" fill="#8b6c42"/>
+      <text x="114" y="36" font-size="12" fill="#0a0a0b" text-anchor="end">Amazon</text>
+      <text x="748" y="36" font-size="12" fill="#0a0a0b" font-weight="700">$200B</text>
+
+      <rect x="120" y="52" width="589" height="26" fill="#8b6c42"/>
+      <text x="114" y="70" font-size="12" fill="#0a0a0b" text-anchor="end">Microsoft</text>
+      <text x="717" y="70" font-size="12" fill="#0a0a0b" font-weight="700">$190B</text>
+
+      <rect x="120" y="86" width="558" height="26" fill="#8b6c42"/>
+      <text x="114" y="104" font-size="12" fill="#0a0a0b" text-anchor="end">Alphabet</text>
+      <text x="686" y="104" font-size="12" fill="#0a0a0b" font-weight="700">$175-185B</text>
+
+      <rect x="120" y="120" width="388" height="26" fill="#8b6c42"/>
+      <text x="114" y="138" font-size="12" fill="#0a0a0b" text-anchor="end">Meta</text>
+      <text x="516" y="138" font-size="12" fill="#0a0a0b" font-weight="700">$115-135B</text>
+
+      <rect x="120" y="154" width="42" height="26" fill="#2a5c3f"/>
+      <text x="114" y="172" font-size="12" fill="#0a0a0b" text-anchor="end" font-weight="700">Apple</text>
+      <text x="170" y="172" font-size="13" fill="#2a5c3f" font-weight="700">仅 $13-14B</text>
+
+      <text x="120" y="205" font-size="11" fill="#8b2e2e" font-weight="700">四巨头合计约 $695-725B（同比+77%），是苹果的约 51 倍</text>
+      <text x="120" y="221" font-size="10" fill="#6b6460">苹果把AI基建外包给 Google Gemini 与 OpenAI，让合作伙伴承担资本风险</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 7 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">一、这是一份"当季全赢、下季认输"的财报</span>
+    <span class="label-en">Every Number Won. The Outlook Lost.</span>
+    <p>把当季拆开看，苹果几乎无可挑剔：营收 <strong>$1,094亿（+16%）</strong>创六月季历史纪录，EPS <strong>$2.02（+29%）</strong>超共识7.4%，iPhone <strong>$542.5亿（+22%）</strong>，Mac <strong>$103.5亿</strong>大幅超出共识$87.4亿。<strong>但股价盘后跌5%~6.6%，从本周新高$344砸向$310。</strong>杀伤全部来自一句话：<strong>Q4营收指引 +9%~11%，而市场要的是超过12%</strong>。而Q4恰恰是新一代iPhone的首发季——<strong>本该是全年最有想象力的一个季度，苹果却主动把预期往下压。</strong>理由是元件短缺，管理层明确表示<strong>先进制程的供应受限可能限制 iPhone、Mac 和 iPad 的出货量</strong>，且这一约束从六月季到九月季会<strong>"显著加剧"</strong>。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">二、50.1%的毛利率是漂亮的，但成色和方向都不对</span>
+    <span class="label-en">A High-Quality Number With Low-Quality Sourcing</span>
+    <p>毛利率 50.1% 大幅超出共识 47.9%，看起来是本季最亮的一笔。<strong>但要看两层：第一层是成色——这个超预期来自关税退税，属于一次性因素，不是产品结构或成本控制的持续改善。第二层更重要，是方向：</strong>CFO Kevan Parekh 在电话会上说，<strong>"毛利率的环比变化，超过100%由内存成本解释"</strong>；库克紧接着补了一句 <strong>"我们预计将付出更高的内存成本"</strong>。<strong>把这两句放在一起，意思很明确：一次性的退税把这一季的数字垫高了，而结构性的内存涨价正在从下一季开始啃食毛利。</strong>这和上周 Alphabet 用 Anthropic 股权重估把EPS推到$9.11、剔除后反而未达标是同一类问题——<strong>本轮财报季，"利润质量"比"利润数字"更值得盯。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">三、⭐ 苹果躲过了AI资本开支的坑，却被AI的供应链账单击中</span>
+    <span class="label-en">Dodged the Capex Trap, Caught the Supply-Chain Bill</span>
+    <p>这是本季最值得记住的一条判断。过去两周，市场用真金白银惩罚了"AI烧钱"：<strong>Meta 因资本开支上调至$1,350-1,450亿、利润率从43%崩到31%而暴跌7-9%；Alphabet 因capex上调至$1,950-2,050亿、自由现金流首次转负而被砸</strong>。<strong>苹果是唯一的例外——它2026年资本开支只有约$135亿，而 Amazon($2,000亿)、Microsoft($1,900亿)、Alphabet($1,750-1,850亿)、Meta($1,150-1,350亿) 四家合计约$6,950-7,250亿，是苹果的约51倍。</strong>苹果把AI基建外包给 Gemini 和 OpenAI，让伙伴承担资本风险——<strong>所以它没有自由现金流转负的问题，没有折旧吞噬利润率的问题。</strong></p>
+    <p style="margin-top:8px;"><strong>但这一季揭示了代价：苹果没付资本开支的钱，却开始付供应链的钱。</strong>四巨头$7,000亿的AI基建把内存和先进制程的价格与产能全部抬走了，而苹果是全球最大的内存采购方之一。<strong>MU 本周单日暴涨15%的另一面，就是苹果毛利率承压和出货受限。</strong>换句话说：<strong>你可以选择不参加军备竞赛，但你躲不开军备竞赛推高的物价。这是"轻资产AI战略"第一次显示出它的账单，而且这个账单还会持续。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">四、两根增长支柱同时差一口气 + 库克的最后一次电话会</span>
+    <span class="label-en">Both Growth Pillars Wobbled, on Cook's Final Call</span>
+    <p><strong>服务业务 $307.4亿 未达共识 $312.2亿；大中华区 $188.6亿（+22.4%，从去年$154亿显著复苏）仍未达共识 $195.8亿。</strong>这两块是苹果估值的核心支撑——服务是高毛利的年金型收入，中国是最大的增量市场。<strong>两者同时略微失手，杀伤力大于任何单一硬件分部的波动。</strong>尤其中国：交出+22.4%的增长还被判"未达标"，说明<strong>市场对中国复苏的定价已经很满，容错空间很小</strong>。</p>
+    <p style="margin-top:8px;">同时，<strong>这是 Tim Cook 的最后一次财报电话会</strong>，John Ternus 将接任。<strong>治理层面的交接发生在"AI战略正被重新审视 + 供应链约束加剧"的时点，本身就是一个需要额外风险溢价的变量</strong>——新任CEO面对的第一道题，恰恰是苹果的轻资产AI路线到底能不能撑住下一个产品周期。</p>
+  </div>
+</div>
+
+<!-- 8 三情景目标价 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">目标价三情景（12个月）</span><span class="section-en">Three-Scenario Target Price</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">12个月目标价区间 · 盘后参考价约 $312（财报前收$332.15，本周高点$344）</div>
+    <svg viewBox="0 0 800 150" font-family="'IM Fell English',Georgia,serif">
+      <!-- axis 240..390 mapped to 60..760 -->
+      <line x1="60" y1="86" x2="760" y2="86" stroke="#d4cec6" stroke-width="2"/>
+      <!-- bear 254 -> 60+(254-240)/150*700=125.3 ; base 310 -> 386.7 ; bull 367 -> 652.3 ; cur 312 -> 396 ; pre 332 -> 489.3 -->
+      <rect x="125" y="80" width="527" height="12" fill="#8b6c42" opacity="0.18"/>
+      <g>
+        <line x1="125" y1="66" x2="125" y2="106" stroke="#8b2e2e" stroke-width="2.5"/>
+        <text x="125" y="58" font-size="13" fill="#8b2e2e" text-anchor="middle" font-weight="700">$254</text>
+        <text x="125" y="122" font-size="10" fill="#8b2e2e" text-anchor="middle">熊市 Bear</text>
+        <text x="125" y="134" font-size="9" fill="#6b6460" text-anchor="middle">-18.6%</text>
+      </g>
+      <g>
+        <line x1="387" y1="64" x2="387" y2="108" stroke="#8b6c42" stroke-width="3"/>
+        <text x="387" y="56" font-size="14" fill="#8b6c42" text-anchor="middle" font-weight="700">$310</text>
+        <text x="387" y="122" font-size="10" fill="#8b6c42" text-anchor="middle">基准 Base</text>
+        <text x="387" y="134" font-size="9" fill="#6b6460" text-anchor="middle">-0.6%</text>
+      </g>
+      <g>
+        <line x1="652" y1="66" x2="652" y2="106" stroke="#2a5c3f" stroke-width="2.5"/>
+        <text x="652" y="58" font-size="13" fill="#2a5c3f" text-anchor="middle" font-weight="700">$367</text>
+        <text x="652" y="122" font-size="10" fill="#2a5c3f" text-anchor="middle">牛市 Bull</text>
+        <text x="652" y="134" font-size="9" fill="#6b6460" text-anchor="middle">+17.6%</text>
+      </g>
+      <polygon points="396,26 390,14 402,14" fill="#0a0a0b"/>
+      <line x1="396" y1="26" x2="396" y2="80" stroke="#0a0a0b" stroke-width="1.5"/>
+      <text x="396" y="10" font-size="11" fill="#0a0a0b" text-anchor="middle" font-weight="700">盘后约$312</text>
+      <line x1="489" y1="92" x2="489" y2="112" stroke="#6b6460" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="489" y="126" font-size="9.5" fill="#6b6460" text-anchor="middle">财报前$332</text>
+      <text x="60" y="148" font-size="9.5" fill="#6b6460">分析师共识均值 $322.71（55位）—— 已低于财报前股价，说明卖方也不认为还有大空间</text>
+    </svg>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市情景</b></div>
+      <div class="sp">$254</div>
+      <div class="schg">较盘后价 −18.6%</div>
+      <div class="slogic">内存涨价持续到2027年，毛利率跌破47%；元件短缺压制新iPhone首发季出货；服务增长滑向个位数；中国份额被本土品牌侵蚀。多重压缩至 <strong>27× FY27E EPS</strong>。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准情景</b></div>
+      <div class="sp">$310</div>
+      <div class="schg">较盘后价 −0.6%</div>
+      <div class="slogic">供应约束在2027上半年缓解，毛利率守在48-49%；新iPhone周期正常兑现；服务恢复双位数增长。给予 <strong>33× FY27E EPS</strong>，接近当前水平——<strong>意味着未来12个月大概率是震荡消化，不是趋势行情。</strong></div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市情景</b></div>
+      <div class="sp">$367</div>
+      <div class="schg">较盘后价 +17.6%</div>
+      <div class="slogic">AI功能驱动换机超级周期；轻资产AI战略被市场重新定价为"高ROIC优势"而非"掉队"；中国持续+20%以上。估值重估至 <strong>39× FY27E EPS</strong>。</div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:190px">关键假设</th><th>熊市</th><th>基准</th><th>牛市</th></tr></thead>
+    <tbody>
+      <tr><td class="k">FY2027E EPS</td><td>$9.40</td><td>$9.40</td><td>$9.40</td></tr>
+      <tr><td class="k">给予 P/E 倍数</td><td>27×</td><td>33×</td><td>39×</td></tr>
+      <tr><td class="k">毛利率走向</td><td>跌破47%</td><td>守住48-49%</td><td>回升至50%+</td></tr>
+      <tr><td class="k">元件短缺缓解时点</td><td>2027下半年后</td><td>2027上半年</td><td>2026Q4即缓解</td></tr>
+      <tr><td class="k">服务业务增速</td><td>滑向个位数</td><td>恢复双位数</td><td>加速至15%+</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:var(--muted);">FY2027E EPS $9.40 为本报告推算 <span class="badge badge-predict">推算</span>：以 FY2026 前三季实际（Q1 $143.8B / Q2 $111.2B / Q3 $109.4B）加 Q4 指引中值推得全年营收约 <strong>$4,770亿</strong>，对应 FY2026E EPS 约 $8.60，再按 +9%（受内存成本压制的温和增长）外推至 FY2027E $9.40。估值倍数参考分析师共识（55位均值目标价 $322.71、"买入"占比78% <span class="badge badge-official">公开</span>）与苹果近年 28-38× 的历史区间校准。股数约 145.3 亿股（由"$344 时市值约$5万亿"反推 <span class="badge badge-predict">推算</span>）。</p>
+</div>
+
+<!-- 9 Verdict -->
+<div class="verdict">
+  <div class="verdict-en">Earnings Verdict · Executive Summary</div>
+  <div class="verdict-zh">裁决：最强的一季，最弱的一句话</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text">
+    <strong>不是业绩问题，是指引问题——而指引问题的根源是别人的AI军备竞赛。</strong>营收/EPS/iPhone/Mac 全部超预期、六月季历史最佳，却因 Q4 指引 +9~11%（共识&gt;12%）盘后跌5-6.6%。管理层把原因说得很清楚：<strong>元件短缺，且从六月季到九月季"显著加剧"</strong>。而Q4是新iPhone首发季——<strong>苹果在最该乐观的季度选择了保守。</strong>
+    <span class="v-src">依据：Q4指引+9~11% vs 共识&gt;12%；管理层"先进制程供应受限可能限制iPhone/Mac/iPad出货"</span>
+  </div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text">
+    <strong>苹果躲过了AI资本开支的坑，却被AI的供应链账单击中——这是本季最重要的结构性发现。</strong>它2026年capex仅约$135亿，四巨头合计约$7,000亿（<strong>51倍差距</strong>），所以没有FCF转负、没有折旧压毛利。<strong>但四巨头的$7,000亿把内存与先进制程的价格和产能抬走了：CFO称毛利率环比变化"超过100%由内存成本解释"，库克说"预计将付出更高的内存成本"。MU单日+15%的另一面，就是苹果的毛利率与出货量。</strong>
+    <span class="v-src">依据：Apple capex $13-14B vs Amazon $200B/MSFT $190B/GOOGL $175-185B/META $115-135B</span>
+  </div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text">
+    <strong>50.1%的毛利率靠一次性退税垫高，方向却是往下——利润质量问题在本轮财报季反复出现。</strong>毛利率超共识2.2pp来自关税退税，而结构性的内存涨价从下季开始啃食。<strong>这与上周 Alphabet 用 $980亿股权重估把EPS推到$9.11、剔除后$2.85反而未达标，是同一类问题。</strong>叠加服务($307.4亿)与大中华区($188.6亿,+22.4%)双双未达共识——<strong>两根增长支柱同时差一口气，且这一切发生在库克最后一次电话会上。</strong>
+    <span class="v-src">依据：毛利率50.1% vs 共识47.9%(关税退税)；服务/中国双miss；John Ternus 接任</span>
+  </div></div>
+</div>
+
+<div class="feedback">
+  对这份财报分析有补充或修正？ <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&report=aapl">点此反馈</a>
+</div>
+
+<!-- 10 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">管理层语气评分</span><span class="section-en">Management Tone · 54 / 100 中性偏防御</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">前瞻指引完整度 35%</span><span class="tone-bar"><span class="tone-fill green" style="width:74%"></span></span><span class="tone-val">74</span></div>
+    <div class="tone-row"><span class="tone-lab">数据透明度 35%</span><span class="tone-bar"><span class="tone-fill green" style="width:70%"></span></span><span class="tone-val">70</span></div>
+    <div class="tone-row"><span class="tone-lab">战略清晰度 30%</span><span class="tone-bar"><span class="tone-fill red" style="width:12%"></span></span><span class="tone-val">12</span></div>
+  </div>
+  <p style="font-size:13.5px;color:#3a352f;">
+    <strong>加分项</strong>：管理层对坏消息毫不遮掩——主动给出量化的Q4指引区间（+9~11%）而非模糊表述，直接点名<strong>元件短缺</strong>为原因，CFO 用"<em>超过100%由内存成本解释</em>"这种精确到归因权重的说法，库克更是直言"<em>预计将付出更高的内存成本</em>"。<strong>在能选择粉饰的时候选择了说实话，透明度值得给分。</strong><br>
+    <strong>扣分项（战略清晰度仅12分，本报告迄今最低）</strong>：<strong>整场电话会没有回答一个核心问题——苹果的AI战略到底是什么。</strong>当四家同行合计投入$7,000亿、并各自用Azure +39%、Cloud +82%这类数字证明进展时，苹果既没有给出自己的AI变现路径，也没有解释轻资产路线如何抵御这轮供应链涨价。<strong>叠加库克交棒给 John Ternus，"下一任CEO的AI答卷是什么"完全空白——这不是语气问题，是叙事真空。</strong>
+  </p>
+</div>
+
+<!-- 11 chips -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">营收$1,094亿 · 六月季历史最佳</span>
+    <span class="chip pos">EPS $2.02 超共识7.4%</span>
+    <span class="chip pos">iPhone +22%</span>
+    <span class="chip pos">Mac 大超共识（$103.5亿 vs $87.4亿）</span>
+    <span class="chip pos">大中华区 +22.4% 显著复苏</span>
+    <span class="chip pos">资本开支仅$135亿 · 无FCF转负风险</span>
+    <span class="chip neu">毛利率50.1%（含关税退税一次性）</span>
+    <span class="chip neu">库克交棒 John Ternus</span>
+    <span class="chip neu">分析师共识目标$322.71已低于财报前价</span>
+    <span class="chip neg">Q4指引 +9~11% vs 共识&gt;12%</span>
+    <span class="chip neg">元件短缺 · 九月季"显著加剧"</span>
+    <span class="chip neg">内存成本压制毛利（CFO明确归因）</span>
+    <span class="chip neg">服务未达共识（$307.4亿 vs $312.2亿）</span>
+    <span class="chip neg">中国+22.4%仍未达共识</span>
+    <span class="chip neg">AI战略叙事真空</span>
+  </div>
+</div>
+
+<!-- 12 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <thead><tr><th style="width:200px">风险项</th><th style="width:60px">概率</th><th style="width:60px">影响</th><th>监测信号</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">内存涨价持续侵蚀毛利</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>下季毛利率是否跌破48%；DRAM/NAND现货价；MU/海力士/三星的定价与产能公告——<strong>它们涨价即苹果承压</strong></td>
+      </tr>
+      <tr>
+        <td class="k">元件短缺压制新iPhone首发</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>Q4实际营收能否达到指引上沿+11%；发布会后的交付周期与备货情况；先进制程产能分配消息</td>
+      </tr>
+      <tr>
+        <td class="k">AI战略缺位导致长期掉队</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>新任CEO Ternus 首次公开AI路线图的时点与内容；与 Gemini/OpenAI 合作条款是否升级；Siri/端侧AI的实际交付</td>
+      </tr>
+      <tr>
+        <td class="k">服务增长失速</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+        <td>是否连续两季未达共识；App Store 监管与佣金压力；Google 默认搜索付费协议的反垄断风险</td>
+      </tr>
+      <tr>
+        <td class="k">中国市场竞争加剧</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td>本季+22.4%能否延续；华为/小米高端机型份额；国补政策变化</td>
+      </tr>
+      <tr>
+        <td class="k">CEO交接期的执行风险</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+        <td>Ternus 首季表现与首次指引；核心高管是否跟随变动；产品路线是否调整</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:#3a352f;margin-top:8px;">
+    <strong>双高风险</strong>：「内存涨价侵蚀毛利」与「元件短缺压制新iPhone首发」概率与影响双高，且<strong>二者同源——都是四巨头$7,000亿AI基建挤占供应链的结果</strong>，已在裁决框中体现。这也意味着：<strong>观察苹果的最佳先行指标，反而是内存厂商的价格公告，而不是苹果自己的产品发布会。</strong>
+  </p>
+</div>
+
+<!-- 13 分析师 Q&A 张力 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分析师 Q&amp;A 张力区域</span><span class="section-en">Points of Tension</span></div>
+  <table>
+    <thead><tr><th style="width:220px">追问方向</th><th>管理层回应</th><th style="width:80px">张力</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="k">Q4指引为何低于预期？</td>
+        <td>归因元件短缺；明确表示<strong>先进制程供应受限可能限制 iPhone/Mac/iPad 出货</strong>，且约束从六月季到九月季<strong>"显著加剧"</strong></td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+      </tr>
+      <tr>
+        <td class="k">毛利率能守住吗？</td>
+        <td>CFO Parekh：「<em>超过100%的环比毛利率变化由内存成本解释，汇率影响较小</em>」；库克：「<em>我们预计将付出更高的内存成本</em>」——<strong>等于承认下行压力将持续</strong></td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+      </tr>
+      <tr>
+        <td class="k">苹果的AI战略是什么？</td>
+        <td><strong>未给出实质路线图</strong>。在同行以Azure +39%、Cloud +82%证明AI变现的对照下，苹果既未披露AI收入贡献，也未说明轻资产路线如何应对供应链涨价</td>
+        <td style="color:var(--red);font-weight:700;">高</td>
+      </tr>
+      <tr>
+        <td class="k">服务与中国为何双双未达？</td>
+        <td>强调中国从$154亿增至$188.6亿（+22.4%）的复苏幅度、各地区均双位数增长，但未直接回应与共识的差距</td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+      </tr>
+      <tr>
+        <td class="k">CEO交接如何保障连续性？</td>
+        <td>库克称交接"<em>正在无缝推进</em>"，对 Ternus 接任表示期待；<strong>但未涉及战略重点是否调整</strong></td>
+        <td style="color:var(--amber);font-weight:700;">中</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:#3a352f;margin-top:8px;">
+    <strong>最大张力点</strong>：管理层在<strong>成本与供应</strong>问题上极其坦诚（甚至主动加码坏消息），却在<strong>AI战略</strong>上保持沉默。<strong>市场对前者可以定价（所以跌6%），对后者无法定价（所以给不出估值溢价）——这正是苹果当前"不便宜也不贵、易震荡难突破"的根本原因。</strong>
+  </p>
+</div>
+
+<!-- 14 Footer -->
+<div class="footer">
+  Apple Inc. (AAPL) · Q3 FY2026 Earnings Analysis · Generated by Earner (Earnings Copilot) on 2026-07-31.<br>
+  一手来源：Apple Q3 FY2026 财报新闻稿与 8-K（SEC EDGAR）、Q3 FY2026 业绩电话会记录（库克/CFO Kevan Parekh 发言）。<br>
+  二手来源：CNBC / Bloomberg / Yahoo Finance / Investing.com / 9to5Mac / MacObserver / Six Colors / FXLeaders / GuruFocus / Fast Company / ValueAddVC 等公开报道（2026-07-30 至 07-31）。<br>
+  标注【推算】者为分析推断：FY2027E EPS $9.40、股数约145.3亿股、穿戴/家居/配件分部$78.9亿（由总营收减已披露分部倒推）、去年同期EPS $1.57（由+29%反推）。<br>
+  盘后股价为区间参考（报道口径 -5% 至 -6.6%，跌破 $317.50，日内区间 $305.07-$337.00），最终收盘价以次日交易为准。<br>
+  本报告为研究分析，不构成投资建议。
+</div>
+
+</body>
+</html>
