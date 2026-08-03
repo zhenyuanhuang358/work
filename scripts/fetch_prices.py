@@ -5,7 +5,7 @@ Saves to stock_prices.json.
 
 Tickers tracked:
   Equities (Finnhub):  22 tickers - indices/megacaps/mid-price CSP-friendly names
-  Indices (yfinance):  ^VIX (CBOE VIX)  ^TNX (10-year Treasury yield)
+  Indices (yfinance):  ^VIX ^VIX9D ^VIX3M ^SKEW ^VVIX ^TNX — 含尾部风险定价指标
 """
 
 import os
@@ -37,6 +37,11 @@ EQUITY_TICKERS = [
 INDEX_TICKERS = {
     "^VIX": "vix",
     "^TNX": "treasury_10y",
+    # 尾部风险定价指标（tail-risk-monitor skill 使用）
+    "^VIX9D": "vix9d",      # 9日VIX，短端恐慌
+    "^VIX3M": "vix3m",      # 3月VIX，用于期限结构
+    "^SKEW": "skew",        # CBOE SKEW，价外put相对定价 = 尾部保护的价格
+    "^VVIX": "vvix",        # 波动率的波动率 = VIX期权的贵贱
 }
 
 
@@ -92,7 +97,7 @@ def fetch_equity_yfinance(ticker: str) -> dict | None:
 
 
 def fetch_index_yfinance(yf_symbol: str) -> float | None:
-    """Fetch a single index value (VIX, TNX) via yfinance."""
+    """Fetch a single index value (VIX, TNX, SKEW, VVIX...) via yfinance."""
     if not HAS_YFINANCE:
         return None
     try:
@@ -128,7 +133,7 @@ def main():
             print("FAILED")
         time.sleep(0.2)
 
-    print("\nFetching indices (VIX + 10yr Treasury)...")
+    print("\nFetching indices (VIX term structure + SKEW + VVIX + 10yr)...")
     index_data = {}
     for yf_symbol, key in INDEX_TICKERS.items():
         print(f"  {yf_symbol}...", end=" ")
@@ -140,10 +145,28 @@ def main():
             print("FAILED")
         time.sleep(0.3)
 
+    # 尾部风险衍生指标（由原始指标计算，供 tail-risk-monitor 直接读取）
+    vix, vix9d, vix3m = (index_data.get(k) for k in ("vix", "vix9d", "vix3m"))
+    term_structure = None
+    if vix and vix3m:
+        # >1 = backwardation（近月高于远月）= 市场在为眼前的风险付钱 = 压力信号
+        term_structure = round(vix / vix3m, 3)
+    short_end = None
+    if vix9d and vix:
+        short_end = round(vix9d / vix, 3)
+
     output = {
         "updated_at": _now(),
-        "vix": index_data.get("vix"),
+        "vix": vix,
         "treasury_10y": index_data.get("treasury_10y"),
+        "tail_risk": {
+            "vix9d": vix9d,
+            "vix3m": vix3m,
+            "skew": index_data.get("skew"),
+            "vvix": index_data.get("vvix"),
+            "term_structure": term_structure,   # VIX / VIX3M
+            "short_end_ratio": short_end,       # VIX9D / VIX
+        },
         "prices": prices,
     }
 
@@ -151,9 +174,10 @@ def main():
         json.dump(output, f, indent=2)
 
     n_ok = len(prices)
+    n_idx = len(index_data)
     print(f"\nDone. {n_ok}/{len(EQUITY_TICKERS)} equities, "
-          f"VIX={'✓' if index_data.get('vix') else '✗'}, "
-          f"10yr={'✓' if index_data.get('treasury_10y') else '✗'}")
+          f"{n_idx}/{len(INDEX_TICKERS)} indices, "
+          f"term_structure={term_structure}, skew={index_data.get('skew')}")
 
 
 if __name__ == "__main__":
