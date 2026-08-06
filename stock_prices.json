@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-05T22:16:59.642603Z",
+  "updated_at": "2026-08-06T05:08:24.429617Z",
   "vix": 15.81,
   "treasury_10y": 4.62,
   "tail_risk": {
@@ -130,6 +130,14 @@
       "high": 282.5,
       "low": 270,
       "prevClose": 269.93
+    },
+    "SNDK": {
+      "price": 1350.5,
+      "change": -77.12,
+      "changePct": -5.4,
+      "high": 1441.76,
+      "low": 1345,
+      "prevClose": 1427.62
     },
     "SOFI": {
       "price": 18.25,

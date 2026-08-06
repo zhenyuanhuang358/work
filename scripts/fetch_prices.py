@@ -4,7 +4,7 @@ Fetches equity prices via Finnhub API + VIX/Treasury via yfinance.
 Saves to stock_prices.json.
 
 Tickers tracked:
-  Equities (Finnhub):  22 tickers - indices/megacaps/mid-price CSP-friendly names
+  Equities (Finnhub):  23 tickers - indices/megacaps/mid-price CSP-friendly names
   Indices (yfinance):  ^VIX ^VIX9D ^VIX3M ^SKEW ^VVIX ^TNX — 含尾部风险定价指标
 """
 
@@ -29,7 +29,7 @@ EQUITY_TICKERS = [
     # 指数/大盘
     "SPY", "QQQ", "IWM", "GLD", "SLV", "TLT", "XLE",
     # 大盘股（价差策略用）
-    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT",
+    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT", "SNDK",
     # 中低价高流动性（小账户CSP友好带：股价20-80美元）
     "SOFI", "HOOD", "INTC", "F", "UBER", "T", "KO",
 ]
@@ -97,7 +97,7 @@ def fetch_equity_yfinance(ticker: str) -> dict | None:
 
 
 def fetch_index_yfinance(yf_symbol: str) -> float | None:
-    """Fetch a single index value (VIX, TNX) via yfinance."""
+    """Fetch a single index value (VIX, TNX, SKEW, VVIX...) via yfinance."""
     if not HAS_YFINANCE:
         return None
     try:
@@ -133,7 +133,7 @@ def main():
             print("FAILED")
         time.sleep(0.2)
 
-    print("\nFetching indices (VIX + 10yr Treasury)...")
+    print("\nFetching indices (VIX term structure + SKEW + VVIX + 10yr)...")
     index_data = {}
     for yf_symbol, key in INDEX_TICKERS.items():
         print(f"  {yf_symbol}...", end=" ")
@@ -174,9 +174,10 @@ def main():
         json.dump(output, f, indent=2)
 
     n_ok = len(prices)
+    n_idx = len(index_data)
     print(f"\nDone. {n_ok}/{len(EQUITY_TICKERS)} equities, "
-          f"VIX={'✓' if index_data.get('vix') else '✗'}, "
-          f"10yr={'✓' if index_data.get('treasury_10y') else '✗'}")
+          f"{n_idx}/{len(INDEX_TICKERS)} indices, "
+          f"term_structure={term_structure}, skew={index_data.get('skew')}")
 
 
 if __name__ == "__main__":

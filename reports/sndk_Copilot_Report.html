@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sandisk (SNDK) Q4 FY2026 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:26px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:29px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:150px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.qa{border-left:3px solid var(--copper);padding:10px 16px;margin:14px 0;background:var(--card);}
+.qa .qq{font-weight:700;font-size:14px;color:var(--ink);}
+.qa .qa-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;font-style:italic;color:var(--copper);letter-spacing:.5px;}
+.qa .aa{font-size:13.5px;color:#3a352f;margin-top:5px;}
+.feedback{text-align:center;margin:22px 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .chart-grid2,.sc-grid{grid-template-columns:1fr;}
+  .title-zh{font-size:24px;} body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>Sandisk Corporation (NASDAQ: SNDK)</span>
+  <span>Q4 FY2026 &amp; 全年 · 财报日 2026-08-05（盘后 16:05 ET）</span>
+  <span>分析日 2026-08-06</span>
+  <span><b>半导体史上最极端的一个季度</b></span>
+</div>
+
+<!-- 2 双语标题 + 标签行 -->
+<div class="title-block">
+  <div class="title-en">Sandisk Q4 FY2026 — A 84.6% Gross Margin on a Commodity, and a 7.5× Forward P/E. Both Are Telling the Truth.</div>
+  <div class="title-zh">闪迪四季报：大宗商品做出 84.6% 毛利率<br>市场却只给 7.5 倍前瞻市盈率</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性 Neutral · 观望</span>
+    <span class="tag amber">语气评分 72 / 100 乐观偏谨慎</span>
+    <span class="tag green">营收 +372% · EPS 超预期 13.7%</span>
+    <span class="tag red">Q1指引中值低于共识 2.5%</span>
+    <span class="tag red">当日 −5.4% · 盘后再跌 3.5%~8%</span>
+    <span class="tag">数据截止 2026-08-06</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num green">$89.65亿</div><div class="lab">Q4营收<span class="en">+372% YoY · +51% QoQ · 共识 $83.9亿</span></div></div>
+  <div class="stat"><div class="num green">84.6%</div><div class="lab">非GAAP毛利率<span class="en">指引 79-81% · 去年同期 26.4%</span></div></div>
+  <div class="stat"><div class="num green">$39.25</div><div class="lab">非GAAP摊薄EPS<span class="en">共识 $34.52 · 超预期 13.7%</span></div></div>
+  <div class="stat"><div class="num red">$105.5亿</div><div class="lab">Q1 FY27 指引中值<span class="en">共识 $108.2亿 · 低 2.5%</span></div></div>
+</div>
+
+<!-- 数据口径声明 -->
+<div class="notice red">
+  <div class="nt">⚠ 先说清楚三件事，否则下面的数字会被误读</div>
+  <strong>一、股价口径。</strong>本报告使用的 <strong>$1,350.50</strong> 是 <strong>8月5日常规交易时段收盘价</strong>（当日 −5.40%，来自本系统 GitHub 价格缓存，抓取时间 2026-08-06 05:08 UTC，已核实）。财报在<strong>收盘后</strong>发布，因此这个价格<strong>不包含财报反应</strong>。公开报道显示盘后再跌 <strong>3.5% 至 8%</strong>、一度跌破 $1,300 —— 该盘后价<strong>未经本系统缓存核实</strong>，全文凡涉及盘后价一律标注为公开报道口径。<br>
+  <strong>二、分部拆分。</strong>Edge（边缘）与 Consumer（消费）全年数字中，Consumer 全年 <strong>$29.38亿</strong> 系由「总额 − 数据中心 − Edge」倒算，非公司直接披露。<br>
+  <strong>三、电话会 Q&amp;A。</strong>本次尝试抓取 SEC、公司IR、Alphastreet、Benzinga 等六个逐字记录源，<strong>全部返回 403</strong>。第13节的 Q&amp;A 张力为<strong>依据公开报道重构的应问清单</strong>，不是逐字实录，已在该节顶部标注。
+</div>
+
+<!-- 4 季度营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">季度营收走势</span><span class="section-en">Quarterly Revenue · 7 Quarters</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">Sandisk 季度营收（十亿美元）· 财年口径，最后一根为 Q1 FY27 指引中值</div>
+    <svg viewBox="0 0 800 250" font-family="'IM Fell English',Georgia,serif">
+      <line x1="52" y1="16" x2="52" y2="195" stroke="#d4cec6"/>
+      <line x1="52" y1="195" x2="780" y2="195" stroke="#d4cec6"/>
+      <line x1="52" y1="105.5" x2="780" y2="105.5" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="52" y1="16" x2="780" y2="16" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <text x="46" y="199" font-size="9" fill="#6b6460" text-anchor="end">0</text>
+      <text x="46" y="109" font-size="9" fill="#6b6460" text-anchor="end">6.0</text>
+      <text x="46" y="20" font-size="9" fill="#6b6460" text-anchor="end">12.0</text>
+      <g>
+        <rect x="76"  y="169.64" width="84" height="25.36"  fill="#8b6c42" opacity="0.45"/>
+        <rect x="176" y="166.66" width="84" height="28.34"  fill="#8b6c42" opacity="0.45"/>
+        <rect x="276" y="160.54" width="84" height="34.46"  fill="#8b6c42" opacity="0.55"/>
+        <rect x="376" y="149.80" width="84" height="45.20"  fill="#8b6c42" opacity="0.65"/>
+        <rect x="476" y="106.25" width="84" height="88.75"  fill="#8b6c42" opacity="0.8"/>
+        <rect x="576" y="61.27"  width="84" height="133.73" fill="#2a5c3f"/>
+        <rect x="676" y="37.63"  width="84" height="157.37" fill="none" stroke="#c47a1e" stroke-width="2" stroke-dasharray="5,3"/>
+      </g>
+      <g font-size="11.5" fill="#0a0a0b" text-anchor="middle" font-weight="700">
+        <text x="118" y="162.6">1.70</text>
+        <text x="218" y="159.7">1.90</text>
+        <text x="318" y="153.5">2.31</text>
+        <text x="418" y="142.8">3.03</text>
+        <text x="518" y="99.2">5.95</text>
+        <text x="618" y="54.3" fill="#2a5c3f">8.97</text>
+        <text x="718" y="30.6" fill="#c47a1e">10.55E</text>
+      </g>
+      <g font-size="9.5" fill="#6b6460" text-anchor="middle">
+        <text x="118" y="211">Q3 FY25</text><text x="218" y="211">Q4 FY25</text><text x="318" y="211">Q1 FY26</text>
+        <text x="418" y="211">Q2 FY26</text><text x="518" y="211">Q3 FY26</text><text x="618" y="211">Q4 FY26</text>
+        <text x="718" y="211">Q1 FY27</text>
+        <text x="118" y="222">(25年3月)</text><text x="218" y="222">(25年6月)</text><text x="318" y="222">(25年9月)</text>
+        <text x="418" y="222">(25年12月)</text><text x="518" y="222">(26年3月)</text><text x="618" y="222">(26年6月)</text>
+        <text x="718" y="222" fill="#c47a1e">指引中值</text>
+      </g>
+      <text x="618" y="240" font-size="10.5" fill="#2a5c3f" text-anchor="middle" font-weight="700">同比 +372% · 环比 +51%</text>
+      <text x="52" y="240" font-size="9.5" fill="#6b6460">全年 FY2026 营收 $202.48亿，同比 +175%</text>
+    </svg>
+  </div>
+  <div class="notice">
+    <div class="nt">这条曲线最重要的一句话：管理层说环比 51% 的增长里，约三分之一来自出货量，约三分之二来自价格</div>
+    价格是<strong>会均值回归</strong>的那一半，出货量是<strong>不会</strong>的那一半。整份财报的多空分歧，全部压在这个 1:2 的拆分上。
+  </div>
+</div>
+
+<!-- 5 分部营收 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分部营收拆分</span><span class="section-en">Revenue by End Market · FY2026</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">FY2026 全年分部营收（十亿美元）与同比增速</div>
+    <svg viewBox="0 0 800 180" font-family="'IM Fell English',Georgia,serif">
+      <line x1="170" y1="10" x2="170" y2="150" stroke="#d4cec6"/>
+      <rect x="170" y="20" width="467.6" height="30" fill="#8b6c42"/>
+      <text x="164" y="39" font-size="12" fill="#0a0a0b" text-anchor="end">Edge 边缘</text>
+      <text x="647.6" y="39" font-size="12" fill="#0a0a0b" font-weight="700">$121.57亿</text>
+      <text x="176" y="39" font-size="11" fill="#faf8f4" font-weight="700">同比 +195%</text>
+
+      <rect x="170" y="66" width="198.2" height="30" fill="#2a5c3f"/>
+      <text x="164" y="85" font-size="12" fill="#0a0a0b" text-anchor="end">Datacenter 数据中心</text>
+      <text x="378.2" y="85" font-size="12" fill="#0a0a0b" font-weight="700">$51.53亿</text>
+      <text x="176" y="85" font-size="11" fill="#faf8f4" font-weight="700">同比 +437%</text>
+
+      <rect x="170" y="112" width="113.0" height="30" fill="#8b2e2e"/>
+      <text x="164" y="131" font-size="12" fill="#0a0a0b" text-anchor="end">Consumer 消费</text>
+      <text x="293.0" y="131" font-size="12" fill="#0a0a0b" font-weight="700">$29.38亿</text>
+      <text x="303" y="131" font-size="10" fill="#8b2e2e" font-weight="700">（倒算值 · Q4 环比 −32%）</text>
+
+      <text x="170" y="168" font-size="9.5" fill="#6b6460">Edge = 可移动与嵌入式闪存（手机/PC/车载）；Consumer = 零售自有品牌；数据中心 = 企业级 SSD</text>
+    </svg>
+  </div>
+
+  <table>
+    <tr><th>分部</th><th>Q4 FY26 营收</th><th>环比</th><th>FY2026 全年</th><th>同比</th><th>读法</th></tr>
+    <tr><td class="k">Datacenter 数据中心</td><td>$29.80亿</td><td><span style="color:#2a5c3f;font-weight:700">环比翻倍以上</span></td><td>$51.53亿</td><td><span style="color:#2a5c3f;font-weight:700">+437%</span></td><td>AI 推理侧存储的直接受益，是这轮周期的发动机<span class="badge badge-official">已披露</span></td></tr>
+    <tr><td class="k">Edge 边缘</td><td>$54.29亿<span class="badge badge-predict">倒算</span></td><td>约 +47%<span class="badge badge-predict">倒算</span></td><td>$121.57亿</td><td><span style="color:#2a5c3f;font-weight:700">+195%</span></td><td>体量最大，但增长主要来自单价而非终端出货量</td></tr>
+    <tr><td class="k">Consumer 消费</td><td>$5.56亿</td><td><span style="color:#8b2e2e;font-weight:700">−32%</span></td><td>$29.38亿<span class="badge badge-predict">倒算</span></td><td>—</td><td><span style="color:#8b2e2e;font-weight:700">全场唯一在萎缩的分部，也是全场最重要的一个信号</span><span class="badge badge-official">已披露</span></td></tr>
+  </table>
+
+  <div class="notice red">
+    <div class="nt">消费分部环比 −32%，是这份财报里唯一一个「需求端在说话」的数字</div>
+    数据中心和 Edge 的客户是超大规模厂商与设备厂，他们<strong>没有不买的选择</strong>——不买就没法交付 AI 产品。消费分部的客户是<strong>你我</strong>，买一张存储卡、一个移动固态盘，<strong>可以选择不买、或者买小一点的容量</strong>。<br>
+    所以：<strong>消费分部是整个 NAND 价格体系里唯一一个「需求弹性」能被观测到的地方，而它正在以每季三分之一的速度塌陷。</strong>这不是这个分部本身重要（它在 Q4 只占营收 6.2%，全年口径 14.5%），而是它是<strong>价格开始摧毁自身需求的第一个证据</strong>。等这个弹性传导到 Edge 和数据中心，价格拐点就到了。
+  </div>
+</div>
+
+<!-- 6 EPS 对比 + 毛利率走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">EPS 对比与毛利率走势</span><span class="section-en">EPS vs Consensus · Gross Margin Trajectory</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">非GAAP 摊薄 EPS：共识 vs 实际（美元）</div>
+      <svg viewBox="0 0 400 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="50" y1="14" x2="50" y2="170" stroke="#d4cec6"/>
+        <line x1="50" y1="170" x2="380" y2="170" stroke="#d4cec6"/>
+        <rect x="100" y="54.9" width="80" height="115.1" fill="#8b6c42" opacity="0.5"/>
+        <rect x="240" y="39.2" width="80" height="130.8" fill="#2a5c3f"/>
+        <text x="140" y="48" font-size="17" fill="#0a0a0b" text-anchor="middle" font-weight="700">$34.52</text>
+        <text x="280" y="32" font-size="17" fill="#2a5c3f" text-anchor="middle" font-weight="700">$39.25</text>
+        <text x="140" y="186" font-size="11" fill="#6b6460" text-anchor="middle">市场共识</text>
+        <text x="280" y="186" font-size="11" fill="#6b6460" text-anchor="middle">实际</text>
+        <text x="140" y="199" font-size="9" fill="#6b6460" text-anchor="middle">Consensus</text>
+        <text x="280" y="199" font-size="9" fill="#6b6460" text-anchor="middle">Actual</text>
+        <text x="210" y="219" font-size="12.5" fill="#2a5c3f" text-anchor="middle" font-weight="700">超预期 +13.7%</text>
+        <text x="50" y="219" font-size="9" fill="#6b6460">去年同期 $0.29</text>
+      </svg>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">非GAAP 毛利率走势（%）· 虚线段为 Q1 FY27 指引中值</div>
+      <svg viewBox="0 0 800 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="60" y1="20" x2="60" y2="190" stroke="#d4cec6"/>
+        <line x1="60" y1="190" x2="770" y2="190" stroke="#d4cec6"/>
+        <line x1="60" y1="133.3" x2="770" y2="133.3" stroke="#d4cec6" stroke-dasharray="4,3"/>
+        <line x1="60" y1="76.7" x2="770" y2="76.7" stroke="#d4cec6" stroke-dasharray="4,3"/>
+        <line x1="60" y1="20" x2="770" y2="20" stroke="#d4cec6" stroke-dasharray="4,3"/>
+        <text x="54" y="194" font-size="9" fill="#6b6460" text-anchor="end">0</text>
+        <text x="54" y="137" font-size="9" fill="#6b6460" text-anchor="end">30</text>
+        <text x="54" y="80" font-size="9" fill="#6b6460" text-anchor="end">60</text>
+        <text x="54" y="24" font-size="9" fill="#6b6460" text-anchor="end">90</text>
+        <polyline points="90,140.13 218,129.56 346,93.48 474,41.91 602,30.20" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+        <polyline points="602,30.20 730,31.33" fill="none" stroke="#c47a1e" stroke-width="2.5" stroke-dasharray="6,4"/>
+        <g fill="#8b6c42">
+          <circle cx="90" cy="140.13" r="4.5" fill="#8b2e2e"/>
+          <circle cx="218" cy="129.56" r="4" fill="#faf8f4" stroke="#8b6c42" stroke-width="2"/>
+          <circle cx="346" cy="93.48" r="4.5"/>
+          <circle cx="474" cy="41.91" r="4.5"/>
+          <circle cx="602" cy="30.20" r="5.5" fill="#2a5c3f"/>
+          <circle cx="730" cy="31.33" r="4.5" fill="#faf8f4" stroke="#c47a1e" stroke-width="2"/>
+        </g>
+        <g font-size="11.5" fill="#0a0a0b" text-anchor="middle" font-weight="700">
+          <text x="90" y="158" fill="#8b2e2e">26.4</text>
+          <text x="218" y="121" fill="#6b6460">32†</text>
+          <text x="346" y="85">51.1</text>
+          <text x="474" y="33">78.4</text>
+          <text x="602" y="21" fill="#2a5c3f">84.6</text>
+          <text x="730" y="49" fill="#c47a1e">84.0E</text>
+        </g>
+        <g font-size="9.5" fill="#6b6460" text-anchor="middle">
+          <text x="90" y="207">Q4 FY25</text><text x="218" y="207">Q1 FY26</text><text x="346" y="207">Q2 FY26</text>
+          <text x="474" y="207">Q3 FY26</text><text x="602" y="207">Q4 FY26</text><text x="730" y="207">Q1 FY27</text>
+        </g>
+        <text x="90" y="172" font-size="9" fill="#8b2e2e" text-anchor="middle">周期底</text>
+        <text x="60" y="225" font-size="9" fill="#6b6460">† Q1 FY26 毛利率为推算值（由营收与非GAAP EPS $1.22 反推），非公司直接披露</text>
+      </svg>
+    </div>
+  </div>
+  <div class="notice">
+    <div class="nt">毛利率曲线的形状本身就是答案</div>
+    四个季度从 <strong>26.4% 走到 84.6%</strong>，这不是效率改善能做到的——一家公司不可能在一年内把成本砍掉四分之三。<strong>这 58 个百分点几乎全部是售价上涨</strong>。而指引给的 83-85%（中值 84.0%）意味着管理层自己认为<strong>这条线已经平了</strong>。<br>
+    <strong>一条平掉的毛利率曲线，在周期股里从来不是「稳定」的意思，而是「见顶」的意思。</strong>
+  </div>
+</div>
+
+<!-- 7 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心分析</span><span class="section-en">Core Analysis · Four Threads</span></div>
+
+  <div class="para">
+    <span class="label-zh">一、7.5 倍前瞻市盈率不是便宜，是市场对「E」的不信任投票</span>
+    <span class="label-en">A 7.5× Forward P/E Is Not Cheap — It Is a Vote of No Confidence in the E</span>
+    <p>按 8月5日收盘价 $1,350.50、摊薄股数 1.569亿股计算，市值约 <strong>$2,119亿</strong>；扣除现金 $47.62亿、且长期负债已清零，企业价值约 <strong>$2,072亿</strong>。若把 Q1 FY27 指引中值 EPS $45 简单年化（$180），前瞻市盈率仅 <strong>7.5 倍</strong>；而按 FY2026 全年非GAAP EPS 约 $67.7<span class="badge badge-predict">推算</span>计算，追溯市盈率是 <strong>约 20 倍</strong>（该全年 EPS 中 Q1 $1.22、Q2 $6.20、Q4 $39.25 为已披露值，Q3 约 $21 系由 GAAP 净利环比口径推算，故追溯倍数为约数）。</p>
+    <p>从 20 倍塌到 7.5 倍——<strong>这个塌陷本身就是市场的结论</strong>。一只股票的前瞻市盈率显著低于追溯市盈率，只可能是两种情况：要么市场犯了错，要么<strong>市场认为分母（盈利）会掉下来</strong>。周期股的历史上，后者的胜率高得多。<strong>7.5 倍不是「便宜到不可思议」，而是市场用最标准的方式，为一个它认为会腰斩的盈利流定价。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">二、卖方在为「E」建模，市场在为「E 会消失」定价——这个裂口有 40%</span>
+    <span class="label-en">The Sell Side Models the E; the Tape Discounts It. The Gap Is 40%.</span>
+    <p>财报前的分析师目标价：富国银行 $1,620（7月22日上调）、高盛 $2,200（7月5日）、瑞穗 $2,200、花旗 $2,500、美银 $2,500、Susquehanna $3,050（7月23日<strong>下调</strong>）。中位数在 <strong>$2,200–2,500</strong> 区间。而股票收在 <strong>$1,350.50</strong>，盘后据报跌破 $1,300。</p>
+    <p><strong>卖方比市场高出 40% 到 45%。</strong>这不是常见的乐观偏差幅度，而是两个阵营在对同一个问题给出相反答案：<strong>卖方在用当前盈利乘一个正常倍数；市场在赌当前盈利根本不该被乘。</strong>值得注意的是，这份财报的当季数字<strong>全面超越卖方模型</strong>，股价却还是跌了——这说明分歧不在「这季赚了多少」，而在「这个赚法能持续几季」。<strong>当一份超预期 13.7% 的财报换来盘后 8% 的下跌，市场已经把话说得很清楚了。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">三、真正变了的东西是 NBM，它可能是 NAND 历史上第一次拥有合约化收入</span>
+    <span class="label-en">What Genuinely Changed: NBM Gives NAND Contracted Revenue for the First Time</span>
+    <p>看空的论据都指向价格周期，但有一件事是<strong>结构性的、而且是真的</strong>：新商业模式（New Business Model, NBM）。四月电话会宣布了首批 5 份协议，本季<strong>再签 5 份</strong>（其中 3 份是<strong>新客户</strong>、2 份是既有协议扩容），合计 <strong>10 份</strong>，期限最长 5 年。</p>
+    <p>关键在条款不是意向书：首批五份协议的<strong>财务担保总额超过 $110亿</strong>，含 <strong>$4亿预付款</strong>，并由第三方金融工具背书——<strong>客户不提货也要赔偿闪迪</strong>。Q3 签的三份合同带来 <strong>$420亿的最低合同收入（剩余履约义务）</strong>。管理层称 <strong>FY2027 超过三分之一的位元出货已被锁定</strong>，且定价同时含固定与浮动成分，价格上行时仍能吃到。</p>
+    <p><strong>NAND 从来是全球最典型的大宗商品：没有合约、没有可见度、价格由现货决定。NBM 如果坐实，它把这门生意的三分之一变成了「有合同的生意」。</strong>这是牛市情景唯一站得住脚的支点——不是「价格会一直高」，而是「即使价格跌，三分之一的量有合同兜底」。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">四、位元增长「中双位数」，而理由是库存高企——这是全场最不该被忽略的一句话</span>
+    <span class="label-en">Mid-Teens Bit Growth, Constrained by Elevated Inventory — the Most Underrated Line of the Call</span>
+    <p>管理层给出 FY2027 <strong>可售位元增长仅中双位数（mid-teens）</strong>，理由是<strong>库存水平偏高</strong>。把这句话和收入指引放在一起看：Q1 FY27 指引中值 $105.5亿，环比 <strong>+17.7%</strong>。如果全年位元只增长 15% 左右，那么<strong>收入增长里超过绝大部分依然要靠价格</strong>——和 Q4 那个「三分之二靠价格」的结构<strong>没有改善</strong>。</p>
+    <p>更值得警惕的是给出的<strong>理由</strong>。如果限制来自产能不足，那是好消息（供给紧张支撑价格）。但管理层说的是<strong>库存高</strong>——公司口径是为支撑 NBM 而<strong>主动</strong>维持高库存天数。这个解释可以成立，但它同时打开了另一种读法：<strong>渠道和客户手上的货已经不少了。</strong>在存储行业，库存从来是最领先的转折指标，而且它领先于价格。<strong>「消费分部环比 −32%」＋「库存高企」＋「位元增速降至中双位数」，这三个数字如果指向同一件事，那件事叫需求见顶。</strong></p>
+  </div>
+
+  <div class="notice green">
+    <div class="nt">跨标的闭环：这份财报是我们上一份苹果财报分析的另一端</div>
+    2026-07-31 的苹果 Q3 FY2026 分析里，CFO Kevan Parekh 的原话是「<strong>毛利率的环比变化超过100%由内存成本解释</strong>」，库克补了一句「<strong>我们预计将付出更高的内存成本</strong>」。<br>
+    <strong>闪迪这 84.6% 的毛利率，就是苹果那段毛利率压缩本身。</strong>同一笔钱，从设备厂的利润表转移到了存储厂的利润表，只是换了个方向看。当时那份报告的结论是「观察苹果的最佳先行指标反而是内存厂商的价格公告」——现在这个先行指标发布了，它说的是：<strong>转移仍在进行，但转移的规模已经大到让最价格敏感的那一端（闪迪自己的消费分部）先撑不住了。</strong>
+  </div>
+</div>
+
+<!-- 8 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">目标价三情景</span><span class="section-en">Three-Scenario Price Target</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">12个月目标价区间（美元）· 箭头为 8月5日收盘价 $1,350.50</div>
+    <svg viewBox="0 0 800 170" font-family="'IM Fell English',Georgia,serif">
+      <line x1="80" y1="95" x2="760" y2="95" stroke="#d4cec6" stroke-width="2"/>
+      <rect x="98.9" y="86" width="313.5" height="18" fill="#8b2e2e" opacity="0.18"/>
+      <rect x="412.4" y="86" width="324.9" height="18" fill="#2a5c3f" opacity="0.18"/>
+
+      <line x1="98.9" y1="76" x2="98.9" y2="114" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="98.9" y="68" font-size="15" fill="#8b2e2e" text-anchor="middle" font-weight="700">$650</text>
+      <text x="98.9" y="131" font-size="11" fill="#8b2e2e" text-anchor="middle">熊市 Bear</text>
+      <text x="98.9" y="144" font-size="10" fill="#6b6460" text-anchor="middle">−51.9%</text>
+
+      <line x1="412.4" y1="76" x2="412.4" y2="114" stroke="#8b6c42" stroke-width="3"/>
+      <text x="412.4" y="68" font-size="15" fill="#8b6c42" text-anchor="middle" font-weight="700">$1,480</text>
+      <text x="412.4" y="131" font-size="11" fill="#8b6c42" text-anchor="middle">基准 Base</text>
+      <text x="412.4" y="144" font-size="10" fill="#6b6460" text-anchor="middle">+9.6%</text>
+
+      <line x1="737.3" y1="76" x2="737.3" y2="114" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="737.3" y="68" font-size="15" fill="#2a5c3f" text-anchor="middle" font-weight="700">$2,340</text>
+      <text x="737.3" y="131" font-size="11" fill="#2a5c3f" text-anchor="middle">牛市 Bull</text>
+      <text x="737.3" y="144" font-size="10" fill="#6b6460" text-anchor="middle">+73.3%</text>
+
+      <polygon points="363.5,38 357,26 370,26" fill="#0a0a0b"/>
+      <line x1="363.5" y1="38" x2="363.5" y2="86" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="363.5" y="20" font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="700">现价 $1,350.50</text>
+
+      <text x="80" y="163" font-size="9" fill="#6b6460">卖方目标价中位数 $2,200–2,500（财报前），显著高于本报告基准情景——分歧点见第七节第二段</text>
+    </svg>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">Bear<b>熊市情景</b></div>
+      <div class="sp">$650</div>
+      <div class="schg">较现价 −51.9%</div>
+      <div class="slogic">CY2027 上半年 NAND 价格见顶回落：长江存储与合肥长鑫（CXMT）产能落地叠加超大规模厂商进入消化期，价格快速回吐。非GAAP毛利率退回 50% 一线，FY2028 EPS 约 $65，给 10 倍。<br><strong>EPS 假设 $65 · P/E 10×</strong></div>
+    </div>
+    <div class="sc base">
+      <div class="sname">Base<b>基准情景</b></div>
+      <div class="sp">$1,480</div>
+      <div class="schg">较现价 +9.6%</div>
+      <div class="slogic">FY2027 全年指引大体兑现，周期在年中见顶后转为平台期而非崩塌，NBM 合约为三分之一的量托底。正常化年度 EPS 约 $148（低于指引年化的 $180），给 10 倍周期峰值倍数。<br><strong>EPS 假设 $148 · P/E 10×</strong></div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">Bull<b>牛市情景</b></div>
+      <div class="sp">$2,340</div>
+      <div class="schg">较现价 +73.3%</div>
+      <div class="slogic">NBM 覆盖率从三分之一升至过半，市场承认这不再是纯大宗商品生意并给出高于周期股的倍数；AI 推理侧存储需求延续到 FY2028。FY2027 EPS $195，给 12 倍。<br><strong>EPS 假设 $195 · P/E 12×</strong></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="color:#e8a0a0">熊市</th><th style="color:#e8c98a">基准</th><th style="color:#a0d0b4">牛市</th></tr>
+    <tr><td class="k">FY2027 NAND 均价走势</td><td>年中见顶，下半年回吐 30%+</td><td>上半年见顶，下半年温和回落 10-15%</td><td>全年高位窄幅震荡</td></tr>
+    <tr><td class="k">FY2027 可售位元增长</td><td>中双位数（指引），但库存转为去化拖累</td><td>中双位数兑现（指引口径）</td><td>中双位数为下限，NBM 需求带动上修</td></tr>
+    <tr><td class="k">非GAAP 毛利率退出水平</td><td>约 50%</td><td>约 68-72%</td><td>维持 80%+</td></tr>
+    <tr><td class="k">NBM 覆盖 FY27 位元比例</td><td>停在三分之一，无新增</td><td>三分之一，续签正常</td><td>升至过半，倍数重估</td></tr>
+  </table>
+
+  <div class="notice">
+    <div class="nt">情景概率与期望值</div>
+    按 <strong>熊 25% / 基准 50% / 牛 25%</strong> 加权，相对 $1,350.50 收盘价的期望回报约 <strong>+10%</strong>。<br>
+    但这个正期望值有一条<strong>很肥的左尾</strong>：单一情景的最大下行是 −51.9%，而基准情景的上行只有 +9.6%。<strong>赔率结构是「小赚的概率一半、腰斩的概率四分之一」——对绝大多数账户而言，这不是一个应该主动去承担的分布。</strong>
+  </div>
+</div>
+
+<!-- 9 Verdict Box -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — A Perfect Quarter Priced as a Peak</div>
+  <div class="verdict-zh">裁决：一个完美的季度，被当作顶点定价</div>
+
+  <div class="v-item"><div class="v-num">1</div><div class="v-text">
+    <strong>这份财报本身没有任何瑕疵。</strong>营收 $89.65亿超共识 6.9%、非GAAP EPS $39.25 超共识 13.7%、毛利率 84.6% 超自家指引上沿 3.6 个百分点、调整后自由现金流 $50.35亿（56% 利润率）、长期负债清零。<strong>问题从来不在这一季，而在下一季的话。</strong>
+    <span class="v-src">来源：公司 FQ4 FY2026 业绩发布（2026-08-05 盘后）；共识口径 Zacks/Benzinga</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">2</div><div class="v-text">
+    <strong>市场砸盘的直接扳机是指引，深层原因是增长的构成。</strong>Q1 FY27 指引 $103–108亿，中值 $105.5亿，比共识 $108.2亿<strong>低 2.5%</strong>——注意，是<strong>区间上沿才勉强够到共识</strong>。而更要命的是：Q4 的环比增长「约三分之二来自价格」，FY2027 位元增速只有<strong>中双位数</strong>，理由还是<strong>库存高企</strong>。<strong>增长的成分越来越依赖那个会均值回归的部分。</strong>
+    <span class="v-src">来源：公司 Q1 FY27 指引；管理层电话会关于位元增长与库存的表述（公开报道口径）</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">3</div><div class="v-text">
+    <strong>消费分部环比 −32% 是全场最被低估的数字。</strong>它在 Q4 只占营收 6.2%，但它是整条 NAND 价格链上<strong>唯一一个客户可以说「不」的环节</strong>。数据中心客户不买就交付不了 AI，Edge 客户不买就出不了手机——只有消费者可以选择不升级。<strong>价格摧毁需求，永远从这里开始显形。</strong>
+    <span class="v-src">来源：公司披露 Q4 Consumer 营收 $5.56亿，环比 −32%</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">4</div><div class="v-text">
+    <strong>NBM 是唯一真正改变了商业模式的东西，也是牛市情景唯一的支点。</strong>10 份多年期协议、首批五份财务担保逾 $110亿含 $4亿预付、Q3 三份合同带来 $420亿剩余履约义务、<strong>FY2027 超三分之一位元已锁定</strong>。<strong>NAND 从来没有过合约化收入。如果这件事坐实，它值得一个高于周期股的倍数——但目前它覆盖的是三分之一，不是全部。</strong>
+    <span class="v-src">来源：公司披露的 NBM 协议条款与剩余履约义务；四月与八月两次电话会累计</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">5</div><div class="v-text">
+    <strong>$140亿新增回购授权（总剩余 $155亿，占市值 7.3%）值得打一个问号。</strong>股价年内仍<strong>上涨约 500%</strong>，盈利处在有记录以来最高水平，公司在<strong>这个位置</strong>加码回购。存储行业的历史规律是：<strong>在周期顶点回购、在周期底部增发。</strong>这不构成看空理由，但它是一个应当计入的资本配置风险。
+    <span class="v-src">来源：公司宣布额外 $140亿回购授权，总剩余授权 $155亿；市值按 $1,350.50 收盘价计算</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">6</div><div class="v-text">
+    <strong>结论：中性，观望。</strong>不是因为公司不好——公司好得惊人。而是因为<strong>整笔投资的胜负手是「NAND 价格什么时候拐」，而这件事没有人能可靠预测，包括管理层自己</strong>（他们的位元指引已经在往回收）。基准情景 +9.6% 的上行，不足以补偿熊市情景 −51.9% 的下行。<strong>在一个你没有信息优势的变量上下注，赔率再好也不该下。</strong>
+    <span class="v-src">本报告独立判断；卖方目标价中位数 $2,200–2,500，与本结论存在显著分歧，分歧点已在第七节第二段列明</span>
+  </div></div>
+</div>
+
+<!-- 反馈入口 -->
+<div class="feedback">
+  对这份报告的判断有异议或补充？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&report=sndk_q4fy2026" target="_blank">点此提交反馈 →</a>
+</div>
+
+<!-- 未核实项（Critic CONDITIONAL 要求） -->
+<div class="notice red">
+  <div class="nt">未核实项清单 · Unverified Items</div>
+  本报告在以下六处的置信度低于其余内容，使用时请自行加权：<br>
+  <strong>一、盘后股价。</strong>「跌破 $1,300 / 盘后 −3.5%~−8%」为公开报道口径，<strong>未经本系统价格缓存核实</strong>；已核实的只有 8月5日收盘价 $1,350.50。<br>
+  <strong>二、电话会 Q&amp;A。</strong>六个逐字记录源全部返回 403，第13节为<strong>重构的应问清单</strong>，非管理层原话。<br>
+  <strong>三、Consumer 全年营收 $29.38亿</strong>与 <strong>Q4 Edge 营收 $54.29亿</strong>为倒算值，非公司直接披露。<br>
+  <strong>四、Q1 FY26 毛利率 32%</strong> 由营收与非GAAP EPS 反推，非披露值；毛利率折线图中该点已用空心标记区分。<br>
+  <strong>五、FY2026 全年非GAAP EPS 约 $67.7</strong> 中的 Q3 分项（约 $21）为推算，故「追溯市盈率约 20 倍」为约数；<strong>前瞻市盈率 7.5 倍则完全基于公司指引，不受此影响</strong>。<br>
+  <strong>六、Q3 FY25 营收 $17.0亿</strong> 由「Q4 FY25 环比 +12%」倒算，用于营收走势图最左一根柱。<br>
+  <strong>不受影响的核心数字</strong>：Q4 营收 $89.65亿、非GAAP 毛利率 84.6%、非GAAP EPS $39.25、全年营收 $202.48亿、数据中心全年 $51.53亿、Consumer Q4 环比 −32%、Q1 FY27 指引 $103–108亿、位元增速中双位数、$140亿回购授权 —— 均为公司直接披露。
+</div>
+
+<!-- 10 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">管理层语气评分</span><span class="section-en">Management Tone · 72 / 100</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><div class="tone-lab">措辞强度<br><span style="font-size:9px;font-family:'IM Fell English',Georgia,serif">Rhetorical Strength</span></div><div class="tone-bar"><div class="tone-fill green" style="width:78%"></div></div><div class="tone-val">78</div></div>
+    <div class="tone-row"><div class="tone-lab">前瞻信心<br><span style="font-size:9px;font-family:'IM Fell English',Georgia,serif">Forward Confidence</span></div><div class="tone-bar"><div class="tone-fill amber" style="width:62%"></div></div><div class="tone-val">62</div></div>
+    <div class="tone-row"><div class="tone-lab">风险披露充分度<br><span style="font-size:9px;font-family:'IM Fell English',Georgia,serif">Risk Disclosure</span></div><div class="tone-bar" style="width:100%"><div class="tone-fill" style="width:76%"></div></div><div class="tone-val">76</div></div>
+    <div class="tone-row"><div class="tone-lab" style="font-weight:700;color:#0a0a0b">综合<br><span style="font-size:9px;font-family:'IM Fell English',Georgia,serif">Composite</span></div><div class="tone-bar"><div class="tone-fill" style="width:72%"></div></div><div class="tone-val">72</div></div>
+  </div>
+  <div class="para">
+    <p><strong>72 分＝乐观偏谨慎。</strong>修辞层面几乎无保留——CEO David Goeckeler 表示公司「以领先的技术组合收官 FY2026、把数据中心确立为关键增长支柱、深化了客户合作关系」，并称技术与产品「<strong>已就位以产生持续增长且具持久性的自由现金流</strong>」；同时对 NAND 后续复苏、PC 与智能手机需求给出正面表态。</p>
+    <p><strong>但谨慎全部藏在数字里，不在形容词里。</strong>扣分的三处：① Q1 指引中值低于共识，且<strong>区间上沿才等于共识</strong>——这是管理层主动降低门槛的典型做法；② FY2027 位元增速给到<strong>中双位数</strong>，明显低于收入增速隐含的水平；③ 位元受限的理由是<strong>库存高企</strong>而非产能不足——这是一个<strong>更保守</strong>的措辞选择。<br><strong>加分的一处</strong>：他们没有藏消费分部 −32% 这个难看的数字，也没有把库存问题包装成「战略性备货」以外的东西。<strong>在周期顶点还愿意把减速的理由说清楚，这本身是可信度的加分项。</strong></p>
+  </div>
+</div>
+
+<!-- 11 核心主题 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">AI 推理侧存储需求</span>
+    <span class="chip pos">NBM 合约化收入（10份 · 锁定 FY27 三分之一位元）</span>
+    <span class="chip pos">零长期负债 · 现金 $47.62亿</span>
+    <span class="chip pos">调整后自由现金流 $50.35亿（56%利润率）</span>
+    <span class="chip neu">资本开支仅占营收 6.3%</span>
+    <span class="chip neu">$155亿剩余回购授权（占市值 7.3%）</span>
+    <span class="chip neg">增长三分之二来自价格</span>
+    <span class="chip neg">FY27 位元增速仅中双位数</span>
+    <span class="chip neg">库存天数主动维持高位</span>
+    <span class="chip neg">消费分部环比 −32%</span>
+    <span class="chip neg">中国供给（CXMT 上市募资逾 $80亿）</span>
+    <span class="chip neg">超大规模厂商资本开支消化风险</span>
+  </div>
+</div>
+
+<!-- 12 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <tr><th>风险</th><th>概率</th><th>影响</th><th>证据 / 触发条件</th></tr>
+    <tr>
+      <td class="k">NAND 价格见顶回落<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">NAND ASP rollover</span></td>
+      <td><span style="color:#8b2e2e;font-weight:700">高</span></td><td><span style="color:#8b2e2e;font-weight:700">极高</span></td>
+      <td>本季增长约三分之二来自价格；毛利率指引已走平（84.6% → 84.0%中值）。价格若回吐 30%，毛利率结构性下移，EPS 呈非线性塌陷</td>
+    </tr>
+    <tr>
+      <td class="k">中国供给冲击<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">China supply shock</span></td>
+      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#8b2e2e;font-weight:700">高</span></td>
+      <td>CXMT 于上海上市，市值约 $4,870亿、募资逾 $80亿——七月存储股崩盘的直接导火索之一。募集资金转化为产能需 18-24 个月，是 FY2028 的事而非 FY2027</td>
+    </tr>
+    <tr>
+      <td class="k">位元增长仅中双位数<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Mid-teens bit growth</span></td>
+      <td><span style="color:#8b2e2e;font-weight:700">已确认</span></td><td><span style="color:#c47a1e;font-weight:700">中</span></td>
+      <td>管理层 FY2027 指引，理由为库存水平偏高。意味着收入增长将继续依赖价格而非销量——把周期风险放大而非分散</td>
+    </tr>
+    <tr>
+      <td class="k">需求弹性开始显形<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Demand elasticity showing</span></td>
+      <td><span style="color:#8b2e2e;font-weight:700">已发生</span></td><td><span style="color:#c47a1e;font-weight:700">中→高</span></td>
+      <td>Q4 消费分部环比 −32%。当前仅占 Q4 营收 6.2% 故影响有限，但若传导至 Edge（占 Q4 营收 60.6%），影响升为极高。<strong>这是本报告建议的头号追踪指标</strong></td>
+    </tr>
+    <tr>
+      <td class="k">超大规模厂商资本开支消化<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Hyperscaler capex digestion</span></td>
+      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#8b2e2e;font-weight:700">高</span></td>
+      <td>七月存储板块整体重挫的核心叙事。数据中心分部同比 +437%，基数已高，任何一家超大规模厂商下修资本开支都会被放大解读</td>
+    </tr>
+    <tr>
+      <td class="k">周期顶点回购<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Buyback at cycle peak</span></td>
+      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#c47a1e;font-weight:700">中</span></td>
+      <td>新增 $140亿授权、总剩余 $155亿，而股价年内仍上涨约 500%。存储行业历史上多次在顶点回购、在底部增发</td>
+    </tr>
+    <tr>
+      <td class="k">客户集中与 NBM 对手方风险<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Customer concentration</span></td>
+      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#c47a1e;font-weight:700">中</span></td>
+      <td>NBM 绑定少数超大规模客户。虽有逾 $110亿财务担保与第三方金融工具背书，但若价格暴跌，客户的履约意愿与担保执行成本仍是未经检验的变量</td>
+    </tr>
+    <tr>
+      <td class="k">股价自身波动<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Realized volatility</span></td>
+      <td><span style="color:#8b2e2e;font-weight:700">已确认</span></td><td><span style="color:#8b2e2e;font-weight:700">高</span></td>
+      <td>七月单月 −47%、自六月高点最大回撤约 −55%，其后曾单日反弹 26%，年内仍 +500%。<strong>这是一只任何仓位模型都必须按极端波动处理的股票</strong></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 13 分析师 Q&A 张力区域 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">分析师 Q&amp;A 张力区域</span><span class="section-en">Q&amp;A Tension · Reconstructed</span></div>
+  <div class="notice red">
+    <div class="nt">⚠ 置信度声明：本节不是逐字实录</div>
+    本次分析尝试抓取 SEC EDGAR、公司投资者关系页、Alphastreet、Benzinga、Investing.com、Biggo 六个逐字记录源，<strong>全部返回 HTTP 403</strong>。因此本节是<strong>依据公开报道重构的「四个必须被追问的张力点」</strong>，其中<strong>问题是本报告提出的，管理层立场来自公开报道的转述</strong>，<strong>不得当作管理层原话引用</strong>。置信度：中。
+  </div>
+
+  <div class="qa">
+    <div class="qq">张力一：位元增长受限，到底是产能问题还是需求问题？</div>
+    <div class="qa-en">Is the bit constraint about supply, or about demand?</div>
+    <div class="aa">管理层给出的理由是<strong>库存水平偏高</strong>，并称高库存天数是为支撑 NBM 而<strong>主动</strong>维持的。<strong>这两个说法可以同时为真，但它们的投资含义完全相反</strong>：为履约而备货是中性的；渠道积压是看空的。追问点应当是——<strong>这些库存在谁的资产负债表上？是闪迪的成品库存，还是客户与渠道手里的货？</strong>公开报道未见对此的明确区分。</div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">张力二：Q1 指引区间的上沿才等于共识，这是保守还是信号？</div>
+    <div class="qa-en">The top of the guide merely matches consensus — sandbagging or signal?</div>
+    <div class="aa">$103–108亿对共识 $108.2亿。管理层刚刚在 Q4 交出一个<strong>超自身指引上沿 8.7%</strong> 的季度（指引 $77.5–82.5亿，实际 $89.65亿），<strong>说明他们的指引一贯偏保守</strong>。若沿用同样的保守度，实际值可能落在 $115亿以上。<strong>市场没有给这个「历史保守度」任何折扣，反而直接按中值定价并卖出——这本身说明市场担心的不是这一季，而是价格拐点的时点。</strong></div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">张力三：消费分部 −32%，公司如何解释？</div>
+    <div class="qa-en">How does management explain the 32% sequential collapse in Consumer?</div>
+    <div class="aa">公开报道<strong>未见管理层对此给出专门解释</strong>，重点全部落在数据中心与 Edge 的增长上。<strong>这是本次电话会最明显的信息缺口。</strong>可能的良性解释是主动把产能从低毛利的消费端转向高毛利的数据中心（配置性选择）；恶性解释是终端在这个价格上不买了（需求破坏）。<strong>两者对 FY2027 的含义天差地别，而公司没有把话说清楚。</strong></div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">张力四：NBM 的浮动定价条款，在价格下行时是保护还是漏洞？</div>
+    <div class="qa-en">In a price downturn, do NBM's variable-price terms protect — or leak?</div>
+    <div class="aa">公司披露 NBM「同时包含固定与浮动定价成分，使公司能在市场价格上行时捕捉收益」。<strong>这句话被作为利好宣传，但它天然是双向的</strong>——能跟着涨，通常也意味着能跟着跌。<strong>真正决定 NBM 价值的是：浮动部分有没有价格下限（floor）？</strong>公开信息未见披露。若无下限，则「三分之一位元已锁定」锁的是<strong>量</strong>而非<strong>价</strong>，对熊市情景的保护远小于表面。<strong>这是本报告认为最值得向公司追问的一条。</strong></div>
+  </div>
+</div>
+
+<!-- 追踪清单 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">下季追踪信号</span><span class="section-en">What to Watch Next</span></div>
+  <table>
+    <tr><th>序</th><th>追踪项</th><th>为什么它重要</th></tr>
+    <tr><td class="k">1</td><td>消费分部环比是否<strong>连续第二季两位数下滑</strong></td><td>单季 −32% 可以是配置性调整，连续两季就是需求破坏。<strong>头号指标</strong></td></tr>
+    <tr><td class="k">2</td><td>Edge 分部的<strong>量价拆分</strong></td><td>Edge 占营收 60%，若它的增长也变成「主要靠价格」，风险从局部变成全局</td></tr>
+    <tr><td class="k">3</td><td>库存天数与库存<strong>归属</strong>（公司 vs 渠道）</td><td>存储行业最领先的转折指标，且领先于价格</td></tr>
+    <tr><td class="k">4</td><td>NBM 是否再新增，以及是否披露<strong>价格下限条款</strong></td><td>决定「锁定三分之一位元」到底锁的是量还是价——牛市情景成立与否的关键</td></tr>
+    <tr><td class="k">5</td><td>NAND 现货与合约价（TrendForce / DRAMeXchange 月度）</td><td>整笔投资的唯一胜负手，且它是公开可得的高频数据</td></tr>
+    <tr><td class="k">6</td><td>CXMT 产能爬坡进度与良率公告</td><td>决定中国供给冲击落在 FY2027 还是 FY2028</td></tr>
+    <tr><td class="k">7</td><td>苹果 / 戴尔 / 惠普的<strong>内存成本表述</strong></td><td>反向验证：设备厂喊贵得越凶，说明价格转移仍在进行；一旦他们开始说「成本压力缓解」，闪迪的顶就到了</td></tr>
+  </table>
+</div>
+
+<!-- 14 Footer -->
+<div class="footer">
+  Earnings Copilot · Earner ｜ Sandisk Corporation (NASDAQ: SNDK) · Q4 FY2026 &amp; Full Year<br>
+  数据来源：公司 FQ4 FY2026 业绩发布（2026-08-05 盘后 16:05 ET）与全年业绩；管理层电话会公开报道；Zacks / Benzinga 共识口径；分析师目标价为财报前最新公开值。<br>
+  股价 $1,350.50 为 2026-08-05 常规时段收盘价，取自本系统 GitHub 价格缓存（updated_at 2026-08-06T05:08:24Z），当日 −5.40%。<strong>该价格不含财报后反应</strong>；盘后跌幅为公开报道口径，未经缓存核实。<br>
+  标注说明：<span class="badge badge-official">已披露</span> 公司直接披露 ｜ <span class="badge badge-predict">倒算</span> 由已披露数字推算 ｜ 第13节为重构非实录。<br>
+  本报告为独立分析，不构成投资建议。分析日 2026-08-06。
+</div>
+
+</body>
+</html>
