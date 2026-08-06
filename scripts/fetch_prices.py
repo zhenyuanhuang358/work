@@ -4,7 +4,7 @@ Fetches equity prices via Finnhub API + VIX/Treasury via yfinance.
 Saves to stock_prices.json.
 
 Tickers tracked:
-  Equities (Finnhub):  22 tickers - indices/megacaps/mid-price CSP-friendly names
+  Equities (Finnhub):  23 tickers - indices/megacaps/mid-price CSP-friendly names
   Indices (yfinance):  ^VIX ^VIX9D ^VIX3M ^SKEW ^VVIX ^TNX — 含尾部风险定价指标
 """
 
@@ -29,7 +29,7 @@ EQUITY_TICKERS = [
     # 指数/大盘
     "SPY", "QQQ", "IWM", "GLD", "SLV", "TLT", "XLE",
     # 大盘股（价差策略用）
-    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT",
+    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT", "SNDK",
     # 中低价高流动性（小账户CSP友好带：股价20-80美元）
     "SOFI", "HOOD", "INTC", "F", "UBER", "T", "KO",
 ]
