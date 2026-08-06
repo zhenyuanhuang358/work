@@ -4,7 +4,7 @@ Fetches equity prices via Finnhub API + VIX/Treasury via yfinance.
 Saves to stock_prices.json.
 
 Tickers tracked:
-  Equities (Finnhub):  23 tickers - indices/megacaps/mid-price CSP-friendly names
+  Equities (Finnhub):  23 tickers + yfinance 盘前/盘后扩展时段 - indices/megacaps/mid-price CSP-friendly names
   Indices (yfinance):  ^VIX ^VIX9D ^VIX3M ^SKEW ^VVIX ^TNX — 含尾部风险定价指标
 """
 
@@ -96,6 +96,40 @@ def fetch_equity_yfinance(ticker: str) -> dict | None:
     return None
 
 
+# 扩展时段（盘前/盘后）跟踪名单：财报股需要盘后价才能核实市场反应
+EXTENDED_HOURS_TICKERS = ["SNDK", "MU", "NVDA", "AMD", "GOOGL", "AAPL", "PLTR", "VRT", "HOOD", "INTC", "UBER"]
+
+
+def fetch_extended_hours(ticker: str) -> dict | None:
+    """盘前/盘后价。Finnhub 免费档只返回常规时段，故只能走 yfinance。
+    财报多在盘后发布，没有这个字段就无法核实市场对财报的第一反应。"""
+    if not HAS_YFINANCE:
+        return None
+    try:
+        t = yf.Ticker(ticker)
+        info = t.info or {}
+        out = {}
+        for src, dst in (("preMarketPrice", "pre"), ("postMarketPrice", "post")):
+            v = info.get(src)
+            if v:
+                out[dst] = round(float(v), 2)
+        for src, dst in (("preMarketChangePercent", "prePct"),
+                         ("postMarketChangePercent", "postPct")):
+            v = info.get(src)
+            if v is not None:
+                out[dst] = round(float(v), 2)
+        # 回退：用含盘前盘后的分钟线取最后一笔，并与常规收盘对比
+        if not out:
+            h = t.history(period="2d", interval="5m", prepost=True)
+            if not h.empty:
+                out["lastExtended"] = round(float(h["Close"].iloc[-1]), 2)
+                out["source"] = "history(prepost=True)"
+        return out or None
+    except Exception as e:
+        print(f"  extended-hours error for {ticker}: {e}")
+    return None
+
+
 def fetch_index_yfinance(yf_symbol: str) -> float | None:
     """Fetch a single index value (VIX, TNX, SKEW, VVIX...) via yfinance."""
     if not HAS_YFINANCE:
@@ -131,6 +165,16 @@ def main():
             print(f"${data['price']} ({data['changePct']:+.2f}%)")
         else:
             print("FAILED")
+        time.sleep(0.2)
+
+    print("\nFetching extended hours (pre/post market)...")
+    for ticker in EXTENDED_HOURS_TICKERS:
+        if ticker not in prices:
+            continue
+        ext = fetch_extended_hours(ticker)
+        if ext:
+            prices[ticker]["extended"] = ext
+            print(f"  {ticker}: {ext}")
         time.sleep(0.2)
 
     print("\nFetching indices (VIX term structure + SKEW + VVIX + 10yr)...")
