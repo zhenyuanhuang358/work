@@ -105,21 +105,22 @@ svg{width:100%;height:auto;display:block;}
   <span><b>Earnings Copilot</b> · Earner</span>
   <span>Sandisk Corporation (NASDAQ: SNDK)</span>
   <span>Q4 FY2026 &amp; 全年 · 财报日 2026-08-05（盘后 16:05 ET）</span>
-  <span>分析日 2026-08-06</span>
-  <span><b>半导体史上最极端的一个季度</b></span>
+  <span>分析日 2026-08-06 · <b>v2 修订版</b></span>
+  <span><b>v1 的两个判断已被管理层原话推翻并更正</b></span>
 </div>
 
 <!-- 2 双语标题 + 标签行 -->
 <div class="title-block">
-  <div class="title-en">Sandisk Q4 FY2026 — A 84.6% Gross Margin on a Commodity, and a 7.5× Forward P/E. Both Are Telling the Truth.</div>
-  <div class="title-zh">闪迪四季报：大宗商品做出 84.6% 毛利率<br>市场却只给 7.5 倍前瞻市盈率</div>
+  <div class="title-en">Sandisk Q4 FY2026 — A 84.6% Gross Margin on a Commodity, and a 6.9× Forward P/E. The Floor Clause Changes the Odds.</div>
+  <div class="title-zh">闪迪四季报：大宗商品做出 84.6% 毛利率<br>市场只给 6.9 倍前瞻市盈率</div>
   <div class="tags">
-    <span class="tag dark">评级：中性 Neutral · 观望</span>
+    <span class="tag dark">评级：中性偏多 · 谨慎乐观（v2 上修）</span>
     <span class="tag amber">语气评分 72 / 100 乐观偏谨慎</span>
     <span class="tag green">营收 +372% · EPS 超预期 13.7%</span>
     <span class="tag red">Q1指引中值低于共识 2.5%</span>
-    <span class="tag red">当日 −5.4% · 盘后再跌 3.5%~8%</span>
-    <span class="tag">数据截止 2026-08-06</span>
+    <span class="tag red">当日 −5.40% · 盘后 −7.96% 至 $1,243（已核实）</span>
+    <span class="tag green">NBM 含价格下限 · 底价最低承诺 $939亿</span>
+    <span class="tag">v2 · 2026-08-06</span>
   </div>
 </div>
 
@@ -128,15 +129,32 @@ svg{width:100%;height:auto;display:block;}
   <div class="stat"><div class="num green">$89.65亿</div><div class="lab">Q4营收<span class="en">+372% YoY · +51% QoQ · 共识 $83.9亿</span></div></div>
   <div class="stat"><div class="num green">84.6%</div><div class="lab">非GAAP毛利率<span class="en">指引 79-81% · 去年同期 26.4%</span></div></div>
   <div class="stat"><div class="num green">$39.25</div><div class="lab">非GAAP摊薄EPS<span class="en">共识 $34.52 · 超预期 13.7%</span></div></div>
-  <div class="stat"><div class="num red">$105.5亿</div><div class="lab">Q1 FY27 指引中值<span class="en">共识 $108.2亿 · 低 2.5%</span></div></div>
+  <div class="stat"><div class="num red">$1,243.00</div><div class="lab">盘后收盘（已核实）<span class="en">−7.96% · 两日累计 −12.93%</span></div></div>
 </div>
 
 <!-- 数据口径声明 -->
+<div class="notice green">
+  <div class="nt">v2 更新说明：v1 中标注为「未核实」的六项，已解决五项——其中两项推翻了我 v1 的判断</div>
+  v1（8月6日 05:47Z）发布时有六项低置信内容。本次逐项攻坚后：<br>
+  <strong>① 盘后股价 → 已核实。</strong>为抓取器加入盘前/盘后字段并重跑，<strong>盘后收 $1,243.00、−7.96%</strong>（缓存实测，updated_at 2026-08-06T05:50:52Z）。两日累计 −12.93%。全文估值已按此价重算。<br>
+  <strong>② 电话会 Q&amp;A → 已拿到实际问答</strong>（经分析师纪要转述，非逐字实录）。第13节已从「重构的应问清单」改写为<strong>实际提问与管理层回答</strong>。<br>
+  <strong>③④ 分部倒算值 → 降级为算术闭合</strong>：由公司披露的总额与已披露分部倒推，加总严格闭合，非估计。Q2 FY26 营收更获两条独立环比数据双向验证。<br>
+  <strong>⑤ 仍未解决：Q1 FY26 毛利率约 32%</strong> 为推算，图中以空心点标注。<br>
+  <strong>⑥ 出口限制说明（修正 v1 措辞）</strong>：sec.gov、investor.sandisk.com、fool.com、alphastreet 等站点是<strong>本会话出口策略封禁</strong>（代理层 CONNECT 403），不是站点拒绝。可用通道为 WebSearch 与 GitHub Action。
+</div>
+
 <div class="notice red">
-  <div class="nt">⚠ 先说清楚三件事，否则下面的数字会被误读</div>
-  <strong>一、股价口径。</strong>本报告使用的 <strong>$1,350.50</strong> 是 <strong>8月5日常规交易时段收盘价</strong>（当日 −5.40%，来自本系统 GitHub 价格缓存，抓取时间 2026-08-06 05:08 UTC，已核实）。财报在<strong>收盘后</strong>发布，因此这个价格<strong>不包含财报反应</strong>。公开报道显示盘后再跌 <strong>3.5% 至 8%</strong>、一度跌破 $1,300 —— 该盘后价<strong>未经本系统缓存核实</strong>，全文凡涉及盘后价一律标注为公开报道口径。<br>
-  <strong>二、分部拆分。</strong>Edge（边缘）与 Consumer（消费）全年数字中，Consumer 全年 <strong>$29.38亿</strong> 系由「总额 − 数据中心 − Edge」倒算，非公司直接披露。<br>
-  <strong>三、电话会 Q&amp;A。</strong>本次尝试抓取 SEC、公司IR、Alphastreet、Benzinga 等六个逐字记录源，<strong>全部返回 403</strong>。第13节的 Q&amp;A 张力为<strong>依据公开报道重构的应问清单</strong>，不是逐字实录，已在该节顶部标注。
+  <div class="nt">⚠ 我在 v1 里说错了两件事，先认下来</div>
+  <strong>错误一：我把「位元增速中双位数、库存高企」读成需求见顶信号。</strong>CFO Luis Flores 在电话会上明确表示，公司预计<strong>位元将在 2027 日历年之后仍处于配给（allocation）状态，因为需求增长快于供给</strong>。这是<strong>供给约束</strong>，不是需求疲软。我 v1 的读法方向错了。<br>
+  <strong>错误二：我把毛利率指引走平（84.6% → 84.0%）读成「价格见顶」。</strong>公司给出的下调理由是<strong>产品结构、元件成本上升与审慎假设</strong>，并明确说明<strong>价格仍在温和上涨</strong>。毛利率微降不等于售价见顶。<br>
+  <strong>另有一项我 v1 列为「最值得追问」的问题，答案是对多方有利的：</strong>NBM 合约<strong>含价格下限与上限（floor &amp; ceiling）</strong>，设计目的就是在市场价格下跌时保护可接受的毛利率。这直接抬高了熊市情景的底部——详见第八节。
+</div>
+
+<div class="notice">
+  <div class="nt">仍需注意的口径</div>
+  <strong>NBM 数字口径</strong>：$939亿底价最低承诺收入、$598亿剩余履约义务、NBM 毛利率约 80% —— 三项来自分析师对本次电话会的纪要转述，<strong>非公司文件直读</strong>（相关站点被出口策略封禁），置信度<strong>中高</strong>。<br>
+  <strong>Q1 FY26 毛利率约 32%</strong>：由营收与非GAAP EPS 反推，非披露值。<br>
+  <strong>FY2026 全年非GAAP EPS 约 $67.7</strong>：其中 Q3 分项（约 $21）为推算，故「追溯市盈率约 18 倍」为约数；<strong>前瞻市盈率 6.9 倍完全基于公司指引，不受影响</strong>。
 </div>
 
 <!-- 4 季度营收走势 -->
@@ -289,9 +307,9 @@ svg{width:100%;height:auto;display:block;}
     </div>
   </div>
   <div class="notice">
-    <div class="nt">毛利率曲线的形状本身就是答案</div>
-    四个季度从 <strong>26.4% 走到 84.6%</strong>，这不是效率改善能做到的——一家公司不可能在一年内把成本砍掉四分之三。<strong>这 58 个百分点几乎全部是售价上涨</strong>。而指引给的 83-85%（中值 84.0%）意味着管理层自己认为<strong>这条线已经平了</strong>。<br>
-    <strong>一条平掉的毛利率曲线，在周期股里从来不是「稳定」的意思，而是「见顶」的意思。</strong>
+    <div class="nt">毛利率曲线的形状说明了很多，但不是我 v1 说的那个意思</div>
+    四个季度从 <strong>26.4% 走到 84.6%</strong>，这不是效率改善能做到的——一家公司不可能在一年内把成本砍掉四分之三。<strong>这 58 个百分点几乎全部是售价上涨</strong>，这一点没变。<br>
+    <strong>但 v1 里「走平即见顶」的推论是错的。</strong>公司对 83-85% 指引给出的理由是<strong>产品结构、元件成本上升与审慎假设</strong>，并明确表示<strong>价格仍在温和上涨</strong>。换句话说：<strong>毛利率微降来自成本端，不是售价端。</strong>周期股里毛利率走平确实常常预示见顶，但这一次要看它是被什么压平的——这次是成本，不是价格。
   </div>
 </div>
 
@@ -300,38 +318,41 @@ svg{width:100%;height:auto;display:block;}
   <div class="sec-head"><span class="section-zh">核心分析</span><span class="section-en">Core Analysis · Four Threads</span></div>
 
   <div class="para">
-    <span class="label-zh">一、7.5 倍前瞻市盈率不是便宜，是市场对「E」的不信任投票</span>
-    <span class="label-en">A 7.5× Forward P/E Is Not Cheap — It Is a Vote of No Confidence in the E</span>
-    <p>按 8月5日收盘价 $1,350.50、摊薄股数 1.569亿股计算，市值约 <strong>$2,119亿</strong>；扣除现金 $47.62亿、且长期负债已清零，企业价值约 <strong>$2,072亿</strong>。若把 Q1 FY27 指引中值 EPS $45 简单年化（$180），前瞻市盈率仅 <strong>7.5 倍</strong>；而按 FY2026 全年非GAAP EPS 约 $67.7<span class="badge badge-predict">推算</span>计算，追溯市盈率是 <strong>约 20 倍</strong>（该全年 EPS 中 Q1 $1.22、Q2 $6.20、Q4 $39.25 为已披露值，Q3 约 $21 系由 GAAP 净利环比口径推算，故追溯倍数为约数）。</p>
-    <p>从 20 倍塌到 7.5 倍——<strong>这个塌陷本身就是市场的结论</strong>。一只股票的前瞻市盈率显著低于追溯市盈率，只可能是两种情况：要么市场犯了错，要么<strong>市场认为分母（盈利）会掉下来</strong>。周期股的历史上，后者的胜率高得多。<strong>7.5 倍不是「便宜到不可思议」，而是市场用最标准的方式，为一个它认为会腰斩的盈利流定价。</strong></p>
+    <span class="label-zh">一、6.9 倍前瞻市盈率不是便宜，是市场对「E」的不信任投票</span>
+    <span class="label-en">A 6.9× Forward P/E Is Not Cheap — It Is a Vote of No Confidence in the E</span>
+    <p>按<strong>已核实的盘后价 $1,243.00</strong>、摊薄股数 1.569亿股计算，市值约 <strong>$1,951亿</strong>；扣除现金 $47.62亿、且长期负债已清零，企业价值约 <strong>$1,903亿</strong>。若把 Q1 FY27 指引中值 EPS $45 简单年化（$180），前瞻市盈率仅 <strong>6.9 倍</strong>；而按 FY2026 全年非GAAP EPS 约 $67.7<span class="badge badge-predict">推算</span>计算，追溯市盈率约 <strong>18.4 倍</strong>（该全年 EPS 中 Q1 $1.22、Q2 $6.20、Q4 $39.25 为已披露值，Q3 约 $21 系由 GAAP 净利环比口径推算，故追溯倍数为约数）。企业价值 / Q4 年化调整后自由现金流 = <strong>9.4 倍</strong>。</p>
+    <p>从 18.4 倍塌到 6.9 倍——<strong>这个塌陷本身就是市场的结论</strong>。一只股票的前瞻市盈率显著低于追溯市盈率，只可能是两种情况：要么市场犯了错，要么<strong>市场认为分母（盈利）会掉下来</strong>。周期股的历史上，后者的胜率高得多。<strong>6.9 倍不是「便宜到不可思议」，而是市场用最标准的方式，为一个它认为会腰斩的盈利流定价。</strong>问题只剩一个：<strong>市场这次的判断，有没有把 NBM 的价格下限算进去？</strong></p>
   </div>
 
   <div class="para">
     <span class="label-zh">二、卖方在为「E」建模，市场在为「E 会消失」定价——这个裂口有 40%</span>
     <span class="label-en">The Sell Side Models the E; the Tape Discounts It. The Gap Is 40%.</span>
-    <p>财报前的分析师目标价：富国银行 $1,620（7月22日上调）、高盛 $2,200（7月5日）、瑞穗 $2,200、花旗 $2,500、美银 $2,500、Susquehanna $3,050（7月23日<strong>下调</strong>）。中位数在 <strong>$2,200–2,500</strong> 区间。而股票收在 <strong>$1,350.50</strong>，盘后据报跌破 $1,300。</p>
-    <p><strong>卖方比市场高出 40% 到 45%。</strong>这不是常见的乐观偏差幅度，而是两个阵营在对同一个问题给出相反答案：<strong>卖方在用当前盈利乘一个正常倍数；市场在赌当前盈利根本不该被乘。</strong>值得注意的是，这份财报的当季数字<strong>全面超越卖方模型</strong>，股价却还是跌了——这说明分歧不在「这季赚了多少」，而在「这个赚法能持续几季」。<strong>当一份超预期 13.7% 的财报换来盘后 8% 的下跌，市场已经把话说得很清楚了。</strong></p>
+    <p>财报前的分析师目标价：富国银行 $1,620（7月22日上调）、高盛 $2,200（7月5日）、瑞穗 $2,200、花旗 $2,500、美银 $2,500、Susquehanna $3,050（7月23日<strong>下调</strong>）。中位数在 <strong>$2,200–2,500</strong> 区间。而股票常规时段收 <strong>$1,350.50</strong>、<strong>盘后进一步跌至 $1,243.00</strong>（已核实），两日累计 <strong>−12.93%</strong>。</p>
+    <p><strong>卖方比市场高出 77% 到 101%。</strong>这不是常见的乐观偏差幅度，而是两个阵营在对同一个问题给出相反答案：<strong>卖方在用当前盈利乘一个正常倍数；市场在赌当前盈利根本不该被乘。</strong>值得注意的是，这份财报的当季数字<strong>全面超越卖方模型</strong>，股价却还是跌了——这说明分歧不在「这季赚了多少」，而在「这个赚法能持续几季」。<strong>当一份超预期 13.7% 的财报换来盘后 7.96% 的下跌，市场已经把话说得很清楚了。</strong></p>
   </div>
 
   <div class="para">
     <span class="label-zh">三、真正变了的东西是 NBM，它可能是 NAND 历史上第一次拥有合约化收入</span>
     <span class="label-en">What Genuinely Changed: NBM Gives NAND Contracted Revenue for the First Time</span>
     <p>看空的论据都指向价格周期，但有一件事是<strong>结构性的、而且是真的</strong>：新商业模式（New Business Model, NBM）。四月电话会宣布了首批 5 份协议，本季<strong>再签 5 份</strong>（其中 3 份是<strong>新客户</strong>、2 份是既有协议扩容），合计 <strong>10 份</strong>，期限最长 5 年。</p>
-    <p>关键在条款不是意向书：首批五份协议的<strong>财务担保总额超过 $110亿</strong>，含 <strong>$4亿预付款</strong>，并由第三方金融工具背书——<strong>客户不提货也要赔偿闪迪</strong>。Q3 签的三份合同带来 <strong>$420亿的最低合同收入（剩余履约义务）</strong>。管理层称 <strong>FY2027 超过三分之一的位元出货已被锁定</strong>，且定价同时含固定与浮动成分，价格上行时仍能吃到。</p>
+    <p>关键在条款不是意向书：首批五份协议的<strong>财务担保总额超过 $110亿</strong>，含 <strong>$4亿预付款</strong>，并由第三方金融工具背书——<strong>客户不提货也要赔偿闪迪</strong>。截至本次电话会，NBM 项下<strong>按底价计算的最低承诺收入达 $939亿，剩余履约义务 $598亿</strong>（Q3 时仅三份合同、$420亿）。管理层称 <strong>FY2027 超过三分之一的位元出货已被锁定</strong>。</p>
+    <p><strong>而最关键的一条，正是我在 v1 里点名「最值得追问」的那个问题，答案是有的：NBM 定价含价格下限与上限（floor 与 ceiling），明确设计为在市场价格下跌时保护可接受的毛利率</strong>；近端年份价格基本固定，远端年份带浮动成分让双方分享价格波动。CFO 并表示 <strong>NBM 的毛利率在 80% 上下，价格上行还有进一步空间</strong>。</p>
+    <p><strong>这把 v1 的熊市推理推翻了一半。</strong>我当时假设「锁量不锁价」，因此认为一旦现货崩盘，NBM 只能保住出货量、保不住毛利。<strong>实际是锁量也锁了价格下限。</strong>这意味着即便现货价格腰斩，占比超三分之一的合约量仍以接近 80% 的毛利率结算——<strong>熊市情景的地板被显著抬高，这是本次修订中最重要的一处。</strong></p>
     <p><strong>NAND 从来是全球最典型的大宗商品：没有合约、没有可见度、价格由现货决定。NBM 如果坐实，它把这门生意的三分之一变成了「有合同的生意」。</strong>这是牛市情景唯一站得住脚的支点——不是「价格会一直高」，而是「即使价格跌，三分之一的量有合同兜底」。</p>
   </div>
 
   <div class="para">
-    <span class="label-zh">四、位元增长「中双位数」，而理由是库存高企——这是全场最不该被忽略的一句话</span>
-    <span class="label-en">Mid-Teens Bit Growth, Constrained by Elevated Inventory — the Most Underrated Line of the Call</span>
-    <p>管理层给出 FY2027 <strong>可售位元增长仅中双位数（mid-teens）</strong>，理由是<strong>库存水平偏高</strong>。把这句话和收入指引放在一起看：Q1 FY27 指引中值 $105.5亿，环比 <strong>+17.7%</strong>。如果全年位元只增长 15% 左右，那么<strong>收入增长里超过绝大部分依然要靠价格</strong>——和 Q4 那个「三分之二靠价格」的结构<strong>没有改善</strong>。</p>
-    <p>更值得警惕的是给出的<strong>理由</strong>。如果限制来自产能不足，那是好消息（供给紧张支撑价格）。但管理层说的是<strong>库存高</strong>——公司口径是为支撑 NBM 而<strong>主动</strong>维持高库存天数。这个解释可以成立，但它同时打开了另一种读法：<strong>渠道和客户手上的货已经不少了。</strong>在存储行业，库存从来是最领先的转折指标，而且它领先于价格。<strong>「消费分部环比 −32%」＋「库存高企」＋「位元增速降至中双位数」，这三个数字如果指向同一件事，那件事叫需求见顶。</strong></p>
+    <span class="label-zh">四、位元增速的约束是供给，不是需求——这是我 v1 读反的地方</span>
+    <span class="label-en">The Bit Constraint Is Supply, Not Demand — Where I Got It Wrong in v1</span>
+    <p>管理层给出 FY2027 可售位元增长<strong>中到高双位数（mid-to-high teens）</strong>，并提到库存水平偏高。<strong>我在 v1 里把这个组合读成需求见顶的信号，方向错了。</strong>CFO Luis Flores 在问答中明确表示：公司预计<strong>位元将在 2027 日历年之后仍处于配给（allocation）状态，原因是需求增长快于供给</strong>。「配给」是卖方市场的专有状态——它意味着客户排队拿货，而不是货卖不动。</p>
+    <p>把这个和资本开支放在一起就清楚了：CFO 说<strong>资本开支的绝对金额同比上升</strong>（制程转换越来越贵），但<strong>资本密集度全年降至营收的约 6%</strong>。<strong>一家在扩产、且产品仍需配给的公司，其增长瓶颈在产线上，不在订单簿上。</strong></p>
+    <p><strong>但有一件事仍然成立，而且这次由管理层自己坐实：</strong>价格已经开始咬掉需求。CFO 在回答消费分部为何环比 −32% 时说——<strong>消费市场的价格已经上涨，这影响了可触达市场（TAM）</strong>。CEO 补充说消费业务的节奏与交易型市场不同，当前环境下<strong>消费端提价的传导要慢得多</strong>。<strong>这是管理层用自己的话承认：价格正在缩小市场。</strong>只是这件事目前只发生在消费端，而消费端在配给经济里可以被牺牲掉——公司把有限的位元投向毛利更高的数据中心，<strong>所以它既是需求现象，也是配置选择，两者同时为真。</strong></p>
   </div>
 
   <div class="notice green">
     <div class="nt">跨标的闭环：这份财报是我们上一份苹果财报分析的另一端</div>
     2026-07-31 的苹果 Q3 FY2026 分析里，CFO Kevan Parekh 的原话是「<strong>毛利率的环比变化超过100%由内存成本解释</strong>」，库克补了一句「<strong>我们预计将付出更高的内存成本</strong>」。<br>
-    <strong>闪迪这 84.6% 的毛利率，就是苹果那段毛利率压缩本身。</strong>同一笔钱，从设备厂的利润表转移到了存储厂的利润表，只是换了个方向看。当时那份报告的结论是「观察苹果的最佳先行指标反而是内存厂商的价格公告」——现在这个先行指标发布了，它说的是：<strong>转移仍在进行，但转移的规模已经大到让最价格敏感的那一端（闪迪自己的消费分部）先撑不住了。</strong>
+    <strong>闪迪这 84.6% 的毛利率，就是苹果那段毛利率压缩本身。</strong>同一笔钱，从设备厂的利润表转移到了存储厂的利润表，只是换了个方向看。当时那份报告的结论是「观察苹果的最佳先行指标反而是内存厂商的价格公告」——现在这个先行指标发布了，它说的是：<strong>转移仍在进行，但规模已经大到让最价格敏感的那一端先撑不住——而这次是闪迪 CFO 亲口承认的：消费市场价格已经上涨，这影响了可触达市场。</strong>
   </div>
 </div>
 
@@ -339,104 +360,119 @@ svg{width:100%;height:auto;display:block;}
 <div class="section">
   <div class="sec-head"><span class="section-zh">目标价三情景</span><span class="section-en">Three-Scenario Price Target</span></div>
   <div class="chart-wrap">
-    <div class="chart-title">12个月目标价区间（美元）· 箭头为 8月5日收盘价 $1,350.50</div>
-    <svg viewBox="0 0 800 170" font-family="'IM Fell English',Georgia,serif">
-      <line x1="80" y1="95" x2="760" y2="95" stroke="#d4cec6" stroke-width="2"/>
-      <rect x="98.9" y="86" width="313.5" height="18" fill="#8b2e2e" opacity="0.18"/>
-      <rect x="412.4" y="86" width="324.9" height="18" fill="#2a5c3f" opacity="0.18"/>
+    <div class="chart-title">12个月目标价区间（美元）· 箭头为已核实的盘后价 $1,243.00 · v2 三档全部上修</div>
+    <svg viewBox="0 0 800 180" font-family="'IM Fell English',Georgia,serif">
+      <line x1="80" y1="100" x2="760" y2="100" stroke="#d4cec6" stroke-width="2"/>
+      <rect x="118.9" y="91" width="259.0" height="18" fill="#8b2e2e" opacity="0.18"/>
+      <rect x="377.9" y="91" width="317.3" height="18" fill="#2a5c3f" opacity="0.18"/>
 
-      <line x1="98.9" y1="76" x2="98.9" y2="114" stroke="#8b2e2e" stroke-width="3"/>
-      <text x="98.9" y="68" font-size="15" fill="#8b2e2e" text-anchor="middle" font-weight="700">$650</text>
-      <text x="98.9" y="131" font-size="11" fill="#8b2e2e" text-anchor="middle">熊市 Bear</text>
-      <text x="98.9" y="144" font-size="10" fill="#6b6460" text-anchor="middle">−51.9%</text>
+      <line x1="118.9" y1="81" x2="118.9" y2="119" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="118.9" y="73" font-size="15" fill="#8b2e2e" text-anchor="middle" font-weight="700">$820</text>
+      <text x="118.9" y="136" font-size="11" fill="#8b2e2e" text-anchor="middle">熊市 Bear</text>
+      <text x="118.9" y="149" font-size="10" fill="#6b6460" text-anchor="middle">−34.0%</text>
 
-      <line x1="412.4" y1="76" x2="412.4" y2="114" stroke="#8b6c42" stroke-width="3"/>
-      <text x="412.4" y="68" font-size="15" fill="#8b6c42" text-anchor="middle" font-weight="700">$1,480</text>
-      <text x="412.4" y="131" font-size="11" fill="#8b6c42" text-anchor="middle">基准 Base</text>
-      <text x="412.4" y="144" font-size="10" fill="#6b6460" text-anchor="middle">+9.6%</text>
+      <line x1="377.9" y1="81" x2="377.9" y2="119" stroke="#8b6c42" stroke-width="3"/>
+      <text x="377.9" y="73" font-size="15" fill="#8b6c42" text-anchor="middle" font-weight="700">$1,620</text>
+      <text x="377.9" y="136" font-size="11" fill="#8b6c42" text-anchor="middle">基准 Base</text>
+      <text x="377.9" y="149" font-size="10" fill="#6b6460" text-anchor="middle">+30.3%</text>
 
-      <line x1="737.3" y1="76" x2="737.3" y2="114" stroke="#2a5c3f" stroke-width="3"/>
-      <text x="737.3" y="68" font-size="15" fill="#2a5c3f" text-anchor="middle" font-weight="700">$2,340</text>
-      <text x="737.3" y="131" font-size="11" fill="#2a5c3f" text-anchor="middle">牛市 Bull</text>
-      <text x="737.3" y="144" font-size="10" fill="#6b6460" text-anchor="middle">+73.3%</text>
+      <line x1="695.2" y1="81" x2="695.2" y2="119" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="695.2" y="73" font-size="15" fill="#2a5c3f" text-anchor="middle" font-weight="700">$2,600</text>
+      <text x="695.2" y="136" font-size="11" fill="#2a5c3f" text-anchor="middle">牛市 Bull</text>
+      <text x="695.2" y="149" font-size="10" fill="#6b6460" text-anchor="middle">+109.2%</text>
 
-      <polygon points="363.5,38 357,26 370,26" fill="#0a0a0b"/>
-      <line x1="363.5" y1="38" x2="363.5" y2="86" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="3,2"/>
-      <text x="363.5" y="20" font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="700">现价 $1,350.50</text>
+      <line x1="290.6" y1="91" x2="290.6" y2="109" stroke="#6b6460" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="290.6" y="167" font-size="9" fill="#6b6460" text-anchor="middle">8/5收 $1,350.50</text>
 
-      <text x="80" y="163" font-size="9" fill="#6b6460">卖方目标价中位数 $2,200–2,500（财报前），显著高于本报告基准情景——分歧点见第七节第二段</text>
+      <polygon points="255.8,43 249,31 262,31" fill="#0a0a0b"/>
+      <line x1="255.8" y1="43" x2="255.8" y2="91" stroke="#0a0a0b" stroke-width="1.5" stroke-dasharray="3,2"/>
+      <text x="255.8" y="25" font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="700">盘后 $1,243.00</text>
+
+      <text x="80" y="167" font-size="9" fill="#6b6460">卖方目标价中位数 $2,200–2,500，仍高于本报告牛市情景下沿</text>
     </svg>
+  </div>
+
+  <div class="notice green">
+    <div class="nt">为什么三档全部上修：一个新事实，一个更低的起点</div>
+    <strong>新事实：NBM 含价格下限。</strong>v1 的熊市情景假设合约「锁量不锁价」，故设定毛利率退回 50%。实际条款含 floor 与 ceiling，且 NBM 毛利率约 80%——<strong>占比超三分之一的合约量在现货崩盘时仍以接近 80% 毛利结算</strong>。熊市毛利率地板从 50% 抬到约 60%，EPS 假设从 $65 抬到 $91。<br>
+    <strong>更低的起点：</strong>基准价从 $1,350.50 换成已核实的盘后 $1,243.00，同一个目标价对应的涨幅自然更高。<br>
+    <strong>两者叠加，加权期望从 v1 的 +10.1% 升至 +34.0%，且最大下行从 −51.9% 收窄到 −34.0%。评级相应从「中性观望」上修为「中性偏多 · 谨慎乐观」。</strong>
   </div>
 
   <div class="sc-grid">
     <div class="sc bear">
       <div class="sname">Bear<b>熊市情景</b></div>
-      <div class="sp">$650</div>
-      <div class="schg">较现价 −51.9%</div>
-      <div class="slogic">CY2027 上半年 NAND 价格见顶回落：长江存储与合肥长鑫（CXMT）产能落地叠加超大规模厂商进入消化期，价格快速回吐。非GAAP毛利率退回 50% 一线，FY2028 EPS 约 $65，给 10 倍。<br><strong>EPS 假设 $65 · P/E 10×</strong></div>
+      <div class="sp">$820</div>
+      <div class="schg">较盘后价 −34.0%<br><span style="font-size:10px">v1 为 $650 / −51.9%</span></div>
+      <div class="slogic">CY2027 现货价格见顶回落：中国供给落地叠加超大规模厂商进入消化期。非合约的三分之二位元售价大幅回吐，但 NBM 底价条款守住合约部分，混合毛利率退至约 60%（而非 v1 假设的 50%）。FY2028 EPS 约 $91，给 9 倍。<br><strong>EPS 假设 $91 · P/E 9×</strong></div>
     </div>
     <div class="sc base">
       <div class="sname">Base<b>基准情景</b></div>
-      <div class="sp">$1,480</div>
-      <div class="schg">较现价 +9.6%</div>
-      <div class="slogic">FY2027 全年指引大体兑现，周期在年中见顶后转为平台期而非崩塌，NBM 合约为三分之一的量托底。正常化年度 EPS 约 $148（低于指引年化的 $180），给 10 倍周期峰值倍数。<br><strong>EPS 假设 $148 · P/E 10×</strong></div>
+      <div class="sp">$1,620</div>
+      <div class="schg">较盘后价 +30.3%<br><span style="font-size:10px">v1 为 $1,480 / +9.6%</span></div>
+      <div class="slogic">FY2027 指引路径大体兑现，位元维持配给状态至 CY2027 之后（CFO 口径），周期在高位转为平台期而非崩塌。正常化年度 EPS 约 $162（仍低于指引年化的 $180），给 10 倍周期峰值倍数。<br><strong>EPS 假设 $162 · P/E 10×</strong></div>
     </div>
     <div class="sc bull">
       <div class="sname">Bull<b>牛市情景</b></div>
-      <div class="sp">$2,340</div>
-      <div class="schg">较现价 +73.3%</div>
-      <div class="slogic">NBM 覆盖率从三分之一升至过半，市场承认这不再是纯大宗商品生意并给出高于周期股的倍数；AI 推理侧存储需求延续到 FY2028。FY2027 EPS $195，给 12 倍。<br><strong>EPS 假设 $195 · P/E 12×</strong></div>
+      <div class="sp">$2,600</div>
+      <div class="schg">较盘后价 +109.2%<br><span style="font-size:10px">v1 为 $2,340 / +73.3%</span></div>
+      <div class="slogic">市场承认 $939亿底价最低承诺 + $598亿剩余履约义务是「类订阅式积压订单」而非大宗商品现货，给出高于周期股的倍数；NBM 覆盖率从三分之一升至过半。FY2027 EPS $200，给 13 倍。<br><strong>EPS 假设 $200 · P/E 13×</strong></div>
     </div>
   </div>
 
   <table>
     <tr><th>关键假设</th><th style="color:#e8a0a0">熊市</th><th style="color:#e8c98a">基准</th><th style="color:#a0d0b4">牛市</th></tr>
-    <tr><td class="k">FY2027 NAND 均价走势</td><td>年中见顶，下半年回吐 30%+</td><td>上半年见顶，下半年温和回落 10-15%</td><td>全年高位窄幅震荡</td></tr>
-    <tr><td class="k">FY2027 可售位元增长</td><td>中双位数（指引），但库存转为去化拖累</td><td>中双位数兑现（指引口径）</td><td>中双位数为下限，NBM 需求带动上修</td></tr>
-    <tr><td class="k">非GAAP 毛利率退出水平</td><td>约 50%</td><td>约 68-72%</td><td>维持 80%+</td></tr>
+    <tr><td class="k">FY2027 NAND 现货均价</td><td>年中见顶，下半年回吐 30%+</td><td>上半年见顶，下半年温和回落 10-15%</td><td>全年高位窄幅震荡</td></tr>
+    <tr><td class="k">位元配给状态</td><td>CY2027 内提前结束，转为过剩</td><td>延续至 CY2027 之后（管理层口径）</td><td>延续并伴随需求上修</td></tr>
+    <tr><td class="k">混合非GAAP毛利率退出水平</td><td>约 60%（NBM 底价托底）</td><td>约 72-76%</td><td>维持 80%+</td></tr>
     <tr><td class="k">NBM 覆盖 FY27 位元比例</td><td>停在三分之一，无新增</td><td>三分之一，续签正常</td><td>升至过半，倍数重估</td></tr>
   </table>
 
   <div class="notice">
-    <div class="nt">情景概率与期望值</div>
-    按 <strong>熊 25% / 基准 50% / 牛 25%</strong> 加权，相对 $1,350.50 收盘价的期望回报约 <strong>+10%</strong>。<br>
-    但这个正期望值有一条<strong>很肥的左尾</strong>：单一情景的最大下行是 −51.9%，而基准情景的上行只有 +9.6%。<strong>赔率结构是「小赚的概率一半、腰斩的概率四分之一」——对绝大多数账户而言，这不是一个应该主动去承担的分布。</strong>
+    <div class="nt">情景概率与期望值（v2）</div>
+    按 <strong>熊 25% / 基准 50% / 牛 25%</strong> 加权，相对盘后价 $1,243.00 的期望回报约 <strong>+34.0%</strong>（v1 为 +10.1%）。<br>
+    <strong>赔率结构从 v1 的「上行 +9.6% / 下行 −51.9%」改善为「上行 +30.3% / 下行 −34.0%」——上下行基本对称，而基准情景概率是熊市的两倍。</strong>这是一个可以承担的分布，但请注意：<strong>它之所以改善，主要不是因为公司变好了，而是因为我 v1 漏掉了价格下限条款、并且股价又跌了 8%。</strong>
   </div>
 </div>
 
 <!-- 9 Verdict Box -->
 <div class="verdict">
-  <div class="verdict-en">The Verdict — A Perfect Quarter Priced as a Peak</div>
-  <div class="verdict-zh">裁决：一个完美的季度，被当作顶点定价</div>
+  <div class="verdict-en">The Verdict (v2) — I Was Wrong About the Floor. It Changes the Odds.</div>
+  <div class="verdict-zh">裁决 v2：我漏掉了价格下限，这改变了赔率</div>
 
   <div class="v-item"><div class="v-num">1</div><div class="v-text">
-    <strong>这份财报本身没有任何瑕疵。</strong>营收 $89.65亿超共识 6.9%、非GAAP EPS $39.25 超共识 13.7%、毛利率 84.6% 超自家指引上沿 3.6 个百分点、调整后自由现金流 $50.35亿（56% 利润率）、长期负债清零。<strong>问题从来不在这一季，而在下一季的话。</strong>
+    <strong>这份财报本身没有任何瑕疵。</strong>营收 $89.65亿超共识 6.9%、非GAAP EPS $39.25 超共识 13.7%、毛利率 84.6% 超自家指引上沿 3.6 个百分点、调整后自由现金流 $50.35亿（56% 利润率）、长期负债清零、当季已回购 $45亿。
     <span class="v-src">来源：公司 FQ4 FY2026 业绩发布（2026-08-05 盘后）；共识口径 Zacks/Benzinga</span>
   </div></div>
 
   <div class="v-item"><div class="v-num">2</div><div class="v-text">
-    <strong>市场砸盘的直接扳机是指引，深层原因是增长的构成。</strong>Q1 FY27 指引 $103–108亿，中值 $105.5亿，比共识 $108.2亿<strong>低 2.5%</strong>——注意，是<strong>区间上沿才勉强够到共识</strong>。而更要命的是：Q4 的环比增长「约三分之二来自价格」，FY2027 位元增速只有<strong>中双位数</strong>，理由还是<strong>库存高企</strong>。<strong>增长的成分越来越依赖那个会均值回归的部分。</strong>
-    <span class="v-src">来源：公司 Q1 FY27 指引；管理层电话会关于位元增长与库存的表述（公开报道口径）</span>
+    <strong>市场砸盘的直接扳机是指引：Q1 FY27 给 $103–108亿，中值比共识 $108.2亿低 2.5%，区间上沿才勉强够到共识。</strong>盘后收 <strong>$1,243.00、−7.96%</strong>，两日累计 −12.93%。<strong>但把这次下跌解释为「价格见顶」是站不住的</strong>——毛利率指引微降的公司口径是产品结构与元件成本，<strong>售价仍在温和上涨</strong>。
+    <span class="v-src">来源：公司 Q1 FY27 指引；盘后价取自本系统缓存 updated_at 2026-08-06T05:50:52Z</span>
   </div></div>
 
   <div class="v-item"><div class="v-num">3</div><div class="v-text">
-    <strong>消费分部环比 −32% 是全场最被低估的数字。</strong>它在 Q4 只占营收 6.2%，但它是整条 NAND 价格链上<strong>唯一一个客户可以说「不」的环节</strong>。数据中心客户不买就交付不了 AI，Edge 客户不买就出不了手机——只有消费者可以选择不升级。<strong>价格摧毁需求，永远从这里开始显形。</strong>
-    <span class="v-src">来源：公司披露 Q4 Consumer 营收 $5.56亿，环比 −32%</span>
+    <strong>我在 v1 里读反了一件事：位元增速受限是供给约束，不是需求疲软。</strong>CFO Luis Flores 明确表示，<strong>位元将在 2027 日历年之后仍处于配给状态，因为需求增长快于供给</strong>；同时资本开支绝对额同比上升、资本密集度降至营收约 6%。<strong>一家在扩产且产品仍需配给的公司，瓶颈在产线不在订单簿。</strong>
+    <span class="v-src">来源：Q4 FY2026 电话会问答（分析师纪要转述，非逐字实录，置信度中高）</span>
   </div></div>
 
   <div class="v-item"><div class="v-num">4</div><div class="v-text">
-    <strong>NBM 是唯一真正改变了商业模式的东西，也是牛市情景唯一的支点。</strong>10 份多年期协议、首批五份财务担保逾 $110亿含 $4亿预付、Q3 三份合同带来 $420亿剩余履约义务、<strong>FY2027 超三分之一位元已锁定</strong>。<strong>NAND 从来没有过合约化收入。如果这件事坐实，它值得一个高于周期股的倍数——但目前它覆盖的是三分之一，不是全部。</strong>
-    <span class="v-src">来源：公司披露的 NBM 协议条款与剩余履约义务；四月与八月两次电话会累计</span>
+    <strong>我在 v1 里点名「最值得追问」的那个问题，答案对多方有利：NBM 含价格下限与上限，明确设计为在市场价格下跌时保护可接受毛利率。</strong>NBM 毛利率约 80%，按底价计的最低承诺收入 <strong>$939亿</strong>、剩余履约义务 <strong>$598亿</strong>。<strong>v1 的熊市推理假设「锁量不锁价」——错了，是量价都锁。熊市地板因此从毛利率 50% 抬到约 60%，目标价从 $650 上修至 $820。</strong>
+    <span class="v-src">来源：NBM 条款与规模，分析师对本次电话会的纪要转述；Q3 时口径为三份合同 $420亿 RPO</span>
   </div></div>
 
   <div class="v-item"><div class="v-num">5</div><div class="v-text">
-    <strong>$140亿新增回购授权（总剩余 $155亿，占市值 7.3%）值得打一个问号。</strong>股价年内仍<strong>上涨约 500%</strong>，盈利处在有记录以来最高水平，公司在<strong>这个位置</strong>加码回购。存储行业的历史规律是：<strong>在周期顶点回购、在周期底部增发。</strong>这不构成看空理由，但它是一个应当计入的资本配置风险。
-    <span class="v-src">来源：公司宣布额外 $140亿回购授权，总剩余授权 $155亿；市值按 $1,350.50 收盘价计算</span>
+    <strong>唯一被管理层坐实的看空信号，是消费分部环比 −32% 背后的那句话。</strong>CFO 回答该分部为何下滑时说：<strong>消费市场的价格已经上涨，这影响了可触达市场（TAM）</strong>。<strong>这是管理层承认价格正在缩小市场。</strong>目前它只发生在消费端，且在配给经济里消费端可以被主动牺牲——所以它既是需求现象也是配置选择。<strong>但它仍是整条链上唯一能观测到需求弹性的地方，是头号追踪指标。</strong>
+    <span class="v-src">来源：公司披露 Q4 Consumer 营收 $5.56亿、环比 −32%；管理层解释来自电话会问答转述</span>
   </div></div>
 
   <div class="v-item"><div class="v-num">6</div><div class="v-text">
-    <strong>结论：中性，观望。</strong>不是因为公司不好——公司好得惊人。而是因为<strong>整笔投资的胜负手是「NAND 价格什么时候拐」，而这件事没有人能可靠预测，包括管理层自己</strong>（他们的位元指引已经在往回收）。基准情景 +9.6% 的上行，不足以补偿熊市情景 −51.9% 的下行。<strong>在一个你没有信息优势的变量上下注，赔率再好也不该下。</strong>
-    <span class="v-src">本报告独立判断；卖方目标价中位数 $2,200–2,500，与本结论存在显著分歧，分歧点已在第七节第二段列明</span>
+    <strong>$140亿新增回购授权仍值得打问号，但比 v1 说的更复杂。</strong>当季已执行 <strong>$45亿</strong>，剩余授权 $155亿（占盘后市值 7.9%）。存储业历史规律确实是顶点回购、底部增发。<strong>但如果 NBM 的价格下限成立，「顶点」的定义本身就变了——一家有 $939亿底价合约的公司，其盈利峰值不像纯现货公司那样陡峭。</strong>这条从「资本配置风险」降级为「需要观察，不是硬扣分项」。
+    <span class="v-src">来源：新增 $140亿授权、总剩余 $155亿、当季回购 $45亿；市值按盘后 $1,243.00 计算</span>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">7</div><div class="v-text">
+    <strong>结论上修：中性偏多 · 谨慎乐观（v1 为中性观望）。</strong>加权期望从 +10.1% 升至 <strong>+34.0%</strong>，最大下行从 −51.9% 收窄至 <strong>−34.0%</strong>，上下行基本对称而基准概率是熊市的两倍。<strong>但必须说清楚：改判的原因主要不是公司变好了，而是我 v1 漏掉了价格下限条款、并且股价又跌了 8%。</strong>胜负手仍是 NAND 价格，只是这个变量对闪迪盈利的传导系数，比 v1 假设的小得多。<strong>8月13日的投资者日是最近的验证窗口。</strong>
+    <span class="v-src">本报告独立判断；卖方目标价中位数 $2,200–2,500，仍高于本报告牛市情景下沿</span>
   </div></div>
 </div>
 
@@ -447,15 +483,12 @@ svg{width:100%;height:auto;display:block;}
 
 <!-- 未核实项（Critic CONDITIONAL 要求） -->
 <div class="notice red">
-  <div class="nt">未核实项清单 · Unverified Items</div>
-  本报告在以下六处的置信度低于其余内容，使用时请自行加权：<br>
-  <strong>一、盘后股价。</strong>「跌破 $1,300 / 盘后 −3.5%~−8%」为公开报道口径，<strong>未经本系统价格缓存核实</strong>；已核实的只有 8月5日收盘价 $1,350.50。<br>
-  <strong>二、电话会 Q&amp;A。</strong>六个逐字记录源全部返回 403，第13节为<strong>重构的应问清单</strong>，非管理层原话。<br>
-  <strong>三、Consumer 全年营收 $29.38亿</strong>与 <strong>Q4 Edge 营收 $54.29亿</strong>为倒算值，非公司直接披露。<br>
-  <strong>四、Q1 FY26 毛利率 32%</strong> 由营收与非GAAP EPS 反推，非披露值；毛利率折线图中该点已用空心标记区分。<br>
-  <strong>五、FY2026 全年非GAAP EPS 约 $67.7</strong> 中的 Q3 分项（约 $21）为推算，故「追溯市盈率约 20 倍」为约数；<strong>前瞻市盈率 7.5 倍则完全基于公司指引，不受此影响</strong>。<br>
-  <strong>六、Q3 FY25 营收 $17.0亿</strong> 由「Q4 FY25 环比 +12%」倒算，用于营收走势图最左一根柱。<br>
-  <strong>不受影响的核心数字</strong>：Q4 营收 $89.65亿、非GAAP 毛利率 84.6%、非GAAP EPS $39.25、全年营收 $202.48亿、数据中心全年 $51.53亿、Consumer Q4 环比 −32%、Q1 FY27 指引 $103–108亿、位元增速中双位数、$140亿回购授权 —— 均为公司直接披露。
+  <div class="nt">残余未核实项 · Remaining Unverified（v1 六项已解决五项）</div>
+  <strong>仍未解决（1 项）：Q1 FY26 毛利率约 32%</strong>——由营收与非GAAP EPS $1.22 反推，非披露值；毛利率折线图中该点已用空心标记区分。相关站点被本会话出口策略封禁，WebSearch 亦未取得该表格。<br>
+  <strong>置信度中高（非公司文件直读，来自分析师纪要转述）</strong>：NBM 的 $939亿底价最低承诺、$598亿剩余履约义务、约 80% 毛利率、价格下限与上限条款；第13节全部问答内容；「配给延续至 CY2027 之后」「资本密集度约 6%」「当季回购 $45亿」。<br>
+  <strong>算术闭合（非估计，由披露值倒推且加总严格闭合）</strong>：Consumer 全年 $29.38亿（总额 减 数据中心 减 Edge）；Q4 Edge $54.29亿；Q3 FY25 $17.0亿（由披露的「Q4 FY25 环比 +12%」反推）。Q2 FY26 $30.3亿另获两条独立环比数据双向验证（Q1×1.31 = 3.03、Q3÷1.97 = 3.02）。<br>
+  <strong>推算（1 项）</strong>：FY2026 全年非GAAP EPS 约 $67.7 中的 Q3 分项（约 $21），故「追溯市盈率约 18.4 倍」为约数；<strong>前瞻市盈率 6.9 倍完全基于公司指引，不受影响</strong>。<br>
+  <strong>全部为公司直接披露、不受上述任何限制</strong>：Q4 营收 $89.65亿 / 非GAAP毛利率 84.6% / 非GAAP EPS $39.25 / GAAP EPS $43.97 / 全年营收 $202.48亿 / 数据中心全年 $51.53亿（+437%）/ Edge 全年 $121.57亿（+195%）/ Consumer Q4 $5.56亿（环比 −32%）/ Q1 FY27 指引 $103–108亿、毛利率 83-85%、EPS $44-46 / 调整后FCF $50.35亿 / 现金 $47.62亿 / 长期负债清零 / $140亿新增回购授权。<strong>盘后价 $1,243.00（−7.96%）现已由本系统缓存实测核实。</strong>
 </div>
 
 <!-- 10 管理层语气 -->
@@ -478,14 +511,15 @@ svg{width:100%;height:auto;display:block;}
   <div class="sec-head"><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></div>
   <div class="chips">
     <span class="chip pos">AI 推理侧存储需求</span>
-    <span class="chip pos">NBM 合约化收入（10份 · 锁定 FY27 三分之一位元）</span>
+    <span class="chip pos">NBM 合约化收入（10份 · 底价最低承诺 $939亿）</span>
+    <span class="chip pos">NBM 含价格下限与上限 · 毛利率约 80%</span>
+    <span class="chip pos">位元配给延续至 CY2027 之后</span>
     <span class="chip pos">零长期负债 · 现金 $47.62亿</span>
     <span class="chip pos">调整后自由现金流 $50.35亿（56%利润率）</span>
     <span class="chip neu">资本开支仅占营收 6.3%</span>
     <span class="chip neu">$155亿剩余回购授权（占市值 7.3%）</span>
     <span class="chip neg">增长三分之二来自价格</span>
-    <span class="chip neg">FY27 位元增速仅中双位数</span>
-    <span class="chip neg">库存天数主动维持高位</span>
+    <span class="chip neu">FY27 位元增速中到高双位数（供给约束）</span>
     <span class="chip neg">消费分部环比 −32%</span>
     <span class="chip neg">中国供给（CXMT 上市募资逾 $80亿）</span>
     <span class="chip neg">超大规模厂商资本开支消化风险</span>
@@ -499,8 +533,8 @@ svg{width:100%;height:auto;display:block;}
     <tr><th>风险</th><th>概率</th><th>影响</th><th>证据 / 触发条件</th></tr>
     <tr>
       <td class="k">NAND 价格见顶回落<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">NAND ASP rollover</span></td>
-      <td><span style="color:#8b2e2e;font-weight:700">高</span></td><td><span style="color:#8b2e2e;font-weight:700">极高</span></td>
-      <td>本季增长约三分之二来自价格；毛利率指引已走平（84.6% → 84.0%中值）。价格若回吐 30%，毛利率结构性下移，EPS 呈非线性塌陷</td>
+      <td><span style="color:#8b2e2e;font-weight:700">高</span></td><td><span style="color:#c47a1e;font-weight:700">高（v1 判为极高，已下调）</span></td>
+      <td>本季增长约三分之二来自价格，仍是头号风险。<strong>但传导系数比 v1 假设的小</strong>：超三分之一位元有 NBM 价格下限保护、以约 80% 毛利率结算。毛利率指引微降的公司口径是结构与元件成本，<strong>售价仍在温和上涨</strong>。残余问号是<strong>下限的具体水位未披露</strong>
     </tr>
     <tr>
       <td class="k">中国供给冲击<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">China supply shock</span></td>
@@ -508,9 +542,9 @@ svg{width:100%;height:auto;display:block;}
       <td>CXMT 于上海上市，市值约 $4,870亿、募资逾 $80亿——七月存储股崩盘的直接导火索之一。募集资金转化为产能需 18-24 个月，是 FY2028 的事而非 FY2027</td>
     </tr>
     <tr>
-      <td class="k">位元增长仅中双位数<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Mid-teens bit growth</span></td>
-      <td><span style="color:#8b2e2e;font-weight:700">已确认</span></td><td><span style="color:#c47a1e;font-weight:700">中</span></td>
-      <td>管理层 FY2027 指引，理由为库存水平偏高。意味着收入增长将继续依赖价格而非销量——把周期风险放大而非分散</td>
+      <td class="k">位元增速受限<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Bit growth capped</span></td>
+      <td><span style="color:#c47a1e;font-weight:700">已确认</span></td><td><span style="color:#2a5c3f;font-weight:700">低（v1 判为中，已下调）</span></td>
+      <td><strong>v1 误判：</strong>我把「中双位数增速 + 库存高企」读成需求信号。CFO 明确表示位元在 CY2027 之后仍处<strong>配给</strong>状态、需求快于供给，且资本开支绝对额同比上升——这是<strong>供给约束，不是需求疲软</strong>。风险等级相应下调
     </tr>
     <tr>
       <td class="k">需求弹性开始显形<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Demand elasticity showing</span></td>
@@ -524,8 +558,8 @@ svg{width:100%;height:auto;display:block;}
     </tr>
     <tr>
       <td class="k">周期顶点回购<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Buyback at cycle peak</span></td>
-      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#c47a1e;font-weight:700">中</span></td>
-      <td>新增 $140亿授权、总剩余 $155亿，而股价年内仍上涨约 500%。存储行业历史上多次在顶点回购、在底部增发</td>
+      <td><span style="color:#c47a1e;font-weight:700">中</span></td><td><span style="color:#c47a1e;font-weight:700">中低</span></td>
+      <td>当季已执行 <strong>$45亿</strong>，新增授权 $140亿、总剩余 $155亿（占盘后市值 7.9%），而股价年内仍上涨约 500%。存储业历史规律是顶点回购、底部增发。<strong>但若价格下限成立，「顶点」的陡峭程度低于纯现货公司</strong>，故影响下调</td>
     </tr>
     <tr>
       <td class="k">客户集中与 NBM 对手方风险<br><span style="font-weight:400;font-style:italic;color:#6b6460;font-size:11px">Customer concentration</span></td>
@@ -540,36 +574,48 @@ svg{width:100%;height:auto;display:block;}
   </table>
 </div>
 
-<!-- 13 分析师 Q&A 张力区域 -->
+<!-- 13 分析师 Q&A 实录要点 -->
 <div class="section">
-  <div class="sec-head"><span class="section-zh">分析师 Q&amp;A 张力区域</span><span class="section-en">Q&amp;A Tension · Reconstructed</span></div>
-  <div class="notice red">
-    <div class="nt">⚠ 置信度声明：本节不是逐字实录</div>
-    本次分析尝试抓取 SEC EDGAR、公司投资者关系页、Alphastreet、Benzinga、Investing.com、Biggo 六个逐字记录源，<strong>全部返回 HTTP 403</strong>。因此本节是<strong>依据公开报道重构的「四个必须被追问的张力点」</strong>，其中<strong>问题是本报告提出的，管理层立场来自公开报道的转述</strong>，<strong>不得当作管理层原话引用</strong>。置信度：中。
+  <div class="sec-head"><span class="section-zh">分析师 Q&amp;A 实录要点</span><span class="section-en">Q&amp;A · Actual Exchanges</span></div>
+  <div class="notice">
+    <div class="nt">置信度：中高 · 已从 v1 的「重构清单」升级为实际问答</div>
+    v1 时六个逐字记录源被出口策略封禁，该节曾是我重构的应问清单。本次经 WebSearch 通道取得<strong>实际提问与管理层回答</strong>，来源为分析师对本次电话会的纪要转述，<strong>仍非逐字实录</strong>，个别措辞可能与原话有出入，故置信度标为中高而非高。<br>
+    <strong>值得一记：v1 重构的四个张力点中，有两个是分析师在会上原样问出的。</strong>
   </div>
 
   <div class="qa">
-    <div class="qq">张力一：位元增长受限，到底是产能问题还是需求问题？</div>
-    <div class="qa-en">Is the bit constraint about supply, or about demand?</div>
-    <div class="aa">管理层给出的理由是<strong>库存水平偏高</strong>，并称高库存天数是为支撑 NBM 而<strong>主动</strong>维持的。<strong>这两个说法可以同时为真，但它们的投资含义完全相反</strong>：为履约而备货是中性的；渠道积压是看空的。追问点应当是——<strong>这些库存在谁的资产负债表上？是闪迪的成品库存，还是客户与渠道手里的货？</strong>公开报道未见对此的明确区分。</div>
+    <div class="qq">问一：消费营收本季下滑，是配置选择还是需求驱动？<span class="badge badge-official">v1 预判命中</span></div>
+    <div class="qa-en">"Consumer revenue is down a bit this quarter. Is that allocation choice or demand-driven?"</div>
+    <div class="aa"><strong>CEO David Goeckeler</strong>：消费业务的节奏与交易型市场不同，在当前环境下<strong>消费端提价的传导要慢得多</strong>。<strong>CFO Luis Flores</strong> 补充：<strong>消费市场的价格已经上涨，这影响了可触达市场（TAM）</strong>，但公司对自身市场份额满意，仍将坚守该业务。<br>
+    <strong>读法：答案是「两者都是」。</strong>管理层没有回避——CFO 直接承认价格在缩小市场，<strong>这是全场唯一一句由公司自己说出口的需求破坏证据</strong>。同时「对份额满意、仍将坚守」说明这不是主动放弃，否则这句话会说成「我们把产能配给了更高价值的场景」。</div>
   </div>
 
   <div class="qa">
-    <div class="qq">张力二：Q1 指引区间的上沿才等于共识，这是保守还是信号？</div>
+    <div class="qq">问二：位元供给与配给状态能持续多久？<span class="badge badge-official">v1 预判命中</span></div>
+    <div class="qa-en">How long does the allocation environment last?</div>
+    <div class="aa"><strong>CFO Luis Flores</strong>：公司预计<strong>位元将在 2027 日历年之后仍处于配给状态，因为需求增长快于供给</strong>；维持<strong>中到高双位数</strong>的位元增长承诺，<strong>资本开支绝对金额同比上升</strong>（制程转换成本抬升），但<strong>资本密集度全年降至营收约 6%</strong>。<strong>CEO</strong> 表示公司计划随市场增长，转向一个在定价、可预测性与久期上更可控的商业模式。<br>
+    <strong>读法：这条直接推翻了我 v1 的判断。</strong>我把「库存高企导致可售位元受限」读成需求信号，管理层的口径是供给约束。<strong>配给状态延续到 CY2027 之后，是本次电话会最强的看多陈述。</strong></div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">问三：NBM 合约定价在价格下行时如何保护毛利率？<span class="badge badge-official">v1 标为「最值得追问」</span></div>
+    <div class="qa-en">How do NBM contracts protect margin if prices fall?</div>
+    <div class="aa">定价含<strong>固定与浮动两部分，并设有价格下限（floor）与上限（ceiling），明确设计为在市场价格下跌时保护可接受的毛利率</strong>；<strong>近端年份价格基本固定</strong>，远端年份带浮动成分让双方分享价格波动。<strong>CFO</strong> 表示 <strong>NBM 毛利率在 80% 上下，价格上行仍有空间</strong>。规模口径：<strong>按底价计的最低承诺收入 $939亿、剩余履约义务 $598亿</strong>。<br>
+    <strong>读法：这是本次修订中权重最大的一条。</strong>我 v1 写「若无下限，锁的是量不是价，对熊市保护远小于表面」——<strong>结论正确，前提猜错了。有下限，所以量价都锁。</strong>熊市情景因此从 $650 上修至 $820。</div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">问四：毛利率的持久性，以及回购节奏与资本开支是否够用？</div>
+    <div class="qa-en">Margin durability, buyback pace, and whether capex is sufficient</div>
+    <div class="aa">分析师<strong>反复追问合约定价与毛利率的持久性</strong>，管理层重申对可持续毛利率的信心。<strong>CFO</strong> 就资本回报表示：<strong>在当前阶段回购比派息更具税务效率</strong>；当季已回购 <strong>$45亿</strong>，新增授权 $140亿、总剩余 $155亿。<br>
+    <strong>读法：「反复追问」这四个字本身就是信息。</strong>说明卖方对 84.6% 的持久性并不信服，需要管理层反复背书。<strong>而管理层的回答是重申信心，不是给出新的量化证据——这一点上我 v1 的谨慎立场仍然成立。</strong></div>
+  </div>
+
+  <div class="qa">
+    <div class="qq">问五：Q1 指引区间上沿才等于共识，是保守还是信号？<span class="badge badge-predict">未获正面回应</span></div>
     <div class="qa-en">The top of the guide merely matches consensus — sandbagging or signal?</div>
-    <div class="aa">$103–108亿对共识 $108.2亿。管理层刚刚在 Q4 交出一个<strong>超自身指引上沿 8.7%</strong> 的季度（指引 $77.5–82.5亿，实际 $89.65亿），<strong>说明他们的指引一贯偏保守</strong>。若沿用同样的保守度，实际值可能落在 $115亿以上。<strong>市场没有给这个「历史保守度」任何折扣，反而直接按中值定价并卖出——这本身说明市场担心的不是这一季，而是价格拐点的时点。</strong></div>
-  </div>
-
-  <div class="qa">
-    <div class="qq">张力三：消费分部 −32%，公司如何解释？</div>
-    <div class="qa-en">How does management explain the 32% sequential collapse in Consumer?</div>
-    <div class="aa">公开报道<strong>未见管理层对此给出专门解释</strong>，重点全部落在数据中心与 Edge 的增长上。<strong>这是本次电话会最明显的信息缺口。</strong>可能的良性解释是主动把产能从低毛利的消费端转向高毛利的数据中心（配置性选择）；恶性解释是终端在这个价格上不买了（需求破坏）。<strong>两者对 FY2027 的含义天差地别，而公司没有把话说清楚。</strong></div>
-  </div>
-
-  <div class="qa">
-    <div class="qq">张力四：NBM 的浮动定价条款，在价格下行时是保护还是漏洞？</div>
-    <div class="qa-en">In a price downturn, do NBM's variable-price terms protect — or leak?</div>
-    <div class="aa">公司披露 NBM「同时包含固定与浮动定价成分，使公司能在市场价格上行时捕捉收益」。<strong>这句话被作为利好宣传，但它天然是双向的</strong>——能跟着涨，通常也意味着能跟着跌。<strong>真正决定 NBM 价值的是：浮动部分有没有价格下限（floor）？</strong>公开信息未见披露。若无下限，则「三分之一位元已锁定」锁的是<strong>量</strong>而非<strong>价</strong>，对熊市情景的保护远小于表面。<strong>这是本报告认为最值得向公司追问的一条。</strong></div>
+    <div class="aa"><strong>公开纪要中未见管理层对此的正面解释。</strong>可参照的事实是：Q4 实际营收 $89.65亿，超出自身指引上沿（$82.5亿）<strong>8.7%</strong>——<strong>这家公司的指引一贯偏保守</strong>。若沿用同等保守度，Q1 实际可能落在 $115亿以上。<br>
+    <strong>读法：市场没有给这个「历史保守度」任何折扣，直接按中值定价并卖出。</strong>结合问二的配给表态，<strong>指引偏低更可能是产能而非需求的函数</strong>——但这是本报告的推断，公司未确认。</div>
   </div>
 </div>
 
@@ -580,11 +626,12 @@ svg{width:100%;height:auto;display:block;}
     <tr><th>序</th><th>追踪项</th><th>为什么它重要</th></tr>
     <tr><td class="k">1</td><td>消费分部环比是否<strong>连续第二季两位数下滑</strong></td><td>单季 −32% 可以是配置性调整，连续两季就是需求破坏。<strong>头号指标</strong></td></tr>
     <tr><td class="k">2</td><td>Edge 分部的<strong>量价拆分</strong></td><td>Edge 占营收 60%，若它的增长也变成「主要靠价格」，风险从局部变成全局</td></tr>
-    <tr><td class="k">3</td><td>库存天数与库存<strong>归属</strong>（公司 vs 渠道）</td><td>存储行业最领先的转折指标，且领先于价格</td></tr>
-    <tr><td class="k">4</td><td>NBM 是否再新增，以及是否披露<strong>价格下限条款</strong></td><td>决定「锁定三分之一位元」到底锁的是量还是价——牛市情景成立与否的关键</td></tr>
+    <tr><td class="k">3</td><td><strong>配给状态是否提前结束</strong>（管理层称延续至 CY2027 之后）</td><td>这是管理层押上信誉的一条前瞻表述。一旦有客户表示「已能足量拿到货」，供给约束的叙事就破了</td></tr>
+    <tr><td class="k">4</td><td>NBM <strong>价格下限的具体水位</strong>与新增合约数</td><td>下限存在已确认，但<strong>下限定在多高未披露</strong>——它直接决定熊市地板是毛利率 60% 还是 45%。<strong>8月13日投资者日是最近的问询窗口</strong></td></tr>
     <tr><td class="k">5</td><td>NAND 现货与合约价（TrendForce / DRAMeXchange 月度）</td><td>整笔投资的唯一胜负手，且它是公开可得的高频数据</td></tr>
     <tr><td class="k">6</td><td>CXMT 产能爬坡进度与良率公告</td><td>决定中国供给冲击落在 FY2027 还是 FY2028</td></tr>
-    <tr><td class="k">7</td><td>苹果 / 戴尔 / 惠普的<strong>内存成本表述</strong></td><td>反向验证：设备厂喊贵得越凶，说明价格转移仍在进行；一旦他们开始说「成本压力缓解」，闪迪的顶就到了</td></tr>
+    <tr><td class="k">7</td><td><strong>2026-08-13 投资者日</strong>：FY2027-29 中期模型与 NBM 细节</td><td>距今一周，是本报告所有残余问号的集中验证点</td></tr>
+    <tr><td class="k">8</td><td>苹果 / 戴尔 / 惠普的<strong>内存成本表述</strong></td><td>反向验证：设备厂喊贵得越凶，说明价格转移仍在进行；一旦他们开始说「成本压力缓解」，闪迪的顶就到了</td></tr>
   </table>
 </div>
 
@@ -592,8 +639,10 @@ svg{width:100%;height:auto;display:block;}
 <div class="footer">
   Earnings Copilot · Earner ｜ Sandisk Corporation (NASDAQ: SNDK) · Q4 FY2026 &amp; Full Year<br>
   数据来源：公司 FQ4 FY2026 业绩发布（2026-08-05 盘后 16:05 ET）与全年业绩；管理层电话会公开报道；Zacks / Benzinga 共识口径；分析师目标价为财报前最新公开值。<br>
-  股价 $1,350.50 为 2026-08-05 常规时段收盘价，取自本系统 GitHub 价格缓存（updated_at 2026-08-06T05:08:24Z），当日 −5.40%。<strong>该价格不含财报后反应</strong>；盘后跌幅为公开报道口径，未经缓存核实。<br>
-  标注说明：<span class="badge badge-official">已披露</span> 公司直接披露 ｜ <span class="badge badge-predict">倒算</span> 由已披露数字推算 ｜ 第13节为重构非实录。<br>
+  股价：2026-08-05 常规时段收盘 $1,350.50（−5.40%）；<strong>盘后收盘 $1,243.00（−7.96%）</strong>，两日累计 −12.93%。均取自本系统 GitHub 价格缓存（updated_at 2026-08-06T05:50:52Z）——盘前/盘后字段为本次为解决 v1 未核实项而新增。估值一律按盘后价 $1,243.00 计算。<br>
+  标注说明：<span class="badge badge-official">已披露</span> 公司直接披露或 v1 预判命中 ｜ <span class="badge badge-predict">推算</span> 由已披露数字推算。第13节问答为分析师纪要转述，非逐字实录。<br>
+  出口限制：sec.gov、investor.sandisk.com、fool.com、alphastreet 等站点被本会话出口策略封禁（代理层 CONNECT 403），非站点拒绝；可用通道为 WebSearch 与 GitHub Action。<br>
+  <strong>版本：v2（2026-08-06）。相对 v1 的实质性变化：盘后价核实、Q&amp;A 由重构改为实录、两处判断被管理层原话推翻并已更正、NBM 价格下限条款发现、三情景目标价全部上修、评级由中性观望上修为中性偏多。</strong><br>
   本报告为独立分析，不构成投资建议。分析日 2026-08-06。
 </div>
 
