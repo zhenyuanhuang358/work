@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>闪迪估值框架重做 · 一家 50-67% 位元合约化的 NAND 公司值几倍</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:26px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.answer{background:var(--ink);color:var(--paper);padding:20px 24px;margin:18px 0;border-left:5px solid var(--gold);}
+.answer .alab{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.answer .atext{font-size:16.5px;font-weight:700;line-height:1.7;}
+.answer .asub{font-size:13.5px;color:#cfc9be;margin-top:8px;line-height:1.7;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+td.num{font-family:'IM Fell English',Georgia,serif;font-weight:700;text-align:right;white-space:nowrap;}
+td.hl{background:rgba(201,168,76,.16)!important;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-note{font-size:12px;color:var(--muted);margin-top:6px;border-top:1px dotted var(--border);padding-top:6px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:29px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.appendix{border:2px solid var(--ink);padding:22px 24px;margin:38px 0 0;background:var(--card);}
+.appendix .ap-head{border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px;}
+.appendix .ap-zh{font-size:19px;font-weight:700;}
+.appendix .ap-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;}
+.ap-sub{font-weight:700;font-size:14.5px;margin:18px 0 6px;color:var(--copper);}
+.ap-sub:first-of-type{margin-top:4px;}
+.appendix p,.appendix li{font-size:13.3px;color:#3a352f;}
+.appendix ul{margin:6px 0 6px 20px;} .appendix li{margin:5px 0;}
+.feedback{text-align:center;margin:26px 0 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .sc-grid{grid-template-columns:1fr;}
+  .title-zh{font-size:24px;} body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner · 估值框架专题</span>
+  <span>Sandisk Corporation (NASDAQ: SNDK)</span>
+  <span>基准价 $1,747.60 · 2026-08-17 09:48 ET 盘中（本系统缓存）</span>
+  <span>本文<b>覆盖并作废</b> 8/6 报告与 8/13 追踪中的全部目标价</span>
+</div>
+
+<!-- 2 双语标题 + 标签 -->
+<div class="title-block">
+  <div class="title-en">What Multiple Does a NAND Company Deserve When 50–67% of Its Bits Are Under Contract? — A Ground-Up Rebuild</div>
+  <div class="title-zh">闪迪估值框架重做：合约化的 NAND<br>该给几倍，以及为什么这个问题比目标价重要</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性 · 已充分定价（由「中性偏多」下调）</span>
+    <span class="tag amber">加权期望 −4.2%</span>
+    <span class="tag green">框架合理倍数 9.9× – 11.3×</span>
+    <span class="tag">现价隐含 9.6×</span>
+    <span class="tag red">旧目标价全部作废</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num">9.6×</div><div class="lab">现价隐含前瞻 P/E<span class="en">Implied Fwd P/E</span></div></div>
+  <div class="stat"><div class="num amber">9.9 – 11.3×</div><div class="lab">本框架推导的合理区间<span class="en">Derived Fair Range</span></div></div>
+  <div class="stat"><div class="num red">−4.2%</div><div class="lab">三情景加权期望回报<span class="en">Prob-Weighted Return</span></div></div>
+  <div class="stat"><div class="num green">−74%</div><div class="lab">合约化削减的盈利波动<span class="en">Earnings Vol Reduction</span></div></div>
+</div>
+
+<!-- 4 答案 -->
+<div class="answer">
+  <span class="alab">The Answer</span>
+  <div class="atext">闪迪在 $1,747.60 大致合理定价，不再有超额赔率。合理前瞻倍数区间是 <span style="color:var(--gold)">9.9× – 11.3×</span>，现价隐含 9.6×，只低于区间下沿 3%。三情景加权期望 −4.2%，评级由「中性偏多」下调至<span style="color:var(--gold)">中性</span>。</div>
+  <div class="asub">但这份工作真正的产出不是这个价位，而是下面这句：<strong style="color:#fff">NBM 合约的价值不在它抬高了盈利，在它砍掉了 74% 的盈利波动。</strong>合约化把「EPS 可以归零」变成了「EPS 有地板」——倍数该重估，不是因为增长，是因为波动率。8/6 那份报告给 10× 是错的，但错的方向和幅度都不是我原先以为的那样。</div>
+</div>
+
+<!-- 5 第一部分：合理倍数 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">一 · 合理倍数怎么算出来的</span><span class="section-en">Deriving the Multiple · Sum of the Parts</span></div>
+
+  <div class="para">
+    <span class="label-zh">结论：合约部分值 13.9 倍，现货部分值 6.0 倍，按覆盖率加权得 FY2027 的 9.9× 与 FY2028 的 11.3×。</span>
+    <span class="label-en">Contract bits at 13.9×, spot bits at 6.0×, blended by coverage.</span>
+    <p>一家 50% 位元有五年合约、50% 位元裸露在现货市场的公司，不能整体套一个倍数——这正是 8/6 那份报告犯的错。正确做法是分部估值：把公司拆成「一门合约生意」和「一门现货生意」，分别定价，再按位元覆盖率加权。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">合约部分的锚是林德（Linde），不是美光。</span>
+    <span class="label-en">Anchor on Linde, not Micron.</span>
+    <p>工业气体的林德约 70% 营收落在 15–20 年 take-or-pay 长约里，市场给它 <strong>28.3 倍</strong>前瞻市盈率<span class="badge badge-official">已核实</span>，而化工行业中位数只有 20.5 倍。这 38% 的溢价买的就是「营收被合同锁住」这一件事。闪迪的 NBM 合约在结构上同类——都锁量、都有价格条款、都有违约赔偿——但在三个维度上更弱，所以要打三道折扣。</p>
+  </div>
+
+  <table>
+    <tr><th>推导环节</th><th style="text-align:right">系数</th><th>依据</th><th style="text-align:right">累计</th></tr>
+    <tr><td class="k">起点 · Linde 前瞻 P/E</td><td class="num">28.3×</td><td>约 70% 营收在 15–20 年 take-or-pay；化工中位 20.5× <span class="badge badge-official">已核实</span></td><td class="num">28.3×</td></tr>
+    <tr><td class="k">久期折扣</td><td class="num">×0.72</td><td>NBM 最长 5 年 vs Linde 15–20 年。若按现值权重硬折应打到 0.35–0.40（DCF 前五年现值约占永续值 35–40%）；但合约到期生意不归零、且存在续约，故取 1.00 与 0.40 的中点偏上 <span class="badge badge-predict">判断项</span></td><td class="num">20.4×</td></tr>
+    <tr><td class="k">切换成本折扣</td><td class="num">×0.80</td><td>Linde 在客户厂区就地共建制气装置，物理上无法切换；NAND 是可替代品，合约到期客户可换供应商 <span class="badge badge-predict">判断项</span></td><td class="num">16.3×</td></tr>
+    <tr><td class="k">履约验证折扣</td><td class="num">×0.85</td><td>NBM 仅 1–2 年历史，未经完整下行周期检验；Linde 的 take-or-pay 已跨多轮周期兑现 <span class="badge badge-predict">判断项</span></td><td class="num">13.9×</td></tr>
+    <tr><td class="k hl">合约部分合理倍数</td><td class="num hl">13.9×</td><td class="hl">相当于给「五年可见度 + 有价格下限」付 2.3 倍于现货的溢价</td><td class="num hl">13.9×</td></tr>
+    <tr><td class="k">现货部分合理倍数</td><td class="num">6.0×</td><td>美光峰值盈利期 P/E 压缩至 4–8×、极端低至 3×<span class="badge badge-official">已核实</span>；取区间中位</td><td class="num">6.0×</td></tr>
+  </table>
+
+  <table>
+    <tr><th>加权</th><th>合约位元占比</th><th style="text-align:right">计算</th><th style="text-align:right">合理倍数</th></tr>
+    <tr><td class="k">FY2027</td><td>约 50%（投资者日口径）<span class="badge badge-official">公司披露</span></td><td class="num">13.9×0.50 + 6.0×0.50</td><td class="num">9.9×</td></tr>
+    <tr><td class="k">FY2028</td><td>约三分之二（投资者日口径）<span class="badge badge-official">公司披露</span></td><td class="num">13.9×0.67 + 6.0×0.33</td><td class="num">11.3×</td></tr>
+    <tr><td class="k hl">12 个月目标窗口</td><td class="hl">跨 FY27／FY28</td><td class="num hl">取中点</td><td class="num hl">10.6×</td></tr>
+  </table>
+
+  <div class="chart-wrap">
+    <div class="chart-title">倍数定位：现价站在哪里 · Where the Current Multiple Sits</div>
+    <svg viewBox="0 0 800 210" font-family="'IM Fell English',Georgia,serif">
+      <!-- 轴 -->
+      <line x1="80" y1="130" x2="768" y2="130" stroke="#0a0a0b" stroke-width="1.5"/>
+      <polygon points="768,130 760,126 760,134" fill="#0a0a0b"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <line x1="80" y1="130" x2="80" y2="136" stroke="#6b6460"/><text x="80" y="148">0×</text>
+        <line x1="193.3" y1="130" x2="193.3" y2="136" stroke="#6b6460"/><text x="193.3" y="148">5×</text>
+        <line x1="306.7" y1="130" x2="306.7" y2="136" stroke="#6b6460"/><text x="306.7" y="148">10×</text>
+        <line x1="420" y1="130" x2="420" y2="136" stroke="#6b6460"/><text x="420" y="148">15×</text>
+        <line x1="533.3" y1="130" x2="533.3" y2="136" stroke="#6b6460"/><text x="533.3" y="148">20×</text>
+        <line x1="646.7" y1="130" x2="646.7" y2="136" stroke="#6b6460"/><text x="646.7" y="148">25×</text>
+        <line x1="760" y1="130" x2="760" y2="136" stroke="#6b6460"/><text x="760" y="148">30×</text>
+      </g>
+      <!-- 美光带 -->
+      <rect x="170.7" y="118" width="90.6" height="24" fill="#8b2e2e" opacity="0.20"/>
+      <text x="216" y="176" font-size="11" fill="#8b2e2e" text-anchor="middle">美光峰值 4–8×</text>
+      <text x="216" y="190" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">pure cyclical</text>
+      <!-- 框架带 -->
+      <rect x="304.4" y="112" width="31.7" height="36" fill="#8b6c42" opacity="0.32"/>
+      <line x1="320.3" y1="148" x2="320.3" y2="168" stroke="#8b6c42" stroke-width="1"/>
+      <text x="330" y="180" font-size="11" fill="#8b6c42" text-anchor="middle" font-weight="bold">本框架 9.9–11.3×</text>
+      <text x="330" y="194" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">FY27 → FY28 blended</text>
+      <!-- 现价 -->
+      <line x1="298.5" y1="112" x2="298.5" y2="88" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="298.5,114 293,104 304,104" fill="#0a0a0b"/>
+      <text x="270" y="80" font-size="11.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">现价隐含 9.6×</text>
+      <!-- 全合约上限 -->
+      <line x1="395.1" y1="118" x2="395.1" y2="62" stroke="#2a5c3f" stroke-width="1" stroke-dasharray="3,2"/>
+      <circle cx="395.1" cy="130" r="3.5" fill="#2a5c3f"/>
+      <text x="430" y="56" font-size="11" fill="#2a5c3f" text-anchor="middle">若位元 100% 合约化 13.9×</text>
+      <!-- Linde -->
+      <line x1="721.5" y1="118" x2="721.5" y2="88" stroke="#c9a84c" stroke-width="2"/>
+      <circle cx="721.5" cy="130" r="4" fill="#c9a84c"/>
+      <text x="721.5" y="80" font-size="11.5" fill="#8b6c42" text-anchor="middle" font-weight="bold">Linde 28.3×</text>
+      <text x="721.5" y="176" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">70% take-or-pay</text>
+    </svg>
+    <div class="chart-note">现价隐含倍数 = $1,747.60 ÷ 本模型基线 EPS $181.2（对应现货毛利率维持 85%）。市场目前给闪迪的定价，只比「纯周期股上沿 8×」高 20%，仍在合约溢价的最下缘。</div>
+  </div>
+
+  <div class="notice">
+    <div class="nt">这张图里最该注意的一格</div>
+    现价 9.6× 与框架下沿 9.9× 几乎重合，说明市场<strong>已经完成了从「纯周期 6.9×」到「部分合约化 9.6×」的重估</strong>——这段路我在 8/6 没走到，8 个交易日里被市场走完了。剩下的问题是：市场会不会继续往 11.3×（FY28 覆盖率）走。这需要 NBM 覆盖率真的兑现到三分之二，而这是 FY2028 的事，不是未来 12 个月的事。
+  </div>
+</div>
+
+<!-- 6 第二部分：EPS -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">二 · EPS 模型：唯一的自由变量是现货毛利率</span><span class="section-en">The EPS Model · One Free Variable</span></div>
+
+  <div class="para">
+    <span class="label-zh">结论：FY2027 EPS 落在 $118 – $181 之间，全部由「现货部分的毛利率」一个变量决定。</span>
+    <span class="label-en">FY2027 EPS lands between $118 and $181; spot gross margin is the only driver.</span>
+    <p>这个模型没有可调参数。营收取 Q1 指引年化，经营费用由 Q4 实际数反解，税率与股数取公司口径。把这四个数代进去，在「现货毛利率维持 85%」时模型吐出 EPS $181.2——与管理层指引中值年化的 $180 相差 0.7%。<strong>模型自己撞上了公司的指引，说明口径对齐了，可以用来外推。</strong></p>
+  </div>
+
+  <table>
+    <tr><th>输入项</th><th style="text-align:right">取值</th><th>来源与口径</th></tr>
+    <tr><td class="k">FY2027 营收</td><td class="num">$422 亿</td><td>Q1 FY2027 指引中值（环比 +17.7%，约 $105.5 亿）×4 <span class="badge badge-official">指引推算</span></td></tr>
+    <tr><td class="k">经营费用</td><td class="num">$13.6 亿/年</td><td><strong>反解，非假设</strong>：Q4 毛利 $75.84 亿 − 税前利润 $72.45 亿 = $3.39 亿/季 ×4 <span class="badge badge-official">财报反算</span></td></tr>
+    <tr><td class="k">税率</td><td class="num">15%</td><td>非 GAAP 口径 <span class="badge badge-predict">推算</span></td></tr>
+    <tr><td class="k">摊薄股数</td><td class="num">1.569 亿</td><td>Q4 实际 <span class="badge badge-official">公司披露</span></td></tr>
+    <tr><td class="k">合约位元占比</td><td class="num">50%</td><td>8/13 投资者日 FY2027 口径 <span class="badge badge-official">公司披露</span></td></tr>
+    <tr><td class="k">合约毛利率</td><td class="num">80%</td><td>公司披露 NBM 毛利率约 80% <span class="badge badge-official">公司披露</span></td></tr>
+    <tr><td class="k hl">现货毛利率</td><td class="num hl">变量</td><td class="hl"><strong>唯一自由变量。所有情景差异都在这一格。</strong></td></tr>
+  </table>
+
+  <table>
+    <tr><th>现货毛利率假设</th><th style="text-align:right">混合毛利率</th><th style="text-align:right">FY2027 EPS</th><th>含义</th></tr>
+    <tr><td class="k">85%（维持当前）</td><td class="num">82.5%</td><td class="num">$181.2</td><td>校准点：与指引年化 $180 吻合</td></tr>
+    <tr><td class="k">80%</td><td class="num">80.0%</td><td class="num">$175.5</td><td>合约与现货同价，合约不再有意义</td></tr>
+    <tr><td class="k">75%</td><td class="num">77.5%</td><td class="num">$169.8</td><td>价格温和回落</td></tr>
+    <tr><td class="k hl">70%（基准）</td><td class="num hl">75.0%</td><td class="num hl">$164.1</td><td class="hl"><strong>基准情景：供给紧张延续但价格见顶回落</strong></td></tr>
+    <tr><td class="k">65%</td><td class="num">72.5%</td><td class="num">$158.4</td><td>回到 2018 年周期上行中段水平</td></tr>
+    <tr><td class="k">50%</td><td class="num">65.0%</td><td class="num">$141.2</td><td>价格腰斩式回落</td></tr>
+    <tr><td class="k">30%（熊市）</td><td class="num">55.0%</td><td class="num">$118.4</td><td>接近历史周期底部的现货毛利率</td></tr>
+  </table>
+
+  <div class="notice green">
+    <div class="nt">这张表本身就是结论</div>
+    现货毛利率从 85% 崩到 30%——这是 NAND 历史上完整的一轮周期崩塌——<strong>EPS 只从 $181 掉到 $118，跌 35%。</strong>不是腰斩，不是归零。这个「跌不下去」正是下一节要拆的东西。
+  </div>
+</div>
+
+<!-- 7 第三部分：反事实 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">三 · 反事实：如果没有 NBM 合约</span><span class="section-en">The Counterfactual · What the Contracts Actually Buy</span></div>
+
+  <div class="para">
+    <span class="label-zh">结论：合约把盈利波动砍掉了 74%，把破产线从「现货毛利率 3.2%」推到了「现货毛利率 −73.6%」——后者在物理上不可能发生。</span>
+    <span class="label-en">Contracts cut earnings volatility by 74% and move breakeven below the realm of the possible.</span>
+    <p>把同一个模型的合约占比从 50% 改成 0%，其余不动，就得到「如果闪迪没签 NBM」的平行世界。两条线的差距，就是这十份合约的真实价值。</p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">FY2027 EPS 对现货毛利率的敏感度：有合约 vs 无合约 · With vs Without NBM</div>
+    <svg viewBox="0 0 800 300" font-family="'IM Fell English',Georgia,serif">
+      <!-- 网格 -->
+      <g stroke="#d4cec6" stroke-width="1">
+        <line x1="70" y1="250" x2="755" y2="250"/>
+        <line x1="70" y1="195" x2="755" y2="195" stroke-dasharray="2,3"/>
+        <line x1="70" y1="140" x2="755" y2="140" stroke-dasharray="2,3"/>
+        <line x1="70" y1="85"  x2="755" y2="85"  stroke-dasharray="2,3"/>
+        <line x1="70" y1="30"  x2="755" y2="30"  stroke-dasharray="2,3"/>
+      </g>
+      <line x1="70" y1="30" x2="70" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g font-size="10" fill="#6b6460" text-anchor="end">
+        <text x="63" y="254">$0</text><text x="63" y="199">$50</text>
+        <text x="63" y="144">$100</text><text x="63" y="89">$150</text><text x="63" y="34">$200</text>
+      </g>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="268">30%</text><text x="237.5" y="268">45%</text>
+        <text x="405" y="268">60%</text><text x="572.5" y="268">75%</text><text x="740" y="268">90%</text>
+      </g>
+      <text x="405" y="286" font-size="11" fill="#6b6460" text-anchor="middle">现货部分毛利率 · Spot Gross Margin</text>
+      <text x="20" y="140" font-size="11" fill="#6b6460" text-anchor="middle" transform="rotate(-90 20 140)">FY2027 EPS</text>
+
+      <!-- 无合约（陡） -->
+      <line x1="70" y1="182.7" x2="740" y2="31.8" stroke="#8b2e2e" stroke-width="2.5" stroke-dasharray="6,3"/>
+      <!-- 有合约（缓） -->
+      <line x1="70" y1="119.8" x2="740" y2="44.4" stroke="#2a5c3f" stroke-width="3"/>
+
+      <!-- 交点 -->
+      <circle cx="628.3" cy="56.9" r="5" fill="none" stroke="#8b6c42" stroke-width="2"/>
+      <line x1="628.3" y1="56.9" x2="600" y2="100" stroke="#8b6c42" stroke-width="1"/>
+      <text x="560" y="114" font-size="10.5" fill="#8b6c42" text-anchor="middle">交点 80% = 合约毛利率</text>
+      <text x="560" y="127" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">above this, contracts cost you upside</text>
+
+      <!-- 熊市差距标注 -->
+      <line x1="70" y1="119.8" x2="70" y2="182.7" stroke="#c47a1e" stroke-width="0" />
+      <line x1="88" y1="119.8" x2="88" y2="182.7" stroke="#c47a1e" stroke-width="2"/>
+      <line x1="83" y1="119.8" x2="93" y2="119.8" stroke="#c47a1e" stroke-width="2"/>
+      <line x1="83" y1="182.7" x2="93" y2="182.7" stroke="#c47a1e" stroke-width="2"/>
+      <text x="102" y="146" font-size="11" fill="#c47a1e" font-weight="bold">熊市差距 $57.2</text>
+      <text x="102" y="159" font-size="10" fill="#c47a1e">$118.4 vs $61.2 · +93%</text>
+
+      <!-- 线标签 -->
+      <text x="330" y="78" font-size="11.5" fill="#2a5c3f" font-weight="bold">有 NBM 合约（50% 位元锁定）</text>
+      <text x="330" y="196" font-size="11.5" fill="#8b2e2e" font-weight="bold">无合约 · 100% 现货敞口</text>
+
+      <!-- 情景点 -->
+      <circle cx="70" cy="119.8" r="4" fill="#2a5c3f"/>
+      <circle cx="516.7" cy="69.6" r="4" fill="#2a5c3f"/>
+      <circle cx="684.2" cy="50.4" r="4" fill="#2a5c3f"/>
+      <text x="516.7" y="60" font-size="9.5" fill="#2a5c3f" text-anchor="middle">基准 $164</text>
+      <text x="700" y="42" font-size="9.5" fill="#2a5c3f" text-anchor="middle">牛 $181</text>
+    </svg>
+    <div class="chart-note">两条线在现货毛利率 80%（＝合约毛利率）处相交。<strong>80% 以上，合约是在让渡上行；80% 以下，合约是在托底。</strong>闪迪用「现货价格再疯涨时少赚的那一点」，换回了「现货价格崩溃时不至于亏损」——这是一笔用上行尾部换下行尾部的交易，对一家周期股而言，市场愿意为后者付更高倍数。</div>
+  </div>
+
+  <table>
+    <tr><th>指标</th><th style="text-align:right">有 NBM 合约</th><th style="text-align:right">无合约（反事实）</th><th>差异的含义</th></tr>
+    <tr><td class="k">EPS 摆幅（现货 GM 30%→85%）</td><td class="num">+53.1%</td><td class="num">+205.4%</td><td><strong>波动收敛 74.1%</strong></td></tr>
+    <tr><td class="k">熊市 EPS（现货 GM 30%）</td><td class="num">$118.4</td><td class="num">$61.2</td><td>熊市盈利高出 93%</td></tr>
+    <tr><td class="k">牛市 EPS（现货 GM 85%）</td><td class="num">$181.2</td><td class="num">$187.0</td><td>牛市只让渡 3.1%</td></tr>
+    <tr><td class="k hl">盈亏平衡所需现货毛利率</td><td class="num hl">−73.6%</td><td class="num hl">+3.2%</td><td class="hl"><strong>负毛利率不可能发生 → 结构上不会亏损</strong></td></tr>
+  </table>
+
+  <div class="notice green">
+    <div class="nt">本次工作最核心的一句</div>
+    <strong>合约化把「EPS 可以归零」变成了「EPS 有地板」。倍数该重估，不是因为增长，是因为波动率。</strong>牛市只让渡 3.1% 的盈利，熊市换来 93% 的托底——这个交换比是极度不对称的，而市场给周期股压低倍数的理由，恰恰只有一个：怕熊市那一半。地板一旦成立，压低倍数的理由就削掉了一半。
+  </div>
+</div>
+
+<!-- 8 第四部分：不确定度分解 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">四 · 不确定度分解：别再纠结倍数了</span><span class="section-en">Decomposing the Uncertainty</span></div>
+
+  <div class="para">
+    <span class="label-zh">结论：EPS 的不确定度是倍数不确定度的 4.0 倍；在总估值不确定度里，倍数只占约 23%。</span>
+    <span class="label-en">EPS uncertainty is 4.0× the multiple uncertainty; multiples explain only ~23% of total.</span>
+    <p>EPS 区间跨度 53.1%（$118.4 → $181.2），倍数区间跨度 13.5%（9.9× → 11.3×）。按对数分解，倍数只贡献总估值不确定度的 22.9%。<strong>这意味着：把倍数从 9.9× 争到 11.3× 所能改变的价格，还不到把现货毛利率从 70% 争到 85% 的四分之一。</strong>值得花力气盯的是 NAND 现货报价，不是卖方的倍数口水战。</p>
+  </div>
+
+  <table>
+    <tr><th>不确定度来源</th><th style="text-align:right">区间跨度</th><th style="text-align:right">对总量的贡献</th><th>可观测性</th></tr>
+    <tr><td class="k">EPS（＝现货毛利率）</td><td class="num">53.1%</td><td class="num">77.1%</td><td>可观测：TrendForce／DRAMeXchange 现货与合约报价、月度</td></tr>
+    <tr><td class="k">估值倍数</td><td class="num">13.5%</td><td class="num">22.9%</td><td>不可观测：由市场情绪与合约兑现度共同决定</td></tr>
+  </table>
+
+  <div class="notice">
+    <div class="nt">这条结论可跨标的复用</div>
+    做周期股目标价时，习惯做法是「情景 = 熊市压 EPS 同时压倍数、牛市抬 EPS 同时抬倍数」。<strong>这会把两个本可独立的变量绑在一起动，人为放大情景区间，同时让中间地带失去分辨率。</strong>正确做法是先把两者解耦、各自量化不确定度，再看哪一个才是真正的胜负手。本例中答案很清楚：胜负手在毛利率，不在倍数。
+  </div>
+</div>
+
+<!-- 9 第五部分：三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五 · 三情景目标价</span><span class="section-en">Three Scenarios · 12-Month Targets</span></div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">目标价区间与现价位置 · Target Range vs Spot</div>
+    <svg viewBox="0 0 800 190" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="110" x2="740" y2="110" stroke="#d4cec6" stroke-width="10"/>
+      <line x1="140.3" y1="110" x2="667.4" y2="110" stroke="#8b6c42" stroke-width="10" opacity="0.35"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="140">$800</text><text x="309.3" y="140">$1,300</text>
+        <text x="548.6" y="140">$1,800</text><text x="740" y="140">$2,200</text>
+      </g>
+      <!-- 熊 -->
+      <line x1="140.3" y1="96" x2="140.3" y2="124" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="140.3" y="88" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="bold">$947</text>
+      <text x="140.3" y="162" font-size="10.5" fill="#8b2e2e" text-anchor="middle">熊 −45.8% · 20%</text>
+      <!-- 基准 -->
+      <line x1="519.8" y1="96" x2="519.8" y2="124" stroke="#8b6c42" stroke-width="3"/>
+      <text x="480" y="162" font-size="12" fill="#8b6c42" text-anchor="middle" font-weight="bold">$1,739</text>
+      <text x="480" y="176" font-size="10.5" fill="#8b6c42" text-anchor="middle">基准 −0.5% · 50%</text>
+      <!-- 牛 -->
+      <line x1="667.4" y1="96" x2="667.4" y2="124" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="667.4" y="88" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="bold">$2,048</text>
+      <text x="667.4" y="162" font-size="10.5" fill="#2a5c3f" text-anchor="middle">牛 +17.2% · 30%</text>
+      <!-- 现价 -->
+      <line x1="523.5" y1="110" x2="523.5" y2="52" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="523.5,108 517,96 530,96" fill="#0a0a0b"/>
+      <text x="560" y="44" font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">现价 $1,747.60</text>
+      <text x="560" y="30" font-size="10" fill="#6b6460" text-anchor="middle" font-style="italic">basically on top of base case</text>
+    </svg>
+    <div class="chart-note">现价与基准目标价几乎重合（差 0.5%）。这不是巧合，是本次工作的结论：<strong>市场已经把「部分合约化」这件事定价进去了。</strong></div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市</b></div>
+      <div class="sp">$947</div>
+      <div class="schg">−45.8% ｜ 概率 20%</div>
+      <div class="slogic">现货毛利率崩至 30%（完整周期底部），同时倍数被压回 8.0×（美光峰值区间上沿）。<strong>触发条件：CXMT 产能提前放量 + 消费端需求破坏扩散到数据中心。</strong>注意这仍不是亏损——是「赚 $118 但市场只肯给 8 倍」。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准</b></div>
+      <div class="sp">$1,739</div>
+      <div class="schg">−0.5% ｜ 概率 50%</div>
+      <div class="slogic">现货毛利率回落至 70%（价格见顶但供给仍紧），倍数取 FY27／FY28 过渡值 10.6×。<strong>这是公司自己给的路径：供给紧张延续到 2028、FY2030 前营收 mid-to-high teens 增长。</strong>价格已经在这里。</div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市</b></div>
+      <div class="sp">$2,048</div>
+      <div class="schg">+17.2% ｜ 概率 30%</div>
+      <div class="slogic">现货毛利率维持 85%，且市场按 FY2028 覆盖率给 11.3×。<strong>触发条件：NBM 覆盖率兑现到三分之二，且公司披露价格下限的具体水位。</strong>后者一旦公开，13.9× 的合约部分倍数才真正可验证。</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="text-align:right">熊市</th><th style="text-align:right">基准</th><th style="text-align:right">牛市</th></tr>
+    <tr><td class="k">现货部分毛利率</td><td class="num">30%</td><td class="num">70%</td><td class="num">85%</td></tr>
+    <tr><td class="k">FY2027 EPS</td><td class="num">$118.4</td><td class="num">$164.1</td><td class="num">$181.2</td></tr>
+    <tr><td class="k">前瞻 P/E</td><td class="num">8.0×</td><td class="num">10.6×</td><td class="num">11.3×</td></tr>
+    <tr><td class="k">倍数所依据的合约覆盖率</td><td class="num">按纯周期股定价</td><td class="num">FY27/28 过渡</td><td class="num">FY28 三分之二</td></tr>
+    <tr><td class="k hl">目标价</td><td class="num hl">$947</td><td class="num hl">$1,739</td><td class="num hl">$2,048</td></tr>
+    <tr><td class="k">较现价 $1,747.60</td><td class="num" style="color:var(--red)">−45.8%</td><td class="num">−0.5%</td><td class="num" style="color:var(--green)">+17.2%</td></tr>
+    <tr><td class="k hl">概率加权期望</td><td class="num hl" colspan="3" style="text-align:center;color:var(--red)">−4.2%</td></tr>
+  </table>
+
+  <div class="notice red">
+    <div class="nt">赔率结构：仍然左尾肥，且肥在基本面这一侧</div>
+    上行 +17.2% × 30% 对下行 −45.8% × 20%，期望值为负。<strong>把熊市的 −45.8% 拆开：34.7 个百分点来自盈利下滑，只有 11.1 个百分点来自倍数压缩。</strong>这与第四节的不确定度分解相互印证——风险的主体在现货毛利率，不在市场情绪。好消息是这个变量可观测（NAND 月度现货报价）；坏消息是可观测不等于可预测。
+  </div>
+</div>
+
+<!-- 10 第六部分：旧框架错在哪 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">六 · 8/6 那份报告错在哪</span><span class="section-en">What the Old Framework Got Wrong</span></div>
+
+  <table>
+    <tr><th>错误</th><th>当时的做法</th><th>为什么错</th></tr>
+    <tr><td class="k">① 倍数当常数用</td><td>直接套「周期股给 10× 峰值倍数」的行业经验</td><td>这条经验的<strong>适用前提是「营收 100% 现货敞口」</strong>。闪迪已有 50% 位元合约化，前提不成立。引用历史区间前必须先问前提还在不在。</td></tr>
+    <tr><td class="k">② 整体估值而非分部估值</td><td>对整个公司套一个 P/E</td><td>一门生意里两种商业模式（五年长约 vs 现货），风险特征完全不同，必须分部定价再加权。</td></tr>
+    <tr><td class="k hl">③ 两个变量绑在一起动（最致命）</td><td class="hl">熊市同时压 EPS 和倍数、牛市同时抬 EPS 和倍数</td><td class="hl"><strong>情景区间被人为拉宽到 $990–$2,600（2.6 倍），而中间地带没有分辨率。</strong>解耦之后才看得出现价隐含的是哪一个组合。</td></tr>
+  </table>
+
+  <div class="para">
+    <span class="label-zh">代价是可量化的：8 个交易日走完了 12 个月的基准路径。</span>
+    <span class="label-en">The cost: eight sessions covered a twelve-month base case.</span>
+    <p>8/6 报告基准 $1,620（对 $1,243 的 +30.3%），8/14 盘中 $1,623.24 打穿。<strong>误差不在方向，在量级。</strong>方向判断（NBM 是结构性变化、市场低估持续性）成立并已兑现；但因为倍数假设的前提没被检验，整套价位系统性偏低。这次重做把倍数从「引用的常数」变成了「推导的结论」，这是方法层面的修复，不是数字层面的更新。</p>
+  </div>
+</div>
+
+<!-- 11 第七部分：监控 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">七 · 什么会推翻这个框架</span><span class="section-en">What Would Break This</span></div>
+  <table>
+    <tr><th>观测项</th><th>推翻方向</th><th>时点</th></tr>
+    <tr><td class="k">NBM 价格下限的具体水位</td><td><strong>唯一能证伪 13.9× 的数据。</strong>若下限远低于当前现货价，合约保护的只是量不是利，13.9× 应下调至 10× 以下，整个框架的合理区间塌回 8–9×</td><td>公司至今未披露 <span class="badge badge-gap">缺口</span></td></tr>
+    <tr><td class="k">消费分部是否连续第二季两位数下滑</td><td>连跌两季 = 需求破坏已成趋势 → 现货毛利率假设需下修，基准情景从 70% 降到 60% 以下</td><td>2026 年 11 月财报</td></tr>
+    <tr><td class="k">NBM 覆盖率实际兑现进度</td><td>FY2028 覆盖率若达不到三分之二，牛市倍数 11.3× 不成立，上行空间清零</td><td>季度更新</td></tr>
+    <tr><td class="k">CXMT 产能进度</td><td>提前放量 = 熊市概率从 20% 上调</td><td>无固定披露节奏 <span class="badge badge-gap">缺口</span></td></tr>
+    <tr><td class="k">苹果／戴尔／惠普口径转向</td><td>一旦它们说「内存成本压力缓解」，闪迪的价格顶就到了 —— 这是跨标的领先指标</td><td>各自财报季</td></tr>
+  </table>
+</div>
+
+<!-- 12 Verdict -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — Fairly Priced. The Insight Is Not the Price.</div>
+  <div class="verdict-zh">裁决：中性 · 已充分定价</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>$1,747.60 大致合理，加权期望 −4.2%，不构成买入理由。</strong>现价隐含 9.6×，框架区间 9.9–11.3×，现价只低于下沿 3%——市场已完成从「纯周期 6.9×」到「部分合约化 9.6×」的重估，这段套利已经被吃掉。<span class="v-src">EPS $181.2（基线）· 三情景 20/50/30 加权</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>合约的价值在波动率，不在盈利水平。</strong>牛市只让渡 3.1% 的 EPS，熊市换来 93% 的托底；盈亏平衡所需现货毛利率被推到 −73.6%，物理上不可能触及。这才是倍数该从 6.9× 抬到 9.9× 的理由。<span class="v-src">反事实模型 · 波动收敛 74.1%</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>盯毛利率，别盯倍数。</strong>EPS 不确定度是倍数的 4.0 倍，倍数只解释总估值不确定度的 23%。折成金额：倍数走完 9.9×→11.3× 全程值 $220，现货毛利率走完 30%→85% 全程值 $666。<span class="v-src">对数分解 · 倍数按基准 EPS $164.1、EPS 按基准倍数 10.6× 折算</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>风险仍在基本面，但它是可观测的。</strong>熊市 −45.8% 中，34.7 个百分点来自盈利下滑、11.1 个百分点来自倍数压缩。要跟的是 NAND 月度现货报价与消费分部环比，不是卖方的目标价调整。<span class="v-src">熊市情景两步分解</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>对本人账户仍是硬否决。</strong>股价 $1,747.60，单张期权名义 $174,760；即使深度价外 $1,000 行权，接货市值 $100,000 ＝ 净值 $10,041.64 的 <strong>996%</strong>。按 R5「接货市值 ≤ 可取现金」标尺，无论分析结论如何均不进候选池。<span class="v-src">标尺 R3／R5／R6</span></div></div>
+</div>
+
+<!-- 13 分析师附注 -->
+<div class="appendix">
+  <div class="ap-head">
+    <span class="ap-en">Analyst's Notes — Confidence, Gaps, Method, and My Own View</span>
+    <div class="ap-zh">分析师附注</div>
+  </div>
+
+  <div class="ap-sub">置信度总表</div>
+  <table>
+    <tr><th>结论</th><th>置信</th><th>依据强度</th></tr>
+    <tr><td>EPS 模型口径正确（自校准到指引 ±0.7%）</td><td class="k">高</td><td>营收取指引、opex 由财报反解、无自由参数</td></tr>
+    <tr><td>合约化削减 74% 盈利波动</td><td class="k">高</td><td>同一模型改一个参数的反事实，算术确定</td></tr>
+    <tr><td>NBM 覆盖率 FY27 50%／FY28 67%</td><td class="k">高</td><td>8/13 投资者日公司口径</td></tr>
+    <tr><td>合约部分合理倍数 13.9×</td><td class="k">中</td><td>Linde 28.3× 是硬数据，但三道折扣系数（0.72／0.80／0.85）全为我的判断</td></tr>
+    <tr><td>现货部分合理倍数 6.0×</td><td class="k">中高</td><td>美光 4–8× 峰值压缩区间为历史实证</td></tr>
+    <tr><td>三情景概率 20／50／30</td><td class="k">中低</td><td>主观赋权，未经历史频率校准</td></tr>
+    <tr><td>FY2027 营收 $422 亿</td><td class="k">中</td><td>Q1 指引简单年化，未计入季节性与后续加速</td></tr>
+  </table>
+
+  <div class="ap-sub">数据缺口</div>
+  <ul>
+    <li><strong>NBM 价格下限的具体水位——最大的单一缺口。</strong>公司披露了「有 floor 与 ceiling」「按底价计最低承诺收入 $939 亿」「NBM 毛利率约 80%」，但没给下限相对于现货价的位置。本模型用「合约毛利率恒定 80%」代替，这等价于假设下限足够高、在熊市不会被击穿。<strong>若下限实际较低，熊市 EPS $118.4 会显著高估。</strong></li>
+    <li>合约的固定／浮动成分比例未披露，故无法建模「部分浮动」的中间态。</li>
+    <li>FY2027 营收的季度分布未知，年化可能低估（公司称 FY2030 前 mid-to-high teens 增长）。</li>
+    <li>CXMT 产能进度无公开披露节奏，熊市触发条件无法被前瞻观测。</li>
+  </ul>
+
+  <div class="ap-sub">方法限制</div>
+  <ul>
+    <li><strong>Linde 类比是本框架的承重墙，也是它最脆的地方。</strong>工业气体与 NAND 在需求周期性、技术迭代速度、替代品威胁上都不同类。我用三道折扣去校正，但折扣系数本身没有独立数据支撑——它们是有依据的判断，不是测算结果。<strong>如果有人不同意 0.72／0.80／0.85 这三个数，整个 13.9× 就会移动，而我没有办法证明我的取值比别人的对。</strong></li>
+    <li>模型把「合约位元」与「合约营收」当作同比例，实际上合约位元的单价可能与现货不同，营收占比未必等于位元占比 50%。</li>
+    <li>税率 15% 为推算；SNDK 上季 GAAP 净利高于非 GAAP，隐含一次性税项收益，实际有效税率可能有波动。</li>
+    <li>本文只做前瞻 P/E，未做 DCF 交叉验证。对一家现金流刚从 $2.38 亿跳到 $87.4 亿的公司，DCF 的终值假设会主导结果，可靠性未必更高，故未做。</li>
+  </ul>
+
+  <div class="ap-sub">我的独立看法</div>
+  <ul>
+    <li><strong>我认为这次重做真正有价值的不是目标价，是「倍数必须被推导、不能被引用」这条方法。</strong>8/6 的错误不是选错了数，是选数的方式不对——把一条有前提的经验当成了无前提的常数。目标价会随价格变动而失效，方法不会。</li>
+    <li><strong>如果只让我盯一个数，我盯 NBM 价格下限的水位，不盯覆盖率。</strong>市场现在关注覆盖率（50%→67%），但覆盖率只决定「多少位元被锁」，下限水位才决定「锁住的是不是利润」。公司愿意披露前者不愿披露后者，这个信息选择本身值得警惕——但也可能只是竞争考虑。</li>
+    <li><strong>我对 30% 的牛市概率有保留，它可能给高了。</strong>牛市要求现货毛利率维持 85% 且倍数进一步扩张，两个条件同向成立。但历史上 NAND 从未在 85% 毛利率上停留超过几个季度，而闪迪已经在这个水位待了一季。给 30% 是因为供给紧张确实被公司口径延到 2028，如果去掉这条公司自述，我会给 20%。</li>
+    <li><strong>一个我没有能力回答但很重要的问题：如果 NAND 真的进入合约化时代，合约化的会不会是整个行业？</strong>若三星、SK 海力士、美光同样把位元合约化，闪迪的合约溢价就不是护城河而是行业新常态，13.9× 的独占性消失。我没有找到其他厂商大规模合约化的证据，但也没找到反证。</li>
+    <li><strong>对 8/6 报告其余部分的处置建议：保留。</strong>那份报告里量价拆分、消费分部作为需求弹性观测点、与苹果毛利率的跨标的闭环，都不依赖估值框架，仍然成立。失效的只有目标价。</li>
+  </ul>
+
+  <div class="ap-sub">待核实项</div>
+  <ul>
+    <li>Q1 FY2027 营收指引中值的精确数字（本文用环比 +17.7% 反推约 $105.5 亿）<span class="badge badge-predict">推算</span></li>
+    <li>Linde 前瞻 P/E 28.3× 的取数时点（若已随市场变动，合约倍数需同步调整）</li>
+    <li>CFO 姓名在两个来源中不一致（Luis Flores／Luis Visoso），不影响任何数字，但说明部分二手来源质量有限</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  对这份框架有异议或想调整假设？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=sndk_valuation_framework">点此反馈 · Send Feedback</a>
+</div>
+
+<div class="footer">
+  Earnings Copilot · Earner ｜ 估值框架专题 ｜ 生成于 2026-08-17<br>
+  基准价 $1,747.60（2026-08-17 09:48 ET 盘中，本系统价格缓存，当日 +6.49%）｜ 模型基线 EPS $181.2 ｜ 本文覆盖并作废 2026-08-06 报告与 2026-08-13／14 追踪中的全部目标价<br>
+  本报告为研究分析，不构成投资建议。所有带「判断项」「推算」标记的数字均为分析师估算，非公司披露。
+</div>
+
+</body>
+</html>
