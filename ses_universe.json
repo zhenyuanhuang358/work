@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T04:36:01.290051Z",
+  "generated_at": "2026-08-19T04:41:35.883236Z",
   "years": [
     2019,
     2020,
@@ -13,11 +13,11 @@
   "universe_size": 8584,
   "screened": 745,
   "distribution": {
-    "赛道外": 215,
+    "赛道外": 217,
     "灰": 423,
     "红": 73,
     "绿": 19,
-    "黄": 15
+    "黄": 13
   },
   "green": [
     {
@@ -52,7 +52,9 @@
       "cik": "0001375365",
       "ticker": "SMCI",
       "name": "SUPER MICRO COMPUTER, INC.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3571",
+      "sic_desc": "Electronic Computers"
     },
     {
       "window": "2019-2025",
@@ -86,7 +88,9 @@
       "cik": "0001759824",
       "ticker": "ALTG",
       "name": "ALTA EQUIPMENT GROUP INC.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5084",
+      "sic_desc": "Wholesale-Industrial Machinery & Equipment"
     },
     {
       "window": "2019-2025",
@@ -122,7 +126,9 @@
       "cik": "0001601548",
       "ticker": "VVX",
       "name": "Vectrus, Inc.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "8744",
+      "sic_desc": "Services-Facilities Support Management Services"
     },
     {
       "window": "2019-2025",
@@ -156,7 +162,9 @@
       "cik": "0001023128",
       "ticker": "LAD",
       "name": "LITHIA MOTORS INC",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5500",
+      "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
     },
     {
       "window": "2019-2025",
@@ -190,7 +198,9 @@
       "cik": "0000944148",
       "ticker": "CBZ",
       "name": "CBIZ, INC.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "7389",
+      "sic_desc": "Services-Business Services, NEC"
     },
     {
       "window": "2019-2025",
@@ -224,7 +234,9 @@
       "cik": "0001517175",
       "ticker": "CHEF",
       "name": "THE CHEFS’ WAREHOUSE, INC.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5141",
+      "sic_desc": "Wholesale-Groceries, General Line"
     },
     {
       "window": "2019-2023",
@@ -256,7 +268,9 @@
       "cik": "0001915657",
       "ticker": "DINO",
       "name": "HF SINCLAIR CORP",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "4610",
+      "sic_desc": "Pipe Lines (No Natural Gas)"
     },
     {
       "window": "2019-2025",
@@ -292,7 +306,9 @@
       "cik": "0001125376",
       "ticker": "ENSG",
       "name": "Ensign Group, Inc",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "8051",
+      "sic_desc": "Services-Skilled Nursing Care Facilities"
     },
     {
       "window": "2019-2025",
@@ -326,7 +342,9 @@
       "cik": "0001439288",
       "ticker": "ZWS",
       "name": "ZURN WATER SOLUTIONS CORPORATION",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3560",
+      "sic_desc": "General Industrial Machinery & Equipment"
     },
     {
       "window": "2019-2024",
@@ -358,7 +376,9 @@
       "cik": "0001488139",
       "ticker": "AMRC",
       "name": "Ameresco, Inc.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "1700",
+      "sic_desc": "Construction - Special Trade Contractors"
     },
     {
       "window": "2019-2025",
@@ -392,7 +412,9 @@
       "cik": "0000927003",
       "ticker": "AEIS",
       "name": "ADVANCED ENERGY INDUSTRIES INC",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3679",
+      "sic_desc": "Electronic Components, NEC"
     },
     {
       "window": "2019-2025",
@@ -426,7 +448,9 @@
       "cik": "0000860731",
       "ticker": "TYL",
       "name": "TYLER TECHNOLOGIES, INC.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "7372",
+      "sic_desc": "Services-Prepackaged Software"
     },
     {
       "window": "2019-2025",
@@ -460,7 +484,9 @@
       "cik": "0001101302",
       "ticker": "ENTG",
       "name": "Entegris, Inc.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3089",
+      "sic_desc": "Plastics Products, NEC"
     },
     {
       "window": "2019-2025",
@@ -496,7 +522,9 @@
       "cik": "0000909832",
       "ticker": "COST",
       "name": "COSTCO WHOLESALE CORP /NEW",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5331",
+      "sic_desc": "Retail-Variety Stores"
     },
     {
       "window": "2019-2025",
@@ -530,7 +558,9 @@
       "cik": "0001720635",
       "ticker": "NVT",
       "name": "nVent Electric plc",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3550",
+      "sic_desc": "Special Industry Machinery (No Metalworking Machinery)"
     },
     {
       "window": "2019-2025",
@@ -564,7 +594,9 @@
       "cik": "0001027664",
       "ticker": "ESLT",
       "name": "ELBIT SYSTEMS LTD.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3728",
+      "sic_desc": "Aircraft Parts & Auxiliary Equipment, NEC"
     },
     {
       "window": "2019-2025",
@@ -598,7 +630,9 @@
       "cik": "0000927653",
       "ticker": "MCK",
       "name": "McKESSON CORPORATION",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5122",
+      "sic_desc": "Wholesale-Drugs, Proprietaries & Druggists' Sundries"
     },
     {
       "window": "2019-2024",
@@ -628,7 +662,9 @@
       "cik": "0000096021",
       "ticker": "SYY",
       "name": "Sysco Corporation",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "5140",
+      "sic_desc": "Wholesale-Groceries & Related Products"
     },
     {
       "window": "2019-2025",
@@ -662,44 +698,12 @@
       "cik": "0001047127",
       "ticker": "AMKR",
       "name": "Amkor Technology, Inc.",
-      "flag": "绿"
+      "flag": "绿",
+      "sic": "3674",
+      "sic_desc": "Semiconductors & Related Devices"
     }
   ],
   "yellow": [
-    {
-      "window": "2020-2025",
-      "years": 5,
-      "revenue_latest": 1261341000,
-      "revenue_cagr": 0.6890976410111582,
-      "gm_trend": -0.05890175119502783,
-      "gm_latest": 0.4060535572854605,
-      "opm_trend": -0.022501678841457706,
-      "opm_latest": 0.2091638977881477,
-      "sga_trend": null,
-      "gm_series": [
-        0.465,
-        0.4789,
-        0.3419,
-        0.3414,
-        0.4051,
-        0.4061
-      ],
-      "opm_series": [
-        0.2317,
-        -0.013,
-        -0.3669,
-        -0.0316,
-        0.0665,
-        0.2092
-      ],
-      "notes": [
-        "毛利由 收入−成本 推导"
-      ],
-      "cik": "0001883085",
-      "ticker": "PGY",
-      "name": "Pagaya Technologies Ltd.",
-      "flag": "黄"
-    },
     {
       "window": "2019-2025",
       "years": 6,
@@ -732,7 +736,9 @@
       "cik": "0001841156",
       "ticker": "PAY",
       "name": "Paymentus Holdings, Inc.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "7389",
+      "sic_desc": "Services-Business Services, NEC"
     },
     {
       "window": "2019-2024",
@@ -766,7 +772,9 @@
       "cik": "0001060955",
       "ticker": "ICLR",
       "name": "ICON PLC",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "8731",
+      "sic_desc": "Services-Commercial Physical & Biological Research"
     },
     {
       "window": "2019-2025",
@@ -802,7 +810,9 @@
       "cik": "0001039684",
       "ticker": "OKE",
       "name": "ONEOK, Inc.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "4923",
+      "sic_desc": "Natural Gas Transmisison & Distribution"
     },
     {
       "window": "2019-2025",
@@ -836,7 +846,9 @@
       "cik": "0001624794",
       "ticker": "CSW",
       "name": "CSW INDUSTRIALS, INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "2891",
+      "sic_desc": "Adhesives & Sealants"
     },
     {
       "window": "2019-2025",
@@ -872,7 +884,9 @@
       "cik": "0001177609",
       "ticker": "FIVE",
       "name": "Five Below, Inc.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "5331",
+      "sic_desc": "Retail-Variety Stores"
     },
     {
       "window": "2019-2025",
@@ -906,7 +920,9 @@
       "cik": "0001206264",
       "ticker": "SGI",
       "name": "TEMPUR SEALY INTERNATIONAL, INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "2510",
+      "sic_desc": "Household Furniture"
     },
     {
       "window": "2019-2025",
@@ -942,7 +958,9 @@
       "cik": "0000811596",
       "ticker": "KALU",
       "name": "KAISER ALUMINUM CORPORATION",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "3350",
+      "sic_desc": "Rolling Drawing & Extruding of  Nonferrous Metals"
     },
     {
       "window": "2019-2025",
@@ -976,7 +994,9 @@
       "cik": "0001511737",
       "ticker": "UI",
       "name": "UBIQUITI INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "3663",
+      "sic_desc": "Radio & Tv Broadcasting & Communications Equipment"
     },
     {
       "window": "2019-2025",
@@ -1010,7 +1030,9 @@
       "cik": "0001409171",
       "ticker": "TITN",
       "name": "TITAN MACHINERY INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "5990",
+      "sic_desc": "Retail-Retail Stores, NEC"
     },
     {
       "window": "2019-2024",
@@ -1043,7 +1065,9 @@
       "cik": "0000202058",
       "ticker": "LHX",
       "name": "L3HARRIS TECHNOLOGIES, INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "3812",
+      "sic_desc": "Search, Detection, Navigation, Guidance, Aeronautical Sys"
     },
     {
       "window": "2019-2025",
@@ -1077,43 +1101,9 @@
       "cik": "0001022671",
       "ticker": "STLD",
       "name": "Steel Dynamics, Inc.",
-      "flag": "黄"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 39900000000,
-      "revenue_cagr": 0.09399845875703794,
-      "gm_trend": -0.023670020525546454,
-      "gm_latest": 0.17333333333333334,
-      "opm_trend": -0.010197256429651823,
-      "opm_latest": 0.04393483709273183,
-      "sga_trend": null,
-      "gm_series": [
-        0.197,
-        0.1779,
-        0.1993,
-        0.1967,
-        0.185,
-        0.1811,
-        0.1733
-      ],
-      "opm_series": [
-        0.0541,
-        0.0419,
-        0.0607,
-        0.0501,
-        0.0355,
-        0.0402,
-        0.0439
-      ],
-      "notes": [
-        "毛利由 收入−成本 推导"
-      ],
-      "cik": "0001138118",
-      "ticker": "CBRE",
-      "name": "CBRE GROUP, INC.",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "3312",
+      "sic_desc": "Steel Works, Blast Furnaces & Rolling Mills (Coke Ovens)"
     },
     {
       "window": "2019-2025",
@@ -1149,7 +1139,9 @@
       "cik": "0000887936",
       "ticker": "FCN",
       "name": "FTI CONSULTING, INC",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "8742",
+      "sic_desc": "Services-Management Consulting Services"
     },
     {
       "window": "2019-2025",
@@ -1183,7 +1175,9 @@
       "cik": "0001748790",
       "ticker": "AMCR",
       "name": "AMCOR PLC",
-      "flag": "黄"
+      "flag": "黄",
+      "sic": "3990",
+      "sic_desc": "Miscellaneous Manufacturing Industries"
     }
   ]
 }
