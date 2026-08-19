@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T05:13:20.910869Z",
+  "generated_at": "2026-08-19T05:15:33.157208Z",
   "years": [
     2019,
     2020,
@@ -16,76 +16,10 @@
     "赛道外": 238,
     "灰": 419,
     "红": 94,
-    "绿": 14,
-    "黄": 33
+    "黄": 37,
+    "绿": 10
   },
   "green": [
-    {
-      "window": "2022-2025",
-      "years": 3,
-      "revenue_latest": 21972042000,
-      "revenue_cagr": 0.6170781210288652,
-      "gm_trend": -0.043370305405253065,
-      "gm_latest": 0.11059154174200105,
-      "opm_trend": -0.007476839049455404,
-      "opm_latest": 0.057026743349571245,
-      "sga_trend": null,
-      "gm_series": [
-        0.154,
-        0.1801,
-        0.1375,
-        0.1106
-      ],
-      "opm_series": [
-        0.0645,
-        0.1068,
-        0.0808,
-        0.057
-      ],
-      "notes": [
-        "基期异常已丢弃 3 年（COVID 谷底类），窗口改为 2022-2025"
-      ],
-      "cik": "0001375365",
-      "ticker": "SMCI",
-      "name": "SUPER MICRO COMPUTER, INC.",
-      "flag": "绿",
-      "sic": "3571",
-      "sic_desc": "Electronic Computers"
-    },
-    {
-      "window": "2021-2025",
-      "years": 4,
-      "revenue_latest": 1650080000,
-      "revenue_cagr": 0.3311065611066679,
-      "gm_trend": -0.038714870200179746,
-      "gm_latest": 0.23935506157277223,
-      "opm_trend": 0.00964450987278559,
-      "opm_latest": 0.1603661640647726,
-      "sga_trend": -0.04835938007296531,
-      "gm_series": [
-        0.2781,
-        0.2236,
-        0.2364,
-        0.2425,
-        0.2394
-      ],
-      "opm_series": [
-        0.1507,
-        0.1312,
-        0.1441,
-        0.1498,
-        0.1604
-      ],
-      "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
-      ],
-      "cik": "0000008947",
-      "ticker": "AZZ",
-      "name": "AZZ Inc.",
-      "flag": "绿",
-      "sic": "3470",
-      "sic_desc": "Coating, Engraving & Allied Services"
-    },
     {
       "window": "2019-2025",
       "years": 6,
@@ -301,40 +235,6 @@
       "sic_desc": "Services-Prepackaged Software"
     },
     {
-      "window": "2021-2025",
-      "years": 4,
-      "revenue_latest": 5649519000,
-      "revenue_cagr": 0.13215578673580008,
-      "gm_trend": -0.034155103240606305,
-      "gm_latest": 0.1925641811276323,
-      "opm_trend": 0.004312487255913301,
-      "opm_latest": 0.05981146359539635,
-      "sga_trend": -0.03208417266119562,
-      "gm_series": [
-        0.2267,
-        0.2241,
-        0.2281,
-        0.2027,
-        0.1926
-      ],
-      "opm_series": [
-        0.0555,
-        0.0621,
-        0.0731,
-        0.0644,
-        0.0598
-      ],
-      "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
-      ],
-      "cik": "0001014739",
-      "ticker": "OPCH",
-      "name": "OPTION CARE HEALTH, INC.",
-      "flag": "绿",
-      "sic": "8082",
-      "sic_desc": "Services-Home Health Care Services"
-    },
-    {
       "window": "2019-2025",
       "years": 6,
       "revenue_latest": 3893100000,
@@ -443,40 +343,6 @@
       "sic_desc": "Wholesale-Drugs, Proprietaries & Druggists' Sundries"
     },
     {
-      "window": "2021-2025",
-      "years": 4,
-      "revenue_latest": 7064640000,
-      "revenue_cagr": 0.09696267793016666,
-      "gm_trend": -0.017124623279740125,
-      "gm_latest": 0.2067570322054627,
-      "opm_trend": -0.007605049683843158,
-      "opm_latest": 0.05573617339312407,
-      "sga_trend": -0.008888422383927674,
-      "gm_series": [
-        0.2239,
-        0.2194,
-        0.2104,
-        0.2056,
-        0.2068
-      ],
-      "opm_series": [
-        0.0633,
-        0.0747,
-        0.0677,
-        0.0628,
-        0.0557
-      ],
-      "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
-      ],
-      "cik": "0001012019",
-      "ticker": "RUSHA",
-      "name": "RUSH ENTERPRISES INC \\TX\\",
-      "flag": "绿",
-      "sic": "5500",
-      "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
-    },
-    {
       "window": "2019-2025",
       "years": 6,
       "revenue_latest": 6707981000,
@@ -514,6 +380,74 @@
     }
   ],
   "yellow": [
+    {
+      "window": "2022-2025",
+      "years": 3,
+      "revenue_latest": 21972042000,
+      "revenue_cagr": 0.6170781210288652,
+      "gm_trend": -0.043370305405253065,
+      "gm_latest": 0.11059154174200105,
+      "opm_trend": -0.007476839049455404,
+      "opm_latest": 0.057026743349571245,
+      "sga_trend": null,
+      "gm_series": [
+        0.154,
+        0.1801,
+        0.1375,
+        0.1106
+      ],
+      "opm_series": [
+        0.0645,
+        0.1068,
+        0.0808,
+        0.057
+      ],
+      "notes": [
+        "基期异常已丢弃 3 年（COVID 谷底类），窗口改为 2022-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
+      ],
+      "cik": "0001375365",
+      "ticker": "SMCI",
+      "name": "SUPER MICRO COMPUTER, INC.",
+      "flag": "黄",
+      "sic": "3571",
+      "sic_desc": "Electronic Computers"
+    },
+    {
+      "window": "2021-2025",
+      "years": 4,
+      "revenue_latest": 1650080000,
+      "revenue_cagr": 0.3311065611066679,
+      "gm_trend": -0.038714870200179746,
+      "gm_latest": 0.23935506157277223,
+      "opm_trend": 0.00964450987278559,
+      "opm_latest": 0.1603661640647726,
+      "sga_trend": -0.04835938007296531,
+      "gm_series": [
+        0.2781,
+        0.2236,
+        0.2364,
+        0.2425,
+        0.2394
+      ],
+      "opm_series": [
+        0.1507,
+        0.1312,
+        0.1441,
+        0.1498,
+        0.1604
+      ],
+      "notes": [
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
+      ],
+      "cik": "0000008947",
+      "ticker": "AZZ",
+      "name": "AZZ Inc.",
+      "flag": "黄",
+      "sic": "3470",
+      "sic_desc": "Coating, Engraving & Allied Services"
+    },
     {
       "window": "2019-2025",
       "years": 6,
@@ -1205,6 +1139,41 @@
       "sic_desc": "Aircraft Engines & Engine Parts"
     },
     {
+      "window": "2021-2025",
+      "years": 4,
+      "revenue_latest": 5649519000,
+      "revenue_cagr": 0.13215578673580008,
+      "gm_trend": -0.034155103240606305,
+      "gm_latest": 0.1925641811276323,
+      "opm_trend": 0.004312487255913301,
+      "opm_latest": 0.05981146359539635,
+      "sga_trend": -0.03208417266119562,
+      "gm_series": [
+        0.2267,
+        0.2241,
+        0.2281,
+        0.2027,
+        0.1926
+      ],
+      "opm_series": [
+        0.0555,
+        0.0621,
+        0.0731,
+        0.0644,
+        0.0598
+      ],
+      "notes": [
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
+      ],
+      "cik": "0001014739",
+      "ticker": "OPCH",
+      "name": "OPTION CARE HEALTH, INC.",
+      "flag": "黄",
+      "sic": "8082",
+      "sic_desc": "Services-Home Health Care Services"
+    },
+    {
       "window": "2020-2025",
       "years": 5,
       "revenue_latest": 1872334000,
@@ -1529,6 +1498,41 @@
       "flag": "黄",
       "sic": "3841",
       "sic_desc": "Surgical & Medical Instruments & Apparatus"
+    },
+    {
+      "window": "2021-2025",
+      "years": 4,
+      "revenue_latest": 7064640000,
+      "revenue_cagr": 0.09696267793016666,
+      "gm_trend": -0.017124623279740125,
+      "gm_latest": 0.2067570322054627,
+      "opm_trend": -0.007605049683843158,
+      "opm_latest": 0.05573617339312407,
+      "sga_trend": -0.008888422383927674,
+      "gm_series": [
+        0.2239,
+        0.2194,
+        0.2104,
+        0.2056,
+        0.2068
+      ],
+      "opm_series": [
+        0.0633,
+        0.0747,
+        0.0677,
+        0.0628,
+        0.0557
+      ],
+      "notes": [
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
+      ],
+      "cik": "0001012019",
+      "ticker": "RUSHA",
+      "name": "RUSH ENTERPRISES INC \\TX\\",
+      "flag": "黄",
+      "sic": "5500",
+      "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
     },
     {
       "window": "2019-2025",
@@ -4513,12 +4517,13 @@
         0.1604
       ],
       "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
       ],
       "cik": "0000008947",
       "ticker": "AZZ",
       "name": "AZZ Inc.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "3470",
       "sic_desc": "Coating, Engraving & Allied Services"
     },
@@ -19891,12 +19896,13 @@
         0.0598
       ],
       "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
       ],
       "cik": "0001014739",
       "ticker": "OPCH",
       "name": "OPTION CARE HEALTH, INC.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "8082",
       "sic_desc": "Services-Home Health Care Services"
     },
@@ -22519,12 +22525,13 @@
         0.0557
       ],
       "notes": [
-        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025"
+        "基期异常已丢弃 2 年（COVID 谷底类），窗口改为 2021-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
       ],
       "cik": "0001012019",
       "ticker": "RUSHA",
       "name": "RUSH ENTERPRISES INC \\TX\\",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "5500",
       "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
     },
@@ -23673,12 +23680,13 @@
         0.057
       ],
       "notes": [
-        "基期异常已丢弃 3 年（COVID 谷底类），窗口改为 2022-2025"
+        "基期异常已丢弃 3 年（COVID 谷底类），窗口改为 2022-2025",
+        "窗口经截短，CAGR 存在选择偏差，强制降级为黄灯"
       ],
       "cik": "0001375365",
       "ticker": "SMCI",
       "name": "SUPER MICRO COMPUTER, INC.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "3571",
       "sic_desc": "Electronic Computers"
     },
