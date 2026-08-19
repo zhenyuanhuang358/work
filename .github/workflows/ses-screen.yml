@@ -10,6 +10,7 @@ on:
     paths:
       - ses_screen_trigger.txt
       - scripts/ses_screener.py
+      - scripts/ses_universe.py
   workflow_dispatch:
   schedule:
     # 每周一 12:00 UTC 重跑一次。SEC 数据按年报更新，无需高频。
@@ -32,11 +33,16 @@ jobs:
       - name: Cache SEC companyfacts
         uses: actions/cache@v4
         with:
-          path: .ses_cache
+          path: |
+            .ses_cache
+            .ses_frames
           key: ses-facts-${{ github.run_id }}
           restore-keys: ses-facts-
 
-      - name: Run Phase 1 screen
+      - name: Run Phase 0 full-market scan
+        run: python3 scripts/ses_universe.py
+
+      - name: Run Phase 1 candidate-pool screen
         run: python3 scripts/ses_screener.py
 
       - name: Commit ses_screen.json
@@ -44,7 +50,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main || true
-          git add ses_screen.json
+          git add ses_screen.json ses_universe.json
           git diff --cached --quiet && echo "nothing to commit" || \
             git commit -m "chore: SES phase-1 screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
           git push
