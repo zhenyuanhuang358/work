@@ -262,8 +262,10 @@ def _t1b(rows):
             sic2 = sic3[:2]
             peers = [x for x in rows if (x.get("sic") or "")[:2] == sic2]
         peers = [p for p in peers if p is not r]
-        if len(peers) < 3:
+        # 分位数在 n<6 时无意义（n=3 时只有 0%/33%/67%/100% 四档）
+        if len(peers) < 6:
             r["t1b"] = "同业样本不足"
+            r["peer_n"] = len(peers)
             continue
         gms = [p["gm_latest"] for p in peers]
         sgs = [p["sga_latest"] for p in peers if p.get("sga_latest") is not None]
@@ -283,6 +285,11 @@ def _t1b(rows):
             gm_pct = sum(1 for v in gms if v > r["gm_latest"]) / len(gms)
             r["sga_pctile"] = round(sga_pct, 2)   # 越高＝比越多同业便宜
             r["gm_pctile"] = round(gm_pct, 2)     # 越高＝毛利比越多同业低
+            # ⚠ 与最低成本者的差距 —— 这才是 BJ 案例真正的杀手。
+            #   分位数答的是"比多少人强"，SES 要的是"是不是最强"：
+            #   低成本领先者随时可以把你压回去。BJ 分位 86% 看着不错，
+            #   但比同业最低者高 5.6pct，而那个最低者（Costco）大它 13 倍还长得更快。
+            r["sga_gap_to_best"] = round(r["sga_latest"] - min(sgs + [r["sga_latest"]]), 4)
             if sga_pct >= 0.75 and gm_pct >= 0.75:
                 r["t1b"] = "✓成本优势"      # 收得最少且花得最少 = Costco 签名
             elif sga_pct >= 0.75:
