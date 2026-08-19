@@ -122,6 +122,10 @@ def compute(entry):
     sga = ratio(entry.get("sga", {}))
     if not gm or not opm:
         return None
+    # 基期营业利润率必须为正：从负值或近零基数出发算百分点变化会炸成天文数字
+    # （首跑实证：LCID 营利Δ +5360pct、ALNY +441pct，全部是这个成因）
+    if opm[0][1] <= 0.01:
+        return None
 
     return {
         "window": f"{lo}-{hi}", "years": n,
@@ -138,10 +142,26 @@ def compute(entry):
     }
 
 
+# SES 是"薄毛利、高周转"的现象：机制是规模压低单位成本→让价→上量→更大规模，
+# 这要求 COGS 是主要成本项。毛利率 80-98% 的生物医药/软件公司成本结构由 R&D 与
+# S&M 主导，其规模收益体现在费用杠杆而非毛利率，本判别器对它们不适用。
+GM_CEILING = 0.50      # 高于此：非 COGS 主导，换赛道
+GM_FLOOR = 0.02        # 低于此：多为总额法计收入的标记口径问题
+OPM_TREND_CEILING = 0.03   # SES 要求营业利润率稳定，不是扭亏反转
+GM_TREND_FLOOR = -0.08     # 低于此是毛利崩塌，不是让利
+
+
 def flag(s):
     """与 ses_screener.ses_flag 同一套判别器，口径必须保持一致。"""
     cagr, gm, opm, sga = (s["revenue_cagr"], s["gm_trend"],
                           s["opm_trend"], s["sga_trend"])
+    gml = s["gm_latest"]
+    if not (GM_FLOOR < gml < GM_CEILING):
+        return "赛道外"     # 非 COGS 主导，或毛利率读数不可信
+    if opm > OPM_TREND_CEILING:
+        return "灰"         # 营业利润率大幅扩张 = 扭亏或收割，不是让利
+    if gm < GM_TREND_FLOOR:
+        return "红"         # 毛利崩塌
     if gm > 0:
         return "灰"
     if gm <= -0.03 and opm < -0.03 and (sga is None or sga >= 0):
@@ -184,9 +204,9 @@ def main():
     print("分布:", dict(Counter(r["flag"] for r in rows)))
 
     # 绿灯内部排序：SG&A 比率降幅越大 → 规模带来的经营杠杆越确凿；其次看增速
+    # 排序按增速降序：飞轮还在转的排前面。不做加权打分（判别器不是评分公式）。
     green = sorted([r for r in rows if r["flag"] == "绿"],
-                   key=lambda r: (r["sga_trend"] if r["sga_trend"] is not None else 0,
-                                  -r["revenue_cagr"]))
+                   key=lambda r: -r["revenue_cagr"])
     yellow = sorted([r for r in rows if r["flag"] == "黄"],
                     key=lambda r: -r["revenue_cagr"])
 
