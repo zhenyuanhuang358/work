@@ -57,20 +57,33 @@ def _normalize(entry):
 
 WINDOW_YEARS = 5              # 所有趋势统一在这个窗口上计算
 ACCEPTED_FORMS = {"10-K", "20-F", "40-F"}
+TAXONOMIES = ["us-gaap", "ifrs-full"]   # IFRS 报送人（多数 20-F）落在 ifrs-full
 CACHE_DIR = os.environ.get("SES_CACHE_DIR", ".ses_cache")
 
-# 标签优先级：按顺序回退
+# 标签优先级：按顺序回退。同一列表里混放 US-GAAP 与 IFRS 标签名，
+# 因为两套分类下的标签名不冲突，逐个试即可。
 TAGS = {
     "revenue": [
         "RevenueFromContractWithCustomerExcludingAssessedTax",
         "Revenues",
         "RevenueFromContractWithCustomerIncludingAssessedTax",
         "SalesRevenueNet",
+        "Revenue",                                  # IFRS
+        "RevenueFromContractsWithCustomers",        # IFRS
     ],
-    "gross_profit": ["GrossProfit"],
-    "cost_of_revenue": ["CostOfRevenue", "CostOfGoodsAndServicesSold", "CostOfSales"],
-    "sga": ["SellingGeneralAndAdministrativeExpense"],
-    "operating_income": ["OperatingIncomeLoss"],
+    "gross_profit": ["GrossProfit"],                # 两套分类同名
+    "cost_of_revenue": [
+        "CostOfRevenue", "CostOfGoodsAndServicesSold", "CostOfSales",
+    ],
+    "sga": [
+        "SellingGeneralAndAdministrativeExpense",
+        "SellingGeneralAndAdministrativeExpenses",  # IFRS
+        "AdministrativeExpense",                    # IFRS
+    ],
+    "operating_income": [
+        "OperatingIncomeLoss",
+        "ProfitLossFromOperatingActivities",        # IFRS
+    ],
 }
 
 _TICKER_MAP_URL = "https://www.sec.gov/files/company_tickers.json"
@@ -117,7 +130,7 @@ def fetch_company_facts(cik: str) -> dict:
 
 # --------------------------------------------------------------------------- 序列提取
 
-def _annual_series(facts: dict, tag: str, taxonomy: str = "us-gaap"):
+def _annual_series(facts: dict, tag: str, taxonomy: str = None):
     """
     提取某科目的年度值序列，返回 [(end_date_str, val), ...] 按期末日排序。
 
@@ -126,9 +139,17 @@ def _annual_series(facts: dict, tag: str, taxonomy: str = "us-gaap"):
       按 fy 去重会让后写的覆盖先写的，静默串年。
     改为：按 start/end 的实际期间长度识别年度区间，按 end 去重，同一 end 取 filed 最新的修订。
     """
-    try:
-        units = facts["facts"][taxonomy][tag]["units"]
-    except KeyError:
+    # 同时搜 us-gaap 与 ifrs-full：巴西/拉美/东南亚的 20-F 报送人按 IFRS 编制，
+    # 其 XBRL 落在 ifrs-full 分类下。只搜 us-gaap 会让它们静默返回"收入序列不足"
+    # ——这是 2026-08-19 首次实跑时 NU 暴露出来的，与只筛 10-K 是同一类漏检。
+    units = None
+    for tx in ([taxonomy] if taxonomy else TAXONOMIES):
+        try:
+            units = facts["facts"][tx][tag]["units"]
+            break
+        except KeyError:
+            continue
+    if units is None:
         return [], None
 
     unit = "USD" if "USD" in units else next(iter(units), None)
