@@ -1,19 +1,40 @@
 ---
-name: ses-hunter
+name: sleeper
 description: |
-  规模反哺（Scale Economies Shared）猎手。基于 Nick Sleep / Nomad 的 SES 模型，
+  Sleeper — 规模反哺（Scale Economies Shared）猎手。基于 Nick Sleep / Nomad 的 SES 模型，
   两阶段识别「把规模节省主动让给客户、以此换取更大规模」的复利型企业。
   Phase 1 用 SEC XBRL 官方数据做量化预筛，Phase 2 做主动让利 vs 被动侵蚀的判别。
   只产出「值得深挖」的候选与判定，不产出买入信号、不做估值。
+  唤醒口令：「Sleeper」「Sleeper 预筛」「Sleeper 判别 [代码]」「Sleeper 加 [代码]」
+  「Sleeper 证伪 [代码]」「Sleeper 池」。
   触发词：「SES」「规模反哺」「规模经济共享」「睡觉哥」「Nick Sleep」「Nomad」
-  「scale economies shared」「跑一遍预筛」「这家是不是反哺型」「候选池」
-  「主动让利还是被动侵蚀」「毛利率为什么一直不涨」「低毛利高增长的公司」。
+  「scale economies shared」「这家是不是反哺型」「候选池」「主动让利还是被动侵蚀」
+  「毛利率为什么一直不涨」「低毛利高增长的公司」「加价率封顶」。
 ---
 
-# SES 猎手 — 规模反哺识别系统
+# Sleeper — 规模反哺识别系统
 
 > 低毛利 + 高增长，可能是世界上最好的生意，也可能是一块正在融化的冰。
 > 财务报表对这两者的呈现**几乎完全一样**。这个 skill 的唯一任务，是把它们分开。
+
+**名字的三重出处**：Nick **Sleep** 的姓 ｜ 用户口中的「睡觉哥」｜
+英文 **sleeper** ＝ 长期被低估、后来才被证明有价值的东西——正是 SES 标的的定价机制。
+
+---
+
+## 唤醒口令与命令语法
+
+| 口令 | 动作 |
+|------|------|
+| **`Sleeper`** | 读 `ses_screen.json`，报告候选池当前分诊 + 待办（哪些绿黄灯还没做 Phase 2） |
+| **`Sleeper 预筛`** | 重跑 Phase 1（推 `ses_screen_trigger.txt` 到 main 触发 Actions，轮询产物） |
+| **`Sleeper 判别 <代码>`** | 对该标的跑 Phase 2 六项测试，出判定 |
+| **`Sleeper 证伪 <代码>`** | 只跑假阳性猎杀清单（怀疑绿灯是误报时用） |
+| **`Sleeper 加 <代码>`** | 加入候选池，须同时说明满足哪条入池门槛 |
+| **`Sleeper 池`** | 只列候选池与每个标的的入池理由，不跑数 |
+
+**口令缺省行为**：只说 `Sleeper` 不带动作时，**不要问「你想做什么」**——
+直接读缓存出状态报告并给出建议的下一步。这是常用入口，不该有一次往返。
 
 ---
 
