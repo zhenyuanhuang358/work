@@ -173,6 +173,17 @@ def flag(s):
     return "灰"
 
 
+def fetch_sic(cik):
+    """取实体 SIC 码。frames API 不返回行业，只能按 CIK 查 submissions。
+    只对入围名单调用（几十次），不对全市场调用。"""
+    try:
+        d = _get(f"https://data.sec.gov/submissions/CIK{cik}.json")
+        time.sleep(0.15)
+        return str(d.get("sic", "")), d.get("sicDescription", "")
+    except Exception:
+        return "", ""
+
+
 def load_ticker_map():
     """CIK -> ticker。company_tickers.json 只含有上市代码的实体，正好当作上市过滤器。"""
     raw = _get("https://www.sec.gov/files/company_tickers.json")
@@ -204,6 +215,17 @@ def main():
     print("分布:", dict(Counter(r["flag"] for r in rows)))
 
     # 绿灯内部排序：SG&A 比率降幅越大 → 规模带来的经营杠杆越确凿；其次看增速
+    # 行业排除：金融机构没有毛利率/营业利润率的常规口径，判别器全部失效（F9）。
+    # ⚠ EXCLUDED_SIC_PREFIX 此前只定义未调用（死代码），导致 SNEX/TRUP 等券商与
+    #   保险公司混入首跑绿灯名单。只对绿黄灯查 SIC，不对全市场查。
+    for r in rows:
+        if r["flag"] in ("绿", "黄"):
+            sic, desc = fetch_sic(r["cik"])
+            r["sic"], r["sic_desc"] = sic, desc
+            if sic[:2] in EXCLUDED_SIC_PREFIX:
+                r["flag"] = "赛道外"
+                r.setdefault("notes", []).append(f"金融业 SIC {sic} {desc}，判别器不适用（F9）")
+
     # 排序按增速降序：飞轮还在转的排前面。不做加权打分（判别器不是评分公式）。
     green = sorted([r for r in rows if r["flag"] == "绿"],
                    key=lambda r: -r["revenue_cagr"])
