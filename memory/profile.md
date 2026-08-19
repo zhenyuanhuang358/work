@@ -411,3 +411,25 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 **投资侧**：个人投资组合（美股期权 $8500 账户）+ 机构级财报分析工具。核心价值：消除信息噪音、核实数据、给出有立场的结论。
 
 **技术侧**：多 Skill 系统，均部署在同一个 Claude Code 项目中，通过触发词激活。GitHub Actions 用于突破 sandbox 网络限制拉取实时财务数据。
+
+---
+
+### 1.1f ⚠ 价格缓存要读**默认分支**，不是 main（2026-08-19 发现，此前一直读错）
+
+**事故**：8/19 扫描时发现 main 的 `stock_prices.json` 停在 8/18 14:54，而 Actions 全部显示 success。
+查 job 元数据发现 `head_branch = claude/install-claude-hud-d51E6` —— **本仓库的默认分支不是 main。**
+GitHub 的 **schedule 定时任务只在默认分支上运行**，所以所有定时抓的价格都提交到了工作分支，
+main 上那份只在我手动 `push_files` 触发（push 事件命中 main）时才更新。
+
+**正确读法**：
+```
+git fetch origin claude/install-claude-hud-d51E6 -q
+git show origin/claude/install-claude-hud-d51E6:stock_prices.json
+```
+或先确认默认分支再读。**不要默认 main 是默认分支。**
+
+**⭐ 教训的一般形式**：**「workflow 全部 success」不等于「产物在我以为的地方」。**
+本次是「成功但没产出到预期位置」，比失败更隐蔽——因为没有任何红色告警。
+**核对产物必须核对「内容的时间戳」，不能只核对「运行的状态」。**
+（这与 7/4 那次 `fetch_research_data.py` 未推 main 是同一类问题的镜像：
+那次是代码不在执行分支，这次是产物不在读取分支。）
