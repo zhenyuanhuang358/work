@@ -166,6 +166,7 @@ def compute(entry):
         "opm_trend": opm[-1][1] - opm[0][1],
         "opm_latest": opm[-1][1],
         "sga_trend": (sga[-1][1] - sga[0][1]) if sga else None,
+        "sga_latest": sga[-1][1] if sga else None,
         "gm_series": [round(v, 4) for _, v in gm],
         "opm_series": [round(v, 4) for _, v in opm],
         "notes": notes,
@@ -214,15 +215,84 @@ def flag(s):
     return "灰"
 
 
+SIC_CACHE = os.environ.get("SES_SIC_CACHE", ".ses_sic")
+
+
 def fetch_sic(cik):
     """取实体 SIC 码。frames API 不返回行业，只能按 CIK 查 submissions。
-    只对入围名单调用（几十次），不对全市场调用。"""
+    T1b 同业成本对比需要给全部过筛标的分组，故对全部 rows 调用并落盘缓存。"""
+    os.makedirs(SIC_CACHE, exist_ok=True)
+    path = os.path.join(SIC_CACHE, f"{cik}.json")
+    if os.path.exists(path):
+        with open(path) as f:
+            d = json.load(f)
+            return d.get("sic", ""), d.get("desc", "")
     try:
         d = _get(f"https://data.sec.gov/submissions/CIK{cik}.json")
-        time.sleep(0.15)
-        return str(d.get("sic", "")), d.get("sicDescription", "")
+        time.sleep(0.12)
+        out = {"sic": str(d.get("sic", "")), "desc": d.get("sicDescription", "")}
     except Exception:
-        return "", ""
+        out = {"sic": "", "desc": ""}
+    with open(path, "w") as f:
+        json.dump(out, f)
+    return out["sic"], out["desc"]
+
+
+def _t1b(rows):
+    """T1b 成本优势（机制条件）批量前置筛。
+
+    由 BJ 判别新增：T1（第二条腿）检验结构，T1b 检验机制——
+    单位成本是不是真的比同业低，也就是**有没有东西可让**。
+    BJ 的会员费占营业利润 61.2% 高于 Costco 的 51.3%，但毛利率高 5.8pct、
+    SG&A 也高 5.8pct，两者完全相抵：它的薄商品利润是成本约束不是主动选择。
+
+    Costco 签名 = 同时低于同业的毛利率（收得少）与 SG&A 比率（花得少）。
+    只有 SG&A 低 = 会省钱但没让出去；只有毛利低 = 让了但没本钱让，不可持续。
+    """
+    import statistics as _st
+    from collections import defaultdict
+    grp = defaultdict(list)
+    for r in rows:
+        if r.get("sic"):
+            grp[r["sic"][:3]].append(r)      # 先按 3 位 SIC 分组
+    for r in rows:
+        sic3 = (r.get("sic") or "")[:3]
+        peers = grp.get(sic3, [])
+        if len(peers) < 4:                    # 组太小则退回 2 位 SIC
+            sic2 = sic3[:2]
+            peers = [x for x in rows if (x.get("sic") or "")[:2] == sic2]
+        peers = [p for p in peers if p is not r]
+        if len(peers) < 3:
+            r["t1b"] = "同业样本不足"
+            continue
+        gms = [p["gm_latest"] for p in peers]
+        sgs = [p["sga_latest"] for p in peers if p.get("sga_latest") is not None]
+        r["peer_n"] = len(peers)
+        r["peer_gm_median"] = round(_st.median(gms), 4)
+        gm_rel = r["gm_latest"] - r["peer_gm_median"]
+        r["gm_vs_peer"] = round(gm_rel, 4)
+        if sgs and r.get("sga_latest") is not None:
+            r["peer_sga_median"] = round(_st.median(sgs), 4)
+            r["sga_vs_peer"] = round(r["sga_latest"] - r["peer_sga_median"], 4)
+            # ⚠ 门槛不能用"优于中位数"——那只是"比一半人强"。
+            #   SES 要求的是**成本最低的那一档**：只有低成本领先者才能持续地
+            #   比所有人便宜还活得下去。BJ 优于同业中位，但它是三家里的老三，
+            #   成本比 Costco 高 5.8pct —— 这正是它做不成 SES 的原因。
+            #   故改用分位数：便宜过 75% 的同业才算有成本优势。
+            sga_pct = sum(1 for v in sgs if v > r["sga_latest"]) / len(sgs)
+            gm_pct = sum(1 for v in gms if v > r["gm_latest"]) / len(gms)
+            r["sga_pctile"] = round(sga_pct, 2)   # 越高＝比越多同业便宜
+            r["gm_pctile"] = round(gm_pct, 2)     # 越高＝毛利比越多同业低
+            if sga_pct >= 0.75 and gm_pct >= 0.75:
+                r["t1b"] = "✓成本优势"      # 收得最少且花得最少 = Costco 签名
+            elif sga_pct >= 0.75:
+                r["t1b"] = "省而不让"        # 效率领先但没传导给客户
+            elif gm_pct >= 0.75:
+                r["t1b"] = "让而无本"        # 毛利最低但费用不低 → 不可持续
+            else:
+                r["t1b"] = "✗无成本优势"
+        else:
+            r["t1b"] = "缺SG&A"
 
 
 def load_ticker_map():
@@ -260,16 +330,17 @@ def main():
     print("分布:", dict(Counter(r["flag"] for r in rows)))
 
     # 绿灯内部排序：SG&A 比率降幅越大 → 规模带来的经营杠杆越确凿；其次看增速
-    # 行业排除：金融机构没有毛利率/营业利润率的常规口径，判别器全部失效（F9）。
-    # ⚠ EXCLUDED_SIC_PREFIX 此前只定义未调用（死代码），导致 SNEX/TRUP 等券商与
-    #   保险公司混入首跑绿灯名单。只对绿黄灯查 SIC，不对全市场查。
+    # 行业分组：SIC 对全部过筛标的取（T1b 同业对比需要完整分组，非只看候选）。
+    # ⚠ EXCLUDED_SIC_PREFIX 此前只定义未调用（死代码），导致 SNEX/TRUP 混入首跑绿灯。
+    print(f"取 SIC（{len(rows)} 家，落盘缓存）…")
     for r in rows:
-        if r["flag"] in ("绿", "黄"):
-            sic, desc = fetch_sic(r["cik"])
-            r["sic"], r["sic_desc"] = sic, desc
-            if sic[:2] in EXCLUDED_SIC_PREFIX:
-                r["flag"] = "赛道外"
-                r.setdefault("notes", []).append(f"金融业 SIC {sic} {desc}，判别器不适用（F9）")
+        sic, desc = fetch_sic(r["cik"])
+        r["sic"], r["sic_desc"] = sic, desc
+        if sic[:2] in EXCLUDED_SIC_PREFIX:
+            r["flag"] = "赛道外"
+            r.setdefault("notes", []).append(f"金融业 SIC {sic} {desc}，判别器不适用（F9）")
+
+    _t1b(rows)
 
     # 排序按增速降序：飞轮还在转的排前面。不做加权打分（判别器不是评分公式）。
     green = sorted([r for r in rows if r["flag"] == "绿"],
@@ -298,6 +369,15 @@ def main():
               f"{r['opm_trend']*100:>8.1f}{sg:>8}{r['gm_latest']*100:>7.1f}%  "
               f"{r['window']:<10}{r['name'][:34]}")
     print(f"\n绿灯 {len(green)} 家 / 黄灯 {len(yellow)} 家。已写入 ses_universe.json")
+    from collections import Counter as _C
+    cand = [r for r in rows if r["flag"] in ("绿", "黄")]
+    print(f"\nT1b 成本优势前置筛（{len(cand)} 家候选）: {dict(_C(r.get('t1b','?') for r in cand))}")
+    print(f"{'代码':<7}{'灯':<5}{'毛利率':>7}{'SG&A':>7}{'低成本分位':>10}{'低毛利分位':>10}  {'T1b':<10}同业(SIC)")
+    for r in sorted(cand, key=lambda x: -(x.get("sga_pctile") or 0)):
+        if r.get("t1b", "").startswith(("✓", "省", "让")):
+            print(f"{r['ticker']:<7}{r['flag']:<5}{r['gm_latest']*100:>6.1f}%"
+                  f"{(r.get('sga_latest') or 0)*100:>6.1f}%{(r.get('sga_pctile') or 0):>10.0%}"
+                  f"{(r.get('gm_pctile') or 0):>10.0%}  {r['t1b']:<10}n={r.get('peer_n','?')} {r.get('sic_desc','')[:26]}")
     print("⚠ 灯不是结论，是分诊。绿灯只意味着值得进 Phase 2。")
 
 
