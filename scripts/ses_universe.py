@@ -142,6 +142,11 @@ def compute(entry):
         common = [y for y in common if y > drop_year]
         dropped += 1
     if dropped:
+        # ⚠ 丢弃基期会把窗口截短到"复苏最陡的一段"，CAGR 被系统性放大——
+        #   SYY 首跑 9.0% → 丢弃后 16.6%，而真实（FY19→FY25 公司自报）仅 5.18%；
+        #   SMCI 35.8% → 61.7%（丢 3 年，只剩 AI 服务器爆发段）。
+        #   这是把"基期污染"换成了"窗口选择偏差"，后者更隐蔽。
+        #   → 凡丢弃过基期的标的一律不得留在绿灯，强制降级为黄灯交人工判别。
         lo = common[0]
         n = common[-1] - lo
         if n < 3 or len(gm) < 2 or rev.get(lo, 0) <= 0:
@@ -243,7 +248,11 @@ def main():
         s = compute(e)
         if not s:
             continue
-        s.update(cik=cik, ticker=t, name=e.get("name", ""), flag=flag(s))
+        f = flag(s)
+        if f == "绿" and any("基期异常已丢弃" in x for x in s.get("notes", [])):
+            f = "黄"
+            s["notes"].append("窗口经截短，CAGR 存在选择偏差，强制降级为黄灯")
+        s.update(cik=cik, ticker=t, name=e.get("name", ""), flag=f)
         rows.append(s)
 
     print(f"通过口径与规模门槛（收入≥10亿、序列≥{MIN_YEARS}年）: {len(rows):,}")
