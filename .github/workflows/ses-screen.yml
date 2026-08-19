@@ -1,0 +1,50 @@
+name: SES Phase 1 Screen
+
+# data.sec.gov 在会话容器的出口策略封禁名单内（CONNECT tunnel 403），
+# 故 Phase 1 预筛在 Actions 里跑（出口不受限），产物写回 main 的 ses_screen.json。
+# 与 fetch-prices.yml 同一套机制。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ses_screen_trigger.txt
+      - scripts/ses_screener.py
+  workflow_dispatch:
+  schedule:
+    # 每周一 12:00 UTC 重跑一次。SEC 数据按年报更新，无需高频。
+    - cron: '0 12 * * 1'
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # companyfacts 单个文件可达 10MB+，跨 run 缓存避免重复拉取并降低 SEC 负载
+      - name: Cache SEC companyfacts
+        uses: actions/cache@v4
+        with:
+          path: .ses_cache
+          key: ses-facts-${{ github.run_id }}
+          restore-keys: ses-facts-
+
+      - name: Run Phase 1 screen
+        run: python3 scripts/ses_screener.py
+
+      - name: Commit ses_screen.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add ses_screen.json
+          git diff --cached --quiet && echo "nothing to commit" || \
+            git commit -m "chore: SES phase-1 screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          git push
