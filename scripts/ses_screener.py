@@ -30,15 +30,30 @@ HEADERS = {"User-Agent": "Personal Research zhenyuanhuang358@gmail.com"}
 # ---- 维护区: 候选池，人工加标的 ----
 # 候选池是人工策展的，不是全市场扫描：SES 是一种管理层意图，
 # 意图不在财务数据里，只能先由人从阅读中提出假设，再由筛选器证伪。
+#
+# 写法：直接写 ticker 字符串，或写 dict 附加元数据。
+#   mixed=True  标记混业结构 —— 合并口径毛利率被高毛利分部占比上升掩盖，
+#               本筛对其结构性失明。这类标的不出灯，直接标 ⚑分部 送 Phase 2 拆分部。
+#               （这是分诊工具的固有限制，不是 bug。见 references/failure-modes.md F2）
 CANDIDATES = [
-    "COST",  # 原型案例:会员费+低毛利,持续把规模节省让给客户
-    "AMZN",  # Prime+履约网络。⚠ 合并口径毛利率因 AWS/广告占比上升而上行，本筛必然判灰 —— 见 F2
-    "WMT",   # EDLP 规模反哺范例
-    "MELI",  # 拉美电商+金融科技双轮
-    "SE",    # Shopee。20-F 报送；资本周期尚在扩张期，重点核实是补贴还是成本优势
-    "NU",    # Nu Holdings。20-F 报送；金融牌照型，监管风险需单独核实
+    "COST",                                                    # 原型:会员费+低毛利,持续把规模节省让给客户
+    {"ticker": "AMZN", "mixed": True,
+     "note": "SES 教科书案例，但合并毛利率因 AWS/广告占比上升而上行，合并数必然误判"},
+    "WMT",                                                     # EDLP 规模反哺范例
+    "MELI",                                                    # 拉美电商+金融科技双轮
+    {"ticker": "SE", "mixed": True,
+     "note": "电商/游戏/数字金融三分部，游戏毛利远高于电商，合并数会掩盖 Shopee 端让利"},
+    "NU",                                                      # Nu Holdings。20-F 报送；金融牌照型
     # "TICKER",  # 在此加新标的
 ]
+
+
+def _normalize(entry):
+    """候选池条目归一化：支持纯 ticker 字符串或带元数据的 dict。"""
+    if isinstance(entry, str):
+        return {"ticker": entry, "mixed": False, "note": ""}
+    return {"ticker": entry["ticker"], "mixed": entry.get("mixed", False),
+            "note": entry.get("note", "")}
 
 WINDOW_YEARS = 5              # 所有趋势统一在这个窗口上计算
 ACCEPTED_FORMS = {"10-K", "20-F", "40-F"}
@@ -252,15 +267,23 @@ def ses_flag(sig: dict) -> tuple:
 
 def run_screen(candidates=None) -> dict:
     results = []
-    for ticker in (candidates or CANDIDATES):
+    for entry in (candidates or CANDIDATES):
+        c = _normalize(entry)
+        ticker = c["ticker"]
         try:
             cik = get_cik(ticker)
             sig = compute_signals(cik)
             flag, why = ses_flag(sig)
+            if c["mixed"]:
+                # 混业结构：合并口径对 SES 结构性失明，不出灯，避免"灰"被当成结论。
+                # 数字仍然保留，供 Phase 2 分部拆分时做对照。
+                sig.setdefault("notes", []).append(f"合并口径原始分诊={flag}（不作数）")
+                flag = "⚑分部"
+                why = c["note"] or "混业结构，合并数无效，须做分部级拆分后重判"
             results.append({"ticker": ticker, "cik": cik, "flag": flag,
-                            "reason": why, "signals": sig})
+                            "reason": why, "mixed": c["mixed"], "signals": sig})
         except Exception as e:
-            results.append({"ticker": ticker, "flag": "抓取失败",
+            results.append({"ticker": ticker, "flag": "抓取失败", "mixed": c["mixed"],
                             "reason": f"{type(e).__name__}: {e}", "signals": {}})
         time.sleep(0.15)   # SEC 限流礼貌等待
 
@@ -273,15 +296,16 @@ def run_screen(candidates=None) -> dict:
     def pct(x):
         return f"{x*100:+.1f}%" if isinstance(x, (int, float)) else "  --  "
 
-    print(f"{'标的':<7}{'灯':<7}{'CAGR':>8}{'毛利Δ':>9}{'营利Δ':>9}{'SG&AΔ':>9}  说明")
-    print("-" * 108)
+    print(f"{'标的':<7}{'灯':<8}{'CAGR':>8}{'毛利Δ':>9}{'营利Δ':>9}{'SG&AΔ':>9}  窗口      说明")
+    print("-" * 118)
     for r in results:
         s = r["signals"]
-        print(f"{r['ticker']:<7}{r['flag']:<7}"
+        win = f"{(s.get('window_years') or 0):.1f}y" if s.get("window_years") else "  --"
+        print(f"{r['ticker']:<7}{r['flag']:<8}"
               f"{pct(s.get('revenue_cagr')):>8}{pct(s.get('gm_trend')):>9}"
-              f"{pct(s.get('opm_trend')):>9}{pct(s.get('sga_trend')):>9}  {r['reason']}")
+              f"{pct(s.get('opm_trend')):>9}{pct(s.get('sga_trend')):>9}  {win:<8}  {r['reason']}")
     print("\n⚠ 灯不是结论，是分诊。绿灯只意味着值得花时间做 Phase 2。")
-    print("⚠ 混业公司（高毛利分部占比上升）本筛结果无效，须直接做分部级拆分。")
+    print("⚠ ⚑分部 = 混业结构，合并口径对 SES 结构性失明，数字仅供对照，须分部拆分后重判。")
     return out
 
 
