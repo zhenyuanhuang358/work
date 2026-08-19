@@ -238,6 +238,9 @@ def main():
         "universe_size": len(uni), "screened": len(rows),
         "distribution": dict(Counter(r["flag"] for r in rows)),
         "green": green, "yellow": yellow[:60],
+        # 全部过筛结果。F4「行业性通缩」要求把同业放进同一张表比形状，
+        # 但此前产物只存绿黄灯，同业（多为灰/红）根本取不到 —— 规则写了没接线的第四例。
+        "all": sorted(rows, key=lambda r: r["ticker"]),
     }
     with open("ses_universe.json", "w") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)
