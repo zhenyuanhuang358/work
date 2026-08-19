@@ -122,6 +122,31 @@ def compute(entry):
     sga = ratio(entry.get("sga", {}))
     if not gm or not opm:
         return None
+
+    # 基期污染检测（2026-08-19 由 SYY 暴露）：首尾差法对基期异常极度敏感。
+    # SYY 基期落在 COVID 谷底（营利率 1.4% vs 中位 3.4%），
+    # 导致 CAGR 9.0%（真实 5.2%）、营利Δ +2.4pct（真实 −0.02pct），
+    # 把一家增速不达标的公司推成绿灯。
+    # 修法：若基期营业利润率显著低于序列中位数，丢弃首点后重算；仍异常则整体弃用。
+    import statistics as _st
+    dropped = 0
+    while len(opm) >= 4:
+        med = _st.median(v for _, v in opm)
+        if med <= 0 or opm[0][1] >= 0.7 * med:
+            break
+        drop_year = opm[0][0]
+        opm = opm[1:]
+        gm = [x for x in gm if x[0] > drop_year]
+        if sga:
+            sga = [x for x in sga if x[0] > drop_year]
+        common = [y for y in common if y > drop_year]
+        dropped += 1
+    if dropped:
+        lo = common[0]
+        n = common[-1] - lo
+        if n < 3 or len(gm) < 2 or rev.get(lo, 0) <= 0:
+            return None
+        notes.append(f"基期异常已丢弃 {dropped} 年（COVID 谷底类），窗口改为 {lo}-{common[-1]}")
     # 基期营业利润率必须为正：从负值或近零基数出发算百分点变化会炸成天文数字
     # （首跑实证：LCID 营利Δ +5360pct、ALNY +441pct，全部是这个成因）
     if opm[0][1] <= 0.01:
