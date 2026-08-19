@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T04:53:50.086634Z",
+  "generated_at": "2026-08-19T05:00:12.393072Z",
   "years": [
     2019,
     2020,
@@ -14,10 +14,10 @@
   "screened": 798,
   "distribution": {
     "赛道外": 238,
-    "灰": 431,
+    "灰": 419,
     "红": 94,
-    "绿": 21,
-    "黄": 14
+    "绿": 14,
+    "黄": 33
   },
   "green": [
     {
@@ -161,114 +161,6 @@
       "sic_desc": "Services-Facilities Support Management Services"
     },
     {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 37634900000,
-      "revenue_cagr": 0.19891097389116852,
-      "gm_trend": -0.0018419219632959394,
-      "gm_latest": 0.15233201097917093,
-      "opm_trend": 0.003312561563161738,
-      "opm_latest": 0.04237290387379799,
-      "sga_trend": -0.003591313421948905,
-      "gm_series": [
-        0.1542,
-        0.1695,
-        0.1865,
-        0.1828,
-        0.1684,
-        0.1537,
-        0.1523
-      ],
-      "opm_series": [
-        0.0391,
-        0.0528,
-        0.0728,
-        0.0689,
-        0.0545,
-        0.0433,
-        0.0424
-      ],
-      "notes": [],
-      "cik": "0001023128",
-      "ticker": "LAD",
-      "name": "LITHIA MOTORS INC",
-      "flag": "绿",
-      "sic": "5500",
-      "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 2757991000,
-      "revenue_cagr": 0.19471702229014398,
-      "gm_trend": -0.002862300961158165,
-      "gm_latest": 0.12885937626337432,
-      "opm_trend": -5.285342019240025e-05,
-      "opm_latest": 0.08484799261491426,
-      "sga_trend": null,
-      "gm_series": [
-        0.1317,
-        0.1437,
-        0.1442,
-        0.1582,
-        0.1403,
-        0.1006,
-        0.1289
-      ],
-      "opm_series": [
-        0.0849,
-        0.0959,
-        0.0658,
-        0.1192,
-        0.1038,
-        0.0406,
-        0.0848
-      ],
-      "notes": [],
-      "cik": "0000944148",
-      "ticker": "CBZ",
-      "name": "CBIZ, INC.",
-      "flag": "绿",
-      "sic": "7389",
-      "sic_desc": "Services-Business Services, NEC"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 4149537000,
-      "revenue_cagr": 0.17314126372589023,
-      "gm_trend": -0.0008680232013832112,
-      "gm_latest": 0.24197639399287196,
-      "opm_trend": 0.0031398786762287315,
-      "opm_latest": 0.03496920258814417,
-      "sga_trend": -0.0022290484759475426,
-      "gm_series": [
-        0.2428,
-        0.2232,
-        0.2237,
-        0.2367,
-        0.2372,
-        0.2409,
-        0.242
-      ],
-      "opm_series": [
-        0.0318,
-        -0.0924,
-        0.0062,
-        0.0328,
-        0.0294,
-        0.0338,
-        0.035
-      ],
-      "notes": [],
-      "cik": "0001517175",
-      "ticker": "CHEF",
-      "name": "THE CHEFS’ WAREHOUSE, INC.",
-      "flag": "绿",
-      "sic": "5141",
-      "sic_desc": "Wholesale-Groceries, General Line"
-    },
-    {
       "window": "2019-2023",
       "years": 4,
       "revenue_latest": 31964000000,
@@ -301,80 +193,6 @@
       "flag": "绿",
       "sic": "4610",
       "sic_desc": "Pipe Lines (No Natural Gas)"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 5032118000,
-      "revenue_cagr": 0.16272465258776458,
-      "gm_trend": -0.0029033291664209704,
-      "gm_latest": 0.20131523147907104,
-      "opm_trend": 0.02108667641970781,
-      "opm_latest": 0.08451828832312756,
-      "sga_trend": null,
-      "gm_series": [
-        0.2042,
-        0.2187,
-        0.2312,
-        0.2218,
-        0.2068,
-        0.2031,
-        0.2013
-      ],
-      "opm_series": [
-        0.0634,
-        0.0935,
-        0.0991,
-        0.0981,
-        0.0689,
-        0.0846,
-        0.0845
-      ],
-      "notes": [
-        "毛利由 收入−成本 推导"
-      ],
-      "cik": "0001125376",
-      "ticker": "ENSG",
-      "name": "Ensign Group, Inc",
-      "flag": "绿",
-      "sic": "8051",
-      "sic_desc": "Services-Skilled Nursing Care Facilities"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 1695900000,
-      "revenue_cagr": 0.15614805949138733,
-      "gm_trend": -0.0033322245183237675,
-      "gm_latest": 0.4509699864378796,
-      "opm_trend": 0.017856380829303437,
-      "opm_latest": 0.16445545138274661,
-      "sga_trend": -0.03033982925544254,
-      "gm_series": [
-        0.4543,
-        0.4533,
-        0.4097,
-        0.3632,
-        0.4235,
-        0.4513,
-        0.451
-      ],
-      "opm_series": [
-        0.1466,
-        0.1444,
-        0.1175,
-        0.0836,
-        0.1251,
-        0.1561,
-        0.1645
-      ],
-      "notes": [],
-      "cik": "0001439288",
-      "ticker": "ZWS",
-      "name": "ZURN WATER SOLUTIONS CORPORATION",
-      "flag": "绿",
-      "sic": "3560",
-      "sic_desc": "General Industrial Machinery & Equipment"
     },
     {
       "window": "2019-2024",
@@ -515,80 +333,6 @@
       "flag": "绿",
       "sic": "8082",
       "sic_desc": "Services-Home Health Care Services"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 3196600000,
-      "revenue_cagr": 0.12331101272262912,
-      "gm_trend": -0.0030899255862196773,
-      "gm_latest": 0.44419070262153537,
-      "opm_trend": -0.007768197632801371,
-      "opm_latest": 0.14262028405180505,
-      "sga_trend": -0.03804161554495292,
-      "gm_series": [
-        0.4473,
-        0.457,
-        0.4609,
-        0.4255,
-        0.425,
-        0.4587,
-        0.4442
-      ],
-      "opm_series": [
-        0.1504,
-        0.2127,
-        0.24,
-        0.1462,
-        0.1417,
-        0.1647,
-        0.1426
-      ],
-      "notes": [],
-      "cik": "0001101302",
-      "ticker": "ENTG",
-      "name": "Entegris, Inc.",
-      "flag": "绿",
-      "sic": "3089",
-      "sic_desc": "Plastics Products, NEC"
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
-      "revenue_latest": 275235000000,
-      "revenue_cagr": 0.10317060651497556,
-      "gm_trend": -0.001342724446277782,
-      "gm_latest": 0.12843206714262356,
-      "opm_trend": 0.006703125103371184,
-      "opm_latest": 0.03772412665540356,
-      "sga_trend": -0.007482664805406852,
-      "gm_series": [
-        0.1298,
-        0.1309,
-        0.1288,
-        0.1215,
-        0.1226,
-        0.1261,
-        0.1284
-      ],
-      "opm_series": [
-        0.031,
-        0.0326,
-        0.0342,
-        0.0343,
-        0.0335,
-        0.0365,
-        0.0377
-      ],
-      "notes": [
-        "毛利由 收入−成本 推导"
-      ],
-      "cik": "0000909832",
-      "ticker": "COST",
-      "name": "COSTCO WHOLESALE CORP /NEW",
-      "flag": "绿",
-      "sic": "5331",
-      "sic_desc": "Retail-Variety Stores"
     },
     {
       "window": "2019-2025",
@@ -919,6 +663,114 @@
     {
       "window": "2019-2025",
       "years": 6,
+      "revenue_latest": 1228282000,
+      "revenue_cagr": 0.21166006066829857,
+      "gm_trend": 0.0034786210616973845,
+      "gm_latest": 0.16899702185654433,
+      "opm_trend": -0.04806235212442064,
+      "opm_latest": -0.02686760857848605,
+      "sga_trend": 0.01993992391567362,
+      "gm_series": [
+        0.1655,
+        0.1777,
+        0.1901,
+        0.1756,
+        0.1777,
+        0.1708,
+        0.169
+      ],
+      "opm_series": [
+        0.0212,
+        -0.6065,
+        0.037,
+        0.009,
+        0.0078,
+        -0.0326,
+        -0.0269
+      ],
+      "notes": [],
+      "cik": "0001680873",
+      "ticker": "HFFG",
+      "name": "HF Foods Group Inc.",
+      "flag": "黄",
+      "sic": "5140",
+      "sic_desc": "Wholesale-Groceries & Related Products"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 37634900000,
+      "revenue_cagr": 0.19891097389116852,
+      "gm_trend": -0.0018419219632959394,
+      "gm_latest": 0.15233201097917093,
+      "opm_trend": 0.003312561563161738,
+      "opm_latest": 0.04237290387379799,
+      "sga_trend": -0.003591313421948905,
+      "gm_series": [
+        0.1542,
+        0.1695,
+        0.1865,
+        0.1828,
+        0.1684,
+        0.1537,
+        0.1523
+      ],
+      "opm_series": [
+        0.0391,
+        0.0528,
+        0.0728,
+        0.0689,
+        0.0545,
+        0.0433,
+        0.0424
+      ],
+      "notes": [],
+      "cik": "0001023128",
+      "ticker": "LAD",
+      "name": "LITHIA MOTORS INC",
+      "flag": "黄",
+      "sic": "5500",
+      "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 2757991000,
+      "revenue_cagr": 0.19471702229014398,
+      "gm_trend": -0.002862300961158165,
+      "gm_latest": 0.12885937626337432,
+      "opm_trend": -5.285342019240025e-05,
+      "opm_latest": 0.08484799261491426,
+      "sga_trend": null,
+      "gm_series": [
+        0.1317,
+        0.1437,
+        0.1442,
+        0.1582,
+        0.1403,
+        0.1006,
+        0.1289
+      ],
+      "opm_series": [
+        0.0849,
+        0.0959,
+        0.0658,
+        0.1192,
+        0.1038,
+        0.0406,
+        0.0848
+      ],
+      "notes": [],
+      "cik": "0000944148",
+      "ticker": "CBZ",
+      "name": "CBIZ, INC.",
+      "flag": "黄",
+      "sic": "7389",
+      "sic_desc": "Services-Business Services, NEC"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
       "revenue_latest": 1082549000,
       "revenue_cagr": 0.18759283964051976,
       "gm_trend": -0.03919329532840138,
@@ -951,6 +803,42 @@
       "flag": "黄",
       "sic": "2891",
       "sic_desc": "Adhesives & Sealants"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 4149537000,
+      "revenue_cagr": 0.17314126372589023,
+      "gm_trend": -0.0008680232013832112,
+      "gm_latest": 0.24197639399287196,
+      "opm_trend": 0.0031398786762287315,
+      "opm_latest": 0.03496920258814417,
+      "sga_trend": -0.0022290484759475426,
+      "gm_series": [
+        0.2428,
+        0.2232,
+        0.2237,
+        0.2367,
+        0.2372,
+        0.2409,
+        0.242
+      ],
+      "opm_series": [
+        0.0318,
+        -0.0924,
+        0.0062,
+        0.0328,
+        0.0294,
+        0.0338,
+        0.035
+      ],
+      "notes": [],
+      "cik": "0001517175",
+      "ticker": "CHEF",
+      "name": "THE CHEFS’ WAREHOUSE, INC.",
+      "flag": "黄",
+      "sic": "5141",
+      "sic_desc": "Wholesale-Groceries, General Line"
     },
     {
       "window": "2019-2025",
@@ -991,6 +879,38 @@
       "sic_desc": "Retail-Variety Stores"
     },
     {
+      "window": "2021-2024",
+      "years": 3,
+      "revenue_latest": 81370000000,
+      "revenue_cagr": 0.16624126507725623,
+      "gm_trend": 0.0015617108289587567,
+      "gm_latest": 0.1839621482118717,
+      "opm_trend": 0.00973862586150634,
+      "opm_latest": 0.0379501044611036,
+      "sga_trend": null,
+      "gm_series": [
+        0.1824,
+        0.1795,
+        0.1828,
+        0.184
+      ],
+      "opm_series": [
+        0.0282,
+        0.0342,
+        0.0398,
+        0.038
+      ],
+      "notes": [
+        "基期异常已丢弃 1 年（COVID 谷底类），窗口改为 2021-2024"
+      ],
+      "cik": "0000096021",
+      "ticker": "SYY",
+      "name": "Sysco Corporation",
+      "flag": "黄",
+      "sic": "5140",
+      "sic_desc": "Wholesale-Groceries & Related Products"
+    },
+    {
       "window": "2020-2025",
       "years": 5,
       "revenue_latest": 22571400000,
@@ -1029,6 +949,80 @@
     {
       "window": "2019-2025",
       "years": 6,
+      "revenue_latest": 5032118000,
+      "revenue_cagr": 0.16272465258776458,
+      "gm_trend": -0.0029033291664209704,
+      "gm_latest": 0.20131523147907104,
+      "opm_trend": 0.02108667641970781,
+      "opm_latest": 0.08451828832312756,
+      "sga_trend": null,
+      "gm_series": [
+        0.2042,
+        0.2187,
+        0.2312,
+        0.2218,
+        0.2068,
+        0.2031,
+        0.2013
+      ],
+      "opm_series": [
+        0.0634,
+        0.0935,
+        0.0991,
+        0.0981,
+        0.0689,
+        0.0846,
+        0.0845
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导"
+      ],
+      "cik": "0001125376",
+      "ticker": "ENSG",
+      "name": "Ensign Group, Inc",
+      "flag": "黄",
+      "sic": "8051",
+      "sic_desc": "Services-Skilled Nursing Care Facilities"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 7574900000,
+      "revenue_cagr": 0.1601698511549654,
+      "gm_trend": 0.0008085272479654848,
+      "gm_latest": 0.10734135104093784,
+      "opm_trend": 0.008973190210272673,
+      "opm_latest": 0.05432414949372269,
+      "sga_trend": -0.008184685451308453,
+      "gm_series": [
+        0.1065,
+        0.106,
+        0.1191,
+        0.1034,
+        0.1028,
+        0.1104,
+        0.1073
+      ],
+      "opm_series": [
+        0.0454,
+        0.047,
+        0.0486,
+        0.0442,
+        0.0443,
+        0.0499,
+        0.0543
+      ],
+      "notes": [],
+      "cik": "0001361538",
+      "ticker": "PRIM",
+      "name": "Primoris Services Corporation",
+      "flag": "黄",
+      "sic": "1623",
+      "sic_desc": "Water, Sewer, Pipeline, Comm & Power Line Construction"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
       "revenue_latest": 7476500000,
       "revenue_cagr": 0.1576647628376069,
       "gm_trend": -0.00637064174766272,
@@ -1061,6 +1055,42 @@
       "flag": "黄",
       "sic": "2510",
       "sic_desc": "Household Furniture"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 1695900000,
+      "revenue_cagr": 0.15614805949138733,
+      "gm_trend": -0.0033322245183237675,
+      "gm_latest": 0.4509699864378796,
+      "opm_trend": 0.017856380829303437,
+      "opm_latest": 0.16445545138274661,
+      "sga_trend": -0.03033982925544254,
+      "gm_series": [
+        0.4543,
+        0.4533,
+        0.4097,
+        0.3632,
+        0.4235,
+        0.4513,
+        0.451
+      ],
+      "opm_series": [
+        0.1466,
+        0.1444,
+        0.1175,
+        0.0836,
+        0.1251,
+        0.1561,
+        0.1645
+      ],
+      "notes": [],
+      "cik": "0001439288",
+      "ticker": "ZWS",
+      "name": "ZURN WATER SOLUTIONS CORPORATION",
+      "flag": "黄",
+      "sic": "3560",
+      "sic_desc": "General Industrial Machinery & Equipment"
     },
     {
       "window": "2019-2025",
@@ -1137,6 +1167,188 @@
       "sic_desc": "Radio & Tv Broadcasting & Communications Equipment"
     },
     {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 4485044000,
+      "revenue_cagr": 0.13885830941294253,
+      "gm_trend": 0.0024112750125282467,
+      "gm_latest": 0.3983158247722876,
+      "opm_trend": 0.0048374874342236585,
+      "opm_latest": 0.22719910886047048,
+      "sga_trend": -0.0024262124216953562,
+      "gm_series": [
+        0.3959,
+        0.3817,
+        0.3899,
+        0.3907,
+        0.3886,
+        0.3893,
+        0.3983
+      ],
+      "opm_series": [
+        0.2224,
+        0.2108,
+        0.2106,
+        0.225,
+        0.2107,
+        0.2137,
+        0.2272
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导"
+      ],
+      "cik": "0000046619",
+      "ticker": "HEI",
+      "name": "HEICO CORPORATION",
+      "flag": "黄",
+      "sic": "3724",
+      "sic_desc": "Aircraft Engines & Engine Parts"
+    },
+    {
+      "window": "2020-2025",
+      "years": 5,
+      "revenue_latest": 1872334000,
+      "revenue_cagr": 0.1285065528891205,
+      "gm_trend": -0.0021661399024923977,
+      "gm_latest": 0.22806935087436322,
+      "opm_trend": -0.12217028341755243,
+      "opm_latest": -0.04563822480390785,
+      "sga_trend": 0.04299489249563129,
+      "gm_series": [
+        0.2302,
+        0.291,
+        0.3173,
+        0.2764,
+        0.2454,
+        0.2281
+      ],
+      "opm_series": [
+        0.0765,
+        0.1212,
+        0.1248,
+        0.0093,
+        0.0366,
+        -0.0456
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导"
+      ],
+      "cik": "0001772921",
+      "ticker": "ONEW",
+      "name": "OneWater Marine Inc.",
+      "flag": "黄",
+      "sic": "5531",
+      "sic_desc": "Retail-Auto & Home Supply Stores"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 3196600000,
+      "revenue_cagr": 0.12331101272262912,
+      "gm_trend": -0.0030899255862196773,
+      "gm_latest": 0.44419070262153537,
+      "opm_trend": -0.007768197632801371,
+      "opm_latest": 0.14262028405180505,
+      "sga_trend": -0.03804161554495292,
+      "gm_series": [
+        0.4473,
+        0.457,
+        0.4609,
+        0.4255,
+        0.425,
+        0.4587,
+        0.4442
+      ],
+      "opm_series": [
+        0.1504,
+        0.2127,
+        0.24,
+        0.1462,
+        0.1417,
+        0.1647,
+        0.1426
+      ],
+      "notes": [],
+      "cik": "0001101302",
+      "ticker": "ENTG",
+      "name": "Entegris, Inc.",
+      "flag": "黄",
+      "sic": "3089",
+      "sic_desc": "Plastics Products, NEC"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 1284141000,
+      "revenue_cagr": 0.12077276023118011,
+      "gm_trend": -0.000199750502967333,
+      "gm_latest": 0.2324923820670783,
+      "opm_trend": -0.1513169543831594,
+      "opm_latest": -0.02257929619878191,
+      "sga_trend": null,
+      "gm_series": [
+        0.2327,
+        0.2324,
+        0.08,
+        0.1299,
+        0.2636,
+        0.325,
+        0.2325
+      ],
+      "opm_series": [
+        0.1287,
+        0.1091,
+        -0.029,
+        -0.0111,
+        0.1358,
+        -0.2479,
+        -0.0226
+      ],
+      "notes": [],
+      "cik": "0001820721",
+      "ticker": "ARRY",
+      "name": "ARRAY TECHNOLOGIES, INC.",
+      "flag": "黄",
+      "sic": "3674",
+      "sic_desc": "Semiconductors & Related Devices"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 4835800000,
+      "revenue_cagr": 0.10847721307368108,
+      "gm_trend": -0.0005128667896565076,
+      "gm_latest": 0.35766574300012405,
+      "opm_trend": -0.038827482114290504,
+      "opm_latest": 0.09255965920840399,
+      "sga_trend": 0.03620111086090855,
+      "gm_series": [
+        0.3582,
+        0.3616,
+        0.3634,
+        0.3474,
+        0.4035,
+        0.3881,
+        0.3577
+      ],
+      "opm_series": [
+        0.1314,
+        0.1625,
+        0.1888,
+        0.1963,
+        0.195,
+        0.1692,
+        0.0926
+      ],
+      "notes": [],
+      "cik": "0001159152",
+      "ticker": "JHX",
+      "name": "JAMES HARDIE INDUSTRIES plc",
+      "flag": "黄",
+      "sic": "3272",
+      "sic_desc": "Concrete Products, Except Block & Brick"
+    },
+    {
       "window": "2019-2024",
       "years": 5,
       "revenue_latest": 21325000000,
@@ -1174,6 +1386,153 @@
     {
       "window": "2019-2025",
       "years": 6,
+      "revenue_latest": 4688759000,
+      "revenue_cagr": 0.10614948330514618,
+      "gm_trend": -0.0048065196295362655,
+      "gm_latest": 0.302701205158977,
+      "opm_trend": -0.07398484573320285,
+      "opm_latest": -0.047284366716224914,
+      "sga_trend": 0.034327669250691584,
+      "gm_series": [
+        0.3075,
+        0.3105,
+        0.3081,
+        0.3052,
+        0.3128,
+        0.3024,
+        0.3027
+      ],
+      "opm_series": [
+        0.0267,
+        0.0343,
+        0.0289,
+        0.0265,
+        0.0317,
+        0.0179,
+        -0.0473
+      ],
+      "notes": [],
+      "cik": "0001771515",
+      "ticker": "GO",
+      "name": "Grocery Outlet Holding Corp.",
+      "flag": "黄",
+      "sic": "5411",
+      "sic_desc": "Retail-Grocery Stores"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 275235000000,
+      "revenue_cagr": 0.10317060651497556,
+      "gm_trend": -0.001342724446277782,
+      "gm_latest": 0.12843206714262356,
+      "opm_trend": 0.006703125103371184,
+      "opm_latest": 0.03772412665540356,
+      "sga_trend": -0.007482664805406852,
+      "gm_series": [
+        0.1298,
+        0.1309,
+        0.1288,
+        0.1215,
+        0.1226,
+        0.1261,
+        0.1284
+      ],
+      "opm_series": [
+        0.031,
+        0.0326,
+        0.0342,
+        0.0343,
+        0.0335,
+        0.0365,
+        0.0377
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导"
+      ],
+      "cik": "0000909832",
+      "ticker": "COST",
+      "name": "COSTCO WHOLESALE CORP /NEW",
+      "flag": "黄",
+      "sic": "5331",
+      "sic_desc": "Retail-Variety Stores"
+    },
+    {
+      "window": "2020-2025",
+      "years": 5,
+      "revenue_latest": 6364245000,
+      "revenue_cagr": 0.10183235751059061,
+      "gm_trend": 0.0011851481373535977,
+      "gm_latest": 0.22493382954301727,
+      "opm_trend": 0.02031789076210247,
+      "opm_latest": 0.06569105997647796,
+      "sga_trend": -0.02639705602512757,
+      "gm_series": [
+        0.2237,
+        0.233,
+        0.2257,
+        0.2216,
+        0.2083,
+        0.2249
+      ],
+      "opm_series": [
+        0.0454,
+        0.0362,
+        0.0443,
+        0.053,
+        0.0634,
+        0.0657
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导",
+        "基期异常已丢弃 1 年（COVID 谷底类），窗口改为 2020-2025"
+      ],
+      "cik": "0000275880",
+      "ticker": "PSN",
+      "name": "PARSONS CORPORATION",
+      "flag": "黄",
+      "sic": "7373",
+      "sic_desc": "Services-Computer Integrated Systems Design"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 2231262000,
+      "revenue_cagr": 0.09902503640792437,
+      "gm_trend": -0.00424029344296778,
+      "gm_latest": 0.36841885892378395,
+      "opm_trend": -0.0655936303395438,
+      "opm_latest": 0.019194966794576343,
+      "sga_trend": 0.06145544524162527,
+      "gm_series": [
+        0.3727,
+        0.3631,
+        0.3734,
+        0.306,
+        0.3275,
+        0.3462,
+        0.3684
+      ],
+      "opm_series": [
+        0.0848,
+        0.0772,
+        0.0936,
+        -0.0188,
+        0.0101,
+        0.018,
+        0.0192
+      ],
+      "notes": [],
+      "cik": "0000883984",
+      "ticker": "ICUI",
+      "name": "ICU MEDICAL INC/DE",
+      "flag": "黄",
+      "sic": "3841",
+      "sic_desc": "Surgical & Medical Instruments & Apparatus"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
       "revenue_latest": 18176581000,
       "revenue_cagr": 0.09662500375692185,
       "gm_trend": -0.014881803356435797,
@@ -1206,6 +1565,80 @@
       "flag": "黄",
       "sic": "3312",
       "sic_desc": "Steel Works, Blast Furnaces & Rolling Mills (Coke Ovens)"
+    },
+    {
+      "window": "2020-2025",
+      "years": 5,
+      "revenue_latest": 3841700000,
+      "revenue_cagr": 0.09279268988561085,
+      "gm_trend": 0.0017106347627693919,
+      "gm_latest": 0.387536767576854,
+      "opm_trend": -0.042698887200144954,
+      "opm_latest": 0.05161777338157587,
+      "sga_trend": 0.04554729823161752,
+      "gm_series": [
+        0.3858,
+        0.3428,
+        0.3499,
+        0.3912,
+        0.3876,
+        0.3875
+      ],
+      "opm_series": [
+        0.0943,
+        0.0101,
+        0.0299,
+        0.0461,
+        0.0138,
+        0.0516
+      ],
+      "notes": [
+        "基期异常已丢弃 1 年（COVID 谷底类），窗口改为 2020-2025"
+      ],
+      "cik": "0000066382",
+      "ticker": "MLKN",
+      "name": "MillerKnoll, Inc.",
+      "flag": "黄",
+      "sic": "2520",
+      "sic_desc": "Office Furniture"
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 21457274000,
+      "revenue_cagr": 0.0844705070425864,
+      "gm_trend": 0.0024227856856195995,
+      "gm_latest": 0.18639935343138184,
+      "opm_trend": 0.011356670799829088,
+      "opm_latest": 0.03805721080879146,
+      "sga_trend": -0.009157273135167843,
+      "gm_series": [
+        0.184,
+        0.1931,
+        0.1847,
+        0.1777,
+        0.1824,
+        0.1836,
+        0.1864
+      ],
+      "opm_series": [
+        0.0267,
+        0.0416,
+        0.037,
+        0.0382,
+        0.0401,
+        0.0377,
+        0.0381
+      ],
+      "notes": [
+        "毛利由 收入−成本 推导"
+      ],
+      "cik": "0001531152",
+      "ticker": "BJ",
+      "name": "BJ’S WHOLESALE CLUB HOLDINGS, INC.",
+      "flag": "黄",
+      "sic": "5331",
+      "sic_desc": "Retail-Variety Stores"
     },
     {
       "window": "2019-2025",
@@ -3417,7 +3850,9 @@
       "cik": "0001820721",
       "ticker": "ARRY",
       "name": "ARRAY TECHNOLOGIES, INC.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "3674",
+      "sic_desc": "Semiconductors & Related Devices"
     },
     {
       "window": "2020-2025",
@@ -4772,7 +5207,9 @@
       "cik": "0001531152",
       "ticker": "BJ",
       "name": "BJ’S WHOLESALE CLUB HOLDINGS, INC.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "5331",
+      "sic_desc": "Retail-Variety Stores"
     },
     {
       "window": "2019-2025",
@@ -5968,7 +6405,7 @@
       "cik": "0000944148",
       "ticker": "CBZ",
       "name": "CBIZ, INC.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "7389",
       "sic_desc": "Services-Business Services, NEC"
     },
@@ -6342,7 +6779,7 @@
       "cik": "0001517175",
       "ticker": "CHEF",
       "name": "THE CHEFS’ WAREHOUSE, INC.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "5141",
       "sic_desc": "Wholesale-Groceries, General Line"
     },
@@ -7197,7 +7634,7 @@
       "cik": "0000909832",
       "ticker": "COST",
       "name": "COSTCO WHOLESALE CORP /NEW",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "5331",
       "sic_desc": "Retail-Variety Stores"
     },
@@ -9815,7 +10252,7 @@
       "cik": "0001125376",
       "ticker": "ENSG",
       "name": "Ensign Group, Inc",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "8051",
       "sic_desc": "Services-Skilled Nursing Care Facilities"
     },
@@ -9851,7 +10288,7 @@
       "cik": "0001101302",
       "ticker": "ENTG",
       "name": "Entegris, Inc.",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "3089",
       "sic_desc": "Plastics Products, NEC"
     },
@@ -12078,7 +12515,9 @@
       "cik": "0001771515",
       "ticker": "GO",
       "name": "Grocery Outlet Holding Corp.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "5411",
+      "sic_desc": "Retail-Grocery Stores"
     },
     {
       "window": "2019-2025",
@@ -12702,7 +13141,9 @@
       "cik": "0000046619",
       "ticker": "HEI",
       "name": "HEICO CORPORATION",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "3724",
+      "sic_desc": "Aircraft Engines & Engine Parts"
     },
     {
       "window": "2019-2025",
@@ -12770,7 +13211,9 @@
       "cik": "0001680873",
       "ticker": "HFFG",
       "name": "HF Foods Group Inc.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "5140",
+      "sic_desc": "Wholesale-Groceries & Related Products"
     },
     {
       "window": "2020-2025",
@@ -13559,7 +14002,9 @@
       "cik": "0000883984",
       "ticker": "ICUI",
       "name": "ICU MEDICAL INC/DE",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "3841",
+      "sic_desc": "Surgical & Medical Instruments & Apparatus"
     },
     {
       "window": "2019-2025",
@@ -14433,7 +14878,9 @@
       "cik": "0001159152",
       "ticker": "JHX",
       "name": "JAMES HARDIE INDUSTRIES plc",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "3272",
+      "sic_desc": "Concrete Products, Except Block & Brick"
     },
     {
       "window": "2019-2025",
@@ -15254,7 +15701,7 @@
       "cik": "0001023128",
       "ticker": "LAD",
       "name": "LITHIA MOTORS INC",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "5500",
       "sic_desc": "Retail-Auto Dealers & Gasoline Stations"
     },
@@ -17140,7 +17587,9 @@
       "cik": "0000066382",
       "ticker": "MLKN",
       "name": "MillerKnoll, Inc.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "2520",
+      "sic_desc": "Office Furniture"
     },
     {
       "window": "2019-2025",
@@ -19383,7 +19832,9 @@
       "cik": "0001772921",
       "ticker": "ONEW",
       "name": "OneWater Marine Inc.",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "5531",
+      "sic_desc": "Retail-Auto & Home Supply Stores"
     },
     {
       "window": "2022-2025",
@@ -20990,7 +21441,9 @@
       "cik": "0001361538",
       "ticker": "PRIM",
       "name": "Primoris Services Corporation",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "1623",
+      "sic_desc": "Water, Sewer, Pipeline, Comm & Power Line Construction"
     },
     {
       "window": "2019-2025",
@@ -21093,7 +21546,9 @@
       "cik": "0000275880",
       "ticker": "PSN",
       "name": "PARSONS CORPORATION",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "7373",
+      "sic_desc": "Services-Computer Integrated Systems Design"
     },
     {
       "window": "2021-2025",
@@ -24344,7 +24799,9 @@
       "cik": "0000096021",
       "ticker": "SYY",
       "name": "Sysco Corporation",
-      "flag": "灰"
+      "flag": "黄",
+      "sic": "5140",
+      "sic_desc": "Wholesale-Groceries & Related Products"
     },
     {
       "window": "2019-2025",
@@ -28493,7 +28950,7 @@
       "cik": "0001439288",
       "ticker": "ZWS",
       "name": "ZURN WATER SOLUTIONS CORPORATION",
-      "flag": "绿",
+      "flag": "黄",
       "sic": "3560",
       "sic_desc": "General Industrial Machinery & Equipment"
     }
