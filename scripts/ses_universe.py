@@ -174,6 +174,14 @@ GM_CEILING = 0.50      # 高于此：非 COGS 主导，换赛道
 GM_FLOOR = 0.02        # 低于此：多为总额法计收入的标记口径问题
 OPM_TREND_CEILING = 0.03   # SES 要求营业利润率稳定，不是扭亏反转
 GM_TREND_FLOOR = -0.08     # 低于此是毛利崩塌，不是让利
+GM_DEAD_BAND = 0.005       # |毛利率变化| < 0.5pct 视为持平（见下）
+
+# ⚠ 2026-08-19 由 CHEF 判别暴露：判别器原先在零点上做符号判断——
+#   毛利率 −0.1pct 判绿、+0.1pct 判灰，而六年 0.1pct 完全在噪音区内。
+#   COST 与 CHEF 的绿灯都是由这种噪音级 gm_trend 触发的。
+#   更重要的是概念问题：**毛利率持平不是"让利"的证据，只是"没有收割"的证据。**
+#   真正的让利证据在 T1（第二条腿）与 T2（自设加价率上限），Phase 0 给不出。
+#   → 持平带内一律判黄（须人工判别），不判绿。
 
 
 def flag(s):
@@ -187,8 +195,11 @@ def flag(s):
         return "灰"         # 营业利润率大幅扩张 = 扭亏或收割，不是让利
     if gm < GM_TREND_FLOOR:
         return "红"         # 毛利崩塌
-    if gm > 0:
+    if gm > GM_DEAD_BAND:
         return "灰"
+    if abs(gm) <= GM_DEAD_BAND:
+        # 持平带：无法区分"主动让利"与"稳定竞争均衡"，交 Phase 2
+        return "黄" if cagr >= 0.08 else "灰"
     if gm <= -0.03 and opm < -0.03 and (sga is None or sga >= 0):
         return "红"
     if cagr >= 0.08 and opm >= -0.01:
