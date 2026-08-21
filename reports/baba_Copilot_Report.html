@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阿里巴巴 FQ1 FY2027 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:25px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.answer{background:var(--ink);color:var(--paper);padding:20px 24px;margin:18px 0;border-left:5px solid var(--gold);}
+.answer .alab{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.answer .atext{font-size:16.5px;font-weight:700;line-height:1.7;}
+.answer .asub{font-size:13.5px;color:#cfc9be;margin-top:8px;line-height:1.7;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+td.num{font-family:'IM Fell English',Georgia,serif;font-weight:700;text-align:right;white-space:nowrap;}
+td.hl{background:rgba(201,168,76,.16)!important;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-note{font-size:12px;color:var(--muted);margin-top:6px;border-top:1px dotted var(--border);padding-top:6px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:29px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:160px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.qa{border-left:3px solid var(--copper);padding:10px 16px;margin:14px 0;background:var(--card);}
+.qa .qq{font-weight:700;font-size:14px;color:var(--ink);}
+.qa .qa-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;font-style:italic;color:var(--copper);letter-spacing:.5px;}
+.qa .aa{font-size:13.5px;color:#3a352f;margin-top:5px;}
+.appendix{border:2px solid var(--ink);padding:22px 24px;margin:38px 0 0;background:var(--card);}
+.appendix .ap-head{border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px;}
+.appendix .ap-zh{font-size:19px;font-weight:700;}
+.appendix .ap-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;}
+.ap-sub{font-weight:700;font-size:14.5px;margin:18px 0 6px;color:var(--copper);}
+.appendix p,.appendix li{font-size:13.3px;color:#3a352f;}
+.appendix ul{margin:6px 0 6px 20px;} .appendix li{margin:5px 0;}
+.feedback{text-align:center;margin:26px 0 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .chart-grid2,.sc-grid{grid-template-columns:1fr;}
+  .title-zh{font-size:24px;} body{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>阿里巴巴集团 Alibaba Group (NYSE: BABA / 9988.HK)</span>
+  <span>FQ1 FY2027 · 2026年6月季 · 财报日 2026-08-20</span>
+  <span>分析日 2026-08-20 · 现价 <b>US$128.90</b></span>
+  <span>单位：人民币（RMB），另注明者除外</span>
+</div>
+
+<!-- 2 双语标题 + 标签 -->
+<div class="title-block">
+  <div class="title-en">Alibaba FQ1 FY2027 — The Profit Drain Changed Hands: Subsidies Out, Compute In</div>
+  <div class="title-zh">阿里六月季：利润侵蚀换了主人<br>补贴退场，算力接手</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性偏多 · 投入期定价</span>
+    <span class="tag amber">语气评分 68 / 100 进攻但兑现期拉长</span>
+    <span class="tag green">营收 +8.6% 微超共识 · 云 +45% 加速</span>
+    <span class="tag red">非GAAP EPS 低于共识 20.5%</span>
+    <span class="tag red">客户管理收入 −7%</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num">¥2,690<span style="font-size:14px">亿</span></div><div class="lab">营收 +8.6%<span class="en">Revenue · beat by 0.2%</span></div></div>
+  <div class="stat"><div class="num red">¥8.52</div><div class="lab">非GAAP EPS · 共识 ¥10.72<span class="en">Missed by 20.5%</span></div></div>
+  <div class="stat"><div class="num green">+45%</div><div class="lab">AI云与算力收入增速<span class="en">Cloud accelerating from 38%</span></div></div>
+  <div class="stat"><div class="num red">−30%</div><div class="lab">经调整 EBITA<span class="en">Adj. EBITA ¥273亿</span></div></div>
+</div>
+
+<!-- 4 答案前置 -->
+<div class="answer">
+  <span class="alab">The Answer</span>
+  <div class="atext">这季最重要的不是利润跌了多少，是<span style="color:var(--gold)">利润侵蚀的性质换了</span>：销售营销费占营收从 21.5% 降到 17.7%、绝对额同比 −10.4%，<strong style="color:#fff">补贴战确实在退潮</strong>；但经调整 EBITA 仍减少 117 亿。<span style="color:var(--gold)">省下的 101 亿补贴，被约 218 亿的技术与算力投入吃掉了。</span></div>
+  <div class="asub">两者性质完全不同：<strong style="color:#fff">补贴是被美团与京东逼出来的防御性支出，算力是主动的战略选择。</strong>市场今天用盘前 −4% 对「EPS 低于共识 20.5%」投票，但这个数字回答的是「今年花多少」，不是「花完之后值多少」。真正该问的是资本开支何时见顶——当季 677 亿、同比 +75%、占营收 25.2%，已把三年 3,800 亿的原始承诺节奏超出 114%。</div>
+</div>
+
+<!-- 5 季度营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">一 · 季度营收走势</span><span class="section-en">Quarterly Revenue Trend</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">近八个季度营收（亿元人民币）· Quarterly Revenue, RMB 100M</div>
+    <svg viewBox="0 0 800 300" font-family="'IM Fell English',Georgia,serif">
+      <line x1="60" y1="250" x2="760" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g fill="#8b6c42">
+        <rect x="70" y="84.3" width="60" height="165.7" opacity="0.45"/>
+        <rect x="155" y="53.9" width="60" height="196.1" opacity="0.45"/>
+        <rect x="240" y="84.1" width="60" height="165.9" opacity="0.45"/>
+        <rect x="325" y="76.1" width="60" height="173.9" opacity="0.75"/>
+        <rect x="410" y="76.0" width="60" height="174.0" opacity="0.75"/>
+        <rect x="495" y="50.0" width="60" height="200.0" opacity="0.75"/>
+        <rect x="580" y="79.1" width="60" height="170.9" opacity="0.75"/>
+      </g>
+      <rect x="665" y="61.1" width="60" height="188.9" fill="#0a0a0b"/>
+      <g font-size="11" fill="#0a0a0b" text-anchor="middle" font-weight="bold">
+        <text x="100" y="78">2,360</text><text x="185" y="47">2,793</text>
+        <text x="270" y="78">2,363</text><text x="355" y="70">2,477</text>
+        <text x="440" y="69">2,478</text><text x="525" y="43">2,848</text>
+        <text x="610" y="72">2,434</text><text x="695" y="54">2,690</text>
+      </g>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="100" y="266">24Q3</text><text x="185" y="266">24Q4</text>
+        <text x="270" y="266">25Q1</text><text x="355" y="266">25Q2</text>
+        <text x="440" y="266">25Q3</text><text x="525" y="266">25Q4</text>
+        <text x="610" y="266">26Q1</text><text x="695" y="266" fill="#0a0a0b" font-weight="bold">26Q2</text>
+      </g>
+      <g font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">
+        <text x="100" y="279">推算</text><text x="185" y="279">推算</text><text x="270" y="279">推算</text>
+        <text x="695" y="279" fill="#8b6c42">本季 +8.6%</text>
+      </g>
+      <text x="200" y="292" font-size="10" fill="#6b6460">前三季由公司披露的同比增速倒算，非直接披露值</text>
+    </svg>
+    <div class="chart-note">季节性明显：12 月季（双十一）为全年峰值。本季 2,690 亿是<strong>非峰值季度里的最高值</strong>，且 +8.6% 的增速是近八个季度最快——但增量主要来自即时零售与云，不是核心电商。</div>
+  </div>
+</div>
+
+<!-- 6 分部营收 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">二 · 分部营收拆分</span><span class="section-en">Revenue by Segment</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">主要分部收入与同比（亿元人民币）· Segment Revenue &amp; YoY</div>
+    <svg viewBox="0 0 800 260" font-family="'IM Fell English',Georgia,serif">
+      <g font-size="12" fill="#0a0a0b" text-anchor="end">
+        <text x="140" y="45">中国快商务</text><text x="140" y="100">AI云与算力</text>
+        <text x="140" y="155">国际电商</text><text x="140" y="210">全球批发</text>
+      </g>
+      <rect x="150" y="28" width="480" height="26" fill="#2a5c3f" opacity="0.8"/>
+      <rect x="150" y="83" width="436" height="26" fill="#2a5c3f" opacity="0.8"/>
+      <rect x="150" y="138" width="250" height="26" fill="#8b2e2e" opacity="0.55"/>
+      <rect x="150" y="193" width="125" height="26" fill="#8b6c42" opacity="0.6"/>
+      <g font-size="12.5" font-weight="bold" fill="#fff">
+        <text x="162" y="46">533 亿</text><text x="162" y="101">484 亿</text>
+        <text x="162" y="156">278 亿</text><text x="162" y="211">139 亿</text>
+      </g>
+      <g font-size="13" font-weight="bold">
+        <text x="642" y="47" fill="#2a5c3f">+45.1%</text>
+        <text x="598" y="102" fill="#2a5c3f">+44.9%</text>
+        <text x="412" y="157" fill="#8b2e2e">−1.5%</text>
+        <text x="287" y="212" fill="#8b6c42">+6.7%</text>
+      </g>
+      <g font-size="9.5" fill="#6b6460">
+        <text x="642" y="60">盒马 + 淘宝闪购</text>
+        <text x="598" y="115">AI 产品 124 亿，第 12 季三位数</text>
+        <text x="412" y="170">唯一负增长分部</text>
+        <text x="287" y="225">跨境增值服务驱动</text>
+      </g>
+    </svg>
+    <div class="chart-note">两个 +45% 的分部合计占营收 <strong>37.8%</strong>，是本季增长的全部来源。但两者性质相反：<strong>云是高毛利、越大越赚；即时零售是补贴驱动、越大越亏</strong>（管理层给出的整体盈利时点是 FY2029）。</div>
+  </div>
+</div>
+
+<!-- 7 EPS + 利润侵蚀拆解 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">三 · EPS 对比与利润侵蚀拆解</span><span class="section-en">EPS vs Consensus &amp; Margin Bridge</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">非GAAP 摊薄 EPS：共识 vs 实际（元/ADS）</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="50" y1="230" x2="360" y2="230" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="90" y="50" width="90" height="180" fill="#8b6c42" opacity="0.45"/>
+        <rect x="230" y="86.9" width="90" height="143.1" fill="#8b2e2e"/>
+        <text x="135" y="42" font-size="19" font-weight="bold" fill="#8b6c42" text-anchor="middle">¥10.72</text>
+        <text x="275" y="79" font-size="19" font-weight="bold" fill="#8b2e2e" text-anchor="middle">¥8.52</text>
+        <text x="135" y="248" font-size="12" fill="#6b6460" text-anchor="middle">市场共识</text>
+        <text x="275" y="248" font-size="12" fill="#0a0a0b" text-anchor="middle" font-weight="bold">实际</text>
+        <text x="205" y="270" font-size="14" font-weight="bold" fill="#8b2e2e" text-anchor="middle">低于共识 20.5%</text>
+      </svg>
+      <div class="chart-note">营收微超 0.2%、EPS 低 20.5% —— <strong>分歧不在收入端，全在成本端。</strong></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">经调整 EBITA 侵蚀成分拆解（亿元）</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="40" y1="250" x2="380" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="55" y="109.5" width="62" height="140.5" fill="#8b6c42" opacity="0.5"/>
+        <rect x="140" y="73.0" width="62" height="36.5" fill="#2a5c3f" opacity="0.75"/>
+        <rect x="225" y="73.0" width="62" height="78.6" fill="#8b2e2e" opacity="0.8"/>
+        <rect x="310" y="151.6" width="62" height="98.4" fill="#0a0a0b"/>
+        <g stroke="#6b6460" stroke-width="1" stroke-dasharray="3,2">
+          <line x1="117" y1="109.5" x2="140" y2="109.5"/>
+          <line x1="202" y1="73.0" x2="225" y2="73.0"/>
+          <line x1="287" y1="151.6" x2="310" y2="151.6"/>
+        </g>
+        <g font-size="11.5" font-weight="bold" text-anchor="middle">
+          <text x="86" y="103" fill="#8b6c42">390</text>
+          <text x="171" y="66" fill="#2a5c3f">+101</text>
+          <text x="256" y="66" fill="#8b2e2e">−218</text>
+          <text x="341" y="145" fill="#0a0a0b">273</text>
+        </g>
+        <g font-size="9.5" fill="#6b6460" text-anchor="middle">
+          <text x="86" y="264">去年同期</text>
+          <text x="171" y="264">补贴节省</text>
+          <text x="256" y="264">技术投入</text>
+          <text x="341" y="264" fill="#0a0a0b" font-weight="bold">本季</text>
+        </g>
+      </svg>
+      <div class="chart-note">「补贴节省」＝ 按去年 21.5% 的销售费用率折算后的相对节省额。<strong>本季这张图就是整份财报。</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">四 · 核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">补贴战确实在退潮，这是本季第一个真实的好消息。</span>
+    <span class="label-en">The subsidy war is receding — the first genuinely good news this quarter.</span>
+    <p>销售营销费用 <strong>476.25 亿</strong>，占营收 <strong>17.7%</strong>，去年同期 531.78 亿、占比 21.5%。<strong>绝对额同比下降 10.4%，而营收增长 8.6%</strong>——这是两年来第一次出现「收入涨、营销费降」的组合。按去年比例折算，本季相对节省约 <strong>101 亿元</strong> <span class="badge badge-predict">推算</span>。淘宝闪购日均单量维持在 6,000 万单量级，说明份额是在补贴退坡下守住的，不是靠继续加码换来的。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">但省下的钱没落进利润，全部转投算力——这才是 EBITA 仍跌 30% 的真因。</span>
+    <span class="label-en">The savings went straight into compute, not into earnings.</span>
+    <p>经调整 EBITA <strong>273.29 亿</strong>，同比 −30%，减少约 117 亿。省下 101 亿却仍少赚 117 亿，缺口 <strong>约 218 亿</strong>就是技术与算力投入的净增量 <span class="badge badge-predict">倒算</span>。当季资本开支 <strong>676.78 亿</strong>、同比 <strong>+75%</strong>、占营收 <strong>25.2%</strong>——年化 2,707 亿，已把「三年 3,800 亿」的原始承诺节奏超出 <strong>114%</strong>。CEO 吴泳铭称阿里云未来持有的算力中心资产将是 2022 年的 <strong>十倍以上</strong>。<strong>这不是超支，是公开的战略换挡。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">云的加速是真的，而且在加速的加速：26% → 36% → 38% → 45%。</span>
+    <span class="label-en">Cloud is not just growing — the growth rate itself is accelerating.</span>
+    <p>AI 云与算力服务收入 <strong>484.37 亿</strong>，同比 <strong>+45%</strong>，其中 AI 相关产品收入 <strong>124 亿</strong>，<strong>连续第 12 个季度三位数增长</strong>。增速轨迹从去年同期的 26% 一路走到 45%，<strong>四个季度里没有一次回落</strong>。对一个已经年化近 1,940 亿收入的业务，增速还在抬升，这是本季最难得的信号——它意味着算力投入正在转化为收入，而不只是转化为折旧。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">最该担心的数字是客户管理收入 −7%，核心电商的变现在萎缩。</span>
+    <span class="label-en">The number that should worry you is CMR at −7%.</span>
+    <p>客户管理收入（CMR，即电商广告与佣金）同比 <strong>−7%</strong>，公司称剔除新业务扶持计划影响后的可比口径为 <strong>+1%</strong>。即便完全采信可比口径，<strong>+1% 的核心变现增速配 +8.6% 的总营收增速，含义是清楚的：增长完全由低毛利的即时零售与高投入的云驱动，现金牛本身在原地踏步。</strong>阿里电商集团经调整 EBITA 397.49 亿、同比 −1%，基本持平——电商本体守住了，但没有向上的动能。</p>
+  </div>
+</div>
+
+<!-- 9 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五 · 目标价三情景</span><span class="section-en">Three Scenarios · 12-Month Targets</span></div>
+
+  <div class="para">
+    <span class="label-zh">用分部估值，不用整体市盈率——一家云在 +45%、电商在 −1% 的公司，套一个 P/E 没有意义。</span>
+    <span class="label-en">Sum-of-the-parts, not a blended P/E.</span>
+    <p>市值 <strong>2,954.6 亿美元 ≈ 20,047 亿元</strong>。云按年化收入 1,938 亿给 P/S，电商按年化经调整 EBITA 1,590 亿给倍数。<strong>现价隐含的组合是：若电商按 8× EBITA，云只被给了 3.8× P/S</strong>——对一个 +45% 且在加速的云业务，这是明显偏低的定价 <span class="badge badge-predict">分析师判断</span>。</p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">目标价区间与现价位置 · Target Range vs Spot (US$)</div>
+    <svg viewBox="0 0 800 190" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="110" x2="740" y2="110" stroke="#d4cec6" stroke-width="10"/>
+      <line x1="131.4" y1="110" x2="706.5" y2="110" stroke="#8b6c42" stroke-width="10" opacity="0.35"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="140">$100</text><text x="349.2" y="140">$150</text>
+        <text x="628.3" y="140">$200</text><text x="740" y="140">$220</text>
+      </g>
+      <line x1="131.4" y1="96" x2="131.4" y2="124" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="131.4" y="88" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="bold">$111</text>
+      <text x="131.4" y="162" font-size="10.5" fill="#8b2e2e" text-anchor="middle">熊 −13.8% · 25%</text>
+      <line x1="388.3" y1="96" x2="388.3" y2="124" stroke="#8b6c42" stroke-width="3"/>
+      <text x="388.3" y="88" font-size="12" fill="#8b6c42" text-anchor="middle" font-weight="bold">$157</text>
+      <text x="388.3" y="162" font-size="10.5" fill="#8b6c42" text-anchor="middle">基准 +21.4% · 45%</text>
+      <line x1="706.5" y1="96" x2="706.5" y2="124" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="706.5" y="88" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="bold">$214</text>
+      <text x="706.5" y="162" font-size="10.5" fill="#2a5c3f" text-anchor="middle">牛 +66.3% · 30%</text>
+      <line x1="231.4" y1="110" x2="231.4" y2="52" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="231.4,108 225,96 238,96" fill="#0a0a0b"/>
+      <text x="231.4" y="44" font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">现价 $128.90</text>
+      <text x="231.4" y="30" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">52周区间 $91.99 – $192.67</text>
+    </svg>
+    <div class="chart-note">概率加权期望回报 <strong>+26.1%</strong>。现价距 52 周高点 $192.67 仍有 <strong>33%</strong> 的距离，距低点 $91.99 高 40%。</div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市</b></div>
+      <div class="sp">$111</div>
+      <div class="schg">−13.8% ｜ 概率 25%</div>
+      <div class="slogic">云 4× P/S ＋ 电商 6× EBITA。<strong>触发：云增速回落至 30% 以下、CMR 连续两季负增长、资本开支继续超预期而收入端无对应兑现。</strong>市场把 AI 投入重新定价为「无回报的资本消耗」。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准</b></div>
+      <div class="sp">$157</div>
+      <div class="schg">+21.4% ｜ 概率 45%</div>
+      <div class="slogic">云 6× P/S ＋ 电商 8× EBITA。<strong>路径：云维持 40%+、CMR 可比口径转正并逐季修复、即时零售亏损按管理层节奏继续收窄。</strong>资本开支在 FY2027 内见顶但不下降。</div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市</b></div>
+      <div class="sp">$214</div>
+      <div class="schg">+66.3% ｜ 概率 30%</div>
+      <div class="slogic">云 9× P/S ＋ 电商 10× EBITA。<strong>触发：云加速至 50%+、AI 产品收入形成独立可披露的变现曲线、资本开支明确见顶。</strong>市场开始按「中国的 AI 云龙头」而非「增长停滞的电商」给估值。</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="text-align:right">熊市</th><th style="text-align:right">基准</th><th style="text-align:right">牛市</th></tr>
+    <tr><td class="k">云收入增速（未来四季）</td><td class="num">回落至 30%</td><td class="num">维持 40%+</td><td class="num">加速至 50%+</td></tr>
+    <tr><td class="k">云 P/S 倍数</td><td class="num">4.0×</td><td class="num">6.0×</td><td class="num">9.0×</td></tr>
+    <tr><td class="k">客户管理收入（CMR）</td><td class="num">持续负增长</td><td class="num">可比口径转正</td><td class="num">恢复正增长</td></tr>
+    <tr><td class="k">电商经调整 EBITA 倍数</td><td class="num">6.0×</td><td class="num">8.0×</td><td class="num">10.0×</td></tr>
+    <tr><td class="k hl">目标价（US$）</td><td class="num hl">$111</td><td class="num hl">$157</td><td class="num hl">$214</td></tr>
+    <tr><td class="k">较现价 $128.90</td><td class="num" style="color:var(--red)">−13.8%</td><td class="num" style="color:var(--green)">+21.4%</td><td class="num" style="color:var(--green)">+66.3%</td></tr>
+    <tr><td class="k hl">概率加权期望</td><td class="num hl" colspan="3" style="text-align:center;color:var(--green)">+26.1%</td></tr>
+  </table>
+</div>
+
+<!-- 10 Verdict Box -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — Priced for the Cost, Not for the Destination.</div>
+  <div class="verdict-zh">裁决：中性偏多 · 处于投入期定价</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>补贴退潮是真的，但它没有变成利润。</strong>销售营销费占比 21.5% → 17.7%、绝对额 −10.4%，相对省下约 101 亿；经调整 EBITA 仍减少 117 亿。<strong>约 218 亿的差额是技术与算力投入。</strong><span class="v-src">推算自公司披露的费用率与 EBITA 同比</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>侵蚀性质的切换比幅度重要。</strong>补贴是被对手逼出来的防御性支出，算力是主动选择。前者的天花板由竞争决定，后者的天花板由管理层决定——<strong>后者可以被叫停，前者不能。</strong><span class="v-src">分析师判断</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>云的增速在加速的加速：26% → 36% → 38% → 45%，四季无回落。</strong>年化近 1,940 亿的体量上增速还在抬升，说明算力投入正在转成收入而不只是折旧。AI 产品收入 124 亿，第 12 个季度三位数。<span class="v-src">公司披露</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>最该盯的风险是 CMR −7%。</strong>即使采信可比口径 +1%，核心电商变现也只是原地踏步。<strong>全部增长来自低毛利的即时零售与高投入的云——现金牛不再供血，投入就必须靠资产负债表撑。</strong><span class="v-src">公司披露 · 可比口径为公司调整值</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>现价隐含云只值 3.8× P/S（若电商按 8× EBITA）。</strong>对一个 +45% 且在加速的云业务，这是偏低的定价。加权期望 +26.1%，但左尾真实存在：熊市 −13.8% 的触发条件（云降速 + CMR 续负）并非小概率。<span class="v-src">分部估值反推</span></div></div>
+</div>
+
+<!-- 11 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">六 · 管理层语气</span><span class="section-en">Management Tone Score</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">综合语气评分</span><div class="tone-bar"><div class="tone-fill amber" style="width:68%"></div></div><span class="tone-val">68</span></div>
+    <div class="tone-row"><span class="tone-lab">战略清晰度</span><div class="tone-bar"><div class="tone-fill green" style="width:85%"></div></div><span class="tone-val">85</span></div>
+    <div class="tone-row"><span class="tone-lab">短期能见度</span><div class="tone-bar"><div class="tone-fill red" style="width:45%"></div></div><span class="tone-val">45</span></div>
+    <div class="tone-row"><span class="tone-lab">财务健康度</span><div class="tone-bar"><div class="tone-fill amber" style="width:62%"></div></div><span class="tone-val">62</span></div>
+  </div>
+  <div class="notice">
+    <div class="nt">68 分 = 进攻性表述，但兑现期被主动拉长</div>
+    <strong>战略清晰度 85</strong>：AI 优先的路径没有含糊，资本开支承诺被主动超越而非被动超支，CEO 公开给出「算力资产十倍于 2022 年」的量化目标。<br>
+    <strong>短期能见度 45（最低项）</strong>：即时零售整体盈利时点给到 <strong>FY2029</strong>——还有三年；资本开支未给见顶时点。<strong>管理层在要求市场用三年的耐心换一个尚未证明的终局。</strong><br>
+    <strong>财务健康度 62</strong>：电商经调整 EBITA 397 亿仅 −1%、现金牛未失血，但资本开支占营收 25.2%、自由现金流承压。
+  </div>
+</div>
+
+<!-- 12 核心主题 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">七 · 核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">云增速四季连升 26%→45%</span>
+    <span class="chip pos">AI 产品第 12 季三位数增长</span>
+    <span class="chip pos">销售费用率 21.5%→17.7%</span>
+    <span class="chip pos">电商 EBITA 仅 −1%，本体守住</span>
+    <span class="chip neu">资本开支 +75%、占营收 25.2%</span>
+    <span class="chip neu">即时零售 +45% 但 FY2029 才盈利</span>
+    <span class="chip neu">千问 App 与淘天深度整合</span>
+    <span class="chip neg">客户管理收入 −7%</span>
+    <span class="chip neg">非GAAP EPS 低于共识 20.5%</span>
+    <span class="chip neg">国际电商 −1.5%，唯一负增长分部</span>
+    <span class="chip neg">经调 EBITDA 利润率 16%→10%</span>
+  </div>
+</div>
+
+<!-- 13 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">八 · 风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <tr><th>风险</th><th>可能性</th><th>影响</th><th>观测信号</th></tr>
+    <tr><td class="k">CMR 持续负增长<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Core monetization stalls</span></td><td>中高</td><td>高</td><td>下季 CMR 可比口径能否转正。<strong>这是熊市情景的第一触发器</strong></td></tr>
+    <tr><td class="k">资本开支不见顶<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Capex has no ceiling</span></td><td>中高</td><td>高</td><td>年化已 2,707 亿、超原承诺节奏 114%。管理层是否给出见顶指引</td></tr>
+    <tr><td class="k">云增速回落<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Cloud decelerates</span></td><td>中低</td><td>极高</td><td>四季连升后的首次回落。<strong>云是整个多头逻辑的唯一支点</strong></td></tr>
+    <tr><td class="k">即时零售价格战重燃<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Subsidy war restarts</span></td><td>中</td><td>中高</td><td>销售费用率是否重回 20%+。美团/京东的补贴动作</td></tr>
+    <tr><td class="k">芯片供应与国产化配额<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Chip supply constraint</span></td><td>中</td><td>中高</td><td>资本开支约一半用于芯片采购，国产芯配额约 300 亿 <span class="badge badge-predict">媒体口径</span></td></tr>
+    <tr><td class="k">国际电商持续收缩<br><span style="font-weight:400;font-style:italic;color:var(--muted)">International shrinks</span></td><td>中</td><td>中低</td><td>占营收仅 10.3%，影响有限但方向不佳</td></tr>
+  </table>
+</div>
+
+<!-- 14 分析师应问清单 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">九 · 电话会应问清单</span><span class="section-en">Questions That Should Be Asked</span></div>
+  <div class="qa">
+    <div class="qq">资本开支的见顶时点</div>
+    <div class="qa-en">When does capex peak — not when does it slow, when does it peak?</div>
+    <div class="aa">当季 677 亿、年化 2,707 亿，已超「三年 3,800 亿」原始节奏 114%。<strong>管理层至今只给了投入的下限（十倍算力资产），没给上限。</strong>没有见顶时点，熊市情景就无法被证伪。</div>
+  </div>
+  <div class="qa">
+    <div class="qq">CMR 的「可比口径」到底剔除了什么</div>
+    <div class="qa-en">What exactly does the "like-for-like" adjustment remove?</div>
+    <div class="aa">披露口径 −7%、可比口径 +1%，中间 8 个百分点的差额来自「新业务发展计划」。<strong>这个计划是一次性的还是长期的，决定了 CMR 究竟是在萎缩还是在换血。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">AI 产品收入 124 亿的构成</div>
+    <div class="qa-en">Break down the RMB 12.4bn of AI product revenue.</div>
+    <div class="aa">连续 12 季三位数增长是最有力的多头论据，但基数从何而来、其中多少是集团内部调用、多少是外部付费客户，公司未拆分。<strong>这是牛市情景能否成立的核心验证点。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">即时零售 FY2029 盈利的中间路标</div>
+    <div class="qa-en">What are the milestones between now and FY2029 breakeven?</div>
+    <div class="aa">三年是很长的耐心要求。<strong>单均亏损、日均单量、履约成本三条曲线的季度路标，比一个终点年份有用得多。</strong></div>
+  </div>
+</div>
+
+<!-- 分析师附注 -->
+<div class="appendix">
+  <div class="ap-head">
+    <span class="ap-en">Analyst's Notes — Sources, Gaps, Method, and My Own View</span>
+    <div class="ap-zh">分析师附注</div>
+  </div>
+
+  <div class="ap-sub">数据来源与置信度</div>
+  <table>
+    <tr><th>项目</th><th>置信</th><th>来源</th></tr>
+    <tr><td>营收 2,689.53 亿、EBITA 273.29 亿、净利 104.44 亿、非GAAP净利 207.15 亿</td><td class="k">高</td><td>公司 2026-08-20 业绩公告</td></tr>
+    <tr><td>分部收入（云 484.37 / 快商务 532.95 / 国际 277.61 / 批发 139.06 亿）</td><td class="k">高</td><td>公司业绩公告</td></tr>
+    <tr><td>销售营销费 476.25 亿、占营收 17.7%；资本开支 676.78 亿 +75%</td><td class="k">高</td><td>公司业绩公告</td></tr>
+    <tr><td>非GAAP EPS ¥8.52 vs 共识 ¥10.72；营收共识 2,683.4 亿</td><td class="k">中高</td><td>第三方汇总，非公司披露</td></tr>
+    <tr><td>近八季营收中前三季（24Q3/24Q4/25Q1）</td><td class="k">中</td><td><strong>由公司披露的同比增速倒算，非直接披露值</strong></td></tr>
+    <tr><td>资本开支约一半用于芯片、国产芯配额约 300 亿</td><td class="k">中低</td><td>媒体口径，公司未确认</td></tr>
+    <tr><td>三情景概率 25/45/30</td><td class="k">中低</td><td>主观赋权，未经历史频率校准</td></tr>
+  </table>
+
+  <div class="ap-sub">推算明细</div>
+  <ul>
+    <li><strong>去年同期 EBITA 390.4 亿</strong>＝ 273.29 ÷ (1 − 30%)。公司只披露同比降幅，未直接给去年同期值。</li>
+    <li><strong>补贴相对节省 101 亿</strong>＝ 本季营收 2,689.53 × 去年销售费用率 21.5% − 实际 476.25 亿。<strong>这是「若维持去年费用强度」的反事实，不是公司披露的节省额。</strong></li>
+    <li><strong>技术投入净增量约 218 亿</strong>＝ 101（节省）＋ 117（EBITA 减少）。<strong>严格说这是「除销售费用外所有成本项的净增量」，公司并未单独披露技术投入金额，把它全部归因于技术与算力是我的判断。</strong>其中可能混入折旧、人力与其他费用。</li>
+    <li><strong>市值 20,047 亿元</strong>＝ 2,954.6 亿美元 × 6.785。汇率取近似值，未做精确时点换算。</li>
+  </ul>
+
+  <div class="ap-sub">方法与口径限制</div>
+  <ul>
+    <li><strong>阿里不披露毛利率</strong>，故本报告以「经调整 EBITA 侵蚀成分拆解」替代模板要求的毛利率折线图。这是口径替代，不是数据缺失。</li>
+    <li><strong>分部估值把「云」与「电商」两块相加，忽略了国际电商、菜鸟、大文娱与净现金。</strong>这些项合计对估值有实质影响，本模型未计入——因此三个目标价都偏保守，但保守的幅度未量化。</li>
+    <li>云用 P/S、电商用 EBITA 倍数，两个口径不可直接比较；合并相加是简化处理。</li>
+    <li><strong>本报告未使用财报电话会逐字记录</strong>，管理层表述均来自公司公告与二手转述。语气评分因此比有实录时的可靠性低一档。</li>
+    <li>一处二手源冲突：某汇总站称「EPS 低于共识约 89%、营收未达预期约 1.5%」，与本报告采用的「EPS 低 20.5%、营收超 0.2%」严重不符。<strong>本报告采用后者</strong>，因为 ¥8.52 与非GAAP净利 207.15 亿、约 23.8 亿股 ADS 的关系可自洽核算，前者无法对账。</li>
+  </ul>
+
+  <div class="ap-sub">我的独立看法与分歧点</div>
+  <ul>
+    <li><strong>我认为市场今天定价的是错误的问题。</strong>盘前 −4% 回应的是「EPS 低于共识 20.5%」，而这个数字回答的是「今年花多少」。真正决定三年后估值的是「资本开支何时见顶」与「云增速能否守住 40%」——这两个问题今天的财报<strong>都没有回答</strong>。</li>
+    <li><strong>但我不认为「投入必有回报」是可以默认的。</strong>云增速四季连升确实是强证据，然而 AI 产品收入 124 亿的内部/外部构成未拆分。<strong>如果其中相当一部分是集团内部调用，那么「投入转化为收入」就是左手倒右手。</strong>这是我在牛市情景上没有给更高概率的原因。</li>
+    <li><strong>CMR −7% 比 EPS 低于共识严重得多，但市场今天几乎没有讨论它。</strong>核心电商是这一切投入的资金来源。现金牛只要还在增长，投入期就是可承受的；一旦现金牛掉头，投入就变成了对资产负债表的透支。<strong>下季 CMR 是我唯一会重点看的数字。</strong></li>
+    <li><strong>一个我答不了但很重要的问题：即时零售在 FY2029 盈利的前提，是价格战在此之前结束。</strong>而这不由阿里单方面决定。管理层给了终点年份却给不了对手的行为假设——这个时间表的可信度因此低于它看起来的样子。</li>
+    <li><strong>关于「补贴换算力」这个切换，我的判断偏正面但有保留。</strong>正面在于：算力投入的节奏由管理层控制，可以叫停；补贴的节奏由对手控制，不能。保留在于：算力资产一旦建成就是固定成本，折旧会在未来若干年持续压制利润表——<strong>叫停投入不等于叫停折旧。</strong></li>
+  </ul>
+
+  <div class="ap-sub">待核实项</div>
+  <ul>
+    <li>财报电话会逐字记录（本报告未取得），特别是资本开支见顶指引与 CMR 可比口径的具体调整项</li>
+    <li>AI 产品收入 124 亿的内部/外部客户拆分 <span class="badge badge-gap">缺口</span></li>
+    <li>本季经调整 EBITDA 利润率 16%→10% 的口径（EBITDA 与 EBITA 两个指标在不同来源中被混用）</li>
+    <li>菜鸟、大文娱、其他分部的本季数据与净现金头寸，未纳入分部估值</li>
+    <li><strong>市场当日反应：本报告写于美股盘中，按纪律不对「市场怎么看」下结论。</strong>盘前 −4% 仅作为事实记录</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  对这份分析有异议或想调整假设？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=baba_fq1fy2027">点此反馈 · Send Feedback</a>
+</div>
+
+<div class="footer">
+  Earnings Copilot · Earner ｜ 阿里巴巴集团 FQ1 FY2027（2026年6月季）｜ 生成于 2026-08-20<br>
+  现价 US$128.90 ｜ 市值 US$295.46B ｜ 52 周区间 US$91.99 – US$192.67 ｜ 汇率按 USD/CNY 6.785 近似换算<br>
+  本报告为研究分析，不构成投资建议。所有带「推算」「分析师判断」标记的数字均为估算，非公司披露。
+</div>
+
+</body>
+</html>
