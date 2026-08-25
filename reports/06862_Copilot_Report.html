@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海底捞 2026 中期业绩分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+  --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;--muted:#6b6460;--border:#d4cec6;--card:#faf8f4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;border-bottom:1px solid var(--border);
+  padding:16px 0 10px;font-size:12px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:25px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.answer{background:var(--ink);color:var(--paper);padding:20px 24px;margin:18px 0;border-left:5px solid var(--gold);}
+.answer .alab{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.answer .atext{font-size:16.5px;font-weight:700;line-height:1.7;}
+.answer .asub{font-size:13.5px;color:#cfc9be;margin-top:8px;line-height:1.7;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+td.num{font-family:'IM Fell English',Georgia,serif;font-weight:700;text-align:right;white-space:nowrap;}
+td.hl{background:rgba(201,168,76,.16)!important;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-note{font-size:12px;color:var(--muted);margin-top:6px;border-top:1px dotted var(--border);padding-top:6px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:28px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:160px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.qa{border-left:3px solid var(--copper);padding:10px 16px;margin:14px 0;background:var(--card);}
+.qa .qq{font-weight:700;font-size:14px;color:var(--ink);}
+.qa .qa-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;font-style:italic;color:var(--copper);letter-spacing:.5px;}
+.qa .aa{font-size:13.5px;color:#3a352f;margin-top:5px;}
+.appendix{border:2px solid var(--ink);padding:22px 24px;margin:38px 0 0;background:var(--card);}
+.appendix .ap-head{border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px;}
+.appendix .ap-zh{font-size:19px;font-weight:700;}
+.appendix .ap-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;}
+.ap-sub{font-weight:700;font-size:14.5px;margin:18px 0 6px;color:var(--copper);}
+.appendix p,.appendix li{font-size:13.3px;color:#3a352f;}
+.appendix ul{margin:6px 0 6px 20px;} .appendix li{margin:5px 0;}
+.feedback{text-align:center;margin:26px 0 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){.stat-bar{grid-template-columns:repeat(2,1fr);}.chart-grid2,.sc-grid{grid-template-columns:1fr;}.title-zh{font-size:24px;}body{font-size:14px;}}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>海底捞国际控股 Haidilao (6862.HK)</span>
+  <span>2026 中期业绩 · 截至 2026-06-30 止六个月 · 公告日 2026-08-25</span>
+  <span>分析日 2026-08-25 · 现价 <b>HK$13.07</b></span>
+  <span>单位：人民币，另注明者除外</span>
+</div>
+
+<!-- 2 标题 + 标签 -->
+<div class="title-block">
+  <div class="title-en">Haidilao 1H26 — Revenue Up 7.9%, Core Brand Down 4.0%. The Margin Held on a One-Off Depreciation Windfall.</div>
+  <div class="title-zh">海底捞中期：营收涨 7.9%，主品牌跌 4.0%<br>利润率是靠一笔一次性折旧红利撑住的</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性 · 结构性改善，主业未止跌</span>
+    <span class="tag amber">语气评分 62 / 100 稳健但缺增长叙事</span>
+    <span class="tag green">营收 +7.9% · 中期股息 0.377 港元</span>
+    <span class="tag red">主品牌餐厅经营 −4.0%</span>
+    <span class="tag red">同店销售额 −1.3% · 客流 −3.1%</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num">¥223.4<span style="font-size:14px">亿</span></div><div class="lab">营业收入 +7.9%<span class="en">Revenue</span></div></div>
+  <div class="stat"><div class="num red">−4.0%</div><div class="lab">海底捞餐厅经营收入<span class="en">Core brand shrinking</span></div></div>
+  <div class="stat"><div class="num amber">3.9</div><div class="lab">整体翻台率（同店 3.9 持平）<span class="en">Table turnover, flat like-for-like</span></div></div>
+  <div class="stat"><div class="num amber">104%</div><div class="lab">中期派息率（超过当期盈利）<span class="en">Payout above 1H earnings</span></div></div>
+</div>
+
+<!-- 4 答案前置 -->
+<div class="answer">
+  <span class="alab">The Answer</span>
+  <div class="atext">这份财报有三处「看起来在改善、实际不是」，而且它们互相咬合：<span style="color:var(--gold)">营收 +7.9% 的增量全部来自主品牌之外，主品牌自身 −4.0%；整体翻台率 3.8→3.9 的提升来自新店，同店翻台率其实持平且同店销售额 −1.3%；核心经营利润率看似稳住，实际靠折旧摊销占比骤降 1.5 个百分点这笔一次性红利撑着。</span></div>
+  <div class="asub">拆开看：人工与折旧合计给了约 <strong style="color:#fff">3.5 个百分点</strong>的顺风，但核心经营利润率仍从 11.63% 降到 <strong style="color:#fff">11.25%</strong>——意味着经营层面被吃掉了约 3.9 个百分点。公司对折旧下降的口径解释是「部分餐厅物业、厂房及设备已于前期提足折旧及摊销」，<strong style="color:#fff">这是一次性的，且不可续。</strong>与此同时中期股息每股 0.377 港元、派息率约 104%——在净利润仅 +0.5% 的半年里派出超过当期盈利的现金。</div>
+</div>
+
+<!-- 5 半年营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">一 · 半年度营收走势</span><span class="section-en">Half-Yearly Revenue Trend</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">近五个半年度营业收入（亿元人民币）· Half-Yearly Revenue, RMB 100M</div>
+    <svg viewBox="0 0 800 300" font-family="'IM Fell English',Georgia,serif">
+      <line x1="80" y1="250" x2="740" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g fill="#8b6c42">
+        <rect x="110" y="59.2" width="80" height="190.8" opacity="0.42"/>
+        <rect x="230" y="61.2" width="80" height="188.8" opacity="0.42"/>
+        <rect x="350" y="66.2" width="80" height="183.8" opacity="0.62"/>
+        <rect x="470" y="50.0" width="80" height="200.0" opacity="0.62"/>
+      </g>
+      <rect x="590" y="51.6" width="80" height="198.4" fill="#0a0a0b"/>
+      <g font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">
+        <text x="150" y="52">214.9</text><text x="270" y="54">212.6</text>
+        <text x="390" y="59">207.0</text><text x="510" y="43">225.2</text>
+        <text x="630" y="45">223.4</text>
+      </g>
+      <g font-size="11" fill="#6b6460" text-anchor="middle">
+        <text x="150" y="268">2024 H1</text><text x="270" y="268">2024 H2</text>
+        <text x="390" y="268">2025 H1</text><text x="510" y="268">2025 H2</text>
+        <text x="630" y="268" fill="#0a0a0b" font-weight="bold">2026 H1</text>
+      </g>
+      <g font-size="10.5" text-anchor="middle">
+        <text x="390" y="284" fill="#8b2e2e">−3.7%</text>
+        <text x="510" y="284" fill="#2a5c3f">+5.9%</text>
+        <text x="630" y="284" fill="#2a5c3f" font-weight="bold">+7.9%</text>
+      </g>
+      <g font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">
+        <text x="270" y="284">推算</text>
+      </g>
+    </svg>
+    <div class="chart-note">2024 H2 由 2024 全年（427.6 亿，倒算自 2025 全年与同比）减 2024 H1 得出。<strong>连续三个半年度的同比：−3.7% → +5.9% → +7.9%，趋势线是清楚向上的</strong>——问题在这个增长的构成，见下一节。</div>
+  </div>
+</div>
+
+<!-- 6 分部增量拆解 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">二 · 增长从哪里来</span><span class="section-en">Where the Growth Came From</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">各分部对营收增量的贡献（百万元人民币）· Contribution to Revenue Change</div>
+    <svg viewBox="0 0 800 300" font-family="'IM Fell English',Georgia,serif">
+      <line x1="400" y1="30" x2="400" y2="265" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g font-size="12" fill="#0a0a0b" text-anchor="end">
+        <text x="392" y="55">外卖业务</text><text x="392" y="95">其他餐厅经营</text>
+        <text x="392" y="135">调味品及食材</text><text x="392" y="175">加盟业务</text>
+      </g>
+      <g font-size="12" fill="#0a0a0b" text-anchor="start">
+        <text x="408" y="215">海底捞餐厅经营</text><text x="408" y="252">其他</text>
+      </g>
+      <rect x="400" y="40" width="280" height="24" fill="#2a5c3f" opacity="0.82"/>
+      <rect x="400" y="80" width="168.2" height="24" fill="#2a5c3f" opacity="0.7"/>
+      <rect x="400" y="120" width="109.3" height="24" fill="#2a5c3f" opacity="0.6"/>
+      <rect x="400" y="160" width="40.7" height="24" fill="#2a5c3f" opacity="0.5"/>
+      <rect x="214.7" y="200" width="185.3" height="24" fill="#8b2e2e"/>
+      <rect x="394.1" y="238" width="5.9" height="18" fill="#8b2e2e" opacity="0.6"/>
+      <g font-size="12.5" font-weight="bold">
+        <text x="690" y="57" fill="#2a5c3f">+1,124</text>
+        <text x="578" y="97" fill="#2a5c3f">+675</text>
+        <text x="519" y="137" fill="#2a5c3f">+438</text>
+        <text x="451" y="177" fill="#2a5c3f">+163</text>
+        <text x="204" y="217" fill="#8b2e2e" text-anchor="end">−743</text>
+        <text x="386" y="253" fill="#8b2e2e" text-anchor="end">−24</text>
+      </g>
+      <g font-size="10" fill="#6b6460">
+        <text x="690" y="70">+121.2%</text><text x="578" y="110">+113.1%</text>
+        <text x="519" y="150">+94.6%</text><text x="451" y="190">+179.9%</text>
+        <text x="204" y="230" text-anchor="end">−4.0%</text>
+      </g>
+      <text x="400" y="288" font-size="11.5" fill="#8b6c42" text-anchor="middle" font-weight="bold">净增 +1,634 百万元 ＝ 总营收 +7.9%</text>
+    </svg>
+    <div class="chart-note"><strong>主品牌餐厅经营收入减少 743 百万元，而外卖、其他餐厅、调味品、加盟合计增加 2,400 百万元。</strong>换句话说：这 +7.9% 里，没有一分来自主品牌本身——主品牌是净拖累项，被四条新业务线抬了起来。</div>
+  </div>
+</div>
+
+<!-- 7 整体 vs 同店 + 利润率瀑布 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">三 · 两个被误读的指标</span><span class="section-en">Two Metrics That Get Misread</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">翻台率：整体 vs 同店（次/天）</div>
+      <svg viewBox="0 0 400 300" font-family="'IM Fell English',Georgia,serif">
+        <line x1="50" y1="245" x2="370" y2="245" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="80" y="89.1" width="55" height="155.9" fill="#8b6c42" opacity="0.4"/>
+        <rect x="145" y="85.0" width="55" height="160.0" fill="#0a0a0b"/>
+        <rect x="240" y="85.0" width="55" height="160.0" fill="#8b6c42" opacity="0.4"/>
+        <rect x="305" y="85.0" width="55" height="160.0" fill="#0a0a0b"/>
+        <g font-size="17" font-weight="bold" text-anchor="middle">
+          <text x="107" y="85" fill="#8b6c42">3.8</text>
+          <text x="172" y="77" fill="#2a5c3f">3.9</text>
+          <text x="267" y="77" fill="#8b6c42">3.9</text>
+          <text x="332" y="77" fill="#0a0a0b">3.9</text>
+        </g>
+        <g font-size="11" fill="#6b6460" text-anchor="middle">
+          <text x="107" y="262">25H1</text><text x="172" y="262">26H1</text>
+          <text x="267" y="262">25H1</text><text x="332" y="262">26H1</text>
+        </g>
+        <text x="210" y="296" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">纵轴自 0 起，未截断</text>
+        <text x="140" y="284" font-size="12.5" fill="#2a5c3f" text-anchor="middle" font-weight="bold">整体 +0.1</text>
+        <text x="300" y="284" font-size="12.5" fill="#8b2e2e" text-anchor="middle" font-weight="bold">同店 持平</text>
+      </svg>
+      <div class="chart-note">整体翻台率的提升来自<strong>新开餐厅（4.2 次/天）</strong>与门店结构变化。<strong>同店口径（1,163 家）翻台率 3.9 → 3.9 完全持平，同店销售额 −1.3%、同店日均销售额 −1.4%。</strong></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">核心经营利润率变动拆解（百分点）</div>
+      <svg viewBox="0 0 400 300" font-family="'IM Fell English',Georgia,serif">
+        <line x1="35" y1="255" x2="380" y2="255" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="42" y="138.7" width="38" height="116.3" fill="#8b6c42" opacity="0.5"/>
+        <rect x="89.5" y="118.7" width="38" height="20" fill="#2a5c3f" opacity="0.8"/>
+        <rect x="137" y="103.7" width="38" height="15" fill="#2a5c3f" opacity="0.8"/>
+        <rect x="184.5" y="103.7" width="38" height="17.7" fill="#8b2e2e" opacity="0.85"/>
+        <rect x="232" y="121.4" width="38" height="15.1" fill="#8b2e2e" opacity="0.85"/>
+        <rect x="279.5" y="136.5" width="38" height="6.0" fill="#8b2e2e" opacity="0.5"/>
+        <rect x="327" y="142.5" width="38" height="112.5" fill="#0a0a0b"/>
+        <g stroke="#6b6460" stroke-width="1" stroke-dasharray="3,2">
+          <line x1="80" y1="138.7" x2="89.5" y2="138.7"/><line x1="127.5" y1="118.7" x2="137" y2="118.7"/>
+          <line x1="175" y1="103.7" x2="184.5" y2="103.7"/><line x1="222.5" y1="121.4" x2="232" y2="121.4"/>
+          <line x1="270" y1="136.5" x2="279.5" y2="136.5"/><line x1="317.5" y1="142.5" x2="327" y2="142.5"/>
+        </g>
+        <g font-size="11" font-weight="bold" text-anchor="middle">
+          <text x="61" y="132" fill="#8b6c42">11.63</text>
+          <text x="108.5" y="112" fill="#2a5c3f">+2.00</text>
+          <text x="156" y="97" fill="#2a5c3f">+1.50</text>
+          <text x="203.5" y="97" fill="#8b2e2e">−1.77</text>
+          <text x="251" y="150" fill="#8b2e2e">−1.51</text>
+          <text x="298.5" y="156" fill="#8b2e2e">−0.60</text>
+          <text x="346" y="136" fill="#0a0a0b">11.25</text>
+        </g>
+        <g font-size="8.5" fill="#6b6460" text-anchor="middle">
+          <text x="61" y="270">25H1</text><text x="108.5" y="270">人工</text>
+          <text x="156" y="270">折旧</text><text x="203.5" y="270">原材料</text>
+          <text x="251" y="270">其他开支</text><text x="298.5" y="270">残差</text>
+          <text x="346" y="270" fill="#0a0a0b" font-weight="bold">26H1</text>
+        </g>
+        <text x="200" y="290" font-size="10" fill="#6b6460" text-anchor="middle">残差 −0.60pct 为未单列项目，按四舍五入后成本率倒算</text>
+      </svg>
+      <div class="chart-note"><strong>折旧摊销贡献 +1.50pct 是一次性的</strong>——公司口径为「部分餐厅物业、厂房及设备已于前期提足折旧及摊销」。<strong>人工与折旧合计给了 3.5pct 顺风，利润率仍下降 0.38pct。</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">四 · 核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">主品牌在收缩，这是这份财报里最硬的一个事实。</span>
+    <span class="label-en">The core brand is shrinking. That is the hardest fact here.</span>
+    <p>海底捞餐厅经营收入 <strong>178.37 亿元，同比 −4.0%</strong>，占总营收比重从 89.7% 降至 <strong>79.9%</strong>。自营门店数从 1,322 家减至 <strong>1,290 家</strong>（期内新开自营 24 家、关闭 32 家、自营转加盟 6 家）。倒算客流：以餐厅经营收入除以人均消费，<strong>2026 上半年约 1.839 亿人次，去年同期约 1.898 亿人次，同比 −3.1%</strong> <span class="badge badge-predict">倒算</span>。人均消费 97.0 元、同比 −0.9%，各线城市普跌，<strong>港澳台跌幅最大（205.8 → 196.6 元，−4.5%）</strong>。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">翻台率 3.8 → 3.9 不能读作经营改善——同店口径是完全持平的。</span>
+    <span class="label-en">The turnover uptick is mix, not improvement.</span>
+    <p>公司披露的整体自营翻台率从 3.8 升至 3.9 次/天。但同店口径（1,163 家，经营满 150 天以上）<strong>翻台率 3.9 → 3.9，一动未动</strong>；同店销售额 163.49 亿 → 与去年 165.71 亿相比 <strong>−1.3%</strong>；同店平均日销售额 78.9 → <strong>77.8 千元，−1.4%</strong>。整体数字之所以更好看，是因为<strong>新开餐厅翻台率 4.2 次/天</strong>拉高了均值。<strong>分城市看，只有一线城市同店销售额是正的（+0.6%），二线 −2.6%、三线及以下 −1.1%、港澳台 −0.4%。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">利润率的稳定是买来的，付账的是一笔不可续的折旧红利。</span>
+    <span class="label-en">Margin stability was bought with a non-recurring depreciation windfall.</span>
+    <p>折旧及摊销从 11.56 亿降至 <strong>9.08 亿，−21.5%</strong>，占收入比重从 5.6% 降至 <strong>4.1%</strong>，单这一项就贡献 <strong>1.50 个百分点</strong>的利润率顺风；人工成本占比从 33.8% 降至 31.8%，再贡献 <strong>2.00 个百分点</strong>。两项合计 3.5 个百分点。<strong>而核心经营利润率仍从 11.63% 降至 11.25%</strong>——说明经营层面被吃掉了约 3.9 个百分点，主要来自原材料及易耗品占比上升 1.77pct（公司归因于「毛利率较低业务的收入贡献比例提高」与「多项为提升客户体验的消费者让利活动」）与其他开支上升 1.51pct（同比 +38.9%）。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">中期派息率约 104%，在净利润仅 +0.5% 的半年里派出超过当期盈利的现金。</span>
+    <span class="label-en">A 104% payout in a half-year when profit grew 0.5%.</span>
+    <p>董事会宣派中期股息<strong>每股 0.377 港元</strong>。按约 53.54 亿股计，股息总额约 20.19 亿港元（约 18.41 亿元人民币），对期内溢利 17.64 亿元的<strong>派息率约 104%</strong> <span class="badge badge-predict">推算</span>。同期<strong>流动资产净值从 31.03 亿降至 19.60 亿元，−36.8%</strong>；现金及现金等价物则从 39.51 亿增至 49.44 亿元。<strong>现金增加而净流动资产大幅下降，说明流动负债增加更多。</strong>年化股息率约 5.7%——这个水平已经把海底捞推到了「收益型标的」的定价区间，而不是成长股。</p>
+  </div>
+</div>
+
+<!-- 9 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五 · 目标价三情景</span><span class="section-en">Three Scenarios · 12-Month Targets</span></div>
+
+  <div class="para">
+    <span class="label-zh">胜负手是折旧红利消退之后，利润率落在哪里。</span>
+    <span class="label-en">The swing factor is where margin lands after the windfall fades.</span>
+    <p>若折旧摊销占收入比重回到 2025 年的 5.6%，按上半年收入规模测算，<strong>每半年多支出约 3.35 亿元，税后约 2.61 亿元，全年约 5.23 亿元——相当于 2026 年预计净利的 12%</strong> <span class="badge badge-predict">测算</span>。这是整个估值里最大的单一变量，也是三情景分野之处。</p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">目标价区间与现价位置 · Target Range vs Spot (HK$)</div>
+    <svg viewBox="0 0 800 190" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="110" x2="740" y2="110" stroke="#d4cec6" stroke-width="10"/>
+      <line x1="108.9" y1="110" x2="701.8" y2="110" stroke="#8b6c42" stroke-width="10" opacity="0.35"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="140">HK$9</text><text x="405" y="140">HK$14</text>
+        <text x="740" y="140">HK$19</text>
+      </g>
+      <line x1="108.9" y1="96" x2="108.9" y2="124" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="108.9" y="88" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="bold">9.58</text>
+      <text x="108.9" y="162" font-size="10.5" fill="#8b2e2e" text-anchor="middle">熊 −26.7% · 30%</text>
+      <line x1="386.2" y1="96" x2="386.2" y2="124" stroke="#8b6c42" stroke-width="3"/>
+      <text x="386.2" y="162" font-size="12" fill="#8b6c42" text-anchor="middle" font-weight="bold">13.72</text>
+      <text x="386.2" y="176" font-size="10.5" fill="#8b6c42" text-anchor="middle">基准 +5.0% · 45%</text>
+      <line x1="701.8" y1="96" x2="701.8" y2="124" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="701.8" y="88" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="bold">18.43</text>
+      <text x="701.8" y="162" font-size="10.5" fill="#2a5c3f" text-anchor="middle">牛 +41.0% · 25%</text>
+      <line x1="342.7" y1="110" x2="342.7" y2="52" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="342.7,108 336,96 349,96" fill="#0a0a0b"/>
+      <text x="300" y="44" font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">现价 HK$13.07</text>
+      <text x="300" y="30" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">近期低点 12.43</text>
+    </svg>
+    <div class="chart-note">概率加权期望 <strong>+4.5%</strong>。现价对 2026 年预计净利的隐含市盈率约 <strong>15.2 倍</strong>，年化股息率约 5.7%。作为参照，中金近期将目标价下调 25% 至 15 港元。</div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市</b></div>
+      <div class="sp">HK$9.58</div>
+      <div class="schg">−26.7% ｜ 概率 30%</div>
+      <div class="slogic">13 倍 P/E × 净利 36 亿。<strong>触发：主品牌同店销售额跌幅扩大、折旧红利在 2027 年消退且无对冲、原材料成本率继续上行。</strong>市场把它彻底当成一只缩量的收益股定价。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准</b></div>
+      <div class="sp">HK$13.72</div>
+      <div class="schg">+5.0% ｜ 概率 45%</div>
+      <div class="slogic">16 倍 P/E × 2026E 净利 41.9 亿。<strong>路径：主品牌同店企稳在 −1% 附近、外卖与副牌维持高增、派息政策维持。</strong>下半年季节性更强（2025 H2 净利率 10.15% vs H1 8.48%）。</div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市</b></div>
+      <div class="sp">HK$18.43</div>
+      <div class="schg">+41.0% ｜ 概率 25%</div>
+      <div class="slogic">20 倍 P/E × 净利 45 亿。<strong>触发：同店销售额转正、中台建设兑现为可量化的费用率下降、副牌收入体量突破并跑出第二个盈利品牌。</strong></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="text-align:right">熊市</th><th style="text-align:right">基准</th><th style="text-align:right">牛市</th></tr>
+    <tr><td class="k">主品牌同店销售额</td><td class="num">跌幅扩大</td><td class="num">企稳约 −1%</td><td class="num">转正</td></tr>
+    <tr><td class="k">折旧红利</td><td class="num">2027 消退且无对冲</td><td class="num">部分延续</td><td class="num">被中台降本对冲</td></tr>
+    <tr><td class="k">净利润（亿元）</td><td class="num">36.0</td><td class="num">41.9</td><td class="num">45.0</td></tr>
+    <tr><td class="k">市盈率</td><td class="num">13.0×</td><td class="num">16.0×</td><td class="num">20.0×</td></tr>
+    <tr><td class="k hl">目标价（港元）</td><td class="num hl">9.58</td><td class="num hl">13.72</td><td class="num hl">18.43</td></tr>
+    <tr><td class="k">较现价 HK$13.07</td><td class="num" style="color:var(--red)">−26.7%</td><td class="num" style="color:var(--green)">+5.0%</td><td class="num" style="color:var(--green)">+41.0%</td></tr>
+    <tr><td class="k hl">概率加权期望</td><td class="num hl" colspan="3" style="text-align:center;color:var(--green)">+4.5%</td></tr>
+  </table>
+</div>
+
+<!-- 10 Verdict -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — Structural Growth, Core Decline, Borrowed Margin.</div>
+  <div class="verdict-zh">裁决：中性 · 结构性改善，主业未止跌</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>营收 +7.9% 里没有一分来自主品牌。</strong>海底捞餐厅经营收入 −4.0%（−7.43 亿元），外卖 +11.24 亿、其他餐厅 +6.75 亿、调味品 +4.39 亿、加盟 +1.63 亿把它抬了起来。<strong>主品牌是净拖累项。</strong><span class="v-src">公司披露分部收入</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>翻台率 3.8→3.9 是结构不是改善。</strong>同店（1,163 家）翻台率 3.9→3.9 持平，同店销售额 −1.3%、同店日均 −1.4%。整体数字被新开餐厅的 4.2 次/天拉高。<strong>只有一线城市同店销售额为正（+0.6%）。</strong><span class="v-src">公司披露同店明细</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>利润率是借来的。</strong>人工 +2.00pct、折旧 +1.50pct 合计 3.5 个百分点顺风，核心经营利润率仍从 11.63% 降到 11.25%。<strong>折旧红利的公司口径是「已于前期提足折旧及摊销」——按定义不可续，回归将吃掉约 12% 的年度净利。</strong><span class="v-src">成本率拆解 · 影响测算</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>派息率约 104%，同期净流动资产 −36.8%。</strong>净利仅 +0.5% 的半年派出超过当期盈利的现金，年化股息率约 5.7%。<strong>这是一个明确的定位信号：管理层在把它当收益型资产经营，而不是成长股。</strong><span class="v-src">股息公告 · 财务状况表</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>加权期望 +4.5%，赔率结构偏中性。</strong>但左右尾都不小：熊市 −26.7%（折旧红利消退且主业续跌）对牛市 +41.0%（同店转正 + 中台降本兑现）。<strong>胜负手只有一个——同店销售额能不能转正。</strong><span class="v-src">三情景 30/45/25 加权</span></div></div>
+</div>
+
+<!-- 11 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">六 · 管理层语气</span><span class="section-en">Management Tone Score</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">综合语气评分</span><div class="tone-bar"><div class="tone-fill amber" style="width:62%"></div></div><span class="tone-val">62</span></div>
+    <div class="tone-row"><span class="tone-lab">战略清晰度</span><div class="tone-bar"><div class="tone-fill green" style="width:75%"></div></div><span class="tone-val">75</span></div>
+    <div class="tone-row"><span class="tone-lab">短期能见度</span><div class="tone-bar"><div class="tone-fill amber" style="width:58%"></div></div><span class="tone-val">58</span></div>
+    <div class="tone-row"><span class="tone-lab">财务健康度</span><div class="tone-bar"><div class="tone-fill amber" style="width:60%"></div></div><span class="tone-val">60</span></div>
+  </div>
+  <div class="notice">
+    <div class="nt">62 分 = 稳健叙事，但缺少增长承诺</div>
+    <strong>战略清晰度 75</strong>：把 2026 定位为「中台管理能力建设元年」，明确提出增长动能由<strong>「单店驱动」切换为「总部平台驱动」</strong>——这是一个清晰且可被检验的组织命题。对加盟业务表述为「在充分复盘的基础上，采取更加审慎的原则」，是明显的降速信号。<br>
+    <strong>短期能见度 58</strong>：全文未给任何量化指引；对行业的表述是「经历阶段性调整后逐步回归理性竞争」，措辞偏中性。<br>
+    <strong>财务健康度 60</strong>：现金及等价物 49.44 亿（较年初 +25.1%），银行结余及现金合计 59.29 亿；但净流动资产 −36.8%、派息率超 100%。<strong>会员数突破 2.44 亿是本期最有力的资产端数据。</strong>
+  </div>
+</div>
+
+<!-- 12 核心主题 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">七 · 核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">外卖 +121.2%，占比升至 9.2%</span>
+    <span class="chip pos">其他餐厅 +113.1%，21 品牌 183 家</span>
+    <span class="chip pos">调味品及食材 +94.6%</span>
+    <span class="chip pos">加盟 41→99 家，收入 +179.9%</span>
+    <span class="chip pos">会员数突破 2.44 亿</span>
+    <span class="chip pos">中期股息 0.377 港元，股息率约 5.7%</span>
+    <span class="chip neu">中台建设元年：单店驱动 → 总部平台驱动</span>
+    <span class="chip neu">露营火锅、夜宵火锅等场景创新</span>
+    <span class="chip neu">加盟转向「更加审慎」</span>
+    <span class="chip neg">主品牌餐厅经营 −4.0%</span>
+    <span class="chip neg">同店销售额 −1.3%，同店翻台持平</span>
+    <span class="chip neg">倒算客流 −3.1%</span>
+    <span class="chip neg">原材料成本率 +1.77pct</span>
+    <span class="chip neg">净流动资产 −36.8%</span>
+  </div>
+</div>
+
+<!-- 13 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">八 · 风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <tr><th>风险</th><th>可能性</th><th>影响</th><th>观测信号</th></tr>
+    <tr><td class="k">折旧红利消退<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Depreciation windfall fades</span></td><td>高</td><td>高</td><td>折旧摊销占收入比重能否维持 4% 附近。<strong>回到 5.6% 将吃掉约 12% 的年度净利</strong></td></tr>
+    <tr><td class="k">主品牌同店续跌<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Same-store keeps sliding</span></td><td>中高</td><td>极高</td><td>下期同店销售额与同店日均。<strong>这是唯一的胜负手</strong></td></tr>
+    <tr><td class="k">原材料成本率上行<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Food cost ratio rising</span></td><td>中高</td><td>中高</td><td>41.6% 能否回落。公司归因含「消费者让利活动」——<strong>若让利常态化，这是结构性的</strong></td></tr>
+    <tr><td class="k">派息不可持续<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Payout above earnings</span></td><td>中</td><td>中高</td><td>派息率 104% + 净流动资产 −36.8%。<strong>下期若派息率回落，收益型逻辑会被打断</strong></td></tr>
+    <tr><td class="k">外卖高增基数效应<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Delivery base effect</span></td><td>中高</td><td>中</td><td>+121% 不可能维持；平台补贴退潮是外部变量</td></tr>
+    <tr><td class="k">加盟主动降速<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Franchise slowdown</span></td><td>中</td><td>中低</td><td>公司已明示「更加审慎」。加盟 41→99 家的增速大概率不可复制</td></tr>
+  </table>
+</div>
+
+<!-- 14 应问清单 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">九 · 业绩会应问清单</span><span class="section-en">Questions That Should Be Asked</span></div>
+  <div class="qa">
+    <div class="qq">折旧摊销的正常化水平是多少</div>
+    <div class="qa-en">Where does D&amp;A normalise?</div>
+    <div class="aa">占收入比重从 5.6% 降到 4.1%，公司口径是「部分餐厅已于前期提足折旧及摊销」。<strong>这批资产的规模有多大、红利还能持续几个报告期、新开店的折旧何时接上——不回答这三点，2027 年的利润率就无法被预测。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">「消费者让利活动」是阶段性促销还是新的定价常态</div>
+    <div class="qa-en">Is the customer giveback promotional or structural?</div>
+    <div class="aa">原材料及易耗品成本率上升 1.77pct，公司归因之一是「多项为提升客户体验的消费者让利活动」。<strong>若属常态化的价格重定位，则 41.6% 就是新的基准线，而不是可以回落的扰动。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">同店销售额转正需要什么条件</div>
+    <div class="qa-en">What has to happen for same-store to turn positive?</div>
+    <div class="aa">同店 −1.3%、同店翻台持平、人均消费 −0.9%——三个数字合起来说明<strong>量价都没有改善</strong>。管理层认为拐点靠什么触发：客单价回升、频次提升、还是门店组合调整？</div>
+  </div>
+  <div class="qa">
+    <div class="qq">104% 的派息率是一次性的还是政策</div>
+    <div class="qa-en">Is the 104% payout a policy or a one-off?</div>
+    <div class="aa">在净利仅 +0.5%、净流动资产下降 36.8% 的半年派出超过当期盈利的现金。<strong>如果是政策，那么估值锚就应该从市盈率切换到股息率；如果是一次性，则下期派息回落会同时打击估值与情绪。</strong></div>
+  </div>
+</div>
+
+<!-- 分析师附注 -->
+<div class="appendix">
+  <div class="ap-head">
+    <span class="ap-en">Analyst's Notes — Sources, Predictions Scored, Method, and My Own View</span>
+    <div class="ap-zh">分析师附注</div>
+  </div>
+
+  <div class="ap-sub">⭐ 本次是对我们自己判断的一次记分（8/21 智库文章）</div>
+  <table>
+    <tr><th>此前预测</th><th>实际</th><th>判定</th></tr>
+    <tr><td>营收 &gt;207 亿 = 拐点延续</td><td class="num">223.37 亿，+7.9%</td><td class="k" style="color:var(--green)">✓ 对</td></tr>
+    <tr><td>翻台率 3.8 – 4.0</td><td class="num">3.9</td><td class="k" style="color:var(--green)">✓ 对</td></tr>
+    <tr><td>人均消费 95 – 98 元</td><td class="num">97.0</td><td class="k" style="color:var(--green)">✓ 对</td></tr>
+    <tr><td>客流同比 +2% ~ +5%</td><td class="num">约 −3.1%（倒算）</td><td class="k" style="color:var(--red)">✗ 错</td></tr>
+    <tr><td>检验清单第 2 项写「客户管理收入 CMR」</td><td>海底捞不披露该指标</td><td class="k" style="color:var(--red)">✗ 指标用错</td></tr>
+  </table>
+  <ul>
+    <li><strong>客流预测错在哪：</strong>我以「门店数持续净增」作为客流增量的依据，但没注意到<strong>自营门店实际在减少（1,322 → 1,290），净增的是加盟店（41 → 99），而加盟店销售额不并入收入</strong>，只贡献特许权使用费。→ <strong>规则：用门店数推客流时，必须先分清自营与加盟——两者在收入口径上不是一回事。</strong></li>
+    <li><strong>指标用错更严重：</strong>「客户管理收入（CMR）」是阿里巴巴的电商变现指标，海底捞从不披露。我在 8/21 的检验清单里把两家公司的指标搞混，并称其为「唯一重点看的数字」。<strong>海底捞对应的核心变现指标是同店销售额与人均消费</strong>——而这两个数（−1.3% / −0.9%）恰好给出了我想要的那个答案，只是我当时报错了名字。</li>
+    <li><strong>「拐点在 2025 下半年已出现」的判断成立且延续</strong>：−3.7% → +5.9% → +7.9%。<strong>但本次揭示了一个此前未看清的层次：这个拐点是结构性的，不是主品牌的复苏。</strong></li>
+  </ul>
+
+  <div class="ap-sub">数据来源</div>
+  <p>全部核心数字取自海底捞国际控股 2026 年 8 月 25 日发布的《截至 2026 年 6 月 30 日止六个月的中期业绩及中期股息及暂停办理过户登记手续公告》原文（31 页），包括：收入 22,336.9 百万元、除税前溢利 2,557.1 百万元、期内溢利 1,764.0 百万元、核心经营利润 2,513.5 百万元、每股基本盈利 0.33 元；自营餐厅 1,290 家、加盟 99 家、其他品牌 21 个共 183 家；整体翻台率 3.9 次/天、人均消费 97.0 元、系统销售额增长率 0.8%、会员数逾 2.44 亿；分部收入六项；同店 1,163 家的销售额、日均销售额与翻台率；原材料 9,289.2 百万元、人工 7,093.3 百万元、折旧摊销 907.9 百万元、其他开支 1,510.1 百万元；现金及等价物 4,944.0 百万元、净流动资产 1,960.0 百万元；中期股息每股 0.377 港元。</p>
+  <p>股价 HK$13.07、近期低点 HK$12.43 与中金目标价 15 港元来自公开报道 <span class="badge badge-predict">二手</span>，非公司披露。</p>
+
+  <div class="ap-sub">推算明细</div>
+  <ul>
+    <li><strong>客流约 1.839 / 1.898 亿人次</strong>：以「海底捞餐厅经营收入 ÷ 人均消费」计算，依据是公告附注「人均消费按期内餐厅经营产生的总收入除以期内服务顾客总数计算」。<strong>公司未直接披露顾客人次。</strong></li>
+    <li><strong>2024 全年 427.6 亿、2024 H2 212.6 亿</strong>：由 2025 全年 432.25 亿与同比 +1.1% 倒算全年，再减 2024 H1 的 214.91 亿。</li>
+    <li><strong>派息率约 104%</strong>：股数 = 本公司拥有人应占溢利 1,766.9 百万 ÷ 每股基本盈利 0.33 元 ≈ 5,354 百万股；股息总额 = 5,354 × 0.377 港元 ≈ 2,019 百万港元，按 HKD/CNY 0.912 折算约 1,841 百万元，对期内溢利 1,764.0 百万元。<strong>汇率为近似值，派息率对汇率敏感（0.90–0.93 区间对应 102%–106%）。</strong></li>
+    <li><strong>折旧红利回归影响约 5.23 亿元/年</strong>：以上半年收入 223.37 亿 ×（5.6% − 4.1%）= 3.35 亿元，按 22% 税率折算税后约 2.61 亿元，年化 5.23 亿元。<strong>该测算假设下半年收入规模与上半年相当，且折旧比重一次性回到 2025 年水平——现实中大概率是渐进的。</strong></li>
+    <li><strong>2026E 净利 41.9 亿</strong>：上半年实际 17.64 亿 + 下半年假设（2025 H2 收入 225.22 亿 × 1.06 = 238.7 亿，沿用 2025 H2 净利率 10.15%）= 24.2 亿。</li>
+  </ul>
+
+  <div class="ap-sub">方法与限制</div>
+  <ul>
+    <li><strong>本报告未使用业绩发布会逐字记录</strong>，管理层表述均取自公告原文，因此语气评分的可靠性低于有实录时的水平。</li>
+    <li>海底捞不披露毛利率，本报告以「核心经营利润率变动拆解」替代模板要求的毛利率折线图；EPS 对比图因<strong>未取得市场共识 EPS</strong>，替换为「整体翻台率 vs 同店翻台率」对比——这是本期最具信息量的一组对照。<strong>两处均为口径替代，非数据缺失。</strong></li>
+    <li>三情景的市盈率（13 / 16 / 20 倍）为分析师取值，未做同业可比表回归。</li>
+    <li><strong>本报告写于业绩公告当日、港股收市之后。按既定纪律不对市场反应下任何结论</strong>——市场对这份财报的定价要到下一个交易日才形成。</li>
+  </ul>
+
+  <div class="ap-sub">我的独立看法与分歧点</div>
+  <ul>
+    <li><strong>我认为这份财报最容易被误读的地方，是把「营收 +7.9%」和「翻台率 3.8→3.9」当成经营改善。</strong>两个数字都是真的，但都由结构变化驱动：增长来自主品牌之外，翻台率来自新店。<strong>把主品牌单独拎出来看，它同时在缩收入（−4.0%）、缩客流（−3.1%）、缩客单（−0.9%）、缩门店（−32 家）——四个方向一致向下。</strong></li>
+    <li><strong>但我不认为这是坏消息，前提是把它读成「转型」而不是「衰退」。</strong>外卖 +121%、其他餐厅 +113%、调味品 +95% 的组合，配上「中台建设元年」「单店驱动 → 总部平台驱动」的表述，是一个自洽的战略叙事。<strong>问题在于时间：主品牌占比仍有 79.9%，副牌要跑到能对冲主品牌下滑的体量，按当前增速还需要数年。</strong></li>
+    <li><strong>104% 的派息率是本期最强的信号，也是我最不确定的地方。</strong>它可能意味着管理层认为资本开支高峰已过、现金可以还给股东——这是成熟期的正确做法。也可能意味着在缺少高回报再投资机会的情况下，用派息维持估值。<strong>两种解释对应完全不同的估值锚（股息率 vs 市盈率），而这份公告没有给出足以分辨的信息。</strong></li>
+    <li><strong>一个我答不了但很重要的问题：折旧红利与「让利活动」在时间上的重合是不是巧合。</strong>本期折旧省下 1.5 个百分点，同期原材料成本率上升 1.77 个百分点、公司明确归因含「消费者让利」。<strong>如果管理层是在用折旧红利腾出的空间做价格投入，那么这是一次有意识的、有期限的窗口——窗口关上时，要么让利停，要么利润率下台阶。</strong>这个假设无法从公告证实或证伪，但它能同时解释本期的两个异常。</li>
+  </ul>
+
+  <div class="ap-sub">待核实项</div>
+  <ul>
+    <li>业绩发布会逐字记录，特别是折旧正常化水平与让利活动的性质 <span class="badge badge-gap">缺口</span></li>
+    <li>21 个其他品牌 183 家的品牌级拆分与单店模型（公告仅给合计收入） <span class="badge badge-gap">缺口</span></li>
+    <li>焰请烤肉铺子的最新门店数（此前媒体口径为 2026 上半年零新开、关店至少 19 家，公告未单列）</li>
+    <li>顾客人次官方口径（本报告为倒算值）</li>
+    <li>经营活动现金流与资本开支（本次提取的公告文本中未见完整现金流量表明细）</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  对这份分析有异议或想调整假设？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=06862_1h26">点此反馈 · Send Feedback</a>
+</div>
+
+<div class="footer">
+  Earnings Copilot · Earner ｜ 海底捞国际控股 6862.HK ｜ 2026 中期业绩（截至 2026-06-30 止六个月）｜ 生成于 2026-08-25<br>
+  现价 HK$13.07 ｜ 股数约 53.54 亿股 ｜ 市值约 700 亿港元 ｜ 汇率按 HKD/CNY 0.912 近似换算<br>
+  本报告为研究分析，不构成投资建议。所有带「推算」「测算」「二手」标记的数字均为分析师估算或第三方来源，非公司披露。
+</div>
+
+</body>
+</html>
