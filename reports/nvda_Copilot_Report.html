@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英伟达 FY27Q2 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+  --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;--muted:#6b6460;--border:#d4cec6;--card:#faf8f4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;border-bottom:1px solid var(--border);
+  padding:16px 0 10px;font-size:12px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:25px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.answer{background:var(--ink);color:var(--paper);padding:20px 24px;margin:18px 0;border-left:5px solid var(--gold);}
+.answer .alab{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.answer .atext{font-size:16.5px;font-weight:700;line-height:1.7;}
+.answer .asub{font-size:13.5px;color:#cfc9be;margin-top:8px;line-height:1.7;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+td.num{font-family:'IM Fell English',Georgia,serif;font-weight:700;text-align:right;white-space:nowrap;}
+td.hl{background:rgba(201,168,76,.16)!important;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-note{font-size:12px;color:var(--muted);margin-top:6px;border-top:1px dotted var(--border);padding-top:6px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:28px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:160px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.qa{border-left:3px solid var(--copper);padding:10px 16px;margin:14px 0;background:var(--card);}
+.qa .qq{font-weight:700;font-size:14px;color:var(--ink);}
+.qa .qa-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;font-style:italic;color:var(--copper);letter-spacing:.5px;}
+.qa .aa{font-size:13.5px;color:#3a352f;margin-top:5px;}
+.appendix{border:2px solid var(--ink);padding:22px 24px;margin:38px 0 0;background:var(--card);}
+.appendix .ap-head{border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px;}
+.appendix .ap-zh{font-size:19px;font-weight:700;}
+.appendix .ap-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;}
+.ap-sub{font-weight:700;font-size:14.5px;margin:18px 0 6px;color:var(--copper);}
+.appendix p,.appendix li{font-size:13.3px;color:#3a352f;}
+.appendix ul{margin:6px 0 6px 20px;} .appendix li{margin:5px 0;}
+.feedback{text-align:center;margin:26px 0 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){.stat-bar{grid-template-columns:repeat(2,1fr);}.chart-grid2,.sc-grid{grid-template-columns:1fr;}.title-zh{font-size:24px;}body{font-size:14px;}}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>英伟达 NVIDIA Corporation (NVDA.US)</span>
+  <span>FY2027 第二财季 · 截至 2026-07 · 公告 2026-08-26 盘后</span>
+  <span>分析于公告后 1 小时 · 盘后价 <b>$207.93</b></span>
+  <span>单位：美元</span>
+</div>
+
+<!-- 2 标题 + 标签 -->
+<div class="title-block">
+  <div class="title-en">NVDA FY27Q2 — A Triple Beat That the Stock Ignored. The Number That Moved Was on the Balance Sheet.</div>
+  <div class="title-zh">英伟达三项全超预期，股价却跌<br>真正动了的数字不在利润表上</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性偏多 · 增长未失速，融资结构存疑</span>
+    <span class="tag amber">语气评分 78 / 100 高度自信但首次让出毛利率</span>
+    <span class="tag green">营收 $962亿 +106% · 超共识 4.5%</span>
+    <span class="tag green">Q3 指引 $1,080亿 · 超共识 2.7%</span>
+    <span class="tag red">注资承诺 $1,190亿 → $2,790亿</span>
+    <span class="tag red">毛利率指引首次下调 100bp</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num green">$962<span style="font-size:14px">亿</span></div><div class="lab">营收 +106% · 超共识 4.5%<span class="en">Revenue beat</span></div></div>
+  <div class="stat"><div class="num green">$2.22</div><div class="lab">调整后 EPS +120% · 超 7.7%<span class="en">Non-GAAP EPS beat</span></div></div>
+  <div class="stat"><div class="num amber">74.0%</div><div class="lab">Q3 毛利率指引（−100bp）<span class="en">First guided decline</span></div></div>
+  <div class="stat"><div class="num red">$2,790<span style="font-size:14px">亿</span></div><div class="lab">注资承诺（上季 $1,190亿）<span class="en">Funding commitments, +134%</span></div></div>
+</div>
+
+<!-- 4 答案前置 -->
+<div class="answer">
+  <span class="alab">The Answer</span>
+  <div class="atext">营收、EPS、数据中心、Q3 指引，四项全部超预期，股价盘后仍跌 0.83%。<span style="color:var(--gold)">市场没有在给这份财报的利润表定价，它在给资产负债表上的一行定价——注资承诺一个季度从 $1,190 亿膨胀到 $2,790 亿，增速是营收增速的 7.5 倍。</span></div>
+  <div class="asub">这个数字第一次让「循环融资」的质疑有了干净的量化落点：<strong style="color:#fff">$2,790 亿相当于 2.9 个季度的营收、年化营收的 73%</strong>。同期公司宣布与 Apollo、BlackRock、Blackstone、Brookfield、Goldman Sachs、KKR 组建独立算力融资平台，拟调动<strong style="color:#fff">超过 $5,000 亿第三方资本</strong>——公告明写「需以最终协议为准」，即尚未签定。<strong style="color:#fff">当买方的资金有相当部分由卖方安排时，「需求」这个词的含义就变了。</strong>配合毛利率指引三个季度以来首次下调 100bp，这份财报的两个负面都不在被超越的那几行里。</div>
+</div>
+
+<!-- 5 营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">一 · 季度营收走势</span><span class="section-en">Quarterly Revenue Trend</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">季度营收（十亿美元）与环比美元增量 · Quarterly Revenue &amp; Sequential Dollar Adds, US$B</div>
+    <svg viewBox="0 0 800 310" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="250" x2="760" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g fill="#8b6c42">
+        <rect x="90" y="163.5" width="82" height="86.5" opacity="0.4"/>
+        <rect x="200" y="144.4" width="82" height="105.6" opacity="0.48"/>
+        <rect x="310" y="124.1" width="82" height="125.9" opacity="0.56"/>
+        <rect x="420" y="98.9" width="82" height="151.1" opacity="0.64"/>
+      </g>
+      <rect x="530" y="71.9" width="82" height="178.1" fill="#0a0a0b"/>
+      <rect x="640" y="50.0" width="82" height="200.0" fill="none" stroke="#8b6c42" stroke-width="2" stroke-dasharray="5,3"/>
+      <g font-size="13" fill="#0a0a0b" text-anchor="middle" font-weight="bold">
+        <text x="131" y="156">46.7</text><text x="241" y="137">57.0</text>
+        <text x="351" y="117">68.0</text><text x="461" y="92">81.6</text>
+        <text x="571" y="64">96.2</text><text x="681" y="42" fill="#8b6c42">108.0</text>
+      </g>
+      <g font-size="11" fill="#6b6460" text-anchor="middle">
+        <text x="131" y="268">Q2 FY26</text><text x="241" y="268">Q3 FY26</text>
+        <text x="351" y="268">Q4 FY26</text><text x="461" y="268">Q1 FY27</text>
+        <text x="571" y="268" fill="#0a0a0b" font-weight="bold">Q2 FY27</text>
+        <text x="681" y="268" fill="#8b6c42" font-style="italic">Q3 指引</text>
+      </g>
+      <g font-size="11" text-anchor="middle" font-weight="bold">
+        <text x="241" y="288" fill="#2a5c3f">+10.3</text>
+        <text x="351" y="288" fill="#2a5c3f">+11.0</text>
+        <text x="461" y="288" fill="#2a5c3f">+13.6</text>
+        <text x="571" y="288" fill="#c47a1e">+14.6</text>
+        <text x="681" y="288" fill="#8b6c42">+11.8</text>
+      </g>
+      <text x="415" y="305" font-size="10.5" fill="#6b6460" text-anchor="middle" font-style="italic">下排为环比美元增量（十亿美元）；五个季度区间 +10.3 ~ +14.6</text>
+    </svg>
+    <div class="chart-note"><strong>环比美元增量五个季度稳定在 $103 亿–$146 亿之间，而环比百分比从 22.1% 一路降到 12.3%。</strong>增速的衰减是分母变大的算术结果，不是需求转弱——<strong>把这两件事分开，是读懂这家公司的前提。</strong>Q2 的 +$146 亿是五个季度里首次突破上沿，<strong>加速真正发生在本季，而 Q3 指引的 +$118 亿是回到区间中值。</strong></div>
+  </div>
+</div>
+
+<!-- 6 分部 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">二 · 分部结构</span><span class="section-en">Segment Breakdown</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">FY27Q2 分部营收（十亿美元）与同比增速 · Segment Revenue &amp; YoY</div>
+    <svg viewBox="0 0 800 210" font-family="'IM Fell English',Georgia,serif">
+      <g font-size="13" fill="#0a0a0b" text-anchor="end">
+        <text x="150" y="58">数据中心</text>
+        <text x="150" y="128">边缘计算</text>
+      </g>
+      <g font-size="10" fill="#6b6460" text-anchor="end" font-style="italic">
+        <text x="150" y="73">Data Center</text>
+        <text x="150" y="143">Edge Computing</text>
+      </g>
+      <rect x="165" y="38" width="480" height="34" fill="#2a5c3f" opacity="0.82"/>
+      <rect x="165" y="108" width="38.8" height="34" fill="#2a5c3f" opacity="0.45"/>
+      <g font-size="15" font-weight="bold" fill="#0a0a0b">
+        <text x="655" y="60">$89.0B</text>
+        <text x="214" y="130">$7.2B</text>
+      </g>
+      <g font-size="11.5" fill="#2a5c3f" font-weight="bold">
+        <text x="655" y="76">同比 +117%　环比 +18%</text>
+        <text x="214" y="146">同比 +27%　环比 +13%</text>
+      </g>
+      <text x="405" y="60" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">占总营收 92.5%</text>
+      <line x1="165" y1="170" x2="760" y2="170" stroke="#d4cec6" stroke-width="1"/>
+      <text x="165" y="192" font-size="11.5" fill="#8b6c42" font-weight="bold">数据中心占比轨迹：87.8% (Q2FY26) → 91.3% (Q4FY26) → 92.2% (Q1FY27) → 92.5% (本季)</text>
+    </svg>
+    <div class="chart-note"><strong>数据中心占总营收 92.5%，这家公司在财务意义上已经是一家单一分部公司。</strong>边缘计算同比 +27% 看着健康，但 $72 亿的体量对 $962 亿的总盘子已经不构成分散——<strong>任何关于英伟达的判断，本质上都是关于数据中心资本开支的判断。</strong></div>
+  </div>
+</div>
+
+<!-- 7 EPS + 毛利率 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">三 · 盈利能力：一个超预期，一个转向</span><span class="section-en">Earnings Beat, Margin Turn</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">调整后 EPS：共识 vs 实际（美元）</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="45" y1="230" x2="375" y2="230" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="80" y="104.6" width="52" height="125.4" fill="#8b6c42" opacity="0.35"/>
+        <rect x="140" y="97.5" width="52" height="132.5" fill="#2a5c3f" opacity="0.8"/>
+        <rect x="240" y="84.0" width="52" height="146.0" fill="#8b6c42" opacity="0.35"/>
+        <rect x="300" y="72.7" width="52" height="157.3" fill="#2a5c3f"/>
+        <g font-size="13" font-weight="bold" text-anchor="middle">
+          <text x="106" y="97" fill="#8b6c42">1.77</text>
+          <text x="166" y="90" fill="#2a5c3f">1.87</text>
+          <text x="266" y="76" fill="#8b6c42">2.061</text>
+          <text x="326" y="65" fill="#2a5c3f">2.22</text>
+        </g>
+        <g font-size="10.5" fill="#2a5c3f" text-anchor="middle" font-weight="bold">
+          <text x="166" y="248">超 +5.6%</text>
+          <text x="326" y="248">超 +7.7%</text>
+        </g>
+        <g font-size="11" fill="#6b6460" text-anchor="middle">
+          <text x="136" y="266">Q1 FY27</text><text x="296" y="266">Q2 FY27</text>
+        </g>
+        <g font-size="9.5" fill="#6b6460" text-anchor="middle">
+          <text x="106" y="244">共识</text><text x="166" y="230" fill="#fff" font-weight="bold">实际</text>
+          <text x="266" y="244">共识</text><text x="326" y="230" fill="#fff" font-weight="bold">实际</text>
+        </g>
+      </svg>
+      <div class="chart-note"><strong>超预期幅度在扩大：+5.6% → +7.7%。</strong>调整后 EPS 环比 +18.7%，与营收环比 +17.9%、数据中心环比 +18.4% <strong>三者同步</strong>——盈利质量没有被稀释。</div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">非 GAAP 毛利率走势（%）· 含 Q3 指引</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="45" y1="230" x2="375" y2="230" stroke="#0a0a0b" stroke-width="1.5"/>
+        <g stroke="#e5e0d8" stroke-width="1">
+          <line x1="45" y1="187.5" x2="375" y2="187.5"/><line x1="45" y1="145" x2="375" y2="145"/>
+          <line x1="45" y1="102.5" x2="375" y2="102.5"/><line x1="45" y1="60" x2="375" y2="60"/>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="end">
+          <text x="41" y="191">73%</text><text x="41" y="148.5">74%</text>
+          <text x="41" y="106">75%</text><text x="41" y="63.5">76%</text>
+        </g>
+        <polyline points="80,200.2 137,162 194,102.5 251,102.5 308,102.5" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+        <polyline points="308,102.5 360,145" fill="none" stroke="#c47a1e" stroke-width="2.5" stroke-dasharray="6,4"/>
+        <g fill="#8b6c42">
+          <circle cx="80" cy="200.2" r="4"/><circle cx="137" cy="162" r="4"/>
+          <circle cx="194" cy="102.5" r="4"/><circle cx="251" cy="102.5" r="4"/>
+        </g>
+        <circle cx="308" cy="102.5" r="5.5" fill="#0a0a0b"/>
+        <circle cx="360" cy="145" r="5.5" fill="#c47a1e"/>
+        <g font-size="11" font-weight="bold" text-anchor="middle">
+          <text x="80" y="216" fill="#8b6c42">72.7</text><text x="137" y="178" fill="#8b6c42">73.6</text>
+          <text x="194" y="92" fill="#8b6c42">75.0</text><text x="251" y="92" fill="#8b6c42">75.0</text>
+          <text x="308" y="90" fill="#0a0a0b">75.0</text><text x="360" y="133" fill="#c47a1e">74.0</text>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="middle">
+          <text x="80" y="250">Q2FY26</text><text x="137" y="250">Q3FY26</text>
+          <text x="194" y="250">Q4FY26</text><text x="251" y="250">Q1FY27</text>
+          <text x="308" y="250" fill="#0a0a0b" font-weight="bold">Q2FY27</text>
+          <text x="360" y="250" fill="#c47a1e" font-style="italic">Q3E</text>
+        </g>
+        <text x="210" y="272" font-size="10" fill="#6b6460" text-anchor="middle" font-style="italic">虚线为公司指引 74.0% ±50bp</text>
+      </svg>
+      <div class="chart-note"><strong>三个季度钉在 75.0% 之后，Q3 首次指引下调 100 个基点。</strong>对 $1,080 亿营收即 <strong>−$10.8 亿毛利</strong>。营收环比仍有 +12.3% 而毛利率转头向下——<strong>Vera Rubin 平台爬坡成本与存储涨价同时到位</strong>，本季刚宣布与 SK 海力士的多年期合作。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">四 · 核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">注资承诺一个季度增加 $1,600 亿，是本季唯一一个数量级异常的数字。</span>
+    <span class="label-en">Funding commitments jumped $160B in one quarter. Nothing else moved on that scale.</span>
+    <p>注资承诺（funding commitments）从上季 <strong>$1,190 亿</strong>膨胀至 <strong>$2,790 亿，环比 +134%</strong>；同期营收环比 +17.9%。<strong>两者之比 7.5 倍。</strong>绝对水平上，$2,790 亿相当于 <strong>2.9 个季度的营收</strong>，或年化营收的 <strong>73%</strong> <span class="badge badge-predict">测算</span>。公司同时宣布与 Apollo、BlackRock、Blackstone、Brookfield、Goldman Sachs、KKR 组建独立算力融资平台，拟调动<strong>超过 $5,000 亿第三方资本</strong>，用于逐步构建 AI 基础设施——<strong>公告原文写明「需以最终协议为准」，意即尚未签定。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">这把「循环融资」从一个叙事质疑变成了一个可跟踪的会计科目。</span>
+    <span class="label-en">Circular financing is now a line item, not a narrative.</span>
+    <p>卖方为买方安排资金，本身在资本品行业里并不罕见；<strong>问题在于速度与比例。</strong>当承诺规模以营收 7.5 倍的速度扩张，需求的独立性就无法从收入端被验证——<strong>因为收入端看到的正是被这笔承诺支撑起来的那部分需求。</strong>下季真正需要回答的是两个转化率：<strong>$2,790 亿里有多大比例最终转为确认收入，以及本季新增的 $1,600 亿对应的订单落在哪几个季度入表。</strong>在这两个数字出现之前，营收超预期本身无法区分「需求强劲」与「融资强劲」。</p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">经营层面没有裂痕：营收、数据中心、EPS 三个环比增速完全同步。</span>
+    <span class="label-en">Operationally there is no crack — three sequential growth rates move as one.</span>
+    <p>营收环比 <strong>+17.9%</strong>、数据中心环比 <strong>+18.4%</strong>、调整后 EPS 环比 <strong>+18.7%</strong>。<strong>三者在 18% 上下完全对齐，说明本季的增长没有靠费用递延或口径调整来支撑。</strong>数据中心 $890 亿、同比 +117%，超共识 $858.6 亿；调整后 EPS $2.22、同比 +120%，超共识 $2.061，<strong>超预期幅度较上季的 +5.6% 扩大到 +7.7%</strong>。本季向股东返还约 <strong>$260 亿</strong>（上季 $200 亿），回购授权余额 <strong>$990 亿</strong>。<strong>这不是一家现金紧张的公司——所以承诺规模的问题不是流动性问题，是需求质量问题。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">加速真正发生在本季，而不是在指引里。</span>
+    <span class="label-en">The acceleration is in the quarter just reported, not in the guide.</span>
+    <p>环比美元增量的五季度序列为 <strong>+$103亿 → +$110亿 → +$136亿 → +$146亿 → 指引 +$118亿</strong>。<strong>Q2 的 +$146 亿是五个季度里首次突破 $136 亿的上沿；而 Q3 指引的 +$118 亿回到区间中值。</strong>市场普遍以「指引超共识 2.7%」来读这份财报，<strong>但用绝对水平衡量一个基数在快速变化的序列，会把「维持趋势」误读成「加速」。</strong>按增量口径，正确的表述是：本季超预期，下季指引持平于趋势。</p>
+  </div>
+</div>
+
+<!-- 9 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五 · 目标价三情景</span><span class="section-en">Three Scenarios · 12-Month Targets</span></div>
+
+  <div class="para">
+    <span class="label-zh">胜负手是环比增量能否守住每季 $115 亿，以及毛利率在哪里企稳。</span>
+    <span class="label-en">The swing factors: can the ~$11.5B quarterly add hold, and where does margin settle.</span>
+    <p>按 Q3 指引 $1,080 亿、Q4 沿趋势增量推至约 $1,195 亿，<strong>FY27 全年营收约 $4,053 亿、调整后 EPS 约 $9.28</strong> <span class="badge badge-predict">测算</span>，对应现价 <strong>22.4 倍</strong>。三情景的分野在 FY28：增量守住则营收约 $5,930 亿，塌陷则约 $4,600 亿——<strong>这两个数之间的差距，几乎完全由那 $2,790 亿承诺的转化率决定。</strong></p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">目标价区间与现价位置 · Target Range vs Spot (US$)</div>
+    <svg viewBox="0 0 800 190" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="110" x2="740" y2="110" stroke="#d4cec6" stroke-width="10"/>
+      <line x1="102.2" y1="110" x2="697.1" y2="110" stroke="#8b6c42" stroke-width="10" opacity="0.35"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="140">$100</text><text x="405" y="140">$225</text><text x="740" y="140">$350</text>
+      </g>
+      <line x1="102.2" y1="96" x2="102.2" y2="124" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="102.2" y="88" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="bold">112</text>
+      <text x="102.2" y="162" font-size="10.5" fill="#8b2e2e" text-anchor="middle">熊 −46.1% · 30%</text>
+      <line x1="466.6" y1="96" x2="466.6" y2="124" stroke="#8b6c42" stroke-width="3"/>
+      <text x="466.6" y="88" font-size="12" fill="#8b6c42" text-anchor="middle" font-weight="bold">248</text>
+      <text x="466.6" y="162" font-size="10.5" fill="#8b6c42" text-anchor="middle">基准 +19.3% · 45%</text>
+      <line x1="697.1" y1="96" x2="697.1" y2="124" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="697.1" y="88" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="bold">334</text>
+      <text x="697.1" y="162" font-size="10.5" fill="#2a5c3f" text-anchor="middle">牛 +60.6% · 25%</text>
+      <line x1="359.3" y1="110" x2="359.3" y2="52" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="359.3,108 352.6,96 366,96" fill="#0a0a0b"/>
+      <text x="359.3" y="44" font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">盘后 $207.93</text>
+      <text x="359.3" y="30" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">收盘 209.66 · 盘后 −0.83%</text>
+    </svg>
+    <div class="chart-note">概率加权期望 <strong>+10.0%</strong>。现价对 FY27E EPS $9.28 的市盈率 <strong>22.4 倍</strong>，对 FY28E 基准 EPS $13.77 为 <strong>15.1 倍</strong>。<strong>左尾比右尾更值得注意：熊市 −46.1% 不是靠盈利下滑实现的，而是靠盈利与估值同时收缩。</strong></div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市</b></div>
+      <div class="sp">$112</div>
+      <div class="schg">−46.1% ｜ 概率 30%</div>
+      <div class="slogic">12 倍 × FY28 EPS $9.30。<strong>触发：注资承诺不转化，环比增量塌至每季约 $50 亿；循环融资质疑坐实，市场按「被融资撑起的需求」重估。</strong>毛利率退至 68%。</div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准</b></div>
+      <div class="sp">$248</div>
+      <div class="schg">+19.3% ｜ 概率 45%</div>
+      <div class="slogic">18 倍 × FY28 EPS $13.77。<strong>路径：环比增量守住每季约 $115 亿；毛利率在 73% 企稳；承诺按季稳定转为收入。</strong>FY28 营收约 $5,930 亿。</div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市</b></div>
+      <div class="sp">$334</div>
+      <div class="schg">+60.6% ｜ 概率 25%</div>
+      <div class="slogic">22 倍 × FY28 EPS $15.19。<strong>触发：Vera Rubin 大规模放量，$5,000 亿第三方资本平台签定并落地，环比增量重回 $140 亿以上。</strong>毛利率回到 74.5%。</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="text-align:right">熊市</th><th style="text-align:right">基准</th><th style="text-align:right">牛市</th></tr>
+    <tr><td class="k">季均环比增量</td><td class="num">约 $50 亿</td><td class="num">约 $115 亿</td><td class="num">$140 亿以上</td></tr>
+    <tr><td class="k">FY28 营收（亿美元）</td><td class="num">4,600</td><td class="num">5,930</td><td class="num">6,330</td></tr>
+    <tr><td class="k">非 GAAP 毛利率</td><td class="num">68.0%</td><td class="num">73.0%</td><td class="num">74.5%</td></tr>
+    <tr><td class="k">FY28 调整后 EPS</td><td class="num">9.30</td><td class="num">13.77</td><td class="num">15.19</td></tr>
+    <tr><td class="k">市盈率</td><td class="num">12.0×</td><td class="num">18.0×</td><td class="num">22.0×</td></tr>
+    <tr><td class="k hl">目标价（美元）</td><td class="num hl">112</td><td class="num hl">248</td><td class="num hl">334</td></tr>
+    <tr><td class="k">较盘后价 $207.93</td><td class="num" style="color:var(--red)">−46.1%</td><td class="num" style="color:var(--green)">+19.3%</td><td class="num" style="color:var(--green)">+60.6%</td></tr>
+    <tr><td class="k hl">概率加权期望</td><td class="num hl" colspan="3" style="text-align:center;color:var(--green)">+10.0%</td></tr>
+  </table>
+</div>
+
+<!-- 10 Verdict -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — Operations Clean, Financing Structure Under Question.</div>
+  <div class="verdict-zh">裁决：中性偏多 · 增长未失速，融资结构存疑</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>四项全超，股价仍跌 0.83%。</strong>营收 $962 亿超共识 4.5%、EPS $2.22 超 7.7%、数据中心 $890 亿超 3.7%、Q3 指引 $1,080 亿超 2.7%。<strong>市场没有在给利润表定价。</strong><span class="v-src">公司公告 · 共识对照</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>注资承诺 $1,190 亿 → $2,790 亿，增速是营收增速的 7.5 倍。</strong>相当于 2.9 个季度的营收、年化营收的 73%。<strong>这是「循环融资」第一次成为一个可跟踪的会计科目，而不只是一个叙事质疑。</strong><span class="v-src">公司披露 · 比率为本报告测算</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>加速在本季，不在指引里。</strong>环比增量 +$146 亿五个季度来首次破上沿，而 Q3 指引 +$118 亿是回到中值。<strong>用绝对水平读一个基数在快速变化的序列，会把「维持趋势」误读成「加速」。</strong><span class="v-src">增量口径重构</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>毛利率三个季度锁定 75.0% 后，首次指引下调至 74.0%。</strong>对 $1,080 亿营收即 −$10.8 亿毛利。营收仍在环比 +12.3% 而毛利率转向，<strong>指向 Vera Rubin 爬坡成本与存储涨价——本季刚宣布与 SK 海力士多年合作。</strong><span class="v-src">公司指引 · 影响为测算</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>加权期望 +10.0%，但左尾远重于右尾。</strong>熊市 −46.1% 靠的是盈利与估值同时收缩，不是单纯盈利下滑。<strong>胜负手只有一个——那 $2,790 亿承诺的转化率。</strong><span class="v-src">三情景 30/45/25 加权</span></div></div>
+</div>
+
+<!-- 11 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">六 · 管理层语气</span><span class="section-en">Management Tone Score</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">综合语气评分</span><div class="tone-bar"><div class="tone-fill green" style="width:78%"></div></div><span class="tone-val">78</span></div>
+    <div class="tone-row"><span class="tone-lab">战略清晰度</span><div class="tone-bar"><div class="tone-fill green" style="width:88%"></div></div><span class="tone-val">88</span></div>
+    <div class="tone-row"><span class="tone-lab">短期能见度</span><div class="tone-bar"><div class="tone-fill green" style="width:80%"></div></div><span class="tone-val">80</span></div>
+    <div class="tone-row"><span class="tone-lab">财务审慎度</span><div class="tone-bar"><div class="tone-fill amber" style="width:62%"></div></div><span class="tone-val">62</span></div>
+  </div>
+  <div class="notice green">
+    <div class="nt">78 分 = 高度自信，但首次在毛利率上让步</div>
+    <strong>战略清晰度 88</strong>：黄仁勋称「人工智能已经到达了转折点……计算就是收入，而且需求正在加速增长」，并明确对比「去年这个时候只有一家实验室在推动基础设施建设，如今多个前沿实验室并行扩展」。<strong>这是一个可被证伪的具体表述，不是套话。</strong>Vera Rubin「现已全面投入生产」，已在 CoreWeave、Google Cloud、Azure、OCI、Nebius 上机。<br>
+    <strong>短期能见度 80</strong>：给出了完整的 Q3 营收、毛利率、GAAP/非 GAAP 运营费用三项指引，以及 FY27 全年税率区间 16.0%–18.0%。<strong>指引颗粒度高于多数同业。</strong><br>
+    <strong>财务审慎度 62</strong>：注资承诺翻倍以上而未在公告中给出转化节奏；$5,000 亿第三方资本平台以「需以最终协议为准」表述发布。<strong>用未签定的承诺规模来支撑增长叙事，是本次唯一一处措辞与实质之间的落差。</strong>
+  </div>
+</div>
+
+<!-- 12 核心主题 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">七 · 核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">营收 $962 亿，同比 +106%</span>
+    <span class="chip pos">数据中心 $890 亿，同比 +117%</span>
+    <span class="chip pos">调整后 EPS $2.22，同比 +120%</span>
+    <span class="chip pos">Q3 指引 $1,080 亿，超共识 2.7%</span>
+    <span class="chip pos">Vera Rubin 全面投产，五大云已上机</span>
+    <span class="chip pos">本季返还股东约 $260 亿，回购余额 $990 亿</span>
+    <span class="chip pos">环比增量 +$146 亿，五季度首次破上沿</span>
+    <span class="chip neu">Vera CPU：首款 AI 代理专用 CPU</span>
+    <span class="chip neu">Groq 3 LPX 推理加速器投产</span>
+    <span class="chip neu">日韩国家级 AI 基础设施、欧洲 35 台超算</span>
+    <span class="chip neu">SK 海力士多年期存储合作</span>
+    <span class="chip neg">注资承诺 $1,190 亿 → $2,790 亿（+134%）</span>
+    <span class="chip neg">$5,000 亿融资平台「需以最终协议为准」</span>
+    <span class="chip neg">毛利率指引 75.0% → 74.0%</span>
+    <span class="chip neg">数据中心占比 92.5%，单一分部风险</span>
+  </div>
+</div>
+
+<!-- 13 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">八 · 风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <tr><th>风险</th><th>可能性</th><th>影响</th><th>观测信号</th></tr>
+    <tr><td class="k">注资承诺不转化<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Commitments fail to convert</span></td><td>中高</td><td>极高</td><td>下季承诺余额与确认收入的比值。<strong>这是唯一的胜负手</strong></td></tr>
+    <tr><td class="k">毛利率继续下行<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Margin keeps sliding</span></td><td>中高</td><td>高</td><td>74.0% 能否守住。<strong>若跌破 73%，说明存储涨价已从周期变成结构</strong></td></tr>
+    <tr><td class="k">环比增量塌陷<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Sequential adds break down</span></td><td>中</td><td>极高</td><td>Q3 实际增量能否守住 $103 亿下沿。<strong>跌破即五季度趋势首次断裂</strong></td></tr>
+    <tr><td class="k">单一分部集中<br><span style="font-weight:400;font-style:italic;color:var(--muted)">92.5% single-segment</span></td><td>高（已发生）</td><td>中高</td><td>边缘计算占比能否回升。<strong>目前 7.5% 不构成任何分散</strong></td></tr>
+    <tr><td class="k">超大客户资本开支转向<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Hyperscaler capex turn</span></td><td>中</td><td>极高</td><td>五大云的下季资本开支指引。<strong>领先英伟达约一到两个季度</strong></td></tr>
+    <tr><td class="k">中国口径<br><span style="font-weight:400;font-style:italic;color:var(--muted)">China excluded from guide</span></td><td>中</td><td>中</td><td>指引不含中国数据中心计算产品。<strong>不对称在多头一边，但也意味着基准情形无中国贡献</strong></td></tr>
+  </table>
+</div>
+
+<!-- 14 应问清单 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">九 · 业绩会应问清单</span><span class="section-en">Questions That Should Be Asked</span></div>
+  <div class="qa">
+    <div class="qq">$2,790 亿注资承诺的转化节奏是什么</div>
+    <div class="qa-en">What is the conversion schedule on $279B of commitments?</div>
+    <div class="aa">一个季度增加 $1,600 亿，而营收环比只增 17.9%。<strong>这批承诺中有多少已对应具体订单、预计在哪几个季度确认收入、若客户未能提款公司承担什么——不回答这三点，营收超预期就无法与融资超预期区分开。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">毛利率 74.0% 是底还是路上的一站</div>
+    <div class="qa-en">Is 74.0% the floor or a waypoint?</div>
+    <div class="aa">三个季度锁在 75.0% 后首次下调。<strong>其中多少来自 Vera Rubin 爬坡（会随规模摊薄回升），多少来自存储成本（与 SK 海力士的多年合作意味着已锁价还是仍暴露）——这决定 74% 是周期低点还是新基准。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">$5,000 亿第三方资本平台何时从「需以最终协议为准」变成已签定</div>
+    <div class="qa-en">When do the definitive agreements get signed?</div>
+    <div class="aa">六家机构、超过 $5,000 亿的表述已进入公告，但明确标注尚未定稿。<strong>在签定之前，它既不能计入需求可见度，也不应被市场当作已落地的资本供给。管理层是否愿意给一个时间表？</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">数据中心 92.5% 的集中度，管理层认为合适吗</div>
+    <div class="qa-en">Is 92.5% concentration a target or a consequence?</div>
+    <div class="aa">边缘计算同比 +27%，但 $72 亿的体量对 $962 亿的总盘不构成分散。<strong>机器人出租车、物理 AI、RTX Spark 这些新方向，管理层给不给出可量化的营收里程碑？还是接受长期作为单一分部公司运营？</strong></div>
+  </div>
+</div>
+
+<!-- 分析师附注 -->
+<div class="appendix">
+  <div class="ap-head">
+    <span class="ap-en">Analyst's Notes — Sources, Method, a Scored Prediction, and My Own View</span>
+    <div class="ap-zh">分析师附注</div>
+  </div>
+
+  <div class="ap-sub">⭐ 对本报告作者自己判断的一次记分</div>
+  <p>本次财报发布前 4 小时，本报告作者预先登记了一条判读门槛：<strong>「Q3 指引 &gt; $1,060 亿 = 真加速」</strong>。实际指引 $1,080 亿，按字面判定为「真加速」。</p>
+  <p><strong>该判定错误，且错在方法。</strong>$1,060 亿这个阈值是用当时<strong>估计的</strong> Q2 营收 $921.6 亿加上增量带上沿换算出来的。Q2 实际为 $962 亿，比估计高 $40.4 亿——<strong>基数一移，用绝对水平表述的门槛就静默失效了。</strong>按真正的分析变量（环比增量）复核：Q2 实际增量 +$146 亿突破上沿，<strong>加速发生在本季；</strong>Q3 指引增量 +$118 亿位于区间中值，<strong>是维持趋势而非加速。</strong></p>
+  <ul>
+    <li><strong>规则：判读门槛必须用分析变量本身表述（增量、比率、占比），不能翻译成依赖估计基数的绝对水平。</strong>否则基数一动，门槛失效，而且失效方向不可预知——本次它恰好把「维持」判成了「加速」，方向对多头有利，这类偏差最容易被放过。</li>
+  </ul>
+
+  <div class="ap-sub">已澄清的一处红旗</div>
+  <p>财报发布后，社交渠道出现「上季 EPS $2.39、本季 $2.22，环比下降」的说法。<strong>经核，Q1 FY27 非 GAAP 每股收益为 $1.87，本季 $2.22 为环比 +18.7%，与营收环比 +17.9%、数据中心环比 +18.4% 三者同步。</strong>「$2.39」非本季可比口径。<strong>本报告在写入前完成了这一核实，未采用该说法。</strong></p>
+
+  <div class="ap-sub">数据来源</div>
+  <p>FY27Q2 全部核心数字取自英伟达 2026-08-26 美股盘后发布的第二财季业绩公告（经富途资讯转载的中文全文）：营收 $962 亿、调整后每股收益 $2.22、数据中心营收 $890 亿、边缘计算营收 $72 亿、GAAP 与非 GAAP 毛利率均为 75.0%；Q3 指引营收 $1,080 亿 ±2%、毛利率 74.0% ±50bp、GAAP 与非 GAAP 运营费用分别约 $92 亿与 $90 亿；FY27 税率区间 16.0%–18.0%；季度股息每股 $0.25（2026-09-10 登记、2026-10-01 派发）；本季返还股东约 $260 亿、回购授权余额约 $990 亿；注资承诺由上季 $1,190 亿增至 $2,790 亿。</p>
+  <p>历史季度数据（Q2 FY26 $467 亿 / Q3 FY26 $570 亿 / Q4 FY26 $680 亿 / Q1 FY27 $816 亿，Q1 FY27 非 GAAP EPS $1.87、数据中心 $752 亿、毛利率 75.0%）与市场共识（营收 $920.5 亿、EPS $2.061、数据中心 $858.6 亿、Q3 指引 $1,051.5 亿、Q3 非 GAAP 运营费用 $89.7 亿）<span class="badge badge-predict">二手</span>来自公开报道与数据商，非公司披露。股价 $209.66 收盘、$207.93 盘后取自行情缓存。</p>
+
+  <div class="ap-sub">推算明细</div>
+  <ul>
+    <li><strong>环比美元增量序列</strong>：由各季营收直接相减，无假设。</li>
+    <li><strong>数据中心历史值</strong>：Q2 FY26 $410 亿由本季 $890 亿 ÷ 2.17（同比 +117%）倒算；Q4 FY26 $621 亿由 Q1 FY27 $752 亿 ÷ 1.21（环比 +21%）倒算。<strong>公司未在本次公告中列出这两个数。</strong></li>
+    <li><strong>FY27 EPS 约 $9.28</strong>：Q1 实际 $1.87 + Q2 实际 $2.22 + Q3 测算 $2.47（营收 $1,080 亿 × 毛利率 74.0% − 非 GAAP 运营费用 $90 亿，税率 17%，股数 242 亿）+ Q4 测算 $2.73（营收 $1,195 亿 × 73.5% − 运营费用 $97 亿）。<strong>Q4 营收按趋势增量 $115 亿外推，公司未给指引。</strong></li>
+    <li><strong>三情景 FY28 EPS</strong>：熊 $9.30（营收 $4,600 亿 × 68.0% − $500 亿）／基准 $13.77（$5,930 亿 × 73.0% − $420 亿）／牛 $15.19（$6,330 亿 × 74.5% − $400 亿），统一税率 17%、股数 238 亿、其他收益 $40 亿。<strong>市盈率 12/18/22 倍为分析师取值，未做同业可比回归。</strong></li>
+    <li><strong>注资承诺比率</strong>：$2,790 亿 ÷ 本季营收 $962 亿 = 2.9 个季度；÷ 年化营收 $3,848 亿 = 73%。<strong>年化为本季 ×4 的简单外推，非公司口径。</strong></li>
+  </ul>
+
+  <div class="ap-sub">方法与限制</div>
+  <ul>
+    <li><strong>本报告写于业绩公告后约 1 小时，未使用业绩发布会逐字记录</strong>（电话会于 17:00 ET 开始）。管理层表述均取自公告新闻稿原文，<strong>因此语气评分的可靠性低于有实录时的水平，且未涵盖问答环节。</strong></li>
+    <li>本次分析期间，NVIDIA 官网、投资者关系页、CNBC、Kiplinger、富途、moomoo 等站点<strong>均被本环境的出口策略封禁</strong>，WebSearch 为唯一可用检索通道且其索引未收录当日数据。<strong>核心数字由用户提供的公告全文获得，历史与共识数据经多来源交叉且已用同比口径自洽校验。</strong></li>
+    <li>公司未披露注资承诺的期限结构、对手方集中度与转化历史，<strong>本报告对该科目的全部判断都建立在「规模与增速」之上，无法评估其信用质量。这是本次分析最大的单一盲区。</strong></li>
+    <li>数据中心指引<strong>不含中国数据中心计算产品收入</strong>，故三情景均未计入中国贡献。</li>
+    <li><strong>本报告不对盘后价格反应下任何结论。</strong>盘后 −0.83% 仅作事实记录，正式定价要到下一交易日才形成。</li>
+  </ul>
+
+  <div class="ap-sub">我的独立看法与分歧点</div>
+  <ul>
+    <li><strong>我认为这份财报最容易被误读的地方，是把「四项全超」当作分歧已经消除。</strong>四个被超越的数字全部来自利润表，而市场用下跌回应的是资产负债表上的一行。<strong>两者不在同一张表上，因此「超预期」并不能回应质疑——它甚至可能加重质疑，因为超出的那部分收入无法被证明与那 $1,600 亿新增承诺无关。</strong></li>
+    <li><strong>但我不认为「循环融资」等同于「虚假需求」。</strong>资本品行业里卖方融资是常态，且英伟达本季返还股东 $260 亿、回购余额尚有 $990 亿，<strong>这不是一家靠融资维持运转的公司。真正的问题不是能不能撑，而是这种结构把需求风险从客户资产负债表转移到了自己这里——风险没有消失，只是换了位置，且这个位置目前没有披露。</strong></li>
+    <li><strong>毛利率下调 100bp 被市场轻视了。</strong>三个季度精确锁定在 75.0% 说明公司对成本有很强的掌控力，<strong>而首次主动让出 100bp，通常意味着掌控力遇到了外部约束。</strong>与 SK 海力士签多年期存储合作，与毛利率指引下调出现在同一份公告里——<strong>如果这是锁价换供应的交换，那 74% 就是新基准而不是周期低点。</strong>这个假设无法从公告证实或证伪，但它能同时解释这两条。</li>
+    <li><strong>一个我答不了但很重要的问题：黄仁勋说「需求正在加速增长」，而 Q3 指引的环比增量是 $118 亿，低于本季的 $146 亿。</strong>这两句话可以同时为真——如果指引一如既往地保守。<strong>但按增量口径，公司自己给出的下季路径是减速的。这是本次公告里措辞与数字之间最直接的一处张力。</strong></li>
+  </ul>
+
+  <div class="ap-sub">待核实项</div>
+  <ul>
+    <li>业绩发布会逐字记录，特别是问答环节对注资承诺与毛利率的追问 <span class="badge badge-gap">缺口</span></li>
+    <li>注资承诺的期限结构、对手方集中度与历史转化率（公告仅给总额） <span class="badge badge-gap">缺口</span></li>
+    <li>$5,000 亿第三方资本平台的最终协议签署时间表 <span class="badge badge-gap">缺口</span></li>
+    <li>Q3 FY26 数据中心营收（本次未取得，故分部占比轨迹缺该点）</li>
+    <li>SK 海力士合作是否含锁价条款（决定 74% 是周期低点还是新基准）</li>
+    <li>10-Q 中注资承诺的会计分类与附注（应为本季度最重要的补充披露）</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  对这份分析有异议或想调整假设？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=nvda_fy27q2">点此反馈 · Send Feedback</a>
+</div>
+
+<div class="footer">
+  Earnings Copilot · Earner ｜ 英伟达 NVIDIA Corporation (NVDA.US) ｜ FY2027 第二财季（截至 2026 年 7 月）｜ 生成于 2026-08-26 公告后约 1 小时<br>
+  收盘 $209.66 ｜ 盘后 $207.93 ｜ 股数约 242 亿股 ｜ 市值约 5.03 万亿美元<br>
+  本报告为研究分析，不构成投资建议。所有带「测算」「二手」标记的数字均为分析师估算或第三方来源，非公司披露。
+</div>
+
+</body>
+</html>
