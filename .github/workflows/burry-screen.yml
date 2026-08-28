@@ -1,0 +1,56 @@
+name: Burry Screen
+
+# data.sec.gov / www.sec.gov 在会话容器的出口策略封禁名单内（CONNECT tunnel 403），
+# 故 13F 边界发现与全市场扫描在 Actions 里跑（出口不受限），产物写回仓库。
+# 与 ses-screen.yml / fetch-prices.yml 同一套机制。
+
+on:
+  push:
+    branches: [main, claude/install-claude-hud-d51E6]
+    paths:
+      - burry_trigger.txt
+      - scripts/burry_screener.py
+  workflow_dispatch:
+  schedule:
+    # 跟随 10-Q/10-K 披露节奏做季度扫描，不追求实时。
+    # 伯里本人的方法论也不依赖高频信号。
+    - cron: '0 13 1 3,5,8,11 *'
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # frames 结果跨 run 缓存，降低 SEC 负载并加速重跑
+      - name: Cache SEC frames
+        uses: actions/cache@v4
+        with:
+          path: .burry_frames
+          key: burry-frames-${{ github.run_id }}
+          restore-keys: burry-frames-
+
+      - name: Run screener
+        env:
+          FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
+          BURRY_YEAR: '2025'
+        run: python scripts/burry_screener.py
+
+      - name: Commit artifacts
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add burry_state.json burry_screen.json
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "chore: burry screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+            git push
+          fi
