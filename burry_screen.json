@@ -1,0 +1,7551 @@
+{
+  "updated_at": "2026-08-28T13:35:51.025947Z",
+  "year": 2025,
+  "source_boundary": "2025-09-30",
+  "coverage_note": "EDGAR 仅覆盖向 SEC 报送的主体，扫描范围为美股。伯里本人选股不限国别（历史上做过波兰、英国、墨西哥小盘股）。本扫描器范围小于其真实选股范围——这是数据源的收窄，不是选股标准的收窄。",
+  "sample": {
+    "universe": 6735,
+    "complete": 799,
+    "incomplete": 5947,
+    "incomplete_ratio": 0.8814,
+    "stage_a_survivors": 240,
+    "stage_b_priced": 229
+  },
+  "thresholds": {
+    "net_debt_ebitda_cut": 1.173851207205987,
+    "sbc_ratio_cut": 0.0093603744149766,
+    "quantiles": {
+      "net_debt": 0.6,
+      "sbc": 0.5,
+      "ev_ebitda": 0.1,
+      "pb": 0.15,
+      "fcf_yield": 0.85
+    }
+  },
+  "warnings": [
+    "frames 不返回 SIC，本次未按行业剔除金融机构；银行/保险/券商的 EV/EBITDA 与净负债/EBITDA 会失真，须人工复核。",
+    "不完整样本占比 88.1% > 30%，分位数阈值代表性存疑",
+    "Stage A 幸存者中 10 家无 ticker 映射，无法取价，已并入不完整组而非静默丢弃。"
+  ],
+  "results": [
+    {
+      "cik": "0001688568",
+      "name": "DXC TECHNOLOGY CO",
+      "ticker": "DXC",
+      "missing": [],
+      "revenue": 12644000000,
+      "ebitda": 2152000000,
+      "equity": 3145000000,
+      "shares": 169759963,
+      "net_debt": -1731000000,
+      "fcf": 1036000000,
+      "net_debt_ebitda": -0.804368029739777,
+      "sbc_ratio": 0.006801645049035116,
+      "price": 11.19,
+      "mktcap": 1899613985.97,
+      "ev": 168613985.97000003,
+      "ev_ebitda": 0.07835222396375466,
+      "pb": 0.6040108063497616,
+      "fcf_yield": 6.144211549475654,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.004366812227074236,
+        "pb": 0.05240174672489083,
+        "fcf_yield": 1.0
+      }
+    },
+    {
+      "cik": "0001016504",
+      "name": "INTEGRATED BIOPHARMA INC",
+      "ticker": "INBP",
+      "missing": [],
+      "revenue": 54353000,
+      "ebitda": 2338000,
+      "equity": 19769000,
+      "shares": 31059610,
+      "net_debt": -5314000,
+      "fcf": 1874000,
+      "net_debt_ebitda": -2.2728828058169377,
+      "sbc_ratio": 0.0034036759700476512,
+      "price": 0.18895,
+      "mktcap": 5868713.3095,
+      "ev": 554713.3095000004,
+      "ev_ebitda": 0.23725975598802415,
+      "pb": 0.2968644498710102,
+      "fcf_yield": 3.3783216805977836,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.013100436681222707,
+        "pb": 0.017467248908296942,
+        "fcf_yield": 0.9912663755458515
+      }
+    },
+    {
+      "cik": "0001045742",
+      "name": "Live Ventures Incorporated",
+      "ticker": "LIVE",
+      "missing": [],
+      "revenue": 444944000,
+      "ebitda": 31909000,
+      "equity": 95291000,
+      "shares": 3071656,
+      "net_debt": 0,
+      "fcf": 20978000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.00044949476788090187,
+      "price": 9.33,
+      "mktcap": 28658550.48,
+      "ev": 28658550.48,
+      "ev_ebitda": 0.8981337704096023,
+      "pb": 0.3007477146844928,
+      "fcf_yield": 0.7319979429748186,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.026200873362445413,
+        "pb": 0.021834061135371178,
+        "fcf_yield": 0.982532751091703
+      }
+    },
+    {
+      "cik": "0000885639",
+      "name": "KOHL’S CORP",
+      "ticker": "KSS",
+      "missing": [],
+      "revenue": 15527000000,
+      "ebitda": 1324000000,
+      "equity": 4048000000,
+      "shares": 112189191,
+      "net_debt": 762000000,
+      "fcf": 1380000000,
+      "net_debt_ebitda": 0.5755287009063444,
+      "sbc_ratio": 0.0021897340117215175,
+      "price": 18.05,
+      "mktcap": 2025014897.5500002,
+      "ev": 2787014897.55,
+      "ev_ebitda": 2.1049961461858007,
+      "pb": 0.5002507157979249,
+      "fcf_yield": 0.4951534350294022,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.034934497816593885,
+        "pb": 0.039301310043668124,
+        "fcf_yield": 0.9694323144104804
+      }
+    },
+    {
+      "cik": "0000928465",
+      "name": "AMCON DISTRIBUTING CO",
+      "ticker": "DIT",
+      "missing": [],
+      "revenue": 2816688287,
+      "ebitda": 22390665,
+      "equity": 114114013,
+      "shares": 650709,
+      "net_debt": 5517971,
+      "fcf": 9664030,
+      "net_debt_ebitda": 0.24644069302988544,
+      "sbc_ratio": 0.0009058322185581624,
+      "price": 69,
+      "mktcap": 44898921,
+      "ev": 50416892,
+      "ev_ebitda": 2.2516924798794498,
+      "pb": 0.393456682659999,
+      "fcf_yield": 0.1916823829600603,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.039301310043668124,
+        "pb": 0.03056768558951965,
+        "fcf_yield": 0.9126637554585153
+      }
+    },
+    {
+      "cik": "0000018498",
+      "name": "Genesco Inc",
+      "ticker": "GCO",
+      "missing": [],
+      "revenue": 2436096000,
+      "ebitda": 70639000,
+      "equity": 567044000,
+      "shares": 10792736,
+      "net_debt": -102026000,
+      "fcf": 83706000,
+      "net_debt_ebitda": -1.4443296196152267,
+      "sbc_ratio": 0.005024843027532577,
+      "price": 33.13,
+      "mktcap": 357563343.68,
+      "ev": 255537343.68,
+      "ev_ebitda": 3.617510775633857,
+      "pb": 0.6305742476421583,
+      "fcf_yield": 0.3275685611916743,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.06550218340611354,
+        "pb": 0.07423580786026202,
+        "fcf_yield": 0.9563318777292577
+      }
+    },
+    {
+      "cik": "0000911971",
+      "name": "TEEKAY CORPORATION LTD.",
+      "ticker": "TK",
+      "missing": [],
+      "revenue": 949520000,
+      "ebitda": 389444000,
+      "equity": 2162603000,
+      "shares": 86056804,
+      "net_debt": -940735000,
+      "fcf": 111508000,
+      "net_debt_ebitda": -2.4155847824077403,
+      "sbc_ratio": null,
+      "price": 12.91,
+      "mktcap": 1110993339.64,
+      "ev": 170258339.6400001,
+      "ev_ebitda": 0.4371831114101131,
+      "pb": 0.5137296765240777,
+      "fcf_yield": 0.6549341444053561,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.017467248908296942,
+        "pb": 0.043668122270742356,
+        "fcf_yield": 0.9737991266375546
+      }
+    },
+    {
+      "cik": "0002039060",
+      "name": "Robin Energy Ltd.",
+      "ticker": "RBNE",
+      "missing": [],
+      "revenue": 9905602,
+      "ebitda": 2847638,
+      "equity": 30469567,
+      "shares": 2774865,
+      "net_debt": -5649692,
+      "fcf": 10170291,
+      "net_debt_ebitda": -1.9839923473419023,
+      "sbc_ratio": null,
+      "price": 2.71,
+      "mktcap": 7519884.149999999,
+      "ev": 1870192.1499999994,
+      "ev_ebitda": 0.6567520696099713,
+      "pb": 0.24679983637443878,
+      "fcf_yield": 5.438099502235641,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.021834061135371178,
+        "pb": 0.013100436681222707,
+        "fcf_yield": 0.9956331877729258
+      }
+    },
+    {
+      "cik": "0002037400",
+      "name": "China Automotive Systems, Inc.",
+      "ticker": "CAAS",
+      "missing": [],
+      "revenue": 765736000,
+      "ebitda": 67890000,
+      "equity": 401339000,
+      "shares": 30170702,
+      "net_debt": -60660000,
+      "fcf": 74443000,
+      "net_debt_ebitda": -0.8935041979673001,
+      "sbc_ratio": null,
+      "price": 5.09,
+      "mktcap": 153568873.18,
+      "ev": 92908873.18,
+      "ev_ebitda": 1.3685207420827812,
+      "pb": 0.3826412912276156,
+      "fcf_yield": 0.8012474745633331,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.03056768558951965,
+        "pb": 0.026200873362445413,
+        "fcf_yield": 0.9868995633187773
+      }
+    },
+    {
+      "cik": "0001646972",
+      "name": "Albertsons Companies, Inc.",
+      "ticker": "ACI",
+      "missing": [],
+      "revenue": 83172500000,
+      "ebitda": 2641300000,
+      "equity": 2501800000,
+      "shares": 513913121,
+      "net_debt": -195100000,
+      "fcf": 2366700000,
+      "net_debt_ebitda": -0.07386514216484306,
+      "sbc_ratio": 0.0011482160569899907,
+      "price": 12.4,
+      "mktcap": 6372522700.400001,
+      "ev": 6177422700.400001,
+      "ev_ebitda": 2.3387811685155038,
+      "pb": 2.5471751140778642,
+      "fcf_yield": 0.38312094133476593,
+      "passed": [
+        "EV/EBITDA",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.043668122270742356,
+        "pb": 0.4410480349344978,
+        "fcf_yield": 0.9606986899563319
+      }
+    },
+    {
+      "cik": "0000895447",
+      "name": "Shoe Carnival, Inc.",
+      "ticker": "SHOE",
+      "missing": [],
+      "revenue": 1135324000,
+      "ebitda": 101106000,
+      "equity": 689666000,
+      "shares": 27374968,
+      "net_debt": -117091000,
+      "fcf": 26584000,
+      "net_debt_ebitda": -1.1581013985322335,
+      "sbc_ratio": 0.006440452240946197,
+      "price": 14.01,
+      "mktcap": 383523301.68,
+      "ev": 266432301.68,
+      "ev_ebitda": 2.635177948687516,
+      "pb": 0.5561000566651104,
+      "fcf_yield": 0.09977769149000883,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.05240174672489083,
+        "pb": 0.048034934497816595,
+        "fcf_yield": 0.8078602620087336
+      }
+    },
+    {
+      "cik": "0001856485",
+      "name": "SYLVAMO CORPORATION",
+      "ticker": "SLVM",
+      "missing": [],
+      "revenue": 3351000000,
+      "ebitda": 430000000,
+      "equity": 966000000,
+      "shares": 39508287,
+      "net_debt": -112000000,
+      "fcf": 268000000,
+      "net_debt_ebitda": -0.26046511627906976,
+      "sbc_ratio": 0.005371530886302597,
+      "price": 36.99,
+      "mktcap": 1461411536.13,
+      "ev": 1349411536.13,
+      "ev_ebitda": 3.1381663630930237,
+      "pb": 1.5128483810869566,
+      "fcf_yield": 0.19860509031114532,
+      "passed": [
+        "EV/EBITDA",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.056768558951965066,
+        "pb": 0.24017467248908297,
+        "fcf_yield": 0.925764192139738
+      }
+    },
+    {
+      "cik": "0000802481",
+      "name": "PILGRIM’S PRIDE CORPORATION",
+      "ticker": "PPC",
+      "missing": [],
+      "revenue": 18497553000,
+      "ebitda": 2069696000,
+      "equity": 3680050000,
+      "shares": 237547447,
+      "net_debt": -639311000,
+      "fcf": 1116750000,
+      "net_debt_ebitda": -0.30889125746003276,
+      "sbc_ratio": 0.0015869126040617373,
+      "price": 31.53,
+      "mktcap": 7489871003.91,
+      "ev": 6850560003.91,
+      "ev_ebitda": 3.309935374040439,
+      "pb": 2.0352633806361324,
+      "fcf_yield": 0.1630158701423837,
+      "passed": [
+        "EV/EBITDA",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.0611353711790393,
+        "pb": 0.34497816593886466,
+        "fcf_yield": 0.8864628820960698
+      }
+    },
+    {
+      "cik": "0000794367",
+      "name": "Macy's, Inc.",
+      "ticker": "M",
+      "missing": [],
+      "revenue": 21764000000,
+      "ebitda": 1924000000,
+      "equity": 4860000000,
+      "shares": 265883109,
+      "net_debt": 1186000000,
+      "fcf": 1057000000,
+      "net_debt_ebitda": 0.6164241164241164,
+      "sbc_ratio": 0.002710898731850763,
+      "price": 22.8,
+      "mktcap": 6062134885.2,
+      "ev": 7248134885.2,
+      "ev_ebitda": 3.7672218738045737,
+      "pb": 1.247352857037037,
+      "fcf_yield": 0.14583061942711542,
+      "passed": [
+        "EV/EBITDA",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.06986899563318777,
+        "pb": 0.17903930131004367,
+        "fcf_yield": 0.8733624454148472
+      }
+    },
+    {
+      "cik": "0001467858",
+      "name": "GENERAL MOTORS COMPANY",
+      "ticker": "GM",
+      "missing": [],
+      "revenue": 167971000000,
+      "ebitda": 14889000000,
+      "equity": 61119000000,
+      "shares": 903967853,
+      "net_debt": -20945000000,
+      "fcf": 17564000000,
+      "net_debt_ebitda": -1.4067432332594534,
+      "sbc_ratio": 0.001988438480451983,
+      "price": 87.8,
+      "mktcap": 79368377493.4,
+      "ev": 58423377493.399994,
+      "ev_ebitda": 3.9239289068036802,
+      "pb": 1.2985876322158412,
+      "fcf_yield": 0.30063308137199324,
+      "passed": [
+        "EV/EBITDA",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.07860262008733625,
+        "pb": 0.2052401746724891,
+        "fcf_yield": 0.9519650655021834
+      }
+    },
+    {
+      "cik": "0000825324",
+      "name": "Good Times Restaurants Inc.",
+      "ticker": "GTIM",
+      "missing": [],
+      "revenue": 141630000,
+      "ebitda": 4379000,
+      "equity": 33247000,
+      "shares": 10557896,
+      "net_debt": 1834000,
+      "fcf": -1454000,
+      "net_debt_ebitda": 0.41881708152546243,
+      "sbc_ratio": 0.000790792911106404,
+      "price": 1.52,
+      "mktcap": 16048001.92,
+      "ev": 17882001.92,
+      "ev_ebitda": 4.0835811646494635,
+      "pb": 0.4826902252834842,
+      "fcf_yield": -0.08131080661465447,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.08296943231441048,
+        "pb": 0.034934497816593885,
+        "fcf_yield": 0.03056768558951965
+      }
+    },
+    {
+      "cik": "0001285785",
+      "name": "Mosaic Co",
+      "ticker": "MOS",
+      "missing": [],
+      "revenue": 12052400000,
+      "ebitda": 1871400000,
+      "equity": 12084900000,
+      "shares": 317505258,
+      "net_debt": 483300000,
+      "fcf": -534600000,
+      "net_debt_ebitda": 0.25825585123437,
+      "sbc_ratio": 0.0025472105140884804,
+      "price": 23.95,
+      "mktcap": 7604250929.099999,
+      "ev": 8087550929.099999,
+      "ev_ebitda": 4.3216580790317405,
+      "pb": 0.629235734602686,
+      "fcf_yield": -0.06610159301457301,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.09606986899563319,
+        "pb": 0.06550218340611354,
+        "fcf_yield": 0.039301310043668124
+      }
+    },
+    {
+      "cik": "0001065696",
+      "name": "LKQ CORPORATION",
+      "ticker": "LKQ",
+      "missing": [],
+      "revenue": 13651000000,
+      "ebitda": 1411000000,
+      "equity": 6537000000,
+      "shares": 255132267,
+      "net_debt": -319000000,
+      "fcf": 1063000000,
+      "net_debt_ebitda": -0.22608079376328843,
+      "sbc_ratio": 0.0024906600249066002,
+      "price": 25.51,
+      "mktcap": 6508424131.17,
+      "ev": 6189424131.17,
+      "ev_ebitda": 4.386551474961021,
+      "pb": 0.9956285958650757,
+      "fcf_yield": 0.17174457226912623,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.10480349344978165,
+        "pb": 0.11790393013100436,
+        "fcf_yield": 0.9039301310043668
+      }
+    },
+    {
+      "cik": "0000793952",
+      "name": "Harley-Davidson, Inc.",
+      "ticker": "HOG",
+      "missing": [],
+      "revenue": 3603979000,
+      "ebitda": 559006000,
+      "equity": 3140668000,
+      "shares": 111850563,
+      "net_debt": -622503000,
+      "fcf": 415243000,
+      "net_debt_ebitda": -1.1135891206892234,
+      "sbc_ratio": 0.008809429799674194,
+      "price": 27.96,
+      "mktcap": 3127341741.48,
+      "ev": 2504838741.48,
+      "ev_ebitda": 4.480879885868846,
+      "pb": 0.9957568713025382,
+      "fcf_yield": 0.1657763404580093,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.11353711790393013,
+        "pb": 0.1222707423580786,
+        "fcf_yield": 0.8908296943231441
+      }
+    },
+    {
+      "cik": "0001318008",
+      "name": "ZUMIEZ INC",
+      "ticker": "ZUMZ",
+      "missing": [],
+      "revenue": 929057000,
+      "ebitda": 38162000,
+      "equity": 324285000,
+      "shares": 16949578,
+      "net_debt": -127860000,
+      "fcf": 42413000,
+      "net_debt_ebitda": -3.350453330538232,
+      "sbc_ratio": 0.007829444264453096,
+      "price": 17.88,
+      "mktcap": 303058454.64,
+      "ev": 175198454.64,
+      "ev_ebitda": 4.590913857764268,
+      "pb": 0.9345435485452611,
+      "fcf_yield": 0.2420854686598165,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1222707423580786,
+        "pb": 0.1091703056768559,
+        "fcf_yield": 0.9432314410480349
+      }
+    },
+    {
+      "cik": "0001701758",
+      "name": "THE LOVESAC COMPANY",
+      "ticker": "LOVE",
+      "missing": [],
+      "revenue": 697115000,
+      "ebitda": 20250000,
+      "equity": 218707000,
+      "shares": 14617106,
+      "net_debt": -101853000,
+      "fcf": 26193000,
+      "net_debt_ebitda": -5.0297777777777775,
+      "sbc_ratio": 0.007904004360829992,
+      "price": 16.22,
+      "mktcap": 237089459.32,
+      "ev": 135236459.32,
+      "ev_ebitda": 6.678343670123456,
+      "pb": 1.084050621699351,
+      "fcf_yield": 0.1936829767039482,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2445414847161572,
+        "pb": 0.13537117903930132,
+        "fcf_yield": 0.9213973799126638
+      }
+    },
+    {
+      "cik": "0001005516",
+      "name": "BOS BETTER ONLINE SOLUTIONS LTD",
+      "ticker": "BOSC",
+      "missing": [],
+      "revenue": 50569000,
+      "ebitda": 3389000,
+      "equity": 28704000,
+      "shares": 7028934,
+      "net_debt": -10078000,
+      "fcf": 4594000,
+      "net_debt_ebitda": -2.9737385659486573,
+      "sbc_ratio": 0.0028475943760011076,
+      "price": 4.66,
+      "mktcap": 32754832.44,
+      "ev": 22676832.44,
+      "ev_ebitda": 6.6913049395101805,
+      "pb": 1.141124318561873,
+      "fcf_yield": 0.20258561296667585,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.24890829694323144,
+        "pb": 0.14847161572052403,
+        "fcf_yield": 0.9301310043668122
+      }
+    },
+    {
+      "cik": "0001047340",
+      "name": "FRESH DEL MONTE PRODUCE INC",
+      "ticker": "DMC",
+      "missing": [],
+      "revenue": 4322300000,
+      "ebitda": 209900000,
+      "equity": 2016200000,
+      "shares": 47383526,
+      "net_debt": -35700000,
+      "fcf": 245100000,
+      "net_debt_ebitda": -0.1700809909480705,
+      "sbc_ratio": 0.0023135830460634384,
+      "price": 31.72,
+      "mktcap": 1503005444.72,
+      "ev": 1467305444.72,
+      "ev_ebitda": 6.990497592758457,
+      "pb": 0.7454644602321199,
+      "fcf_yield": 0.16704088496500566,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.27510917030567683,
+        "pb": 0.09170305676855896,
+        "fcf_yield": 0.8951965065502183
+      }
+    },
+    {
+      "cik": "0000821002",
+      "name": "G III APPAREL GROUP LTD /DE/",
+      "ticker": "GIII",
+      "missing": [],
+      "revenue": 2957012000,
+      "ebitda": 137002000,
+      "equity": 1760323000,
+      "shares": 42189287,
+      "net_debt": -402024000,
+      "fcf": 299144000,
+      "net_debt_ebitda": -2.9344389133005357,
+      "sbc_ratio": 0.007908659146462714,
+      "price": 33.85,
+      "mktcap": 1428107364.95,
+      "ev": 1026083364.95,
+      "ev_ebitda": 7.489550261675013,
+      "pb": 0.8112757516376257,
+      "fcf_yield": 0.2915396645325957,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.31877729257641924,
+        "pb": 0.09606986899563319,
+        "fcf_yield": 0.9475982532751092
+      }
+    },
+    {
+      "cik": "0001606757",
+      "name": "KIMBALL ELECTRONICS, INC.",
+      "ticker": "KE",
+      "missing": [],
+      "revenue": 1486727000,
+      "ebitda": 82529000,
+      "equity": 579162000,
+      "shares": 24214134,
+      "net_debt": 75959000,
+      "fcf": 150661000,
+      "net_debt_ebitda": 0.9203916199154236,
+      "sbc_ratio": 0.004384799630328904,
+      "price": 24.11,
+      "mktcap": 583802770.74,
+      "ev": 659761770.74,
+      "ev_ebitda": 7.994302254237905,
+      "pb": 1.008012906129891,
+      "fcf_yield": 0.22835666854570258,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3537117903930131,
+        "pb": 0.12663755458515283,
+        "fcf_yield": 0.9388646288209607
+      }
+    },
+    {
+      "cik": "0000100726",
+      "name": "UNIFI, INC.",
+      "ticker": "UFI",
+      "missing": [],
+      "revenue": 531303000,
+      "ebitda": 9402000,
+      "equity": 229998000,
+      "shares": 18581051,
+      "net_debt": -30192000,
+      "fcf": 21532000,
+      "net_debt_ebitda": -3.2112316528398215,
+      "sbc_ratio": 0.006570638599819689,
+      "price": 7.64,
+      "mktcap": 141959229.64,
+      "ev": 111767229.63999999,
+      "ev_ebitda": 11.887601535843435,
+      "pb": 0.6172194090383394,
+      "fcf_yield": 0.19265038660575323,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5502183406113537,
+        "pb": 0.0611353711790393,
+        "fcf_yield": 0.9170305676855895
+      }
+    },
+    {
+      "cik": "0001605331",
+      "name": "AB International Group Corp.",
+      "ticker": "AERA",
+      "missing": [],
+      "revenue": 1180300,
+      "ebitda": 3440606,
+      "equity": 3465725,
+      "shares": 3201107,
+      "net_debt": 0,
+      "fcf": -2318961,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": null,
+      "price": 0.212,
+      "mktcap": 678634.684,
+      "ev": 678634.684,
+      "ev_ebitda": 0.19724277758046113,
+      "pb": 0.19581319464181376,
+      "fcf_yield": -3.4170976737168948,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.008733624454148471,
+        "pb": 0.008733624454148471,
+        "fcf_yield": 0.004366812227074236
+      }
+    },
+    {
+      "cik": "0000879526",
+      "name": "WABASH NATIONAL CORPORATION",
+      "ticker": "WNC",
+      "missing": [],
+      "revenue": 1542754000,
+      "ebitda": 366240000,
+      "equity": 367358000,
+      "shares": 40436437,
+      "net_debt": 410929000,
+      "fcf": -13045000,
+      "net_debt_ebitda": 1.1220210790738314,
+      "sbc_ratio": 0.007438645435370772,
+      "price": 13.52,
+      "mktcap": 546700628.24,
+      "ev": 957629628.24,
+      "ev_ebitda": 2.6147597975098296,
+      "pb": 1.4881957878690542,
+      "fcf_yield": -0.013622176690559408,
+      "passed": [
+        "EV/EBITDA",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.048034934497816595,
+        "pb": 0.2314410480349345,
+        "fcf_yield": 0.08733624454148471
+      }
+    },
+    {
+      "cik": "0000842162",
+      "name": "LEAR CORP",
+      "ticker": "LEA",
+      "missing": [],
+      "revenue": 23259100000,
+      "ebitda": 1381400000,
+      "equity": 5035100000,
+      "shares": 50727454,
+      "net_debt": -1005100000,
+      "fcf": 527200000,
+      "net_debt_ebitda": -0.7275951932821775,
+      "sbc_ratio": 0.0028461978322463035,
+      "price": 123.34,
+      "mktcap": 6256724176.360001,
+      "ev": 5251624176.360001,
+      "ev_ebitda": 3.801668000839728,
+      "pb": 1.2426216314194356,
+      "fcf_yield": 0.10038799089492581,
+      "passed": [
+        "EV/EBITDA",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.07423580786026202,
+        "pb": 0.17467248908296942,
+        "fcf_yield": 0.8122270742358079
+      }
+    },
+    {
+      "cik": "0000066382",
+      "name": "MillerKnoll, Inc.",
+      "ticker": "MLKN",
+      "missing": [],
+      "revenue": 3841700000,
+      "ebitda": 346600000,
+      "equity": 1299700000,
+      "shares": 68249980,
+      "net_debt": -180400000,
+      "fcf": 77600000,
+      "net_debt_ebitda": -0.5204847085978073,
+      "sbc_ratio": 0.006767837155425983,
+      "price": 23.64,
+      "mktcap": 1613429527.2,
+      "ev": 1433029527.2,
+      "ev_ebitda": 4.1345341234852855,
+      "pb": 1.2413861100253905,
+      "fcf_yield": 0.05415101261145877,
+      "passed": [
+        "EV/EBITDA",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.08733624454148471,
+        "pb": 0.1703056768558952,
+        "fcf_yield": 0.5545851528384279
+      }
+    },
+    {
+      "cik": "0000016732",
+      "name": "CAMPBELL'S CO",
+      "ticker": "CPB",
+      "missing": [],
+      "revenue": 10253000000,
+      "ebitda": 1558000000,
+      "equity": 4005000000,
+      "shares": 298134245,
+      "net_debt": -561000000,
+      "fcf": 705000000,
+      "net_debt_ebitda": -0.3600770218228498,
+      "sbc_ratio": 0.005559348483370721,
+      "price": 23.56,
+      "mktcap": 7024042812.2,
+      "ev": 6463042812.2,
+      "ev_ebitda": 4.1482944879332475,
+      "pb": 1.7538184300124844,
+      "fcf_yield": 0.10908174686220594,
+      "passed": [
+        "EV/EBITDA",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.09170305676855896,
+        "pb": 0.2925764192139738,
+        "fcf_yield": 0.8296943231441049
+      }
+    },
+    {
+      "cik": "0001040971",
+      "name": "SL GREEN REALTY CORP",
+      "ticker": "SLG",
+      "missing": [],
+      "revenue": 1003046000,
+      "ebitda": 914698000,
+      "equity": 3671155000,
+      "shares": 71031183,
+      "net_debt": -155747000,
+      "fcf": 82906000,
+      "net_debt_ebitda": -0.1702714994457187,
+      "sbc_ratio": null,
+      "price": 57.98,
+      "mktcap": 4118387990.3399997,
+      "ev": 3962640990.3399997,
+      "ev_ebitda": 4.332185038493579,
+      "pb": 1.1218235106771575,
+      "fcf_yield": 0.02092190541664148,
+      "passed": [
+        "EV/EBITDA",
+        "P/B",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.10043668122270742,
+        "pb": 0.14410480349344978,
+        "fcf_yield": 0.22707423580786026
+      }
+    },
+    {
+      "cik": "0000832988",
+      "name": "SIGNET JEWELERS LIMITED",
+      "ticker": "SIG",
+      "missing": [],
+      "revenue": 6813600000,
+      "ebitda": 540600000,
+      "equity": 1966200000,
+      "shares": 40684442,
+      "net_debt": -874800000,
+      "fcf": 525300000,
+      "net_debt_ebitda": -1.6182019977802442,
+      "sbc_ratio": 0.0039479863801808145,
+      "price": 82.17,
+      "mktcap": 3343040599.14,
+      "ev": 2468240599.14,
+      "ev_ebitda": 4.565742876692563,
+      "pb": 1.70025460234971,
+      "fcf_yield": 0.21282366078210868,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.11790393013100436,
+        "pb": 0.27510917030567683,
+        "fcf_yield": 0.9344978165938864
+      }
+    },
+    {
+      "cik": "0000103379",
+      "name": "V. F. CORPORATION",
+      "ticker": "VFC",
+      "missing": [],
+      "revenue": 9605207000,
+      "ebitda": 857098000,
+      "equity": 1784443000,
+      "shares": 391263343,
+      "net_debt": -1455947000,
+      "fcf": 671274000,
+      "net_debt_ebitda": -1.6986937316386224,
+      "sbc_ratio": 0.008011696156053691,
+      "price": 13.81,
+      "mktcap": 5403346766.83,
+      "ev": 3947399766.83,
+      "ev_ebitda": 4.605540751267649,
+      "pb": 3.0280299044743932,
+      "fcf_yield": 0.17005472960725068,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.13100436681222707,
+        "pb": 0.5109170305676856,
+        "fcf_yield": 0.8995633187772926
+      }
+    },
+    {
+      "cik": "0000070318",
+      "name": "TENET HEALTHCARE CORP",
+      "ticker": "THC",
+      "missing": [],
+      "revenue": 21310000000,
+      "ebitda": 4371000000,
+      "equity": 4220000000,
+      "shares": 86963000,
+      "net_debt": -2883000000,
+      "fcf": 2530000000,
+      "net_debt_ebitda": -0.6595744680851063,
+      "sbc_ratio": 0.004880337869544815,
+      "price": 269.99,
+      "mktcap": 23479140370.0,
+      "ev": 20596140370.0,
+      "ev_ebitda": 4.711997339281629,
+      "pb": 5.563777338862559,
+      "fcf_yield": 0.1228385490946234,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.13537117903930132,
+        "pb": 0.7641921397379913,
+        "fcf_yield": 0.851528384279476
+      }
+    },
+    {
+      "cik": "0000876427",
+      "name": "MONRO, INC.",
+      "ticker": "MNRO",
+      "missing": [],
+      "revenue": 1157176000,
+      "ebitda": 81703000,
+      "equity": 604944000,
+      "shares": 30019660,
+      "net_debt": 40088000,
+      "fcf": 38781000,
+      "net_debt_ebitda": 0.4906551779004443,
+      "sbc_ratio": 0.0033478053468098197,
+      "price": 12.39,
+      "mktcap": 371943587.40000004,
+      "ev": 412031587.40000004,
+      "ev_ebitda": 5.043041104977786,
+      "pb": 0.6148396998730462,
+      "fcf_yield": 0.09412142463328042,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1615720524017467,
+        "pb": 0.056768558951965066,
+        "fcf_yield": 0.7860262008733624
+      }
+    },
+    {
+      "cik": "0000055529",
+      "name": "KEWAUNEE SCIENTIFIC CORPORATION",
+      "ticker": "KEQU",
+      "missing": [],
+      "revenue": 281999000,
+      "ebitda": 22996000,
+      "equity": 70675000,
+      "shares": 2866384,
+      "net_debt": 13180000,
+      "fcf": 18633000,
+      "net_debt_ebitda": 0.573143155331362,
+      "sbc_ratio": 0.007539033826361086,
+      "price": 37.99,
+      "mktcap": 108893928.16000001,
+      "ev": 122073928.16000001,
+      "ev_ebitda": 5.308485308749348,
+      "pb": 1.5407701189954017,
+      "fcf_yield": 0.1526370149699621,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1703056768558952,
+        "pb": 0.24890829694323144,
+        "fcf_yield": 0.8820960698689956
+      }
+    },
+    {
+      "cik": "0000862668",
+      "name": "Escalon Medical Corp.",
+      "ticker": "ESMC",
+      "missing": [],
+      "revenue": 12046148,
+      "ebitda": 171036,
+      "equity": 1772932,
+      "shares": 7415329,
+      "net_debt": -337434,
+      "fcf": 376845,
+      "net_debt_ebitda": -1.9728829018452256,
+      "sbc_ratio": null,
+      "price": 0.17,
+      "mktcap": 1260605.9300000002,
+      "ev": 923171.9300000002,
+      "ev_ebitda": 5.3975299352183175,
+      "pb": 0.7110289227110799,
+      "fcf_yield": 0.4082067356619042,
+      "passed": [
+        "P/B",
+        "FCF yield",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.17903930131004367,
+        "pb": 0.08733624454148471,
+        "fcf_yield": 0.9650655021834061
+      }
+    },
+    {
+      "cik": "0000104918",
+      "name": "AVISTA CORP",
+      "ticker": "AVA",
+      "missing": [],
+      "revenue": 1964000000,
+      "ebitda": 643000000,
+      "equity": 2709000000,
+      "shares": 82251245,
+      "net_debt": 369000000,
+      "fcf": -101000000,
+      "net_debt_ebitda": 0.5738724727838258,
+      "sbc_ratio": 0.004582484725050916,
+      "price": 37.94,
+      "mktcap": 3120612235.2999997,
+      "ev": 3489612235.2999997,
+      "ev_ebitda": 5.4270796816485225,
+      "pb": 1.1519425010335915,
+      "fcf_yield": -0.02894304386553628,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.18340611353711792,
+        "pb": 0.15283842794759825,
+        "fcf_yield": 0.06986899563318777
+      }
+    },
+    {
+      "cik": "0001739940",
+      "name": "The Cigna Group",
+      "ticker": "CI",
+      "missing": [],
+      "revenue": 274900000000,
+      "ebitda": 11975000000,
+      "equity": 41713000000,
+      "shares": 263528277,
+      "net_debt": -7676000000,
+      "fcf": 9601000000,
+      "net_debt_ebitda": -0.6410020876826722,
+      "sbc_ratio": 0.0010585667515460168,
+      "price": 278.73,
+      "mktcap": 73453236648.21,
+      "ev": 65777236648.21001,
+      "ev_ebitda": 5.4928798871156586,
+      "pb": 1.7609195370318607,
+      "fcf_yield": 0.14596234942717484,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.18777292576419213,
+        "pb": 0.29694323144104806,
+        "fcf_yield": 0.8777292576419214
+      }
+    },
+    {
+      "cik": "0001435064",
+      "name": "Cemtrex Inc.",
+      "ticker": "CETX",
+      "missing": [],
+      "revenue": 76488088,
+      "ebitda": 1865364,
+      "equity": 29090589,
+      "shares": 6911663,
+      "net_debt": -7751946,
+      "fcf": -1772219,
+      "net_debt_ebitda": -4.155728318976886,
+      "sbc_ratio": 0.00018612048453871667,
+      "price": 2.67,
+      "mktcap": 18454140.21,
+      "ev": 10702194.21,
+      "ev_ebitda": 5.737322158034572,
+      "pb": 0.6343680497496974,
+      "fcf_yield": -0.1655939861700566,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.19213973799126638,
+        "pb": 0.07860262008733625,
+        "fcf_yield": 0.021834061135371178
+      }
+    },
+    {
+      "cik": "0000057131",
+      "name": "LA-Z-BOY INCORPORATED",
+      "ticker": "LZB",
+      "missing": [],
+      "revenue": 2126635000,
+      "ebitda": 176647000,
+      "equity": 1042522000,
+      "shares": 40923710,
+      "net_debt": -306117000,
+      "fcf": 127800000,
+      "net_debt_ebitda": -1.7329306469965524,
+      "sbc_ratio": 0.007376912352143174,
+      "price": 33.01,
+      "mktcap": 1350891667.1,
+      "ev": 1044774667.0999999,
+      "ev_ebitda": 5.914477274451306,
+      "pb": 1.295791999689215,
+      "fcf_yield": 0.12232302717937907,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2052401746724891,
+        "pb": 0.20087336244541484,
+        "fcf_yield": 0.8471615720524017
+      }
+    },
+    {
+      "cik": "0001048911",
+      "name": "FedEx Corporation",
+      "ticker": "FDX",
+      "missing": [],
+      "revenue": 94720000000,
+      "ebitda": 9832000000,
+      "equity": 28140000000,
+      "shares": 235122816,
+      "net_debt": -6570000000,
+      "fcf": 8925000000,
+      "net_debt_ebitda": -0.6682262001627339,
+      "sbc_ratio": 0.0018686655405405405,
+      "price": 332.9,
+      "mktcap": 78272385446.4,
+      "ev": 71702385446.4,
+      "ev_ebitda": 7.292756859886086,
+      "pb": 2.7815346640511724,
+      "fcf_yield": 0.12447284625797764,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.30131004366812225,
+        "pb": 0.47161572052401746,
+        "fcf_yield": 0.8558951965065502
+      }
+    },
+    {
+      "cik": "0000027904",
+      "name": "DELTA AIR LINES, INC.",
+      "ticker": "DAL",
+      "missing": [],
+      "revenue": 63364000000,
+      "ebitda": 8265000000,
+      "equity": 20853000000,
+      "shares": 653130708,
+      "net_debt": 8998000000,
+      "fcf": 8342000000,
+      "net_debt_ebitda": 1.0886872353297035,
+      "sbc_ratio": 0.004939713401931696,
+      "price": 81.96,
+      "mktcap": 53530592827.67999,
+      "ev": 62528592827.67999,
+      "ev_ebitda": 7.565467976730791,
+      "pb": 2.567045165092792,
+      "fcf_yield": 0.13341096645161005,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3318777292576419,
+        "pb": 0.44541484716157204,
+        "fcf_yield": 0.8646288209606987
+      }
+    },
+    {
+      "cik": "0000029534",
+      "name": "DOLLAR GENERAL CORPORATION",
+      "ticker": "DG",
+      "missing": [],
+      "revenue": 42724369000,
+      "ebitda": 3249986000,
+      "equity": 8511962000,
+      "shares": 220118871,
+      "net_debt": -1138501000,
+      "fcf": 3634500000,
+      "net_debt_ebitda": -0.35030950902557734,
+      "sbc_ratio": 0.002140534831538413,
+      "price": 122.81,
+      "mktcap": 27032798547.510002,
+      "ev": 25894297547.510002,
+      "ev_ebitda": 7.967510490048266,
+      "pb": 3.175859871967239,
+      "fcf_yield": 0.14035908845689055,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.34934497816593885,
+        "pb": 0.5327510917030568,
+        "fcf_yield": 0.868995633187773
+      }
+    },
+    {
+      "cik": "0000751365",
+      "name": "VIRCO MFG. CORPORATION",
+      "ticker": "VIRC",
+      "missing": [],
+      "revenue": 199652000,
+      "ebitda": 9799000,
+      "equity": 105931000,
+      "shares": 15761141,
+      "net_debt": -10522000,
+      "fcf": -6695000,
+      "net_debt_ebitda": -1.073783039085621,
+      "sbc_ratio": 0.0010418127541922946,
+      "price": 6,
+      "mktcap": 94566846,
+      "ev": 84044846,
+      "ev_ebitda": 8.576879885702622,
+      "pb": 0.8927211675524634,
+      "fcf_yield": -0.07965985207468879,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3624454148471616,
+        "pb": 0.10480349344978165,
+        "fcf_yield": 0.034934497816593885
+      }
+    },
+    {
+      "cik": "0001696558",
+      "name": "Jerash Holdings (US), Inc.",
+      "ticker": "JRSH",
+      "missing": [],
+      "revenue": 166263870,
+      "ebitda": 6788284,
+      "equity": 63589890,
+      "shares": 12699940,
+      "net_debt": -11454016,
+      "fcf": -2634156,
+      "net_debt_ebitda": -1.6873212729461524,
+      "sbc_ratio": 0.00543816885773199,
+      "price": 5.6,
+      "mktcap": 71119664.0,
+      "ev": 59665648.0,
+      "ev_ebitda": 8.789503798014344,
+      "pb": 1.118411495915467,
+      "fcf_yield": -0.04414861965464617,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.37117903930131,
+        "pb": 0.13973799126637554,
+        "fcf_yield": 0.05240174672489083
+      }
+    },
+    {
+      "cik": "0001133062",
+      "name": "JANEL CORPORATION",
+      "ticker": "JANL",
+      "missing": [],
+      "revenue": 183823000,
+      "ebitda": 7079000,
+      "equity": 23593000,
+      "shares": 1186354,
+      "net_debt": 2403000,
+      "fcf": 43066000,
+      "net_debt_ebitda": 0.3394547252436785,
+      "sbc_ratio": 0.0026656076769501096,
+      "price": 51.98,
+      "mktcap": 61666680.919999994,
+      "ev": 64069680.919999994,
+      "ev_ebitda": 9.050668303432687,
+      "pb": 2.613770225066757,
+      "fcf_yield": 0.6721744104481175,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.38427947598253276,
+        "pb": 0.4497816593886463,
+        "fcf_yield": 0.9781659388646288
+      }
+    },
+    {
+      "cik": "0001064728",
+      "name": "PEABODY ENERGY CORP",
+      "ticker": "BTU",
+      "missing": [],
+      "revenue": 3861500000,
+      "ebitda": 304400000,
+      "equity": 3536400000,
+      "shares": 121747873,
+      "net_debt": -575300000,
+      "fcf": -77700000,
+      "net_debt_ebitda": -1.8899474375821288,
+      "sbc_ratio": 0.0035737407743105013,
+      "price": 29.39,
+      "mktcap": 3578169987.4700003,
+      "ev": 3002869987.4700003,
+      "ev_ebitda": 9.864881693396848,
+      "pb": 1.0118114431257776,
+      "fcf_yield": -0.025875246122614975,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4148471615720524,
+        "pb": 0.13100436681222707,
+        "fcf_yield": 0.07860262008733625
+      }
+    },
+    {
+      "cik": "0001042046",
+      "name": "AMERICAN FINANCIAL GROUP, INC.",
+      "ticker": "AFG",
+      "missing": [],
+      "revenue": 8174000000,
+      "ebitda": 1159000000,
+      "equity": 4820000000,
+      "shares": 83298833,
+      "net_debt": 93000000,
+      "fcf": 1533000000,
+      "net_debt_ebitda": 0.08024158757549611,
+      "sbc_ratio": 0.002202104232933692,
+      "price": 143.9,
+      "mktcap": 11986702068.7,
+      "ev": 12079702068.7,
+      "ev_ebitda": 10.422521198188093,
+      "pb": 2.486867649107884,
+      "fcf_yield": 0.12690710344356854,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4672489082969432,
+        "pb": 0.42358078602620086,
+        "fcf_yield": 0.8602620087336245
+      }
+    },
+    {
+      "cik": "0001530804",
+      "name": "TRONOX HOLDINGS PLC",
+      "ticker": "TROX",
+      "missing": [],
+      "revenue": 2898000000,
+      "ebitda": 49000000,
+      "equity": 1418000000,
+      "shares": 158557858,
+      "net_debt": -160000000,
+      "fcf": 60000000,
+      "net_debt_ebitda": -3.2653061224489797,
+      "sbc_ratio": 0.006901311249137336,
+      "price": 5.63,
+      "mktcap": 892680740.54,
+      "ev": 732680740.54,
+      "ev_ebitda": 14.952668174285714,
+      "pb": 0.629535077954866,
+      "fcf_yield": 0.08189105660915671,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6855895196506551,
+        "pb": 0.06986899563318777,
+        "fcf_yield": 0.7510917030567685
+      }
+    },
+    {
+      "cik": "0000915840",
+      "name": "BEAZER HOMES USA, INC.",
+      "ticker": "BZH",
+      "missing": [],
+      "revenue": 2371555000,
+      "ebitda": 55773000,
+      "equity": 1200248000,
+      "shares": 29506806,
+      "net_debt": -120757000,
+      "fcf": 3480000,
+      "net_debt_ebitda": -2.165151596650709,
+      "sbc_ratio": 0.0030941723890021526,
+      "price": 33.24,
+      "mktcap": 980806231.44,
+      "ev": 860049231.44,
+      "ev_ebitda": 15.420530210675418,
+      "pb": 0.8171696444734755,
+      "fcf_yield": 0.004046279995126973,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7161572052401747,
+        "pb": 0.10043668122270742,
+        "fcf_yield": 0.13100436681222707
+      }
+    },
+    {
+      "cik": "0000732712",
+      "name": "Verizon Communications Inc.",
+      "ticker": "VZ",
+      "missing": [],
+      "revenue": 138191000000,
+      "ebitda": 47608000000,
+      "equity": 105741000000,
+      "shares": 4217684168,
+      "net_debt": -430000000,
+      "fcf": 37137000000,
+      "net_debt_ebitda": -0.009032095446143504,
+      "sbc_ratio": null,
+      "price": 49.78,
+      "mktcap": 209956317883.04,
+      "ev": 209526317883.04,
+      "ev_ebitda": 4.401073724647959,
+      "pb": 1.9855715179829962,
+      "fcf_yield": 0.17724265082885815,
+      "passed": [
+        "FCF yield",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1091703056768559,
+        "pb": 0.3318777292576419,
+        "fcf_yield": 0.9082969432314411
+      }
+    },
+    {
+      "cik": "0001687932",
+      "name": "J.Jill, Inc.",
+      "ticker": "JILL",
+      "missing": [],
+      "revenue": 596549000,
+      "ebitda": 71808000,
+      "equity": 121499000,
+      "shares": 15115353,
+      "net_debt": 32295000,
+      "fcf": 25206000,
+      "net_debt_ebitda": 0.4497409759358289,
+      "sbc_ratio": 0.009011833059815707,
+      "price": 19.68,
+      "mktcap": 297470147.04,
+      "ev": 329765147.04,
+      "ev_ebitda": 4.5923176671123,
+      "pb": 2.4483341183055005,
+      "fcf_yield": 0.07643621597446303,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.12663755458515283,
+        "pb": 0.40611353711790393,
+        "fcf_yield": 0.7074235807860262
+      }
+    },
+    {
+      "cik": "0001817358",
+      "name": "Academy Sports and Outdoors, Inc.",
+      "ticker": "ASO",
+      "missing": [],
+      "revenue": 6053414000,
+      "ebitda": 635050000,
+      "equity": 2171377000,
+      "shares": 66681300,
+      "net_debt": 153473000,
+      "fcf": 222130000,
+      "net_debt_ebitda": 0.24167073458782773,
+      "sbc_ratio": 0.0034981912685965308,
+      "price": 43.15,
+      "mktcap": 2877298095.0,
+      "ev": 3030771095.0,
+      "ev_ebitda": 4.77249207936383,
+      "pb": 1.325102962313776,
+      "fcf_yield": 0.07329157928372021,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.13973799126637554,
+        "pb": 0.2096069868995633,
+        "fcf_yield": 0.6855895196506551
+      }
+    },
+    {
+      "cik": "0000884614",
+      "name": "UGI CORP",
+      "ticker": "UGI",
+      "missing": [],
+      "revenue": 7147000000,
+      "ebitda": 1668000000,
+      "equity": 5001000000,
+      "shares": 214636337,
+      "net_debt": -251000000,
+      "fcf": 390000000,
+      "net_debt_ebitda": -0.15047961630695444,
+      "sbc_ratio": 0.002518539247236603,
+      "price": 38.35,
+      "mktcap": 8231303523.950001,
+      "ev": 7980303523.950001,
+      "ev_ebitda": 4.784354630665468,
+      "pb": 1.6459315184863028,
+      "fcf_yield": 0.04887032163996717,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.14410480349344978,
+        "pb": 0.2663755458515284,
+        "fcf_yield": 0.519650655021834
+      }
+    },
+    {
+      "cik": "0001581804",
+      "name": "NAVIGATOR HOLDINGS LTD.",
+      "ticker": "NVGS",
+      "missing": [],
+      "revenue": 586961000,
+      "ebitda": 299922000,
+      "equity": 1226840000,
+      "shares": 65250444,
+      "net_debt": 13116000,
+      "fcf": 116643000,
+      "net_debt_ebitda": 0.04373137015624062,
+      "sbc_ratio": 0.003122865062585078,
+      "price": 22,
+      "mktcap": 1435509768,
+      "ev": 1448625768,
+      "ev_ebitda": 4.830008362174166,
+      "pb": 1.1700871898536076,
+      "fcf_yield": 0.08051976057352585,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.14847161572052403,
+        "pb": 0.1572052401746725,
+        "fcf_yield": 0.74235807860262
+      }
+    },
+    {
+      "cik": "0001397187",
+      "name": "lululemon athletica inc.",
+      "ticker": "LULU",
+      "missing": [],
+      "revenue": 11102600000,
+      "ebitda": 2706843000,
+      "equity": 4961840000,
+      "shares": 112190041,
+      "net_debt": 0,
+      "fcf": 921675000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.005602561562156612,
+      "price": 117.66,
+      "mktcap": 13200280224.06,
+      "ev": 13200280224.06,
+      "ev_ebitda": 4.876633119859556,
+      "pb": 2.660359911657772,
+      "fcf_yield": 0.06982238137036466,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.15283842794759825,
+        "pb": 0.45414847161572053,
+        "fcf_yield": 0.6506550218340611
+      }
+    },
+    {
+      "cik": "0000709005",
+      "name": "NOBLE ROMAN’S, INC.",
+      "ticker": "NROM",
+      "missing": [],
+      "revenue": 16461459,
+      "ebitda": 2798439,
+      "equity": 3431947,
+      "shares": 22215512,
+      "net_debt": 0,
+      "fcf": 1100694,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.002634213650199536,
+      "price": 0.635,
+      "mktcap": 14106850.120000001,
+      "ev": 14106850.120000001,
+      "ev_ebitda": 5.040971098530288,
+      "pb": 4.110451041347667,
+      "fcf_yield": 0.07802549758712542,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1572052401746725,
+        "pb": 0.62882096069869,
+        "fcf_yield": 0.7205240174672489
+      }
+    },
+    {
+      "cik": "0000895126",
+      "name": "EXPAND ENERGY CORPORATION",
+      "ticker": "EXE",
+      "missing": [],
+      "revenue": 12124000000,
+      "ebitda": 5451000000,
+      "equity": 18578000000,
+      "shares": 240398260,
+      "net_debt": 4393000000,
+      "fcf": 1839000000,
+      "net_debt_ebitda": 0.8059071729957806,
+      "sbc_ratio": 0.003794127350709337,
+      "price": 98.74,
+      "mktcap": 23736924192.399998,
+      "ev": 28129924192.399998,
+      "ev_ebitda": 5.16050709822051,
+      "pb": 1.2776899662181074,
+      "fcf_yield": 0.06537522061637308,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.16593886462882096,
+        "pb": 0.19213973799126638,
+        "fcf_yield": 0.6026200873362445
+      }
+    },
+    {
+      "cik": "0001316835",
+      "name": "BUILDERS FIRSTSOURCE, INC.",
+      "ticker": "BLDR",
+      "missing": [],
+      "revenue": 15190638000,
+      "ebitda": 1377708000,
+      "equity": 4352251000,
+      "shares": 110605069,
+      "net_debt": -181753000,
+      "fcf": 853284000,
+      "net_debt_ebitda": -0.13192418132144113,
+      "sbc_ratio": 0.0035226960184292456,
+      "price": 68.68,
+      "mktcap": 7596356138.920001,
+      "ev": 7414603138.920001,
+      "ev_ebitda": 5.38183935849977,
+      "pb": 1.7453855806845702,
+      "fcf_yield": 0.11508154705152406,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.17467248908296942,
+        "pb": 0.28820960698689957,
+        "fcf_yield": 0.8384279475982532
+      }
+    },
+    {
+      "cik": "0000742278",
+      "name": "RPC, INC.",
+      "ticker": "RES",
+      "missing": [],
+      "revenue": 1626566000,
+      "ebitda": 205925000,
+      "equity": 1099171000,
+      "shares": 221639270,
+      "net_debt": -209974000,
+      "fcf": 52924000,
+      "net_debt_ebitda": -1.0196624984824572,
+      "sbc_ratio": 0.007654162204300348,
+      "price": 6.4,
+      "mktcap": 1418491328.0,
+      "ev": 1208517328.0,
+      "ev_ebitda": 5.868725642831127,
+      "pb": 1.2905101462829713,
+      "fcf_yield": 0.04379250406577538,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.1965065502183406,
+        "pb": 0.1965065502183406,
+        "fcf_yield": 0.4410480349344978
+      }
+    },
+    {
+      "cik": "0001046257",
+      "name": "INGREDION INCORPORATED",
+      "ticker": "INGR",
+      "missing": [],
+      "revenue": 7219000000,
+      "ebitda": 1238000000,
+      "equity": 4274000000,
+      "shares": 62945041,
+      "net_debt": 712000000,
+      "fcf": 511000000,
+      "net_debt_ebitda": 0.5751211631663974,
+      "sbc_ratio": 0.0055409336473195734,
+      "price": 104.47,
+      "mktcap": 6575868433.2699995,
+      "ev": 7287868433.2699995,
+      "ev_ebitda": 5.886808104418416,
+      "pb": 1.5385747387154889,
+      "fcf_yield": 0.07011652373789067,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.20087336244541484,
+        "pb": 0.2445414847161572,
+        "fcf_yield": 0.6593886462882096
+      }
+    },
+    {
+      "cik": "0000919012",
+      "name": "AMERICAN EAGLE OUTFITTERS, INC.",
+      "ticker": "AEO",
+      "missing": [],
+      "revenue": 5547236000,
+      "ebitda": 448402000,
+      "equity": 1693153000,
+      "shares": 169512006,
+      "net_debt": -238923000,
+      "fcf": 195387000,
+      "net_debt_ebitda": -0.5328321461545666,
+      "sbc_ratio": 0.007105520659297712,
+      "price": 17.23,
+      "mktcap": 2920691863.38,
+      "ev": 2681768863.38,
+      "ev_ebitda": 5.98072458057725,
+      "pb": 1.725001735448598,
+      "fcf_yield": 0.07285750933573806,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2096069868995633,
+        "pb": 0.2838427947598253,
+        "fcf_yield": 0.6724890829694323
+      }
+    },
+    {
+      "cik": "0001007019",
+      "name": "COFFEE HOLDING CO., INC.",
+      "ticker": "JVA",
+      "missing": [],
+      "revenue": 96283547,
+      "ebitda": 2851815,
+      "equity": 28761513,
+      "shares": 5708599,
+      "net_debt": -2746491,
+      "fcf": -5210581,
+      "net_debt_ebitda": -0.9630677305505442,
+      "sbc_ratio": null,
+      "price": 3.475,
+      "mktcap": 19837381.525000002,
+      "ev": 17090890.525000002,
+      "ev_ebitda": 5.992987106456766,
+      "pb": 0.6897196793854343,
+      "fcf_yield": -0.30487475139918135,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.21397379912663755,
+        "pb": 0.08296943231441048,
+        "fcf_yield": 0.013100436681222707
+      }
+    },
+    {
+      "cik": "0001039280",
+      "name": "NETSOL TECHNOLOGIES, INC.",
+      "ticker": "NTWK",
+      "missing": [],
+      "revenue": 66088229,
+      "ebitda": 4965501,
+      "equity": 35939913,
+      "shares": 11816519,
+      "net_debt": -17745254,
+      "fcf": -935503,
+      "net_debt_ebitda": -3.573708675116569,
+      "sbc_ratio": 0.003149063050244545,
+      "price": 4.08,
+      "mktcap": 48211397.52,
+      "ev": 30466143.520000003,
+      "ev_ebitda": 6.135562860625746,
+      "pb": 1.3414444692729224,
+      "fcf_yield": -0.030706315007866802,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2183406113537118,
+        "pb": 0.21397379912663755,
+        "fcf_yield": 0.0611353711790393
+      }
+    },
+    {
+      "cik": "0001053369",
+      "name": "Elite Pharmaceuticals, Inc.",
+      "ticker": "ELTP",
+      "missing": [],
+      "revenue": 148870119,
+      "ebitda": 50184727,
+      "equity": 80314083,
+      "shares": 1076996442,
+      "net_debt": 0,
+      "fcf": 22822468,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.0011856442460424176,
+      "price": 0.288,
+      "mktcap": 310174975.296,
+      "ev": 310174975.296,
+      "ev_ebitda": 6.180664792617084,
+      "pb": 3.8620247372556067,
+      "fcf_yield": 0.07357933365907587,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.22270742358078602,
+        "pb": 0.6026200873362445,
+        "fcf_yield": 0.6899563318777293
+      }
+    },
+    {
+      "cik": "0001300514",
+      "name": "LAS VEGAS SANDS CORP.",
+      "ticker": "LVS",
+      "missing": [],
+      "revenue": 13017000000,
+      "ebitda": 4282000000,
+      "equity": 1590000000,
+      "shares": 671910723,
+      "net_debt": -3841000000,
+      "fcf": 1855000000,
+      "net_debt_ebitda": -0.8970107426436245,
+      "sbc_ratio": 0.004148421295229315,
+      "price": 45.35,
+      "mktcap": 30471151288.05,
+      "ev": 26630151288.05,
+      "ev_ebitda": 6.219091846812237,
+      "pb": 19.164246093113206,
+      "fcf_yield": 0.06965788440084499,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.22707423580786026,
+        "pb": 0.9650655021834061,
+        "fcf_yield": 0.6462882096069869
+      }
+    },
+    {
+      "cik": "0001111711",
+      "name": "NiSource Inc.",
+      "ticker": "NI",
+      "missing": [],
+      "revenue": 6522800000,
+      "ebitda": 3002900000,
+      "equity": 9450100000,
+      "shares": 478533171,
+      "net_debt": -90400000,
+      "fcf": -420000000,
+      "net_debt_ebitda": -0.030104232575177328,
+      "sbc_ratio": 0.007803397314036916,
+      "price": 41.07,
+      "mktcap": 19653357332.97,
+      "ev": 19562957332.97,
+      "ev_ebitda": 6.5146882456858375,
+      "pb": 2.079698345305341,
+      "fcf_yield": -0.021469146655662446,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2314410480349345,
+        "pb": 0.3537117903930131,
+        "fcf_yield": 0.08296943231441048
+      }
+    },
+    {
+      "cik": "0001547459",
+      "name": "Natural Grocers by Vitamin Cottage, Inc.",
+      "ticker": "NGVC",
+      "missing": [],
+      "revenue": 1330836000,
+      "ebitda": 93804000,
+      "equity": 220011000,
+      "shares": 23033093,
+      "net_debt": -23210000,
+      "fcf": 24103000,
+      "net_debt_ebitda": -0.2474308131849388,
+      "sbc_ratio": 0.0029755732486948052,
+      "price": 27.57,
+      "mktcap": 635022374.01,
+      "ev": 611812374.01,
+      "ev_ebitda": 6.52224184480406,
+      "pb": 2.886321020358073,
+      "fcf_yield": 0.03939606491124359,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.23580786026200873,
+        "pb": 0.4890829694323144,
+        "fcf_yield": 0.4104803493449782
+      }
+    },
+    {
+      "cik": "0001603923",
+      "name": "Weatherford International plc",
+      "ticker": "WFRD",
+      "missing": [],
+      "revenue": 4918000000,
+      "ebitda": 1023000000,
+      "equity": 1699000000,
+      "shares": 71717593,
+      "net_debt": 428000000,
+      "fcf": 450000000,
+      "net_debt_ebitda": 0.41837732160312807,
+      "sbc_ratio": 0.0077267181781211875,
+      "price": 91.66,
+      "mktcap": 6573634574.38,
+      "ev": 7001634574.38,
+      "ev_ebitda": 6.84421757026393,
+      "pb": 3.8691198201177164,
+      "fcf_yield": 0.06427070639284939,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.25327510917030566,
+        "pb": 0.6069868995633187,
+        "fcf_yield": 0.5938864628820961
+      }
+    },
+    {
+      "cik": "0000016040",
+      "name": "Cabot Corporation",
+      "ticker": "CBT",
+      "missing": [],
+      "revenue": 3713000000,
+      "ebitda": 775000000,
+      "equity": 1575000000,
+      "shares": 52221604,
+      "net_debt": 884000000,
+      "fcf": 391000000,
+      "net_debt_ebitda": 1.1406451612903226,
+      "sbc_ratio": 0.006463775922434689,
+      "price": 84.76,
+      "mktcap": 4426303155.04,
+      "ev": 5310303155.04,
+      "ev_ebitda": 6.852004071019355,
+      "pb": 2.8103512095492063,
+      "fcf_yield": 0.07363044793947451,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2576419213973799,
+        "pb": 0.48034934497816595,
+        "fcf_yield": 0.6943231441048034
+      }
+    },
+    {
+      "cik": "0000868857",
+      "name": "AECOM",
+      "ticker": "ACM",
+      "missing": [],
+      "revenue": 16139622000,
+      "ebitda": 1068822000,
+      "equity": 2231942000,
+      "shares": 129288624,
+      "net_debt": -1243369000,
+      "fcf": 684927000,
+      "net_debt_ebitda": -1.1633078286187972,
+      "sbc_ratio": 0.003806718645579184,
+      "price": 66.52,
+      "mktcap": 8600279268.48,
+      "ev": 7356910268.48,
+      "ev_ebitda": 6.883195020761174,
+      "pb": 3.8532718450927486,
+      "fcf_yield": 0.09309981704337299,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.26200873362445415,
+        "pb": 0.5982532751091703,
+        "fcf_yield": 0.7816593886462883
+      }
+    },
+    {
+      "cik": "0000896156",
+      "name": "Ethan Allen Interiors Inc.",
+      "ticker": "ETD",
+      "missing": [],
+      "revenue": 614649000,
+      "ebitda": 77511000,
+      "equity": 478171000,
+      "shares": 25446339,
+      "net_debt": -64274000,
+      "fcf": 50428000,
+      "net_debt_ebitda": -0.829224239140251,
+      "sbc_ratio": 0.0024843447235739424,
+      "price": 23.57,
+      "mktcap": 599770210.23,
+      "ev": 535496210.23,
+      "ev_ebitda": 6.908647936808969,
+      "pb": 1.2543006795267801,
+      "fcf_yield": 0.09417060109228553,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2663755458515284,
+        "pb": 0.18777292576419213,
+        "fcf_yield": 0.7903930131004366
+      }
+    },
+    {
+      "cik": "0000764478",
+      "name": "BEST BUY CO., INC.",
+      "ticker": "BBY",
+      "missing": [],
+      "revenue": 41691000000,
+      "ebitda": 2220000000,
+      "equity": 2964000000,
+      "shares": 209535103,
+      "net_debt": -1738000000,
+      "fcf": 1258000000,
+      "net_debt_ebitda": -0.7828828828828829,
+      "sbc_ratio": 0.0033340529130987504,
+      "price": 82.3,
+      "mktcap": 17244738976.899998,
+      "ev": 15506738976.899998,
+      "ev_ebitda": 6.985017557162161,
+      "pb": 5.818063082624831,
+      "fcf_yield": 0.08112601894402241,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.27074235807860264,
+        "pb": 0.7729257641921398,
+        "fcf_yield": 0.7467248908296943
+      }
+    },
+    {
+      "cik": "0001336920",
+      "name": "Leidos Holdings, Inc.",
+      "ticker": "LDOS",
+      "missing": [],
+      "revenue": 17107000000,
+      "ebitda": 2399000000,
+      "equity": 4916000000,
+      "shares": 126392684,
+      "net_debt": -1108000000,
+      "fcf": 1750000000,
+      "net_debt_ebitda": -0.4618591079616507,
+      "sbc_ratio": 0.0055532822821067395,
+      "price": 141.61,
+      "mktcap": 17898467981.24,
+      "ev": 16790467981.240002,
+      "ev_ebitda": 6.998944552413507,
+      "pb": 3.640860045004069,
+      "fcf_yield": 0.10422580251814755,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2794759825327511,
+        "pb": 0.5895196506550219,
+        "fcf_yield": 0.8165938864628821
+      }
+    },
+    {
+      "cik": "0001018840",
+      "name": "Abercrombie & Fitch Co.",
+      "ticker": "ANF",
+      "missing": [],
+      "revenue": 5266292000,
+      "ebitda": 854164000,
+      "equity": 1403895000,
+      "shares": 45857556,
+      "net_debt": -759540000,
+      "fcf": 378368000,
+      "net_debt_ebitda": -0.8892203370781255,
+      "sbc_ratio": 0.0074147046916502165,
+      "price": 147.53,
+      "mktcap": 6765365236.68,
+      "ev": 6005825236.68,
+      "ev_ebitda": 7.03123198434961,
+      "pb": 4.8189966035066725,
+      "fcf_yield": 0.06300016818490718,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2838427947598253,
+        "pb": 0.6986899563318777,
+        "fcf_yield": 0.5895196506550219
+      }
+    },
+    {
+      "cik": "0000794170",
+      "name": "Toll Brothers, Inc.",
+      "ticker": "TOL",
+      "missing": [],
+      "revenue": 10966723000,
+      "ebitda": 1802699000,
+      "equity": 8409092000,
+      "shares": 95003000,
+      "net_debt": -1202828000,
+      "fcf": 1026216000,
+      "net_debt_ebitda": -0.667237292526373,
+      "sbc_ratio": 0.002811596499701871,
+      "price": 147.73,
+      "mktcap": 14034793189.999998,
+      "ev": 12831965189.999998,
+      "ev_ebitda": 7.118196210238092,
+      "pb": 1.6690022168861987,
+      "fcf_yield": 0.07997340896776546,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.28820960698689957,
+        "pb": 0.27074235807860264,
+        "fcf_yield": 0.7336244541484717
+      }
+    },
+    {
+      "cik": "0001324404",
+      "name": "CF INDUSTRIES HOLDINGS, INC.",
+      "ticker": "CF",
+      "missing": [],
+      "revenue": 7084000000,
+      "ebitda": 3198000000,
+      "equity": 4838000000,
+      "shares": 153668821,
+      "net_debt": 3215000000,
+      "fcf": 1802000000,
+      "net_debt_ebitda": 1.005315822388993,
+      "sbc_ratio": 0.006352343308865048,
+      "price": 128.16,
+      "mktcap": 19694196099.36,
+      "ev": 22909196099.36,
+      "ev_ebitda": 7.163601031694809,
+      "pb": 4.070730901066557,
+      "fcf_yield": 0.07865836898791666,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.2925764192139738,
+        "pb": 0.6200873362445415,
+        "fcf_yield": 0.7292576419213974
+      }
+    },
+    {
+      "cik": "0000016160",
+      "name": "CAL-MAINE FOODS, INC.",
+      "ticker": "CALM",
+      "missing": [],
+      "revenue": 2911632000,
+      "ebitda": 474528000,
+      "equity": 2691461000,
+      "shares": 47654046,
+      "net_debt": -369450000,
+      "fcf": 328533000,
+      "net_debt_ebitda": -0.7785631195630184,
+      "sbc_ratio": 0.001977241629436687,
+      "price": 80.55,
+      "mktcap": 3838533405.2999997,
+      "ev": 3469083405.2999997,
+      "ev_ebitda": 7.31059791055533,
+      "pb": 1.4261894953335752,
+      "fcf_yield": 0.0947031136518867,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3056768558951965,
+        "pb": 0.22707423580786026,
+        "fcf_yield": 0.7947598253275109
+      }
+    },
+    {
+      "cik": "0000010329",
+      "name": "BASSETT FURNITURE INDUSTRIES, INCORPORATED",
+      "ticker": "BSET",
+      "missing": [],
+      "revenue": 335280000,
+      "ebitda": 16628000,
+      "equity": 165107000,
+      "shares": 8654370,
+      "net_debt": -41277000,
+      "fcf": 8961000,
+      "net_debt_ebitda": -2.4823791195573732,
+      "sbc_ratio": null,
+      "price": 18.91,
+      "mktcap": 163654136.7,
+      "ev": 122377136.69999999,
+      "ev_ebitda": 7.359702712292518,
+      "pb": 0.9912004742379183,
+      "fcf_yield": 0.07322446203302942,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.31004366812227074,
+        "pb": 0.11353711790393013,
+        "fcf_yield": 0.6812227074235808
+      }
+    },
+    {
+      "cik": "0001058290",
+      "name": "COGNIZANT TECHNOLOGY SOLUTIONS CORPORATION",
+      "ticker": "CTSH",
+      "missing": [],
+      "revenue": 21108000000,
+      "ebitda": 3939000000,
+      "equity": 15015000000,
+      "shares": 478246920,
+      "net_debt": -1325000000,
+      "fcf": 2595000000,
+      "net_debt_ebitda": -0.3363797918253364,
+      "sbc_ratio": 0.00857494788705704,
+      "price": 64.54,
+      "mktcap": 30866056216.800003,
+      "ev": 29541056216.800003,
+      "ev_ebitda": 7.4996334645341465,
+      "pb": 2.05568139972028,
+      "fcf_yield": 0.08784384623743491,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3231441048034934,
+        "pb": 0.34934497816593885,
+        "fcf_yield": 0.7729257641921398
+      }
+    },
+    {
+      "cik": "0000799292",
+      "name": "M/I HOMES, INC.",
+      "ticker": "MHO",
+      "missing": [],
+      "revenue": 4417781000,
+      "ebitda": 525451000,
+      "equity": 3166190000,
+      "shares": 25767709,
+      "net_debt": 0,
+      "fcf": 127740000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.003847633008517172,
+      "price": 153.32,
+      "mktcap": 3950705143.8799996,
+      "ev": 3950705143.8799996,
+      "ev_ebitda": 7.51869373905464,
+      "pb": 1.2477789216313613,
+      "fcf_yield": 0.03233346841838623,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.32751091703056767,
+        "pb": 0.18340611353711792,
+        "fcf_yield": 0.3318777292576419
+      }
+    },
+    {
+      "cik": "0000015847",
+      "name": "BUTLER NATIONAL CORP",
+      "ticker": "BUKS",
+      "missing": [],
+      "revenue": 97967000,
+      "ebitda": 35318000,
+      "equity": 76344000,
+      "shares": 64279002,
+      "net_debt": -5671000,
+      "fcf": 19241000,
+      "net_debt_ebitda": -0.16056968118239992,
+      "sbc_ratio": 0.0020006736962446536,
+      "price": 4.25,
+      "mktcap": 273185758.5,
+      "ev": 267514758.5,
+      "ev_ebitda": 7.574459439945636,
+      "pb": 3.57835269962276,
+      "fcf_yield": 0.07192500371900042,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.33624454148471616,
+        "pb": 0.5764192139737991,
+        "fcf_yield": 0.6681222707423581
+      }
+    },
+    {
+      "cik": "0000910521",
+      "name": "DECKERS OUTDOOR CORP",
+      "ticker": "DECK",
+      "missing": [],
+      "revenue": 5472296000,
+      "ebitda": 1338676000,
+      "equity": 2609454000,
+      "shares": 141949971,
+      "net_debt": -2086746000,
+      "fcf": 1097332000,
+      "net_debt_ebitda": -1.558813334966788,
+      "sbc_ratio": 0.008193087508424252,
+      "price": 87.76,
+      "mktcap": 12457529454.960001,
+      "ev": 10370783454.960001,
+      "ev_ebitda": 7.747045181179017,
+      "pb": 4.773998489707043,
+      "fcf_yield": 0.10580994239882452,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3406113537117904,
+        "pb": 0.6855895196506551,
+        "fcf_yield": 0.8209606986899564
+      }
+    },
+    {
+      "cik": "0001679273",
+      "name": "LAMB WESTON HOLDINGS, INC.",
+      "ticker": "LW",
+      "missing": [],
+      "revenue": 6612300000,
+      "ebitda": 987800000,
+      "equity": 1754400000,
+      "shares": 138879884,
+      "net_debt": 104300000,
+      "fcf": 540200000,
+      "net_debt_ebitda": 0.10558817574407775,
+      "sbc_ratio": 0.0069869788122136015,
+      "price": 55.49,
+      "mktcap": 7706444763.16,
+      "ev": 7810744763.16,
+      "ev_ebitda": 7.9072127588175745,
+      "pb": 4.392638373894209,
+      "fcf_yield": 0.06916113845479836,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.34497816593886466,
+        "pb": 0.6419213973799127,
+        "fcf_yield": 0.6419213973799127
+      }
+    },
+    {
+      "cik": "0000080420",
+      "name": "Powell Industries, Inc.",
+      "ticker": "POWL",
+      "missing": [],
+      "revenue": 1104318000,
+      "ebitda": 225125000,
+      "equity": 668886000,
+      "shares": 12142283,
+      "net_debt": -490631000,
+      "fcf": 154788000,
+      "net_debt_ebitda": -2.1793714602998335,
+      "sbc_ratio": 0.00419716060047921,
+      "price": 191.98,
+      "mktcap": 2331075490.3399997,
+      "ev": 1840444490.3399997,
+      "ev_ebitda": 8.175211506229871,
+      "pb": 3.485011631787778,
+      "fcf_yield": 0.08410359606738523,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.35807860262008734,
+        "pb": 0.5633187772925764,
+        "fcf_yield": 0.7554585152838428
+      }
+    },
+    {
+      "cik": "0001397016",
+      "name": "OPTEX SYSTEMS HOLDINGS, INC.",
+      "ticker": "OPXS",
+      "missing": [],
+      "revenue": 41337000,
+      "ebitda": 7647000,
+      "equity": 24745000,
+      "shares": 6937358,
+      "net_debt": -5841000,
+      "fcf": 6437000,
+      "net_debt_ebitda": -0.7638289525304041,
+      "sbc_ratio": 0.009265307109853158,
+      "price": 10.32,
+      "mktcap": 71593534.56,
+      "ev": 65752534.56,
+      "ev_ebitda": 8.598474507650058,
+      "pb": 2.893252558496666,
+      "fcf_yield": 0.09789736689353257,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.36681222707423583,
+        "pb": 0.49344978165938863,
+        "fcf_yield": 0.8034934497816594
+      }
+    },
+    {
+      "cik": "0001021860",
+      "name": "NOV INC.",
+      "ticker": "NOV",
+      "missing": [],
+      "revenue": 8744000000,
+      "ebitda": 849000000,
+      "equity": 6268000000,
+      "shares": 360404544,
+      "net_debt": 166000000,
+      "fcf": 876000000,
+      "net_debt_ebitda": 0.1955241460541814,
+      "sbc_ratio": 0.007662397072278134,
+      "price": 20.65,
+      "mktcap": 7442353833.599999,
+      "ev": 7608353833.599999,
+      "ev_ebitda": 8.961547507184923,
+      "pb": 1.1873570251435863,
+      "fcf_yield": 0.1151366010517821,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.37554585152838427,
+        "pb": 0.1615720524017467,
+        "fcf_yield": 0.8427947598253275
+      }
+    },
+    {
+      "cik": "0000775158",
+      "name": "Oshkosh Corporation",
+      "ticker": "OSK",
+      "missing": [],
+      "revenue": 10422300000,
+      "ebitda": 1163600000,
+      "equity": 4530500000,
+      "shares": 62548631,
+      "net_debt": 620500000,
+      "fcf": 618000000,
+      "net_debt_ebitda": 0.5332588518391199,
+      "sbc_ratio": 0.0036460282279343332,
+      "price": 158.15,
+      "mktcap": 9892065992.65,
+      "ev": 10512565992.65,
+      "ev_ebitda": 9.034518728643864,
+      "pb": 2.183438029500055,
+      "fcf_yield": 0.05878678910858518,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3799126637554585,
+        "pb": 0.3624454148471616,
+        "fcf_yield": 0.5720524017467249
+      }
+    },
+    {
+      "cik": "0000912615",
+      "name": "URBAN OUTFITTERS, INC.",
+      "ticker": "URBN",
+      "missing": [],
+      "revenue": 6165376000,
+      "ebitda": 734163000,
+      "equity": 2815287000,
+      "shares": 89678939,
+      "net_debt": -369206000,
+      "fcf": 315022000,
+      "net_debt_ebitda": -0.5028937715466456,
+      "sbc_ratio": 0.00493205929370731,
+      "price": 79.72,
+      "mktcap": 7149205017.08,
+      "ev": 6779999017.08,
+      "ev_ebitda": 9.235005056206864,
+      "pb": 2.5394231625692156,
+      "fcf_yield": 0.04646342856487216,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.388646288209607,
+        "pb": 0.4366812227074236,
+        "fcf_yield": 0.4847161572052402
+      }
+    },
+    {
+      "cik": "0000903129",
+      "name": "GENTHERM INCORPORATED",
+      "ticker": "THRM",
+      "missing": [],
+      "revenue": 1498602000,
+      "ebitda": 136079000,
+      "equity": 720323000,
+      "shares": 30526465,
+      "net_debt": 28240000,
+      "fcf": 61118000,
+      "net_debt_ebitda": 0.20752651033590783,
+      "sbc_ratio": 0.008207649529361365,
+      "price": 40.43,
+      "mktcap": 1234184979.95,
+      "ev": 1262424979.95,
+      "ev_ebitda": 9.277147685903042,
+      "pb": 1.7133771654521652,
+      "fcf_yield": 0.04841317382869013,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.3930131004366812,
+        "pb": 0.2794759825327511,
+        "fcf_yield": 0.5152838427947598
+      }
+    },
+    {
+      "cik": "0001573516",
+      "name": "MURPHY USA INC.",
+      "ticker": "MUSA",
+      "missing": [],
+      "revenue": 19384000000,
+      "ebitda": 995300000,
+      "equity": 623500000,
+      "shares": 18535347,
+      "net_debt": -28900000,
+      "fcf": 813900000,
+      "net_debt_ebitda": -0.029036471415653572,
+      "sbc_ratio": 0.00147544366487825,
+      "price": 503.6,
+      "mktcap": 9334400749.2,
+      "ev": 9305500749.2,
+      "ev_ebitda": 9.349443131920024,
+      "pb": 14.970971530392944,
+      "fcf_yield": 0.08746439573066193,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.39737991266375544,
+        "pb": 0.9475982532751092,
+        "fcf_yield": 0.7685589519650655
+      }
+    },
+    {
+      "cik": "0001802974",
+      "name": "MISSION PRODUCE, INC.",
+      "ticker": "AVO",
+      "missing": [],
+      "revenue": 1391200000,
+      "ebitda": 99800000,
+      "equity": 586900000,
+      "shares": 70569517,
+      "net_debt": 55200000,
+      "fcf": 37200000,
+      "net_debt_ebitda": 0.5531062124248497,
+      "sbc_ratio": 0.0063254744105807935,
+      "price": 12.54,
+      "mktcap": 884941743.18,
+      "ev": 940141743.18,
+      "ev_ebitda": 9.42025794769539,
+      "pb": 1.5078237232577951,
+      "fcf_yield": 0.03956850152634662,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4017467248908297,
+        "pb": 0.23580786026200873,
+        "fcf_yield": 0.4148471615720524
+      }
+    },
+    {
+      "cik": "0000096021",
+      "name": "Sysco Corporation",
+      "ticker": "SYY",
+      "missing": [],
+      "revenue": 84553000000,
+      "ebitda": 4071000000,
+      "equity": 2283000000,
+      "shares": 478930649,
+      "net_debt": -1222000000,
+      "fcf": 2638000000,
+      "net_debt_ebitda": -0.30017194792434293,
+      "sbc_ratio": 0.0013955743734698947,
+      "price": 82.64,
+      "mktcap": 39578828833.36,
+      "ev": 38356828833.36,
+      "ev_ebitda": 9.421967288960943,
+      "pb": 17.336324499938677,
+      "fcf_yield": 0.06877523716730352,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.40611353711790393,
+        "pb": 0.9606986899563319,
+        "fcf_yield": 0.6331877729257642
+      }
+    },
+    {
+      "cik": "0001050797",
+      "name": "COLUMBIA SPORTSWEAR COMPANY",
+      "ticker": "COLM",
+      "missing": [],
+      "revenue": 3397351000,
+      "ebitda": 263874000,
+      "equity": 1710143000,
+      "shares": 52351552,
+      "net_debt": -442028000,
+      "fcf": 282903000,
+      "net_debt_ebitda": -1.6751479872969675,
+      "sbc_ratio": 0.007134382052369626,
+      "price": 58.04,
+      "mktcap": 3038484078.08,
+      "ev": 2596456078.08,
+      "ev_ebitda": 9.839757149548648,
+      "pb": 1.77674269232456,
+      "fcf_yield": 0.10895736014498583,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4104803493449782,
+        "pb": 0.30131004366812225,
+        "fcf_yield": 0.8253275109170306
+      }
+    },
+    {
+      "cik": "0001179929",
+      "name": "MOLINA HEALTHCARE, INC.",
+      "ticker": "MOH",
+      "missing": [],
+      "revenue": 45426000000,
+      "ebitda": 976000000,
+      "equity": 4069000000,
+      "shares": 51500000,
+      "net_debt": -482000000,
+      "fcf": -636000000,
+      "net_debt_ebitda": -0.49385245901639346,
+      "sbc_ratio": 0.001034649760049311,
+      "price": 198.01,
+      "mktcap": 10197515000.0,
+      "ev": 9715515000.0,
+      "ev_ebitda": 9.954421106557376,
+      "pb": 2.5061477021381173,
+      "fcf_yield": -0.06546230436574901,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4192139737991266,
+        "pb": 0.4279475982532751,
+        "fcf_yield": 0.043668122270742356
+      }
+    },
+    {
+      "cik": "0001040829",
+      "name": "RYMAN HOSPITALITY PROPERTIES, INC.",
+      "ticker": "RHP",
+      "missing": [],
+      "revenue": 2577061000,
+      "ebitda": 765112000,
+      "equity": 750152000,
+      "shares": 63006031,
+      "net_debt": -471421000,
+      "fcf": 590629000,
+      "net_debt_ebitda": -0.6161463942533904,
+      "sbc_ratio": 0.005456215433006824,
+      "price": 129.14,
+      "mktcap": 8136598843.339999,
+      "ev": 7665177843.339999,
+      "ev_ebitda": 10.01837357581635,
+      "pb": 10.846600213476734,
+      "fcf_yield": 0.07705352857705403,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.42358078602620086,
+        "pb": 0.8995633187772926,
+        "fcf_yield": 0.7161572052401747
+      }
+    },
+    {
+      "cik": "0000027419",
+      "name": "TARGET CORPORATION",
+      "ticker": "TGT",
+      "missing": [],
+      "revenue": 104780000000,
+      "ebitda": 8251000000,
+      "equity": 16165000000,
+      "shares": 452806418,
+      "net_debt": 8910000000,
+      "fcf": 2835000000,
+      "net_debt_ebitda": 1.0798691067749364,
+      "sbc_ratio": 0.0026818095056308456,
+      "price": 163.79,
+      "mktcap": 74165163204.22,
+      "ev": 83075163204.22,
+      "ev_ebitda": 10.068496328229307,
+      "pb": 4.588008858906279,
+      "fcf_yield": 0.034125722907469284,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4279475982532751,
+        "pb": 0.6593886462882096,
+        "fcf_yield": 0.34497816593886466
+      }
+    },
+    {
+      "cik": "0000916365",
+      "name": "TRACTOR SUPPLY CO /DE/",
+      "ticker": "TSCO",
+      "missing": [],
+      "revenue": 15524046000,
+      "ebitda": 1961400000,
+      "equity": 2581293000,
+      "shares": 526351286,
+      "net_debt": 1570865000,
+      "fcf": 740489000,
+      "net_debt_ebitda": 0.800889670643418,
+      "sbc_ratio": 0.0036757814296607986,
+      "price": 34.76,
+      "mktcap": 18295970701.36,
+      "ev": 19866835701.36,
+      "ev_ebitda": 10.128905731293974,
+      "pb": 7.0879093157421496,
+      "fcf_yield": 0.037272619109107,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.43231441048034935,
+        "pb": 0.8296943231441049,
+        "fcf_yield": 0.37554585152838427
+      }
+    },
+    {
+      "cik": "0001410636",
+      "name": "American Water Works Company, Inc.",
+      "ticker": "AWK",
+      "missing": [],
+      "revenue": 5121000000,
+      "ebitda": 2773000000,
+      "equity": 10837000000,
+      "shares": 195208666,
+      "net_debt": 1490000000,
+      "fcf": -1067000000,
+      "net_debt_ebitda": 0.5373241976199062,
+      "sbc_ratio": 0.006248779535247022,
+      "price": 137.51,
+      "mktcap": 26843143661.66,
+      "ev": 28333143661.66,
+      "ev_ebitda": 10.217505828222142,
+      "pb": 2.4769902797508534,
+      "fcf_yield": -0.03765907563034909,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4410480349344978,
+        "pb": 0.4192139737991266,
+        "fcf_yield": 0.056768558951965066
+      }
+    },
+    {
+      "cik": "0000932696",
+      "name": "INSIGHT ENTERPRISES, INC.",
+      "ticker": "NSIT",
+      "missing": [],
+      "revenue": 8247180000,
+      "ebitda": 441243000,
+      "equity": 1648874000,
+      "shares": 30996502,
+      "net_debt": -358020000,
+      "fcf": 279307000,
+      "net_debt_ebitda": -0.8113896424419198,
+      "sbc_ratio": 0.004090852873345798,
+      "price": 157.32,
+      "mktcap": 4876369694.639999,
+      "ev": 4518349694.639999,
+      "ev_ebitda": 10.240048441878963,
+      "pb": 2.9573937697119366,
+      "fcf_yield": 0.06181615387833629,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.44541484716157204,
+        "pb": 0.5021834061135371,
+        "fcf_yield": 0.5764192139737991
+      }
+    },
+    {
+      "cik": "0000915779",
+      "name": "Daktronics, Inc.",
+      "ticker": "DAKT",
+      "missing": [],
+      "revenue": 838706000,
+      "ebitda": 80187000,
+      "equity": 293738000,
+      "shares": 48747817,
+      "net_debt": -133372000,
+      "fcf": 34300000,
+      "net_debt_ebitda": -1.663262124783319,
+      "sbc_ratio": 0.005848294873292906,
+      "price": 19.63,
+      "mktcap": 956919647.7099999,
+      "ev": 823547647.7099999,
+      "ev_ebitda": 10.270338679711173,
+      "pb": 3.257731882527967,
+      "fcf_yield": 0.04164907773748901,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4497816593886463,
+        "pb": 0.5414847161572053,
+        "fcf_yield": 0.43231441048034935
+      }
+    },
+    {
+      "cik": "0000057515",
+      "name": "The Marzetti Company",
+      "ticker": "MZTI",
+      "missing": [],
+      "revenue": 1909122000,
+      "ebitda": 282485000,
+      "equity": 1032827000,
+      "shares": 27423000,
+      "net_debt": -201584000,
+      "fcf": 203496000,
+      "net_debt_ebitda": -0.7136095721896738,
+      "sbc_ratio": 0.0047032091191657735,
+      "price": 113.23,
+      "mktcap": 3105106290.0,
+      "ev": 2903522290.0,
+      "ev_ebitda": 10.278500769952387,
+      "pb": 3.006414714177689,
+      "fcf_yield": 0.07008590934564515,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.45414847161572053,
+        "pb": 0.5065502183406113,
+        "fcf_yield": 0.6550218340611353
+      }
+    },
+    {
+      "cik": "0000785956",
+      "name": "J&J SNACK FOODS CORP.",
+      "ticker": "JJSF",
+      "missing": [],
+      "revenue": 1583233000,
+      "ebitda": 157658000,
+      "equity": 912858000,
+      "shares": 19011903,
+      "net_debt": -66761000,
+      "fcf": 82253000,
+      "net_debt_ebitda": -0.4234545662129419,
+      "sbc_ratio": 0.00399183190345325,
+      "price": 88.8,
+      "mktcap": 1688256986.3999999,
+      "ev": 1621495986.3999999,
+      "ev_ebitda": 10.284895066536427,
+      "pb": 1.8494190623295188,
+      "fcf_yield": 0.0507266133804104,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4585152838427948,
+        "pb": 0.314410480349345,
+        "fcf_yield": 0.5327510917030568
+      }
+    },
+    {
+      "cik": "0001022408",
+      "name": "ePlus inc.",
+      "ticker": "PLUS",
+      "missing": [],
+      "revenue": 2442549000,
+      "ebitda": 193760000,
+      "equity": 1063298000,
+      "shares": 26392561,
+      "net_debt": -326291000,
+      "fcf": -120660000,
+      "net_debt_ebitda": -1.6839956647398844,
+      "sbc_ratio": 0.004967761138057005,
+      "price": 89.3,
+      "mktcap": 2356855697.2999997,
+      "ev": 2030564697.2999997,
+      "ev_ebitda": 10.479793029004954,
+      "pb": 2.2165523656585453,
+      "fcf_yield": -0.05942189389997725,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.47161572052401746,
+        "pb": 0.36681222707423583,
+        "fcf_yield": 0.048034934497816595
+      }
+    },
+    {
+      "cik": "0001177394",
+      "name": "TD SYNNEX CORPORATION",
+      "ticker": "SNX",
+      "missing": [],
+      "revenue": 62508086000,
+      "ebitda": 1829138000,
+      "equity": 8450429000,
+      "shares": 80729152,
+      "net_debt": -1416129000,
+      "fcf": 1531704000,
+      "net_debt_ebitda": -0.7742056640887675,
+      "sbc_ratio": 0.0010627105107649593,
+      "price": 259.28,
+      "mktcap": 20931454530.559998,
+      "ev": 19515325530.559998,
+      "ev_ebitda": 10.669137883833805,
+      "pb": 2.476969456883195,
+      "fcf_yield": 0.0784872380223138,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4759825327510917,
+        "pb": 0.4148471615720524,
+        "fcf_yield": 0.7248908296943232
+      }
+    },
+    {
+      "cik": "0002014596",
+      "name": "CONCENTRA GROUP HOLDINGS PARENT, INC.",
+      "ticker": "CON",
+      "missing": [],
+      "revenue": 2163417000,
+      "ebitda": 409809000,
+      "equity": 393281000,
+      "shares": 128634749,
+      "net_debt": -79899000,
+      "fcf": 197062000,
+      "net_debt_ebitda": -0.19496643558340593,
+      "sbc_ratio": 0.004848810931965497,
+      "price": 34.73,
+      "mktcap": 4467484832.7699995,
+      "ev": 4387585832.7699995,
+      "ev_ebitda": 10.706416483703382,
+      "pb": 11.359523680955855,
+      "fcf_yield": 0.044913537309785125,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.48034934497816595,
+        "pb": 0.9082969432314411,
+        "fcf_yield": 0.4672489082969432
+      }
+    },
+    {
+      "cik": "0000902791",
+      "name": "BARRETT BUSINESS SERVICES, INC.",
+      "ticker": "BBSI",
+      "missing": [],
+      "revenue": 1240298000,
+      "ebitda": 70419000,
+      "equity": 241000000,
+      "shares": 25203090,
+      "net_debt": -95033000,
+      "fcf": 65955000,
+      "net_debt_ebitda": -1.3495363467246055,
+      "sbc_ratio": 0.008352831335695131,
+      "price": 33.82,
+      "mktcap": 852368503.8,
+      "ev": 757335503.8,
+      "ev_ebitda": 10.754704040102812,
+      "pb": 3.5367987709543565,
+      "fcf_yield": 0.08708821872085062,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4847161572052402,
+        "pb": 0.5720524017467249,
+        "fcf_yield": 0.7641921397379913
+      }
+    },
+    {
+      "cik": "0000092380",
+      "name": "SOUTHWEST AIRLINES CO.",
+      "ticker": "LUV",
+      "missing": [],
+      "revenue": 28063000000,
+      "ebitda": 1988000000,
+      "equity": 7981000000,
+      "shares": 491317990,
+      "net_debt": 1698000000,
+      "fcf": 1842000000,
+      "net_debt_ebitda": 0.8541247484909457,
+      "sbc_ratio": 0.0035277767879414177,
+      "price": 40.17,
+      "mktcap": 19736243658.3,
+      "ev": 21434243658.3,
+      "ev_ebitda": 10.781812705382293,
+      "pb": 2.4729036033454452,
+      "fcf_yield": 0.08593725206098984,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4890829694323144,
+        "pb": 0.4104803493449782,
+        "fcf_yield": 0.759825327510917
+      }
+    },
+    {
+      "cik": "0000912766",
+      "name": "Laureate Education, Inc.",
+      "ticker": "LAUR",
+      "missing": [],
+      "revenue": 1701930000,
+      "ebitda": 505597000,
+      "equity": 1187937000,
+      "shares": 142743630,
+      "net_debt": -73580000,
+      "fcf": 366192000,
+      "net_debt_ebitda": -0.14553092680534102,
+      "sbc_ratio": 0.007839335342816684,
+      "price": 39.14,
+      "mktcap": 5586985678.2,
+      "ev": 5513405678.2,
+      "ev_ebitda": 10.904743655915679,
+      "pb": 4.703099304256034,
+      "fcf_yield": 0.06641847550742054,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.49344978165938863,
+        "pb": 0.6724890829694323,
+        "fcf_yield": 0.6157205240174672
+      }
+    },
+    {
+      "cik": "0000069891",
+      "name": "National Beverage Corp.",
+      "ticker": "FIZZ",
+      "missing": [],
+      "revenue": 1180552000,
+      "ebitda": 252785000,
+      "equity": 591062000,
+      "shares": 93632102,
+      "net_debt": -313973000,
+      "fcf": 156112000,
+      "net_debt_ebitda": -1.24205550171094,
+      "sbc_ratio": 0.00037185994348406506,
+      "price": 32.92,
+      "mktcap": 3082368797.84,
+      "ev": 2768395797.84,
+      "ev_ebitda": 10.951582561623514,
+      "pb": 5.21496695412664,
+      "fcf_yield": 0.05639078058195439,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.4978165938864629,
+        "pb": 0.7336244541484717,
+        "fcf_yield": 0.5676855895196506
+      }
+    },
+    {
+      "cik": "0000918965",
+      "name": "ScanSource, Inc.",
+      "ticker": "SCSC",
+      "missing": [],
+      "revenue": 3040810000,
+      "ebitda": 115395000,
+      "equity": 910886000,
+      "shares": 21480385,
+      "net_debt": 19197000,
+      "fcf": 112349000,
+      "net_debt_ebitda": 0.16635902768750813,
+      "sbc_ratio": 0.003637846494848412,
+      "price": 58.07,
+      "mktcap": 1247365956.95,
+      "ev": 1266562956.95,
+      "ev_ebitda": 10.97589113003163,
+      "pb": 1.36939853829129,
+      "fcf_yield": 0.08870384167127919,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5021834061135371,
+        "pb": 0.2183406113537118,
+        "fcf_yield": 0.777292576419214
+      }
+    },
+    {
+      "cik": "0000056047",
+      "name": "Kirby Corporation",
+      "ticker": "KEX",
+      "missing": [],
+      "revenue": 3364050000,
+      "ebitda": 760410000,
+      "equity": 3380512000,
+      "shares": 53646000,
+      "net_debt": 833149000,
+      "fcf": 670204000,
+      "net_debt_ebitda": 1.095657605765311,
+      "sbc_ratio": 0.00522079041631367,
+      "price": 140.49,
+      "mktcap": 7536726540.000001,
+      "ev": 8369875540.000001,
+      "ev_ebitda": 11.007056114464566,
+      "pb": 2.22946303400195,
+      "fcf_yield": 0.0800733531576504,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5065502183406113,
+        "pb": 0.37554585152838427,
+        "fcf_yield": 0.7379912663755459
+      }
+    },
+    {
+      "cik": "0001531152",
+      "name": "BJ’S WHOLESALE CLUB HOLDINGS, INC.",
+      "ticker": "BJ",
+      "missing": [],
+      "revenue": 21457274000,
+      "ebitda": 1105198000,
+      "equity": 2197659000,
+      "shares": 130847715,
+      "net_debt": 472854000,
+      "fcf": 328008000,
+      "net_debt_ebitda": 0.4278455082256754,
+      "sbc_ratio": 0.0021997202440533687,
+      "price": 90.71,
+      "mktcap": 11869196227.65,
+      "ev": 12342050227.65,
+      "ev_ebitda": 11.167275210098099,
+      "pb": 5.400836175061736,
+      "fcf_yield": 0.02657645966025652,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5109170305676856,
+        "pb": 0.7467248908296943,
+        "fcf_yield": 0.2663755458515284
+      }
+    },
+    {
+      "cik": "0001047127",
+      "name": "Amkor Technology, Inc.",
+      "ticker": "AMKR",
+      "missing": [],
+      "revenue": 6707981000,
+      "ebitda": 1109393000,
+      "equity": 4471106000,
+      "shares": 247309063,
+      "net_debt": -95531000,
+      "fcf": 190992000,
+      "net_debt_ebitda": -0.08611105352206117,
+      "sbc_ratio": 0.002996281593522701,
+      "price": 50.75,
+      "mktcap": 12550934947.25,
+      "ev": 12455403947.25,
+      "ev_ebitda": 11.227224209319871,
+      "pb": 2.807120866123505,
+      "fcf_yield": 0.015334067109254107,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5152838427947598,
+        "pb": 0.4759825327510917,
+        "fcf_yield": 0.16593886462882096
+      }
+    },
+    {
+      "cik": "0001995075",
+      "name": "MEGAN HOLDINGS LIMITED",
+      "ticker": "MGN",
+      "missing": [],
+      "revenue": 20681805,
+      "ebitda": 164453,
+      "equity": 11912843,
+      "shares": 16250000,
+      "net_debt": 37958,
+      "fcf": -2364146,
+      "net_debt_ebitda": 0.23081366712677787,
+      "sbc_ratio": null,
+      "price": 0.1125,
+      "mktcap": 1828125.0,
+      "ev": 1866083.0,
+      "ev_ebitda": 11.347211665339033,
+      "pb": 0.15345833064365913,
+      "fcf_yield": -1.2669029191091714,
+      "passed": [
+        "P/B",
+        "净负债/EBITDA"
+      ],
+      "pct": {
+        "ev_ebitda": 0.519650655021834,
+        "pb": 0.004366812227074236,
+        "fcf_yield": 0.008733624454148471
+      }
+    },
+    {
+      "cik": "0000055785",
+      "name": "KIMBERLY-CLARK CORPORATION",
+      "ticker": "KMB",
+      "missing": [],
+      "revenue": 16447000000,
+      "ebitda": 3156000000,
+      "equity": 1502000000,
+      "shares": 331922371,
+      "net_debt": -688000000,
+      "fcf": 2777000000,
+      "net_debt_ebitda": -0.21799746514575413,
+      "sbc_ratio": 0.008512190673071077,
+      "price": 111.33,
+      "mktcap": 36952917563.43,
+      "ev": 36264917563.43,
+      "ev_ebitda": 11.490785032772497,
+      "pb": 24.60247507551931,
+      "fcf_yield": 0.07657538432681732,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5240174672489083,
+        "pb": 0.982532751091703,
+        "fcf_yield": 0.7117903930131004
+      }
+    },
+    {
+      "cik": "0001639300",
+      "name": "Ollie’s Bargain Outlet Holdings, Inc.",
+      "ticker": "OLLI",
+      "missing": [],
+      "revenue": 2649198000,
+      "ebitda": 352865000,
+      "equity": 1888076000,
+      "shares": 61332549,
+      "net_debt": -259680000,
+      "fcf": 194660000,
+      "net_debt_ebitda": -0.7359188358153969,
+      "sbc_ratio": 0.00492979384704352,
+      "price": 71.01,
+      "mktcap": 4355224304.490001,
+      "ev": 4095544304.4900007,
+      "ev_ebitda": 11.606547275842038,
+      "pb": 2.3066996797215795,
+      "fcf_yield": 0.04752970192181576,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5283842794759825,
+        "pb": 0.388646288209607,
+        "fcf_yield": 0.5065502183406113
+      }
+    },
+    {
+      "cik": "0001710366",
+      "name": "Core Natural Resources, Inc.",
+      "ticker": "CNR",
+      "missing": [],
+      "revenue": 4164775000,
+      "ebitda": 439006000,
+      "equity": 3678234000,
+      "shares": 50979544,
+      "net_debt": -37352000,
+      "fcf": 21171000,
+      "net_debt_ebitda": -0.0850831195928985,
+      "sbc_ratio": 0.00790390837440198,
+      "price": 101.03,
+      "mktcap": 5150463330.32,
+      "ev": 5113111330.32,
+      "ev_ebitda": 11.647019244201672,
+      "pb": 1.4002543966262069,
+      "fcf_yield": 0.004140531788239986,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5327510917030568,
+        "pb": 0.22270742358078602,
+        "fcf_yield": 0.13537117903930132
+      }
+    },
+    {
+      "cik": "0000935703",
+      "name": "DOLLAR TREE, INC.",
+      "ticker": "DLTR",
+      "missing": [],
+      "revenue": 19395700000,
+      "ebitda": 2301200000,
+      "equity": 3754900000,
+      "shares": 198853187,
+      "net_debt": 1713900000,
+      "fcf": 0,
+      "net_debt_ebitda": 0.74478532939336,
+      "sbc_ratio": 0.0030367555695334533,
+      "price": 126.23,
+      "mktcap": 25101237795.010002,
+      "ev": 26815137795.010002,
+      "ev_ebitda": 11.652675906053364,
+      "pb": 6.684928438842579,
+      "fcf_yield": 0.0,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.537117903930131,
+        "pb": 0.8078602620087336,
+        "fcf_yield": 0.11790393013100436
+      }
+    },
+    {
+      "cik": "0001584509",
+      "name": "Aramark",
+      "ticker": "ARMK",
+      "missing": [],
+      "revenue": 18506299000,
+      "ebitda": 1268191000,
+      "equity": 3208109000,
+      "shares": 262835999,
+      "net_debt": -439633000,
+      "fcf": 0,
+      "net_debt_ebitda": -0.3466615044579247,
+      "sbc_ratio": 0.0031688129539028847,
+      "price": 58.81,
+      "mktcap": 15457385101.19,
+      "ev": 15017752101.19,
+      "ev_ebitda": 11.841869325038578,
+      "pb": 4.818223165481597,
+      "fcf_yield": 0.0,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5414847161572053,
+        "pb": 0.6943231441048034,
+        "fcf_yield": 0.11790393013100436
+      }
+    },
+    {
+      "cik": "0001069202",
+      "name": "LENNOX INTERNATIONAL INC.",
+      "ticker": "LII",
+      "missing": [],
+      "revenue": 5195300000,
+      "ebitda": 1154000000,
+      "equity": 1163100000,
+      "shares": 34802911,
+      "net_debt": -15900000,
+      "fcf": 638800000,
+      "net_debt_ebitda": -0.013778162911611784,
+      "sbc_ratio": 0.005601216484129886,
+      "price": 394.21,
+      "mktcap": 13719655545.31,
+      "ev": 13703755545.31,
+      "ev_ebitda": 11.875004805294626,
+      "pb": 11.79576609518528,
+      "fcf_yield": 0.0466149587890616,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5458515283842795,
+        "pb": 0.9213973799126638,
+        "fcf_yield": 0.49344978165938863
+      }
+    },
+    {
+      "cik": "0000064803",
+      "name": "CVS HEALTH CORPORATION",
+      "ticker": "CVS",
+      "missing": [],
+      "revenue": 402067000000,
+      "ebitda": 9266000000,
+      "equity": 75214000000,
+      "shares": 1272211063,
+      "net_debt": -8453000000,
+      "fcf": 7807000000,
+      "net_debt_ebitda": -0.9122598748111375,
+      "sbc_ratio": 0.0013306240004775324,
+      "price": 93.37,
+      "mktcap": 118786346952.31001,
+      "ev": 110333346952.31001,
+      "ev_ebitda": 11.90733293247464,
+      "pb": 1.5793116567701493,
+      "fcf_yield": 0.07075829942306076,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5545851528384279,
+        "pb": 0.25327510917030566,
+        "fcf_yield": 0.6637554585152838
+      }
+    },
+    {
+      "cik": "0001637810",
+      "name": "FirstService Corporation",
+      "ticker": "FSV",
+      "missing": [],
+      "revenue": 5497500000,
+      "ebitda": 523287000,
+      "equity": 1375999000,
+      "shares": 45722486,
+      "net_debt": -154425000,
+      "fcf": 318236000,
+      "net_debt_ebitda": -0.2951057450309295,
+      "sbc_ratio": 0.004981718963165075,
+      "price": 139.89,
+      "mktcap": 6396118566.539999,
+      "ev": 6241693566.539999,
+      "ev_ebitda": 11.927859026767337,
+      "pb": 4.648345359655057,
+      "fcf_yield": 0.05098552125435565,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5589519650655022,
+        "pb": 0.6681222707423581,
+        "fcf_yield": 0.537117903930131
+      }
+    },
+    {
+      "cik": "0000073756",
+      "name": "OCEANEERING INTERNATIONAL INC",
+      "ticker": "OII",
+      "missing": [],
+      "revenue": 2643062000,
+      "ebitda": 406807000,
+      "equity": 1070600000,
+      "shares": 99393743,
+      "net_debt": -201457000,
+      "fcf": 207846000,
+      "net_debt_ebitda": -0.49521517574673,
+      "sbc_ratio": 0.005582540250663813,
+      "price": 50.86,
+      "mktcap": 5055165768.98,
+      "ev": 4853708768.98,
+      "ev_ebitda": 11.931232178846479,
+      "pb": 4.721806247879694,
+      "fcf_yield": 0.042822099531051705,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5633187772925764,
+        "pb": 0.6768558951965066,
+        "fcf_yield": 0.4366812227074236
+      }
+    },
+    {
+      "cik": "0000731802",
+      "name": "Atmos Energy Corp",
+      "ticker": "ATO",
+      "missing": [],
+      "revenue": 4702755000,
+      "ebitda": 2294716000,
+      "equity": 14282892000,
+      "shares": 165438946,
+      "net_debt": -367023000,
+      "fcf": 2049456000,
+      "net_debt_ebitda": -0.1599426682866202,
+      "sbc_ratio": 0.0027071365614411125,
+      "price": 167.79,
+      "mktcap": 27759000749.34,
+      "ev": 27391977749.34,
+      "ev_ebitda": 11.936979455993683,
+      "pb": 1.9435140130822246,
+      "fcf_yield": 0.07481957012210923,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5676855895196506,
+        "pb": 0.3231441048034934,
+        "fcf_yield": 0.6986899563318777
+      }
+    },
+    {
+      "cik": "0001836754",
+      "name": "LEGACY EDUCATION INC.",
+      "ticker": "LGCY",
+      "missing": [],
+      "revenue": 64168025,
+      "ebitda": 10428044,
+      "equity": 46073908,
+      "shares": 12613086,
+      "net_debt": -20397075,
+      "fcf": 6923919,
+      "net_debt_ebitda": -1.9559828286110033,
+      "sbc_ratio": 0.008614882568070312,
+      "price": 11.58,
+      "mktcap": 146059535.88,
+      "ev": 125662460.88,
+      "ev_ebitda": 12.05043447074063,
+      "pb": 3.1701138935295003,
+      "fcf_yield": 0.0550993427274349,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5720524017467249,
+        "pb": 0.5283842794759825,
+        "fcf_yield": 0.5633187772925764
+      }
+    },
+    {
+      "cik": "0001054905",
+      "name": "INNOSPEC INC.",
+      "ticker": "IOSP",
+      "missing": [],
+      "revenue": 1778000000,
+      "ebitda": 173100000,
+      "equity": 1326100000,
+      "shares": 24777859,
+      "net_debt": -292500000,
+      "fcf": 138300000,
+      "net_debt_ebitda": -1.6897746967071057,
+      "sbc_ratio": 0.004555680539932509,
+      "price": 96.66,
+      "mktcap": 2395027850.94,
+      "ev": 2102527850.94,
+      "ev_ebitda": 12.14631918509532,
+      "pb": 1.806068811507428,
+      "fcf_yield": 0.06577796338734286,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5764192139737991,
+        "pb": 0.31004366812227074,
+        "fcf_yield": 0.6069868995633187
+      }
+    },
+    {
+      "cik": "0001748790",
+      "name": "AMCOR PLC",
+      "ticker": "AMCR",
+      "missing": [],
+      "revenue": 15009000000,
+      "ebitda": 1731000000,
+      "equity": 11636000000,
+      "shares": 462045690,
+      "net_debt": -621000000,
+      "fcf": 1390000000,
+      "net_debt_ebitda": -0.3587521663778163,
+      "sbc_ratio": 0.004930375108268372,
+      "price": 46.99,
+      "mktcap": 21711526973.100002,
+      "ev": 21090526973.100002,
+      "ev_ebitda": 12.184013271577124,
+      "pb": 1.8658926583963564,
+      "fcf_yield": 0.06590636648258628,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5807860262008734,
+        "pb": 0.31877729257641924,
+        "fcf_yield": 0.611353711790393
+      }
+    },
+    {
+      "cik": "0001739445",
+      "name": "Arcosa, Inc.",
+      "ticker": "ACA",
+      "missing": [],
+      "revenue": 2883400000,
+      "ebitda": 564900000,
+      "equity": 2641400000,
+      "shares": 49044022,
+      "net_debt": -214600000,
+      "fcf": 175500000,
+      "net_debt_ebitda": -0.37989024606124977,
+      "sbc_ratio": 0.009155857668030797,
+      "price": 145.47,
+      "mktcap": 7134433880.34,
+      "ev": 6919833880.34,
+      "ev_ebitda": 12.249661675234554,
+      "pb": 2.7010047248958884,
+      "fcf_yield": 0.0253618805067871,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5851528384279476,
+        "pb": 0.4585152838427948,
+        "fcf_yield": 0.26200873362445415
+      }
+    },
+    {
+      "cik": "0000823768",
+      "name": "Waste Management, Inc",
+      "ticker": "WM",
+      "missing": [],
+      "revenue": 25204000000,
+      "ebitda": 7171000000,
+      "equity": 9990000000,
+      "shares": 403335781,
+      "net_debt": -201000000,
+      "fcf": 6043000000,
+      "net_debt_ebitda": -0.028029563519732254,
+      "sbc_ratio": 0.006705284875416601,
+      "price": 219.11,
+      "mktcap": 88374902974.91,
+      "ev": 88173902974.91,
+      "ev_ebitda": 12.295900568248502,
+      "pb": 8.846336634125125,
+      "fcf_yield": 0.06853501768793815,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5895196506550219,
+        "pb": 0.8820960698689956,
+        "fcf_yield": 0.62882096069869
+      }
+    },
+    {
+      "cik": "0001944048",
+      "name": "Kenvue Inc.",
+      "ticker": "KVUE",
+      "missing": [],
+      "revenue": 15124000000,
+      "ebitda": 2971000000,
+      "equity": 10765000000,
+      "shares": 1916732090,
+      "net_debt": -312000000,
+      "fcf": 1722000000,
+      "net_debt_ebitda": -0.10501514641534837,
+      "sbc_ratio": 0.00899233007140968,
+      "price": 19.39,
+      "mktcap": 37165435225.1,
+      "ev": 36853435225.1,
+      "ev_ebitda": 12.404387487411645,
+      "pb": 3.452432440789596,
+      "fcf_yield": 0.046725630581845645,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5938864628820961,
+        "pb": 0.5589519650655022,
+        "fcf_yield": 0.4978165938864629
+      }
+    },
+    {
+      "cik": "0001403568",
+      "name": "ULTA BEAUTY, INC.",
+      "ticker": "ULTA",
+      "missing": [],
+      "revenue": 12392820000,
+      "ebitda": 1833764000,
+      "equity": 2803451000,
+      "shares": 44362172,
+      "net_debt": -361956000,
+      "fcf": 1067951000,
+      "net_debt_ebitda": -0.19738417811670422,
+      "sbc_ratio": 0.003019974469087746,
+      "price": 525.04,
+      "mktcap": 23291914786.879997,
+      "ev": 22929958786.879997,
+      "ev_ebitda": 12.50431287062021,
+      "pb": 8.308301014314143,
+      "fcf_yield": 0.04657448405930225,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.5982532751091703,
+        "pb": 0.8602620087336245,
+        "fcf_yield": 0.4890829694323144
+      }
+    },
+    {
+      "cik": "0000940944",
+      "name": "DARDEN RESTAURANTS, INC.",
+      "ticker": "DRI",
+      "missing": [],
+      "revenue": 13210900000,
+      "ebitda": 2143900000,
+      "equity": 2080400000,
+      "shares": 115139249,
+      "net_debt": 2353000000,
+      "fcf": -734000000,
+      "net_debt_ebitda": 1.0975325341667055,
+      "sbc_ratio": 0.005987480035425293,
+      "price": 212.61,
+      "mktcap": 24479755729.890003,
+      "ev": 26832755729.890003,
+      "ev_ebitda": 12.515861621292972,
+      "pb": 11.766850475817153,
+      "fcf_yield": -0.02735462609166043,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6026200873362445,
+        "pb": 0.9170305676855895,
+        "fcf_yield": 0.07423580786026202
+      }
+    },
+    {
+      "cik": "0001037976",
+      "name": "Jones Lang LaSalle Incorporated",
+      "ticker": "JLL",
+      "missing": [],
+      "revenue": 26115600000,
+      "ebitda": 1350800000,
+      "equity": 7502800000,
+      "shares": 46851472,
+      "net_debt": -599100000,
+      "fcf": 1194100000,
+      "net_debt_ebitda": -0.44351495410127334,
+      "sbc_ratio": 0.00010338648164315581,
+      "price": 382.99,
+      "mktcap": 17943645261.28,
+      "ev": 17344545261.28,
+      "ev_ebitda": 12.84020229588392,
+      "pb": 2.3915931733859357,
+      "fcf_yield": 0.06884585222685033,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6157205240174672,
+        "pb": 0.39737991266375544,
+        "fcf_yield": 0.6375545851528385
+      }
+    },
+    {
+      "cik": "0000818686",
+      "name": "TEVA PHARMACEUTICAL INDUSTRIES LIMITED",
+      "ticker": "TEVA",
+      "missing": [],
+      "revenue": 17258000000,
+      "ebitda": 3159000000,
+      "equity": 7910000000,
+      "shares": 1149812898,
+      "net_debt": -1758000000,
+      "fcf": 1649000000,
+      "net_debt_ebitda": -0.5565052231718899,
+      "sbc_ratio": 0.0090972302700197,
+      "price": 37.28,
+      "mktcap": 42865024837.44,
+      "ev": 41107024837.44,
+      "ev_ebitda": 13.012670097321939,
+      "pb": 5.419092899802782,
+      "fcf_yield": 0.040114798055102784,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6244541484716157,
+        "pb": 0.7510917030567685,
+        "fcf_yield": 0.4192139737991266
+      }
+    },
+    {
+      "cik": "0001921963",
+      "name": "Atmus Filtration Technologies Inc.",
+      "ticker": "ATMU",
+      "missing": [],
+      "revenue": 1764300000,
+      "ebitda": 329000000,
+      "equity": 378500000,
+      "shares": 81508591,
+      "net_debt": 333600000,
+      "fcf": 148800000,
+      "net_debt_ebitda": 1.013981762917933,
+      "sbc_ratio": 0.0070282831717961795,
+      "price": 48.86,
+      "mktcap": 3982509756.2599998,
+      "ev": 4316109756.26,
+      "ev_ebitda": 13.118874639088146,
+      "pb": 10.521822341505944,
+      "fcf_yield": 0.03447549029173399,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.62882096069869,
+        "pb": 0.8951965065502183,
+        "fcf_yield": 0.34934497816593885
+      }
+    },
+    {
+      "cik": "0001171155",
+      "name": "RADIANT LOGISTICS, INC.",
+      "ticker": "RLGT",
+      "missing": [],
+      "revenue": 902696000,
+      "ebitda": 28819000,
+      "equity": 229828000,
+      "shares": 46826544,
+      "net_debt": -31884000,
+      "fcf": 8144000,
+      "net_debt_ebitda": -1.1063534473784655,
+      "sbc_ratio": -0.0009072821858078467,
+      "price": 8.78,
+      "mktcap": 411137056.32,
+      "ev": 379253056.32,
+      "ev_ebitda": 13.159827069641556,
+      "pb": 1.7888901975390292,
+      "fcf_yield": 0.02147378871253812,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6331877729257642,
+        "pb": 0.3056768558951965,
+        "fcf_yield": 0.23580786026200873
+      }
+    },
+    {
+      "cik": "0000038725",
+      "name": "FRANKLIN ELECTRIC CO., INC.",
+      "ticker": "FELE",
+      "missing": [],
+      "revenue": 2131250000,
+      "ebitda": 331853000,
+      "equity": 1322579000,
+      "shares": 44202147,
+      "net_debt": -99662000,
+      "fcf": 193541000,
+      "net_debt_ebitda": -0.30031971987596917,
+      "sbc_ratio": 0.0061916715542522,
+      "price": 102.08,
+      "mktcap": 4512155165.76,
+      "ev": 4412493165.76,
+      "ev_ebitda": 13.29652938427557,
+      "pb": 3.4116337593141886,
+      "fcf_yield": 0.043862050937967814,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6375545851528385,
+        "pb": 0.5545851528384279,
+        "fcf_yield": 0.44541484716157204
+      }
+    },
+    {
+      "cik": "0000702165",
+      "name": "NORFOLK SOUTHERN CORPORATION",
+      "ticker": "NSC",
+      "missing": [],
+      "revenue": 12180000000,
+      "ebitda": 5749000000,
+      "equity": 15547000000,
+      "shares": 224572025,
+      "net_debt": -1530000000,
+      "fcf": 2157000000,
+      "net_debt_ebitda": -0.2661332405635763,
+      "sbc_ratio": 0.005172413793103448,
+      "price": 347.86,
+      "mktcap": 78119624616.5,
+      "ev": 76589624616.5,
+      "ev_ebitda": 13.322251629239867,
+      "pb": 5.0247394749147745,
+      "fcf_yield": 0.028163083587372868,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6419213973799127,
+        "pb": 0.7161572052401747,
+        "fcf_yield": 0.2838427947598253
+      }
+    },
+    {
+      "cik": "0000763532",
+      "name": "LSI INDUSTRIES INC.",
+      "ticker": "LYTS",
+      "missing": [],
+      "revenue": 573377000,
+      "ebitda": 48344000,
+      "equity": 248097000,
+      "shares": 31133195,
+      "net_debt": 21532000,
+      "fcf": 34653000,
+      "net_debt_ebitda": 0.44539136190633793,
+      "sbc_ratio": 0.007262237585393206,
+      "price": 20.09,
+      "mktcap": 625465887.55,
+      "ev": 646997887.55,
+      "ev_ebitda": 13.383209654765844,
+      "pb": 2.52105381181554,
+      "fcf_yield": 0.053559680281524906,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6462882096069869,
+        "pb": 0.43231441048034935,
+        "fcf_yield": 0.5458515283842795
+      }
+    },
+    {
+      "cik": "0000831259",
+      "name": "Freeport-McMoRan Inc.",
+      "ticker": "FCX",
+      "missing": [],
+      "revenue": 25186000000,
+      "ebitda": 8762000000,
+      "equity": 18899000000,
+      "shares": 1437201606,
+      "net_debt": 5555000000,
+      "fcf": 5610000000,
+      "net_debt_ebitda": 0.6339876740470213,
+      "sbc_ratio": 0.004804256332883348,
+      "price": 77.93,
+      "mktcap": 112001121155.58002,
+      "ev": 117556121155.58002,
+      "ev_ebitda": 13.41658538639352,
+      "pb": 5.92629880711043,
+      "fcf_yield": 0.04772188759592899,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6506550218340611,
+        "pb": 0.777292576419214,
+        "fcf_yield": 0.5109170305676856
+      }
+    },
+    {
+      "cik": "0001665918",
+      "name": "US FOODS HOLDING CORP.",
+      "ticker": "USFD",
+      "missing": [],
+      "revenue": 39424000000,
+      "ebitda": 1661000000,
+      "equity": 4307000000,
+      "shares": 220541957,
+      "net_debt": -41000000,
+      "fcf": 959000000,
+      "net_debt_ebitda": -0.024683925346177003,
+      "sbc_ratio": 0.0021053165584415585,
+      "price": 107.11,
+      "mktcap": 23622249014.27,
+      "ev": 23581249014.27,
+      "ev_ebitda": 14.19701927409392,
+      "pb": 5.484617834750407,
+      "fcf_yield": 0.040667905225023025,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6550218340611353,
+        "pb": 0.759825327510917,
+        "fcf_yield": 0.4279475982532751
+      }
+    },
+    {
+      "cik": "0000091440",
+      "name": "Snap-on Inc",
+      "ticker": "SNA",
+      "missing": [],
+      "revenue": 4709300000,
+      "ebitda": 1426200000,
+      "equity": 5931800000,
+      "shares": 51913121,
+      "net_debt": -438100000,
+      "fcf": 1081700000,
+      "net_debt_ebitda": -0.3071799186649839,
+      "sbc_ratio": 0.006136793153971928,
+      "price": 398.83,
+      "mktcap": 20704510048.43,
+      "ev": 20266410048.43,
+      "ev_ebitda": 14.21007575966204,
+      "pb": 3.4904261857159717,
+      "fcf_yield": 0.05337403108962543,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6593886462882096,
+        "pb": 0.5676855895196506,
+        "fcf_yield": 0.5414847161572053
+      }
+    },
+    {
+      "cik": "0001096056",
+      "name": "Luxfer Holdings PLC",
+      "ticker": "LXFR",
+      "missing": [],
+      "revenue": 384600000,
+      "ebitda": 33900000,
+      "equity": 226400000,
+      "shares": 26640434,
+      "net_debt": 31100000,
+      "fcf": 26200000,
+      "net_debt_ebitda": 0.9174041297935103,
+      "sbc_ratio": 0.0093603744149766,
+      "price": 17.16,
+      "mktcap": 457149847.44,
+      "ev": 488249847.44,
+      "ev_ebitda": 14.402650366961652,
+      "pb": 2.019213107067138,
+      "fcf_yield": 0.053661051073282034,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6637554585152838,
+        "pb": 0.33624454148471616,
+        "fcf_yield": 0.5502183406113537
+      }
+    },
+    {
+      "cik": "0001318220",
+      "name": "WASTE CONNECTIONS, INC.",
+      "ticker": "WCN",
+      "missing": [],
+      "revenue": 9466915000,
+      "ebitda": 2942280000,
+      "equity": 8245381000,
+      "shares": 255681232,
+      "net_debt": -45968000,
+      "fcf": 1234841000,
+      "net_debt_ebitda": -0.015623258153540792,
+      "sbc_ratio": 0.008392174219373471,
+      "price": 166.14,
+      "mktcap": 42478879884.479996,
+      "ev": 42432911884.479996,
+      "ev_ebitda": 14.421778989246434,
+      "pb": 5.151839543191515,
+      "fcf_yield": 0.02910101958974086,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6681222707423581,
+        "pb": 0.7205240174672489,
+        "fcf_yield": 0.30131004366812225
+      }
+    },
+    {
+      "cik": "0000090896",
+      "name": "CHAMPION HOMES, INC.",
+      "ticker": "SKY",
+      "missing": [],
+      "revenue": 2663639000,
+      "ebitda": 299554000,
+      "equity": 1592226000,
+      "shares": 55302021,
+      "net_debt": -635942000,
+      "fcf": 269749000,
+      "net_debt_ebitda": -2.1229628047029916,
+      "sbc_ratio": 0.00784227892743724,
+      "price": 90.31,
+      "mktcap": 4994325516.51,
+      "ev": 4358383516.51,
+      "ev_ebitda": 14.549575423830095,
+      "pb": 3.1366938591066846,
+      "fcf_yield": 0.061891983341567654,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6724890829694323,
+        "pb": 0.5240174672489083,
+        "fcf_yield": 0.5807860262008734
+      }
+    },
+    {
+      "cik": "0000026172",
+      "name": "CUMMINS INC.",
+      "ticker": "CMI",
+      "missing": [],
+      "revenue": 33670000000,
+      "ebitda": 5130000000,
+      "equity": 12349000000,
+      "shares": 138165463,
+      "net_debt": -2751000000,
+      "fcf": 2386000000,
+      "net_debt_ebitda": -0.5362573099415204,
+      "sbc_ratio": 0.002762102762102762,
+      "price": 571.9,
+      "mktcap": 79016828289.7,
+      "ev": 76265828289.7,
+      "ev_ebitda": 14.866633194873295,
+      "pb": 6.398641856806218,
+      "fcf_yield": 0.03128530894513656,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6768558951965066,
+        "pb": 0.7947598253275109,
+        "fcf_yield": 0.3231441048034934
+      }
+    },
+    {
+      "cik": "0000040704",
+      "name": "GENERAL MILLS, INC.",
+      "ticker": "GIS",
+      "missing": [],
+      "revenue": 18424600000,
+      "ebitda": 1441000000,
+      "equity": 9316400000,
+      "shares": 533582081,
+      "net_debt": -666600000,
+      "fcf": 1626300000,
+      "net_debt_ebitda": -0.46259541984732827,
+      "sbc_ratio": 0.004309455836218968,
+      "price": 41.45,
+      "mktcap": 22116977257.45,
+      "ev": 21450377257.45,
+      "ev_ebitda": 14.88575798573907,
+      "pb": 2.3739832185661847,
+      "fcf_yield": 0.0758168483696558,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6812227074235808,
+        "pb": 0.3930131004366812,
+        "fcf_yield": 0.7030567685589519
+      }
+    },
+    {
+      "cik": "0001048268",
+      "name": "IES Holdings, Inc.",
+      "ticker": "IESC",
+      "missing": [],
+      "revenue": 3371468000,
+      "ebitda": 430470000,
+      "equity": 961077000,
+      "shares": 19927999,
+      "net_debt": -88834000,
+      "fcf": 286096000,
+      "net_debt_ebitda": -0.20636513578181986,
+      "sbc_ratio": 0.00383542124676847,
+      "price": 328.04,
+      "mktcap": 6537180791.96,
+      "ev": 6448346791.96,
+      "ev_ebitda": 14.979782079959115,
+      "pb": 6.801932407039186,
+      "fcf_yield": 0.044367340844123554,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6899563318777293,
+        "pb": 0.8165938864628821,
+        "fcf_yield": 0.4585152838427948
+      }
+    },
+    {
+      "cik": "0001698514",
+      "name": "NATIONAL ENERGY SERVICES REUNITED CORP.",
+      "ticker": "NESR",
+      "missing": [],
+      "revenue": 1324047000,
+      "ebitda": 240049000,
+      "equity": 967916000,
+      "shares": 100787173,
+      "net_debt": 131081000,
+      "fcf": 264242000,
+      "net_debt_ebitda": 0.5460593462168141,
+      "sbc_ratio": 0.006284520111446195,
+      "price": 34.58,
+      "mktcap": 3485220442.3399997,
+      "ev": 3616301442.3399997,
+      "ev_ebitda": 15.064846936833728,
+      "pb": 3.600746802759743,
+      "fcf_yield": 0.07306968299330073,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6943231441048034,
+        "pb": 0.5851528384279476,
+        "fcf_yield": 0.6768558951965066
+      }
+    },
+    {
+      "cik": "0001856437",
+      "name": "VICTORIA'S SECRET & CO.",
+      "ticker": "VSXY",
+      "missing": [],
+      "revenue": 6553000000,
+      "ebitda": 509000000,
+      "equity": 856000000,
+      "shares": 80268924,
+      "net_debt": 457000000,
+      "fcf": 312000000,
+      "net_debt_ebitda": 0.8978388998035364,
+      "sbc_ratio": 0.00839310239584923,
+      "price": 91.03,
+      "mktcap": 7306880151.72,
+      "ev": 7763880151.72,
+      "ev_ebitda": 15.253202655638507,
+      "pb": 8.53607494359813,
+      "fcf_yield": 0.04018609173544235,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.6986899563318777,
+        "pb": 0.8646288209606987,
+        "fcf_yield": 0.42358078602620086
+      }
+    },
+    {
+      "cik": "0000080424",
+      "name": "PROCTER & GAMBLE CO",
+      "ticker": "PG",
+      "missing": [],
+      "revenue": 84284000000,
+      "ebitda": 23298000000,
+      "equity": 53317000000,
+      "shares": 2324000685,
+      "net_debt": 25577000000,
+      "fcf": 14044000000,
+      "net_debt_ebitda": 1.0978195553266374,
+      "sbc_ratio": 0.005647572492999858,
+      "price": 143.23,
+      "mktcap": 332866618112.55,
+      "ev": 358443618112.55,
+      "ev_ebitda": 15.38516688610825,
+      "pb": 6.243161057684228,
+      "fcf_yield": 0.03918049949933893,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7030567685589519,
+        "pb": 0.7903930131004366,
+        "fcf_yield": 0.4017467248908297
+      }
+    },
+    {
+      "cik": "0001069878",
+      "name": "Trex Company, Inc.",
+      "ticker": "TREX",
+      "missing": [],
+      "revenue": 1174267000,
+      "ebitda": 320918000,
+      "equity": 1034264000,
+      "shares": 105737365,
+      "net_debt": -3807000,
+      "fcf": 134521000,
+      "net_debt_ebitda": -0.011862843467801743,
+      "sbc_ratio": 0.00776228915570309,
+      "price": 46.74,
+      "mktcap": 4942164440.1,
+      "ev": 4938357440.1,
+      "ev_ebitda": 15.388222038340013,
+      "pb": 4.778436105385086,
+      "fcf_yield": 0.027240029024159902,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7074235807860262,
+        "pb": 0.6899563318777293,
+        "fcf_yield": 0.27510917030567683
+      }
+    },
+    {
+      "cik": "0000277948",
+      "name": "CSX CORPORATION",
+      "ticker": "CSX",
+      "missing": [],
+      "revenue": 14092000000,
+      "ebitda": 6201000000,
+      "equity": 13160000000,
+      "shares": 1859556799,
+      "net_debt": 0,
+      "fcf": 1711000000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.0038319613965370424,
+      "price": 51.38,
+      "mktcap": 95544028332.62001,
+      "ev": 95544028332.62001,
+      "ev_ebitda": 15.407842014613774,
+      "pb": 7.26018452375532,
+      "fcf_yield": 0.017907974259191266,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7117903930131004,
+        "pb": 0.834061135371179,
+        "fcf_yield": 0.1965065502183406
+      }
+    },
+    {
+      "cik": "0001385157",
+      "name": "TE CONNECTIVITY PLC",
+      "ticker": "TEL",
+      "missing": [],
+      "revenue": 17262000000,
+      "ebitda": 4049000000,
+      "equity": 12987000000,
+      "shares": 293434273,
+      "net_debt": 3605000000,
+      "fcf": 3203000000,
+      "net_debt_ebitda": 0.890343294640652,
+      "sbc_ratio": 0.008631676514888194,
+      "price": 203.41,
+      "mktcap": 59687465470.93,
+      "ev": 63292465470.93,
+      "ev_ebitda": 15.631628913541615,
+      "pb": 4.595939437201047,
+      "fcf_yield": 0.050606339572458685,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7205240174672489,
+        "pb": 0.6637554585152838,
+        "fcf_yield": 0.5283842794759825
+      }
+    },
+    {
+      "cik": "0001041803",
+      "name": "PriceSmart, Inc.",
+      "ticker": "PSMT",
+      "missing": [],
+      "revenue": 5270094000,
+      "ebitda": 320671000,
+      "equity": 1304790000,
+      "shares": 30815417,
+      "net_debt": -26086000,
+      "fcf": 103173000,
+      "net_debt_ebitda": -0.08134817304963654,
+      "sbc_ratio": 0.0035695757988377435,
+      "price": 170.98,
+      "mktcap": 5268819998.66,
+      "ev": 5242733998.66,
+      "ev_ebitda": 16.349261388338828,
+      "pb": 4.038059763379548,
+      "fcf_yield": 0.019679236067740646,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7248908296943232,
+        "pb": 0.6157205240174672,
+        "fcf_yield": 0.2183406113537118
+      }
+    },
+    {
+      "cik": "0001334325",
+      "name": "CODA OCTOPUS GROUP, INC.",
+      "ticker": "CODA",
+      "missing": [],
+      "revenue": 26563126,
+      "ebitda": 5397320,
+      "equity": 60185342,
+      "shares": 11270575,
+      "net_debt": -30446369,
+      "fcf": 6040450,
+      "net_debt_ebitda": -5.64101609687771,
+      "sbc_ratio": 0.00846233233242202,
+      "price": 10.57,
+      "mktcap": 119129977.75,
+      "ev": 88683608.75,
+      "ev_ebitda": 16.431045176124446,
+      "pb": 1.979385242174083,
+      "fcf_yield": 0.068112361293597,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7292576419213974,
+        "pb": 0.32751091703056767,
+        "fcf_yield": 0.6244541484716157
+      }
+    },
+    {
+      "cik": "0000900075",
+      "name": "COPART, INC.",
+      "ticker": "CPRT",
+      "missing": [],
+      "revenue": 4646958000,
+      "ebitda": 1912563000,
+      "equity": 9789045000,
+      "shares": 968017684,
+      "net_debt": 0,
+      "fcf": 1230760000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.008178253386408915,
+      "price": 33.13,
+      "mktcap": 32070425870.920002,
+      "ev": 32070425870.920002,
+      "ev_ebitda": 16.76829776112996,
+      "pb": 3.276154708750445,
+      "fcf_yield": 0.03837679003558219,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7336244541484717,
+        "pb": 0.5458515283842795,
+        "fcf_yield": 0.38427947598253276
+      }
+    },
+    {
+      "cik": "0000278166",
+      "name": "CAVCO INDUSTRIES, INC.",
+      "ticker": "CVCO",
+      "missing": [],
+      "revenue": 2244505000,
+      "ebitda": 251612000,
+      "equity": 1089219000,
+      "shares": 7761163,
+      "net_debt": -224616000,
+      "fcf": 232085000,
+      "net_debt_ebitda": -0.8927078199767896,
+      "sbc_ratio": 0.005695242380836755,
+      "price": 575.33,
+      "mktcap": 4465229908.79,
+      "ev": 4240613908.79,
+      "ev_ebitda": 16.853782445948525,
+      "pb": 4.099478533508872,
+      "fcf_yield": 0.0547291040853616,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7379912663755459,
+        "pb": 0.6244541484716157,
+        "fcf_yield": 0.5589519650655022
+      }
+    },
+    {
+      "cik": "0001103982",
+      "name": "Mondelez International, Inc.",
+      "ticker": "MDLZ",
+      "missing": [],
+      "revenue": 38537000000,
+      "ebitda": 4906000000,
+      "equity": 25838000000,
+      "shares": 1281845669,
+      "net_debt": 2688000000,
+      "fcf": 3235000000,
+      "net_debt_ebitda": 0.5479005299633102,
+      "sbc_ratio": 0.002958196019409918,
+      "price": 62.62,
+      "mktcap": 80269175792.78,
+      "ev": 82957175792.78,
+      "ev_ebitda": 16.909330573334692,
+      "pb": 3.106632703490208,
+      "fcf_yield": 0.038996023780760766,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.74235807860262,
+        "pb": 0.519650655021834,
+        "fcf_yield": 0.39737991266375544
+      }
+    },
+    {
+      "cik": "0000788920",
+      "name": "PRO-DEX, INC.",
+      "ticker": "PDEX",
+      "missing": [],
+      "revenue": 66593000,
+      "ebitda": 11928000,
+      "equity": 41613000,
+      "shares": 3205985,
+      "net_debt": -5273000,
+      "fcf": -1682000,
+      "net_debt_ebitda": -0.4420690811535882,
+      "sbc_ratio": 0.008334209301277913,
+      "price": 64.91,
+      "mktcap": 208100486.35,
+      "ev": 202827486.35,
+      "ev_ebitda": 17.004316427733066,
+      "pb": 5.00085277076875,
+      "fcf_yield": -0.00829276164817984,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7467248908296943,
+        "pb": 0.7117903930131004,
+        "fcf_yield": 0.09170305676855896
+      }
+    },
+    {
+      "cik": "0001050377",
+      "name": "PC CONNECTION, INC.",
+      "ticker": "CNXN",
+      "missing": [],
+      "revenue": 2872746000,
+      "ebitda": 109765000,
+      "equity": 910130000,
+      "shares": 25198472,
+      "net_debt": -193221000,
+      "fcf": 58049000,
+      "net_debt_ebitda": -1.760315218876691,
+      "sbc_ratio": 0.0032522889249519448,
+      "price": 81.75,
+      "mktcap": 2059975086.0,
+      "ev": 1866754086.0,
+      "ev_ebitda": 17.006824452238874,
+      "pb": 2.263385544922154,
+      "fcf_yield": 0.03109622227981024,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7510917030567685,
+        "pb": 0.3799126637554585,
+        "fcf_yield": 0.314410480349345
+      }
+    },
+    {
+      "cik": "0000040533",
+      "name": "GENERAL DYNAMICS CORPORATION",
+      "ticker": "GD",
+      "missing": [],
+      "revenue": 52550000000,
+      "ebitda": 6280000000,
+      "equity": 25622000000,
+      "shares": 270389759,
+      "net_debt": 4674000000,
+      "fcf": 3959000000,
+      "net_debt_ebitda": 0.7442675159235669,
+      "sbc_ratio": 0.0037297811607992387,
+      "price": 380.45,
+      "mktcap": 102869783811.55,
+      "ev": 107543783811.55,
+      "ev_ebitda": 17.12480633941879,
+      "pb": 4.014900624914136,
+      "fcf_yield": 0.03681291339848516,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7554585152838428,
+        "pb": 0.611353711790393,
+        "fcf_yield": 0.36681222707423583
+      }
+    },
+    {
+      "cik": "0000277509",
+      "name": "FEDERAL SIGNAL CORPORATION",
+      "ticker": "FSS",
+      "missing": [],
+      "revenue": 2180500000,
+      "ebitda": 421400000,
+      "equity": 1382000000,
+      "shares": 60888150,
+      "net_debt": -63700000,
+      "fcf": 227100000,
+      "net_debt_ebitda": -0.1511627906976744,
+      "sbc_ratio": 0.00687915615684476,
+      "price": 120.35,
+      "mktcap": 7327888852.5,
+      "ev": 7264188852.5,
+      "ev_ebitda": 17.238226987422877,
+      "pb": 5.302379777496382,
+      "fcf_yield": 0.03126295373252068,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.759825327510917,
+        "pb": 0.74235807860262,
+        "fcf_yield": 0.31877729257641924
+      }
+    },
+    {
+      "cik": "0001003078",
+      "name": "MSC INDUSTRIAL DIRECT CO., INC.",
+      "ticker": "MSM",
+      "missing": [],
+      "revenue": 3769521000,
+      "ebitda": 392190000,
+      "equity": 1381171000,
+      "shares": 55803307,
+      "net_debt": -40254000,
+      "fcf": 240877000,
+      "net_debt_ebitda": -0.10263902700221832,
+      "sbc_ratio": 0.003329600763598346,
+      "price": 122.51,
+      "mktcap": 6836463140.570001,
+      "ev": 6796209140.570001,
+      "ev_ebitda": 17.328869019021393,
+      "pb": 4.94975867620302,
+      "fcf_yield": 0.03544284688975854,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7641921397379913,
+        "pb": 0.7030567685589519,
+        "fcf_yield": 0.35807860262008734
+      }
+    },
+    {
+      "cik": "0000029644",
+      "name": "DONALDSON COMPANY, INC.",
+      "ticker": "DCI",
+      "missing": [],
+      "revenue": 3690900000,
+      "ebitda": 594900000,
+      "equity": 1575100000,
+      "shares": 115336687,
+      "net_debt": -194400000,
+      "fcf": 339900000,
+      "net_debt_ebitda": -0.3267776096822995,
+      "sbc_ratio": 0.006502479070145493,
+      "price": 91.73,
+      "mktcap": 10579834298.51,
+      "ev": 10385434298.51,
+      "ev_ebitda": 17.45744545051269,
+      "pb": 6.716928638505492,
+      "fcf_yield": 0.03272853019240279,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7685589519650655,
+        "pb": 0.8122270742358079,
+        "fcf_yield": 0.3406113537117904
+      }
+    },
+    {
+      "cik": "0000066570",
+      "name": "MSA SAFETY INCORPORATED",
+      "ticker": "MSA",
+      "missing": [],
+      "revenue": 1874814000,
+      "ebitda": 443409000,
+      "equity": 1367012000,
+      "shares": 38774722,
+      "net_debt": 415867000,
+      "fcf": 295429000,
+      "net_debt_ebitda": 0.9378857894178964,
+      "sbc_ratio": 0.008105870769046956,
+      "price": 192.01,
+      "mktcap": 7445134371.219999,
+      "ev": 7861001371.219999,
+      "ev_ebitda": 17.72855618902638,
+      "pb": 5.446283113257235,
+      "fcf_yield": 0.03758159883823433,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7729257641921398,
+        "pb": 0.7554585152838428,
+        "fcf_yield": 0.3799126637554585
+      }
+    },
+    {
+      "cik": "0001699150",
+      "name": "Ingersoll Rand Inc.",
+      "ticker": "IR",
+      "missing": [],
+      "revenue": 7650900000,
+      "ebitda": 1650400000,
+      "equity": 10089800000,
+      "shares": 391617994,
+      "net_debt": -1248800000,
+      "fcf": 1355700000,
+      "net_debt_ebitda": -0.7566650508967523,
+      "sbc_ratio": 0.00692728959991635,
+      "price": 79.14,
+      "mktcap": 30992648045.16,
+      "ev": 29743848045.16,
+      "ev_ebitda": 18.02220555329617,
+      "pb": 3.071681108164681,
+      "fcf_yield": 0.04557917314335538,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7816593886462883,
+        "pb": 0.5152838427947598,
+        "fcf_yield": 0.47161572052401746
+      }
+    },
+    {
+      "cik": "0000898293",
+      "name": "JABIL INC",
+      "ticker": "JBL",
+      "missing": [],
+      "revenue": 29802000000,
+      "ebitda": 1856000000,
+      "equity": 1344000000,
+      "shares": 105595267,
+      "net_debt": 1315000000,
+      "fcf": 1172000000,
+      "net_debt_ebitda": 0.7085129310344828,
+      "sbc_ratio": 0.0035903630628816856,
+      "price": 308.59,
+      "mktcap": 32585643443.53,
+      "ev": 33900643443.53,
+      "ev_ebitda": 18.265432889832972,
+      "pb": 24.245270419293153,
+      "fcf_yield": 0.03457161519521773,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7860262008733624,
+        "pb": 0.9781659388646288,
+        "fcf_yield": 0.3537117903930131
+      }
+    },
+    {
+      "cik": "0001335258",
+      "name": "LIVE NATION ENTERTAINMENT, INC.",
+      "ticker": "LYV",
+      "missing": [],
+      "revenue": 25201406000,
+      "ebitda": 1890089000,
+      "equity": 271007000,
+      "shares": 234801922,
+      "net_debt": -7094200000,
+      "fcf": 333611000,
+      "net_debt_ebitda": -3.7533682276337252,
+      "sbc_ratio": 0.006159140486050659,
+      "price": 179.24,
+      "mktcap": 42085896499.28,
+      "ev": 34991696499.28,
+      "ev_ebitda": 18.51325334377376,
+      "pb": 155.29449977041182,
+      "fcf_yield": 0.009534004731861586,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7903930131004366,
+        "pb": 1.0,
+        "fcf_yield": 0.15283842794759825
+      }
+    },
+    {
+      "cik": "0000808439",
+      "name": "TAT TECHNOLOGIES LTD",
+      "ticker": "TATT",
+      "missing": [],
+      "revenue": 178015000,
+      "ebitda": 23913000,
+      "equity": 176391000,
+      "shares": 12983137,
+      "net_debt": -39547000,
+      "fcf": 4020000,
+      "net_debt_ebitda": -1.6537866432484423,
+      "sbc_ratio": 0.006915147599921355,
+      "price": 37.54,
+      "mktcap": 487386962.97999996,
+      "ev": 447839962.97999996,
+      "ev_ebitda": 18.727887048049176,
+      "pb": 2.763105617520168,
+      "fcf_yield": 0.008976420892075522,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7947598253275109,
+        "pb": 0.462882096069869,
+        "fcf_yield": 0.14410480349344978
+      }
+    },
+    {
+      "cik": "0000048898",
+      "name": "HUBBELL INC",
+      "ticker": "HUBB",
+      "missing": [],
+      "revenue": 5844600000,
+      "ebitda": 1414900000,
+      "equity": 3847900000,
+      "shares": 53161602,
+      "net_debt": 1553800000,
+      "fcf": 1029800000,
+      "net_debt_ebitda": 1.0981694819421868,
+      "sbc_ratio": 0.005646237552612668,
+      "price": 470.24,
+      "mktcap": 24998711724.48,
+      "ev": 26552511724.48,
+      "ev_ebitda": 18.76635219766768,
+      "pb": 6.496715539509863,
+      "fcf_yield": 0.03878352491416393,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.7991266375545851,
+        "pb": 0.7991266375545851,
+        "fcf_yield": 0.388646288209607
+      }
+    },
+    {
+      "cik": "0000104169",
+      "name": "Walmart Inc.",
+      "ticker": "WMT",
+      "missing": [],
+      "revenue": 706413000000,
+      "ebitda": 44028000000,
+      "equity": 99617000000,
+      "shares": 7970166964,
+      "net_debt": 27439000000,
+      "fcf": 14923000000,
+      "net_debt_ebitda": 0.623217043699464,
+      "sbc_ratio": 0.005100415762450578,
+      "price": 102.76,
+      "mktcap": 819014357220.64,
+      "ev": 846453357220.64,
+      "ev_ebitda": 19.225341991928772,
+      "pb": 8.22163242439182,
+      "fcf_yield": 0.01763003226663334,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8034934497816594,
+        "pb": 0.8558951965065502,
+        "fcf_yield": 0.18777292576419213
+      }
+    },
+    {
+      "cik": "0001177609",
+      "name": "Five Below, Inc.",
+      "ticker": "FIVE",
+      "missing": [],
+      "revenue": 4764147000,
+      "ebitda": 649522000,
+      "equity": 2193290000,
+      "shares": 55157085,
+      "net_debt": -723699000,
+      "fcf": 411687000,
+      "net_debt_ebitda": -1.1142024442590088,
+      "sbc_ratio": 0.007279372361935935,
+      "price": 245.62,
+      "mktcap": 13547683217.7,
+      "ev": 12823984217.7,
+      "ev_ebitda": 19.743725720914767,
+      "pb": 6.176877301998368,
+      "fcf_yield": 0.032102893532243965,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8078602620087336,
+        "pb": 0.7860262008733624,
+        "fcf_yield": 0.32751091703056767
+      }
+    },
+    {
+      "cik": "0000052988",
+      "name": "Jacobs Solutions Inc.",
+      "ticker": "J",
+      "missing": [],
+      "revenue": 12029783000,
+      "ebitda": 945693000,
+      "equity": 3443900000,
+      "shares": 117446713,
+      "net_debt": 933109000,
+      "fcf": 607472000,
+      "net_debt_ebitda": 0.9866933560891326,
+      "sbc_ratio": 0.005067423078205151,
+      "price": 151.63,
+      "mktcap": 17808445092.19,
+      "ev": 18741554092.19,
+      "ev_ebitda": 19.817799319853272,
+      "pb": 5.171011089808066,
+      "fcf_yield": 0.032413107099434534,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8122270742358079,
+        "pb": 0.7292576419213974,
+        "fcf_yield": 0.33624454148471616
+      }
+    },
+    {
+      "cik": "0000216228",
+      "name": "ITT INC.",
+      "ticker": "ITT",
+      "missing": [],
+      "revenue": 3938500000,
+      "ebitda": 827700000,
+      "equity": 4084400000,
+      "shares": 86000000,
+      "net_debt": -1218600000,
+      "fcf": 0,
+      "net_debt_ebitda": -1.4722725625226531,
+      "sbc_ratio": 0.009191316491049891,
+      "price": 206.9,
+      "mktcap": 17793400000.0,
+      "ev": 16574800000.0,
+      "ev_ebitda": 20.02512987797511,
+      "pb": 4.356429340906865,
+      "fcf_yield": 0.0,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8165938864628821,
+        "pb": 0.6331877729257642,
+        "fcf_yield": 0.11790393013100436
+      }
+    },
+    {
+      "cik": "0000101829",
+      "name": "RTX Corporation",
+      "ticker": "RTX",
+      "missing": [],
+      "revenue": 88603000000,
+      "ebitda": 13678000000,
+      "equity": 65245000000,
+      "shares": 1342287676,
+      "net_debt": -7231000000,
+      "fcf": 7940000000,
+      "net_debt_ebitda": -0.5286591606960082,
+      "sbc_ratio": 0.00585758947213977,
+      "price": 212.25,
+      "mktcap": 284900559231.0,
+      "ev": 277669559231.0,
+      "ev_ebitda": 20.30045030201784,
+      "pb": 4.366626702904437,
+      "fcf_yield": 0.028595140288296864,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8209606986899564,
+        "pb": 0.6375545851528385,
+        "fcf_yield": 0.2925764192139738
+      }
+    },
+    {
+      "cik": "0000059527",
+      "name": "LINCOLN ELECTRIC HOLDINGS INC",
+      "ticker": "LECO",
+      "missing": [],
+      "revenue": 4233003000,
+      "ebitda": 816605000,
+      "equity": 1469794000,
+      "shares": 54805365,
+      "net_debt": 841439000,
+      "fcf": 661173000,
+      "net_debt_ebitda": 1.0304112759534905,
+      "sbc_ratio": 0.004806989269792627,
+      "price": 291.1,
+      "mktcap": 15953841751.500002,
+      "ev": 16795280751.500002,
+      "ev_ebitda": 20.567202933486815,
+      "pb": 10.854474675702855,
+      "fcf_yield": 0.03936659409167364,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8253275109170306,
+        "pb": 0.9039301310043668,
+        "fcf_yield": 0.40611353711790393
+      }
+    },
+    {
+      "cik": "0000719413",
+      "name": "HECLA MINING COMPANY",
+      "ticker": "HL",
+      "missing": [],
+      "revenue": 1423019000,
+      "ebitda": 680365000,
+      "equity": 2591646000,
+      "shares": 670349801,
+      "net_debt": -241558000,
+      "fcf": 310249000,
+      "net_debt_ebitda": -0.3550417790450714,
+      "sbc_ratio": 0.007672420396354511,
+      "price": 21.54,
+      "mktcap": 14439334713.539999,
+      "ev": 14197776713.539999,
+      "ev_ebitda": 20.867882259581254,
+      "pb": 5.57149190651038,
+      "fcf_yield": 0.021851942473790614,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8296943231441049,
+        "pb": 0.7685589519650655,
+        "fcf_yield": 0.24017467248908297
+      }
+    },
+    {
+      "cik": "0001043277",
+      "name": "C.H. ROBINSON WORLDWIDE, INC.",
+      "ticker": "CHRW",
+      "missing": [],
+      "revenue": 16232763000,
+      "ebitda": 897779000,
+      "equity": 1845647000,
+      "shares": 118620833,
+      "net_debt": 928567000,
+      "fcf": 894891000,
+      "net_debt_ebitda": 1.0342935176697161,
+      "sbc_ratio": 0.0049326168317741104,
+      "price": 151.68,
+      "mktcap": 17992407949.440002,
+      "ev": 18920974949.440002,
+      "ev_ebitda": 21.075314692635942,
+      "pb": 9.748564026295387,
+      "fcf_yield": 0.04729624146701202,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.834061135371179,
+        "pb": 0.8908296943231441,
+        "fcf_yield": 0.5021834061135371
+      }
+    },
+    {
+      "cik": "0001968487",
+      "name": "WORTHINGTON STEEL, INC.",
+      "ticker": "WS",
+      "missing": [],
+      "revenue": 3443800000,
+      "ebitda": 82800000,
+      "equity": 1117100000,
+      "shares": 50805635,
+      "net_debt": -17700000,
+      "fcf": 80000000,
+      "net_debt_ebitda": -0.213768115942029,
+      "sbc_ratio": 0.004036239038271676,
+      "price": 34.86,
+      "mktcap": 1771084436.1,
+      "ev": 1753384436.1,
+      "ev_ebitda": 21.176140532608695,
+      "pb": 1.5854305219765463,
+      "fcf_yield": 0.045626046606151924,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8384279475982532,
+        "pb": 0.2576419213973799,
+        "fcf_yield": 0.4759825327510917
+      }
+    },
+    {
+      "cik": "0000785786",
+      "name": "PLEXUS CORP.",
+      "ticker": "PLXS",
+      "missing": [],
+      "revenue": 4032966000,
+      "ebitda": 280163000,
+      "equity": 1481063000,
+      "shares": 26786466,
+      "net_debt": -248825000,
+      "fcf": 153967000,
+      "net_debt_ebitda": -0.8881436877817557,
+      "sbc_ratio": 0.007505146336467999,
+      "price": 246.36,
+      "mktcap": 6599113763.76,
+      "ev": 6350288763.76,
+      "ev_ebitda": 22.666407640409332,
+      "pb": 4.455660403210397,
+      "fcf_yield": 0.02424566909124874,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8471615720524017,
+        "pb": 0.6550218340611353,
+        "fcf_yield": 0.24890829694323144
+      }
+    },
+    {
+      "cik": "0000277135",
+      "name": "W.W. Grainger, Inc.",
+      "ticker": "GWW",
+      "missing": [],
+      "revenue": 17942000000,
+      "ebitda": 2825000000,
+      "equity": 3736000000,
+      "shares": 47373024,
+      "net_debt": 1903000000,
+      "fcf": 1331000000,
+      "net_debt_ebitda": 0.6736283185840708,
+      "sbc_ratio": 0.003567049381339873,
+      "price": 1328.31,
+      "mktcap": 62926061509.439995,
+      "ev": 64829061509.439995,
+      "ev_ebitda": 22.948340357323893,
+      "pb": 16.843164215588864,
+      "fcf_yield": 0.020530915749970995,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.851528384279476,
+        "pb": 0.9563318777292577,
+        "fcf_yield": 0.22270742358078602
+      }
+    },
+    {
+      "cik": "0000067347",
+      "name": "MODINE MANUFACTURING CO",
+      "ticker": "MOD",
+      "missing": [],
+      "revenue": 3181100000,
+      "ebitda": 422100000,
+      "equity": 1121800000,
+      "shares": 52731197,
+      "net_debt": -97500000,
+      "fcf": 105400000,
+      "net_debt_ebitda": -0.23098791755508175,
+      "sbc_ratio": 0.006947282386595832,
+      "price": 188.36,
+      "mktcap": 9932448266.92,
+      "ev": 9834948266.92,
+      "ev_ebitda": 23.30004327628524,
+      "pb": 8.854027693813514,
+      "fcf_yield": 0.010716884028207299,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8558951965065502,
+        "pb": 0.8864628820960698,
+        "fcf_yield": 0.1572052401746725
+      }
+    },
+    {
+      "cik": "0001466258",
+      "name": "TRANE TECHNOLOGIES PLC",
+      "ticker": "TT",
+      "missing": [],
+      "revenue": 21321900000,
+      "ebitda": 4343700000,
+      "equity": 8579200000,
+      "shares": 221331905,
+      "net_debt": 2158800000,
+      "fcf": 3194500000,
+      "net_debt_ebitda": 0.49699564887077835,
+      "sbc_ratio": 0.004061551737884523,
+      "price": 454.79,
+      "mktcap": 100659537074.95,
+      "ev": 102818337074.95,
+      "ev_ebitda": 23.670681003510833,
+      "pb": 11.732974761626958,
+      "fcf_yield": 0.031069360688758773,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8602620087336245,
+        "pb": 0.9126637554585153,
+        "fcf_yield": 0.31004366812227074
+      }
+    },
+    {
+      "cik": "0000069633",
+      "name": "NAPCO SECURITY TECHNOLOGIES, INC",
+      "ticker": "NSSC",
+      "missing": [],
+      "revenue": 181621000,
+      "ebitda": 48220000,
+      "equity": 184814000,
+      "shares": 35664324,
+      "net_debt": -104919000,
+      "fcf": 51411000,
+      "net_debt_ebitda": -2.1758399004562423,
+      "sbc_ratio": 0.008330534464626888,
+      "price": 35.27,
+      "mktcap": 1257880707.48,
+      "ev": 1152961707.48,
+      "ev_ebitda": 23.910446028204063,
+      "pb": 6.806198163991906,
+      "fcf_yield": 0.044590379425842125,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8646288209606987,
+        "pb": 0.8209606986899564,
+        "fcf_yield": 0.462882096069869
+      }
+    },
+    {
+      "cik": "0001037868",
+      "name": "AMETEK, Inc.",
+      "ticker": "AME",
+      "missing": [],
+      "revenue": 7401116000,
+      "ebitda": 2333121000,
+      "equity": 10628786000,
+      "shares": 228977202,
+      "net_debt": 616383000,
+      "fcf": 1671515000,
+      "net_debt_ebitda": 0.2641881839818852,
+      "sbc_ratio": 0.006454026663005957,
+      "price": 244.01,
+      "mktcap": 55872727060.02,
+      "ev": 56489110060.02,
+      "ev_ebitda": 24.211821872941865,
+      "pb": 5.256736475832706,
+      "fcf_yield": 0.029590039535478712,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.868995633187773,
+        "pb": 0.7379912663755459,
+        "fcf_yield": 0.3056768558951965
+      }
+    },
+    {
+      "cik": "0001099369",
+      "name": "DESTINY MEDIA TECHNOLOGIES INC.",
+      "ticker": "DSNY",
+      "missing": [],
+      "revenue": 4524448,
+      "ebitda": 170548,
+      "equity": 2468380,
+      "shares": 9637410,
+      "net_debt": -1362500,
+      "fcf": 36024,
+      "net_debt_ebitda": -7.988953256561203,
+      "sbc_ratio": 0.007012568163011267,
+      "price": 0.57,
+      "mktcap": 5493323.699999999,
+      "ev": 4130823.6999999993,
+      "ev_ebitda": 24.22088620212491,
+      "pb": 2.225477317106766,
+      "fcf_yield": 0.00872077886064225,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8733624454148472,
+        "pb": 0.37117903930131,
+        "fcf_yield": 0.13973799126637554
+      }
+    },
+    {
+      "cik": "0001065280",
+      "name": "Netflix, Inc.",
+      "ticker": "NFLX",
+      "missing": [],
+      "revenue": 45183036000,
+      "ebitda": 13659992000,
+      "equity": 26615488000,
+      "shares": 4222162150,
+      "net_debt": 5429155000,
+      "fcf": 9461053000,
+      "net_debt_ebitda": 0.39744935428951933,
+      "sbc_ratio": 0.00815458704457133,
+      "price": 80.8,
+      "mktcap": 341150701720.0,
+      "ev": 346579856720.0,
+      "ev_ebitda": 25.37189309627707,
+      "pb": 12.817751142492671,
+      "fcf_yield": 0.02729833490479954,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8820960698689956,
+        "pb": 0.9301310043668122,
+        "fcf_yield": 0.2794759825327511
+      }
+    },
+    {
+      "cik": "0001318484",
+      "name": "CITI TRENDS, INC.",
+      "ticker": "CTRN",
+      "missing": [],
+      "revenue": 819962000,
+      "ebitda": 22334000,
+      "equity": 116320000,
+      "shares": 8345260,
+      "net_debt": 0,
+      "fcf": 20954000,
+      "net_debt_ebitda": 0.0,
+      "sbc_ratio": 0.006572255787463321,
+      "price": 69.58,
+      "mktcap": 580663190.8,
+      "ev": 580663190.8,
+      "ev_ebitda": 25.999068272588875,
+      "pb": 4.991946275790921,
+      "fcf_yield": 0.036086323934415306,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8864628820960698,
+        "pb": 0.7074235807860262,
+        "fcf_yield": 0.3624454148471616
+      }
+    },
+    {
+      "cik": "0000820313",
+      "name": "AMPHENOL CORPORATION",
+      "ticker": "APH",
+      "missing": [],
+      "revenue": 23094700000,
+      "ebitda": 6791000000,
+      "equity": 13413100000,
+      "shares": 1229214930,
+      "net_debt": -11130600000,
+      "fcf": 4378100000,
+      "net_debt_ebitda": -1.6390222353114416,
+      "sbc_ratio": 0.005862817009963325,
+      "price": 161.36,
+      "mktcap": 198346121104.80002,
+      "ev": 187215521104.80002,
+      "ev_ebitda": 27.56818157926668,
+      "pb": 14.787492906546586,
+      "fcf_yield": 0.023385347401560872,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8951965065502183,
+        "pb": 0.9388646288209607,
+        "fcf_yield": 0.2445414847161572
+      }
+    },
+    {
+      "cik": "0001408710",
+      "name": "FABRINET",
+      "ticker": "FN",
+      "missing": [],
+      "revenue": 4641097000,
+      "ebitda": 531258000,
+      "equity": 2184786000,
+      "shares": 35826117,
+      "net_debt": -319855000,
+      "fcf": 4222000,
+      "net_debt_ebitda": -0.6020709335200599,
+      "sbc_ratio": 0.0074615979799603415,
+      "price": 420.04,
+      "mktcap": 15048402184.68,
+      "ev": 14728547184.68,
+      "ev_ebitda": 27.723906622921444,
+      "pb": 6.8878151840409085,
+      "fcf_yield": 0.00028665420608432735,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.8995633187772926,
+        "pb": 0.8253275109170306,
+        "fcf_yield": 0.1222707423580786
+      }
+    },
+    {
+      "cik": "0000853816",
+      "name": "Landstar System, Inc.",
+      "ticker": "LSTR",
+      "missing": [],
+      "revenue": 4743760000,
+      "ebitda": 197965000,
+      "equity": 795665000,
+      "shares": 34058726,
+      "net_debt": -396694000,
+      "fcf": 215002000,
+      "net_debt_ebitda": -2.0038592680524334,
+      "sbc_ratio": 0.001264397861611886,
+      "price": 182.55,
+      "mktcap": 6217420431.3,
+      "ev": 5820726431.3,
+      "ev_ebitda": 29.402805704543734,
+      "pb": 7.814118292623152,
+      "fcf_yield": 0.03693731401700345,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.9039301310043668,
+        "pb": 0.8427947598253275,
+        "fcf_yield": 0.37117903930131
+      }
+    },
+    {
+      "cik": "0000026324",
+      "name": "CURTISS-WRIGHT CORPORATION",
+      "ticker": "CW",
+      "missing": [],
+      "revenue": 3498372000,
+      "ebitda": 758338000,
+      "equity": 2533574000,
+      "shares": 36869530,
+      "net_debt": 386539000,
+      "fcf": 553710000,
+      "net_debt_ebitda": 0.5097186215117797,
+      "sbc_ratio": 0.006151432723563989,
+      "price": 605.87,
+      "mktcap": 22338142141.1,
+      "ev": 22724681141.1,
+      "ev_ebitda": 29.966428084970026,
+      "pb": 8.816850086518096,
+      "fcf_yield": 0.024366018452006206,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.9082969432314411,
+        "pb": 0.8733624454148472,
+        "fcf_yield": 0.25327510917030566
+      }
+    },
+    {
+      "cik": "0000909832",
+      "name": "COSTCO WHOLESALE CORP /NEW",
+      "ticker": "COST",
+      "missing": [],
+      "revenue": 275235000000,
+      "ebitda": 12809000000,
+      "equity": 30303000000,
+      "shares": 443869411,
+      "net_debt": -10481000000,
+      "fcf": 7837000000,
+      "net_debt_ebitda": -0.8182527910063236,
+      "sbc_ratio": 0.003124602612313114,
+      "price": 939.42,
+      "mktcap": 416979802081.62,
+      "ev": 406498802081.62,
+      "ev_ebitda": 31.73540495601686,
+      "pb": 13.760347229040688,
+      "fcf_yield": 0.019279269606374945,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.9170305676855895,
+        "pb": 0.9344978165938864,
+        "fcf_yield": 0.2096069868995633
+      }
+    },
+    {
+      "cik": "0000815556",
+      "name": "FASTENAL CO",
+      "ticker": "FAST",
+      "missing": [],
+      "revenue": 8200500000,
+      "ebitda": 1834900000,
+      "equity": 3943600000,
+      "shares": 1148179210,
+      "net_debt": -151800000,
+      "fcf": 1050600000,
+      "net_debt_ebitda": -0.082729304049267,
+      "sbc_ratio": 0.001024327784891165,
+      "price": 51.16,
+      "mktcap": 58740848383.6,
+      "ev": 58589048383.6,
+      "ev_ebitda": 31.930376796337676,
+      "pb": 14.89523490810427,
+      "fcf_yield": 0.01793167885440651,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.9213973799126638,
+        "pb": 0.9432314410480349,
+        "fcf_yield": 0.20087336244541484
+      }
+    },
+    {
+      "cik": "0000105770",
+      "name": "WEST PHARMACEUTICAL SERVICES, INC.",
+      "ticker": "WST",
+      "missing": [],
+      "revenue": 3074100000,
+      "ebitda": 756300000,
+      "equity": 3176000000,
+      "shares": 72021491,
+      "net_debt": -588500000,
+      "fcf": 468900000,
+      "net_debt_ebitda": -0.7781303715456829,
+      "sbc_ratio": 0.007742103379851014,
+      "price": 345.27,
+      "mktcap": 24866860197.57,
+      "ev": 24278360197.57,
+      "ev_ebitda": 32.10149437732381,
+      "pb": 7.829615931224811,
+      "fcf_yield": 0.01931349548257101,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.925764192139738,
+        "pb": 0.8471615720524017,
+        "fcf_yield": 0.21397379912663755
+      }
+    },
+    {
+      "cik": "0001018963",
+      "name": "ATI Inc.",
+      "ticker": "ATI",
+      "missing": [],
+      "revenue": 4587400000,
+      "ebitda": 809000000,
+      "equity": 1804500000,
+      "shares": 136936299,
+      "net_debt": -416700000,
+      "fcf": 614300000,
+      "net_debt_ebitda": -0.515080346106304,
+      "sbc_ratio": 0.0063216636874918256,
+      "price": 213.75,
+      "mktcap": 29270133911.25,
+      "ev": 28853433911.25,
+      "ev_ebitda": 35.66555489647713,
+      "pb": 16.220633921446385,
+      "fcf_yield": 0.021290360166125094,
+      "passed": [
+        "净负债/EBITDA",
+        "SBC 稀释"
+      ],
+      "pct": {
+        "ev_ebitda": 0.9301310043668122,
+        "pb": 0.9519650655021834,
+        "fcf_yield": 0.2314410480349345
+      }
+    }
+  ],
+  "incomplete_sample": [
+    {
+      "cik": "0000001800",
+      "name": "Abbott Laboratories",
+      "ticker": "ABT",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000002488",
+      "name": "ADVANCED MICRO DEVICES, INC.",
+      "ticker": "AMD",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000003197",
+      "name": "CECO ENVIRONMENTAL CORP.",
+      "ticker": "CECO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000003453",
+      "name": "Matson, Inc.",
+      "ticker": "MATX",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000003545",
+      "name": "ALICO, INC.",
+      "ticker": "ALCO",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000003570",
+      "name": "CHENIERE ENERGY, INC.",
+      "ticker": "LNG",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000004127",
+      "name": "Skyworks Solutions, Inc.",
+      "ticker": "SWKS",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000004457",
+      "name": "U-Haul Holding Company",
+      "ticker": "UHAL",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000004962",
+      "name": "American Express Co",
+      "ticker": "AXP",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000005981",
+      "name": "AMERICAN VANGUARD CORPORATION",
+      "ticker": "AVD",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000006176",
+      "name": "AMPCO-PITTSBURGH CORP",
+      "ticker": "AP",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000006201",
+      "name": "American Airlines Group Inc.",
+      "ticker": "AAL",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000006207",
+      "name": "AMREP CORP.",
+      "ticker": "AXR",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000006281",
+      "name": "Analog Devices, Inc.",
+      "ticker": "ADI",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000007084",
+      "name": "ARCHER-DANIELS-MIDLAND CO",
+      "ticker": "ADM",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000007431",
+      "name": "ARMSTRONG WORLD INDUSTRIES, INC.",
+      "ticker": "AWI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000008063",
+      "name": "ASTRONICS CORPORATION",
+      "ticker": "ATRO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000008670",
+      "name": "AUTOMATIC DATA PROCESSING, INC.",
+      "ticker": "ADP",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000008818",
+      "name": "AVERY DENNISON CORPORATION",
+      "ticker": "AVY",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000009092",
+      "name": "BADGER METER, INC.",
+      "ticker": "BMI",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000012208",
+      "name": "BIO-RAD LABORATORIES, INC.",
+      "ticker": "BIO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000012659",
+      "name": "H&R Block, Inc.",
+      "ticker": "HRB",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000013156",
+      "name": "Galaxy Gaming, Inc.",
+      "ticker": "GLXZ",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000014177",
+      "name": "BRIDGFORD FOODS CORPORATION",
+      "ticker": "BRID",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000014693",
+      "name": "BROWN-FORMAN CORPORATION",
+      "ticker": "BF-B",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000015357",
+      "name": "CHASE GENERAL CORP",
+      "ticker": null,
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000016918",
+      "name": "CONSTELLATION BRANDS, INC.",
+      "ticker": "STZ",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000018926",
+      "name": "Lumen Technologies, Inc.",
+      "ticker": "LUMN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000019745",
+      "name": "CHESAPEAKE UTILITIES CORPORATION",
+      "ticker": "CPK",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000019871",
+      "name": "Chicago Rivet & Machine Co.",
+      "ticker": "CVR",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000020212",
+      "name": "Churchill Downs Inc",
+      "ticker": "CHDN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000021076",
+      "name": "THE CLOROX COMPANY",
+      "ticker": "CLX",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000021175",
+      "name": "CNA FINANCIAL CORPORATION",
+      "ticker": "CNA",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000022701",
+      "name": "SUNATION ENERGY, INC.",
+      "ticker": "SUNE",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000023194",
+      "name": "COMSTOCK RESOURCES, INC.",
+      "ticker": "CRK",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000023217",
+      "name": "CONAGRA BRANDS, INC.",
+      "ticker": "CAG",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000024545",
+      "name": "MOLSON COORS BEVERAGE COMPANY",
+      "ticker": "TAP",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000025475",
+      "name": "CRAWFORD & CO",
+      "ticker": "CRD-A",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000026780",
+      "name": "Dana Incorporated",
+      "ticker": "DAN",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000027430",
+      "name": "THE DAYTON POWER AND LIGHT COMPANY",
+      "ticker": null,
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000028917",
+      "name": "DILLARD’S, INC.",
+      "ticker": "DDS",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000029002",
+      "name": "DIODES INC /DEL/",
+      "ticker": "DIOD",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000030305",
+      "name": "DUCOMMUN INCORPORATED",
+      "ticker": "DCO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000031107",
+      "name": "THE EASTERN COMPANY",
+      "ticker": "EML",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000031235",
+      "name": "EASTMAN KODAK CO",
+      "ticker": "KODK",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000031462",
+      "name": "ECOLAB INC.",
+      "ticker": "ECL",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000031791",
+      "name": "REVVITY, INC.",
+      "ticker": "RVTY",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000032604",
+      "name": "EMERSON ELECTRIC CO.",
+      "ticker": "EMR",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000032621",
+      "name": "EMERSON RADIO CORP",
+      "ticker": "MSN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000033002",
+      "name": "ENNIS, INC.",
+      "ticker": "EBF",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000033488",
+      "name": "ESCALADE, INCORPORATED",
+      "ticker": "ESCA",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000034067",
+      "name": "DMC Global Inc.",
+      "ticker": "BOOM",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000034285",
+      "name": "RELIABILITY INCORPORATED",
+      "ticker": "RLBY",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000034956",
+      "name": "Tenax Therapeutics, Inc.",
+      "ticker": "TENX",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000036270",
+      "name": "M&T BANK CORPORATION",
+      "ticker": "MTB",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000037472",
+      "name": "FLEXSTEEL INDUSTRIES, INC.",
+      "ticker": "FLXS",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000037785",
+      "name": "FMC CORPORATION",
+      "ticker": "FMC",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000037996",
+      "name": "Ford Motor Co",
+      "ticker": "F",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000038009",
+      "name": "Ford Motor Credit Company LLC",
+      "ticker": null,
+      "missing": [
+        "operating_income",
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000039263",
+      "name": "CULLEN/FROST BANKERS, INC.",
+      "ticker": "CFR",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000039311",
+      "name": "INDEPENDENT BANK CORPORATION",
+      "ticker": "IBCP",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000039899",
+      "name": "TEGNA INC.",
+      "ticker": null,
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000040729",
+      "name": "ALLY FINANCIAL INC.",
+      "ticker": "ALLY",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000040987",
+      "name": "GENUINE PARTS CO",
+      "ticker": "GPC",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000042582",
+      "name": "THE GOODYEAR TIRE & RUBBER COMPANY",
+      "ticker": "GT",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000043196",
+      "name": "GRAY MEDIA, INC.",
+      "ticker": "GTN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000045876",
+      "name": "ENVIRI CORPORATION",
+      "ticker": null,
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000045919",
+      "name": "HARTE HANKS, INC.",
+      "ticker": "HHS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000046129",
+      "name": "ALLIENT INC",
+      "ticker": "ALNT",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000046195",
+      "name": "BANK OF HAWAII CORPORATION",
+      "ticker": "BOH",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000046619",
+      "name": "HEICO CORPORATION",
+      "ticker": "HEI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000047111",
+      "name": "THE HERSHEY COMPANY",
+      "ticker": "HSY",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000049196",
+      "name": "Huntington Bancshares Incorporated",
+      "ticker": "HBAN",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000049826",
+      "name": "ILLINOIS TOOL WORKS INC",
+      "ticker": "ITW",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000050863",
+      "name": "INTEL CORPORATION",
+      "ticker": "INTC",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000051253",
+      "name": "INTERNATIONAL FLAVORS & FRAGRANCES INC",
+      "ticker": "IFF",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000051434",
+      "name": "INTERNATIONAL PAPER COMPANY",
+      "ticker": "IP",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000052827",
+      "name": "RAYONIER INC.",
+      "ticker": "RYN",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000055135",
+      "name": "KELLY SERVICES, INC.",
+      "ticker": "KELYA",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000058492",
+      "name": "LEGGETT & PLATT, INC",
+      "ticker": "LEG",
+      "missing": [
+        "operating_income",
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000059255",
+      "name": "VALHI, INC.",
+      "ticker": "VHI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000060086",
+      "name": "LOEWS CORP",
+      "ticker": "L",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000060667",
+      "name": "LOWE’S COMPANIES, INC",
+      "ticker": "LOW",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000060714",
+      "name": "LSB INDUSTRIES, INC.",
+      "ticker": "LXU",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000061004",
+      "name": "LGL GROUP INC",
+      "ticker": "LGL",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000062996",
+      "name": "Masco Corporation",
+      "ticker": "MAS",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000064463",
+      "name": "Soluna Holdings, Inc.",
+      "ticker": "SLNH",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000065770",
+      "name": "MicroVision, Inc.",
+      "ticker": "MVIS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000067215",
+      "name": "DYCOM INDUSTRIES, INC.",
+      "ticker": "DY",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000068622",
+      "name": "QWEST CORPORATION",
+      "ticker": "CTGG",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000069422",
+      "name": "THE INTERGROUP CORPORATION",
+      "ticker": "INTG",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000069488",
+      "name": "MYERS INDUSTRIES, INC.",
+      "ticker": "MYE",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000069733",
+      "name": "NATHAN’S FAMOUS, INC.",
+      "ticker": "NATH",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000070487",
+      "name": "National Research Corporation",
+      "ticker": "NRC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000070866",
+      "name": "NCR VOYIX CORPORATION",
+      "ticker": "VYX",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000071557",
+      "name": "NUVERA COMMUNICATIONS, INC.",
+      "ticker": "NUVR",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000071691",
+      "name": "THE NEW YORK TIMES COMPANY",
+      "ticker": "NYT",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000071829",
+      "name": "NPK International Inc.",
+      "ticker": "NPKI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000072162",
+      "name": "NL INDUSTRIES, INC.",
+      "ticker": "NL",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000072573",
+      "name": "MOVADO GROUP, INC.",
+      "ticker": "MOV",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000073124",
+      "name": "NORTHERN TRUST CORPORATION",
+      "ticker": "NTRS",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000073309",
+      "name": "NUCOR CORPORATION",
+      "ticker": "NUE",
+      "missing": [
+        "operating_income",
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000074046",
+      "name": "OIL-DRI CORPORATION OF AMERICA",
+      "ticker": "ODC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000075252",
+      "name": "Accendra Health, Inc.",
+      "ticker": "ACH",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000075677",
+      "name": "PACKAGING CORP OF AMERICA",
+      "ticker": "PKG",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000076282",
+      "name": "PARK-OHIO HOLDINGS CORP.",
+      "ticker": "PKOH",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000076334",
+      "name": "PARKER-HANNIFIN CORPORATION",
+      "ticker": "PH",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000077360",
+      "name": "Pentair plc",
+      "ticker": "PNR",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000077543",
+      "name": "Tutor Perini Corporation",
+      "ticker": "TPC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000078128",
+      "name": "Essential Utilities, Inc.",
+      "ticker": "WTRG",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000078749",
+      "name": "AGILYSYS, INC.",
+      "ticker": "AGYS",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000078890",
+      "name": "THE BRINK’S COMPANY",
+      "ticker": "BCO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000079661",
+      "name": "PORTSMOUTH SQUARE, INC.",
+      "ticker": "PRSI",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000079879",
+      "name": "PPG INDUSTRIES, INC.",
+      "ticker": "PPG",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000080035",
+      "name": "Preformed Line Products Company",
+      "ticker": "PLPC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000081362",
+      "name": "QUAKER CHEMICAL CORPORATION",
+      "ticker": "KWR",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000082020",
+      "name": "UNITED STATES LIME & MINERALS INC",
+      "ticker": "USLM",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000082473",
+      "name": "INNSUITES HOSPITALITY TRUST",
+      "ticker": "IHT",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000084748",
+      "name": "ROGERS CORP",
+      "ticker": "ROG",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000087347",
+      "name": "SLB LIMITED/NV",
+      "ticker": "SLB",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000088000",
+      "name": "HORIZON KINETICS HOLDING CORPORATION",
+      "ticker": "HKHC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000088205",
+      "name": "SPX Technologies, Inc.",
+      "ticker": "SPXC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000088941",
+      "name": "SEMTECH CORP",
+      "ticker": "SMTC",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000089439",
+      "name": "MUELLER INDUSTRIES, INC.",
+      "ticker": "MLI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000089800",
+      "name": "THE SHERWIN-WILLIAMS COMPANY",
+      "ticker": "SHW",
+      "missing": [
+        "operating_income",
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000091142",
+      "name": "A. O. Smith Corporation",
+      "ticker": "AOS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000091388",
+      "name": "SMITHFIELD FOODS, INC.",
+      "ticker": "SFD",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000091576",
+      "name": "KeyCorp",
+      "ticker": "KEY",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000093389",
+      "name": "Standard Motor Products, Inc.",
+      "ticker": "SMP",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000093410",
+      "name": "Chevron Corp",
+      "ticker": "CVX",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000094845",
+      "name": "LEVI STRAUSS & CO.",
+      "ticker": "LEVI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000095574",
+      "name": "SUPERIOR GROUP OF COMPANIES, INC.",
+      "ticker": "SGC",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000095953",
+      "name": "Ascent Industries Co.",
+      "ticker": "ACNT",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000096223",
+      "name": "Jefferies Financial Group Inc.",
+      "ticker": "JEF",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000096869",
+      "name": "TEJON RANCH CO.",
+      "ticker": "TRC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000096943",
+      "name": "TELEFLEX INCORPORATED",
+      "ticker": "TFX",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000097134",
+      "name": "TENNANT CO",
+      "ticker": "TNC",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000097476",
+      "name": "TEXAS INSTRUMENTS INC",
+      "ticker": "TXN",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000097745",
+      "name": "THERMO FISHER SCIENTIFIC INC.",
+      "ticker": "TMO",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000098677",
+      "name": "TOOTSIE ROLL INDUSTRIES INC",
+      "ticker": "TR",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000100122",
+      "name": "TUCSON ELECTRIC POWER CO",
+      "ticker": null,
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000100493",
+      "name": "TYSON FOODS, INC.",
+      "ticker": "TSN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000100591",
+      "name": "Argan, Inc.",
+      "ticker": "AGX",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000100885",
+      "name": "UNION PACIFIC CORP",
+      "ticker": "UNP",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000101538",
+      "name": "UNITED STATES ANTIMONY CORPORATION",
+      "ticker": "UAMY",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000101594",
+      "name": "US ENERGY CORP",
+      "ticker": "BSIN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000101984",
+      "name": "UNIVERSAL ELECTRONICS INC.",
+      "ticker": "UEIC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000102729",
+      "name": "Valmont Industries, Inc.",
+      "ticker": "VMI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000102752",
+      "name": "VSE CORPORATION",
+      "ticker": "VSEC",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000103595",
+      "name": "VILLAGE SUPER MARKET, INC.",
+      "ticker": "VLGEA",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000104889",
+      "name": "Graham Holdings Co",
+      "ticker": "GHC",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000105418",
+      "name": "WEIS MARKETS, INC",
+      "ticker": "WMK",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000107140",
+      "name": "JOHN WILEY & SONS, INC.",
+      "ticker": "WLY",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000107263",
+      "name": "Williams Companies, Inc.",
+      "ticker": "WMB",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000108312",
+      "name": "WOODWARD, INC.",
+      "ticker": "WWD",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000108985",
+      "name": "YORK WATER CO",
+      "ticker": "YORW",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000109380",
+      "name": "ZIONS BANCORPORATION, NATIONAL ASSOCIATION",
+      "ticker": "ZION",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000109563",
+      "name": "APPLIED INDUSTRIAL TECHNOLOGIES, INC.",
+      "ticker": "AIT",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000110621",
+      "name": "RPM INTERNATIONAL INC.",
+      "ticker": "RPM",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000200406",
+      "name": "Johnson & Johnson",
+      "ticker": "JNJ",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000205402",
+      "name": "GRAYBAR ELECTRIC COMPANY, INC.",
+      "ticker": null,
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000215466",
+      "name": "Coeur Mining, Inc.",
+      "ticker": "CDE",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000216085",
+      "name": "HAVERTY FURNITURE COMPANIES, INC",
+      "ticker": "HVT",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000275053",
+      "name": "NATURE’S SUNSHINE PRODUCTS, INC.",
+      "ticker": "NATR",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000277638",
+      "name": "THE DAVEY TREE EXPERT COMPANY",
+      "ticker": null,
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000278165",
+      "name": "OMNIQ CORP.",
+      "ticker": "OMQS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000313616",
+      "name": "DANAHER CORPORATION",
+      "ticker": "DHR",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000314808",
+      "name": "Valaris Limited",
+      "ticker": "VAL",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000315213",
+      "name": "ROBERT HALF INC.",
+      "ticker": "RHI",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000315293",
+      "name": "Aon plc",
+      "ticker": "AON",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000315545",
+      "name": "PROVECTUS BIOPHARMACEUTICALS, INC.",
+      "ticker": "PVCT",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000315852",
+      "name": "RANGE RESOURCES CORPORATION",
+      "ticker": "RRC",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000317540",
+      "name": "COCA-COLA CONSOLIDATED, INC.",
+      "ticker": "COKE",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000318299",
+      "name": "SPARTA COMMERCIAL SERVICES, INC.",
+      "ticker": "SRCO",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000318300",
+      "name": "PEOPLES BANCORP INC.",
+      "ticker": "PEBO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000318306",
+      "name": "ABEONA THERAPEUTICS INC.",
+      "ticker": "ABEO",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000318833",
+      "name": "TEAM, INC.",
+      "ticker": "TISI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000319201",
+      "name": "KLA CORP",
+      "ticker": "KLAC",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000320017",
+      "name": "LISATA THERAPEUTICS, INC.",
+      "ticker": "LSTA",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000320121",
+      "name": "TELOS CORPORATION",
+      "ticker": "TLS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000320187",
+      "name": "NIKE, Inc.",
+      "ticker": "NKE",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000352915",
+      "name": "UNIVERSAL HEALTH SERVICES, INC.",
+      "ticker": "UHS",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000353184",
+      "name": "Air T, Inc.",
+      "ticker": "AIRT",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000354190",
+      "name": "ARTHUR J. GALLAGHER & CO.",
+      "ticker": "AJG",
+      "missing": [
+        "operating_income"
+      ]
+    },
+    {
+      "cik": "0000354963",
+      "name": "Shenandoah Telecommunications Company",
+      "ticker": "SHEN",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000355948",
+      "name": "RICHARDSON ELECTRONICS, LTD.",
+      "ticker": "RELL",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000356171",
+      "name": "TriCo Bancshares",
+      "ticker": "TCBK",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000700923",
+      "name": "MYR GROUP INC.",
+      "ticker": "MYRG",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000701985",
+      "name": "BATH & BODY WORKS, INC.",
+      "ticker": "BBWI",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000704532",
+      "name": "ONTO INNOVATION INC.",
+      "ticker": "ONTO",
+      "missing": [
+        "dep_amort"
+      ]
+    },
+    {
+      "cik": "0000706698",
+      "name": "UTAH MEDICAL PRODUCTS INC",
+      "ticker": "UTMD",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000707605",
+      "name": "AMERISERV FINANCIAL INC /PA/",
+      "ticker": "ASRV",
+      "missing": [
+        "operating_income",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000708781",
+      "name": "CASS INFORMATION SYSTEMS, INC.",
+      "ticker": "CASS",
+      "missing": [
+        "operating_income",
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000708821",
+      "name": "PAR TECHNOLOGY CORPORATION",
+      "ticker": "PAR",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000709283",
+      "name": "QUANTUM CORP /DE/",
+      "ticker": "QMCO",
+      "missing": [
+        "非正数值：rev/ebitda/equity/shares"
+      ]
+    },
+    {
+      "cik": "0000712034",
+      "name": "ACCO Brands Corporation",
+      "ticker": "ACCO",
+      "missing": [
+        "dep_amort",
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000714256",
+      "name": "SANARA MEDTECH INC.",
+      "ticker": "SMTI",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000715957",
+      "name": "DOMINION ENERGY, INC.",
+      "ticker": "D",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000717954",
+      "name": "UNIFIRST CORPORATION",
+      "ticker": "UNF",
+      "missing": [
+        "shares"
+      ]
+    },
+    {
+      "cik": "0000719135",
+      "name": "Apyx Medical Corp",
+      "ticker": "APYX",
+      "missing": [
+        "shares"
+      ]
+    }
+  ]
+}

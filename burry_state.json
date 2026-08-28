@@ -1,0 +1,93 @@
+{
+  "updated_at": "2026-08-28T13:35:51.025947Z",
+  "cik": "0001649339",
+  "cik_candidates": [
+    "0001649339"
+  ],
+  "tier1": {
+    "entity_name": "Scion Asset Management, LLC",
+    "filings_found": 33,
+    "latest": {
+      "form": "13F-HR",
+      "report_date": "2025-09-30",
+      "filing_date": "2025-11-03",
+      "accession": "0001649339-25-000007"
+    },
+    "all": [
+      {
+        "form": "13F-HR",
+        "report_date": "2025-09-30",
+        "filing_date": "2025-11-03",
+        "accession": "0001649339-25-000007"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2025-06-30",
+        "filing_date": "2025-08-14",
+        "accession": "0001879202-25-000038"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2025-03-31",
+        "filing_date": "2025-05-15",
+        "accession": "0001879202-25-000025"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2024-12-31",
+        "filing_date": "2025-02-14",
+        "accession": "0001879202-25-000012"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2024-09-30",
+        "filing_date": "2024-11-14",
+        "accession": "0000905148-24-003106"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2024-06-30",
+        "filing_date": "2024-08-14",
+        "accession": "0000905148-24-002196"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2024-03-31",
+        "filing_date": "2024-05-15",
+        "accession": "0000905148-24-001390"
+      },
+      {
+        "form": "13F-HR/A",
+        "report_date": "2023-12-31",
+        "filing_date": "2024-02-16",
+        "accession": "0000905148-24-000751"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2023-12-31",
+        "filing_date": "2024-02-14",
+        "accession": "0000905148-24-000653"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2023-09-30",
+        "filing_date": "2023-11-14",
+        "accession": "0000905148-23-001400"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2023-06-30",
+        "filing_date": "2023-08-14",
+        "accession": "0000905148-23-000689"
+      },
+      {
+        "form": "13F-HR",
+        "report_date": "2023-03-31",
+        "filing_date": "2023-05-15",
+        "accession": "0000905148-23-000408"
+      }
+    ]
+  },
+  "boundary_moved_since_last_run": false,
+  "note": "Tier 1 边界由 EDGAR 发现，不写死。13F 义务由持仓规模触发，非投顾注册状态。"
+}
