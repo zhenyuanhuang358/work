@@ -46,13 +46,23 @@ Q_FCF_YIELD = 0.85        # FCF yield 最高 15% 分位（即 85% 分位以上�
 CONCEPTS = {
     "revenue": ["RevenueFromContractWithCustomerExcludingAssessedTax",
                 "Revenues", "RevenueFromContractWithCustomerIncludingAssessedTax"],
-    "operating_income": ["OperatingIncomeLoss"],
+    "operating_income": ["OperatingIncomeLoss",
+                         "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest"],
     "dep_amort": ["DepreciationDepletionAndAmortization",
-                  "DepreciationAmortizationAndAccretionNet", "DepreciationAndAmortization"],
+                  "DepreciationAmortizationAndAccretionNet", "DepreciationAndAmortization",
+                  "DepreciationDepletionAndAmortizationExcludingAmortizationOfDeferredCharges"],
+    # 上面整合标签取不到时，用这两项相加兜底（Abbott / AMD 等分开报）
+    "depreciation_only": ["Depreciation", "DepreciationNonproduction"],
+    "amortization_only": ["AmortizationOfIntangibleAssets", "AmortizationOfDeferredCharges"],
     "sbc": ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"],
     "cfo": ["NetCashProvidedByUsedInOperatingActivities"],
     "capex": ["PaymentsToAcquirePropertyPlantAndEquipment"],
 }
+# 时点科目按此顺序回退，每个 CIK 取第一个命中的。
+# 只查 CY2025Q4I 会漏掉全部非 12 月结账公司（实测 shares 缺失率 62%）。
+# 对 shares/equity 这类存量科目，取"最近可得"本就比"强行对齐某一期"更合理。
+INSTANT_PERIODS = ["CY2026Q2I", "CY2026Q1I", "CY2025Q4I", "CY2025Q3I", "CY2025Q2I"]
+
 # 时点科目（frames 需 I 后缀）
 CONCEPTS_INSTANT = {
     "cash": ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsAndShortTermInvestments"],
@@ -127,9 +137,10 @@ def discover_tier1_boundary(cik):
 
 # ────────────────────────── B. 全市场扫描 ──────────────────────────
 
-def fetch_frame(tag, year, taxonomy="us-gaap", unit="USD", instant=False):
+def fetch_frame(tag, year, taxonomy="us-gaap", unit="USD", instant=False, period=None):
     os.makedirs(CACHE_DIR, exist_ok=True)
-    period = f"CY{year}Q4I" if instant else f"CY{year}"
+    if period is None:
+        period = f"CY{year}Q4I" if instant else f"CY{year}"
     path = os.path.join(CACHE_DIR, f"{taxonomy}_{tag}_{period}.json")
     if os.path.exists(path):
         with open(path) as f:
@@ -185,12 +196,14 @@ def build_universe():
                 e["name"] = name
     for concept, tags in CONCEPTS_INSTANT.items():
         merged = {}
-        for tag in tags:
-            tax, unit = ("dei", "shares") if concept == "shares" else ("us-gaap", "USD")
-            for cik, (val, name) in fetch_frame(tag, YEAR, taxonomy=tax, unit=unit,
-                                                instant=True).items():
-                merged.setdefault(cik, (val, name))
-        print(f"  {concept:<18} CY{YEAR}Q4I: {len(merged):>6} 家")
+        tax, unit = ("dei", "shares") if concept == "shares" else ("us-gaap", "USD")
+        # 期间从新到旧回退，先到先得：拿到的是每家"最近可得"的时点值
+        for period in INSTANT_PERIODS:
+            for tag in tags:
+                for cik, (val, name) in fetch_frame(tag, YEAR, taxonomy=tax, unit=unit,
+                                                    period=period).items():
+                    merged.setdefault(cik, (val, name))
+        print(f"  {concept:<18} {len(INSTANT_PERIODS)}期回退: {len(merged):>6} 家")
         for cik, (val, name) in merged.items():
             e = uni.setdefault(cik, {"name": name})
             e[concept] = val
@@ -199,7 +212,8 @@ def build_universe():
     return uni
 
 
-REQUIRED = ["revenue", "operating_income", "dep_amort", "equity", "shares"]
+# dep_amort 不列入 REQUIRED：允许由 depreciation_only + amortization_only 兜底推导
+REQUIRED = ["revenue", "operating_income", "equity", "shares"]
 
 
 def stage_a(uni, tickers):
@@ -213,7 +227,18 @@ def stage_a(uni, tickers):
             incomplete.append(rec)
             continue
         rev = e["revenue"]
-        ebitda = e["operating_income"] + e["dep_amort"]
+        da = e.get("dep_amort")
+        if da is None:
+            dep, amo = e.get("depreciation_only"), e.get("amortization_only")
+            if dep is not None or amo is not None:
+                da = (dep or 0) + (amo or 0)
+                rec["da_derived"] = True
+        if da is None:
+            rec["missing"] = ["dep_amort（含分项兜底后仍缺）"]
+            incomplete.append(rec)
+            continue
+        rec["dep_amort"] = da
+        ebitda = e["operating_income"] + da
         if rev <= 0 or ebitda <= 0 or e["equity"] <= 0 or e["shares"] <= 0:
             rec["missing"] = ["非正数值：rev/ebitda/equity/shares"]
             incomplete.append(rec)
