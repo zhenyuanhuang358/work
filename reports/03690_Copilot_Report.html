@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美团 2026Q2 财报分析 · Earnings Copilot</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+  --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;--muted:#6b6460;--border:#d4cec6;--card:#faf8f4;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;border-bottom:1px solid var(--border);
+  padding:16px 0 10px;font-size:12px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:16px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:31px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:25px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.answer{background:var(--ink);color:var(--paper);padding:20px 24px;margin:18px 0;border-left:5px solid var(--gold);}
+.answer .alab{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:6px;}
+.answer .atext{font-size:16.5px;font-weight:700;line-height:1.7;}
+.answer .asub{font-size:13.5px;color:#cfc9be;margin-top:8px;line-height:1.7;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);white-space:nowrap;}
+td.num{font-family:'IM Fell English',Georgia,serif;font-weight:700;text-align:right;white-space:nowrap;}
+td.hl{background:rgba(201,168,76,.16)!important;}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 6px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;margin-left:3px;}
+.badge-official{background:var(--green);} .badge-predict{background:var(--amber);} .badge-gap{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-note{font-size:12px;color:var(--muted);margin-top:6px;border-top:1px dotted var(--border);padding-top:6px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.para{margin:14px 0;}
+.label-zh{font-weight:700;font-size:15.5px;color:var(--ink);display:block;}
+.label-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--copper);font-style:italic;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.para p{font-size:14.2px;color:#221f1c;}
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.sc{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center;}
+.sc.bear{border-top:3px solid var(--red);} .sc.base{border-top:3px solid var(--copper);} .sc.bull{border-top:3px solid var(--green);}
+.sc .sname{font-family:'IM Fell English',Georgia,serif;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+.sc .sname b{display:block;font-family:'Songti SC',Georgia,serif;font-size:14px;color:var(--ink);letter-spacing:0;margin-top:2px;}
+.sc .sp{font-family:'IM Fell English',Georgia,serif;font-size:28px;font-weight:700;margin:8px 0 2px;}
+.sc.bear .sp{color:var(--red);} .sc.base .sp{color:var(--copper);} .sc.bull .sp{color:var(--green);}
+.sc .schg{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.sc .slogic{font-size:12.5px;color:#3a352f;text-align:left;border-top:1px solid var(--border);padding-top:8px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.v-src{color:var(--gold);font-size:11px;display:block;margin-top:3px;}
+.tone-wrap{margin:14px 0;}
+.tone-row{display:flex;align-items:center;gap:12px;margin:8px 0;font-size:13px;}
+.tone-lab{width:160px;flex-shrink:0;color:var(--muted);}
+.tone-bar{flex:1;height:16px;background:#e5e0d8;border:1px solid var(--border);position:relative;}
+.tone-fill{height:100%;background:var(--copper);}
+.tone-fill.amber{background:var(--amber);} .tone-fill.green{background:var(--green);} .tone-fill.red{background:var(--red);}
+.tone-val{width:44px;text-align:right;font-family:'IM Fell English',Georgia,serif;font-weight:700;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+.chip{font-size:12.5px;padding:4px 12px;border-radius:14px;border:1px solid;}
+.chip.pos{background:rgba(42,92,63,.08);border-color:var(--green);color:var(--green);}
+.chip.neu{background:rgba(196,122,30,.08);border-color:var(--amber);color:var(--amber);}
+.chip.neg{background:rgba(139,46,46,.08);border-color:var(--red);color:var(--red);}
+.qa{border-left:3px solid var(--copper);padding:10px 16px;margin:14px 0;background:var(--card);}
+.qa .qq{font-weight:700;font-size:14px;color:var(--ink);}
+.qa .qa-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;font-style:italic;color:var(--copper);letter-spacing:.5px;}
+.qa .aa{font-size:13.5px;color:#3a352f;margin-top:5px;}
+.appendix{border:2px solid var(--ink);padding:22px 24px;margin:38px 0 0;background:var(--card);}
+.appendix .ap-head{border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:14px;}
+.appendix .ap-zh{font-size:19px;font-weight:700;}
+.appendix .ap-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;}
+.ap-sub{font-weight:700;font-size:14.5px;margin:18px 0 6px;color:var(--copper);}
+.appendix p,.appendix li{font-size:13.3px;color:#3a352f;}
+.appendix ul{margin:6px 0 6px 20px;} .appendix li{margin:5px 0;}
+.feedback{text-align:center;margin:26px 0 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){.stat-bar{grid-template-columns:repeat(2,1fr);}.chart-grid2,.sc-grid{grid-template-columns:1fr;}.title-zh{font-size:24px;}body{font-size:14px;}}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Earnings Copilot</b> · Earner</span>
+  <span>美团 Meituan (3690.HK)</span>
+  <span>2026 年第二季度 · 截至 2026-06-30 止三个月 · 公告 2026-08-28 港股收市后</span>
+  <span>分析于公告后约 1 小时 · 现价 <b>HK$78.05</b></span>
+  <span>单位：人民币，另注明者除外</span>
+</div>
+
+<!-- 2 标题 + 标签 -->
+<div class="title-block">
+  <div class="title-en">Meituan 2Q26 — Profit Is Back. It Came From Stopping the Bleeding, Not From the Business Getting Better.</div>
+  <div class="title-zh">美团重回盈利：利润回来了<br>但它来自停止烧钱，不是来自业务变好</div>
+  <div class="tags">
+    <span class="tag dark">评级：中性偏多 · 拐点确认，但质量存疑</span>
+    <span class="tag amber">语气评分 66 / 100 数字扭转，结构未修复</span>
+    <span class="tag green">收入 1,046.4 亿 · +14.4%</span>
+    <span class="tag green">经调整溢利净额 +25.2 亿 · 环比改善 74.9 亿</span>
+    <span class="tag red">利润改善 98.7% 来自利润率，非增长</span>
+    <span class="tag red">高毛利商家服务仅 +4.0%</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num green">¥1,046<span style="font-size:14px">亿</span></div><div class="lab">营业收入 +14.4%<span class="en">Revenue</span></div></div>
+  <div class="stat"><div class="num green">+¥25.2<span style="font-size:14px">亿</span></div><div class="lab">经调整溢利净额（上季 −49.7亿）<span class="en">Back to profit</span></div></div>
+  <div class="stat"><div class="num amber">2.6%</div><div class="lab">经营利润率（上年 0.2%）<span class="en">Operating margin</span></div></div>
+  <div class="stat"><div class="num red">+4.0%</div><div class="lab">核心商家服务同比<span class="en">High-margin line stalling</span></div></div>
+</div>
+
+<!-- 4 答案前置 -->
+<div class="answer">
+  <span class="alab">The Answer</span>
+  <div class="atext">美团回到盈利了，经调整溢利净额 +25.2 亿，较上季的 −49.7 亿改善 74.9 亿。<span style="color:var(--gold)">但把经营溢利的 24.65 亿增量做两步拆解：营收多出的 131.5 亿，按去年的利润率只能多赚 32 万——利润改善的 98.7% 来自利润率，与增长几乎无关。</span></div>
+  <div class="asub">而利润率的改善<strong style="color:#fff">不可能来自收入结构，因为结构在恶化</strong>：核心本地商业里高毛利的商家服务同比仅 <strong style="color:#fff">+4.0%</strong>，占比从 58.7% 降至 <strong style="color:#fff">55.4%</strong>；拉动增长的是低毛利的配送服务（+13.1%）、自营商品销售（+78.9%）与新业务商品销售（占总增量 54.5%）。<strong style="color:#fff">结构向低毛利倾斜、利润率却大涨，改善只能来自成本端——补贴退坡。</strong>这个结论有一个不舒服的推论：<strong style="color:#fff">补贴只能停一次。此后的利润率扩张必须靠结构或经营杠杆，而结构正在往反方向走。</strong></div>
+</div>
+
+<!-- 5 季度营收走势 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">一 · 季度营收走势</span><span class="section-en">Quarterly Revenue Trend</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">近六个季度营业收入（亿元人民币）· Quarterly Revenue, RMB 100M</div>
+    <svg viewBox="0 0 800 300" font-family="'IM Fell English',Georgia,serif">
+      <line x1="60" y1="250" x2="760" y2="250" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g fill="#8b6c42">
+        <rect x="80" y="85.1" width="84" height="164.9" opacity="0.35"/>
+        <rect x="192" y="75.1" width="84" height="174.9" opacity="0.42"/>
+        <rect x="304" y="67.5" width="84" height="182.5" opacity="0.5"/>
+        <rect x="416" y="74.8" width="84" height="175.2" opacity="0.42"/>
+        <rect x="528" y="75.9" width="84" height="174.1" opacity="0.5"/>
+      </g>
+      <rect x="640" y="50.0" width="84" height="200.0" fill="#0a0a0b"/>
+      <g font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">
+        <text x="122" y="78">862.7</text><text x="234" y="68">914.9</text>
+        <text x="346" y="60">955.0</text><text x="458" y="68">916.4</text>
+        <text x="570" y="69">911.0</text><text x="682" y="43">1046.4</text>
+      </g>
+      <g font-size="11" fill="#6b6460" text-anchor="middle">
+        <text x="122" y="268">Q1 2025</text><text x="234" y="268">Q2 2025</text>
+        <text x="346" y="268">Q3 2025</text><text x="458" y="268">Q4 2025</text>
+        <text x="570" y="268">Q1 2026</text>
+        <text x="682" y="268" fill="#0a0a0b" font-weight="bold">Q2 2026</text>
+      </g>
+      <g font-size="10.5" text-anchor="middle" font-weight="bold">
+        <text x="234" y="286" fill="#2a5c3f">+6.1%</text>
+        <text x="346" y="286" fill="#2a5c3f">+4.4%</text>
+        <text x="458" y="286" fill="#8b2e2e">−4.0%</text>
+        <text x="570" y="286" fill="#8b2e2e">−0.6%</text>
+        <text x="682" y="286" fill="#2a5c3f">+14.9%</text>
+      </g>
+      <g font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">
+        <text x="122" y="298">倒算</text><text x="458" y="298">倒算</text>
+      </g>
+      <text x="410" y="298" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">下排为环比</text>
+    </svg>
+    <div class="chart-note"><strong>环比序列 +6.1% → +4.4% → −4.0% → −0.6% → +14.9%。</strong>连续两个季度的环比收缩之后，本季出现近两年最强的单季环比增长。<strong>但增长的构成才是问题所在，见下一节。</strong></div>
+  </div>
+</div>
+
+<!-- 6 增量拆解 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">二 · 增长从哪里来</span><span class="section-en">Where the Growth Came From</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">各收入科目对营收增量的贡献（亿元人民币）· Contribution to Revenue Change</div>
+    <svg viewBox="0 0 800 330" font-family="'IM Fell English',Georgia,serif">
+      <line x1="400" y1="25" x2="400" y2="295" stroke="#0a0a0b" stroke-width="1.5"/>
+      <g font-size="12" fill="#0a0a0b" text-anchor="end">
+        <text x="392" y="47">新业务 · 商品销售</text><text x="392" y="79">核心 · 配送服务</text>
+        <text x="392" y="111">核心 · 商品销售</text><text x="392" y="143">核心 · 商家服务</text>
+        <text x="392" y="175">新业务 · 商家服务</text><text x="392" y="207">新业务 · 配送服务</text>
+        <text x="392" y="239">核心 · 其他</text>
+      </g>
+      <text x="408" y="271" font-size="12" fill="#0a0a0b" text-anchor="start">新业务 · 其他（含利息）</text>
+      <rect x="400" y="32" width="300" height="22" fill="#2a5c3f" opacity="0.85"/>
+      <rect x="400" y="64" width="129.7" height="22" fill="#2a5c3f" opacity="0.7"/>
+      <rect x="400" y="96" width="66.3" height="22" fill="#2a5c3f" opacity="0.6"/>
+      <rect x="400" y="128" width="63.2" height="22" fill="#c47a1e" opacity="0.75"/>
+      <rect x="400" y="160" width="47.3" height="22" fill="#2a5c3f" opacity="0.5"/>
+      <rect x="400" y="192" width="43.9" height="22" fill="#2a5c3f" opacity="0.5"/>
+      <rect x="400" y="224" width="14.3" height="22" fill="#2a5c3f" opacity="0.4"/>
+      <rect x="285.9" y="256" width="114.1" height="22" fill="#8b2e2e"/>
+      <g font-size="12" font-weight="bold" fill="#2a5c3f">
+        <text x="708" y="48">+71.67</text><text x="538" y="80">+30.98</text>
+        <text x="475" y="112">+15.84</text>
+        <text x="456" y="176">+11.30</text><text x="452" y="208">+10.49</text>
+        <text x="423" y="240">+3.42</text>
+      </g>
+      <text x="472" y="144" font-size="12" font-weight="bold" fill="#c47a1e">+15.09</text>
+      <text x="278" y="272" font-size="12" font-weight="bold" fill="#8b2e2e" text-anchor="end">−27.27</text>
+      <g font-size="10" fill="#6b6460">
+        <text x="708" y="62">+45.1%　占增量 54.5%</text>
+        <text x="538" y="94">+13.1%</text><text x="475" y="126">+78.9%</text>
+        <text x="456" y="190">+69.6%</text><text x="452" y="222">全新科目</text>
+        <text x="423" y="254">+28.8%</text>
+      </g>
+      <text x="472" y="158" font-size="10" fill="#c47a1e" font-weight="bold">仅 +4.0%</text>
+      <text x="278" y="286" font-size="10" fill="#8b2e2e" text-anchor="end">−30.4%</text>
+      <text x="400" y="316" font-size="11.5" fill="#8b6c42" text-anchor="middle" font-weight="bold">净增 +131.53 亿元 ＝ 总营收 +14.4%</text>
+    </svg>
+    <div class="chart-note"><strong>单一最大来源是新业务的商品销售 +71.67 亿，占总增量的 54.5%——这是自营零售，毛利结构最薄的一类收入。</strong>而琥珀色那根是<strong>核心本地商业的商家服务（佣金与广告，公司真正的利润引擎），同比只有 +4.0%</strong>。<strong>新业务出现全新科目「配送服务」10.49 亿（去年同期为零），同期新业务「其他（含利息收入）」减少 27.27 亿。</strong></div>
+  </div>
+</div>
+
+<!-- 7 利润指标 + 利润率轨迹 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">三 · 盈利：四项指标全面转正</span><span class="section-en">All Four Profit Metrics Turned</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">四项利润指标：2025Q2 vs 2026Q2（亿元）</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="35" y1="230" x2="380" y2="230" stroke="#0a0a0b" stroke-width="1.5"/>
+        <rect x="48" y="220.9" width="28" height="9.1" fill="#8b6c42" opacity="0.35"/>
+        <rect x="80" y="121.7" width="28" height="108.3" fill="#2a5c3f"/>
+        <rect x="130" y="215.3" width="28" height="14.7" fill="#8b6c42" opacity="0.35"/>
+        <rect x="162" y="143.2" width="28" height="86.8" fill="#2a5c3f"/>
+        <rect x="212" y="118.0" width="28" height="112.0" fill="#8b6c42" opacity="0.35"/>
+        <rect x="244" y="65.0" width="28" height="165.0" fill="#2a5c3f"/>
+        <rect x="294" y="169.9" width="28" height="60.1" fill="#8b6c42" opacity="0.35"/>
+        <rect x="326" y="128.4" width="28" height="101.6" fill="#2a5c3f"/>
+        <g font-size="10.5" font-weight="bold" text-anchor="middle">
+          <text x="62" y="215" fill="#8b6c42">2.26</text><text x="94" y="116" fill="#2a5c3f">26.91</text>
+          <text x="144" y="209" fill="#8b6c42">3.65</text><text x="176" y="137" fill="#2a5c3f">21.55</text>
+          <text x="226" y="112" fill="#8b6c42">27.82</text><text x="258" y="59" fill="#2a5c3f">40.98</text>
+          <text x="308" y="164" fill="#8b6c42">14.93</text><text x="340" y="122" fill="#2a5c3f">25.24</text>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="middle">
+          <text x="78" y="248">经营溢利</text><text x="160" y="248">期内溢利</text>
+          <text x="242" y="248">经调整EBITDA</text><text x="324" y="248">经调整净额</text>
+        </g>
+        <g font-size="9.5" text-anchor="middle" font-weight="bold" fill="#2a5c3f">
+          <text x="78" y="262">nm</text><text x="160" y="262">+490%</text>
+          <text x="242" y="262">+47.3%</text><text x="324" y="262">+69.0%</text>
+        </g>
+        <text x="200" y="276" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">浅色 2025Q2　深色 2026Q2</text>
+      </svg>
+      <div class="chart-note"><strong>四项全部改善，但幅度差异很大：经营溢利从 2.26 亿跳到 26.91 亿（近 12 倍），而经调整 EBITDA 只增 47.3%。</strong>差异本身说明改善集中在<strong>折旧摊销之上的经营层面，也就是费用与补贴</strong>。</div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">经调整溢利净额率轨迹（%）· 五个季度</div>
+      <svg viewBox="0 0 400 280" font-family="'IM Fell English',Georgia,serif">
+        <line x1="45" y1="94" x2="375" y2="94" stroke="#0a0a0b" stroke-width="1" stroke-dasharray="4,3"/>
+        <g stroke="#e5e0d8" stroke-width="1">
+          <line x1="45" y1="60" x2="375" y2="60"/><line x1="45" y1="128" x2="375" y2="128"/>
+          <line x1="45" y1="162" x2="375" y2="162"/><line x1="45" y1="196" x2="375" y2="196"/>
+          <line x1="45" y1="230" x2="375" y2="230"/>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="end">
+          <text x="41" y="63">+5%</text><text x="41" y="97">0%</text>
+          <text x="41" y="131">−5%</text><text x="41" y="165">−10%</text>
+          <text x="41" y="199">−15%</text><text x="41" y="233">−20%</text>
+        </g>
+        <polyline points="80,82.9 145,207.9" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+        <polyline points="145,207.9 210,206.1" fill="none" stroke="#8b6c42" stroke-width="2.5" stroke-dasharray="5,3"/>
+        <polyline points="210,206.1 275,131.1 340,77.6" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+        <g fill="#8b6c42">
+          <circle cx="80" cy="82.9" r="4"/><circle cx="145" cy="207.9" r="4"/>
+          <circle cx="210" cy="206.1" r="4"/><circle cx="275" cy="131.1" r="4"/>
+        </g>
+        <circle cx="340" cy="77.6" r="5.5" fill="#2a5c3f"/>
+        <g font-size="10.5" font-weight="bold" text-anchor="middle">
+          <text x="80" y="74" fill="#8b6c42">+1.63</text>
+          <text x="145" y="222" fill="#8b2e2e">−16.75</text>
+          <text x="210" y="220" fill="#8b2e2e">−16.48</text>
+          <text x="275" y="123" fill="#8b6c42">−5.46</text>
+          <text x="340" y="68" fill="#2a5c3f">+2.41</text>
+        </g>
+        <g font-size="9" fill="#6b6460" text-anchor="middle">
+          <text x="80" y="252">Q2'25</text><text x="145" y="252">Q3'25</text>
+          <text x="210" y="252">Q4'25</text><text x="275" y="252">Q1'26</text>
+          <text x="340" y="252" fill="#2a5c3f" font-weight="bold">Q2'26</text>
+        </g>
+        <text x="200" y="272" font-size="9" fill="#6b6460" text-anchor="middle" font-style="italic">虚线段：Q4'25 为「期内亏损」口径，与其余四点不完全可比</text>
+      </svg>
+      <div class="chart-note"><strong>标准的 V 形：+1.63% → −16.75% 触底 → −5.46% → +2.41%。</strong>王兴曾表示<strong>外卖业务亏损在 2025 年三季度见顶</strong>，这条曲线与该表述一致。<strong>本季利润率已回到 2025 年二季度之上。</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- 8 核心分析 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">四 · 核心分析</span><span class="section-en">Core Analysis</span></div>
+
+  <div class="para">
+    <span class="label-zh">利润改善的 98.7% 来自利润率，与增长几乎无关。</span>
+    <span class="label-en">98.7% of the profit improvement came from margin, not growth.</span>
+    <p>经营溢利从 2.26 亿增至 <strong>26.91 亿，增量 24.65 亿</strong>。做两步拆解：营收增加的 131.53 亿，<strong>按 2025 年二季度 0.25% 的经营利润率计算，只能贡献 0.32 亿——三十二万元</strong>；剩余 <strong>24.33 亿（98.7%）全部来自利润率从 0.25% 抬升到 2.57%</strong> <span class="badge badge-predict">测算</span>。<strong>换句话说，这一个多出来的 131 亿收入，本身几乎没有为利润做贡献。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">而利润率的改善不可能来自结构，因为结构在恶化。</span>
+    <span class="label-en">The margin gain cannot be mix — mix moved the wrong way.</span>
+    <p>核心本地商业中，<strong>商家服务（佣金与在线营销，公司毛利最厚的一块）同比仅 +4.0%</strong>，占该分部比重从 58.7% 降至 <strong>55.4%（−3.3 个百分点）</strong>。同期拉动增长的是：<strong>配送服务 +13.1%</strong>（需支付骑手成本）、<strong>核心自营商品销售 +78.9%</strong>、<strong>新业务商品销售 +45.1%（单项占总增量 54.5%）</strong>——三者都是低毛利业务。<strong>收入结构明确向低毛利倾斜，而利润率却大幅上行，那么改善只能来自成本端：补贴退坡。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">这个结论有一个不舒服的推论：补贴只能停一次。</span>
+    <span class="label-en">Subsidies can only be switched off once.</span>
+    <p>本季的利润率修复本质上是<strong>一次性的水平位移</strong>，不是可重复的斜率。<strong>当补贴回到常态水平后，进一步的利润率扩张必须来自收入结构改善或经营杠杆——而结构目前正在往反方向走。</strong>这不意味着盈利不可持续，但它意味着<strong>不能把本季 2.41% 的经调整净利率外推成一条上升曲线</strong>。下个季度真正需要验证的，是商家服务能否重回双位数增长——<strong>那才是利润率能否继续扩张的唯一来源。</strong></p>
+  </div>
+
+  <div class="para">
+    <span class="label-zh">新业务贡献了超过一半的营收增量，但它同时也是亏损的主要来源。</span>
+    <span class="label-en">New initiatives drove over half the growth — and most of the losses.</span>
+    <p>新业务收入 <strong>331.12 亿、同比 +25.0%</strong>，贡献总增量的 <strong>50.3%</strong>；核心本地商业 <strong>715.31 亿、同比 +10.1%</strong>，贡献 49.7%。<strong>本季公告未拆分部经营溢利。</strong>按合并经营溢利 26.91 亿倒推：<strong>若核心本地商业经营利润率为 8%（57.2 亿），新业务约亏 30.3 亿；若为 10%（71.5 亿），新业务约亏 44.6 亿</strong> <span class="badge badge-predict">测算</span>。参照 2025 年二季度核心分部经营溢利约 37 亿、合并仅 2.26 亿（隐含新业务约亏 34.7 亿），<strong>新业务季度亏损大概率仍在 30–45 亿量级——这个数决定本次「拐点」是全面修复，还是核心业务独木撑。</strong></p>
+  </div>
+</div>
+
+<!-- 9 目标价三情景 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五 · 目标价三情景</span><span class="section-en">Three Scenarios · 12-Month Targets</span></div>
+
+  <div class="para">
+    <span class="label-zh">胜负手是补贴退坡之后，商家服务能否重新加速。</span>
+    <span class="label-en">The swing factor: can merchant services reaccelerate once subsidies normalise.</span>
+    <p>现价对应市值约 <strong>RMB 4,342 亿</strong>，对 2026 年预计营收约 4,177 亿的市销率仅 <strong>1.04 倍</strong> <span class="badge badge-predict">测算</span>——处于历史低位区间。<strong>估值的争议不在收入，在利润能修复到什么水平。</strong>三情景以 2027 年经调整净利为锚：熊市 130 亿、基准 250 亿、牛市 380 亿。<strong>注意市盈率随盈利上升而下调（24× / 20× / 22×），因为盈利越接近常态，越不该给予修复期的高倍数。</strong></p>
+  </div>
+
+  <div class="chart-wrap">
+    <div class="chart-title">目标价区间与现价位置 · Target Range vs Spot (HK$)</div>
+    <svg viewBox="0 0 800 200" font-family="'IM Fell English',Georgia,serif">
+      <line x1="70" y1="115" x2="740" y2="115" stroke="#d4cec6" stroke-width="10"/>
+      <line x1="183.2" y1="115" x2="462.4" y2="115" stroke="#c9a84c" stroke-width="10" opacity="0.3"/>
+      <line x1="147.0" y1="115" x2="597.7" y2="115" stroke="#8b6c42" stroke-width="10" opacity="0.35"/>
+      <g font-size="10" fill="#6b6460" text-anchor="middle">
+        <text x="70" y="145">HK$40</text><text x="405" y="145">HK$110</text><text x="740" y="145">HK$180</text>
+      </g>
+      <text x="322" y="103" font-size="9.5" fill="#8b6c42" text-anchor="middle" font-style="italic">52 周区间 63.65 – 122.00</text>
+      <line x1="147.0" y1="101" x2="147.0" y2="129" stroke="#8b2e2e" stroke-width="3"/>
+      <text x="147.0" y="93" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="bold">56.1</text>
+      <text x="147.0" y="167" font-size="10.5" fill="#8b2e2e" text-anchor="middle">熊 −28.1% · 35%</text>
+      <line x1="308.7" y1="101" x2="308.7" y2="129" stroke="#8b6c42" stroke-width="3"/>
+      <text x="308.7" y="167" font-size="12" fill="#8b6c42" text-anchor="middle" font-weight="bold">89.9</text>
+      <text x="308.7" y="181" font-size="10.5" fill="#8b6c42" text-anchor="middle">基准 +15.2% · 45%</text>
+      <line x1="597.7" y1="101" x2="597.7" y2="129" stroke="#2a5c3f" stroke-width="3"/>
+      <text x="597.7" y="93" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="bold">150.3</text>
+      <text x="597.7" y="167" font-size="10.5" fill="#2a5c3f" text-anchor="middle">牛 +92.6% · 20%</text>
+      <line x1="252.1" y1="115" x2="252.1" y2="55" stroke="#0a0a0b" stroke-width="2"/>
+      <polygon points="252.1,113 245.4,101 259,101" fill="#0a0a0b"/>
+      <text x="252.1" y="47" font-size="12.5" fill="#0a0a0b" text-anchor="middle" font-weight="bold">现价 HK$78.05</text>
+      <text x="252.1" y="33" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">市值约 RMB 4,342 亿</text>
+    </svg>
+    <div class="chart-note">概率加权期望 <strong>+15.5%</strong>。<strong>右尾极长（牛市 +92.6%）是盈利被极度压缩的必然结果——当基数接近零，任何常态化都会产生巨大的百分比弹性。</strong>因此本区间的宽度反映的是盈利的不确定性，而非分析的模糊。</div>
+  </div>
+
+  <div class="sc-grid">
+    <div class="sc bear">
+      <div class="sname">BEAR<b>熊市</b></div>
+      <div class="sp">HK$56.1</div>
+      <div class="schg">−28.1% ｜ 概率 35%</div>
+      <div class="slogic">24 倍 × 2027 年经调整净利 130 亿。<strong>触发：王兴预警的「2026 下半年行业订单同比负增长」兑现；淘宝闪购或京东重启补贴，利润率修复中断。</strong></div>
+    </div>
+    <div class="sc base">
+      <div class="sname">BASE<b>基准</b></div>
+      <div class="sp">HK$89.9</div>
+      <div class="schg">+15.2% ｜ 概率 45%</div>
+      <div class="slogic">20 倍 × 2027 年经调整净利 250 亿。<strong>路径：补贴退坡持续，核心本地商业经营利润率修复至 8–10%，新业务季度亏损收窄至 20 亿以内。</strong></div>
+    </div>
+    <div class="sc bull">
+      <div class="sname">BULL<b>牛市</b></div>
+      <div class="sp">HK$150.3</div>
+      <div class="schg">+92.6% ｜ 概率 20%</div>
+      <div class="slogic">22 倍 × 2027 年经调整净利 380 亿。<strong>触发：行业停火固化，商家服务重回双位数增长，Keeta 海外与闪购转正。</strong></div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>关键假设</th><th style="text-align:right">熊市</th><th style="text-align:right">基准</th><th style="text-align:right">牛市</th></tr>
+    <tr><td class="k">商家服务同比</td><td class="num">继续个位数</td><td class="num">回升至 8–10%</td><td class="num">重回双位数</td></tr>
+    <tr><td class="k">新业务季度亏损</td><td class="num">维持 40 亿以上</td><td class="num">收窄至 20 亿内</td><td class="num">接近盈亏平衡</td></tr>
+    <tr><td class="k">2027E 经调整净利（亿元）</td><td class="num">130</td><td class="num">250</td><td class="num">380</td></tr>
+    <tr><td class="k">市盈率</td><td class="num">24.0×</td><td class="num">20.0×</td><td class="num">22.0×</td></tr>
+    <tr><td class="k hl">目标价（港元）</td><td class="num hl">56.1</td><td class="num hl">89.9</td><td class="num hl">150.3</td></tr>
+    <tr><td class="k">较现价 HK$78.05</td><td class="num" style="color:var(--red)">−28.1%</td><td class="num" style="color:var(--green)">+15.2%</td><td class="num" style="color:var(--green)">+92.6%</td></tr>
+    <tr><td class="k hl">概率加权期望</td><td class="num hl" colspan="3" style="text-align:center;color:var(--green)">+15.5%</td></tr>
+  </table>
+</div>
+
+<!-- 10 Verdict -->
+<div class="verdict">
+  <div class="verdict-en">The Verdict — The Turn Is Real. Its Quality Is Not Yet Proven.</div>
+  <div class="verdict-zh">裁决：中性偏多 · 拐点确认，但质量存疑</div>
+  <div class="v-item"><div class="v-num">1</div><div class="v-text"><strong>拐点确认。</strong>经调整溢利净额 <strong>+25.24 亿</strong>，较上季 −49.7 亿改善 <strong>74.9 亿</strong>；经调整净利率 −5.46% → <strong>+2.41%</strong>，已高于 2025 年二季度的 1.63%。<span class="v-src">公司公告 · 环比为本报告计算</span></div></div>
+  <div class="v-item"><div class="v-num">2</div><div class="v-text"><strong>但利润改善的 98.7% 来自利润率，不是增长。</strong>营收多出的 131.5 亿，按去年利润率只能多赚 32 万。<strong>这一个多出来的季度收入，本身几乎没有为利润做贡献。</strong><span class="v-src">经营溢利两步拆解</span></div></div>
+  <div class="v-item"><div class="v-num">3</div><div class="v-text"><strong>而利润率的改善不可能来自结构，因为结构在恶化。</strong>高毛利的商家服务同比仅 <strong>+4.0%</strong>，占核心分部比重 58.7% → 55.4%；拉动增长的全是低毛利的配送与自营商品。<strong>改善只能来自成本端——补贴退坡。</strong><span class="v-src">分项收入结构位移</span></div></div>
+  <div class="v-item"><div class="v-num">4</div><div class="v-text"><strong>补贴只能停一次。</strong>本季的利润率修复是一次性的水平位移，不是可重复的斜率。<strong>此后的扩张必须靠结构或经营杠杆，而结构正在往反方向走。不能把 2.41% 外推成一条上升曲线。</strong><span class="v-src">分析师判断</span></div></div>
+  <div class="v-item"><div class="v-num">5</div><div class="v-text"><strong>加权期望 +15.5%，但区间极宽。</strong>熊市 −28.1% 对牛市 +92.6%——<strong>右尾长是盈利被极度压缩的算术结果，不是分析模糊。胜负手只有一个：商家服务能不能重新加速。</strong><span class="v-src">三情景 35/45/20 加权</span></div></div>
+</div>
+
+<!-- 11 管理层语气 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">六 · 管理层语气</span><span class="section-en">Management Tone Score</span></div>
+  <div class="tone-wrap">
+    <div class="tone-row"><span class="tone-lab">综合语气评分</span><div class="tone-bar"><div class="tone-fill amber" style="width:66%"></div></div><span class="tone-val">66</span></div>
+    <div class="tone-row"><span class="tone-lab">数字说服力</span><div class="tone-bar"><div class="tone-fill green" style="width:82%"></div></div><span class="tone-val">82</span></div>
+    <div class="tone-row"><span class="tone-lab">披露透明度</span><div class="tone-bar"><div class="tone-fill red" style="width:48%"></div></div><span class="tone-val">48</span></div>
+    <div class="tone-row"><span class="tone-lab">前瞻可见度</span><div class="tone-bar"><div class="tone-fill amber" style="width:55%"></div></div><span class="tone-val">55</span></div>
+  </div>
+  <div class="notice">
+    <div class="nt">66 分 = 数字扭转有力，但披露与前瞻两项拖累</div>
+    <strong>数字说服力 82</strong>：四项利润指标全部改善，经调整溢利净额同比 +69.0%、环比转正，且经调整净利率已超过补贴战爆发前一年的同期水平。<strong>与王兴此前「外卖亏损在 2025 年三季度见顶」的表述完全吻合，管理层的预判被兑现。</strong><br>
+    <strong>披露透明度 48</strong>：<strong>本次公告的收入分部表未同时给出分部经营溢利</strong>，而这恰是判断「拐点质量」最关键的一个数。<strong>在核心与新业务盈利能力差异极大的阶段省略该拆分，会实质性削弱外部验证能力。</strong>此外新业务新增「配送服务」科目 10.49 亿、同期「其他（含利息收入）」减少 27.27 亿，两者是否为口径重分类，公告正文未作说明。<br>
+    <strong>前瞻可见度 55</strong>：<strong>王兴此前公开预警「2026 年下半年行业订单可能同比负增长」</strong>——这条指引是否重申、修正或收回，是本次业绩会最具信息量的一句话，也是三情景分野的直接触发条件。
+  </div>
+</div>
+
+<!-- 12 核心主题 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">七 · 核心主题</span><span class="section-en">Key Themes</span></div>
+  <div class="chips">
+    <span class="chip pos">经调整溢利净额 +25.24 亿，环比改善 74.9 亿</span>
+    <span class="chip pos">收入 1,046.4 亿，同比 +14.4%、环比 +14.9%</span>
+    <span class="chip pos">经营利润率 0.2% → 2.6%</span>
+    <span class="chip pos">经调整 EBITDA 40.98 亿，+47.3%</span>
+    <span class="chip pos">新业务收入 +25.0%，贡献总增量 50.3%</span>
+    <span class="chip pos">利润率 V 形反转，与「三季度见顶」表述吻合</span>
+    <span class="chip neu">新业务新增「配送服务」科目 10.49 亿</span>
+    <span class="chip neu">核心自营商品销售 +78.9%</span>
+    <span class="chip neg">核心商家服务仅 +4.0%，占比 −3.3pct</span>
+    <span class="chip neg">利润改善 98.7% 来自利润率而非增长</span>
+    <span class="chip neg">新业务「其他（含利息）」−27.27 亿 / −30.4%</span>
+    <span class="chip neg">分部经营溢利未披露</span>
+    <span class="chip neg">王兴预警下半年行业订单或同比负增长</span>
+  </div>
+</div>
+
+<!-- 13 风险矩阵 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">八 · 风险矩阵</span><span class="section-en">Risk Matrix</span></div>
+  <table>
+    <tr><th>风险</th><th>可能性</th><th>影响</th><th>观测信号</th></tr>
+    <tr><td class="k">补贴战重启<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Subsidy war restarts</span></td><td>中高</td><td>极高</td><td>淘宝闪购与京东的补贴投放强度。<strong>本季全部利润改善都建立在停火之上</strong></td></tr>
+    <tr><td class="k">商家服务持续低增<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Merchant services stall</span></td><td>中高</td><td>极高</td><td>下季该科目同比能否回到双位数。<strong>这是唯一的胜负手</strong></td></tr>
+    <tr><td class="k">行业订单同比转负<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Industry orders turn negative</span></td><td>中</td><td>高</td><td><strong>王兴自己给过的预警。</strong>业绩会是否重申</td></tr>
+    <tr><td class="k">新业务亏损不收敛<br><span style="font-weight:400;font-style:italic;color:var(--muted)">New initiatives keep bleeding</span></td><td>中</td><td>高</td><td>倒推区间 30–45 亿/季。<strong>公司若持续不披露分部溢利，该风险无法被外部量化</strong></td></tr>
+    <tr><td class="k">结构性低毛利化<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Mix shift to low margin</span></td><td>高（已发生）</td><td>中高</td><td>商家服务占核心分部比重能否止跌于 55%</td></tr>
+    <tr><td class="k">利息收入下降<br><span style="font-weight:400;font-style:italic;color:var(--muted)">Interest income decline</span></td><td>待确认</td><td>中</td><td>新业务「其他（含利息）」−30.4% 是重分类还是实质下降</td></tr>
+  </table>
+</div>
+
+<!-- 14 应问清单 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">九 · 业绩会应问清单</span><span class="section-en">Questions That Should Be Asked</span></div>
+  <div class="qa">
+    <div class="qq">核心本地商业与新业务的分部经营溢利分别是多少</div>
+    <div class="qa-en">What is the segment-level operating profit split?</div>
+    <div class="aa">合并经营溢利 26.91 亿，但收入分部表未给盈利拆分。<strong>按 8% 与 10% 两个核心利润率假设倒推，新业务季度亏损在 30–45 亿之间——区间宽达 15 亿，足以改变对「拐点质量」的全部判断。这是本次最该补的一个数。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">商家服务同比只有 4.0%，是价格让利还是订单结构变化</div>
+    <div class="qa-en">Merchant services grew only 4.0% — price or mix?</div>
+    <div class="aa">配送服务 +13.1%、自营商品 +78.9%，唯独佣金与广告近乎停滞。<strong>若是主动降佣以留住商家，则这是竞争成本的另一种形态、且会长期压制利润率；若只是高价订单占比下降，则可随结构回摆。两者对估值的含义完全相反。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">新业务新增的「配送服务」10.49 亿是什么业务</div>
+    <div class="qa-en">What is the new delivery-service line inside New Initiatives?</div>
+    <div class="aa">该科目去年同期为零，同时新业务「其他（含利息收入）」减少 27.27 亿。<strong>是 Keeta 海外配送开始独立列示、闪购从其他项拆出，还是纯粹的口径重分类？如果是后者，则新业务的真实增速需要重算。</strong></div>
+  </div>
+  <div class="qa">
+    <div class="qq">「2026 年下半年行业订单可能同比负增长」这一判断是否维持</div>
+    <div class="qa-en">Does the H2 negative-order-growth warning still stand?</div>
+    <div class="aa">这是管理层自己给出的预警。<strong>若重申，则本季 +14.9% 的环比增长是一次性反弹，三情景应向熊市加权；若收回，则基准情形的利润率修复路径可信度显著提高。这一句话的信息量高于本次公告的任何一个数字。</strong></div>
+  </div>
+</div>
+
+<!-- 分析师附注 -->
+<div class="appendix">
+  <div class="ap-head">
+    <span class="ap-en">Analyst's Notes — Sources, Method, a Scored Prediction, and My Own View</span>
+    <div class="ap-zh">分析师附注</div>
+  </div>
+
+  <div class="ap-sub">⭐ 对本报告作者预登记门槛的记分</div>
+  <p>本次财报公布前约 1 小时，本报告作者预先登记了一组判读门槛，以 2026 年一季度经调整净亏损 <strong>−49.7 亿</strong>为基准：<strong>「Q2 经调整 &gt; 0 = 拐点确认」</strong>；−25 至 0 亿为趋势延续；−50 至 −25 亿为收窄放缓；低于 −49.7 亿为恶化。</p>
+  <p><strong>实际经调整溢利净额 +25.24 亿，落入最乐观档，门槛命中。</strong>本次门槛<strong>刻意以「相对上季的改善额」表述，而非绝对水平</strong>——这是对 8 月 26 日英伟达分析中一次方法错误的修正：当时的阈值用估计基数换算成绝对水平，实际基数高出 40 亿后阈值静默失效，把「维持趋势」判成了「加速」。<strong>门槛必须用分析变量本身表述。</strong></p>
+
+  <div class="ap-sub">⭐ 一次被识破的期间错标</div>
+  <p>公告发布前的检索返回过一组数据——「二季度营收 918.4 亿、同比 +11.7%，调整后净利润 14.9 亿、同比下降 89%，核心本地商业经营溢利 37 亿」——并标注为 2026 年二季度。<strong>该组数据实为 2025 年二季度。</strong>识破依据三条：其一，918.4 ÷ 1.117 得出的「去年同期」822 亿与美团 2025 年季度体量不符；其二，另一来源给出 2026 年一季度营收「超 910 亿」，若二季度为 918.4 亿则环比仅 +0.8%，与竞争格局不符；其三，「净利 14.9 亿、同比 −89%」倒推去年同期 135 亿，属补贴战爆发前的水平。<strong>公告确认 2025 年二季度经调整溢利净额正是 14.93 亿，识破成立。</strong>此为本季度内第三次遇到同类期间错标（前两次为海底捞 8 月 25 日、英伟达 8 月 26 日）。</p>
+
+  <div class="ap-sub">数据来源</div>
+  <p>2026 年二季度全部核心数字取自美团 2026-08-28 港股收市后发布的季度业绩公告（收入分部表与财务概要两页原文）：收入 104,643,044 千元；经营溢利 2,691,166 千元（占收入 2.6%）；期内溢利 2,155,222 千元（2.1%）；经调整 EBITDA 4,098,050 千元（3.9%）；经调整溢利净额 2,523,716 千元（2.4%）。分部与分项：核心本地商业 71,530,555 千元（配送 26,781,224／商家 39,630,201／商品 3,592,964／其他 1,526,166），新业务 33,112,489 千元（配送 1,049,197／商家 2,753,081／商品 23,074,361／其他 6,235,850）。2025 年同期各项同源。<strong>四张表的分项加总与合计逐一验算一致，总营收同比复算 14.4% 与公告一致。</strong></p>
+  <p>2026 年一季度（营收约 911 亿、+5.6%，经调整净亏损 49.7 亿）、2025 年三季度（营收 955 亿、经调整净亏损 160 亿、本地市场业务亏损约 141 亿、年交易用户破 8 亿）、2025 年四季度（亏损 151 亿）、2025 年全年（收入 3,649 亿、净亏损 234 亿）、2025 年二季度核心本地商业经营溢利 37 亿，以及股价 HK$78.05、52 周区间 HK$63.65–122.00，<strong>均为公开报道</strong> <span class="badge badge-predict">二手</span>，非本次公告披露。王兴关于「外卖亏损三季度见顶」「2026 下半年行业订单可能同比负增长」的表述同为公开报道。</p>
+
+  <div class="ap-sub">推算明细</div>
+  <ul>
+    <li><strong>2025 年一季度营收 862.7 亿</strong>：由 2026 年一季度 911 亿 ÷ 1.056 倒算。<strong>2025 年四季度营收 916.4 亿</strong>：由全年 3,649 亿减去前三季得出。两者合计校验闭合于 3,649 亿。</li>
+    <li><strong>利润改善的量率拆解</strong>：量的贡献 = 营收增量 131.53 亿 × 2025Q2 经营利润率 0.2474% = 0.32 亿；率的贡献 = 2026Q2 营收 1,046.43 亿 ×（2.5718% − 0.2474%）= 24.33 亿；两者合计 24.65 亿，与经营溢利实际增量一致。</li>
+    <li><strong>新业务亏损区间 30–45 亿</strong>：以合并经营溢利 26.91 亿减去核心本地商业收入 715.31 亿乘以假设利润率（8%／10%）得出。<strong>该区间完全依赖假设的核心利润率，公司未披露实际值。</strong></li>
+    <li><strong>市值与市销率</strong>：股数按约 61 亿股估算 <span class="badge badge-predict">估算</span>，市值 = HK$78.05 × 61 亿 = HK$4,761 亿，按 1 港元 = 0.912 元人民币折为 RMB 4,342 亿；2026 年预计营收 4,177 亿 =（一季 911 + 二季 1,046 + 下半年测算 2,220）。<strong>股数为估算值，市值与市销率对其敏感。</strong></li>
+    <li><strong>三情景目标价</strong>：2027 年经调整净利（130／250／380 亿）× 市盈率（24／20／22 倍），按 1 元人民币 = 1.0965 港元折算后除以 61 亿股。<strong>市盈率随盈利上升而下调，因为盈利越接近常态、越不应给予修复期倍数。所有取值均为分析师判断，未做同业可比回归。</strong></li>
+  </ul>
+
+  <div class="ap-sub">方法与限制</div>
+  <ul>
+    <li><strong>本报告写于公告后约 1 小时，业绩说明会（19:00 香港时间）尚未召开</strong>，管理层表述均取自公开报道与此前公开发言，<strong>因此语气评分未涵盖本次问答环节，可靠性低于有实录时的水平。</strong></li>
+    <li><strong>本次仅取得收入分部表与财务概要两页</strong>，未见完整损益表、现金流量表、分部经营溢利、经调整口径的调节表与附注。<strong>本报告对成本结构的判断全部由收入结构与利润率反推得出，无法直接验证。</strong></li>
+    <li><strong>季度利润序列存在口径混用，本报告已隔离处理</strong>：全年 234 亿为净亏损（国际财务报告准则），160 亿与 49.7 亿为「经调整」，151 亿为「期内亏损」。按季相加反推 2025 年一季度得 +62.1 亿，而市场普遍认知约 109 亿，<strong>因此本报告不做全年利润闭合校验，利润率折线图中 2025 年四季度一点以虚线段标注为不完全可比。</strong></li>
+    <li>美团不披露毛利率，本报告以「四项利润指标对比」替代模板要求的 EPS 双柱图，以「经调整溢利净额率轨迹」替代毛利率折线图。<strong>两处均为口径替代，非数据缺失。</strong></li>
+    <li><strong>本报告写于港股收市之后，不对市场反应下任何结论。</strong></li>
+  </ul>
+
+  <div class="ap-sub">我的独立看法与分歧点</div>
+  <ul>
+    <li><strong>我认为这份财报最容易被误读的地方，是把「重回盈利」等同于「竞争结束」。</strong>盈利是真的，环比 74.9 亿的改善也是真的。<strong>但两步拆解给出的答案很硬：多出来的 131.5 亿收入，按去年的利润率只贡献了 32 万利润。整个利润改善来自成本端。这是停火的红利，不是经营的胜利。</strong></li>
+    <li><strong>最让我警惕的单一数字是商家服务的 +4.0%。</strong>这是佣金加广告，是美团商业模式里最接近「定价权」的一块。<strong>在总收入 +14.4%、配送 +13.1%、自营商品 +78.9% 的背景下，唯独它几乎不动——这不像需求问题，更像是让利问题。</strong>如果是主动降佣换商家留存，那么竞争成本只是从补贴科目换到了佣金科目，<strong>报表上看起来停火了，实际上还在付钱。这个假设无法从这两页证实或证伪，但它能同时解释「利润率大涨」与「商家服务停滞」这两件表面矛盾的事。</strong></li>
+    <li><strong>我不认为估值贵。</strong>1.04 倍市销率、盈利刚从深坑里爬出来，右尾天然很长。<strong>但右尾长不等于赔率好——熊市 −28.1% 的触发条件（王兴自己预警过的行业订单负增长）比牛市的触发条件（商家服务重回双位数）更容易发生。因此我给熊市 35% 而非对称的权重。</strong></li>
+    <li><strong>一个我答不了但会改变结论的问题：分部经营溢利为什么这次没给。</strong>在核心与新业务盈利能力差异极大、且市场最关心「谁在赚谁在亏」的时点上省略该拆分，<strong>要么是披露口径的常规调整，要么是新业务亏损的绝对值不便单列。两种解释的含义差别很大，而公告本身不足以分辨。</strong>业绩会若被追问而未正面回答，我会把这一项本身视作一个负面信号。</li>
+  </ul>
+
+  <div class="ap-sub">待核实项</div>
+  <ul>
+    <li>分部经营溢利拆分（核心本地商业 vs 新业务） <span class="badge badge-gap">缺口</span>——本次最关键的缺失数</li>
+    <li>完整损益表与经调整口径调节表；销售及营销开支的绝对额与占收入比重 <span class="badge badge-gap">缺口</span></li>
+    <li>新业务「配送服务」10.49 亿的业务归属，及「其他（含利息收入）」−27.27 亿是否为同一笔重分类</li>
+    <li>业绩说明会中「2026 下半年行业订单」指引是否重申</li>
+    <li>即时零售/闪购的市场份额与订单量；骑手成本与单均配送成本</li>
+    <li>总股本精确数（本报告按约 61 亿股估算，市值与目标价对其敏感）</li>
+  </ul>
+</div>
+
+<div class="feedback">
+  对这份分析有异议或想调整假设？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=03690_2q26">点此反馈 · Send Feedback</a>
+</div>
+
+<div class="footer">
+  Earnings Copilot · Earner ｜ 美团 Meituan 3690.HK ｜ 2026 年第二季度（截至 2026-06-30 止三个月）｜ 生成于 2026-08-28 公告后约 1 小时<br>
+  现价 HK$78.05 ｜ 52 周区间 HK$63.65 – 122.00 ｜ 股数约 61 亿股（估算）｜ 市值约 RMB 4,342 亿 ｜ 汇率按 1 港元 = 0.912 元人民币<br>
+  本报告为研究分析，不构成投资建议。所有带「测算」「估算」「二手」标记的数字均为分析师估算或第三方来源，非公司披露。
+</div>
+
+</body>
+</html>
