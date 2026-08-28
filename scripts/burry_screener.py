@@ -73,9 +73,18 @@ CONCEPTS_INSTANT = {
     "shares": ["EntityCommonStockSharesOutstanding"],   # dei 分类，见 fetch_frame
 }
 
-# ⚠ 已知缺口：frames API 不返回 SIC，本脚本无法按行业剔除金融机构。
-# 银行/保险/券商没有 EV/EBITDA 与净负债的常规口径，其数值会失真。
-# 不静默剔除（会让范围被动收窄），改为在输出 warnings 里提示人工复核。
+# frames 不返回 SIC，逐家查 submissions 要 7000+ 请求。
+# 改用「标签指纹」：只有金融机构才会报这些科目，命中即判为金融。
+# 银行/保险/券商没有 EV/EBITDA 与净负债的常规口径，其数值必然失真，必须排除。
+FINANCIAL_FINGERPRINT = [
+    "PolicyholderBenefitsAndClaimsIncurredNet",   # 保险：赔付
+    "LiabilityForClaimsAndClaimsAdjustmentExpense",
+    "InterestAndDividendIncomeOperating",          # 银行：利息收入
+    "Deposits",                                    # 银行：存款
+    "ProvisionForLoanAndLeaseLosses",
+]
+
+MIN_MKTCAP = float(os.environ.get("BURRY_MIN_MKTCAP", "50e6"))   # 市值下限，滤壳
 
 
 def _get(url, timeout=120):
@@ -181,6 +190,21 @@ def fetch_ticker_map():
     return m
 
 
+def fetch_financial_ciks():
+    """标签指纹法：命中任一金融专属科目即判为金融机构。"""
+    fin = set()
+    for tag in FINANCIAL_FINGERPRINT:
+        got = fetch_frame(tag, YEAR)
+        if not got:
+            for period in INSTANT_PERIODS[:3]:
+                got = fetch_frame(tag, YEAR, period=period)
+                if got:
+                    break
+        fin |= set(got.keys())
+        print(f"  金融指纹 {tag:<45} 累计 {len(fin)}")
+    return fin
+
+
 def build_universe():
     uni = {}
     for concept, tags in CONCEPTS.items():
@@ -216,15 +240,21 @@ def build_universe():
 REQUIRED = ["revenue", "operating_income", "equity", "shares"]
 
 
-def stage_a(uni, tickers):
-    """纯 EDGAR，零价格请求。返回 (完整样本, 不完整样本)。"""
-    full, incomplete = [], []
+def stage_a(uni, tickers, fin_ciks):
+    """纯 EDGAR，零价格请求。返回 (完整, 数据缺失, 不适用)。
+    ⚠ 「数据缺失」与「不适用」必须分开：前者说明抓数管道有洞、影响分位数代表性；
+    后者（EBITDA≤0、金融股）是指标本身无定义，被正确排除，不构成覆盖率问题。"""
+    full, missing_data, not_applicable = [], [], []
     for cik, e in uni.items():
         missing = [k for k in REQUIRED if e.get(k) is None]
         rec = {"cik": cik, "name": e.get("name", ""),
                "ticker": tickers.get(cik), "missing": missing}
+        if cik in fin_ciks:
+            rec["reason"] = "金融机构（标签指纹命中）"
+            not_applicable.append(rec)
+            continue
         if missing:
-            incomplete.append(rec)
+            missing_data.append(rec)
             continue
         rev = e["revenue"]
         da = e.get("dep_amort")
@@ -235,13 +265,13 @@ def stage_a(uni, tickers):
                 rec["da_derived"] = True
         if da is None:
             rec["missing"] = ["dep_amort（含分项兜底后仍缺）"]
-            incomplete.append(rec)
+            missing_data.append(rec)
             continue
         rec["dep_amort"] = da
         ebitda = e["operating_income"] + da
         if rev <= 0 or ebitda <= 0 or e["equity"] <= 0 or e["shares"] <= 0:
-            rec["missing"] = ["非正数值：rev/ebitda/equity/shares"]
-            incomplete.append(rec)
+            rec["reason"] = "指标无定义：EBITDA/净资产/收入非正"
+            not_applicable.append(rec)
             continue
         net_debt = (e.get("debt_lt") or 0) + (e.get("debt_st") or 0) - (e.get("cash") or 0)
         fcf = (e.get("cfo") or 0) - (e.get("capex") or 0)
@@ -252,7 +282,7 @@ def stage_a(uni, tickers):
             "sbc_ratio": (e["sbc"] / rev) if e.get("sbc") else None,
         })
         full.append(rec)
-    return full, incomplete
+    return full, missing_data, not_applicable
 
 
 def pct_threshold(values, q):
@@ -320,14 +350,16 @@ def main():
     print(f"  合并后报送人: {len(uni)}")
     tickers = fetch_ticker_map()
     print(f"  CIK->ticker 映射: {len(tickers)} 条")
-    full, incomplete = stage_a(uni, tickers)
-    inc_ratio = len(incomplete) / max(len(uni), 1)
-    print(f"  完整样本 {len(full)} / 不完整 {len(incomplete)}（{inc_ratio*100:.1f}%）")
+    fin_ciks = fetch_financial_ciks()
+    full, missing_data, not_applicable = stage_a(uni, tickers, fin_ciks)
+    # 分位数代表性只受「数据缺失」影响；「不适用」是被正确排除的
+    denom = len(full) + len(missing_data)
+    miss_ratio = len(missing_data) / max(denom, 1)
+    print(f"  完整 {len(full)} / 数据缺失 {len(missing_data)} / 不适用 {len(not_applicable)}")
+    print(f"  真实缺失率 = 缺失/(完整+缺失) = {miss_ratio*100:.1f}%")
     warn = []
-    warn.append("frames 不返回 SIC，本次未按行业剔除金融机构；"
-                "银行/保险/券商的 EV/EBITDA 与净负债/EBITDA 会失真，须人工复核。")
-    if inc_ratio > 0.30:
-        warn.append(f"不完整样本占比 {inc_ratio*100:.1f}% > 30%，分位数阈值代表性存疑")
+    if miss_ratio > 0.30:
+        warn.append(f"数据缺失率 {miss_ratio*100:.1f}% > 30%，分位数阈值代表性存疑")
 
     nd_vals = [r["net_debt_ebitda"] for r in full]
     sbc_vals = [r["sbc_ratio"] for r in full if r["sbc_ratio"] is not None]
@@ -348,7 +380,7 @@ def main():
     priced = []
     if FINNHUB_TOKEN:
         print(f"  Stage B 取价 {len(survivors)} 家 …")
-        no_ticker = sum(1 for r in survivors if not r.get("ticker"))
+        no_ticker = sum(1 for r in survivors if not r.get("ticker"))  # noqa
         if no_ticker:
             warn.append(f"Stage A 幸存者中 {no_ticker} 家无 ticker 映射，无法取价，"
                         f"已并入不完整组而非静默丢弃。")
@@ -356,15 +388,23 @@ def main():
             sym = r.get("ticker")
             p = fetch_price(sym) if sym else None
             if not p:
-                incomplete.append({"cik": r["cik"], "name": r["name"],
-                                   "ticker": sym, "missing": ["price"]})
+                missing_data.append({"cik": r["cik"], "name": r["name"],
+                                     "ticker": sym, "missing": ["price"]})
             if p:
                 r["price"] = p
                 r["mktcap"] = p * r["shares"]
                 r["ev"] = r["mktcap"] + r["net_debt"]
-                r["ev_ebitda"] = r["ev"] / r["ebitda"] if r["ebitda"] else None
-                r["pb"] = r["mktcap"] / r["equity"] if r["equity"] else None
-                r["fcf_yield"] = r["fcf"] / r["ev"] if r["ev"] else None
+                if r["mktcap"] < MIN_MKTCAP:
+                    r["reason"] = f"市值 {r['mktcap']/1e6:.1f}M < 下限 {MIN_MKTCAP/1e6:.0f}M"
+                    not_applicable.append(r); continue
+                # ⚠ EV≤0（净现金超过市值）时 EV/EBITDA 与 FCF yield 无经济含义，
+                #   升序排序会把它们顶到最前面，制造「最便宜」的假象。必须排除。
+                if r["ev"] <= 0:
+                    r["reason"] = f"EV = {r['ev']/1e6:.1f}M ≤ 0，EV 类指标无定义"
+                    not_applicable.append(r); continue
+                r["ev_ebitda"] = r["ev"] / r["ebitda"]
+                r["pb"] = r["mktcap"] / r["equity"]
+                r["fcf_yield"] = r["fcf"] / r["ev"]
                 priced.append(r)
             if i % 55 == 54:
                 time.sleep(60)     # Finnhub 免费档 60 req/min
@@ -407,7 +447,9 @@ def main():
                           "伯里本人选股不限国别（历史上做过波兰、英国、墨西哥小盘股）。"
                           "本扫描器范围小于其真实选股范围——这是数据源的收窄，不是选股标准的收窄。"),
         "sample": {"universe": len(uni), "complete": len(full),
-                   "incomplete": len(incomplete), "incomplete_ratio": round(inc_ratio, 4),
+                   "missing_data": len(missing_data), "not_applicable": len(not_applicable),
+                   "missing_ratio": round(miss_ratio, 4),
+                   "financials_excluded": len(fin_ciks),
                    "stage_a_survivors": len(survivors), "stage_b_priced": len(priced)},
         "thresholds": {"net_debt_ebitda_cut": nd_cut, "sbc_ratio_cut": sbc_cut,
                        "quantiles": {"net_debt": Q_NETDEBT_MAX, "sbc": Q_SBC_MAX,
@@ -415,12 +457,14 @@ def main():
                                      "fcf_yield": Q_FCF_YIELD}},
         "warnings": warn,
         "results": results[:200],
-        # 不完整样本单列保留：既不参与分位数计算，也不剔除
-        "incomplete_sample": incomplete[:200],
+        # 两类单列保留：数据缺失（管道有洞）与不适用（指标无定义），都不静默丢弃
+        "missing_data_sample": missing_data[:150],
+        "not_applicable_sample": not_applicable[:150],
     }
     with open(SCREEN_FILE, "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    print(f"\n  写出 {SCREEN_FILE}：结果 {len(results)} 家，不完整 {len(incomplete)} 家")
+    print(f"\n  写出 {SCREEN_FILE}：结果 {len(results)} 家 / "
+          f"数据缺失 {len(missing_data)} / 不适用 {len(not_applicable)}")
     for w in warn:
         print(f"  ⚠ {w}")
 
