@@ -76,16 +76,35 @@ CONCEPTS_INSTANT = {
     "shares_gaap": ["CommonStockSharesOutstanding", "CommonStockSharesIssued"],  # us-gaap
 }
 
-# frames 不返回 SIC，逐家查 submissions 要 7000+ 请求。
-# 改用「标签指纹」：只有金融机构才会报这些科目，命中即判为金融。
-# 银行/保险/券商没有 EV/EBITDA 与净负债的常规口径，其数值必然失真，必须排除。
-FINANCIAL_FINGERPRINT = [
-    "PolicyholderBenefitsAndClaimsIncurredNet",   # 保险：赔付
-    "LiabilityForClaimsAndClaimsAdjustmentExpense",
-    "InterestAndDividendIncomeOperating",          # 银行：利息收入
-    "Deposits",                                    # 银行：存款
-    "ProvisionForLoanAndLeaseLosses",
-]
+# frames 不返回 SIC，逐家查 submissions 要 7000+ 请求，故用标签识别行业。
+#
+# ⚠ F13（2026-08-30 实测修正）：原版是「单标签一票否决」，误伤严重——
+#   U-Haul（卡车租赁，有保险子公司）、Archer-Daniels-Midland（粮商）、
+#   VALHI（化工控股）全被判为金融。
+#   **用一个标签代理一个行业，误伤必然存在，且方向由标签的业务含义决定，不是随机的。**
+#
+# 改为「带规模检验的多条件」。判别逻辑分三类，不是一刀切：
+#   银行/放贷：有存款、有贷款损失计提          -> EV/EBITDA 无意义（负债是原料，无净负债概念）
+#   投资驱动型（保险/控股）：投资收益占营收大头 -> EV/EBITDA 存疑（浮存金、投资收益）
+#   管理式医疗（MOLINA/UNH/Oscar）：赔付占营收高，但**无存款、无放贷、投资收益占比低**
+#     -> **EV/EBITDA 是能算的，它们是服务型公司，医疗成本相当于销货成本。**
+#     原版用 PolicyholderBenefits 单标签否决，把 MCO 和真保险公司混为一谈，
+#     而医疗保健恰是伯里持仓里最大的一类（172 家中 11 家）。**故本版明确不排除 MCO。**
+FIN_TAGS = {
+    "deposits": ["Deposits", "InterestBearingDepositLiabilities"],
+    "loan_loss": ["ProvisionForLoanAndLeaseLosses", "ProvisionForLoanLossesExpensed"],
+    "invest_income": ["InterestAndDividendIncomeOperating", "NetInvestmentIncome"],
+    # ⭐ 区分「真保险」与「管理式医疗」的关键，不是投资收益占比，是**准备金的期限**：
+    #   财险/寿险：长尾准备金 > 一年营收（浮存金模式，靠投资端赚钱）
+    #   MCO：应付赔款 ≈ 一个月营收（短尾，本质是应付账款）
+    #   —— 这个比值差一个数量级，比调百分比阈值稳健得多。
+    "claims_reserve": ["LiabilityForClaimsAndClaimsAdjustmentExpense",
+                       "LiabilityForFuturePolicyBenefits"],
+}
+FIN_DEPOSITS_X_REV = 0.50     # 存款 > 半年营收 -> 银行
+FIN_LOANLOSS_X_REV = 0.02     # 贷款损失计提 > 2% 营收 -> 放贷机构
+FIN_INVINC_X_REV = 0.30       # 投资收益 > 30% 营收 -> 投资驱动型
+FIN_RESERVE_X_REV = 1.00      # 准备金 > 一年营收 -> 浮存金模式的保险公司（MCO 约 0.08×）
 
 MIN_MKTCAP = float(os.environ.get("BURRY_MIN_MKTCAP", "50e6"))   # 市值下限，滤壳
 
@@ -204,19 +223,42 @@ def fetch_ticker_map():
     return m
 
 
-def fetch_financial_ciks():
-    """标签指纹法：命中任一金融专属科目即判为金融机构。"""
-    fin = set()
-    for tag in FINANCIAL_FINGERPRINT:
-        got = fetch_frame(tag, YEAR)
-        if not got:
-            for period in INSTANT_PERIODS[:3]:
-                got = fetch_frame(tag, YEAR, period=period)
-                if got:
-                    break
-        fin |= set(got.keys())
-        print(f"  金融指纹 {tag:<45} 累计 {len(fin)}")
-    return fin
+def fetch_financial_values():
+    """取三类金融科目的**数值**（非仅存在性），供规模检验用。"""
+    out = {}
+    for concept, tags in FIN_TAGS.items():
+        merged = {}
+        for tag in tags:
+            got = fetch_frame(tag, YEAR)
+            if not got:
+                for period in INSTANT_PERIODS[:3]:
+                    got = fetch_frame(tag, YEAR, period=period)
+                    if got:
+                        break
+            for cik, (val, _) in got.items():
+                merged.setdefault(cik, val)
+        out[concept] = merged
+        print(f"  金融科目 {concept:<15} 取到 {len(merged)} 家")
+    return out
+
+
+def classify_financial(cik, revenue, finvals):
+    """带规模检验。返回 (是否金融, 理由)。管理式医疗故意不排除——见 FIN_TAGS 注释。"""
+    if not revenue or revenue <= 0:
+        return False, None
+    dep = (finvals.get("deposits") or {}).get(cik)
+    ll = (finvals.get("loan_loss") or {}).get(cik)
+    inv = (finvals.get("invest_income") or {}).get(cik)
+    if dep and dep > FIN_DEPOSITS_X_REV * revenue:
+        return True, f"银行：存款/营收 = {dep/revenue:.1f}×"
+    if ll and ll > FIN_LOANLOSS_X_REV * revenue:
+        return True, f"放贷：贷款损失计提/营收 = {ll/revenue*100:.1f}%"
+    if inv and inv > FIN_INVINC_X_REV * revenue:
+        return True, f"投资驱动：投资收益/营收 = {inv/revenue*100:.0f}%"
+    res = (finvals.get("claims_reserve") or {}).get(cik)
+    if res and res > FIN_RESERVE_X_REV * revenue:
+        return True, f"保险（浮存金）：准备金/营收 = {res/revenue:.1f}×"
+    return False, None
 
 
 def build_universe():
@@ -254,7 +296,7 @@ def build_universe():
 REQUIRED = ["revenue", "operating_income", "equity", "shares"]
 
 
-def stage_a(uni, tickers, fin_ciks):
+def stage_a(uni, tickers, finvals):
     """纯 EDGAR，零价格请求。返回 (完整, 数据缺失, 不适用)。
     ⚠ 「数据缺失」与「不适用」必须分开：前者说明抓数管道有洞、影响分位数代表性；
     后者（EBITDA≤0、金融股）是指标本身无定义，被正确排除，不构成覆盖率问题。"""
@@ -267,8 +309,9 @@ def stage_a(uni, tickers, fin_ciks):
         rec = {"cik": cik, "name": e.get("name", ""),
                "ticker": tickers.get(cik), "missing": missing,
                "shares_from_gaap": bool(e.get("shares_from_gaap"))}
-        if cik in fin_ciks:
-            rec["reason"] = "金融机构（标签指纹命中）"
+        is_fin, why = classify_financial(cik, e.get("revenue"), finvals)
+        if is_fin:
+            rec["reason"] = f"金融机构（{why}）"
             not_applicable.append(rec)
             continue
         if missing:
@@ -406,8 +449,8 @@ def main():
     print(f"  合并后报送人: {len(uni)}")
     tickers = fetch_ticker_map()
     print(f"  CIK->ticker 映射: {len(tickers)} 条")
-    fin_ciks = fetch_financial_ciks()
-    full, missing_data, not_applicable = stage_a(uni, tickers, fin_ciks)
+    finvals = fetch_financial_values()
+    full, missing_data, not_applicable = stage_a(uni, tickers, finvals)
     # 分位数代表性只受「数据缺失」影响；「不适用」是被正确排除的
     denom = len(full) + len(missing_data)
     miss_ratio = len(missing_data) / max(denom, 1)
@@ -525,7 +568,8 @@ def main():
         "sample": {"universe": len(uni), "complete": len(full),
                    "missing_data": len(missing_data), "not_applicable": len(not_applicable),
                    "missing_ratio": round(miss_ratio, 4),
-                   "financials_excluded": len(fin_ciks),
+                   "financials_excluded": sum(1 for r in not_applicable
+                                              if "金融" in (r.get("reason") or "")),
                    "stage_a_survivors": len(survivors), "stage_b_priced": len(priced)},
         "drawdown": {"threshold_3y": DRAWDOWN_MIN,
                      "n_pass": sum(1 for r in results if r.get("drawdown_pass")),
