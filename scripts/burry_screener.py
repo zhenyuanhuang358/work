@@ -89,6 +89,16 @@ FINANCIAL_FINGERPRINT = [
 
 MIN_MKTCAP = float(os.environ.get("BURRY_MIN_MKTCAP", "50e6"))   # 市值下限，滤壳
 
+# ⭐ 回撤维度（2026-08-30 加）。Burry 校验实测：筛选器 ∩ 他实际持仓 = 6/172。
+# 根因是「便宜」有两种——筛选器找「一直便宜」（DXC/Kohl's/Macy's 常年低估值），
+# 他买「刚变便宜」（MOLINA/UNH/雅诗兰黛/LULU 从高位崩下来）。
+# 静态估值分位数区分不了价值陷阱与叙事破裂，缺的就是这一刀。
+#
+# ⚠ 阈值按经济逻辑预登记，不按重合度拟合（F10）：
+#   20% 回撤是常规波动；40% 意味着估值倍数被结构性砍掉一半左右 = 叙事破裂。
+#   **加完只跑一次校验，不反复调。反复调就是后见之明拟合。**
+DRAWDOWN_MIN = float(os.environ.get("BURRY_DRAWDOWN_MIN", "0.40"))   # 距 3 年高点
+
 
 def _get(url, timeout=120):
     req = urllib.request.Request(url, headers=HEADERS)
@@ -310,6 +320,44 @@ def rank_pct(values, v):
     return sum(1 for x in vs if x <= v) / len(vs)
 
 
+def fetch_history_batch(syms):
+    """批量取 3 年日线，算 52 周与 3 年高点。yfinance 批量下载，
+    比逐支 REST 请求快一个数量级，且不受 Finnhub 每分钟 60 次限制。"""
+    try:
+        import yfinance as yf
+    except ImportError:
+        print("  yfinance 不可用，回撤维度跳过")
+        return {}
+    out = {}
+    B = 150
+    for i in range(0, len(syms), B):
+        chunk = syms[i:i + B]
+        try:
+            df = yf.download(" ".join(chunk), period="3y", interval="1d",
+                             group_by="ticker", auto_adjust=True,
+                             progress=False, threads=True)
+        except Exception as e:
+            print(f"  批次 {i//B+1} 下载失败: {type(e).__name__}")
+            continue
+        for sym in chunk:
+            try:
+                c = (df[sym]["Close"] if len(chunk) > 1 else df["Close"]).dropna()
+                if len(c) < 60:          # 上市不足 3 个月，回撤无意义
+                    continue
+                px = float(c.iloc[-1])
+                hi3 = float(c.max())
+                hi52 = float(c.iloc[-252:].max()) if len(c) >= 60 else hi3
+                out[sym] = {"px_hist": px, "high_3y": hi3, "high_52w": hi52,
+                            "dd_3y": 1 - px / hi3 if hi3 > 0 else None,
+                            "dd_52w": 1 - px / hi52 if hi52 > 0 else None,
+                            "bars": len(c)}
+            except Exception:
+                continue
+        print(f"  历史行情 {min(i+B,len(syms))}/{len(syms)}  已取到 {len(out)}")
+        time.sleep(1)
+    return out
+
+
 def fetch_price(sym):
     if not FINNHUB_TOKEN:
         return None
@@ -420,6 +468,20 @@ def main():
         warn.append("未配置 FINNHUB_TOKEN：Stage B 未运行，仅产出 Stage A 结果。"
                     "EV/EBITDA、P/B、FCF yield 全部缺失。")
 
+    # ⭐ 回撤维度：只对已定价的幸存者取历史，成本可控
+    if priced:
+        print(f"  取 3 年历史行情（{len(priced)} 支）…")
+        hist = fetch_history_batch([r["ticker"] for r in priced if r.get("ticker")])
+        n_dd = 0
+        for r in priced:
+            hh = hist.get(r.get("ticker"))
+            if hh:
+                r.update({k: hh[k] for k in ("high_3y", "high_52w", "dd_3y", "dd_52w")})
+                n_dd += 1
+        print(f"  回撤可算 {n_dd}/{len(priced)}")
+        if n_dd == 0:
+            warn.append("回撤维度未取到任何历史行情，本次榜单缺「刚变便宜 vs 一直便宜」的区分。")
+
     results = []
     if priced:
         ev_vals = [r["ev_ebitda"] for r in priced]
@@ -437,6 +499,9 @@ def main():
             if r["fcf_yield"] is not None and r["fcf_yield"] >= cuts["fcf_yield"]:
                 passed.append("FCF yield")
             passed.append("净负债/EBITDA")
+            # 回撤单列，不混进估值项——它回答的是「什么时候变便宜的」，不是「有多便宜」
+            if r.get("dd_3y") is not None and r["dd_3y"] >= DRAWDOWN_MIN:
+                r["drawdown_pass"] = True
             if r["sbc_ratio"] is not None and sbc_cut is not None and r["sbc_ratio"] <= sbc_cut:
                 passed.append("SBC 稀释")
             r["passed"] = passed
@@ -445,7 +510,10 @@ def main():
                         "fcf_yield": rank_pct(fy_vals, r["fcf_yield"])}
             results.append(r)
         # 先硬过滤，不加权打分——没验证过筛选力度就引入权重 = 把主观判断伪装成算法
-        results.sort(key=lambda r: (-len(r["passed"]), r["ev_ebitda"] or 9e9))
+        # 回撤作为**第二排序键**而非过滤器：不剔除无回撤的标的（它们仍是合格的便宜货），
+        # 只是把「刚变便宜」的排在「一直便宜」前面，让两类在榜单上可分辨。
+        results.sort(key=lambda r: (-len(r["passed"]), not r.get("drawdown_pass", False),
+                                    r["ev_ebitda"] or 9e9))
 
     out = {
         "updated_at": now,
@@ -459,6 +527,10 @@ def main():
                    "missing_ratio": round(miss_ratio, 4),
                    "financials_excluded": len(fin_ciks),
                    "stage_a_survivors": len(survivors), "stage_b_priced": len(priced)},
+        "drawdown": {"threshold_3y": DRAWDOWN_MIN,
+                     "n_pass": sum(1 for r in results if r.get("drawdown_pass")),
+                     "note": "阈值按经济逻辑预登记（40% = 倍数被结构性砍半），"
+                             "非按与实际持仓的重合度拟合。回撤为排序键，不作过滤器。"},
         "thresholds": {"net_debt_ebitda_cut": nd_cut, "sbc_ratio_cut": sbc_cut,
                        "quantiles": {"net_debt": Q_NETDEBT_MAX, "sbc": Q_SBC_MAX,
                                      "ev_ebitda": Q_EV_EBITDA, "pb": Q_PB,

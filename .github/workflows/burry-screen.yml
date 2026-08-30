@@ -30,6 +30,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      # 回撤维度需要历史行情，yfinance 批量下载
+      - name: Install deps
+        run: pip install --quiet yfinance
+
       # frames 结果跨 run 缓存，降低 SEC 负载并加速重跑
       - name: Cache SEC frames
         uses: actions/cache@v4
