@@ -70,7 +70,10 @@ CONCEPTS_INSTANT = {
     "debt_st": ["LongTermDebtCurrent", "ShortTermBorrowings"],
     "equity": ["StockholdersEquity",
                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
-    "shares": ["EntityCommonStockSharesOutstanding"],   # dei 分类，见 fetch_frame
+    # shares 是首要缺失瓶颈（首跑缺 62%，5 期回退后仍占缺失样本 67%）。
+    # dei 覆盖不足时用 us-gaap 的股数科目补——两个分类都试，先到先得。
+    "shares": ["EntityCommonStockSharesOutstanding"],          # dei
+    "shares_gaap": ["CommonStockSharesOutstanding", "CommonStockSharesIssued"],  # us-gaap
 }
 
 # frames 不返回 SIC，逐家查 submissions 要 7000+ 请求。
@@ -140,8 +143,9 @@ def discover_tier1_boundary(cik):
     if not rows:
         return {"entity_name": d.get("name"), "filings_found": 0, "latest": None, "all": []}
     rows.sort(key=lambda r: (r["report_date"] or ""), reverse=True)
+    # 保留全部备案：13F 抓取需要完整历史，截断会让归因只能看最近三年
     return {"entity_name": d.get("name"), "filings_found": len(rows),
-            "latest": rows[0], "all": rows[:12]}
+            "latest": rows[0], "all": rows}
 
 
 # ────────────────────────── B. 全市场扫描 ──────────────────────────
@@ -246,9 +250,13 @@ def stage_a(uni, tickers, fin_ciks):
     后者（EBITDA≤0、金融股）是指标本身无定义，被正确排除，不构成覆盖率问题。"""
     full, missing_data, not_applicable = [], [], []
     for cik, e in uni.items():
+        if e.get("shares") is None and e.get("shares_gaap") is not None:
+            e["shares"] = e["shares_gaap"]
+            e["shares_from_gaap"] = True
         missing = [k for k in REQUIRED if e.get(k) is None]
         rec = {"cik": cik, "name": e.get("name", ""),
-               "ticker": tickers.get(cik), "missing": missing}
+               "ticker": tickers.get(cik), "missing": missing,
+               "shares_from_gaap": bool(e.get("shares_from_gaap"))}
         if cik in fin_ciks:
             rec["reason"] = "金融机构（标签指纹命中）"
             not_applicable.append(rec)

@@ -10,6 +10,7 @@ on:
     paths:
       - burry_trigger.txt
       - scripts/burry_screener.py
+      - scripts/burry_13f.py
   workflow_dispatch:
   schedule:
     # 跟随 10-Q/10-K 披露节奏做季度扫描，不追求实时。
@@ -33,21 +34,27 @@ jobs:
       - name: Cache SEC frames
         uses: actions/cache@v4
         with:
-          path: .burry_frames
+          path: |
+            .burry_frames
+            .burry_13f
           key: burry-frames-${{ github.run_id }}
           restore-keys: burry-frames-
 
-      - name: Run screener
+      - name: Run screener (Tier 边界发现 + Layer 1 扫描)
         env:
           FINNHUB_TOKEN: ${{ secrets.FINNHUB_TOKEN }}
           BURRY_YEAR: '2025'
         run: python scripts/burry_screener.py
 
+      # 归因模块的数据源。必须在 screener 之后跑——它读 burry_state.json 里的备案列表。
+      - name: Fetch 13F holdings (归因模块数据源)
+        run: python scripts/burry_13f.py
+
       - name: Commit artifacts
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add burry_state.json burry_screen.json
+          git add burry_state.json burry_screen.json burry_holdings.json
           if git diff --staged --quiet; then
             echo "no change"
           else
