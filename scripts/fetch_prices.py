@@ -32,6 +32,8 @@ EQUITY_TICKERS = [
     "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT", "SNDK",
     # 中低价高流动性（小账户CSP友好带：股价20-80美元）
     "SOFI", "HOOD", "INTC", "F", "UBER", "T", "KO",
+    # 持仓标的：SGI = Somnigroup International（原 Tempur Sealy，2025-02 改名）
+    "SGI",
 ]
 
 INDEX_TICKERS = {
