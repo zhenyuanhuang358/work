@@ -184,19 +184,10 @@ open "项目/XXX/ppt/index.html"
 **代码只能证明类名存在，不能证明版式舒服——必须打开网页逐页看。**
 
 
-## 参考作品
+## 参考作品（风格锚点）
 
-本 skill 的两种风格分别参考了：
+**风格 A · 电子杂志风**：歸藏「一人公司：被 AI 折叠的组织」分享（2026-04-22，27 页）｜
+*Monocle* 杂志版式｜Garry Tan "Thin Harness, Fat Skills" 博客 demo
 
-**风格 A · 电子杂志风**:
-- 歸藏 "一人公司：被 AI 折叠的组织" 分享（2026-04-22，27 页）
-- *Monocle* 杂志的版式
-- YC 总裁 Garry Tan "Thin Harness, Fat Skills" 那篇博客的 demo
-
-**风格 B · 瑞士国际主义风**:
-- Massimo Vignelli 的 NYC Subway / Unimark 系统
-- *Helvetica Forever* 的字体设计语言
-- Josef Müller-Brockmann 的网格系统经典著作
-- 当代设计:Acne Studios / Off-White / IKEA / Beck Design
-
-可以把它们当做风格锚点。
+**风格 B · 瑞士国际主义风**：Massimo Vignelli 的 NYC Subway / Unimark 系统｜
+*Helvetica Forever*｜Josef Müller-Brockmann 网格系统｜当代：Acne Studios / Off-White / IKEA
