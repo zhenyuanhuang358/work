@@ -195,6 +195,33 @@ def concentration(rows):
     }
 
 
+def pick_latest_per_period(filings):
+    """同一 report_date 可能有原件(13F-HR)与修订(13F-HR/A)多份。
+
+    ⚠ P0 修复（2026-09-01 审计发现）：原实现是
+        for f in sorted(filings, key=report_date): quarters[rd] = ...
+      同键之间「后处理的覆盖先处理的」，而 sorted 只按 report_date 排、
+      同键保持原顺序——**留下哪一份完全由列表顺序偶然决定，不是设计**。
+      实测 2023-12-31 保留了原件、丢弃了修订件。
+      **修订件之所以存在就是因为原件有错，保留原件等于保留了错的那份。**
+
+    规则：同一 report_date 取「备案日最晚」的那份；备案日相同则 /A 优先。
+    """
+    best = {}
+    for f in filings:
+        rd = f.get("report_date")
+        if not rd:
+            continue
+        cur = best.get(rd)
+        if cur is None:
+            best[rd] = f
+            continue
+        key = lambda x: ((x.get("filing_date") or ""), 1 if x.get("form", "").endswith("/A") else 0)
+        if key(f) > key(cur):
+            best[rd] = f
+    return [best[k] for k in sorted(best)]
+
+
 def main():
     st = load_state()
     cik = st.get("cik")
@@ -203,18 +230,26 @@ def main():
         raise SystemExit("burry_state.json 里没有 CIK 或 13F 备案列表")
     print(f"CIK {cik}｜13F-HR 备案 {len(filings)} 份（state 中保留最近 {len(filings)} 份）")
 
+    selected = pick_latest_per_period(filings)
+    amended = [f for f in selected if f.get("form", "").endswith("/A")]
+    print(f"  去重后 {len(selected)} 个报告期（其中 {len(amended)} 个取自修订件 13F-HR/A）")
+
     quarters = {}
-    for f in sorted(filings, key=lambda x: x["report_date"] or ""):
+    skipped = []          # ⚠ P0 修复：抓取失败必须落库，否则产物看不出漏了几期
+    for f in selected:
         rd, fd, acc = f["report_date"], f["filing_date"], f["accession"]
         url = find_infotable_url(cik, acc)
         if not url:
             print(f"  {rd}  ✗ 未找到 infotable")
+            skipped.append({"report_date": rd, "accession": acc, "reason": "未找到 infotable XML"})
             continue
         try:
             xb = _cached(f"it_{acc.replace('-','')}.xml",
                          lambda: _get(url, raw=True), raw=True)
         except Exception as e:
             print(f"  {rd}  ✗ 下载失败 {type(e).__name__}")
+            skipped.append({"report_date": rd, "accession": acc,
+                            "reason": f"下载失败 {type(e).__name__}"})
             continue
         in_dollars = (fd or "9999") >= VALUE_DOLLARS_FROM
         rows = merge_same_security(parse_infotable(xb, in_dollars))
@@ -247,7 +282,11 @@ def main():
         "cik": cik,
         "entity_name": (st.get("tier1") or {}).get("entity_name"),
         "tier1_boundary": ((st.get("tier1") or {}).get("latest") or {}).get("report_date"),
+        "periods_available": len(selected),
         "quarters_parsed": len(quarters),
+        # ⚠ 抓取失败的期间显式落库。为空是结论，不为空是必须交代的缺口。
+        "skipped": skipped,
+        "amended_periods": [f["report_date"] for f in amended],
         "concentration_threshold_top1": conc_threshold,
         "caliber_notes": [
             "13F <value> 字段 2023-01-03 前为千美元、之后为美元，本文件已统一换算为美元。",
@@ -255,13 +294,18 @@ def main():
             "13F 仅含多头 13F 证券：不含空头、现金、债券、外国交易所上市股票。",
             "季末快照，季中建仓再清仓不可见，换手率被系统性低估。",
             "浓仓位阈值取该管理人自身历史 top1 分布的 80% 分位，非固定 15%。",
+            "同一报告期有原件与修订(13F-HR/A)时取修订件——修订件存在即说明原件有错。",
         ],
         "quarters": quarters,
         "changes": changes,
     }
     with open(OUT_FILE, "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
-    print(f"\n写出 {OUT_FILE}：{len(quarters)} 个报告期，{len(changes)} 组变动")
+    print(f"\n写出 {OUT_FILE}：{len(quarters)}/{len(selected)} 个报告期，{len(changes)} 组变动")
+    if skipped:
+        print(f"⚠ 跳过 {len(skipped)} 期，已落库到 skipped 字段：")
+        for sk in skipped:
+            print(f"    {sk['report_date']}  {sk['reason']}")
     if conc_threshold is not None:
         print(f"浓仓位阈值（历史 top1 的 80% 分位）= {conc_threshold*100:.1f}%")
 

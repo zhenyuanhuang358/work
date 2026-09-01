@@ -25,7 +25,13 @@ from datetime import datetime, timezone
 
 HEADERS = {"User-Agent": "Personal Research zhenyuanhuang358@gmail.com"}
 
-YEAR = int(os.environ.get("BURRY_YEAR", "2025"))     # 扫描基准年（最近完整财年）
+def _default_year():
+    """最近一个「年报大概率已备案」的财年 = 去年。
+    ⚠ 不写死。写死会在跨年后静默扫一个越来越旧的年份，而且不报错。"""
+    return datetime.now(timezone.utc).year - 1
+
+
+YEAR = int(os.environ.get("BURRY_YEAR") or _default_year())   # 扫描基准年
 CACHE_DIR = os.environ.get("BURRY_FRAME_CACHE", ".burry_frames")
 MAX_STAGE_B = int(os.environ.get("BURRY_MAX_STAGE_B", "800"))
 FINNHUB_TOKEN = os.environ.get("FINNHUB_TOKEN", "")
@@ -58,10 +64,32 @@ CONCEPTS = {
     "cfo": ["NetCashProvidedByUsedInOperatingActivities"],
     "capex": ["PaymentsToAcquirePropertyPlantAndEquipment"],
 }
-# 时点科目按此顺序回退，每个 CIK 取第一个命中的。
-# 只查 CY2025Q4I 会漏掉全部非 12 月结账公司（实测 shares 缺失率 62%）。
-# 对 shares/equity 这类存量科目，取"最近可得"本就比"强行对齐某一期"更合理。
-INSTANT_PERIODS = ["CY2026Q2I", "CY2026Q1I", "CY2025Q4I", "CY2025Q3I", "CY2025Q2I"]
+def _instant_periods(n=5):
+    """从当前日期倒推最近 n 个季度末的 frames 期间标识（CY{yyyy}Q{q}I）。
+
+    ⚠ P0 修复（2026-09-01 审计发现）：原来写死为
+        ["CY2026Q2I","CY2026Q1I","CY2025Q4I","CY2025Q3I","CY2025Q2I"]
+      跨年后这组期间会越来越旧，frames 返回空、缺失率飙升，
+      **但脚本不会报错、不会崩——只会安静地扫一个过期的横截面。**
+      这与本仓库反复记录的「把会变的东西写成常量」是同一类错误。
+
+    只查一个期间会漏掉全部非 12 月结账公司（实测 shares 缺失率曾达 62%），
+    故多期回退，每个 CIK 取第一个命中的；对 shares/equity 这类存量科目，
+    取「最近可得」本就比「强行对齐某一期」更合理。
+    """
+    now = datetime.now(timezone.utc)
+    y, q = now.year, (now.month - 1) // 3 + 1
+    q -= 1                      # 当前季度未结束，从上一个已结束的季度起
+    out = []
+    for _ in range(n):
+        if q == 0:
+            q, y = 4, y - 1
+        out.append(f"CY{y}Q{q}I")
+        q -= 1
+    return out
+
+
+INSTANT_PERIODS = _instant_periods()
 
 # 时点科目（frames 需 I 后缀）
 CONCEPTS_INSTANT = {

@@ -22,7 +22,15 @@ from datetime import datetime, timezone
 
 HEADERS = {"User-Agent": "Personal Research zhenyuanhuang358@gmail.com"}
 
-YEARS = list(range(2019, 2026))          # CY2019..CY2025
+def _years(n=7):
+    """最近 n 个「年报大概率已备案」的财年，末年 = 去年。
+    ⚠ 不写死。原为 range(2019, 2026)，跨年后新财年永远扫不到，
+      且 frames 不会报错——只会让趋势序列停在一个越来越旧的终点。"""
+    end = datetime.now(timezone.utc).year - 1
+    return list(range(end - n + 1, end + 1))
+
+
+YEARS = _years()                         # 最近 7 个已备案财年
 MIN_REVENUE = 1_000_000_000              # 收入下限 10 亿美元，剔除微盘与壳
 MIN_YEARS = 5                            # 至少 5 年可用序列
 CACHE_DIR = os.environ.get("SES_FRAME_CACHE", ".ses_frames")
