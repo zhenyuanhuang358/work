@@ -177,6 +177,13 @@ open "项目/XXX/ppt/index.html"
 分别见 `references/themes.md` 与 `references/themes-swiss.md` 的开头章节。
 **两种风格不可混用：字体、网格、强调色、留白逻辑都是成套的。**
 
+## 质量自检
+
+**本 skill 的自检清单是 `references/checklist.md`（P0–P3 分级 + 生成后视觉核对），不在 hub 重复。**
+交付前必须逐项对照，**P0 全部通过**才算完成。
+**代码只能证明类名存在，不能证明版式舒服——必须打开网页逐页看。**
+
+
 ## 参考作品
 
 本 skill 的两种风格分别参考了：
