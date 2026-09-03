@@ -29,7 +29,7 @@ EQUITY_TICKERS = [
     # 指数/大盘
     "SPY", "QQQ", "IWM", "GLD", "SLV", "TLT", "XLE",
     # 大盘股（价差策略用）
-    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT", "SNDK",
+    "NVDA", "PLTR", "TSLA", "AAPL", "AMD", "MU", "GOOGL", "VRT", "SNDK", "AVGO",
     # 中低价高流动性（小账户CSP友好带：股价20-80美元）
     "SOFI", "HOOD", "INTC", "F", "UBER", "T", "KO",
     # 持仓标的：SGI = Somnigroup International（原 Tempur Sealy，2025-02 改名）
@@ -99,7 +99,7 @@ def fetch_equity_yfinance(ticker: str) -> dict | None:
 
 
 # 扩展时段（盘前/盘后）跟踪名单：财报股需要盘后价才能核实市场反应
-EXTENDED_HOURS_TICKERS = ["SNDK", "MU", "NVDA", "AMD", "GOOGL", "AAPL", "PLTR", "VRT", "HOOD", "INTC", "UBER"]
+EXTENDED_HOURS_TICKERS = ["SNDK", "MU", "NVDA", "AMD", "GOOGL", "AAPL", "PLTR", "VRT", "HOOD", "INTC", "UBER", "AVGO"]
 
 
 def fetch_extended_hours(ticker: str) -> dict | None:
