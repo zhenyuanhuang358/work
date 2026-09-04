@@ -1,0 +1,495 @@
+<meta charset="utf-8">
+<title>LULU 露露乐檬 Q2 FY2026 | Earner Copilot</title>
+<style>
+:root{
+  --ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+  --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;
+  --line:#d6d0c4;--mute:#6b665d;--band:#e7e3da;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','Source Han Serif SC',Georgia,serif;
+  font-size:15px;line-height:1.75}
+.wrap{max-width:1120px;margin:0 auto;padding:34px 26px 70px}
+.pub{display:flex;flex-wrap:wrap;gap:9px 20px;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:26px;
+  font-size:12px;letter-spacing:.06em;color:var(--mute)}
+.pub b{color:var(--ink);letter-spacing:.14em;font-size:13px}
+.co{font-size:12.5px;color:var(--mute);letter-spacing:.05em;margin-bottom:7px}
+h1{font-size:30px;line-height:1.32;margin:0 0 7px;letter-spacing:.01em}
+.h1en{font-size:14.5px;color:var(--mute);font-style:italic;margin:0 0 20px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.tag{font-size:11.5px;letter-spacing:.05em;padding:4px 11px;border:1px solid var(--line);background:#fff;border-radius:2px;color:var(--mute)}
+.tag.g{border-color:var(--green);color:var(--green)}
+.tag.r{border-color:var(--red);color:var(--red)}
+.tag.a{border-color:var(--amber);color:var(--amber)}
+.tag.c{border-color:var(--copper);color:var(--copper)}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 32px}
+.stat{background:#fff;padding:15px 16px}
+.stat .en{font-size:10.5px;letter-spacing:.13em;color:var(--mute);text-transform:uppercase}
+.stat .zh{font-size:12px;color:var(--mute);margin-bottom:6px}
+.stat .v{font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+.stat .d{font-size:11.5px;margin-top:5px;line-height:1.5}
+.up{color:var(--green)}.dn{color:var(--red)}.nt{color:var(--amber)}
+.lead{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);padding:19px 22px;margin:0 0 34px}
+.lead .k{font-size:11.5px;letter-spacing:.16em;color:var(--red);margin-bottom:9px}
+.lead p{margin:0 0 10px;font-size:15.5px}
+.lead p:last-child{margin-bottom:0}
+h2{margin:42px 0 3px;letter-spacing:.01em}
+.section-zh{font-size:21px;display:block}
+.section-en{font-size:11.5px;letter-spacing:.15em;color:var(--mute);text-transform:uppercase;font-style:italic;display:block;margin-top:2px}
+.chartbox{background:#fff;border:1px solid var(--line);padding:18px 16px;margin-top:15px;overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.two{grid-template-columns:1fr}.statbar{grid-template-columns:repeat(2,1fr)}}
+p.body{margin:13px 0}
+.label-zh{font-weight:600;color:var(--copper)}
+.label-en{font-size:11px;font-style:italic;color:var(--mute);letter-spacing:.06em}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px;margin-top:14px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--band);font-size:12.5px;letter-spacing:.04em;font-weight:600}
+td.q{background:#fbfaf7;font-weight:600}
+.scr{overflow-x:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);padding:17px 18px;border-top:3px solid var(--line)}
+.card.bear{border-top-color:var(--red)}.card.base{border-top-color:var(--copper)}.card.bull{border-top-color:var(--green)}
+.card .nm{font-size:12px;letter-spacing:.1em;color:var(--mute);margin-bottom:5px}
+.card .pr{font-size:29px;font-weight:600;line-height:1.1}
+.card .ch{font-size:13.5px;margin:4px 0 11px;font-weight:600}
+.card .lg{font-size:12.5px;color:#3a3730;line-height:1.65;margin-bottom:10px}
+.card .as{font-size:11.5px;color:var(--mute);border-top:1px solid var(--line);padding-top:8px;line-height:1.7}
+.verdict{background:var(--ink);color:#efece6;padding:26px 28px;margin:38px 0 0}
+.verdict .k{font-size:11.5px;letter-spacing:.16em;color:var(--gold);margin-bottom:11px}
+.verdict h3{margin:0 0 12px;font-size:20px;color:#fff;font-weight:600}
+.verdict p{margin:0 0 11px;font-size:15px}
+.verdict p:last-child{margin-bottom:0}
+.verdict b{color:#fff}
+.verdict-en{font-size:12.5px;color:rgba(239,236,230,.62);font-style:italic;line-height:1.65;margin-top:13px;border-top:1px solid rgba(239,236,230,.2);padding-top:12px}
+.fb{margin-top:16px;font-size:12px}
+.fb a{color:var(--gold)}
+.tone{background:#fff;border:1px solid var(--line);padding:18px 20px;margin-top:15px}
+.bar{height:9px;background:var(--band);border-radius:5px;overflow:hidden;margin:7px 0 4px}
+.bar i{display:block;height:100%;background:var(--copper)}
+.tone .row{margin-bottom:14px}
+.tone .row:last-child{margin-bottom:0}
+.tone .tl{display:flex;justify-content:space-between;font-size:12.5px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.chip{background:#fff;border:1px solid var(--line);padding:8px 13px;font-size:12.5px}
+.chip b{color:var(--copper)}
+.chip i{color:var(--mute);font-size:11px;font-style:italic;display:block}
+.note{background:#fff;border:1px solid var(--line);border-top:3px solid var(--amber);padding:19px 22px;margin-top:16px;font-size:13px;line-height:1.8}
+.note h4{margin:0 0 4px;font-size:13.5px;color:var(--amber)}
+.note .blk{margin-bottom:15px}
+.note .blk:last-child{margin-bottom:0}
+.foot{margin-top:32px;padding-top:15px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute);line-height:1.85}
+.badge{display:inline-block;font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:2px;margin-left:5px;vertical-align:middle}
+.b-off{background:#e4ede7;color:var(--green)}
+.b-cal{background:#f6ecdb;color:var(--amber)}
+.b-est{background:#ece9e3;color:var(--mute)}
+@media print{body{background:#fff}.wrap{padding:0}}
+</style>
+
+<div class="wrap">
+
+<div class="pub">
+  <b>Earner Copilot · Institutional Research</b>
+  <span>LULU · Nasdaq · Q2 FY2026</span>
+  <span>财季止 2026-08-02 ｜ 财报日 2026-09-03（盘后）</span>
+  <span>分析日期 2026-09-04</span>
+</div>
+
+<div class="co">LULU · lululemon athletica inc. · 露露乐檬</div>
+<h1>露露乐檬 Q2 FY2026：报表说经营利润跌 13%，剔除关税退款实际跌 39%</h1>
+<p class="h1en">lululemon Q2 FY2026 — A $134.5M Tariff Refund Masks a 39% Collapse in Operating Profit; Americas Comps −12% and No Permanent CEO</p>
+
+<div class="tags">
+  <span class="tag r">盘后 ▼18.2% 至 $99.65</span>
+  <span class="tag r">全球同店 −10%</span>
+  <span class="tag r">美洲同店 −12%</span>
+  <span class="tag a">$134.5M 关税退款为一次性</span>
+  <span class="tag r">全年 EPS 指引下调 13.1%</span>
+  <span class="tag c">CEO 空缺已逾 7 个月</span>
+  <span class="tag">语气评分 38 / 100</span>
+</div>
+
+<div class="statbar">
+  <div class="stat">
+    <div class="en">Net Revenue</div><div class="zh">季度营收</div>
+    <div class="v">$24.16亿</div>
+    <div class="d dn">▼ −4.0% YoY · 低于共识 $24.6亿</div>
+  </div>
+  <div class="stat">
+    <div class="en">Operating Income (ex-refund)</div><div class="zh">经营利润（剔除退税）</div>
+    <div class="v">$3.19亿</div>
+    <div class="d dn">▼ −38.8% · 报表值 $4.54亿（−13.0%）</div>
+  </div>
+  <div class="stat">
+    <div class="en">Diluted EPS</div><div class="zh">摊薄每股收益</div>
+    <div class="v">$2.92</div>
+    <div class="d nt">含退税 $0.86 · 剔除后 $2.06（−33.5%）</div>
+  </div>
+  <div class="stat">
+    <div class="en">FY26 EPS Guidance</div><div class="zh">全年 EPS 指引</div>
+    <div class="v">$9.48–9.73</div>
+    <div class="d dn">▼ 自 $10.95–11.15 下调 13.1%</div>
+  </div>
+</div>
+
+<div class="lead">
+  <div class="k">核心判断 · The Call</div>
+  <p><strong>这季度所有的表面数字都被一笔 $1.345 亿的关税退款扭曲了。</strong>报表毛利率 60.5%、同比扩张 200bps；剔除退税后是 <strong>54.9%、同比收缩 360bps</strong>。报表经营利润 $4.54 亿、同比 −13.0%；剔除后 <strong>$3.19 亿、同比 −38.8%</strong>。退税在毛利率与经营利润率上各贡献 560bps，且按性质不可重复。</p>
+  <p><strong>但「超预期全部来自退税」的推论不成立——这一点必须说清。</strong>公司披露退税及利息税后影响为每股 $0.86，剔除后 EPS 为 $2.06，仍高于共识 $1.79 约 15%。<strong>当季利润本身不是问题，问题是收入与指引。</strong></p>
+  <p><strong>真正的坏消息是下滑在加速而非企稳：</strong>营收同比自 Q1 的 +4% 转为 Q2 的 −4%，Q3 指引 −10~−11%，全年指引倒推 Q4 约 −11%。<strong>全年 EPS 下调幅度（−13.1%）是收入下调幅度（−5.9%）的两倍多</strong>——这是经营去杠杆的定量证据，不是口径差异。</p>
+</div>
+
+<h2><span class="section-zh">季度营收走势</span><span class="section-en">Quarterly Revenue · 8 Quarters incl. Guidance</span></h2>
+<div class="chartbox">
+<svg viewBox="0 0 1060 340" width="100%" style="font-family:'IM Fell English',Georgia,serif">
+  <text x="0" y="14" font-size="11" fill="#6b665d">Net Revenue ($ Billions) · Q1 FY25 – Q4 FY26E · 虚线框为指引或倒推值</text>
+  <line x1="42" y1="290" x2="1050" y2="290" stroke="#d6d0c4"/>
+  <line x1="42" y1="40" x2="42" y2="290" stroke="#d6d0c4"/>
+  <text x="10" y="294" font-size="10" fill="#6b665d">0</text>
+  <text x="4" y="232" font-size="10" fill="#6b665d">1B</text>
+  <text x="4" y="170" font-size="10" fill="#6b665d">2B</text>
+  <text x="4" y="108" font-size="10" fill="#6b665d">3B</text>
+  <line x1="42" y1="228" x2="1050" y2="228" stroke="#e7e3da"/>
+  <line x1="42" y1="166" x2="1050" y2="166" stroke="#e7e3da"/>
+  <line x1="42" y1="104" x2="1050" y2="104" stroke="#e7e3da"/>
+
+  <rect x="70" y="141.0" width="82" height="149.0" fill="#cfc7b8"/>
+  <text x="111" y="134" font-size="11.5" text-anchor="middle" fill="#0a0a0b">2.404</text>
+  <text x="111" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q1 F25</text>
+
+  <rect x="192" y="133.9" width="82" height="156.1" fill="#cfc7b8"/>
+  <text x="233" y="127" font-size="11.5" text-anchor="middle" fill="#0a0a0b">2.517</text>
+  <text x="233" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q2 F25</text>
+
+  <rect x="314" y="130.3" width="82" height="159.7" fill="#cfc7b8"/>
+  <text x="355" y="123" font-size="11.5" text-anchor="middle" fill="#0a0a0b">2.575</text>
+  <text x="355" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q3 F25</text>
+
+  <rect x="436" y="66.6" width="82" height="223.4" fill="#cfc7b8"/>
+  <text x="477" y="60" font-size="11.5" text-anchor="middle" fill="#0a0a0b">3.604</text>
+  <text x="477" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q4 F25</text>
+
+  <rect x="558" y="135.0" width="82" height="155.0" fill="#8b6c42"/>
+  <text x="599" y="128" font-size="11.5" text-anchor="middle" fill="#2a5c3f" font-weight="600">2.500</text>
+  <text x="599" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q1 F26</text>
+  <text x="599" y="320" font-size="10" text-anchor="middle" fill="#2a5c3f">+4.0%</text>
+
+  <rect x="680" y="140.2" width="82" height="149.8" fill="#8b2e2e"/>
+  <text x="721" y="133" font-size="11.5" text-anchor="middle" fill="#8b2e2e" font-weight="600">2.416</text>
+  <text x="721" y="306" font-size="10" text-anchor="middle" fill="#0a0a0b" font-weight="600">Q2 F26</text>
+  <text x="721" y="320" font-size="10" text-anchor="middle" fill="#8b2e2e">−4.0%</text>
+
+  <rect x="802" y="147.1" width="82" height="142.9" fill="#e0cfcf" stroke="#8b2e2e" stroke-dasharray="3,2"/>
+  <text x="843" y="140" font-size="11.5" text-anchor="middle" fill="#8b2e2e">2.305</text>
+  <text x="843" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q3 F26E</text>
+  <text x="843" y="320" font-size="10" text-anchor="middle" fill="#8b2e2e">−10.5%</text>
+
+  <rect x="924" y="91.4" width="82" height="198.6" fill="#e0cfcf" stroke="#8b2e2e" stroke-dasharray="3,2"/>
+  <text x="965" y="85" font-size="11.5" text-anchor="middle" fill="#8b2e2e">3.204</text>
+  <text x="965" y="306" font-size="10" text-anchor="middle" fill="#6b665d">Q4 F26E</text>
+  <text x="965" y="320" font-size="10" text-anchor="middle" fill="#8b2e2e">−11.1%</text>
+
+  <text x="0" y="334" font-size="10" fill="#6b665d">Q3 FY26 为指引中值；Q4 FY26 由全年指引中值 $10.425B 倒推。同比自 +4.0% 逐季恶化至约 −11%。</text>
+</svg>
+</div>
+
+<h2><span class="section-zh">地区同店增长拆分</span><span class="section-en">Comparable Sales by Region · Q2 FY26</span></h2>
+<div class="chartbox">
+<svg viewBox="0 0 1060 250" width="100%" style="font-family:'IM Fell English',Georgia,serif">
+  <text x="0" y="14" font-size="11" fill="#6b665d">Comparable Sales Growth (%) · 零轴向左为负</text>
+  <line x1="620" y1="30" x2="620" y2="215" stroke="#0a0a0b" stroke-width="1.5"/>
+  <text x="620" y="232" font-size="10" text-anchor="middle" fill="#6b665d">0%</text>
+  <text x="380" y="232" font-size="10" text-anchor="middle" fill="#6b665d">−12%</text>
+  <text x="500" y="232" font-size="10" text-anchor="middle" fill="#6b665d">−6%</text>
+
+  <text x="0" y="55" font-size="13" fill="#0a0a0b">美洲 <tspan font-size="10.5" fill="#6b665d">Americas</tspan></text>
+  <rect x="380" y="42" width="240" height="20" fill="#8b2e2e"/>
+  <text x="368" y="57" font-size="14" text-anchor="end" fill="#8b2e2e" font-weight="600">−12%</text>
+
+  <text x="0" y="97" font-size="13" fill="#0a0a0b">全球 <tspan font-size="10.5" fill="#6b665d">Total Company</tspan></text>
+  <rect x="420" y="84" width="200" height="20" fill="#a54545"/>
+  <text x="408" y="99" font-size="14" text-anchor="end" fill="#8b2e2e" font-weight="600">−10%</text>
+
+  <text x="0" y="139" font-size="13" fill="#0a0a0b">中国大陆 <tspan font-size="10.5" fill="#6b665d">China Mainland</tspan></text>
+  <rect x="460" y="126" width="160" height="20" fill="#c47a1e"/>
+  <text x="448" y="141" font-size="14" text-anchor="end" fill="#c47a1e" font-weight="600">−8%</text>
+
+  <text x="0" y="181" font-size="13" fill="#0a0a0b">国际（除中国）<tspan font-size="10.5" fill="#6b665d">International</tspan></text>
+  <rect x="560" y="168" width="60" height="20" fill="#cfc7b8"/>
+  <text x="548" y="183" font-size="14" text-anchor="end" fill="#6b665d" font-weight="600">−3%</text>
+  <text x="632" y="183" font-size="11" fill="#6b665d">固定汇率 −6%</text>
+
+  <text x="0" y="248" font-size="10.5" fill="#6b665d">中国大陆收入 +4%（固定汇率 −2%），但同店 −8% —— 增长来自开店，不是既有门店。美洲是核心问题所在。</text>
+</svg>
+</div>
+
+<div class="two">
+<div>
+<h2><span class="section-zh">EPS 共识 vs 实际</span><span class="section-en">EPS · Consensus vs Actual vs Ex-Refund</span></h2>
+<div class="chartbox">
+<svg viewBox="0 0 500 300" width="100%" style="font-family:'IM Fell English',Georgia,serif">
+  <line x1="40" y1="245" x2="480" y2="245" stroke="#d6d0c4"/>
+  <rect x="70" y="155.5" width="90" height="89.5" fill="#cfc7b8"/>
+  <text x="115" y="148" font-size="16" text-anchor="middle" fill="#0a0a0b">$1.79</text>
+  <text x="115" y="263" font-size="10.5" text-anchor="middle" fill="#6b665d">共识</text>
+  <text x="115" y="277" font-size="9.5" text-anchor="middle" fill="#6b665d">Consensus</text>
+
+  <rect x="205" y="99" width="90" height="146" fill="#2a5c3f"/>
+  <text x="250" y="91" font-size="16" text-anchor="middle" fill="#2a5c3f" font-weight="600">$2.92</text>
+  <text x="250" y="263" font-size="10.5" text-anchor="middle" fill="#6b665d">报表</text>
+  <text x="250" y="277" font-size="9.5" text-anchor="middle" fill="#6b665d">Reported</text>
+  <rect x="205" y="99" width="90" height="43" fill="#c47a1e"/>
+  <text x="250" y="126" font-size="10" text-anchor="middle" fill="#fff">退税 $0.86</text>
+
+  <rect x="340" y="142" width="90" height="103" fill="#8b6c42"/>
+  <text x="385" y="134" font-size="16" text-anchor="middle" fill="#8b6c42" font-weight="600">$2.06</text>
+  <text x="385" y="263" font-size="10.5" text-anchor="middle" fill="#6b665d">剔除退税</text>
+  <text x="385" y="277" font-size="9.5" text-anchor="middle" fill="#6b665d">Ex-Refund</text>
+
+  <text x="250" y="30" font-size="11" text-anchor="middle" fill="#6b665d">去年同期 $3.10 · 剔除退税后同比 −33.5%</text>
+  <text x="250" y="296" font-size="10.5" text-anchor="middle" fill="#8b6c42">剔除退税仍超共识 15% —— 当季利润非问题所在</text>
+</svg>
+</div>
+</div>
+<div>
+<h2><span class="section-zh">毛利率走势</span><span class="section-en">Gross Margin Trend · Reported vs Ex-Refund</span></h2>
+<div class="chartbox">
+<svg viewBox="0 0 500 300" width="100%" style="font-family:'IM Fell English',Georgia,serif">
+  <line x1="42" y1="260" x2="490" y2="260" stroke="#d6d0c4"/>
+  <text x="4" y="54" font-size="10" fill="#6b665d">62%</text>
+  <text x="4" y="134" font-size="10" fill="#6b665d">58%</text>
+  <text x="4" y="214" font-size="10" fill="#6b665d">54%</text>
+  <line x1="42" y1="50" x2="490" y2="50" stroke="#e7e3da"/>
+  <line x1="42" y1="130" x2="490" y2="130" stroke="#e7e3da"/>
+  <line x1="42" y1="210" x2="490" y2="210" stroke="#e7e3da"/>
+
+  <polyline points="70,124 145,120 220,178" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+  <polyline points="220,178 370,206" fill="none" stroke="#8b6c42" stroke-width="2.5" stroke-dasharray="4,3"/>
+  <polyline points="370,206 445,192" fill="none" stroke="#8b6c42" stroke-width="2.5"/>
+  <circle cx="70" cy="124" r="4" fill="#8b6c42"/>
+  <circle cx="145" cy="120" r="4" fill="#8b6c42"/>
+  <circle cx="220" cy="178" r="4" fill="#8b6c42"/>
+  <circle cx="370" cy="206" r="4" fill="#8b6c42"/>
+  <circle cx="445" cy="192" r="5.5" fill="#8b6c42"/>
+  <circle cx="445" cy="80" r="5.5" fill="#2a5c3f"/>
+  <line x1="445" y1="80" x2="445" y2="192" stroke="#c47a1e" stroke-width="1.5" stroke-dasharray="2,2"/>
+
+  <text x="70" y="113" font-size="10" text-anchor="middle" fill="#6b665d">58.3</text>
+  <text x="145" y="109" font-size="10" text-anchor="middle" fill="#6b665d">58.5</text>
+  <text x="220" y="167" font-size="10" text-anchor="middle" fill="#6b665d">55.6</text>
+  <text x="370" y="222" font-size="10" text-anchor="middle" fill="#6b665d">54.2</text>
+  <text x="470" y="196" font-size="11" text-anchor="middle" fill="#8b6c42" font-weight="600">54.9</text>
+  <text x="470" y="76" font-size="11" text-anchor="middle" fill="#2a5c3f" font-weight="600">60.5</text>
+  <text x="408" y="140" font-size="9.5" text-anchor="middle" fill="#c47a1e">退税</text>
+  <text x="408" y="152" font-size="9.5" text-anchor="middle" fill="#c47a1e">+560bps</text>
+
+  <text x="70" y="276" font-size="9" text-anchor="middle" fill="#6b665d">Q1F25</text>
+  <text x="145" y="276" font-size="9" text-anchor="middle" fill="#6b665d">Q2F25</text>
+  <text x="220" y="276" font-size="9" text-anchor="middle" fill="#6b665d">Q3F25</text>
+  <text x="295" y="276" font-size="9" text-anchor="middle" fill="#c47a1e">Q4F25</text>
+  <text x="295" y="288" font-size="8.5" text-anchor="middle" fill="#c47a1e">未获取</text>
+  <text x="370" y="276" font-size="9" text-anchor="middle" fill="#6b665d">Q1F26</text>
+  <text x="445" y="276" font-size="9" text-anchor="middle" fill="#0a0a0b">Q2F26</text>
+  <text x="250" y="298" font-size="10" text-anchor="middle" fill="#6b665d">绿点为报表值，铜线为剔除退税后的可比口径</text>
+</svg>
+</div>
+</div>
+</div>
+
+<h2><span class="section-zh">核心分析</span><span class="section-en">Core Analysis</span></h2>
+
+<p class="body"><span class="label-zh">一笔退税同时扭曲了三个指标。</span><span class="label-en">One Refund, Three Distorted Metrics.</span> $1.345 亿关税退款在毛利率与经营利润率上各贡献 <strong>560bps</strong>。剔除后：毛利率 <strong>54.9%</strong>（报表 60.5%），同比 <strong>−360bps</strong> 而非报表显示的 +200bps；经营利润 <strong>$3.19 亿</strong>（报表 $4.54 亿），同比 <strong>−38.8%</strong> 而非 −13.0%。更值得注意的是两者的差额：毛利率剔除后同比 −360bps，经营利润率却 −750bps，<strong>中间 390bps 的差距全部来自 SG&amp;A 去杠杆</strong>——收入下滑 4% 而费用未同步压缩。这与海底捞 2026 中期依靠折旧摊销红利托住经营利润率是同一模式：<strong>非经常性项目掩盖经营层面的实际恶化</strong>。</p>
+
+<p class="body"><span class="label-zh">但「超预期全部来自退税」这个推论是错的。</span><span class="label-en">The Beat Was Not Entirely the Refund.</span> 共识 EPS $1.79、实际 $2.92，表面超预期 63%，直觉会认为全部来自一次性项。<strong>公司披露退税及相关利息的税后影响为每股 $0.86</strong>，剔除后 EPS 为 <strong>$2.06</strong>，仍高于共识约 <strong>15%</strong>。<span class="badge b-off">官方</span> 结论是：<strong>当季的利润执行本身好于市场预期，真正低于预期的是收入（$24.16 亿 vs 共识 $24.6 亿）与全年指引。</strong>把两者混为一谈会得出过度悲观的判断。</p>
+
+<p class="body"><span class="label-zh">下滑在加速，而且利润的下调幅度是收入的两倍多。</span><span class="label-en">Deceleration Is Accelerating, and Earnings Are Cut Twice as Hard.</span> 营收同比轨迹：Q1 <strong>+4%</strong> → Q2 <strong>−4%</strong> → Q3 指引 <strong>−10~−11%</strong> → Q4 倒推 <strong>约 −11%</strong>。全年营收指引自 $110.0–111.5 亿下调至 <strong>$103.5–105.0 亿</strong>（中值 −5.9%），而 EPS 指引自 $10.95–11.15 下调至 <strong>$9.48–9.73</strong>（中值 <strong>−13.1%</strong>）。<strong>利润下调幅度是收入下调幅度的 2.2 倍</strong>，且新指引本身还包含了 $0.86 的退税收益——<strong>剔除退税后的全年 EPS 约 $8.75，对 FY25 的 $12.97 为 −32.6%</strong>。<span class="badge b-cal">计算</span></p>
+
+<p class="body"><span class="label-zh">问题在美洲，在核心品类，且管理层的归因值得存疑。</span><span class="label-en">The Problem Is Americas, in the Core Category.</span> 美洲同店 <strong>−12%</strong>，国际 −3%（固定汇率 −6%），中国大陆收入 +4% 但同店 <strong>−8%</strong>（即中国的增长来自开店而非既有门店）。临时联席 CEO Meghan Frank 将疲软归因于<strong>「媒体与社交渠道的负面评论影响客流」</strong>及「部分新品反响弱于计划」，并特别点名<strong>女子核心下装、尤其是紧身裤</strong>——这正是该品牌的立身之本。<strong>把基本盘品类的销量下滑归因于舆论，这个因果方向值得质疑：舆论通常是产品与定价问题的结果，而非原因。</strong>这是本次电话会最应打折扣的一处表述。</p>
+
+<h2><span class="section-zh">管理层预期差</span><span class="section-en">Guidance vs Market Expectation</span></h2>
+<div class="scr">
+<table>
+<tr><th style="width:22%">项目</th><th style="width:22%">公司口径</th><th style="width:20%">市场共识／前值</th><th style="width:36%">差距判断</th></tr>
+<tr><td class="q">Q2 营收</td><td>$24.16 亿（−4.0%）<span class="badge b-off">官方</span></td><td>$24.6 亿</td><td class="dn">低于共识 1.8%</td></tr>
+<tr><td class="q">Q2 EPS（报表）</td><td>$2.92<span class="badge b-off">官方</span></td><td>$1.79</td><td class="up">超预期 63%——但含 $0.86 退税</td></tr>
+<tr><td class="q">Q2 EPS（剔除退税）</td><td>$2.06<span class="badge b-cal">计算</span></td><td>$1.79</td><td class="up">仍超预期 15%，经营执行好于预期</td></tr>
+<tr><td class="q">全年营收指引</td><td>$103.5–105.0 亿<span class="badge b-off">官方</span></td><td>前值 $110.0–111.5 亿</td><td class="dn">中值下调 $6.5 亿（−5.9%）</td></tr>
+<tr><td class="q">全年 EPS 指引</td><td>$9.48–9.73<span class="badge b-off">官方</span></td><td>前值 $10.95–11.15</td><td class="dn"><strong>中值下调 13.1%，为收入降幅的 2.2 倍</strong></td></tr>
+<tr><td class="q">Q3 EPS 指引</td><td>$0.93–0.98<span class="badge b-off">官方</span></td><td>去年同期 $2.59</td><td class="dn"><strong>同比约 −63%，为本财年最差单季</strong></td></tr>
+<tr><td class="q">Q4 隐含 EPS</td><td>约 $4.04<span class="badge b-cal">倒推</span></td><td>去年同期 $4.68</td><td class="nt"><strong>仅 −13.7%——在营收指引 −11% 的前提下隐含利润率显著改善，是全年指引中最乐观的一环</strong></td></tr>
+</table>
+</div>
+
+<h2><span class="section-zh">目标价三情景</span><span class="section-en">12-Month Price Target · Three Scenarios</span></h2>
+<div class="chartbox">
+<svg viewBox="0 0 1060 170" width="100%" style="font-family:'IM Fell English',Georgia,serif">
+  <line x1="60" y1="96" x2="1000" y2="96" stroke="#d6d0c4" stroke-width="2"/>
+  <line x1="154" y1="84" x2="154" y2="108" stroke="#8b2e2e" stroke-width="2.5"/>
+  <text x="154" y="76" font-size="15" text-anchor="middle" fill="#8b2e2e" font-weight="600">$65</text>
+  <text x="154" y="127" font-size="11" text-anchor="middle" fill="#8b2e2e">熊市 Bear</text>
+  <text x="154" y="142" font-size="10.5" text-anchor="middle" fill="#6b665d">−34.8%</text>
+
+  <line x1="480" y1="80" x2="480" y2="112" stroke="#8b6c42" stroke-width="3"/>
+  <text x="480" y="70" font-size="17" text-anchor="middle" fill="#8b6c42" font-weight="600">$117</text>
+  <text x="480" y="131" font-size="11" text-anchor="middle" fill="#8b6c42">基准 Base</text>
+  <text x="480" y="146" font-size="10.5" text-anchor="middle" fill="#6b665d">+17.4%</text>
+
+  <line x1="919" y1="84" x2="919" y2="108" stroke="#2a5c3f" stroke-width="2.5"/>
+  <text x="919" y="76" font-size="15" text-anchor="middle" fill="#2a5c3f" font-weight="600">$187</text>
+  <text x="919" y="127" font-size="11" text-anchor="middle" fill="#2a5c3f">牛市 Bull</text>
+  <text x="919" y="142" font-size="10.5" text-anchor="middle" fill="#6b665d">+87.7%</text>
+
+  <polygon points="371,96 361,86 361,106" fill="#0a0a0b"/>
+  <line x1="371" y1="96" x2="371" y2="40" stroke="#0a0a0b" stroke-width="1.5"/>
+  <text x="371" y="32" font-size="12.5" text-anchor="middle" fill="#0a0a0b" font-weight="600">现价 $99.65</text>
+  <text x="371" y="18" font-size="10" text-anchor="middle" fill="#6b665d">9/3 盘后</text>
+  <text x="0" y="165" font-size="10.5" fill="#6b665d">概率加权（35 / 45 / 20）期望回报 +13.2%　·　所有情景基于 FY2027 EPS</text>
+</svg>
+</div>
+
+<div class="cards">
+  <div class="card bear">
+    <div class="nm">熊市 BEAR · 35%</div>
+    <div class="pr">$65</div>
+    <div class="ch dn">−34.8%</div>
+    <div class="lg">品牌受损具结构性：核心女子下装份额被 Alo、Vuori 等持续侵蚀，美洲同店维持双位数负增长；折扣化换量导致毛利率进一步下探；CEO 空缺延长，转型无人执行。</div>
+    <div class="as">FY27 EPS $6.50（较 FY26 指引再降 32%）<br>P/E <strong>10x</strong>——价值陷阱式估值<br>隐含营收再降约 8%</div>
+  </div>
+  <div class="card base">
+    <div class="nm">基准 BASE · 45%</div>
+    <div class="pr">$117</div>
+    <div class="ch up">+17.4%</div>
+    <div class="lg">低位企稳：正式 CEO 到位并给出可信路线图；收入自 FY26 的低基数持平；库存已 −7%（件数）意味着折扣压力见顶；毛利率停在 55% 上下不再恶化。</div>
+    <div class="as">FY27 EPS $9.00（较 FY26 指引 −6%）<br>P/E <strong>13x</strong>——低增长消费品牌<br>隐含营收持平</div>
+  </div>
+  <div class="card bull">
+    <div class="nm">牛市 BULL · 20%</div>
+    <div class="pr">$187</div>
+    <div class="ch up">+87.7%</div>
+    <div class="lg">核心品类回归：新品命中率恢复，美洲同店转正；关税成本环境改善叠加库存健康，毛利率回到 57%+；市场认可品牌未受结构性损伤，估值倍数随之修复。</div>
+    <div class="as">FY27 EPS $11.00（较 FY26 指引 +15%）<br>P/E <strong>17x</strong>——仍远低于历史 25–35x<br>隐含营收 +3%</div>
+  </div>
+</div>
+
+<div class="scr">
+<table>
+<tr><th style="width:28%">关键假设</th><th style="width:24%">熊市</th><th style="width:24%">基准</th><th style="width:24%">牛市</th></tr>
+<tr><td class="q">FY27 摊薄 EPS</td><td>$6.50</td><td><strong>$9.00</strong></td><td>$11.00</td></tr>
+<tr><td class="q">较 FY26 指引中值 $9.605</td><td>−32%</td><td>−6%</td><td>+15%</td></tr>
+<tr><td class="q">美洲同店</td><td>持续双位数负增长</td><td>降幅收窄至个位数</td><td>转正</td></tr>
+<tr><td class="q">P/E 倍数</td><td>10x</td><td>13x</td><td>17x</td></tr>
+</table>
+</div>
+
+<div class="verdict">
+  <div class="k">裁决 · VERDICT</div>
+  <h3>中性（Neutral）｜ 12 个月目标价 $117 ｜ 概率加权期望 +13.2%</h3>
+  <p><strong>估值已经计入了大量坏消息，但基本面尚未出现任何触底信号。</strong>当前 $99.65 对应 FY26 指引中值 10.4 倍、剔除退税 11.4 倍——对一个曾长期交易在 25–35 倍的品牌，这是一次彻底的重定价。问题是分母还在下移：Q3 指引 EPS 同比约 −63%，是本财年最差单季，而它还没有发生。</p>
+  <p><strong>唯一真正的正面信号是库存：金额 −1%、件数 −7%。</strong>件数降幅大于金额，说明公司在主动收缩而非被动积压，这通常是折扣压力见顶的前置条件。剔除退税后的毛利率环比也从 Q1 的 54.2% 微升至 54.9%——<strong>同比是崩的，环比未继续恶化。</strong></p>
+  <p><strong>最不该忽视的风险是治理，不是财务：CEO 自 2026-01-31 离任至今空缺逾 7 个月，现由 CFO 与 CCO 兼任临时联席 CEO。</strong>一个正在经历核心品类失灵的消费品牌，用兼任的临时管理层执行转型，同时刚结束一场与创始人的代理权之争。<strong>在正式 CEO 到位并给出可信路线图之前，基准情景的「低位企稳」假设缺少执行主体。</strong></p>
+  <div class="verdict-en">A $134.5M tariff refund inflated every headline metric: reported gross margin rose 200bps to 60.5%, but ex-refund it fell 360bps to 54.9%; reported operating income fell 13.0%, ex-refund it collapsed 38.8%. The beat itself was not entirely the refund — ex-refund EPS of $2.06 still exceeded the $1.79 consensus by 15%. The genuine problems are revenue deceleration (+4% → −4% → guided −11%), full-year EPS guidance cut 2.2x harder than revenue, Americas comps of −12% in the core women's bottoms category, and a CEO seat vacant for over seven months.</div>
+  <div class="fb"><a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=lulu_q2fy26">对本报告提出修正或补充 · Submit Feedback</a></div>
+</div>
+
+<h2><span class="section-zh">管理层语气</span><span class="section-en">Management Tone Analysis</span></h2>
+<div class="tone">
+  <div class="row">
+    <div class="tl"><span>综合语气评分 Overall Tone</span><strong>38 / 100 · 防御</strong></div>
+    <div class="bar"><i style="width:38%;background:#8b2e2e"></i></div>
+    <div style="font-size:12.5px;color:#6b665d">临时联席 CEO 主持，指引大幅下调，核心品类失灵。评分低于中性区间。</div>
+  </div>
+  <div class="row">
+    <div class="tl"><span>需求侧信心 Demand Confidence</span><strong>25 / 100</strong></div>
+    <div class="bar"><i style="width:25%;background:#8b2e2e"></i></div>
+    <div style="font-size:12.5px;color:#6b665d">全球同店 −10%、美洲 −12%，且管理层未给出核心品类的具体修复时间表。</div>
+  </div>
+  <div class="row">
+    <div class="tl"><span>归因坦诚度 Attribution Candor</span><strong>32 / 100</strong></div>
+    <div class="bar"><i style="width:32%;background:#8b2e2e"></i></div>
+    <div style="font-size:12.5px;color:#6b665d">将核心品类销量下滑归因于「媒体与社交渠道负面评论」——把结果当成原因，是本次最应打折扣的表述。</div>
+  </div>
+  <div class="row">
+    <div class="tl"><span>利润率透明度 Margin Transparency</span><strong>70 / 100</strong></div>
+    <div class="bar"><i style="width:70%;background:#2a5c3f"></i></div>
+    <div style="font-size:12.5px;color:#6b665d">主动披露退税的 560bps 影响与每股 $0.86 的税后金额，未试图把一次性收益混入经营表现。这一点应予肯定。</div>
+  </div>
+</div>
+
+<h2><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></h2>
+<div class="chips">
+  <span class="chip"><b>核心女子下装失灵</b><i>Core Women's Bottoms</i></span>
+  <span class="chip"><b>美洲同店 −12%</b><i>Americas Deceleration</i></span>
+  <span class="chip"><b>一次性关税退款</b><i>Non-Recurring Tariff Refund</i></span>
+  <span class="chip"><b>SG&amp;A 去杠杆</b><i>Operating Deleverage</i></span>
+  <span class="chip"><b>CEO 空缺逾 7 个月</b><i>Leadership Vacuum</i></span>
+  <span class="chip"><b>创始人代理权之争</b><i>Chip Wilson Proxy Settlement</i></span>
+  <span class="chip"><b>库存件数 −7%</b><i>Unit Inventory Discipline</i></span>
+  <span class="chip"><b>中国靠开店而非同店</b><i>China: Doors, Not Comps</i></span>
+</div>
+
+<h2><span class="section-zh">风险矩阵</span><span class="section-en">Risk Matrix</span></h2>
+<div class="scr">
+<table>
+<tr><th style="width:22%">风险</th><th style="width:11%">概率</th><th style="width:11%">影响</th><th style="width:56%">说明与观察指标</th></tr>
+<tr><td class="q">品牌结构性受损<br><span class="label-en">Structural Brand Erosion</span></td><td class="nt">中</td><td class="dn">极高</td><td>核心女子下装是品牌立身之本，被 Alo、Vuori 等分流。若属结构性而非周期性，则所有基于「回归常态」的估值都需重做。<strong>观察：Q3、Q4 美洲同店降幅是否收窄。</strong></td></tr>
+<tr><td class="q">治理真空<br><span class="label-en">Leadership Vacuum</span></td><td class="dn">高（已发生）</td><td class="dn">高</td><td>CEO 自 2026-01-31 空缺，CFO 与 CCO 兼任临时联席 CEO 逾 7 个月。转型缺少执行主体。<strong>观察：正式 CEO 任命时点与其零售品牌履历。</strong></td></tr>
+<tr><td class="q">Q4 指引隐含利润率改善过于乐观<br><span class="label-en">Optimistic Q4 Margin</span></td><td class="nt">中</td><td class="nt">中</td><td>Q4 隐含 EPS 仅 −13.7%，而营收指引 −11%——在 Q1/Q2 已显示严重去杠杆的背景下，隐含 Q4 利润率显著改善。<strong>观察：Q3 实际值是否已透支 Q4 的改善空间。</strong></td></tr>
+<tr><td class="q">关税环境反复<br><span class="label-en">Tariff Volatility</span></td><td class="nt">中</td><td class="nt">中</td><td>本季 $1.345 亿为退款收益，但 Q1 曾有 280bps 的负面关税影响。方向可逆，且不在公司控制范围内。</td></tr>
+<tr><td class="q">折扣化损伤品牌溢价<br><span class="label-en">Markdown Risk</span></td><td class="nt">中</td><td class="nt">中</td><td>库存件数 −7% 显示当前仍在主动控制，但若同店持续双位数负增长，折扣压力将重新累积。<strong>观察：毛利率能否守住 54–55%。</strong></td></tr>
+<tr><td class="q">回购时点风险<br><span class="label-en">Buyback Timing</span></td><td>低</td><td>低</td><td>本季以均价 $122.22 回购 270 万股、耗资 $3.30 亿，现价 $99.65，浮亏约 18.5%。金额相对资产负债表可控，但反映管理层对拐点的判断偏早。</td></tr>
+</table>
+</div>
+
+<h2><span class="section-zh">分析师 Q&amp;A 张力区域</span><span class="section-en">Analyst Q&amp;A · Points of Tension</span></h2>
+<div class="scr">
+<table>
+<tr><th style="width:30%">未被充分回答的问题</th><th style="width:70%">为什么这是张力点</th></tr>
+<tr><td class="q">核心女子下装的问题是产品还是需求？</td><td>管理层归因于「媒体与社交负面评论」与「新品反响弱」。这两者指向完全不同的修复路径与周期：产品问题可通过设计迭代在 2–3 个季度内修复，需求或份额问题则是多年的结构性挑战。<strong>管理层没有区分，而这个区分决定了熊市与基准情景之间的选择。</strong></td></tr>
+<tr><td class="q">Q4 的利润率改善从哪来？</td><td>Q4 隐含 EPS 同比仅 −13.7%，远好于 Q3 的 −63%，而营收同比降幅相近。若无关税或一次性因素支撑，这一改善缺少解释。</td></tr>
+<tr><td class="q">正式 CEO 的时间表是什么？</td><td>空缺已逾 7 个月。在核心品类失灵期间，临时联席管理层能否推动品类重建、以及新任 CEO 是否会重置指引，都是当前无法定价的变量。</td></tr>
+</table>
+</div>
+
+<h2><span class="section-zh">分析师附注</span><span class="section-en">Analyst's Note</span></h2>
+<div class="note">
+  <div class="blk">
+    <h4>数据口径与来源</h4>
+    Q2 FY2026 损益数字取自公司 2026-09-03 官方业绩公告及同日财报电话会记录。<strong>剔除退税的毛利率（54.9%）、经营利润（$3.19 亿）与经营利润率（13.2%）均为本报告计算值</strong>，方法为在报表值基础上扣除公司披露的 $1.345 亿退税及其 560bps 影响；<strong>每股 $0.86 的税后影响为公司直接披露，非本报告推算</strong>。FY25 全年 EPS $12.97 取自公司 Q3 FY25 时点指引区间 $12.92–13.02 的中值。
+  </div>
+  <div class="blk">
+    <h4>推算明细</h4>
+    一、Q4 FY25 营收 $36.04 亿 = FY25 全年 $111 亿 − Q1 $24.04 亿 − Q2 $25.17 亿 − Q3 $25.75 亿。<span class="badge b-cal">倒推</span><br>
+    二、Q4 FY26E 营收 $32.04 亿 = 全年指引中值 $104.25 亿 − Q1 $25.00 亿 − Q2 $24.16 亿 − Q3 指引中值 $23.05 亿。<span class="badge b-cal">倒推</span><br>
+    三、Q4 FY26E EPS $4.04 = 全年指引中值 $9.605 − Q1 $1.69 − Q2 $2.92 − Q3 指引中值 $0.955。<span class="badge b-cal">倒推</span><br>
+    四、Q4 FY25 EPS $4.68 = FY25 $12.97 − $2.60 − $3.10 − $2.59。<span class="badge b-cal">倒推</span>
+  </div>
+  <div class="blk">
+    <h4>分析师独立看法与分歧点</h4>
+    <strong>我与市场共识的分歧不在方向，在幅度。</strong>盘后 −18.2% 的反应把这季度当成了全面崩塌，但剔除退税后的 EPS $2.06 仍超共识 15%，说明成本端的执行并不差；真正恶化的是收入与指引。<strong>市场卖的是未来，不是当季——这个定价方向是对的。</strong><br><br>
+    <strong>我最不确定的是基准情景 45% 的权重。</strong>它假设「正式 CEO 到位 + 收入企稳」，但这两件事目前都没有时间表，而 Q3 指引隐含的 −63% EPS 同比尚未发生。<strong>如果 Q3 实际值低于指引下沿、或 CEO 任命再拖一个季度，基准与熊市的权重应当互换，届时加权期望将从 +13.2% 转为负值。</strong>这是本报告最脆弱的一环。<br><br>
+    <strong>库存是我唯一愿意给正面权重的硬数据</strong>：金额 −1% 而件数 −7%，主动收缩而非被动积压，且剔除退税后的毛利率环比自 54.2% 微升至 54.9%。同比是崩的，但环比没有继续恶化——这是判断「是否触底」时唯一可用的前置指标。
+  </div>
+  <div class="blk">
+    <h4>待核实项</h4>
+    一、<strong>Q4 FY25 毛利率未获取</strong>，毛利率图表中该点留空并以虚线连接，未作插值。<br>
+    二、FY25 全年 EPS 采用 Q3 时点指引中值 $12.97，未取得财年实际值，Q4 FY25 EPS $4.68 系由此倒推，若实际全年 EPS 不同则该点需调整。<br>
+    三、市场共识数字（EPS $1.79、营收 $24.6 亿）取自财经媒体转述，各家口径可能存在细微差异。<br>
+    四、竞品份额（Alo、Vuori 对核心女子下装的分流程度）无公开量化数据支撑，熊市情景中该假设为定性判断。<br>
+    五、本报告未取得公司公告原文表格逐字核对（sec.gov 与 businesswire 在本会话环境出口受限），关键数字均经两个以上独立来源交叉验证。
+  </div>
+</div>
+
+<div class="foot">
+  <b>数据来源</b>　lululemon 2026-09-03 第二财季业绩公告（businesswire）｜ 同日财报电话会记录（Investing.com）｜ CNBC Q2 FY2026 报道 ｜ lululemon 2026-06-04 第一财季业绩公告 ｜ lululemon 2025-12 第三财季业绩公告与 FY25 指引 ｜ CNBC 2026-05-27 代理权之争和解报道 ｜ Nasdaq 利润率分析 ｜ 股价取自本地行情缓存（2026-09-04T07:33Z 抓取，两次独立运行一致）
+  <div style="margin-top:11px">
+    <b>报告类型</b>　Earner Copilot 机构级财报分析　｜　<b>分析日期</b>　2026-09-04　｜　<b>标的</b>　LULU · lululemon athletica inc.　｜　<b>报告期</b>　Q2 FY2026（财季止 2026-08-02）
+  </div>
+  <div style="margin-top:11px;font-style:italic">
+    本报告为研究分析，不构成投资建议。目标价基于公开披露数据与明示假设推导，实际结果可能显著偏离。
+  </div>
+</div>
+
+</div>
