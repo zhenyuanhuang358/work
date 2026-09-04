@@ -63,5 +63,10 @@ jobs:
             echo "no change"
           else
             git commit -m "chore: burry screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
-            git push
+            # ⚠ 必须先 rebase 再 push。2026-09-01 run#7 就是在这里丢了整轮结果：
+            # 扫描算完了（日志 3,422 insertions），push 被 (fetch first) 拒绝，产物全部作废，
+            # 而工作流在 Actions 页面只显示一个红叉——产物停在上一轮，不报错、不回滚、无提示。
+            # fetch-prices.yml 早有此兜底，本文件一直没同步。
+            git pull --rebase origin "$GITHUB_REF_NAME" || true
+            git push origin "HEAD:$GITHUB_REF_NAME"
           fi
