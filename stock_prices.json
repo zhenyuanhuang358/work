@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-09-04T06:49:40.180602Z",
-  "vix": 14.32,
+  "updated_at": "2026-09-04T07:33:08.026815Z",
+  "vix": 14.15,
   "treasury_10y": 4.76,
   "tail_risk": {
     "vix9d": 11.68,
     "vix3m": 17.42,
     "skew": 150.63,
     "vvix": 83.8,
-    "term_structure": 0.822,
-    "short_end_ratio": 0.816
+    "term_structure": 0.812,
+    "short_end_ratio": 0.825
   },
   "prices": {
     "SPY": {
