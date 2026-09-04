@@ -1,16 +1,22 @@
 {
-  "updated_at": "2026-08-30T12:32:45.783516Z",
+  "updated_at": "2026-09-04T06:13:13.433273Z",
   "cik": "0001649339",
   "entity_name": "Scion Asset Management, LLC",
   "tier1_boundary": "2025-09-30",
+  "periods_available": 32,
   "quarters_parsed": 32,
+  "skipped": [],
+  "amended_periods": [
+    "2023-12-31"
+  ],
   "concentration_threshold_top1": 0.2555290483096062,
   "caliber_notes": [
     "13F <value> 字段 2023-01-03 前为千美元、之后为美元，本文件已统一换算为美元。",
     "期权按标的名义市值披露，非权利金；is_option=true 者必须与股票分列，不同表排序。",
     "13F 仅含多头 13F 证券：不含空头、现金、债券、外国交易所上市股票。",
     "季末快照，季中建仓再清仓不可见，换手率被系统性低估。",
-    "浓仓位阈值取该管理人自身历史 top1 分布的 80% 分位，非固定 15%。"
+    "浓仓位阈值取该管理人自身历史 top1 分布的 80% 分位，非固定 15%。",
+    "同一报告期有原件与修订(13F-HR/A)时取修订件——修订件存在即说明原件有错。"
   ],
   "quarters": {
     "2015-12-31": {
@@ -3989,9 +3995,9 @@
     },
     "2023-12-31": {
       "report_date": "2023-12-31",
-      "filing_date": "2024-02-14",
-      "accession": "0000905148-24-000653",
-      "form": "13F-HR",
+      "filing_date": "2024-02-16",
+      "accession": "0000905148-24-000751",
+      "form": "13F-HR/A",
       "value_unit_source": "USD",
       "n_positions": 25,
       "total_value": 94591240.0,
