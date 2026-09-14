@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>绿茶集团 6831.HK · 连锁餐饮行业研究</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --rule:#d6d0c4; --mute:#6b655c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'IM Fell English','Songti SC','STSong',Georgia,serif;
+  line-height:1.72; padding:0 0 80px;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+/* Pub Bar */
+.pubbar{
+  background:var(--ink); color:var(--paper);
+  padding:11px 0; font-size:12.5px; letter-spacing:.06em;
+}
+.pubbar .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.pubbar .brand{font-weight:600;letter-spacing:.16em}
+.pubbar .meta{color:#b5ada0}
+
+/* Title */
+.masthead{padding:46px 0 26px;border-bottom:3px double var(--ink)}
+.kicker{font-size:12px;letter-spacing:.3em;color:var(--copper);text-transform:uppercase;margin-bottom:16px}
+h1.zh{font-size:44px;line-height:1.18;letter-spacing:.01em;font-weight:600}
+h1.en{font-size:19px;font-style:italic;color:var(--mute);margin-top:9px;font-weight:400;letter-spacing:.02em}
+.tagrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
+.tag{
+  border:1px solid var(--ink);padding:4px 13px;font-size:12.5px;letter-spacing:.05em;
+  background:transparent;
+}
+.tag.solid{background:var(--ink);color:var(--paper)}
+.tag.gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.tag.red{background:var(--red);border-color:var(--red);color:var(--paper)}
+.tag.green{background:var(--green);border-color:var(--green);color:var(--paper)}
+
+/* Stat bar */
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);margin:30px 0 8px}
+.stat{padding:19px 16px;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:none}
+.stat .lbl{font-size:11.5px;letter-spacing:.12em;color:var(--copper);text-transform:uppercase}
+.stat .lbl-zh{font-size:12.5px;color:var(--mute);display:block;margin-top:2px}
+.stat .val{font-size:31px;font-weight:600;margin-top:9px;line-height:1.1}
+.stat .sub{font-size:12.5px;color:var(--mute);margin-top:5px}
+.up{color:var(--green)} .down{color:var(--red)} .warn{color:var(--amber)}
+
+/* Sections */
+section{margin-top:52px}
+.sec-head{border-bottom:1px solid var(--ink);padding-bottom:9px;margin-bottom:26px}
+.section-zh{font-size:27px;font-weight:600;letter-spacing:.02em}
+.section-en{font-size:13px;font-style:italic;color:var(--copper);letter-spacing:.09em;margin-top:3px}
+
+h3.q{font-size:19px;font-weight:600;margin:32px 0 12px;padding-left:13px;border-left:4px solid var(--copper)}
+h3.q .en{display:block;font-size:12.5px;font-style:italic;color:var(--mute);font-weight:400;letter-spacing:.02em;margin-top:2px}
+
+p{margin:13px 0;font-size:15.5px}
+.lead{font-size:17px}
+.answer{
+  background:#fff;border:1px solid var(--rule);border-left:4px solid var(--ink);
+  padding:17px 21px;margin:15px 0;
+}
+.answer .a-first{font-size:16.5px;font-weight:600;line-height:1.66}
+.answer p{font-size:15px;margin:11px 0 0}
+.label-zh{font-weight:600;color:var(--ink)}
+.label-en{font-style:italic;color:var(--mute);font-size:13px;margin-left:6px}
+
+.badge{
+  display:inline-block;font-size:11px;letter-spacing:.07em;padding:2px 9px;
+  border:1px solid var(--rule);background:var(--paper);color:var(--mute);margin-left:6px;
+  vertical-align:middle;white-space:nowrap;
+}
+.badge.hi{background:var(--green);color:#fff;border-color:var(--green)}
+.badge.mid{background:var(--amber);color:#fff;border-color:var(--amber)}
+.badge.lo{background:#7a7268;color:#fff;border-color:#7a7268}
+.badge.calc{background:var(--copper);color:#fff;border-color:var(--copper)}
+.srcline{font-size:12px;color:var(--mute);margin-top:9px;letter-spacing:.02em}
+
+/* Tables */
+.tw{overflow-x:auto;margin:20px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;background:#fff;min-width:560px}
+th{
+  background:var(--ink);color:var(--paper);padding:10px 11px;text-align:left;
+  font-size:12.5px;letter-spacing:.06em;font-weight:600;
+}
+td{padding:9px 11px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:#faf9f6}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+th.num{text-align:right}
+.hl{background:#fdf8e8 !important}
+
+/* Chart */
+.chart{background:#fff;border:1px solid var(--rule);padding:20px;margin:24px 0}
+.chart-t{font-size:15px;font-weight:600;margin-bottom:3px}
+.chart-t .en{font-style:italic;color:var(--mute);font-weight:400;font-size:12.5px;margin-left:8px}
+.chart-n{font-size:12.5px;color:var(--mute);margin-top:10px;line-height:1.6}
+
+/* Verdict */
+.verdict{background:var(--ink);color:var(--paper);padding:32px 34px;margin:38px 0 0}
+.verdict .v-k{font-size:11.5px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase}
+.verdict h4{font-size:25px;margin:13px 0 4px;font-weight:600;line-height:1.35}
+.verdict-en{font-size:13.5px;font-style:italic;color:rgba(241,239,234,.6);margin-bottom:17px}
+.verdict p{font-size:15px;color:rgba(241,239,234,.92);margin:11px 0}
+.verdict .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(241,239,234,.2);margin-top:22px}
+.verdict .vcell{background:var(--ink);padding:15px 16px}
+.verdict .vcell .k{font-size:11.5px;letter-spacing:.11em;color:var(--gold)}
+.verdict .vcell .v{font-size:23px;font-weight:600;margin-top:6px}
+.verdict .vcell .d{font-size:12.5px;color:rgba(241,239,234,.65);margin-top:4px}
+
+/* Feedback */
+.fb{border:1px dashed var(--copper);padding:15px 20px;margin-top:20px;text-align:center;font-size:14px}
+.fb a{color:var(--copper);font-weight:600}
+
+/* Note */
+.note{background:#ebe8e0;border:1px solid var(--rule);padding:26px 30px;margin-top:46px}
+.note h4{font-size:19px;margin-bottom:4px;font-weight:600}
+.note .h-en{font-size:12.5px;font-style:italic;color:var(--mute);margin-bottom:18px}
+.note h5{font-size:14.5px;margin:20px 0 7px;color:var(--copper);font-weight:600;letter-spacing:.04em}
+.note p,.note li{font-size:14px;line-height:1.7}
+.note ul{margin:8px 0 8px 20px}
+.note li{margin:6px 0}
+
+.flag{border-left:4px solid var(--amber);background:#fdf6e9;padding:14px 19px;margin:18px 0;font-size:14.5px}
+.flag.red{border-left-color:var(--red);background:#fbeded}
+.flag.green{border-left-color:var(--green);background:#eaf2ed}
+.flag .ft{font-weight:600;display:block;margin-bottom:5px}
+
+footer{margin-top:52px;padding-top:20px;border-top:3px double var(--ink);font-size:12.5px;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:780px){
+  .wrap{padding:0 18px}
+  h1.zh{font-size:31px}
+  .statbar{grid-template-columns:repeat(2,1fr)}
+  .stat{border-bottom:1px solid var(--rule)}
+  .verdict .vgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="pubbar"><div class="wrap">
+  <span class="brand">MERLIN · 咨询情报系统</span>
+  <span class="meta">客户提纲研究 · 模式B 五智能体 ｜ 研究日 2026-09-14 ｜ 数据截止 2026-06-30 中期业绩</span>
+</div></div>
+
+<div class="wrap">
+
+<div class="masthead">
+  <div class="kicker">连锁餐饮行业研究 · Chain Restaurant Sector</div>
+  <h1 class="zh">绿茶集团 6831.HK：用开店买来的增长</h1>
+  <h1 class="en">Green Tea Group — Growth Bought With Store Count, Not Store Quality</h1>
+  <div class="tagrow">
+    <span class="tag solid">客户提纲三题</span>
+    <span class="tag">2026 中期业绩</span>
+    <span class="tag gold">核心判断：量价齐跌中的规模扩张</span>
+    <span class="tag red">同店 −9.7%</span>
+    <span class="tag green">新店回收 12.5 个月</span>
+  </div>
+</div>
+
+<div class="statbar">
+  <div class="stat">
+    <span class="lbl">Revenue 1H26</span><span class="lbl-zh">2026 上半年收入</span>
+    <div class="val">26.75<span style="font-size:17px">亿元</span></div>
+    <div class="sub up">同比 +16.8%</div>
+  </div>
+  <div class="stat">
+    <span class="lbl">Same-Store Sales</span><span class="lbl-zh">同店销售额</span>
+    <div class="val down">−9.7%</div>
+    <div class="sub">15.35 亿元</div>
+  </div>
+  <div class="stat">
+    <span class="lbl">Store Count</span><span class="lbl-zh">期末门店数</span>
+    <div class="val">733<span style="font-size:17px">家</span></div>
+    <div class="sub up">同比 +46.0%（502 家）</div>
+  </div>
+  <div class="stat">
+    <span class="lbl">Fwd P/E</span><span class="lbl-zh">前瞻市盈率</span>
+    <div class="val warn">6.2<span style="font-size:17px">倍</span></div>
+    <div class="sub">小菜园 14.1 倍</div>
+  </div>
+</div>
+
+<!-- ============ 五智能体流程 ============ -->
+<div class="chart">
+  <div class="chart-t">五智能体协作流程<span class="en">Five-Agent Research Pipeline</span></div>
+  <svg viewBox="0 0 1100 200" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="五智能体协作流程图">
+    <defs><marker id="ar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto"><polygon points="0 0, 9 3.5, 0 7" fill="#8b6c42"/></marker></defs>
+    <rect x="8" y="66" width="150" height="62" fill="#0a0a0b"/>
+    <text x="83" y="90" text-anchor="middle" fill="#f1efea" font-size="14" font-weight="600">Orchestrator</text>
+    <text x="83" y="110" text-anchor="middle" fill="#c9a84c" font-size="12">提纲分解 · 3 题 9 问</text>
+    <line x1="160" y1="97" x2="196" y2="97" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="200" y="66" width="150" height="62" fill="#fff" stroke="#0a0a0b" stroke-width="1.4"/>
+    <text x="275" y="90" text-anchor="middle" font-size="14" font-weight="600">Scout 情报员</text>
+    <text x="275" y="110" text-anchor="middle" fill="#6b655c" font-size="12">14 组检索 · 中报为主</text>
+    <line x1="352" y1="97" x2="388" y2="97" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="392" y="22" width="150" height="58" fill="#fff" stroke="#0a0a0b" stroke-width="1.4"/>
+    <text x="467" y="45" text-anchor="middle" font-size="14" font-weight="600">Analyst 分析师</text>
+    <text x="467" y="64" text-anchor="middle" fill="#6b655c" font-size="12">增长归因拆解</text>
+    <rect x="392" y="114" width="150" height="58" fill="#fff" stroke="#8b2e2e" stroke-width="1.6"/>
+    <text x="467" y="137" text-anchor="middle" font-size="14" font-weight="600" fill="#8b2e2e">Forensic 侦探</text>
+    <text x="467" y="156" text-anchor="middle" fill="#6b655c" font-size="12">口径矛盾核验</text>
+    <line x1="544" y1="51" x2="584" y2="85" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <line x1="544" y1="143" x2="584" y2="109" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="590" y="66" width="150" height="62" fill="#fff" stroke="#0a0a0b" stroke-width="1.4"/>
+    <text x="665" y="90" text-anchor="middle" font-size="14" font-weight="600">Strategist 战略家</text>
+    <text x="665" y="110" text-anchor="middle" fill="#6b655c" font-size="12">逐条成文 · 答案前置</text>
+    <line x1="742" y1="97" x2="778" y2="97" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="782" y="66" width="150" height="62" fill="#8b6c42"/>
+    <text x="857" y="90" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Critic 评审</text>
+    <text x="857" y="110" text-anchor="middle" fill="#f1efea" font-size="12">置信度 · 风险信号</text>
+    <line x1="934" y1="97" x2="970" y2="97" stroke="#8b6c42" stroke-width="1.6" marker-end="url(#ar)"/>
+    <rect x="974" y="66" width="118" height="62" fill="#2a5c3f"/>
+    <text x="1033" y="90" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">交付</text>
+    <text x="1033" y="110" text-anchor="middle" fill="#dfeae3" font-size="12">高7 中11 低2</text>
+  </svg>
+  <div class="chart-n">Forensic 本轮的独立贡献：发现「新店坪效 +47.3%」与「单店日均 −15%」这两个同时出自中报的数字互相冲突，追查后确认二者口径不同且可以并存，并用独立计算复现了媒体引用的单店口径。详见话题三。</div>
+</div>
+
+<!-- ============ 话题一 ============ -->
+<section>
+  <div class="sec-head">
+    <div class="section-zh">话题一 · 整体市场表现、开店拓展、海外扩张</div>
+    <div class="section-en">Topic I — Market Performance, Store Expansion, Overseas Rollout</div>
+  </div>
+
+  <h3 class="q">1.1 整体市场表现<span class="en">Overall performance: revenue up, unit economics down</span></h3>
+
+  <div class="answer">
+    <div class="a-first">收入 26.75 亿元（+16.8%）、股东应占利润 2.91 亿元（+24.4%），但这份增长的 142.9% 来自新开门店，同店贡献为 −42.9%。<span class="badge calc">本报告计算</span></div>
+    <p><span class="label-zh">拆解</span><span class="label-en">Decomposition</span>：2026 上半年收入 26.748 亿元，较上年同期 22.904 亿元增加 <strong>3.844 亿元</strong>。同店销售额 15.35 亿元、同比 −9.7%，反推去年同期同店基数 16.999 亿元，即<strong>同店拖累 −1.649 亿元</strong>；两者相减得<strong>新店贡献 +5.493 亿元</strong>。新店贡献占全部增量的 142.9%，同店为 −42.9%。</p>
+    <p><span class="label-zh">收入结构</span><span class="label-en">Revenue mix</span>：堂食 20.14 亿元（+14.6%，占 75.3%）、外卖 6.51 亿元（+24.1%，占 24.3%）。两项合计 26.65 亿元，与总额 26.75 亿元的 0.10 亿元差额为其他收入。</p>
+    <p><span class="label-zh">核心经营指标全线走弱</span><span class="label-en">Core operating metrics deteriorating</span>：翻台率 3.1 降至 <strong>2.9 次/日</strong>（−6.5%）；客单价 55.5 元降至 <strong>54.4 元</strong>（−2.0%）；堂食单店日均销售额 2.0 万元降至 <strong>1.7 万元</strong>。翻台与客单同时下降，意味着这是量价齐跌，不是主动降价换量。</p>
+    <div class="srcline">来源：2026 年中期业绩公告（2026-08-24）；同店与翻台数据见中报及财经媒体转述。<span class="badge hi">高置信</span></div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">剪刀差：门店增速 46.0% 对收入增速 16.8%<span class="en">The Scissor Gap</span></div>
+    <svg viewBox="0 0 900 300" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="门店增速与收入增速剪刀差柱状图">
+      <line x1="80" y1="245" x2="860" y2="245" stroke="#0a0a0b" stroke-width="1.4"/>
+      <line x1="80" y1="40" x2="80" y2="245" stroke="#0a0a0b" stroke-width="1.4"/>
+      <!-- gridlines -->
+      <line x1="80" y1="212" x2="860" y2="212" stroke="#d6d0c4" stroke-width=".8"/>
+      <line x1="80" y1="178" x2="860" y2="178" stroke="#d6d0c4" stroke-width=".8"/>
+      <line x1="80" y1="145" x2="860" y2="145" stroke="#d6d0c4" stroke-width=".8"/>
+      <line x1="80" y1="112" x2="860" y2="112" stroke="#d6d0c4" stroke-width=".8"/>
+      <text x="72" y="216" text-anchor="end" font-size="12" fill="#6b655c">+10%</text>
+      <text x="72" y="182" text-anchor="end" font-size="12" fill="#6b655c">+20%</text>
+      <text x="72" y="149" text-anchor="end" font-size="12" fill="#6b655c">+30%</text>
+      <text x="72" y="116" text-anchor="end" font-size="12" fill="#6b655c">+40%</text>
+      <text x="72" y="249" text-anchor="end" font-size="12" fill="#6b655c">0</text>
+      <!-- bars: scale 245 - pct*3.33 -->
+      <rect x="140" y="92" width="112" height="153" fill="#0a0a0b"/>
+      <text x="196" y="82" text-anchor="middle" font-size="19" font-weight="600">+46.0%</text>
+      <text x="196" y="268" text-anchor="middle" font-size="13.5">门店数</text>
+      <text x="196" y="286" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">Store count</text>
+
+      <rect x="330" y="189" width="112" height="56" fill="#8b6c42"/>
+      <text x="386" y="179" text-anchor="middle" font-size="19" font-weight="600">+16.8%</text>
+      <text x="386" y="268" text-anchor="middle" font-size="13.5">总收入</text>
+      <text x="386" y="286" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">Revenue</text>
+
+      <rect x="520" y="196" width="112" height="49" fill="#c47a1e"/>
+      <text x="576" y="186" text-anchor="middle" font-size="19" font-weight="600">+14.6%</text>
+      <text x="576" y="268" text-anchor="middle" font-size="13.5">堂食收入</text>
+      <text x="576" y="286" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">Dine-in</text>
+
+      <rect x="710" y="245" width="112" height="32" fill="#8b2e2e"/>
+      <text x="766" y="292" text-anchor="middle" font-size="19" font-weight="600" fill="#8b2e2e">−9.7%</text>
+      <text x="766" y="236" text-anchor="middle" font-size="13.5">同店销售</text>
+      <text x="766" y="222" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">Same-store</text>
+      <text x="470" y="26" text-anchor="middle" font-size="14" font-weight="600" fill="#8b2e2e">剪刀差 −29.2 个百分点</text>
+    </svg>
+    <div class="chart-n">门店增速远高于收入增速，二者之差即单店产出的稀释幅度。这个缺口本身不是问题（小店模型天然会产生它），问题在于同店同期为负——两件事叠加，说明稀释不只来自门店结构变化，也来自存量经营的真实走弱。</div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">增长归因：新店 +5.49 亿 抵消 同店 −1.65 亿<span class="en">Growth Attribution Waterfall</span></div>
+    <svg viewBox="0 0 900 300" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="收入增长归因瀑布图">
+      <line x1="70" y1="240" x2="870" y2="240" stroke="#0a0a0b" stroke-width="1.4"/>
+      <!-- 标尺：26.75 亿 = 160px，即 5.981 px/亿 -->
+      <!-- base 2025H1 = 22.904 亿 -> h 137 -->
+      <rect x="100" y="103" width="120" height="137" fill="#6b655c"/>
+      <text x="160" y="93" text-anchor="middle" font-size="15" font-weight="600">22.90 亿</text>
+      <text x="160" y="262" text-anchor="middle" font-size="13">2025 上半年</text>
+      <text x="160" y="279" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">1H25 base</text>
+      <!-- new stores +5.493 -> h 33, 浮动 103 -> 70 -->
+      <rect x="290" y="70" width="120" height="33" fill="#2a5c3f"/>
+      <text x="350" y="60" text-anchor="middle" font-size="16" font-weight="600" fill="#2a5c3f">+5.49 亿</text>
+      <text x="350" y="262" text-anchor="middle" font-size="13">新店贡献</text>
+      <text x="350" y="279" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">New stores +142.9%</text>
+      <line x1="220" y1="103" x2="290" y2="103" stroke="#8b6c42" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- same store -1.649 -> h 10, 浮动 70 -> 80 -->
+      <rect x="480" y="70" width="120" height="10" fill="#8b2e2e"/>
+      <text x="540" y="60" text-anchor="middle" font-size="16" font-weight="600" fill="#8b2e2e">−1.65 亿</text>
+      <text x="540" y="262" text-anchor="middle" font-size="13">同店拖累</text>
+      <text x="540" y="279" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">Same-store −42.9%</text>
+      <line x1="410" y1="70" x2="480" y2="70" stroke="#8b6c42" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- total 26.748 -> h 160 -->
+      <rect x="670" y="80" width="120" height="160" fill="#0a0a0b"/>
+      <text x="730" y="70" text-anchor="middle" font-size="16" font-weight="600">26.75 亿</text>
+      <text x="730" y="262" text-anchor="middle" font-size="13">2026 上半年</text>
+      <text x="730" y="279" text-anchor="middle" font-size="11.5" fill="#6b655c" font-style="italic">1H26 actual</text>
+      <line x1="600" y1="80" x2="670" y2="80" stroke="#8b6c42" stroke-width="1" stroke-dasharray="4 3"/>
+    </svg>
+    <div class="chart-n">全图同一标尺：26.75 亿元对应 160 像素。读法——如果 2026 上半年一家新店都不开，收入将是 21.26 亿元，同比 −7.2%。全部 16.8% 的收入增长与 24.4% 的利润增长，都建立在 131 家新店之上。</div>
+  </div>
+
+  <h3 class="q">1.2 开店拓展近况<span class="en">Store expansion: ahead of plan, small-format, going down-tier</span></h3>
+
+  <div class="answer">
+    <div class="a-first">上半年新开 131 家，已完成全年 200 家计划的 65.5%，全年大概率超额；新店结构转向 450 平方米以下小店与下沉市场，2026 年新店中下沉占比目标超 60%。<span class="badge hi">高置信</span></div>
+    <p><span class="label-zh">门店基数</span><span class="label-en">Store base</span>：期末 733 家，覆盖中国内地 21 省、4 直辖市、2 自治区，以及中国香港、中国澳门、新加坡、泰国、马来西亚。2025 年末为 609 家，上半年新开 131 家、净增 124 家，隐含关店约 7 家。</p>
+    <p><span class="label-zh">规划节奏</span><span class="label-en">Pipeline</span>：招股书规划 2025 / 2026 / 2027 年分别新开 150 / 200 / 213 家。2025 年实际新增 157 家（超额）；2026 上半年 131 家，进度 65.5%。</p>
+    <p><span class="label-zh">模型切换是核心</span><span class="label-en">Format shift is the core change</span>：2025 至 2027 年新增门店中约 <strong>87%</strong> 为建筑面积 450 平方米以下的小型餐厅，而 2021 至 2024 年的开店目标中小店仅占 20% 至 30%。2024 年小型餐厅数量 284 家，首次超过大型餐厅。</p>
+    <p><span class="label-zh">加盟</span><span class="label-en">Franchising</span>：管理层明确表示无计划开放加盟店，全部为直营。这与海底捞（99 家加盟）走的是相反路径。</p>
+    <div class="srcline">来源：2026 中期业绩公告；招股书门店规划章节；2026-03 业绩会管理层表述。</div>
+  </div>
+
+  <h3 class="q">1.3 海外扩张计划<span class="en">Overseas: 6% of revenue, 31% of growth</span></h3>
+
+  <div class="answer">
+    <div class="a-first">港澳及海外收入 1.628 亿元，同比 +266.5%，以 6.1% 的收入占比贡献了本期收入增量的 30.8%；目标 2026 年底门店数突破 30 家，中长期超 100 家、收入超 15 亿元。<span class="badge hi">高置信</span><span class="badge calc">占比为本报告计算</span></div>
+    <p><span class="label-zh">当前布局</span><span class="label-en">Footprint</span>：截至 2026 年 2 月末，中国香港 10 家、中国澳门 1 家、新加坡 1 家、泰国 1 家、马来西亚 4 家，合计 17 家。</p>
+    <p><span class="label-zh">2026 年目标</span><span class="label-en">2026 target</span>：至少新增 15 家海外门店，主要投向马来西亚、越南等核心潜力市场，年底港澳及海外门店总数突破 30 家。</p>
+    <p><span class="label-zh">中长期目标</span><span class="label-en">Medium-term</span>：海外门店超 100 家、收入超 15 亿元，海外业务贡献集团超 20% 的新增利润。</p>
+    <p><span class="label-zh">海外单店效率显著高于国内</span><span class="label-en">Overseas unit economics are materially better</span>：按上半年平均海外门店 18 至 22 家测算，海外单店日均收入区间为 <strong>4.1 万至 5.0 万元</strong>，对应国内全口径单店日均 2.20 万元的 <strong>1.9 至 2.3 倍</strong>。这是海外被置于战略优先级的经济基础，也是理解「20% 新增利润」目标的钥匙。<span class="badge calc">本报告测算</span></p>
+    <p><span class="label-zh">目标自洽性检验</span><span class="label-en">Target sanity check</span>：以当前海外单店效率 4.5 万元/日计，100 家门店年化收入约 16.4 亿元，与「收入超 15 亿元」的中长期目标相互吻合。该目标不依赖单店效率提升，只依赖门店数量兑现——这使它比多数餐饮出海目标更可验证。<span class="badge calc">本报告测算</span></p>
+    <div class="srcline">来源：2026 中期业绩公告（港澳及海外收入 4,440 万元增至 1.628 亿元）；2026-03 业绩会；公司门店页。</div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">海外：6.1% 的收入，30.8% 的增量<span class="en">Overseas Contribution Asymmetry</span></div>
+    <svg viewBox="0 0 900 230" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="海外收入占比与增量占比对比">
+      <text x="30" y="46" font-size="13.5" fill="#6b655c">占总收入</text>
+      <text x="30" y="63" font-size="11.5" fill="#6b655c" font-style="italic">Share of revenue</text>
+      <rect x="180" y="30" width="640" height="38" fill="#e3ded3"/>
+      <rect x="180" y="30" width="39" height="38" fill="#8b6c42"/>
+      <text x="234" y="55" font-size="17" font-weight="600" fill="#8b6c42">6.1%</text>
+
+      <text x="30" y="126" font-size="13.5" fill="#6b655c">占收入增量</text>
+      <text x="30" y="143" font-size="11.5" fill="#6b655c" font-style="italic">Share of growth</text>
+      <rect x="180" y="110" width="640" height="38" fill="#e3ded3"/>
+      <rect x="180" y="110" width="197" height="38" fill="#2a5c3f"/>
+      <text x="392" y="135" font-size="17" font-weight="600" fill="#2a5c3f">30.8%</text>
+
+      <text x="30" y="206" font-size="13.5" fill="#6b655c">同比增速</text>
+      <text x="180" y="206" font-size="24" font-weight="600" fill="#2a5c3f">+266.5%</text>
+      <text x="420" y="206" font-size="13.5" fill="#6b655c">4,440 万元 → 1.628 亿元</text>
+      <text x="420" y="222" font-size="11.5" fill="#6b655c" font-style="italic">RMB 44.4mn to RMB 162.8mn</text>
+    </svg>
+    <div class="chart-n">海外是本期唯一一个「增速远快于门店投入速度」的板块。相对于国内 46% 的门店增速只换来 16.8% 的收入增速，海外 17 家门店换来了全集团近三分之一的收入增量。</div>
+  </div>
+</section>
+
+<!-- ============ 话题二 ============ -->
+<section>
+  <div class="sec-head">
+    <div class="section-zh">话题二 · 竞争格局与竞对表现</div>
+    <div class="section-en">Topic II — Competitive Landscape and Peer Performance</div>
+  </div>
+
+  <div class="answer">
+    <div class="a-first">同一个宏观环境下，四家上市中餐连锁走了四条不同的路，而绿茶是其中唯一一家翻台率与客单价同时下降的。<span class="badge hi">高置信</span></div>
+    <p><span class="label-zh">四种战略</span><span class="label-en">Four strategies</span>：绿茶是<strong>开店换收入</strong>（门店 +46%，同店 −9.7%）；小菜园是<strong>降价换客流</strong>（客单 −12%，翻台 +12.9%）；九毛九是<strong>关店换利润</strong>（关 42 家，收入 −13.2%，利润 +33.2%）；海底捞是<strong>守住基本盘、以外卖和副牌找增量</strong>（外卖 +121.2%，其他品牌 +113.1%）。</p>
+    <div class="srcline">来源：四家公司 2026 年中期业绩公告及业绩发布会（绿茶 2026-08-24、小菜园 2026-08-14、九毛九 2026-08-29、海底捞 2026-08-26）。九毛九翻台率与同店为太二品牌口径，客单价为九毛九品牌口径，两者在集团披露中分品牌列示。<span class="badge hi">高置信</span></div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>2026 上半年</th>
+      <th class="num">收入（亿元）</th>
+      <th class="num">收入同比</th>
+      <th class="num">净利同比</th>
+      <th class="num">门店数</th>
+      <th class="num">翻台率</th>
+      <th class="num">客单价</th>
+      <th class="num">同店</th>
+    </tr></thead>
+    <tbody>
+      <tr class="hl">
+        <td><strong>绿茶 6831</strong></td>
+        <td class="num">26.75</td><td class="num up">+16.8%</td><td class="num up">+24.4%</td>
+        <td class="num">733</td>
+        <td class="num down">2.9（3.1 降）</td><td class="num down">54.4 元（降 2.0%）</td><td class="num down">−9.7%</td>
+      </tr>
+      <tr>
+        <td>小菜园 0999</td>
+        <td class="num">29.03</td><td class="num up">+7.0%</td><td class="num down">−24.3%</td>
+        <td class="num">824</td>
+        <td class="num up">3.5（升 12.9%）</td><td class="num down">50.5 元（降 12%）</td><td class="num down">−12.5%</td>
+      </tr>
+      <tr>
+        <td>九毛九 9922（太二口径）</td>
+        <td class="num">23.91</td><td class="num down">−13.2%</td><td class="num up">+33.2%</td>
+        <td class="num">606（关 42 家）</td>
+        <td class="num up">3.5（3.1 升）</td><td class="num">九毛九品牌 58 元（升）</td><td class="num up">日均 +11.8%</td>
+      </tr>
+      <tr>
+        <td>海底捞 6862</td>
+        <td class="num">223.37</td><td class="num up">+7.9%</td><td class="num up">核心经营利润 +4.4%</td>
+        <td class="num">1,290 自营 + 99 加盟 + 183 副牌</td>
+        <td class="num up">3.9（3.8 升）</td><td class="num">97.0 元</td><td class="num">未单独披露</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="flag red">
+    <span class="ft">Forensic 信号：绿茶与小菜园在外卖上走向完全相反</span>
+    绿茶外卖 +24.1%（占 24.3%），管理层称外卖「还有 5% 增长空间」；小菜园外卖 −10.6%（占 32.6%，从 60.7% 的堂食占比提升至 67%），主动收缩以退出平台低价内卷。两家对同一个渠道给出了相反的战略判断。美团 CEO 王兴在 2026 年一季度业绩电话会上表示「鉴于去年的高基数，可能在今年下半年出现订单量同比负增长」——这是 2025 年补贴大战推高基数所致的基数效应，不是需求塌陷，但它意味着<strong>整个行业的外卖订单增速在下半年会失去顺风</strong>。绿茶继续加码的这一侧，验证压力集中在下半年。<span class="badge mid">中置信</span>
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">战略象限：翻台率方向 × 收入增速<span class="en">Strategy Quadrant — Traffic Direction vs Revenue Growth</span></div>
+    <svg viewBox="0 0 900 430" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="四家公司战略象限散点图">
+      <!-- axes -->
+      <line x1="450" y1="40" x2="450" y2="380" stroke="#0a0a0b" stroke-width="1.4"/>
+      <line x1="90" y1="210" x2="830" y2="210" stroke="#0a0a0b" stroke-width="1.4"/>
+      <text x="838" y="206" font-size="12.5" fill="#6b655c">翻台率上升 →</text>
+      <text x="92" y="206" font-size="12.5" fill="#6b655c">← 翻台率下降</text>
+      <text x="458" y="36" font-size="12.5" fill="#6b655c">↑ 收入增长</text>
+      <text x="458" y="396" font-size="12.5" fill="#6b655c">↓ 收入下滑</text>
+      <!-- quadrant labels -->
+      <text x="250" y="66" font-size="13" fill="#c47a1e" font-style="italic">规模驱动 · 效率稀释</text>
+      <text x="640" y="66" font-size="13" fill="#2a5c3f" font-style="italic">健康增长</text>
+      <text x="250" y="366" font-size="13" fill="#8b2e2e" font-style="italic">双重收缩</text>
+      <text x="620" y="366" font-size="13" fill="#8b6c42" font-style="italic">主动瘦身 · 效率修复</text>
+      <!-- points -->
+      <circle cx="270" cy="115" r="13" fill="#8b2e2e"/>
+      <text x="292" y="112" font-size="15" font-weight="600">绿茶 6831</text>
+      <text x="292" y="130" font-size="12" fill="#6b655c">收入 +16.8%｜翻台 3.1 → 2.9</text>
+
+      <circle cx="716" cy="186" r="13" fill="#0a0a0b"/>
+      <text x="736" y="183" font-size="15" font-weight="600">小菜园 0999</text>
+      <text x="736" y="201" font-size="12" fill="#6b655c">收入 +7.0%｜翻台 +12.9%</text>
+
+      <circle cx="730" cy="296" r="13" fill="#8b6c42"/>
+      <text x="656" y="326" font-size="15" font-weight="600">九毛九 9922</text>
+      <text x="620" y="344" font-size="12" fill="#6b655c">收入 −13.2%｜太二翻台 3.1 → 3.5</text>
+
+      <circle cx="540" cy="174" r="13" fill="#2a5c3f"/>
+      <text x="496" y="146" font-size="15" font-weight="600" fill="#2a5c3f">海底捞 6862</text>
+      <text x="472" y="128" font-size="12" fill="#6b655c">收入 +7.9%｜翻台 3.8 → 3.9</text>
+    </svg>
+    <div class="chart-n">绿茶是四家中唯一落在左上象限的：收入在长，客流效率在退。这个象限的特征是增长必须由持续的资本投入维持，一旦开店节奏放缓，收入增速会迅速向同店增速收敛。</div>
+  </div>
+
+  <div class="flag">
+    <span class="ft">最值得客户注意的一组数字</span>
+    绿茶 2026 上半年净利 2.91 亿元，小菜园 2.89 亿元，<strong>相差 0.7%</strong>；收入 26.75 亿元对 29.03 亿元，相差 8.5%。但市值上，小菜园约 89 亿港元，绿茶 39.87 亿港元，<strong>相差 2.24 倍</strong>。市场没有在为当期利润定价——绿茶利润 +24.4% 拿到 6.2 倍前瞻市盈率，小菜园利润 −24.3% 拿到 14.1 倍。差别在于小菜园的利润下滑来自主动投入（降价、砍外卖、会员制、中央工厂），而翻台率 +12.9% 与 7 月堂食实收 +29.6% 正在验证这笔投入；绿茶的利润上升来自开店，而同店与翻台同时在退。
+  </div>
+</section>
+
+<!-- ============ 话题三 ============ -->
+<section>
+  <div class="sec-head">
+    <div class="section-zh">话题三 · 单店模型与资本情况</div>
+    <div class="section-en">Topic III — Unit Economics and Capital Position</div>
+  </div>
+
+  <h3 class="q">3.1 单店模型<span class="en">Unit economics: new stores are good, old stores are not</span></h3>
+
+  <div class="answer">
+    <div class="a-first">新店与老店必须分开看：新开购物中心店坪效每平方米月均 1,868 元、较 2026 年之前开业门店高 47.3%，现金投资回收期 12.5 个月，快于招股书承诺的约 18 个月；而存量门店同店 −9.7%、翻台 3.1 降至 2.9。两组数字都是真的，指向相反的结论。<span class="badge hi">高置信</span></div>
+    <p><span class="label-zh">这两个数字为什么不矛盾</span><span class="label-en">Why both can be true</span>：坪效衡量的是单位面积产出，回收期衡量的是投资效率，单店日均衡量的是绝对额。小店模型的经济学正是——<strong>牺牲单店绝对收入，换取更低的单店投资额和更快的回收速度</strong>。中报对单店表现承压的解释亦为「平均餐厅面积减少所致」。</p>
+    <p><span class="label-zh">但同店下滑与门店结构无关</span><span class="label-en">Same-store decline is not a mix effect</span>：同店是可比口径，不受新开小店稀释。同店 −9.7% 与翻台 −6.5% 衡量的是存量门店的真实经营，这一层没有被结构变化解释掉。</p>
+    <div class="srcline">来源：2026 中期业绩公告（坪效 1,868 元、+47.3%、回收期 12.5 个月）；招股书（小店定义、单店投资额、回本期）。</div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>单店模型要素</th><th class="num">数值</th><th>口径与来源</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><strong>新店现金投资回收期</strong></td><td class="num up"><strong>12.5 个月</strong></td><td>2026 上半年新开门店，中期业绩公告</td></tr>
+      <tr><td>新店坪效（购物中心店）</td><td class="num up">1,868 元/㎡/月（+47.3%）</td><td>对比 2026 年之前开业门店，中期业绩公告</td></tr>
+      <tr><td>单店投资额（资本开支＋经营开支）</td><td class="num">240 万 至 370 万元</td><td>招股书，国内门店</td></tr>
+      <tr><td>隐含门店层面月现金流</td><td class="num">19.2 万 至 29.6 万元</td><td><span class="badge calc">本报告计算</span>投资额 ÷ 12.5 个月</td></tr>
+      <tr><td>小型餐厅定义</td><td class="num">建筑面积 &lt; 450 ㎡</td><td>招股书</td></tr>
+      <tr><td>2025 至 2027 新店中小店占比</td><td class="num">约 87%</td><td>招股书（2021 至 2024 年仅 20% 至 30%）</td></tr>
+      <tr><td>下沉市场小店回收期</td><td class="num">14.8 个月</td><td>公开披露</td></tr>
+      <tr><td>2026 年新店下沉市场占比目标</td><td class="num">超过 60%</td><td>公司规划</td></tr>
+      <tr><td>翻台率</td><td class="num down">2.9 次/日（上年 3.1）</td><td>中期业绩</td></tr>
+      <tr><td>客单价</td><td class="num down">54.4 元（上年 55.5 元）</td><td>中期业绩</td></tr>
+      <tr><td>堂食单店日均销售额</td><td class="num down">1.7 万元（上年 2.0 万元）</td><td>中期业绩，堂食口径</td></tr>
+      <tr><td>全口径单店日均收入</td><td class="num">2.20 万元</td><td><span class="badge calc">本报告计算</span>26.75 亿 ÷ 671 家均店 ÷ 181 天</td></tr>
+      <tr><td>成本结构（原材料／员工／租金水电）</td><td class="num">33.6%／25.4%／18.3%</td><td><span class="badge lo">2023 年口径</span>最新可得，2026 上半年未按此拆分披露</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="flag green">
+    <span class="ft">口径复现：本报告独立验证了「单店日均」的统计基础</span>
+    以 2026 上半年平均门店数 671 家（期初 609、期末 733）、堂食收入 20.14 亿元、181 天计算，得堂食单店日均 <strong>1.66 万元</strong>；以 2025 上半年平均门店 484 家、堂食收入 17.57 亿元计算，得 <strong>2.01 万元</strong>。两者与中报引用的「2.0 万元降至 1.7 万元」吻合，据此确认该指标为<strong>堂食口径而非全口径</strong>。若误按全口径理解，会把实际的 2.20 万元读成 1.7 万元，低估约 29%。
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">单店模型的双轨：新店在变好，老店在变差<span class="en">Two Tracks — New Stores Improving, Existing Stores Declining</span></div>
+    <svg viewBox="0 0 900 300" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="新店与老店指标对比">
+      <rect x="40" y="30" width="390" height="240" fill="#eaf2ed" stroke="#2a5c3f" stroke-width="1.6"/>
+      <text x="235" y="60" text-anchor="middle" font-size="17" font-weight="600" fill="#2a5c3f">新店（131 家）</text>
+      <text x="235" y="80" text-anchor="middle" font-size="12.5" font-style="italic" fill="#6b655c">New stores opened in 1H26</text>
+      <text x="235" y="128" text-anchor="middle" font-size="34" font-weight="600" fill="#2a5c3f">12.5 个月</text>
+      <text x="235" y="150" text-anchor="middle" font-size="13">现金投资回收期（招股书承诺约 18 个月）</text>
+      <text x="235" y="196" text-anchor="middle" font-size="26" font-weight="600" fill="#2a5c3f">+47.3%</text>
+      <text x="235" y="218" text-anchor="middle" font-size="13">坪效较 2026 年前门店</text>
+      <text x="235" y="250" text-anchor="middle" font-size="13" fill="#6b655c">1,868 元／㎡／月</text>
+
+      <rect x="470" y="30" width="390" height="240" fill="#fbeded" stroke="#8b2e2e" stroke-width="1.6"/>
+      <text x="665" y="60" text-anchor="middle" font-size="17" font-weight="600" fill="#8b2e2e">存量门店（同店口径）</text>
+      <text x="665" y="80" text-anchor="middle" font-size="12.5" font-style="italic" fill="#6b655c">Existing stores, comparable basis</text>
+      <text x="665" y="128" text-anchor="middle" font-size="34" font-weight="600" fill="#8b2e2e">−9.7%</text>
+      <text x="665" y="150" text-anchor="middle" font-size="13">同店销售额（15.35 亿元）</text>
+      <text x="665" y="196" text-anchor="middle" font-size="26" font-weight="600" fill="#8b2e2e">3.1 → 2.9</text>
+      <text x="665" y="218" text-anchor="middle" font-size="13">翻台率（次／日，−6.5%）</text>
+      <text x="665" y="250" text-anchor="middle" font-size="13" fill="#6b655c">客单价 55.5 元 → 54.4 元</text>
+    </svg>
+    <div class="chart-n">投资判断的分歧点就落在这两块之间：把绿茶看成「小店模型跑通、回收期领先」是右边那块被忽略；把它看成「效率崩塌」则是左边那块被忽略。真实结论是——新店模型确实有效，但它目前的作用是掩盖存量下滑，而不是逆转它。</div>
+  </div>
+
+  <h3 class="q">3.2 资本情况<span class="en">Capital: cheap, but cheap for a reason</span></h3>
+
+  <div class="answer">
+    <div class="a-first">股价 5.14 港元，较 7.19 港元发行价低 28.5%，上市 16 个月未收复发行价；总市值 39.87 亿港元，前瞻市盈率约 6.2 倍，为同业最低；压制估值的直接事件是二股东清仓式减持 15.96% 股本。<span class="badge hi">高置信</span></div>
+    <p><span class="label-zh">上市与破发</span><span class="label-en">IPO and first-day break</span>：2025 年 5 月 16 日上市，发行价 7.19 港元，融资认购 282 倍，8 家基石锁定 6.73 亿港元。首日即破发，收 6.29 港元、跌 12.52%，市值 42.36 亿港元。</p>
+    <p><span class="label-zh">募资用途</span><span class="label-en">Use of proceeds</span>：净额 7.46 亿港元——扩张餐厅网络 4.72 亿（63.3%）、浙江中央食材加工设施 1.963 亿（26.3%）、升级信息技术系统 4,030 万（5.4%，自上市起三年内使用）、营运资金 3,730 万。</p>
+    <p><span class="label-zh">二股东清仓</span><span class="label-en">Second-largest shareholder full exit</span>：2026 年 4 月 8 日，Partners Group Gourmet House Limited（瑞士合众集团控制）宣布清仓全部约 1.06 亿股、占已发行股本约 15.96%，市值约 9.42 亿港元，分大宗配售、售予投资基金、与战略性企业买方签谅解备忘录三部分执行。该股东 2017 年入股，锁定期 2025 年 11 月届满，选择在股价自 2025 年 12 月至 2026 年 4 月初累计上涨约 45% 的高位退出，属私募基金标准退出路径。</p>
+    <p><span class="label-zh">公司对冲动作</span><span class="label-en">Company response</span>：2026 年 5 月 6 日耗资约 250.1 万港元回购 27.92 万股。回购规模相对 9.42 亿港元的减持量级，对冲作用有限。</p>
+    <p><span class="label-zh">现金与分红</span><span class="label-en">Cash and dividend</span>：2025 年末现金及现金等价物 11.99 亿元（同比 +385.3%，主要为 IPO 募资到账）；2026 年中期派息每股 0.30 港元。</p>
+    <div class="srcline">来源：2025-05 上市公告与媒体报道；2026-04-08 减持公告；2026-05-06 回购披露；2026 中期业绩公告；行情数据为 2026 年 9 月初读数。</div>
+  </div>
+
+  <div class="chart">
+    <div class="chart-t">估值：净利几乎相同，市值相差 2.24 倍<span class="en">Near-Identical Earnings, 2.24x Valuation Gap</span></div>
+    <svg viewBox="0 0 900 320" style="width:100%;height:auto;font-family:'IM Fell English',Georgia,serif" role="img" aria-label="绿茶与小菜园估值对比">
+      <text x="30" y="34" font-size="13.5" fill="#6b655c">2026 上半年净利润（亿元人民币）</text>
+      <rect x="180" y="48" width="330" height="34" fill="#8b6c42"/>
+      <text x="522" y="72" font-size="16" font-weight="600">绿茶 2.91</text>
+      <rect x="180" y="92" width="328" height="34" fill="#6b655c"/>
+      <text x="520" y="116" font-size="16" font-weight="600">小菜园 2.89</text>
+      <text x="700" y="94" font-size="13.5" fill="#8b2e2e" font-weight="600">相差 0.7%</text>
+
+      <line x1="30" y1="148" x2="870" y2="148" stroke="#d6d0c4" stroke-width="1"/>
+
+      <text x="30" y="178" font-size="13.5" fill="#6b655c">总市值（亿港元）</text>
+      <rect x="180" y="192" width="184" height="34" fill="#8b2e2e"/>
+      <text x="376" y="216" font-size="16" font-weight="600" fill="#8b2e2e">绿茶 39.87</text>
+      <rect x="180" y="236" width="413" height="34" fill="#2a5c3f"/>
+      <text x="605" y="260" font-size="16" font-weight="600" fill="#2a5c3f">小菜园 约 89.4</text>
+      <text x="700" y="216" font-size="13.5" fill="#8b2e2e" font-weight="600">相差 2.24 倍</text>
+
+      <text x="180" y="300" font-size="15" font-weight="600">前瞻市盈率　绿茶 <tspan fill="#8b2e2e" font-size="20">6.2 倍</tspan>　对　小菜园 <tspan fill="#2a5c3f" font-size="20">14.1 倍</tspan></text>
+      <text x="180" y="316" font-size="11.5" font-style="italic" fill="#6b655c">Forward P/E, annualised from 1H26 net profit, HKD/CNY 0.91</text>
+    </svg>
+    <div class="chart-n">上下两组条形使用各自标尺（单位不同，不可跨组比长度），组内比例严格按数值绘制。前瞻市盈率以 2026 上半年净利年化、港元兑人民币 0.91 计算。小菜园股本按上市首日市值 114 亿港元对应 9.70 港元推算得 11.75 亿股，市值为 2026 年 9 月 1 日收盘价 7.61 港元对应值；绿茶行情为 2026 年 9 月初读数，两者存在数日时点差。</div>
+  </div>
+</section>
+
+<!-- ============ 风险信号 ============ -->
+<section>
+  <div class="sec-head">
+    <div class="section-zh">风险信号表</div>
+    <div class="section-en">Risk Signal Matrix — Identified by Critic</div>
+  </div>
+  <div class="tw">
+  <table>
+    <thead><tr><th>信号</th><th>证据</th><th class="num">影响</th><th>验证时点</th></tr></thead>
+    <tbody>
+      <tr class="hl">
+        <td><strong>增长对开店的单点依赖</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Single dependence on new openings</span></td>
+        <td>新店贡献收入增量的 142.9%，同店为 −42.9%。若不开店，上半年收入为 −7.2%。</td>
+        <td class="num"><span class="badge" style="background:#8b2e2e;color:#fff;border-color:#8b2e2e">高</span></td>
+        <td>2027 年规划 213 家，增速自然放缓；届时同店若未转正，收入增速将向个位数甚至负值收敛</td>
+      </tr>
+      <tr>
+        <td><strong>量价齐跌</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Both traffic and ticket falling</span></td>
+        <td>翻台 −6.5% 且客单 −2.0%。小菜园是价跌量升（主动降价），绿茶两者同向下行。</td>
+        <td class="num"><span class="badge" style="background:#8b2e2e;color:#fff;border-color:#8b2e2e">高</span></td>
+        <td>2026 年报同店与翻台读数</td>
+      </tr>
+      <tr>
+        <td><strong>外卖战略与行业风向相反</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Delivery bet against sector direction</span></td>
+        <td>绿茶外卖 +24.1% 并称仍有 5% 空间；小菜园主动收缩 −10.6%；美团 CEO 王兴在 2026 一季度业绩会预警下半年行业订单量或同比负增长（2025 年补贴大战推高基数所致）。</td>
+        <td class="num"><span class="badge mid">中</span></td>
+        <td>2026 全年外卖收入增速；平台补贴政策变化</td>
+      </tr>
+      <tr>
+        <td><strong>二股东减持余量与股价压制</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Overhang from PE exit</span></td>
+        <td>15.96% 股本分三种方式退出，其中「与战略性企业买方签谅解备忘录」一段的完成情况未见后续公开确认。</td>
+        <td class="num"><span class="badge mid">中</span></td>
+        <td>后续权益披露；若仍有余量，构成持续供给压力</td>
+      </tr>
+      <tr>
+        <td><strong>成本结构无最新披露</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Cost breakdown not updated</span></td>
+        <td>原材料／员工／租金占比最新可得口径为 2023 年（33.6%／25.4%／18.3%），2026 上半年未按此拆分公开。</td>
+        <td class="num"><span class="badge mid">中</span></td>
+        <td>无法判断门店层面经营利润率的方向，是本研究最大的单一数据缺口</td>
+      </tr>
+      <tr>
+        <td><strong>海外门店数为 2026 年 2 月末口径</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Overseas count is a February datapoint</span></td>
+        <td>17 家为 2 月末公开数，中报未逐一披露 6 月末海外门店明细，本报告的海外单店测算据此设 18 至 22 家区间。</td>
+        <td class="num"><span class="badge lo">低</span></td>
+        <td>访谈或年报补充；区间上下限对结论（海外单店为国内 1.9 至 2.3 倍）不构成方向性影响</td>
+      </tr>
+      <tr>
+        <td><strong>预制菜与 OEM 结构的历史包袱</strong><br><span style="font-size:12px;color:#6b655c;font-style:italic">Pre-made food and OEM legacy</span></td>
+        <td>长期无自建央厨、依赖约 205 家第三方加工厂（招股书口径）；2024 年六部委预制菜国标的豁免只覆盖「中央厨房配送自有门店」，跨主体 OEM 配送不在豁免内。首个自建央厨为 IPO 募投项目。<br><span style="font-size:12px;color:#6b655c">本条承继本机构 2026-07 绿茶专项研究结论，本轮未重新取证。</span></td>
+        <td class="num"><span class="badge mid">中</span></td>
+        <td>浙江中央食材加工设施投产进度（募资 1.963 亿港元，占募资 26.3%）</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ 裁定 ============ -->
+<div class="verdict">
+  <div class="v-k">评审裁定 · Critic Verdict</div>
+  <h4>绿茶买到了规模，还没买到效率。它当前的低估值不是错杀，是市场对「增长必须持续付费」的定价。</h4>
+  <div class="verdict-en">Green Tea has bought scale but not yet efficiency. The 6.2x multiple is not a mispricing — it is the market pricing growth that must be continuously paid for.</div>
+  <p>三个话题收敛到同一个结论：<strong>新店模型是有效的</strong>（回收期 12.5 个月，快于招股书承诺的 18 个月；坪效较老店高 47.3%），<strong>海外是真正的亮点</strong>（6.1% 的收入贡献 30.8% 的增量，单店效率为国内 1.9 至 2.3 倍，且 100 家／15 亿元的长期目标经测算自洽）；但<strong>这两点目前的作用是掩盖存量下滑，而不是逆转它</strong>。</p>
+  <p>与同业比较给出了最清晰的判据：绿茶与小菜园上半年净利几乎完全相同（2.91 对 2.89 亿元），市值相差 2.24 倍。市场在为翻台率的方向定价，不是为利润增速定价。绿茶利润 +24.4% 而翻台下行，拿到 6.2 倍；小菜园利润 −24.3% 而翻台 +12.9%，拿到 14.1 倍。</p>
+  <p><strong>对客户最有操作价值的一句：</strong>判断绿茶的下一个关键读数不是收入或利润，而是<strong>同店与翻台率</strong>。2027 年开店规划 213 家，门店基数增速自然放缓，届时同店若仍为负，收入增速会迅速向同店收敛——今天 16.8% 的增长与 −9.7% 的同店之间那 26 个百分点的缺口，就是这个模型的全部风险敞口。</p>
+  <div class="vgrid">
+    <div class="vcell"><div class="k">综合置信度 CONFIDENCE</div><div class="v">7.4 / 10</div><div class="d">高置信 7 处 · 中置信 11 处 · 低置信 2 处（计分口径见附注）</div></div>
+    <div class="vcell"><div class="k">数据充分度 DATA</div><div class="v">中上</div><div class="d">中报口径完整；门店层面经营利润率为唯一结构性缺口</div></div>
+    <div class="vcell"><div class="k">最该追问的一项 KEY QUESTION</div><div class="v">门店层面利润率</div><div class="d">新店回收期 12.5 个月能否在下沉市场规模化复制</div></div>
+  </div>
+</div>
+
+<div class="fb">
+  这份报告对您是否有用？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=greentea_2026h1" target="_blank" rel="noopener">点此反馈 · Send Feedback</a>
+</div>
+
+<!-- ============ 分析师附注 ============ -->
+<div class="note">
+  <h4>分析师附注</h4>
+  <div class="h-en">Analyst's Note — Methodology, Confidence Calibration, and Independent View</div>
+
+  <h5>一、置信度总表</h5>
+  <p>正文共 20 处带徽章结论。计分口径：高置信 9 分、中置信 7 分、低置信 4 分，加权得 <strong>（7×9 + 11×7 + 2×4）÷ 20 = 7.4 分</strong>。</p>
+  <ul>
+    <li><strong>高置信（7 处 · 徽章「高置信」）</strong>：2026 上半年财务与经营数据（收入、利润、堂食外卖拆分、门店数、翻台率、客单价、同店）；开店进度与小店模型规划；海外收入、增速与门店目标；新店坪效与 12.5 个月回收期；IPO、募资用途与二股东减持事实；四家同业中期业绩对照。均直接取自公司公告或招股书原文。</li>
+    <li><strong>中置信（11 处 · 徽章「中置信」5 处 ＋ 徽章「本报告计算」6 处）</strong>：增长归因拆解、海外单店效率测算与目标自洽性检验、前瞻市盈率与市值对比、单店日均口径复现、隐含门店层面月现金流、全口径单店日均、外卖行业基数效应判断。锚点数据均为公开披露，推导步骤为本报告计算，已在正文逐项标注。「本报告计算」徽章在计分上等同于中置信。</li>
+    <li><strong>低置信（2 处 · 徽章「低置信」）</strong>：成本结构（2023 年口径，与 2026 年可比性受限）；海外门店数（2026 年 2 月末口径，用于测算时已设为区间而非单点）。</li>
+  </ul>
+
+  <h5>二、计算方法与假设</h5>
+  <ul>
+    <li><strong>增长归因</strong>：2025 上半年收入由 26.748 亿 ÷ 1.168 反推得 22.901 亿元，与公开披露的 22.904 亿元相差 0.01%，验证通过。同店基数由 15.35 亿 ÷ 0.903 反推。</li>
+    <li><strong>平均门店数</strong>：以期初期末算术平均。2026 上半年为（609 + 733）÷ 2 = 671 家，两端均为披露值。2025 上半年为（465 + 502）÷ 2 = 484 家，其中期末 502 家为披露值，<strong>期初 465 家系由 2025 年末 609 家、全年门店数同比 +31% 反推</strong>，属推算值。真实的时间加权平均会低于算术平均（新店在期内陆续开出），因此本报告的单店日均为<strong>偏保守</strong>估计，实际单店产出略高。</li>
+    <li><strong>单店日均口径复现</strong>：本报告用独立数据算出 2.01 万元与 1.66 万元，与中报引用的 2.0 万元、1.7 万元吻合（偏差 2% 以内），据此确认该指标为堂食口径。这一步的意义在于——若按全口径理解，同一指标应为 2.20 万元，误读会低估约 29%。按本报告口径计算的降幅为 −17.4%，与公开表述的约 −15% 在同一量级，差异来自期初门店数推算的取值。</li>
+    <li><strong>前瞻市盈率</strong>：以 2026 上半年净利润简单年化（乘 2），港元兑人民币按 0.91。餐饮存在季节性（下半年通常含旺季），简单年化可能低估全年利润，因此实际前瞻市盈率或低于 6.2 倍——这不改变与同业对比的方向。</li>
+    <li><strong>小菜园股本</strong>：由上市首日市值 114 亿港元 ÷ 收盘价 9.70 港元推得 11.75 亿股，未考虑上市后可能的股本变动。市值为 2026 年 9 月 1 日收盘口径，与绿茶行情读数存在数日时点差。</li>
+  </ul>
+
+  <h5>三、数据缺口与处理</h5>
+  <ul>
+    <li><strong>门店层面经营利润率</strong>——这是本研究最重要的缺口。多轮检索未取得 2026 上半年口径。<strong>本报告未给推算值</strong>，理由是：该指标高度依赖原材料、人工、租金三项的最新占比，而三项最新可得口径为 2023 年；绿茶正处于门店结构（大店转小店）与市场结构（一二线转下沉）双重切换期，2023 年的费率基准不可迁移，误差量级会超过被估计值本身。侧向代理数据为九毛九披露的太二 14.9%、怂火锅 3.5%，可作量级参照但不可作绿茶的估计值。</li>
+    <li><strong>2026 年 6 月末海外门店明细</strong>——中报只给了合计收入未给门店明细。已用 18 至 22 家区间测算并在正文标注区间结果，未给单点数字。</li>
+    <li><strong>二股东减持的执行完成度</strong>——公告披露了三种退出方式，但「与战略性企业买方签谅解备忘录」一段的最终执行未见后续公开确认。已列入风险信号表而非结论区。</li>
+  </ul>
+
+  <h5>四、分析师独立看法与分歧点</h5>
+  <ul>
+    <li><strong>与卖方乐观叙事的分歧</strong>：市场对绿茶的正面叙述集中在「收入利润双增、小店模型跑通、出海想象力」。这三点本报告都认同且逐项给了数据支撑，<strong>但它们没有回答一个问题——存量门店在变差这件事，靠什么逆转。</strong>新店回收期 12.5 个月说明的是「新投的钱回得快」，不是「已有的店在变好」。把前者当作后者的证据，是当前多数正面分析的共同缺陷。</li>
+    <li><strong>与看空叙事的分歧</strong>：以「翻台率下滑、单店日均下降 15%」论证绿茶效率崩塌，同样不严谨。单店日均的下降相当程度上是门店模型主动切换（450 平方米以下小店从占比 20% 至 30% 升至 87%）的算术后果，公司自己在中报中也归因于「平均餐厅面积减少」。<strong>真正能证明效率恶化的证据只有一个——同店 −9.7% 与翻台 −6.5%，因为它们是可比口径。</strong>看空方引用的很多数字其实证明不了他们的论点。</li>
+    <li><strong>我认为被市场低估的一点</strong>：海外。17 家门店、6.1% 的收入占比，贡献了 30.8% 的收入增量，单店效率是国内的约两倍。对一家总市值仅 39.87 亿港元的公司，这个板块的期权价值没有被定价——但它的兑现依赖东南亚开店节奏，而不是任何存量经营的改善，因此与国内的问题相互独立。</li>
+    <li><strong>我认为被市场高估的一点</strong>：外卖。24.3% 的收入占比、+24.1% 的增速看起来是亮点，但小菜园在同一时期主动把外卖砍了 10.6%、把堂食占比从 60.7% 提到 67%，且其 7 月堂食实收 +29.6% 正在验证这个选择。两家对同一渠道做出了相反判断。需要区分的是：王兴预警的下半年订单负增长是 2025 年补贴大战的<strong>基数效应</strong>，不等于需求塌陷——但对绿茶而言结果相同，行业顺风在下半年消失，+24.1% 的增速要靠自身份额而非行业增量来维持。</li>
+    <li><strong>关于承继性结论</strong>：风险表中「预制菜与 OEM 结构」一条来自本机构 2026 年 7 月的绿茶专项研究，本轮未重新取证，已在该条目下标注。其余全部结论均基于本轮检索的公开材料。</li>
+  </ul>
+
+  <h5>五、待核实项</h5>
+  <ul>
+    <li>2026 上半年门店层面经营利润率，及原材料／员工／租金三项的最新占比</li>
+    <li>2026 年 6 月末港澳及海外门店的分地区明细</li>
+    <li>浙江中央食材加工设施（募资 1.963 亿港元）的投产进度与实际自供比例</li>
+    <li>二股东 15.96% 股本的最终去向与是否仍有未消化余量</li>
+    <li>小菜园 2026 上半年门店层面经营利润率（用于与绿茶做同口径对比）</li>
+  </ul>
+
+  <h5>六、合规声明</h5>
+  <p>本报告全部内容来自公司公告、招股书、交易所披露与公开媒体报道，不含绿茶集团（6831.HK）、海底捞（6862.HK）、九毛九（9922.HK）、小菜园（0999.HK）任何未公开的经营数据、合同条款或供应商价格。所有标注「本报告计算」的数字均为基于上述公开数据的推导，推导步骤已在正文或本附注中写明，可独立复核。</p>
+</div>
+
+<footer>
+  <span>MERLIN 咨询情报系统 · 模式B 客户提纲研究</span>
+  <span>报告编号 greentea_2026h1 ｜ 生成于 2026-09-14</span>
+</footer>
+
+</div>
+</body>
+</html>
