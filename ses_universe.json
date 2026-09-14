@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T17:11:04.190604Z",
+  "generated_at": "2026-09-14T17:35:16.150974Z",
   "years": [
     2019,
     2020,
@@ -10,7 +10,7 @@
     2025
   ],
   "min_revenue": 1000000000,
-  "universe_size": 8590,
+  "universe_size": 8595,
   "screened": 799,
   "distribution": {
     "赛道外": 250,
@@ -5774,8 +5774,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.0671,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.0704,
       "peer_sga_median": 0.3546,
       "sga_vs_peer": -0.0716,
       "sga_pctile": 0.75,
@@ -10485,8 +10485,8 @@
       "sic": "5912",
       "sic_desc": "Retail-Drug Stores and Proprietary Stores",
       "peer_n": 24,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.0796,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.0829,
       "t1b": "缺SG&A"
     },
     {
@@ -13502,8 +13502,8 @@
       "sic": "5900",
       "sic_desc": "Retail-Miscellaneous Retail",
       "peer_n": 24,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.2152,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.2185,
       "t1b": "缺SG&A"
     },
     {
@@ -14176,14 +14176,14 @@
       "t1b": "让而无本"
     },
     {
-      "window": "2019-2024",
-      "years": 5,
-      "revenue_latest": 1685658000,
-      "revenue_cagr": 0.025032895434929925,
-      "gm_trend": -0.030729028440275863,
-      "gm_latest": 0.38695393727553273,
-      "opm_trend": -0.17545200794244717,
-      "opm_latest": -0.12150329426253724,
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 1503511000,
+      "revenue_cagr": 0.0015462898696469995,
+      "gm_trend": -0.037682420325718335,
+      "gm_latest": 0.38000054539009026,
+      "opm_trend": -0.13849548453825417,
+      "opm_latest": -0.08454677085834424,
       "sga_trend": null,
       "sga_latest": null,
       "gm_series": [
@@ -14191,14 +14191,16 @@
         0.4224,
         0.3722,
         0.3754,
-        0.387
+        0.387,
+        0.38
       ],
       "opm_series": [
         0.0539,
         0.0702,
         0.0191,
         -0.0174,
-        -0.1215
+        -0.1215,
+        -0.0845
       ],
       "notes": [],
       "cik": "0001084869",
@@ -14209,7 +14211,7 @@
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
       "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.0167,
+      "gm_vs_peer": 0.0097,
       "t1b": "缺SG&A"
     },
     {
@@ -16518,45 +16520,6 @@
     {
       "window": "2019-2025",
       "years": 6,
-      "revenue_latest": 1291474000,
-      "revenue_cagr": 0.09434283138649047,
-      "gm_trend": -0.06009540326639705,
-      "gm_latest": 0.12322199285467612,
-      "opm_trend": -0.039997866178886544,
-      "opm_latest": 0.05043461966714003,
-      "sga_trend": -0.034084655682232484,
-      "sga_latest": 0.0588002545928141,
-      "gm_series": [
-        0.1833,
-        0.1089,
-        0.0228,
-        0.058,
-        0.1553,
-        0.1616,
-        0.1232
-      ],
-      "opm_series": [
-        0.0904,
-        0.0178,
-        -0.0722,
-        -0.0514,
-        0.0492,
-        0.0938,
-        0.0504
-      ],
-      "notes": [],
-      "cik": "0000866829",
-      "ticker": "HLX",
-      "name": "HELIX ENERGY SOLUTIONS GROUP, INC.",
-      "flag": "灰",
-      "sic": "1389",
-      "sic_desc": "Oil & Gas Field Services, NEC",
-      "t1b": "同业样本不足",
-      "peer_n": 5
-    },
-    {
-      "window": "2019-2025",
-      "years": 6,
       "revenue_latest": 2839000000,
       "revenue_cagr": 0.039749596876077486,
       "gm_trend": 0.04320120444818831,
@@ -16685,6 +16648,45 @@
       "sic_desc": "Aircraft Engines & Engine Parts",
       "t1b": "同业样本不足",
       "peer_n": 4
+    },
+    {
+      "window": "2019-2025",
+      "years": 6,
+      "revenue_latest": 1291474000,
+      "revenue_cagr": 0.09434283138649047,
+      "gm_trend": -0.06009540326639705,
+      "gm_latest": 0.12322199285467612,
+      "opm_trend": -0.039997866178886544,
+      "opm_latest": 0.05043461966714003,
+      "sga_trend": -0.034084655682232484,
+      "sga_latest": 0.0588002545928141,
+      "gm_series": [
+        0.1833,
+        0.1089,
+        0.0228,
+        0.058,
+        0.1553,
+        0.1616,
+        0.1232
+      ],
+      "opm_series": [
+        0.0904,
+        0.0178,
+        -0.0722,
+        -0.0514,
+        0.0492,
+        0.0938,
+        0.0504
+      ],
+      "notes": [],
+      "cik": "0000866829",
+      "ticker": "HOS",
+      "name": "HELIX ENERGY SOLUTIONS GROUP, INC.",
+      "flag": "灰",
+      "sic": "1389",
+      "sic_desc": "Oil & Gas Field Services, NEC",
+      "t1b": "同业样本不足",
+      "peer_n": 5
     },
     {
       "window": "2019-2025",
@@ -18398,8 +18400,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3868,
-      "gm_vs_peer": -0.2264,
+      "peer_gm_median": 0.3833,
+      "gm_vs_peer": -0.2229,
       "t1b": "缺SG&A"
     },
     {
@@ -19963,8 +19965,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3868,
-      "gm_vs_peer": -0.0328,
+      "peer_gm_median": 0.3833,
+      "gm_vs_peer": -0.0293,
       "peer_sga_median": 0.3247,
       "sga_vs_peer": 0.0181,
       "sga_pctile": 0.5,
@@ -28430,8 +28432,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.1459,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.1492,
       "peer_sga_median": 0.3129,
       "sga_vs_peer": 0.1148,
       "sga_pctile": 0.0,
@@ -28972,8 +28974,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3868,
-      "gm_vs_peer": -0.0714,
+      "peer_gm_median": 0.3833,
+      "gm_vs_peer": -0.0679,
       "t1b": "缺SG&A"
     },
     {
@@ -29984,8 +29986,8 @@
       "sic": "5900",
       "sic_desc": "Retail-Miscellaneous Retail",
       "peer_n": 24,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.2362,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.2395,
       "t1b": "缺SG&A"
     },
     {
@@ -31611,8 +31613,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3868,
-      "gm_vs_peer": -0.2292,
+      "peer_gm_median": 0.3833,
+      "gm_vs_peer": -0.2257,
       "t1b": "缺SG&A"
     },
     {
@@ -32896,8 +32898,8 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3703,
-      "gm_vs_peer": 0.0207,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.024,
       "peer_sga_median": 0.3546,
       "sga_vs_peer": -0.0886,
       "sga_pctile": 1.0,
@@ -35108,12 +35110,12 @@
       "sic": "5990",
       "sic_desc": "Retail-Retail Stores, NEC",
       "peer_n": 8,
-      "peer_gm_median": 0.3705,
-      "gm_vs_peer": 0.0162,
+      "peer_gm_median": 0.367,
+      "gm_vs_peer": 0.0197,
       "peer_sga_median": 0.3129,
       "sga_vs_peer": 0.0536,
       "sga_pctile": 0.25,
-      "gm_pctile": 0.5,
+      "gm_pctile": 0.38,
       "sga_gap_to_best": 0.1005,
       "t1b": "✗无成本优势"
     },
