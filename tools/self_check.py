@@ -147,6 +147,42 @@ def check_predictions():
         say("  无到期未记分项")
 
 
+# ── C5 · 无触发词的 skill 必须在 CLAUDE.md 路由表里有一行 ───────────────────
+# 2026-09-15 装 huashu-report 时发现的缺口：它的 frontmatter 零触发词，
+# 而 Merlin/Earner/restaurant-research 都有，于是「帮我做个报告」永远被前三个截胡。
+# 这类缺口在装任何第三方 skill 时都会重现，所以要检测而不是记住。
+def check_skill_routing():
+    say("\n[C5] 无触发词的 skill 是否已进 CLAUDE.md 路由表")
+    claude = os.path.join(REPO, "CLAUDE.md")
+    ctxt = open(claude, encoding="utf-8").read() if os.path.exists(claude) else ""
+    skdir = os.path.join(REPO, ".claude/skills")
+    n_no_trigger = 0
+    for name in sorted(os.listdir(skdir)):
+        hub = os.path.join(skdir, name, "SKILL.md")
+        if not os.path.exists(hub):
+            continue
+        txt = open(hub, encoding="utf-8").read()
+        # ⚠ 首跑假阳性修正（2026-09-15）：michael-polanyi 的触发短语写在 description 里，
+        #   用「」逐个列举，只是没用「触发词」这三个字。只认字面串会误报。
+        #   判据应是「有没有可匹配的短语」，不是「有没有用某个词来标注它们」。
+        #   修检测器不改 skill（1.1p：宁可漏报也不要习惯性误报）。
+        fm = txt.split("---")[1] if txt.count("---") >= 2 else txt
+        quoted = re.findall(r"[「『][^」』]{2,20}[」』]", fm)
+        has_trigger = ("触发词" in txt or "唤醒口令" in txt or len(quoted) >= 3)
+        if has_trigger:
+            continue
+        n_no_trigger += 1
+        routed = name in ctxt
+        say(f"  {name:<24} 无触发词  {'✅ 已在 CLAUDE.md 路由表' if routed else '❌ 未进路由表'}")
+        if not routed:
+            flag("P2", name,
+                 "该 skill 的 frontmatter 没有触发词，且 CLAUDE.md 里没有它的路由规则 — "
+                 "它只能靠 description 语义匹配，会被有触发词的同类 skill 截胡。"
+                 "解法：在 CLAUDE.md 路由表加一行（不要改第三方文件，upstream 更新会冲突）")
+    if n_no_trigger == 0:
+        say("  所有 skill 都有触发词，无需路由兜底")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -155,6 +191,7 @@ def main():
     check_orphan_rules()
     check_threshold_drift()
     check_predictions()
+    check_skill_routing()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

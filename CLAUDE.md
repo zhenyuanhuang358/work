@@ -100,11 +100,49 @@
 
 ---
 
+# 报告类任务的路由（2026-09-15 定，因 huashu-report 无触发词）
+
+**⚠ 为什么需要这条规则**：Merlin / Earner / restaurant-research 都有明确触发词列表，
+**而 huashu-report 的 frontmatter 里一个触发词都没有，只靠 description 语义匹配**。
+后果：说「帮我做个报告」会被前三个截胡。**这条路由规则就是补那个缺口——
+不改第三方文件（upstream 更新会冲突），在自己这侧解决（profile 1.2h 的同一条推论）。**
+
+**判据是可观测的交付形态，不是题材：**
+
+| 交付形态 | 走谁 | 产物 |
+|---|---|---|
+| **多章、≥20 页、要目录页码 / Exhibit 编号 / 跨页表头、PDF、供引用或存档** | **huashu-report** | `数据表.json` + `build.py` + PDF |
+| 客户提纲 / 访谈准备 / 逐条回答 / 投资尽调准备 | Merlin | 单篇 HTML（R-E6） |
+| 财报季度分析 | Earner | 单篇 HTML（14 节模板） |
+| 品牌 / 渠道 / 消费行业调研（非提纲非访谈） | restaurant-research | 单篇 HTML |
+| 横向翻页网页 PPT（杂志风 / 瑞士风 / 发布会分享页） | `guizang-ppt-skill` | 单 HTML |
+| 单篇文章 | `design` | — |
+
+**⚠ 本表一律写 skill 的精确可调用名**（如 `guizang-ppt-skill` 不是 `guizang-ppt`）——
+写错名字的路由表比没有路由表更糟：照着它叫会叫不中，而且看起来像已经解决了。
+`tools/self_check.py` 的 C5 会逐个核对表里的名字。
+
+**一句话判据：交付物是「一页 HTML」还是「一本 PDF」。** 是一本就走 `huashu-report`。
+
+**显式点名一律优先**：用户说「用 huashu-report」「/huashu-report」时直接走它，不再判形态。
+
+**⚠ huashu-report 的硬门槛，接活前先确认**：它要求每个数字有 value / basis（口径）/ n（样本量）/ src（出处）。
+**口径写不出一句完整的话，这个数字就不能用。**「大概是这样」「我记得好像」它会直接拒收——
+**这不是它难伺候，这是它和前面几个 skill 的本质差别，接活前要先跟用户对齐数据能不能到这个标准。**
+
+---
+
 # Critic 质量门控
 
 **每次 `SendUserFile` 推送 HTML 研究报告前，必须先运行 `.claude/skills/critic/SKILL.md`，输出裁定结果（PASS / CONDITIONAL / REWRITE），再决定是否推送。**
 
 适用范围：Merlin / Earner / restaurant-research / buffett-analyst 生成的所有 HTML 报告。
+
+**⚠ huashu-report 不走 Critic**：它交付的是 PDF 不是 HTML，且自带两层自检——
+`render.py` 的机械自检（图表编号连续性、目录页码一致、空页、占位符残留、**逐页四边留白几何实测**）
+＋ SKILL.md 里的逐页肉眼清单（列缝粘连、负值画成零高度、标注被版心切掉、孤儿段、长表跨页表头丢失）。
+**Critic 的五维评审是为 HTML 报告设计的，套到 PDF 上大部分维度失效。**
+→ **但 D1（数据来源）/ D2（内部数字一致性）/ D3b（答案前置）仍然适用，交付前手工过这三项。**
 
 ---
 
