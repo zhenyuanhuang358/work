@@ -1,0 +1,92 @@
+name: Self Check
+
+# 为什么要自动跑：
+# 2026-09-15 的诊断结论是「一条规则在拿到承载物之前不算立住，承诺记住不是机制」。
+# 如果 rule_replay.py 与 self_check.py 只能靠我想起来手动跑，它们就变成了
+# 第三条和第四条孤儿规则——正是它们本身要检测的那种病。
+# 所以它们必须自己跑。
+
+on:
+  schedule:
+    # 每周一 13:10 UTC（09:10 ET，开盘前）。
+    # ⚠ schedule 只在默认分支运行，本仓库默认分支是 claude/install-claude-hud-d51E6（profile 1.1f）。
+    - cron: '10 13 * * 1'
+  workflow_dispatch:
+  push:
+    branches: [main, claude/install-claude-hud-d51E6]
+    paths:
+      # 任何一处规则或工具改动，立刻重跑——「改动阈值后必须立刻回放」的落地
+      - '.claude/skills/**/SKILL.md'
+      - 'tools/**'
+      - 'memory/profile.md'
+      - 'memory/state/predictions.md'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # rule_replay 要读 stock_prices.json 的全部历史
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 自检器（孤儿规则 / spoke 路径 / 阈值漂移 / 预测到期）
+        id: selfcheck
+        continue-on-error: true
+        run: |
+          python3 tools/self_check.py | tee /tmp/self_check.txt
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+
+      - name: 规则回放（阈值型规则的历史触发分布）
+        id: replay
+        continue-on-error: true
+        run: |
+          python3 tools/rule_replay.py | tee /tmp/rule_replay.txt
+
+      - name: 写回报告
+        run: |
+          mkdir -p memory/state
+          {
+            echo "# 自检报告（自动生成，勿手改）"
+            echo
+            echo "> 由 .github/workflows/self-check.yml 生成 · $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "> 手动重跑：\`python3 tools/self_check.py\` 与 \`python3 tools/rule_replay.py\`"
+            echo
+            echo '## 自检器'
+            echo '```'
+            cat /tmp/self_check.txt
+            echo '```'
+            echo
+            echo '## 规则回放'
+            echo '```'
+            cat /tmp/rule_replay.txt
+            echo '```'
+          } > memory/state/self_check_report.md
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add memory/state/self_check_report.md
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "chore: self-check $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+            # ⚠ 必须先 rebase 再 push —— burry-screen.yml 2026-09-01 run#7 就是在这里
+            # 丢了整轮结果：算完了，push 被 (fetch first) 拒绝，产物静默停在上一轮。
+            git pull --rebase origin "$GITHUB_REF_NAME" || true
+            git push origin "HEAD:$GITHUB_REF_NAME"
+          fi
+
+      - name: 有 P1 则让工作流失败（P1 必须当次处理）
+        run: |
+          if grep -q '\[P1\]' /tmp/self_check.txt; then
+            echo "::error::自检发现 P1 项，见 memory/state/self_check_report.md"
+            grep -A2 '\[P1\]' /tmp/self_check.txt
+            exit 1
+          fi
+          echo "无 P1"
