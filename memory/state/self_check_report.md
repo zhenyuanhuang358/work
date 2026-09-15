@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T17:58:55Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T18:07:12Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-09-15 17:58 UTC
+自检器 · 2026-09-15 18:07 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -42,6 +42,11 @@
 [C4] 预测记分卡  (1.1j：不记分就学不到)
   明细 11 条｜已记分 10（排除⊘）｜✅5 ❌4｜命中率 50.0%｜待验 7 条
   无到期未记分项
+
+[C5] 无触发词的 skill 是否已进 CLAUDE.md 路由表
+  critic                   无触发词  ✅ 已在 CLAUDE.md 路由表
+  guizang-ppt-skill        无触发词  ✅ 已在 CLAUDE.md 路由表
+  huashu-report            无触发词  ✅ 已在 CLAUDE.md 路由表
 
 ==========================================================================
 全部通过。
