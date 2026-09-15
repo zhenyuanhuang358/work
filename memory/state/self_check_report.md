@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T12:03:27Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T17:58:55Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-09-15 12:03 UTC
+自检器 · 2026-09-15 17:58 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -13,6 +13,7 @@
   long-running-agent-sop   hub 109 行   spoke 引用  3 处
   critic                   hub 119 行   spoke 引用  2 处
   viral-content-agent      hub 141 行   spoke 引用  7 处
+  huashu-report            hub 179 行   spoke 引用 15 处
   merlin                   hub 181 行   spoke 引用  1 处
   burry                    hub 183 行   spoke 引用  8 处
   us-options-agent         hub 181 行   spoke 引用 10 处
@@ -91,10 +92,10 @@
     vix              3d >20%    0 天    0.0%
 
   各指标平均单日绝对变动（门槛是否该共用的依据）：
-    term_structure   2.40%   (10% 门槛 = 其常态的 4.2 倍)
+    term_structure   2.44%   (10% 门槛 = 其常态的 4.1 倍)
     skew             1.77%   (10% 门槛 = 其常态的 5.7 倍)
-    vvix             3.19%   (10% 门槛 = 其常态的 3.1 倍)
-    vix              4.19%   (10% 门槛 = 其常态的 2.4 倍)
+    vvix             3.23%   (10% 门槛 = 其常态的 3.1 倍)
+    vix              4.27%   (10% 门槛 = 其常态的 2.3 倍)
 
 [5] 期限溢价开窗率（VIX3M/VIX ≥ 1.20）
   开窗 17/34 天  (50.0%)   区间 1.106 – 1.295
