@@ -1,6 +1,6 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T12:03:08Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T12:03:27Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
@@ -19,7 +19,7 @@
   restaurant-research-skill hub 187 行   spoke 引用 16 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
   earner                   hub 131 行   spoke 引用  6 处
-  tail-risk-monitor        hub 201 行   spoke 引用 12 处
+  tail-risk-monitor        hub 200 行   spoke 引用 12 处
   sleeper                  hub 164 行   spoke 引用  5 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
@@ -43,11 +43,7 @@
   无到期未记分项
 
 ==========================================================================
-发现 1 项：
-
-  [P3] tail-risk-monitor/SKILL.md
-        hub 201 行，超 CLAUDE.md 的 200 行目标 1 行
-
+全部通过。
 ```
 
 ## 规则回放
