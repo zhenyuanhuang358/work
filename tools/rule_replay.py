@@ -35,6 +35,8 @@ ACCEL_1D = 0.10                         # 单日 >10%
 ACCEL_3D = 0.20                         # 三日累计 >20%
 ACCEL_UPWARD_ONLY = True                # 9/11 修正：方向限定为上行
 RESONANCE_MIN = 2                       # ≥2 项共振才变灯
+RESIDENT_WINDOW = 20                    # 常驻项判定窗口（必须与 SKILL.md 的「近 20 个交易日」一致）
+RESIDENT_THRESHOLD = 0.80               # 窗口内 >80% 非绿档 → 常驻项
 SKEW_NEVER_ALONE = True                 # 铁律：SKEW 不得单独触发红灯
 TERM_PREMIUM_OPEN = 1.20                # 30-45 天窗口开启线
 
@@ -157,10 +159,22 @@ def main():
                                  f"{max(raw):.2f} 还有 {gap:.0%} — 阈值够不着，该指标对灯色无贡献"))
             else:
                 print(f"  {'':<16} └ 样本期未触发，但阈值距极值仅 {gap:.1%}，够得着，不判死条款")
-        if g == 0.0:
-            findings.append(("恒触发", m, f"{n} 个交易日从未进入绿档（黄 {y:.0f}% 红 {rd:.0f}%）— "
-                                          f"它在共振计数里是一个常驻的 +1，"
-                                          f"使「≥{RESONANCE_MIN} 项共振」实际退化为「≥{RESONANCE_MIN-1} 项」"))
+        # ⚠ 常驻项判定必须用与规则相同的窗口。
+        #   SKILL.md 定义的是「近 20 个交易日 >80% 非绿档」，而本检测器一度用了全部历史，
+        #   导致本地（22 天）与 CI（34 天，fetch-depth:0）给出相反结论。
+        #   2026-09-15 CI 首跑暴露——工具与规则的窗口必须一致，同阈值漂移是同一类问题。
+        w = vals[-RESIDENT_WINDOW:]
+        if w:
+            ng_ratio = sum(1 for v in w if v >= 1) / len(w)
+            print(f"  {'':<16} └ 近 {len(w)} 日非绿档占比 {ng_ratio:.0%}"
+                  f"（常驻线 {RESIDENT_THRESHOLD:.0%}）"
+                  f"{'  → 判为常驻项，应剔除出共振计数' if ng_ratio > RESIDENT_THRESHOLD else ''}")
+            if ng_ratio > RESIDENT_THRESHOLD:
+                findings.append(("常驻项", m,
+                                 f"近 {len(w)} 个交易日 {ng_ratio:.0%} 处于非绿档（全期 {100-g:.0f}%）— "
+                                 f"它是常态水平不是异常信号，在共振计数里构成常驻 +1，"
+                                 f"使「≥{RESONANCE_MIN} 项共振」退化为「≥{RESONANCE_MIN-1} 项」。"
+                                 f"按 SKILL.md「常驻项剔除」应降为观察项"))
 
     # ── 2. 灯色分布 ─────────────────────────────────────────────────────
     print("\n[2] 灯色分布")
