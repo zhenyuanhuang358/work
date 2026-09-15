@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T12:02:15Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-09-15T12:03:08Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-09-15 12:02 UTC
+自检器 · 2026-09-15 12:03 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -19,12 +19,12 @@
   restaurant-research-skill hub 187 行   spoke 引用 16 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
   earner                   hub 131 行   spoke 引用  6 处
-  tail-risk-monitor        hub 207 行   spoke 引用 11 处
+  tail-risk-monitor        hub 201 行   spoke 引用 12 处
   sleeper                  hub 164 行   spoke 引用  5 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
-  合计 138 处 spoke 引用，0 处失效
+  合计 139 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -46,7 +46,7 @@
 发现 1 项：
 
   [P3] tail-risk-monitor/SKILL.md
-        hub 207 行，超 CLAUDE.md 的 200 行目标 7 行
+        hub 201 行，超 CLAUDE.md 的 200 行目标 1 行
 
 ```
 
