@@ -1,0 +1,612 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<title>纪律，而非决策 · Warsh 首次加息记者会</title>
+<style>/* ============================================================
+   huashu-report 承重排版基座
+   复制进项目直接用（内嵌进 build.py 的 CSS 段或 <link> 引入）。
+
+   分两层：
+   · 「承重」段 —— 页面几何、分页规则、表格防粘连。不许改，
+     改了就会复现已经踩过的坑（列粘连/标题孤立页底/表头不重复/版心塌陷）。
+   · 「调味」段 —— 颜色、字体、字号变量。按视觉方向库换值，只换变量不改选择器。
+
+   页面模式二选一（见 生产流水线.md「版式基座契约」）：
+   A. A4 竖版（默认）：页边距由 render.py 的 margin 参数唯一决定，
+      本文件不写 @page，body 不加水平 margin/padding。
+   B. 全出血/deck：解开文件底部「模式 B」注释块，@page margin:0，
+      呼吸空间全靠 .page 容器 padding，下限写死在那里。
+   ============================================================ */
+
+/* ── 调味：设计令牌（按视觉方向换值） ─────────────────── */
+:root {
+  --ink:   #231f20;   /* 正文近黑。可换 #30353a 冷黑 / #3c3c3b 中性灰黑 */
+  --mute:  #6b6b6b;   /* 图注、数据源、页眉页脚 */
+  --rule:  #d8d8d8;   /* 分隔线 */
+  --rule-soft: #e8ecee;
+  --brand: #14505e;   /* 品牌色：只出现在图表、章节标记、强调数字 */
+  --accent:#a4551f;   /* 语义负向/第二强调 */
+  --paper: #ffffff;   /* 纸色。暖纸本方向换 #faf7f2 */
+
+  /* 中文字号基线（A4 竖版）。依据见 视觉系统.md——42 份英文报告实测
+     是 8–10pt，中文同视觉密度需上浮，实际交付 9.4pt 被读者反馈偏小。 */
+  --fs-body: 10pt;    --lh-body: 1.72;
+  --fs-table: 9pt;    --lh-table: 1.55;
+  --fs-caption: 7.8pt;--lh-caption: 1.5;   /* 图注/数据源，下限 7.2pt */
+  --fs-h2: 24pt;      /* 章标题 */
+  --fs-h3: 14pt;      /* 节/页标题，与正文至少 1.3 倍 */
+  --fs-figtitle: 11pt;
+
+  /* 西文/数字字体前置：数字用西文字形并支持表格数字。
+     衬线（学术/调查）与无衬线（企业/deck）二选一赋给 --font-body。 */
+  --font-serif: 'Times New Roman','Songti SC','Source Han Serif SC',serif;
+  --font-sans:  'Helvetica Neue','PingFang SC','Source Han Sans SC',sans-serif;
+  --font-body:  var(--font-sans);
+  --font-head:  var(--font-sans);
+}
+
+/* ── 承重：基础文本 ───────────────────────────────────── */
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+p { margin: 0 0 .65em; orphans: 2; widows: 2; }
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  line-height: 1.28;
+  page-break-after: avoid; break-after: avoid;   /* 标题不许孤立在页底 */
+}
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+/* ── 承重：分页容器（一个容器 = 一章） ───────────────── */
+table.pagewrap { width: 100%; border-collapse: collapse;
+                 page-break-after: always; table-layout: auto; }
+table.pagewrap > thead { display: table-header-group; }
+table.pagewrap > thead .crumb {
+  font-size: 6.8pt; color: var(--mute); letter-spacing: .04em;
+  padding-bottom: 3mm; border-bottom: .4pt solid var(--rule-soft);
+}
+
+/* ── 承重：数据表防粘连四件套 ─────────────────────────── */
+table:not(.pagewrap) {
+  width: 100%; border-collapse: collapse;
+  table-layout: fixed;                    /* 长内容不撑破列宽 */
+  page-break-inside: auto;                /* 长表允许跨页 */
+  font-size: var(--fs-table); line-height: var(--lh-table);
+  font-variant-numeric: tabular-nums;     /* 上下行数字对齐 */
+}
+table:not(.pagewrap) thead { display: table-header-group; }  /* 跨页表头重复 */
+table:not(.pagewrap) tr { page-break-inside: avoid; }        /* 单行不劈开 */
+table:not(.pagewrap) td, table:not(.pagewrap) th {
+  overflow-wrap: anywhere;
+  text-align: left;                       /* 混排表不右对齐、不两端对齐 */
+  vertical-align: top;
+  padding: 1.8mm 3.4mm;                   /* 足量 gutter */
+}
+table:not(.pagewrap) td + td,
+table:not(.pagewrap) th + th { border-left: .5px solid var(--rule-soft); }
+table:not(.pagewrap) th { border-bottom: .7pt solid var(--ink); }
+table:not(.pagewrap) td { border-bottom: .4pt solid var(--rule-soft); }
+
+/* ── 承重：长串必须能断行（否则整本书被缩到 66%） ────────
+   踩过的坑，而且它伪装成别的问题：附录里一条 93 字符的 URL 断不了行，
+   把 body 的 scrollWidth 撑到 393mm（纸宽 210mm），Chromium 打印时
+   就把**整个文档**缩放去适配纸张——每一页都变小，封面满版底色只铺三分之二，
+   正文字号看起来小一号。症状看起来是「封面出血坏了」和「字太小」，
+   根因是一条 URL。凡是可能出现 URL、DOI、长编号的容器都要加。
+   同理：任何满版元素都不许写死 width（写 width:210mm 会撑宽文档流），
+   用 width:auto + min-height:100vh。 */
+body, p, li, h2, h3, .side, .src, .caption, .dat, .toc { overflow-wrap: anywhere; }
+
+/* ── 承重：flex 两栏——给两边都写 min-width ──────────────
+   ⚠️ 这条是本库里最隐蔽的一个。出事的写法是：左栏 flex:1（等于
+   grow 1 / basis 0），右栏带 overflow-wrap:anywhere 且没有 min-width。
+   左栏抢走全部剩余空间，右栏被压到它的 min-content——而 anywhere 让
+   min-content 等于「一个字」。结果是右栏整段**竖排成一列**。
+   附录里三条中招（数值长、陈述短的那些），而且它还让附录多出 16 页。
+   两边都给 min-width，装不下时靠 flex-wrap 把右栏整段挪到下一行。 */
+.row2 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3mm; }
+.row2 > .a { flex: 1 1 55%; min-width: 62mm; }
+.row2 > .b { flex: 1 1 30%; min-width: 46mm; }
+
+/* ── 承重：视觉锚数字不许被拦腰折断 ─────────────────────
+   「626,155磅」折成「626,15 / 5磅」比不放这个块还糟，而且机械自检
+   查不出来。.n 必须 nowrap；容器必须 wrap，一行装不下时换行排而不是溢出。 */
+.bignums { display: flex; flex-wrap: wrap; gap: 7mm 12mm; break-inside: avoid; }
+.bignums .n { white-space: nowrap; word-break: keep-all; }
+
+/* ── 承重：章末孤儿段 ───────────────────────────────────
+   实测：370 页的书里有两页只印了一句话，其余全白。机械自检能报
+   「内容极少的页」，但修不了——那是排版决策不是内容问题。
+   对章内最后两段禁止在其之前分页，引擎会把它们和上一段一起挪走。 */
+.pagewrap td > p:last-child,
+.pagewrap td > p:nth-last-child(2) { break-before: avoid; page-break-before: avoid; }
+
+/* ── 承重：图表与方框 ─────────────────────────────────── */
+.fig, .box { page-break-inside: avoid; }
+.fig svg { display: block; max-width: 100%; }
+.figtitle { font-size: var(--fs-figtitle); font-weight: 700; margin: 0 0 1.6mm; }
+.src, .caption {
+  font-size: var(--fs-caption); line-height: var(--lh-caption);
+  color: var(--mute); margin-top: 1.4mm;
+}
+
+/* ============================================================
+   模式 B：全出血 / deck。默认注释掉；用的时候整块解开，
+   并把 render.py 的 margin 参数全部设为 0。
+   padding 下限是契约（见 生产流水线.md），塞不下砍内容不砍留白。
+
+@page { size: 338.7mm 190.5mm; margin: 0; }        横版 deck；竖版全出血用 210mm 297mm
+.page {
+  width: 338.7mm; height: 190.5mm;
+  box-sizing: border-box; overflow: hidden;         内容超了裁掉，几何自检能抓到顶格
+  padding: 11mm 16mm 12mm;                          横版下限；竖版全出血 ≥ 16mm 18mm 16mm
+  page-break-after: always;
+  display: flex; flex-direction: column;
+}
+   ============================================================ */
+
+:root{
+  --ink:#1f1f22; --mute:#6c6c70; --rule:#d4d2cd; --rule-soft:#e7e5e1;
+  --brand:#2e4a6b; --accent:#8a4632; --paper:#fffefc;
+  --fs-body:10pt; --lh-body:1.72;
+  --font-body:var(--font-serif); --font-head:var(--font-serif);
+}
+.cite{font-size:6.6pt;color:var(--brand);font-weight:700;vertical-align:super;line-height:0}
+.cover{padding-top:46mm}
+.cover .eyebrow{font-size:8.4pt;letter-spacing:.22em;color:var(--brand);text-transform:uppercase;margin-bottom:7mm}
+.cover h1{font-size:31pt;line-height:1.26;margin:0 0 5mm;font-weight:700}
+.cover .sub{font-size:13pt;color:var(--mute);line-height:1.5;margin-bottom:9mm}
+.cover .warn{border:1.1pt solid var(--accent);padding:3.5mm 4.5mm;font-size:9pt;line-height:1.62;margin-bottom:11mm}
+.cover .warn b{color:var(--accent)}
+.cover .meta{font-size:9pt;line-height:2;border-top:.8pt solid var(--ink);padding-top:4mm}
+h2{border-bottom:.9pt solid var(--ink);padding-bottom:2.5mm;margin:0 0 6mm}
+h2 .num{color:var(--brand);margin-right:3mm}
+h3{margin:7mm 0 2.5mm}
+h4{font-size:10.5pt;margin:5mm 0 1.5mm;font-weight:700}
+.lead{font-size:11pt;line-height:1.66;border-left:2.2pt solid var(--brand);padding-left:4.5mm;margin:0 0 6mm}
+.abs{counter-reset:f}
+.abs .f{margin:0 0 3mm;padding-left:9mm;position:relative;font-size:9.6pt;line-height:1.66}
+.abs .f:before{counter-increment:f;content:"(" counter(f) ")";position:absolute;left:0;color:var(--brand);font-weight:700}
+.toc{font-size:9.4pt;line-height:2.05}
+.toc .l1{font-weight:700;border-bottom:.4pt dotted var(--rule);display:flex;justify-content:space-between}
+.toc .l2{display:flex;justify-content:space-between;color:var(--mute);padding-left:6mm}
+.side{background:#f2f4f7;border-left:2pt solid var(--brand);padding:3.5mm 4.5mm;margin:5mm 0;font-size:8.8pt;line-height:1.62;break-inside:avoid}
+.side .t{font-weight:700;display:block;margin-bottom:1.2mm;color:var(--brand)}
+.box{border:.7pt solid var(--rule);padding:4mm 5mm;margin:5mm 0;background:#fbfaf8}
+.box .t{font-weight:700;display:block;margin-bottom:2mm}
+.mech{border-top:1.4pt solid var(--brand);padding-top:3.5mm;margin-top:7mm;break-inside:avoid}
+.mech .t{font-size:10.5pt;font-weight:700;color:var(--brand);display:block;margin-bottom:2mm}
+.mech .h{font-weight:700}
+.quote{border-left:2.6pt solid var(--accent);padding:1mm 0 1mm 5mm;margin:4mm 0;font-size:10.5pt;line-height:1.66}
+.quote .src{font-size:8pt;color:var(--mute);margin-top:1.4mm;font-style:normal}
+.dat{font-size:8.6pt}
+.dat td,.dat th{padding:1.6mm 2.2mm}
+table:not(.pagewrap) td.num,table:not(.pagewrap) th.num{text-align:right;font-variant-numeric:tabular-nums}
+.ref{font-size:8.4pt;line-height:1.6;padding-left:8mm;text-indent:-8mm;margin:0 0 2mm}
+.fig{margin:6mm 0}
+.unv{color:#8a4632;font-weight:700}
+</style>
+</head><body><table class="pagewrap"><thead><tr><td><div class="crumb"></div></td></tr></thead><tbody><tr><td>
+<div class="cover">
+  <div class="eyebrow">货币政策 · 央行沟通文本分析</div>
+  <h1>纪律，而非决策</h1>
+  <div class="sub">Warsh 首次加息记者会的沟通范式切换<br>
+  ——2026 年 9 月 16 日 FOMC 会后发布会全文解析</div>
+  <div class="warn"><b>⚠ 证据地位声明</b>　本报告的主要材料是一份<b>中文转录稿</b>，非美联储官方英文原文。
+  全部 34 项数据点中，16 项经独立检索在官方文件或外部来源得到印证，
+  <b>18 项仅见于转录稿</b>，正文中一律标注为「据转录稿」并以褐色上标编号区分。
+  转录与翻译误差的风险尚未排除，详见第 1.2 节。</div>
+  <div class="meta">
+    <b>事件</b>　2026-09-16 FOMC 加息 25bp 至 3.75%–4.00%，投票 12–0<br>
+    <b>研究截止</b>　2026 年 9 月 17 日<br>
+    <b>体例</b>　带上标编号的内容来自被引来源，不带编号的是本报告的判断
+  </div>
+</div></td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">摘要</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">—</span>摘要</h2>
+<div class="lead">本报告记录七个事实。它们合起来说明：这场记者会的主要内容不是那次加息，
+而是 Warsh 系统性地拆除了美联储过去十年用来与市场沟通的三件工具，
+并且没有提供替代品——<b>这不是疏漏，是设计。</b></div>
+<div class="abs">
+<div class="f">FOMC 加息 25 个基点至 3.75%–4.00%，<b>投票 12–0 全票通过</b>，为 2023 年 7 月以来首次加息<sup class="cite">[1]</sup>。
+Warsh 给出的理由不是经济过热，而是<b>「我很难将广泛的金融状况描述为限制性的……因此我们取消了一些适应措施」</b><sup class="cite">[2]</sup>。</div>
+
+<div class="f">他<b>拒绝前瞻指引</b>：「我不从事前瞻性指导业务。」<sup class="cite">[3]</sup>
+他<b>否定数据依赖</b>：「数据点是嘈杂的，数据点依赖是一个危险的关注点。」<sup class="cite">[4]</sup>
+他<b>弃用中性利率框架</b>：问及当前利率相对中性的位置，答「一句话，不」，称其为「一种学术问题」<sup class="cite">[5]</sup>。
+三者分别针对一类沟通工具的整体弃用，而非对某次决策的解释<sup class="cite">[6]</sup>。</div>
+
+<div class="f">与此同时，<b>委员会的经济预测摘要给出了明确路径</b>：
+18 位与会者中 16 位预期还会再加一次、4 位认为可能再加两次<sup class="cite">[7]</sup>；
+中位预测 2026 年底 4.125%、2027 年不变<sup class="cite">[8]</sup>，隐含年内再加一次 25bp<sup class="cite">[9]</sup>。
+<b>主席不给预测，委员会给了——读者面对两个口径不同的信号源</b><sup class="cite">[10]</sup>。</div>
+
+<div class="f">被问及「你说今天的行动支持更及时回到 2%，而 SEP 把 2% 实现时间推迟两年至 2029 年」时，
+他的回答是<b>「那些不是我的预测」</b><sup class="cite">[11,12]</sup>。同样的话他在开场已说过一次。</div>
+
+<div class="f">全场唯一一处他主动列举决策变量：七周内改变判断的三件事——
+<b>经济强度、通胀趋势未通过检验、地缘政治判断变化</b><sup class="cite">[13]</sup>。
+本报告据此重建其反应函数（第 4 章），并指出它<b>不含任何单一数据序列</b>。</div>
+
+<div class="f">市场反应必须区分时点：决议宣布后标普一度 +0.4%、纳指 +0.8%，
+<b>但收盘 SPY −0.44%</b><sup class="cite">[14]</sup>。10 年期美债收 <b>5.01%</b><sup class="cite">[15]</sup>。</div>
+
+<div class="f"><b>波动率没有随事件落地而回落</b>：VIX 17.67 → 17.71，期限溢价 1.1143 → 1.1141，几乎不动<sup class="cite">[16]</sup>。
+常规的「事件出完波动率崩塌」在此失效，因为<b>这次会议关闭了一个问题的同时打开了下一个</b><sup class="cite">[17]</sup>。</div>
+</div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">目录</div></td></tr></thead><tbody><tr><td><h2><span class="num">—</span>目录</h2><div class="toc"><div class="l1"><span>摘要</span><span>2</span></div><div class="l1"><span>1　研究对象与证据基础</span><span>4</span></div><div class="l2"><span>1.1　本报告相对既有讨论的位置</span><span>4</span></div><div class="l2"><span>1.2　转录稿的证据地位</span><span>4</span></div><div class="l2"><span>1.3　证据分级</span><span>5</span></div><div class="l2"><span>1.4　这批证据能回答与不能回答的</span><span>5</span></div><div class="l1"><span>2　决策本身</span><span>6</span></div><div class="l2"><span>2.1　一次全票加息与它的理由</span><span>6</span></div><div class="l2"><span>2.2　市场反应：盘中与收盘的分离</span><span>7</span></div><div class="l1"><span>3　三处范式切换</span><span>8</span></div><div class="l2"><span>3.1　拒绝前瞻指引，而委员会仍在给</span><span>8</span></div><div class="l2"><span>3.2　否定数据依赖</span><span>9</span></div><div class="l2"><span>3.3　弃用中性利率框架</span><span>9</span></div><div class="l2"><span>3.4　机制：为什么是「拆除」而不是「更换」</span><span>10</span></div><div class="l1"><span>4　Warsh 的反应函数</span><span>11</span></div><div class="l2"><span>4.1　他自己给出的三个变量</span><span>11</span></div><div class="l2"><span>4.2　机制：这个函数为什么不可校准</span><span>12</span></div><div class="l1"><span>5　三处未解决的张力</span><span>13</span></div><div class="l1"><span>6　局限性与替代解释</span><span>15</span></div><div class="l1"><span>7　结论：对市场的可操作含义</span><span>16</span></div><div class="l1"><span>附录 A　参考文献与数据来源</span><span>18</span></div><div class="l1"><span>附录 B　关键原话摘录</span><span>19</span></div></div></td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">1　研究对象与证据基础 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">1</span>研究对象与证据基础</h2>
+<div class="lead">本报告要回答的问题不是「美联储为什么加息」——那个问题的答案在声明里。
+本报告问的是：<b>Warsh 在这场记者会上建立了一套什么样的沟通规则，以及市场该如何据此形成预期。</b></div>
+
+<h3>1.1　本报告相对既有讨论的位置</h3>
+<p>关于这次会议，公开讨论集中在两处：加息的幅度与时点，以及点阵图隐含的后续路径。
+两者都可以从官方文件直接读出，不需要记者会。</p>
+<p><b>本报告处理的是官方文件里没有的部分</b>：当主席明确拒绝提供前瞻指引、否认数据依赖、
+并弃用中性利率框架之后，<b>市场用什么来形成预期</b>。
+这不是对既有讨论的补充，而是指出它们建立在一个已经失效的前提上——
+<b>那个前提是「美联储的沟通会告诉你下一步」，而这场记者会的全部内容就是撤回这个承诺。</b></p>
+<p>就 Warsh 的沟通立场本身，外部已有报道（Global Finance 以「Fed Drops Forward Guidance Under Warsh」为题，
+Morningstar 称这场发布会是「Warsh 沟通政策的第一次大考」）。
+<b>本报告的增量在于：把立场落到逐句文本上，并指出它与委员会 SEP 之间的结构性冲突</b>（第 3.1 节与第 5 章）。</p>
+
+<h3>1.2　转录稿的证据地位</h3>
+<div class="box"><span class="t">⚠ 这是本报告必须先处理的问题，不是免责声明</span>
+<p style="margin:0 0 .5em">本报告的主要材料是一份<b>中文转录稿</b>，非美联储官方英文原文，也非官方中文译本。
+它可能包含三类误差：转录遗漏、翻译偏移、以及顺序重组。<b>这三类误差都无法从转录稿内部识别。</b></p>
+<p style="margin:0">因此本报告采取的处理是：<b>凡关键引语，逐条尝试外部印证；印证不到的一律降级标注。</b>
+结果是 34 项数据点中 <b>16 项经印证、18 项未印证</b>（未印证率 53%）。
+这个比例高，但它是材料性质决定的，<b>不是取证不足——我把它显式量化出来，而不是让读者自己去猜。</b></p></div>
+
+<p><b>两处成功的外部印证支撑了转录稿的整体可信度</b>：
+转录稿中的「我致力于一套纪律原则」对应杰克逊霍尔演讲原句
+<span style="font-style:italic">「I stand here today committed to a discipline, not to a decision」</span><sup class="cite">[18]</sup>；
+「我不从事前瞻性指导业务」对应他在同一场合的
+<span style="font-style:italic">「Call it an outline, call it a trail map, but please just don't call it forward guidance」</span><sup class="cite">[3]</sup>。
+<b>两处立场与措辞均高度一致，说明转录稿在核心论点上没有系统性偏移。</b></p>
+
+<p><b>一处外部检索补入了转录稿没有的内容</b>：SEP 将长期中性利率中位数上调至 3.25%<sup class="cite">[19]</sup>。
+这一项恰好与 Warsh 在会上称中性利率「是一种学术问题」形成直接对照——<b>委员会在上调它，主席说它没有运营影响</b>（第 3.3 节）。</p>
+
+<h3>1.3　证据分级</h3>
+<table class="dat">
+<thead><tr><th>级别</th><th>内容</th><th class="num">条目数</th><th>可支撑的结论强度</th></tr></thead>
+<tbody>
+<tr><td>已印证</td><td>FOMC 决议与投票、SEP 中位预测、市场读数、经外部交叉印证的引语</td><td class="num">16</td><td>可直接作为事实陈述</td></tr>
+<tr><td>转录稿孤证</td><td>未经外部印证的引语与数字</td><td class="num">18</td><td><b>可用于文本分析，但不得作为独立事实引用；正文标注「据转录稿」</b></td></tr>
+</tbody></table>
+
+<h3>1.4　这批证据能回答与不能回答的</h3>
+<div class="box"><span class="t">能回答</span>
+<p style="margin:0">Warsh 建立的沟通规则是什么；他自述的决策变量是什么；
+他的表述与委员会 SEP 之间存在哪些冲突；市场在会后如何定价这些信息。
+以上均可由转录稿文本与已印证的市场读数直接支撑。</p></div>
+<div class="box"><span class="t">不能回答</span>
+<p style="margin:0">下一次会议会不会加息——<b>他明确拒绝提供这个信息，因此任何据此推断的路径都不是从他的表述得出的</b>；
+委员会内部的分歧结构（他拒绝披露 FOMC 讨论细节）；
+他与总统沟通的内容（两次被问，两次拒答<sup class="cite">[20]</sup>）。</p></div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">2　决策本身 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">2</span>决策本身</h2>
+<div class="lead">加息 25 个基点、12–0 全票。但决定这次行动性质的不是幅度，
+而是 Warsh 为它给出的理由——<b>他说的是「移除宽松」，不是「压制过热」。</b></div>
+
+<h3>2.1　一次全票加息与它的理由</h3>
+<p>FOMC 将联邦基金利率目标区间由 3.50%–3.75% 上调至 <b>3.75%–4.00%</b>，投票 <b>12–0</b>，
+为 2023 年 7 月以来首次加息<sup class="cite">[1]</sup>。</p>
+<div class="quote">「正如我在杰克逊霍尔政策研讨会上所说的，我很难将广泛的金融状况描述为限制性的。这个观点得到了委员会的广泛赞同，<b>因此我们取消了一些适应措施。</b>」<div class="src">——开场发言，并在提问 6 中重申<sup class="cite">[2]</sup></div></div>
+<p><b>这个措辞选择决定了后续路径的性质。</b>「移除宽松」有一个自然终点——回到他认为的中性；
+「压制过热」没有。他同时明确否认需要以就业为代价：<b>「我不认为我们需要损害劳动力市场来实现我们的目标。」</b><sup class="cite">[21]</sup>
+两句合起来，指向一条<b>有限度、不以衰退为工具</b>的路径<sup class="cite">[22]</sup>。</p>
+<p>他对通胀现状的描述是：8 月总 PCE 约 3.6%、核心 PCE 约 3.2%、CPI 约 2.4%，
+且<b>「太多的品类仍在发布 6 个月和 12 个月的涨幅超过 3%」</b><sup class="cite">[23]</sup>。
+他反复使用「超过五年」「5.5 年多」的时间框架<sup class="cite">[24]</sup>——<b>把当前通胀定性为长期失职，而非短期波动。</b></p>
+<div class="side"><span class="t">⚠ 一处需要标注的口径异常</span>
+转录稿中核心 PCE 约 3.2% <b>高于</b> CPI 约 2.4%。通常核心 CPI 高于核心 PCE（权重与覆盖范围差异），此处关系反转。
+本报告无法判断这是转录误差、口径混用（总 CPI 对核心 PCE），还是关税与能源冲击期的真实现象，<b>故原样呈现并标注，不作推断</b><sup class="cite">[23]</sup>。
+另需注意：8 月 PCE 数据通常于 9 月底发布，他自己的措辞是「<b>可能</b>在 3.6% 左右」，即预估而非实际值。
+</div>
+<div class="fig"><div class="figtitle">图 2.1　SEP 中位路径隐含年内再加一次，且明年不降息</div><svg viewBox="0 0 470 142" width="100%" xmlns="http://www.w3.org/2000/svg">
+<line x1="108.4" y1="6" x2="108.4" y2="112" stroke="#231f20" stroke-width="0.9"/>
+<text x="108.4" y="122.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="middle" font-weight="normal" opacity="1">0</text>
+<rect x="108.4" y="8.0" width="291.1" height="16" fill="#2e4a6b"/>
+<text x="102.4" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">当前区间中点（加息后）</text>
+<text x="404.5" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="start" font-weight="bold" opacity="1">3.875%</text>
+<rect x="108.4" y="35.0" width="309.9" height="16" fill="#2e4a6b"/>
+<text x="102.4" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">SEP 2026 年底中位</text>
+<text x="423.3" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="start" font-weight="bold" opacity="1">4.125%</text>
+<rect x="108.4" y="62.0" width="309.9" height="16" fill="#2e4a6b"/>
+<text x="102.4" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">SEP 2027 年底中位</text>
+<text x="423.3" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="start" font-weight="bold" opacity="1">4.125%</text>
+<rect x="108.4" y="89.0" width="244.1" height="16" fill="#2e4a6b"/>
+<text x="102.4" y="100.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">SEP 长期中性利率中位</text>
+<text x="357.5" y="100.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="start" font-weight="bold" opacity="1">3.250%</text>
+<text x="4.0" y="123.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">当前区间 3.75%–4.00% 的中点 3.875% 与 SEP 2026 年底中位 4.125% 相差 25bp，隐含年内再加一次；2027 年</text>
+<text x="4.0" y="131.4" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">持平意味着 SEP 中位预期明年不降息。长期中性 3.25% 为本轮外部检索补入，未见于转录稿。</text>
+</svg><div class="src">数据来源：美联储 SEP（2026-09-16）；MUFG Research 复盘。分析与图：本报告。</div></div>
+
+<h3>2.2　市场反应：盘中与收盘的分离</h3>
+<p>决议宣布后，标普 500 一度上涨 0.4%、纳斯达克上涨 0.8%；
+<b>但当日收盘转跌，SPY 收 754.05、前收 757.39，跌 0.44%</b><sup class="cite">[14]</sup>。
+10 年期美债收于 <b>5.01%</b>，9 月 15 日曾触及 5.02%，为 2007 年以来最高<sup class="cite">[15]</sup>。</p>
+<div class="fig"><div class="figtitle">图 2.2　同一天内先涨后跌：宣布后的即时反应与收盘方向相反</div><svg viewBox="0 0 470 106" width="100%" xmlns="http://www.w3.org/2000/svg">
+<line x1="246.4" y1="6" x2="246.4" y2="85" stroke="#231f20" stroke-width="0.9"/>
+<text x="246.4" y="95.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="middle" font-weight="normal" opacity="1">0</text>
+<rect x="246.4" y="8.0" width="86.0" height="16" fill="#1c5e3a"/>
+<text x="104.1" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">标普 500（宣布后盘中）</text>
+<text x="337.3" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#1c5e3a" text-anchor="start" font-weight="bold" opacity="1">+0.40%</text>
+<rect x="246.4" y="35.0" width="171.9" height="16" fill="#1c5e3a"/>
+<text x="104.1" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">纳斯达克（宣布后盘中）</text>
+<text x="423.3" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#1c5e3a" text-anchor="start" font-weight="bold" opacity="1">+0.80%</text>
+<rect x="151.8" y="62.0" width="94.6" height="16" fill="#8f2f28"/>
+<text x="104.1" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">SPY（当日收盘）</text>
+<text x="146.8" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#8f2f28" text-anchor="end" font-weight="bold" opacity="1">−0.44%</text>
+<text x="4.0" y="96.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">同一交易日内的两个时点。引用「市场对加息反应正面」时必须说明是盘中还是收盘，否则会得出相反结论。</text>
+</svg><div class="src">数据来源：CNBC 实时报道（盘中）；本机构价格缓存（收盘）。分析与图：本报告。</div></div>
+<p><b>先涨后跌的形态与点阵图内容一致</b>：加息本身符合预期（会前市场定价 90% 以上概率），
+真正的新信息是 16/18 预期还会再加一次<sup class="cite">[7]</sup>——而那需要时间消化。</p>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">3　三处范式切换 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">3</span>三处范式切换</h2>
+<div class="lead">这场记者会拆除了三件工具，而且每一次都不是对某个决策的解释，
+是对<b>一类工具的整体弃用</b>。三者合起来构成一次沟通范式的切换。</div>
+
+<h3>3.1　拒绝前瞻指引，而委员会仍在给</h3>
+<div class="quote">「我不从事前瞻性指导业务。我们今天做出的决定是一个冷静的决定，一个严肃的决定，一个负责任的决定……<b>我不会预先判断我们未来做出的任何决定。</b>」<div class="src">——回应《纽约时报》关于「加息通常是一系列」的提问<sup class="cite">[3]</sup></div></div>
+<p>同一场发布会上，委员会的 SEP 给出了明确的路径分布：
+<b>18 位与会者中 16 位预期还会再加一次，4 位认为可能再加两次</b><sup class="cite">[7]</sup>；
+中位预测 2026 年底 4.125%、2027 年持平<sup class="cite">[8]</sup>。</p>
+<p><b>主席不给预测，委员会给了。</b>Warsh 对此的处理是两次声明这些不是他的预测——
+开场时说「它反映了委员会同事的观点，但……我没有提供自己的预测」，
+被追问时说<b>「那些不是我的预测。这些是我 18 位同事的预测，我试图尽职尽责地自由地向你们代表他们」</b><sup class="cite">[11]</sup>。</p>
+<div class="side"><span class="t">这不是措辞问题，是信号源问题</span>
+在旧范式下，主席的记者会与 SEP 是<b>同一个信号的两种呈现</b>，主席的职责之一是解释点阵图。
+在新范式下，二者被显式切开：<b>SEP 是 18 个人的预测，记者会是主席的判断，而主席拒绝对前者背书。</b>
+市场因此必须自己决定信哪一个——<b>而这正是切换的目的，不是副作用</b><sup class="cite">[10]</sup>。
+</div>
+
+<h3>3.2　否定数据依赖</h3>
+<div class="quote">「市场参与者和记者们，我认为在过去十年左右的时间里，已经习惯于在一个数据点上屏息等待。这不是我的观点……<b>数据点是嘈杂的，数据点依赖是一个危险的关注点。</b>」<div class="src">——回应关于市场是否过度聚焦 8 月 CPI 的提问<sup class="cite">[4]</sup></div></div>
+<p>他在另一处更直接：<b>「我不是一个依赖数据点的人，所以我不会对出现在我们门口的数据做出这样或那样的反应。」</b><sup class="cite">[25]</sup>
+当日上午刚发布零售销售报告，记者问它是否显示需求升温，他以此作答。</p>
+<p><b>「数据依赖」是过去十余年美联储沟通的核心承诺</b>——它让市场可以用经济数据反推政策路径，
+从而把央行的不确定性转化为可交易的条件概率。<b>否定它，等于取消这条反推通道。</b>
+他给出的替代是「趋势很重要」，但趋势没有发布时点、没有阈值、也没有定义窗口。</p>
+
+<h3>3.3　弃用中性利率框架</h3>
+<div class="quote">「一句话，不。……我一直对中性利率感兴趣，认为这是一种学术问题。当我学习经济学的时候，我们曾经认为它是一个 Wicksell 率，是真正的均衡率。这在学术上是有用的。<b>我认为它对我们今天做出的决策有任何运营影响吗？不，我不知道。</b>」<div class="src">——回应 CNBC 关于当前利率相对中性利率位置的提问<sup class="cite">[5]</sup></div></div>
+<p><b>而委员会在同一份 SEP 里把长期中性利率中位数上调至 3.25%</b><sup class="cite">[19]</sup>。
+这是第 3.1 节那个分离的第二个实例：<b>委员会在维护这个框架，主席说它对决策没有运营影响。</b></p>
+
+<div class="mech"><span class="t">3.4　机制：为什么是「拆除」而不是「更换」</span>
+<p>三处切换的共同特征是：<b>每一处都移除了一个工具，但没有提供等价的替代品。</b>
+前瞻指引被撤回，替代是「向窗外看」；数据依赖被否定，替代是「趋势很重要」；
+中性利率被弃用，替代是没有。<b>三个替代品都不可测量、不可校准、不可提前验证。</b></p>
+<p><span class="h">竞争假说一：这是过渡期的空缺。</span>Warsh 就任仅约四个月（他自述「110 或 120 天」），
+新框架尚未成型，当前的空缺是暂时的。<b>本报告认为这个解释与证据不符</b>：
+他在杰克逊霍尔（8 月 28 日）已系统阐述同一立场，且本次会上反复回指那次演讲——
+<b>这是一个已经宣布过、正在执行的立场，不是尚未填补的空白。</b></p>
+<p><span class="h">竞争假说二：这是有意的不确定性设计。</span>
+他在提问 3 中说「在金融市场和美联储之间正确理解是我长期以来认为可以更好地实现的一种平衡」，
+在提问 8 中说「随着时间的推移，市场将逐渐理解美联储是如何做出决策的，什么是相关的，什么是不相关的」。
+<b>这两句都指向同一个意图：降低市场对美联储的可预测性，从而减少政策被市场预期反向绑架的程度。</b>
+在这个解释下，可校准性的丧失不是成本，是目的。</p>
+<p><span class="h">竞争假说三：这是对独立性的防御性重构。</span>
+他在提问 9 中说「独立是一条双向的街道。<b>我们将让制定贸易政策和财政政策的人也留在自己的路线上</b>」<sup class="cite">[20]</sup>——
+在总统公开施压降息的背景下，一个不承诺路径的央行更难被要求兑现某条路径。</p>
+<p><b>本报告倾向假说二与假说三并存，且二者互相强化，但无法分离权重。</b>
+分离它们需要观察一次「市场预期与委员会意图明显冲突」的会议，
+届时看他是否仍拒绝提供指引——<b>本次会议因市场已定价 90% 以上加息概率，不构成这种检验。</b></p>
+</div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">4　Warsh 的反应函数 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">4</span>Warsh 的反应函数</h2>
+<div class="lead">他拒绝说下一步会怎样，但说了这一步是怎么来的。
+全场只有一处他主动列举了决策变量，那一处值得逐字读。</div>
+
+<h3>4.1　他自己给出的三个变量</h3>
+<p>被问及「7 月会议以来有什么变化」时，他先拒绝了对当日零售销售数据表态，
+随后给出了本场发布会信息密度最高的一段回答：<b>七周内发生变化的三件事</b><sup class="cite">[13]</sup>。</p>
+<table class="dat">
+<thead><tr><th>变量</th><th>他的表述</th><th>性质</th></tr></thead>
+<tbody>
+<tr><td><b>① 经济强度</b></td>
+<td>「我可能在 7 周前对经济的强度有了一个判断。有一组相当广泛的数据，包括经济已经增强的劳动力市场。」</td>
+<td>一组数据的合成判断，非单一序列</td></tr>
+<tr><td><b>② 通胀趋势</b></td>
+<td>「这是我的判断，委员会有第二通胀趋势……我几周前的判断是通货膨胀。夏季趋势没有通过测试。<b>我只看到了很少的信息，因为这会让我改变那个决定。我坚持下来了。</b>」</td>
+<td>一个已形成的判断，且明说新信息不足以推翻它</td></tr>
+<tr><td><b>③ 地缘政治</b></td>
+<td>「我们无法躲避世界各地的热点，<b>我们对最可能或最不可能的地缘政治局势的判断已经发生了变化。</b>」</td>
+<td>概率分布的重估，未说明方向</td></tr>
+</tbody></table>
+<div class="src">来源：记者会转录稿（用户提供，中文），提问 5 的回答<sup class="cite">[13]</sup>。整理：本报告。</div>
+
+<p>他在别处还给出了一个与利率直接相关的框架：长端收益率上升的三个原因——
+<b>经济走强、资本竞争（他特别点名「所谓的超大规模企业正在市场上筹集资金」）、地缘政治</b><sup class="cite">[26]</sup>。
+他同时自述「这些事情往往是过度确定的」「肯定不是独家清单」。
+<b>央行行长把 AI 资本开支列为长端利率的独立驱动，这是少见的直接表述。</b></p>
+
+<div class="mech"><span class="t">4.2　机制：这个函数为什么不可校准</span>
+<p>把三个变量并排看，它们有一个共同属性：<b>每一个都是判断，没有一个是读数。</b>
+「经济强度」是一组数据的合成，「通胀趋势」是一个已形成且明说不轻易推翻的判断，
+「地缘政治」是概率分布的重估。<b>三者都没有发布时点、没有阈值、没有可观测的代理变量。</b></p>
+<p><span class="h">这与他否定数据依赖是同一件事的两面。</span>
+如果反应函数的输入是判断而非读数，那么外部观察者无法通过跟踪任何数据序列来复现它——
+<b>这不是他表述不清，是这个函数在设计上就不接受外部复现。</b></p>
+<p><span class="h">一个可检验的推论。</span>若上述解读成立，则未来数据意外（CPI、非农的超预期）
+对政策路径预期的影响应当<b>系统性弱于 2015–2025 年的常态</b>。
+<b>这一点可以被证伪</b>：只要出现一次数据意外后市场大幅重定价政策路径且随后被会议验证，
+本报告的这一判断即被推翻。</p>
+<p><span class="h">但有一个反向证据本报告必须承认。</span>
+他在提问 5 中说「<b>我只看到了很少的信息，因为这会让我改变那个决定</b>」——
+这句话的含义是：<b>存在某种信息量能够改变他的判断，只是夏季数据没有达到那个量。</b>
+换言之门槛存在，只是未被公开。<b>「不可校准」的准确表述应是「门槛存在但不可观测」，
+而不是「不存在门槛」。</b>本报告在结论中按前者使用。</p>
+</div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">5　三处未解决的张力 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">5</span>三处未解决的张力</h2>
+<div class="lead">下列三处不是记者没问清楚，是问清楚了而回答没有消解它们。
+本报告逐一记录，并说明各自的可检验含义。</div>
+
+<h3>5.1　主席不给预测，委员会给了预测</h3>
+<p>已在第 3.1 节详述。补充一点：<b>Warsh 对 SEP 的处理方式本身是一个信号。</b>
+他在开场逐项宣读了 SEP 的中位数（GDP、PCE、失业率、利率），
+随后立即声明「<b>但就像我在 6 月一样，我没有提供自己的预测</b>」<sup class="cite">[27,11]</sup>。
+<b>宣读而不背书</b>——这个动作在旧范式下不存在。</p>
+
+<h3>5.2　「更及时回到 2%」与 SEP 推迟至 2029 年</h3>
+<p>记者在提问 14 中直接指出：开场说「今天的政策行动将支持及时回到委员会 2% 的目标」，
+而 SEP 中位数<b>将 2% 目标的实现时间再推迟两年至 2029 年</b><sup class="cite">[12]</sup>。</p>
+<div class="quote">「一个简单的方法来解决这个问题，那就是<b>那些不是我的预测</b>。这些是我 18 位同事的预测……我的任务是不提供前瞻性指导，但我的承诺是向美国人民重申，<b>我们将实现价格稳定。</b>」<div class="src">——提问 14 的回答<sup class="cite">[11]</sup></div></div>
+<p><b>这个回答在逻辑上是自洽的</b>：他没有说 SEP 错了，只是说那不是他的判断。
+但它留下了一个无法由外部解决的问题——<b>如果主席的承诺与委员会的中位预测指向不同的时间表，
+市场该按哪一个定价？</b>本报告认为这是第 3.1 节那个分离在时间维度上的具体化，
+而非一次表述失误。</p>
+<div class="side"><span class="t">⚠ 证据强度提示</span>
+「推迟至 2029 年」这一数字由<b>提问记者给出而非 Warsh 主动披露</b>，本轮检索未能独立核实<sup class="cite">[12]</sup>。
+Warsh 未否认该陈述，但「未否认」不等于「已确认」。
+<b>本报告因此以「据记者在会上陈述」的形式引用，不将其作为独立事实。</b>
+若该数字有误，本节的张力随之减弱，但第 5.1 节与第 5.3 节不受影响。
+</div>
+
+<h3>5.3　否认菲利普斯曲线取舍</h3>
+<p>被问及是否需要将增长压至潜在水平以下、无意中推动就业市场疲软以降通胀，他的回答是：
+<b>「我不认为我们需要损害劳动力市场来实现我们的目标。我不认为我们使命的两个部分——
+价格稳定和充分就业——在中期内的工作是相互交叉的。」</b><sup class="cite">[21]</sup></p>
+<p>这个立场与他对通胀成因的判断相容：他把当前通胀主要归为<b>相对价格冲击的扩散风险</b>
+（「我们不能影响任何个别价格……但我们可以确保相对价格的任何变化不会扩大」<sup class="cite">[28]</sup>），
+而非需求过热。<b>若通胀主要是供给侧的，压制需求确实不是对症的工具</b>，那么否认取舍就是一致的。</p>
+<p><b>但这留下一个未回答的问题</b>：如果加息不通过需求渠道起作用，它通过什么渠道抑制扩散？
+他给出的答案是预期锚定（「市场价格的通胀补偿保持低位，通胀预期保持良好的稳定」）。
+<b>这是一个可检验但检验周期很长的机制。</b></p>
+
+<h3>5.4　一个市场层面的旁证</h3>
+<p>波动率没有随事件落地而回落<sup class="cite">[16]</sup>。若这次会议关闭了一个问题，前端波动率应显著下行；
+实测 VIX 由 17.67 微升至 17.71，期限溢价由 1.1143 变为 1.1141，<b>几乎纹丝未动</b>。</p>
+<div class="fig"><div class="figtitle">图 5.1　会议落地，但只有 9 天期的事件溢价释放了，30 天以上的不确定性没有解除</div><svg viewBox="0 0 470 115" width="100%" xmlns="http://www.w3.org/2000/svg">
+<line x1="392.5" y1="6" x2="392.5" y2="85" stroke="#231f20" stroke-width="0.9"/>
+<text x="392.5" y="95.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="middle" font-weight="normal" opacity="1">0</text>
+<rect x="392.5" y="8.0" width="25.8" height="16" fill="#8f2f28"/>
+<text x="136.4" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">VIX（FOMC 前一日收 → 当日收）</text>
+<text x="423.3" y="19.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#8f2f28" text-anchor="start" font-weight="bold" opacity="1">+0.23%</text>
+<rect x="390.3" y="35.0" width="2.2" height="16" fill="#2e4a6b"/>
+<text x="136.4" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">VIX3M/VIX 期限溢价</text>
+<text x="385.3" y="46.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="end" font-weight="bold" opacity="1">−0.02%</text>
+<rect x="184.1" y="62.0" width="208.4" height="16" fill="#2e4a6b"/>
+<text x="136.4" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">VIX9D/VIX 短端比率</text>
+<text x="179.1" y="73.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#2e4a6b" text-anchor="end" font-weight="bold" opacity="1">−1.86%</text>
+<text x="4.0" y="96.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">若事件落地消除不确定性，前端波动率应显著回落。实测 VIX 几乎不动、期限溢价纹丝未动；仅短端比率（9 天对 30 天）回落，即会议本身的事件溢价释</text>
+<text x="4.0" y="104.4" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">放了，但对更远期的不确定性没有解除。</text>
+</svg><div class="src">数据来源：本机构尾部风险缓存（收盘）。分析与图：本报告。</div></div>
+<p>只有短端比率（VIX9D/VIX）由 1.0011 回落至 0.9825<sup class="cite">[29]</sup>——<b>即会议本身的事件溢价释放了，
+但这次会议同时打开了下一个问题（16/18 预期再加一次），所以更远期的不确定性没有被消解</b><sup class="cite">[17]</sup>。</p>
+<div class="box"><span class="t">本报告的一次记录在案的预测失败</span>
+<p style="margin:0">本机构曾于 2026 年 9 月 13 日预测期限溢价将在 FOMC 后扩张至 1.20 以上，
+实际为 1.1141，<b>落空</b>。根因是把「事件落地」等同于「不确定性消除」。
+<b>修正后的规则：事件后波动率是否回落，取决于该事件是关闭了一个问题还是打开了下一个问题。</b>
+一次性读数（财报、CPI）适用常规；带路径预期的央行会议不适用<sup class="cite">[17]</sup>。</p></div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">6　局限性与替代解释 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">6</span>局限性与替代解释</h2>
+<div class="lead">下列每一条都会改变某个具体结论，而不是泛泛的免责声明。</div>
+
+<h3>6.1　材料本身的局限</h3>
+<p><b>这是本报告最重要的局限。</b>主要材料为中文转录稿，非官方英文原文，
+可能包含转录遗漏、翻译偏移、顺序重组三类误差，<b>且三类都无法从转录稿内部识别</b>。</p>
+<p>缓解措施与其结果：34 项数据点中 16 项经外部印证、18 项未印证。
+<b>两处最核心的立场表述（拒绝前瞻指引、纪律而非决策）均已印证</b>，
+且与杰克逊霍尔演讲的英文原句高度一致<sup class="cite">[3,18]</sup>——
+这支撑了转录稿在核心论点上没有系统性偏移，但<b>不能排除个别措辞的偏差</b>。</p>
+<p><b>本报告的所有直接引语都应被理解为「转录稿所载的中文表述」，而非 Warsh 的英文原话。</b>
+凡需要逐字引用英文原文的用途（学术引用、合规文件），请以美联储官方发布为准。</p>
+
+<h3>6.2　单次观察的局限</h3>
+<p>本报告的全部结论建立在<b>一场记者会</b>之上。第 3 章所称的「范式切换」，
+其证据是本次会议的三处表述加上杰克逊霍尔演讲的立场一致性。
+<b>两个观测点不足以确立一个范式。</b></p>
+<p>如果后续会议中 Warsh 开始提供某种形式的路径指引，
+本报告第 3 章的判断即被削弱——<b>而那完全可能发生，因为他拒绝的是「前瞻指引」这个标签，
+他在杰克逊霍尔说过「Call it an outline, call it a trail map, but please just don't call it forward guidance」。</b>
+<b>这句话本身就留了余地。</b></p>
+
+<h3>6.3　本报告没有排除的替代解释</h3>
+<p><b>关于三处切换的动机（第 3.4 节）</b>：过渡期空缺、有意的不确定性设计、对独立性的防御性重构。
+第一个与证据不符（立场在杰克逊霍尔已系统阐述），后两个都相容且互相强化，<b>本报告无法分离权重</b>。
+分离它们需要观察一次「市场预期与委员会意图明显冲突」的会议。</p>
+<p><b>关于反应函数不可校准（第 4.2 节）</b>：他说过「我只看到了很少的信息，因为这会让我改变那个决定」，
+这意味着<b>门槛存在但未公开</b>，而非不存在门槛。本报告已按前者表述，但二者的实践含义相近。</p>
+
+<h3>6.4　数据层面的已知缺口</h3>
+<table class="dat">
+<thead><tr><th>缺口</th><th>受影响的结论</th></tr></thead>
+<tbody>
+<tr><td>SEP 的 GDP 与 PCE 具体数值未经外部核实<sup class="cite">[27]</sup></td><td>仅用于第 5.1 节的叙述，不承载任何推导</td></tr>
+<tr><td>「2% 目标推迟至 2029 年」为记者陈述，未独立核实<sup class="cite">[12]</sup></td><td>第 5.2 节的张力强度；若有误，5.1 与 5.3 不受影响</td></tr>
+<tr><td>核心 PCE 与 CPI 的口径反转无法判断成因<sup class="cite">[23]</sup></td><td>已原样呈现并标注，不作推断</td></tr>
+</tbody></table>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">7　结论 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">7</span>结论：对市场的可操作含义</h2>
+<div class="lead">这场记者会的主要产出不是那次加息，
+是一套新的沟通规则——而它对如何形成预期有直接且具体的含义。</div>
+
+<h3>7.1　三条可操作的含义</h3>
+<p><b>① 不要用主席的表述去推路径，用 SEP。</b>
+Warsh 已两次明确声明他不提供预测，且不为 SEP 背书<sup class="cite">[3,11]</sup>。
+<b>在这套规则下，主席的记者会提供的是「这一步为什么」，不是「下一步会怎样」。</b>
+后者只能从点阵图读：16/18 预期再加一次、中位 2026 年底 4.125%、2027 年不变<sup class="cite">[7,8]</sup>。</p>
+<p><b>② 降低单一数据点对政策路径预期的权重。</b>
+他两次明确否定数据依赖，并称之为「危险的关注点」<sup class="cite">[25,4]</sup>。
+<b>这条含义是可证伪的</b>：若未来出现一次数据意外后市场大幅重定价政策路径、
+且随后被会议验证，本判断即被推翻。</p>
+<p><b>③ 事件后的波动率回落不能按常规假设。</b>
+本次会议落地后 VIX 几乎不动、期限溢价纹丝未动<sup class="cite">[16]</sup>，
+只有 9 天期的事件溢价释放<sup class="cite">[29]</sup>。<b>带路径预期的央行会议会在关闭一个问题的同时打开下一个，
+「事件出完波动率崩塌」的常规只适用于一次性读数。</b></p>
+
+<h3>7.2　超出摘要的两点</h3>
+<p><b>第一，这次加息的性质由措辞决定，而不是由幅度决定。</b>
+他说的是「取消一些适应措施」，不是「压制过热」；他同时否认需要损害劳动力市场<sup class="cite">[21,2]</sup>。
+<b>「移除宽松」有自然终点——回到他认为的中性；「压制过热」没有。</b>
+SEP 中位「2027 年持平」正与前者相容<sup class="cite">[8]</sup>。
+<b>这意味着路径的风险更可能来自「加到哪里停」的位置分歧，而不是「会不会加很多次」的数量恐慌。</b></p>
+<p><b>第二，被拆掉的三件工具有一个共同功能——它们都是让外部复现美联储判断的接口。</b>
+前瞻指引提供结论，数据依赖提供输入，中性利率提供标尺。三者合起来，
+市场可以搭一个近似模型去跟踪央行。<b>三件同时移除之后，剩下的是「向窗外看」和「趋势很重要」，
+而这两句不可测量、不可校准、不可提前验证。</b></p>
+<p>本报告不认为这是沟通失败。<b>他在提问 3 和提问 8 中两次表达了同一个意图：
+降低市场对美联储的可预测性，减少政策被市场预期反向绑架的程度。</b>
+在这个意图下，可校准性的丧失不是成本，是目的。
+<b>但这意味着一件对市场很具体的事：美联储的不确定性从此更难被转化为可交易的条件概率，
+而这部分不确定性不会消失，它会转移到期限溢价上。</b></p>
+
+<div class="box"><span class="t">最该跟踪的三项</span>
+<p style="margin:0 0 .5em"><b>其一，下次会议他是否仍拒绝提供任何形式的路径指引。</b>
+本次会议因市场已定价 90% 以上加息概率，不构成对这套规则的真正检验；
+真正的检验是一次市场预期与委员会意图明显冲突的会议。</p>
+<p style="margin:0 0 .5em"><b>其二，数据意外后的政策路径重定价幅度。</b>
+这是第 4.2 节那个推论的直接检验项，且可证伪。</p>
+<p style="margin:0"><b>其三，期限溢价而非即期波动率。</b>
+若上述判断成立，被移除的可预测性会沉淀在更远端的定价上，而不是在事件日的 VIX 上。</p></div>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">附录 A　参考文献与数据来源 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">A</span>参考文献与数据来源</h2>
+<p>按正文首次引用顺序编号。完整数据表（含每条的口径、印证状态与备注）
+随本报告以 <code>数据表.json</code> 单独交付，不排入正文。</p>
+<p class="ref">[1]　加息 25 个基点至 3.75%–4.00%，投票 12–0 全票通过　—　美联储 FOMC 政策声明（2026-09-16）；CNBC、Fox Business 报道（2026-09-16）</p><p class="ref">[2]　「我很难将广泛的金融状况描述为限制性的……因此我们取消了一些适应措施。」　—　记者会转录稿（用户提供，中文）（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[3]　「我不从事前瞻性指导业务。」　—　同 [2]（2026-09-16）</p><p class="ref">[4]　「数据点是嘈杂的，数据点依赖是一个危险的关注点。这不是我关心的事情。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[5]　「一句话，不。」（回答中性利率是否对当前决策有运营影响）　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[6]　三处范式切换：拒绝前瞻指引、否定数据依赖、弃用中性利率框架　—　本报告，基于 Q1–Q5（2026-09-17）</p><p class="ref">[7]　18 位与会者中 16 位预期还会再加一次，其中 4 位认为可能再加两次　—　美联储 SEP（2026-09-16）；CNBC 报道（2026-09-16）</p><p class="ref">[8]　2026 年底中位 4.1%（官方口径 4.125%），2027 年保持不变　—　美联储 SEP（2026-09-16）；MUFG Research、Norada 等机构复述（2026-09-16）</p><p class="ref">[9]　隐含年内还有一次 25bp 加息　—　本报告，基于 S1、F2（2026-09-17）</p><p class="ref">[10]　主席与委员会在沟通上分离：主席不给预测，委员会的 SEP 给了　—　本报告，基于 Q8、F2、S1（2026-09-17）</p><p class="ref">[11]　「那些不是我的预测。这些是我 18 位同事的预测，我试图尽职尽责地自由地向你们代表他们。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[12]　SEP 中位数将 2% 目标的实现时间再推迟两年至 2029 年　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[13]　七周内改变判断的三件事：① 经济强度（含劳动力市场）② 通胀趋势未通过检验 ③ 地缘政治判断变化　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[14]　宣布后标普 500 一度 +0.4%、纳斯达克 +0.8%；收盘 SPY −0.44%　—　CNBC 实时报道（盘中）；本机构价格缓存（收盘）（2026-09-16）</p><p class="ref">[15]　10 年期美债收益率 5.01%　—　本机构价格缓存（收盘）；TheStreet 报道 9 月 15 日触及 2007 年以来高位（2026-09-16）</p><p class="ref">[16]　VIX 17.67 → 17.71（+0.23%）；VIX3M/VIX 期限溢价 1.1143 → 1.1141　—　本机构尾部风险缓存（收盘）（2026-09-16）</p><p class="ref">[17]　波动率未随事件落地而回落，因该事件打开了下一个问题而非关闭了一个问题　—　本报告，基于 M3、F2（2026-09-17）</p><p class="ref">[18]　「我致力于一套纪律原则。我承诺向窗外看，看看我能观察到什么。」　—　同 [2]（2026-09-16）</p><p class="ref">[19]　长期中性利率中位数上调至 3.25%　—　MUFG Research 对 2026-09 SEP 的复盘（2026-09-16）</p><p class="ref">[20]　「独立是一条双向的街道。我们将让制定贸易政策和财政政策的人也留在自己的路线上。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[21]　「我不认为我们需要损害劳动力市场来实现我们的目标。我不认为我们使命的两个部分在中期内的工作是相互交叉的。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[22]　本次加息的理由是「移除宽松」而非「对抗过热」　—　本报告，基于 Q11、Q12（2026-09-17）</p><p class="ref">[23]　8 月总 PCE 约 3.6%；核心 PCE 约 3.2%；CPI 约 2.4%。「太多的品类仍在发布 6 个月和 12 个月的涨幅超过 3%」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[24]　「通货膨胀一直在高于目标水平」超过五年；「价格稳定一直是 5.5 年多以来的问题」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[25]　「我不是一个依赖数据点的人，所以我不会对出现在我们门口的数据做出这样或那样的反应。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[26]　长端收益率上升的三个原因：① 经济走强 ② 资本竞争（超大规模企业在市场筹资）③ 地缘政治（现货价格与裂解价差之差）　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[27]　实际 GDP 增长今年 2.3%、明年 2.4%；PCE 总通胀今年 3.7%、明年降至 2.3%　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[28]　「我们不能影响任何个别价格……但我们可以做并将做的是确保相对价格的任何变化不会扩大，不会对经济产生二级和三级影响。」　—　同 [2]（2026-09-16）　<b class="unv">［转录稿孤证］</b></p><p class="ref">[29]　VIX9D/VIX 由 1.0011 回落至 0.9825　—　同 [16]（2026-09-16）</p>
+<h3>A.2　本报告的核实规则</h3>
+<p><code>verified=true</code> 仅当：① 数字或事实经本轮独立检索在官方文件或主流财经媒体得到确认；
+或 ② 引语经外部来源交叉印证。<b>凡仅见于转录稿而未经外部印证者一律标注为转录稿孤证</b>，
+正文中以「据转录稿」表述，并在第 1.2 节与第 6.1 节说明其证据地位。
+<b>转录与翻译误差的风险由编制者承担，不委托。</b></p>
+<h3>A.3　声明</h3>
+<p>本报告的全部直接引语应被理解为<b>所依据转录稿中的中文表述</b>，而非 Warsh 主席的英文原话。
+凡需逐字引用英文原文的用途（学术引用、合规文件、媒体转载），请以美联储官方发布的记者会实录为准。
+本报告不含任何非公开信息。</p>
+</td></tr></tbody></table><table class="pagewrap"><thead><tr><td><div class="crumb">附录 B　关键原话摘录 | Warsh 首次加息记者会</div></td></tr></thead><tbody><tr><td>
+<h2><span class="num">B</span>关键原话摘录</h2>
+<p>下表汇集本报告论证所依赖的十一处表述及其语境。<b>全部来自转录稿，均为中文转述而非英文原话</b>，
+其中两处（拒绝前瞻指引、纪律而非决策）已由杰克逊霍尔演讲的英文原句交叉印证。</p>
+<table class="dat">
+<thead><tr><th style="width:17%">主题</th><th style="width:44%">转录稿表述</th><th style="width:39%">语境</th></tr></thead>
+<tbody><tr><td><b>拒绝前瞻指引</b></td><td>「我不从事前瞻性指导业务。」</td><td style="font-size:7.8pt;color:#6c6c70">回应《纽约时报》Colby Smith 关于「加息通常是一系列」的提问（提问 2）。同一回答中他补充「你从其他人那里有效地听到了他们的预测是什么。我不会预先判断我们未来做出的任何决定」</td></tr><tr><td><b>纪律而非决策</b></td><td>「我致力于一套纪律原则。我承诺向窗外看，看看我能观察到什么。」</td><td style="font-size:7.8pt;color:#6c6c70">同为提问 2 的回答。他将杰克逊霍尔的立场重述为本次决策的方法论依据</td></tr><tr><td><b>否定数据依赖</b></td><td>「数据点是嘈杂的，数据点依赖是一个危险的关注点。这不是我关心的事情。」</td><td style="font-size:7.8pt;color:#6c6c70">回应关于市场是否过度聚焦 8 月 CPI 的提问（提问 8）。同一回答中他说「市场参与者和记者们，我认为在过去十年左右的时间里，已经习惯于在一个数据点上屏息等待。这不是我的观点」</td></tr><tr><td><b>弃用中性利率</b></td><td>「一句话，不。」（回答中性利率是否对当前决策有运营影响）</td><td style="font-size:7.8pt;color:#6c6c70">回应 CNBC 关于当前利率相对中性利率位置的提问（提问 7）。完整表述为「我一直对中性利率感兴趣，认为这是一种学术问题……我认为它对我们今天做出的决策有任何运营影响吗？不，我不知道」</td></tr><tr><td><b>七周三变量</b></td><td>七周内改变判断的三件事：① 经济强度（含劳动力市场）② 通胀趋势未通过检验 ③ 地缘政治判断变化</td><td style="font-size:7.8pt;color:#6c6c70">回应「7 月会议以来有什么变化」的提问（提问 5）。他明确列举三项，并称「这三件事导致了他们今天做出了一个坚定、一致的决定」</td></tr><tr><td><b>行动标准</b></td><td>「我们必须有信心，潜在的通货膨胀正在以足够的速度明确地向我们的目标移动。今天，FOMC 决定这个标准没有得到满足。」</td><td style="font-size:7.8pt;color:#6c6c70">开场发言。这是他为行动设定的标准，措辞为定性而非可测门槛</td></tr><tr><td><b>不为 SEP 背书</b></td><td>「那些不是我的预测。这些是我 18 位同事的预测，我试图尽职尽责地自由地向你们代表他们。」</td><td style="font-size:7.8pt;color:#6c6c70">回应记者指出「你说今天的行动支持更及时回到 2%，但 SEP 把 2% 实现时间推迟两年至 2029」的矛盾（提问 14）</td></tr><tr><td><b>独立是双向的</b></td><td>「独立是一条双向的街道。我们将让制定贸易政策和财政政策的人也留在自己的路线上。」</td><td style="font-size:7.8pt;color:#6c6c70">回应关于特朗普威胁切断贸易以迫使降息、以及美联储独立性的提问（提问 9）。他明确拒绝披露与总统的沟通内容</td></tr><tr><td><b>长端收益率三因</b></td><td>长端收益率上升的三个原因：① 经济走强 ② 资本竞争（超大规模企业在市场筹资）③ 地缘政治（现货价格与裂解价差之差）</td><td style="font-size:7.8pt;color:#6c6c70">回应关于债券市场在传达什么的提问（提问 13）。他自述「这些事情往往是过度确定的」，并称这三项「肯定不是独家清单」</td></tr><tr><td><b>否认菲利普斯取舍</b></td><td>「我不认为我们需要损害劳动力市场来实现我们的目标。我不认为我们使命的两个部分在中期内的工作是相互交叉的。」</td><td style="font-size:7.8pt;color:#6c6c70">回应关于是否需要将增长压至潜在水平以下、推动就业市场疲软以降通胀的提问（提问 16）</td></tr><tr><td><b>移除宽松</b></td><td>「我很难将广泛的金融状况描述为限制性的……因此我们取消了一些适应措施。」</td><td style="font-size:7.8pt;color:#6c6c70">开场发言，并在提问 6 中重申。这是他为本次加息给出的直接理由——不是对抗衰退风险，而是移除他认为不应存在的宽松</td></tr></tbody></table>
+</td></tr></tbody></table></body></html>
