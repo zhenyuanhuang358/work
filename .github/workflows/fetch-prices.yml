@@ -35,8 +35,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin "$GITHUB_REF_NAME" || true
+          # ⚠ 顺序必须是 add → commit → pull --rebase → push（2026-09-18 修）
+          # 原顺序把 pull 放在 add 之前：脚本刚改写的 stock_prices.json 是 unstaged，
+          # 于是 `git pull --rebase` 必然以 "You have unstaged changes" 失败，
+          # 而 `|| true` 把这个失败吞掉，流程照常推进到 push —— remote 一旦领先就被拒，
+          # 整轮抓价作废，且工作流只在 Actions 页面留一个红叉，缓存静默停在上一轮。
+          # 这个 bug 一直存在，只在「remote 领先」时才暴露；2026-09-18 因先推了一个
+          # 无关提交而首次触发。burry-screen.yml 的顺序本来就是对的，此处是未同步。
           git add stock_prices.json
           git diff --cached --quiet && echo "nothing to commit" || \
             git commit -m "chore: refresh stock prices $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          # ⚠ 不用 `|| true`：rebase 真失败时必须让工作流失败，而不是静默走到 push。
+          # `|| true` 的本意只是容忍「没有东西可 rebase」，但那种情况 rebase 本就返回 0。
+          git pull --rebase origin "$GITHUB_REF_NAME" \
+            || { echo "::error::git pull --rebase 失败，本轮抓价未写回"; exit 1; }
           git push origin "HEAD:$GITHUB_REF_NAME"
