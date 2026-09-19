@@ -1,0 +1,102 @@
+name: Jev 归因基准
+
+# 为什么必须在 Actions 里跑，而不是在会话容器里：
+#   会话容器对 typesafe.ai / api.typesafe.ai / docs.typesafe.ai 一律
+#   CONNECT tunnel failed 403（组织代理策略）。按 /root/.ccr/README.md
+#   这类拒绝只报告不绕过。Actions runner 出网不受该策略约束，是唯一可行路径。
+#
+# 手动触发，不排期：这是一次性实验，不是监控。
+
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "只跑前 N 例（留空跑全部 164 例）"
+        required: false
+        default: ""
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0     # 基准集由 git 历史重建，浅克隆会少掉大部分交易日
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 前置检查 —— 没有 key 就明确失败，不要跑出一份空结果
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+        run: |
+          if [ -z "$TYPESAFE_API_KEY" ]; then
+            echo "::error::secret TYPESAFE_API_KEY 未配置。"
+            echo "::error::获取路径：typesafe.ai 排队 → console.typesafe.ai/settings/keys"
+            echo "::error::→ 本仓库 Settings > Secrets and variables > Actions > New repository secret"
+            exit 1
+          fi
+
+      - name: 重建基准集（离线，不用 key）
+        run: |
+          python3 tools/jev_bench.py --build
+          python3 tools/jev_bench.py --stats | tee bench_stats.txt
+
+      - name: 基准集必须与提交版一致 —— 不一致说明答案键或数据变了
+        run: |
+          # 答案键是实验的地基。若 Actions 里重建出的集合与仓库里提交的那份不同，
+          # 说明常数被改过或抓价历史变了 —— 此时任何分数都不可比，直接停。
+          if ! git diff --quiet -- memory/state/jev_bench_set.json; then
+            echo "::warning::重建出的基准集与提交版不一致，下面是差异摘要："
+            git diff --stat -- memory/state/jev_bench_set.json
+            python3 - <<'PY'
+          import json, subprocess
+          old = json.loads(subprocess.run(
+              ["git","show","HEAD:memory/state/jev_bench_set.json"],
+              capture_output=True, text=True).stdout)
+          new = json.load(open("memory/state/jev_bench_set.json"))
+          if old["key_constants"] != new["key_constants"]:
+              raise SystemExit(f"::error::答案键常数被改动 "
+                               f"{old['key_constants']} → {new['key_constants']}，"
+                               f"这会让新旧分数不可比。停。")
+          print(f"常数未变；例数 {old['n_cases']} → {new['n_cases']}"
+                f"（抓价历史增长导致，可接受）")
+          PY
+          fi
+
+      - name: 调 Jev
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          LIMIT: ${{ inputs.limit }}
+        run: |
+          set -o pipefail
+          python3 tools/jev_bench.py --run > jev_responses.json || true
+          # --run 对逐例错误是记录而非中断（一个 4xx 不该废掉整轮），
+          # 所以这里要自己看有没有全军覆没。
+          python3 - <<'PY'
+          import json, sys
+          r = json.load(open("jev_responses.json"))
+          bad = [x for x in r if "error" in x]
+          print(f"应答 {len(r)} 例，其中出错 {len(bad)}")
+          if bad:
+              print("前 3 条错误：")
+              for x in bad[:3]:
+                  print(" ", x["case_id"], x.get("error"), str(x.get("body"))[:200])
+          if len(bad) == len(r):
+              sys.exit("::error::全部请求失败 —— 多半是 schema 或鉴权不对，"
+                       "不是模型表现差。先拿官方文档核 build_requests() 的字段名。")
+          PY
+
+      - name: 对分
+        run: python3 tools/jev_bench.py --score jev_responses.json | tee bench_score.txt
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jev-bench-${{ github.run_number }}
+          path: |
+            bench_stats.txt
+            bench_score.txt
+            jev_responses.json
+            memory/state/jev_bench_set.json
