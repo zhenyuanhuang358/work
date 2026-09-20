@@ -188,6 +188,40 @@ def check_predictions():
                    "**差不开：我的自我评估没有信息量，所有判断应一视同仁打折**"))
 
 
+# ── C6 · 「可证伪判断必须登记并带把握档」这条规则有没有承载物 ─────────────
+# 2026-09-20 立。为什么需要它：predictions.md 的登记规范立了近一个月，
+# 而 12 个会产出可证伪判断的 skill **零个引用它**——规则有了，
+# 该触发它的东西都不知道它存在（profile 1.2a）。
+# 解法是把规则写进 CLAUDE.md（永远加载），这个检查确保它不被某次编辑悄悄删掉，
+# 且 predictions.md 的表结构与之匹配。
+def check_forecast_rule():
+    say("\n[C6] 可证伪判断的登记规则是否还有承载物")
+    claude = os.path.join(REPO, "CLAUDE.md")
+    ctxt = open(claude, encoding="utf-8").read() if os.path.exists(claude) else ""
+    ok_rule = "把握档" in ctxt and "predictions.md" in ctxt
+    say(f"  CLAUDE.md 含把握档规则   {'✅' if ok_rule else '❌ 规则已从 CLAUDE.md 消失'}")
+    if not ok_rule:
+        flag("P1", "CLAUDE.md",
+             "「可证伪判断必须登记并带把握档」不在 CLAUDE.md 里 —— "
+             "12 个 skill 没有一个自己引用 predictions.md，删掉这段等于这条规则失效")
+
+    pf = os.path.join(REPO, "memory/state/predictions.md")
+    ptxt = open(pf, encoding="utf-8").read() if os.path.exists(pf) else ""
+    has_col = "| 把握 |" in ptxt
+    say(f"  predictions.md 有把握列  {'✅' if has_col else '❌ 表结构与规则不符'}")
+    if not has_col:
+        flag("P1", "predictions.md", "待验/明细表缺「把握」列 —— C4 的分档统计会一直数出 0")
+
+    # 会产出可证伪判断的 skill 清单——数量变了要知道（新装 skill 时提醒）
+    skdir = os.path.join(REPO, ".claude/skills")
+    pat = re.compile(r"目标价|三情景|内在价值|安全边际|PoP|定价缺口|领先.{0,6}季度")
+    producers = [n for n in sorted(os.listdir(skdir))
+                 if os.path.exists(os.path.join(skdir, n, "SKILL.md"))
+                 and pat.search(open(os.path.join(skdir, n, "SKILL.md"), encoding="utf-8").read())]
+    say(f"  产出可证伪判断的 skill   {len(producers)} 个，靠 CLAUDE.md 统一约束"
+        f"（各自 SKILL.md 不重复写，避免 upstream 冲突）")
+
+
 # ── C5 · 无触发词的 skill 必须在 CLAUDE.md 路由表里有一行 ───────────────────
 # 2026-09-15 装 huashu-report 时发现的缺口：它的 frontmatter 零触发词，
 # 而 Merlin/Earner/restaurant-research 都有，于是「帮我做个报告」永远被前三个截胡。
@@ -233,6 +267,7 @@ def main():
     check_threshold_drift()
     check_predictions()
     check_skill_routing()
+    check_forecast_rule()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
