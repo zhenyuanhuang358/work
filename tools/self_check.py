@@ -146,6 +146,47 @@ def check_predictions():
     else:
         say("  无到期未记分项")
 
+    # ── 分档统计（承载登记规范第 10 条，2026-09-20 立）────────────────────
+    # 为什么要机器做：第 10 条最容易被违反的方式不是忘记填，是**全填「高」**。
+    # 白皮书 8.1 已论证：任务难度分布窄时校准是平凡满足的——
+    # 全判高把握就能让高档看起来很准。所以配额检查必须是装置，不是叮嘱。
+    TIER_COL = 3                 # 明细表把握列的位置（验证时点|预测|门槛|把握|结果|记分）
+    TIERS = ("高", "中", "低")
+    tally = {k: [0, 0, 0] for k in TIERS}        # 档 -> [已记分, ✅, ❌]
+    unfiled = 0
+    for d, rest in rows:
+        cells = [c.strip() for c in ("|" + rest).split("|")]
+        tier = cells[TIER_COL] if len(cells) > TIER_COL else ""
+        if "待验" in rest or "⊘" in rest:
+            continue
+        if tier not in TIERS:
+            unfiled += 1
+            continue
+        tally[tier][0] += 1
+        tally[tier][1] += "✅" in rest
+        tally[tier][2] += "❌" in rest
+    n_tiered = sum(v[0] for v in tally.values())
+    say(f"  分档：已分档 {n_tiered} 条｜建档前未分档 {unfiled} 条（不参与分档统计）")
+    for k in TIERS:
+        n, h, m2 = tally[k]
+        if n:
+            say(f"    {k} 档  {n} 条｜✅{h} ❌{m2}｜命中率 {h/n*100:.1f}%")
+    if n_tiered < 20:
+        say(f"  样本 {n_tiered}/20，**不对分档有效性下任何结论**"
+            f"（不到门槛就说「我高把握的准」是拿噪声当发现）")
+    else:
+        hi_share = tally["高"][0] / n_tiered
+        if hi_share > 0.70:
+            flag("P1", "predictions.md",
+                 f"高档占比 {hi_share:.0%} > 70% — 分档失去区分度。"
+                 f"若我不敢把任何一条标成「低」，这个分档就是装饰（登记规范第 10 条配额自检）")
+        hi = tally["高"]; lo = tally["低"]
+        if hi[0] and lo[0]:
+            gap = hi[1]/hi[0] - lo[1]/lo[0]
+            say(f"  高低档命中率落差 {gap*100:+.1f}pp — "
+                + ("差得开，高档可据以行动" if gap > 0.15 else
+                   "**差不开：我的自我评估没有信息量，所有判断应一视同仁打折**"))
+
 
 # ── C5 · 无触发词的 skill 必须在 CLAUDE.md 路由表里有一行 ───────────────────
 # 2026-09-15 装 huashu-report 时发现的缺口：它的 frontmatter 零触发词，
