@@ -86,6 +86,30 @@ def text_w(s, size):
     return sum(1.0 if ord(c) > 0x2E80 else 0.55 for c in str(s)) * size
 
 
+def note_lines(note, avail_w, size=6.6):
+    """把图注按实际可用宽度折行。返回行列表。
+
+    ⚠ 为什么需要这个：本文件 text_w 的 docstring 已经写明「任何预留宽度都必须
+    由实际标注反算，不许写死」——但 note 一直是单行 _txt，既不折行也不反算。
+    库防住了轴标签和数值标注，唯独漏了图注自己。
+    2026-09-20 实测命中：一条 43 字的中文图注在 470 单位宽的画布上
+    被版心齐刷刷切掉尾部，PDF 上印成「…零高度的柱会被读成零分。可」。
+    SVG 不报溢出，机械自检只知道那里有字。
+    """
+    if not note:
+        return []
+    out, cur = [], ""
+    for ch in str(note):
+        if text_w(cur + ch, size) > avail_w and cur:
+            out.append(cur)
+            cur = ch
+        else:
+            cur += ch
+    if cur:
+        out.append(cur)
+    return out
+
+
 def clamp_x(cx, s, size, lo=2, hi=468):
     """居中文字的锚点夹回画布内。
 
@@ -129,6 +153,8 @@ def hbar(data, w=470, rowh=22, maxv=None, fmt="{}%", label_w=None,
         label_w = min(190, max(60, max(text_w(lab, 8.4) for lab, _ in data) + 10))
     val_w = max(text_w(fmt.format(v), 8.4) for _, v in data) + 10
     bw = max(60, w - label_w - val_w)
+    nlines = note_lines(note, w - label_w)
+    h += max(0, len(nlines) - 1) * 9        # 图注多一行就加 9 个单位，不许压在柱子上
     s = [f'<svg viewBox="0 0 {w} {h}" width="100%" xmlns="http://www.w3.org/2000/svg">']
     for i, (lab, v) in enumerate(data):
         y = i * rowh + 8
@@ -138,9 +164,10 @@ def hbar(data, w=470, rowh=22, maxv=None, fmt="{}%", label_w=None,
         s.append(f'<rect x="{label_w}" y="{y+2}" width="{bl:.1f}" height="{rowh-8}" fill="{c}"/>')
         s.append(_txt(label_w + bl + 5, y + 11, fmt.format(v), 8.4,
                       INK, "start", "bold"))
-    s.append(f'<line x1="{label_w}" y1="6" x2="{label_w}" y2="{h-14}" stroke="{RULE}" stroke-width="0.6"/>')
-    if note:
-        s.append(_txt(label_w, h - 3, note, 6.6, MUTE))
+    rule_bottom = h - 14 - max(0, len(nlines) - 1) * 9
+    s.append(f'<line x1="{label_w}" y1="6" x2="{label_w}" y2="{rule_bottom}" stroke="{RULE}" stroke-width="0.6"/>')
+    for i, ln in enumerate(nlines):
+        s.append(_txt(label_w, h - 3 - (len(nlines) - 1 - i) * 9, ln, 6.6, MUTE))
     s.append("</svg>")
     return "\n".join(s)
 
@@ -219,8 +246,9 @@ def paired_bars(groups, w=470, h=182, ymax=None, ymin=None, unit="%", note=None,
             s.append(f'<rect x="{lx}" y="{2}" width="8" height="8" fill="{colors[k]}"/>')
             s.append(_txt(lx + 11, 9, name, 7.2, MUTE))
             lx += 11 + len(name) * 7.6 + 16
-    if note:
-        s.append(_txt(pad_l, h - 1, note, 6.6, MUTE))
+    for i, ln in enumerate(note_lines(note, w - pad_l)):
+        s.append(_txt(pad_l, h - 1 - (len(note_lines(note, w - pad_l)) - 1 - i) * 9,
+                      ln, 6.6, MUTE))
     s.append("</svg>")
     return "\n".join(s)
 

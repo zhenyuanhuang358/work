@@ -251,6 +251,15 @@ table:not(.pagewrap) td.sig{color:var(--sig);font-weight:700}
 /* 显式开页：给那些「尾巴甩到下一页只剩一两行」的小节用。
    判据是内容完整性，不是省页数——一条落单要点配一个引文块比半页留白更难看 */
 h3.newpage{break-before:page;page-break-before:always}
+/* 末段与紧随其后的组件不许被分页切开：切开的后果不是难看，
+   是一个词被劈成两半（「多数」在上页、「类基线」在下页）*/
+/* ⚠ 必须显式写 break-before:auto 覆盖上面那条「末两段禁止在其前分页」——
+   两条规则方向相反：那条不让它整块挪到下一页，于是它只能从中间裂开，
+   把「多数 / 类基线」一个词劈成两半。2026-09-20 实测命中。*/
+.keepnext{break-inside:avoid;page-break-inside:avoid;break-before:auto;page-break-before:auto}
+.keepnext+.side,.keepnext+.box{break-before:avoid;page-break-before:avoid}
+/* 解读段紧跟它解读的那张图，不许被分页拆开——拆开后前页留半张图、后页留一句话，两页都难看 */
+.fig+.keepnext{break-before:avoid;page-break-before:avoid}
 ul{margin:2.4mm 0 2.4mm 0;padding-left:5mm}
 li{margin-bottom:1.5mm;line-height:1.6}
 p{margin:0 0 3.2mm;orphans:3;widows:3}
@@ -273,8 +282,8 @@ p{margin:0 0 3.2mm;orphans:3;widows:3}
   <div class="meta">
     <b>报告类型</b>　技术评估 · 学术型<br>
     <b>一手数据</b>　164 例独立基准集（本报告构建，Jev 侧未执行）<br>
-    <b>二手数据</b>　官方发布材料、社区实测、57 个数据点分五级标注证据强度<br>
-    <b>核验规则</b>　仅一手可复跑与算术可推导者置 verified；66.7% 的数据点不可独立核验
+    <b>二手数据</b>　官方发布材料、社区实测、公开集独立测量，72 个数据点分级标注证据强度<br>
+    <b>核验规则</b>　仅一手可复跑与算术可推导者置 verified；69.4% 的数据点不可独立核验
   </div>
 </div>
 
@@ -311,13 +320,21 @@ p{margin:0 0 3.2mm;orphans:3;widows:3}
 在代理的串行循环中，决定体验的是尾延迟不是中位数，
 而现有模型评测几乎只报中位数。</div>
 
-<div class="f">本报告构建了一个 164 例的独立归因基准<sup class="cite">[12]</sup>，并在建成时得到两条方法论结论：
-多数类基线 55.5%，而只看单一变量的最优阈值规则得分<b>与它一字不差</b><sup class="cite">[13,14]</sup>——
-基准有效；同时答案键静默删除了作者 5 条记录判断中的 3 条，
-且被删的恰好是判错的那些<sup class="cite">[15,13]</sup>。</div>
+<div class="f"><b>一份在公开有标注数据集上的独立测量证实了分档结论，同时修正了它</b>：
+高低置信档的准确率落差是 +25.3pp / +35.8pp<sup class="cite">[12]</sup>，量级与第(5)条一致；
+但把低置信项升级给第二个模型，在一个数据集上让总分涨 2.5pp、
+在另一个上只涨 0.9pp<sup class="cite">[13]</sup>。
+<b>分流的价值不是模型的属性，是「任务 × 模型对」的属性，不能从别人的数字外推。</b></div>
 
-<div class="f"><b>Jev 侧尚未执行</b><sup class="cite">[16]</sup>。本报告不提供 Jev 的基准得分，
-只提供它必须跨过的那两条线，以及一套可复跑的判定装置。</div>
+<div class="f">本报告构建了一个 164 例的独立归因基准<sup class="cite">[14]</sup>，并在建成时得到两条方法论结论：
+多数类基线 55.5%，而只看单一变量的最优阈值规则得分<b>与它一字不差</b><sup class="cite">[15,16]</sup>——
+基准有效；同时答案键静默删除了作者 5 条记录判断中的 3 条，
+且被删的恰好是判错的那些<sup class="cite">[17,15]</sup>。</div>
+
+<div class="f"><b>基准仍无模型得分，但已从「等条件」变成「可执行」</b>：
+官方 API 的三个前置条件依然未满足<sup class="cite">[18]</sup>，而经由一个免 key 的公开端点
+可以今天就跑<sup class="cite">[19]</sup>——代价是那条路测的是<b>服务</b>而非裸模型<sup class="cite">[20]</sup>。
+本报告提供的是必须跨过的两条线、三道闸，以及一套可复跑的判定装置。</div>
 </div>
 
 <div class="box sig"><span class="bt">本报告的一句话</span>
@@ -327,7 +344,7 @@ Jev 值得做进产品，不值得用来给自己提效；而在任何人把它�
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">目录 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">—</span>目录</h2>
-<div class="toc"><div class="l1"><span>00　摘要</span><span class="p">2</span></div><div class="l1"><span>01　界定：一个只做选择题的模型</span><span class="p">4</span></div><div class="l2"><span>题型、规格、它不能做什么</span><span class="p"></span></div><div class="l1"><span>02　官方主张与它们的口径</span><span class="p">6</span></div><div class="l2"><span>68% 是怎么测出来的，以及它测的是什么</span><span class="p"></span></div><div class="l1"><span>03　生态实况：217 个项目的可用性分布</span><span class="p">7</span></div><div class="l2"><span>为什么热闹与可用之间差两个数量级</span><span class="p"></span></div><div class="l1"><span>04　四次失败的结构解剖</span><span class="p">9</span></div><div class="l2"><span>三条约束，以及那个对什么都答 0 的对照组</span><span class="p"></span></div><div class="l1"><span>05　两轮实测的证据强度复核</span><span class="p">11</span></div><div class="l2"><span>显著性、基线缺位、以及被低估的尾延迟</span><span class="p"></span></div><div class="l1"><span>06　一次独立基准的构建</span><span class="p">13</span></div><div class="l2"><span>164 例、两条必须先跨过的线、与一个答案键的自我偏袒</span><span class="p"></span></div><div class="l1"><span>07　机制：为什么只有一种用法站得住</span><span class="p">15</span></div><div class="l2"><span>四个竞争假说与文献定位</span><span class="p"></span></div><div class="l1"><span>08　局限与替代解释</span><span class="p">17</span></div><div class="l2"><span>本报告没有排除掉的那些</span><span class="p"></span></div><div class="l1"><span>09　结论与决策框架</span><span class="p">19</span></div><div class="l2"><span>三步判定，以及不该做的事</span><span class="p"></span></div><div class="l1"><span>附录 A　参考文献与来源</span><span class="p">21</span></div><div class="l1"><span>附录 B　数据速查页</span><span class="p">23</span></div><div class="l2"><span>全部关键数字一页汇总</span><span class="p"></span></div></div>
+<div class="toc"><div class="l1"><span>00　摘要</span><span class="p">2</span></div><div class="l1"><span>01　界定：一个只做选择题的模型</span><span class="p">4</span></div><div class="l2"><span>题型、规格、它不能做什么</span><span class="p"></span></div><div class="l1"><span>02　官方主张与它们的口径</span><span class="p">6</span></div><div class="l2"><span>68% 是怎么测出来的，以及它测的是什么</span><span class="p"></span></div><div class="l1"><span>03　生态实况：217 个项目的可用性分布</span><span class="p">8</span></div><div class="l2"><span>为什么热闹与可用之间差两个数量级</span><span class="p"></span></div><div class="l1"><span>04　四次失败的结构解剖</span><span class="p">10</span></div><div class="l2"><span>三条约束，以及那个对什么都答 0 的对照组</span><span class="p"></span></div><div class="l1"><span>05　两轮实测的证据强度复核</span><span class="p">12</span></div><div class="l2"><span>显著性、基线缺位、尾延迟，与一份更硬的独立测量</span><span class="p"></span></div><div class="l1"><span>06　一次独立基准的构建</span><span class="p">16</span></div><div class="l2"><span>164 例、两条线、三道闸、与一个答案键的自我偏袒</span><span class="p"></span></div><div class="l1"><span>07　机制：为什么只有一种用法站得住</span><span class="p">19</span></div><div class="l2"><span>四个竞争假说与文献定位</span><span class="p"></span></div><div class="l1"><span>08　局限与替代解释</span><span class="p">21</span></div><div class="l2"><span>本报告没有排除掉的那些</span><span class="p"></span></div><div class="l1"><span>09　结论与决策框架</span><span class="p">23</span></div><div class="l2"><span>三步判定，以及不该做的事</span><span class="p"></span></div><div class="l1"><span>附录 A　参考文献与来源</span><span class="p">25</span></div><div class="l1"><span>附录 B　数据速查页</span><span class="p">27</span></div><div class="l2"><span>全部关键数字一页汇总</span><span class="p"></span></div></div>
 <div class="side"><span class="t">关于证据标注</span>
 正文里带上标编号的数字来自被引来源，不带标记的句子是本报告的判断。
 数据表按五级标注证据强度：<span class="tier t0">T0</span> 一手可复跑、
@@ -341,11 +358,11 @@ Jev 值得做进产品，不值得用来给自己提效；而在任何人把它�
 这个类比准确到可以当定义用——它的每一项优势和每一项限制都是它的直接推论。</div>
 
 <h3><span class="n">1.1</span>规格</h3>
-<p>TypeSafe AI 发布 Jev 的时间在两个来源之间差一天：本文作者记为 2026-09-15<sup class="cite">[17]</sup>，
-而创始人 Diogo Almeida 的发布帖标注为 9 月 16 日<sup class="cite">[18]</sup>。本报告未能判定何者为准，
+<p>TypeSafe AI 发布 Jev 的时间在两个来源之间差一天：本文作者记为 2026-09-15<sup class="cite">[21]</sup>，
+而创始人 Diogo Almeida 的发布帖标注为 9 月 16 日<sup class="cite">[22]</sup>。本报告未能判定何者为准，
 并存两者只为说明对来源冲突的处理方式：<b>不取平均、不择一，并存并标注。</b></p>
 
-<div class="fig"><div class="figtitle"><span class="figno">Table 1</span>Jev 的规格，以及每一项规格对应的直接后果</div><table><colgroup><col style="width:15%"><col style="width:24%"><col style="width:23%"><col style="width:38%"></colgroup><thead><tr><th>维度</th><th>Jev</th><th>通用大模型</th><th>该差异的直接后果</th></tr></thead><tbody><tr><td>输出形式</td><td>固定选项上的概率分布</td><td>自由文本，需程序再解析</td><td>输出格式永远合法，但<b>选错选项完全可能</b></td></tr><tr><td>题型</td><td>单选(≤255 项)/打分/是否</td><td>任意</td><td>问题必须先被化成选项，这一步不由 Jev 完成</td></tr><tr><td>响应</td><td>0.07–0.5 秒（官方）</td><td>3 秒–5 分钟（官方对比口径）</td><td>对比口径不对等：后者是写完整段答案的时间</td></tr><tr><td>输入价</td><td>$0.042 / 百万 token</td><td>$0.20–$10 / 百万 token</td><td>输出侧免费，因为没有生成过程</td></tr><tr><td>输入上限</td><td>约 3.2 万 token</td><td>几十万 token</td><td><b>长输入必须先被压缩，而压缩需要判断</b></td></tr><tr><td>图像</td><td>不支持</td><td>支持</td><td>任何依赖看画面的场景一律出局</td></tr></tbody></table><div class="figsrc">资料来源：TypeSafe 发布材料与定价页<sup class="cite">[1,19,20,2]</sup>，经作者转述；证据层级 T3（官方自报，无第三方核验）。右栏为本报告的判断，不带标记。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 1</span>Jev 的规格，以及每一项规格对应的直接后果</div><table><colgroup><col style="width:15%"><col style="width:24%"><col style="width:23%"><col style="width:38%"></colgroup><thead><tr><th>维度</th><th>Jev</th><th>通用大模型</th><th>该差异的直接后果</th></tr></thead><tbody><tr><td>输出形式</td><td>固定选项上的概率分布</td><td>自由文本，需程序再解析</td><td>输出格式永远合法，但<b>选错选项完全可能</b></td></tr><tr><td>题型</td><td>单选(≤255 项)/打分/是否</td><td>任意</td><td>问题必须先被化成选项，这一步不由 Jev 完成</td></tr><tr><td>响应</td><td>0.07–0.5 秒（官方）</td><td>3 秒–5 分钟（官方对比口径）</td><td>对比口径不对等：后者是写完整段答案的时间</td></tr><tr><td>输入价</td><td>$0.042 / 百万 token</td><td>$0.20–$10 / 百万 token</td><td>输出侧免费，因为没有生成过程</td></tr><tr><td>输入上限</td><td>约 3.2 万 token</td><td>几十万 token</td><td><b>长输入必须先被压缩，而压缩需要判断</b></td></tr><tr><td>图像</td><td>不支持</td><td>支持</td><td>任何依赖看画面的场景一律出局</td></tr></tbody></table><div class="figsrc">资料来源：TypeSafe 发布材料与定价页<sup class="cite">[1,23,24,2]</sup>，经作者转述；证据层级 T3（官方自报，无第三方核验）。右栏为本报告的判断，不带标记。</div></div>
 
 <h3><span class="n">1.2</span>为什么它快、为什么它便宜</h3>
 <p>通用大模型逐 token 生成，每个 token 都要跑一次完整前向并把结果接回输入。
@@ -406,7 +423,7 @@ TypeSafe 的 CEO 在 Hacker News 上亲自承认了这一点。
 <h3><span class="n">2.2</span>倍数是怎么来的</h3>
 <p>三条质疑在 Hacker News 上被反复提出，本报告认为其中两条成立：</p>
 <ul>
-<li><b>速度对比不对等（成立）。</b>官方比较的是大模型写出完整一段答案的时间<sup class="cite">[19]</sup>，
+<li><b>速度对比不对等（成立）。</b>官方比较的是大模型写出完整一段答案的时间<sup class="cite">[23]</sup>，
 而不是让大模型也只输出一个字母。后者才是同任务对照。</li>
 <li><b>「前沿模型」一词借光（部分成立）。</b>更准确的说法是：在做选择题这一件事上，
 它把速度与成本推到了新水平。这个说法本身已经足够强，不需要借光。</li>
@@ -414,27 +431,31 @@ TypeSafe 的 CEO 在 Hacker News 上亲自承认了这一点。
 该演示说明反应快，不说明会玩游戏。</li>
 </ul>
 
-<div class="fig"><div class="figtitle"><span class="figno">Figure 1</span>本报告引用的 {N_SUB} 个实质数字里，三分之二我无法独立核验</div><svg viewBox="0 0 470 132" width="100%" xmlns="http://www.w3.org/2000/svg">
-<text x="116.7" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T2 二手实测（作者自测）</text>
-<rect x="124.66000000000001" y="10" width="269.9" height="14" fill="#c4c7ca"/>
-<text x="399.6" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">23 个</text>
-<text x="116.7" y="41.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T1 算术可推导（本报告复算）</text>
-<rect x="124.66000000000001" y="32" width="117.3" height="14" fill="#17191c"/>
-<text x="247.0" y="41.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">10 个</text>
-<text x="116.7" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T0 一手可复跑（本报告代码）</text>
-<rect x="124.66000000000001" y="54" width="105.6" height="14" fill="#17191c"/>
-<text x="235.3" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">9 个</text>
-<text x="116.7" y="85.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T3 官方自报</text>
-<rect x="124.66000000000001" y="76" width="105.6" height="14" fill="#c8321f"/>
-<text x="235.3" y="85.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">9 个</text>
-<text x="116.7" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T4 社媒自报</text>
-<rect x="124.66000000000001" y="98" width="70.4" height="14" fill="#c8321f"/>
-<text x="200.1" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">6 个</text>
-<line x1="124.66000000000001" y1="6" x2="124.66000000000001" y2="118" stroke="#d8d8d8" stroke-width="0.6"/>
-<text x="124.7" y="129.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">按证据强度分级，共 57 个实质数据点（不含 3 条关于本表自身的元统计）。T0/T1 合计 19 个即本报告可独立担保的部分。</text>
-</svg><div class="figsrc">资料来源：本报告数据表自计<sup class="cite">[21]</sup>。核验规则在开工时定死：仅一手可复跑或算术可推导者置 verified。T3/T4 标记为不可核验不代表怀疑其真伪，只表示本报告没有独立证据。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Figure 1</span>本报告引用的 72 个实质数字里，七成我无法独立核验</div><svg viewBox="0 0 470 163" width="100%" xmlns="http://www.w3.org/2000/svg">
+<text x="154.9" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T2 二手实测（作者自测）</text>
+<rect x="162.88" y="10" width="236.9" height="14" fill="#c4c7ca"/>
+<text x="404.8" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">23 个</text>
+<text x="154.9" y="41.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T1 算术可推导（本报告复算）</text>
+<rect x="162.88" y="32" width="133.9" height="14" fill="#17191c"/>
+<text x="301.8" y="41.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">13 个</text>
+<text x="154.9" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T2+ 公开集独立测量（可被第三方复跑）</text>
+<rect x="162.88" y="54" width="113.3" height="14" fill="#8f9396"/>
+<text x="281.2" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">11 个</text>
+<text x="154.9" y="85.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T0 一手可复跑（本报告代码）</text>
+<rect x="162.88" y="76" width="92.7" height="14" fill="#17191c"/>
+<text x="260.6" y="85.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">9 个</text>
+<text x="154.9" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T3 官方自报</text>
+<rect x="162.88" y="98" width="92.7" height="14" fill="#c8321f"/>
+<text x="260.6" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">9 个</text>
+<text x="154.9" y="129.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">T4 社媒自报</text>
+<rect x="162.88" y="120" width="72.1" height="14" fill="#c8321f"/>
+<text x="240.0" y="129.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">7 个</text>
+<line x1="162.88" y1="6" x2="162.88" y2="140" stroke="#d8d8d8" stroke-width="0.6"/>
+<text x="162.9" y="151.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">按证据强度分级，共 72 个实质数据点（不含 3 条关于本表自身的元统计）。T0/T1 合计 22 个是本报</text>
+<text x="162.9" y="160.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">告可独立担保的部分；T2+ 我复跑不了，但第三方可以。</text>
+</svg><div class="figsrc">资料来源：本报告数据表自计<sup class="cite">[25]</sup>。核验规则在开工时定死：仅一手可复跑或算术可推导者置 verified。T3/T4 标记为不可核验不代表怀疑其真伪，只表示本报告没有独立证据。</div></div>
 
-<p>把这张图当成结论读：<b>关于 Jev 的公开讨论，其证据基础 66.7% 由自报构成。</b>
+<p class="keepnext">把这张图当成结论读：<b>关于 Jev 的公开讨论，其证据基础 69.4% 我无法独立核验。</b>其中 T2+ 那 11 条是例外中的例外——数据集公开有标注、harness 代码公开，<b>第三方能复跑，只是本报告的执行环境跑不了</b>。
 这个比例本身不是丑闻——任何一个发布不到一周的模型都会是这样——
 但它决定了今天所有关于 Jev 的强判断（包括正面的和负面的）都应当降一档来听。</p>
 </td></tr></tbody></table>
@@ -444,7 +465,7 @@ TypeSafe 的 CEO 在 Hacker News 上亲自承认了这一点。
 这不是唱衰——发布不到一周的模型本该如此——但它直接决定了今天谁该用它、谁不该。</div>
 
 <h3><span class="n">3.1</span>漏斗</h3>
-<div class="fig"><div class="figtitle"><span class="figno">Figure 2</span>217 个项目里今天真能用的有 15 个，其中 14 个是框架接口而不是应用</div><svg viewBox="0 0 470 110" width="100%" xmlns="http://www.w3.org/2000/svg">
+<div class="fig"><div class="figtitle"><span class="figno">Figure 2</span>217 个项目里今天真能用的有 15 个，其中 14 个是框架接口而不是应用</div><svg viewBox="0 0 470 119" width="100%" xmlns="http://www.w3.org/2000/svg">
 <text x="111.2" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">受评项目总数</text>
 <rect x="119.2" y="10" width="281.8" height="14" fill="#c4c7ca"/>
 <text x="406.0" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">217</text>
@@ -458,8 +479,9 @@ TypeSafe 的 CEO 在 Hacker News 上亲自承认了这一点。
 <rect x="119.2" y="76" width="1.3" height="14" fill="#c8321f"/>
 <text x="125.5" y="85.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">1</text>
 <line x1="119.2" y1="6" x2="119.2" y2="96" stroke="#d8d8d8" stroke-width="0.6"/>
-<text x="119.2" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">第一轮评测：以各项目的公开介绍文字为输入，由 Jev 逐条判定。Jev 不开链接、不跑代码，判的是「公开证据够不够」，不是项目好不好。</text>
-</svg><div class="figsrc">资料来源：作者第一轮实测<sup class="cite">[4]</sup>，样本 = 60 个案例 + GitHub 上 167 个 Jev 项目。可用率 6.9%<sup class="cite">[5]</sup>，框架接口占可用项的 93.3%<sup class="cite">[22]</sup>。证据层级 T2。<b>该轮无人工标注的标准答案<sup class="cite">[6]</sup>，因此只能观察判定分布，不能评估判定准不准。</b></div></div>
+<text x="119.2" y="107.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">第一轮评测：以各项目的公开介绍文字为输入，由 Jev 逐条判定。Jev 不开链接、不跑代码，判的是「公开证据够不够</text>
+<text x="119.2" y="116.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">」，不是项目好不好。</text>
+</svg><div class="figsrc">资料来源：作者第一轮实测<sup class="cite">[4]</sup>，样本 = 60 个案例 + GitHub 上 167 个 Jev 项目。可用率 6.9%<sup class="cite">[5]</sup>，框架接口占可用项的 93.3%<sup class="cite">[26]</sup>。证据层级 T2。<b>该轮无人工标注的标准答案<sup class="cite">[6]</sup>，因此只能观察判定分布，不能评估判定准不准。</b></div></div>
 
 <p>这 15 个里的 14 个是 pydantic-ai、LangChain、Vercel AI SDK 这类主流开发框架的
 Jev 接入层<sup class="cite">[4]</sup>，唯一的独立应用是 Browser Use 的 jev-ultrafast。
@@ -471,15 +493,15 @@ Jev 接入层<sup class="cite">[4]</sup>，唯一的独立应用是 Browser Use 
 <h3><span class="n">3.2</span>证据最完整的那个案例</h3>
 <p>jev-ultrafast 值得单独说，因为它是全部案例里唯一自带测量脚本的：
 它不再每步截图给视觉模型看，而是把网页拆成带编号的元素清单，
-让 Jev 选「做什么、对哪个」。一次机票搜索的全程耗时从 9.5 秒降到 7.1 秒<sup class="cite">[23]</sup>，
-降幅 -25.3%<sup class="cite">[24]</sup>。</p>
+让 Jev 选「做什么、对哪个」。一次机票搜索的全程耗时从 9.5 秒降到 7.1 秒<sup class="cite">[27]</sup>，
+降幅 -25.3%<sup class="cite">[28]</sup>。</p>
 
 <p>请注意这个案例的结构——它解释了为什么<b>它</b>能成而别的不能：
 网页元素清单是一份<b>已经被结构化、且天然就是选项列表</b>的输入。
 把现实化成选项这一步由 DOM 解析完成，不由 Jev 完成。
 第 7 章会论证：这正是 Jev 唯一能可靠工作的输入形态。</p>
 
-<div class="fig"><div class="figtitle"><span class="figno">Table 2</span>其余有公开数字的案例，按证据层级排列——全部为自报，无一附带标准答案</div><table><colgroup><col style="width:36%"><col style="width:30%"><col style="width:18%"><col style="width:16%"></colgroup><thead><tr><th>案例</th><th>规模与耗时</th><th>成本</th><th>层级</th></tr></thead><tbody><tr class="grp"><td colspan="4">按用途分类：代理决策器</td></tr><tr><td>jev-ultrafast（Browser Use）</td><td>机票搜索 9.5s → 7.1s</td><td>未披露</td><td class="num"><span class="tier">T2</span></td></tr><tr><td>Slack 代理前置分类</td><td>端到端提速约 2 倍</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr><tr class="grp"><td colspan="4">按用途分类：海量逐条分类</td></tr><tr><td>jev() PostgreSQL 扩展</td><td>129 行 / 约 1 秒 / 重跑 6ms</td><td>$0.0009</td><td class="num"><span class="tier t34">T4</span></td></tr><tr><td>广告素材拆解</td><td>724 条 / 37 品牌 / 40 秒</td><td>$0.09</td><td class="num"><span class="tier t34">T4</span></td></tr><tr><td>AI 论文主题分类</td><td>1,018 篇 → 24 主题</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr><tr class="grp"><td colspan="4">按用途分类：按把握分流</td></tr><tr><td>播客洞察排序（低把握转 DeepSeek）</td><td>85 段 / 约 380ms 每批</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr></tbody></table><div class="figsrc">资料来源：各项目公开帖文与仓库<sup class="cite">[23,25,26,27,28,29]</sup>。<b>本表所有条目均无标准答案、无错误率披露</b>，因此它们证明的是「能跑通且很快」，不是「判得对」。这两件事在本报告中始终分开记。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 2</span>其余有公开数字的案例，按证据层级排列——全部为自报，无一附带标准答案</div><table><colgroup><col style="width:36%"><col style="width:30%"><col style="width:18%"><col style="width:16%"></colgroup><thead><tr><th>案例</th><th>规模与耗时</th><th>成本</th><th>层级</th></tr></thead><tbody><tr class="grp"><td colspan="4">按用途分类：代理决策器</td></tr><tr><td>jev-ultrafast（Browser Use）</td><td>机票搜索 9.5s → 7.1s</td><td>未披露</td><td class="num"><span class="tier">T2</span></td></tr><tr><td>Slack 代理前置分类</td><td>端到端提速约 2 倍</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr><tr class="grp"><td colspan="4">按用途分类：海量逐条分类</td></tr><tr><td>jev() PostgreSQL 扩展</td><td>129 行 / 约 1 秒 / 重跑 6ms</td><td>$0.0009</td><td class="num"><span class="tier t34">T4</span></td></tr><tr><td>广告素材拆解</td><td>724 条 / 37 品牌 / 40 秒</td><td>$0.09</td><td class="num"><span class="tier t34">T4</span></td></tr><tr><td>AI 论文主题分类</td><td>1,018 篇 → 24 主题</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr><tr class="grp"><td colspan="4">按用途分类：按把握分流</td></tr><tr><td>播客洞察排序（低把握转 DeepSeek）</td><td>85 段 / 约 380ms 每批</td><td>未披露</td><td class="num"><span class="tier t34">T4</span></td></tr></tbody></table><div class="figsrc">资料来源：各项目公开帖文与仓库<sup class="cite">[27,29,30,31,32,33]</sup>。<b>本表所有条目均无标准答案、无错误率披露</b>，因此它们证明的是「能跑通且很快」，不是「判得对」。这两件事在本报告中始终分开记。</div></div>
 
 <div class="side"><span class="t">未计入的部分</span>
 OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不是 Jev 的应用。
@@ -492,7 +514,7 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 接口每次都正常返回，判断也准，全部出在它被放进真实流程的那一刻。
 <b>这四次的价值高于前面所有成功案例：成功案例只说明它能做什么，失败案例说明边界在哪。</b></div>
 
-<div class="fig"><div class="figtitle"><span class="figno">Table 3</span>四次失败，以及每一次卡住的那个结构性原因</div><table><colgroup><col style="width:24%"><col style="width:24%"><col style="width:37%"><col style="width:15%"></colgroup><thead><tr><th>尝试</th><th>结果</th><th>卡在哪</th><th>归类</th></tr></thead><tbody><tr><td>Claude Code 上下文压缩插件</td><td>装不上；勉强跑起来是无脑删</td><td>为塞进 32K 上限，插件先把内容砍光，Jev 只看到工具名和长度</td><td class="sig">看不到内容</td></tr><tr><td>Codex 模型路由省额度</td><td>成本 +59%–184%，每步多等 1–2 秒</td><td>中间代理把请求变重 2.5 倍 倍并弄丢缓存</td><td class="sig">壳的问题</td></tr><tr><td>稿件 AI 味检测</td><td>22 / 62 句误报，误报率 35.5%</td><td>作者本就逐句自审，未多抓出一句，净增价值约零</td><td class="sig">边际成本为零</td></tr><tr><td>40 个大视频判断可删</td><td>Jev 判 0 vs 7（纯文件名规则判出 7 个）</td><td>看不到文件内容，只能凭文件名猜</td><td class="sig">看不到内容</td></tr></tbody></table><div class="figsrc">资料来源：作者自述<sup class="cite">[6,30]</sup>，证据层级 T2。右栏归类为本报告所加，不带标记。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 3</span>四次失败，以及每一次卡住的那个结构性原因</div><table><colgroup><col style="width:24%"><col style="width:24%"><col style="width:37%"><col style="width:15%"></colgroup><thead><tr><th>尝试</th><th>结果</th><th>卡在哪</th><th>归类</th></tr></thead><tbody><tr><td>Claude Code 上下文压缩插件</td><td>装不上；勉强跑起来是无脑删</td><td>为塞进 32K 上限，插件先把内容砍光，Jev 只看到工具名和长度</td><td class="sig">看不到内容</td></tr><tr><td>Codex 模型路由省额度</td><td>成本 +59%–184%，每步多等 1–2 秒</td><td>中间代理把请求变重 2.5 倍 倍并弄丢缓存</td><td class="sig">壳的问题</td></tr><tr><td>稿件 AI 味检测</td><td>22 / 62 句误报，误报率 35.5%</td><td>作者本就逐句自审，未多抓出一句，净增价值约零</td><td class="sig">边际成本为零</td></tr><tr><td>40 个大视频判断可删</td><td>Jev 判 0 vs 7（纯文件名规则判出 7 个）</td><td>看不到文件内容，只能凭文件名猜</td><td class="sig">看不到内容</td></tr></tbody></table><div class="figsrc">资料来源：作者自述<sup class="cite">[6,34]</sup>，证据层级 T2。右栏归类为本报告所加，不带标记。</div></div>
 
 <h3><span class="n">4.1</span>那个对什么都答 0 的对照组</h3>
 <div class="box sig"><span class="bt">本报告认为这是全文最有信息量的一次观察</span>
@@ -521,7 +543,9 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 <h2><span class="num">05</span>两轮实测的证据强度复核</h2>
 <div class="lead">作者的第二轮实测是本报告见到的、关于 Jev 最认真的一份公开测试：
 预先标注答案、设了对照组、报告了延迟分布。正因为它最认真，值得逐项复核。
-复核结果是三处读法需要修正，以及一处被作者自己低估的发现。</div>
+复核结果是三处读法需要修正，以及一处被作者自己低估的发现。
+<b>5.6 补入一份本报告初稿完成后才找到的独立测量</b>——它在公开有标注数据集上
+把 5.3 的分档结论测了出来，同时证伪了一个本报告差点写死的推论。</div>
 
 <h3><span class="n">5.1</span>测试设计</h3>
 <p>100 条中文科技资讯，答案事先标好，每条三道题，共 300 个判断<sup class="cite">[7]</sup>；
@@ -531,7 +555,7 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 <p>准确率 94.7% 对 93.0%<sup class="cite">[7]</sup>，两模型答案不同的有 12 条<sup class="cite">[7]</sup>。
 配对比较的正确检验是 McNemar 精确检验，只看这 12 个分歧对如何分配：</p>
 
-<div class="fig"><div class="figtitle"><span class="figno">Table 4</span>对 Jev 与 Qwen 差距的配对显著性检验：两种可能情形都不显著</div><table><colgroup><col style="width:16%"><col style="width:16%"><col style="width:18%"><col style="width:20%"><col style="width:30%"></colgroup><thead><tr><th>情形</th><th>Jev 独对</th><th>Qwen 独对</th><th>准确率差</th><th>McNemar 双侧 p</th></tr></thead><tbody><tr><td>b−c = 6</td><td>9</td><td>3</td><td>+2.0pp</td><td class="num sig">0.146</td></tr><tr><td>b−c = 4</td><td>8</td><td>4</td><td>+1.3pp</td><td class="num sig">0.388</td></tr></tbody></table><div class="figsrc">资料来源：本报告计算<sup class="cite">[8]</sup>，输入为 C8、C9 两个数。<b>存在一处内部不一致</b><sup class="cite">[31]</sup>：分歧数 12 为偶数则正确数之差必为偶数，但由 94.7%−93.0% 还原出的差是 5（奇数），故原文两数至少有一个是约数。本报告因此给出区间而非点值。两种情形的 p 都远高于 0.05。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 4</span>对 Jev 与 Qwen 差距的配对显著性检验：两种可能情形都不显著</div><table><colgroup><col style="width:16%"><col style="width:16%"><col style="width:18%"><col style="width:20%"><col style="width:30%"></colgroup><thead><tr><th>情形</th><th>Jev 独对</th><th>Qwen 独对</th><th>准确率差</th><th>McNemar 双侧 p</th></tr></thead><tbody><tr><td>b−c = 6</td><td>9</td><td>3</td><td>+2.0pp</td><td class="num sig">0.146</td></tr><tr><td>b−c = 4</td><td>8</td><td>4</td><td>+1.3pp</td><td class="num sig">0.388</td></tr></tbody></table><div class="figsrc">资料来源：本报告计算<sup class="cite">[8]</sup>，输入为 C8、C9 两个数。<b>存在一处内部不一致</b><sup class="cite">[35]</sup>：分歧数 12 为偶数则正确数之差必为偶数，但由 94.7%−93.0% 还原出的差是 5（奇数），故原文两数至少有一个是约数。本报告因此给出区间而非点值。两种情形的 p 都远高于 0.05。</div></div>
 
 <p><b>结论：在这个样本上，Jev 与一个便宜的轻量模型打平，差距无统计显著性。</b>
 这与作者自己的定性结论（「准确率和费用都和便宜大模型打平」）一致，
@@ -557,6 +581,9 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 <b>94.7% 这个总数不应被当作 Jev 的能力值引用</b>，
 因为它混合了两个性质完全不同的档位。能被引用的是两个数：高档零错误、低档六成。</p>
 
+<p>这个分档结论后来在<b>公开有标注数据集</b>上被独立复现了，而且量级接近——
+见 5.6。那份测量同时表明，这个落差有多值钱<b>取决于任务</b>。</p>
+
 <h3><span class="n">5.4</span>修正三：没有报告多数类基线</h3>
 <div class="box sig"><span class="bt">这是本报告最核心的一条批评，且适用于全部公开材料</span>
 第二轮没有报告<b>多数类基线</b>——全猜最常见的那个标签能得多少分<sup class="cite">[10]</sup>。
@@ -566,7 +593,8 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 此时 94.7% 是真本事。如果分布是 95:3:2，全猜多数类有 95%，
 那么 94.7% <b>不如不看内容</b>。<b>两种情况在已披露的信息里无法区分。</b>
 <br><br>
-这不是针对作者——<b>官方评测同样没报</b>，社区案例一个也没报。
+这不是针对作者——<b>官方评测同样没报</b>，社区案例一个也没报，
+5.6 那份证据最硬的独立测量<b>也没报</b><sup class="cite">[36]</sup>。
 第 6 章给出本报告在自建基准上实测的这两条线。</div>
 
 <h3><span class="n">5.5</span>被低估的那个发现：尾延迟</h3>
@@ -610,13 +638,104 @@ OpenJev、Kev、Nimble 这类模仿 Jev 的替代模型不计入——它们不�
 Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰恰是它自己没有重点宣传的</b>：
 封闭答案空间意味着没有可变长度的生成过程，因而没有长尾的结构性来源。
 这是架构保证，不是工程调优。</div>
+
+<h3><span class="n">5.6</span>一份更硬的独立测量，以及它证伪的那个推论</h3>
+<p>本报告初稿完成后找到一份此前未见的测量<sup class="cite">[37]</sup>：classifier.dev
+是一个不需要 API key 的公开分类服务，其后端自 2026-09-17 起<b>就是 Jev</b>，
+LLM 链降为 fallback。该项目把部署服务与 Jev 直连放在两个<b>公开有标注</b>的
+单标签测试集上对照，每集 400 条<sup class="cite">[38]</sup>，原始逐项结果与 harness 代码随仓库发布。</p>
+
+<p>这份证据比本章前五节引用的都硬，原因是可核验性：<b>数据集是公开的、
+标注不是作者写的、代码可以复跑。</b>本报告仍把它标为二手（T2+）而非一手——
+本报告的执行环境对该域名同样返回 403，我复跑不了。</p>
+
+<div class="fig"><div class="figtitle"><span class="figno">Figure 5</span>置信度确有分流价值，但它值多少钱取决于任务——两个数据集给出相反的答案</div><svg viewBox="0 0 470 182" width="100%" xmlns="http://www.w3.org/2000/svg">
+<line x1="34" y1="148.0" x2="458" y2="148.0" stroke="#d8d8d8" stroke-width="0.5"/>
+<text x="29.0" y="150.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#6b6b6b" text-anchor="end" font-weight="normal" opacity="1">0</text>
+<line x1="34" y1="115.0" x2="458" y2="115.0" stroke="#d8d8d8" stroke-width="0.5"/>
+<text x="29.0" y="117.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#6b6b6b" text-anchor="end" font-weight="normal" opacity="1">25</text>
+<line x1="34" y1="82.0" x2="458" y2="82.0" stroke="#d8d8d8" stroke-width="0.5"/>
+<text x="29.0" y="84.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#6b6b6b" text-anchor="end" font-weight="normal" opacity="1">50</text>
+<line x1="34" y1="49.0" x2="458" y2="49.0" stroke="#d8d8d8" stroke-width="0.5"/>
+<text x="29.0" y="51.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#6b6b6b" text-anchor="end" font-weight="normal" opacity="1">75</text>
+<line x1="34" y1="16.0" x2="458" y2="16.0" stroke="#d8d8d8" stroke-width="0.5"/>
+<text x="29.0" y="18.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7" fill="#6b6b6b" text-anchor="end" font-weight="normal" opacity="1">100</text>
+<rect x="65.0" y="28.4" width="20.0" height="119.6" fill="#17191c"/>
+<text x="75.0" y="24.9" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">90.6%</text>
+<rect x="89.0" y="28.0" width="20.0" height="120.0" fill="#c8321f"/>
+<text x="99.0" y="24.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">90.9%</text>
+<text x="87.0" y="159.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">AG News</text>
+<text x="87.0" y="167.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">
+高置信档</text>
+<rect x="171.0" y="61.8" width="20.0" height="86.2" fill="#17191c"/>
+<text x="181.0" y="58.3" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">65.3%</text>
+<rect x="195.0" y="37.5" width="20.0" height="110.5" fill="#c8321f"/>
+<text x="205.0" y="34.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">83.7%</text>
+<text x="193.0" y="159.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">AG News</text>
+<text x="193.0" y="167.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">
+低置信档</text>
+<rect x="277.0" y="52.0" width="20.0" height="96.0" fill="#17191c"/>
+<text x="287.0" y="48.5" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">72.7%</text>
+<rect x="301.0" y="53.1" width="20.0" height="94.9" fill="#c8321f"/>
+<text x="311.0" y="49.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">71.9%</text>
+<text x="299.0" y="159.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">emotion</text>
+<text x="299.0" y="167.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">
+高置信档</text>
+<rect x="383.0" y="99.3" width="20.0" height="48.7" fill="#17191c"/>
+<text x="393.0" y="95.8" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">36.9%</text>
+<rect x="407.0" y="92.8" width="20.0" height="55.2" fill="#c8321f"/>
+<text x="417.0" y="89.3" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.4" fill="#231f20" text-anchor="middle" font-weight="bold" opacity="1">41.8%</text>
+<text x="405.0" y="159.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">emotion</text>
+<text x="405.0" y="167.6" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#231f20" text-anchor="middle" font-weight="normal" opacity="1">
+低置信档</text>
+<rect x="34" y="2" width="8" height="8" fill="#17191c"/>
+<text x="45.0" y="9.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">Jev 直连</text>
+<rect x="106.6" y="2" width="8" height="8" fill="#c8321f"/>
+<text x="117.6" y="9.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="7.2" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">升级低置信项后</text>
+<text x="34.0" y="181.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">低置信 = Jev 给出的置信度 &lt; 0.7，也正是 smart 档唯一会动的那批。AG News 低置信档被升级后提升 18.4pp，emotion 只提升 4.9pp。</text>
+</svg><div class="figsrc">资料来源：classifier.dev 仓库 src/vs-jev.json<sup class="cite">[20]</sup>，测于 2026-09-18，每集 400 条。落差与增量为本报告推算<sup class="cite">[12,13]</sup>。⚠ 样本取法是测试集<b>前 400 条</b>，未打乱、未设种子、未分层<sup class="cite">[38]</sup>，因此这 400 条的类别分布可能偏离总体。</div></div>
+
+<h4>它确认了什么</h4>
+<p><b>5.3 的分档结论在公开有标注集上成立，量级还更大。</b>
+高低置信档的准确率落差是 +25.3pp / +35.8pp<sup class="cite">[12]</sup>——
+而 5.3 那份自造模板测出的落差约 30pp<sup class="cite">[7,9]</sup>。
+两个独立来源、不同任务、不同语言，给出同一量级的结论。
+<b>「按把握分流」这件事，到此可以认为是被证据支持的，不再只是一个说法。</b></p>
+
+<h4>它证伪了什么</h4>
+<div class="box sig"><span class="bt">本报告差点写死的一个推论</span>
+第 9 章原本要说「真正值钱的用法只有一个：按把握分流」。
+这句话还是对的，但<b>少了半句</b>：
+<br><br>
+把低置信项升级给第二个模型，在 AG News 上让总准确率涨了 +2.5pp
+（低置信档 65.3%→83.7%），在 emotion 上只涨了 +0.9pp
+（低置信档 36.9%→41.8%）<sup class="cite">[13,20]</sup>。
+<b>同一套分流机制，一个任务上值，另一个任务上基本白费。</b>
+<br><br>
+机制是清楚的：升级能不能赚回成本，取决于<b>第二个模型在第一个模型不确定的那批上
+是不是真的更强</b>。emotion 的低置信项有 122/400（30.5%），
+第二个模型在它们上面也只有四成出头——那批样本是<b>任务本身就难</b>，
+不是第一个模型偶然失手。
+<br><br>
+<b>→ 修正后的说法：分流的价值不是 Jev 的属性，是「任务 × 模型对」的属性。
+上线前必须在自己的数据上测它，不能从别人的数字外推。</b>
+这条已写入第 9 章的三步判定。</div>
+
+<p>顺带一提，这个项目的 <code>eval/README.md</code> 专设一节叫
+「引用任何数字之前先读这个」，自陈六项局限，包括在自己报告的集合上调参、
+单人标注无一致性检验、n=7、无置信区间、重跑方差 0.73 与 0.60，
+并明确区分该数据支持什么与不支持什么<sup class="cite">[39]</sup>。
+<b>论证据纪律，这份材料强于本报告引用的官方发布材料。</b>
+它唯一缺的仍然是 5.4 那条：多数类基线<sup class="cite">[36]</sup>。</p>
+
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">06 独立基准 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">06</span>一次独立基准的构建</h2>
 <div class="lead">第 5 章批评了公开材料普遍不报基线。本章给出一个自建基准，
-把那两条线实测出来。<b>本章不提供 Jev 的得分</b>——它尚未执行。
-本章提供的是判定装置本身，以及构建过程中暴露的两个方法论问题，
-这两个问题独立于 Jev 成立。</div>
+把那两条线实测出来。<b>本章仍不提供模型的得分</b>——但与初稿不同，
+现在它已经是<b>可执行</b>的：6.4 记录了一条不需要任何 API key 的路径。
+本章提供的是判定装置本身、它的三道闸，以及构建过程中暴露的两个方法论问题。
+后者独立于 Jev 成立。</div>
 
 <h3><span class="n">6.1</span>任务与答案键</h3>
 <p>基准任务是<b>归因判断</b>：给定某只股票当日涨跌与大盘、波动率、利率背景，
@@ -625,7 +744,7 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 而且本报告作者在这件事上<b>有记录在案的失败</b>。</p>
 
 <p>数据取自 25 个交易日（2026-08-18 至 2026-09-18）、27 个标的，
-每日取当日最后一次抓价<sup class="cite">[32]</sup>，经答案键筛选后得 164 例<sup class="cite">[12]</sup>。
+每日取当日最后一次抓价<sup class="cite">[40]</sup>，经答案键筛选后得 164 例<sup class="cite">[14]</sup>。
 答案键只裁判一件机器裁得了的事：把目标的涨跌与<b>同业个股</b>的均值和离散度做 z 检验。
 不裁「是利率驱动还是油价驱动」——那个标签没有机械答案，
 拿事后解释当标准答案就是自评。</p>
@@ -637,7 +756,7 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 答案存在 <code>key</code> 里，两者不交叉。</div>
 
 <h3><span class="n">6.2</span>两条必须先跨过的线</h3>
-<div class="fig"><div class="figtitle"><span class="figno">Figure 5</span>多数类基线与平凡规则上限完全相等——该基准无法被单变量规则做掉，因此有效</div><svg viewBox="0 0 470 66" width="100%" xmlns="http://www.w3.org/2000/svg">
+<div class="fig"><div class="figtitle"><span class="figno">Figure 6</span>多数类基线与平凡规则上限完全相等——该基准无法被单变量规则做掉，因此有效</div><svg viewBox="0 0 470 75" width="100%" xmlns="http://www.w3.org/2000/svg">
 <text x="128.0" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="end" font-weight="normal" opacity="1">多数类基线（全猜最常见标签）</text>
 <rect x="136.0" y="10" width="167.0" height="14" fill="#8f9396"/>
 <text x="308.0" y="19.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">55.5%</text>
@@ -645,10 +764,11 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 <rect x="136.0" y="32" width="167.0" height="14" fill="#17191c"/>
 <text x="308.0" y="41.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="8.4" fill="#231f20" text-anchor="start" font-weight="bold" opacity="1">55.5%</text>
 <line x1="136.0" y1="6" x2="136.0" y2="52" stroke="#d8d8d8" stroke-width="0.6"/>
-<text x="136.0" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">两条线相等即说明「标的自身涨跌」这一维零信息量。Jev 侧未执行，故不入图——零高度的柱会被读成零分。执行条件见 6.4。</text>
-</svg><div class="figsrc">资料来源：本报告自建基准<sup class="cite">[12,13,14,16]</sup>，代码 <code>tools/jev_bench.py</code>，证据层级 T0（一手可复跑）。标签分布 91 / 40 / 33<sup class="cite">[13]</sup>。平凡规则上限的口径是：只看标的自身涨跌绝对值的两阈值规则，在 0–6% 范围网格搜索后的最高准确率。</div></div>
+<text x="136.0" y="63.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">两条线相等即说明「标的自身涨跌」这一维零信息量。模型侧尚无读数，故不入图——零高度的柱会被读成零分。可</text>
+<text x="136.0" y="72.0" font-family="'PingFang SC','Helvetica Neue',Arial,sans-serif" font-size="6.6" fill="#6b6b6b" text-anchor="start" font-weight="normal" opacity="1">执行状态见 6.4。</text>
+</svg><div class="figsrc">资料来源：本报告自建基准<sup class="cite">[14,15,16,18]</sup>，代码 <code>tools/jev_bench.py</code>，证据层级 T0（一手可复跑）。标签分布 91 / 40 / 33<sup class="cite">[15]</sup>。平凡规则上限的口径是：只看标的自身涨跌绝对值的两阈值规则，在 0–6% 范围网格搜索后的最高准确率。</div></div>
 
-<div class="bigrow"><div class="c"><div class="v">55.5%</div><div class="k">多数类基线：全猜最常见标签 sector_wide 的准确率。任何模型低于此数即无信息量。</div></div><div class="c"><div class="v">55.5%</div><div class="k">平凡规则上限：最优单变量阈值规则的得分。与基线一字不差 → 该维度零信息量。</div></div><div class="c s"><div class="v">未测</div><div class="k">Jev 在本基准上的得分。未执行，非零分。</div></div></div>
+<div class="bigrow"><div class="c"><div class="v">55.5%</div><div class="k">多数类基线：全猜最常见标签 sector_wide 的准确率。任何模型低于此数即无信息量。</div></div><div class="c"><div class="v">55.5%</div><div class="k">平凡规则上限：最优单变量阈值规则的得分。与基线一字不差 → 该维度零信息量。</div></div><div class="c s"><div class="v">未测</div><div class="k">模型在本基准上的得分。装置已就绪且可执行，只是尚未跑过；非零分，见 6.4。</div></div></div>
 
 <p>这个检查本身值得单独说明。<b>如果一条三行的阈值规则就能做到和模型一样好，
 那这个基准测不出任何东西。</b>实测结果是平凡规则上限与多数类基线完全相等，
@@ -660,12 +780,12 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 答案键设了一个参数：同业不足 3 只不出题——一个看起来纯技术、纯保守的常数。
 <br><br>
 首次造集的结果：本报告作者记录在案的 5 条归因判断，
-<b>被删掉 3 条，全部是同一只股票，全部落在汽车板块</b><sup class="cite">[15]</sup>。
+<b>被删掉 3 条，全部是同一只股票，全部落在汽车板块</b><sup class="cite">[17]</sup>。
 原因是汽车组在 27 只标的的池子里只有三只，去掉目标只剩两个同业。
 <br><br>
 <b>而作者记为落空的判断，全部落在汽车板块。</b>
 删掉的恰好是判错的那些，留下的恰好是判对的那些——
-剩余对照子集上作者的成绩是 2 比 2 全对<sup class="cite">[13]</sup>。
+剩余对照子集上作者的成绩是 2 比 2 全对<sup class="cite">[15]</sup>。
 <br><br>
 <b>如果没有去查被删的是哪些，这个基准会报告：作者在归因上百发百中。</b></div>
 
@@ -681,16 +801,42 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 并且必须检查「我自己的历史答案有几条落在被排除区」。</b>
 只报「跳过 N 条」是不够的——N 是个数字，不会让人去看它删了谁。</p>
 
-<h3><span class="n">6.4</span>为什么 Jev 侧尚未执行</h3>
-<p>三个条件未满足<sup class="cite">[16]</sup>：本报告的执行环境对 <code>api.typesafe.ai</code>
-及其文档站的出站连接被组织代理策略拒绝；尚无 API 密钥；
-且请求体 schema 未经官方文档核对<sup class="cite">[33]</sup>——
-文档站在本环境同样不可达，现有构造依据公开检索结果拼接。</p>
+<h3><span class="n">6.4</span>两条执行路径，以及它们口径上的差别</h3>
+<p>初稿写的是「尚未执行」，原因是三个条件未满足<sup class="cite">[18]</sup>：执行环境对
+<code>api.typesafe.ai</code> 及其文档站的出站连接被组织代理策略拒绝；尚无 API 密钥；
+且请求体 schema 未经官方文档核对<sup class="cite">[41]</sup>。这三条对<b>官方 API</b> 依然成立。</p>
 
-<p>基准集、请求构造与对分逻辑均已就绪，可在出网不受限的环境中执行。
-本报告选择<b>交付未执行的装置而不是执行一个凑合的版本</b>：
-在 schema 未核对的情况下拿到的失败率，无法区分「模型判得差」和「字段名写错了」，
-而这两者会导出完全相反的结论。</p>
+<p>但 5.6 那份材料同时提供了第二条路：classifier.dev 是一个
+<b>不需要任何 API key</b> 的公开分类端点，后端就是 Jev<sup class="cite">[19]</sup>。
+本基准已接成它的第二后端，因此<b>装置从「等条件」变成了「可执行」</b>。</p>
+
+<div class="fig"><div class="figtitle"><span class="figno">Table 5</span>两条路径测的不是同一个东西，分数不可互换</div><table><colgroup><col style="width:18%"><col style="width:36%"><col style="width:46%"></colgroup><thead><tr><th></th><th>路径 A：官方 API</th><th>路径 B：classifier.dev</th></tr></thead><tbody><tr><td>测的对象</td><td>Jev 裸模型</td><td class="sig"><b>服务</b>——隔着它的 prompt、分块与 LLM fallback 链</td></tr><tr><td>前置条件</td><td>排队申请 + API key + schema 核对</td><td>无，公开端点</td></tr><tr><td>今天能跑吗</td><td class="sig">否</td><td class="num">是</td></tr><tr><td>两者差距</td><td>—</td><td>同一公开集上 87.5% 对 87.2%，接近但不等同</td></tr></tbody></table><div class="figsrc">资料来源：口径差别与 87.5/87.2 的对照见 classifier.dev 自己的 vs_jev.py<sup class="cite">[20]</sup>——该脚本存在的理由正是分开这两件事。本报告的工具对经路径 B 得到的结果一律标记 backend="classifier.dev"，不得写作「Jev」。</div></div>
+
+<h3><span class="n">6.5</span>执行前设的三道闸</h3>
+<p>装置可执行之后，风险就从「跑不了」变成「跑出一个错的数还不自知」。
+三道闸各自对应一类已经发生过的事故：</p>
+<ul>
+<li><b>fallback 污染闸。</b>路径 B 的服务在上游不可用时会静默降级到 LLM 链。
+该项目自己踩过：上游模型下架后每个请求都由链上下一个模型作答，
+F1 从 0.800 掉到 0.546，而<b>部署出来的数字里一个字都没说</b><sup class="cite">[42]</sup>。
+对分器因此逐项检查响应里的 <code>model</code> 字段，
+非 Jev 作答的单独摘出并拒绝把该分数写成 Jev 的分数。</li>
+<li><b>信息隔离闸。</b>同业个股的涨跌是答案键的计算材料，不得进入送给模型的文本；
+破坏即拒发请求。首次运行：真泄漏 0 处。
+<b>但第一版检查器报了 57 处「泄漏」</b>——全部是数值巧合
+（某个同业当天的涨跌恰好等于文本里六个大盘读数之一）。
+检查器自己制造的假事故，与 6.3 那个「答案键口径不对」同源，已分开计数。</li>
+<li><b>基线闸。</b>对分时把多数类基线与平凡规则上限直接打在分数旁边，
+没跨过就明写「无信息量」。这是把 5.4 那条批评做成装置，而不是留作叮嘱。</li>
+</ul>
+
+<div class="box"><span class="bt">预注册</span>
+本报告的执行环境对 classifier.dev 同样返回 403，<b>我无法本地试跑</b>。
+因此送给模型的标签文案与任务说明在代码中定死：<b>首跑即终跑</b>，
+没有「看到结果再调标签」的机会。
+<br><br>
+这不是缺陷。它天然排除了「调到好看为止」——而那正是 6.3 那条方法论问题的同一个病根。
+</div>
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">07 机制 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">07</span>机制：为什么只有一种用法站得住</h2>
@@ -698,7 +844,7 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 核心问题只有一个：为什么「给自己提效」四次全败，而「做进产品」能跑通？</div>
 
 <h3><span class="n">7.1</span>四个竞争假说</h3>
-<div class="fig"><div class="figtitle"><span class="figno">Table 5</span>对「自用全败、产品可用」的四种解释，及各自的可证伪点</div><table><colgroup><col style="width:14%"><col style="width:27%"><col style="width:29%"><col style="width:30%"></colgroup><thead><tr><th>假说</th><th>内容</th><th>它预测什么</th><th>证据评估</th></tr></thead><tbody><tr><td>H1 生态不成熟</td><td>壳是个人两三天写的，问题在壳不在模型</td><td>随时间推移失败率下降</td><td>部分成立。路由那次的直接原因确实在代理层</td></tr><tr><td>H2 上下文上限</td><td>32K 决定它只能看已被结构化的输入</td><td>凡需先压缩内容的场景一律失败</td><td>成立。压缩插件与磁盘清理两次都死在这</td></tr><tr><td>H3 订阅制经济学</td><td>包月工具里判断的边际成本已是零</td><td>消费端无成本优势，生产端才有</td><td>成立，但只解释「不划算」，不解释「不工作」</td></tr><tr><td><b>H4 问题表述</b></td><td><b>把现实化成互斥选项是判断的主体，而 Jev 不做这一步</b></td><td><b>凡选项由外部结构天然给定的场景成功，需要自己划定选项的一律失败</b></td><td class="sig"><b>与全部案例一致，含成功案例</b></td></tr></tbody></table><div class="figsrc">本表为本报告的分析，不带标记。H1–H3 为作者提出或可直接归纳自其叙述，H4 为本报告所加。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 6</span>对「自用全败、产品可用」的四种解释，及各自的可证伪点</div><table><colgroup><col style="width:14%"><col style="width:27%"><col style="width:29%"><col style="width:30%"></colgroup><thead><tr><th>假说</th><th>内容</th><th>它预测什么</th><th>证据评估</th></tr></thead><tbody><tr><td>H1 生态不成熟</td><td>壳是个人两三天写的，问题在壳不在模型</td><td>随时间推移失败率下降</td><td>部分成立。路由那次的直接原因确实在代理层</td></tr><tr><td>H2 上下文上限</td><td>32K 决定它只能看已被结构化的输入</td><td>凡需先压缩内容的场景一律失败</td><td>成立。压缩插件与磁盘清理两次都死在这</td></tr><tr><td>H3 订阅制经济学</td><td>包月工具里判断的边际成本已是零</td><td>消费端无成本优势，生产端才有</td><td>成立，但只解释「不划算」，不解释「不工作」</td></tr><tr><td><b>H4 问题表述</b></td><td><b>把现实化成互斥选项是判断的主体，而 Jev 不做这一步</b></td><td><b>凡选项由外部结构天然给定的场景成功，需要自己划定选项的一律失败</b></td><td class="sig"><b>与全部案例一致，含成功案例</b></td></tr></tbody></table><div class="figsrc">本表为本报告的分析，不带标记。H1–H3 为作者提出或可直接归纳自其叙述，H4 为本报告所加。</div></div>
 
 <h3><span class="n">7.2</span>为什么 H4 是更深的一层</h3>
 <p>H1 到 H3 都是真的，但它们是<b>表现</b>；H4 解释了为什么这些表现会同时出现。
@@ -706,8 +852,8 @@ Jev 的价值主张里<b>最硬、最难被轻量模型追平的那一项，恰�
 <ul>
 <li><b>jev-ultrafast 成功</b>，因为网页 DOM 天然就是一份带编号的元素清单。
 选项由解析器给定，Jev 只需在既有选项上选。</li>
-<li><b>数据库逐行过滤成功</b><sup class="cite">[26]</sup>，因为「这一行符不符合条件」本来就是一道是非题。</li>
-<li><b>Slack 代理前置分类成功</b><sup class="cite">[25]</sup>，因为技能列表和工具列表是固定枚举。</li>
+<li><b>数据库逐行过滤成功</b><sup class="cite">[30]</sup>，因为「这一行符不符合条件」本来就是一道是非题。</li>
+<li><b>Slack 代理前置分类成功</b><sup class="cite">[29]</sup>，因为技能列表和工具列表是固定枚举。</li>
 <li><b>上下文压缩失败</b>，因为「哪一段该留」需要先理解内容才能划出候选，
 而划候选这一步没人替它做。</li>
 <li><b>磁盘清理失败</b><sup class="cite">[6]</sup>，同理：文件名不是选项，是需要被判读的证据。</li>
@@ -748,11 +894,11 @@ Jev 的贡献不在提出这个机制，而在把它的单次成本压到可以�
 <p>高把握档 255 个判断零错误<sup class="cite">[7]</sup>是本报告见到的最强单项证据，
 但它<b>不足以支持「Jev 校准很准」这个一般结论</b>，有三个理由：</p>
 <ul>
-<li><b>有效样本远小于名义样本。</b>100 条题面由 25 个模板各变 4 次生成<sup class="cite">[34]</sup>，
+<li><b>有效样本远小于名义样本。</b>100 条题面由 25 个模板各变 4 次生成<sup class="cite">[43]</sup>，
 模板级独立样本是 25 不是 100。同模板的四个变体在难度上高度相关。</li>
 <li><b>任务难度分布窄。</b>作者自述任务偏简单。在一个难度方差很小的题库上，
 校准是平凡满足的——模型只需把所有题都判为高把握即可，
-而这恰好是 85% 的判断落在最高档<sup class="cite">[35]</sup>所呈现的样子。</li>
+而这恰好是 85% 的判断落在最高档<sup class="cite">[44]</sup>所呈现的样子。</li>
 <li><b>关键档位样本量不足。</b>80%–90% 那一档只有 11 个样本<sup class="cite">[7]</sup>。
 而分流阈值恰恰要设在这个区间，<b>最需要证据的地方证据最少</b>。</li>
 </ul>
@@ -761,13 +907,13 @@ Jev 的贡献不在提出这个机制，而在把它的单次成本压到可以�
 
 <h3><span class="n">8.2</span>本报告自建基准的局限</h3>
 <ul>
-<li><b>没有 Jev 的得分</b><sup class="cite">[16]</sup>。本章之前的全部结论都不依赖 Jev 的表现，
+<li><b>没有 Jev 的得分</b><sup class="cite">[18]</sup>。本章之前的全部结论都不依赖 Jev 的表现，
 但也因此，本报告<b>无法对 Jev 的能力下任何定量判断</b>。</li>
 <li><b>标的池只有 27 只</b>，汽车板块仅三只，这是 6.3 那个问题的直接来源。
 扩大标的池能缓解它，但本环境无法取新数据。</li>
 <li><b>答案键本身是一种口径选择。</b>用同业 z 检验定义「行业共动」是一个可辩护的口径，
 不是唯一口径。换一个口径，164 例的标签分布会变，两条基线也会变。</li>
-<li><b>请求 schema 未经核对</b><sup class="cite">[33]</sup>，因此本报告连「基准能跑通」都没有验证过。</li>
+<li><b>请求 schema 未经核对</b><sup class="cite">[41]</sup>，因此本报告连「基准能跑通」都没有验证过。</li>
 </ul>
 
 <div class="side"><span class="t">一处方法论声明</span>
@@ -778,7 +924,7 @@ Jev 的贡献不在提出这个机制，而在把它的单次成本压到可以�
 剩下的交给后续实验。</div>
 
 <h3><span class="n">8.3</span>对本报告主要结论的反驳路径</h3>
-<div class="fig"><div class="figtitle"><span class="figno">Table 6</span>推翻本报告每一条主要结论所需的证据</div><table><colgroup><col style="width:42%"><col style="width:58%"></colgroup><thead><tr><th>本报告的结论</th><th>推翻它需要什么</th></tr></thead><tbody><tr><td>Jev 与轻量模型准确率打平</td><td>一个难度分布更宽、标注独立、报告了多数类基线的题库上，Jev 显著胜出</td></tr><tr><td>今天能用的只有框架接口</td><td>一个月后重跑 217 项评测，可用率与应用占比双双上升</td></tr><tr><td>自用提效走不通</td><td>一个不需要先砍内容、且判断边际成本非零的自用场景成功案例</td></tr><tr><td>尾延迟是它最硬的优势</td><td>轻量模型在同等并发下 P99 追平，或证明代理循环对尾延迟不敏感</td></tr><tr><td>「按把握分流」是唯一站得住的用法</td><td>一个不依赖置信度分流、且 Jev 不可替换为常数模型的生产案例</td></tr></tbody></table><div class="figsrc">本表为本报告的分析，不带标记。每一行都是可执行的实验设计，不是修辞。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 7</span>推翻本报告每一条主要结论所需的证据</div><table><colgroup><col style="width:42%"><col style="width:58%"></colgroup><thead><tr><th>本报告的结论</th><th>推翻它需要什么</th></tr></thead><tbody><tr><td>Jev 与轻量模型准确率打平</td><td>一个难度分布更宽、标注独立、报告了多数类基线的题库上，Jev 显著胜出</td></tr><tr><td>今天能用的只有框架接口</td><td>一个月后重跑 217 项评测，可用率与应用占比双双上升</td></tr><tr><td>自用提效走不通</td><td>一个不需要先砍内容、且判断边际成本非零的自用场景成功案例</td></tr><tr><td>尾延迟是它最硬的优势</td><td>轻量模型在同等并发下 P99 追平，或证明代理循环对尾延迟不敏感</td></tr><tr><td>「按把握分流」是唯一站得住的用法</td><td>一个不依赖置信度分流、且 Jev 不可替换为常数模型的生产案例</td></tr></tbody></table><div class="figsrc">本表为本报告的分析，不带标记。每一行都是可执行的实验设计，不是修辞。</div></div>
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">09 结论 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">09</span>结论与决策框架</h2>
@@ -793,15 +939,17 @@ Jev 的贡献不在提出这个机制，而在把它的单次成本压到可以�
 <li><b>今天能用的 Jev 是框架里的接口，不是应用。</b>
 217 个项目筛出 15 个可用，14 个是接入层<sup class="cite">[4]</sup>。
 四次自用尝试全败<sup class="cite">[6]</sup>。</li>
-<li><b>真正值钱的用法只有一个：按把握分流。</b>
-高把握自动过，低把握转大模型。它不是替代大模型，
-是在大模型前面加一道又快又稳的闸门。</li>
+<li><b>真正值钱的用法只有一个：按把握分流——但它值多少钱取决于任务。</b>
+高把握自动过，低把握转大模型；它不是替代大模型，是在大模型前面加一道闸门。
+公开有标注集上的独立测量显示，同一套分流机制在一个数据集上让总分涨 2.5pp、
+在另一个上只涨 0.9pp<sup class="cite">[13,20]</sup>。
+<b>分流的价值是「任务 × 模型对」的属性，不是 Jev 的属性，必须在自己的数据上测。</b></li>
 <li><b>但今天别上生产。</b>两轮样本都偏简单，关键档位只有 11 个样本<sup class="cite">[7]</sup>，
 官方渠道还要排队，而第三方通道不是官方的服务承诺。</li>
 </ul>
 
 <h3><span class="n">9.2</span>三步判定</h3>
-<div class="fig"><div class="figtitle"><span class="figno">Table 7</span>把 Jev 纳入生产之前该跑的三步，每一步都有明确的否决条件</div><table><colgroup><col style="width:14%"><col style="width:48%"><col style="width:38%"></colgroup><thead><tr><th>步骤</th><th>做什么</th><th>否决条件</th></tr></thead><tbody><tr><td>① 找靶子</td><td>列出业务里「现在用大模型、但其实只让它返回一个选项」的调用</td><td class="sig">一个都没有 → 停，这个热点与你无关</td></tr><tr><td>② 盲测</td><td>挑一个，用真实历史数据、人工预先标答案跑盲测。<b>必须同时报告多数类基线和平凡规则上限</b>，并<b>把 Jev 换成常数模型跑一遍对照</b></td><td class="sig">模型分 ≤ 两条基线中的高者 → 停，你测的不是能力；常数模型指标不动 → 停，Jev 没有进入结果</td></tr><tr><td>③ 设闸门</td><td>从 90% 阈值起步加在大模型前面，盯着 70%–90% 档的真实正确率往下调</td><td class="sig">该档样本量不足以估计正确率 → 阈值不许下调</td></tr></tbody></table><div class="figsrc">本表为本报告的建议，不带标记。第②步的两项附加要求是本报告相对原始三步方案所加，理由分别见 5.4 与 4.1。</div></div>
+<div class="fig"><div class="figtitle"><span class="figno">Table 8</span>把 Jev 纳入生产之前该跑的三步，每一步都有明确的否决条件</div><table><colgroup><col style="width:14%"><col style="width:48%"><col style="width:38%"></colgroup><thead><tr><th>步骤</th><th>做什么</th><th>否决条件</th></tr></thead><tbody><tr><td>① 找靶子</td><td>列出业务里「现在用大模型、但其实只让它返回一个选项」的调用</td><td class="sig">一个都没有 → 停，这个热点与你无关</td></tr><tr><td>② 盲测</td><td>挑一个，用真实历史数据、人工预先标答案跑盲测。<b>必须同时报告多数类基线和平凡规则上限</b>，并<b>把 Jev 换成常数模型跑一遍对照</b></td><td class="sig">模型分 ≤ 两条基线中的高者 → 停，你测的不是能力；常数模型指标不动 → 停，Jev 没有进入结果</td></tr><tr><td>③ 设闸门</td><td>从 90% 阈值起步加在大模型前面，盯着 70%–90% 档的真实正确率往下调。<b>同时单独测一次：把低把握项转给第二个模型，它在这批上到底提升多少</b></td><td class="sig">该档样本量不足以估计正确率 → 阈值不许下调；第二个模型在低把握批上的提升 ≲ 1pp → 不要建分流，直接单模型跑（公开集上实测存在这种情形）</td></tr></tbody></table><div class="figsrc">本表为本报告的建议，不带标记。第②步的两项附加要求与第③步的第二条否决条件是本报告相对原始三步方案所加，理由分别见 5.4、4.1 与 5.6。</div></div>
 
 <h3><span class="n">9.3</span>不该做的事</h3>
 <ul>
@@ -819,25 +967,25 @@ Jev 的贡献不在提出这个机制，而在把它的单次成本压到可以�
 你的基准上，三行 if-else 能得几分？</div>
 
 <p>这个问题今天没有任何一份公开材料回答过——官方评测没有<sup class="cite">[3]</sup>，
-社区实测没有<sup class="cite">[10]</sup>，本报告自建的基准是目前唯一给出这两条线的<sup class="cite">[13,14]</sup>，
-而它<b>还没有测过 Jev</b><sup class="cite">[16]</sup>。
+社区实测没有<sup class="cite">[10]</sup>，本报告自建的基准是目前唯一给出这两条线的<sup class="cite">[15,16]</sup>，
+而它<b>还没有测过 Jev</b><sup class="cite">[18]</sup>。
 这就是本报告能给出的全部：不是一个关于 Jev 好不好的答案，
 而是一把在别人给出答案时可以用来量它的尺子。</p>
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">附录 A 来源 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">A</span>参考文献与来源</h2>
 <p>正文中每个上标编号对应下表一行。<b>同一来源被多个数字引用时只出现一次</b>，
-因此本表长度跟来源数走，不跟数据点数走——35 条来源承载了
-57 个实质数据点（另有 3 条关于本表自身的元统计）。
+因此本表长度跟来源数走，不跟数据点数走——44 条来源承载了
+71 个实质数据点（另有 3 条关于本表自身的元统计）。
 第三列列出该来源支撑的数据点编号，完整口径与样本量见随交付物提供的
 <code>数据表.json</code>，不排进正文。</p>
-<div class="fig long"><div class="figtitle"><span class="figno">Table A1</span>按正文出现顺序排列的来源</div><table><colgroup><col style="width:9%"><col style="width:50%"><col style="width:27%"><col style="width:14%"></colgroup><thead><tr><th>编号</th><th>来源</th><th>支撑的数据点</th><th>层级</th></tr></thead><tbody><tr><td class="num"><span class="mono">[1]</span></td><td>TypeSafe 发布材料，经作者转述</td><td class="num"><span class="mono">S3 S4</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[2]</span></td><td>TypeSafe 发布材料</td><td class="num"><span class="mono">S7</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[3]</span></td><td>TypeSafe 官方评测</td><td class="num"><span class="mono">S8 S9</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[4]</span></td><td>作者第一轮实测</td><td class="num"><span class="mono">R1 R2 R4 R6</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[5]</span></td><td>本报告据 R1、R2 推算</td><td class="num"><span class="mono">R3</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[6]</span></td><td>作者自述</td><td class="num"><span class="mono">F1 F2 F3 F4 F6 F7 R7</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[7]</span></td><td>作者第二轮实测</td><td class="num"><span class="mono">C1 C13 C14 C16 C3 C6 C7 C8 C9</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[8]</span></td><td>本报告计算，代码见交付物 mcnemar 段</td><td class="num"><span class="mono">C10</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[9]</span></td><td>本报告据 C3、C8 推算</td><td class="num"><span class="mono">C5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[10]</span></td><td>本报告据作者披露内容核验</td><td class="num"><span class="mono">C12</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[11]</span></td><td>本报告据 C13、C14 推算</td><td class="num"><span class="mono">C15</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[12]</span></td><td>tools/jev_bench.py，本仓库</td><td class="num"><span class="mono">J1</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[13]</span></td><td>tools/jev_bench.py --stats</td><td class="num"><span class="mono">J3 J5 J7</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[14]</span></td><td>tools/jev_bench.py trivial_ceiling()</td><td class="num"><span class="mono">J4</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[15]</span></td><td>tools/jev_bench.py dropped_my_calls</td><td class="num"><span class="mono">J6</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[16]</span></td><td>本报告</td><td class="num"><span class="mono">J8</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[17]</span></td><td>用户提供文章正文</td><td class="num"><span class="mono">S1</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[18]</span></td><td>文中引用的 @CompleteSkeptic 帖子，标注日期 9月16日</td><td class="num"><span class="mono">S2</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[19]</span></td><td>TypeSafe 官方对比表</td><td class="num"><span class="mono">S10 S11 S5</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[20]</span></td><td>TypeSafe 定价</td><td class="num"><span class="mono">S6</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[21]</span></td><td>本数据表自计</td><td class="num"><span class="mono">M1 M2 M3</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[22]</span></td><td>本报告据 R4 推算</td><td class="num"><span class="mono">R5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[23]</span></td><td>Browser Use 开源项目 jev-ultrafast</td><td class="num"><span class="mono">B1</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[24]</span></td><td>本报告据 B1 推算</td><td class="num"><span class="mono">B2</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[25]</span></td><td>@johnyeo_</td><td class="num"><span class="mono">B7</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[26]</span></td><td>@iam_zachi，2026-09-18</td><td class="num"><span class="mono">B3</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[27]</span></td><td>@TheMattBerman，2026-09-18</td><td class="num"><span class="mono">B4</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[28]</span></td><td>社区项目，作者汇总</td><td class="num"><span class="mono">B6</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[29]</span></td><td>@StuSim</td><td class="num"><span class="mono">B5</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[30]</span></td><td>本报告据 F4 推算</td><td class="num"><span class="mono">F5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[31]</span></td><td>本报告据 C8、C9 核验</td><td class="num"><span class="mono">C11</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[32]</span></td><td>本仓库 git 历史</td><td class="num"><span class="mono">J2</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[33]</span></td><td>tools/jev_bench.py build_requests() 函数注释</td><td class="num"><span class="mono">J9</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[34]</span></td><td>作者自述的造题方式</td><td class="num"><span class="mono">C2</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[35]</span></td><td>本报告据 C1、C3 推算</td><td class="num"><span class="mono">C4</span></td><td><span class="tier ">T1</span></td></tr></tbody></table><div class="figsrc">证据层级取该来源下第一个数据点的层级。<span class="tier t0">T0</span> 为本报告一手可复跑，<span class="tier t34">T3/T4</span> 为自报、不作独立证据使用。</div></div>
+<div class="fig long"><div class="figtitle"><span class="figno">Table A1</span>按正文出现顺序排列的来源</div><table><colgroup><col style="width:9%"><col style="width:50%"><col style="width:27%"><col style="width:14%"></colgroup><thead><tr><th>编号</th><th>来源</th><th>支撑的数据点</th><th>层级</th></tr></thead><tbody><tr><td class="num"><span class="mono">[1]</span></td><td>TypeSafe 发布材料，经作者转述</td><td class="num"><span class="mono">S3 S4</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[2]</span></td><td>TypeSafe 发布材料</td><td class="num"><span class="mono">S7</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[3]</span></td><td>TypeSafe 官方评测</td><td class="num"><span class="mono">S8 S9</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[4]</span></td><td>作者第一轮实测</td><td class="num"><span class="mono">R1 R2 R4 R6</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[5]</span></td><td>本报告据 R1、R2 推算</td><td class="num"><span class="mono">R3</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[6]</span></td><td>作者自述</td><td class="num"><span class="mono">F1 F2 F3 F4 F6 F7 R7</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[7]</span></td><td>作者第二轮实测</td><td class="num"><span class="mono">C1 C13 C14 C16 C3 C6 C7 C8 C9</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[8]</span></td><td>本报告计算，代码见交付物 mcnemar 段</td><td class="num"><span class="mono">C10</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[9]</span></td><td>本报告据 C3、C8 推算</td><td class="num"><span class="mono">C5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[10]</span></td><td>本报告据作者披露内容核验</td><td class="num"><span class="mono">C12</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[11]</span></td><td>本报告据 C13、C14 推算</td><td class="num"><span class="mono">C15</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[12]</span></td><td>本报告据 V4、V6 推算</td><td class="num"><span class="mono">V7</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[13]</span></td><td>本报告据 vs-jev.json 推算</td><td class="num"><span class="mono">V8</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[14]</span></td><td>tools/jev_bench.py，本仓库</td><td class="num"><span class="mono">J1</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[15]</span></td><td>tools/jev_bench.py --stats</td><td class="num"><span class="mono">J3 J5 J7</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[16]</span></td><td>tools/jev_bench.py trivial_ceiling()</td><td class="num"><span class="mono">J4</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[17]</span></td><td>tools/jev_bench.py dropped_my_calls</td><td class="num"><span class="mono">J6</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[18]</span></td><td>本报告</td><td class="num"><span class="mono">J8</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[19]</span></td><td>classifier.dev 公开文档（仓库 src/docs.ts）</td><td class="num"><span class="mono">V13</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[20]</span></td><td>同 V1</td><td class="num"><span class="mono">V14 V3 V4 V5 V6 V9</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[21]</span></td><td>用户提供文章正文</td><td class="num"><span class="mono">S1</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[22]</span></td><td>文中引用的 @CompleteSkeptic 帖子，标注日期 9月16日</td><td class="num"><span class="mono">S2</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[23]</span></td><td>TypeSafe 官方对比表</td><td class="num"><span class="mono">S10 S11 S5</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[24]</span></td><td>TypeSafe 定价</td><td class="num"><span class="mono">S6</span></td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><span class="mono">[25]</span></td><td>本数据表自计</td><td class="num"><span class="mono">M1 M2 M3</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[26]</span></td><td>本报告据 R4 推算</td><td class="num"><span class="mono">R5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[27]</span></td><td>Browser Use 开源项目 jev-ultrafast</td><td class="num"><span class="mono">B1</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[28]</span></td><td>本报告据 B1 推算</td><td class="num"><span class="mono">B2</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[29]</span></td><td>@johnyeo_</td><td class="num"><span class="mono">B7</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[30]</span></td><td>@iam_zachi，2026-09-18</td><td class="num"><span class="mono">B3</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[31]</span></td><td>@TheMattBerman，2026-09-18</td><td class="num"><span class="mono">B4</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[32]</span></td><td>社区项目，作者汇总</td><td class="num"><span class="mono">B6</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[33]</span></td><td>@StuSim</td><td class="num"><span class="mono">B5</span></td><td><span class="tier t34">T4</span></td></tr><tr><td class="num"><span class="mono">[34]</span></td><td>本报告据 F4 推算</td><td class="num"><span class="mono">F5</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[35]</span></td><td>本报告据 C8、C9 核验</td><td class="num"><span class="mono">C11</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[36]</span></td><td>本报告对该仓库 commit 5c241af 的核验</td><td class="num"><span class="mono">V11</span></td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><span class="mono">[37]</span></td><td>mrmps/classifier-dev 仓库 src/vs-jev.json（commit 5c241af）</td><td class="num"><span class="mono">V1</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[38]</span></td><td>同上，eval/single.py 源码</td><td class="num"><span class="mono">V2</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[39]</span></td><td>同 V1，eval/README.md</td><td class="num"><span class="mono">V12</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[40]</span></td><td>本仓库 git 历史</td><td class="num"><span class="mono">J2</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[41]</span></td><td>tools/jev_bench.py build_requests() 函数注释</td><td class="num"><span class="mono">J9</span></td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><span class="mono">[42]</span></td><td>同 V1，eval/README.md「Why bench.py exists」节</td><td class="num"><span class="mono">V15</span></td><td><span class="tier ">T2+</span></td></tr><tr><td class="num"><span class="mono">[43]</span></td><td>作者自述的造题方式</td><td class="num"><span class="mono">C2</span></td><td><span class="tier ">T2</span></td></tr><tr><td class="num"><span class="mono">[44]</span></td><td>本报告据 C1、C3 推算</td><td class="num"><span class="mono">C4</span></td><td><span class="tier ">T1</span></td></tr></tbody></table><div class="figsrc">证据层级取该来源下第一个数据点的层级。<span class="tier t0">T0</span> 为本报告一手可复跑，<span class="tier t34">T3/T4</span> 为自报、不作独立证据使用。</div></div>
 </td></tr></tbody></table>
 <table class="pagewrap"><thead><tr><td><div class="crumb">附录 B 速查 | JEV 技术评估</div></td></tr></thead><tbody><tr><td>
 <h2><span class="num">B</span>数据速查页</h2>
 <div class="lead">全报告关键数字一页汇总。<b>引用前请连同口径与证据层级一起引用</b>——
 本报告的主要结论之一正是这些数字被单独引用时会失真。</div>
-<div class="fig long"><div class="figtitle"><span class="figno">Table B1</span>关键数字、口径与证据层级</div><table><colgroup><col style="width:17%"><col style="width:48%"><col style="width:21%"><col style="width:14%"></colgroup><thead><tr><th>数值</th><th>口径</th><th>样本量</th><th>层级</th></tr></thead><tbody><tr><td class="num"><b>$0.042 / 百万 token</b></td><td>输入侧单价，按 token 计费；输出侧标称免费，因输出是固定选项上的概率而非生成文本</td><td>定价页</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>约 3.2 万 token</b></td><td>Jev 可接受的最大输入长度，约 3.2 万 token；不接受图像输入。该上限是本报告第 4 章多处失败的直接原因</td><td>产品规格</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>约 68%</b></td><td>官方自建评测的准确率。评测设计为：让各模型在同一段程序里做决策，以两个最强模型答案的平均值作为标准答案</td><td>题目数与模型清单均未披露</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>6.9%</b></td><td>可用率 = 15/217，由 R1、R2 推算。口径为『今天能拿到且能跑起来』，不含项目质量评价</td><td>217 条</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>93.3%</b></td><td>可用项中框架接口的占比 = 14/15，由 R4 推算</td><td>15 条</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>85.0%</b></td><td>高把握档占全部判断的比例 = 255/300，由 C1、C3 推算</td><td>300 判断</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>62.2%–66.7%</b></td><td>低把握档（<90%）的反推准确率区间：总正确数(283/284/285 三种取整)减去高把握档全对的 255，除以剩余 45 个判断。区间宽度来自原文 94.7% 的取整歧义</td><td>45 判断</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>p = 0.15–0.39</b></td><td>对 C8 的 Jev/Qwen 差异做 McNemar 精确双侧检验。配对分歧数 b+c=12（据 C9），差值取 b-c=6 与 b-c=4 两种情形分别得 p=0.146 与 p=0.38…</td><td>12 个分歧对</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>21.3 倍</b></td><td>最慢一次延迟之比 = 32/1.5，由 C13、C14 推算。这是两者差距最大的单一维度，且远大于中位数差距</td><td>300 次调用</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>55.5%</b></td><td>多数类基线：全部猜最常见标签 sector_wide 的准确率 = 91/164。任何模型低于此数即为无信息量</td><td>164 例</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>55.5%</b></td><td>平凡规则上限：只看标的自身涨跌绝对值的最优两阈值规则，在 0–6% 范围网格搜索后的最高准确率。与 J3 完全相等，说明该维度零信息量</td><td>164 例</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>3 / 5</b></td><td>我自己记录在案的 5 条归因判断中，被答案键判为不可裁而排除的条数。三条全部是 GM，全部落在汽车板块</td><td>5 条记录判断</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>66.7%</b></td><td>不可独立核验的实质数据点占比 = 38/57。本报告把它作为一项发现列出：关于 Jev 的公开讨论，其证据基础约三分之二由自报构成</td><td>57 个实质数据点</td><td><span class="tier ">T1</span></td></tr></tbody></table><div class="figsrc">完整数据表见交付物 <code>数据表.json</code>，共 57 个实质数据点，其中 66.7% 不可独立核验<sup class="cite">[21]</sup>。层级分布：T0:9 / T1:10 / T2:23 / T3:9 / T4:6。</div></div>
+<div class="fig long"><div class="figtitle"><span class="figno">Table B1</span>关键数字、口径与证据层级</div><table><colgroup><col style="width:17%"><col style="width:48%"><col style="width:21%"><col style="width:14%"></colgroup><thead><tr><th>数值</th><th>口径</th><th>样本量</th><th>层级</th></tr></thead><tbody><tr><td class="num"><b>$0.042 / 百万 token</b></td><td>输入侧单价，按 token 计费；输出侧标称免费，因输出是固定选项上的概率而非生成文本</td><td>定价页</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>约 3.2 万 token</b></td><td>Jev 可接受的最大输入长度，约 3.2 万 token；不接受图像输入。该上限是本报告第 4 章多处失败的直接原因</td><td>产品规格</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>约 68%</b></td><td>官方自建评测的准确率。评测设计为：让各模型在同一段程序里做决策，以两个最强模型答案的平均值作为标准答案</td><td>题目数与模型清单均未披露</td><td><span class="tier t34">T3</span></td></tr><tr><td class="num"><b>6.9%</b></td><td>可用率 = 15/217，由 R1、R2 推算。口径为『今天能拿到且能跑起来』，不含项目质量评价</td><td>217 条</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>93.3%</b></td><td>可用项中框架接口的占比 = 14/15，由 R4 推算</td><td>15 条</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>85.0%</b></td><td>高把握档占全部判断的比例 = 255/300，由 C1、C3 推算</td><td>300 判断</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>62.2%–66.7%</b></td><td>低把握档（<90%）的反推准确率区间：总正确数(283/284/285 三种取整)减去高把握档全对的 255，除以剩余 45 个判断。区间宽度来自原文 94.7% 的取整歧义</td><td>45 判断</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>p = 0.15–0.39</b></td><td>对 C8 的 Jev/Qwen 差异做 McNemar 精确双侧检验。配对分歧数 b+c=12（据 C9），差值取 b-c=6 与 b-c=4 两种情形分别得 p=0.146 与 p=0.38…</td><td>12 个分歧对</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>21.3 倍</b></td><td>最慢一次延迟之比 = 32/1.5，由 C13、C14 推算。这是两者差距最大的单一维度，且远大于中位数差距</td><td>300 次调用</td><td><span class="tier ">T1</span></td></tr><tr><td class="num"><b>55.5%</b></td><td>多数类基线：全部猜最常见标签 sector_wide 的准确率 = 91/164。任何模型低于此数即为无信息量</td><td>164 例</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>55.5%</b></td><td>平凡规则上限：只看标的自身涨跌绝对值的最优两阈值规则，在 0–6% 范围网格搜索后的最高准确率。与 J3 完全相等，说明该维度零信息量</td><td>164 例</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>3 / 5</b></td><td>我自己记录在案的 5 条归因判断中，被答案键判为不可裁而排除的条数。三条全部是 GM，全部落在汽车板块</td><td>5 条记录判断</td><td><span class="tier t0">T0</span></td></tr><tr><td class="num"><b>69.4%</b></td><td>不可独立核验的实质数据点占比 = 50/72。本报告把它作为一项发现列出：关于 Jev 的公开讨论，其证据基础约七成由自报或我无法复跑的测量构成</td><td>72 个实质数据点</td><td><span class="tier ">T1</span></td></tr></tbody></table><div class="figsrc">完整数据表见交付物 <code>数据表.json</code>，共 72 个实质数据点，其中 69.4% 不可独立核验<sup class="cite">[25]</sup>。层级分布：T0:9 / T1:13 / T2:23 / T2+:11 / T3:9 / T4:7。</div></div>
 
 <div class="box sig"><span class="bt">最该被记住的三个数</span>
 <b>55.5% / 55.5%</b>　自建基准的多数类基线与平凡规则上限。

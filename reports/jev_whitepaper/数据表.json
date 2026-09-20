@@ -8,7 +8,8 @@
    "T1": "算术可推导（由原文数字推出并复算）",
    "T2": "二手实测（作者自测，方法有描述，我无法复跑）",
    "T3": "官方自报（TypeSafe 发布材料，无第三方核验）",
-   "T4": "社媒自报（X/HN 帖子，通常无方法描述）"
+   "T4": "社媒自报（X/HN 帖子，通常无方法描述）",
+   "T2+": "二手实测，但数据集公开有标注、harness 代码公开、原始逐项结果随仓库发布——可被第三方复跑，只是我这个环境跑不了"
   }
  },
  "S1": {
@@ -468,27 +469,147 @@
   "verified": true
  },
  "M1": {
-  "value": "38 / 57",
+  "value": "50 / 72",
   "basis": "本报告引用的实质数据点中 verified=false 的条数与总条数。分母不含 M* 三条元统计（统计自己会形成自指）。该计数由脚本对数据表实算，不手写——本报告作者首次手写此数时写成 23/44，机器实算为 38/57，误差方向恰好低估了自己的发现",
-  "n": "57 个实质数据点",
+  "n": "72 个实质数据点",
   "src": "本数据表自计",
   "tier": "T1",
   "verified": true
  },
  "M2": {
-  "value": "66.7%",
-  "basis": "不可独立核验的实质数据点占比 = 38/57。本报告把它作为一项发现列出：关于 Jev 的公开讨论，其证据基础约三分之二由自报构成",
-  "n": "57 个实质数据点",
+  "value": "69.4%",
+  "basis": "不可独立核验的实质数据点占比 = 50/72。本报告把它作为一项发现列出：关于 Jev 的公开讨论，其证据基础约七成由自报或我无法复跑的测量构成",
+  "n": "72 个实质数据点",
   "src": "本数据表自计",
   "tier": "T1",
   "verified": true
  },
  "M3": {
-  "value": "T0:9 / T1:10 / T2:23 / T3:9 / T4:6",
+  "value": "T0:9 / T1:13 / T2:23 / T2+:11 / T3:9 / T4:7",
   "basis": "按证据层级统计的实质数据点分布：T0 一手可复跑、T1 算术可推导、T2 二手实测、T3 官方自报、T4 社媒自报。不含 M* 元统计",
-  "n": "57 个实质数据点",
+  "n": "72 个实质数据点",
   "src": "本数据表自计",
   "tier": "T1",
   "verified": true
+ },
+ "V1": {
+  "value": "2026-09-18",
+  "basis": "classifier.dev 的 vs-jev 对照测量日期。该服务后端自 2026-09-17 起以 Jev 取代 LLM 链为主力，LLM 链降为 fallback",
+  "n": "不适用",
+  "src": "mrmps/classifier-dev 仓库 src/vs-jev.json（commit 5c241af）",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V2": {
+  "value": "400 / 400",
+  "basis": "两个公开单标签测试集各取的样本量：AG News 与 dair-ai/emotion。取法为测试集前 400 条（eval/single.py 的 rows[:n]），未打乱、未设随机种子、未分层",
+  "n": "每集 400 条",
+  "src": "同上，eval/single.py 源码",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V3": {
+  "value": "87.5%",
+  "basis": "Jev 直连在 AG News 400 条上的总准确率",
+  "n": "400 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V4": {
+  "value": "90.6% / 65.3%",
+  "basis": "Jev 直连在 AG News 上按置信度分档的准确率：置信 ≥0.7 档 90.6%，<0.7 档 65.3%。低置信档占 49/400 = 12.3%",
+  "n": "351 / 49 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V5": {
+  "value": "61.8%",
+  "basis": "Jev 直连在 dair-ai/emotion 400 条上的总准确率",
+  "n": "400 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V6": {
+  "value": "72.7% / 36.9%",
+  "basis": "Jev 直连在 emotion 上按置信度分档的准确率：≥0.7 档 72.7%，<0.7 档 36.9%。低置信档占 122/400 = 30.5%",
+  "n": "278 / 122 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V7": {
+  "value": "+25.3pp / +35.8pp",
+  "basis": "高低置信档的准确率落差：AG News 90.6−65.3，emotion 72.7−36.9。由 V4、V6 推算。落差即置信度的分流价值",
+  "n": "各 400 条",
+  "src": "本报告据 V4、V6 推算",
+  "tier": "T1",
+  "verified": true
+ },
+ "V8": {
+  "value": "+2.5pp / +0.9pp",
+  "basis": "把低置信项升级给第二个模型（smart 档）带来的总准确率增量：AG News 87.5→90.0，emotion 61.8→62.7。由 V3、V5 与 smart 档读数推算",
+  "n": "各 400 条",
+  "src": "本报告据 vs-jev.json 推算",
+  "tier": "T1",
+  "verified": true
+ },
+ "V9": {
+  "value": "65.3→83.7 / 36.9→41.8",
+  "basis": "升级只作用于低置信档，该档准确率的变化：AG News 提升 18.4pp（升级 43 项），emotion 仅提升 4.9pp（升级 126 项）",
+  "n": "49 / 122 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V10": {
+  "value": "25.0%（未核）",
+  "basis": "AG News 的多数类基线。该测试集为 4 类均衡设计，故多数类基线为 25%。⚠ 本报告无法在此环境核验该 400 条子样本的实际类别分布——取法是测试集前 400 条而非随机抽样，子样本分布可能偏离总体",
+  "n": "不适用",
+  "src": "AG News 数据集的公开设计；本报告未能独立核验",
+  "tier": "T4",
+  "verified": false
+ },
+ "V11": {
+  "value": "未报告",
+  "basis": "classifier.dev 的评测同样未报告多数类基线：grep 其 eval/ 目录与 src/docs.ts，baseline / majority / chance 零匹配",
+  "n": "不适用",
+  "src": "本报告对该仓库 commit 5c241af 的核验",
+  "tier": "T1",
+  "verified": true
+ },
+ "V12": {
+  "value": "自陈六项局限",
+  "basis": "该项目 eval/README.md 专设「引用任何数字之前先读这个」一节，自陈：在自己报告的集合上调参（train-on-test，无留出集）、单人写输入与标准答案（无标注者间一致性）、n=7、无置信区间、无显著性检验、重跑方差大（同配置测出过 0.73 与 0.60），并明确区分该数据支持什么（远大于噪声的差距）与不支持什么（0.03 以内是抛硬币）",
+  "n": "该节针对的是其 7 例多标签集，非本表 V2–V9 的 400 条单标签集",
+  "src": "同 V1，eval/README.md",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V13": {
+  "value": "免 key 公开端点",
+  "basis": "classifier.dev 提供不需要 API key 的公开 HTTP 分类接口，单次最多 1000 条，返回标签与置信度。本报告据此把 164 例基准接成第二条可执行路径",
+  "n": "不适用",
+  "src": "classifier.dev 公开文档（仓库 src/docs.ts）",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V14": {
+  "value": "服务 ≠ 裸模型",
+  "basis": "口径警告：经 classifier.dev 测得的分数是服务的分数，中间隔着其 prompt、分块与降级到 LLM 链的 fallback。该项目自己的 vs_jev.py 存在的理由正是分开这两者——AG News 上 Jev 直连 87.5% 对 fast 档 87.2%，接近但不等同",
+  "n": "400 条",
+  "src": "同 V1",
+  "tier": "T2+",
+  "verified": false
+ },
+ "V15": {
+  "value": "0.80 → 0.546",
+  "basis": "fallback 静默污染的实例：该项目的上游模型 ling-3.0-flash 被下架后，每个 fast 请求都 404 并由链上下一个模型作答，F1 从文档宣称的 0.800 掉到 0.546，而「部署出来的数字里一个字都没说」。本报告据此在自己的对分器里加了逐项 model 字段检查",
+  "n": "7 例 × 3 轮",
+  "src": "同 V1，eval/README.md「Why bench.py exists」节",
+  "tier": "T2+",
+  "verified": false
  }
 }

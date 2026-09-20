@@ -1909,3 +1909,10 @@ Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。仓库 `mrmps/class
 **接入结果**：`tools/jev_bench.py --run-classifier [fast|smart]`，
 `.github/workflows/jev-bench.yml` 加了 backend 选择。**classifier.dev 这条不需要任何 secret。**
 口径写死：走它测的是**服务**不是**Jev 裸模型**，结果一律标 backend="classifier.dev"。
+
+**2026-09-20 白皮书 v2**：第 5 章加 5.6（classifier.dev 的公开有标注集测量），
+第 6 章 6.4 由「尚未执行」改为「两条执行路径」+ 新增 6.5「三道闸」。
+证据层级新增 **T2+**（二手实测但数据集公开有标注、harness 公开、第三方可复跑，只是本环境跑不了），
+实质数据点 57 → 72，不可独立核验 66.7% → 69.4%。
+**5.6 证伪了初稿差点写死的一个推论**：分流的价值不是 Jev 的属性，
+是「任务 × 模型对」的属性（AG News +2.5pp vs emotion +0.9pp），已写入第 9 章三步判定的否决条件。
