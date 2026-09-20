@@ -77,6 +77,11 @@ def load(path, encoding="utf-8"):
         return _wrap(json.load(f), os.path.basename(path))
 
 
+def loads(text, src="<str>"):
+    """从字符串读（例如 `git show HEAD:x.json` 的输出），同样返回 StrictDict。"""
+    return _wrap(json.loads(text), src)
+
+
 def keys_report(d, label=""):
     """1.1u 第 1 条的字面执行：读子结构前先把键名打出来。"""
     print(f"  {label or '<dict>'} 顶层键：{sorted(d) if isinstance(d, dict) else type(d).__name__}")

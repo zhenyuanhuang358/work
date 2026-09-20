@@ -17,6 +17,10 @@ burry_screener.py — Burry Layer 1 独立选股器 + Tier 1 边界发现
 
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools"))
+import jsonsafe as _jsonsafe
 import statistics
 import time
 import urllib.parse
@@ -213,8 +217,7 @@ def fetch_frame(tag, year, taxonomy="us-gaap", unit="USD", instant=False, period
         period = f"CY{year}Q4I" if instant else f"CY{year}"
     path = os.path.join(CACHE_DIR, f"{taxonomy}_{tag}_{period}.json")
     if os.path.exists(path):
-        with open(path) as f:
-            raw = json.load(f)
+        raw = _jsonsafe.load(path)   # 1.1u
     else:
         url = f"https://data.sec.gov/api/xbrl/frames/{taxonomy}/{tag}/{unit}/{period}.json"
         try:
@@ -235,8 +238,7 @@ def fetch_ticker_map():
     os.makedirs(CACHE_DIR, exist_ok=True)
     path = os.path.join(CACHE_DIR, "company_tickers.json")
     if os.path.exists(path):
-        with open(path) as f:
-            raw = json.load(f)
+        raw = _jsonsafe.load(path)   # 1.1u
     else:
         try:
             raw = _get("https://www.sec.gov/files/company_tickers.json", timeout=60)
@@ -451,11 +453,11 @@ def main():
     prev = {}
     if os.path.exists(STATE_FILE):
         try:
-            with open(STATE_FILE) as f:
-                prev = json.load(f)
+            prev = _jsonsafe.load(STATE_FILE)   # 1.1u
         except Exception:
             prev = {}
-    prev_rd = ((prev.get("tier1") or {}).get("latest") or {}).get("report_date")
+    # 首次运行时 state 里没有 tier1，是合法缺失 → 显式默认值
+    prev_rd = ((prev.get("tier1", None) or {}).get("latest", None) or {}).get("report_date", None)
     new_rd = ((boundary or {}).get("latest") or {}).get("report_date")
     moved = bool(new_rd and prev_rd and new_rd > prev_rd)
     if boundary and boundary.get("latest"):

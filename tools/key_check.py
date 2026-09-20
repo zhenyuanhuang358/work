@@ -70,7 +70,12 @@ def check_keys(verbose=True):
         rel = os.path.relpath(f, REPO)
         if rel.endswith(("key_check.py", "jsonsafe.py")):
             continue
-        touches = [p for p in DATA_PRODUCTS if p in src]
+        # ⚠ 只写不读的脚本与本条无关（fetch_prices.py 产出 stock_prices.json
+        #   但从不读它）。首版按「文件名出现过」判，把它误算成违规。
+        #   判据要是「真的读了」，不是「提到了文件名」—— 同 profile 1.2n。
+        reads = re.search(r"(?:json\.loads?|_jsonsafe\.loads?|jsonsafe\.loads?"
+                          r"|read_text|\.read\(\))", src)
+        touches = [p for p in DATA_PRODUCTS if p in src] if reads else []
         if not touches:
             na += 1
             continue
@@ -78,8 +83,10 @@ def check_keys(verbose=True):
         #   首版写成 `"jsonsafe" in src`，结果一行没用上的 import 就让它变 ✅——
         #   2026-09-20 我自己无意中把它骗过去了。检查器被一个字符串糊弄，
         #   和规则没有承载物是一样的后果。
-        called = re.search(r"(?:jsonsafe|_jsonsafe)\s*\.\s*load\s*\(", src) \
-            or re.search(r"from\s+jsonsafe\s+import[^\n]*\bload\b", src)
+        # load 与 loads 都算（前者读文件、后者读字符串，比如 git show 的输出）。
+        # 首版正则只写了 load\( ，把已迁的两个 loads( 漏判成未迁 —— 2026-09-20 实测。
+        called = re.search(r"(?:jsonsafe|_jsonsafe)\s*\.\s*loads?\s*\(", src) \
+            or re.search(r"from\s+jsonsafe\s+import[^\n]*\bloads?\b", src)
         (safe if called else raw).append((rel, touches))
     if verbose:
         print("═══ A. 严格加载器采用情况（1.1u 第 1 条）═══")

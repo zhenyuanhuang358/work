@@ -41,6 +41,7 @@ build_requests() 只从 case["visible"] 取值，答案在 case["key"] 里，两
   按 profile 1.1x：没实测就不要把它当已知——所以这里显式标注为待核。
 """
 import json, os, sys, subprocess, statistics, collections
+import jsonsafe as _jsonsafe
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BENCH = os.path.join(REPO, "memory", "state", "jev_bench_set.json")
@@ -234,8 +235,8 @@ def build():
 def load_bench():
     if not os.path.exists(BENCH):
         return build()
-    with open(BENCH) as f:
-        return json.load(f)
+    # 1.1u：经 jsonsafe 读，.get(拼错的键) 抛错而不是静默返回 None
+    return _jsonsafe.load(BENCH)
 
 
 # ── 请求构造（schema 待核）─────────────────────────────────────────────────
@@ -508,10 +509,11 @@ def load_responses(path):
 
     统一成 [{case_id, answer, confidence, model}]。
     """
-    with open(path) as f:
-        payload = json.load(f)
-    if isinstance(payload, dict) and payload.get("rows") is not None:
-        meta = {k: payload.get(k) for k in
+    payload = _jsonsafe.load(path)
+    # ⚠ 下面这些键**确实可能缺失**（两种应答格式不同），所以显式给默认值——
+    #   jsonsafe 要的就是把「允许缺失」写出来，而不是靠 .get() 默默返回 None
+    if isinstance(payload, dict) and payload.get("rows", None) is not None:
+        meta = {k: payload.get(k, None) for k in
                 ("backend", "tier", "top_model", "models_used", "usage", "labels")}
         rows = [{"case_id": r["case_id"], "answer": r.get("label"),
                  "confidence": r.get("confidence"), "model": r.get("model")}

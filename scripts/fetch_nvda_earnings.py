@@ -116,7 +116,8 @@ def extract_quarter(title: str) -> str:
 def get_nvda_price() -> str:
     if STOCK_PRICES_FILE.exists():
         try:
-            data = json.loads(STOCK_PRICES_FILE.read_text(encoding="utf-8"))
+            data = _jsonsafe.loads(STOCK_PRICES_FILE.read_text(encoding="utf-8"),
+                                   "stock_prices.json")   # 1.1u
             price = data.get("prices", {}).get("NVDA", {}).get("price")
             if price:
                 return str(price)

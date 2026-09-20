@@ -16,6 +16,7 @@
     python3 tools/rule_replay.py --json       # 机器可读输出
 """
 import json, subprocess, sys, os
+import jsonsafe as _jsonsafe
 from collections import Counter
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -50,17 +51,23 @@ def load_history():
         raw = subprocess.run(["git", "show", f"{c}:stock_prices.json"],
                              capture_output=True, text=True, cwd=REPO).stdout
         try:
-            d = json.loads(raw)
-        except Exception:
+            d = _jsonsafe.loads(raw, "stock_prices.json@git")
+        except json.JSONDecodeError:
+            continue   # ⚠ 只吞「这个提交的 JSON 解析不了」，不许吞别的。
+                       #    2026-09-20：这里原本是 except Exception，
+                       #    一个 NameError 被它吃掉 → 37 天数据静默变成 0 天，
+                       #    脚本照常往下跑直到 recs[0] 才崩。**正是 1.1u 说的
+                       #    try-except pass 在读取端把错误伪装成「数据为空」。**
+        # ⚠ 历史提交里这些字段可能确实不存在（抓价脚本早期没有 tail_risk），
+        #   所以显式写默认值——这正是 1.1u 要的「确实允许缺失就写出来」
+        t = d.get("tail_risk", None) or {}
+        if not t or d.get("vix", None) is None:
             continue
-        t = d.get("tail_risk") or {}
-        if not t or d.get("vix") is None:
-            continue
-        vix, v3m, v9d = d["vix"], t.get("vix3m"), t.get("vix9d")
+        vix, v3m, v9d = d["vix"], t.get("vix3m", None), t.get("vix9d", None)
         rows.append({
             "ts": d.get("updated_at", ""),
             "vix": vix, "vix9d": v9d, "vix3m": v3m,
-            "skew": t.get("skew"), "vvix": t.get("vvix"),
+            "skew": t.get("skew", None), "vvix": t.get("vvix", None),
             "term_structure": (vix / v3m) if v3m else None,
             "term_premium":   (v3m / vix) if vix else None,
         })

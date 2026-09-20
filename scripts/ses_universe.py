@@ -16,6 +16,10 @@ frames API: https://data.sec.gov/api/xbrl/frames/{taxonomy}/{tag}/{unit}/CY{year
 
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools"))
+import jsonsafe as _jsonsafe
 import time
 import urllib.request
 from datetime import datetime, timezone
@@ -61,8 +65,7 @@ def fetch_frame(tag, year, taxonomy="us-gaap", unit="USD"):
     os.makedirs(CACHE_DIR, exist_ok=True)
     path = os.path.join(CACHE_DIR, f"{taxonomy}_{tag}_CY{year}.json")
     if os.path.exists(path):
-        with open(path) as f:
-            raw = json.load(f)
+        raw = _jsonsafe.load(path)   # 1.1u
     else:
         url = f"https://data.sec.gov/api/xbrl/frames/{taxonomy}/{tag}/{unit}/CY{year}.json"
         try:
@@ -232,9 +235,8 @@ def fetch_sic(cik):
     os.makedirs(SIC_CACHE, exist_ok=True)
     path = os.path.join(SIC_CACHE, f"{cik}.json")
     if os.path.exists(path):
-        with open(path) as f:
-            d = json.load(f)
-            return d.get("sic", ""), d.get("desc", "")
+        d = _jsonsafe.load(path)   # 1.1u
+        return d.get("sic", ""), d.get("desc", "")
     try:
         d = _get(f"https://data.sec.gov/submissions/CIK{cik}.json")
         time.sleep(0.12)

@@ -1038,3 +1038,33 @@ C6 只找得到 SKILL.md 里明写了那几个关键词的 skill，
 两次都是**检查机制对自己放水，而我没有察觉**。
 1.2j 是规则的盲区与我的失败同源；这一条是判据宽松到一个副作用就能满足。
 **凡我写的检查器通过了，都要追问一句：它是被什么满足的？**
+
+---
+
+## 1.2o 迁移时 replace 没匹配上却不报错，而下游的 except Exception 把后果吃干净了（2026-09-20）
+
+把 6 个脚本迁到 `jsonsafe` 时，我的补丁脚本给 `tools/jev_bench.py` 插 import
+用的是 `t.replace("import json\n", ...)`，**而该文件的 import 是一行式**
+`import json, os, sys, subprocess, statistics, collections` —— 没匹配上，
+`replace` 不报错，补丁脚本打印「✓ 已迁移」。
+
+后果分两条路暴露，**一条响亮、一条静默**：
+- `jev_bench.py` → `NameError: _jsonsafe` **当场抛错**（好）
+- `rule_replay.py` → 读取处套着 `try: ... except Exception: continue`，
+  **NameError 被它吃掉，37 个交易日静默变成 0 天**，脚本照常往下跑，
+  直到 `recs[0]` 才崩，而错误信息是 `IndexError: list index out of range`，
+  指向一个跟根因毫无关系的地方。
+
+**⭐ 讽刺之处**：我当时正在做的就是 1.1u，而 1.1u 的通用推论原文写着
+「`try-except pass` 这类容错写法在**读取端**是危险的，它把错误伪装成数据为空」。
+**我一边把这条做成装置，一边被它咬了一口。**
+
+**→ 两条可执行的**：
+1. **批量替换必须断言**：`assert old in t` 或改完立刻验证目标串存在。
+   `str.replace` 找不到就静默返回原文，是「不报错的失败」的典型。
+2. **读取端的 except 必须窄**：`except json.JSONDecodeError` 而不是 `except Exception`。
+   已把 rule_replay 那处收窄，并注明理由。
+
+**→ 更通用的一条：改完必须与基线逐字比对，不能只看「跑起来了」。**
+本次正是靠迁移前存下的 5 份基线输出发现的——
+`sum_check` 和 `self_check` 都是绿的，只有 diff 暴露了另外两个工具已经崩了。
