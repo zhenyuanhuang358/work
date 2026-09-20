@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-09-20T06:53:25Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-09-20T17:53:31Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-09-20 06:53 UTC
+自检器 · 2026-09-20 17:53 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -49,6 +49,11 @@
   critic                   无触发词  ✅ 已在 CLAUDE.md 路由表
   guizang-ppt-skill        无触发词  ✅ 已在 CLAUDE.md 路由表
   huashu-report            无触发词  ✅ 已在 CLAUDE.md 路由表
+
+[C6] 可证伪判断的登记规则是否还有承载物
+  CLAUDE.md 含把握档规则   ✅
+  predictions.md 有把握列  ✅
+  产出可证伪判断的 skill   6 个，靠 CLAUDE.md 统一约束（各自 SKILL.md 不重复写，避免 upstream 冲突）
 
 ==========================================================================
 全部通过。
