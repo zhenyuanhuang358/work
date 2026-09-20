@@ -103,12 +103,18 @@
 # 可证伪判断必须登记，且必须带把握档（2026-09-20 定）
 
 **⚠ 为什么这条写在 CLAUDE.md 而不是各个 skill 里**：`memory/state/predictions.md` 的
-登记规范立了近一个月，但 **12 个会产出可证伪判断的 skill，零个引用它**
-（us-options-agent / earner / buffett-analyst / expansion-health-tracker /
-restaurant-research-skill / burry / sleeper / merlin / viral-content-agent…）。
+登记规范立了近一个月，但**会产出可证伪判断的 skill，零个引用它**
+（2026-09-20 `self_check.py` C6 实测 6 个：us-options-agent / earner /
+buffett-analyst / expansion-health-tracker / burry / sleeper）。
 规则有了，该触发它的东西都不知道它存在——这是 profile 1.2a「规则需要承载物」。
-改 12 个 skill 是错的架构（重复 + upstream 冲突 + tail-risk-monitor 已卡 200 行上限）。
+逐个改 skill 是错的架构（重复 + upstream 冲突 + tail-risk-monitor 已卡 200 行上限）。
 **CLAUDE.md 永远加载，一处生效。**
+
+**⚠ 检测器的口径不等于本规则的适用范围。** C6 的正则只能找到
+「SKILL.md 里明写了目标价 / 三情景 / 安全边际 / PoP / 定价缺口」的那几个；
+而本规则的适用范围是上面那句**触发条件**——任何 agent、任何带门槛数字与
+验证时点的判断，包括 merlin / restaurant-research 在客户报告里给出的前瞻判断。
+**拿检测器的数字当规则的边界，就把规则悄悄缩小了。**
 
 **触发条件**：任何 agent 给出带门槛数字与验证时点的判断——目标价、方向、
 PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」——**当场登记到

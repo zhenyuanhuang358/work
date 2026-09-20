@@ -166,7 +166,14 @@ def check_predictions():
         tally[tier][1] += "✅" in rest
         tally[tier][2] += "❌" in rest
     n_tiered = sum(v[0] for v in tally.values())
+    # 待验表里带把握档的条数 —— 这是新规则有没有被执行的**领先指标**。
+    # 已记分那边要等验证时点到期才动，等它涨太慢；待验这边是当场就能看出来的。
+    pend_tiered = sum(1 for _, rest in prows
+                      if any(f"| {k} " in "|" + rest or f"**{k}**" in rest for k in TIERS))
     say(f"  分档：已分档 {n_tiered} 条｜建档前未分档 {unfiled} 条（不参与分档统计）")
+    say(f"        待验 {len(prows)} 条中 {pend_tiered} 条已填把握档"
+        + ("  ← 新登记都在填，规则在执行" if pend_tiered else
+           "  ⚠ 一条都没填 —— 规则立了但没在执行"))
     for k in TIERS:
         n, h, m2 = tally[k]
         if n:
