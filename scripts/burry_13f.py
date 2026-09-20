@@ -19,6 +19,10 @@ burry_13f.py — 13F-HR 持仓抓取与逐季变动计算
 
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools"))
+import jsonsafe as _jsonsafe
 import re
 import time
 import urllib.request
@@ -59,8 +63,9 @@ def _cached(name, fetch, raw=False):
 def load_state():
     if not os.path.exists(STATE_FILE):
         raise SystemExit("burry_state.json 不存在——先跑 burry_screener.py 做 Tier 边界发现")
-    with open(STATE_FILE) as f:
-        return json.load(f)
+    # 1.1u：经 jsonsafe 读，.get(拼错的键) 会抛错并列出实际键名，
+    # 而不是静默返回 None（2026-09-06 事故就是这么来的）
+    return _jsonsafe.load(STATE_FILE)
 
 
 def find_infotable_url(cik, accession):
@@ -301,6 +306,21 @@ def main():
     }
     with open(OUT_FILE, "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+    # ── 1.1u 第 2 条：汇总出现不可能值时必须当场停，不许往下解读 ──────────────
+    # 2026-09-06 的事故：全历史汇总成「new 272 / closed 0 / inc 0 / dec 0」，
+    # 一个 272 次建仓、0 次清仓的组合物理上不可能存在。**那个数就摆在眼前，我看过、没停。**
+    # 现在由守卫来停。
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tools"))
+    from key_check import impossible_shapes
+    totals = {k: 0 for k in ("new", "add", "trim", "exit")}
+    for per in changes.values():
+        for k in totals:
+            totals[k] += len(per.get(k, []))
+    print(f"\n全历史变动汇总：" + "｜".join(f"{k} {v}" for k, v in totals.items()))
+    for msg in impossible_shapes(totals, "⛔ "):
+        print(msg)
+        raise SystemExit("汇总出现 1.1u 列出的不可能形态，已停止写出——先核对键名与口径")
+
     print(f"\n写出 {OUT_FILE}：{len(quarters)}/{len(selected)} 个报告期，{len(changes)} 组变动")
     if skipped:
         print(f"⚠ 跳过 {len(skipped)} 期，已落库到 skipped 字段：")

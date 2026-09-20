@@ -68,7 +68,7 @@ CARRIERS = [
     (r"spoke 路径是否真实存在|主动验证所有 spoke", "spoke 路径校验（R-E3）", "self_check.py"),
     (r"自己先加一遍|分项加总",               "分项加总校验（1.1s）", "sum_check.py"),
     (r"OTM 漂移超 5pct|锚失效",             "IV 锚漂移判定（1.1w）", None),
-    (r"print\(list\(d\.keys|先 `print",      "读 JSON 前打印键名（1.1u）", None),
+    (r"print\(list\(d\.keys|先 `print",      "读 JSON 前打印键名（1.1u）", "jsonsafe.py"),
 ]
 
 
@@ -195,6 +195,29 @@ def check_predictions():
                    "**差不开：我的自我评估没有信息量，所有判断应一视同仁打折**"))
 
 
+# ── C8 · 键名静默失效防线（承载 1.1u，2026-09-20 由人工执行改为装置）────────
+def check_keys_rule():
+    say("\n[C8] 键名静默失效防线  (1.1u：.get() 对拼错的键不报错)")
+    tool = os.path.join(REPO, "tools/key_check.py")
+    if not os.path.exists(tool):
+        flag("P1", "tools/key_check.py", "1.1u 的承载物不存在")
+        return
+    r = subprocess.run([sys.executable, tool, "--selftest"],
+                       capture_output=True, text=True, cwd=REPO)
+    o = r.stdout
+    n_safe = o.count("✅ ") - o.count("✅ scripts/burry_13f.py  changes")
+    n_raw = sum(1 for l in o.split("\n") if "仍用原生 json.load" in l)
+    say(f"  严格加载器：已迁 {n_safe} 个脚本，未迁 {n_raw} 个（迁移是渐进的，不判失败）")
+    guard_ok = "✅ scripts/burry_13f.py" in o and "未调用守卫" not in o
+    say(f"  不可能值守卫在产出点：{'✅ 已接' if guard_ok else '⛔ 未接'}")
+    if not guard_ok:
+        flag("P1", "scripts/burry_13f.py", "汇总产出点未调用 impossible_shapes() 守卫（1.1u 第 2 条）")
+    st = "自测通过" in o
+    say(f"  自测（拿 2026-09-06 真实汇总回放）：{'✅ 抓得住且正常分布零误报' if st else '⛔ 失败'}")
+    if not st:
+        flag("P1", "tools/key_check.py", "1.1u 的守卫自测未通过 —— 它抓不住立规的那个案例")
+
+
 # ── C7 · 分项加总校验（承载 1.1s，2026-09-20 由人工执行改为装置）────────────
 def check_sums():
     say("\n[C7] 分项加总校验  (1.1s：加不平就写明差额去向)")
@@ -300,6 +323,7 @@ def main():
     check_skill_routing()
     check_forecast_rule()
     check_sums()
+    check_keys_rule()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
