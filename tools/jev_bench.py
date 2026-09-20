@@ -29,8 +29,11 @@ build_requests() 只从 case["visible"] 取值，答案在 case["key"] 里，两
     python3 tools/jev_bench.py --build          # 造基准集（不需要 key，可离线）
     python3 tools/jev_bench.py --stats          # 看基准集分布
     python3 tools/jev_bench.py --requests > r.json   # 导出待发请求
-    python3 tools/jev_bench.py --run            # 真调 API（需 TYPESAFE_API_KEY，需可出网）
-    python3 tools/jev_bench.py --score resp.json     # 对分
+    python3 tools/jev_bench.py --run            # 调 Jev 官方 API（需 TYPESAFE_API_KEY）
+    python3 tools/jev_bench.py --run-classifier fast > r.json   # 调 classifier.dev（不要 key）
+    python3 tools/jev_bench.py --render 5       # 看模型到底收到了什么文本
+    python3 tools/jev_bench.py --isolation      # 信息隔离闸：同业代码不得进入文本
+    python3 tools/jev_bench.py --score r.json   # 对分，两种应答格式都认
 
 ⚠ API 请求格式未经验证：docs.typesafe.ai / api.typesafe.ai 在本容器返回
   CONNECT tunnel failed 403（组织代理策略，按 README 只报告不绕过）。
@@ -269,6 +272,171 @@ def build_requests(bench):
     return reqs
 
 
+# ══════════════════════════════════════════════════════════════════════════
+# 后端二：classifier.dev（2026-09-20 接入）
+# ══════════════════════════════════════════════════════════════════════════
+# 为什么加这条路：Jev 官方 API 需要排队拿 key，而 classifier.dev 是一个
+# **不要 key 的公开 HTTP 端点，后端就是 Jev**（其 src/jev.ts，2026-09-17 起
+# Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。这条路让基准今天就能跑。
+#
+# ⚠ 口径必须先说死，否则结果会被误读：
+#   **走这条路测的是「服务」，不是「Jev 裸模型」。** 中间隔着它的 prompt、
+#   分块、以及降级到 LLM 链的 fallback。两者不等同——该项目自己的 vs_jev.py
+#   存在的理由正是要把它们分开（AG News 上 Jev 直连 87.5% vs fast 档 87.2%）。
+#   所以本模块的结果一律标记 backend="classifier.dev"，不得写成 "Jev"。
+#
+# ⚠ fallback 污染是这条路最大的风险，而且它静默：
+#   该项目 eval/README.md 记过一次——上游模型 ling-3.0 被下架，每个 fast 请求
+#   都 404 并由链上下一个模型作答，F1 从 0.80 掉到 0.546，
+#   **「部署出来的数字里一个字都没说」**。
+#   响应带 model / modelsUsed / usage.fallback，所以这里逐项记录 model，
+#   并在对分时把非 Jev 作答的条目单独摘出来 —— 见 score() 的 fallback 段。
+
+CLASSIFIER_URL = "https://classifier.dev/v1/classify"
+
+# ── 预注册（2026-09-20）────────────────────────────────────────────────────
+# 本容器对 classifier.dev 同样是 CONNECT tunnel failed 403，我**无法在本地试跑**。
+# 也就是说下面这套配置是一次性的：首跑发生在 Actions 里，出什么就是什么，
+# 没有「看到结果再调标签」的机会。这不是缺陷，是个好性质——
+# 它天然排除了 profile 1.1p 的凑答案。**配置在此定死，事后不许改。**
+CLS_LABELS = ["sector move", "stock-specific move", "unclear"]
+CLS_TO_KEY = {"sector move": "sector_wide",
+              "stock-specific move": "stock_specific",
+              "unclear": "unclear"}
+# instructions 只描述任务，不泄露答案键的计算材料（同业个股涨跌仍然不可见）。
+# 把 unclear 的定义给模型是公平的——数据照样藏着。
+CLS_INSTRUCTIONS = (
+    "You are given one US-listed stock's percent move on a single trading day, "
+    "plus that day's index, volatility and rate backdrop. Decide what best "
+    "explains the stock's move. "
+    "'sector move' = the stock moved together with its industry peers that day. "
+    "'stock-specific move' = the stock diverged sharply from its industry peers. "
+    "'unclear' = the stock's whole industry barely moved that day, so there is "
+    "nothing much to attribute. "
+    "You are NOT given the peer stocks' moves; infer from your knowledge of "
+    "which companies move together and from the market backdrop."
+)
+
+
+def render_state(visible):
+    """把结构化状态渲染成一段文本。
+
+    ⚠ 这一步本身是个会影响结果的变换（Jev 原生接结构化 state，
+       classifier.dev 接文本）。渲染方式固定在这里，不随案例变化，
+       且**只读 visible**——答案键在 key 里，两者不交叉。
+    """
+    v = visible
+    parts = [f"Ticker {v['ticker']} moved {v['change_pct']:+.2f}% today."]
+    mk = v.get("market") or {}
+    bits = []
+    for k in ("SPY", "QQQ", "IWM", "XLE", "TLT", "GLD"):
+        if mk.get(k) is not None:
+            bits.append(f"{k} {mk[k]:+.2f}%")
+    if bits:
+        parts.append("Market: " + ", ".join(bits) + ".")
+    if mk.get("VIX") is not None:
+        parts.append(f"VIX {mk['VIX']}.")
+    if mk.get("UST10Y") is not None:
+        parts.append(f"US 10-year yield {mk['UST10Y']}%.")
+    if v.get("narrative"):
+        parts.append(f"Context that day: {v['narrative']}")
+    return " ".join(parts)
+
+
+def isolation_check(bench=None, verbose=True):
+    """信息隔离的验收闸：同业个股代码不得出现在送给模型的文本里。
+
+    ⚠ 必须区分两种命中，否则这个检查会天天喊狼来了：
+      **真泄漏**  = 同业的股票代码出现在文本中 → 实验作废
+      **数值巧合** = 同业的涨跌数值恰好等于文本里六个大盘读数之一（2 位小数）
+                     → 不是泄漏。模型看到的是「IWM -1.26%」，
+                       它无从知道 INTC 当天也是 -1.26%。
+    2026-09-20 首跑：真泄漏 0 处，数值巧合 57 处。
+    第一版检查把两者混在一起报了 57 处「泄漏」——**检查器自己制造的假事故**，
+    和 profile 1.2j 里那次「检查器口径不对」是同一类错误。
+    """
+    bench = bench or load_bench()
+    leaks, coincidences = [], []
+    for c in bench["cases"]:
+        txt = render_state(c["visible"])
+        for pk, pv in c["key"]["evidence"]["peers"].items():
+            if pk in txt:
+                leaks.append((c["id"], pk))
+            elif f"{pv:+.2f}%" in txt or f"{pv}" in txt:
+                coincidences.append((c["id"], pk, pv))
+    if verbose:
+        print(f"信息隔离检查：{len(bench['cases'])} 例")
+        print(f"  真泄漏（同业代码进入文本）  {len(leaks)} 处"
+              f"  {'✓' if not leaks else '⛔ 实验作废：' + str(leaks[:5])}")
+        print(f"  数值巧合（同业涨跌 = 某大盘读数）{len(coincidences)} 处  —— 不是泄漏，见函数注释")
+    return leaks
+
+
+def run_classifier(tier="fast", out=sys.stdout):
+    """把 164 例发给 classifier.dev，逐项记录 label / confidence / model。
+
+    tier: fast（默认，1000 decisions 上限）或 smart（公开配额 200 decisions，
+          164 例刚好装得下；smart 会把低置信项升级给第二个模型）。
+    """
+    import urllib.request, urllib.error
+    bench = load_bench()
+    if isolation_check(bench, verbose=False):
+        isolation_check(bench)
+        print("⛔ 信息隔离被破坏，拒绝发出请求。", file=sys.stderr)
+        return 1
+    cases = bench["cases"]
+    body = {
+        "inputs": [render_state(c["visible"]) for c in cases],
+        "labels": CLS_LABELS,
+        "instructions": CLS_INSTRUCTIONS,
+        "tier": tier,
+    }
+    req = urllib.request.Request(
+        CLASSIFIER_URL, data=json.dumps(body).encode(),
+        headers={"content-type": "application/json",
+                 "user-agent": "jev-bench/1.0 (+github.com/zhenyuanhuang358/work)"})
+    try:
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            payload = json.loads(resp.read().decode())
+    except urllib.error.HTTPError as e:
+        print(f"HTTP {e.code}: {e.read().decode()[:600]}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"{type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+
+    results = payload.get("results") or []
+    if len(results) != len(cases):
+        print(f"⚠ 返回 {len(results)} 条，送出 {len(cases)} 条 —— 顺序对齐已不可信，停。",
+              file=sys.stderr)
+        return 1
+
+    rows = []
+    for c, r in zip(cases, results):
+        rows.append({
+            "case_id": c["id"],
+            "backend": "classifier.dev",     # 不是 "Jev" —— 见本节开头的口径说明
+            "tier": tier,
+            "label_raw": r.get("label"),
+            "label": CLS_TO_KEY.get(r.get("label")),
+            "confidence": r.get("confidence"),
+            "scores": r.get("scores"),
+            "model": r.get("model"),
+        })
+    envelope = {
+        "backend": "classifier.dev",
+        "tier": tier,
+        "top_model": payload.get("model"),
+        "models_used": payload.get("modelsUsed"),
+        "usage": payload.get("usage"),
+        "labels": CLS_LABELS,
+        "instructions": CLS_INSTRUCTIONS,
+        "rows": rows,
+    }
+    json.dump(envelope, out, ensure_ascii=False, indent=1)
+    return 0
+
+
 def run():
     """真调 API。需要 TYPESAFE_API_KEY 且所在环境可出网到 api.typesafe.ai。
 
@@ -332,24 +500,54 @@ def extract_answer(resp):
     return None
 
 
+def load_responses(path):
+    """认两种应答格式，并返回 (rows, meta)。
+
+    A) Jev 直连：一个列表，每项 {case_id, response}
+    B) classifier.dev：一个信封 {backend, tier, rows:[{case_id,label,confidence,model}]}
+
+    统一成 [{case_id, answer, confidence, model}]。
+    """
+    with open(path) as f:
+        payload = json.load(f)
+    if isinstance(payload, dict) and payload.get("rows") is not None:
+        meta = {k: payload.get(k) for k in
+                ("backend", "tier", "top_model", "models_used", "usage", "labels")}
+        rows = [{"case_id": r["case_id"], "answer": r.get("label"),
+                 "confidence": r.get("confidence"), "model": r.get("model")}
+                for r in payload["rows"]]
+        return rows, meta
+    rows = [{"case_id": r["case_id"], "answer": extract_answer(r.get("response")),
+             "confidence": None, "model": None} for r in payload]
+    return rows, {"backend": "jev-direct", "tier": None}
+
+
 def score(resp_path):
     bench = load_bench()
     keys = {c["id"]: c for c in bench["cases"]}
-    with open(resp_path) as f:
-        responses = json.load(f)
+    responses, meta = load_responses(resp_path)
 
     hit = miss = unparsed = 0
     confusion = collections.Counter()
     head_to_head = []
+    by_model = collections.Counter()
+    conf_buckets = collections.defaultdict(lambda: [0, 0])   # 档 -> [对, 总]
     for r in responses:
         c = keys.get(r["case_id"])
         if not c:
             continue
-        got = extract_answer(r.get("response"))
+        got = r["answer"]
         if got is None:
             unparsed += 1
             continue
+        if r.get("model"):
+            by_model[r["model"]] += 1
         truth = c["key"]["label"]
+        conf = r.get("confidence")
+        if conf is not None:
+            b = "≥0.9" if conf >= 0.9 else "0.7–0.9" if conf >= 0.7 else "<0.7"
+            conf_buckets[b][1] += 1
+            conf_buckets[b][0] += got == truth
         confusion[(truth, got)] += 1
         if got == truth:
             hit += 1
@@ -360,9 +558,54 @@ def score(resp_path):
                                  "jev": got, "mine": c["mine"]["answer"]})
 
     total = hit + miss
-    print(f"基准集 {bench['n_cases']} 例 | 有效应答 {total} | 解析失败 {unparsed}")
+    n = bench["n_cases"]
+    base = collections.Counter(c["key"]["label"] for c in bench["cases"]).most_common(1)[0]
+    triv = trivial_ceiling(bench["cases"])[0]
+    backend = meta.get("backend", "?")
+    print(f"后端 {backend}" + (f" · {meta['tier']} 档" if meta.get("tier") else ""))
+    print(f"基准集 {n} 例 | 有效应答 {total} | 解析失败 {unparsed}")
+
+    # ⚠ fallback 污染检查：classifier.dev 在上游不可用时会静默降级到 LLM 链。
+    #    该项目自己踩过这个坑（ling-3.0 下架，F1 0.80→0.546，部署数字里只字未提）。
+    #    这里逐项看 model 字段，非 Jev 作答的必须单独摘出来。
+    if by_model:
+        print("\n逐项作答模型：")
+        for m, k in by_model.most_common():
+            print(f"  {m:<28} {k} 项")
+        non_jev = sum(k for m, k in by_model.items() if "jev" not in (m or "").lower())
+        if non_jev:
+            print(f"  ⛔ 其中 {non_jev} 项不是 Jev 作答（fallback 到 LLM 链）。"
+                  f"\n     **这个分数不能写成 Jev 的分数**——混了两个模型。"
+                  f"\n     该项目自己就因为这个把 F1 0.80 报成了 0.546 而不自知。")
+        else:
+            print(f"  ✓ 全部由 Jev 作答，无 fallback 污染")
+    if meta.get("usage", {}).get("fallback"):
+        print(f"  ⛔ usage.fallback = {meta['usage']['fallback']}")
+
     if total:
-        print(f"Jev 准确率 {hit}/{total} = {hit/total:.1%}")
+        print(f"\n准确率 {hit}/{total} = {hit/total:.1%}")
+        print(f"  多数类基线   {base[1]/n:.1%}（全猜 {base[0]}）"
+              f"   {'✓ 跨过' if hit/total > base[1]/n else '✗ 没跨过 —— 无信息量'}")
+        print(f"  平凡规则上限 {triv/n:.1%}"
+              f"   {'✓ 跨过' if hit/total > triv/n else '✗ 没跨过 —— 三行 if-else 就够了'}")
+
+    if conf_buckets:
+        print("\n按置信度分档（「按把握分流」在本任务上成不成立，看这里）：")
+        for b in ("≥0.9", "0.7–0.9", "<0.7"):
+            if b in conf_buckets:
+                ok, tot = conf_buckets[b]
+                print(f"  {b:<8} {ok}/{tot} = {ok/tot:.1%}")
+        hi = sum(v[0] for k, v in conf_buckets.items() if k != "<0.7")
+        hin = sum(v[1] for k, v in conf_buckets.items() if k != "<0.7")
+        lo, lon = conf_buckets.get("<0.7", [0, 0])
+        if hin and lon:
+            # ⚠ 不要写成 f"{x:+.1%pp}" —— `pp` 跟在 % 后面不是合法格式串，
+            #   会抛 ValueError，而且只在高低两档同时存在时才会走到，
+            #   也就是**恰好在真跑那一次**才崩。2026-09-20 靠造假数据走完未覆盖分支才发现。
+            delta = (hi / hin - lo / lon) * 100
+            print(f"  高低档落差 {delta:+.1f}pp"
+                  "  —— 落差小就说明置信度在本任务上没有分流价值")
+
     print("\n混淆矩阵（真值 → 判定）:")
     for (t, g), n in sorted(confusion.items()):
         mark = " " if t == g else "✗"
@@ -372,11 +615,12 @@ def score(resp_path):
         print(f"\n── 同题对照（我 vs Jev），n={len(head_to_head)} ──")
         print("  ⚠ n 这么小只能看出大破绽，看不出高下。不要用它下结论。")
         mine_hit = sum(1 for h in head_to_head if h["mine"] == h["truth"])
-        jev_hit = sum(1 for h in head_to_head if h["jev"] == h["truth"])
+        m_hit = sum(1 for h in head_to_head if h["jev"] == h["truth"])
         for h in head_to_head:
             print(f"  {h['id']:<18} 真值 {h['truth']:<15} "
-                  f"我 {h['mine']:<15} Jev {h['jev']}")
-        print(f"  我 {mine_hit}/{len(head_to_head)} | Jev {jev_hit}/{len(head_to_head)}")
+                  f"我 {h['mine']:<15} {backend} {h['jev']}")
+        print(f"  我 {mine_hit}/{len(head_to_head)} | {backend} {m_hit}/{len(head_to_head)}")
+        print("  ⚠ 再说一次：这 2 例是答案键筛剩的自选样本（见 6.3），不得用来比高下。")
     return 0
 
 
@@ -461,6 +705,18 @@ if __name__ == "__main__":
         json.dump(build_requests(load_bench()), sys.stdout, ensure_ascii=False, indent=1)
     elif arg == "--run":
         sys.exit(run())
+    elif arg == "--run-classifier":
+        # 用法：--run-classifier [fast|smart] > resp.json
+        tier = sys.argv[2] if len(sys.argv) > 2 else "fast"
+        sys.exit(run_classifier(tier))
+    elif arg == "--isolation":
+        sys.exit(1 if isolation_check() else 0)
+    elif arg == "--render":
+        # 把渲染后的文本打印出来，供人工核对「模型到底看到了什么」。
+        # 这是信息隔离的验收口：**任何同业个股代码出现在这里，实验就作废。**
+        b = load_bench()
+        for c in b["cases"][:int(sys.argv[2]) if len(sys.argv) > 2 else 5]:
+            print(f"[{c['id']}] {render_state(c['visible'])}")
     elif arg == "--score":
         sys.exit(score(sys.argv[2]))
     else:

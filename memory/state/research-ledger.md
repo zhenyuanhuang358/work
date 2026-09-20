@@ -1874,3 +1874,38 @@ typesafe.ai 全域出网被代理策略拒、无 API key、请求 schema 未经�
 
 **副产物**：`reports/jev_whitepaper/check_d123.py` —— CLAUDE.md 规定 huashu-report
 交付前手工过 D1/D2/D3b，但「手工过」没有承载物（profile 1.2a）。这个脚本是它的承载物。
+
+---
+
+## 2026-09-20 · classifier.dev 评估 + 接成 jev_bench 第二后端
+
+**是什么**：零样本文本分类服务（Cloudflare Worker + CLI + MCP），**不要 key**，
+最多一次 1000 条，返回标签 + 置信度。**后端就是 Jev**（`src/jev.ts`，2026-09-17 起
+Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。仓库 `mrmps/classifier-dev`。
+
+**没装插件，理由**：它的 MCP server 是 `https://classifier.dev/mcp`，
+而本容器对 classifier.dev 同样 403（同一条代理策略）。装上只会得到连接错误。
+本地机器若跑 Claude Code 可装：`claude plugin marketplace add mrmps/classifier-dev`。
+
+**它带来的两项证据（白皮书发布后的新数据，值得回填）**：
+`src/vs-jev.json`，2026-09-18 实测，公开有标注集，n=400：
+| 集合 | 系统 | 总 | 高置信档 | 低置信档 |
+|---|---|---|---|---|
+| AG News | Jev 直连 | 87.5% | 90.6% | 65.3% |
+| AG News | smart（低置信转二模）| 90.0% | 90.9% | 83.7% |
+| emotion | Jev 直连 | 61.8% | 72.7% | 36.9% |
+| emotion | smart | 62.7% | 71.9% | 41.8% |
+→ ① 置信度确有信号（高低档差 25pp / 36pp），这是**第一份公开有标注集上的分流证据**，
+  强于白皮书引用的那 100 条自造模板。
+→ ② **分流收益高度依赖任务**：AG News 值（总分 +2.5pp），emotion 不值（+0.9pp）。
+  作者把这个负面结果原样发了。
+→ ③ 它**仍然不报多数类基线**（grep eval/ 与 docs.ts 零匹配）；
+  且 `single.py` 是 `rows[:n]` 取测试集前 400 条，无打乱无种子无分层。
+
+**其 eval/README.md 的证据纪律强于官方与那篇文章**：自陈 train-on-test、
+单人标注无一致性检验、n=7 无置信区间、重跑方差 0.73~0.60，
+并明确区分「这份数据支持什么 / 不支持什么（0.03 以内是抛硬币）」。
+
+**接入结果**：`tools/jev_bench.py --run-classifier [fast|smart]`，
+`.github/workflows/jev-bench.yml` 加了 backend 选择。**classifier.dev 这条不需要任何 secret。**
+口径写死：走它测的是**服务**不是**Jev 裸模型**，结果一律标 backend="classifier.dev"。
