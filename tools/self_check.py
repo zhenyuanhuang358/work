@@ -17,7 +17,7 @@
     python3 tools/self_check.py            # 全部检查
     python3 tools/self_check.py --quiet    # 只输出问题
 """
-import os, re, sys, subprocess, json
+import os, sys, re, json, subprocess
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 QUIET = "--quiet" in sys.argv
@@ -66,7 +66,7 @@ CARRIERS = [
     (r"回放|触发率|一刀切.*触发",           "规则回放（1.1o）", "rule_replay.py"),
     (r"期权扫描前.*必须先.*(价格|缓存)",     "价格缓存刷新（R-D0）", "fetch-prices.yml"),
     (r"spoke 路径是否真实存在|主动验证所有 spoke", "spoke 路径校验（R-E3）", "self_check.py"),
-    (r"自己先加一遍|分项加总",               "分项加总校验（1.1s）", None),
+    (r"自己先加一遍|分项加总",               "分项加总校验（1.1s）", "sum_check.py"),
     (r"OTM 漂移超 5pct|锚失效",             "IV 锚漂移判定（1.1w）", None),
     (r"print\(list\(d\.keys|先 `print",      "读 JSON 前打印键名（1.1u）", None),
 ]
@@ -195,6 +195,30 @@ def check_predictions():
                    "**差不开：我的自我评估没有信息量，所有判断应一视同仁打折**"))
 
 
+# ── C7 · 分项加总校验（承载 1.1s，2026-09-20 由人工执行改为装置）────────────
+def check_sums():
+    say("\n[C7] 分项加总校验  (1.1s：加不平就写明差额去向)")
+    tool = os.path.join(REPO, "tools/sum_check.py")
+    if not os.path.exists(tool):
+        flag("P1", "tools/sum_check.py", "1.1s 的承载物不存在 —— 该规则退回人工自觉")
+        return
+    r = subprocess.run([sys.executable, tool, "--all", "--quiet"],
+                       capture_output=True, text=True, cwd=REPO)
+    tail = [l for l in r.stdout.strip().split("\n") if l.startswith("共 ")]
+    say("  " + (tail[-1] if tail else "（无输出）"))
+    gaps = [l.strip() for l in r.stdout.split("\n") if "⛔" in l]
+    if r.returncode:
+        flag("P1", "reports/", f"{len(gaps)} 处分项加总对不上且未写明差额（1.1s）：\n        "
+             + "\n        ".join(g[:150] for g in gaps[:4]))
+    else:
+        say("  ✅ 无「加不平且未说明」的情形")
+    # 声明覆盖率——这条检查最大的局限就在这里，必须可见
+    decl = sum(1 for l in r.stdout.split("\n") if "声明关系" in l)
+    none = sum(1 for l in r.stdout.split("\n") if "未声明任何加总关系" in l)
+    say(f"  ⚠ 局限：只核**声明过**的关系。当前 {decl} 份数据表有声明、{none} 份没有。"
+        f"\n     忘了声明就不会触发 —— 这是把「每次记得加一遍」降为「记得声明一次」，不是消灭自觉。")
+
+
 # ── C6 · 「可证伪判断必须登记并带把握档」这条规则有没有承载物 ─────────────
 # 2026-09-20 立。为什么需要它：predictions.md 的登记规范立了近一个月，
 # 而 12 个会产出可证伪判断的 skill **零个引用它**——规则有了，
@@ -275,6 +299,7 @@ def main():
     check_predictions()
     check_skill_routing()
     check_forecast_rule()
+    check_sums()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
