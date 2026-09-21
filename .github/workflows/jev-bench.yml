@@ -13,6 +13,16 @@ name: Jev 归因基准
 #   正是要分开这两件事（AG News 上 87.5% 直连 vs 87.2% 过壳）。
 
 on:
+  # ⚠ 为什么不只有 workflow_dispatch：本会话的集成 token 没有 actions:write，
+  #   `actions_run_trigger` 返回 403 Resource not accessible by integration，
+  #   我**无法从这里 dispatch**，于是 2026-09-20 建好之后一次都没跑起来
+  #   （list_workflow_runs total_count = 0）。
+  #   仓库里早有现成解法：fetch-prices.yml 靠 push 一个 trigger 文件自启动。
+  #   照抄它 —— 我 dispatch 不了，但我能 push。
+  push:
+    branches: [claude/install-claude-hud-d51E6]
+    paths:
+      - jev_bench_trigger.txt
   workflow_dispatch:
     inputs:
       backend:
@@ -70,10 +80,11 @@ jobs:
 
       # ── 后端 A：classifier.dev（无需任何 secret）──────────────────────────
       - name: 调 classifier.dev
-        if: inputs.backend == 'classifier.dev' || inputs.backend == 'both'
+        # push 触发时 inputs 为空 → 默认跑 classifier.dev（它不需要任何 secret）
+        if: github.event_name == 'push' || inputs.backend == 'classifier.dev' || inputs.backend == 'both'
         run: |
           set -o pipefail
-          tiers="${{ inputs.tier }}"
+          tiers="${{ inputs.tier || 'both' }}"
           [ "$tiers" = "both" ] && tiers="fast smart"
           for tier in $tiers; do
             echo "::group::classifier.dev $tier"
