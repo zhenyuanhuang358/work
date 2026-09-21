@@ -1,5 +1,5 @@
 {
- "built_at_utc": "2026-09-19T03:08:11Z",
+ "built_at_utc": "2026-09-21T04:32:48Z",
  "dropped_my_calls": [
   {
    "id": "2026-09-11:GM",
@@ -24,13 +24,3944 @@
   "MIN_PEERS": 3
  },
  "task": "给定某只股票当日涨跌与大盘/波动率/利率背景（不给同业个股），判断该涨跌是行业共动(sector_wide)、个股独有(stock_specific)还是无从判断(unclear)。",
- "n_cases": 164,
+ "n_cases": 269,
  "skipped": {
-  "同业有效样本 2 < 3": 140,
-  "目标无读数": 12,
-  "同业有效样本 1 < 3": 84
+  "同业有效样本 1 < 3": 422,
+  "同业有效样本 2 < 3": 471,
+  "同业有效样本 0 < 3": 195,
+  "目标无读数": 51
  },
  "cases": [
+  {
+   "id": "2026-07-16:AMD",
+   "date": "2026-07-16",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -5.33,
+    "market": {
+     "SPY": -0.54,
+     "QQQ": -1.64,
+     "IWM": -0.06,
+     "TLT": -0.04,
+     "XLE": 0.92,
+     "GLD": -1.98,
+     "VIX": 16.73,
+     "UST10Y": 4.57
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.33,
+     "peer_mean": -4.63,
+     "peer_sd": 1.579,
+     "z": -0.44,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.4,
+      "MU": -5.65,
+      "INTC": -5.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-16:INTC",
+   "date": "2026-07-16",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -5.84,
+    "market": {
+     "SPY": -0.54,
+     "QQQ": -1.64,
+     "IWM": -0.06,
+     "TLT": -0.04,
+     "XLE": 0.92,
+     "GLD": -1.98,
+     "VIX": 16.73,
+     "UST10Y": 4.57
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.84,
+     "peer_mean": -4.46,
+     "peer_sd": 1.462,
+     "z": -0.94,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.4,
+      "AMD": -5.33,
+      "MU": -5.65
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-16:MU",
+   "date": "2026-07-16",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -5.65,
+    "market": {
+     "SPY": -0.54,
+     "QQQ": -1.64,
+     "IWM": -0.06,
+     "TLT": -0.04,
+     "XLE": 0.92,
+     "GLD": -1.98,
+     "VIX": 16.73,
+     "UST10Y": 4.57
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.65,
+     "peer_mean": -4.523,
+     "peer_sd": 1.516,
+     "z": -0.74,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.4,
+      "AMD": -5.33,
+      "INTC": -5.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-16:NVDA",
+   "date": "2026-07-16",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -2.4,
+    "market": {
+     "SPY": -0.54,
+     "QQQ": -1.64,
+     "IWM": -0.06,
+     "TLT": -0.04,
+     "XLE": 0.92,
+     "GLD": -1.98,
+     "VIX": 16.73,
+     "UST10Y": 4.57
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.4,
+     "peer_mean": -5.607,
+     "peer_sd": 0.21,
+     "z": 6.41,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -5.33,
+      "MU": -5.65,
+      "INTC": -5.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-17:AMD",
+   "date": "2026-07-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -1.03,
+    "market": {
+     "SPY": -0.99,
+     "QQQ": -1.5,
+     "IWM": -0.52,
+     "TLT": 0.37,
+     "XLE": 1.16,
+     "GLD": 0.95,
+     "VIX": 18.77,
+     "UST10Y": 4.54
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.03,
+     "peer_mean": -1.57,
+     "peer_sd": 0.761,
+     "z": 0.71,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.21,
+      "MU": -0.5,
+      "INTC": -2.0
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-17:INTC",
+   "date": "2026-07-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -2.0,
+    "market": {
+     "SPY": -0.99,
+     "QQQ": -1.5,
+     "IWM": -0.52,
+     "TLT": 0.37,
+     "XLE": 1.16,
+     "GLD": 0.95,
+     "VIX": 18.77,
+     "UST10Y": 4.54
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.0,
+     "peer_mean": -1.247,
+     "peer_sd": 0.715,
+     "z": -1.05,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.21,
+      "AMD": -1.03,
+      "MU": -0.5
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-17:MU",
+   "date": "2026-07-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -0.5,
+    "market": {
+     "SPY": -0.99,
+     "QQQ": -1.5,
+     "IWM": -0.52,
+     "TLT": 0.37,
+     "XLE": 1.16,
+     "GLD": 0.95,
+     "VIX": 18.77,
+     "UST10Y": 4.54
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.5,
+     "peer_mean": -1.747,
+     "peer_sd": 0.514,
+     "z": 2.43,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -2.21,
+      "AMD": -1.03,
+      "INTC": -2.0
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-17:NVDA",
+   "date": "2026-07-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -2.21,
+    "market": {
+     "SPY": -0.99,
+     "QQQ": -1.5,
+     "IWM": -0.52,
+     "TLT": 0.37,
+     "XLE": 1.16,
+     "GLD": 0.95,
+     "VIX": 18.77,
+     "UST10Y": 4.54
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.21,
+     "peer_mean": -1.177,
+     "peer_sd": 0.621,
+     "z": -1.66,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -1.03,
+      "MU": -0.5,
+      "INTC": -2.0
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-20:AMD",
+   "date": "2026-07-20",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 1.58,
+    "market": {
+     "SPY": -0.16,
+     "QQQ": 0.1,
+     "IWM": -0.59,
+     "TLT": -0.75,
+     "XLE": 0.45,
+     "GLD": -0.22,
+     "VIX": 18.65,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.58,
+     "peer_mean": 1.433,
+     "peer_sd": 0.854,
+     "z": 0.17,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.23,
+      "MU": 1.94,
+      "INTC": 2.13
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-20:INTC",
+   "date": "2026-07-20",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 2.13,
+    "market": {
+     "SPY": -0.16,
+     "QQQ": 0.1,
+     "IWM": -0.59,
+     "TLT": -0.75,
+     "XLE": 0.45,
+     "GLD": -0.22,
+     "VIX": 18.65,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.13,
+     "peer_mean": 1.25,
+     "peer_sd": 0.736,
+     "z": 1.2,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.23,
+      "AMD": 1.58,
+      "MU": 1.94
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-20:MU",
+   "date": "2026-07-20",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 1.94,
+    "market": {
+     "SPY": -0.16,
+     "QQQ": 0.1,
+     "IWM": -0.59,
+     "TLT": -0.75,
+     "XLE": 0.45,
+     "GLD": -0.22,
+     "VIX": 18.65,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.94,
+     "peer_mean": 1.313,
+     "peer_sd": 0.798,
+     "z": 0.79,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.23,
+      "AMD": 1.58,
+      "INTC": 2.13
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-20:NVDA",
+   "date": "2026-07-20",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 0.23,
+    "market": {
+     "SPY": -0.16,
+     "QQQ": 0.1,
+     "IWM": -0.59,
+     "TLT": -0.75,
+     "XLE": 0.45,
+     "GLD": -0.22,
+     "VIX": 18.65,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.23,
+     "peer_mean": 1.883,
+     "peer_sd": 0.228,
+     "z": -3.31,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 1.58,
+      "MU": 1.94,
+      "INTC": 2.13
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-21:AMD",
+   "date": "2026-07-21",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 8.11,
+    "market": {
+     "SPY": 0.83,
+     "QQQ": 1.85,
+     "IWM": 1.45,
+     "TLT": -0.27,
+     "XLE": 0.97,
+     "GLD": 1.96,
+     "VIX": 17.05,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 8.11,
+     "peer_mean": 7.593,
+     "peer_sd": 4.229,
+     "z": 0.12,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 1.97,
+      "MU": 12.17,
+      "INTC": 8.64
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-21:INTC",
+   "date": "2026-07-21",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 8.64,
+    "market": {
+     "SPY": 0.83,
+     "QQQ": 1.85,
+     "IWM": 1.45,
+     "TLT": -0.27,
+     "XLE": 0.97,
+     "GLD": 1.96,
+     "VIX": 17.05,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 8.64,
+     "peer_mean": 7.417,
+     "peer_sd": 4.193,
+     "z": 0.29,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 1.97,
+      "AMD": 8.11,
+      "MU": 12.17
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-21:MU",
+   "date": "2026-07-21",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 12.17,
+    "market": {
+     "SPY": 0.83,
+     "QQQ": 1.85,
+     "IWM": 1.45,
+     "TLT": -0.27,
+     "XLE": 0.97,
+     "GLD": 1.96,
+     "VIX": 17.05,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 12.17,
+     "peer_mean": 6.24,
+     "peer_sd": 3.027,
+     "z": 1.96,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 1.97,
+      "AMD": 8.11,
+      "INTC": 8.64
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-21:NVDA",
+   "date": "2026-07-21",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 1.97,
+    "market": {
+     "SPY": 0.83,
+     "QQQ": 1.85,
+     "IWM": 1.45,
+     "TLT": -0.27,
+     "XLE": 0.97,
+     "GLD": 1.96,
+     "VIX": 17.05,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.97,
+     "peer_mean": 9.64,
+     "peer_sd": 1.802,
+     "z": -4.26,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 8.11,
+      "MU": 12.17,
+      "INTC": 8.64
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-22:AMD",
+   "date": "2026-07-22",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 1.45,
+    "market": {
+     "SPY": -0.12,
+     "QQQ": -0.51,
+     "IWM": -0.93,
+     "TLT": -0.26,
+     "XLE": 1.2,
+     "GLD": 1.15,
+     "VIX": 16.64,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.45,
+     "peer_mean": -0.517,
+     "peer_sd": 2.085,
+     "z": 0.94,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.3,
+      "MU": -1.17,
+      "INTC": -2.68
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-22:INTC",
+   "date": "2026-07-22",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -2.68,
+    "market": {
+     "SPY": -0.12,
+     "QQQ": -0.51,
+     "IWM": -0.93,
+     "TLT": -0.26,
+     "XLE": 1.2,
+     "GLD": 1.15,
+     "VIX": 16.64,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.68,
+     "peer_mean": 0.86,
+     "peer_sd": 1.477,
+     "z": -2.4,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.3,
+      "AMD": 1.45,
+      "MU": -1.17
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-22:MU",
+   "date": "2026-07-22",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -1.17,
+    "market": {
+     "SPY": -0.12,
+     "QQQ": -0.51,
+     "IWM": -0.93,
+     "TLT": -0.26,
+     "XLE": 1.2,
+     "GLD": 1.15,
+     "VIX": 16.64,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.17,
+     "peer_mean": 0.357,
+     "peer_sd": 2.175,
+     "z": -0.7,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.3,
+      "AMD": 1.45,
+      "INTC": -2.68
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-22:NVDA",
+   "date": "2026-07-22",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.3,
+    "market": {
+     "SPY": -0.12,
+     "QQQ": -0.51,
+     "IWM": -0.93,
+     "TLT": -0.26,
+     "XLE": 1.2,
+     "GLD": 1.15,
+     "VIX": 16.64,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.3,
+     "peer_mean": -0.8,
+     "peer_sd": 1.706,
+     "z": 1.82,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 1.45,
+      "MU": -1.17,
+      "INTC": -2.68
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-23:AMD",
+   "date": "2026-07-23",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -2.29,
+    "market": {
+     "SPY": -1.23,
+     "QQQ": -1.9,
+     "IWM": -0.58,
+     "TLT": -0.32,
+     "XLE": 0.3,
+     "GLD": -2.0,
+     "VIX": 18.7,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.29,
+     "peer_mean": -0.23,
+     "peer_sd": 2.446,
+     "z": -0.84,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -1.56,
+      "MU": 3.2,
+      "INTC": -2.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-23:INTC",
+   "date": "2026-07-23",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -2.33,
+    "market": {
+     "SPY": -1.23,
+     "QQQ": -1.9,
+     "IWM": -0.58,
+     "TLT": -0.32,
+     "XLE": 0.3,
+     "GLD": -2.0,
+     "VIX": 18.7,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.33,
+     "peer_mean": -0.217,
+     "peer_sd": 2.434,
+     "z": -0.87,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -1.56,
+      "AMD": -2.29,
+      "MU": 3.2
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-23:MU",
+   "date": "2026-07-23",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 3.2,
+    "market": {
+     "SPY": -1.23,
+     "QQQ": -1.9,
+     "IWM": -0.58,
+     "TLT": -0.32,
+     "XLE": 0.3,
+     "GLD": -2.0,
+     "VIX": 18.7,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 3.2,
+     "peer_mean": -2.06,
+     "peer_sd": 0.354,
+     "z": 10.52,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -1.56,
+      "AMD": -2.29,
+      "INTC": -2.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-23:NVDA",
+   "date": "2026-07-23",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -1.56,
+    "market": {
+     "SPY": -1.23,
+     "QQQ": -1.9,
+     "IWM": -0.58,
+     "TLT": -0.32,
+     "XLE": 0.3,
+     "GLD": -2.0,
+     "VIX": 18.7,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.56,
+     "peer_mean": -0.473,
+     "peer_sd": 2.597,
+     "z": -0.42,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -2.29,
+      "MU": 3.2,
+      "INTC": -2.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-24:AMD",
+   "date": "2026-07-24",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -3.29,
+    "market": {
+     "SPY": 0.1,
+     "QQQ": -1.12,
+     "IWM": -0.32,
+     "TLT": 0.1,
+     "XLE": 0.4,
+     "GLD": 0.1,
+     "VIX": 18.58,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -3.29,
+     "peer_mean": -5.267,
+     "peer_sd": 3.095,
+     "z": 0.64,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -0.92,
+      "MU": -6.99,
+      "INTC": -7.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-24:INTC",
+   "date": "2026-07-24",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -7.89,
+    "market": {
+     "SPY": 0.1,
+     "QQQ": -1.12,
+     "IWM": -0.32,
+     "TLT": 0.1,
+     "XLE": 0.4,
+     "GLD": 0.1,
+     "VIX": 18.58,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -7.89,
+     "peer_mean": -3.733,
+     "peer_sd": 2.498,
+     "z": -1.66,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -0.92,
+      "AMD": -3.29,
+      "MU": -6.99
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-24:MU",
+   "date": "2026-07-24",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -6.99,
+    "market": {
+     "SPY": 0.1,
+     "QQQ": -1.12,
+     "IWM": -0.32,
+     "TLT": 0.1,
+     "XLE": 0.4,
+     "GLD": 0.1,
+     "VIX": 18.58,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -6.99,
+     "peer_mean": -4.033,
+     "peer_sd": 2.894,
+     "z": -1.02,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -0.92,
+      "AMD": -3.29,
+      "INTC": -7.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-24:NVDA",
+   "date": "2026-07-24",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.92,
+    "market": {
+     "SPY": 0.1,
+     "QQQ": -1.12,
+     "IWM": -0.32,
+     "TLT": 0.1,
+     "XLE": 0.4,
+     "GLD": 0.1,
+     "VIX": 18.58,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.92,
+     "peer_mean": -6.057,
+     "peer_sd": 1.991,
+     "z": 2.58,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -3.29,
+      "MU": -6.99,
+      "INTC": -7.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-27:AMD",
+   "date": "2026-07-27",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -5.17,
+    "market": {
+     "SPY": 0.02,
+     "QQQ": -0.31,
+     "IWM": 0.6,
+     "TLT": 0.6,
+     "XLE": -2.11,
+     "GLD": 0.73,
+     "VIX": 18.67,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.17,
+     "peer_mean": -2.647,
+     "peer_sd": 1.774,
+     "z": -1.42,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -4.99,
+      "MU": -2.25,
+      "INTC": -0.7
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-27:INTC",
+   "date": "2026-07-27",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -0.7,
+    "market": {
+     "SPY": 0.02,
+     "QQQ": -0.31,
+     "IWM": 0.6,
+     "TLT": 0.6,
+     "XLE": -2.11,
+     "GLD": 0.73,
+     "VIX": 18.67,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.7,
+     "peer_mean": -4.137,
+     "peer_sd": 1.336,
+     "z": 2.57,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -4.99,
+      "AMD": -5.17,
+      "MU": -2.25
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-27:MU",
+   "date": "2026-07-27",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -2.25,
+    "market": {
+     "SPY": 0.02,
+     "QQQ": -0.31,
+     "IWM": 0.6,
+     "TLT": 0.6,
+     "XLE": -2.11,
+     "GLD": 0.73,
+     "VIX": 18.67,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.25,
+     "peer_mean": -3.62,
+     "peer_sd": 2.066,
+     "z": 0.66,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -4.99,
+      "AMD": -5.17,
+      "INTC": -0.7
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-27:NVDA",
+   "date": "2026-07-27",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -4.99,
+    "market": {
+     "SPY": 0.02,
+     "QQQ": -0.31,
+     "IWM": 0.6,
+     "TLT": 0.6,
+     "XLE": -2.11,
+     "GLD": 0.73,
+     "VIX": 18.67,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -4.99,
+     "peer_mean": -2.707,
+     "peer_sd": 1.853,
+     "z": -1.23,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -5.17,
+      "MU": -2.25,
+      "INTC": -0.7
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-28:AMD",
+   "date": "2026-07-28",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -8.15,
+    "market": {
+     "SPY": 0.24,
+     "QQQ": -0.97,
+     "IWM": 0.16,
+     "TLT": 0.59,
+     "XLE": -1.35,
+     "GLD": -1.4,
+     "VIX": 18.21,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -8.15,
+     "peer_mean": -4.82,
+     "peer_sd": 3.787,
+     "z": -0.88,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.25,
+      "MU": -8.85,
+      "INTC": -5.86
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-28:INTC",
+   "date": "2026-07-28",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -5.86,
+    "market": {
+     "SPY": 0.24,
+     "QQQ": -0.97,
+     "IWM": 0.16,
+     "TLT": 0.59,
+     "XLE": -1.35,
+     "GLD": -1.4,
+     "VIX": 18.21,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.86,
+     "peer_mean": -5.583,
+     "peer_sd": 4.135,
+     "z": -0.07,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.25,
+      "AMD": -8.15,
+      "MU": -8.85
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-28:MU",
+   "date": "2026-07-28",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -8.85,
+    "market": {
+     "SPY": 0.24,
+     "QQQ": -0.97,
+     "IWM": 0.16,
+     "TLT": 0.59,
+     "XLE": -1.35,
+     "GLD": -1.4,
+     "VIX": 18.21,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -8.85,
+     "peer_mean": -4.587,
+     "peer_sd": 3.546,
+     "z": -1.2,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 0.25,
+      "AMD": -8.15,
+      "INTC": -5.86
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-28:NVDA",
+   "date": "2026-07-28",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 0.25,
+    "market": {
+     "SPY": 0.24,
+     "QQQ": -0.97,
+     "IWM": 0.16,
+     "TLT": 0.59,
+     "XLE": -1.35,
+     "GLD": -1.4,
+     "VIX": 18.21,
+     "UST10Y": 4.6
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.25,
+     "peer_mean": -7.62,
+     "peer_sd": 1.277,
+     "z": 6.16,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -8.15,
+      "MU": -8.85,
+      "INTC": -5.86
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-29:AMD",
+   "date": "2026-07-29",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -5.51,
+    "market": {
+     "SPY": -1.54,
+     "QQQ": -2.04,
+     "IWM": -1.64,
+     "TLT": -1.65,
+     "XLE": 1.88,
+     "GLD": 0.46,
+     "VIX": 20.66,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.51,
+     "peer_mean": -6.203,
+     "peer_sd": 2.719,
+     "z": 0.26,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -3.55,
+      "MU": -9.94,
+      "INTC": -5.12
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-29:INTC",
+   "date": "2026-07-29",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -5.12,
+    "market": {
+     "SPY": -1.54,
+     "QQQ": -2.04,
+     "IWM": -1.64,
+     "TLT": -1.65,
+     "XLE": 1.88,
+     "GLD": 0.46,
+     "VIX": 20.66,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.12,
+     "peer_mean": -6.333,
+     "peer_sd": 2.673,
+     "z": 0.45,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -3.55,
+      "AMD": -5.51,
+      "MU": -9.94
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-29:MU",
+   "date": "2026-07-29",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -9.94,
+    "market": {
+     "SPY": -1.54,
+     "QQQ": -2.04,
+     "IWM": -1.64,
+     "TLT": -1.65,
+     "XLE": 1.88,
+     "GLD": 0.46,
+     "VIX": 20.66,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -9.94,
+     "peer_mean": -4.727,
+     "peer_sd": 0.847,
+     "z": -6.15,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": -3.55,
+      "AMD": -5.51,
+      "INTC": -5.12
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-29:NVDA",
+   "date": "2026-07-29",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -3.55,
+    "market": {
+     "SPY": -1.54,
+     "QQQ": -2.04,
+     "IWM": -1.64,
+     "TLT": -1.65,
+     "XLE": 1.88,
+     "GLD": 0.46,
+     "VIX": 20.66,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -3.55,
+     "peer_mean": -6.857,
+     "peer_sd": 2.186,
+     "z": 1.51,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -5.51,
+      "MU": -9.94,
+      "INTC": -5.12
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-30:AMD",
+   "date": "2026-07-30",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 13.0,
+    "market": {
+     "SPY": 1.68,
+     "QQQ": 3.3,
+     "IWM": 1.39,
+     "TLT": -0.06,
+     "XLE": 0.53,
+     "GLD": 1.64,
+     "VIX": 17.09,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 13.0,
+     "peer_mean": 10.77,
+     "peer_sd": 6.425,
+     "z": 0.35,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.65,
+      "MU": 18.36,
+      "INTC": 11.3
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-30:INTC",
+   "date": "2026-07-30",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 11.3,
+    "market": {
+     "SPY": 1.68,
+     "QQQ": 3.3,
+     "IWM": 1.39,
+     "TLT": -0.06,
+     "XLE": 0.53,
+     "GLD": 1.64,
+     "VIX": 17.09,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 11.3,
+     "peer_mean": 11.337,
+     "peer_sd": 6.521,
+     "z": -0.01,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.65,
+      "AMD": 13.0,
+      "MU": 18.36
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-30:MU",
+   "date": "2026-07-30",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 18.36,
+    "market": {
+     "SPY": 1.68,
+     "QQQ": 3.3,
+     "IWM": 1.39,
+     "TLT": -0.06,
+     "XLE": 0.53,
+     "GLD": 1.64,
+     "VIX": 17.09,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 18.36,
+     "peer_mean": 8.983,
+     "peer_sd": 4.532,
+     "z": 2.07,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.65,
+      "AMD": 13.0,
+      "INTC": 11.3
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-30:NVDA",
+   "date": "2026-07-30",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.65,
+    "market": {
+     "SPY": 1.68,
+     "QQQ": 3.3,
+     "IWM": 1.39,
+     "TLT": -0.06,
+     "XLE": 0.53,
+     "GLD": 1.64,
+     "VIX": 17.09,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.65,
+     "peer_mean": 14.22,
+     "peer_sd": 3.009,
+     "z": -3.85,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 13.0,
+      "MU": 18.36,
+      "INTC": 11.3
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-31:AMD",
+   "date": "2026-07-31",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -1.9,
+    "market": {
+     "SPY": 0.72,
+     "QQQ": 0.65,
+     "IWM": -0.48,
+     "TLT": -0.66,
+     "XLE": 1.0,
+     "GLD": -1.49,
+     "VIX": 15.99,
+     "UST10Y": 4.75
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.9,
+     "peer_mean": -1.33,
+     "peer_sd": 3.611,
+     "z": -0.16,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "MU": -5.9,
+      "INTC": -1.02
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-31:INTC",
+   "date": "2026-07-31",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -1.02,
+    "market": {
+     "SPY": 0.72,
+     "QQQ": 0.65,
+     "IWM": -0.48,
+     "TLT": -0.66,
+     "XLE": 1.0,
+     "GLD": -1.49,
+     "VIX": 15.99,
+     "UST10Y": 4.75
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.02,
+     "peer_mean": -1.623,
+     "peer_sd": 3.61,
+     "z": 0.17,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "AMD": -1.9,
+      "MU": -5.9
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-31:MU",
+   "date": "2026-07-31",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -5.9,
+    "market": {
+     "SPY": 0.72,
+     "QQQ": 0.65,
+     "IWM": -0.48,
+     "TLT": -0.66,
+     "XLE": 1.0,
+     "GLD": -1.49,
+     "VIX": 15.99,
+     "UST10Y": 4.75
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -5.9,
+     "peer_mean": 0.003,
+     "peer_sd": 2.1,
+     "z": -2.81,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "AMD": -1.9,
+      "INTC": -1.02
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-07-31:NVDA",
+   "date": "2026-07-31",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.93,
+    "market": {
+     "SPY": 0.72,
+     "QQQ": 0.65,
+     "IWM": -0.48,
+     "TLT": -0.66,
+     "XLE": 1.0,
+     "GLD": -1.49,
+     "VIX": 15.99,
+     "UST10Y": 4.75
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.93,
+     "peer_mean": -2.94,
+     "peer_sd": 2.124,
+     "z": 2.76,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -1.9,
+      "MU": -5.9,
+      "INTC": -1.02
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-03:AMD",
+   "date": "2026-08-03",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 1.78,
+    "market": {
+     "SPY": 1.42,
+     "QQQ": 1.76,
+     "IWM": 1.72,
+     "TLT": -0.07,
+     "XLE": -1.28,
+     "GLD": 0.05,
+     "VIX": 15.86,
+     "UST10Y": 4.69
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.78,
+     "peer_mean": 1.537,
+     "peer_sd": 0.986,
+     "z": 0.25,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "MU": 0.79,
+      "INTC": 0.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-03:INTC",
+   "date": "2026-08-03",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 0.89,
+    "market": {
+     "SPY": 1.42,
+     "QQQ": 1.76,
+     "IWM": 1.72,
+     "TLT": -0.07,
+     "XLE": -1.28,
+     "GLD": 0.05,
+     "VIX": 15.86,
+     "UST10Y": 4.69
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.89,
+     "peer_mean": 1.833,
+     "peer_sd": 0.874,
+     "z": -1.08,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "AMD": 1.78,
+      "MU": 0.79
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-03:MU",
+   "date": "2026-08-03",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 0.79,
+    "market": {
+     "SPY": 1.42,
+     "QQQ": 1.76,
+     "IWM": 1.72,
+     "TLT": -0.07,
+     "XLE": -1.28,
+     "GLD": 0.05,
+     "VIX": 15.86,
+     "UST10Y": 4.69
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.79,
+     "peer_mean": 1.867,
+     "peer_sd": 0.835,
+     "z": -1.29,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.93,
+      "AMD": 1.78,
+      "INTC": 0.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-03:NVDA",
+   "date": "2026-08-03",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.93,
+    "market": {
+     "SPY": 1.42,
+     "QQQ": 1.76,
+     "IWM": 1.72,
+     "TLT": -0.07,
+     "XLE": -1.28,
+     "GLD": 0.05,
+     "VIX": 15.86,
+     "UST10Y": 4.69
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.93,
+     "peer_mean": 1.153,
+     "peer_sd": 0.445,
+     "z": 3.55,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 1.78,
+      "MU": 0.79,
+      "INTC": 0.89
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-04:AMD",
+   "date": "2026-08-04",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 7.0,
+    "market": {
+     "SPY": 1.8,
+     "QQQ": 3.4,
+     "IWM": 1.85,
+     "TLT": 0.77,
+     "XLE": -0.46,
+     "GLD": 0.66,
+     "VIX": 16.5,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 7.0,
+     "peer_mean": 7.007,
+     "peer_sd": 3.408,
+     "z": -0.0,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.56,
+      "MU": 7.62,
+      "INTC": 10.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-04:INTC",
+   "date": "2026-08-04",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 10.84,
+    "market": {
+     "SPY": 1.8,
+     "QQQ": 3.4,
+     "IWM": 1.85,
+     "TLT": 0.77,
+     "XLE": -0.46,
+     "GLD": 0.66,
+     "VIX": 16.5,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 10.84,
+     "peer_mean": 5.727,
+     "peer_sd": 2.253,
+     "z": 2.27,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.56,
+      "AMD": 7.0,
+      "MU": 7.62
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-04:MU",
+   "date": "2026-08-04",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 7.62,
+    "market": {
+     "SPY": 1.8,
+     "QQQ": 3.4,
+     "IWM": 1.85,
+     "TLT": 0.77,
+     "XLE": -0.46,
+     "GLD": 0.66,
+     "VIX": 16.5,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 7.62,
+     "peer_mean": 6.8,
+     "peer_sd": 3.383,
+     "z": 0.24,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 2.56,
+      "AMD": 7.0,
+      "INTC": 10.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-04:NVDA",
+   "date": "2026-08-04",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.56,
+    "market": {
+     "SPY": 1.8,
+     "QQQ": 3.4,
+     "IWM": 1.85,
+     "TLT": 0.77,
+     "XLE": -0.46,
+     "GLD": 0.66,
+     "VIX": 16.5,
+     "UST10Y": 4.63
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.56,
+     "peer_mean": 8.487,
+     "peer_sd": 1.683,
+     "z": -3.52,
+     "n_peers": 3,
+     "peers": {
+      "AMD": 7.0,
+      "MU": 7.62,
+      "INTC": 10.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-05:AMD",
+   "date": "2026-08-05",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -7.04,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.9,
+     "IWM": -0.64,
+     "TLT": 0.22,
+     "XLE": -2.07,
+     "GLD": 4.14,
+     "VIX": 15.81,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -7.04,
+     "peer_mean": 1.23,
+     "peer_sd": 1.557,
+     "z": -5.31,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 3.43,
+      "MU": 0.06,
+      "INTC": 0.2
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-05:INTC",
+   "date": "2026-08-05",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 0.2,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.9,
+     "IWM": -0.64,
+     "TLT": 0.22,
+     "XLE": -2.07,
+     "GLD": 4.14,
+     "VIX": 15.81,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.2,
+     "peer_mean": -1.183,
+     "peer_sd": 4.364,
+     "z": 0.32,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 3.43,
+      "AMD": -7.04,
+      "MU": 0.06
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-05:MU",
+   "date": "2026-08-05",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 0.06,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.9,
+     "IWM": -0.64,
+     "TLT": 0.22,
+     "XLE": -2.07,
+     "GLD": 4.14,
+     "VIX": 15.81,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.06,
+     "peer_mean": -1.137,
+     "peer_sd": 4.378,
+     "z": 0.27,
+     "n_peers": 3,
+     "peers": {
+      "NVDA": 3.43,
+      "AMD": -7.04,
+      "INTC": 0.2
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-05:NVDA",
+   "date": "2026-08-05",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 3.43,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.9,
+     "IWM": -0.64,
+     "TLT": 0.22,
+     "XLE": -2.07,
+     "GLD": 4.14,
+     "VIX": 15.81,
+     "UST10Y": 4.62
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 3.43,
+     "peer_mean": -2.26,
+     "peer_sd": 3.38,
+     "z": 1.68,
+     "n_peers": 3,
+     "peers": {
+      "AMD": -7.04,
+      "MU": 0.06,
+      "INTC": 0.2
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-06:AMD",
+   "date": "2026-08-06",
+   "basis": "intraday 15:10Z",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 2.39,
+    "market": {
+     "SPY": 0.11,
+     "QQQ": 0.19,
+     "IWM": 0.32,
+     "TLT": -0.28,
+     "XLE": 0.85,
+     "GLD": 0.5,
+     "VIX": 15.38,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.39,
+     "peer_mean": -0.062,
+     "peer_sd": 1.929,
+     "z": 1.27,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.48,
+      "MU": 1.93,
+      "SNDK": -3.03,
+      "INTC": 1.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-06:INTC",
+   "date": "2026-08-06",
+   "basis": "intraday 15:10Z",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 1.33,
+    "market": {
+     "SPY": 0.11,
+     "QQQ": 0.19,
+     "IWM": 0.32,
+     "TLT": -0.28,
+     "XLE": 0.85,
+     "GLD": 0.5,
+     "VIX": 15.38,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.33,
+     "peer_mean": 0.203,
+     "peer_sd": 2.161,
+     "z": 0.52,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.48,
+      "AMD": 2.39,
+      "MU": 1.93,
+      "SNDK": -3.03
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-06:MU",
+   "date": "2026-08-06",
+   "basis": "intraday 15:10Z",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 1.93,
+    "market": {
+     "SPY": 0.11,
+     "QQQ": 0.19,
+     "IWM": 0.32,
+     "TLT": -0.28,
+     "XLE": 0.85,
+     "GLD": 0.5,
+     "VIX": 15.38,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.93,
+     "peer_mean": 0.053,
+     "peer_sd": 2.054,
+     "z": 0.91,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.48,
+      "AMD": 2.39,
+      "SNDK": -3.03,
+      "INTC": 1.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-06:NVDA",
+   "date": "2026-08-06",
+   "basis": "intraday 15:10Z",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.48,
+    "market": {
+     "SPY": 0.11,
+     "QQQ": 0.19,
+     "IWM": 0.32,
+     "TLT": -0.28,
+     "XLE": 0.85,
+     "GLD": 0.5,
+     "VIX": 15.38,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.48,
+     "peer_mean": 0.655,
+     "peer_sd": 2.16,
+     "z": -0.53,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 2.39,
+      "MU": 1.93,
+      "SNDK": -3.03,
+      "INTC": 1.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-06:SNDK",
+   "date": "2026-08-06",
+   "basis": "intraday 15:10Z",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": -3.03,
+    "market": {
+     "SPY": 0.11,
+     "QQQ": 0.19,
+     "IWM": 0.32,
+     "TLT": -0.28,
+     "XLE": 0.85,
+     "GLD": 0.5,
+     "VIX": 15.38,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -3.03,
+     "peer_mean": 1.292,
+     "peer_sd": 1.09,
+     "z": -3.96,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.48,
+      "AMD": 2.39,
+      "MU": 1.93,
+      "INTC": 1.33
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-07:AMD",
+   "date": "2026-08-07",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -1.21,
+    "market": {
+     "SPY": 0.61,
+     "QQQ": 1.17,
+     "IWM": 1.11,
+     "TLT": 0.29,
+     "XLE": -1.13,
+     "GLD": 2.26,
+     "VIX": 14.9,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.21,
+     "peer_mean": -0.003,
+     "peer_sd": 2.36,
+     "z": -0.51,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 2.27,
+      "MU": -0.44,
+      "SNDK": -3.68,
+      "INTC": 1.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-07:INTC",
+   "date": "2026-08-07",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 1.84,
+    "market": {
+     "SPY": 0.61,
+     "QQQ": 1.17,
+     "IWM": 1.11,
+     "TLT": 0.29,
+     "XLE": -1.13,
+     "GLD": 2.26,
+     "VIX": 14.9,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.84,
+     "peer_mean": -0.765,
+     "peer_sd": 2.122,
+     "z": 1.23,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 2.27,
+      "AMD": -1.21,
+      "MU": -0.44,
+      "SNDK": -3.68
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-07:MU",
+   "date": "2026-08-07",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -0.44,
+    "market": {
+     "SPY": 0.61,
+     "QQQ": 1.17,
+     "IWM": 1.11,
+     "TLT": 0.29,
+     "XLE": -1.13,
+     "GLD": 2.26,
+     "VIX": 14.9,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.44,
+     "peer_mean": -0.195,
+     "peer_sd": 2.418,
+     "z": -0.1,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 2.27,
+      "AMD": -1.21,
+      "SNDK": -3.68,
+      "INTC": 1.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-07:NVDA",
+   "date": "2026-08-07",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 2.27,
+    "market": {
+     "SPY": 0.61,
+     "QQQ": 1.17,
+     "IWM": 1.11,
+     "TLT": 0.29,
+     "XLE": -1.13,
+     "GLD": 2.26,
+     "VIX": 14.9,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.27,
+     "peer_mean": -0.873,
+     "peer_sd": 1.971,
+     "z": 1.59,
+     "n_peers": 4,
+     "peers": {
+      "AMD": -1.21,
+      "MU": -0.44,
+      "SNDK": -3.68,
+      "INTC": 1.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-07:SNDK",
+   "date": "2026-08-07",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": -3.68,
+    "market": {
+     "SPY": 0.61,
+     "QQQ": 1.17,
+     "IWM": 1.11,
+     "TLT": 0.29,
+     "XLE": -1.13,
+     "GLD": 2.26,
+     "VIX": 14.9,
+     "UST10Y": 4.66
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -3.68,
+     "peer_mean": 0.615,
+     "peer_sd": 1.473,
+     "z": -2.92,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 2.27,
+      "AMD": -1.21,
+      "MU": -0.44,
+      "INTC": 1.84
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-10:AMD",
+   "date": "2026-08-10",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -2.85,
+    "market": {
+     "SPY": -0.03,
+     "QQQ": -0.3,
+     "IWM": -0.52,
+     "TLT": -0.85,
+     "XLE": 4.66,
+     "GLD": 1.02,
+     "VIX": 15.46,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.85,
+     "peer_mean": -1.672,
+     "peer_sd": 2.321,
+     "z": -0.51,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -2.86,
+      "MU": -1.89,
+      "SNDK": 2.12,
+      "INTC": -4.06
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-10:INTC",
+   "date": "2026-08-10",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -4.06,
+    "market": {
+     "SPY": -0.03,
+     "QQQ": -0.3,
+     "IWM": -0.52,
+     "TLT": -0.85,
+     "XLE": 4.66,
+     "GLD": 1.02,
+     "VIX": 15.46,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -4.06,
+     "peer_mean": -1.37,
+     "peer_sd": 2.053,
+     "z": -1.31,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -2.86,
+      "AMD": -2.85,
+      "MU": -1.89,
+      "SNDK": 2.12
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-10:MU",
+   "date": "2026-08-10",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": -1.89,
+    "market": {
+     "SPY": -0.03,
+     "QQQ": -0.3,
+     "IWM": -0.52,
+     "TLT": -0.85,
+     "XLE": 4.66,
+     "GLD": 1.02,
+     "VIX": 15.46,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.89,
+     "peer_mean": -1.912,
+     "peer_sd": 2.38,
+     "z": 0.01,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -2.86,
+      "AMD": -2.85,
+      "SNDK": 2.12,
+      "INTC": -4.06
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-10:NVDA",
+   "date": "2026-08-10",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -2.86,
+    "market": {
+     "SPY": -0.03,
+     "QQQ": -0.3,
+     "IWM": -0.52,
+     "TLT": -0.85,
+     "XLE": 4.66,
+     "GLD": 1.02,
+     "VIX": 15.46,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -2.86,
+     "peer_mean": -1.67,
+     "peer_sd": 2.319,
+     "z": -0.51,
+     "n_peers": 4,
+     "peers": {
+      "AMD": -2.85,
+      "MU": -1.89,
+      "SNDK": 2.12,
+      "INTC": -4.06
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-10:SNDK",
+   "date": "2026-08-10",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 2.12,
+    "market": {
+     "SPY": -0.03,
+     "QQQ": -0.3,
+     "IWM": -0.52,
+     "TLT": -0.85,
+     "XLE": 4.66,
+     "GLD": 1.02,
+     "VIX": 15.46,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.12,
+     "peer_mean": -2.915,
+     "peer_sd": 0.77,
+     "z": 6.54,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -2.86,
+      "AMD": -2.85,
+      "MU": -1.89,
+      "INTC": -4.06
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-11:AMD",
+   "date": "2026-08-11",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 1.01,
+    "market": {
+     "SPY": -0.32,
+     "QQQ": -0.34,
+     "IWM": 0.34,
+     "TLT": 0.16,
+     "XLE": 1.25,
+     "GLD": -0.39,
+     "VIX": 15.28,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.01,
+     "peer_mean": 0.93,
+     "peer_sd": 1.063,
+     "z": 0.08,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.02,
+      "MU": 0.87,
+      "SNDK": 2.68,
+      "INTC": 0.19
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-11:INTC",
+   "date": "2026-08-11",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 0.19,
+    "market": {
+     "SPY": -0.32,
+     "QQQ": -0.34,
+     "IWM": 0.34,
+     "TLT": 0.16,
+     "XLE": 1.25,
+     "GLD": -0.39,
+     "VIX": 15.28,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.19,
+     "peer_mean": 1.135,
+     "peer_sd": 0.976,
+     "z": -0.97,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.02,
+      "AMD": 1.01,
+      "MU": 0.87,
+      "SNDK": 2.68
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-11:MU",
+   "date": "2026-08-11",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 0.87,
+    "market": {
+     "SPY": -0.32,
+     "QQQ": -0.34,
+     "IWM": 0.34,
+     "TLT": 0.16,
+     "XLE": 1.25,
+     "GLD": -0.39,
+     "VIX": 15.28,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "unclear",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.87,
+     "peer_mean": 0.965,
+     "peer_sd": 1.062,
+     "z": -0.09,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.02,
+      "AMD": 1.01,
+      "SNDK": 2.68,
+      "INTC": 0.19
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-11:NVDA",
+   "date": "2026-08-11",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.02,
+    "market": {
+     "SPY": -0.32,
+     "QQQ": -0.34,
+     "IWM": 0.34,
+     "TLT": 0.16,
+     "XLE": 1.25,
+     "GLD": -0.39,
+     "VIX": 15.28,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.02,
+     "peer_mean": 1.188,
+     "peer_sd": 0.916,
+     "z": -1.32,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 1.01,
+      "MU": 0.87,
+      "SNDK": 2.68,
+      "INTC": 0.19
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-11:SNDK",
+   "date": "2026-08-11",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 2.68,
+    "market": {
+     "SPY": -0.32,
+     "QQQ": -0.34,
+     "IWM": 0.34,
+     "TLT": 0.16,
+     "XLE": 1.25,
+     "GLD": -0.39,
+     "VIX": 15.28,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.68,
+     "peer_mean": 0.512,
+     "peer_sd": 0.437,
+     "z": 4.34,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.02,
+      "AMD": 1.01,
+      "MU": 0.87,
+      "INTC": 0.19
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-12:AMD",
+   "date": "2026-08-12",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 1.82,
+    "market": {
+     "SPY": 0.25,
+     "QQQ": 0.73,
+     "IWM": 0.57,
+     "TLT": -0.1,
+     "XLE": 0.16,
+     "GLD": 0.99,
+     "VIX": 14.55,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 1.82,
+     "peer_mean": 4.258,
+     "peer_sd": 1.127,
+     "z": -2.16,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 3.03,
+      "MU": 4.92,
+      "SNDK": 5.76,
+      "INTC": 3.32
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-12:INTC",
+   "date": "2026-08-12",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 3.32,
+    "market": {
+     "SPY": 0.25,
+     "QQQ": 0.73,
+     "IWM": 0.57,
+     "TLT": -0.1,
+     "XLE": 0.16,
+     "GLD": 0.99,
+     "VIX": 14.55,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 3.32,
+     "peer_mean": 3.882,
+     "peer_sd": 1.548,
+     "z": -0.36,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 3.03,
+      "AMD": 1.82,
+      "MU": 4.92,
+      "SNDK": 5.76
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-12:MU",
+   "date": "2026-08-12",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 4.92,
+    "market": {
+     "SPY": 0.25,
+     "QQQ": 0.73,
+     "IWM": 0.57,
+     "TLT": -0.1,
+     "XLE": 0.16,
+     "GLD": 0.99,
+     "VIX": 14.55,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 4.92,
+     "peer_mean": 3.482,
+     "peer_sd": 1.43,
+     "z": 1.01,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 3.03,
+      "AMD": 1.82,
+      "SNDK": 5.76,
+      "INTC": 3.32
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-12:NVDA",
+   "date": "2026-08-12",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 3.03,
+    "market": {
+     "SPY": 0.25,
+     "QQQ": 0.73,
+     "IWM": 0.57,
+     "TLT": -0.1,
+     "XLE": 0.16,
+     "GLD": 0.99,
+     "VIX": 14.55,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 3.03,
+     "peer_mean": 3.955,
+     "peer_sd": 1.513,
+     "z": -0.61,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 1.82,
+      "MU": 4.92,
+      "SNDK": 5.76,
+      "INTC": 3.32
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-12:SNDK",
+   "date": "2026-08-12",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 5.76,
+    "market": {
+     "SPY": 0.25,
+     "QQQ": 0.73,
+     "IWM": 0.57,
+     "TLT": -0.1,
+     "XLE": 0.16,
+     "GLD": 0.99,
+     "VIX": 14.55,
+     "UST10Y": 4.68
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 5.76,
+     "peer_mean": 3.272,
+     "peer_sd": 1.105,
+     "z": 2.25,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 3.03,
+      "AMD": 1.82,
+      "MU": 4.92,
+      "INTC": 3.32
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-13:AMD",
+   "date": "2026-08-13",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 0.02,
+    "market": {
+     "SPY": 0.7,
+     "QQQ": 1.16,
+     "IWM": 0.26,
+     "TLT": 0.58,
+     "XLE": 0.05,
+     "GLD": -1.47,
+     "VIX": 14.63,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.02,
+     "peer_mean": 5.505,
+     "peer_sd": 4.916,
+     "z": -1.12,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 0.54,
+      "MU": 4.23,
+      "SNDK": 13.67,
+      "INTC": 3.58
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-13:INTC",
+   "date": "2026-08-13",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 3.58,
+    "market": {
+     "SPY": 0.7,
+     "QQQ": 1.16,
+     "IWM": 0.26,
+     "TLT": 0.58,
+     "XLE": 0.05,
+     "GLD": -1.47,
+     "VIX": 14.63,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 3.58,
+     "peer_mean": 4.615,
+     "peer_sd": 5.474,
+     "z": -0.19,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 0.54,
+      "AMD": 0.02,
+      "MU": 4.23,
+      "SNDK": 13.67
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-13:MU",
+   "date": "2026-08-13",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 4.23,
+    "market": {
+     "SPY": 0.7,
+     "QQQ": 1.16,
+     "IWM": 0.26,
+     "TLT": 0.58,
+     "XLE": 0.05,
+     "GLD": -1.47,
+     "VIX": 14.63,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 4.23,
+     "peer_mean": 4.452,
+     "peer_sd": 5.493,
+     "z": -0.04,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 0.54,
+      "AMD": 0.02,
+      "SNDK": 13.67,
+      "INTC": 3.58
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-13:NVDA",
+   "date": "2026-08-13",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": 0.54,
+    "market": {
+     "SPY": 0.7,
+     "QQQ": 1.16,
+     "IWM": 0.26,
+     "TLT": 0.58,
+     "XLE": 0.05,
+     "GLD": -1.47,
+     "VIX": 14.63,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.54,
+     "peer_mean": 5.375,
+     "peer_sd": 5.05,
+     "z": -0.96,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 0.02,
+      "MU": 4.23,
+      "SNDK": 13.67,
+      "INTC": 3.58
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-13:SNDK",
+   "date": "2026-08-13",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 13.67,
+    "market": {
+     "SPY": 0.7,
+     "QQQ": 1.16,
+     "IWM": 0.26,
+     "TLT": 0.58,
+     "XLE": 0.05,
+     "GLD": -1.47,
+     "VIX": 14.63,
+     "UST10Y": 4.64
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 13.67,
+     "peer_mean": 2.093,
+     "peer_sd": 1.836,
+     "z": 6.31,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": 0.54,
+      "AMD": 0.02,
+      "MU": 4.23,
+      "INTC": 3.58
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-14:AMD",
+   "date": "2026-08-14",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 6.5,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 6.5,
+     "peer_mean": 1.915,
+     "peer_sd": 3.504,
+     "z": 1.31,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "MU": 2.3,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-14:INTC",
+   "date": "2026-08-14",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -1.97,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.97,
+     "peer_mean": 4.032,
+     "peer_sd": 3.046,
+     "z": -1.97,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "MU": 2.3,
+      "SNDK": 7.39
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-14:MU",
+   "date": "2026-08-14",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 2.3,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.3,
+     "peer_mean": 2.965,
+     "peer_sd": 4.049,
+     "z": -0.16,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-14:NVDA",
+   "date": "2026-08-14",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.06,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.06,
+     "peer_mean": 3.555,
+     "peer_sd": 3.724,
+     "z": -0.97,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 6.5,
+      "MU": 2.3,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-14:SNDK",
+   "date": "2026-08-14",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 7.39,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 7.39,
+     "peer_mean": 1.692,
+     "peer_sd": 3.161,
+     "z": 1.8,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "MU": 2.3,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-15:AMD",
+   "date": "2026-08-15",
+   "basis": "intraday 04:04Z",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": 6.5,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 6.5,
+     "peer_mean": 1.915,
+     "peer_sd": 3.504,
+     "z": 1.31,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "MU": 2.3,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-15:INTC",
+   "date": "2026-08-15",
+   "basis": "intraday 04:04Z",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": -1.97,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.97,
+     "peer_mean": 4.032,
+     "peer_sd": 3.046,
+     "z": -1.97,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "MU": 2.3,
+      "SNDK": 7.39
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-15:MU",
+   "date": "2026-08-15",
+   "basis": "intraday 04:04Z",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 2.3,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 2.3,
+     "peer_mean": 2.965,
+     "peer_sd": 4.049,
+     "z": -0.16,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-15:NVDA",
+   "date": "2026-08-15",
+   "basis": "intraday 04:04Z",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.06,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.06,
+     "peer_mean": 3.555,
+     "peer_sd": 3.724,
+     "z": -0.97,
+     "n_peers": 4,
+     "peers": {
+      "AMD": 6.5,
+      "MU": 2.3,
+      "SNDK": 7.39,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-15:SNDK",
+   "date": "2026-08-15",
+   "basis": "intraday 04:04Z",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 7.39,
+    "market": {
+     "SPY": -0.2,
+     "QQQ": -0.14,
+     "IWM": 0.52,
+     "TLT": -0.67,
+     "XLE": 1.39,
+     "GLD": 0.63,
+     "VIX": 14.25,
+     "UST10Y": 4.7
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 7.39,
+     "peer_mean": 1.692,
+     "peer_sd": 3.161,
+     "z": 1.8,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.06,
+      "AMD": 6.5,
+      "MU": 2.3,
+      "INTC": -1.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-17:AMD",
+   "date": "2026-08-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "AMD",
+    "change_pct": -1.63,
+    "market": {
+     "SPY": -0.47,
+     "QQQ": -0.16,
+     "IWM": -0.34,
+     "TLT": -0.84,
+     "XLE": 1.08,
+     "GLD": 1.0,
+     "VIX": 15.19,
+     "UST10Y": 4.72
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -1.63,
+     "peer_mean": 3.478,
+     "peer_sd": 3.482,
+     "z": -1.47,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.07,
+      "MU": 4.13,
+      "SNDK": 8.88,
+      "INTC": 0.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-17:INTC",
+   "date": "2026-08-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "INTC",
+    "change_pct": 0.97,
+    "market": {
+     "SPY": -0.47,
+     "QQQ": -0.16,
+     "IWM": -0.34,
+     "TLT": -0.84,
+     "XLE": 1.08,
+     "GLD": 1.0,
+     "VIX": 15.19,
+     "UST10Y": 4.72
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 0.97,
+     "peer_mean": 2.828,
+     "peer_sd": 4.08,
+     "z": -0.46,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.07,
+      "AMD": -1.63,
+      "MU": 4.13,
+      "SNDK": 8.88
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-17:MU",
+   "date": "2026-08-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "MU",
+    "change_pct": 4.13,
+    "market": {
+     "SPY": -0.47,
+     "QQQ": -0.16,
+     "IWM": -0.34,
+     "TLT": -0.84,
+     "XLE": 1.08,
+     "GLD": 1.0,
+     "VIX": 15.19,
+     "UST10Y": 4.72
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 4.13,
+     "peer_mean": 2.038,
+     "peer_sd": 4.057,
+     "z": 0.52,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.07,
+      "AMD": -1.63,
+      "SNDK": 8.88,
+      "INTC": 0.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-17:NVDA",
+   "date": "2026-08-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "NVDA",
+    "change_pct": -0.07,
+    "market": {
+     "SPY": -0.47,
+     "QQQ": -0.16,
+     "IWM": -0.34,
+     "TLT": -0.84,
+     "XLE": 1.08,
+     "GLD": 1.0,
+     "VIX": 15.19,
+     "UST10Y": 4.72
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "sector_wide",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": -0.07,
+     "peer_mean": 3.088,
+     "peer_sd": 3.917,
+     "z": -0.81,
+     "n_peers": 4,
+     "peers": {
+      "AMD": -1.63,
+      "MU": 4.13,
+      "SNDK": 8.88,
+      "INTC": 0.97
+     }
+    }
+   },
+   "mine": null
+  },
+  {
+   "id": "2026-08-17:SNDK",
+   "date": "2026-08-17",
+   "basis": "close",
+   "visible": {
+    "ticker": "SNDK",
+    "change_pct": 8.88,
+    "market": {
+     "SPY": -0.47,
+     "QQQ": -0.16,
+     "IWM": -0.34,
+     "TLT": -0.84,
+     "XLE": 1.08,
+     "GLD": 1.0,
+     "VIX": 15.19,
+     "UST10Y": 4.72
+    },
+    "narrative": null
+   },
+   "key": {
+    "label": "stock_specific",
+    "evidence": {
+     "sector": "semis",
+     "target_pct": 8.88,
+     "peer_mean": 0.85,
+     "peer_sd": 2.108,
+     "z": 3.81,
+     "n_peers": 4,
+     "peers": {
+      "NVDA": -0.07,
+      "AMD": -1.63,
+      "MU": 4.13,
+      "INTC": 0.97
+     }
+    }
+   },
+   "mine": null
+  },
   {
    "id": "2026-08-18:AMD",
    "date": "2026-08-18",

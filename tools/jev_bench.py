@@ -581,7 +581,11 @@ def score(resp_path):
                   f"\n     该项目自己就因为这个把 F1 0.80 报成了 0.546 而不自知。")
         else:
             print(f"  ✓ 全部由 Jev 作答，无 fallback 污染")
-    if meta.get("usage", {}).get("fallback"):
+    # ⚠ fallback 字段只在真的降级过时才出现，**缺失是合法的**——显式给默认值。
+    #    2026-09-21 Actions 首跑：Jev 答完 269 题、零 fallback，
+    #    却被 jsonsafe 在这一行拦下（KeyError: 没有键 'fallback'）。
+    #    防线按设计工作了，是这行代码欠一个默认值。
+    if (meta.get("usage", None) or {}).get("fallback", None):
         print(f"  ⛔ usage.fallback = {meta['usage']['fallback']}")
 
     if total:
@@ -662,8 +666,11 @@ def stats():
     print(f"  平凡规则上限  只看自身 |涨跌| 的最优两阈值规则：{triv/n:.1%} (lo={lo} hi={hi})")
     print(f"  **打不过这两个数就是没有信息量**——这是判据，不是参考。")
     if triv <= base[1]:
-        print(f"  ✓ 平凡规则 = 多数类基线 → 自身涨跌这一维零信息量，"
-              f"任务确实需要同业共动的先验，基准有效。")
+        # ⚠ 措辞必须跟实际关系一致。首版无论相等还是更低都印「=」，
+        #    而 2026-09-21 实测是 53.9% < 57.2%——印成「=」会误导读者。
+        rel = "=" if triv == base[1] else "<"
+        print(f"  ✓ 平凡规则 {triv/n:.1%} {rel} 多数类基线 {base[1]/n:.1%} → "
+              f"自身涨跌这一维零信息量，任务确实需要同业共动的先验，基准有效。")
     else:
         print(f"  ⚠ 平凡规则已超基线 {(triv-base[1])/n:+.1%} → "
               f"这个基准有一部分能被三行代码做掉，评分时要扣掉这部分再谈模型价值。")
