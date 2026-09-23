@@ -1198,3 +1198,17 @@ R4 一律并列输出两个数，并在不同向时明说，不替用户择一�
 ```
 **→ 通用推论：任何我自己划的阈值，必须在旁边记上「它是看着几个观测点划的」。
 n=1 的阈值不是阈值，是把当时的状态写成了标准。**
+
+## 1.2t 两个工具坑：`pkill -f` 会杀掉发出它的 shell；本环境 LibreOffice 转换必挂（2026-09-23 众信填表）
+
+**一、`pkill -f soffice` 把我自己的命令杀了。** `-f` 匹配完整命令行，而这条 bash 命令本身就含
+「soffice」字样 → 杀掉发出它的 shell → **exit 1、零输出**。我连续四次静默失败，
+**前两次还把它归咎为 LibreOffice**，差点据此下错结论。
+→ **杀进程用 `ps aux | grep -i [s]office | awk '{print $2}' | xargs -r kill -9`**（`[s]` 让 grep 不匹配自己），
+  或把 pkill 单独放一条命令。
+→ **通用推论：一条命令「零输出 + 非零退出」，先怀疑命令本身，再怀疑它调用的程序。**
+
+**二、LibreOffice headless 在本环境转换任何文件都挂**（`--version` 正常，连两格的最小文件都转不出来），
+xlsx skill 的 `recalc.py` 因此不可用。**替代：`pip install pycel`，逐格 `ExcelCompiler.evaluate()`**，
+支持 SUMPRODUCT / ROUND / TEXT / 跨表引用，本次 297 个公式 0 错误。
+客户版用 pycel 求出的值落成纯数值文件；内部版保留公式并设 `fullCalcOnLoad=True`，Excel 打开即重算。
