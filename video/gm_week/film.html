@@ -1,0 +1,213 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>gm-week</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// 一条卖方仓位的一周 —— 确定性帧：画面只由 t（秒）决定，无随机数、无外部素材
+const W=1080,H=1920,DUR=45;
+const C={paper:'#f1efea',ink:'#0a0a0b',copper:'#8b6c42',gold:'#c9a84c',green:'#2a5c3f',red:'#8b2e2e',amber:'#c47a1e',mute:'#6b665c',rule:'#d9d3c7'};
+const ZH='"WenQuanYi Zen Hei"', SERIF='"Liberation Serif","DejaVu Serif",serif';
+const cv=document.getElementById('c'), g=cv.getContext('2d');
+window.__overflow=[];
+
+// ---------- 工具 ----------
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;};
+const prog=(t,a,b)=>ease((t-a)/(b-a));           // a→b 秒内 0→1
+const lerp=(a,b,p)=>a+(b-a)*p;
+function font(px,w='normal',fam=ZH){return `${w} ${px}px ${fam}`;}
+function txt(s,x,y,{px=48,w='normal',fam=ZH,color=C.ink,alpha=1,align='left',maxW=W-160,tag=''}={}){
+  g.save();g.globalAlpha*=alpha;g.font=font(px,w,fam);g.fillStyle=color;g.textAlign=align;g.textBaseline='alphabetic';
+  const m=g.measureText(s).width;
+  if(m>maxW) window.__overflow.push({tag:tag||s.slice(0,12),need:Math.round(m),max:maxW});
+  g.fillText(s,x,y);
+  if(w==='bold'&&fam===ZH){g.strokeStyle=color;g.lineWidth=Math.max(1.2,px/30);g.lineJoin='round';g.strokeText(s,x,y);} // 文泉驿无粗体字重
+  g.restore();return m;
+}
+function rule(x1,y,x2,color=C.copper,lw=3,alpha=1){g.save();g.globalAlpha*=alpha;g.strokeStyle=color;g.lineWidth=lw;g.beginPath();g.moveTo(x1,y);g.lineTo(x2,y);g.stroke();g.restore();}
+function box(x,y,w,h,fill,alpha=1,r=18){g.save();g.globalAlpha*=alpha;g.fillStyle=fill;g.beginPath();g.roundRect(x,y,w,h,r);g.fill();g.restore();}
+function bg(){g.fillStyle=C.paper;g.fillRect(0,0,W,H);
+  // 版心细框 + 页眉页脚，全片一致
+  g.strokeStyle=C.rule;g.lineWidth=2;g.strokeRect(48,48,W-96,H-96);
+  txt('期权账户 · 周复盘',80,118,{px:30,color:C.copper,tag:'header'});
+  txt('2026 · 09',W-80,118,{px:30,fam:SERIF,color:C.copper,align:'right',tag:'header-r'});
+}
+function footer(t){
+  const s='盈亏为模型估计（9/22 为平台实价）· 数据：仓库价格缓存';
+  txt(s,W/2,H-86,{px:24,color:C.mute,align:'center',tag:'footer'});
+}
+function fadeWin(t,a,b,fi=.5,fo=.5){ // 镜头可见度
+  if(t<a||t>b) return 0; return Math.min(clamp((t-a)/fi),clamp((b-t)/fo));
+}
+
+// ---------- 数据（与 memory/state/options-journal.md 核对过） ----------
+const DAYS=['9/18','9/21','9/22','9/23','9/24','9/25'];
+const CLOSE=[82.20,83.95,83.45,83.77,80.57,82.63];
+const RATIO=[0.48,0.82,0.74,0.91,0.30,0.76];
+
+// ---------- 镜头 1：0–5s 标题 + 仓位卡 ----------
+function shot1(t){
+  const a=fadeWin(t,0,5,.01,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  const pr=prog(t,0.0,0.8); rule(80,300,lerp(80,W-80,pr),C.copper,4);
+  const k=prog(t,0.2,1.0); txt('GM · 卖出看跌期权',80,380-20*(1-k),{px:36,color:C.copper,alpha:k,tag:'kicker'});
+  const ti=prog(t,0.35,1.35);
+  txt('一条卖方仓位',80,520-40*(1-ti),{px:104,w:'bold',alpha:ti,tag:'title1'});
+  txt('的一周',80,650-40*(1-ti),{px:104,w:'bold',alpha:ti,tag:'title2'});
+  const st=prog(t,1.1,1.9);
+  txt('9/18 → 9/25',80,740,{px:44,fam:SERIF,color:C.mute,alpha:st,tag:'dates'});
+  // 仓位卡
+  const cp=prog(t,1.8,2.8); const cy=860;
+  if(cp>0) box(80,cy,W-160,560*cp,C.ink,1);
+  const rows=[['合约','GM 2026-10-09 $79 Put × 4',C.paper],
+              ['卖出价','$0.96 / 张 · 收 $384',C.paper],
+              ['行权即接货','$31,600',C.gold],
+              ['相当于净值','2.9 倍',C.gold]];
+  rows.forEach((r,i)=>{const rp=prog(t,2.3+i*0.3,3.0+i*0.3);
+    const y=cy+120+i*120;
+    txt(r[0],130,y,{px:34,color:'#b8b2a6',alpha:rp,tag:'row'+i});
+    txt(r[1],W-130,y,{px:i>=2?52:40,fam:i>=2?SERIF:ZH,w:i>=2?'bold':'normal',color:r[2],alpha:rp,align:'right',maxW:640,tag:'rowv'+i});
+    if(i<3) rule(130,y+42,W-130,'#2a2824',2,rp);
+  });
+  g.restore();
+}
+
+// ---------- 镜头 2：5–12s 价格折线 ----------
+function shot2(t){
+  const a=fadeWin(t,5,12,.3,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  txt('标的价格（收盘）',80,260,{px:56,w:'bold',tag:'s2title'});
+  txt('行权价 $79 · 触发线 $82',80,330,{px:34,color:C.mute,tag:'s2sub'});
+  const X0=150,X1=W-110,Y0=1250,Y1=520,LO=78,HI=85;
+  const px=i=>lerp(X0,X1,i/(DAYS.length-1)), py=v=>lerp(Y0,Y1,(v-LO)/(HI-LO));
+  // 网格与刻度
+  for(let v=78;v<=85;v++){rule(X0,py(v),X1,C.rule,1);txt('$'+v,X0-20,py(v)+10,{px:26,fam:SERIF,color:C.mute,align:'right',tag:'yt'});}
+  DAYS.forEach((d,i)=>txt(d,px(i),Y0+56,{px:30,fam:SERIF,color:C.mute,align:'center',tag:'xt'}));
+  // 行权价 / 触发线
+  const lp=prog(t,5.3,6.2);
+  g.save();g.strokeStyle=C.red;g.lineWidth=5;g.beginPath();g.moveTo(X0,py(79));g.lineTo(lerp(X0,X1,lp),py(79));g.stroke();g.restore();
+  txt('行权价 $79',X1,py(79)+44,{px:30,color:C.red,alpha:lp,align:'right',tag:'strike'});
+  g.save();g.strokeStyle=C.amber;g.lineWidth=4;g.setLineDash([18,14]);g.beginPath();g.moveTo(X0,py(82));g.lineTo(lerp(X0,X1,lp),py(82));g.stroke();g.restore();
+  txt('触发线 $82',px(1.5),py(82)-18,{px:30,color:C.amber,alpha:lp,align:'center',tag:'trig'});
+  // 折线逐日描出
+  const dp=clamp((t-6.2)/4.2)*(DAYS.length-1);
+  g.save();g.strokeStyle=C.ink;g.lineWidth=6;g.lineJoin='round';g.beginPath();
+  for(let i=0;i<=Math.floor(dp);i++){const x=px(i),y=py(CLOSE[i]); i?g.lineTo(x,y):g.moveTo(x,y);}
+  const f=dp-Math.floor(dp), j=Math.floor(dp);
+  if(j<DAYS.length-1&&f>0) g.lineTo(lerp(px(j),px(j+1),f),lerp(py(CLOSE[j]),py(CLOSE[j+1]),f));
+  g.stroke();g.restore();
+  for(let i=0;i<=Math.floor(dp)&&i<DAYS.length;i++){
+    const hit=CLOSE[i]<82, x=px(i), y=py(CLOSE[i]);
+    const pulse=hit?1+0.35*Math.max(0,Math.sin((t-6.2-i*0.84)*6))*clamp((11.5-t)):1;
+    g.save();g.fillStyle=hit?C.red:C.ink;g.beginPath();g.arc(x,y,11*pulse,0,Math.PI*2);g.fill();g.restore();
+    txt(CLOSE[i].toFixed(2),x,hit?y+52:y-26,{px:30,fam:SERIF,w:'bold',color:hit?C.red:C.ink,align:'center',tag:'pt'});
+  }
+  const cap=prog(t,10.4,11.2);
+  txt('一周在 $80.57 – $83.95 之间来回',W/2,1470,{px:44,alpha:cap,align:'center',tag:'s2cap'});
+  txt('9/24 收盘跌破触发线',W/2,1540,{px:38,color:C.red,alpha:cap,align:'center',tag:'s2cap2'});
+  g.restore();
+}
+
+// ---------- 镜头 3：12–20s 缓冲÷1σ ----------
+function shot3(t){
+  const a=fadeWin(t,12,20,.3,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  txt('离行权价有几个标准差',80,260,{px:56,w:'bold',tag:'s3title'});
+  txt('缓冲 ÷ 1σ ——越低越危险',80,330,{px:34,color:C.mute,tag:'s3sub'});
+  const X0=130,X1=W-100,Y0=1300,TOP=560,MAX=1.2;
+  const py=v=>lerp(Y0,TOP,v/MAX), bw=(X1-X0)/DAYS.length;
+  // 1.00 标准线
+  const sp=prog(t,12.6,13.4);
+  g.save();g.strokeStyle=C.green;g.lineWidth=4;g.setLineDash([16,12]);g.beginPath();g.moveTo(X0,py(1));g.lineTo(lerp(X0,X1,sp),py(1));g.stroke();g.restore();
+  txt('1.00 ＝ 我会新开的标准',X0,py(1)-22,{px:32,color:C.green,alpha:sp,tag:'std'});
+  rule(X0,Y0,X1,C.ink,3);
+  DAYS.forEach((d,i)=>{
+    const bp=prog(t,13.4+i*0.55,14.2+i*0.55), v=RATIO[i]*bp;
+    const col=RATIO[i]<0.5?C.red:C.amber, x=X0+i*bw+bw*0.18, w=bw*0.64;
+    box(x,py(v),w,Y0-py(v),col,1,6);
+    txt(d,x+w/2,Y0+52,{px:30,fam:SERIF,color:C.mute,align:'center',tag:'bx'});
+    if(bp>0.05) txt((RATIO[i]*bp).toFixed(2),x+w/2,py(v)-18,{px:36,fam:SERIF,w:'bold',color:col,align:'center',tag:'bv'});
+  });
+  const cap=prog(t,17.2,18.0);
+  txt('六次读数，没有一次达到 1.00',W/2,1470,{px:46,w:'bold',alpha:cap,align:'center',tag:'s3cap'});
+  g.restore();
+}
+
+// ---------- 镜头 4：20–27s 裁定框 ----------
+function shot4(t){
+  const a=fadeWin(t,20,27,.3,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  const bp=prog(t,20,20.8); box(80,lerp(700,560,bp),W-160,820,C.ink,bp);
+  const q=prog(t,20.6,21.6);
+  txt('判据只有一句话',140,700,{px:34,color:C.gold,alpha:q,tag:'s4k'});
+  txt('今天我会不会',140,820,{px:72,w:'bold',color:C.paper,alpha:q,maxW:W-280,tag:'s4q1'});
+  txt('开这一笔？',140,920,{px:72,w:'bold',color:C.paper,alpha:q,maxW:W-280,tag:'s4q2'});
+  const an=prog(t,22.6,23.6);
+  rule(140,990,lerp(140,W-140,an),C.gold,3);
+  txt('不会 → 就不该继续拿',140,1090,{px:60,w:'bold',color:C.gold,alpha:an,maxW:W-280,tag:'s4a'});
+  const n=prog(t,24.4,25.4);
+  txt('9/22 按此建议平仓',140,1200,{px:38,color:'#b8b2a6',alpha:n,maxW:W-280,tag:'s4n1'});
+  txt('当时平掉可落袋 +$96（平台实价）',140,1260,{px:38,color:'#b8b2a6',alpha:n,maxW:W-280,tag:'s4n2'});
+  g.restore();
+}
+
+// ---------- 镜头 5：27–34s 9/24 击穿 ----------
+function shot5(t){
+  const a=fadeWin(t,27,34,.2,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  txt('9/24 收盘',80,420,{px:52,color:C.mute,tag:'s5d'});
+  const n=prog(t,27.3,28.3);
+  txt('$80.57',80,620,{px:200,fam:SERIF,w:'bold',color:C.red,alpha:n,tag:'s5p'});
+  txt('跌破触发线 $82 · 估平仓 −$153',80,720,{px:44,color:C.red,alpha:prog(t,28.4,29.2),tag:'s5l'});
+  // 印章
+  const sp=prog(t,29.6,30.2), sc=lerp(1.6,1,sp);
+  g.save();g.globalAlpha*=sp;g.translate(W/2,1060);g.rotate(-0.08);g.scale(sc,sc);
+  g.strokeStyle=C.red;g.lineWidth=8;g.strokeRect(-360,-110,720,220);
+  txt('预测落空',0,10,{px:88,w:'bold',color:C.red,align:'center',tag:'s5stamp'});
+  txt('「每日收盘 ≥ $82」',0,80,{px:36,color:C.red,align:'center',tag:'s5stamp2'});
+  g.restore();
+  const why=prog(t,31.4,32.4);
+  txt('登记那天，它成立的概率',W/2,1350,{px:42,alpha:why,align:'center',tag:'s5w1'});
+  txt('只有约 31%',W/2,1440,{px:76,w:'bold',color:C.ink,alpha:why,align:'center',tag:'s5w2'});
+  txt('路径条件：期间任一天破线就算输',W/2,1520,{px:34,color:C.mute,alpha:why,align:'center',tag:'s5w3'});
+  g.restore();
+}
+
+// ---------- 镜头 6：34–40s 反弹 ----------
+function shot6(t){
+  const a=fadeWin(t,34,40,.3,.3); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  txt('9/25 收盘',80,420,{px:52,color:C.mute,tag:'s6d'});
+  const n=prog(t,34.4,35.6), v=lerp(80.57,82.63,n);
+  txt('$'+v.toFixed(2),80,620,{px:200,fam:SERIF,w:'bold',color:n<1?C.ink:C.green,tag:'s6p'});
+  txt('反弹 · 估平仓 +$157',80,720,{px:44,color:C.green,alpha:prog(t,35.6,36.4),tag:'s6l'});
+  const b=prog(t,36.8,37.8);
+  box(80,900,W-160,420,C.ink,b);
+  txt('这是运气',140,1060,{px:96,w:'bold',color:C.gold,alpha:b,maxW:W-280,tag:'s6a'});
+  txt('不是判断',140,1190,{px:96,w:'bold',color:C.paper,alpha:b,maxW:W-280,tag:'s6b'});
+  txt('反弹改变的是出场价，不是判据',W/2,1440,{px:38,color:C.mute,alpha:prog(t,38.2,39),align:'center',tag:'s6c'});
+  g.restore();
+}
+
+// ---------- 镜头 7：40–45s 三条教训 ----------
+function shot7(t){
+  const a=fadeWin(t,40,45.01,.3,.01); if(!a) return;
+  g.save();g.globalAlpha*=a;
+  txt('这一周学到的',80,300,{px:64,w:'bold',tag:'s7t'});
+  rule(80,340,lerp(80,W-80,prog(t,40.2,41)),C.copper,4);
+  const L=[['同一把尺子','不对存量仓位放宽'],['路径条件','按触线概率定把握'],['赚没赚','≠ 值不值得扛']];
+  L.forEach((l,i)=>{const p=prog(t,40.8+i*0.9,41.6+i*0.9), y=560+i*300;
+    txt(String(i+1),80,y+10,{px:120,fam:SERIF,w:'bold',color:C.gold,alpha:p,tag:'n'+i});
+    txt(l[0],230,y-30,{px:58,w:'bold',alpha:p,maxW:W-310,tag:'l0'+i});
+    txt(l[1],230,y+50,{px:46,color:C.mute,alpha:p,maxW:W-310,tag:'l1'+i});
+  });
+  g.restore();
+}
+
+window.render=function(t){
+  window.__overflow=[];
+  bg(); shot1(t); shot2(t); shot3(t); shot4(t); shot5(t); shot6(t); shot7(t); footer(t);
+  return window.__overflow;
+};
+window.render(0);
+</script></body></html>
