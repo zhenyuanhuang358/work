@@ -1,0 +1,289 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>yading</title>
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+// 稻城亚丁 · 宣传短片 —— 确定性帧：画面只由 t 决定（随机数全部来自固定种子）
+const W=1080,H=1920,DUR=40;
+const ZH='"WenQuanYi Zen Hei"', SERIF='"Liberation Serif","DejaVu Serif",serif';
+const cv=document.getElementById('c'), g=cv.getContext('2d');
+const off=document.createElement('canvas'); off.width=W; off.height=H; const og=off.getContext('2d'); // 倒影用
+window.__overflow=[];
+
+// ---------- 数学工具 ----------
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;};
+const prog=(t,a,b)=>ease((t-a)/(b-a));
+const lerp=(a,b,p)=>a+(b-a)*p;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;}}
+function makeNoise(seed,n=1024){const r=mulberry32(seed);const v=Array.from({length:n},()=>r()*2-1);
+  return x=>{const i=Math.floor(x),f=x-i,a=v[((i%n)+n)%n],b=v[(((i+1)%n)+n)%n];const s=f*f*(3-2*f);return a+(b-a)*s;};}
+function fbm(nz,x,oct=5){let s=0,a=1,f=1,nm=0;for(let o=0;o<oct;o++){s+=a*nz(x*f);nm+=a;a*=.5;f*=2.03;}return s/nm;}
+function hex(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function mix(c1,c2,p){const a=hex(c1),b=hex(c2);return `rgb(${a.map((v,i)=>Math.round(lerp(v,b[i],clamp(p)))).join(',')})`;}
+function mixA(c1,c2,p){const a=hex(c1),b=hex(c2);return '#'+a.map((v,i)=>Math.round(lerp(v,b[i],clamp(p))).toString(16).padStart(2,'0')).join('');}
+
+// ---------- 世界：三怙主神山（世界坐标 x∈[0,3000]，山脚 y=1250） ----------
+const BASE=1250, WX=3000, STEP=3;
+const PEAKS=[{name:'仙乃日',x:700,top:470,w:560,p:1.45},{name:'央迈勇',x:1500,top:350,w:380,p:0.85},{name:'夏诺多吉',x:2300,top:430,w:430,p:1.05}];
+const LOBES=PEAKS.concat([{x:545,top:585,w:300,p:1.2},{x:860,top:600,w:280,p:1.2},{x:2215,top:468,w:150,p:0.75},{x:2395,top:545,w:170,p:0.9}]);
+const nz1=makeNoise(11), nz2=makeNoise(29), nz3=makeNoise(47), nz4=makeNoise(83);
+function peakH(x){let h=0;for(const k of LOBES){const u=Math.abs(x-k.x)/k.w;if(u<1){h=Math.max(h,(BASE-k.top)*(1-Math.pow(u,k.p)));}}return h;}
+const RIDGE=[], SNOW=[], HILL=[], FAR=[];
+for(let x=0;x<=WX;x+=STEP){
+  const h=peakH(x), rough=(0.25+0.75*h/(BASE-350));
+  const jag=(x>2050&&x<2550)?1.8:1;  // 夏诺多吉山体更嶙峋
+  RIDGE.push(BASE-60-h-55*fbm(nz1,x/85)*rough-18*jag*fbm(nz4,x/18)*rough);
+  SNOW.push(840+45*fbm(nz2,x/55)+25*fbm(nz4,x/14));
+  HILL.push(1330-70*(0.5+0.5*fbm(nz3,x/260))-25*fbm(nz1,x/40));
+  FAR.push(1180-120*(0.5+0.5*fbm(nz2,x/340))-30*fbm(nz4,x/60));
+}
+const rd=i=>RIDGE[clamp(Math.round(i),0,RIDGE.length-1)];
+
+// ---------- 光照预设 ----------
+const LIGHT={
+  night:{s0:'#070b24',s1:'#141d48',s2:'#26306a',rock:'#161b36',snow:'#6f7aa6',hill:'#0b0f24',fg:'#080b1c',star:1},
+  dawn: {s0:'#2a2f66',s1:'#b86e8a',s2:'#f5b98e',rock:'#3b3552',snow:'#e9dbe6',hill:'#1f1c33',fg:'#15132a',star:.15},
+  day:  {s0:'#1f63b8',s1:'#5aa2df',s2:'#bfe2f5',rock:'#56606e',snow:'#ffffff',hill:'#2e4638',fg:'#22382b',star:0},
+  warm: {s0:'#2d6fb5',s1:'#7fb6df',s2:'#f3dcb0',rock:'#5d5b62',snow:'#fff4e2',hill:'#4a4430',fg:'#3a3222',star:0},
+  dusk: {s0:'#24204f',s1:'#b3566a',s2:'#f6b26b',rock:'#2d2338',snow:'#f4b89a',hill:'#1c1526',fg:'#120d18',star:.05},
+};
+function blend(a,b,p){const o={};for(const k in a){o[k]=typeof a[k]==='number'?lerp(a[k],b[k],p):mixA(a[k],b[k],p);}return o;}
+
+// ---------- 相机：cx=画面中心对应的世界 x，z=缩放，dy=整体上下偏移 ----------
+function sx(wx,cam,par=1){return (wx-cam.cx)*cam.z*par+W/2;}
+function sy(wy,cam){return (wy-960)*cam.z+960+cam.dy;}
+
+function drawSky(L,t){
+  const gr=g.createLinearGradient(0,0,0,H*0.75);gr.addColorStop(0,L.s0);gr.addColorStop(.62,L.s1);gr.addColorStop(1,L.s2);
+  g.fillStyle=gr;g.fillRect(0,0,W,H);
+  if(L.star>0.01){
+    // 银河：斜向淡光带 + 细密星尘
+    g.save();g.globalAlpha*=L.star;g.translate(W*0.55,H*0.22);g.rotate(-0.55);
+    const mg=g.createLinearGradient(0,-130,0,130);mg.addColorStop(0,'rgba(170,180,255,0)');mg.addColorStop(.5,'rgba(190,200,255,0.18)');mg.addColorStop(1,'rgba(170,180,255,0)');
+    g.fillStyle=mg;g.fillRect(-900,-130,1800,260);
+    const r=mulberry32(7);g.fillStyle='#dfe4ff';
+    for(let i=0;i<1400;i++){const x=(r()-.5)*1800,y=(r()+r()+r()-1.5)*110,s=r()*1.4+.3;g.globalAlpha=L.star*(0.15+0.5*r());g.fillRect(x,y,s,s);}
+    g.restore();
+    const r2=mulberry32(3);
+    for(let i=0;i<420;i++){const x=r2()*W,y=r2()*H*0.62,s=r2()*2.2+.6,ph=r2()*6.28,sp=1+r2()*3;
+      const tw=0.55+0.45*Math.sin(t*sp+ph);g.save();g.globalAlpha*=L.star*tw;g.fillStyle='#ffffff';g.beginPath();g.arc(x,y,s,0,6.283);g.fill();g.restore();}
+  }
+}
+function ridgePath(arr,cam,par,yBottom){
+  g.beginPath();
+  const x0=cam.cx-(W/2)/(cam.z*par)-20, x1=cam.cx+(W/2)/(cam.z*par)+20;
+  const i0=Math.max(0,Math.floor(x0/STEP)), i1=Math.min(arr.length-1,Math.ceil(x1/STEP));
+  g.moveTo(sx(i0*STEP,cam,par),yBottom);
+  for(let i=i0;i<=i1;i++) g.lineTo(sx(i*STEP,cam,par),sy(arr[i],cam));
+  g.lineTo(sx(i1*STEP,cam,par),yBottom);g.closePath();
+}
+function drawPeaks(L,cam,glow){
+  // 山体
+  ridgePath(RIDGE,cam,1,H);const rg=g.createLinearGradient(0,sy(350,cam),0,sy(BASE,cam));
+  rg.addColorStop(0,L.rock);rg.addColorStop(1,mixA(L.rock,'#000000',0.35));g.fillStyle=rg;g.fill();
+  g.save();ridgePath(RIDGE,cam,1,H);g.clip();
+  // 雪：山体 ∩ 雪线以上
+  g.beginPath();const i0=0,i1=SNOW.length-1;g.moveTo(sx(0,cam),-10);
+  for(let i=i0;i<=i1;i+=2) g.lineTo(sx(i*STEP,cam),sy(SNOW[i],cam));
+  g.lineTo(sx(WX,cam),-10);g.closePath();g.fillStyle=L.snow;g.fill();
+  // 阴影面：光从左上来，每座峰右侧一块暗面
+  for(const k of PEAKS){
+    const ai=Math.round(k.x/STEP);let best=ai;for(let i=ai-12;i<=ai+12;i++){if(rd(i)<rd(best))best=i;}
+    g.beginPath();g.moveTo(sx(best*STEP,cam),sy(rd(best),cam));
+    for(let i=best;i<=Math.round((k.x+k.w*0.95)/STEP);i+=2) g.lineTo(sx(i*STEP,cam),sy(rd(i),cam));
+    g.lineTo(sx(k.x+k.w*0.95,cam),sy(BASE+40,cam));
+    for(let s=1;s>=0;s-=0.05){const ax=best*STEP+k.w*0.32*s+16*fbm(nz4,s*7+k.x*0.01), ay=lerp(rd(best),BASE+40,s);g.lineTo(sx(ax,cam),sy(ay,cam));}
+    g.closePath();g.fillStyle='rgba(20,28,70,0.30)';g.fill();
+    // 冰沟：雪面上几条斜向下的淡蓝细线
+    const cr=mulberry32(Math.round(k.x));g.strokeStyle='rgba(80,100,160,0.22)';
+    for(let c=0;c<7;c++){const off=(cr()-0.5)*k.w*0.7, xi=Math.round((k.x+off)/STEP), y0=rd(xi)+8, len=120+cr()*220, dir=off<0?-1:1;
+      g.lineWidth=(2+cr()*4)*cam.z;g.beginPath();g.moveTo(sx(xi*STEP,cam),sy(y0,cam));
+      for(let s=1;s<=6;s++){g.lineTo(sx(xi*STEP+dir*s*len*0.06+8*Math.sin(s*1.7+c),cam),sy(y0+s*len/6,cam));}g.stroke();}
+  }
+  // 日照金山：金光从顶向下铺
+  if(glow&&glow.a>0){
+    const gy=sy(glow.y,cam), gg=g.createLinearGradient(0,sy(330,cam),0,gy);
+    gg.addColorStop(0,`rgba(255,178,70,${0.95*glow.a})`);gg.addColorStop(.75,`rgba(255,150,70,${0.75*glow.a})`);gg.addColorStop(1,'rgba(255,140,70,0)');
+    g.save();g.beginPath();g.moveTo(0,-10);for(let i=0;i<SNOW.length;i+=2) g.lineTo(sx(i*STEP,cam),sy(SNOW[i],cam));g.lineTo(W*4,-10);g.clip();
+    g.fillStyle=gg;g.fillRect(0,0,W,gy);g.restore();
+  }
+  g.restore();
+}
+function drawHills(L,cam,arr=HILL,par=1.25,col){
+  ridgePath(arr,cam,par,H);const hg=g.createLinearGradient(0,sy(1150,cam),0,H);
+  hg.addColorStop(0,col||L.hill);hg.addColorStop(1,mixA(col||L.hill,'#000000',0.5));g.fillStyle=hg;g.fill();
+}
+function clouds(t,y0,alpha,seed=5){
+  const r=mulberry32(seed);
+  for(let i=0;i<7;i++){const base=r()*W*1.6-W*0.3, y=y0+r()*260, s=160+r()*220, sp=12+r()*18;
+    const x=((base+t*sp)%(W*1.6))-W*0.3;
+    for(let j=0;j<4;j++){const cx=x+(j-1.5)*s*0.45, cy=y+Math.sin(j*1.7)*s*0.08, rr=s*(0.45+0.2*Math.sin(j*2.3+i));
+      const cg=g.createRadialGradient(cx,cy,0,cx,cy,rr);cg.addColorStop(0,`rgba(255,255,255,${0.55*alpha})`);cg.addColorStop(1,'rgba(255,255,255,0)');
+      g.fillStyle=cg;g.fillRect(cx-rr,cy-rr,rr*2,rr*2);}
+  }
+}
+function forest(cam,yBase,col,seed,s=1,par=1.5){
+  const r=mulberry32(seed);g.fillStyle=col;g.beginPath();g.moveTo(-20,H);g.lineTo(-20,yBase);
+  let x=-20;while(x<W+40){const h=(30+r()*55)*s, w=(14+r()*12)*s;g.lineTo(x+w*0.5,yBase-h);g.lineTo(x+w,yBase-4*r());x+=w*(0.7+r()*0.3);}
+  g.lineTo(W+40,H);g.closePath();g.fill();
+}
+function meadow(y0,c0,c1){const mg=g.createLinearGradient(0,y0,0,H);mg.addColorStop(0,c0);mg.addColorStop(1,c1);g.fillStyle=mg;g.fillRect(0,y0,W,H-y0);}
+function stream(t,y0,col){ // 洛绒牛场式蜿蜒小溪，近宽远窄
+  g.save();g.fillStyle=col;g.beginPath();
+  const pts=[];for(let i=0;i<=40;i++){const u=i/40, y=lerp(y0,H+20,u*u*0.9+u*0.1), x=W*0.74+Math.sin(u*4.6+0.6)*110*u+W*0.14*u, w=4+u*u*130;pts.push([x,y,w]);}
+  pts.forEach(([x,y,w],i)=>i?g.lineTo(x-w,y):g.moveTo(x-w,y));for(let i=pts.length-1;i>=0;i--){const[x,y,w]=pts[i];g.lineTo(x+w,y);}g.closePath();g.fill();
+  g.globalAlpha*=0.5;g.fillStyle='#ffffff';for(let i=4;i<40;i+=3){const[x,y,w]=pts[i];g.fillRect(x-w*0.4+Math.sin(t*2+i)*w*0.2,y,w*0.5,2);}
+  g.restore();
+}
+// ---------- 文字 ----------
+function txt(s,x,y,{px=48,w='normal',fam=ZH,color='#ffffff',alpha=1,align='center',ls=0,shadow=true,maxW=W-120,tag=''}={}){
+  if(alpha<=0.001) return;
+  g.save();g.globalAlpha*=alpha;g.font=`${w} ${px}px ${fam}`;g.fillStyle=color;g.textAlign=align;g.letterSpacing=ls+'px';
+  if(shadow){g.shadowColor='rgba(0,0,0,0.45)';g.shadowBlur=18;g.shadowOffsetY=3;}
+  const m=g.measureText(s).width; if(m>maxW) window.__overflow.push({tag:tag||s.slice(0,10),need:Math.round(m),max:maxW});
+  g.fillText(s,x,y);
+  if(w==='bold'&&fam===ZH){g.shadowColor='transparent';g.strokeStyle=color;g.lineWidth=Math.max(1.2,px/30);g.lineJoin='round';g.strokeText(s,x,y);}
+  g.restore();
+}
+function caption(t,a,b,l1,l2,y=1620,s1=76,s2=40){
+  const p=clamp(Math.min((t-a)/0.6,(b-t)/0.5)); if(p<=0) return;
+  const k=ease(p);
+  txt(l1,W/2,y-14*(1-k),{px:s1,w:'bold',alpha:k,ls:6,tag:l1});
+  if(l2) txt(l2,W/2,y+70-10*(1-k),{px:s2,alpha:k*0.95,ls:3,tag:l2});
+}
+
+// ---------- 场景 ----------
+function sceneA(t){ // 0–12 星夜 → 黎明 → 日照金山
+  const p1=prog(t,3.5,8.2), L=blend(LIGHT.night,LIGHT.dawn,p1);
+  const cam={cx:1500,z:1.02+0.02*t/12,dy:40};
+  drawSky(L,t);
+  const glow={a:prog(t,7.2,8.6),y:lerp(330,880,prog(t,7.4,11.6))};
+  drawPeaks(L,cam,glow); drawHills(L,cam);
+  meadow(sy(1400,cam),mixA(L.hill,'#000000',0.2),L.fg);
+  forest(cam,sy(1470,cam),mixA(L.fg,'#000000',0.1),31,1.3); forest(cam,1780,'#04050c',32,2.2);
+  // 标题
+  const ta=clamp(Math.min((t-0.5)/1.0,(5.6-t)/0.7));
+  if(ta>0){const k=ease(ta);
+    txt('稻城亚丁',W/2,560-20*(1-k),{px:150,w:'bold',alpha:k,ls:28,tag:'title'});
+    txt('DAOCHENG  YADING',W/2,650,{px:40,fam:SERIF,alpha:k*0.9,ls:10,tag:'en'});
+    txt('四川 · 甘孜',W/2,720,{px:38,alpha:k*0.85,ls:8,tag:'loc'});}
+  caption(t,8.4,11.6,'清晨 · 日照金山','第一缕阳光先落在峰顶',1560);
+}
+function sceneB(t){ // 12–19 三怙主神山横移
+  const L=LIGHT.day;
+  const stops=[[12.0,700],[14.0,700],[15.1,1500],[16.5,1500],[17.6,2300],[19,2300]];
+  let cx=700;for(let i=0;i<stops.length-1;i++){const[a,x1]=stops[i],[b,x2]=stops[i+1];if(t>=a&&t<=b)cx=lerp(x1,x2,ease((t-a)/(b-a)));}
+  const cam={cx,z:1.0,dy:40};
+  drawSky(L,t); clouds(t,300,0.85,5); drawPeaks(L,cam,null); drawHills(L,cam);
+  meadow(sy(1390,cam),'#6f8a45','#3c5a2e'); stream(t,sy(1400,cam),'#8fcbe6');
+  forest(cam,1760,'#1f3a26',41,1.9);
+  caption(t,12.3,14.3,'仙乃日','北峰 · 海拔 6032 米',1580,96,44);
+  caption(t,15.0,16.8,'央迈勇','南峰 · 海拔 5958 米',1580,96,44);
+  caption(t,17.5,19.0,'夏诺多吉','东峰 · 海拔 5958 米',1580,96,44);
+  txt('三怙主神山',W/2,300,{px:46,alpha:clamp(Math.min((t-12.3)/0.6,(18.9-t)/0.4))*0.95,ls:14,tag:'s3'});
+}
+function sceneC(t){ // 19–25 牛奶海（平视：湖面压扁，倒影以水岸线为轴）
+  const L=LIGHT.day, cam={cx:1500,z:1.0,dy:-260};
+  drawSky(L,t); clouds(t,160,0.6,9); drawPeaks(L,cam,null); drawHills(L,cam);
+  const yw=sy(1330,cam)+30;                       // 远岸水岸线
+  meadow(yw-30,'#5f7d45','#2f4a2a');
+  og.clearRect(0,0,W,H);og.drawImage(cv,0,0);      // 此刻画面＝山与天，供倒影取样
+  const cy=yw+250, rx=720, ry=250;
+  const lake=()=>{g.beginPath();for(let a=0;a<=90;a++){const th=a/90*Math.PI*2, w=1+0.04*Math.sin(a*0.9)+0.03*Math.sin(a*2.3);
+    const x=W/2+Math.cos(th)*rx*w, y=cy+Math.sin(th)*ry*w; a?g.lineTo(x,y):g.moveTo(x,y);}g.closePath();};
+  g.save();lake();g.clip();
+  g.fillStyle='#35b5c4';g.fillRect(0,yw-10,W,2*ry+20);
+  g.globalAlpha*=0.5;
+  for(let y=yw;y<cy+ry;y+=2){const d=(y-yw)/(2*ry), src=yw-(y-yw)/0.72-40, dx=Math.sin(y*0.05+t*2.2)*(1.5+9*d);
+    if(src>0) g.drawImage(off,0,src,W,2,dx,y,W,2);}
+  g.globalAlpha/=0.5;
+  g.save();g.translate(W/2,cy);g.scale(1,ry/rx);
+  const rg=g.createRadialGradient(0,0,30,0,0,rx);
+  rg.addColorStop(0,'rgba(10,140,185,0.55)');rg.addColorStop(0.6,'rgba(50,185,200,0.35)');rg.addColorStop(0.83,'rgba(215,236,228,0.8)');rg.addColorStop(1,'rgba(242,248,242,0.97)');
+  g.fillStyle=rg;g.fillRect(-rx,-rx,2*rx,2*rx);g.restore();
+  for(let i=0;i<18;i++){const y=yw+30+i*((2*ry-60)/18), w=50+40*Math.sin(i*2.1), x=W/2-300+((i*137+t*30)%600);
+    g.fillStyle=`rgba(255,255,255,${0.16+0.12*Math.sin(t*3+i)})`;g.fillRect(x,y,w,2);}
+  g.restore();
+  forest(cam,1905,'#26402a',71,1.4);
+  caption(t,19.5,22.6,'牛奶海','海拔 4600 米 · 碧蓝湖心，乳白湖缘',1720,96,40);
+  caption(t,22.5,25,'五色海','海拔 4700 米 · 光线下变幻五种颜色',1720,96,40);
+}
+function tree(x,y,s,col,kind,t,ph){
+  const sw=Math.sin(t*1.6+ph)*s*0.04;
+  if(kind===0){ // 冷杉
+    g.fillStyle=col;g.beginPath();g.moveTo(x+sw,y-s*1.9);g.lineTo(x-s*0.45,y);g.lineTo(x+s*0.45,y);g.closePath();g.fill();
+  }else{ // 白杨/桦：细干 + 叶团
+    g.strokeStyle='#e8e2d6';g.lineWidth=Math.max(1.5,s*0.06);g.beginPath();g.moveTo(x,y);g.lineTo(x+sw,y-s*1.3);g.stroke();
+    g.fillStyle=col;g.beginPath();g.ellipse(x+sw,y-s*1.35,s*0.38,s*0.62,0,0,6.283);g.fill();
+  }
+}
+function sceneD(t){ // 25–31 秋 · 冲古寺望仙乃日
+  const L=LIGHT.warm, cam={cx:700,z:1.0,dy:-60};
+  drawSky(L,t); clouds(t,260,0.5,13); drawPeaks(L,cam,{a:0.25,y:900});
+  drawHills(L,cam,HILL,1.25,'#5b4a2c');
+  const top=sy(1330,cam);
+  const mg=g.createLinearGradient(0,top,0,H);mg.addColorStop(0,'#b88a3a');mg.addColorStop(1,'#6e4f22');g.fillStyle=mg;g.fillRect(0,top+30,W,H);
+  const r=mulberry32(101), cols=['#e7b53b','#f0c64a','#d9772b','#c9542f','#a8412e','#3e6a3c','#2f5733'];
+  const rows=[[top+40,26,40],[top+160,20,58],[top+330,14,84],[top+560,9,120]];
+  for(const [yy,n,s] of rows){for(let i=0;i<n;i++){const x=(i+r()*0.8)*(W/n), c=cols[Math.floor(r()*cols.length)], k=c.startsWith('#3')||c.startsWith('#2')?0:1;
+    tree(x,yy+r()*40,s*(0.8+r()*0.5),c,k,t,r()*6);}}
+  // 落叶
+  const lr=mulberry32(55);
+  for(let i=0;i<70;i++){const x0=lr()*W, sp=60+lr()*80, ph=lr()*6.28, c=cols[Math.floor(lr()*5)];
+    const band=H-top+120, y=top-120+((lr()*band+(t-25)*sp)%band), x=x0+Math.sin((t-25)*1.3+ph)*40+(t-25)*12;
+    g.save();g.translate(((x%W)+W)%W,y);g.rotate((t-25)*2+ph);g.fillStyle=c;g.beginPath();g.ellipse(0,0,9,5,0,0,6.283);g.fill();g.restore();}
+  caption(t,25.5,30.6,'9 月下旬 – 10 月中旬','冲古寺望仙乃日 · 秋色最浓的时候',330,72,40);
+}
+function flags(t,x1,y1,x2,y2,sag,seed){
+  const n=Math.floor(Math.hypot(x2-x1,y2-y1)/46), cols=['#2c5aa0','#f4f1e8','#c0392b','#2e8b57','#f1c40f'];
+  g.strokeStyle='rgba(60,50,40,0.8)';g.lineWidth=2;g.beginPath();
+  const P=u=>[lerp(x1,x2,u),lerp(y1,y2,u)+sag*4*u*(1-u)];
+  for(let i=0;i<=40;i++){const[x,y]=P(i/40);i?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();
+  for(let i=0;i<n;i++){const u=(i+0.5)/n,[x,y]=P(u),[xb]=P(u+0.8/n);const w=xb-x, fl=Math.sin(t*5+i*0.7+seed)*10, lift=Math.sin(t*3.3+i*0.5+seed)*6;
+    g.fillStyle=cols[i%5];g.beginPath();g.moveTo(x,y);g.lineTo(x+w,y);g.lineTo(x+w+fl,y+44+lift);g.lineTo(x+fl*0.6,y+46);g.closePath();g.fill();}
+}
+function sceneE(t){ // 31–36 桑堆红草地（远山，无神山）
+  const L=LIGHT.warm, cam={cx:1500,z:1.0,dy:-120};
+  drawSky(L,t); clouds(t,240,0.65,17);
+  drawHills(L,cam,FAR,0.8,'#7c8aa0'); drawHills(L,cam,HILL,1.2,'#5d5a3a');
+  const top=sy(1330,cam)+20;
+  g.fillStyle='#7a2a22';g.fillRect(0,top,W,H);
+  // 水洼倒映天空
+  const r=mulberry32(77);
+  for(let i=0;i<9;i++){const cx=r()*W, cy0=top+80+r()*(H-top-200), cy=(cy0>1440&&cy0<1720)?(cy0<1580?1400:1780):cy0, rx=90+r()*170, ry=18+r()*30;
+    const wg=g.createLinearGradient(0,cy-ry,0,cy+ry);wg.addColorStop(0,'#bfe2f5');wg.addColorStop(1,'#5aa2df');
+    g.fillStyle=wg;g.beginPath();g.ellipse(cx,cy,rx,ry,0,0,6.283);g.fill();}
+  // 红草
+  const gr=mulberry32(91);
+  for(let i=0;i<900;i++){const x=gr()*W, y=top+gr()*(H-top), h=10+gr()*28*(0.4+(y-top)/(H-top)), c=['#b3342a','#c9452f','#8f2a22','#d8603a'][Math.floor(gr()*4)];
+    const sw=Math.sin(t*2+x*0.02)*3;g.strokeStyle=c;g.lineWidth=2;g.beginPath();g.moveTo(x,y);g.lineTo(x+sw,y-h);g.stroke();}
+  flags(t,-40,520,W+40,700,120,1); flags(t,-40,640,W+40,880,90,2.7);
+  caption(t,31.5,35.6,'10 月初 · 桑堆红草地','稻城县城西北 28 公里 · 一年只有十几天',1560,72,40);
+}
+function sceneF(t){ // 36–40 落日 · 三山同框
+  const L=LIGHT.dusk, cam={cx:1500,z:0.42,dy:-40};
+  drawSky(L,t); drawPeaks(L,cam,{a:0.7,y:1000}); drawHills(L,cam,HILL,1.0,'#1c1526');
+  meadow(sy(1360,cam),'#1a1222',L.fg); forest(cam,sy(1395,cam),'#0d0912',61,1.0);
+  const a=prog(t,36.4,37.4);
+  txt('稻城亚丁',W/2,1250,{px:140,w:'bold',alpha:a,ls:26,tag:'end'});
+  txt('秋天，去见雪山',W/2,1350,{px:52,alpha:prog(t,37.0,37.9),ls:10,tag:'end2'});
+  const b=prog(t,37.8,38.6);
+  txt('稻城亚丁机场海拔 4411 米，世界海拔最高的民用机场',W/2,1720,{px:28,alpha:b*0.85,ls:1,tag:'f1'});
+  txt('景区最高处超过 4600 米，高原旅行请量力而行',W/2,1770,{px:28,alpha:b*0.85,ls:1,tag:'f2'});
+}
+
+const SCENES=[[0,12,sceneA],[12,19,sceneB],[19,25,sceneC],[25,31,sceneD],[31,36,sceneE],[36,40,sceneF]];
+window.render=function(t){
+  window.__overflow=[];
+  g.save();g.globalAlpha=1;g.fillStyle='#000';g.fillRect(0,0,W,H);
+  for(const [a,b,f] of SCENES){ if(t>=a&&t<b){ f(t);
+    // 黑场转场：每场结尾 0.3 秒淡出、开头 0.3 秒淡入（首场开头与末场结尾除外）
+    const fin=a===0?1:clamp((t-a)/0.3), fout=b===DUR?1:clamp((b-t)/0.3), k=Math.min(fin,fout);
+    if(k<1){g.fillStyle=`rgba(0,0,0,${1-k})`;g.fillRect(0,0,W,H);}
+  }}
+  g.restore();
+  return window.__overflow;
+};
+window.render(0);
+</script></body></html>
