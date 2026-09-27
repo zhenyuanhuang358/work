@@ -7,7 +7,8 @@
 |---|---|
 | `film.html` | 全部画面；`render(t)` 只由 t 决定，随机数全部来自固定种子（mulberry32） |
 | `render.py` | 逐帧渲染 → libx264；`--sheet OUT --times a,b,c` 按指定时刻出缩略图 |
-| `out/yading_40s.mp4` | 成片 1080×1920 · 30fps · 无音轨（约 2 分钟渲染） |
+| `music.py` | 配乐合成（numpy，全程序生成，无采样）：`python3 music.py out/music.wav` |
+| `out/yading_40s.mp4` | 成片 1080×1920 · 30fps · AAC 立体声，整体响度 −16.6 LUFS |
 | `out/contact_sheet.png` | 十帧取样 |
 
 ## 画面系统
@@ -20,3 +21,13 @@
 ## 地理诚实
 桑堆红草地在稻城县城西北约 28 公里、不在亚丁景区，看不到三神山 → 该镜背景只画远山。
 牛奶海可见央迈勇、冲古寺望仙乃日，均与实际视线一致。
+
+## 配乐
+藏式氛围（非传统曲目）：D 持续低音 + 颂钵（非谐和分音、拍频）+ D 小调五声音阶笛声（滑音、颤音、气息）+ 法铃 + 风声 + 远处手鼓，
+卷积混响（合成衰减脉冲）。与画面对点：0/12/36s 颂钵，19/25/31s 法铃（换场），6.6s 日照金山笛声进入并伴低音渐强，31–36s 经幡场风声加大并加鼓。
+合成与合流：
+```
+python3 music.py out/music.wav
+ffmpeg -i out/silent.mp4 -i out/music.wav -map 0:v -map 1:a -c:v copy -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a aac -b:a 192k -shortest out/yading_40s.mp4
+```
+**我无法试听**：质量检查只做了客观项——无削波、分段响度符合结构、法铃/颂钵起音时刻与换场点一致、频谱图结构正确。好不好听需人耳判断。
