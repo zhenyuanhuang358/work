@@ -55,6 +55,10 @@ def gemini_score(text: str) -> int | None:
         "systemInstruction": {"parts": [{"text": PROMPT}]},
         "contents": [{"role": "user", "parts": [{"text": text}]}],
         "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json",
+                             # 与 AIHOT 上线配置一致：关思考（LLM_EXTRA_JSON 默认 thinking disabled）。
+                             # 实测开着思考时每次输出约 1.2k token，绝大部分是思考，成本约为关闭时的数十倍
+                             **({"thinkingConfig": {"thinkingBudget": int(os.environ.get("CALIB_THINKING", "0"))}}
+                                if "2.5-flash" in MODEL else {}),
                              "responseSchema": {"type": "OBJECT", "properties": {"attentionScore": {"type": "INTEGER"}},
                                                 "required": ["attentionScore"]}},
     }).encode()
