@@ -56,6 +56,7 @@ description: |
 - 指标定义有疑问 → `references/metric-definitions.md`
 - 提纲明确涉及上下游/供应链分析（而非仅提及"竞争格局"） → `references/industry-chain.md`
 - 提纲涉及用户画像/口碑/社媒/舆情/消费者状态 → `references/social-signals.md`
+- 采集完、写进数据表之前 / 要引用媒体给出的门店数、加盟、融资、回本周期、热度 / 客户问「接下来会怎样」→ `references/signal-grading.md`（口径陷阱 + 打折清单 + 领先信号）
 - 生成 HTML 报告（每次必做）→ `references/report-template.md`
 
 ---

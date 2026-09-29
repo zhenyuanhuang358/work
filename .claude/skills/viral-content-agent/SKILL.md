@@ -102,7 +102,7 @@ description: |
 
 ```
 1. 加载 references/platform-list.md → 按优先级 WebSearch 各平台
-2. 加载 references/virality-scoring.md → 对每个候选话题用 A+B+C+D 四维评分
+2. 加载 references/virality-scoring.md → 对每个候选话题用 A+B+C+D 四维评分，品牌/消费/餐饮话题再减 E（人造热度）
    - 总分 ≥ 7 → 强推；5-6 → 有潜力；< 5 → 跳过
    - 同时判断话题生命周期：↑爆发中 / ⊙峰值区 / ↓消退中 / 👀苗头期
 3. 选出综合得分最高 Top5，按总分降序排列
