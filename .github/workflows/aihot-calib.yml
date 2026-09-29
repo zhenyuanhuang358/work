@@ -1,0 +1,41 @@
+name: AIHOT 餐饮版评分校准
+
+# 改 aihot_canyin/calib/run_trigger.txt 并推送到本分支即触发。
+# 用仓库 Secrets 里的 ANTHROPIC_API_KEY 给 gold.jsonl 逐条打两次分，结果提交回本分支。
+
+on:
+  push:
+    branches: [claude/us-stock-opportunities-htj5ur]
+    paths: [aihot_canyin/calib/run_trigger.txt]
+
+jobs:
+  calib:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install anthropic
+
+      - name: Score gold set
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CALIB_MODEL: claude-opus-5-5
+          CALIB_EFFORT: low
+        run: python aihot_canyin/calib/score.py
+
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add aihot_canyin/calib/results.jsonl aihot_canyin/calib/report.md 2>/dev/null || true
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "auto: AIHOT 餐饮版校准结果 [skip ci]"
+          git pull --rebase origin claude/us-stock-opportunities-htj5ur
+          git push origin HEAD:claude/us-stock-opportunities-htj5ur

@@ -394,6 +394,7 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 | 项目 | 值 |
 |------|---|
 | Finnhub Token | `FINNHUB_TOKEN`（存于 `/home/user/work/.env` + GitHub Secrets） |
+| **LLM Key** | `ANTHROPIC_API_KEY`，**只在 GitHub Secrets**，容器 env 里没有 → 要调模型就走 Actions（先例：`nvda-earner-auto.yml`、`aihot-calib.yml`）。**用户说「key 给过了」时先查 `.github/workflows` 里的 `secrets.*`，别只查 env**（2026-09-29 漏查一次） |
 | 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json` |
 | 反馈表单 URL | `https://spontaneous-youtiao-b9cde9.netlify.app` |
 | Git 工作分支 | `claude/install-claude-hud-d51E6` |
