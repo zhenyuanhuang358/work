@@ -1,7 +1,7 @@
 name: AIHOT 餐饮版评分校准
 
 # 改 aihot_canyin/calib/run_trigger.txt 并推送到本分支即触发。
-# 用仓库 Secrets 里的 ANTHROPIC_API_KEY 给 gold.jsonl 逐条打两次分，结果提交回本分支。
+# 用仓库 Secrets 里的 GEMINI_API_KEY（优先）或 ANTHROPIC_API_KEY 给 gold.jsonl 逐条打两次分，结果提交回本分支。
 
 on:
   push:
@@ -20,12 +20,12 @@ jobs:
         with:
           python-version: "3.11"
 
-      - run: pip install anthropic
+      - run: pip install anthropic  # Gemini 路径只用标准库
 
       - name: Score gold set
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          CALIB_MODEL: claude-opus-5-5
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}        # 有它就用 Gemini
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}  # 否则用 Claude
           CALIB_EFFORT: low
         run: python aihot_canyin/calib/score.py
 

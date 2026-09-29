@@ -4,27 +4,35 @@
 - 输入格式与 buildScoreInput 一致：发布时间 / 标题 / 完整正文，不给信源分级
 - 每条独立打两次分，两次之和 ≥ 2 × 门槛才入选
 
-在 GitHub Actions 里跑（key 在仓库 Secrets 的 ANTHROPIC_API_KEY）：
-    CALIB_MODEL=claude-opus-5-5 python aihot_canyin/calib/score.py
+两种打分模型，按哪个 key 存在自动选（都在仓库 Secrets 里配）：
+    GEMINI_API_KEY     → Gemini（默认 gemini-2.5-flash，AI Studio 免费层可跑；便宜，和日常部署的模型同档）
+    ANTHROPIC_API_KEY  → Claude（默认 claude-opus-5-5）
+门槛与模型绑定：用哪个模型校准，上线就用哪个模型打分。
 产物：calib/results.jsonl（逐条分数）、calib/report.md（门槛扫描 + 分歧清单）
 """
-import json, os, pathlib, statistics, sys
+import json, os, pathlib, statistics, sys, time, urllib.error, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-import anthropic
 
 HERE = pathlib.Path(__file__).parent
 PROMPT = (HERE.parent / "industry/prompts/selection-score.md").read_text(encoding="utf-8").replace("{{siteName}}", "餐饮HOT")
-MODEL = os.environ.get("CALIB_MODEL", "claude-opus-5-5")
+PROVIDER = "gemini" if os.environ.get("GEMINI_API_KEY") else "anthropic" if os.environ.get("ANTHROPIC_API_KEY") else None
+if PROVIDER is None:
+    sys.exit("GEMINI_API_KEY 和 ANTHROPIC_API_KEY 都为空：到仓库 Settings → Secrets and variables → Actions 添加其一")
+MODEL = os.environ.get("CALIB_MODEL") or ("gemini-2.5-flash" if PROVIDER == "gemini" else "claude-opus-5-5")
+WORKERS = int(os.environ.get("CALIB_WORKERS", "2" if PROVIDER == "gemini" else "6"))
 EFFORT = os.environ.get("CALIB_EFFORT", "low")
 SCORE_CALLS = 2
 AIHOT_THRESHOLDS = {"T1": 60, "T1_5": 65, "T2": 76}  # AIHOT 在 AI 领域调出的门槛，作对照
 SCHEMA = {"type": "object", "properties": {"attentionScore": {"type": "integer"}},
           "required": ["attentionScore"], "additionalProperties": False}
 
-if not os.environ.get("ANTHROPIC_API_KEY"):
-    sys.exit("ANTHROPIC_API_KEY 为空：仓库 Settings → Secrets and variables → Actions 里没有这个 Secret")
-client = anthropic.Anthropic()
+if PROVIDER == "anthropic":
+    import anthropic
+    client = anthropic.Anthropic()
+    API_ERRORS = (anthropic.APIStatusError, anthropic.APIConnectionError)
+else:
+    API_ERRORS = (urllib.error.URLError,)
 usage = {"in": 0, "out": 0}
 errors: list[str] = []
 
@@ -39,6 +47,41 @@ def score_input(m: dict) -> str:
 
 
 def one_score(text: str) -> int | None:
+    return gemini_score(text) if PROVIDER == "gemini" else claude_score(text)
+
+
+def gemini_score(text: str) -> int | None:
+    body = json.dumps({
+        "systemInstruction": {"parts": [{"text": PROMPT}]},
+        "contents": [{"role": "user", "parts": [{"text": text}]}],
+        "generationConfig": {"temperature": 0.2, "responseMimeType": "application/json",
+                             "responseSchema": {"type": "OBJECT", "properties": {"attentionScore": {"type": "INTEGER"}},
+                                                "required": ["attentionScore"]}},
+    }).encode()
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
+    for attempt in range(6):  # 免费层限速：429/503 指数退避
+        req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json",
+                                                              "x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                d = json.load(r)
+            break
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 503) and attempt < 5:
+                time.sleep(min(60, 4 * 2 ** attempt))
+                continue
+            raise urllib.error.URLError(f"HTTP {e.code}: {e.read()[:300].decode(errors='replace')}")
+    meta = d.get("usageMetadata", {})
+    usage["in"] += meta.get("promptTokenCount", 0)
+    usage["out"] += meta.get("candidatesTokenCount", 0) + meta.get("thoughtsTokenCount", 0)
+    cand = (d.get("candidates") or [{}])[0]
+    if cand.get("finishReason") in ("SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST"):
+        return None
+    txt = "".join(p.get("text", "") for p in cand.get("content", {}).get("parts", []))
+    return max(0, min(100, int(json.loads(txt)["attentionScore"])))
+
+
+def claude_score(text: str) -> int | None:
     resp = client.messages.create(
         model=MODEL, max_tokens=4096,
         system=[{"type": "text", "text": PROMPT, "cache_control": {"type": "ephemeral"}}],
@@ -59,7 +102,7 @@ def run_case(case: dict) -> dict:
     for _ in range(SCORE_CALLS):  # 顺序两次：第二次复用缓存的系统提示
         try:
             values.append(one_score(text))
-        except (anthropic.APIStatusError, anthropic.APIConnectionError, json.JSONDecodeError, KeyError, ValueError) as e:
+        except (*API_ERRORS, json.JSONDecodeError, KeyError, ValueError, TypeError) as e:
             print(f"  {case['caseId']} 打分失败：{type(e).__name__}: {e}", file=sys.stderr)
             errors.append(f"{case['caseId']}: {type(e).__name__}: {str(e)[:300]}")
             values.append(None)
@@ -83,7 +126,7 @@ def metrics(rows, thr_of):
 
 def main():
     cases = [json.loads(l) for l in (HERE / "gold.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
         rows = list(ex.map(run_case, cases))
     (HERE / "results.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
 
@@ -93,7 +136,7 @@ def main():
         (HERE / "report.md").write_text("# 校准失败：没有一条打分成功\n\n" + "\n".join(f"- {e}" for e in errors[:10]) + "\n", encoding="utf-8")
         print("没有一条打分成功", errors[:3], file=sys.stderr)
         sys.exit(1)
-    L = [f"# 校准结果", "", f"模型 `{MODEL}` · effort `{EFFORT}` · 每条 {SCORE_CALLS} 次独立打分 · 有效 {len(ok)}/{len(rows)} 条"
+    L = [f"# 校准结果", "", f"模型 `{MODEL}`" + (f" · effort `{EFFORT}`" if PROVIDER == "anthropic" else "") + f" · 每条 {SCORE_CALLS} 次独立打分 · 有效 {len(ok)}/{len(rows)} 条"
          + (f"（失败或拒答：{', '.join(failed)}）" if failed else ""),
          f"token：输入 {usage['in']:,} / 输出 {usage['out']:,}", ""]
 

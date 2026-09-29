@@ -394,7 +394,7 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 | 项目 | 值 |
 |------|---|
 | Finnhub Token | `FINNHUB_TOKEN`（存于 `/home/user/work/.env` + GitHub Secrets） |
-| **LLM Key** | **截至 2026-09-29 仓库里没有**：`nvda-earner-auto.yml` / `aihot-calib.yml` 引用了 `secrets.ANTHROPIC_API_KEY`，但该 Secret 从未设置（aihot-calib 首跑 17 秒报认证为空；nvda 那个 0 次运行，所以一直没暴露）。**「工作流里引用了 secret」≠「secret 存在」——只有跑一次才算验证**（同 1.2m：检查建在想象的形态上）。用户补上后记得改这一格 |
+| **LLM Key** | **截至 2026-09-29 没有可用的**。① `ANTHROPIC_API_KEY`：工作流引用了但 Secret 从未设置（aihot-calib 首跑 17 秒报认证为空）——**「引用了」≠「存在」，跑一次才算验证**。② 用户说的「谷歌 key」：曾明文写在 `alphaflow/start_mac.sh` 并提交进仓库，**已被 Google 判定泄露停用**（403 reported as leaked）；同文件还明文写了 `FMP_API_KEY`。已改为读 gitignore 的 `alphaflow/.env`。**新 key 只进 GitHub Secrets（`GEMINI_API_KEY`）或 .env，永不进提交**。补上后改这一格 |
 | 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json` |
 | 反馈表单 URL | `https://spontaneous-youtiao-b9cde9.netlify.app` |
 | Git 工作分支 | `claude/install-claude-hud-d51E6` |

@@ -21,9 +21,11 @@ cd "$SCRIPT_DIR"
 echo "安装依赖..."
 pip3 install -r backend/requirements.txt -q
 
-# 4. 设置环境变量
-export GOOGLE_API_KEY="AIzaSyA0O6NFH_Co1GY2q1TihOt7vNv2_f5fRHM"
-export FMP_API_KEY="DraQiOzkvaGpIKoOQxy6VBfrRPNMPgNk"
+# 4. 设置环境变量（key 放在同目录 .env 里，.env 已被 .gitignore 忽略；不要写进本文件——
+#    2026-09 写死在这里的 Google key 被 Google 判定泄露并停用）
+if [ -f "$SCRIPT_DIR/.env" ]; then set -a; . "$SCRIPT_DIR/.env"; set +a; fi
+: "${GOOGLE_API_KEY:?缺 GOOGLE_API_KEY：复制 .env.example 为 .env 并填入}"
+: "${FMP_API_KEY:?缺 FMP_API_KEY：在 .env 里填入}"
 export REPORTS_DIR="/tmp/alphaflow_reports"
 mkdir -p "$REPORTS_DIR"
 
