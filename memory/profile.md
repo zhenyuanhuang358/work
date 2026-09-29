@@ -394,7 +394,7 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 | 项目 | 值 |
 |------|---|
 | Finnhub Token | `FINNHUB_TOKEN`（存于 `/home/user/work/.env` + GitHub Secrets） |
-| **LLM Key** | `ANTHROPIC_API_KEY`，**只在 GitHub Secrets**，容器 env 里没有 → 要调模型就走 Actions（先例：`nvda-earner-auto.yml`、`aihot-calib.yml`）。**用户说「key 给过了」时先查 `.github/workflows` 里的 `secrets.*`，别只查 env**（2026-09-29 漏查一次） |
+| **LLM Key** | **截至 2026-09-29 仓库里没有**：`nvda-earner-auto.yml` / `aihot-calib.yml` 引用了 `secrets.ANTHROPIC_API_KEY`，但该 Secret 从未设置（aihot-calib 首跑 17 秒报认证为空；nvda 那个 0 次运行，所以一直没暴露）。**「工作流里引用了 secret」≠「secret 存在」——只有跑一次才算验证**（同 1.2m：检查建在想象的形态上）。用户补上后记得改这一格 |
 | 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json` |
 | 反馈表单 URL | `https://spontaneous-youtiao-b9cde9.netlify.app` |
 | Git 工作分支 | `claude/install-claude-hud-d51E6` |

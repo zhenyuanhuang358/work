@@ -22,6 +22,8 @@ AIHOT_THRESHOLDS = {"T1": 60, "T1_5": 65, "T2": 76}  # AIHOT 在 AI 领域调出
 SCHEMA = {"type": "object", "properties": {"attentionScore": {"type": "integer"}},
           "required": ["attentionScore"], "additionalProperties": False}
 
+if not os.environ.get("ANTHROPIC_API_KEY"):
+    sys.exit("ANTHROPIC_API_KEY 为空：仓库 Settings → Secrets and variables → Actions 里没有这个 Secret")
 client = anthropic.Anthropic()
 usage = {"in": 0, "out": 0}
 errors: list[str] = []
