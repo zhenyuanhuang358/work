@@ -1,0 +1,613 @@
+{
+  "$comment": "餐饮消费版示范信源（替换 AIHOT 原 industry/sources.json）。只收录配置格式确定的免费信源；港交所/巨潮公告、统计局、行业垂直媒体公众号见 aihot_canyin/README.md 的「待接入」表。全部未经实抓验证：本仓库的开发容器对这些域名出口封禁，部署后逐个在后台「信源 → 试抓」验证。",
+  "sources": [
+    {
+      "id": "sec-yumc",
+      "name": "SEC 披露 · 百胜中国 Yum China",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=YUMC&type=&dateb=&owner=include&count=40&output=atom",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "yumchina",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "公告"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "sec-cha",
+      "name": "SEC 披露 · 霸王茶姬 CHAGEE",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=CHA&type=&dateb=&owner=include&count=40&output=atom",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "chagee",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "公告"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "sec-hdl",
+      "name": "SEC 披露 · 特海国际 Super Hi",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=HDL&type=&dateb=&owner=include&count=40&output=atom",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "superhi",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "公告"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-haidilao",
+      "name": "Google 新闻 · 海底捞",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E6%B5%B7%E5%BA%95%E6%8D%9E%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-yumchina",
+      "name": "Google 新闻 · 百胜中国",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E7%99%BE%E8%83%9C%E4%B8%AD%E5%9B%BD%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-greentea",
+      "name": "Google 新闻 · 绿茶集团",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E7%BB%BF%E8%8C%B6%E9%9B%86%E5%9B%A2%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-jiumaojiu",
+      "name": "Google 新闻 · 九毛九",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E4%B9%9D%E6%AF%9B%E4%B9%9D%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-xiaocaiyuan",
+      "name": "Google 新闻 · 小菜园",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%B0%8F%E8%8F%9C%E5%9B%AD%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-mixue",
+      "name": "Google 新闻 · 蜜雪冰城",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E8%9C%9C%E9%9B%AA%E5%86%B0%E5%9F%8E%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-guming",
+      "name": "Google 新闻 · 古茗",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%8F%A4%E8%8C%97%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-chabaidao",
+      "name": "Google 新闻 · 茶百道",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E8%8C%B6%E7%99%BE%E9%81%93%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-auntea",
+      "name": "Google 新闻 · 沪上阿姨",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E6%B2%AA%E4%B8%8A%E9%98%BF%E5%A7%A8%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-nayuki",
+      "name": "Google 新闻 · 奈雪的茶",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%A5%88%E9%9B%AA%E7%9A%84%E8%8C%B6%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-chagee",
+      "name": "Google 新闻 · 霸王茶姬",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E9%9C%B8%E7%8E%8B%E8%8C%B6%E5%A7%AC%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-heytea",
+      "name": "Google 新闻 · 喜茶",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%96%9C%E8%8C%B6%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-luckin",
+      "name": "Google 新闻 · 瑞幸咖啡",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E7%91%9E%E5%B9%B8%E5%92%96%E5%95%A1%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-cotti",
+      "name": "Google 新闻 · 库迪咖啡",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%BA%93%E8%BF%AA%E5%92%96%E5%95%A1%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-tastien",
+      "name": "Google 新闻 · 塔斯汀",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%A1%94%E6%96%AF%E6%B1%80%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-laoxiangji",
+      "name": "Google 新闻 · 老乡鸡",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E8%80%81%E4%B9%A1%E9%B8%A1%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-xiabuxiabu",
+      "name": "Google 新闻 · 呷哺呷哺",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%91%B7%E5%93%BA%E5%91%B7%E5%93%BA%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-guoquan",
+      "name": "Google 新闻 · 锅圈",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E9%94%85%E5%9C%88%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-sushiro",
+      "name": "Google 新闻 · 寿司郎",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E5%AF%BF%E5%8F%B8%E9%83%8E%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-dpc",
+      "name": "Google 新闻 · 达美乐中国",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%22%E8%BE%BE%E7%BE%8E%E4%B9%90%E4%B8%AD%E5%9B%BD%22&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体聚合"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-topic-jiameng",
+      "name": "Google 新闻 · 议题 · 餐饮 加盟政策",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%E9%A4%90%E9%A5%AE%20%E5%8A%A0%E7%9B%9F%E6%94%BF%E7%AD%96&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体聚合",
+        "议题"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-topic-waimai",
+      "name": "Google 新闻 · 议题 · 外卖 佣金 OR 补贴 餐饮",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%E5%A4%96%E5%8D%96%20%E4%BD%A3%E9%87%91%20OR%20%E8%A1%A5%E8%B4%B4%20%E9%A4%90%E9%A5%AE&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体聚合",
+        "议题"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-topic-shian",
+      "name": "Google 新闻 · 议题 · 餐饮 食品安全 通报",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%E9%A4%90%E9%A5%AE%20%E9%A3%9F%E5%93%81%E5%AE%89%E5%85%A8%20%E9%80%9A%E6%8A%A5&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体聚合",
+        "议题"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-topic-canyinshouru",
+      "name": "Google 新闻 · 议题 · 餐饮收入 同比 统计局",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%E9%A4%90%E9%A5%AE%E6%94%B6%E5%85%A5%20%E5%90%8C%E6%AF%94%20%E7%BB%9F%E8%AE%A1%E5%B1%80&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体聚合",
+        "议题"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gnews-topic-guanbi",
+      "name": "Google 新闻 · 议题 · 餐饮 关店 门店",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://news.google.com/rss/search?q=%E9%A4%90%E9%A5%AE%20%E5%85%B3%E5%BA%97%20%E9%97%A8%E5%BA%97&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "_aihot": {
+          "initialBackfillLimit": 5
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "媒体聚合",
+        "议题"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-36kr",
+      "name": "36氪",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://36kr.com/feed",
+        "_aihot": {
+          "initialBackfillLimit": 10
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "rss-huxiu",
+      "name": "虎嗅",
+      "kind": "rss",
+      "config": {
+        "feedUrl": "https://www.huxiu.com/rss/0.xml",
+        "_aihot": {
+          "initialBackfillLimit": 10
+        }
+      },
+      "tier": "T2",
+      "first_party": false,
+      "participation_mode": "editorial",
+      "interval_minutes": 60,
+      "tags": [
+        "媒体"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    }
+  ]
+}
