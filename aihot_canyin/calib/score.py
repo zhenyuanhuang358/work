@@ -67,10 +67,13 @@ def gemini_score(text: str) -> int | None:
                 d = json.load(r)
             break
         except urllib.error.HTTPError as e:
+            detail = e.read()[:2000].decode(errors="replace")
+            if "PerDay" in detail:  # 每日额度用完：退避没用，直接停（免费层 gemini-3.8-flash 只有 20 次/天）
+                raise urllib.error.URLError(f"HTTP {e.code} 每日额度用完：{detail[:200]}")
             if e.code in (429, 500, 503) and attempt < 5:
                 time.sleep(min(60, 4 * 2 ** attempt))
                 continue
-            raise urllib.error.URLError(f"HTTP {e.code}: {e.read()[:300].decode(errors='replace')}")
+            raise urllib.error.URLError(f"HTTP {e.code}: {detail[:300]}")
     meta = d.get("usageMetadata", {})
     usage["in"] += meta.get("promptTokenCount", 0)
     usage["out"] += meta.get("candidatesTokenCount", 0) + meta.get("thoughtsTokenCount", 0)
