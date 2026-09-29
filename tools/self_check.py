@@ -312,6 +312,47 @@ def check_skill_routing():
         say("  所有 skill 都有触发词，无需路由兜底")
 
 
+# ── C9 · 工作流可解析 + 仓库无明文 key（2026-09-29：两件事都在无人察觉下坏了一个多月）──
+# fetch-research-data.yml 的 run 块里有顶格 Python，YAML 解析失败 → 研究数据管道从未跑通，
+# 每次推送都挂一个 0 job 的失败运行。alphaflow/start_mac.sh 明文写着 Google/FMP key，
+# 仓库公开 → Google 判定泄露并停用。两者都是「没人会去看」的静默失效，只能靠装置。
+KEY_PATTERNS = [
+    (r"AIza[0-9A-Za-z_-]{35}", "Google API key"),
+    (r"sk-ant-[0-9A-Za-z_-]{20,}", "Anthropic key"),
+    # 注意：git grep -E 是 POSIX ERE，不认 (?: 和 \s —— 写了不报错，只是永远不匹配（首版即如此，回放才发现）
+    (r"(API_KEY|_TOKEN|SECRET)[\"']?[[:space:]]*[=:][[:space:]]*[\"'][0-9A-Za-z_-]{24,}[\"']", "赋值形态的 key"),
+]
+
+
+def check_workflows_and_keys():
+    say("\n[C9] 工作流 YAML 可解析 + 仓库无明文 key")
+    try:
+        import yaml
+    except ImportError:
+        flag("P2", "tools/self_check.py", "缺 pyyaml，C9 的工作流解析跳过")
+        yaml = None
+    wfdir = os.path.join(REPO, ".github/workflows")
+    n = 0
+    for f in sorted(os.listdir(wfdir)) if yaml and os.path.isdir(wfdir) else []:
+        if not f.endswith((".yml", ".yaml")):
+            continue
+        n += 1
+        try:
+            yaml.safe_load(open(os.path.join(wfdir, f), encoding="utf-8"))
+        except yaml.YAMLError as e:
+            flag("P1", f".github/workflows/{f}", f"YAML 解析失败，GitHub 会在每次推送挂一个失败运行、任务从不执行：{str(e).splitlines()[0]}")
+    say(f"  工作流 {n} 个已解析")
+    hits = 0
+    for pat, name in KEY_PATTERNS:
+        r = subprocess.run(["git", "grep", "-nIE", pat, "--", ".", ":!*.jsonl", ":!tools/self_check.py"],
+                           capture_output=True, text=True, cwd=REPO)
+        for line in r.stdout.splitlines():
+            if re.search(r"your_|example|xxxx|<redacted>|\.\.\.", line, re.I):
+                continue
+            hits += 1
+            flag("P1", line.split(":")[0] + ":" + line.split(":")[1], f"疑似明文 {name}（仓库公开，提交即泄露；改读 Secrets 或 gitignore 的 .env，并作废原 key）")
+    say(f"  明文 key 命中 {hits} 处")
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -324,6 +365,7 @@ def main():
     check_forecast_rule()
     check_sums()
     check_keys_rule()
+    check_workflows_and_keys()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

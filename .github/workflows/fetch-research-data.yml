@@ -33,11 +33,7 @@ jobs:
         run: |
           TICKERS="${{ github.event.inputs.tickers }}"
           if [ -z "$TICKERS" ] && [ -f research_fetch_trigger.json ]; then
-            TICKERS=$(python3 -c "
-import json
-d = json.load(open('research_fetch_trigger.json'))
-print(','.join(d.get('tickers', [])))
-")
+            TICKERS=$(python3 -c "import json; print(','.join(json.load(open('research_fetch_trigger.json')).get('tickers', [])))")
           fi
           echo "list=$TICKERS" >> "$GITHUB_OUTPUT"
           echo "Tickers: $TICKERS"
