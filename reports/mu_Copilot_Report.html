@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>美光科技 FQ4 FY26 财报分析 · Earnings Copilot</title><style>
+:root{
+  --ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;
+  --green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e;
+  --line:#d6d0c4;--mute:#6b665d;--band:#e7e3da;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'IM Fell English','Songti SC','Source Han Serif SC',Georgia,serif;
+  font-size:15px;line-height:1.75}
+.wrap{max-width:1120px;margin:0 auto;padding:34px 26px 70px}
+.pub{display:flex;flex-wrap:wrap;gap:9px 20px;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:26px;
+  font-size:12px;letter-spacing:.06em;color:var(--mute)}
+.pub b{color:var(--ink);letter-spacing:.14em;font-size:13px}
+.co{font-size:12.5px;color:var(--mute);letter-spacing:.05em;margin-bottom:7px}
+h1{font-size:30px;line-height:1.32;margin:0 0 7px;letter-spacing:.01em}
+.h1en{font-size:14.5px;color:var(--mute);font-style:italic;margin:0 0 20px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+.tag{font-size:11.5px;letter-spacing:.05em;padding:4px 11px;border:1px solid var(--line);background:#fff;border-radius:2px;color:var(--mute)}
+.tag.g{border-color:var(--green);color:var(--green)}
+.tag.r{border-color:var(--red);color:var(--red)}
+.tag.a{border-color:var(--amber);color:var(--amber)}
+.tag.c{border-color:var(--copper);color:var(--copper)}
+.statbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:0 0 32px}
+.stat{background:#fff;padding:15px 16px}
+.stat .en{font-size:10.5px;letter-spacing:.13em;color:var(--mute);text-transform:uppercase}
+.stat .zh{font-size:12px;color:var(--mute);margin-bottom:6px}
+.stat .v{font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1.15}
+.stat .d{font-size:11.5px;margin-top:5px;line-height:1.5}
+.up{color:var(--green)}.dn{color:var(--red)}.nt{color:var(--amber)}
+.lead{background:#fff;border:1px solid var(--line);border-left:4px solid var(--copper);padding:19px 22px;margin:0 0 34px}
+.lead .k{font-size:11.5px;letter-spacing:.16em;color:var(--copper);margin-bottom:9px}
+.lead p{margin:0 0 10px;font-size:15.5px}
+.lead p:last-child{margin-bottom:0}
+h2{margin:42px 0 3px;letter-spacing:.01em}
+.section-zh{font-size:21px;display:block}
+.section-en{font-size:11.5px;letter-spacing:.15em;color:var(--mute);text-transform:uppercase;font-style:italic;display:block;margin-top:2px}
+.chartbox{background:#fff;border:1px solid var(--line);padding:18px 16px;margin-top:15px;overflow-x:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.two{grid-template-columns:1fr}.statbar{grid-template-columns:repeat(2,1fr)}}
+p.body{margin:13px 0}
+.label-zh{font-weight:600;color:var(--copper)}
+.label-en{font-size:11px;font-style:italic;color:var(--mute);letter-spacing:.06em}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px;margin-top:14px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--band);font-size:12.5px;letter-spacing:.04em;font-weight:600}
+td.q{background:#fbfaf7;font-weight:600}
+.scr{overflow-x:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);padding:17px 18px;border-top:3px solid var(--line)}
+.card.bear{border-top-color:var(--red)}.card.base{border-top-color:var(--copper)}.card.bull{border-top-color:var(--green)}
+.card .nm{font-size:12px;letter-spacing:.1em;color:var(--mute);margin-bottom:5px}
+.card .pr{font-size:29px;font-weight:600;line-height:1.1}
+.card .ch{font-size:13.5px;margin:4px 0 11px;font-weight:600}
+.card .lg{font-size:12.5px;color:#3a3730;line-height:1.65;margin-bottom:10px}
+.card .as{font-size:11.5px;color:var(--mute);border-top:1px solid var(--line);padding-top:8px;line-height:1.7}
+.verdict{background:var(--ink);color:#efece6;padding:26px 28px;margin:38px 0 0}
+.verdict .k{font-size:11.5px;letter-spacing:.16em;color:var(--gold);margin-bottom:11px}
+.verdict h3{margin:0 0 12px;font-size:20px;color:#fff;font-weight:600}
+.verdict p{margin:0 0 11px;font-size:15px}
+.verdict p:last-child{margin-bottom:0}
+.verdict b{color:#fff}
+.verdict-en{font-size:12.5px;color:rgba(239,236,230,.62);font-style:italic;line-height:1.65;margin-top:13px;border-top:1px solid rgba(239,236,230,.2);padding-top:12px}
+.fb{margin-top:16px;font-size:12px}
+.fb a{color:var(--gold)}
+.tone{background:#fff;border:1px solid var(--line);padding:18px 20px;margin-top:15px}
+.bar{height:9px;background:var(--band);border-radius:5px;overflow:hidden;margin:7px 0 4px}
+.bar i{display:block;height:100%;background:var(--copper)}
+.tone .row{margin-bottom:14px}
+.tone .row:last-child{margin-bottom:0}
+.tone .tl{display:flex;justify-content:space-between;font-size:12.5px}
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.chip{background:#fff;border:1px solid var(--line);padding:8px 13px;font-size:12.5px}
+.chip b{color:var(--copper)}
+.chip i{color:var(--mute);font-size:11px;font-style:italic;display:block}
+.note{background:#fff;border:1px solid var(--line);border-top:3px solid var(--amber);padding:19px 22px;margin-top:16px;font-size:13px;line-height:1.8}
+.note h4{margin:0 0 4px;font-size:13.5px;color:var(--amber)}
+.note .blk{margin-bottom:15px}
+.note .blk:last-child{margin-bottom:0}
+.foot{margin-top:32px;padding-top:15px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute);line-height:1.85}
+.badge{display:inline-block;font-size:10px;letter-spacing:.06em;padding:1px 6px;border-radius:2px;margin-left:5px;vertical-align:middle}
+.b-off{background:#e4ede7;color:var(--green)}
+.b-cal{background:#f6ecdb;color:var(--amber)}
+.b-est{background:#ece9e3;color:var(--mute)}.b-gap{background:#f3e3e3;color:var(--red)}
+@media print{body{background:#fff}.wrap{padding:0}}
+</style></head><body><div class="wrap">
+
+<div class="pub"><b>EARNINGS COPILOT</b><span>美光科技 Micron Technology · NASDAQ: MU</span><span>FQ4 FY2026（截至 2026-09-03）</span><span>财报发布 2026-09-30 盘后</span><span>报告日 2026-10-01</span></div>
+
+<div class="co">MICRON TECHNOLOGY, INC.</div>
+<h1>数字全线超预期，但利润引擎已从 HBM 换成稀缺定价的普通内存</h1>
+<div class="h1en">A clean beat-and-raise whose profit engine has quietly shifted from HBM to scarcity-priced commodity DRAM</div>
+<div class="tags"><span class="tag c">评级：中性 · 已充分定价｜Hold</span><span class="tag g">语气评分 85/100 · 强势乐观</span><span class="tag a">三情景加权 -1.7%</span><span class="tag r">资本开支上调 · 双高风险</span></div>
+
+<div class="statbar">
+<div class="stat"><div class="en">Revenue</div><div class="zh">营收</div><div class="v">$54.23B</div><div class="d"><span class="up">共识 $51.07B，超 6.2%｜同比 +379%</span><span class="badge b-cal">共识</span></div></div>
+<div class="stat"><div class="en">Non-GAAP Gross Margin</div><div class="zh">非 GAAP 毛利率</div><div class="v">87.0%</div><div class="d"><span class="up">环比 +210 基点</span><span class="badge b-off">官方</span></div></div>
+<div class="stat"><div class="en">Non-GAAP EPS</div><div class="zh">每股收益</div><div class="v">$33.42</div><div class="d"><span class="up">共识 $31.61，超 5.7%</span><span class="badge b-cal">共识</span></div></div>
+<div class="stat"><div class="en">FQ1 FY27 Guide</div><div class="zh">下季营收指引</div><div class="v">$61.5B</div><div class="d"><span class="up">共识 $57.0B，高 7.9%</span><span class="badge b-cal">共识</span></div></div>
+</div>
+
+<div class="lead"><div class="k">一句话结论 · THE CALL</div>
+<p>这是一份没有瑕疵的成绩单：营收 $54.23B 比自己三个月前给的 $50B 指引高 8.5%，下季指引又比共识高 7.9%。<b>但股价收盘后几乎不动</b>，因为市场在 $1,065 已经给到约 6.6 倍明年利润——这个价格就是管理层自己描绘的路径。</p>
+<p>真正值得注意的是两件事：<b>毛利率最高的不再是 HBM</b>（云内存 83%），而是卖给普通服务器与手机的常规内存（90%），而这部分占营收七成；同时公司把资本开支上调到 FY27 至少约 $47B，<b>新洁净室在 2028 年下半年投产——这正是供需紧张这个论点的到期日。</b></p></div>
+
+<h2><span class="section-zh">季度营收走势</span><span class="section-en">Quarterly Revenue · 8 Quarters</span></h2>
+<div class="chartbox"><svg viewBox="0 0 640 270" width="100%" style="font-family:'IM Fell English',Georgia,serif" role="img" aria-label="八季度营收"><line x1="46" y1="226.0" x2="630" y2="226.0" stroke="#e7e3da"/><text x="38" y="230.0" font-size="10.5" text-anchor="end" fill="#6b665d">0</text><line x1="46" y1="158.0" x2="630" y2="158.0" stroke="#e7e3da"/><text x="38" y="162.0" font-size="10.5" text-anchor="end" fill="#6b665d">20</text><line x1="46" y1="90.0" x2="630" y2="90.0" stroke="#e7e3da"/><text x="38" y="94.0" font-size="10.5" text-anchor="end" fill="#6b665d">40</text><line x1="46" y1="22.0" x2="630" y2="22.0" stroke="#e7e3da"/><text x="38" y="26.0" font-size="10.5" text-anchor="end" fill="#6b665d">60</text><rect x="58.9" y="196.4" width="46" height="29.6" fill="#8b6c42"/><text x="81.9" y="190.4" font-size="11" text-anchor="middle" fill="#0a0a0b">8.71</text><text x="81.9" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q1 FY25</text><rect x="130.6" y="198.6" width="46" height="27.4" fill="#8b6c42"/><text x="153.6" y="192.6" font-size="11" text-anchor="middle" fill="#0a0a0b">8.05</text><text x="153.6" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q2 FY25</text><rect x="202.4" y="194.4" width="46" height="31.6" fill="#8b6c42"/><text x="225.4" y="188.4" font-size="11" text-anchor="middle" fill="#0a0a0b">9.3</text><text x="225.4" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q3 FY25</text><rect x="274.1" y="187.5" width="46" height="38.5" fill="#8b6c42"/><text x="297.1" y="181.5" font-size="11" text-anchor="middle" fill="#0a0a0b">11.32</text><text x="297.1" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q4 FY25</text><rect x="345.9" y="179.6" width="46" height="46.4" fill="#8b6c42"/><text x="368.9" y="173.6" font-size="11" text-anchor="middle" fill="#0a0a0b">13.64</text><text x="368.9" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q1 FY26</text><rect x="417.6" y="144.9" width="46" height="81.1" fill="#8b6c42"/><text x="440.6" y="138.9" font-size="11" text-anchor="middle" fill="#0a0a0b">23.86</text><text x="440.6" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q2 FY26</text><rect x="489.4" y="85.0" width="46" height="141.0" fill="#8b6c42"/><text x="512.4" y="79.0" font-size="11" text-anchor="middle" fill="#0a0a0b">41.46</text><text x="512.4" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q3 FY26</text><rect x="561.1" y="41.6" width="46" height="184.4" fill="#2a5c3f"/><text x="584.1" y="35.6" font-size="11" text-anchor="middle" fill="#0a0a0b">54.23</text><text x="584.1" y="242" font-size="10" text-anchor="middle" fill="#6b665d">Q4 FY26</text><text x="46" y="14" font-size="10.5" fill="#6b665d">单位：十亿美元｜深绿为本季</text></svg></div>
+<p class="body"><span class="label-zh">判断</span> <span class="label-en">Read</span>　量级仍在扩张，但斜率已经过了最陡处：环比从上季的 +74% 降到本季 +31%，下季指引中值只隐含 +13%。八个季度从 $8.71B 走到 $54.23B，FY26 全年 $133.19B 是 FY25 的 3.6 倍<span class="badge b-off">官方</span>。</p>
+
+<h2><span class="section-zh">分部营收</span><span class="section-en">Segment Revenue · Business Units</span></h2>
+<div class="chartbox"><svg viewBox="0 0 640 210" width="100%" style="font-family:'IM Fell English',Georgia,serif" role="img" aria-label="分部营收"><text x="140" y="34" font-size="12" text-anchor="end" fill="#0a0a0b">核心数据中心</text><text x="140" y="47" font-size="9.5" text-anchor="end" fill="#6b665d">CDBU</text><rect x="150" y="22" width="315.0" height="22" fill="#8b6c42"/><text x="473.0" y="37" font-size="11.5" fill="#0a0a0b">$18B｜毛利 90%｜<tspan fill="#2a5c3f">同比 +1041%</tspan></text><text x="140" y="74" font-size="12" text-anchor="end" fill="#0a0a0b">云内存（含 HBM）</text><text x="140" y="87" font-size="9.5" text-anchor="end" fill="#6b665d">CMBU</text><rect x="150" y="62" width="285.2" height="22" fill="#8b6c42"/><text x="443.2" y="77" font-size="11.5" fill="#0a0a0b">$16.3B｜毛利 83%｜<tspan fill="#2a5c3f">同比 +259%</tspan></text><text x="140" y="114" font-size="12" text-anchor="end" fill="#0a0a0b">移动与客户端</text><text x="140" y="127" font-size="9.5" text-anchor="end" fill="#6b665d">MCBU</text><rect x="150" y="102" width="229.2" height="22" fill="#8b6c42"/><text x="387.2" y="117" font-size="11.5" fill="#0a0a0b">$13.1B｜毛利 90%｜<tspan fill="#2a5c3f">两部合计同比 +283%</tspan></text><text x="140" y="154" font-size="12" text-anchor="end" fill="#0a0a0b">汽车与嵌入式</text><text x="140" y="167" font-size="9.5" text-anchor="end" fill="#6b665d">AEBU</text><rect x="150" y="142" width="119.0" height="22" fill="#8b6c42"/><text x="277.0" y="157" font-size="11.5" fill="#0a0a0b">$6.8B｜毛利 84%｜<tspan fill="#2a5c3f">两部合计同比 +283%</tspan></text><text x="150" y="204" font-size="10" fill="#6b665d">四部合计 $54.2B ＝ 总营收 ✓｜MCBU 与 AEBU 去年同期仅有合计值，故合并计同比</text></svg></div>
+<p class="body"><span class="label-zh">判断</span> <span class="label-en">Read</span>　核心数据中心（普通服务器内存与固态盘）营收是去年同期的 11.4 倍，已超过含 HBM 的云内存成为第一大部门<span class="badge b-off">官方</span>。毛利率排序更说明问题：常规内存 90%，HBM 所在部门 83%。按产品看，DRAM $39.8B（73%）、NAND $14.1B（26%），两者合计比总营收少 $0.33B，余额为其他产品，未单列。</p>
+
+<h2><span class="section-zh">EPS 对比与毛利率走势</span><span class="section-en">EPS vs Consensus · Gross Margin Trend</span></h2>
+<div class="two"><div class="chartbox"><svg viewBox="0 0 310 250" width="100%" style="font-family:'IM Fell English',Georgia,serif" role="img" aria-label="EPS 对比"><rect x="44.0" y="119.9" width="26" height="80.1" fill="#c9a84c"/><text x="57.0" y="114.9" font-size="9.5" text-anchor="middle">20.49</text><rect x="74.0" y="101.8" width="26" height="98.2" fill="#2a5c3f"/><text x="87.0" y="96.8" font-size="9.5" text-anchor="middle">25.11</text><text x="72.0" y="215" font-size="9.5" text-anchor="middle" fill="#6b665d">Q3 FY26</text><rect x="134.0" y="76.4" width="26" height="123.6" fill="#c9a84c"/><text x="147.0" y="71.4" font-size="9.5" text-anchor="middle">31.61</text><rect x="164.0" y="69.3" width="26" height="130.7" fill="#2a5c3f"/><text x="177.0" y="64.3" font-size="9.5" text-anchor="middle">33.42</text><text x="162.0" y="215" font-size="9.5" text-anchor="middle" fill="#6b665d">Q4 FY26</text><rect x="224.0" y="61.5" width="26" height="138.5" fill="#c9a84c"/><text x="237.0" y="56.5" font-size="9.5" text-anchor="middle">35.4</text><rect x="254.0" y="50.8" width="26" height="149.2" fill="#2a5c3f" stroke-dasharray="3 2" stroke="#2a5c3f" fill-opacity=".55"/><text x="267.0" y="45.8" font-size="9.5" text-anchor="middle">38.15</text><text x="252.0" y="215" font-size="9.5" text-anchor="middle" fill="#6b665d">Q1 FY27 指引</text><rect x="34" y="8" width="9" height="9" fill="#c9a84c"/><text x="47" y="16" font-size="9.5" fill="#6b665d">共识</text><rect x="84" y="8" width="9" height="9" fill="#2a5c3f"/><text x="97" y="16" font-size="9.5" fill="#6b665d">实际 / 指引中值</text></svg></div><div class="chartbox"><svg viewBox="0 0 310 250" width="100%" style="font-family:'IM Fell English',Georgia,serif" role="img" aria-label="毛利率走势"><line x1="34" y1="177.7" x2="304" y2="177.7" stroke="#e7e3da"/><text x="29" y="181.7" font-size="9.5" text-anchor="end" fill="#6b665d">40</text><line x1="34" y1="121.1" x2="304" y2="121.1" stroke="#e7e3da"/><text x="29" y="125.1" font-size="9.5" text-anchor="end" fill="#6b665d">60</text><line x1="34" y1="64.5" x2="304" y2="64.5" stroke="#e7e3da"/><text x="29" y="68.5" font-size="9.5" text-anchor="end" fill="#6b665d">80</text><polyline points="44.0,179.1 74.8,183.6 105.5,180.5 136.2,161.6 167.0,130.1 197.8,78.6 228.5,50.6 259.2,44.6" fill="none" stroke="#8b6c42" stroke-width="2"/><line x1="259.2" y1="44.6" x2="290.0" y2="46.8" stroke="#c47a1e" stroke-width="2" stroke-dasharray="4 3"/><circle cx="44.0" cy="179.1" r="2.8" fill="#8b6c42"/><circle cx="74.8" cy="183.6" r="2.8" fill="#8b6c42"/><circle cx="105.5" cy="180.5" r="2.8" fill="#8b6c42"/><circle cx="136.2" cy="161.6" r="2.8" fill="#8b6c42"/><circle cx="167.0" cy="130.1" r="2.8" fill="#8b6c42"/><circle cx="197.8" cy="78.6" r="2.8" fill="#8b6c42"/><circle cx="228.5" cy="50.6" r="2.8" fill="#8b6c42"/><circle cx="259.2" cy="44.6" r="2.8" fill="#8b6c42"/><text x="74.8" y="198.6" font-size="9.5" text-anchor="middle" fill="#8b2e2e">低点 37.9%</text><text x="259.2" y="36.6" font-size="9.5" text-anchor="middle">87.0%</text><text x="288.0" y="61.8" font-size="9.5" text-anchor="end" fill="#c47a1e">Q1E 86.25%</text><text x="44.0" y="221" font-size="9" fill="#6b665d">Q1 FY25</text><text x="290.0" y="221" font-size="9" text-anchor="end" fill="#6b665d">Q1 FY27E</text></svg></div></div>
+<p class="body"><span class="label-zh">判断</span> <span class="label-en">Read</span>　超预期的幅度在收窄：上季 EPS 超共识 23%，本季只超 6%——卖方追上来了。毛利率则出现本轮上行周期的第一次环比回落：下季指引 86.25%，比本季低 75 基点。管理层称这是 FY27 的底部，此后逐季回升<span class="badge b-off">官方</span>。</p>
+
+<h2><span class="section-zh">核心分析</span><span class="section-en">Core Analysis</span></h2>
+<p class="body"><span class="label-zh">利润引擎换了</span> <span class="label-en">The profit engine has moved</span><br>
+市场过去两年讲的美光故事是 HBM 溢价，本季的数字说的是另一件事：普通内存因为洁净室被 HBM 挤占而极度短缺，价格涨到毛利 90%。核心数据中心 + 移动 + 汽车三个部门合计 $37.9B，占营收 70%，毛利率 84% 到 90%。管理层也承认 HBM 与常规 DRAM 的毛利差距在通过明年大幅涨价来收窄<span class="badge b-off">官方</span>。这意味着利润的大头来自稀缺定价而不是技术壁垒，<b>而稀缺定价恰恰是周期里最先反转的东西。</b></p>
+<p class="body"><span class="label-zh">资本开支的真正含义</span> <span class="label-en">What the capex raise really says</span><br>
+FY26 资本开支 $27.37B，FY27 上半年就要 $25.0B，且每季都高于本季的 $10.8B，全年下限约 $46.6B，较 FY26 至少高 70%<span class="badge b-est">推算</span>。CEO 原话：「Given the need for DRAM cleanroom space and supported by greater visibility from SCAs into our demand through the end of the decade and beyond, we plan to increase our capex in fiscal 2027 versus prior plans.」大部分增量是建洁净室，产能落地在 2028 年下半年之后。<b>公司自己告诉了你紧张期大致在什么时候结束。</b></p>
+<p class="body"><span class="label-zh">长约是新变量</span> <span class="label-en">Strategic customer agreements change the multiple debate</span><br>
+2027 年绝大部分 HBM 位元已经签约并大幅涨价，管理层称 SCA（战略客户协议）让需求可见度延伸到本十年末。这是判断估值的关键：如果收入有一部分被长约锁定，传统的周期股峰值 4 到 8 倍就不再是常数。但 SCA 的覆盖比例和价格下限<b>公司都没有披露</b><span class="badge b-gap">缺口</span>，所以本报告不对它做分部估值，只把它作为牛市情景里倍数上移的理由。</p>
+<p class="body"><span class="label-zh">市场为什么不买账</span> <span class="label-en">Why the stock did not move</span><br>
+营收超指引 8%、指引超共识 8%，股价收盘后基本持平（盘后 $1,064.02，跌 0.1%）。原因是共识已在一路上修：FY27 EPS 共识约 $158 到 $165<span class="badge b-cal">共识</span>，与本报告基准 $162 接近。现价对应约 6.6 倍——市场已经按管理层描绘的路径定价，再往上需要倍数重估，而不是再超一次预期。</p>
+
+<h2><span class="section-zh">目标价三情景</span><span class="section-en">Three-Scenario Price Targets · 12 Months</span></h2>
+<div class="chartbox"><svg viewBox="0 0 640 120" width="100%" style="font-family:'IM Fell English',Georgia,serif" role="img" aria-label="目标价区间"><line x1="40" y1="60" x2="600" y2="60" stroke="#d6d0c4" stroke-width="6"/><line x1="121.8" y1="60" x2="423.4" y2="60" stroke="#c9a84c" stroke-width="6"/><circle cx="121.8" cy="60" r="7" fill="#8b2e2e"/><text x="121.8" y="88" font-size="11.5" text-anchor="middle" fill="#8b2e2e">熊市 $690</text><circle cx="279.1" cy="60" r="7" fill="#8b6c42"/><text x="279.1" y="88" font-size="11.5" text-anchor="middle" fill="#8b6c42">基准 $1,055</text><circle cx="423.4" cy="60" r="7" fill="#2a5c3f"/><text x="423.4" y="88" font-size="11.5" text-anchor="middle" fill="#2a5c3f">牛市 $1,390</text><path d="M283.4,44 l-6,-12 h12 z" fill="#0a0a0b"/><text x="283.4" y="26" font-size="11.5" text-anchor="middle">现价 $1,065.11</text><text x="83.1" y="112" font-size="9.5" text-anchor="middle" fill="#6b665d">600</text><text x="255.4" y="112" font-size="9.5" text-anchor="middle" fill="#6b665d">1000</text><text x="427.7" y="112" font-size="9.5" text-anchor="middle" fill="#6b665d">1400</text><text x="600.0" y="112" font-size="9.5" text-anchor="middle" fill="#6b665d">1800</text></svg></div>
+<div class="cards">
+<div class="card bear"><div class="nm">熊市 · BEAR · 概率 25%</div><div class="pr">$690</div><div class="ch dn">-35.2%</div>
+<div class="lg">下半财年常规 DRAM 价格见顶回落，毛利从 86% 往 70% 走；资本开支高位叠加三家同时扩产，市场提前交易 2028 年的供给。</div>
+<div class="as">FY27 EPS $125（季度 38→35→28→24）<br>P/E 5.5×</div></div>
+<div class="card base"><div class="nm">基准 · BASE · 概率 50%</div><div class="pr">$1,055</div><div class="ch nt">-0.9%</div>
+<div class="lg">管理层路径兑现：Q1 为毛利底部，逐季营收创新高；倍数维持现价隐含水平。</div>
+<div class="as">FY27 EPS $162（Q1 指引起逐季 +4%）<br>P/E 6.5×（现价隐含 6.6×）</div></div>
+<div class="card bull"><div class="nm">牛市 · BULL · 概率 25%</div><div class="pr">$1,390</div><div class="ch up">+30.5%</div>
+<div class="lg">2027 到 2028 年供给更紧，长约价格兑现；SCA 让部分收入去周期化，倍数向半导体均值靠拢。</div>
+<div class="as">FY27 EPS $174（逐季 +9%）<br>P/E 8.0×</div></div>
+</div>
+<div class="scr"><table>
+<tr><th>关键假设</th><th>熊市</th><th>基准</th><th>牛市</th></tr>
+<tr><td class="q">FY27 非 GAAP EPS</td><td>$125</td><td>$162</td><td>$174</td></tr>
+<tr><td class="q">市盈率</td><td>5.5×</td><td>6.5×</td><td>8.0×</td></tr>
+<tr><td class="q">常规 DRAM 价格（下半财年）</td><td>见顶回落</td><td>温和上涨</td><td>继续急涨</td></tr>
+<tr><td class="q">非 GAAP 毛利率路径</td><td>86% 降向 70%</td><td>86% 到 88%</td><td>升向 89% 以上</td></tr>
+</table></div>
+<p class="body"><span class="label-zh">读法</span> <span class="label-en">How to read it</span>　三情景加权 $1,048，较现价 -1.7%。熊市跌幅里约 61% 来自利润下滑、39% 来自倍数压缩<span class="badge b-est">推算</span>：风险主体在内存价格，不在情绪。</p>
+
+<div class="verdict"><div class="k">裁决 · VERDICT</div>
+<h3>中性 · 已充分定价：好消息已经在价格里，风险的到期日写在资本开支里</h3>
+<p><b>这一季没有可挑剔的数字，但没有给出新的买入理由。</b>市场在 6.6 倍已经按管理层路径定价，加权期望只有 -1.7%，上下空间是 -35% 对 +31%。</p>
+<p><b>双高风险必须点名：</b>行业资本开支竞赛。美光 FY27 资本开支至少约 $47B，加上同行扩产，2028 年下半年起供给集中释放；而利润七成来自稀缺定价的常规内存，正是对供给最敏感的那部分。</p>
+<p><b>要盯的一个数：</b>常规 DRAM 合约价的月度变化。它比 HBM 新闻更早告诉你周期的方向。</p>
+<div class="verdict-en">Hold. A flawless beat-and-raise that is already in the price at roughly 6.6x forward earnings. Seventy percent of revenue now earns 84 to 90 percent gross margin on scarcity-priced commodity memory, and the company is raising capex for cleanrooms that arrive after late 2028 — management has effectively dated the end of the tightness thesis.</div>
+<div class="fb">反馈本报告 · <a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=earner&amp;report=mu">点击评价</a></div></div>
+
+<h2><span class="section-zh">管理层语气</span><span class="section-en">Management Tone · 85/100</span></h2>
+<div class="tone">
+<div class="row"><div class="tl"><span>前瞻指引完整度</span><span>92</span></div><div class="bar"><i style="width:92%"></i></div></div><div class="row"><div class="tl"><span>数据透明度</span><span>78</span></div><div class="bar"><i style="width:78%"></i></div></div><div class="row"><div class="tl"><span>战略清晰度</span><span>84</span></div><div class="bar"><i style="width:84%"></i></div></div>
+<p class="body" style="margin-bottom:0">指引精确到营收区间、毛利率、营业费用、股本与每股收益，并给出上半年资本开支总额，完整度高。扣分在透明度：HBM 营收总额未单列，SCA 的覆盖比例与价格下限不披露。措辞上「record」「only getting tighter」与「看不到供需恢复平衡的时间点」反复出现，属强势乐观区间。</p></div>
+
+<h2><span class="section-zh">核心主题</span><span class="section-en">Key Themes</span></h2>
+<div class="chips">
+<span class="chip"><b>营收指引双超</b><i>Beat on both actual and guide</i></span>
+<span class="chip"><b>核心数据中心为去年 11 倍</b><i>Core data center up 11x</i></span>
+<span class="chip"><b>常规内存毛利 90%</b><i>Commodity DRAM at 90% margin</i></span>
+<span class="chip"><b>HBM4 本季超 $1B</b><i>HBM4 over $1B in the quarter</i></span>
+<span class="chip"><b>2027 HBM 基本签满</b><i>2027 HBM bits largely contracted</i></span>
+<span class="chip"><b>毛利首次环比回落</b><i>First sequential margin dip</i></span>
+<span class="chip"><b>资本开支上调</b><i>Capex raised for cleanrooms</i></span>
+<span class="chip"><b>净现金 $68.3B</b><i>Net cash $68.3B</i></span>
+</div>
+
+<h2><span class="section-zh">风险矩阵</span><span class="section-en">Risk Matrix</span></h2>
+<div class="scr"><table>
+<tr><th>风险</th><th>概率</th><th>影响</th><th>监测信号</th></tr>
+<tr><td class="q">行业资本开支竞赛，2028 下半年供给集中释放<br><i class="label-en">Industry capex race</i></td><td class="dn">高</td><td class="dn">高</td><td>三星、海力士洁净室投产时间表</td></tr>
+<tr><td class="q">常规 DRAM 价格见顶<br><i class="label-en">Commodity DRAM price peak</i></td><td class="nt">中</td><td class="dn">高</td><td>DRAM 合约价月度涨幅收窄</td></tr>
+<tr><td class="q">SCA 条款不透明，下限水位未知<br><i class="label-en">Opaque contract floors</i></td><td class="dn">高</td><td class="nt">中</td><td>公司是否披露覆盖比例与价格下限</td></tr>
+<tr><td class="q">长端利率高位压估值<br><i class="label-en">Rates at 2007 highs</i></td><td class="nt">中</td><td class="nt">中</td><td>10 年期国债收益率（现 5.27%）</td></tr>
+<tr><td class="q">HBM4 份额与认证节奏<br><i class="label-en">HBM4 share and qualification</i></td><td class="nt">中</td><td class="nt">中</td><td>主要 GPU 平台的供应商份额</td></tr>
+<tr><td class="q">出口管制与地缘<br><i class="label-en">Export controls</i></td><td class="up">低</td><td class="dn">高</td><td>对华芯片管制政策变化</td></tr>
+</table></div>
+
+<h2><span class="section-zh">分析师问答张力</span><span class="section-en">Q&amp;A Tension Points</span></h2>
+<div class="scr"><table>
+<tr><th>分析师的问题</th><th>管理层的回答</th><th>张力在哪</th></tr>
+<tr><td class="q">87% 是周期顶点还是新常态</td><td>FQ1 是 FY27 毛利底部，之后靠持续涨价与执行逐季抬升</td><td>「底部」比本季还低 75 基点，答案本身承认了环比回落</td></tr>
+<tr><td class="q">资本开支会到多高</td><td>多数增量用于洁净室建设，面向 2028 年下半年以后</td><td>扩产落地的时间，就是供需紧张论点到期的时间</td></tr>
+<tr><td class="q">HBM 与常规 DRAM 的利润差</td><td>2027 年 HBM 大部分已签约并大幅涨价，差距在收窄</td><td>说明此前 HBM 毛利低于常规内存，溢价叙事需要改写</td></tr>
+</table></div>
+
+<div class="note"><h4>分析师附注 · Analyst's Note</h4>
+<div class="blk"><b>口径与数据限制。</b>SEC 新闻稿原文与电话会全文抓取均被本环境网络出口拦截，全部数字来自检索摘要；每个关键数字至少两个来源或一处算术自洽才采用：FY26 四季营收 13.64+23.86+41.46+54.23=133.19 与全年一致，FY25 四季合计 37.38 与全年一致，四个业务部门合计 $54.2B 与总营收一致。CEO 原话一句为英文直引；「only getting tighter」为片段引用；其余管理层表述为转述。</div>
+<div class="blk"><b>历史毛利率核验。</b>Q2 FY25 的 37.9% 由非 GAAP 毛利 $3,053M ÷ 营收 $8,053M 独立核实；Q4 FY25 的 45.7% 与「Q1 FY26 环比 +11 个百分点至 56.8%」相互印证；Q3 FY25 的 39.0% 经中性检索确认。<b>Q1 FY25 的 39.5% 未能独立核实</b>（检索未返回，来自一次带数字的诱导式查询），不影响图中所标低点。语气评分无电话会全文，基于新闻稿措辞与电话会转述推断。</div>
+<div class="blk"><b>共识口径。</b>全文只用 LSEG：Q4 EPS $31.61、营收 $51.07B；FQ1 EPS $35.40、营收 $57.0B。另有一套口径（Q4 EPS $31.16、营收 $50.45B，对应「超 7.25% 与 7.49%」的说法）未采用，避免混用。Q3 共识 $20.49 来自另一转述源，仅用于看超预期幅度的变化方向。</div>
+<div class="blk"><b>推算明细。</b>MCBU 与 AEBU 去年同期仅有合计值：11.32 − 4.543 − 1.577 = 5.2，故两部合并计同比 +283%。股本 1.147B 由 GAAP 净利 37.70 ÷ GAAP EPS 32.87 反推。FY27 资本开支下限 = 上半年 25 + 下半年两季各至少 10.8 = 46.6；「全年高于 $40B」的媒体说法比此下限宽松。</div>
+<div class="blk"><b>估值方法偏离默认框架。</b>默认做法是熊市倍数下调 30–50%、牛市上调 40–70%。本报告改为 EPS 与倍数解耦、倍数只在 5.5× 到 8.0× 间移动，依据是本人 2026-08 做闪迪估值时的复盘：把 EPS 和倍数绑在一起动，会把区间人为拉宽、中间地带失去分辨率。</div>
+<div class="blk"><b>分析师独立看法。</b>其一，市场仍按「HBM 技术溢价」理解美光，本季数据显示利润大头是常规内存的稀缺定价，这让它比叙事更周期化，不是更不周期化。其二，闪迪报告里我留下的问题——若其他厂商也合约化，长约溢价就是行业新常态而非护城河——本季美光的 SCA 给出了部分答案：美光也在合约化。其三，SCA 价格下限是唯一能证伪本报告牛市倍数的数据，公司不披露这一点本身值得警惕。</div>
+<div class="blk"><b>待核实。</b>SCA 覆盖比例与价格下限；HBM 营收总额；FQ1 FY27 GAAP 指引；同行 2027 到 2028 年洁净室投产时间表。</div>
+</div>
+
+<div class="foot">数据来源：美光 FQ4 FY26 新闻稿与电话会（经 Yahoo Finance、GlobeNewswire、Investing.com、Benzinga、Alphastreet 转述），LSEG 共识（经 CNBC 转述），本仓库价格缓存（2026-09-30 22:18Z）。<br>
+本报告不构成投资建议。生成：Earnings Copilot · 2026-10-01。</div>
+</div></body></html>
