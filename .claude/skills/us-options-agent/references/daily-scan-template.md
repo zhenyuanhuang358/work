@@ -167,6 +167,20 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 
 ---
 
+## 今日否决统计
+
+> 借鉴 options-scanner：空结果要能告诉用户「是市场没机会，还是过滤太紧」。
+
+| 否决理由 | 个数 | 标的 |
+|---------|------|------|
+| [如：缓冲÷1σ 不足 / 财报在窗口内 / 价差过宽 / 尾部闸门] | [N] | [代码…] |
+
+（R4/R5 现金与接货**不是否决理由**（profile 1.1t），不进本表，只在选股后提示。）
+
+**出报告前**：本表和上面每个机会，逐个 `python3 tools/candidate_ledger.py add` 登记（否决项带理由）。
+
+---
+
 ## 今日风险提示
 
 - [宏观/地缘/经济数据等影响当天持仓的主要风险]

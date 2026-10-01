@@ -218,6 +218,29 @@ def check_keys_rule():
         flag("P1", "tools/key_check.py", "1.1u 的守卫自测未通过 —— 它抓不住立规的那个案例")
 
 
+# ── C9 · 期权候选全量登记（2026-10-01，借鉴 options-scanner）─────────────────
+def check_candidate_ledger():
+    say("\n[C9] 期权候选全量登记  (缓冲÷1σ 排序能否被结算检验)")
+    ledger = os.path.join(REPO, "memory/state/options-candidates.jsonl")
+    journal = os.path.join(REPO, "memory/state/options-journal.md")
+    rows = []
+    if os.path.exists(ledger):
+        with open(ledger, encoding="utf-8") as f:
+            rows = [json.loads(l) for l in f if l.strip() and not l.startswith("#")]
+    last = max((r["logged"][:10] for r in rows), default=None)
+    n_rej = sum(1 for r in rows if r["verdict"] == "否决")
+    say(f"  已登记 {len(rows)} 条（否决 {n_rej}）｜最近登记 {last or '—'}")
+    scans = re.findall(r"^## (\d{4}-\d{2}-\d{2}).*扫描", open(journal, encoding="utf-8").read(), re.M) \
+        if os.path.exists(journal) else []
+    missed = sorted({d for d in scans if d >= "2026-10-01" and (last is None or d > last)})
+    if missed:
+        flag("P2", "memory/state/options-candidates.jsonl",
+             f"journal 有扫描但候选未登记：{', '.join(missed)}——漏登的那天无法事后补（不知道当时屏幕上有什么）")
+    if rows and n_rej == 0:
+        flag("P3", "memory/state/options-candidates.jsonl",
+             "只登记了推荐项、零否决——这样的账本检验不了规则挡掉的是不是好单")
+
+
 # ── C7 · 分项加总校验（承载 1.1s，2026-09-20 由人工执行改为装置）────────────
 def check_sums():
     say("\n[C7] 分项加总校验  (1.1s：加不平就写明差额去向)")
@@ -324,6 +347,7 @@ def main():
     check_forecast_rule()
     check_sums()
     check_keys_rule()
+    check_candidate_ledger()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
