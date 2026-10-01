@@ -1,29 +1,29 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-10-01T01:30:22Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-10-01T06:34:57Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-10-01 01:30 UTC
+自检器 · 2026-10-01 06:34 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
   huashu-report            hub 179 行   spoke 引用 15 处
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
-  us-options-agent         hub 181 行   spoke 引用 10 处
+  us-options-agent         hub 191 行   spoke 引用 10 处
   restaurant-research-skill hub 187 行   spoke 引用 16 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
   merlin                   hub 181 行   spoke 引用  1 处
   tail-risk-monitor        hub 200 行   spoke 引用 12 处
   sleeper                  hub 164 行   spoke 引用  5 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
-  critic                   hub 119 行   spoke 引用  2 处
+  critic                   hub 125 行   spoke 引用  2 处
   viral-content-agent      hub 141 行   spoke 引用  7 处
   burry                    hub 183 行   spoke 引用  8 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
-  earner                   hub 131 行   spoke 引用  6 处
+  earner                   hub 132 行   spoke 引用  6 处
   long-running-agent-sop   hub 109 行   spoke 引用  3 处
   合计 139 处 spoke 引用，0 处失效
 
@@ -62,9 +62,12 @@
      忘了声明就不会触发 —— 这是把「每次记得加一遍」降为「记得声明一次」，不是消灭自觉。
 
 [C8] 键名静默失效防线  (1.1u：.get() 对拼错的键不报错)
-  严格加载器：已迁 6 个脚本，未迁 0 个（迁移是渐进的，不判失败）
+  严格加载器：已迁 6 个脚本，未迁 1 个（迁移是渐进的，不判失败）
   不可能值守卫在产出点：✅ 已接
   自测（拿 2026-09-06 真实汇总回放）：✅ 抓得住且正常分布零误报
+
+[C9] 期权候选全量登记  (缓冲÷1σ 排序能否被结算检验)
+  已登记 0 条（否决 0）｜最近登记 —
 
 ==========================================================================
 发现 1 项：
