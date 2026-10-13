@@ -93,6 +93,7 @@ description: |
 | 完整 Top5 输出格式模板 | `references/output-template.md` |
 | 生成爆文标题（公式 + 反例） | `references/title-formula.md` |
 | 风险提示规则（政治/谣言/敏感事件） | `references/risk-guard.md` |
+| **每次扫描的第 0 步和最后一步**：给到期苗头记分、登记今天的苗头 | `references/review-loop.md` |
 
 ---
 
@@ -101,6 +102,7 @@ description: |
 用户触发「今日热点」「爆文机会」等词时，按顺序执行：
 
 ```
+0. 加载 references/review-loop.md → 先给 memory/state/viral-review.md 里已到期的苗头记分（✅/❌/⊘ + 上榜日）
 1. 加载 references/platform-list.md → 按优先级 WebSearch 各平台
 2. 加载 references/virality-scoring.md → 对每个候选话题用 A+B+C+D 四维评分，品牌/消费/餐饮话题再减 E（人造热度）
    - 总分 ≥ 7 → 强推；5-6 → 有潜力；< 5 → 跳过
@@ -109,6 +111,8 @@ description: |
 4. 加载 references/output-template.md → 生成完整报告（含评分表+生命周期+平台标题矩阵）
 5. 加载 references/title-formula.md → 按平台矩阵生成标题（公众号/知乎/小红书+抖音/X+微博）
 6. 加载 references/risk-guard.md → 为敏感话题添加风险提示
+7. 「明日观察预警」里的每个苗头 → 登记进 viral-review.md（门槛、7 天时点、把握档当场填，事后不补）
+   写不出门槛和时点的苗头，就不要写进报告
 ```
 
 ---

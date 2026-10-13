@@ -31,6 +31,7 @@
 | `profile.md` | always-load · 慢变 | 偏好、可复用规则（R-*）、配置速查、历史教训 |
 | `state/options-journal.md` | 动态 | 期权持仓、风险敞口、止损追踪 |
 | `state/research-ledger.md` | 动态 · append-only | 研究结论沉淀，按公司索引 |
+| `state/viral-review.md` | 动态 | 爆文苗头的登记与 7 天复盘（门槛统一为进入四榜任一前 50） |
 
 ---
 

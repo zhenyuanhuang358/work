@@ -353,6 +353,53 @@ def check_workflows_and_keys():
             flag("P1", line.split(":")[0] + ":" + line.split(":")[1], f"疑似明文 {name}（仓库公开，提交即泄露；改读 Secrets 或 gitignore 的 .env，并作废原 key）")
     say(f"  明文 key 命中 {hits} 处")
 
+# ── C10 · 爆文苗头复盘（承载 viral-content review-loop，2026-10-13 引入）──────────────
+# 报告每天写「明日可能爆」，但从没回头核对过；没有记分的苗头判断没有信息量。
+def check_viral_review(path=None):
+    say("\n[C10] 爆文苗头复盘  (review-loop：7 天内进四榜任一前 50)")
+    path = path or os.path.join(REPO, "memory/state/viral-review.md")
+    if not os.path.exists(path):
+        flag("P1", "memory/state/viral-review.md", "苗头登记表不存在 —— 复盘规则退回人工自觉")
+        return
+    import datetime
+    today = datetime.date.today().isoformat()
+    rows = []
+    for line in open(path, encoding="utf-8"):
+        if not re.match(r"^\|\s*\d{4}-\d{2}-\d{2}", line):
+            continue
+        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        if len(c) < 6:
+            flag("P1", "viral-review.md", f"登记行列数不足：{line.strip()[:40]}"); continue
+        rows.append({"reg": c[0], "topic": c[1], "due": c[3][:10], "tier": c[4].replace("*", ""),
+                     "status": c[5], "lead": c[7] if len(c) > 7 else ""})
+    if not rows:
+        say("  登记 0 条（规则已就位，等第一次扫描登记）"); return
+    for r in rows:
+        if r["tier"] not in ("高", "中", "低", "对照"):
+            flag("P1", "viral-review.md", f"「{r['topic'][:20]}」未填把握档 —— 必须登记时填，事后不得补")
+        if "待验" in r["status"] and r["due"] <= today:
+            flag("P2", "viral-review.md", f"「{r['topic'][:20]}」已到验证时点 {r['due']} 仍为待验")
+    graded = [r for r in rows if r["tier"] in ("高", "中", "低")]
+    if len(graded) >= 5:
+        hi = sum(r["tier"] == "高" for r in graded) / len(graded)
+        if hi > 0.7:
+            flag("P2", "viral-review.md", f"高档占比 {hi:.0%} > 70% —— 分档失去区分度")
+    def stat(sub):
+        h = sum("✅" in r["status"] for r in sub); m = sum("❌" in r["status"] for r in sub)
+        return h, m, (f"{h/(h+m)*100:.0f}%" if h + m else "—")
+    parts = []
+    for t in ("高", "中", "低", "对照"):
+        sub = [r for r in rows if r["tier"] == t]
+        if sub:
+            h, m, rate = stat(sub); parts.append(f"{t} {h}/{h+m}={rate}")
+    leads = [float(r["lead"]) for r in rows if "✅" in r["status"] and re.match(r"^-?\d+(\.\d+)?$", r["lead"] or "")]
+    h, m, rate = stat([r for r in rows if r["tier"] != "对照"])   # 对照是基准，不混进苗头命中率
+    say(f"  登记 {len(rows)} 条｜苗头已记分 {h+m}｜苗头命中率 {rate}｜" + "｜".join(parts)
+        + (f"｜命中平均提前 {sum(leads)/len(leads):.1f} 天" if leads else ""))
+    if h + m < 20:
+        say("  ⚠ 已记分不足 20 条，不对命中率下结论")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -366,6 +413,7 @@ def main():
     check_sums()
     check_keys_rule()
     check_workflows_and_keys()
+    check_viral_review()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
