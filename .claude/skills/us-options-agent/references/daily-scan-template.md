@@ -7,7 +7,7 @@
 
 ## 扫描清单（分三轨，顺序不可颠倒）
 
-### 第零步：读持仓日志（出报告前必做）
+### 第零步：读持仓日志 + 过 `position-discipline.md` 四条（出报告前必做；存量违规则只出处理方案）
 
 读取 `memory/state/options-journal.md`，提取：
 - 当前总风险敞口（各仓位最大亏损之和）
@@ -178,6 +178,7 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 （R4/R5 现金与接货**不是否决理由**（profile 1.1t），不进本表，只在选股后提示。）
 
 **出报告前**：本表和上面每个机会，逐个 `python3 tools/candidate_ledger.py add` 登记（否决项带理由）。
+命令：`python3 tools/candidate_ledger.py add --ticker X --strike K --expiry YYYY-MM-DD --spot S --verdict 推荐|否决 --reason "…" [--iv 0.xx --iv-src 平台反解 --bid B]`
 
 ---
 

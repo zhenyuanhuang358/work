@@ -99,8 +99,11 @@ description: |
 
 ---
 
+## ⛔ 存量先于新仓（2026-10 INTC 事故，详见 `references/position-discipline.md`）
 
----
+- 存量违反「单笔止损亏损 ≤ 净值 5%」或已越过止损价 → **本次只给存量处理方案，不出新候选**。
+- 持有硬线：缓冲÷1σ ≥1.0 持有 / 0.8–1.0 减半 / <0.8 或期权价 ≥2× 收入 → 全平。
+- 接货 > 净值 → 默认用牛市看跌价差（封住跳空）；近 10 日有增发/减持/指引下调 → 只观察。
 
 ## 质量自检（给建议前逐条过）
 
@@ -121,7 +124,7 @@ description: |
 
 缓冲÷1σ 是本 skill 的核心排序，但 7 月以来**没有一个候选被结算过**——规则至今是信念。
 - **全量登记**：推荐和否决都记（否决必须带理由）。只记推荐项，就永远不知道规则挡掉的是不是好单。
-  `python3 tools/candidate_ledger.py add --ticker X --strike K --expiry YYYY-MM-DD --spot S --verdict 推荐|否决 --reason "…" [--iv 0.xx --iv-src 平台反解 --bid B]`
+  命令格式见 `references/daily-scan-template.md`。
 - **结算自动**：`report` 从抓价历史现算到期价内/价外与期间触及，不落盘、不可改写。
 - **独立单位是 (标的, 到期日) 簇**；不满 20 簇，report 拒绝下结论，我也不得替它下。
 
@@ -136,6 +139,7 @@ description: |
 | 市场进入极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
 | 需要获取 IV Rank / 期权链 / 异常流数据时 | `references/data-sources.md` |
 | 记录开仓/平仓、查看当前敞口、更新持仓日志 | `memory/state/options-journal.md` |
+| **每次扫描开头、任何存量处理、开仓前确认** | `references/position-discipline.md` |
 
 ---
 
