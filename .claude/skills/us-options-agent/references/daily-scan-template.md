@@ -93,7 +93,7 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 1. `[候选标的] IV rank site:marketchameleon.com` — IV Rank（最关键，每个标的必查，优先 marketchameleon）
 2. `unusual options activity today` — 异常期权流
 3. `earnings this week [日期]` — 本周财报日历
-4. `宏观 美联储 经济数据 本周` — 宏观风险
+4. 宏观事件：按 `references/macro-events.md` 列未来 5 个交易日的 FOMC / CPI / PPI / 非农；已发布的搜「实际 vs 预期」与市场反应，记进 journal
 
 ---
 
@@ -184,7 +184,8 @@ URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.j
 
 ## 今日风险提示
 
-- [宏观/地缘/经济数据等影响当天持仓的主要风险]
+- 未来 5 个交易日宏观事件：[FOMC / CPI / PPI / 非农 + 日期]；已发布的：[实际 vs 预期 → 市场反应]
+- [地缘等其他主要风险]
 - [VIX 是否异常，是否需要降低卖方仓位]
 
 ---

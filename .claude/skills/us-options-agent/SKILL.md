@@ -115,7 +115,7 @@ description: |
 □ R5 接货 = 行权价×100×张数，算了吗？**平台不会替你看这一条。**
 □ 涉及订单状态时，写的是「**建议下单**」还是「继续挂」？**没有平台确认就不许用默认它存在的动词**（profile 1.1l）。
 □ 算了率（年化/进度/缓冲）之后，问过「这个数量级合理吗」？
-□ 财报前是否裸卖？**财报前禁止裸卖，无例外。**
+□ 财报前是否裸卖？**财报前禁止裸卖，无例外。** 持有期内有 CPI/PPI/FOMC 吗？有则 z 门槛 1.2、事件前一日不新开。
 □ 权利金/反解用的是 **bid**（卖腿）/ ask（买腿），还是 mid？**mid 把收入多算半个价差。**
 □ 本次扫描的**每个候选（含否决项）**都 `candidate_ledger.py add` 了吗？
 ```
@@ -140,6 +140,7 @@ description: |
 | 需要获取 IV Rank / 期权链 / 异常流数据时 | `references/data-sources.md` |
 | 记录开仓/平仓、查看当前敞口、更新持仓日志 | `memory/state/options-journal.md` |
 | **每次扫描开头、任何存量处理、开仓前确认** | `references/position-discipline.md` |
+| **每次扫描：美联储 / CPI / PPI 日历、发布后搜索与记录** | `references/macro-events.md` |
 
 ---
 
