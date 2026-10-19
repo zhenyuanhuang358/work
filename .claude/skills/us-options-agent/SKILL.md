@@ -56,8 +56,9 @@ description: |
 - 财报前必须重新评估 IV Crush 风险
 
 **风险收益**
-- Reward/Risk ≥ 0.25
-- Probability of Profit > 60%
+- 单腿 CSP：Probability of Profit > 60%，缓冲÷1σ ≥ 1.0（含 CPI/PPI/FOMC 时 1.2）
+- **价差（2026-10-19 起，替代 R/R ≥ 0.25）**：净收入 ÷ 宽度 ≥ **按 HV 算的卖腿到期价内概率 + 3pct**，且最大亏损 ≤ 净值 5%。
+  `python3 tools/spread_check.py --ticker X --spot S --short K1 --long K2 --short-bid B --long-ask A --dte D --max-loss-cap 净值×5%`
 
 **仓位上限**
 - 单策略风险 ≤ 账户净值 5%
