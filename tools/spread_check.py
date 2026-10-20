@@ -35,7 +35,11 @@ def hv_from_history(ticker, n=30):
     px = [p["prices"][ticker]["price"] for d, b, p in load_daily_closes()
           if b == "close" and ticker in p["prices"]][-(n + 1):]
     if len(px) < 15:
-        sys.exit(f"{ticker} 收盘历史不足 15 天，请用 --hv 手动给")
+        import subprocess
+        shallow = subprocess.run(["git", "rev-parse", "--is-shallow-repository"], capture_output=True,
+                                 text=True, cwd=REPO).stdout.strip() == "true"
+        hint = "（仓库是浅克隆：先 git fetch --unshallow origin <分支>）" if shallow else "，请用 --hv 手动给"
+        sys.exit(f"{ticker} 收盘历史不足 15 天{hint}")
     r = [math.log(b / a) for a, b in zip(px, px[1:])]
     m = sum(r) / len(r)
     return math.sqrt(sum((x - m) ** 2 for x in r) / (len(r) - 1)) * math.sqrt(252)
