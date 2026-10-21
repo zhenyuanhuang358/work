@@ -11,9 +11,9 @@ def unit(v):
 metrics=''.join(f'  <div class="metric"><span class="metric-value serif">{unit(m["value"])[0]}<span class="unit">{unit(m["value"])[1]}</span></span><span class="metric-label">{m["label"]}</span></div>\n' for m in c['metrics'])
 heads=["门店到大区","集团供应链","品牌运营"]
 tl=''.join(f'    <div class="tl-step">\n      <div class="tl-top"><div class="tl-year serif">{x["period"]}</div><div class="tl-head">{heads[i]}</div></div>\n      <div class="tl-body">{x["milestone"]}</div>\n    </div>\n' for i,x in enumerate(c['timeline']))
-kinds=['港股上市（6831.HK）','华南头部文旅集团','港股上市（6862.HK）','PE / VC 条线']
-roles=['品牌运营总经理','供应链管理部总经理','华南大区运营官','项目顾问']
-hls=[['13 个百分点','25%'],['34%','3.4 亿余元'],['133 家','22%'],['20%']]
+kinds=['港股上市（6831.HK）','华南头部文旅集团','华南头部文旅集团','港股上市（6862.HK）','港股上市（6862.HK）']
+roles=['品牌运营总经理','供应链管理部总经理','供应链管理部总经理','华南大区运营官','华南大区运营官']
+hls=[['13 个百分点','25%'],['34%','3.4 亿余元'],['约一半','75%'],['133 家','22%'],['78%','19%']]
 def proj(i,p):
     return f'''  <div class="project">
     <div class="proj-head">
@@ -37,6 +37,7 @@ for l,sk,em in zip(labels,c['skills'],emph):
     skills+='  <div class="skill-row">\n    <div class="skill-label">'+l+'</div>\n    <div class="skill-body">'+sk.replace(em,SPAN.format(em),1)+'</div>\n  </div>\n'
 
 e=c['education'][0]
+early=''.join('  <div class="edu-row"><div><span class="major">'+x+'</span></div><div class="date"></div></div>\n' for x in c['public_work'])
 body=f'''<body>
 
 <div class="header">
@@ -62,10 +63,11 @@ body=f'''<body>
   <div class="section-title">工作经历<span class="sub">2007 – 至今 · 投行 → 门店运营 → 集团供应链 → 品牌运营</span></div>
   <div class="timeline">
 {tl}  </div>
-{proj(0,P[0])}{proj(1,P[1])}</section>
+{proj(0,P[0])}{proj(1,P[1])}{proj(2,P[2])}{proj(3,P[3])}{proj(4,P[4])}</section>
 
-<section class="page-break">
-{proj(2,P[2])}{proj(3,P[3])}</section>
+<section class="no-break">
+  <div class="section-title">早期经历</div>
+{early}</section>
 
 <section>
   <div class="section-title">核心能力</div>
