@@ -153,6 +153,7 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 | 财报季度分析 | Earner | 单篇 HTML（14 节模板） |
 | 品牌 / 渠道 / 消费行业调研（非提纲非访谈） | restaurant-research | 单篇 HTML |
 | 横向翻页网页 PPT（杂志风 / 瑞士风 / 发布会分享页） | `guizang-ppt-skill` | 单 HTML |
+| **简历 / 求职信 / 推荐信 / 一页纸方案 / 作品集**（单份排版好的 PDF） | `kami` | PDF（`tools/setup_kami.sh` 先装依赖） |
 | 单篇文章 | `design` | — |
 
 **⚠ 本表一律写 skill 的精确可调用名**（如 `guizang-ppt-skill` 不是 `guizang-ppt`）——
@@ -162,6 +163,8 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 **一句话判据：交付物是「一页 HTML」还是「一本 PDF」。** 是一本就走 `huashu-report`。
 
 **显式点名一律优先**：用户说「用 huashu-report」「/huashu-report」时直接走它，不再判形态。
+
+**⚠ kami 的触发词与其他 skill 重叠，按上表划界**：它的 description 也认「白皮书 / PPT / 个股研报 / 简历」。白皮书多章 PDF 仍走 `huashu-report`；网页 PPT 仍走 `guizang-ppt-skill`；财报与个股分析仍走 Earner（14 节模板）。**kami 只接简历、信件、一页纸、作品集这类单份排版件。**
 
 **⚠ 数据表里凡有「总额 + 分项」，总额那条必须声明 `parts`**（2026-09-20 起）：
 ```json
