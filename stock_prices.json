@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-10-23T20:38:08.259089Z",
+  "updated_at": "2026-10-23T23:28:52.726499Z",
   "vix": 19.45,
   "treasury_10y": 4.99,
   "tail_risk": {
     "vix9d": 18.7,
     "vix3m": 20.48,
-    "skew": 152.39,
+    "skew": 151.8,
     "vvix": 109.7,
     "term_structure": 0.95,
     "short_end_ratio": 0.961
@@ -75,8 +75,8 @@
       "low": 210.18,
       "prevClose": 212.21,
       "extended": {
-        "post": 211.23,
-        "postPct": 0.13
+        "post": 211.1,
+        "postPct": 0.07
       }
     },
     "PLTR": {
@@ -87,8 +87,8 @@
       "low": 190.57,
       "prevClose": 196.19,
       "extended": {
-        "post": 196.95,
-        "postPct": 0.1
+        "post": 196.86,
+        "postPct": 0.06
       }
     },
     "TSLA": {
@@ -107,8 +107,8 @@
       "low": 345.75,
       "prevClose": 348.22,
       "extended": {
-        "post": 347.73,
-        "postPct": 0.0
+        "post": 347.4,
+        "postPct": -0.09
       }
     },
     "AMD": {
@@ -119,8 +119,8 @@
       "low": 508.36,
       "prevClose": 507.93,
       "extended": {
-        "post": 518.34,
-        "postPct": 0.3
+        "post": 515.25,
+        "postPct": -0.3
       }
     },
     "MU": {
@@ -131,8 +131,8 @@
       "low": 858.34,
       "prevClose": 856.49,
       "extended": {
-        "post": 880.1,
-        "postPct": 0.29
+        "post": 876.1,
+        "postPct": -0.17
       }
     },
     "GOOGL": {
@@ -143,8 +143,8 @@
       "low": 320.18,
       "prevClose": 324.22,
       "extended": {
-        "post": 321.02,
-        "postPct": 0.25
+        "post": 321.25,
+        "postPct": 0.32
       }
     },
     "VRT": {
@@ -155,8 +155,8 @@
       "low": 187.24,
       "prevClose": 195.59,
       "extended": {
-        "post": 195.66,
-        "postPct": 0.69
+        "post": 194.25,
+        "postPct": -0.04
       }
     },
     "SNDK": {
@@ -167,8 +167,8 @@
       "low": 1228.89,
       "prevClose": 1260.93,
       "extended": {
-        "post": 1238.03,
-        "postPct": 0.0
+        "post": 1236.0,
+        "postPct": -0.16
       }
     },
     "AVGO": {
@@ -179,8 +179,8 @@
       "low": 320.23,
       "prevClose": 323.24,
       "extended": {
-        "post": 321.68,
-        "postPct": 0.0
+        "post": 321.9,
+        "postPct": 0.07
       }
     },
     "GM": {
@@ -199,8 +199,8 @@
       "low": 98.56,
       "prevClose": 104.06,
       "extended": {
-        "post": 99.01,
-        "postPct": 0.0
+        "post": 98.95,
+        "postPct": -0.06
       }
     },
     "SOFI": {
@@ -219,8 +219,8 @@
       "low": 94.79,
       "prevClose": 96.58,
       "extended": {
-        "post": 95.07,
-        "postPct": 0.0
+        "post": 94.7,
+        "postPct": -0.39
       }
     },
     "INTC": {
@@ -231,8 +231,8 @@
       "low": 84.74,
       "prevClose": 85.49,
       "extended": {
-        "post": 87.07,
-        "postPct": 0.13
+        "post": 86.5,
+        "postPct": -0.53
       }
     },
     "F": {
@@ -251,8 +251,8 @@
       "low": 66.43,
       "prevClose": 69.07,
       "extended": {
-        "post": 66.81,
-        "postPct": 0.16
+        "post": 66.99,
+        "postPct": 0.43
       }
     },
     "T": {
