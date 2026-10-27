@@ -1,31 +1,31 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-10-27T15:35:55Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-10-27T15:39:22Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-10-27 15:35 UTC
+自检器 · 2026-10-27 15:39 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
-  restaurant-research-skill hub 187 行   spoke 引用 16 处
-  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
-  earner                   hub 132 行   spoke 引用  6 处
-  us-options-agent         hub 197 行   spoke 引用 14 处
-  burry                    hub 183 行   spoke 引用  8 处
-  tail-risk-monitor        hub 200 行   spoke 引用 12 处
-  expansion-health-tracker hub 140 行   spoke 引用 11 处
   huashu-report            hub 179 行   spoke 引用 15 处
-  kami                     hub 210 行   spoke 引用 32 处
+  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
+  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
+  us-options-agent         hub 197 行   spoke 引用 14 处
+  restaurant-research-skill hub 187 行   spoke 引用 16 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
   merlin                   hub 181 行   spoke 引用  1 处
+  tail-risk-monitor        hub 200 行   spoke 引用 12 处
   sleeper                  hub 164 行   spoke 引用  5 处
-  long-running-agent-sop   hub 109 行   spoke 引用  3 处
-  viral-content-agent      hub 141 行   spoke 引用  7 处
+  expansion-health-tracker hub 140 行   spoke 引用 11 处
   critic                   hub 128 行   spoke 引用  2 处
-  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
+  kami                     hub 210 行   spoke 引用 32 处
+  viral-content-agent      hub 141 行   spoke 引用  7 处
+  burry                    hub 183 行   spoke 引用  8 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
+  earner                   hub 132 行   spoke 引用  6 处
+  long-running-agent-sop   hub 109 行   spoke 引用  3 处
   合计 172 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
