@@ -762,6 +762,9 @@ git show origin/claude/install-claude-hud-d51E6:stock_prices.json
   数据照用，但像作者引用事实那样自然带出（「统计局数据显示」「管理层在业绩会上说」）。
 - 严谨性不丢，转移位置：推算与核对留在研究台账和 predictions.md，不进稿件。Critic 的报告模板项（D3b 附注、D4 反馈链接）对文章体不适用，只跑 D1/D2。
 
+### 1.1zb 用户在手机上看文件：HTML 报告必须同时给 PDF（2026-10-27）
+- 手机端打开 HTML 显示成源码（用户：「你怎么给我些代码？」）。交付 HTML 报告时，同时用 playwright 渲染 PDF（`page.pdf`，A4、printBackground）一并 SendUserFile，PDF 用 display=render。reports/*.pdf 被 .gitignore 忽略，HTML 仍是入库的源文件。
+
 ---
 
 # 六、元规则：关于改进机制本身（2026-09-15 建立）
