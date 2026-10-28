@@ -21,10 +21,10 @@
 **在本 skill 中的用途**：
 - **不要在沙箱内直接调用 Finnhub API**——价格统一走 GitHub Action 缓存：
   Action 内运行 `scripts/fetch_prices.py`（Finnhub 主源 + yfinance 兜底）写入
-  `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json`
+  `https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json`
 - 日扫报告直接读取该文件（curl 或 WebFetch），无需 token，无沙箱限制
-- 缓存机制依赖 main 分支上的 `scripts/fetch_prices.py` + `.github/workflows/fetch-prices.yml`；
-  **修改本地脚本后必须同步推到 main，否则 Action 仍跑旧版**（2026-06-10 踩坑：本地加了 VIX 字段但 main 未部署，缓存长期缺 vix）
+- 缓存机制依赖**默认分支 `claude/install-claude-hud-d51E6`** 上的 `scripts/fetch_prices.py` + `.github/workflows/fetch-prices.yml`；
+  **修改本地脚本后必须推到默认分支（定时任务只在默认分支跑，profile 1.1f），否则 Action 仍跑旧版**（2026-06-10 踩坑：本地加了 VIX 字段但 main 未部署，缓存长期缺 vix）
 
 **覆盖标的**：SPY · QQQ · NVDA · PLTR · TSLA · AAPL · AMD · IWM · GLD（每5分钟更新）
 **新增标的**：在 `.github/workflows/fetch-prices.yml` 的 `tickers` 列表中添加即可。

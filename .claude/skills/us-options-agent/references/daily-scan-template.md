@@ -24,18 +24,18 @@
 > ⚠️ GitHub Actions 定时任务有时延迟，缓存可能已过时数小时。
 > **每次扫描前必须主动触发一次更新，等到价格刷新后才能出报告。**
 
-**触发方式**：用 `mcp__github__push_files` 推一个 trigger 文件到 main 分支：
+**触发方式**：用 `mcp__github__push_files` 推一个 trigger 文件到**默认分支 `claude/install-claude-hud-d51E6`**（不是 main——main 的价格停在 2026-09-02，profile 1.1f）：
 ```json
 owner: "zhenyuanhuang358"
 repo:  "work"
-branch: "main"
+branch: "claude/install-claude-hud-d51E6"
 message: "trigger: refresh stock prices for options scan [当前日期]"
 files: [{"path": "price_fetch_trigger.txt", "content": "[当前日期时间] triggered by options scan pre-fetch"}]
 ```
 
 推送后，**使用 Bash 轮询等待**，直到 `stock_prices.json` 的 `updated_at` 超过今日零点：
 ```bash
-until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json" \
+until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if d['updated_at'] > '[当前日期]T00:00:00' else 1)" \
   2>/dev/null; do sleep 5; done && echo "prices updated"
 ```
@@ -56,7 +56,7 @@ until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/sto
 
 **读取方式**（WebFetch 调用）：
 ```
-URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
+URL: https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json
 ```
 
 **文件结构**（含 VIX + 10年期国债收益率）：

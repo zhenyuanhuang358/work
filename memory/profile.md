@@ -301,11 +301,11 @@ curl -sS -o /dev/null -w "%{http_code}" -L <url>  # CONNECT tunnel failed = 代�
 
 ```
 R-D0: 期权扫描前 → 必须先触发 GitHub Action 更新价格缓存，等 updated_at 刷新后才出报告
-      触发：push price_fetch_trigger.txt 到 main 分支
+      触发：push price_fetch_trigger.txt 到默认分支 claude/install-claude-hud-d51E6（不是 main：main 价格停在 2026-09-02，见 1.1f）
       验证：轮询 stock_prices.json updated_at > 当日零点
 
 R-D1: 股票实时价格 → 必须从 GitHub 缓存 stock_prices.json 读取，不得用 WebSearch 代替
-      缓存地址：https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
+      缓存地址：https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json
       后端：GitHub Action 运行 scripts/fetch_prices.py（Finnhub 主源 + yfinance 兜底）
       缓存外标的：WebSearch 兜底，报告中注明「需在平台二次确认」
       （历史：2026-05 曾用 iTick API，已废弃；.env 现存 FINNHUB_TOKEN）
@@ -394,7 +394,7 @@ R-C4: SVG 图表必须在 <svg> 标签声明字体：
 | 项目 | 值 |
 |------|---|
 | Finnhub Token | `FINNHUB_TOKEN`（存于 `/home/user/work/.env` + GitHub Secrets） |
-| 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json` |
+| 价格缓存 | `https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json` |
 | 反馈表单 URL | `https://spontaneous-youtiao-b9cde9.netlify.app` |
 | Git 工作分支 | `claude/install-claude-hud-d51E6` |
 | 研究缓存路径 | `research_cache/{slug}.json` |

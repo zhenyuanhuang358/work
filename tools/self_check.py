@@ -335,6 +335,57 @@ def check_skill_routing():
         say("  所有 skill 都有触发词，无需路由兜底")
 
 
+# ── C10 · COO 流水线点名的 skill 必须真实存在；运行记录不能烂尾 ─────────────────
+# 2026-10-28 建 COO 总调度时同步建。两个失效方式都是静默的：
+#   ① 流水线写错 skill 名（同 1.2i 路由表写错名）——照着叫叫不中，看起来却像串好了；
+#   ② 运行记录停在「进行中」——跨会话续跑的依据烂在那里，没人知道有活没做完。
+# 用声明不用猜（1.2m）：每个 pipeline spoke 第一行声明 <!-- skills: a, b -->，只核声明。
+def check_coo_pipelines():
+    say("\n[C10] COO 流水线引用与运行记录")
+    import datetime
+    refdir = os.path.join(REPO, ".claude/skills/coo/references")
+    skdir = os.path.join(REPO, ".claude/skills")
+    if not os.path.isdir(refdir):
+        say("  未安装 coo，跳过")
+        return
+    for fn in sorted(os.listdir(refdir)):
+        if not fn.startswith("pipeline-"):
+            continue
+        txt = open(os.path.join(refdir, fn), encoding="utf-8").read()
+        m = re.search(r"<!--\s*skills:\s*([^>]*?)\s*-->", txt)
+        if not m:
+            say(f"  {fn:<26} ❌ 无 skills 声明")
+            flag("P2", f"coo/{fn}", "流水线没有 <!-- skills: … --> 声明，C10 无法核对它调用的 skill 是否存在")
+            continue
+        names = [n.strip() for n in m.group(1).split(",") if n.strip()]
+        bad = [n for n in names if not os.path.exists(os.path.join(skdir, n, "SKILL.md"))]
+        say(f"  {fn:<26} {'✅' if not bad else '❌'} {len(names)} 个 skill" + (f"，不存在：{', '.join(bad)}" if bad else ""))
+        if bad:
+            flag("P1", f"coo/{fn}", f"流水线点名的 skill 不存在：{', '.join(bad)} — 照着叫会叫不中（1.2i）")
+    rundir = os.path.join(REPO, "memory/state/runs")
+    if not os.path.isdir(rundir):
+        say("  运行记录：0 份")
+        return
+    today = datetime.date.today()
+    stale, n = [], 0
+    for fn in sorted(os.listdir(rundir)):
+        if not fn.endswith(".md"):
+            continue
+        n += 1
+        txt = open(os.path.join(rundir, fn), encoding="utf-8").read()
+        st = re.search(r"^状态：\s*(\S+)", txt, re.M)
+        state = st.group(1) if st else "未写状态"
+        try:
+            d = datetime.date.fromisoformat(fn[:10])
+        except ValueError:
+            d = today
+        if state not in ("完成", "放弃") and (today - d).days > 2:
+            stale.append(f"{fn}（{state}，{(today - d).days} 天）")
+    say(f"  运行记录：{n} 份｜超过 2 天未完成 {len(stale)} 份")
+    for s_ in stale:
+        flag("P2", "memory/state/runs", f"运行记录烂尾：{s_} — 续跑或标「放弃」")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -348,6 +399,7 @@ def main():
     check_sums()
     check_keys_rule()
     check_candidate_ledger()
+    check_coo_pipelines()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

@@ -5,7 +5,7 @@
 ## 主源：GitHub 价格缓存（唯一可信来源）
 
 ```
-https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
+https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json
 ```
 
 **结构**（`tail_risk` 区块由 `scripts/fetch_prices.py` 生成）：
@@ -35,15 +35,15 @@ https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json
 
 缓存由 GitHub Action 维护，定时任务可能滞后数小时。**每次判定前必须主动触发刷新。**
 
-**Step 1 — 触发**：用 `mcp__github__push_files` 推 trigger 文件到 main
+**Step 1 — 触发**：用 `mcp__github__push_files` 推 trigger 文件到默认分支 `claude/install-claude-hud-d51E6`（不是 main，profile 1.1f）
 ```
-owner: zhenyuanhuang358    repo: work    branch: main
+owner: zhenyuanhuang358    repo: work    branch: claude/install-claude-hud-d51E6
 files: [{"path": "price_fetch_trigger.txt", "content": "[ISO时间] triggered by tail-risk-monitor"}]
 ```
 
 **Step 2 — 轮询等待**，直到 `updated_at` 超过当日零点：
 ```bash
-until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/stock_prices.json" \
+until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/claude/install-claude-hud-d51E6/stock_prices.json" \
   | python3 -c "import sys,json; d=json.load(sys.stdin); exit(0 if d['updated_at'] > '[当前日期]T00:00:00' else 1)" \
   2>/dev/null; do sleep 8; done && echo "prices updated"
 ```
@@ -75,7 +75,7 @@ until curl -sf "https://raw.githubusercontent.com/zhenyuanhuang358/work/main/sto
 | 故障 | 处理 |
 |------|------|
 | 整个缓存文件拉取失败 | WebSearch 兜底查 VIX/SKEW/VVIX 当前值，报告顶部注明「数据来自网络检索，非缓存，需平台二次确认」 |
-| `tail_risk` 区块缺失（脚本未部署） | 检查 main 分支 `scripts/fetch_prices.py` 是否含 INDEX_TICKERS 的四个尾部指标；缺失则说明未同步推 main（参见 profile.md 1.1 节同类事故） |
+| `tail_risk` 区块缺失（脚本未部署） | 检查默认分支 `scripts/fetch_prices.py` 是否含 INDEX_TICKERS 的四个尾部指标；缺失则说明未推到默认分支（参见 profile.md 1.1 节同类事故） |
 | 单个指标为 null | 该指标不计分，标注「X/4 可用」，置信度降一级；仅1个可用时不输出灯色 |
 | Action 长时间不更新 | 查 GitHub Actions 页面 fetch-prices 最新 run 日志；期间不出裁定 |
 

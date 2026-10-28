@@ -183,6 +183,27 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 
 ---
 
+# 流水线总调度 COO（2026-10-28 定）
+
+**⚠ 为什么写在这里**：用户的瓶颈是「每一步都要我手动喊」。如果还得先喊「COO」，
+只是把「手动串流程」换成了「手动喊调度」。CLAUDE.md 永远加载，一处生效。
+
+**规则**：以下四类任务，**用户没喊 COO 也先加载 `.claude/skills/coo/SKILL.md`**，
+由它路由到领域 skill 并一路跑到交付、记账、推送——中间不停下来问「要不要继续」：
+
+| 任务 | 流水线 |
+|---|---|
+| 客户提纲 / 访谈准备 / 尽调 / 品牌调研 | `coo/references/pipeline-research.md` |
+| 期权扫描 / 持仓复核 / 期权定时提醒 | `coo/references/pipeline-options.md` |
+| 选题 / 写文章 / 做分享页 | `coo/references/pipeline-content.md` |
+| 财报分析 | `coo/references/pipeline-earnings.md` |
+
+**只在 COO 列出的几个决策点停下来**（选题、开平仓与张数、Critic 两轮不过、合规存疑、路由判不清）。
+**用户只问一个具体问题**（「UBER 现在多少」「这个数字对吗」）时不走流水线，直接答。
+**跨会话续跑**：开场若 `memory/state/runs/` 有「进行中」记录，先告诉用户并问是否续跑；`self_check.py` C10 会点名烂尾记录。
+
+---
+
 # Critic 质量门控
 
 **每次 `SendUserFile` 推送 HTML 研究报告前，必须先运行 `.claude/skills/critic/SKILL.md`，输出裁定结果（PASS / CONDITIONAL / REWRITE），再决定是否推送。**

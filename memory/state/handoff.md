@@ -50,6 +50,10 @@
 3. ~~统一止损规则~~ **已做（10/27）**：用户定「期权价格 ≥ 2× 开仓收入」平仓；strategy-catalog / analysis-template 已改齐。
 4. INTC 最后一张平仓价补记（待用户提供）。
 5. 另一分支 `origin/claude/us-stock-opportunities-htj5ur`：**用户 10/27 定「先不合并」**——不要再主动提合并；用户重新提起时再议（届时 predictions.md 的 9/25 行会冲突，内容一致）。
+7. **COO 总调度（10/28 建）**：`.claude/skills/coo/`（hub + 4 条流水线 + 关卡 + 运行记录模板）、`tools/render_pdf.js`、self_check C10、CLAUDE.md「流水线总调度」一节。
+   **第一次真实验证 = 10/29 期权提醒**（已改为走 `/coo 期权`），跑完看运行记录末尾「流水线问题」再修。其余三条流水线等第一次真实任务再验。
+   表外业务线（跨国投资 / 产业投资 / 企业运营 / 文旅投资运营）暂借调研流水线，同类活满 3 次再考虑建专属 skill。
+   同日修复：价格缓存 main→默认分支（main 停在 9/02；daily-scan-template / 两份 data-sources / profile R-D0、R-D1、配置速查）。
 6. 可选：用户有具体面试时做面试准备包（ai-job-search 思路，未安装该仓库）。
 
 ## 4. 已跑测试 / 检查及结果（交接时）
