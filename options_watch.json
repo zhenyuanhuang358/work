@@ -1,0 +1,7 @@
+{
+  "_note": "期权链关注清单：扫描时改这里（候选标的 + 到期日）并推送，fetch-options 工作流会抓 options_chain.json。band = 只取现价 ±band 的行权价。",
+  "expiries": ["2026-10-30", "2026-11-06"],
+  "right": "P",
+  "band": 0.2,
+  "tickers": ["UBER", "F", "T", "SGI", "KO", "XLE", "GLD", "IWM", "SPY", "QQQ"]
+}

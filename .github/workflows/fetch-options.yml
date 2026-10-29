@@ -1,0 +1,35 @@
+name: Fetch Options Chain
+
+# 按需抓期权链（不跑定时：期权链体积大，只在扫描时需要）。
+# 触发：改 options_watch.json（换候选）或 price_fetch_trigger.txt（每次扫描前的抓价触发）。
+on:
+  push:
+    branches: [main, claude/install-claude-hud-d51E6]
+    paths:
+      - options_watch.json
+      - price_fetch_trigger.txt
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install yfinance requests -q
+      - run: python3 scripts/fetch_options.py
+      - name: Commit options_chain.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # 顺序 add → commit → pull --rebase → push，理由见 fetch-prices.yml（2026-09-18）
+          git add options_chain.json
+          git diff --cached --quiet && echo "nothing to commit" || \
+            git commit -m "chore: refresh options chain $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          git pull --rebase origin "$GITHUB_REF_NAME" \
+            || { echo "::error::git pull --rebase 失败，本轮期权链未写回"; exit 1; }
+          git push origin "HEAD:$GITHUB_REF_NAME"
