@@ -54,6 +54,7 @@
    **第一次真实验证 = 10/29 期权提醒**（已改为走 `/coo 期权`），跑完看运行记录末尾「流水线问题」再修。其余三条流水线等第一次真实任务再验。
    表外业务线（跨国投资 / 产业投资 / 企业运营 / 文旅投资运营）暂借调研流水线，同类活满 3 次再考虑建专属 skill。
    同日修复：价格缓存 main→默认分支（main 停在 9/02；daily-scan-template / 两份 data-sources / profile R-D0、R-D1、配置速查）。
+8. **期权链自动化（10/29 建）**：`options_watch.json` → `fetch-options.yml` → `options_chain.json` → `tools/option_quote.py`。CBOE 延迟报价主、yfinance 兜底；profile 1.1x 第 4 条、pricing-boundary、data-sources、pipeline-options 步骤 7 已同步。
 6. 可选：用户有具体面试时做面试准备包（ai-job-search 思路，未安装该仓库）。
 
 ## 4. 已跑测试 / 检查及结果（交接时）
