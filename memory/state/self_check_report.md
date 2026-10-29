@@ -1,32 +1,32 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-10-28T03:12:04Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-10-29T05:28:47Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-10-28 03:12 UTC
+自检器 · 2026-10-29 05:28 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
-  huashu-report            hub 179 行   spoke 引用 15 处
-  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
-  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
-  us-options-agent         hub 197 行   spoke 引用 14 处
   restaurant-research-skill hub 187 行   spoke 引用 16 处
+  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
+  earner                   hub 132 行   spoke 引用  6 处
+  coo                      hub 104 行   spoke 引用 11 处
+  us-options-agent         hub 197 行   spoke 引用 14 处
+  burry                    hub 183 行   spoke 引用  8 处
+  tail-risk-monitor        hub 200 行   spoke 引用 12 处
+  expansion-health-tracker hub 140 行   spoke 引用 11 处
+  huashu-report            hub 179 行   spoke 引用 15 处
+  kami                     hub 210 行   spoke 引用 32 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
   merlin                   hub 181 行   spoke 引用  1 处
-  tail-risk-monitor        hub 200 行   spoke 引用 12 处
   sleeper                  hub 164 行   spoke 引用  5 处
-  expansion-health-tracker hub 140 行   spoke 引用 11 处
-  critic                   hub 128 行   spoke 引用  2 处
-  kami                     hub 210 行   spoke 引用 32 处
-  viral-content-agent      hub 141 行   spoke 引用  7 处
-  coo                      hub 104 行   spoke 引用 11 处
-  burry                    hub 183 行   spoke 引用  8 处
-  buffett-analyst          hub 153 行   spoke 引用 10 处
-  earner                   hub 132 行   spoke 引用  6 处
   long-running-agent-sop   hub 109 行   spoke 引用  3 处
+  viral-content-agent      hub 141 行   spoke 引用  7 处
+  critic                   hub 128 行   spoke 引用  2 处
+  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
+  buffett-analyst          hub 153 行   spoke 引用 10 处
   合计 183 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
@@ -42,10 +42,10 @@
   被测阈值 9 个，漂移 0 个
 
 [C4] 预测记分卡  (1.1j：不记分就学不到)
-  明细 17 条｜已记分 15（排除⊘）｜✅8 ❌5｜命中率 53.3%｜待验 11 条
+  明细 17 条｜已记分 15（排除⊘）｜✅8 ❌5｜命中率 53.3%｜待验 12 条
   无到期未记分项
   分档：已分档 1 条｜建档前未分档 14 条（不参与分档统计）
-        待验 11 条中 8 条已填把握档  ← 新登记都在填，规则在执行
+        待验 12 条中 9 条已填把握档  ← 新登记都在填，规则在执行
     中 档  1 条｜✅0 ❌0｜命中率 0.0%
   样本 1/20，**不对分档有效性下任何结论**（不到门槛就说「我高把握的准」是拿噪声当发现）
 
@@ -79,10 +79,13 @@
   pipeline-earnings.md       ✅ 2 个 skill
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
-  运行记录：0 份
+  运行记录：1 份｜超过 2 天未完成 0 份
 
 ==========================================================================
-发现 1 项：
+发现 2 项：
+
+  [P2] memory/state/options-candidates.jsonl
+        journal 有扫描但候选未登记：2026-10-29——漏登的那天无法事后补（不知道当时屏幕上有什么）
 
   [P3] kami/SKILL.md
         hub 210 行，超 CLAUDE.md 的 200 行目标 10 行
@@ -91,56 +94,56 @@
 
 ## 规则回放
 ```
-规则回放 · 64 个交易日 · 2026-08-03 至 2026-10-27
+规则回放 · 65 个交易日 · 2026-08-03 至 2026-10-28
 ==============================================================================
 
 [1] 各指标在三档中的停留比例（死条款 / 恒触发条款检测）
-  term_structure   绿  98.4%   黄   1.6%   红   0.0%   观测 0.77–0.98  首档阈值 0.95  距极值 -2.6%
+  term_structure   绿  98.5%   黄   1.5%   红   0.0%   观测 0.77–0.98  首档阈值 0.95  距极值 -2.6%
                    └ 近 20 日非绿档占比 5%（常驻线 80%）
-  skew             绿  17.2%   黄  54.7%   红  28.1%   观测 126.41–168.59  首档阈值 140  距极值 -17.0%
+  skew             绿  16.9%   黄  55.4%   红  27.7%   观测 126.41–168.59  首档阈值 140  距极值 -17.0%
                    └ 近 20 日非绿档占比 100%（常驻线 80%）  → 判为常驻项，应剔除出共振计数
-  vvix             绿  90.6%   黄   9.4%   红   0.0%   观测 82.59–109.91  首档阈值 100  距极值 -9.0%
+  vvix             绿  90.8%   黄   9.2%   红   0.0%   观测 82.59–109.91  首档阈值 100  距极值 -9.0%
                    └ 近 20 日非绿档占比 25%（常驻线 80%）
   vix              绿 100.0%   黄   0.0%   红   0.0%   观测 14.21–19.99  首档阈值 20  距极值 +0.1%
                    └ 样本期未触发，但阈值距极值仅 0.1%，够得着，不判死条款
                    └ 近 20 日非绿档占比 0%（常驻线 80%）
 
 [2] 灯色分布
-  绿灯   57 天   89.1%
-  黄灯    1 天    1.6%
-  红灯    6 天    9.4%
+  绿灯   58 天   89.2%
+  黄灯    1 天    1.5%
+  红灯    6 天    9.2%
 
 [3] 非绿档由谁贡献（共振规则的真实基础）
-  term_structure     1/64 天贡献非绿档  (  1.6%)
-  skew              53/64 天贡献非绿档  ( 82.8%)
-  vvix               6/64 天贡献非绿档  (  9.4%)
-  vix                0/64 天贡献非绿档  (  0.0%)
+  term_structure     1/65 天贡献非绿档  (  1.5%)
+  skew              54/65 天贡献非绿档  ( 83.1%)
+  vvix               6/65 天贡献非绿档  (  9.2%)
+  vix                0/65 天贡献非绿档  (  0.0%)
 
   非绿档组合分布：
-    skew                                47 天   73.4%
-    （全绿）                                11 天   17.2%
-    skew + vvix                          5 天    7.8%
-    skew + term_structure + vvix         1 天    1.6%
+    skew                                48 天   73.8%
+    （全绿）                                11 天   16.9%
+    skew + vvix                          5 天    7.7%
+    skew + term_structure + vvix         1 天    1.5%
 
 [4] 加速度条款触发率（1.1o 的门槛校准检查）
-  任一触发：4/64 天  (6.2%)
+  任一触发：4/65 天  (6.2%)
     term_structure   1d >10%    0 天    0.0%
     term_structure   3d >20%    0 天    0.0%
     skew             1d >10%    0 天    0.0%
     skew             3d >20%    0 天    0.0%
-    vvix             1d >10%    3 天    4.7%
+    vvix             1d >10%    3 天    4.6%
     vvix             3d >20%    2 天    3.1%
-    vix              1d >10%    3 天    4.7%
-    vix              3d >20%    1 天    1.6%
+    vix              1d >10%    3 天    4.6%
+    vix              3d >20%    1 天    1.5%
 
   各指标平均单日绝对变动（门槛是否该共用的依据）：
-    term_structure   2.52%   (10% 门槛 = 其常态的 4.0 倍)
-    skew             1.77%   (10% 门槛 = 其常态的 5.6 倍)
-    vvix             3.74%   (10% 门槛 = 其常态的 2.7 倍)
-    vix              4.66%   (10% 门槛 = 其常态的 2.1 倍)
+    term_structure   2.51%   (10% 门槛 = 其常态的 4.0 倍)
+    skew             1.75%   (10% 门槛 = 其常态的 5.7 倍)
+    vvix             3.72%   (10% 门槛 = 其常态的 2.7 倍)
+    vix              4.64%   (10% 门槛 = 其常态的 2.2 倍)
 
 [5] 期限溢价开窗率（VIX3M/VIX ≥ 1.20）
-  开窗 22/64 天  (34.4%)   区间 1.026 – 1.295
+  开窗 22/65 天  (33.8%)   区间 1.026 – 1.295
 
 [6] 阈值漂移检查（本脚本 vs SKILL.md）
   未发现漂移
