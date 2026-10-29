@@ -15,7 +15,7 @@
 | 4 | 尾部闸门 | `tail-risk-monitor` 工作流 Step 1–5 | 灯色 + 期限溢价（≥1.20 才开 30–45 天档） |
 | 5 | 宏观日历 | `us-options-agent/references/macro-events.md` | 未来 5 个交易日事件；**事件前一交易日不新开** |
 | 6 | 存量复核 | `us-options-agent/references/position-discipline.md` 四条 | 每个仓位：持有 / 减半 / 全平。**有违规存量 → 本次只出存量方案，跳到 9** |
-| 7 | 新候选扫描 | `us-options-agent` 每日扫描初筛 → 候选写进 `options_watch.json`（标的 + 到期日）并推送 → 等 `options_chain.json` 更新 → `python3 tools/option_quote.py --ticker X --expiry D --z-min 1.0/1.2` 出 IV/z/收入；价差两腿报价喂 `tools/spread_check.py` | 候选表（含否决的与否决理由）。**不再需要用户截图报价**（2026-10-29 起） |
+| 7 | 新候选扫描 | `us-options-agent` 每日扫描初筛 → 候选写进 `options_watch.json`（标的 + 到期日）并推送 → 等 `options_chain.json` 更新 → `python3 tools/option_quote.py --ticker X --expiry D --z-min 1.0/1.2 --bp <可用购买力>` 出 IV/z/收入/保证金；**只推单腿裸卖、保证金 ≤ 购买力**（盈立无组合单，position-discipline 第 5 条）。购买力用用户最新截图值并注明日期 | 候选表（含否决的与否决理由）。**不再需要用户截图报价**（2026-10-29 起） |
 | 8 | 全量登记候选 | 每个候选（含否决）`python3 tools/candidate_ledger.py add --ticker … --verdict …` | — |
 | 9 | 对话内交付 | 先存量、后新仓；资金/R4/R5 只**提示**不否决（profile 1.1t） | 用户决定 |
 | 10 | 等用户决定 | 开仓前必问两句：止损条件单挂在多少？张数按「止损亏损 ≤ 净值 5%」算的吗？ | 用户回复 → 写 journal |

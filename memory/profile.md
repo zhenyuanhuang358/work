@@ -773,7 +773,9 @@ git show origin/claude/install-claude-hud-d51E6:stock_prices.json
 - 事实：SPY 744/741 价差（最大亏损 $284）在平台下单时被要求一万多美元保证金——按裸卖 744P 计。用户确认「盈立没有组合单」。
 - 后果：position-discipline 第 3 条「接货 > 净值默认价差」产出的候选，在用户账户里**可能全部不可执行**。推了也下不了，等于没推。
 - 规则：价差候选标「分腿：先买后卖；保证金是否按价差计未证实」，证实前不当作可下单推荐。
-- 承载物：position-discipline 第 3 条、us-options-agent hub 存量纪律段。
+- **用户 10/29 同意的规则**：只推单腿裸卖 put，Reg-T 保证金 ≤ 可用购买力（硬过滤）。Reg-T 公式用 SPY 744P 校准过（算 $12,980，平台「一万多」）。
+  与 1.1t 的边界：偏好（接货占净值、风控水位）只提示；**可执行性（平台收不收单）是硬过滤**。
+- 承载物：position-discipline 第 3、5 条、us-options-agent hub、`tools/option_quote.py --bp`、pipeline-options 步骤 7。
 
 ---
 
