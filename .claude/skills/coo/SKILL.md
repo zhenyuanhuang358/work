@@ -65,7 +65,7 @@ description: >
 | G5 | 记账：research-ledger / options-journal / candidate_ledger | 按流水线 | 不记 = 下次从零重做 |
 | G6 | 提交推送 + 运行记录标完成 | 每次 | 推送被拒 → fetch + merge 后重推 |
 
-**关卡顺序不可调**：G1 在 G2 前（Critic 不查合规）；G4/G5 在交付后、推送前（交付后才知道最终数字）。
+**关卡顺序不可调**：G1 在 G2 前（Critic 不查合规）；G4 在数字定稿后、Critic 终审前（报告附注会引用登记结果）；G5 在交付后、推送前。
 
 ## 停下来问用户的点（只有这些，其余一律自己往下走）
 
