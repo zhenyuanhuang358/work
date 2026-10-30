@@ -30,6 +30,12 @@ jobs:
           git add options_chain.json
           git diff --cached --quiet && echo "nothing to commit" || \
             git commit -m "chore: refresh options chain $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
-          git pull --rebase origin "$GITHUB_REF_NAME" \
-            || { echo "::error::git pull --rebase 失败，本轮期权链未写回"; exit 1; }
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          # ⚠ 2026-10-30：fetch-prices 与 fetch-options 被同一次推送同时触发，先推的那个让另一个的 push 被拒
+          #   （cannot lock ref）。rebase 只在推之前做一次不够——推送失败时要重新同步再推。
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" \
+              || { echo "::error::git pull --rebase 失败，本轮期权链未写回"; exit 1; }
+            git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            echo "push 被拒（远端有新提交），第 $i 次重试"; sleep $((i * 3))
+          done
+          echo "::error::重试 5 次仍推送失败，本轮期权链未写回"; exit 1
