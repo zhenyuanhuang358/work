@@ -230,9 +230,12 @@ def check_candidate_ledger():
     last = max((r["logged"][:10] for r in rows), default=None)
     n_rej = sum(1 for r in rows if r["verdict"] == "否决")
     say(f"  已登记 {len(rows)} 条（否决 {n_rej}）｜最近登记 {last or '—'}")
-    scans = re.findall(r"^## (\d{4}-\d{2}-\d{2}).*扫描", open(journal, encoding="utf-8").read(), re.M) \
-        if os.path.exists(journal) else []
-    missed = sorted({d for d in scans if d >= "2026-10-01" and (last is None or d > last)})
+    jtxt = open(journal, encoding="utf-8").read() if os.path.exists(journal) else ""
+    scans = re.findall(r"^## (\d{4}-\d{2}-\d{2}).*扫描", jtxt, re.M)
+    # 2026-10-31：红灯日按规则不扫新候选，账本本来就该是空的——不算漏登（否则误报，1.2m ③）。
+    #   判据要求 journal 当天明写「红灯日不扫新候选」，不靠猜。
+    red = set(re.findall(r"^## (\d{4}-\d{2}-\d{2})(?:(?!\n## ).)*?红灯日不扫新候选", jtxt, re.M | re.S))
+    missed = sorted({d for d in scans if d >= "2026-10-01" and (last is None or d > last) and d not in red})
     if missed:
         flag("P2", "memory/state/options-candidates.jsonl",
              f"journal 有扫描但候选未登记：{', '.join(missed)}——漏登的那天无法事后补（不知道当时屏幕上有什么）")
@@ -333,6 +336,21 @@ def check_skill_routing():
                  "解法：在 CLAUDE.md 路由表加一行（不要改第三方文件，upstream 更新会冲突）")
     if n_no_trigger == 0:
         say("  所有 skill 都有触发词，无需路由兜底")
+
+    # ⚠ 2026-10-31 补：CLAUDE.md 一直写着「C5 会逐个核对表里的名字」，实际从未核对——
+    #   路由表「单篇文章 → `design`」指向一个不存在的 skill，挂了一个多月没人发现（1.2i 的同一个坑，
+    #   而且这次连检测器都只存在于文字里，1.2a）。只核对路由表那一节里反引号包住的名字。
+    sec = ctxt.split("# 报告类任务的路由", 1)[-1].split("\n# ", 1)[0] if "# 报告类任务的路由" in ctxt else ""
+    names = set()
+    for line in sec.splitlines():
+        if line.startswith("|") and line.count("|") >= 4:
+            cells = [c.strip() for c in line.strip("|").split("|")]
+            if len(cells) >= 2:
+                names.update(re.findall(r"`([a-z0-9][a-z0-9-]+)`", cells[1]))
+    missing = sorted(n for n in names if not os.path.exists(os.path.join(skdir, n, "SKILL.md")))
+    say(f"  路由表点名的 skill {len(names)} 个，不存在 {len(missing)} 个" + (f"：{', '.join(missing)}" if missing else ""))
+    for n in missing:
+        flag("P1", "CLAUDE.md 路由表", f"路由到不存在的 skill `{n}`——照着路由表叫会叫不中，看起来却像已经解决了（1.2i）")
 
 
 # ── C10 · COO 流水线点名的 skill 必须真实存在；运行记录不能烂尾 ─────────────────

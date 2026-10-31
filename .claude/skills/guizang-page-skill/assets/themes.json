@@ -1,0 +1,165 @@
+{
+  "$comment": "guizang-design 生成，不要手改。colors 切 <html data-theme>，主题的色值在 assets/gz-<家族>.css 里；fonts 只换西文字形",
+  "magazine": {
+    "default": "ink-classic",
+    "fontIds": [
+      "playfair-display",
+      "noto-serif-sc",
+      "source-serif-4",
+      "noto-sans-sc",
+      "ibm-plex-mono",
+      "inter"
+    ],
+    "colors": [
+      {
+        "id": "ink-classic",
+        "name": "墨水经典",
+        "en": "Ink Classic",
+        "scheme": "light",
+        "paper": "#f1efea",
+        "ink": "#0a0a0b",
+        "accent": "#111111"
+      },
+      {
+        "id": "indigo-porcelain",
+        "name": "靛蓝瓷",
+        "en": "Indigo Porcelain",
+        "scheme": "light",
+        "paper": "#f1f3f5",
+        "ink": "#0a1f3d",
+        "accent": "#315d93"
+      },
+      {
+        "id": "forest-ink",
+        "name": "森林墨",
+        "en": "Forest Ink",
+        "scheme": "light",
+        "paper": "#f5f1e8",
+        "ink": "#1a2e1f",
+        "accent": "#2e6b4f"
+      },
+      {
+        "id": "kraft-paper",
+        "name": "牛皮纸",
+        "en": "Kraft Paper",
+        "scheme": "light",
+        "paper": "#eedfc7",
+        "ink": "#2a1e13",
+        "accent": "#9b5a2e"
+      },
+      {
+        "id": "dune",
+        "name": "沙丘",
+        "en": "Dune",
+        "scheme": "light",
+        "paper": "#f0e6d2",
+        "ink": "#1f1a14",
+        "accent": "#8f7650"
+      },
+      {
+        "id": "midnight-ink",
+        "name": "午夜墨",
+        "en": "Midnight Ink",
+        "scheme": "dark",
+        "paper": "#0e0d0c",
+        "ink": "#ece2cf",
+        "accent": "#d4a04a"
+      }
+    ],
+    "fontVars": [
+      "--font-serif"
+    ],
+    "preview": "衬线 Aa",
+    "fonts": [
+      {
+        "id": "source-serif-4",
+        "name": "Source Serif 4",
+        "family": "'Source Serif 4','Noto Serif SC','Source Han Serif SC','Songti SC','STSong',Georgia,serif",
+        "href": "https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,200..900;1,200..900&display=swap"
+      },
+      {
+        "id": "noto-serif-sc",
+        "name": "Noto Serif SC",
+        "family": "'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',Georgia,serif",
+        "href": "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap"
+      },
+      {
+        "id": "playfair-display",
+        "name": "Playfair Display",
+        "family": "'Playfair Display','Noto Serif SC','Source Han Serif SC','Songti SC','STSong',Georgia,serif",
+        "href": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      }
+    ]
+  },
+  "swiss": {
+    "default": "ikb",
+    "fontIds": [
+      "inter",
+      "noto-sans-sc",
+      "jetbrains-mono"
+    ],
+    "colors": [
+      {
+        "id": "ikb",
+        "name": "克莱因蓝",
+        "en": "IKB",
+        "scheme": "light",
+        "paper": "#fafaf8",
+        "ink": "#0a0a0a",
+        "accent": "#002FA7"
+      },
+      {
+        "id": "lemon",
+        "name": "柠檬黄",
+        "en": "Lemon",
+        "scheme": "light",
+        "paper": "#fafaf8",
+        "ink": "#0a0a0a",
+        "accent": "#FFD500"
+      },
+      {
+        "id": "lemon-green",
+        "name": "柠檬绿",
+        "en": "Lemon Green",
+        "scheme": "light",
+        "paper": "#fafaf8",
+        "ink": "#0a0a0a",
+        "accent": "#C5E803"
+      },
+      {
+        "id": "safety-orange",
+        "name": "安全橙",
+        "en": "Safety Orange",
+        "scheme": "light",
+        "paper": "#fafaf8",
+        "ink": "#0a0a0a",
+        "accent": "#FF6B35"
+      }
+    ],
+    "fontVars": [
+      "--font-sans",
+      "--font-display"
+    ],
+    "preview": "黑体 Aa",
+    "fonts": [
+      {
+        "id": "inter",
+        "name": "Inter",
+        "family": "'Inter','Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif",
+        "href": "https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      },
+      {
+        "id": "dm-sans",
+        "name": "DM Sans",
+        "family": "'DM Sans','Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif",
+        "href": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@100..1000&display=swap"
+      },
+      {
+        "id": "space-grotesk",
+        "name": "Space Grotesk",
+        "family": "'Space Grotesk','Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,sans-serif",
+        "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      }
+    ]
+  }
+}
