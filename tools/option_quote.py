@@ -49,7 +49,7 @@ def main():
     ap.add_argument("--z-min", type=float, default=1.0, help="持有期含 CPI/PPI/FOMC/非农时用 1.2")
     ap.add_argument("--max-age", type=float, default=20, help="报价最长可接受分钟数")
     ap.add_argument("--file", default="options_chain.json")
-    ap.add_argument("--bp", type=float, help="平台当前可用购买力（美元）；给了就按 Reg-T 保证金做可执行性硬过滤（profile 1.1zc）")
+    ap.add_argument("--bp", type=float, help="平台「可取现金」（美元，不是「最大购买力」）；给了就按 Reg-T 保证金做可执行性硬过滤（profile 1.1zc）")
     a = ap.parse_args()
 
     j = json.load(open(a.file))
@@ -100,7 +100,7 @@ def main():
             mark = "⛔保证金"
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {mark}")
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
-          + (f"\n⛔保证金 = 单张保证金 > 可用购买力 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
+          + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))
 
 
