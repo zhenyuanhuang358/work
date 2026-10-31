@@ -1,21 +1,23 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-10-31T02:25:46Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-10-31T04:51:14Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-10-31 02:25 UTC
+自检器 · 2026-10-31 04:51 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
   restaurant-research-skill hub 187 行   spoke 引用 16 处
+  guizang-page-skill       hub 208 行   spoke 引用  5 处
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
   earner                   hub 132 行   spoke 引用  6 处
   coo                      hub 104 行   spoke 引用 11 处
   us-options-agent         hub 197 行   spoke 引用 14 处
   burry                    hub 183 行   spoke 引用  8 处
   tail-risk-monitor        hub 200 行   spoke 引用 12 处
+  humanizer-zh             hub 408 行   spoke 引用  0 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
   huashu-report            hub 179 行   spoke 引用 15 处
   kami                     hub 210 行   spoke 引用 32 处
@@ -23,11 +25,12 @@
   merlin                   hub 181 行   spoke 引用  1 处
   sleeper                  hub 164 行   spoke 引用  5 处
   long-running-agent-sop   hub 109 行   spoke 引用  3 处
+  guizang-social-card-skill hub 338 行   spoke 引用 30 处
   viral-content-agent      hub 141 行   spoke 引用  7 处
   critic                   hub 128 行   spoke 引用  2 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
-  合计 183 处 spoke 引用，0 处失效
+  合计 218 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -42,17 +45,23 @@
   被测阈值 9 个，漂移 0 个
 
 [C4] 预测记分卡  (1.1j：不记分就学不到)
-  明细 17 条｜已记分 15（排除⊘）｜✅8 ❌5｜命中率 53.3%｜待验 17 条
-  分档：已分档 1 条｜建档前未分档 14 条（不参与分档统计）
-        待验 17 条中 14 条已填把握档  ← 新登记都在填，规则在执行
+  明细 18 条｜已记分 16（排除⊘）｜✅9 ❌5｜命中率 56.2%｜待验 16 条
+  无到期未记分项
+  分档：已分档 2 条｜建档前未分档 14 条（不参与分档统计）
+        待验 16 条中 13 条已填把握档  ← 新登记都在填，规则在执行
+    高 档  1 条｜✅1 ❌0｜命中率 100.0%
     中 档  1 条｜✅0 ❌0｜命中率 0.0%
-  样本 1/20，**不对分档有效性下任何结论**（不到门槛就说「我高把握的准」是拿噪声当发现）
+  样本 2/20，**不对分档有效性下任何结论**（不到门槛就说「我高把握的准」是拿噪声当发现）
 
 [C5] 无触发词的 skill 是否已进 CLAUDE.md 路由表
   critic                   无触发词  ✅ 已在 CLAUDE.md 路由表
+  guizang-page-skill       无触发词  ✅ 已在 CLAUDE.md 路由表
   guizang-ppt-skill        无触发词  ✅ 已在 CLAUDE.md 路由表
+  guizang-social-card-skill 无触发词  ✅ 已在 CLAUDE.md 路由表
   huashu-report            无触发词  ✅ 已在 CLAUDE.md 路由表
+  humanizer-zh             无触发词  ✅ 已在 CLAUDE.md 路由表
   kami                     无触发词  ✅ 已在 CLAUDE.md 路由表
+  路由表点名的 skill 4 个，不存在 0 个
 
 [C6] 可证伪判断的登记规则是否还有承载物
   CLAUDE.md 含把握档规则   ✅
@@ -74,23 +83,26 @@
   已登记 101 条（否决 60）｜最近登记 2026-10-29
 
 [C10] COO 流水线引用与运行记录
-  pipeline-content.md        ✅ 4 个 skill
+  pipeline-content.md        ✅ 7 个 skill
   pipeline-earnings.md       ✅ 2 个 skill
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
   运行记录：3 份｜超过 2 天未完成 0 份
 
 ==========================================================================
-发现 3 项：
+发现 4 项：
 
-  [P1] predictions.md
-        1 条预测已到验证时点但仍标「待验」：2026-10-30 UBER 收盘不低于 63P 行权价（10/30 收盘；
+  [P3] guizang-page-skill/SKILL.md
+        hub 208 行，超 CLAUDE.md 的 200 行目标 8 行
 
-  [P2] memory/state/options-candidates.jsonl
-        journal 有扫描但候选未登记：2026-10-30——漏登的那天无法事后补（不知道当时屏幕上有什么）
+  [P3] humanizer-zh/SKILL.md
+        hub 408 行，超 CLAUDE.md 的 200 行目标 208 行
 
   [P3] kami/SKILL.md
         hub 210 行，超 CLAUDE.md 的 200 行目标 10 行
+
+  [P3] guizang-social-card-skill/SKILL.md
+        hub 338 行，超 CLAUDE.md 的 200 行目标 138 行
 
 ```
 
