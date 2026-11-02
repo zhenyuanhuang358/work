@@ -15,7 +15,7 @@
   3. **独立单位是 (标的, 到期日) 簇，不是行。** 同一次扫描同一条链出的几个行权价
      一起涨跌，算成 5 个样本是自欺。**不满 20 簇，report 拒绝下结论。**
 
-**1σ 的口径服从 profile 1.1x / 1.2q**：只有 iv_src = 平台反解 才算 z = 缓冲÷1σ；
+**1σ 的口径服从 profile 1.1x / 1.2q**：只有 iv_src ∈ MEASURED（平台反解 / 链上反解）才算 z = 缓冲÷1σ；
   没有实测 IV 的候选照样登记（它的结果仍然有用），但 z 留空，不参与分桶。
 
 **结算的局限（每次 report 都会打印）**：
@@ -47,6 +47,11 @@ MIN_CLUSTERS = 20
 VERDICTS = ("推荐", "否决")
 
 
+# 实测 IV 的合法来源。「链上反解」= options_chain.json（CBOE 延迟报价）经 tools/option_quote.py 中间价反解，
+# profile 1.1x 第 4 条（2026-10-29）认定等同链上价。2026-11-02 补：1.1x 改了，这里没跟着改，登记被拦。
+MEASURED = {"平台反解", "链上反解"}
+
+
 def read_ledger():
     if not os.path.exists(LEDGER):
         return []
@@ -65,7 +70,7 @@ def read_ledger():
 
 def z_score(row):
     """缓冲÷1σ。只在 IV 是平台反解时给数，否则 None。"""
-    if row["iv_src"] != "平台反解" or not row["iv"]:
+    if row["iv_src"] not in MEASURED or not row["iv"]:
         return None
     dte = (dt.date.fromisoformat(row["expiry"]) - dt.date.fromisoformat(row["logged"][:10])).days
     if dte <= 0:
@@ -79,8 +84,8 @@ def add(a):
         sys.exit(f"--verdict 只能是 {VERDICTS}")
     if a.verdict == "否决" and not a.reason:
         sys.exit("否决项必须写理由——不带理由的否决，事后无法分辨是规则挡住的还是嫌麻烦")
-    if a.iv is not None and a.iv_src != "平台反解":
-        sys.exit("给了 --iv 却不是平台反解：按 1.1x，估出来的 IV 不登记（否则 z 会被污染）")
+    if a.iv is not None and a.iv_src not in MEASURED:
+        sys.exit(f"给了 --iv 但来源不在 {sorted(MEASURED)}：按 1.1x，估出来的 IV 不登记（否则 z 会被污染）")
     right = a.right.upper()
     buffer = (a.spot - a.strike) / a.spot if right == "P" else (a.strike - a.spot) / a.spot
     row = {
