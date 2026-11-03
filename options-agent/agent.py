@@ -18,6 +18,11 @@ spot, rows:[{expiry, strike, bid, ask, delta, oi, volume, last_trade}]}}}）
                    （波动率风险溢价），重算公允价，EV = bid - 公允价；
                    EV 明显为负的卖方候选直接否决
 
+事件日历（events.json，与 agent.py 同目录）：信号持有期（扫描日到到期日）
+跨越的美国宏观事件（非农/CPI/PPI/FOMC/大选等）会被标注在信号上，
+报告头也会列出窗口内全部事件；按 2026-11-03 用户决定，只标注提醒，
+不否决、不改分数。日期需按官方日程（BLS/美联储）定期核对维护。
+
 风控否决（任何模块都适用）：bid<=0、买卖倒挂、价差/中间价 > 50%、
 卖方候选 OI < 20、索普 EV < -0.05/股；--live 模式下报价超过 30 分钟
 的标的整只否决（离线/回放模式只在报告头标注过期，不否决）。
@@ -133,7 +138,20 @@ def base(c):
 
 # ---------------- 风控 + 主流程 ----------------
 
-def run(path, bp=None, live=False, haircut=0.85, top=30):
+def load_events(explicit=None):
+    """加载事件日历：显式路径优先，否则用 agent.py 同目录的 events.json。"""
+    cands = [explicit] if explicit else []
+    cands.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "events.json"))
+    for p in cands:
+        if p and os.path.exists(p):
+            try:
+                return json.load(open(p)).get("events", [])
+            except Exception:
+                return []
+    return []
+
+
+def run(path, bp=None, live=False, haircut=0.85, top=30, events=None):
     j = json.load(open(path))
     updated = j.get("updated_at")
     signals, vetoes, stale_notes = [], [], []
@@ -180,10 +198,25 @@ def run(path, bp=None, live=False, haircut=0.85, top=30):
                 c for c in cands if c["expiry"] == sg["expiry"] and c["strike"] == sg["strike"])), 0.0), 3)
         signals.extend(sig)
     signals.sort(key=lambda x: -x["score"])
+    signals = signals[:top]
+    # 事件标注：持有期 = [扫描日（期权链更新时刻的美东日期）, 到期日]
+    evs = events or []
+    scan_date = None
+    if updated:
+        scan_date = datetime.fromisoformat(updated).astimezone(ET).date()
+    window_events = []
+    if scan_date and signals:
+        max_exp = max(sg["expiry"] for sg in signals)
+        window_events = [e for e in evs
+                         if scan_date.isoformat() <= e["date"] <= max_exp]
+        for sg in signals:
+            sg["events"] = [f"{e['date'][5:]} {e['name']}" for e in evs
+                            if scan_date.isoformat() <= e["date"] <= sg["expiry"]]
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source_file": os.path.basename(path), "chain_updated_at": updated,
             "mode": "live" if live else "replay", "bp": bp, "ev_haircut": haircut,
-            "stale_notes": stale_notes, "signals": signals[:top], "vetoes": vetoes}
+            "stale_notes": stale_notes, "window_events": window_events,
+            "signals": signals, "vetoes": vetoes}
 
 
 def render_md(res):
@@ -193,6 +226,9 @@ def render_md(res):
         lines.append(f"- 购买力硬过滤参考：${res['bp']:,.0f}（Reg-T 估算，平台预览为准）")
     for n in res["stale_notes"]:
         lines.append(f"- ⚠️ {n}")
+    if res.get("window_events"):
+        ev_txt = "；".join(f"{e['date']} {e['name']}" for e in res["window_events"])
+        lines.append(f"- 🗓️ 本批信号持有期内的宏观事件：{ev_txt}（仅标注提醒，不否决）")
     lines += ["", f"## 信号（共 {len(res['signals'])} 条，按分数排序）", ""]
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
@@ -200,6 +236,8 @@ def render_md(res):
         lines.append(f"### {sg['ticker']} {sg['expiry']} {sg['strike']:g}P — {sg['action']}（{sg['module']}，{sg['score']} 分）")
         lines.append(f"- bid/ask {sg['bid']:.2f}/{sg['ask']:.2f}，IV {sg['iv']:.0%}，z {sg['z']}，价外概率 {sg['p_otm']:.0%}，OI {sg['oi']:.0f}，价差占比 {sg['spread_pct']:.0%}")
         lines.append(f"- 理由：{sg['why']}")
+        if sg.get("events"):
+            lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
         lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
@@ -217,8 +255,9 @@ def main():
     ap.add_argument("--live", action="store_true", help="实盘时段模式：报价超 30 分钟整只否决")
     ap.add_argument("--ev-haircut", type=float, default=0.85)
     ap.add_argument("--top", type=int, default=30)
+    ap.add_argument("--events", help="事件日历 JSON 路径（默认 agent.py 同目录 events.json）")
     a = ap.parse_args()
-    res = run(a.file, a.bp, a.live, a.ev_haircut, a.top)
+    res = run(a.file, a.bp, a.live, a.ev_haircut, a.top, events=load_events(a.events))
     os.makedirs(a.out, exist_ok=True)
     json.dump(res, open(os.path.join(a.out, "signals.json"), "w"), ensure_ascii=False, indent=1)
     open(os.path.join(a.out, "report.md"), "w").write(render_md(res))

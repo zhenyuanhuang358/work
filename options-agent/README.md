@@ -25,6 +25,14 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 2026-11-03 按用户决定收窄：只做单腿卖出看跌（券商不支持组合单），
 原 vol_spread（信用价差）与 taleb_hedge（买 put 尾部对冲）两个模块已移除。
 
+## 事件日历（events.json）
+
+美国宏观事件日历（非农、CPI、PPI、FOMC、大选、PCE），日期按 BLS
+官方发布日程与美联储 FOMC 日历核对维护。扫描时自动比对每条信号的
+持有期（扫描日到到期日）：报告头列出窗口内全部事件，每条跨事件的
+信号单独标注「事件窗口」。按 2026-11-03 用户决定：只标注提醒，
+不否决、不改分数。日历需每月核对官方日程后更新 events.json。
+
 ## 风控（任何模块之上）
 
 - bid≤0、买卖倒挂：无法反解 IV，直接不出数字（与既有 option_quote.py 相同）
