@@ -18,6 +18,10 @@ spot, rows:[{expiry, strike, bid, ask, delta, oi, volume, last_trade}]}}}）
                    （波动率风险溢价），重算公允价，EV = bid - 公允价；
                    EV 明显为负的卖方候选直接否决
 
+财报日历（earnings.json，与 agent.py 同目录）：自选股下一次财报日期，
+持有期跨财报日的信号单独打 🔴 标注；同样只提醒不否决。SLV/XLE 为
+ETF 无财报。财报季后需更新日期。
+
 事件日历（events.json，与 agent.py 同目录）：信号持有期（扫描日到到期日）
 跨越的美国宏观事件（非农/CPI/PPI/FOMC/大选等）会被标注在信号上，
 报告头也会列出窗口内全部事件；按 2026-11-03 用户决定，只标注提醒，
@@ -151,7 +155,20 @@ def load_events(explicit=None):
     return []
 
 
-def run(path, bp=None, live=False, haircut=0.85, top=30, events=None):
+def load_earnings(explicit=None):
+    """加载财报日历：显式路径优先，否则用 agent.py 同目录的 earnings.json。"""
+    cands = [explicit] if explicit else []
+    cands.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "earnings.json"))
+    for p in cands:
+        if p and os.path.exists(p):
+            try:
+                return json.load(open(p)).get("earnings", {})
+            except Exception:
+                return {}
+    return {}
+
+
+def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=None):
     j = json.load(open(path))
     updated = j.get("updated_at")
     signals, vetoes, stale_notes = [], [], []
@@ -212,10 +229,22 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None):
         for sg in signals:
             sg["events"] = [f"{e['date'][5:]} {e['name']}" for e in evs
                             if scan_date.isoformat() <= e["date"] <= sg["expiry"]]
+    # 财报标注：持有期内有该标的财报日则打 🔴 标注（只提醒，不否决）
+    earn = earnings or {}
+    earnings_flags = []
+    if scan_date:
+        for sg in signals:
+            e = earn.get(sg["ticker"])
+            if e and e.get("date") and scan_date.isoformat() <= e["date"] <= sg["expiry"]:
+                timing = {"AMC": "盘后", "BMO": "盘前"}.get(e.get("timing") or "", "")
+                sg["earnings_flag"] = f"{e['date'][5:]} {sg['ticker']} 财报" + (f"（{timing}）" if timing else "")
+                if sg["earnings_flag"] not in earnings_flags:
+                    earnings_flags.append(sg["earnings_flag"])
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source_file": os.path.basename(path), "chain_updated_at": updated,
             "mode": "live" if live else "replay", "bp": bp, "ev_haircut": haircut,
             "stale_notes": stale_notes, "window_events": window_events,
+            "earnings_flags": earnings_flags,
             "signals": signals, "vetoes": vetoes}
 
 
@@ -229,6 +258,8 @@ def render_md(res):
     if res.get("window_events"):
         ev_txt = "；".join(f"{e['date']} {e['name']}" for e in res["window_events"])
         lines.append(f"- 🗓️ 本批信号持有期内的宏观事件：{ev_txt}（仅标注提醒，不否决）")
+    if res.get("earnings_flags"):
+        lines.append(f"- 🔴 本批信号持有期内的财报：{'；'.join(res['earnings_flags'])}（仅标注提醒，不否决）")
     lines += ["", f"## 信号（共 {len(res['signals'])} 条，按分数排序）", ""]
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
@@ -238,6 +269,8 @@ def render_md(res):
         lines.append(f"- 理由：{sg['why']}")
         if sg.get("events"):
             lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
+        if sg.get("earnings_flag"):
+            lines.append(f"- 🔴 财报窗口：持有期跨 {sg['earnings_flag']}")
         lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
@@ -256,8 +289,10 @@ def main():
     ap.add_argument("--ev-haircut", type=float, default=0.85)
     ap.add_argument("--top", type=int, default=30)
     ap.add_argument("--events", help="事件日历 JSON 路径（默认 agent.py 同目录 events.json）")
+    ap.add_argument("--earnings", help="财报日历 JSON 路径（默认 agent.py 同目录 earnings.json）")
     a = ap.parse_args()
-    res = run(a.file, a.bp, a.live, a.ev_haircut, a.top, events=load_events(a.events))
+    res = run(a.file, a.bp, a.live, a.ev_haircut, a.top,
+              events=load_events(a.events), earnings=load_earnings(a.earnings))
     os.makedirs(a.out, exist_ok=True)
     json.dump(res, open(os.path.join(a.out, "signals.json"), "w"), ensure_ascii=False, indent=1)
     open(os.path.join(a.out, "report.md"), "w").write(render_md(res))

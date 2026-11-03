@@ -33,6 +33,13 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 信号单独标注「事件窗口」。按 2026-11-03 用户决定：只标注提醒，
 不否决、不改分数。日历需每月核对官方日程后更新 events.json。
 
+## 财报日历（earnings.json）
+
+自选股下一次财报日期（美东，含盘前/盘后）。持有期跨财报日的信号在
+报告中单独打 🔴「财报窗口」标注，报告头汇总；与宏
+观事件同口径：只标注提醒，不否决、不改分数。SLV、XLE 为 ETF 无
+财报。每个财报季结束后需更新 earnings.json 中的下一次日期。
+
 ## 风控（任何模块之上）
 
 - bid≤0、买卖倒挂：无法反解 IV，直接不出数字（与既有 option_quote.py 相同）
