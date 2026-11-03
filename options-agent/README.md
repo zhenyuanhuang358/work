@@ -20,9 +20,10 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 | 模块 | 思想来源 | 规则要点 |
 |---|---|---|
 | buffett_csp | 巴菲特式现金担保卖 put | z≥1.0、价外概率≥80%、OI≥100，按现金担保年化打分，标注 Reg-T 保证金 |
-| vol_spread | 纳坦伯格/麦克米伦波动率派 | IV≥35% 时卖 put 并买最近一档更低行权价 put，风险限定；看净权利金/最大亏损 |
-| taleb_hedge | 塔勒布尾部对冲 | 买 ask≤$0.10、delta 在 -0.12~-0.02、缓冲 5%~25% 的远价外 put，定位是保险 |
 | thorp_ev | 索普期望值（叠加层） | 假设真实波动率 = IV×0.85 重算公允价，EV=bid-公允价；EV<-0.05/股的卖方候选一票否决 |
+
+2026-11-03 按用户决定收窄：只做单腿卖出看跌（券商不支持组合单），
+原 vol_spread（信用价差）与 taleb_hedge（买 put 尾部对冲）两个模块已移除。
 
 ## 风控（任何模块之上）
 
@@ -34,15 +35,14 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 ## 口径与局限
 
 - 定价时刻 = 每只标的的 `quote_time_utc`（CBOE 延迟约 15 分钟），到期按美东 16:00
-- IV Rank/Percentile 需要历史 IV 序列，v1 没有引入，先用 IV 绝对值 + z 值；
-  接入历史链数据后应把 vol_spread 的门槛换成 IV Rank
+- IV Rank/Percentile 需要历史 IV 序列，v1 没有引入，先用 IV 绝对值 + z 值
 - 当前关注清单只有 put（`options_watch.json` 的 `right: "P"`），call 侧策略
   （如备兑开仓）需要先把抓取扩到双边
 - 信号只用于研究筛选，下单前必须以交易平台实时报价复核；不构成投资建议
 
 ## 示例结果（2026-11-02 期权链回放）
 
-30 条信号（CSP 18 / 尾部对冲 7 / 信用价差 5），57 条被风控否决。
+收窄后回放：30 条信号（全部为现金担保卖 put，上限 30 条），57 条被风控否决。
 评分靠前包括 PLTR 152.5P 现金担保卖 put（IV 151%、z 1.05）等；
 注意 PLTR、AMD 当周 IV 超过 100%，与财报临近有关，高 IV 既是权利金
 来源也是跳空风险来源，报告里已如实标注 IV 数值供人工复核。
