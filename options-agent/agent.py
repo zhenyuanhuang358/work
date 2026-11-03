@@ -18,9 +18,9 @@ spot, rows:[{expiry, strike, bid, ask, delta, oi, volume, last_trade}]}}}）
                    （波动率风险溢价），重算公允价，EV = bid - 公允价；
                    EV 明显为负的卖方候选直接否决
 
-财报日历（earnings.json，与 agent.py 同目录）：自选股下一次财报日期，
-持有期跨财报日的信号单独打 🔴 标注；同样只提醒不否决。SLV/XLE 为
-ETF 无财报。财报季后需更新日期。
+财报日历（earnings.json，与 agent.py 同目录）：自选股下一次财报日期。
+按 2026-11-04 用户决定，持有期跨财报日的信号直接否决（移入否决区），
+与宏观事件的「只标注」不同。SLV/XLE 为 ETF 无财报。财报季后需更新日期。
 
 事件日历（events.json，与 agent.py 同目录）：信号持有期（扫描日到到期日）
 跨越的美国宏观事件（非农/CPI/PPI/FOMC/大选等）会被标注在信号上，
@@ -214,13 +214,32 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             sg["thorp_ev"] = round(ev_map.get(id(next(
                 c for c in cands if c["expiry"] == sg["expiry"] and c["strike"] == sg["strike"])), 0.0), 3)
         signals.extend(sig)
-    signals.sort(key=lambda x: -x["score"])
-    signals = signals[:top]
-    # 事件标注：持有期 = [扫描日（期权链更新时刻的美东日期）, 到期日]
-    evs = events or []
+    # 财报否决（2026-11-04 用户决定）：持有期跨财报日的信号直接否决，
+    # 移入否决区，不进信号列表；否决在排序截断之前执行，后排候补自动递补。
     scan_date = None
     if updated:
         scan_date = datetime.fromisoformat(updated).astimezone(ET).date()
+    earn = earnings or {}
+    earnings_vetoes = []
+    if scan_date:
+        kept = []
+        for sg in signals:
+            e = earn.get(sg["ticker"])
+            if e and e.get("date") and scan_date.isoformat() <= e["date"] <= sg["expiry"]:
+                timing = {"AMC": "盘后", "BMO": "盘前"}.get(e.get("timing") or "", "")
+                tag = f"{e['date'][5:]} {sg['ticker']} 财报" + (f"（{timing}）" if timing else "")
+                vetoes.append({"ticker": sg["ticker"], "expiry": sg["expiry"],
+                               "strike": sg["strike"], "module": sg["module"],
+                               "reason": f"跨财报否决：持有期跨 {tag}，按纪律不跨财报持有"})
+                if tag not in earnings_vetoes:
+                    earnings_vetoes.append(tag)
+            else:
+                kept.append(sg)
+        signals = kept
+    signals.sort(key=lambda x: -x["score"])
+    signals = signals[:top]
+    # 宏观事件标注：持有期 = [扫描日（期权链更新时刻的美东日期）, 到期日]，只提醒不否决
+    evs = events or []
     window_events = []
     if scan_date and signals:
         max_exp = max(sg["expiry"] for sg in signals)
@@ -229,22 +248,11 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
         for sg in signals:
             sg["events"] = [f"{e['date'][5:]} {e['name']}" for e in evs
                             if scan_date.isoformat() <= e["date"] <= sg["expiry"]]
-    # 财报标注：持有期内有该标的财报日则打 🔴 标注（只提醒，不否决）
-    earn = earnings or {}
-    earnings_flags = []
-    if scan_date:
-        for sg in signals:
-            e = earn.get(sg["ticker"])
-            if e and e.get("date") and scan_date.isoformat() <= e["date"] <= sg["expiry"]:
-                timing = {"AMC": "盘后", "BMO": "盘前"}.get(e.get("timing") or "", "")
-                sg["earnings_flag"] = f"{e['date'][5:]} {sg['ticker']} 财报" + (f"（{timing}）" if timing else "")
-                if sg["earnings_flag"] not in earnings_flags:
-                    earnings_flags.append(sg["earnings_flag"])
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source_file": os.path.basename(path), "chain_updated_at": updated,
             "mode": "live" if live else "replay", "bp": bp, "ev_haircut": haircut,
             "stale_notes": stale_notes, "window_events": window_events,
-            "earnings_flags": earnings_flags,
+            "earnings_vetoes": earnings_vetoes,
             "signals": signals, "vetoes": vetoes}
 
 
@@ -258,8 +266,8 @@ def render_md(res):
     if res.get("window_events"):
         ev_txt = "；".join(f"{e['date']} {e['name']}" for e in res["window_events"])
         lines.append(f"- 🗓️ 本批信号持有期内的宏观事件：{ev_txt}（仅标注提醒，不否决）")
-    if res.get("earnings_flags"):
-        lines.append(f"- 🔴 本批信号持有期内的财报：{'；'.join(res['earnings_flags'])}（仅标注提醒，不否决）")
+    if res.get("earnings_vetoes"):
+        lines.append(f"- 🔴 财报否决：跨 {'；'.join(res['earnings_vetoes'])} 的信号已直接否决（见否决区）")
     lines += ["", f"## 信号（共 {len(res['signals'])} 条，按分数排序）", ""]
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
@@ -269,8 +277,6 @@ def render_md(res):
         lines.append(f"- 理由：{sg['why']}")
         if sg.get("events"):
             lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
-        if sg.get("earnings_flag"):
-            lines.append(f"- 🔴 财报窗口：持有期跨 {sg['earnings_flag']}")
         lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
