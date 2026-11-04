@@ -17,7 +17,7 @@
 | 6 | 存量复核 | `us-options-agent/references/position-discipline.md` 四条 | 每个仓位：持有 / 减半 / 全平。**有违规存量 → 本次只出存量方案，跳到 9** |
 | 7 | 新候选扫描 | `us-options-agent` 每日扫描初筛 → 候选写进 `options_watch.json`（标的 + 到期日）并推送 → 等 `options_chain.json` 更新 → `python3 tools/option_quote.py --ticker X --expiry D --z-min 1.0/1.2 --bp <可取现金>` 出 IV/z/收入/保证金；**只推单腿裸卖、保证金 ≤ 可取现金**（不是「最大购买力」；盈立无组合单，position-discipline 第 5 条）。可取现金用用户最新截图值并注明日期 | 候选表（含否决的与否决理由）。**不再需要用户截图报价**（2026-10-29 起） |
 | 8 | 全量登记候选 | 每个候选（含否决）`python3 tools/candidate_ledger.py add --ticker … --verdict …` | — |
-| 9 | 对话内交付 | 先存量、后新仓；资金/R4/R5 只**提示**不否决（profile 1.1t） | 用户决定 |
+| 9 | 对话内交付 | 先存量、后新仓；资金/R4/R5 只**提示**不否决（profile 1.1t）。**每个推荐都列 1 / 3 / 6 张的止损亏损（收入 × 张数）与跳空压力（标的 −3% / −5%）**——用户 11/04 定不设权利金门槛、张数自定，代价要在下单前可见（profile 1.1zd） | 用户决定 |
 | 10 | 等用户决定 | 开仓前必问两句：止损条件单挂在多少？张数按「止损亏损 ≤ 净值 5%」算的吗？ | 用户回复 → 写 journal |
 | 11 | 收尾 | G4 / G5 / G6 | — |
 
