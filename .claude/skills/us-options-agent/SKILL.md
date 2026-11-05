@@ -137,6 +137,7 @@ description: |
 | 需要选择具体策略（CSP/CC/Spread/Condor 等） | `references/strategy-catalog.md` |
 | 输出完整分析报告（标的分析 + 策略建议） | `references/analysis-template.md` |
 | 生成《今日美股期权机会》每日扫描报告 | `references/daily-scan-template.md` |
+| 扫描时标注新闻（地缘 / 美联储讲话 / 政要发言 → 板块） | `references/news-channels.md` |
 | 市场进入极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
 | 需要获取 IV Rank / 期权链 / 异常流数据时 | `references/data-sources.md` |
 | 记录开仓/平仓、查看当前敞口、更新持仓日志 | `memory/state/options-journal.md` |
