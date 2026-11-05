@@ -133,6 +133,16 @@ def run(a, j, r):
         black = None
     if black:
         earn_flag = (earn_flag + "｜" if earn_flag else "") + f"⛔ 基本面名单：{black}"
+    # 利率敏感（macro-events：HOOD / SOFI 持有期含 CPI / FOMC 只观察）与「谨慎」名单（只提示）——11/05 第三次重跑发现都靠手工
+    try:
+        rs = scr.get("rate_sensitive", {})
+        rate_hit = [f"{d} {n}" for d, n in rs.get("events", {}).items() if a.ticker.upper() in rs.get("tickers", [])
+                    and now.date().isoformat() <= d <= a.expiry]
+        caution = scr.get("caution", {}).get(a.ticker.upper())
+    except NameError:  # options-screen.json 读不到
+        rate_hit, caution = [], None
+    if caution:
+        earn_flag = (earn_flag + "｜" if earn_flag else "") + f"⚠ 谨慎名单（只提示）：{caution}"
 
     # 排雷四：IV 历史分位（Tastytrade：IV 处在自身高位才卖）。历史不足 15 个交易日时只显示「积累中」
     try:
@@ -218,8 +228,12 @@ def run(a, j, r):
         # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
         if a.bp is not None and margin * 1.15 > a.bp:
             mark = "⛔保证金"
+        if rate_hit:
+            mark = "⛔利率敏感"
         if term_block:
             mark = "⛔期限溢价"
+        if mark == "✅" and caution:
+            mark = "✅⚠谨慎"
         zmax = z if zmax is None else max(zmax, z)
         if getattr(a, "collect", None) is not None:
             a.collect.append({"ticker": a.ticker.upper(), "expiry": a.expiry, "strike": k, "bid": b, "ask": ak, "iv": iv,
@@ -256,18 +270,23 @@ def summary(a, j):
                 main_one(a, j, r)
             except SystemExit:
                 pass
-        why[t] = Counter(x["mark"] for x in a.collect[before:] if x["mark"] != "✅")
-    ok = [x for x in a.collect if x["mark"] == "✅"]
+        why[t] = Counter(x["mark"] for x in a.collect[before:] if not x["mark"].startswith("✅"))
+    ok = [x for x in a.collect if x["mark"].startswith("✅")]
     print(f"== {a.right} 汇总｜z ≥ {a.z_min}｜bp {a.bp}｜过关 {len(ok)} 行 / {len(a.collect)} 行，{len({x['ticker'] for x in ok})} 只标的")
     print(f"{'标的':6} {'到期':10} {'行权':>7} {'bid':>5} {'ask':>5} {'IV/HV':>5} {'z':>5} {'价外概率':>6} {'收入':>5} {'保证金':>6} {'报价差':>5}")
     for x in sorted(ok, key=lambda x: (-x["income"] / x["margin"])):
         print(f"{x['ticker']:6} {x['expiry']:10} {x['strike']:7.2f} {x['bid']:5.2f} {x['ask']:5.2f} {x['ivhv'] or 0:5.2f} {x['z']:5.2f} "
-              f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%}")
+              f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%} {x['mark'][1:]}")
     tot = Counter()
     for c in why.values():
         tot.update({k: 1 for k in c})
     print("挡掉原因（按标的计，一只可有多因）：", dict(tot.most_common()))
-    print("无过关行的标的主因：", {t: c.most_common(1)[0][0] for t, c in why.items() if c and t not in {x['ticker'] for x in ok}})
+    # 主因不算期限溢价：那道闸门只管 30–45 天档，算进来会盖住 20–29 天的真实原因（11/05 XLE 被误显示为期限溢价）
+    gate = sum(1 for c in why.values() if c.get("⛔期限溢价"))
+    print(f"⛔期限溢价（30–45 天档闸门）涉及 {gate} 只标的；下面的主因只看闸门以外的行")
+    okt = {x['ticker'] for x in ok}
+    print("无过关行的标的主因：", {t: (Counter({k: v for k, v in c.items() if k != "⛔期限溢价"}).most_common(1) or [("仅期限溢价",)])[0][0]
+                                    for t, c in why.items() if c and t not in okt})
 
 
 if __name__ == "__main__":

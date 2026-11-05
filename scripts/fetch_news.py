@@ -30,7 +30,11 @@ def slim(x):
 
 
 def main():
-    out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "market": [], "tickers": {},
+    try:  # 扫描会话据此确认三份产物（链 / 价格 / 新闻）都是自己触发的那次（11/05 重跑问题）
+        trig = open("price_fetch_trigger.txt").read().strip()
+    except OSError:
+        trig = None
+    out = {"trigger": trig, "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "market": [], "tickers": {},
            "errors": []}
     if not TOKEN:
         out["errors"].append("无 FINNHUB_TOKEN")

@@ -211,7 +211,12 @@ def main():
     if vix9d and vix:
         short_end = round(vix9d / vix, 3)
 
+    try:  # 扫描会话据此确认价格是自己触发之后抓的（定时 cron 跑出的也带当时的触发内容，同样晚于触发，可用）
+        trig = open("price_fetch_trigger.txt").read().strip()
+    except OSError:
+        trig = None
     output = {
+        "trigger": trig,
         "updated_at": _now(),
         "vix": vix,
         "treasury_10y": index_data.get("treasury_10y"),
