@@ -1,118 +1,118 @@
 {
- "updated_at": "2026-11-05T15:47:50+00:00",
+ "updated_at": "2026-11-05T15:50:18+00:00",
  "mode": "seed",
  "prices": {
-  "XLE": 64.11499786376953,
-  "XLF": 58.310001373291016,
-  "XLU": 43.79330062866211,
-  "XLP": 93.02999877929688,
-  "XLV": 190.44000244140625,
-  "XLI": 165.30499267578125,
-  "XLB": 53.029998779296875,
-  "KRE": 74.0199966430664,
-  "XBI": 151.39999389648438,
-  "GDX": 83.70999908447266,
-  "SLV": 47.01499938964844,
-  "TLT": 81.87999725341797,
-  "HYG": 77.19499969482422,
-  "EEM": 58.7400016784668,
-  "FXI": 34.79499816894531,
-  "EWZ": 31.7549991607666,
-  "ARKK": 72.63500213623047,
-  "USO": 147.64990234375,
-  "IWM": 276.2099914550781,
-  "BAC": 50.77000045776367,
-  "C": 119.0199966430664,
-  "WFC": 85.81500244140625,
-  "SCHW": 92.38999938964844,
-  "USB": 60.40999984741211,
-  "KEY": 21.260000228881836,
-  "SOFI": 15.694999694824219,
-  "HOOD": 76.89009857177734,
-  "PYPL": 58.71500015258789,
-  "XYZ": 82.69000244140625,
-  "COIN": 136.38499450683594,
-  "AFRM": 69.5,
-  "UPST": 21.700000762939453,
+  "XLE": 64.08000183105469,
+  "XLF": 58.2599983215332,
+  "XLU": 43.720001220703125,
+  "XLP": 93.05000305175781,
+  "XLV": 189.97999572753906,
+  "XLI": 165.05499267578125,
+  "XLB": 53.040000915527344,
+  "KRE": 73.99500274658203,
+  "XBI": 151.1300048828125,
+  "GDX": 83.95999908447266,
+  "SLV": 47.16360092163086,
+  "TLT": 81.88999938964844,
+  "HYG": 77.16999816894531,
+  "EEM": 58.78499984741211,
+  "FXI": 34.78499984741211,
+  "EWZ": 31.780000686645508,
+  "ARKK": 72.6500015258789,
+  "USO": 147.8350067138672,
+  "IWM": 276.0,
+  "BAC": 50.76499938964844,
+  "C": 118.78009796142578,
+  "WFC": 85.7300033569336,
+  "SCHW": 92.36000061035156,
+  "USB": 60.34000015258789,
+  "KEY": 21.2450008392334,
+  "SOFI": 15.664999961853027,
+  "HOOD": 77.0250015258789,
+  "PYPL": 58.7599983215332,
+  "XYZ": 82.79000091552734,
+  "COIN": 136.67999267578125,
+  "AFRM": 69.41999816894531,
+  "UPST": 21.639999389648438,
   "T": 22.030000686645508,
-  "VZ": 46.7400016784668,
-  "CMCSA": 25.010000228881836,
+  "VZ": 46.72010040283203,
+  "CMCSA": 24.950000762939453,
   "WBD": null,
-  "DIS": 118.66000366210938,
-  "SNAP": 5.119999885559082,
-  "PINS": 20.040000915527344,
-  "RBLX": 46.30500030517578,
-  "ROKU": 160.77000427246094,
-  "UBER": 68.2699966430664,
-  "LYFT": 17.93000030517578,
-  "DKNG": 23.424999237060547,
-  "BABA": 105.70999908447266,
-  "JD": 28.280000686645508,
-  "BIDU": 77.65499877929688,
-  "NIO": 3.140000104904175,
-  "PDD": 82.30000305175781,
-  "F": 12.586000442504883,
-  "GM": 89.95999908447266,
-  "RIVN": 12.9798002243042,
+  "DIS": 118.72000122070312,
+  "SNAP": 5.099999904632568,
+  "PINS": 20.049999237060547,
+  "RBLX": 46.404998779296875,
+  "ROKU": 160.74000549316406,
+  "UBER": 68.29989624023438,
+  "LYFT": 17.924800872802734,
+  "DKNG": 23.434999465942383,
+  "BABA": 105.65229797363281,
+  "JD": 28.264999389648438,
+  "BIDU": 77.66999816894531,
+  "NIO": 3.138700008392334,
+  "PDD": 82.36000061035156,
+  "F": 12.59000015258789,
+  "GM": 89.98500061035156,
+  "RIVN": 12.960000038146973,
   "LCID": 3.075000047683716,
-  "DAL": 84.98999786376953,
-  "AAL": 12.8149995803833,
-  "UAL": 108.69999694824219,
-  "CCL": 29.375,
-  "NCLH": 17.559999465942383,
-  "RCL": 320.54998779296875,
-  "XOM": 172.52999877929688,
-  "CVX": 220.7949981689453,
-  "OXY": 58.23500061035156,
-  "SLB": 50.86000061035156,
-  "HAL": 33.0099983215332,
-  "DVN": 44.935001373291016,
-  "FCX": 57.56999969482422,
-  "CLF": 11.59000015258789,
-  "AA": 38.85499954223633,
-  "NEM": 116.80999755859375,
-  "MP": 32.3849983215332,
-  "KO": 97.02999877929688,
-  "PEP": 144.89500427246094,
-  "MO": 79.44999694824219,
-  "PM": 209.47000122070312,
-  "WMT": 131.22999572753906,
-  "TGT": 160.80999755859375,
-  "NKE": 39.86000061035156,
-  "SBUX": 109.31999969482422,
-  "KHC": 25.395000457763672,
-  "CVS": 82.83999633789062,
+  "DAL": 84.875,
+  "AAL": 12.8100004196167,
+  "UAL": 108.62999725341797,
+  "CCL": 29.3799991607666,
+  "NCLH": 17.565000534057617,
+  "RCL": 320.7349853515625,
+  "XOM": 172.47500610351562,
+  "CVX": 220.7899932861328,
+  "OXY": 58.25,
+  "SLB": 50.790000915527344,
+  "HAL": 32.994998931884766,
+  "DVN": 44.93000030517578,
+  "FCX": 57.709999084472656,
+  "CLF": 11.569999694824219,
+  "AA": 38.89500045776367,
+  "NEM": 117.11000061035156,
+  "MP": 32.38999938964844,
+  "KO": 97.07499694824219,
+  "PEP": 144.8300018310547,
+  "MO": 79.40499877929688,
+  "PM": 208.86500549316406,
+  "WMT": 131.3105010986328,
+  "TGT": 160.9949951171875,
+  "NKE": 39.8849983215332,
+  "SBUX": 109.29000091552734,
+  "KHC": 25.375,
+  "CVS": 82.44999694824219,
   "WBA": null,
-  "MCD": 279.9407958984375,
-  "PFE": 31.165000915527344,
-  "MRK": 152.40499877929688,
-  "BMY": 64.9749984741211,
-  "GILD": 174.6699981689453,
-  "ABBV": 300.1700134277344,
-  "JNJ": 280.635009765625,
-  "MRNA": 242.3699951171875,
-  "INTC": 53.559898376464844,
-  "CSCO": 97.04000091552734,
-  "ORCL": 114.5999984741211,
-  "IBM": 251.64999389648438,
-  "QCOM": 150.58999633789062,
-  "MU": 676.64501953125,
-  "AMD": 412.2900085449219,
-  "NVDA": 184.07000732421875,
-  "PLTR": 154.625,
-  "SMCI": 26.3700008392334,
-  "MARA": 5.914999961853027,
-  "RIOT": 13.3149995803833,
+  "MCD": 279.5899963378906,
+  "PFE": 31.045000076293945,
+  "MRK": 152.1999969482422,
+  "BMY": 64.7699966430664,
+  "GILD": 174.50999450683594,
+  "ABBV": 299.75,
+  "JNJ": 280.17999267578125,
+  "MRNA": 241.77499389648438,
+  "INTC": 53.8380012512207,
+  "CSCO": 97.16000366210938,
+  "ORCL": 114.2750015258789,
+  "IBM": 252.72999572753906,
+  "QCOM": 151.8000030517578,
+  "MU": 679.0454711914062,
+  "AMD": 413.82000732421875,
+  "NVDA": 184.77999877929688,
+  "PLTR": 154.58999633789062,
+  "SMCI": 26.3799991607666,
+  "MARA": 5.900000095367432,
+  "RIOT": 13.28499984741211,
   "SOUN": 3.944999933242798,
-  "IONQ": 25.48859977722168,
-  "SNOW": 271.9599914550781,
-  "SHOP": 139.06500244140625,
-  "NET": 237.26910400390625,
-  "BA": 171.13499450683594,
-  "GE": 317.7250061035156,
-  "CAT": 560.2100219726562,
-  "UPS": 113.88999938964844,
-  "LMT": 602.7999877929688
+  "IONQ": 25.4950008392334,
+  "SNOW": 272.0199890136719,
+  "SHOP": 139.27999877929688,
+  "NET": 237.6999969482422,
+  "BA": 170.50999450683594,
+  "GE": 316.8349914550781,
+  "CAT": 559.2050170898438,
+  "UPS": 113.79010009765625,
+  "LMT": 600.52001953125
  },
  "criteria": {
   "price": [
@@ -122,6 +122,7 @@
   "min_mcap": 5000000000.0,
   "min_revenue": 1000000000.0,
   "weekly_within_days": 14,
+  "spread_min_dte": 7,
   "max_median_spread": 0.1,
   "min_open_interest": 10000,
   "min_volume": 1000,
@@ -132,24 +133,30 @@
   "pool": 76,
   "chain_ok": 76,
   "chain_error": 0,
-  "liquid": 1,
+  "liquid": 6,
   "weekly": 75,
-  "fail_spread": 75,
+  "fail_spread": 70,
   "fail_oi_vol": 3
  },
  "liquid": [
-  "HOOD"
+  "INTC",
+  "HOOD",
+  "SOFI",
+  "ORCL",
+  "SLV",
+  "RIVN"
  ],
  "stats": {
   "XLE": {
-   "spot": 64.26,
-   "quote_time_utc": "2026-11-05 15:46:06",
+   "spot": 64.3197,
+   "quote_time_utc": "2026-11-05 15:48:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 24,
    "open_interest": 4283442.0,
-   "volume": 37148.0,
-   "median_spread_otm_put": 0.18181818181818174,
+   "volume": 37672.0,
+   "median_spread_otm_put": 0.24999999999999986,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -157,14 +164,15 @@
    "liquid": false
   },
   "XLF": {
-   "spot": 58.76,
-   "quote_time_utc": "2026-11-05 15:46:19",
+   "spot": 58.655,
+   "quote_time_utc": "2026-11-05 15:48:19",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 24,
    "open_interest": 6180267.0,
-   "volume": 90239.0,
-   "median_spread_otm_put": 0.619047619047619,
+   "volume": 91846.0,
+   "median_spread_otm_put": 0.8571428571428571,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -179,7 +187,8 @@
    "n_expiries": 17,
    "open_interest": 2586868.0,
    "volume": 29256.0,
-   "median_spread_otm_put": 0.873015873015873,
+   "median_spread_otm_put": 0.5000000000000001,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -187,14 +196,15 @@
    "liquid": false
   },
   "XLP": {
-   "spot": 92.94,
-   "quote_time_utc": "2026-11-05 15:46:10",
+   "spot": 92.9,
+   "quote_time_utc": "2026-11-05 15:48:10",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 13,
    "open_interest": 1681790.0,
-   "volume": 61386.0,
-   "median_spread_otm_put": 0.3999999999999999,
+   "volume": 67617.0,
+   "median_spread_otm_put": 0.8222222222222222,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -209,7 +219,8 @@
    "n_expiries": 13,
    "open_interest": 266856.0,
    "volume": 383.0,
-   "median_spread_otm_put": 1.2,
+   "median_spread_otm_put": 1.528255528255528,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": false
@@ -217,14 +228,15 @@
    "liquid": false
   },
   "KRE": {
-   "spot": 74.69,
-   "quote_time_utc": "2026-11-05 15:29:44",
+   "spot": 74.5,
+   "quote_time_utc": "2026-11-05 15:48:05",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 21,
    "open_interest": 2428653.0,
-   "volume": 6642.0,
-   "median_spread_otm_put": 1.2799999999999998,
+   "volume": 11689.0,
+   "median_spread_otm_put": 0.8474074074074074,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -232,14 +244,15 @@
    "liquid": false
   },
   "GDX": {
-   "spot": 84.3,
-   "quote_time_utc": "2026-11-05 15:46:19",
+   "spot": 84.28,
+   "quote_time_utc": "2026-11-05 15:49:19",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 21,
    "open_interest": 2650092.0,
-   "volume": 63680.0,
-   "median_spread_otm_put": 0.753577106518283,
+   "volume": 64428.0,
+   "median_spread_otm_put": 0.5242718446601942,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -247,29 +260,31 @@
    "liquid": false
   },
   "SLV": {
-   "spot": 47.0525,
-   "quote_time_utc": "2026-11-05 15:46:09",
+   "spot": 47.125,
+   "quote_time_utc": "2026-11-05 15:49:09",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 26,
    "open_interest": 5665209.0,
-   "volume": 90193.0,
-   "median_spread_otm_put": 0.33333333333333337,
+   "volume": 91743.0,
+   "median_spread_otm_put": 0.06426116838487979,
+   "spread_expiry": "2026-11-13",
    "pass": {
-    "spread": false,
+    "spread": true,
     "oi_vol": true
    },
-   "liquid": false
+   "liquid": true
   },
   "TLT": {
-   "spot": 81.66,
-   "quote_time_utc": "2026-11-05 15:46:17",
+   "spot": 81.63,
+   "quote_time_utc": "2026-11-05 15:49:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 31,
    "open_interest": 14164754.0,
-   "volume": 184556.0,
-   "median_spread_otm_put": 0.2588235294117646,
+   "volume": 195251.0,
+   "median_spread_otm_put": 0.14354066985645933,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -277,14 +292,15 @@
    "liquid": false
   },
   "HYG": {
-   "spot": 77.245,
-   "quote_time_utc": "2026-11-05 15:46:06",
+   "spot": 77.24,
+   "quote_time_utc": "2026-11-05 15:49:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 21,
    "open_interest": 10493335.0,
-   "volume": 29803.0,
-   "median_spread_otm_put": 1.0999999999999999,
+   "volume": 29980.0,
+   "median_spread_otm_put": 0.8999999999999999,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -292,14 +308,15 @@
    "liquid": false
   },
   "EEM": {
-   "spot": 59.195,
-   "quote_time_utc": "2026-11-05 15:37:50",
+   "spot": 59.15,
+   "quote_time_utc": "2026-11-05 15:48:10",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 19,
    "open_interest": 4699814.0,
-   "volume": 42392.0,
-   "median_spread_otm_put": 1.2141560798548094,
+   "volume": 43451.0,
+   "median_spread_otm_put": 0.3999999999999999,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -307,14 +324,15 @@
    "liquid": false
   },
   "FXI": {
-   "spot": 34.905,
-   "quote_time_utc": "2026-11-05 15:46:17",
+   "spot": 34.875,
+   "quote_time_utc": "2026-11-05 15:49:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 25,
    "open_interest": 3309725.0,
-   "volume": 13446.0,
-   "median_spread_otm_put": 1.4285714285714286,
+   "volume": 13525.0,
+   "median_spread_otm_put": 1.2,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -322,14 +340,15 @@
    "liquid": false
   },
   "EWZ": {
-   "spot": 31.94,
-   "quote_time_utc": "2026-11-05 15:46:06",
+   "spot": 31.885,
+   "quote_time_utc": "2026-11-05 15:49:07",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 24,
    "open_interest": 12131209.0,
-   "volume": 30954.0,
-   "median_spread_otm_put": 0.6666666666666666,
+   "volume": 31516.0,
+   "median_spread_otm_put": 0.34285714285714286,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -344,7 +363,8 @@
    "n_expiries": 14,
    "open_interest": 600379.0,
    "volume": 21005.0,
-   "median_spread_otm_put": 0.8368055555555554,
+   "median_spread_otm_put": 1.4285714285714286,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -352,14 +372,15 @@
    "liquid": false
   },
   "USO": {
-   "spot": 147.75,
-   "quote_time_utc": "2026-11-05 15:46:08",
+   "spot": 148.06,
+   "quote_time_utc": "2026-11-05 15:49:08",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 24,
    "open_interest": 1661852.0,
-   "volume": 41269.0,
-   "median_spread_otm_put": 0.3030303030303029,
+   "volume": 42579.0,
+   "median_spread_otm_put": 0.10413503939853967,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -367,14 +388,15 @@
    "liquid": false
   },
   "BAC": {
-   "spot": 51.32,
-   "quote_time_utc": "2026-11-05 15:46:18",
+   "spot": 51.18,
+   "quote_time_utc": "2026-11-05 15:49:18",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 20,
    "open_interest": 2535578.0,
-   "volume": 58896.0,
-   "median_spread_otm_put": 0.2666666666666667,
+   "volume": 60683.0,
+   "median_spread_otm_put": 0.26666666666666666,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -389,7 +411,8 @@
    "n_expiries": 20,
    "open_interest": 1123105.0,
    "volume": 16326.0,
-   "median_spread_otm_put": 0.2933333333333333,
+   "median_spread_otm_put": 0.27029438001784123,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -404,7 +427,8 @@
    "n_expiries": 17,
    "open_interest": 1169014.0,
    "volume": 10086.0,
-   "median_spread_otm_put": 1.0384615384615385,
+   "median_spread_otm_put": 0.46951219512195125,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -419,7 +443,8 @@
    "n_expiries": 18,
    "open_interest": 496239.0,
    "volume": 6436.0,
-   "median_spread_otm_put": 1.0222222222222224,
+   "median_spread_otm_put": 0.7586206896551724,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -434,7 +459,8 @@
    "n_expiries": 18,
    "open_interest": 208257.0,
    "volume": 1299.0,
-   "median_spread_otm_put": 1.435897435897436,
+   "median_spread_otm_put": 1.6082306755110327,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -450,6 +476,7 @@
    "open_interest": 110424.0,
    "volume": 401.0,
    "median_spread_otm_put": 0.7333333333333333,
+   "spread_expiry": "2026-11-20",
    "pass": {
     "spread": false,
     "oi_vol": false
@@ -457,29 +484,31 @@
    "liquid": false
   },
   "SOFI": {
-   "spot": 15.9299,
-   "quote_time_utc": "2026-11-05 15:46:16",
+   "spot": 15.985,
+   "quote_time_utc": "2026-11-05 15:49:16",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 18,
    "open_interest": 4179507.0,
-   "volume": 160469.0,
-   "median_spread_otm_put": 0.15384615384615397,
+   "volume": 167035.0,
+   "median_spread_otm_put": 0.08966861598440547,
+   "spread_expiry": "2026-11-13",
    "pass": {
-    "spread": false,
+    "spread": true,
     "oi_vol": true
    },
-   "liquid": false
+   "liquid": true
   },
   "HOOD": {
-   "spot": 78.34,
-   "quote_time_utc": "2026-11-05 15:46:06",
+   "spot": 78.06,
+   "quote_time_utc": "2026-11-05 15:49:07",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 20,
    "open_interest": 1976498.0,
-   "volume": 156279.0,
-   "median_spread_otm_put": 0.026143790849673224,
+   "volume": 167214.0,
+   "median_spread_otm_put": 0.015831134564643815,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": true,
     "oi_vol": true
@@ -494,7 +523,8 @@
    "n_expiries": 17,
    "open_interest": 1549949.0,
    "volume": 7136.0,
-   "median_spread_otm_put": 0.7136842105263158,
+   "median_spread_otm_put": 0.8521467603434817,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -509,7 +539,8 @@
    "n_expiries": 17,
    "open_interest": 528106.0,
    "volume": 2689.0,
-   "median_spread_otm_put": 1.2363636363636363,
+   "median_spread_otm_put": 1.3707865168539326,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -517,14 +548,15 @@
    "liquid": false
   },
   "COIN": {
-   "spot": 138.55,
-   "quote_time_utc": "2026-11-05 15:46:18",
+   "spot": 138.24,
+   "quote_time_utc": "2026-11-05 15:49:18",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 20,
    "open_interest": 1102516.0,
-   "volume": 36709.0,
-   "median_spread_otm_put": 0.15587044534412958,
+   "volume": 37544.0,
+   "median_spread_otm_put": 0.10232828709538916,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -539,7 +571,8 @@
    "n_expiries": 16,
    "open_interest": 252644.0,
    "volume": 3747.0,
-   "median_spread_otm_put": 0.44545454545454544,
+   "median_spread_otm_put": 0.5112107623318385,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -547,14 +580,15 @@
    "liquid": false
   },
   "UPST": {
-   "spot": 23.47,
-   "quote_time_utc": "2026-11-05 11:13:04",
+   "spot": 22.295,
+   "quote_time_utc": "2026-11-05 15:48:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 16,
    "open_interest": 308810.0,
-   "volume": 20536.0,
-   "median_spread_otm_put": 1.076923076923077,
+   "volume": 3471.0,
+   "median_spread_otm_put": 0.6666666666666667,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -569,7 +603,8 @@
    "n_expiries": 18,
    "open_interest": 1152697.0,
    "volume": 9512.0,
-   "median_spread_otm_put": 0.6666666666666667,
+   "median_spread_otm_put": 0.5000000000000001,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -584,7 +619,8 @@
    "n_expiries": 17,
    "open_interest": 1096097.0,
    "volume": 19973.0,
-   "median_spread_otm_put": 0.7846153846153847,
+   "median_spread_otm_put": 0.6572972972972972,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -592,14 +628,15 @@
    "liquid": false
   },
   "CMCSA": {
-   "spot": 25.07,
-   "quote_time_utc": "2026-11-05 15:35:41",
+   "spot": 25.025,
+   "quote_time_utc": "2026-11-05 15:48:05",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 802975.0,
-   "volume": 4736.0,
-   "median_spread_otm_put": 0.9999999999999998,
+   "volume": 5713.0,
+   "median_spread_otm_put": 0.8133333333333334,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -614,7 +651,8 @@
    "n_expiries": 16,
    "open_interest": 606325.0,
    "volume": 5685.0,
-   "median_spread_otm_put": 0.5191053122087605,
+   "median_spread_otm_put": 1.0666666666666667,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -622,14 +660,15 @@
    "liquid": false
   },
   "PINS": {
-   "spot": 20.24,
-   "quote_time_utc": "2026-11-05 15:33:03",
+   "spot": 20.22,
+   "quote_time_utc": "2026-11-05 15:48:15",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 326663.0,
-   "volume": 1511.0,
-   "median_spread_otm_put": 1.2156862745098036,
+   "volume": 1958.0,
+   "median_spread_otm_put": 0.2854938271604937,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -644,7 +683,8 @@
    "n_expiries": 18,
    "open_interest": 408556.0,
    "volume": 5067.0,
-   "median_spread_otm_put": 1.0548837209302324,
+   "median_spread_otm_put": 1.22492190211732,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -652,14 +692,15 @@
    "liquid": false
   },
   "UBER": {
-   "spot": 69.135,
-   "quote_time_utc": "2026-11-05 15:46:10",
+   "spot": 68.7601,
+   "quote_time_utc": "2026-11-05 15:49:10",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 1576641.0,
-   "volume": 30940.0,
-   "median_spread_otm_put": 0.4516129032258065,
+   "volume": 32339.0,
+   "median_spread_otm_put": 0.19890109890109897,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -674,7 +715,8 @@
    "n_expiries": 18,
    "open_interest": 621909.0,
    "volume": 7837.0,
-   "median_spread_otm_put": 0.45614035087719296,
+   "median_spread_otm_put": 0.4533333333333334,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -689,7 +731,8 @@
    "n_expiries": 17,
    "open_interest": 1032013.0,
    "volume": 7767.0,
-   "median_spread_otm_put": 0.2857142857142858,
+   "median_spread_otm_put": 0.7951807228915662,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -697,14 +740,15 @@
    "liquid": false
   },
   "BABA": {
-   "spot": 106.455,
-   "quote_time_utc": "2026-11-05 15:46:19",
+   "spot": 106.1875,
+   "quote_time_utc": "2026-11-05 15:49:19",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 19,
    "open_interest": 1904536.0,
-   "volume": 62007.0,
-   "median_spread_otm_put": 0.17666666666666664,
+   "volume": 63967.0,
+   "median_spread_otm_put": 0.2213664241905577,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -712,14 +756,15 @@
    "liquid": false
   },
   "JD": {
-   "spot": 28.46,
-   "quote_time_utc": "2026-11-05 15:35:36",
+   "spot": 28.405,
+   "quote_time_utc": "2026-11-05 15:48:20",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 16,
    "open_interest": 892527.0,
-   "volume": 6216.0,
-   "median_spread_otm_put": 0.4444444444444444,
+   "volume": 7341.0,
+   "median_spread_otm_put": 0.6666666666666667,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -727,14 +772,15 @@
    "liquid": false
   },
   "BIDU": {
-   "spot": 78.3,
-   "quote_time_utc": "2026-11-05 15:35:19",
+   "spot": 78.4,
+   "quote_time_utc": "2026-11-05 15:48:05",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 15,
    "open_interest": 395022.0,
-   "volume": 4168.0,
-   "median_spread_otm_put": 0.6352941176470589,
+   "volume": 5058.0,
+   "median_spread_otm_put": 0.39520390191031024,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -749,7 +795,8 @@
    "n_expiries": 16,
    "open_interest": 1044716.0,
    "volume": 9454.0,
-   "median_spread_otm_put": 0.6666666666666667,
+   "median_spread_otm_put": 0.4533440128153785,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -764,7 +811,8 @@
    "n_expiries": 16,
    "open_interest": 1871829.0,
    "volume": 16763.0,
-   "median_spread_otm_put": 0.11764705882352937,
+   "median_spread_otm_put": 0.43809523809523804,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -779,7 +827,8 @@
    "n_expiries": 15,
    "open_interest": 341334.0,
    "volume": 3035.0,
-   "median_spread_otm_put": 0.6190476190476191,
+   "median_spread_otm_put": 0.5001389274798556,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -787,29 +836,31 @@
    "liquid": false
   },
   "RIVN": {
-   "spot": 12.975,
-   "quote_time_utc": "2026-11-05 15:47:13",
+   "spot": 13.04,
+   "quote_time_utc": "2026-11-05 15:49:13",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 2336576.0,
-   "volume": 45471.0,
-   "median_spread_otm_put": 0.28571428571428575,
+   "volume": 46888.0,
+   "median_spread_otm_put": 0.08535489667565146,
+   "spread_expiry": "2026-11-13",
    "pass": {
-    "spread": false,
+    "spread": true,
     "oi_vol": true
    },
-   "liquid": false
+   "liquid": true
   },
   "DAL": {
-   "spot": 85.75,
-   "quote_time_utc": "2026-11-05 15:46:14",
+   "spot": 85.55,
+   "quote_time_utc": "2026-11-05 15:49:14",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 15,
    "open_interest": 882437.0,
-   "volume": 6660.0,
-   "median_spread_otm_put": 0.9999999999999998,
+   "volume": 6729.0,
+   "median_spread_otm_put": 0.9199999999999999,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -817,14 +868,15 @@
    "liquid": false
   },
   "AAL": {
-   "spot": 12.9305,
-   "quote_time_utc": "2026-11-05 15:47:17",
+   "spot": 12.925,
+   "quote_time_utc": "2026-11-05 15:49:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 20,
    "open_interest": 2067500.0,
-   "volume": 31570.0,
-   "median_spread_otm_put": 0.4583333333333333,
+   "volume": 31756.0,
+   "median_spread_otm_put": 0.3927272727272728,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -832,14 +884,15 @@
    "liquid": false
   },
   "UAL": {
-   "spot": 110.01,
-   "quote_time_utc": "2026-11-05 15:46:18",
+   "spot": 109.82,
+   "quote_time_utc": "2026-11-05 15:49:18",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 627973.0,
-   "volume": 3091.0,
-   "median_spread_otm_put": 1.3884297520661155,
+   "volume": 3198.0,
+   "median_spread_otm_put": 0.8956562245254454,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -854,7 +907,8 @@
    "n_expiries": 16,
    "open_interest": 1028603.0,
    "volume": 7672.0,
-   "median_spread_otm_put": 0.3466666666666667,
+   "median_spread_otm_put": 0.3999999999999999,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -869,7 +923,8 @@
    "n_expiries": 15,
    "open_interest": 598196.0,
    "volume": 4209.0,
-   "median_spread_otm_put": 1.1714285714285713,
+   "median_spread_otm_put": 1.4838709677419355,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -877,14 +932,15 @@
    "liquid": false
   },
   "OXY": {
-   "spot": 58.31,
-   "quote_time_utc": "2026-11-05 15:46:06",
+   "spot": 58.41,
+   "quote_time_utc": "2026-11-05 15:49:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 18,
    "open_interest": 822913.0,
-   "volume": 14735.0,
-   "median_spread_otm_put": 1.0,
+   "volume": 15774.0,
+   "median_spread_otm_put": 0.5714285714285713,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -899,7 +955,8 @@
    "n_expiries": 17,
    "open_interest": 573735.0,
    "volume": 1193.0,
-   "median_spread_otm_put": 0.9333333333333335,
+   "median_spread_otm_put": 1.3096024464831806,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -914,7 +971,8 @@
    "n_expiries": 16,
    "open_interest": 423692.0,
    "volume": 574.0,
-   "median_spread_otm_put": 1.3333333333333333,
+   "median_spread_otm_put": 1.2728937728937728,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": false
@@ -922,14 +980,15 @@
    "liquid": false
   },
   "DVN": {
-   "spot": 44.64,
-   "quote_time_utc": "2026-11-05 15:05:38",
+   "spot": 45.025,
+   "quote_time_utc": "2026-11-05 15:48:15",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 490107.0,
-   "volume": 1388.0,
-   "median_spread_otm_put": 0.7654320987654322,
+   "volume": 3656.0,
+   "median_spread_otm_put": 0.4467849223946785,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -944,7 +1003,8 @@
    "n_expiries": 19,
    "open_interest": 975308.0,
    "volume": 13077.0,
-   "median_spread_otm_put": 1.5075239398084814,
+   "median_spread_otm_put": 1.0368524590163932,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -952,14 +1012,15 @@
    "liquid": false
   },
   "CLF": {
-   "spot": 11.835,
-   "quote_time_utc": "2026-11-05 15:47:10",
+   "spot": 11.81,
+   "quote_time_utc": "2026-11-05 15:49:10",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 16,
    "open_interest": 776075.0,
-   "volume": 18247.0,
-   "median_spread_otm_put": 0.48275862068965514,
+   "volume": 18414.0,
+   "median_spread_otm_put": 0.2978723404255319,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -974,7 +1035,8 @@
    "n_expiries": 16,
    "open_interest": 294096.0,
    "volume": 3370.0,
-   "median_spread_otm_put": 0.933424532603739,
+   "median_spread_otm_put": 1.2000000000000002,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -989,7 +1051,8 @@
    "n_expiries": 16,
    "open_interest": 469062.0,
    "volume": 5817.0,
-   "median_spread_otm_put": 1.3198826118855467,
+   "median_spread_otm_put": 1.4498141263940518,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1004,7 +1067,8 @@
    "n_expiries": 17,
    "open_interest": 515567.0,
    "volume": 9591.0,
-   "median_spread_otm_put": 0.6428571428571428,
+   "median_spread_otm_put": 0.42471395881006874,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1019,7 +1083,8 @@
    "n_expiries": 19,
    "open_interest": 797890.0,
    "volume": 17537.0,
-   "median_spread_otm_put": 0.3999999999999999,
+   "median_spread_otm_put": 0.28571428571428586,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1034,7 +1099,8 @@
    "n_expiries": 16,
    "open_interest": 393223.0,
    "volume": 7039.0,
-   "median_spread_otm_put": 0.5793939393939394,
+   "median_spread_otm_put": 0.32081911262798635,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1049,7 +1115,8 @@
    "n_expiries": 15,
    "open_interest": 322215.0,
    "volume": 1559.0,
-   "median_spread_otm_put": 1.241706161137441,
+   "median_spread_otm_put": 1.0829458527073648,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1057,14 +1124,15 @@
    "liquid": false
   },
   "WMT": {
-   "spot": 131.125,
-   "quote_time_utc": "2026-11-05 15:47:17",
+   "spot": 131.05,
+   "quote_time_utc": "2026-11-05 15:49:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 16,
    "open_interest": 1328921.0,
-   "volume": 41083.0,
-   "median_spread_otm_put": 0.3529411764705882,
+   "volume": 41695.0,
+   "median_spread_otm_put": 0.2070015220700152,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1072,14 +1140,15 @@
    "liquid": false
   },
   "NKE": {
-   "spot": 39.85,
-   "quote_time_utc": "2026-11-05 15:47:17",
+   "spot": 39.815,
+   "quote_time_utc": "2026-11-05 15:49:17",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 18,
    "open_interest": 2291654.0,
-   "volume": 18865.0,
-   "median_spread_otm_put": 0.4761904761904763,
+   "volume": 19196.0,
+   "median_spread_otm_put": 0.29166666666666663,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1094,7 +1163,8 @@
    "n_expiries": 17,
    "open_interest": 520009.0,
    "volume": 7179.0,
-   "median_spread_otm_put": 0.7589852008456659,
+   "median_spread_otm_put": 0.522620755619321,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1109,7 +1179,8 @@
    "n_expiries": 16,
    "open_interest": 446388.0,
    "volume": 3668.0,
-   "median_spread_otm_put": 1.0,
+   "median_spread_otm_put": 0.9054545454545455,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1124,7 +1195,8 @@
    "n_expiries": 18,
    "open_interest": 336517.0,
    "volume": 8152.0,
-   "median_spread_otm_put": 0.5108225108225108,
+   "median_spread_otm_put": 0.8130434782608695,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1132,14 +1204,15 @@
    "liquid": false
   },
   "PFE": {
-   "spot": 31.2699,
-   "quote_time_utc": "2026-11-05 15:47:06",
+   "spot": 31.175,
+   "quote_time_utc": "2026-11-05 15:49:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 16,
    "open_interest": 2300224.0,
-   "volume": 65012.0,
-   "median_spread_otm_put": 0.3999999999999999,
+   "volume": 65672.0,
+   "median_spread_otm_put": 0.2678571428571429,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1154,7 +1227,8 @@
    "n_expiries": 16,
    "open_interest": 783467.0,
    "volume": 12648.0,
-   "median_spread_otm_put": 0.9666666666666666,
+   "median_spread_otm_put": 0.3013698630136986,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1162,19 +1236,20 @@
    "liquid": false
   },
   "INTC": {
-   "spot": 53.485,
-   "quote_time_utc": "2026-11-05 15:47:19",
+   "spot": 53.86,
+   "quote_time_utc": "2026-11-05 15:49:19",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 19,
    "open_interest": 7984222.0,
-   "volume": 451336.0,
-   "median_spread_otm_put": 0.10433604336043356,
+   "volume": 459561.0,
+   "median_spread_otm_put": 0.05519965833867174,
+   "spread_expiry": "2026-11-13",
    "pass": {
-    "spread": false,
+    "spread": true,
     "oi_vol": true
    },
-   "liquid": false
+   "liquid": true
   },
   "CSCO": {
    "spot": 98.425,
@@ -1184,7 +1259,8 @@
    "n_expiries": 18,
    "open_interest": 853264.0,
    "volume": 16902.0,
-   "median_spread_otm_put": 0.30484814186002646,
+   "median_spread_otm_put": 0.2535211267605634,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1192,29 +1268,31 @@
    "liquid": false
   },
   "ORCL": {
-   "spot": 117.1,
-   "quote_time_utc": "2026-11-05 15:47:18",
+   "spot": 117.19,
+   "quote_time_utc": "2026-11-05 15:49:18",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 20,
    "open_interest": 3875489.0,
-   "volume": 149176.0,
-   "median_spread_otm_put": 0.1332980225988701,
+   "volume": 152486.0,
+   "median_spread_otm_put": 0.052834393425878624,
+   "spread_expiry": "2026-11-13",
    "pass": {
-    "spread": false,
+    "spread": true,
     "oi_vol": true
    },
-   "liquid": false
+   "liquid": true
   },
   "SMCI": {
-   "spot": 26.7685,
-   "quote_time_utc": "2026-11-05 15:47:06",
+   "spot": 26.73,
+   "quote_time_utc": "2026-11-05 15:49:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 18,
    "open_interest": 2585949.0,
-   "volume": 147857.0,
-   "median_spread_otm_put": 0.1666666666666667,
+   "volume": 149649.0,
+   "median_spread_otm_put": 0.12389380530973444,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1222,14 +1300,15 @@
    "liquid": false
   },
   "RIOT": {
-   "spot": 13.59,
-   "quote_time_utc": "2026-11-05 15:47:06",
+   "spot": 13.665,
+   "quote_time_utc": "2026-11-05 15:49:06",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 14,
    "open_interest": 1663682.0,
-   "volume": 139897.0,
-   "median_spread_otm_put": 0.21071428571428563,
+   "volume": 240151.0,
+   "median_spread_otm_put": 0.18497718497718496,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1237,14 +1316,15 @@
    "liquid": false
   },
   "IONQ": {
-   "spot": 26.025,
-   "quote_time_utc": "2026-11-05 15:36:29",
+   "spot": 26.16,
+   "quote_time_utc": "2026-11-05 15:49:30",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 14,
    "open_interest": 712669.0,
-   "volume": 13498.0,
-   "median_spread_otm_put": 0.12080536912751688,
+   "volume": 16960.0,
+   "median_spread_otm_put": 0.1293532338308459,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1252,14 +1332,15 @@
    "liquid": false
   },
   "SHOP": {
-   "spot": 139.77,
-   "quote_time_utc": "2026-11-05 15:47:18",
+   "spot": 139.595,
+   "quote_time_utc": "2026-11-05 15:49:18",
    "next_expiry": "2026-11-06",
    "weekly": true,
    "n_expiries": 17,
    "open_interest": 596002.0,
-   "volume": 11617.0,
-   "median_spread_otm_put": 0.5227272727272728,
+   "volume": 11691.0,
+   "median_spread_otm_put": 0.2250000000000001,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1274,7 +1355,8 @@
    "n_expiries": 16,
    "open_interest": 429108.0,
    "volume": 4418.0,
-   "median_spread_otm_put": 0.9333333333333335,
+   "median_spread_otm_put": 0.8372093023255813,
+   "spread_expiry": "2026-11-13",
    "pass": {
     "spread": false,
     "oi_vol": true
@@ -1283,5 +1365,5 @@
   }
  },
  "errors": {},
- "runtime_s": 71
+ "runtime_s": 64
 }
