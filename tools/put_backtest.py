@@ -48,6 +48,10 @@ def opt(right, S, K, s, T):
 def load():
     days = {}  # date -> payload（每天取最后一个快照，收盘快照优先）
     for d, kind, p in load_daily_closes():
+        # 2026-11-05 修：快照按 UTC 日期分天；13:30Z（美东开盘）之前的快照装的是前一交易日的 high/low，
+        # 被记成新的一天会把「开仓前」的盘中高低点漏进开仓后的路径（AMD 11/04 假止盈）。
+        if kind.startswith("intraday") and kind[9:14] < "13:30":
+            continue
         if d not in days or kind == "close":
             days[d] = p
     dates = sorted(days)
