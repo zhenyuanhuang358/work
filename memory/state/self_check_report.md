@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T06:59:02Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T07:11:57Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-05 06:59 UTC
+自检器 · 2026-11-05 07:11 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -87,6 +87,7 @@
   pipeline-earnings.md       ✅ 2 个 skill
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
+  期权基本面名单：上次复核 2026-11-05（0 天前）
   运行记录：6 份｜超过 2 天未完成 0 份
 
 ==========================================================================
