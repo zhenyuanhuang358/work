@@ -1,0 +1,44 @@
+name: Watch Fundamentals
+
+# 关注标的基本面体检（期权基本面反向名单月度复核，position-discipline 第 17 条）。
+# SEC 在会话容器出口被封，故在 Actions 跑；复用 burry_screener 的 frames 缓存。
+on:
+  push:
+    branches: [main, claude/install-claude-hud-d51E6]
+    paths:
+      - fundamentals_trigger.txt
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore SEC frames cache
+        uses: actions/cache@v4
+        with:
+          path: .burry_frames
+          key: burry-frames-${{ github.run_id }}
+          restore-keys: burry-frames-
+      - name: Compute watch fundamentals
+        env:
+          BURRY_YEAR: '2025'
+        run: python3 scripts/watch_fundamentals.py
+      - name: Commit watch_fundamentals.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add watch_fundamentals.json
+          git diff --cached --quiet && echo "nothing to commit" || \
+            git commit -m "chore: watch fundamentals $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" || { echo "::error::rebase 失败"; exit 1; }
+            git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 3))
+          done
+          exit 1
