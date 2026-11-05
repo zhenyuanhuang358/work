@@ -49,6 +49,7 @@
 
 - 10/27–10/31：止损统一 2×；predictions 规则 11 搬入；COO 总调度（hub + 4 流水线 + G1–G6 关卡 + 运行记录）；期权链自动化（CBOE 主 / yfinance 兜底）；歸藏三件 skill + humanizer-zh；C5 路由名核对；价格缓存改读本分支。
 - 11/04–11/05：亏损归因 + 回放（`trade_replay_20261105.py`：15 笔实盘旧规则 −$4,240 → 新规则 +$330，最大单笔 −$5,150 → −$304；50% 止盈每 $ 收入 +0.16，样本内未扣成本）；卖 call 纳入；财报日历 + IV/HV 过滤；阶梯加码；大师三原则；巴菲特 + 伯里复核（`watch_fundamentals.py`，多类股用稀释加权股数补缺、yfinance 补价）；期权流动性初筛（`options_liquidity_screen.py`）→ 关注清单扩到 60 只并补审基本面。
+- 11/05 新闻标注：`scripts/fetch_news.py`（Finnhub 要闻 + 60 只个股，随 fetch-options 产出 `news.json`）+ `us-options-agent/references/news-channels.md` + pipeline 步骤 7b。**只标注不否决**（用户要求「加以说明标注」）。
 - INTC 财报 Earner 报告 `reports/intc_Copilot_Report.html`（Critic 后修正）。
 
 ## 4. 待办
