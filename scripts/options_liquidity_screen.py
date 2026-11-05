@@ -33,6 +33,7 @@ PRICE_MIN, PRICE_MAX = 10, 150
 MIN_MCAP = 5e9
 MAX_SPREAD = 0.10
 MIN_OI, MIN_VOL = 10_000, 1_000
+MIN_DTE = 7        # 报价差按 ≥7 天到期日量（我们做 1–6 周的单）
 WEEKLY_DAYS = 14
 OTM_BAND = 0.15
 ETFS = ["SPY", "QQQ", "IWM", "DIA", "XLE", "XLF", "XLK", "XLV", "XLI", "XLU", "XLP", "XLY", "XLB",
@@ -98,13 +99,16 @@ def chain_stats(t):
     weekly = bool(future) and (future[0] - today).days <= WEEKLY_DAYS
     spread = None
     if near:
-        e0 = min(e for e in near if e >= today) if any(e >= today for e in near) else None
+        # 口径 = 我们实际交易的期限：最近一个 ≥ MIN_DTE 天的到期日（2026-11-05 修：原取最近到期日，
+        #   周四跑时取到次日到期的合约，权利金几分钱，报价差动辄 50%+，76 只挂 75 只——量的不是我们要卖的东西）
+        cand = [e for e in near if (e - today).days >= MIN_DTE]
+        e0 = min(cand) if cand else None
         if e0:
             sp = [(a - b) / ((a + b) / 2) for b, a in near[e0] if b > 0 and a >= b]
             spread = statistics.median(sp) if sp else None
     return {"spot": spot, "quote_time_utc": j.get("timestamp"), "next_expiry": future[0].isoformat() if future else None,
             "weekly": weekly, "n_expiries": len(future), "open_interest": oi, "volume": vol,
-            "median_spread_otm_put": spread}
+            "median_spread_otm_put": spread, "spread_expiry": e0.isoformat() if near and e0 else None}
 
 
 def main():
@@ -147,7 +151,7 @@ def main():
     out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "mode": "seed" if seed else "全市场",
            "prices": {t: px.get(t) for t in (seed or [])},
            "criteria": {"price": [PRICE_MIN, PRICE_MAX], "min_mcap": MIN_MCAP, "min_revenue": MIN_REV,
-                        "weekly_within_days": WEEKLY_DAYS, "max_median_spread": MAX_SPREAD,
+                        "weekly_within_days": WEEKLY_DAYS, "spread_min_dte": MIN_DTE, "max_median_spread": MAX_SPREAD,
                         "min_open_interest": MIN_OI, "min_volume": MIN_VOL, "otm_band": OTM_BAND},
            "counts": {"sec_rev_ge_1b": len(shares), "pool": len(pool), "chain_ok": len(rows),
                       "chain_error": len(errs), "liquid": len(liquid),

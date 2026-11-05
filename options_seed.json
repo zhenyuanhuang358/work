@@ -1,5 +1,5 @@
 {
-  "_note": "人工候选清单（2026-11-05）：期权长期最活跃的个股与 ETF，按行业铺开。options_liquidity_screen.py --seed 按真实股价（$10–150）与期权未平仓 / 成交量筛，取前 60 并入 options_watch.json。 2026-11-05 15:46Z 盘中复验报价差。",
+  "_note": "人工候选清单（2026-11-05）：期权长期最活跃的个股与 ETF，按行业铺开。options_liquidity_screen.py --seed 按真实股价（$10–150）与期权未平仓 / 成交量筛，取前 60 并入 options_watch.json。 2026-11-05 15:46Z 盘中复验报价差。 15:52Z 改口径（≥7 天到期日）重跑。",
   "tickers": [
     "XLE",
     "XLF",
