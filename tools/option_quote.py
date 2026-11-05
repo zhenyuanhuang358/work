@@ -73,7 +73,7 @@ def main():
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
         sys.exit(1)
-    print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7}")
+    print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
     for row in sorted(r["rows"], key=lambda x: -x["strike"]):
         if row["expiry"] != a.expiry or (a.strikes and row["strike"] not in a.strikes):
             continue
@@ -95,10 +95,13 @@ def main():
         # Reg-T 裸卖 put 保证金：max(20%×现价 − 价外额 + 权利金, 10%×行权价 + 权利金) × 100
         # 2026-10-29 校准：SPY 744P（现价 769、权利金 1.0）→ $12,980，与盈立实际要求「一万多」吻合
         margin = max(0.2 * s - max(s - k, 0) + b, 0.1 * k + b) * 100
+        spread = (ak - b) / b  # 买卖报价差占收入比例（不是价差策略）；>10% 不推（position-discipline 第 7 条）
         mark = "✅" if z >= a.z_min else "  "
+        if spread > 0.10:
+            mark = "⛔报价差"
         if a.bp is not None and margin > a.bp:
             mark = "⛔保证金"
-        print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {mark}")
+        print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
           + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))
