@@ -30,14 +30,22 @@ def put_price(s, k, sig, t):
     return k * N.cdf(-(d1 - sig * math.sqrt(t))) - s * N.cdf(-d1)
 
 
-def implied_vol(px, s, k, t):
-    intrinsic = max(k - s, 0.0)
+def call_price(s, k, sig, t):
+    return put_price(s, k, sig, t) + s - k  # 平价关系（r = 0）
+
+
+def price(right, s, k, sig, t):
+    return put_price(s, k, sig, t) if right == "P" else call_price(s, k, sig, t)
+
+
+def implied_vol(px, s, k, t, right="P"):
+    intrinsic = max(k - s, 0.0) if right == "P" else max(s - k, 0.0)
     if px <= intrinsic:
         return None
     lo, hi = 0.01, 5.0
     for _ in range(100):
         m = (lo + hi) / 2
-        lo, hi = (m, hi) if put_price(s, k, m, t) < px else (lo, m)
+        lo, hi = (m, hi) if price(right, s, k, m, t) < px else (lo, m)
     return (lo + hi) / 2
 
 
@@ -49,6 +57,7 @@ def main():
     ap.add_argument("--z-min", type=float, default=1.0, help="持有期含 CPI/PPI/FOMC/非农时用 1.2")
     ap.add_argument("--max-age", type=float, default=20, help="报价最长可接受分钟数")
     ap.add_argument("--file", default="options_chain.json")
+    ap.add_argument("--right", choices=["P", "C"], default="P", help="P 卖 put / C 卖 call（2026-11-05 起纳入）")
     ap.add_argument("--bp", type=float, help="平台「可取现金」（美元，不是「最大购买力」）；给了就按 Reg-T 保证金做可执行性硬过滤（profile 1.1zc）")
     a = ap.parse_args()
 
@@ -69,37 +78,44 @@ def main():
     t = (exp - qdt).total_seconds() / (365 * 86400)
     s = r["spot"]
 
-    print(f"{a.ticker.upper()} {a.expiry}P  源 {r['source']}  报价 {qt or '无时间戳(用抓取时刻)'} UTC  "
+    print(f"{a.ticker.upper()} {a.expiry}{a.right}  源 {r['source']}  报价 {qt or '无时间戳(用抓取时刻)'} UTC  "
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
         sys.exit(1)
     print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
-    for row in sorted(r["rows"], key=lambda x: -x["strike"]):
+    for row in sorted(r["rows"], key=lambda x: -x["strike"] if a.right == "P" else x["strike"]):
         if row["expiry"] != a.expiry or (a.strikes and row["strike"] not in a.strikes):
             continue
-        if row["strike"] >= s:  # 卖 put 只看价外；价内行的「IV」受价差和内在价值主导，没有参考价值
+        if row.get("right", "P") != a.right:
+            continue
+        # 只看价外：put 行权价在现价下方，call 在上方。价内的「IV」受内在价值主导，没有参考价值，
+        # 而且卖价内期权不是收权利金，是方向性押注（11/05 用户问 HOOD 80C 时的教训）
+        if (a.right == "P" and row["strike"] >= s) or (a.right == "C" and row["strike"] <= s):
             continue
         k, b, ak = row["strike"], row["bid"] or 0, row["ask"] or 0
         if b <= 0 or ak < b:
             print(f"{k:8.2f} {b:6.2f} {ak:6.2f}   — 买价为 0 或倒挂，无法反解")
             continue
         mid = (b + ak) / 2
-        iv = implied_vol(mid, s, k, t)
+        iv = implied_vol(mid, s, k, t, a.right)
         if iv is None:
             print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.2f}   — 中间价不高于内在价值，无法反解")
             continue
         sig = iv * math.sqrt(t)
-        buf = (s - k) / s
+        buf = (s - k) / s if a.right == "P" else (k - s) / s
         z = buf / sig
-        p_otm = N.cdf((math.log(s / k) - 0.5 * sig * sig) / sig)
+        d2 = (math.log(s / k) - 0.5 * sig * sig) / sig
+        p_otm = N.cdf(d2) if a.right == "P" else N.cdf(-d2)
         # Reg-T 裸卖 put 保证金：max(20%×现价 − 价外额 + 权利金, 10%×行权价 + 权利金) × 100
         # 2026-10-29 校准：SPY 744P（现价 769、权利金 1.0）→ $12,980，与盈立实际要求「一万多」吻合
-        margin = max(0.2 * s - max(s - k, 0) + b, 0.1 * k + b) * 100
+        otm_amt = max(s - k, 0) if a.right == "P" else max(k - s, 0)
+        margin = max(0.2 * s - otm_amt + b, 0.1 * (k if a.right == "P" else s) + b) * 100
         spread = (ak - b) / b  # 买卖报价差占收入比例（不是价差策略）；>10% 不推（position-discipline 第 7 条）
         mark = "✅" if z >= a.z_min else "  "
         if spread > 0.10:
             mark = "⛔报价差"
-        if a.bp is not None and margin > a.bp:
+        # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
+        if a.bp is not None and margin * 1.15 > a.bp:
             mark = "⛔保证金"
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"

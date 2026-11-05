@@ -33,12 +33,12 @@ def from_cboe(t, expiries, right, band):
     rows = []
     for o in data.get("options", []):
         m = OCC.match(o.get("option", ""))
-        if not m or m.group(2) not in want or m.group(3) != right:
+        if not m or m.group(2) not in want or m.group(3) not in right:
             continue
         k = int(m.group(4)) / 1000
         if abs(k / spot - 1) > band:
             continue
-        rows.append({"expiry": want[m.group(2)], "strike": k, "bid": o.get("bid"), "ask": o.get("ask"),
+        rows.append({"expiry": want[m.group(2)], "right": m.group(3), "strike": k, "bid": o.get("bid"), "ask": o.get("ask"),
                      "delta": o.get("delta"), "oi": o.get("open_interest"), "volume": o.get("volume"),
                      "last_trade": o.get("last_trade_time")})
     # CBOE 顶层 timestamp 是 UTC（2026-10-29 实测：14:39:11 对应运行时刻 14:39:35Z）；
@@ -55,18 +55,21 @@ def from_yf(t, expiries, right, band):
         if e not in avail:
             continue
         ch = tk.option_chain(e)
-        df = ch.puts if right == "P" else ch.calls
-        for _, r in df.iterrows():
-            k = float(r["strike"])
-            if abs(k / spot - 1) <= band:
-                rows.append({"expiry": e, "strike": k, "bid": float(r["bid"]), "ask": float(r["ask"]),
-                             "delta": None, "oi": int(r["openInterest"] or 0), "volume": None,
-                             "last_trade": str(r["lastTradeDate"])})
+        for rt, df in (("P", ch.puts), ("C", ch.calls)):
+            if rt not in right:
+                continue
+            for _, r in df.iterrows():
+                k = float(r["strike"])
+                if abs(k / spot - 1) <= band:
+                    rows.append({"expiry": e, "right": rt, "strike": k, "bid": float(r["bid"]), "ask": float(r["ask"]),
+                                 "delta": None, "oi": int(r["openInterest"] or 0), "volume": None,
+                                 "last_trade": str(r["lastTradeDate"])})
     return {"source": "yfinance", "quote_time_utc": None, "spot": spot, "rows": rows}
 
 
 def main():
     w = json.load(open("options_watch.json"))
+    # right：「P」「C」或「PC」（两侧都抓，2026-11-05 起卖 call 纳入策略）
     expiries, right, band = w["expiries"], w.get("right", "P"), w.get("band", 0.2)
     out = {"updated_at": now(), "watch": w, "tickers": {}}
     for t in w["tickers"]:
