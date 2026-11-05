@@ -49,9 +49,13 @@ def implied_vol(px, s, k, t, right="P"):
     return (lo + hi) / 2
 
 
+_HV_CACHE = {}
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--ticker", required=True)
+    ap.add_argument("--ticker", help="不给 = --all 模式下扫 options_watch.json 全部标的")
+    ap.add_argument("--all", action="store_true", help="汇总模式：扫全部标的 × dte 窗口，只列全部过关的行 + 各标的挡掉原因（2026-11-05）")
     ap.add_argument("--expiry", help="不给 = 扫 options_watch.json 的 dte 窗口内全部到期日（2026-11-05 起新仓 20–45 天）")
     ap.add_argument("--strikes", type=float, nargs="*")
     ap.add_argument("--z-min", type=float, default=1.0, help="持有期含 CPI/PPI/FOMC/非农时用 1.2")
@@ -59,13 +63,20 @@ def main():
     ap.add_argument("--file", default="options_chain.json")
     ap.add_argument("--right", choices=["P", "C"], default="P", help="P 卖 put / C 卖 call（2026-11-05 起纳入）")
     ap.add_argument("--bp", type=float, help="平台「可取现金」（美元，不是「最大购买力」）；给了就按 Reg-T 保证金做可执行性硬过滤（profile 1.1zc）")
+    ap.add_argument("--dte-max", type=int, help="期限溢价 VIX3M/VIX < 1.20 时给 29：只扫 20–29 天（tail-risk 闸门）")
     a = ap.parse_args()
 
     j = json.load(open(a.file))
+    if a.all:
+        return summary(a, j)
     r = j["tickers"].get(a.ticker.upper())
     if not r or not r.get("rows"):
         sys.exit(f"{a.ticker}: options_chain.json 里没有数据（{r and r.get('errors')}）——把它加进 options_watch.json 并推送")
 
+    main_one(a, j, r)
+
+
+def main_one(a, j, r):
     if a.expiry:
         run(a, j, r)
         return
@@ -73,6 +84,8 @@ def main():
         lo, hi = json.load(open("options_watch.json")).get("dte", [20, 45])
     except OSError:
         lo, hi = 20, 45
+    if a.dte_max:
+        hi = min(hi, a.dte_max)
     today = datetime.now(timezone.utc).date()
     exps = sorted({row["expiry"] for row in r["rows"] if row.get("right", "P") == a.right
                    and lo <= (datetime.fromisoformat(row["expiry"]).date() - today).days <= hi})
@@ -84,6 +97,7 @@ def main():
         print(f"\n==== {e}（{d} 天）" + ("｜30–45 天档：期限溢价 VIX3M/VIX < 1.20 时不做（tail-risk）" if d >= 30 else "")
               + ("｜≥35 天：剩 21 天未止盈就平" if d >= 35 else "") + " ====")
         run(a, j, r)
+
 
 
 def run(a, j, r):
@@ -130,12 +144,15 @@ def run(a, j, r):
 
     # 排雷二：IV ÷ HV。卖方的优势来自「期权卖贵了」；IV 不高于实际波动 1.1 倍就没有优势
     hv = r.get("hv30")  # fetch_options 用 yfinance 日线算的（2026-11-05 起）；没有再退回仓库收盘历史
-    if not hv:
-        try:
-            from spread_check import hv_from_history
-            hv = hv_from_history(a.ticker.upper())
-        except (Exception, SystemExit):
-            hv = None
+    if not hv:  # 退回仓库收盘历史（读 git 历史，慢）：按标的缓存，--all 模式下每只只算一次
+        key = a.ticker.upper()
+        if key not in _HV_CACHE:
+            try:
+                from spread_check import hv_from_history
+                _HV_CACHE[key] = hv_from_history(key)
+            except (Exception, SystemExit):
+                _HV_CACHE[key] = None
+        hv = _HV_CACHE[key]
     t = (exp - qdt).total_seconds() / (365 * 86400)
     s = r["spot"]
 
@@ -191,11 +208,48 @@ def run(a, j, r):
         # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
         if a.bp is not None and margin * 1.15 > a.bp:
             mark = "⛔保证金"
+        if getattr(a, "collect", None) is not None:
+            a.collect.append({"ticker": a.ticker.upper(), "expiry": a.expiry, "strike": k, "bid": b, "ask": ak, "iv": iv,
+                              "ivhv": ratio, "z": z, "p_otm": p_otm, "income": b * 100, "margin": margin,
+                              "spread": spread, "mark": mark.strip() or "z不够"})
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {(f'{ratio:.2f}' if ratio else '—'):>6} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
           + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))
 
+
+
+def summary(a, j):
+    """全清单汇总：每个 (标的, 到期) 只保留过关行；其余按挡掉原因计数。"""
+    import contextlib
+    import io
+    from collections import Counter
+    tick = json.load(open("options_watch.json"))["tickers"]
+    a.collect, why = [], {}
+    for t in tick:
+        r = j["tickers"].get(t)
+        if not r or not r.get("rows"):
+            why[t] = Counter({"无链": 1})
+            continue
+        a.ticker, a.expiry = t, None
+        before = len(a.collect)
+        with contextlib.redirect_stdout(io.StringIO()):
+            try:
+                main_one(a, j, r)
+            except SystemExit:
+                pass
+        why[t] = Counter(x["mark"] for x in a.collect[before:] if x["mark"] != "✅")
+    ok = [x for x in a.collect if x["mark"] == "✅"]
+    print(f"== {a.right} 汇总｜z ≥ {a.z_min}｜bp {a.bp}｜过关 {len(ok)} 行 / {len(a.collect)} 行，{len({x['ticker'] for x in ok})} 只标的")
+    print(f"{'标的':6} {'到期':10} {'行权':>7} {'bid':>5} {'ask':>5} {'IV/HV':>5} {'z':>5} {'价外概率':>6} {'收入':>5} {'保证金':>6} {'报价差':>5}")
+    for x in sorted(ok, key=lambda x: (-x["income"] / x["margin"])):
+        print(f"{x['ticker']:6} {x['expiry']:10} {x['strike']:7.2f} {x['bid']:5.2f} {x['ask']:5.2f} {x['ivhv'] or 0:5.2f} {x['z']:5.2f} "
+              f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%}")
+    tot = Counter()
+    for c in why.values():
+        tot.update({k: 1 for k in c})
+    print("挡掉原因（按标的计，一只可有多因）：", dict(tot.most_common()))
+    print("无过关行的标的主因：", {t: c.most_common(1)[0][0] for t, c in why.items() if c and t not in {x['ticker'] for x in ok}})
 
 
 if __name__ == "__main__":
