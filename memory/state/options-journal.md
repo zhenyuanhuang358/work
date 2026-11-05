@@ -3647,3 +3647,9 @@ GM 盈亏平衡 $78.04；到期每低 $1，四张多亏 $400（77 → −$416、
 - 最大单笔：−$5,150 → −$304（SPCX，无价格数据，保留原结果）；亏损合计 −$6,565 → −$304。新规则下实际会做 6 笔，赚 5 笔。
 - 局限：规则是看过这些亏损之后定的（事后诸葛，样本内）；IV 按不变；PLTR 开仓股价不确定（IV/HV 0.44 不可信）；INTC 104P「次日止盈」偏乐观（增发后 IV 上升）；未扣手续费。
 - 修复：put_backtest 剔除 13:30Z 前快照（UTC 分天把前一日 high/low 漏进下一天，AMD 曾出现假止盈）。
+
+## 2026-11-05 基本面反向名单首次完整复核（巴菲特 + 伯里）
+- 数据：`scripts/watch_fundamentals.py`（Actions，SEC frames CY2025 + 现价，全市场 1,825 家分位）→ watch_fundamentals.json。
+- 不卖 put：INTC（巴菲特口径不过 + 伯里 R8 不过）、AMD（R3 高倍数，EV/EBITDA 93% 分位）、PLTR（R3 点名，数据缺）、NVDA（R3 点名、P/B 93% 分位；巴菲特口径优，分歧从严）。
+- 基本面可卖 put：T、GM（伯里式便宜 + R8 双过）、KO、UBER、WMT。不卖 call 名单不变（AMD、NVDA、MU、SNDK，拥挤 / 急涨）。
+- 未完成定量：F、HOOD、PLTR（缺股本）、SOFI（放贷口径）、WMT（无现价）。
