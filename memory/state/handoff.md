@@ -61,6 +61,7 @@
    同日修：CLAUDE.md 路由「单篇文章 → design」指向不存在的 skill → 改 guizang-page-skill；C5 补上路由名存在性核对（此前 CLAUDE.md 声称有、实际没有）；C9 红灯日不误报；render_pdf.js 加 --print。
    **边界不变**：humanizer-zh 只作编辑，不承诺 / 不宣传「过 AI 检测」（§5 已排除路线仍有效）。
 10. **期权规则（11/05 定）**：卖 put + **卖价外 call**，每笔 1 张；买卖报价差 ≤ 收入 10%；开仓同挂 2× 止损 + 0.5× 止盈买回单；保证金按估算 ×1.15 比可取现金；绝不卖价内 call。满 20 簇用 `tools/put_backtest.py` / `stop_replay.py` 扣真实报价差复盘。期权链已抓 P+C（`options_watch.json` right=PC）。
+11. **自动排雷（11/05）**：fetch-options 工作流同时抓 `earnings_calendar.json`（Finnhub，已用 NVDA 11/17、WMT 11/19 验证阳性）；option_quote 自动标 ⛔财报 / ⚠未核实 / ⛔IV不贵（IV/HV<1.1）/ ⛔报价差 / ⛔保证金，带 ⛔ 的不推。
 6. 可选：用户有具体面试时做面试准备包（ai-job-search 思路，未安装该仓库）。
 
 ## 4. 已跑测试 / 检查及结果（交接时）
