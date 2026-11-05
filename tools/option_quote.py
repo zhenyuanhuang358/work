@@ -15,6 +15,7 @@
 """
 import argparse
 import json
+import os
 import math
 import sys
 from datetime import datetime, timezone
@@ -238,7 +239,8 @@ def run(a, j, r):
         if getattr(a, "collect", None) is not None:
             a.collect.append({"ticker": a.ticker.upper(), "expiry": a.expiry, "strike": k, "bid": b, "ask": ak, "iv": iv,
                               "ivhv": ratio, "z": z, "p_otm": p_otm, "income": b * 100, "margin": margin,
-                              "spread": spread, "mark": mark.strip() or "z不够"})
+                              "spread": spread, "mark": mark.strip() or "z不够",
+                              "spot": s, "t": t, "right": a.right, "hv30": r.get("hv30"), "move": r.get("move_1y")})
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {(f'{ratio:.2f}' if ratio else '—'):>6} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     # 链不够宽：最远一档价外仍到不了 z 门槛（高 IV 标的 + 长到期，band 不够）——不能当成「没有合格行权价」
     if zmax is not None and zmax < a.z_min:
@@ -252,7 +254,9 @@ def run(a, j, r):
 
 
 def summary(a, j):
-    """全清单汇总：每个 (标的, 到期) 只保留过关行；其余按挡掉原因计数。"""
+    """全清单汇总：每个 (标的, 到期) 只保留过关行；其余按挡掉原因计数。过关行附跳空压力（tools/gap_stress.py）。"""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import gap_stress as gs
     import contextlib
     import io
     from collections import Counter
@@ -277,6 +281,7 @@ def summary(a, j):
     for x in sorted(ok, key=lambda x: (-x["income"] / x["margin"])):
         print(f"{x['ticker']:6} {x['expiry']:10} {x['strike']:7.2f} {x['bid']:5.2f} {x['ask']:5.2f} {x['ivhv'] or 0:5.2f} {x['z']:5.2f} "
               f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%} {x['mark'][1:]}")
+        print("        跳空压力：" + gs.fmt(gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])))
     tot = Counter()
     for c in why.values():
         tot.update({k: 1 for k in c})

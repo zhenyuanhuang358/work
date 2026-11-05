@@ -133,9 +133,15 @@ def main():
     # HV30（2026-11-05 修）：option_quote 原只从仓库价格缓存的收盘历史算 HV，新并入的 49/60 只历史不足 15 天 →
     #   IV/HV ≥ 1.1 过滤对它们静默失效。这里用 yfinance 日线（一次批量请求）直接算，写进每个标的。
     try:
-        px = yf.download(list(w["tickers"]), period="3mo", interval="1d", auto_adjust=True, progress=False)["Close"]
+        px = yf.download(list(w["tickers"]), period="1y", interval="1d", auto_adjust=True, progress=False)["Close"]
         for t, r in out["tickers"].items():
-            c = px[t].dropna().tolist()[-31:] if t in px else []
+            full = px[t].dropna().tolist() if t in px else []
+            if len(full) >= 60:  # 一年内单日最大跌 / 涨（跳空压力的实证档，tools/gap_stress.py 用）
+                rets = sorted(b / a - 1 for a, b in zip(full, full[1:]))
+                r["move_1y"] = {"worst_down": round(rets[0], 4), "worst_up": round(rets[-1], 4),
+                                "p01": round(rets[len(rets) // 100], 4), "p99": round(rets[-len(rets) // 100 - 1], 4),
+                                "days": len(rets)}
+            c = full[-31:]
             if len(c) >= 21:
                 lr = [math.log(b / a) for a, b in zip(c, c[1:])]
                 m = sum(lr) / len(lr)
