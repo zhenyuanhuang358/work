@@ -3653,3 +3653,5 @@ GM 盈亏平衡 $78.04；到期每低 $1，四张多亏 $400（77 → −$416、
 - 不卖 put：INTC（巴菲特口径不过 + 伯里 R8 不过）、AMD（R3 高倍数，EV/EBITDA 93% 分位）、PLTR（R3 点名，数据缺）、NVDA（R3 点名、P/B 93% 分位；巴菲特口径优，分歧从严）。
 - 基本面可卖 put：T、GM（伯里式便宜 + R8 双过）、KO、UBER、WMT。不卖 call 名单不变（AMD、NVDA、MU、SNDK，拥挤 / 急涨）。
 - 未完成定量：F、HOOD、PLTR（缺股本）、SOFI（放贷口径）、WMT（无现价）。
+- 11/05 补缺：多类股（F / HOOD / PLTR）股本改用稀释加权平均股数；股本变化统一为加权股数同比；价格缓存自动并入期权关注清单（WMT 已有价）；SOFI 标不适用（银行口径）。
+  PLTR EV/EBITDA 303、P/B 39 → 不卖 put 有数据支撑；F、HOOD 列「谨慎」（F 杠杆被 Ford Credit 低估；HOOD SBC 90% 分位）。
