@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-05T17:39:45+00:00",
+ "updated_at": "2026-11-05T17:44:15+00:00",
  "schedule": [
   {
    "time": "2026-11-05T08:50:00-05:00",
@@ -54,7 +54,92 @@
   }
  ],
  "board": [],
- "headlines": [],
+ "headlines": [
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-05T16:33+00:00",
+   "source": "GuruFocus",
+   "headline": "Richmond Fed's Barkin Supports Gradual Rate Hikes Amid Inflation Concerns - GuruFocus",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPbVRLVHpZbllKenBuVDRFdEFaZlpvenljNHlPSGE1ajhYenA5QWpybDRCcHpxaDlCMzhKSlNzQ1hLNXVRdFZpTXFZbXpqTm5VUG9CV09WU2hORzdSMFRMUGozcmZNekpXYlBnZ0F5a2pvMEl6eGZWVGkxU0xiUlg2Ymw5QmJoeXN5UHd3T2JJVFZFbWMyZTd3R1BmbEl2d2dBejBJLWlEQkJjbGtma0hXMg?oc=5"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-05T15:48+00:00",
+   "source": "FXStreet",
+   "headline": "Fed’s Barkin backs gradual rate hikes as inflation stays too high - FXStreet",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZ2hPR2RHTkxORzZ4c3FOM3dweVdsTnc4S1NTN29NZXlQVXZxNjN0OTlsMS1nRjdWd2I1NFpFN1l0TFBqYXgwMlJYWHE4YmJXc0RSeFVNNGswTmhHS1I1azBDazhJQ0I0YXZyQVVXX3NRY1FqWUlMYm9ISUJzNzlST0s4ODJVbVZmd2szVTdUQTdwT1FvX2prdGN4dEZlQndrZDFmcVlpX0haZ28?oc=5"
+  },
+  {
+   "speaker": "Hammack",
+   "time_utc": "2026-11-05T15:41+00:00",
+   "source": "Bloomberg.com",
+   "headline": "Fed’s Hammack Says Restrictive Rates Needed to Cool Inflation - Bloomberg.com",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPU2c2UERBM24tYnJsM3UxR3pvTG9mYmZNZ0dDN3k4OHp6SUl3aUxKRXZkNlJVeFU4dTFoS1NtSHBZN0xIVG1GRnBNNmxxWU9MWUNWNmhkZXZPT1A5ZHN2RHZRWS1tMmtZV1BzSDJLLWpERnFoZTVLNDFsdWVlaENTdE5UZVZDanpTbTFtNDQ5WHJJYWt1Y0hGNnd5eEhXaVplZWJNcXFXVHpIMXVqa0c5Z2tn?oc=5"
+  },
+  {
+   "speaker": "Hammack",
+   "time_utc": "2026-11-05T15:35+00:00",
+   "source": "BigGo Finance",
+   "headline": "Cleveland Fed's Hammack Says Rates Must Turn Restrictive as Inflation Runs Near 6-Year High - BigGo Finance",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE05bDVSZEFqVERlOHYyZlVOTE9PU2ptUkRzTnljbHpFdFltLWREX0FrYTRpRWJpeWJ1VE0wYTFQVmROLXJDWURTbDViRThnR19QUUVKejBkVmdBZnY0Um9qTmpZb3QxRUdDTjEwaV8yZjJuWlZHbVE?oc=5"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-05T15:23+00:00",
+   "source": "Seeking Alpha",
+   "headline": "Rate path is straightforward; the question is timing, Richmond Fed's Barkin says - Seeking Alpha",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNMjNMSXpmQ191WTltbzBPaVI4NEVneVRNRTc0a2RkRFBoRk51YzQwSi0xX0piZHFBdEZNbWhtcnl6bllnZUtRV3JyR1VrMHAyX1l0WTlDNzhmX0JOb0t4SHNsWHQxZGJFZXhqUldmU05VUXB5MzZFQzVQNk52M1RQUmJpSWRXZ05PaWVmOXZkckhLWDlJY3BVZnBVWXF4MDBEV25ZRHpMRXIyQXhESU1QN0hPLXpTQQ?oc=5"
+  },
+  {
+   "speaker": "Hammack",
+   "time_utc": "2026-11-05T15:10+00:00",
+   "source": "Investing.com",
+   "headline": "Fed’s Hammack backs restrictive rates, cites persistent inflation pressures - Investing.com",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQXzdHUi14VGZBZ2lTVzBaSG5nUHVlRFhyNGYtcEd0UFFYOFRvMXRUdWJPcjFrQUUtczBreDlicmpHR3NmRGpmR1pLUzJlaWVPQjNhRmxxQUFiYjdvdmV5eHdtXzllMDN2UlBwaDVDX3RzRzk5X0Q2SmJXSXp5ekJIQzJGNFZqVVhVdnZVRlk3aHFqYXFGSi1CQTRpUFhvY0daNGNMNXJrSzE4TmxwaVZoTnZXSk9lclpRQzFjejJMTVo0UzA?oc=5"
+  },
+  {
+   "speaker": "Hammack",
+   "time_utc": "2026-11-05T15:03+00:00",
+   "source": "marketscreener.com",
+   "headline": "Fed's Hammack Repeats Call for Small Rate Increases to Curb Inflation - marketscreener.com",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPejJENnpxVldCamdPNmtHM1BHdFg4SXpERE43ZXBoRUk0bTBfODRiV1NUcWU4d2ZCY1hMWDNfREYzUnpQZjJ6ZnRDMjN5Z0ttTVlhNXJWWEtQN3BRQmlWdk9mMmkwaWZQbkdwWFhHWU9SZFJLU2lnZTFXc3VpMzNKUGZUdVRwNUZ1SUpxY01KOTJyMUpydGZHY25KSWtTUXZSaGY3ejZoQUhzQVEyd2pkVUhNZ2hMMHRKY1pjOTNGZw?oc=5"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-05T14:29+00:00",
+   "source": "CNBC",
+   "headline": "Barkin sees interest rate hikes ahead, but at a gradual pace - CNBC",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPdEZaWEtSWXFFb2N4RUNSdXRrbktjX1JvWnoyWGM2c1p2dnNrWGMzeTAwdkU3UDlmV2g3aDJvZVVxdG5BZ09RbU1DZWs3MmxodWRka0NXSE1YQmNOMjViTzhKbE9Qa1Y4SExQQzROdkFzWnJJeExoZ0h0aFNFRWdHU0NxM2Y4SXFMYlF3V2UxaTN2aXRTOHVvdVdoNGTSAaIBQVVfeXFMTUZ0M1g5R2p1V2hibU0xWHRfcnBDSkVzWGlZNk92OWNKZkRtV1JubEhWVnp4M0RSTWhaSGV5VlR6cjRtT3FMRWI5eFdBcDJoakxBSHVhMWZFdGxsZG90ZFl3SU1OYW92ajZGRkdkRXFZUnZOZFhFd09fQlgtVFctNmF2THlhNzgteDQ3STFZbmV2QXZSWG9Ldi1IOUJSSWNvWFdB?oc=5"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-05T14:20+00:00",
+   "source": "investingLive",
+   "headline": "Fed's Barkin: Gradual pace of hikes \"makes sense\" - investingLive",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObjdFd0w0OEIzZEtUU0Jqbm94OEY1WnRGd1VnX3NHal94WnFaRFlnOGY4ZUlqREpuTFRMM3ZnZ1pBYUlGSnZTVTVNMzgwbmNSRFpIc0Q3eDhOUDZjMEl1dUNHZ2xubF9Ub1JfLXZxa3p1QmZOcUZ5b0RiMTVkQ3FNWGZ5UE4tcVhlSmhPTjQ1aVo?oc=5"
+  },
+  {
+   "speaker": "Hammack",
+   "time_utc": "2026-11-05T13:55+00:00",
+   "source": "Reuters",
+   "headline": "Fed's Hammack favors gradual rate-hike path to lower inflation - Reuters",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTDI4cDU1ODdtRUFrTlZiTjZUbUlKNjZicWpjOHp0YnhONENvNEhMemJ3bWNyR1Rpd0d5akp3Yk1FVElzaDlBenRLRkttdjFvOXFZaGt6dm05WWdZZXpqcU5vazJSY2p3UEx6dkFtM18tNU5nVFZEb0dFY3NHUkRGZlAxS2xJVHZPWWFYOWNUd1lsU2VnbEliTXZDYnp1Um5aX2M1a3Fn?oc=5"
+  },
+  {
+   "speaker": "Williams",
+   "time_utc": "2026-11-05T10:00+00:00",
+   "source": "The Latrobe Bulletin",
+   "headline": "Cheryl 'Sherrie' Anne Williams Okert - The Latrobe Bulletin",
+   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQcFlidXZjMVdxZVU1SmZrRzBsbGpCX2RXNVB4ZXlHTGFfUEFoTldCT1NZUVdOOVlSY29ER3BqeWdZLURXTDdiT29PdVFsRXFFQVF0U1VuSFh1dEZ0MEY1dzJvN3QzRE5Qb1dZWmFFMERoOU0wS0FpUlJVYWdlUHduOEotTkwtWW1xWDNvUEdsRi01YmRkRzE0bFpqSHluM3Z2T2ZieC1tUDdpVFlpZmNqM2F0VXRTUUhtbm9fYnhodklnLVlkSlBxWDBPTQ?oc=5"
+  },
+  {
+   "speaker": "Powell",
+   "time_utc": "2026-11-04T03:08+00:00",
+   "source": "ABC News - Breaking News, Latest News and Videos",
+   "headline": "Fed chair Jerome Powell says he will stay on central bank's board after term expires next month - ABC News - Breaking News, Latest News and Videos",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOVTRuNnNUUkdLNnBuVk9RQTBiS25xcTVBVVpjeFpTaDFUWjJuWFl4QjBkUnp0YkozM3ZXUXRfQ1RSTW1kU2h0OXZiU0M2MHJUQWZBdDNnWVU1am1yb1UxRWlpYWlpN1Y5VUFwd1oxUjF0UlFMeEt3SUx4UURpb1ZpYXY1c0lkYThrLUZtVlpUSWnSAZYBQVVfeXFMUEQwcFlXdjlTV3lqejM2WFFIQ25UWlhUM1FQNjIzTGtGV2ZQaElPZ2Izd0gwR2lLZ1pSdTZhWDVXMTg4d0V6RGxZdnZSak9walllOHRDOFlUT2pYSUJrdjc0NFYyekpfdjVIQUpVaDZjRGpJMlVwLXFHdFhnYzN5b2g3cWpZNkl5Ty11U29pbHllLUNLVjdR?oc=5"
+  }
+ ],
  "errors": [],
- "trigger": "2026-11-05T17:35:50Z-fedtest"
+ "trigger": "2026-11-05T17:40:15Z-fedtest2"
 }
