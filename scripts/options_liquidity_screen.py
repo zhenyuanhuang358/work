@@ -33,7 +33,8 @@ PRICE_MIN, PRICE_MAX = 10, 150
 MIN_MCAP = 5e9
 MAX_SPREAD = 0.10
 MIN_OI, MIN_VOL = 10_000, 1_000
-MIN_DTE = 7        # 报价差按 ≥7 天到期日量（我们做 1–6 周的单）
+MIN_DTE = 14       # 报价差按 ≥14 天到期日量（11/05 实测：1 周到期价外 put 权利金太小，报价差占比普遍 15–50%；2 周档明显收窄）
+MIN_OTM = 0.03     # 只量价外 3% 以外（我们卖的区间），平值附近报价差窄会拉低中位数、高估可做性
 WEEKLY_DAYS = 14
 OTM_BAND = 0.15
 ETFS = ["SPY", "QQQ", "IWM", "DIA", "XLE", "XLF", "XLK", "XLV", "XLI", "XLU", "XLP", "XLY", "XLB",
@@ -93,7 +94,7 @@ def chain_stats(t):
         oi += o.get("open_interest") or 0
         vol += o.get("volume") or 0
         k = int(m.group(4)) / 1000
-        if m.group(3) == "P" and spot * (1 - OTM_BAND) <= k <= spot:
+        if m.group(3) == "P" and spot * (1 - OTM_BAND) <= k <= spot * (1 - MIN_OTM):
             near.setdefault(e, []).append((o.get("bid") or 0, o.get("ask") or 0))
     future = sorted(e for e in exps if e >= today)
     weekly = bool(future) and (future[0] - today).days <= WEEKLY_DAYS
