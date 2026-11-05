@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-05T05:33:19+00:00",
+ "updated_at": "2026-11-05T06:03:00+00:00",
  "watch": {
   "_note": "期权链关注清单：扫描时改这里（候选标的 + 到期日）并推送，fetch-options 工作流会抓 options_chain.json。band = 只取现价 ±band 的行权价。2026-10-30 起按购买力约束选低保证金标的。 right 可为 P / C / PC（2026-11-05 起卖 call 纳入）。",
   "expiries": [
