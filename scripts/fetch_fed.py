@@ -7,7 +7,8 @@
     → 唯一能覆盖地区联储主席日程的免费结构化源；只有「谁、何时」，没有内容
   - 美联储理事会 RSS（federalreserve.gov/feeds/speeches_and_testimony.xml）：理事讲话原文链接 + 发布时间；不含地区主席
   - 圣路易斯联储 FOMC Speak：全员但为 HTML，需另写解析，暂不用
-内容层用已有的 news.json（Finnhub 要闻 + 个股新闻）按讲话人姓氏匹配标题——路透 / CNBC 的「Fed's X says …」就是当天内容。
+内容层：① news.json（Finnhub）按讲话人姓氏匹配标题；② Google News RSS 按讲话人搜近 2 天报道（Finnhub 几乎不报联储官员讲话，
+实测 0/60）——路透 / 彭博 / CNBC 的「Fed's X says …」就是当天讲了什么。标题只作标注原料，鹰鸽判断由扫描会话读标题后写明出处。
 """
 import json
 import re
@@ -77,6 +78,24 @@ def main():
                     out["headlines"].append({"speaker": n, **{k: x.get(k) for k in ("time_utc", "source", "headline", "url")}})
     except OSError:
         out["errors"].append("news.json 不存在（fetch_news 未先跑）")
+    # Google News RSS（11/05 加：Finnhub 要闻 60 条里一条美联储讲话都没有）：近 2 天讲过 / 即将讲的人 + 主席，每人一查
+    recent = {s["speaker"] for s in out["schedule"]
+              if abs((datetime.fromisoformat(s["time"]) - now).total_seconds()) <= 2 * 86400} | {"Powell"}
+    for n in sorted(recent):
+        try:
+            r = requests.get("https://news.google.com/rss/search", headers=H, timeout=20,
+                             params={"q": f'"{n}" Fed when:2d', "hl": "en-US", "gl": "US", "ceid": "US:en"})
+            r.raise_for_status()
+            for it in list(ET.fromstring(r.content).iter("item"))[:6]:
+                title = it.findtext("title") or ""
+                if not re.search(rf"\b{n}\b", title):
+                    continue
+                pub = parsedate_to_datetime(it.findtext("pubDate"))
+                out["headlines"].append({"speaker": n, "time_utc": pub.isoformat(timespec="minutes"),
+                                         "source": (it.findtext("source") or "Google News"), "headline": title,
+                                         "url": it.findtext("link")})
+        except Exception as ex:
+            out["errors"].append(f"gnews {n}: {repr(ex)[:120]}")
     out["headlines"].sort(key=lambda x: x.get("time_utc") or "", reverse=True)
 
     with open("fed_speak.json", "w") as f:
