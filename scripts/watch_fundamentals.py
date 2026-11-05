@@ -17,7 +17,8 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import burry_screener as bs  # noqa: E402
 
-ETFS = {"SLV", "XLE", "GLD", "SPY", "QQQ", "IWM", "TLT"}
+ETFS = {"SLV", "XLE", "GLD", "SPY", "QQQ", "IWM", "TLT", "HYG", "USO", "XLF", "GDX", "XLP", "FXI", "EWZ",
+        "KRE", "EEM", "ARKK", "XLU", "XLV", "XLI", "XLB", "XBI"}
 # 银行口径申报、但没被扫描器的金融识别抓到的标的：营收科目只取到一部分（SOFI 6.2 亿），指标不可比
 LENDERS = {"SOFI": "持牌银行（SoFi Bank），营收科目只取到一部分，指标不可比"}
 TAX = 0.21

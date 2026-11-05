@@ -11,6 +11,7 @@ IV 一律由 tools/option_quote.py 从中间价反解，口径与「平台报价
 import json
 import math
 import re
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -24,8 +25,13 @@ def now():
 
 
 def from_cboe(t, expiries, right, band):
-    r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{t}.json",
-                     timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+    # 关注清单扩到 60 只（2026-11-05）：CBOE 会对连续请求回 429，退避重试
+    for i in range(6):
+        r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{t}.json",
+                         timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code != 429:
+            break
+        time.sleep(2 ** i)
     r.raise_for_status()
     j = r.json()
     data = j["data"]
@@ -96,6 +102,7 @@ def main():
     expiries, right, band = w["expiries"], w.get("right", "P"), w.get("band", 0.2)
     out = {"updated_at": now(), "watch": w, "tickers": {}}
     for t in w["tickers"]:
+        time.sleep(0.4)
         errs = []
         for fn in (from_cboe, from_yf):
             try:

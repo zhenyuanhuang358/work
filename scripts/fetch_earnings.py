@@ -7,6 +7,7 @@
 """
 import json
 import os
+import time
 from datetime import date, datetime, timedelta, timezone
 
 import requests
@@ -44,6 +45,7 @@ def main():
     out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
            "window": [frm, to], "tickers": {}}
     for t in w["tickers"]:
+        time.sleep(1.1)  # Finnhub 免费档 60 次/分钟（关注清单 60 只）
         errs = []
         for name, fn in (("finnhub", from_finnhub), ("yfinance", from_yf)):
             try:
