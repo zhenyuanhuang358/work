@@ -7,6 +7,7 @@ on:
     branches: [main, claude/install-claude-hud-d51E6]
     paths:
       - liquidity_trigger.txt
+      - options_seed.json
   workflow_dispatch:
   schedule:
     - cron: '45 15 * * 1'   # 周一 15:45 UTC（冬令时美东 10:45）
@@ -19,6 +20,8 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # 判断本次推送是否改了 options_seed.json 需要 HEAD~1
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
@@ -32,12 +35,18 @@ jobs:
       - name: Screen
         env:
           BURRY_YEAR: '2025'
-        run: python3 scripts/options_liquidity_screen.py
+        run: |
+          if [ -f options_seed.json ] && [ "${{ github.event_name }}" = "push" ] && git diff --name-only HEAD~1 HEAD | grep -q options_seed.json; then
+            python3 scripts/options_liquidity_screen.py --seed
+          else
+            python3 scripts/options_liquidity_screen.py
+          fi
       - name: Commit options_liquidity.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add options_liquidity.json
+          # 逐个 add：一条 git add 里有一个文件不存在会整条失败、两个都不提交
+          for f in options_liquidity.json options_liquidity_seed.json; do [ -f "$f" ] && git add "$f"; done
           git diff --cached --quiet && echo "nothing to commit" || \
             git commit -m "chore: options liquidity screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
           for i in 1 2 3 4 5; do

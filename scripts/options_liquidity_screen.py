@@ -109,15 +109,25 @@ def chain_stats(t):
 
 def main():
     t0 = time.time()
-    shares = universe()
-    px = prices(list(shares) + ETFS)
-    pool = []
-    for t, sh in shares.items():
-        p = px.get(t)
-        if p and PRICE_MIN <= p <= PRICE_MAX and sh and p * sh >= MIN_MCAP:
-            pool.append(t)
-    pool += [e for e in ETFS if e in px and PRICE_MIN <= px[e] <= PRICE_MAX * 5]  # ETF 不卡市值；高价 ETF 下游由保证金过滤
-    print(f"SEC 营收 ≥ $1B：{len(shares)}｜有价：{len(px)}｜股票池（价格 / 市值 + ETF）：{len(pool)}")
+    # 清单模式（2026-11-05 用户：先把备选库扩到 60 只，不跑全市场）：只筛 options_seed.json 里的人工候选
+    seed = None
+    if len(sys.argv) > 1 and sys.argv[1] == "--seed":
+        seed = json.load(open("options_seed.json"))["tickers"]
+    if seed:
+        shares = {t: None for t in seed}
+        px = prices(seed)
+        pool = [t for t in seed if px.get(t) and PRICE_MIN <= px[t] <= PRICE_MAX]
+        print(f"清单 {len(seed)}｜有价 {len(px)}｜股价 ${PRICE_MIN}–{PRICE_MAX}：{len(pool)}")
+    else:
+        shares = universe()
+        px = prices(list(shares) + ETFS)
+        pool = []
+        for t, sh in shares.items():
+            p = px.get(t)
+            if p and PRICE_MIN <= p <= PRICE_MAX and sh and p * sh >= MIN_MCAP:
+                pool.append(t)
+        pool += [e for e in ETFS if e in px and PRICE_MIN <= px[e] <= PRICE_MAX * 5]  # ETF 不卡市值；高价 ETF 下游由保证金过滤
+        print(f"SEC 营收 ≥ $1B：{len(shares)}｜有价：{len(px)}｜股票池（价格 / 市值 + ETF）：{len(pool)}")
 
     rows, errs = {}, {}
     for t in pool:
@@ -134,7 +144,8 @@ def main():
         }
         r["liquid"] = all(r["pass"].values())
     liquid = sorted([t for t, r in rows.items() if r["liquid"]], key=lambda t: -rows[t]["volume"])
-    out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "mode": "seed" if seed else "全市场",
+           "prices": {t: px.get(t) for t in (seed or [])},
            "criteria": {"price": [PRICE_MIN, PRICE_MAX], "min_mcap": MIN_MCAP, "min_revenue": MIN_REV,
                         "weekly_within_days": WEEKLY_DAYS, "max_median_spread": MAX_SPREAD,
                         "min_open_interest": MIN_OI, "min_volume": MIN_VOL, "otm_band": OTM_BAND},
@@ -144,7 +155,7 @@ def main():
                       "fail_spread": sum(1 for r in rows.values() if not r["pass"]["spread"]),
                       "fail_oi_vol": sum(1 for r in rows.values() if not r["pass"]["oi_vol"])},
            "liquid": liquid, "stats": rows, "errors": errs, "runtime_s": round(time.time() - t0)}
-    with open("options_liquidity.json", "w") as f:
+    with open("options_liquidity_seed.json" if seed else "options_liquidity.json", "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     print(json.dumps(out["counts"], ensure_ascii=False))
     print("流动性好：", ", ".join(liquid[:80]))
