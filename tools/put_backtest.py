@@ -37,6 +37,14 @@ def put(S, K, s, T):
     return K * N.cdf(-(d1 - s * math.sqrt(T))) - S * N.cdf(-d1)
 
 
+def call(S, K, s, T):
+    return put(S, K, s, T) + S - K  # 平价关系（r = 0）
+
+
+def opt(right, S, K, s, T):
+    return put(S, K, s, T) if right == "P" else call(S, K, s, T)
+
+
 def load():
     days = {}  # date -> payload（每天取最后一个快照，收盘快照优先）
     for d, kind, p in load_daily_closes():
@@ -67,8 +75,8 @@ def regime_ok(p, mode):
     return green and tr.get("vix3m") and tr["vix3m"] / vix >= 1.20
 
 
-def simulate(t, K, S0, credit, iv, entry, expiry, dates, days, stop, tp):
-    """返回 (结果 / 收入, 结局)。"""
+def simulate(t, K, S0, credit, iv, entry, expiry, dates, days, stop, tp, right="P"):
+    """返回 (结果 / 收入, 结局)。right = P 卖 put / C 卖 call（不利方向分别看 low / high）。"""
     e = dt.date.fromisoformat(expiry)
     mid = (S0 + K) / 2
     path = [d for d in dates if entry < d <= expiry and t in days[d]["prices"]]
@@ -78,16 +86,18 @@ def simulate(t, K, S0, credit, iv, entry, expiry, dates, days, stop, tp):
         q = days[d]["prices"][t]
         T = max((e - dt.date.fromisoformat(d)).days, 0) / 365
         low, high, close = q.get("low") or q["price"], q.get("high") or q["price"], q["price"]
-        if stop == "2x" and put(low, K, iv, T) >= 2 * credit:
+        bad, good = (low, high) if right == "P" else (high, low)
+        if stop == "2x" and opt(right, bad, K, iv, T) >= 2 * credit:
             return -1.0, "止损"
-        if stop == "stock" and close <= mid:
-            return (credit - put(close, K, iv, T)) / credit, "止损"
-        if tp and put(high, K, iv, T) <= (1 - tp) * credit:
+        if stop == "stock" and (close <= mid if right == "P" else close >= mid):
+            return (credit - opt(right, close, K, iv, T)) / credit, "止损"
+        if tp and opt(right, good, K, iv, T) <= (1 - tp) * credit:
             return tp, "止盈"
     if expiry > dates[-1]:
         return None, "未到期"
     last = days[path[-1]]["prices"][t]["price"] if path else S0
-    return (credit - max(K - last, 0)) / credit, ("到期价内" if last < K else "到期价外")
+    intrinsic = max(K - last, 0) if right == "P" else max(last - K, 0)
+    return (credit - intrinsic) / credit, ("到期价内" if intrinsic > 0 else "到期价外")
 
 
 def run(a):
@@ -129,13 +139,22 @@ def run(a):
                 # 到期日落在周末时取之前最近的交易日
                 ex = max([d for d in dates if d <= expiry], default=None) if expiry <= dates[-1] else expiry
                 T0 = a.dte / 365
-                K = S0 * math.exp(-a.z * iv * math.sqrt(T0))
-                credit = put(S0, K, iv, T0)
-                if credit < 0.005:
-                    continue
-                res, how = simulate(t, K, S0, credit, iv, entry, ex, dates, days, a.stop, a.tp)
-                if res is not None:
-                    trades.append((t, ex, res, how, credit))
+                legs = {"P": ["P"], "C": ["C"], "strangle": ["P", "C"]}[a.right]
+                got = []
+                for rt in legs:
+                    K = S0 * math.exp((-1 if rt == "P" else 1) * a.z * iv * math.sqrt(T0))
+                    credit = opt(rt, S0, K, iv, T0)
+                    if credit < 0.005:
+                        break
+                    res, how = simulate(t, K, S0, credit, iv, entry, ex, dates, days, a.stop, a.tp, rt)
+                    if res is None:
+                        break
+                    got.append((res * credit, how, credit))
+                if len(got) == len(legs):
+                    # 宽跨按一笔合并：两腿盈亏相加 ÷ 两腿收入相加
+                    c = sum(g[2] for g in got)
+                    how = "止损" if any(g[1] == "止损" for g in got) else got[0][1]
+                    trades.append((t, ex, sum(g[0] for g in got) / c, how, c))
     return trades
 
 
@@ -150,10 +169,11 @@ def main():
     ap.add_argument("--iv-mult", type=float, default=1.1)
     ap.add_argument("--step", type=int, default=5)
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--right", choices=["P", "C", "strangle"], default="P", help="合成样本：卖 put / 卖 call / 同时卖两腿（宽跨）")
     a = ap.parse_args()
     tr = run(a)
     label = f"{a.source}｜止损 {a.stop}｜止盈 {a.tp or '无'}｜环境 {a.regime or '不限'}" + \
-            (f"｜{a.dte} 天 z {a.z}" if a.source == "synthetic" else "")
+            (f"｜{a.dte} 天 z {a.z}｜{ {'P':'卖 put','C':'卖 call','strangle':'宽跨'}[a.right]}" if a.source == "synthetic" else "")
     if not tr:
         print(f"{label}：无样本")
         return
