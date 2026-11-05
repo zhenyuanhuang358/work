@@ -25,6 +25,7 @@ jobs:
           path: .burry_frames
           key: burry-frames-${{ github.run_id }}
           restore-keys: burry-frames-
+      - run: pip install --quiet yfinance requests
       - name: Compute watch fundamentals
         env:
           BURRY_YEAR: '2025'

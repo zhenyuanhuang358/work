@@ -36,6 +36,16 @@ EQUITY_TICKERS = [
     "SGI",
 ]
 
+# 2026-11-05：清单写死导致 WMT（后加进期权关注清单）没有价格 → 基本面体检算不出估值（profile 1.1n 同类）。
+# 期权关注清单里的标的自动并入，以后加标的只改 options_watch.json 一处。
+try:
+    with open("options_watch.json") as _f:
+        for _t in json.load(_f).get("tickers", []):
+            if _t not in EQUITY_TICKERS:
+                EQUITY_TICKERS.append(_t)
+except (OSError, ValueError):
+    pass
+
 INDEX_TICKERS = {
     "^VIX": "vix",
     "^TNX": "treasury_10y",

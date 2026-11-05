@@ -18,6 +18,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import burry_screener as bs  # noqa: E402
 
 ETFS = {"SLV", "XLE", "GLD", "SPY", "QQQ", "IWM", "TLT"}
+# 银行口径申报、但没被扫描器的金融识别抓到的标的：营收科目只取到一部分（SOFI 6.2 亿），指标不可比
+LENDERS = {"SOFI": "持牌银行（SoFi Bank），营收科目只取到一部分，指标不可比"}
 TAX = 0.21
 
 
@@ -27,6 +29,37 @@ def main():
     uni = bs.build_universe()
     tickers = bs.fetch_ticker_map()
     finvals = bs.fetch_financial_values()
+
+    # 稀释后加权平均股数（利润表科目，单一总数）。2026-11-05 修：
+    #   F / HOOD / PLTR 是多类股，dei 与 us-gaap 的期末股本按类别分维度申报，frames 只收无维度事实 → 整家缺股本。
+    #   加权平均股数没有类别维度、人人都报，既补期末股本的缺口，也给「股本变化」一个统一口径（今年 ÷ 去年）。
+    def wavg(year):
+        out = {}
+        for tag in ("WeightedAverageNumberOfDilutedSharesOutstanding", "WeightedAverageNumberOfSharesOutstandingBasic"):
+            for cik, (val, _) in bs.fetch_frame(tag, year, unit="shares").items():
+                out.setdefault(cik, val)
+        return out
+    wavg_now, wavg_prev = wavg(bs.YEAR), wavg(bs.YEAR - 1)
+    cik_of = {v: k for k, v in tickers.items()}
+    shares_src = {}
+    for t in watch:
+        cik = cik_of.get(t)
+        if not cik or cik not in uni:
+            continue
+        e = uni[cik]
+        if e.get("shares") is None and e.get("shares_gaap") is None and wavg_now.get(cik):
+            e["shares"] = wavg_now[cik]
+            shares_src[t] = "稀释加权平均股数（多类股补缺）"
+
+    # 现价：缓存没有的标的在这里直接取（缓存清单已改为自动并入关注清单，这是兜底）
+    for t in watch:
+        if t not in prices or not prices[t].get("price"):
+            try:
+                import yfinance as yf
+                prices[t] = {"price": float(yf.Ticker(t).fast_info["last_price"]), "src": "yfinance 兜底"}
+            except Exception as ex:  # 取不到就留空，产物里会显示无现价
+                print(f"  {t} 取价失败：{ex}")
+
     full, missing, na = bs.stage_a(uni, tickers, finvals)
 
     # 上一财年营收（增速）与约一年前的股本（稀释）
@@ -64,6 +97,9 @@ def main():
         if t in ETFS:
             out["tickers"][t] = {"status": "ETF", "note": "ETF 不适用公司基本面"}
             continue
+        if t in LENDERS:
+            out["tickers"][t] = {"status": "不适用", "note": LENDERS[t]}
+            continue
         hit = by_ticker.get(t)
         if not hit:
             out["tickers"][t] = {"status": "未找到", "note": "SEC frames 无该 ticker 映射"}
@@ -81,7 +117,9 @@ def main():
                 "roe_approx": (opi * (1 - TAX) / r["equity"]) if opi else None,
                 "fcf_margin": r["fcf"] / r["revenue"],
                 "net_debt_ebitda": r["net_debt_ebitda"], "sbc_ratio": r["sbc_ratio"],
-                "share_change": (r["shares"] / old_shares[r["cik"]] - 1) if old_shares.get(r["cik"]) else None,
+                "share_change": ((wavg_now[r["cik"]] / wavg_prev[r["cik"]] - 1) if wavg_now.get(r["cik"]) and wavg_prev.get(r["cik"])
+                                 else ((r["shares"] / old_shares[r["cik"]] - 1) if old_shares.get(r["cik"]) else None)),
+                "shares_source": shares_src.get(t, "期末股本"),
                 "price": p,
                 "ev_ebitda": (mcap + r["net_debt"]) / r["ebitda"] if mcap else None,
                 "fcf_yield": r["fcf"] / mcap if mcap else None,
