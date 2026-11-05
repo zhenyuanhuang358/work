@@ -1,0 +1,264 @@
+{
+ "year": 2025,
+ "shares_old_period": "CY2025Q3I",
+ "universe_complete": 1825,
+ "tickers": {
+  "F": {
+   "status": "数据缺失",
+   "name": "Ford Motor Co",
+   "reason": null,
+   "missing": [
+    "shares"
+   ]
+  },
+  "T": {
+   "status": "完整",
+   "name": "AT&T INC.",
+   "reason": null,
+   "missing": [],
+   "revenue": 125648000000,
+   "op_margin": 0.1922991213548962,
+   "rev_growth": 0.027072979335600378,
+   "roe_approx": 0.15549782491812894,
+   "fcf_margin": 0.32060995797784286,
+   "net_debt_ebitda": 2.7515316995205112,
+   "sbc_ratio": 0.0042658856487966385,
+   "share_change": -0.049788923984710576,
+   "price": 21.83,
+   "ev_ebitda": 6.015987725146288,
+   "fcf_yield": 0.27393419621327614,
+   "pb": 1.197983080326425,
+   "pct": {
+    "ev_ebitda": 0.2,
+    "fcf_yield": 1.0,
+    "pb": 0.06666666666666667,
+    "sbc_ratio": 0.1784207353827607,
+    "net_debt_ebitda": 0.72
+   }
+  },
+  "SOFI": {
+   "status": "完整",
+   "name": "SoFi Technologies, Inc.",
+   "reason": null,
+   "missing": [],
+   "revenue": 619353000,
+   "op_margin": 0.849042468511495,
+   "rev_growth": 0.2310170673970382,
+   "roe_approx": 0.03750618599636862,
+   "fcf_margin": -6.042528251255746,
+   "net_debt_ebitda": -4.113426437616446,
+   "sbc_ratio": 0.4231157352915058,
+   "share_change": 0.07103994008990999,
+   "price": 17.38,
+   "ev_ebitda": 25.4224366468774,
+   "fcf_yield": -0.16672053882311438,
+   "pb": 2.026637069745862,
+   "pct": {
+    "ev_ebitda": 0.4,
+    "fcf_yield": 0.06666666666666667,
+    "pb": 0.2,
+    "sbc_ratio": 0.9927667269439421,
+    "net_debt_ebitda": 0.06958904109589041
+   }
+  },
+  "SLV": {
+   "status": "ETF",
+   "note": "ETF 不适用公司基本面"
+  },
+  "XLE": {
+   "status": "ETF",
+   "note": "ETF 不适用公司基本面"
+  },
+  "GM": {
+   "status": "完整",
+   "name": "GENERAL MOTORS COMPANY",
+   "reason": null,
+   "missing": [],
+   "revenue": 167971000000,
+   "op_margin": 0.017318465687529396,
+   "rev_growth": -0.021182243045114957,
+   "roe_approx": 0.03659061236187625,
+   "fcf_margin": 0.10456566907382822,
+   "net_debt_ebitda": -1.5579286721740881,
+   "sbc_ratio": 0.001988438480451983,
+   "share_change": -0.09573972005568332,
+   "price": 92.43,
+   "ev_ebitda": 3.6787744756457785,
+   "fcf_yield": 0.2252682279361476,
+   "pb": 1.2414303278013248,
+   "pct": {
+    "ev_ebitda": 0.06666666666666667,
+    "fcf_yield": 0.9333333333333333,
+    "pb": 0.13333333333333333,
+    "sbc_ratio": 0.05907172995780591,
+    "net_debt_ebitda": 0.16273972602739725
+   }
+  },
+  "KO": {
+   "status": "完整",
+   "name": "COCA COLA CO",
+   "reason": null,
+   "missing": [],
+   "revenue": 47941000000,
+   "op_margin": 0.28706117936630443,
+   "rev_growth": 0.018699135164998548,
+   "roe_approx": 0.29091244782189873,
+   "fcf_margin": 0.11046911829123297,
+   "net_debt_ebitda": -0.9083175803402647,
+   "sbc_ratio": 0.0058196533238772654,
+   "share_change": 6.822796088057359e-05,
+   "price": 95.8,
+   "ev_ebitda": 26.915220341142316,
+   "fcf_yield": 0.012850556069342184,
+   "pb": 11.027567261398909,
+   "pct": {
+    "ev_ebitda": 0.4666666666666667,
+    "fcf_yield": 0.4,
+    "pb": 0.6,
+    "sbc_ratio": 0.2640144665461121,
+    "net_debt_ebitda": 0.2273972602739726
+   }
+  },
+  "HOOD": {
+   "status": "数据缺失",
+   "name": "Robinhood Markets, Inc.",
+   "reason": null,
+   "missing": [
+    "shares"
+   ]
+  },
+  "UBER": {
+   "status": "完整",
+   "name": "UBER TECHNOLOGIES, INC.",
+   "reason": null,
+   "missing": [],
+   "revenue": 52017000000,
+   "op_margin": 0.10698425514735567,
+   "rev_growth": 0.1827959434262585,
+   "roe_approx": 0.15894826277161142,
+   "fcf_margin": 0.18768864025222523,
+   "net_debt_ebitda": 1.28946530872056,
+   "sbc_ratio": 0.03510390833765884,
+   "share_change": -0.017293187802320475,
+   "price": 69.87,
+   "ev_ebitda": 23.992746363924255,
+   "fcf_yield": 0.06843188253167677,
+   "pb": 5.158083016410573,
+   "pct": {
+    "ev_ebitda": 0.3333333333333333,
+    "fcf_yield": 0.8,
+    "pb": 0.4666666666666667,
+    "sbc_ratio": 0.8034960819770947,
+    "net_debt_ebitda": 0.5879452054794521
+   }
+  },
+  "INTC": {
+   "status": "完整",
+   "name": "INTEL CORPORATION",
+   "reason": null,
+   "missing": [],
+   "revenue": 52853000000,
+   "op_margin": -0.04188976973870925,
+   "rev_growth": -0.004670345191239322,
+   "roe_approx": -0.015220599752858659,
+   "fcf_margin": -0.0936370688513424,
+   "net_debt_ebitda": 2.84134007585335,
+   "sbc_ratio": 0.0460522581499631,
+   "share_change": 0.11425576519916136,
+   "price": 58.27,
+   "ev_ebitda": 35.46934787189212,
+   "fcf_yield": -0.01597972005945657,
+   "pb": 2.6951028595297353,
+   "pct": {
+    "ev_ebitda": 0.6,
+    "fcf_yield": 0.13333333333333333,
+    "pb": 0.3333333333333333,
+    "sbc_ratio": 0.8474984930681133,
+    "net_debt_ebitda": 0.7298630136986302
+   }
+  },
+  "PLTR": {
+   "status": "数据缺失",
+   "name": "Palantir Technologies Inc.",
+   "reason": null,
+   "missing": [
+    "shares"
+   ]
+  },
+  "AMD": {
+   "status": "完整",
+   "name": "ADVANCED MICRO DEVICES, INC.",
+   "reason": null,
+   "missing": [],
+   "revenue": 34639000000,
+   "op_margin": 0.10664280146655504,
+   "rev_growth": 0.3433779329067288,
+   "roe_approx": 0.04267148225591835,
+   "fcf_margin": 0.19443401945783653,
+   "net_debt_ebitda": -0.0498848810437452,
+   "sbc_ratio": 0.04728773925344265,
+   "share_change": 0.007398896590808057,
+   "price": 488.78,
+   "ev_ebitda": 122.99567867133997,
+   "fcf_yield": 0.00840150751740002,
+   "pb": 11.721795121200485,
+   "pct": {
+    "ev_ebitda": 0.9333333333333333,
+    "fcf_yield": 0.3333333333333333,
+    "pb": 0.6666666666666666,
+    "sbc_ratio": 0.8511151295961422,
+    "net_debt_ebitda": 0.3863013698630137
+   }
+  },
+  "NVDA": {
+   "status": "完整",
+   "name": "NVIDIA CORP",
+   "reason": null,
+   "missing": [],
+   "revenue": 215938000000,
+   "op_margin": 0.6038168363141272,
+   "rev_growth": 0.6547353579009478,
+   "roe_approx": 0.4498381109597177,
+   "fcf_margin": 0.47568283488779184,
+   "net_debt_ebitda": 0.08198603918036479,
+   "sbc_ratio": 0.029573303448211987,
+   "share_change": -0.008230452674897082,
+   "price": 200.13,
+   "ev_ebitda": 36.283539743301056,
+   "fcf_yield": 0.021296945367254023,
+   "pb": 21.063187820983124,
+   "pct": {
+    "ev_ebitda": 0.6666666666666666,
+    "fcf_yield": 0.6,
+    "pb": 0.9333333333333333,
+    "sbc_ratio": 0.7709463532248343,
+    "net_debt_ebitda": 0.44273972602739725
+   }
+  },
+  "WMT": {
+   "status": "完整",
+   "name": "Walmart Inc.",
+   "reason": null,
+   "missing": [],
+   "revenue": 706413000000,
+   "op_margin": 0.04222034418958881,
+   "rev_growth": 0.047254565346948496,
+   "roe_approx": 0.2398435432317433,
+   "fcf_margin": 0.02112503592091312,
+   "net_debt_ebitda": 0.6451122013264287,
+   "sbc_ratio": 0.005100415762450578,
+   "share_change": -0.0049047549492170495,
+   "price": null,
+   "ev_ebitda": null,
+   "fcf_yield": null,
+   "pb": null,
+   "pct": {
+    "ev_ebitda": null,
+    "fcf_yield": null,
+    "pb": null,
+    "sbc_ratio": 0.2218203737191079,
+    "net_debt_ebitda": 0.5112328767123288
+   }
+  }
+ }
+}
