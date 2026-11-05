@@ -58,7 +58,7 @@ def main():
     ap.add_argument("--all", action="store_true", help="汇总模式：扫全部标的 × dte 窗口，只列全部过关的行 + 各标的挡掉原因（2026-11-05）")
     ap.add_argument("--expiry", help="不给 = 扫 options_watch.json 的 dte 窗口内全部到期日（2026-11-05 起新仓 20–45 天）")
     ap.add_argument("--strikes", type=float, nargs="*")
-    ap.add_argument("--z-min", type=float, default=1.0, help="持有期含 CPI/PPI/FOMC/非农时用 1.2")
+    ap.add_argument("--z-min", type=float, default=1.2, help="默认 1.2：20–45 天持有期必含 CPI/PPI/FOMC 之一（第 19 条）；确无事件时可给 1.0")
     ap.add_argument("--max-age", type=float, default=20, help="报价最长可接受分钟数")
     ap.add_argument("--file", default="options_chain.json")
     ap.add_argument("--right", choices=["P", "C"], default="P", help="P 卖 put / C 卖 call（2026-11-05 起纳入）")
@@ -67,7 +67,7 @@ def main():
     a = ap.parse_args()
 
     j = json.load(open(a.file))
-    if a.all:
+    if a.all or not a.ticker:  # 不给 --ticker 默认走汇总（11/05：旧定时指令只写 --right P，免得逐只跑 120 次）
         return summary(a, j)
     r = j["tickers"].get(a.ticker.upper())
     if not r or not r.get("rows"):
