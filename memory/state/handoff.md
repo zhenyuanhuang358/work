@@ -54,6 +54,7 @@
 ## 4. 待办
 
 1. **11/05 15:45Z 已排定的提醒**（trig_01NhjWbDsQdfWfs1EdsPyM2r）：盘中验证 60 只买卖报价差——改 `options_seed.json` 的 `_note` 推送触发 `options-liquidity.yml`，读 `options_liquidity_seed.json`；报价差 >10% 的用排名靠后且达标的替换，保持 60 只；同步 options-screen sectors；向用户汇报。
+0. **每日定时扫描（11/05 用户定）**：trig_01Pc9MQWHSqbnh9VV8yiELET，`CRON_TZ=America/New_York 31 10 * * 1-5`（开盘后 1 小时，夏令时自动跟随），每次开新会话跑、推送到手机；休市日在 prompt 里列了。改时间 / 休市表用 update_trigger，别删了重建。
 2. **新规则首个可开仓日 = 11/11**（11/05 = NFP 前一日、11/09 = CPI 前一日，均不新开）。开仓前跑 tail-risk 灯 + option_quote。
 3. 实盘每笔用 `scale_check.py open/close` 记账；满 20 簇复盘。
 4. predictions 待记分：XLE 11/13 ≥63、UBER 11/20 ≥62、AMD 11/13 ≥442.5、INTC Q4 / 情景行。
