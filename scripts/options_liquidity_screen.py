@@ -9,7 +9,7 @@
      yfinance 批量取现价 → 股价 $10–150、市值 ≥ $5B（股价上限对应约 $5.5k 可取现金的单张保证金）
   2. 期权链：CBOE 延迟报价（与 fetch_options 同源）
   3. 流动性门槛（三项全过才算流动性好）：
-     - 14 天内有到期日（周度期权）
+     - （只标注，不卡）14 天内有到期日 = 有周度期权
      - 最近到期日、价外 0–15% 的 put：买卖报价差 ÷ 中间价 的中位数 ≤ 10%
      - 全链未平仓 ≥ 10,000 张，且当日成交 ≥ 1,000 张
 局限：CBOE 延迟约 15 分钟，盘后跑时报价差偏宽（看 quote_time）；成交量是单日快照，宜在盘中跑。
@@ -70,8 +70,13 @@ def prices(tickers):
 
 
 def chain_stats(t):
-    r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{t}.json",
-                     timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+    # 2026-11-05 首跑 500 只里 438 只被 CBOE 限流（429）：请求之间留间隔，429 时指数退避重试
+    for i in range(6):
+        r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{t}.json",
+                         timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        if r.status_code != 429:
+            break
+        time.sleep(2 ** i)
     r.raise_for_status()
     j = r.json()
     d = j["data"]
@@ -120,10 +125,10 @@ def main():
             rows[t] = chain_stats(t.replace("-", "."))
         except Exception as ex:  # 无期权或接口失败：记原因，不中断
             errs[t] = repr(ex)[:120]
-        time.sleep(0.1)
+        time.sleep(0.5)
+    # 周度期权只标注、不卡门槛：只有月度期权的中盘股一样能做 2–4 周的单（首跑 41/62 只因此被误挡）
     for t, r in rows.items():
         r["pass"] = {
-            "weekly": r["weekly"],
             "spread": r["median_spread_otm_put"] is not None and r["median_spread_otm_put"] <= MAX_SPREAD,
             "oi_vol": r["open_interest"] >= MIN_OI and r["volume"] >= MIN_VOL,
         }
@@ -135,7 +140,7 @@ def main():
                         "min_open_interest": MIN_OI, "min_volume": MIN_VOL, "otm_band": OTM_BAND},
            "counts": {"sec_rev_ge_1b": len(shares), "pool": len(pool), "chain_ok": len(rows),
                       "chain_error": len(errs), "liquid": len(liquid),
-                      "fail_weekly": sum(1 for r in rows.values() if not r["pass"]["weekly"]),
+                      "weekly": sum(1 for r in rows.values() if r["weekly"]),
                       "fail_spread": sum(1 for r in rows.values() if not r["pass"]["spread"]),
                       "fail_oi_vol": sum(1 for r in rows.values() if not r["pass"]["oi_vol"])},
            "liquid": liquid, "stats": rows, "errors": errs, "runtime_s": round(time.time() - t0)}

@@ -14,7 +14,7 @@ on:
 jobs:
   screen:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     permissions:
       contents: write
     steps:
