@@ -1,6 +1,13 @@
 {
- "updated_at": "2026-11-05T15:39:30+00:00",
+ "updated_at": "2026-11-05T15:56:49+00:00",
  "market": [
+  {
+   "time_utc": "2026-11-05T15:34+00:00",
+   "source": "CNBC",
+   "headline": "Expedia CEO says AI agents aren't changing booking habits — yet",
+   "summary": "Expedia CEO Ariane Gorin told CNBC that AI agents present an exciting time for the travel industry but that they haven't yet impacted bookings.",
+   "url": "https://www.cnbc.com/2026/11/05/expedia-ai-agents-booking-habits.html"
+  },
   {
    "time_utc": "2026-11-05T15:15+00:00",
    "source": "Reuters",
@@ -413,13 +420,6 @@
    "headline": "Ukrainian drone strike sets fire to hub of e-retailer Ozon in southern Russia - Reuters",
    "summary": "Ukrainian drone strike sets fire to hub of e-retailer Ozon in southern Russia  Reuters",
    "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNVjMwSG5rWWpTb3hLVHAyU2JRLXplaDlTaFlLVHBMTG5MOS00VzZ5Ni14clRRMlU2eWZ1dTlFeHJFNHlaTjYxTzNQVVFTNkRaVG5VX0JMTU14NHpINEFyMzhvZndNMHV1WWdSS29HYlotcmJOOF9laXlpMkMwUWcwTG1xLTdFVnFHRHk3V3JKd1l5ZzlWbElqZzNNM0M3cE9Vd2ZJa2VYNm9tcldkN0Fv?oc=5"
-  },
-  {
-   "time_utc": "2026-11-04T13:35+00:00",
-   "source": "Reuters",
-   "headline": "Dubai leads Gulf gains as investors assess US midterm fallout and Iran standoff - Reuters",
-   "summary": "Dubai leads Gulf gains as investors assess US midterm fallout and Iran standoff  Reuters",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOUV8xbDhnd1V0ZnB1RFl2T2JlRmx2TGg3ZVliNTJJeXZvdFJEME9rb2FpQ2lfN3dheTQ2VEhjeEJXNVFxMk5UMHoxbWVhSWFqbDJtTlJzMlNwOXNtS1FGc1dOazEyZ29tOVZ0cXMtRHRRMGVJMWUwOEJlRm9jNFRRMmNLN0dwcFlkR1p2YnhmT1FoanVqeHMyeld1MlZJZXN4WURscHIyWVNnNmhpOGlJMEJ0SzE1aFk?oc=5"
   }
  ],
  "tickers": {
@@ -687,6 +687,13 @@
   ],
   "XLE": [
    {
+    "time_utc": "2026-11-05T10:38+00:00",
+    "source": "SeekingAlpha",
+    "headline": "How The Blue Wave Could Reshape U.S. Energy And Data Centers",
+    "summary": "",
+    "url": "https://finnhub.io/api/news?id=dca1a079f65e108a4613388b81e4679da26d9cd75885e958a2eb36ccce551d04"
+   },
+   {
     "time_utc": "2026-11-05T06:05+00:00",
     "source": "SeekingAlpha",
     "headline": "Will This November Follow Positive Calendar Trends?",
@@ -734,13 +741,6 @@
     "headline": "Do Wall Street Analysts Like Occidental Petroleum Stock?",
     "summary": "Despite Occidental Petroleum's outperformance relative to the S&P 500 Index over the past year, Wall Street analysts remain cautiously optimistic about the stock’s prospects.",
     "url": "https://finnhub.io/api/news?id=dd63e6a975bf57e21694e11b9fb48353e70f5c4a60bfc58556ce504aacaa089e"
-   },
-   {
-    "time_utc": "2026-11-04T14:25+00:00",
-    "source": "Yahoo",
-    "headline": "Sector Update: Energy Stocks Decline Premarket Wednesday",
-    "summary": "Energy stocks were declining premarket Wednesday, with the State Street Energy Select Sector SPDR ET",
-    "url": "https://finnhub.io/api/news?id=b1bec6ee0feb9e93cde32032901e4483f3940c271f7cbb96d486deee37d935fb"
    }
   ],
   "SLV": [
@@ -796,6 +796,13 @@
   ],
   "USO": [
    {
+    "time_utc": "2026-11-05T10:38+00:00",
+    "source": "SeekingAlpha",
+    "headline": "How The Blue Wave Could Reshape U.S. Energy And Data Centers",
+    "summary": "",
+    "url": "https://finnhub.io/api/news?id=dca1a079f65e108a4613388b81e4679da26d9cd75885e958a2eb36ccce551d04"
+   },
+   {
     "time_utc": "2026-11-05T04:42+00:00",
     "source": "Benzinga",
     "headline": "Iran Claims Victory Over Trump After Democrats Flip Congress: 'Strategic Defeat' in Hormuz, 'Political Defeat in Washington'",
@@ -843,13 +850,6 @@
     "headline": "Sector Update: Energy Stocks Decline Premarket Wednesday",
     "summary": "Energy stocks were declining premarket Wednesday, with the State Street Energy Select Sector SPDR ET",
     "url": "https://finnhub.io/api/news?id=b1bec6ee0feb9e93cde32032901e4483f3940c271f7cbb96d486deee37d935fb"
-   },
-   {
-    "time_utc": "2026-11-04T14:24+00:00",
-    "source": "Benzinga",
-    "headline": "President Trump Says Iran War Will End Whenever I Want It To; Not Considering Replacing Hegseth",
-    "summary": "https://www.youtube.com/watch?v=LHT-znOQXkA ",
-    "url": "https://finnhub.io/api/news?id=d28375e8487ab4ad0e2112ff79d16b6f86e10b7cc70dcd77ebb92e2d4d8500b4"
    }
   ],
   "SMCI": [
