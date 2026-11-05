@@ -81,3 +81,13 @@
     | 入场 IV ÷ HV30 均值 | ≥ 1.2 |
     阶梯：1 张 → 2 张 → 3 张（3 张另需保证金 ≤ 可取现金 50%）。任一轮不达标退一阶；**连续两轮不达标 → 停止卖方**。
     预期上限要说实话：3 张、+0.30 时约 1.5–2%/月。卖权利金在这个账户规模下不能「大幅」赚钱；能放大美元收益的只有时间和本金。
+
+## 2026-11-05 起借鉴大师原则的三条（用户决定）
+
+16. **行业分散**（Tastytrade / 塔勒布）：同一行业同时最多 1 笔。行业分组见 `memory/state/options-screen.json` 的 sectors；
+    `scale_check.py open` 会提示同行业冲突。10 月亏损扎堆在半导体与金融科技，一出事就是一串。
+17. **基本面反向名单**（段永平 / 伯里）：`options-screen.json` 的 no_sell_put（基本面差、泡沫、增发减持）/ no_sell_call（拥挤、急涨、轧空风险），
+    option_quote 标 ⛔基本面。**每月用 buffett-analyst / burry 复核一次**；reviewed 超过 35 天 self_check 点名。
+18. **IV 历史分位 + 21 天离场**（Tastytrade）：fetch-options 每次抓链记一条平值 IV（`options_iv_history.jsonl`），满 15 个交易日后
+    IV 低于自身历史中位数标 ⛔IV低位；开仓时距到期 ≥ 35 天的单，剩 21 天仍未止盈就平（`scale_check.py open` 打印离场日）。
+不借：被行权 / 轮动（用户不接货）；买 put 押方向（不是卖方，小账户经不起连续归零）。

@@ -380,6 +380,14 @@ def check_coo_pipelines():
         say(f"  {fn:<26} {'✅' if not bad else '❌'} {len(names)} 个 skill" + (f"，不存在：{', '.join(bad)}" if bad else ""))
         if bad:
             flag("P1", f"coo/{fn}", f"流水线点名的 skill 不存在：{', '.join(bad)} — 照着叫会叫不中（1.2i）")
+    # 期权基本面反向名单的复核时效（position-discipline 第 17 条，2026-11-05）
+    scr = os.path.join(REPO, "memory/state/options-screen.json")
+    if os.path.exists(scr):
+        rv = json.load(open(scr, encoding="utf-8")).get("reviewed", "1970-01-01")
+        age = (datetime.date.today() - datetime.date.fromisoformat(rv)).days
+        say(f"  期权基本面名单：上次复核 {rv}（{age} 天前）")
+        if age > 35:
+            flag("P2", "memory/state/options-screen.json", f"基本面反向名单 {age} 天未复核——用 buffett-analyst / burry 复核后更新 reviewed")
     rundir = os.path.join(REPO, "memory/state/runs")
     if not os.path.isdir(rundir):
         say("  运行记录：0 份")

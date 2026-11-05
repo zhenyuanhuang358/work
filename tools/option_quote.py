@@ -90,6 +90,23 @@ def main():
         if hits:
             earn_flag = "⛔ 持有期内有财报：" + "、".join(f"{e['date']}{(' ' + e['hour']) if e['hour'] else ''}" for e in hits)
 
+    # 排雷三：基本面反向名单（options-screen.json；段永平 / 伯里原则，2026-11-05）
+    try:
+        scr = json.load(open("memory/state/options-screen.json"))
+        black = scr["no_sell_put" if a.right == "P" else "no_sell_call"].get(a.ticker.upper())
+    except (OSError, KeyError, ValueError):
+        black = None
+    if black:
+        earn_flag = (earn_flag + "｜" if earn_flag else "") + f"⛔ 基本面名单：{black}"
+
+    # 排雷四：IV 历史分位（Tastytrade：IV 处在自身高位才卖）。历史不足 15 个交易日时只显示「积累中」
+    try:
+        hist = [json.loads(l) for l in open("options_iv_history.jsonl") if l.strip()]
+        ivs = sorted({h["date"]: h["atm_iv"] for h in hist if h["ticker"] == a.ticker.upper() and h.get("atm_iv")}.items())
+        ivs = [v for _, v in ivs]
+    except OSError:
+        ivs = []
+
     # 排雷二：IV ÷ HV。卖方的优势来自「期权卖贵了」；IV 不高于实际波动 1.1 倍就没有优势
     try:
         from spread_check import hv_from_history
@@ -103,7 +120,8 @@ def main():
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
         sys.exit(1)
-    print(f"HV30 {hv:.0%}" if hv else "HV30 取不到（需完整价格历史：git fetch --unshallow）", f"｜{earn_flag or '持有期内无财报'}")
+    pct_note = f"｜IV 历史 {len(ivs)} 天（≥15 天后启用分位过滤）" if len(ivs) < 15 else ""
+    print(f"HV30 {hv:.0%}" if hv else "HV30 取不到（需完整价格历史：git fetch --unshallow）", f"｜{earn_flag or '持有期内无财报'}{pct_note}")
     print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'IV/HV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
     for row in sorted(r["rows"], key=lambda x: -x["strike"] if a.right == "P" else x["strike"]):
         if row["expiry"] != a.expiry or (a.strikes and row["strike"] not in a.strikes):
@@ -139,7 +157,11 @@ def main():
             mark = "⛔报价差"
         if ratio is not None and ratio < 1.1:
             mark = "⛔IV不贵"
-        if earn_flag.startswith("⛔"):
+        if len(ivs) >= 15 and sum(1 for v in ivs if v <= iv) / len(ivs) < 0.5:
+            mark = "⛔IV低位"
+        if black:
+            mark = "⛔基本面"
+        if earn_flag.startswith("⛔ 持有期内有财报"):
             mark = "⛔财报"
         # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
         if a.bp is not None and margin * 1.15 > a.bp:

@@ -9,6 +9,7 @@
 IV 一律由 tools/option_quote.py 从中间价反解，口径与「平台报价反解」一致（profile 1.1x）。
 """
 import json
+import math
 import re
 from datetime import datetime, timezone
 
@@ -67,6 +68,28 @@ def from_yf(t, expiries, right, band):
     return {"source": "yfinance", "quote_time_utc": None, "spot": spot, "rows": rows}
 
 
+def _put(S, K, s, T):
+    from statistics import NormalDist
+    N = NormalDist()
+    d1 = (math.log(S / K) + 0.5 * s * s * T) / (s * math.sqrt(T))
+    return K * N.cdf(-(d1 - s * math.sqrt(T))) - S * N.cdf(-d1)
+
+
+def atm_iv(res):
+    """最近到期日、最接近平值的 put 中间价反解 IV——给 option_quote 的 IV 历史分位用（2026-11-05）。"""
+    rows = [r for r in res["rows"] if r.get("right", "P") == "P" and r["bid"] and r["ask"]]
+    if not rows:
+        return None, None
+    exp = min(r["expiry"] for r in rows)
+    r = min((r for r in rows if r["expiry"] == exp), key=lambda r: abs(r["strike"] - res["spot"]))
+    T = max((datetime.fromisoformat(exp).replace(tzinfo=timezone.utc) - datetime.now(timezone.utc)).days, 1) / 365
+    mid, lo, hi = (r["bid"] + r["ask"]) / 2, 0.01, 5.0
+    for _ in range(80):
+        m = (lo + hi) / 2
+        lo, hi = (m, hi) if _put(res["spot"], r["strike"], m, T) < mid else (lo, m)
+    return exp, round((lo + hi) / 2, 4)
+
+
 def main():
     w = json.load(open("options_watch.json"))
     # right：「P」「C」或「PC」（两侧都抓，2026-11-05 起卖 call 纳入策略）
@@ -88,6 +111,12 @@ def main():
             out["tickers"][t] = {"source": None, "rows": [], "errors": errs}
     with open("options_chain.json", "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
+    with open("options_iv_history.jsonl", "a") as f:
+        for t, r in out["tickers"].items():
+            if r["rows"]:
+                exp, iv = atm_iv(r)
+                if iv:
+                    f.write(json.dumps({"date": out["updated_at"][:10], "ticker": t, "expiry": exp, "atm_iv": iv}) + "\n")
     for t, r in out["tickers"].items():
         print(f"{t:6} {r['source']!s:9} {len(r['rows']):3} 行  {'; '.join(r['errors'])}")
 

@@ -57,6 +57,17 @@ def cmd_open(a):
         warn.append(f"报价差 {spread:.0%} > 10%（违反第 7 条）")
     if a.ivhv is not None and a.ivhv < 1.1:
         warn.append(f"IV/HV {a.ivhv:.2f} < 1.1（违反第 14 条）")
+    try:
+        sectors = json.load(open(os.path.join(REPO, "memory", "state", "options-screen.json")))["sectors"]
+    except (OSError, KeyError, ValueError):
+        sectors = {}
+    sec = sectors.get(r["ticker"])
+    same = [x for x in rows[:-1] if x["exit"] is None and sec and sectors.get(x["ticker"]) == sec]
+    if same:
+        warn.append(f"同行业「{sec}」已有持仓 {', '.join(x['ticker'] for x in same)}（违反第 16 条：同行业同时最多 1 笔）")
+    dte = (dt.date.fromisoformat(a.expiry) - dt.date.fromisoformat(r["date"])).days
+    if dte >= 35:
+        print(f"⏰ 21 天离场日：{(dt.date.fromisoformat(a.expiry) - dt.timedelta(days=21)).isoformat()}（届时未止盈就平，第 17 条）")
     stage = report(quiet=True)
     if a.contracts > stage:
         warn.append(f"张数 {a.contracts} > 当前阶段允许的 {stage} 张")
