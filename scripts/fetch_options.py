@@ -126,6 +126,18 @@ def main():
                 errs.append(f"{fn.__name__}: {repr(e)[:200]}")
         else:
             out["tickers"][t] = {"source": None, "rows": [], "errors": errs}
+    # HV30（2026-11-05 修）：option_quote 原只从仓库价格缓存的收盘历史算 HV，新并入的 49/60 只历史不足 15 天 →
+    #   IV/HV ≥ 1.1 过滤对它们静默失效。这里用 yfinance 日线（一次批量请求）直接算，写进每个标的。
+    try:
+        px = yf.download(list(w["tickers"]), period="3mo", interval="1d", auto_adjust=True, progress=False)["Close"]
+        for t, r in out["tickers"].items():
+            c = px[t].dropna().tolist()[-31:] if t in px else []
+            if len(c) >= 21:
+                lr = [math.log(b / a) for a, b in zip(c, c[1:])]
+                m = sum(lr) / len(lr)
+                r["hv30"] = round(math.sqrt(sum((x - m) ** 2 for x in lr) / (len(lr) - 1) * 252), 4)
+    except Exception as e:  # HV 取不到不影响期权链本身；option_quote 会标 ⚠ 无HV
+        out["hv_error"] = repr(e)[:200]
     with open("options_chain.json", "w") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     with open("options_iv_history.jsonl", "a") as f:
