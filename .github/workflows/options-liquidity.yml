@@ -1,0 +1,48 @@
+name: Options Liquidity Screen
+
+# 全市场期权流动性初筛（scripts/options_liquidity_screen.py）。
+# 报价差与成交量只有盘中才有意义：定时放在周一美东 10:30 后；手动触发时注意时段。
+on:
+  push:
+    branches: [main, claude/install-claude-hud-d51E6]
+    paths:
+      - liquidity_trigger.txt
+  workflow_dispatch:
+  schedule:
+    - cron: '45 15 * * 1'   # 周一 15:45 UTC（冬令时美东 10:45）
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install --quiet yfinance requests
+      - name: Restore SEC frames cache
+        uses: actions/cache@v4
+        with:
+          path: .burry_frames
+          key: burry-frames-${{ github.run_id }}
+          restore-keys: burry-frames-
+      - name: Screen
+        env:
+          BURRY_YEAR: '2025'
+        run: python3 scripts/options_liquidity_screen.py
+      - name: Commit options_liquidity.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add options_liquidity.json
+          git diff --cached --quiet && echo "nothing to commit" || \
+            git commit -m "chore: options liquidity screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" || { echo "::error::rebase 失败"; exit 1; }
+            git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 3))
+          done
+          exit 1
