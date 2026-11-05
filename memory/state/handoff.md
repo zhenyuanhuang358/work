@@ -51,6 +51,7 @@
 - 11/04–11/05：亏损归因 + 回放（`trade_replay_20261105.py`：15 笔实盘旧规则 −$4,240 → 新规则 +$330，最大单笔 −$5,150 → −$304；50% 止盈每 $ 收入 +0.16，样本内未扣成本）；卖 call 纳入；财报日历 + IV/HV 过滤；阶梯加码；大师三原则；巴菲特 + 伯里复核（`watch_fundamentals.py`，多类股用稀释加权股数补缺、yfinance 补价）；期权流动性初筛（`options_liquidity_screen.py`）→ 关注清单扩到 60 只并补审基本面。
 - 11/05 新闻标注：`scripts/fetch_news.py`（Finnhub 要闻 + 60 只个股，随 fetch-options 产出 `news.json`）+ `us-options-agent/references/news-channels.md` + pipeline 步骤 7b。**只标注不否决**（用户要求「加以说明标注」）。
 - 11/05 重跑优化：`tools/tail_light.py`（机械灯色）；`option_quote.py --all`（全清单汇总）/ `--dte-max` / ⛔期限溢价 / ⚠链不够宽 / ⚠无HV；fetch_options 用 yfinance 算 hv30（原 49/60 只无 HV，IV/HV 过滤静默失效）；candidate_ledger 加「闸门」裁定；band 0.35。
+- 11/05 跳空压力 `tools/gap_stress.py`（option_quote 汇总自动附）；美联储讲话源 `scripts/fetch_fed.py` → `fed_speak.json`（FF 周历日程 + 理事会 RSS + Google News RSS 按讲话人搜，随 fetch-options 产出；Google News 是非官方 RSS，失效时 errors 会写明，退回 WebSearch）。
 - INTC 财报 Earner 报告 `reports/intc_Copilot_Report.html`（Critic 后修正）。
 
 ## 4. 待办
