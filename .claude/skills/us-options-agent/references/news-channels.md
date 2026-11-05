@@ -12,11 +12,15 @@
 
 1. `news.json`（fetch-options 工作流每次扫描时抓，Finnhub 要闻近 36 小时 + 60 只个股近 3 天，带时间与出处）。
    **先看 `updated_at`，不是今天的就当没有。**
-2. WebSearch 补三类 Finnhub 覆盖不全的（每次扫描都搜，各 1 次，搜不到写「未搜到」而不是「无事」）：
+2. **`fed_speak.json`（2026-11-05 起，同一次 fetch-options 产出）——美联储讲话先读它，不再靠 WebSearch**：
+   `schedule` 本周 + 下周全部 FOMC 参与者讲话时间（FF 周历）；`board` 理事讲话原文（理事会 RSS）；
+   `headlines` 近 2 天讲话人的报道标题（Google News RSS + Finnhub，带出处与时间）；`usd_high` 高影响美国数据（核对 macro-events 日历）。
+   鹰 / 鸽按标题写并注出处；持有期内还有谁要讲，从 `schedule` 列出来。
+3. WebSearch 只补 fed_speak / news.json 都没有的（搜不到写「未搜到」而不是「无事」）：
    - 地缘与大宗：`Iran Israel US oil price today` / `OPEC` / 当期热点冲突
-   - 美联储讲话：`Fed speakers this week` + 当日讲话者姓名与要点（鹰 / 鸽）
+   - 美联储讲话：只在 fed_speak.json 缺失或 errors 非空时才搜
    - 知名人士与政要：总统 / 财长 / 商务部长关税与制裁表态；知名投资人（如巴菲特、达利欧、伯里、阿克曼）公开发言
-3. 只采用**有时间戳 + 有出处**的条目；只有搜索摘要、找不到原文时间的，标「未核实」。
+4. 只采用**有时间戳 + 有出处**的条目；只有搜索摘要、找不到原文时间的，标「未核实」。
 
 ## 消息 → 受影响板块（板块名对应 `memory/state/options-screen.json` 的 sectors）
 

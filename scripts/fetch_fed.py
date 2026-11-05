@@ -88,8 +88,8 @@ def main():
             r.raise_for_status()
             for it in list(ET.fromstring(r.content).iter("item"))[:6]:
                 title = it.findtext("title") or ""
-                if not re.search(rf"\b{n}\b", title):
-                    continue
+                if not re.search(rf"\b{n}\b", title) or not re.search(r"Fed|FOMC|[Rr]ate|[Ii]nflation|[Pp]olicy", title):
+                    continue  # 同姓误匹配（11/05 Williams 讣告）
                 pub = parsedate_to_datetime(it.findtext("pubDate"))
                 out["headlines"].append({"speaker": n, "time_utc": pub.isoformat(timespec="minutes"),
                                          "source": (it.findtext("source") or "Google News"), "headline": title,
