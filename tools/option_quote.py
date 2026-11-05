@@ -129,11 +129,13 @@ def run(a, j, r):
         ivs = []
 
     # 排雷二：IV ÷ HV。卖方的优势来自「期权卖贵了」；IV 不高于实际波动 1.1 倍就没有优势
-    try:
-        from spread_check import hv_from_history
-        hv = hv_from_history(a.ticker.upper())
-    except (Exception, SystemExit):
-        hv = None
+    hv = r.get("hv30")  # fetch_options 用 yfinance 日线算的（2026-11-05 起）；没有再退回仓库收盘历史
+    if not hv:
+        try:
+            from spread_check import hv_from_history
+            hv = hv_from_history(a.ticker.upper())
+        except (Exception, SystemExit):
+            hv = None
     t = (exp - qdt).total_seconds() / (365 * 86400)
     s = r["spot"]
 
@@ -178,6 +180,8 @@ def run(a, j, r):
             mark = "⛔报价差"
         if ratio is not None and ratio < 1.1:
             mark = "⛔IV不贵"
+        if ratio is None:
+            mark = "⚠无HV"  # IV/HV 过滤没法做：不能当作通过（11/05 49/60 只静默漏检）
         if len(ivs) >= 15 and sum(1 for v in ivs if v <= iv) / len(ivs) < 0.5:
             mark = "⛔IV低位"
         if black:
