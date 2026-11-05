@@ -20,10 +20,13 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 | 模块 | 思想来源 | 规则要点 |
 |---|---|---|
 | buffett_csp | 巴菲特式现金担保卖 put | z≥1.0、价外概率≥80%、OI≥100，按现金担保年化打分，标注 Reg-T 保证金 |
+| short_call | 卖 call（2026-11-05 用户加入） | 与卖 put 镜像：行权价高于现价、z≥1.0、价外概率≥80%、OI≥100；裸卖 call 上行风险无限，同受全部风控与保证金硬否决 |
 | thorp_ev | 索普期望值（叠加层） | 假设真实波动率 = IV×0.85 重算公允价，EV=bid-公允价；EV<-0.05/股的卖方候选一票否决 |
 
-2026-11-03 按用户决定收窄：只做单腿卖出看跌（券商不支持组合单），
+2026-11-03 按用户决定收窄：只做单腿卖出（券商不支持组合单），
 原 vol_spread（信用价差）与 taleb_hedge（买 put 尾部对冲）两个模块已移除。
+2026-11-05 起关注清单改为双边（`options_watch.json` 的 `right: "PC"`），
+put/call 在 rows 的 right 字段区分，必须分开定价，不得混用。
 
 ## 事件日历（events.json）
 
@@ -51,8 +54,8 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 
 - 定价时刻 = 每只标的的 `quote_time_utc`（CBOE 延迟约 15 分钟），到期按美东 16:00
 - IV Rank/Percentile 需要历史 IV 序列，v1 没有引入，先用 IV 绝对值 + z 值
-- 当前关注清单只有 put（`options_watch.json` 的 `right: "P"`），call 侧策略
-  （如备兑开仓）需要先把抓取扩到双边
+- 卖 call 为裸卖：上行风险理论无限，且保证金随标的上涨膨胀，实盘
+  必须配合 2 倍权利金止损与保证金 60% 硬否决（见 account.json）
 - 信号只用于研究筛选，下单前必须以交易平台实时报价复核；不构成投资建议
 
 ## 示例结果（2026-11-02 期权链回放）

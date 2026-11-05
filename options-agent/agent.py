@@ -12,11 +12,19 @@ spot, rows:[{expiry, strike, bid, ask, delta, oi, volume, last_trade}]}}}）
   - 缓冲 buffer=(S-K)/S，z = buffer / (IV*sqrt(t))，价外概率用同一对数正态公式
 
 策略模块（2026-11-03 按用户决定收窄为单腿卖方：券商不支持组合单，
-只做单腿卖出看跌；信用价差与买 put 尾部对冲两个模块已移除）：
+只做单腿卖出；信用价差与买 put 尾部对冲两个模块已移除）：
   A buffett_csp    巴菲特式现金担保卖 put：价外、z 与价外概率达标、流动性合格
+  B short_call     卖 call（2026-11-05 用户加入）：与卖 put 镜像——价外
+                   （行权价高于现价）、z 与价外概率达标、流动性合格。
+                   注意：裸卖 call 上行风险理论无限，保证金随标的上涨
+                   急剧膨胀，同受保证金 60% 硬否决与全部风控约束
   D thorp_ev       索普式期望值过滤（叠加层）：假设真实波动率 = IV x 折扣
                    （波动率风险溢价），重算公允价，EV = bid - 公允价；
                    EV 明显为负的卖方候选直接否决
+
+数据口径：2026-11-05 起 options_watch.json 的 right 改为 PC，期权链
+rows 带 right 字段（C/P）；无 right 字段的旧链按 P 处理。put 与 call
+必须分开定价（IV 反解、缓冲、保证金公式都不同），混用会出幻影信号。
 
 财报日历（earnings.json，与 agent.py 同目录）：自选股下一次财报日期。
 按 2026-11-04 用户决定，持有期跨财报日的信号直接否决（移入否决区），
@@ -63,13 +71,22 @@ def put_price(s, k, sig, t):
     return k * N.cdf(-(d1 - sig * math.sqrt(t))) - s * N.cdf(-d1)
 
 
-def implied_vol(px, s, k, t):
-    if px <= max(k - s, 0.0):
+def call_price(s, k, sig, t):
+    if sig <= 0 or t <= 0:
+        return max(s - k, 0.0)
+    d1 = (math.log(s / k) + 0.5 * sig * sig * t) / (sig * math.sqrt(t))
+    return s * N.cdf(d1) - k * N.cdf(d1 - sig * math.sqrt(t))
+
+
+def implied_vol(px, s, k, t, right="P"):
+    intrinsic = max(k - s, 0.0) if right == "P" else max(s - k, 0.0)
+    if px <= intrinsic:
         return None
+    price = put_price if right == "P" else call_price
     lo, hi = 0.01, 5.0
     for _ in range(100):
         m = (lo + hi) / 2
-        lo, hi = (m, hi) if put_price(s, k, m, t) < px else (lo, m)
+        lo, hi = (m, hi) if price(s, k, m, t) < px else (lo, m)
     return (lo + hi) / 2
 
 
@@ -77,11 +94,16 @@ def reg_t_margin(s, k, bid):
     return max(0.2 * s - max(s - k, 0) + bid, 0.1 * k + bid) * 100
 
 
+def reg_t_margin_call(s, k, bid):
+    return max(0.2 * s - max(k - s, 0) + bid, 0.1 * s + bid) * 100
+
+
 # ---------------- 候选行特征 ----------------
 
 def enrich(row, s, qdt):
     """给一行原始报价补齐可裁定数字；无法定价返回 None 并在 row 里记原因。"""
     k, b, ak = row["strike"], row.get("bid") or 0, row.get("ask") or 0
+    right = row.get("right") or "P"
     exp = datetime.fromisoformat(row["expiry"]).replace(hour=16, tzinfo=ET)
     t = (exp - qdt).total_seconds() / (365 * 86400)
     if t <= 0:
@@ -89,27 +111,34 @@ def enrich(row, s, qdt):
     if b <= 0 or ak < b:
         return None
     mid = (b + ak) / 2
-    iv = implied_vol(mid, s, k, t)
+    iv = implied_vol(mid, s, k, t, right)
     if iv is None:
         return None
     sig_t = iv * math.sqrt(t)
-    buf = (s - k) / s
+    if right == "P":
+        buf = (s - k) / s
+        p_otm = N.cdf((math.log(s / k) - 0.5 * sig_t * sig_t) / sig_t)
+        margin = reg_t_margin(s, k, b)
+    else:
+        buf = (k - s) / s
+        p_otm = N.cdf((math.log(k / s) + 0.5 * sig_t * sig_t) / sig_t)
+        margin = reg_t_margin_call(s, k, b)
     z = buf / sig_t if sig_t > 0 else 0.0
-    p_otm = N.cdf((math.log(s / k) - 0.5 * sig_t * sig_t) / sig_t) if k < s else \
-        N.cdf((math.log(s / k) - 0.5 * sig_t * sig_t) / sig_t)
     return {
-        "expiry": row["expiry"], "strike": k, "bid": b, "ask": ak, "mid": mid,
+        "expiry": row["expiry"], "strike": k, "right": right,
+        "bid": b, "ask": ak, "mid": mid,
         "delta": row.get("delta"), "oi": row.get("oi") or 0,
         "volume": row.get("volume") or 0, "iv": iv, "t_years": t,
         "days": t * 365, "buffer": buf, "z": z, "p_otm": p_otm,
         "spread_pct": (ak - b) / mid if mid > 0 else 9.9,
-        "margin": reg_t_margin(s, k, b),
+        "margin": margin,
     }
 
 
 def thorp_ev(c, haircut=0.85):
-    """卖 put 的每股期望值：用折扣后的波动率重算公允价。bid - 公允价。"""
-    fair = put_price(c["_spot"], c["strike"], c["iv"] * haircut, c["t_years"])
+    """卖方每股期望值：用折扣后的波动率重算公允价。bid - 公允价。"""
+    price = put_price if c["right"] == "P" else call_price
+    fair = price(c["_spot"], c["strike"], c["iv"] * haircut, c["t_years"])
     return c["bid"] - fair
 
 
@@ -134,8 +163,31 @@ def mod_buffett(cands):
     return out
 
 
+def mod_short_call(cands):
+    """卖 call（2026-11-05 用户加入）：与 buffett_csp 镜像的价外卖方筛选。
+    门槛与卖 put 一致（z>=1.0、价外概率>=80%、OI>=100）；裸卖 call 上行
+    风险无限，分数不因此加成，靠保证金硬否决与 2 倍止损纪律兜底。"""
+    out = []
+    for c in cands:
+        if c["strike"] <= c["_spot"]:
+            continue
+        if c["z"] < 1.0 or c["p_otm"] < 0.80 or c["oi"] < 100 or c["bid"] < 0.05:
+            continue
+        cash_yield = c["bid"] / c["strike"]
+        ann_yield = cash_yield / c["t_years"] if c["t_years"] > 0 else 0
+        score = 40 * min(ann_yield, 1.0) + 25 * min(c["z"], 2.5) / 2.5 \
+            + 20 * c["p_otm"] + 15 * (1 - min(c["spread_pct"], 1.0))
+        out.append({**base(c), "module": "short_call", "action": "SELL_CALL",
+                    "score": round(score, 1),
+                    "why": f"z={c['z']:.2f}，价外概率 {c['p_otm']:.0%}，"
+                           f"年化 {ann_yield:.0%}，每张收入 ${c['bid']*100:.0f}，"
+                           f"保证金约 ${c['margin']:,.0f}（裸卖 call，上行风险无限）"})
+    return out
+
+
 def base(c):
     return {"ticker": c["_ticker"], "expiry": c["expiry"], "strike": c["strike"],
+            "right": c["right"],
             "bid": c["bid"], "ask": c["ask"], "mid": round(c["mid"], 3),
             "iv": round(c["iv"], 4), "z": round(c["z"], 2),
             "p_otm": round(c["p_otm"], 3), "oi": c["oi"],
@@ -223,15 +275,18 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             ev_map[id(c)] = ev
         sellable = []
         for c in cands:
-            if c["strike"] < s and ev_map[id(c)] < -0.05:
+            is_otm = (c["strike"] < s) if c["right"] == "P" else (c["strike"] > s)
+            if is_otm and ev_map[id(c)] < -0.05:
                 vetoes.append({"ticker": tkr, **base(c),
                                "reason": f"索普 EV {ev_map[id(c)]:+.2f}/股（真实波动率按 IVx{haircut} 估），卖方期望值为负"})
             else:
                 sellable.append(c)
-        sig = mod_buffett(sellable)
+        sig = mod_buffett([c for c in sellable if c["right"] == "P"])
+        sig += mod_short_call([c for c in sellable if c["right"] == "C"])
         for sg in sig:
             sg["thorp_ev"] = round(ev_map.get(id(next(
-                c for c in cands if c["expiry"] == sg["expiry"] and c["strike"] == sg["strike"])), 0.0), 3)
+                c for c in cands if c["expiry"] == sg["expiry"] and c["strike"] == sg["strike"]
+                and c["right"] == sg["right"])), 0.0), 3)
         signals.extend(sig)
     # 财报否决（2026-11-04 用户决定）：持有期跨财报日的信号直接否决，
     # 移入否决区，不进信号列表；否决在排序截断之前执行，后排候补自动递补。
@@ -248,7 +303,8 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
                 timing = {"AMC": "盘后", "BMO": "盘前"}.get(e.get("timing") or "", "")
                 tag = f"{e['date'][5:]} {sg['ticker']} 财报" + (f"（{timing}）" if timing else "")
                 vetoes.append({"ticker": sg["ticker"], "expiry": sg["expiry"],
-                               "strike": sg["strike"], "module": sg["module"],
+                               "strike": sg["strike"], "right": sg.get("right", "P"),
+                               "module": sg["module"],
                                "reason": f"跨财报否决：持有期跨 {tag}，按纪律不跨财报持有"})
                 if tag not in earnings_vetoes:
                     earnings_vetoes.append(tag)
@@ -265,7 +321,8 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             if sg.get("margin") and sg["margin"] > margin_cap:
                 pct = sg["margin"] / bp
                 vetoes.append({"ticker": sg["ticker"], "expiry": sg["expiry"],
-                               "strike": sg["strike"], "module": sg["module"],
+                               "strike": sg["strike"], "right": sg.get("right", "P"),
+                               "module": sg["module"],
                                "reason": f"仓位过重否决：保证金约 ${sg['margin']:,.0f}，"
                                          f"占购买力 {pct:.0%}，超过 {cap_ratio:.0%} 上限"})
                 tag = sg["ticker"]
@@ -315,7 +372,7 @@ def render_md(res):
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
     for sg in res["signals"]:
-        lines.append(f"### {sg['ticker']} {sg['expiry']} {sg['strike']:g}P — {sg['action']}（{sg['module']}，{sg['score']} 分）")
+        lines.append(f"### {sg['ticker']} {sg['expiry']} {sg['strike']:g}{sg.get('right', 'P')} — {sg['action']}（{sg['module']}，{sg['score']} 分）")
         lines.append(f"- bid/ask {sg['bid']:.2f}/{sg['ask']:.2f}，IV {sg['iv']:.0%}，z {sg['z']}，价外概率 {sg['p_otm']:.0%}，OI {sg['oi']:.0f}，价差占比 {sg['spread_pct']:.0%}")
         lines.append(f"- 理由：{sg['why']}")
         if sg.get("events"):
@@ -323,7 +380,7 @@ def render_md(res):
         lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
-        lines.append(f"- {v['ticker']} {v['expiry']} {v['strike']:g}P：{v['reason']}")
+        lines.append(f"- {v['ticker']} {v['expiry']} {v['strike']:g}{v.get('right', 'P')}：{v['reason']}")
     lines += ["", "> 口径：IV 由中间价反解；卖方收入按 bid 计；EV 假设真实波动率 = IV x "
               f"{res['ev_haircut']}。信号只用于研究筛选，下单前必须以交易平台实时报价复核。"]
     return "\n".join(lines) + "\n"
