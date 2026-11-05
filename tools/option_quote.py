@@ -155,6 +155,16 @@ def run(a, j, r):
         hv = _HV_CACHE[key]
     t = (exp - qdt).total_seconds() / (365 * 86400)
     s = r["spot"]
+    # 期限溢价闸门（tail-risk：VIX3M/VIX ≥ 1.20 才做 30–45 天档）——11/05 重跑发现只打说明不拦，30–45 天行照样 ✅
+    term_block = False
+    if (exp.date() - now.date()).days >= 30:
+        try:
+            tr = json.load(open("stock_prices.json"))
+            prem = tr["tail_risk"]["vix3m"] / tr["vix"]
+            term_block = prem < 1.20
+        except (OSError, KeyError, TypeError, ZeroDivisionError):
+            term_block = True  # 读不到就按关闭处理：宁可少做，不静默放行
+    zmax = None
 
     print(f"{a.ticker.upper()} {a.expiry}{a.right}  源 {r['source']}  报价 {qt or '无时间戳(用抓取时刻)'} UTC  "
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
@@ -208,11 +218,19 @@ def run(a, j, r):
         # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
         if a.bp is not None and margin * 1.15 > a.bp:
             mark = "⛔保证金"
+        if term_block:
+            mark = "⛔期限溢价"
+        zmax = z if zmax is None else max(zmax, z)
         if getattr(a, "collect", None) is not None:
             a.collect.append({"ticker": a.ticker.upper(), "expiry": a.expiry, "strike": k, "bid": b, "ask": ak, "iv": iv,
                               "ivhv": ratio, "z": z, "p_otm": p_otm, "income": b * 100, "margin": margin,
                               "spread": spread, "mark": mark.strip() or "z不够"})
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {(f'{ratio:.2f}' if ratio else '—'):>6} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
+    # 链不够宽：最远一档价外仍到不了 z 门槛（高 IV 标的 + 长到期，band 不够）——不能当成「没有合格行权价」
+    if zmax is not None and zmax < a.z_min:
+        print(f"⚠ 链不够宽：最远一档 z 只有 {zmax:.2f} < {a.z_min}——加大 options_watch.json 的 band")
+        if getattr(a, "collect", None) is not None:
+            a.collect.append({"ticker": a.ticker.upper(), "mark": "⚠链不够宽"})
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
           + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))

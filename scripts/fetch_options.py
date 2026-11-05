@@ -110,7 +110,11 @@ def main():
     def pick(e):
         d = (datetime.fromisoformat(e).date() - today).days
         return e in fixed or (lo is not None and lo <= d <= hi)
-    out = {"updated_at": now(), "watch": w, "tickers": {}}
+    try:  # 写进触发文件内容：扫描会话据此确认这份链是自己触发的那次（11/05 重跑问题 8）
+        trig = open("price_fetch_trigger.txt").read().strip()
+    except OSError:
+        trig = None
+    out = {"updated_at": now(), "trigger": trig, "watch": w, "tickers": {}}
     for t in w["tickers"]:
         time.sleep(0.4)
         errs = []

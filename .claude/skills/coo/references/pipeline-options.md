@@ -12,12 +12,12 @@
 | 1 | 仓库核验 | `git rev-parse --is-shallow-repository` 为 true → `git fetch --unshallow origin claude/install-claude-hud-d51E6` | 完整价格历史（否则 candidate_ledger / spread_check 取不到） |
 | 2 | 触发抓价并等新鲜 | 改 `price_fetch_trigger.txt` → commit → push **工作分支**；轮询 `git fetch` 后 `git show origin/claude/install-claude-hud-d51E6:stock_prices.json` 的 `updated_at` 晚于今日开盘 | 新鲜的 `stock_prices.json`。**不新鲜不出报告**（R-D0） |
 | 3 | 读存量 | `memory/state/options-journal.md` 末尾 + handoff §2 + `python3 tools/scale_check.py report`（当前允许张数） | 持仓表：标的 / 行权 / 到期 / 收入 / 止损价 / 张数 |
-| 4 | 尾部闸门 | `tail-risk-monitor` 工作流 Step 1–5 | 灯色 + 期限溢价（≥1.20 才开 30–45 天档） |
+| 4 | 尾部闸门 | `python3 tools/tail_light.py`（灯色、常驻项、加速度、期限溢价一次出；11/05 起不再手算）+ `tail-risk-monitor` Step 4–5 | 灯色 + 期限溢价（≥1.20 才开 30–45 天档） |
 | 5 | 宏观日历 | `us-options-agent/references/macro-events.md` | 未来 5 个交易日事件；**事件前一交易日不新开** |
 | 6 | 存量复核 | `us-options-agent/references/position-discipline.md` 四条 | 每个仓位：持有 / 减半 / 全平。**有违规存量 → 本次只出存量方案，跳到 9** |
 | 7 | 新候选扫描 | `us-options-agent` 每日扫描初筛 → 候选写进 `options_watch.json`（标的；到期日由 `dte` 窗口自动选）并推送 → 等 `options_chain.json` 更新 → 先跑汇总 `python3 tools/option_quote.py --all --right P|C --z-min 1.2 --bp <可取现金> [--dte-max 29]`（全清单 × 20–45 天，只列过关行 + 挡掉原因；期限溢价 < 1.20 时加 --dte-max 29），再对过关标的单独跑 `--ticker X` 看全表（不给 --expiry = 扫 20–45 天窗口内全部到期日，position-discipline 第 19 条；期限溢价 < 1.20 时只取 20–29 天）（put 与价外 call 两侧都扫，call 侧排除持有期内有急涨催化剂的标的；工具自动标「⛔财报」「⛔IV不贵」「⛔报价差」「⛔保证金」，带 ⛔ 的一律不推） 出 IV/z/收入/保证金；**只推单腿裸卖、保证金 ≤ 可取现金、买卖报价差 ≤ 收入 10%（option_quote 的「报价差」列）**（不是「最大购买力」；盈立无组合单，position-discipline 第 5 条）。可取现金用用户最新截图值并注明日期 | 候选表（含否决的与否决理由）。**不再需要用户截图报价**（2026-10-29 起） |
 | 7b | 新闻标注（2026-11-05 用户要求） | 读 `news.json`（同一次 fetch-options 产出，核 `updated_at` 是今天）+ WebSearch 补地缘大宗 / 美联储讲话 / 政要与知名投资人三类；按 `us-options-agent/references/news-channels.md` 映射到板块 | 报告顶部「今日消息面」+ 每个候选与存量后的 📰 一行（无相关消息写「📰 无」）。**只标注不否决** |
-| 8 | 全量登记候选 | 每个候选（含否决）`python3 tools/candidate_ledger.py add --ticker … --verdict …` | — |
+| 8 | 全量登记候选 | 每个候选（含否决）`python3 tools/candidate_ledger.py add --ticker … --verdict 推荐|否决|闸门`（闸门 = 规则全过、只因当日灯色 / 事件前一日不开） | — |
 | 9 | 对话内交付 | 先「今日消息面」，再存量、后新仓（每项带 📰）；资金/R4/R5 只**提示**不否决（profile 1.1t）。**每个推荐都列 1 / 3 / 6 张的止损亏损（收入 × 张数）与跳空压力（标的 −3% / −5%）**——用户 11/04 定不设权利金门槛、张数自定，代价要在下单前可见（profile 1.1zd） | 用户决定 |
 | 10 | 等用户决定 | 开仓前必问两句：止损条件单挂在多少？张数按「止损亏损 ≤ 净值 5%」算的吗？ | 用户回复 → 写 journal |
 | 11 | 收尾 | 开平仓记进 `options-trades.jsonl`（scale_check open/close）；G4 / G5 / G6 | — |

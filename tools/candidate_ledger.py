@@ -44,7 +44,7 @@ LEDGER = os.path.join(REPO, "memory", "state", "options-candidates.jsonl")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
 MIN_CLUSTERS = 20
-VERDICTS = ("推荐", "否决")
+VERDICTS = ("推荐", "否决", "闸门")  # 闸门 = 规则全过、只因当日灯色 / 事件前一日不开（11/05 加，复盘时与规则否决分开统计）
 
 
 # 实测 IV 的合法来源。「链上反解」= options_chain.json（CBOE 延迟报价）经 tools/option_quote.py 中间价反解，
@@ -82,7 +82,7 @@ def z_score(row):
 def add(a):
     if a.verdict not in VERDICTS:
         sys.exit(f"--verdict 只能是 {VERDICTS}")
-    if a.verdict == "否决" and not a.reason:
+    if a.verdict in ("否决", "闸门") and not a.reason:
         sys.exit("否决项必须写理由——不带理由的否决，事后无法分辨是规则挡住的还是嫌麻烦")
     if a.iv is not None and a.iv_src not in MEASURED:
         sys.exit(f"给了 --iv 但来源不在 {sorted(MEASURED)}：按 1.1x，估出来的 IV 不登记（否则 z 会被污染）")

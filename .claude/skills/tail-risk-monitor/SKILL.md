@@ -40,7 +40,7 @@ description: |
 
 ```
 Step 1  读取缓存 tail_risk 区块（必须先触发刷新，同 us-options-agent 的 R-D0 规则）
-Step 2  计算四个维度得分 → 加载 references/indicators.md
+Step 2  python3 tools/tail_light.py 出得分 / 常驻项 / 加速度 / 裁定（边界情形再加载 references/indicators.md）
 Step 3  多指标共振判定 → 得出三色灯
 Step 4  查当前持仓（memory/state/options-journal.md）→ 灯色对应动作
 Step 5  输出裁定 + 动作 + 触发条件（下次什么情况会变灯）
