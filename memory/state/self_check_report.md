@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T05:33:08Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T06:02:51Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-05 05:33 UTC
+自检器 · 2026-11-05 06:02 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
