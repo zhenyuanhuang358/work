@@ -75,6 +75,27 @@ def main():
     age = (now - qdt).total_seconds() / 60
     stale = age > a.max_age
     exp = datetime.fromisoformat(a.expiry).replace(hour=16, tzinfo=ET)
+
+    # 排雷一：持有期内有没有财报（earnings_calendar.json，fetch-options 工作流同步抓）
+    # 2026-11-05 加：INTC 财报日记错、AMD 未核实就开仓——财报日不能再靠搜索记忆。
+    earn_flag = ""
+    try:
+        ec = json.load(open("earnings_calendar.json"))["tickers"].get(a.ticker.upper())
+    except (OSError, KeyError, ValueError):
+        ec = None
+    if ec is None or ec.get("earnings") is None:
+        earn_flag = "⚠ 财报日未核实（日历里没有该标的）"
+    else:
+        hits = [e for e in ec["earnings"] if now.date().isoformat() <= e["date"] <= a.expiry]
+        if hits:
+            earn_flag = "⛔ 持有期内有财报：" + "、".join(f"{e['date']}{(' ' + e['hour']) if e['hour'] else ''}" for e in hits)
+
+    # 排雷二：IV ÷ HV。卖方的优势来自「期权卖贵了」；IV 不高于实际波动 1.1 倍就没有优势
+    try:
+        from spread_check import hv_from_history
+        hv = hv_from_history(a.ticker.upper())
+    except (Exception, SystemExit):
+        hv = None
     t = (exp - qdt).total_seconds() / (365 * 86400)
     s = r["spot"]
 
@@ -82,7 +103,8 @@ def main():
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
         sys.exit(1)
-    print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
+    print(f"HV30 {hv:.0%}" if hv else "HV30 取不到（需完整价格历史：git fetch --unshallow）", f"｜{earn_flag or '持有期内无财报'}")
+    print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'IV/HV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
     for row in sorted(r["rows"], key=lambda x: -x["strike"] if a.right == "P" else x["strike"]):
         if row["expiry"] != a.expiry or (a.strikes and row["strike"] not in a.strikes):
             continue
@@ -112,12 +134,17 @@ def main():
         margin = max(0.2 * s - otm_amt + b, 0.1 * (k if a.right == "P" else s) + b) * 100
         spread = (ak - b) / b  # 买卖报价差占收入比例（不是价差策略）；>10% 不推（position-discipline 第 7 条）
         mark = "✅" if z >= a.z_min else "  "
+        ratio = iv / hv if hv else None
         if spread > 0.10:
             mark = "⛔报价差"
+        if ratio is not None and ratio < 1.1:
+            mark = "⛔IV不贵"
+        if earn_flag.startswith("⛔"):
+            mark = "⛔财报"
         # 平台实际保证金比 Reg-T 估算高：AMD 442.5P +7%（11/04）、HOOD 80C +13%（11/05）→ 按 ×1.15 比可取现金
         if a.bp is not None and margin * 1.15 > a.bp:
             mark = "⛔保证金"
-        print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
+        print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {(f'{ratio:.2f}' if ratio else '—'):>6} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
           + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))
