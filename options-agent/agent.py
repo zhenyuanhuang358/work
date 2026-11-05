@@ -31,6 +31,13 @@ spot, rows:[{expiry, strike, bid, ask, delta, oi, volume, last_trade}]}}}）
 卖方候选 OI < 20、索普 EV < -0.05/股；--live 模式下报价超过 30 分钟
 的标的整只否决（离线/回放模式只在报告头标注过期，不否决）。
 
+保证金仓位硬否决（2026-11-05 用户决定）：购买力取自 account.json
+（与 agent.py 同目录，buying_power_usd；--bp 可覆盖）。单张 Reg-T
+估算保证金超过购买力 x margin_cap_ratio（默认 0.6）的信号，在排序
+截断前直接否决并由后排候补递补——2026-11-04 AMD 442.5P 保证金
+几乎占满购买力，盘中逆行被券商先于止损强平（成交 7.75 vs 止损
+6.90），此规则防重演。account.json 的购买力需随账户变化手动更新。
+
 用法：
   python3 agent.py --file data/options_chain.sample.json --out out/
   python3 agent.py --file options_chain.json --bp 5000 --live
@@ -108,22 +115,17 @@ def thorp_ev(c, haircut=0.85):
 
 # ---------------- 策略模块 ----------------
 
-def mod_buffett(cands, bp):
+def mod_buffett(cands):
     out = []
     for c in cands:
         if c["strike"] >= c["_spot"]:
             continue
         if c["z"] < 1.0 or c["p_otm"] < 0.80 or c["oi"] < 100 or c["bid"] < 0.05:
             continue
-        if bp is not None and c["margin"] > bp:
-            c.setdefault("_notes", []).append("保证金超过购买力，仅提示")
-            score_bp = -5
-        else:
-            score_bp = 0
         cash_yield = c["bid"] / c["strike"]                       # 现金担保收益率（本期）
         ann_yield = cash_yield / c["t_years"] if c["t_years"] > 0 else 0
         score = 40 * min(ann_yield, 1.0) + 25 * min(c["z"], 2.5) / 2.5 \
-            + 20 * c["p_otm"] + 15 * (1 - min(c["spread_pct"], 1.0)) + score_bp
+            + 20 * c["p_otm"] + 15 * (1 - min(c["spread_pct"], 1.0))
         out.append({**base(c), "module": "buffett_csp", "action": "SELL_PUT_CSP",
                     "score": round(score, 1),
                     "why": f"z={c['z']:.2f}，价外概率 {c['p_otm']:.0%}，"
@@ -137,7 +139,8 @@ def base(c):
             "bid": c["bid"], "ask": c["ask"], "mid": round(c["mid"], 3),
             "iv": round(c["iv"], 4), "z": round(c["z"], 2),
             "p_otm": round(c["p_otm"], 3), "oi": c["oi"],
-            "spread_pct": round(c["spread_pct"], 3)}
+            "spread_pct": round(c["spread_pct"], 3),
+            "margin": round(c["margin"])}
 
 
 # ---------------- 风控 + 主流程 ----------------
@@ -168,7 +171,23 @@ def load_earnings(explicit=None):
     return {}
 
 
-def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=None):
+def load_account(explicit=None):
+    """加载账户参数：显式路径优先，否则用 agent.py 同目录的 account.json。
+    返回 (buying_power_usd, margin_cap_ratio)；文件缺失时 (None, 0.6)。"""
+    cands = [explicit] if explicit else []
+    cands.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "account.json"))
+    for p in cands:
+        if p and os.path.exists(p):
+            try:
+                j = json.load(open(p))
+                return j.get("buying_power_usd"), float(j.get("margin_cap_ratio", 0.6))
+            except Exception:
+                return None, 0.6
+    return None, 0.6
+
+
+def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=None,
+        cap_ratio=0.6):
     j = json.load(open(path))
     updated = j.get("updated_at")
     signals, vetoes, stale_notes = [], [], []
@@ -209,7 +228,7 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
                                "reason": f"索普 EV {ev_map[id(c)]:+.2f}/股（真实波动率按 IVx{haircut} 估），卖方期望值为负"})
             else:
                 sellable.append(c)
-        sig = mod_buffett(sellable, bp)
+        sig = mod_buffett(sellable)
         for sg in sig:
             sg["thorp_ev"] = round(ev_map.get(id(next(
                 c for c in cands if c["expiry"] == sg["expiry"] and c["strike"] == sg["strike"])), 0.0), 3)
@@ -236,6 +255,25 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             else:
                 kept.append(sg)
         signals = kept
+    # 保证金仓位硬否决（2026-11-05 用户决定）：单张估算保证金超过
+    # 购买力 x cap_ratio 的信号在排序截断前否决，后排候补自动递补。
+    margin_cap = bp * cap_ratio if bp else None
+    margin_vetoes = []
+    if margin_cap:
+        kept = []
+        for sg in signals:
+            if sg.get("margin") and sg["margin"] > margin_cap:
+                pct = sg["margin"] / bp
+                vetoes.append({"ticker": sg["ticker"], "expiry": sg["expiry"],
+                               "strike": sg["strike"], "module": sg["module"],
+                               "reason": f"仓位过重否决：保证金约 ${sg['margin']:,.0f}，"
+                                         f"占购买力 {pct:.0%}，超过 {cap_ratio:.0%} 上限"})
+                tag = sg["ticker"]
+                if tag not in margin_vetoes:
+                    margin_vetoes.append(tag)
+            else:
+                kept.append(sg)
+        signals = kept
     signals.sort(key=lambda x: -x["score"])
     signals = signals[:top]
     # 宏观事件标注：持有期 = [扫描日（期权链更新时刻的美东日期）, 到期日]，只提醒不否决
@@ -251,8 +289,9 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source_file": os.path.basename(path), "chain_updated_at": updated,
             "mode": "live" if live else "replay", "bp": bp, "ev_haircut": haircut,
+            "margin_cap_ratio": cap_ratio, "margin_cap": margin_cap,
             "stale_notes": stale_notes, "window_events": window_events,
-            "earnings_vetoes": earnings_vetoes,
+            "earnings_vetoes": earnings_vetoes, "margin_vetoes": margin_vetoes,
             "signals": signals, "vetoes": vetoes}
 
 
@@ -260,7 +299,8 @@ def render_md(res):
     lines = [f"# 期权信号日报（研究版，不构成下单指令）",
              f"- 生成：{res['generated_at']}｜模式：{res['mode']}｜期权链更新：{res['chain_updated_at']}"]
     if res["bp"]:
-        lines.append(f"- 购买力硬过滤参考：${res['bp']:,.0f}（Reg-T 估算，平台预览为准）")
+        lines.append(f"- 购买力 ${res['bp']:,.0f}，单张保证金上限 ${res['margin_cap']:,.0f}"
+                     f"（购买力 x {res['margin_cap_ratio']:.0%}，仓位过重硬否决；Reg-T 估算，平台预览为准）")
     for n in res["stale_notes"]:
         lines.append(f"- ⚠️ {n}")
     if res.get("window_events"):
@@ -268,6 +308,9 @@ def render_md(res):
         lines.append(f"- 🗓️ 本批信号持有期内的宏观事件：{ev_txt}（仅标注提醒，不否决）")
     if res.get("earnings_vetoes"):
         lines.append(f"- 🔴 财报否决：跨 {'；'.join(res['earnings_vetoes'])} 的信号已直接否决（见否决区）")
+    if res.get("margin_vetoes"):
+        lines.append(f"- 🔴 保证金否决：{'、'.join(res['margin_vetoes'])} 的信号因单张保证金超过购买力 "
+                     f"{res['margin_cap_ratio']:.0%} 已直接否决（见否决区）")
     lines += ["", f"## 信号（共 {len(res['signals'])} 条，按分数排序）", ""]
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
@@ -290,15 +333,19 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--file", required=True)
     ap.add_argument("--out", default="out")
-    ap.add_argument("--bp", type=float, help="可取现金（美元），做保证金可执行性标注")
+    ap.add_argument("--bp", type=float, help="购买力（美元），覆盖 account.json 的 buying_power_usd")
+    ap.add_argument("--account", help="账户参数 JSON 路径（默认 agent.py 同目录 account.json）")
     ap.add_argument("--live", action="store_true", help="实盘时段模式：报价超 30 分钟整只否决")
     ap.add_argument("--ev-haircut", type=float, default=0.85)
     ap.add_argument("--top", type=int, default=30)
     ap.add_argument("--events", help="事件日历 JSON 路径（默认 agent.py 同目录 events.json）")
     ap.add_argument("--earnings", help="财报日历 JSON 路径（默认 agent.py 同目录 earnings.json）")
     a = ap.parse_args()
-    res = run(a.file, a.bp, a.live, a.ev_haircut, a.top,
-              events=load_events(a.events), earnings=load_earnings(a.earnings))
+    acct_bp, cap_ratio = load_account(a.account)
+    bp = a.bp if a.bp is not None else acct_bp
+    res = run(a.file, bp, a.live, a.ev_haircut, a.top,
+              events=load_events(a.events), earnings=load_earnings(a.earnings),
+              cap_ratio=cap_ratio)
     os.makedirs(a.out, exist_ok=True)
     json.dump(res, open(os.path.join(a.out, "signals.json"), "w"), ensure_ascii=False, indent=1)
     open(os.path.join(a.out, "report.md"), "w").write(render_md(res))
