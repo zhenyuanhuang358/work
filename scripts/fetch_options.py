@@ -24,7 +24,7 @@ def now():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def from_cboe(t, expiries, right, band):
+def from_cboe(t, pick, right, band):
     # 关注清单扩到 60 只（2026-11-05）：CBOE 会对连续请求回 429，退避重试
     for i in range(6):
         r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{t}.json",
@@ -36,16 +36,18 @@ def from_cboe(t, expiries, right, band):
     j = r.json()
     data = j["data"]
     spot = float(data["current_price"])
-    want = {e[2:4] + e[5:7] + e[8:10]: e for e in expiries}
     rows = []
     for o in data.get("options", []):
         m = OCC.match(o.get("option", ""))
-        if not m or m.group(2) not in want or m.group(3) not in right:
+        if not m or m.group(3) not in right:
+            continue
+        e = f"20{m.group(2)[:2]}-{m.group(2)[2:4]}-{m.group(2)[4:]}"
+        if not pick(e):
             continue
         k = int(m.group(4)) / 1000
         if abs(k / spot - 1) > band:
             continue
-        rows.append({"expiry": want[m.group(2)], "right": m.group(3), "strike": k, "bid": o.get("bid"), "ask": o.get("ask"),
+        rows.append({"expiry": e, "right": m.group(3), "strike": k, "bid": o.get("bid"), "ask": o.get("ask"),
                      "delta": o.get("delta"), "oi": o.get("open_interest"), "volume": o.get("volume"),
                      "last_trade": o.get("last_trade_time")})
     # CBOE 顶层 timestamp 是 UTC（2026-10-29 实测：14:39:11 对应运行时刻 14:39:35Z）；
@@ -53,13 +55,12 @@ def from_cboe(t, expiries, right, band):
     return {"source": "cboe", "quote_time_utc": j.get("timestamp"), "spot": spot, "rows": rows}
 
 
-def from_yf(t, expiries, right, band):
+def from_yf(t, pick, right, band):
     tk = yf.Ticker(t)
     spot = float(tk.fast_info["last_price"])
-    avail = set(tk.options)
     rows = []
-    for e in expiries:
-        if e not in avail:
+    for e in tk.options:
+        if not pick(e):
             continue
         ch = tk.option_chain(e)
         for rt, df in (("P", ch.puts), ("C", ch.calls)):
@@ -99,14 +100,23 @@ def atm_iv(res):
 def main():
     w = json.load(open("options_watch.json"))
     # right：「P」「C」或「PC」（两侧都抓，2026-11-05 起卖 call 纳入策略）
-    expiries, right, band = w["expiries"], w.get("right", "P"), w.get("band", 0.2)
+    right, band = w.get("right", "P"), w.get("band", 0.2)
+    # 到期日：dte = [最短, 最长] 天（2026-11-05 用户定新仓 20–45 天，每天自动滚动，不用手改日期）；
+    # 旧写法 expiries 列表仍兼容。持仓的到期日不在窗口里时写进 expiries 一起抓。
+    lo, hi = w.get("dte", [None, None])
+    fixed = set(w.get("expiries", []))
+    today = datetime.now(timezone.utc).date()
+
+    def pick(e):
+        d = (datetime.fromisoformat(e).date() - today).days
+        return e in fixed or (lo is not None and lo <= d <= hi)
     out = {"updated_at": now(), "watch": w, "tickers": {}}
     for t in w["tickers"]:
         time.sleep(0.4)
         errs = []
         for fn in (from_cboe, from_yf):
             try:
-                res = fn(t, expiries, right, band)
+                res = fn(t, pick, right, band)
                 if res["rows"]:
                     res["errors"] = errs
                     out["tickers"][t] = res

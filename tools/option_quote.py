@@ -52,7 +52,7 @@ def implied_vol(px, s, k, t, right="P"):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ticker", required=True)
-    ap.add_argument("--expiry", required=True)
+    ap.add_argument("--expiry", help="不给 = 扫 options_watch.json 的 dte 窗口内全部到期日（2026-11-05 起新仓 20–45 天）")
     ap.add_argument("--strikes", type=float, nargs="*")
     ap.add_argument("--z-min", type=float, default=1.0, help="持有期含 CPI/PPI/FOMC/非农时用 1.2")
     ap.add_argument("--max-age", type=float, default=20, help="报价最长可接受分钟数")
@@ -66,6 +66,27 @@ def main():
     if not r or not r.get("rows"):
         sys.exit(f"{a.ticker}: options_chain.json 里没有数据（{r and r.get('errors')}）——把它加进 options_watch.json 并推送")
 
+    if a.expiry:
+        run(a, j, r)
+        return
+    try:
+        lo, hi = json.load(open("options_watch.json")).get("dte", [20, 45])
+    except OSError:
+        lo, hi = 20, 45
+    today = datetime.now(timezone.utc).date()
+    exps = sorted({row["expiry"] for row in r["rows"] if row.get("right", "P") == a.right
+                   and lo <= (datetime.fromisoformat(row["expiry"]).date() - today).days <= hi})
+    if not exps:
+        sys.exit(f"{a.ticker}: 链上没有 {lo}–{hi} 天的到期日——等 fetch-options 按 dte 窗口重抓")
+    for e in exps:
+        a.expiry = e
+        d = (datetime.fromisoformat(e).date() - today).days
+        print(f"\n==== {e}（{d} 天）" + ("｜30–45 天档：期限溢价 VIX3M/VIX < 1.20 时不做（tail-risk）" if d >= 30 else "")
+              + ("｜≥35 天：剩 21 天未止盈就平" if d >= 35 else "") + " ====")
+        run(a, j, r)
+
+
+def run(a, j, r):
     now = datetime.now(timezone.utc)
     qt = r.get("quote_time_utc")
     if qt:
@@ -119,7 +140,7 @@ def main():
     print(f"{a.ticker.upper()} {a.expiry}{a.right}  源 {r['source']}  报价 {qt or '无时间戳(用抓取时刻)'} UTC  "
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
-        sys.exit(1)
+        return
     pct_note = f"｜IV 历史 {len(ivs)} 天（≥15 天后启用分位过滤）" if len(ivs) < 15 else ""
     print(f"HV30 {hv:.0%}" if hv else "HV30 取不到（需完整价格历史：git fetch --unshallow）", f"｜{earn_flag or '持有期内无财报'}{pct_note}")
     print(f"{'行权':>8} {'bid':>6} {'ask':>6} {'中间价':>6} {'IV':>6} {'IV/HV':>6} {'缓冲':>6} {'z':>5} {'价外概率':>7} {'每张收入':>7} {'保证金':>7} {'报价差':>6}")
@@ -170,6 +191,7 @@ def main():
     print(f"✅ = z ≥ {a.z_min}。收入按 bid 计（卖出成交按 bid，不按中间价）。保证金为 Reg-T 估算，以平台下单预览为准。"
           + (f"\n⛔保证金 = 单张保证金 > 可取现金 ${a.bp:,.0f}：平台不收这张单（可执行性硬过滤，不是资金偏好）。" if a.bp is not None else
              "\n未给 --bp：没做可执行性过滤。"))
+
 
 
 if __name__ == "__main__":

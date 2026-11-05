@@ -90,4 +90,8 @@
     option_quote 标 ⛔基本面。**每月用 buffett-analyst / burry 复核一次**；reviewed 超过 35 天 self_check 点名。
 18. **IV 历史分位 + 21 天离场**（Tastytrade）：fetch-options 每次抓链记一条平值 IV（`options_iv_history.jsonl`），满 15 个交易日后
     IV 低于自身历史中位数标 ⛔IV低位；开仓时距到期 ≥ 35 天的单，剩 21 天仍未止盈就平（`scale_check.py open` 打印离场日）。
+19. **新仓到期 20–45 天**（2026-11-05 用户定）：11/05 盘中实测 1 周到期的价外 put 权利金只有几毛，$0.01–0.10 的买卖报价差就占收入 13–50%，
+    第 7 条（≤10%）几乎过不了；2 周以上明显收窄（UBER 11/20 6–10%、WMT 6–10%）。`options_watch.json` 的 `dte: [20, 45]` 让抓链每天自动滚动，
+    `option_quote.py` 不给 `--expiry` 就扫窗口内全部到期日。**30–45 天档仍受 tail-risk 期限溢价闸门（VIX3M/VIX ≥ 1.20）**，闸门关时只做 20–29 天；
+    ≥35 天开的单按第 18 条剩 21 天离场。代价：持有期必含 CPI / FOMC 之一，缓冲门槛按 macro-events 一律 z ≥ 1.2。
 不借：被行权 / 轮动（用户不接货）；买 put 押方向（不是卖方，小账户经不起连续归零）。
