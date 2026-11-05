@@ -1,1 +1,315 @@
-{"earnings":{"AMD":{"confirmed":true,"date":"2026-11-03","label":"Q3 2026 财报","timing":"AMC"},"F":{"confirmed":true,"date":null,"label":"Q3 2026 已于 2026-10-28 盘后发布；下一次未定","timing":null},"GM":{"confirmed":false,"date":"2027-01-26","label":"Q4 2026 财报（预计）","timing":"BMO"},"HOOD":{"confirmed":false,"date":"2027-02-05","label":"Q4 2026 财报（预计）","timing":null},"INTC":{"confirmed":true,"date":null,"label":"Q3 2026 已于 2026-10-29 发布；下一次未定","timing":null},"KO":{"confirmed":true,"date":null,"label":"Q3 2026 已于 2026-10-27 发布；下一次未定","timing":null},"PLTR":{"confirmed":true,"date":null,"label":"Q3 2026 已于 2026-11-02 盘后发布；下一次未定","timing":null},"SOFI":{"confirmed":false,"date":"2027-02-01","label":"Q4 2026 财报（预计）","timing":null},"T":{"confirmed":true,"date":null,"label":"Q3 2026 已于 2026-10-21 发布；下一次未定","timing":null},"UBER":{"confirmed":true,"date":"2026-11-04","label":"Q3 2026 财报","timing":"BMO"}},"etf_no_earnings":["SLV","XLE"],"note":"自选股财报日（美东日期；AMC=盘后，BMO=盘前）。2026-11-03 核对：AMD 11-03 盘后、UBER 11-04 盘前（多家财报日历与公司通知一致）；PLTR 11-02 盘后已发布；HOOD/SOFI 10-27、KO 10-27、F 10-28、INTC 10-29、T 10-21、GM 10-20 均已发布（公司新闻稿/8-K 可查，个别日历站的过期条目已剔除）。SLV、XLE 为 ETF，无个股财报。口径（2026-11-04 用户决定）：持有期跨财报日的信号直接否决，移入报告否决区；宏观事件仍为只标注。财报季后需更新下一次财报日期。"}
+{
+ "earnings": {
+  "AAL": {
+   "confirmed": false,
+   "date": "2027-01-26",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-22 发布",
+   "timing": null
+  },
+  "AMD": {
+   "confirmed": true,
+   "date": "2026-11-03",
+   "label": "Q3 2026 财报",
+   "timing": "AMC"
+  },
+  "BABA": {
+   "confirmed": false,
+   "date": "2026-11-24",
+   "label": "FY2027 Q2 财报（预计）",
+   "timing": "BMO"
+  },
+  "BAC": {
+   "confirmed": false,
+   "date": "2027-01-15",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-14 发布",
+   "timing": "BMO"
+  },
+  "BIDU": {
+   "confirmed": true,
+   "date": "2026-11-16",
+   "label": "Q3 2026 财报（公司 10-27 公告）",
+   "timing": "BMO"
+  },
+  "BMY": {
+   "confirmed": false,
+   "date": "2027-02-04",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-29 发布",
+   "timing": null
+  },
+  "C": {
+   "confirmed": true,
+   "date": "2027-01-14",
+   "label": "Q4 2026 财报（公司预先公布日程）；Q3 已于 2026-10-13 发布",
+   "timing": "BMO"
+  },
+  "CCL": {
+   "confirmed": false,
+   "date": "2026-12-18",
+   "label": "Q4 2026 财报（预计）",
+   "timing": "BMO"
+  },
+  "CLF": {
+   "confirmed": false,
+   "date": "2027-02-08",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-19 发布",
+   "timing": "BMO"
+  },
+  "CMCSA": {
+   "confirmed": false,
+   "date": "2027-01-28",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-22 发布",
+   "timing": null
+  },
+  "CVS": {
+   "confirmed": false,
+   "date": "2027-02-09",
+   "label": "Q4 2026 财报（预计，各站有分歧）；Q3 已于 2026-11-04 盘前发布",
+   "timing": "BMO"
+  },
+  "DAL": {
+   "confirmed": false,
+   "date": "2027-01-13",
+   "label": "Q4 2026 财报（预计，各站区间 01-08~01-13）；Q3 已于 2026-10-09 发布",
+   "timing": "BMO"
+  },
+  "DIS": {
+   "confirmed": true,
+   "date": "2026-11-17",
+   "label": "FY2026 Q4 财报（公司已确认）",
+   "timing": "BMO"
+  },
+  "DKNG": {
+   "confirmed": true,
+   "date": "2026-11-05",
+   "label": "Q3 2026 财报（公司 10-21 公告，今日盘后）",
+   "timing": "AMC"
+  },
+  "DVN": {
+   "confirmed": true,
+   "date": "2026-11-05",
+   "label": "Q3 2026 财报（公司 10-07 新闻稿，今日盘后）",
+   "timing": "AMC"
+  },
+  "F": {
+   "confirmed": true,
+   "date": null,
+   "label": "Q3 2026 已于 2026-10-28 盘后发布；下一次未定",
+   "timing": null
+  },
+  "GM": {
+   "confirmed": false,
+   "date": "2027-01-26",
+   "label": "Q4 2026 财报（预计）",
+   "timing": "BMO"
+  },
+  "HOOD": {
+   "confirmed": false,
+   "date": "2027-02-05",
+   "label": "Q4 2026 财报（预计）",
+   "timing": null
+  },
+  "INTC": {
+   "confirmed": true,
+   "date": null,
+   "label": "Q3 2026 已于 2026-10-29 发布；下一次未定",
+   "timing": null
+  },
+  "JD": {
+   "confirmed": true,
+   "date": "2026-11-17",
+   "label": "Q3 2026 财报（公司 11-04 公告）",
+   "timing": "BMO"
+  },
+  "KHC": {
+   "confirmed": false,
+   "date": "2027-02-17",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-11-04 盘前发布",
+   "timing": null
+  },
+  "KO": {
+   "confirmed": true,
+   "date": null,
+   "label": "Q3 2026 已于 2026-10-27 发布；下一次未定",
+   "timing": null
+  },
+  "LYFT": {
+   "confirmed": true,
+   "date": "2026-11-05",
+   "label": "Q3 2026 财报（今日盘后）",
+   "timing": "AMC"
+  },
+  "MP": {
+   "confirmed": true,
+   "date": "2026-11-05",
+   "label": "Q3 2026 财报（公司 10-08 新闻稿，今日盘后）",
+   "timing": "AMC"
+  },
+  "NCLH": {
+   "confirmed": false,
+   "date": "2027-03-01",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-29 盘前发布",
+   "timing": "BMO"
+  },
+  "NEM": {
+   "confirmed": false,
+   "date": "2027-02-18",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-22 盘后发布",
+   "timing": "AMC"
+  },
+  "NKE": {
+   "confirmed": false,
+   "date": "2026-12-17",
+   "label": "FY2027 Q2 财报（预计）",
+   "timing": null
+  },
+  "NVDA": {
+   "confirmed": true,
+   "date": "2026-11-17",
+   "label": "FY2027 Q3 财报（公司 10-28 通知）",
+   "timing": "AMC"
+  },
+  "ORCL": {
+   "confirmed": false,
+   "date": "2026-12-14",
+   "label": "FY2027 Q2 财报（预计；部分日历站列 12-09，分歧待核）",
+   "timing": "AMC"
+  },
+  "OXY": {
+   "confirmed": true,
+   "date": "2026-11-09",
+   "label": "Q3 2026 财报（11-10 电话会对应 11-09 盘后发布）",
+   "timing": "AMC"
+  },
+  "PDD": {
+   "confirmed": false,
+   "date": "2026-11-18",
+   "label": "Q3 2026 财报（预计，各站区间 11-17~11-19，全在窗口内）",
+   "timing": "BMO"
+  },
+  "PEP": {
+   "confirmed": false,
+   "date": "2027-02-02",
+   "label": "Q4 2026 财报（预计，各站有分歧）；Q3 已于 2026-10-08 发布",
+   "timing": null
+  },
+  "PFE": {
+   "confirmed": false,
+   "date": "2027-02-02",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-11-03 盘前发布",
+   "timing": null
+  },
+  "PLTR": {
+   "confirmed": true,
+   "date": null,
+   "label": "Q3 2026 已于 2026-11-02 盘后发布；下一次未定",
+   "timing": null
+  },
+  "PYPL": {
+   "confirmed": false,
+   "date": "2027-02-09",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-27 发布",
+   "timing": null
+  },
+  "RIOT": {
+   "confirmed": false,
+   "date": "2027-03-03",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-11-04 发布",
+   "timing": null
+  },
+  "RIVN": {
+   "confirmed": false,
+   "date": "2027-02-11",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-29 盘后发布",
+   "timing": "AMC"
+  },
+  "SCHW": {
+   "confirmed": false,
+   "date": "2027-01-19",
+   "label": "Q4 2026 财报（预计，各站 01-19~01-20）；Q3 已于 2026-10-15 发布",
+   "timing": null
+  },
+  "SLB": {
+   "confirmed": false,
+   "date": "2027-01-15",
+   "label": "Q4 2026 财报（预计，各站有分歧）；Q3 已于 2026-10-23 盘前发布",
+   "timing": null
+  },
+  "SMCI": {
+   "confirmed": false,
+   "date": "2027-02-02",
+   "label": "FY2027 Q2 财报（预计）；Q1 已于 2026-11-03 盘后发布",
+   "timing": null
+  },
+  "SOFI": {
+   "confirmed": false,
+   "date": "2027-02-01",
+   "label": "Q4 2026 财报（预计）",
+   "timing": null
+  },
+  "T": {
+   "confirmed": true,
+   "date": null,
+   "label": "Q3 2026 已于 2026-10-21 发布；下一次未定",
+   "timing": null
+  },
+  "UAL": {
+   "confirmed": false,
+   "date": "2027-01-20",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-20 盘后发布",
+   "timing": null
+  },
+  "UBER": {
+   "confirmed": true,
+   "date": "2026-11-04",
+   "label": "Q3 2026 财报",
+   "timing": "BMO"
+  },
+  "UPS": {
+   "confirmed": false,
+   "date": "2027-01-26",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-27 盘前发布",
+   "timing": "BMO"
+  },
+  "VZ": {
+   "confirmed": false,
+   "date": "2027-01-26",
+   "label": "Q4 2026 财报（预计）；Q3 已于 2026-10-26 发布",
+   "timing": null
+  },
+  "WFC": {
+   "confirmed": true,
+   "date": "2027-01-14",
+   "label": "Q4 2026 财报（公司全年日程已宣布）；Q3 已于 2026-10-13 盘前发布",
+   "timing": "BMO"
+  },
+  "WMT": {
+   "confirmed": true,
+   "date": "2026-11-19",
+   "label": "FY2027 Q3 财报（公司事件页已确认）",
+   "timing": "BMO"
+  },
+  "XYZ": {
+   "confirmed": true,
+   "date": "2027-02-24",
+   "label": "Q4 2026 财报（公司 Q3 股东信自述）；Q3 已于 2026-11-03 盘后发布",
+   "timing": "AMC"
+  }
+ },
+ "etf_no_earnings": [
+  "ARKK",
+  "EEM",
+  "EWZ",
+  "FXI",
+  "GDX",
+  "HYG",
+  "KRE",
+  "SLV",
+  "TLT",
+  "USO",
+  "XLE",
+  "XLF",
+  "XLP",
+  "XLU"
+ ],
+ "note": "全标的财报日（美东日期；AMC=盘后，BMO=盘前）。2026-11-05 扩充至覆盖当前期权链全部标的：49 家公司逐只多源核对（财报日历站 Zacks/TipRanks/MarketBeat/StockAnalysis 等与公司公告交叉验证），14 只 ETF 无个股财报单列 etf_no_earnings。窗口内（2026-11-05~11-20）重点：DKNG/DVN/LYFT/MP 11-05 盘后（confirmed）、OXY 11-09 盘后（confirmed）、BIDU 11-16 盘前（confirmed）、JD 11-17 盘前（confirmed）、DIS 11-17 盘前（confirmed）、NVDA 11-17 盘后（confirmed）、PDD 11-18 盘前（estimated，区间 11-17~11-19）、WMT 11-19 盘前（confirmed）、BABA 11-24（estimated，在当前到期窗外）。已发布且下一次为 2027 年预计日期的，各站有 1~9 天分歧的已在 label 注明，临近时需再核。原 10 只口径不变。口径（2026-11-04 用户决定）：持有期跨财报日的信号直接否决，移入报告否决区；宏观事件仍为只标注。财报季后需更新下一次财报日期。"
+}
