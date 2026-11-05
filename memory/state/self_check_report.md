@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T07:11:57Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-05T10:35:10Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-05 07:11 UTC
+自检器 · 2026-11-05 10:35 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -14,7 +14,7 @@
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
   earner                   hub 132 行   spoke 引用  6 处
   coo                      hub 104 行   spoke 引用 11 处
-  us-options-agent         hub 197 行   spoke 引用 14 处
+  us-options-agent         hub 198 行   spoke 引用 15 处
   burry                    hub 183 行   spoke 引用  8 处
   tail-risk-monitor        hub 200 行   spoke 引用 12 处
   humanizer-zh             hub 408 行   spoke 引用  0 处
@@ -30,7 +30,7 @@
   critic                   hub 128 行   spoke 引用  2 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
-  合计 218 处 spoke 引用，0 处失效
+  合计 219 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -75,7 +75,7 @@
      忘了声明就不会触发 —— 这是把「每次记得加一遍」降为「记得声明一次」，不是消灭自觉。
 
 [C8] 键名静默失效防线  (1.1u：.get() 对拼错的键不报错)
-  严格加载器：已迁 6 个脚本，未迁 1 个（迁移是渐进的，不判失败）
+  严格加载器：已迁 6 个脚本，未迁 3 个（迁移是渐进的，不判失败）
   不可能值守卫在产出点：✅ 已接
   自测（拿 2026-09-06 真实汇总回放）：✅ 抓得住且正常分布零误报
 
@@ -152,10 +152,10 @@
     vix              3d >20%    3 天    4.2%
 
   各指标平均单日绝对变动（门槛是否该共用的依据）：
-    term_structure   2.59%   (10% 门槛 = 其常态的 3.9 倍)
+    term_structure   2.61%   (10% 门槛 = 其常态的 3.8 倍)
     skew             1.70%   (10% 门槛 = 其常态的 5.9 倍)
     vvix             3.87%   (10% 门槛 = 其常态的 2.6 倍)
-    vix              4.90%   (10% 门槛 = 其常态的 2.0 倍)
+    vix              4.89%   (10% 门槛 = 其常态的 2.0 倍)
 
 [5] 期限溢价开窗率（VIX3M/VIX ≥ 1.20）
   开窗 22/71 天  (31.0%)   区间 1.021 – 1.295
