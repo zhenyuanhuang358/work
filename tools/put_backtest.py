@@ -111,9 +111,14 @@ def run(a):
             p0 = days.get(entry) or days.get(max([d for d in dates if d <= entry], default=dates[0]))
             if not regime_ok(p0, a.regime):
                 continue
-            iv = r["iv"] if (r.get("iv") and r.get("iv_src") in MEASURED) else hv(dates, days, r["ticker"], entry)
+            measured = bool(r.get("iv") and r.get("iv_src") in MEASURED)
+            vol = hv(dates, days, r["ticker"], entry)
+            iv = r["iv"] if measured else vol
             if not iv:
                 continue
+            if a.ivhv:  # 只保留有实测 IV、且 IV ÷ HV30 ≥ 阈值的（HV 代的行无法判断，剔除）
+                if not measured or not vol or r["iv"] / vol < a.ivhv:
+                    continue
             T0 = max((dt.date.fromisoformat(r["expiry"]) - dt.date.fromisoformat(entry)).days, 1) / 365
             credit = r["bid"] or put(r["spot"], r["strike"], iv, T0)
             if credit < 0.005:
@@ -169,10 +174,11 @@ def main():
     ap.add_argument("--iv-mult", type=float, default=1.1)
     ap.add_argument("--step", type=int, default=5)
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--ivhv", type=float, help="账本样本：只保留实测 IV ÷ HV30 ≥ 该值的候选（2026-11-05 排雷规则）")
     ap.add_argument("--right", choices=["P", "C", "strangle"], default="P", help="合成样本：卖 put / 卖 call / 同时卖两腿（宽跨）")
     a = ap.parse_args()
     tr = run(a)
-    label = f"{a.source}｜止损 {a.stop}｜止盈 {a.tp or '无'}｜环境 {a.regime or '不限'}" + \
+    label = f"{a.source}｜止损 {a.stop}｜止盈 {a.tp or '无'}｜环境 {a.regime or '不限'}" + (f"｜IV/HV ≥ {a.ivhv}" if a.ivhv else "") + \
             (f"｜{a.dte} 天 z {a.z}｜{ {'P':'卖 put','C':'卖 call','strangle':'宽跨'}[a.right]}" if a.source == "synthetic" else "")
     if not tr:
         print(f"{label}：无样本")
