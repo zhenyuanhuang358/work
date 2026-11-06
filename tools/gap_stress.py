@@ -77,6 +77,7 @@ def main():
     ap.add_argument("--right", choices=["P", "C"], default="P")
     ap.add_argument("--credit", type=float, help="每股开仓收入；不给用链上 bid")
     ap.add_argument("--file", default="options_chain.json")
+    ap.add_argument("--asof", help="固定「现在」为该 UTC 时刻（回归测试用）")
     a = ap.parse_args()
     j = json.load(open(a.file))
     r = j["tickers"][a.ticker.upper()]
@@ -86,7 +87,8 @@ def main():
         raise SystemExit(f"链上没有 {a.ticker} {a.expiry} {a.strike}{a.right}")
     s = r["spot"]
     exp = datetime.fromisoformat(a.expiry).replace(hour=21, tzinfo=timezone.utc)
-    t = max((exp - datetime.now(timezone.utc)).total_seconds(), 3600) / (365 * 86400)
+    now = datetime.fromisoformat(a.asof).replace(tzinfo=timezone.utc) if a.asof else datetime.now(timezone.utc)
+    t = max((exp - now).total_seconds(), 3600) / (365 * 86400)
     mid = (row["bid"] + row["ask"]) / 2
     iv = implied(a.right, mid, s, a.strike, t)
     credit = a.credit if a.credit is not None else row["bid"]

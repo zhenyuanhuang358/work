@@ -51,6 +51,11 @@ def implied_vol(px, s, k, t, right="P"):
 
 
 _HV_CACHE = {}
+NOW = None  # --asof / 回归测试固定时刻（11/06 改造：结果可复现）
+
+
+def utcnow():
+    return NOW or datetime.now(timezone.utc)
 
 
 def main():
@@ -65,7 +70,12 @@ def main():
     ap.add_argument("--right", choices=["P", "C"], default="P", help="P 卖 put / C 卖 call（2026-11-05 起纳入）")
     ap.add_argument("--bp", type=float, help="平台「可取现金」（美元，不是「最大购买力」）；给了就按 Reg-T 保证金做可执行性硬过滤（profile 1.1zc）")
     ap.add_argument("--dte-max", type=int, help="期限溢价 VIX3M/VIX < 1.20 时给 29：只扫 20–29 天（tail-risk 闸门）")
+    ap.add_argument("--asof", help="把「现在」固定为该 UTC 时刻（ISO），回归测试与复盘用")
+    ap.add_argument("--json", action="store_true", help="汇总模式输出 JSON（tools/scan.py 用）")
     a = ap.parse_args()
+    global NOW
+    if a.asof:
+        NOW = datetime.fromisoformat(a.asof).replace(tzinfo=timezone.utc)
 
     j = json.load(open(a.file))
     if a.all or not a.ticker:  # 不给 --ticker 默认走汇总（11/05：旧定时指令只写 --right P，免得逐只跑 120 次）
@@ -87,7 +97,7 @@ def main_one(a, j, r):
         lo, hi = 20, 45
     if a.dte_max:
         hi = min(hi, a.dte_max)
-    today = datetime.now(timezone.utc).date()
+    today = utcnow().date()
     exps = sorted({row["expiry"] for row in r["rows"] if row.get("right", "P") == a.right
                    and lo <= (datetime.fromisoformat(row["expiry"]).date() - today).days <= hi})
     if not exps:
@@ -102,7 +112,7 @@ def main_one(a, j, r):
 
 
 def run(a, j, r):
-    now = datetime.now(timezone.utc)
+    now = utcnow()
     qt = r.get("quote_time_utc")
     if qt:
         qdt = datetime.fromisoformat(qt).replace(tzinfo=timezone.utc)
@@ -180,6 +190,8 @@ def run(a, j, r):
     print(f"{a.ticker.upper()} {a.expiry}{a.right}  源 {r['source']}  报价 {qt or '无时间戳(用抓取时刻)'} UTC  "
           f"距今 {age:.0f} 分钟{'  ⛔ 报价过期，不出定价' if stale else ''}  现价 {s:.2f}  剩 {t*365:.2f} 天")
     if stale:
+        if getattr(a, "collect", None) is not None:  # 汇总模式下不能静默跳过：否则显示「0 行过关、主因空」（11/06 试跑发现）
+            a.collect.append({"ticker": a.ticker.upper(), "mark": "⛔报价过期"})
         return
     pct_note = f"｜IV 历史 {len(ivs)} 天（≥15 天后启用分位过滤）" if len(ivs) < 15 else ""
     print(f"HV30 {hv:.0%}" if hv else "HV30 取不到（需完整价格历史：git fetch --unshallow）", f"｜{earn_flag or '持有期内无财报'}{pct_note}")
@@ -253,10 +265,8 @@ def run(a, j, r):
 
 
 
-def summary(a, j):
-    """全清单汇总：每个 (标的, 到期) 只保留过关行；其余按挡掉原因计数。过关行附跳空压力（tools/gap_stress.py）。"""
-    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    import gap_stress as gs
+def collect(a, j):
+    """全清单 × dte 窗口：返回过关行、各标的挡掉原因、主因（排除期限溢价闸门）。不打印。"""
     import contextlib
     import io
     from collections import Counter
@@ -275,23 +285,40 @@ def summary(a, j):
             except SystemExit:
                 pass
         why[t] = Counter(x["mark"] for x in a.collect[before:] if not x["mark"].startswith("✅"))
-    ok = [x for x in a.collect if x["mark"].startswith("✅")]
-    print(f"== {a.right} 汇总｜z ≥ {a.z_min}｜bp {a.bp}｜过关 {len(ok)} 行 / {len(a.collect)} 行，{len({x['ticker'] for x in ok})} 只标的")
-    print(f"{'标的':6} {'到期':10} {'行权':>7} {'bid':>5} {'ask':>5} {'IV/HV':>5} {'z':>5} {'价外概率':>6} {'收入':>5} {'保证金':>6} {'报价差':>5}")
-    for x in sorted(ok, key=lambda x: (-x["income"] / x["margin"])):
-        print(f"{x['ticker']:6} {x['expiry']:10} {x['strike']:7.2f} {x['bid']:5.2f} {x['ask']:5.2f} {x['ivhv'] or 0:5.2f} {x['z']:5.2f} "
-              f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%} {x['mark'][1:]}")
-        print("        跳空压力：" + gs.fmt(gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])))
+    ok = sorted([x for x in a.collect if x["mark"].startswith("✅")], key=lambda x: -x["income"] / x["margin"])
+    okt = {x["ticker"] for x in ok}
+    # 主因不算期限溢价：那道闸门只管 30–45 天档，算进来会盖住 20–29 天的真实原因（11/05 XLE 被误显示为期限溢价）
+    main_cause = {t: (Counter({k: v for k, v in c.items() if k != "⛔期限溢价"}).most_common(1) or [("仅期限溢价",)])[0][0]
+                  for t, c in why.items() if c and t not in okt}
     tot = Counter()
     for c in why.values():
         tot.update({k: 1 for k in c})
-    print("挡掉原因（按标的计，一只可有多因）：", dict(tot.most_common()))
-    # 主因不算期限溢价：那道闸门只管 30–45 天档，算进来会盖住 20–29 天的真实原因（11/05 XLE 被误显示为期限溢价）
-    gate = sum(1 for c in why.values() if c.get("⛔期限溢价"))
-    print(f"⛔期限溢价（30–45 天档闸门）涉及 {gate} 只标的；下面的主因只看闸门以外的行")
-    okt = {x['ticker'] for x in ok}
-    print("无过关行的标的主因：", {t: (Counter({k: v for k, v in c.items() if k != "⛔期限溢价"}).most_common(1) or [("仅期限溢价",)])[0][0]
-                                    for t, c in why.items() if c and t not in okt})
+    return {"right": a.right, "z_min": a.z_min, "bp": a.bp, "rows_total": len(a.collect), "ok": ok,
+            "reasons_by_ticker": dict(tot.most_common()), "main_cause": main_cause,
+            "term_gate_tickers": sum(1 for c in why.values() if c.get("⛔期限溢价"))}
+
+
+def summary(a, j):
+    """全清单汇总（打印）。过关行附跳空压力（tools/gap_stress.py）。"""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import gap_stress as gs
+    res = collect(a, j)
+    for x in res["ok"]:
+        x["gap"] = gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])
+    if getattr(a, "json", False):
+        print(json.dumps(res, ensure_ascii=False, default=str))
+        return res
+    ok = res["ok"]
+    print(f"== {a.right} 汇总｜z ≥ {a.z_min}｜bp {a.bp}｜过关 {len(ok)} 行 / {res['rows_total']} 行，{len({x['ticker'] for x in ok})} 只标的")
+    print(f"{'标的':6} {'到期':10} {'行权':>7} {'bid':>5} {'ask':>5} {'IV/HV':>5} {'z':>5} {'价外概率':>6} {'收入':>5} {'保证金':>6} {'报价差':>5}")
+    for x in ok:
+        print(f"{x['ticker']:6} {x['expiry']:10} {x['strike']:7.2f} {x['bid']:5.2f} {x['ask']:5.2f} {x['ivhv'] or 0:5.2f} {x['z']:5.2f} "
+              f"{x['p_otm']:6.1%} {x['income']:5.0f} {x['margin']:6.0f} {x['spread']:5.0%} {x['mark'][1:]}")
+        print("        跳空压力：" + gs.fmt(x["gap"]))
+    print("挡掉原因（按标的计，一只可有多因）：", res["reasons_by_ticker"])
+    print(f"⛔期限溢价（30–45 天档闸门）涉及 {res['term_gate_tickers']} 只标的；下面的主因只看闸门以外的行")
+    print("无过关行的标的主因：", res["main_cause"])
+    return res
 
 
 if __name__ == "__main__":

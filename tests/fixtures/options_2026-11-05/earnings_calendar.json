@@ -1,0 +1,374 @@
+{
+ "updated_at": "2026-11-05T17:41:32+00:00",
+ "window": [
+  "2026-11-05",
+  "2027-01-04"
+ ],
+ "tickers": {
+  "INTC": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "TLT": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "RIOT": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "DAL": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "HYG": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "XLE": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "SLV": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "USO": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "SMCI": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "UAL": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "SOFI": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "HOOD": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "ORCL": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-12-08",
+     "hour": ""
+    }
+   ],
+   "errors": []
+  },
+  "XLF": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "GDX": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "UBER": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "NKE": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-12-16",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "BABA": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-12-01",
+     "hour": ""
+    }
+   ],
+   "errors": []
+  },
+  "WMT": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-19",
+     "hour": ""
+    }
+   ],
+   "errors": []
+  },
+  "AAL": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "PFE": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "RIVN": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "XLP": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "OXY": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-09",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "FXI": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "EWZ": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "BAC": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "CLF": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "KRE": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "F": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "XYZ": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "KHC": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "CVS": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "DIS": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-17",
+     "hour": "bmo"
+    }
+   ],
+   "errors": []
+  },
+  "LYFT": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-05",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "CCL": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-12-18",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "EEM": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "BMY": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "WFC": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "C": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "DKNG": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-05",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "VZ": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "PYPL": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "GM": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "T": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "KO": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "CMCSA": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "PEP": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "ARKK": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "JD": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "UPS": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "PDD": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-16",
+     "hour": "bmo"
+    }
+   ],
+   "errors": []
+  },
+  "MP": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-05",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "SLB": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "SCHW": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "DVN": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-05",
+     "hour": "amc"
+    }
+   ],
+   "errors": []
+  },
+  "NCLH": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "XLU": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  },
+  "BIDU": {
+   "source": "finnhub",
+   "earnings": [
+    {
+     "date": "2026-11-16",
+     "hour": "bmo"
+    }
+   ],
+   "errors": []
+  },
+  "NEM": {
+   "source": "finnhub",
+   "earnings": [],
+   "errors": []
+  }
+ }
+}
