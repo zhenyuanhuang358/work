@@ -412,6 +412,57 @@ def check_coo_pipelines():
         flag("P2", "memory/state/runs", f"运行记录烂尾：{s_} — 续跑或标「放弃」")
 
 
+# ── C11 · 反馈台账（2026-11-06 改造）：已修的必须有回归测试或写明为什么没有；未关闭的点名 ─────
+def check_feedback():
+    say("\n[C11] 反馈台账 memory/state/feedback.jsonl")
+    fp = os.path.join(REPO, "memory/state/feedback.jsonl")
+    if not os.path.exists(fp):
+        flag("P2", "memory/state/feedback.jsonl", "反馈台账不存在")
+        return
+    rows = [json.loads(l) for l in open(fp, encoding="utf-8") if l.strip()]
+    opened = [r for r in rows if r.get("status") == "open"]
+    say(f"  {len(rows)} 条｜未关闭 {len(opened)}｜已修有测试 {sum(1 for r in rows if r.get('status') == 'fixed' and r.get('test'))}")
+    for r in rows:
+        if r.get("status") != "fixed":
+            continue
+        t = r.get("test")
+        if not t:
+            if not r.get("no_test_reason"):
+                flag("P2", r["id"], "已修但没有回归测试，也没写 no_test_reason——同类问题会再来")
+            continue
+        path, _, name = t.partition("::")
+        src = os.path.join(REPO, path)
+        if not os.path.exists(src) or not re.search(rf"def {re.escape(name)}\b", open(src, encoding="utf-8").read()):
+            flag("P1", r["id"], f"指向的测试不存在：{t}（测试被删或改名，修复失去保护）")
+    for r in opened:
+        flag("P3", r["id"], f"未关闭：{r['problem'][:60]}｜{r.get('fix', '')[:50]}")
+
+
+# ── C12 · 扫描报告必须经 verify_scan 核对，且核对后未再改动（2026-11-06 改造） ─────────────
+def check_scan_reports():
+    import hashlib
+    say("\n[C12] 扫描报告核对 memory/state/scans")
+    d = os.path.join(REPO, "memory/state/scans")
+    if not os.path.isdir(d):
+        say("  暂无扫描底稿")
+        return
+    n = 0
+    for fn in sorted(os.listdir(d)):
+        if not fn.endswith(".md") or fn.endswith(".draft.md"):
+            continue
+        n += 1
+        jp = os.path.join(d, fn[:-3] + ".json")
+        txt = open(os.path.join(d, fn), encoding="utf-8").read()
+        v = json.load(open(jp, encoding="utf-8")).get("verification") if os.path.exists(jp) else None
+        if not v:
+            flag("P1", f"scans/{fn}", "报告没跑过 verify_scan——python3 tools/scan.py verify <报告>")
+        elif v.get("report_sha256") != hashlib.sha256(txt.encode()).hexdigest():
+            flag("P1", f"scans/{fn}", "报告在核对后被改过——重跑 verify")
+        elif not v.get("pass"):
+            flag("P1", f"scans/{fn}", "核对未通过：" + ", ".join(c["id"] for c in v["checks"] if not c["pass"]))
+    say(f"  已交付报告 {n} 份")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -426,6 +477,8 @@ def main():
     check_keys_rule()
     check_candidate_ledger()
     check_coo_pipelines()
+    check_feedback()
+    check_scan_reports()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

@@ -85,6 +85,9 @@ def cmd_run(a):
     import tail_light as tl
     import rule_replay as rr
 
+    for k in ("history", "out"):  # 先转绝对路径再切目录（11/06 试跑：相对路径在 --root 下找不到）
+        if getattr(a, k):
+            setattr(a, k, os.path.abspath(getattr(a, k)))
     os.chdir(REPO if not a.root else a.root)
     now = datetime.fromisoformat(a.asof).replace(tzinfo=timezone.utc) if a.asof else datetime.now(timezone.utc)
     oq.NOW = now if a.asof else None
