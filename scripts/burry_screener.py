@@ -590,8 +590,10 @@ def main():
 
     # 样本计数去重（2026-11-06 tools/screen_check B1 发现）：Stage B 会把 Stage A 的完整样本移进「不适用」（市值下限、EV≤0）
     #   或「缺失」（无 ticker），但同一个 dict 仍留在 full 里 → 完整 + 缺失 + 不适用 比全集多 137，缺失率也停在 Stage A 的值。
-    _moved = {id(r) for r in not_applicable} | {id(r) for r in missing_data}
-    full_final = [r for r in full if id(r) not in _moved]
+    # ⚠ 按 CIK 去重，不能按对象：取不到价的公司是「复制一条新记录」并入缺失（第 ~518 行），原记录仍在 full 里——
+    #   11/06 首次按 id() 去重后实跑仍多 75 家（profile 1.1v：比对实体必须用唯一标识）
+    _moved = {r["cik"] for r in not_applicable} | {r["cik"] for r in missing_data}
+    full_final = [r for r in full if r["cik"] not in _moved]
     miss_ratio_final = len(missing_data) / max(len(full_final) + len(missing_data), 1)
     out = {
         "updated_at": now,
