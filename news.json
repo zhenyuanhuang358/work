@@ -1,7 +1,14 @@
 {
- "trigger": "scan-2026-11-06T15:45:31Z-macrotest",
- "updated_at": "2026-11-06T15:47:49+00:00",
+ "trigger": "scan-2026-11-06T15:49:50+00:00",
+ "updated_at": "2026-11-06T15:52:23+00:00",
  "market": [
+  {
+   "time_utc": "2026-11-06T15:42+00:00",
+   "source": "CNBC",
+   "headline": "Anthropic IPO announcement odds drop on Kalshi following midterms and AI sell-off",
+   "summary": "Kalshi traders cut the odds of an Anthropic IPO announcement before December as AI stocks sold off after Democrats won control of Congress.",
+   "url": "https://www.cnbc.com/2026/11/06/anthropic-ipo-kalshi-post-midterms-ai-sell-off.html"
+  },
   {
    "time_utc": "2026-11-06T15:28+00:00",
    "source": "CNBC",
@@ -2902,6 +2909,20 @@
   ],
   "ARKK": [
    {
+    "time_utc": "2026-11-06T10:30+00:00",
+    "source": "SeekingAlpha",
+    "headline": "Robust U.S. Jobs Market Boosts December Rate Hike Chances",
+    "summary": "The Federal Reserve has been focusing more on inflation recently, but a strong jobs report for October makes aÂ December rate hike an even easier decision. Read more here.",
+    "url": "https://finnhub.io/api/news?id=cdbf73f14492a3d44558e4244e42e1108caa46abaff4984cf00a33eff060e4cb"
+   },
+   {
+    "time_utc": "2026-11-06T10:25+00:00",
+    "source": "SeekingAlpha",
+    "headline": "October Jobs Report: Bad News May Finally Be Bad News",
+    "summary": "Discover how policy shifts, jobs data, and energy prices are reshaping AI data centers, S&P 500 earnings, and Fed outlooksâclick to read the analysis.",
+    "url": "https://finnhub.io/api/news?id=f79ce4688b4ffecad72cd7cae313ac33ea8c9f9703248ad59cc7c95c0c6db8c3"
+   },
+   {
     "time_utc": "2026-11-06T10:10+00:00",
     "source": "SeekingAlpha",
     "headline": "October Jobs Report: Strong Economy, Higher Rates, Trouble For Stocks",
@@ -2942,20 +2963,6 @@
     "headline": "Chart Of The Day: Now, That's What I Call A Fake-Out",
     "summary": "In the wake of the midterm elections, traders seemed to make peace with the results - buying initial weakness and sending QQQ higher on Wednesday. But what a fake-out that turned out to be!",
     "url": "https://finnhub.io/api/news?id=7d4dc6e1cfd29e500fd1886a81c5615e7ff98dfbe034b42e93cdba3ecea8cf1a"
-   },
-   {
-    "time_utc": "2026-11-06T04:30+00:00",
-    "source": "SeekingAlpha",
-    "headline": "A Phenomenon: Initial Applications For Unemployment Benefits (4-Week Average) Drop To The Lowest Since 1969",
-    "summary": "The four-week average of initial applications for unemployment insurance benefits fell to 194,700, the lowest since 1969, according to the Labor Department. Read more here...",
-    "url": "https://finnhub.io/api/news?id=40c7426a61e8e0c64602f73947317a1a9c3f9b731033123528f783f77bf9e557"
-   },
-   {
-    "time_utc": "2026-11-06T02:15+00:00",
-    "source": "SeekingAlpha",
-    "headline": "Campaign Spending: The Hidden Boost Behind U.S. Consumer Resilience",
-    "summary": "With election outlays and larger tax refunds both fading after the midterms, the outlook for U.S. consumers depends more heavily on energy prices.",
-    "url": "https://finnhub.io/api/news?id=8b93ff7df5a0bf1b2931150252f11e88b7112060a98c3e893307f0fd0c951d6a"
    }
   ],
   "JD": [
