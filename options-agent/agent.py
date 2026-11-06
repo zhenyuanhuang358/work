@@ -46,6 +46,11 @@ rows 带 right 字段（C/P）；无 right 字段的旧链按 P 处理。put 与
 几乎占满购买力，盘中逆行被券商先于止损强平（成交 7.75 vs 止损
 6.90），此规则防重演。account.json 的购买力需随账户变化手动更新。
 
+两边分开（2026-11-05 用户决定）：卖 put 与卖 call 分开排序、分开
+截断，每边各自最多 top 条（默认 30），互不挤占名额；报告分「卖 Put」
+「卖 Call」两区呈现，signals.json 除合并列表 signals 外另含
+signals_put / signals_call 两组。
+
 用法：
   python3 agent.py --file data/options_chain.sample.json --out out/
   python3 agent.py --file options_chain.json --bp 5000 --live
@@ -331,8 +336,12 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             else:
                 kept.append(sg)
         signals = kept
+    # 两边分开（2026-11-05 用户决定）：put / call 各自按分数排序、
+    # 各自截断 top 条，互不挤占；合并列表仅作兼容保留。
     signals.sort(key=lambda x: -x["score"])
-    signals = signals[:top]
+    signals_put = [sg for sg in signals if sg.get("right", "P") == "P"][:top]
+    signals_call = [sg for sg in signals if sg.get("right", "P") == "C"][:top]
+    signals = signals_put + signals_call
     # 宏观事件标注：持有期 = [扫描日（期权链更新时刻的美东日期）, 到期日]，只提醒不否决
     evs = events or []
     window_events = []
@@ -349,6 +358,7 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
             "margin_cap_ratio": cap_ratio, "margin_cap": margin_cap,
             "stale_notes": stale_notes, "window_events": window_events,
             "earnings_vetoes": earnings_vetoes, "margin_vetoes": margin_vetoes,
+            "signals_put": signals_put, "signals_call": signals_call,
             "signals": signals, "vetoes": vetoes}
 
 
@@ -368,16 +378,30 @@ def render_md(res):
     if res.get("margin_vetoes"):
         lines.append(f"- 🔴 保证金否决：{'、'.join(res['margin_vetoes'])} 的信号因单张保证金超过购买力 "
                      f"{res['margin_cap_ratio']:.0%} 已直接否决（见否决区）")
-    lines += ["", f"## 信号（共 {len(res['signals'])} 条，按分数排序）", ""]
+    puts = res.get("signals_put")
+    calls = res.get("signals_call")
+    if puts is None or calls is None:
+        # 兼容旧结果结构：按 right 现场拆分
+        puts = [sg for sg in res["signals"] if sg.get("right", "P") == "P"]
+        calls = [sg for sg in res["signals"] if sg.get("right", "P") == "C"]
+    lines += ["", f"## 信号（共 {len(res['signals'])} 条：卖 Put {len(puts)} 条 + 卖 Call {len(calls)} 条，两边分开、各自按分数排序）", ""]
     if not res["signals"]:
         lines.append("今日无通过风控的信号。")
-    for sg in res["signals"]:
-        lines.append(f"### {sg['ticker']} {sg['expiry']} {sg['strike']:g}{sg.get('right', 'P')} — {sg['action']}（{sg['module']}，{sg['score']} 分）")
-        lines.append(f"- bid/ask {sg['bid']:.2f}/{sg['ask']:.2f}，IV {sg['iv']:.0%}，z {sg['z']}，价外概率 {sg['p_otm']:.0%}，OI {sg['oi']:.0f}，价差占比 {sg['spread_pct']:.0%}")
-        lines.append(f"- 理由：{sg['why']}")
-        if sg.get("events"):
-            lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
+    for title, group in [(f"### 卖 Put 信号（{len(puts)} 条）", puts),
+                         (f"### 卖 Call 信号（{len(calls)} 条）", calls)]:
+        lines.append(title)
         lines.append("")
+        if not group:
+            lines.append("本边今日无通过风控的信号。")
+            lines.append("")
+            continue
+        for sg in group:
+            lines.append(f"#### {sg['ticker']} {sg['expiry']} {sg['strike']:g}{sg.get('right', 'P')} — {sg['action']}（{sg['module']}，{sg['score']} 分）")
+            lines.append(f"- bid/ask {sg['bid']:.2f}/{sg['ask']:.2f}，IV {sg['iv']:.0%}，z {sg['z']}，价外概率 {sg['p_otm']:.0%}，OI {sg['oi']:.0f}，价差占比 {sg['spread_pct']:.0%}")
+            lines.append(f"- 理由：{sg['why']}")
+            if sg.get("events"):
+                lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
+            lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
         lines.append(f"- {v['ticker']} {v['expiry']} {v['strike']:g}{v.get('right', 'P')}：{v['reason']}")
@@ -394,7 +418,7 @@ def main():
     ap.add_argument("--account", help="账户参数 JSON 路径（默认 agent.py 同目录 account.json）")
     ap.add_argument("--live", action="store_true", help="实盘时段模式：报价超 30 分钟整只否决")
     ap.add_argument("--ev-haircut", type=float, default=0.85)
-    ap.add_argument("--top", type=int, default=30)
+    ap.add_argument("--top", type=int, default=30, help="每边（put/call 各自）最多保留条数，默认 30")
     ap.add_argument("--events", help="事件日历 JSON 路径（默认 agent.py 同目录 events.json）")
     ap.add_argument("--earnings", help="财报日历 JSON 路径（默认 agent.py 同目录 earnings.json）")
     a = ap.parse_args()
@@ -406,7 +430,7 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     json.dump(res, open(os.path.join(a.out, "signals.json"), "w"), ensure_ascii=False, indent=1)
     open(os.path.join(a.out, "report.md"), "w").write(render_md(res))
-    print(f"信号 {len(res['signals'])} 条，否决 {len(res['vetoes'])} 条 -> {a.out}/report.md")
+    print(f"信号 {len(res['signals'])} 条（卖 Put {len(res['signals_put'])} + 卖 Call {len(res['signals_call'])}），否决 {len(res['vetoes'])} 条 -> {a.out}/report.md")
 
 
 if __name__ == "__main__":

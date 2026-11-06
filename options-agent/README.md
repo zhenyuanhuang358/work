@@ -13,7 +13,10 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 python3 options-agent/agent.py --file options_chain.json --out options-agent/out/ --live --bp 5000
 ```
 
-输出 `out/signals.json` 和 `out/report.md`（按分数排序的信号 + 被否决清单）。
+输出 `out/signals.json` 和 `out/report.md`（信号 + 被否决清单）。自
+2026-11-05 起两边分开：卖 put 与卖 call 各自按分数排序、各自最多
+30 条，互不挤占；report.md 分「卖 Put」「卖 Call」两区，signals.json
+除合并列表 `signals` 外另含 `signals_put` / `signals_call` 两组。
 
 ## 策略模块
 
