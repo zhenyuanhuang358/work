@@ -62,5 +62,37 @@
   "title": "把AI“装”进火锅，海底捞牵手火山引擎开启科技餐饮新范式_中华网",
   "chars": 5423,
   "error": null
+ },
+ "https://www.bls.gov/schedule/news_release/cpi.htm": {
+  "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+  "fetched_at": "2026-11-06T18:23:51+00:00",
+  "file": "pages/www_bls_gov_schedule_news_release_cpi_htm_4084e9.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.bls.gov/schedule/news_release/cpi.htm')"
+ },
+ "https://www.bls.gov/schedule/news_release/empsit.htm": {
+  "url": "https://www.bls.gov/schedule/news_release/empsit.htm",
+  "fetched_at": "2026-11-06T18:23:51+00:00",
+  "file": "pages/www_bls_gov_schedule_news_release_empsit_htm_0a6c2e.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.bls.gov/schedule/news_release/empsit.htm')"
+ },
+ "https://www.bls.gov/schedule/news_release/ppi.htm": {
+  "url": "https://www.bls.gov/schedule/news_release/ppi.htm",
+  "fetched_at": "2026-11-06T18:23:51+00:00",
+  "file": "pages/www_bls_gov_schedule_news_release_ppi_htm_fe59b1.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.bls.gov/schedule/news_release/ppi.htm')"
+ },
+ "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm": {
+  "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+  "fetched_at": "2026-11-06T18:23:51+00:00",
+  "file": "pages/www_federalreserve_gov_monetarypolicy_fomccalendars_htm_8ae938.txt",
+  "title": "The Fed - Meeting calendars and information",
+  "chars": 947,
+  "error": null
  }
 }
