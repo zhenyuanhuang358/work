@@ -30,6 +30,7 @@ SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
 PRESSURE_RE = re.compile(r"offering|secondary|dilut|insider sell|stake sale|sells? .*stake|cuts? (?:guidance|outlook|forecast)|"
                          r"lowers? (?:guidance|outlook|forecast)|downgrade|SEC (?:probe|charges)|investigation|fine[sd]? ", re.I)
+RATE_SECTORS = {"债券", "银行", "金融科技", "公用事业"}  # news-channels：美联储讲话偏鹰 / 偏鸽直接作用的板块
 EVENT_RE = re.compile(r"Non-Farm|CPI|PPI|FOMC|Federal Funds|Fed Chair .* Testifies", re.I)
 
 
@@ -97,6 +98,7 @@ def cmd_run(a):
     load = lambda p: json.load(open(p))  # noqa: E731
     chain, prices = load("options_chain.json"), load("stock_prices.json")
     news = load("news.json") if os.path.exists("news.json") else {}
+    screen = load("memory/state/options-screen.json") if os.path.exists("memory/state/options-screen.json") else {}
     fed = load("fed_speak.json") if os.path.exists("fed_speak.json") else {}
     trig = open("price_fetch_trigger.txt").read().strip() if os.path.exists("price_fetch_trigger.txt") else None
 
@@ -138,6 +140,8 @@ def cmd_run(a):
             x["pressure"] = [n.get("headline") for n in news.get("tickers", {}).get(x["ticker"], [])
                              if PRESSURE_RE.search(n.get("headline") or "")]
             tn = news.get("tickers", {}).get(x["ticker"], [])[:3]
+            if screen.get("sectors", {}).get(x["ticker"]) in RATE_SECTORS and fed.get("headlines"):
+                x["fed_channel"] = fed["headlines"][0]["headline"]  # 11/05 回放：TLT 的个股新闻全是无关长文，真相关的是联储讲话
             x["news"] = [{k: n.get(k) for k in ("time_utc", "source", "headline")} for n in tn]
         sides[right] = res
 
@@ -175,12 +179,19 @@ def draft(s, gs):
             L.append(f"- {x['ticker']} {x['expiry']} {x['strike']:g}{r_}｜收入 ${x['income']:.0f}/张｜保证金 ${x['margin']:.0f}"
                      f"｜z {x['z']:.2f}｜报价差 {x['spread']:.0%}{'｜' + x['mark'][1:] if len(x['mark']) > 1 else ''}")
             L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}"
-                     f"｜接货 ${x['assign_1']:,}/张（只提示）")
+                     + (f"｜接货 ${x['assign_1']:,}/张（只提示）" if r_ == "P" else f"｜被行权需按 ${x['strike']:g} 交付股票（未持股即卖空，只提示）"))
             if x["pressure"]:
                 L.append(f"  ⚠ 事件压力初筛命中（第 4 条，人工判断是否只观察）：{'；'.join(x['pressure'][:2])}")
             L.append(f"  跳空：{gs.fmt(x['gap'])}")
             nh = "；".join(f"{n['headline']}（{n['source']} {n['time_utc']}）" for n in x["news"][:2])
+            if x.get("fed_channel"):
+                nh = f"利率敏感板块，联储讲话：{x['fed_channel']}" + ("；个股：" + nh if nh else "")
             L.append(f"  📰 {nh + ' → 【待判断：不利/有利/中性】' if nh else '无'}")
+    from collections import Counter as _C
+    secs = _C(x["ticker"] for res in s["sides"].values() for x in res["ok"])
+    for t, n in secs.items():
+        if n > 1:
+            L.append(f"- 注意：{t} 有 {n} 张过关合约，但行业分散（第 16 条）同时只能开 1 笔——挑一张")
     if not any(res["ok"] for res in s["sides"].values()):
         from collections import Counter
         for r_, res in s["sides"].items():

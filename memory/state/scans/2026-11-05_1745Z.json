@@ -1,0 +1,804 @@
+{
+ "id": "2026-11-05_1745Z",
+ "asof": "2026-11-05T17:45:00+00:00",
+ "bp": 5470.0,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-05T17:40:40+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-06T01:02:24.039993Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-05T17:42:54+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-05T17:44:15+00:00"
+  },
+  "quote_age_min": 3.7,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-06T01:02:24.039993Z",
+  "ref_day": "2026-11-05",
+  "readings": {
+   "term_structure": 1.10293542074364,
+   "skew": 149.37,
+   "vvix": 134.99,
+   "vix": 28.18
+  },
+  "scores": {
+   "term_structure": 2,
+   "skew": 1,
+   "vvix": 2,
+   "vix": 2
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [
+   "term_structure",
+   "vvix",
+   "vix"
+  ],
+  "base": 2,
+  "accel": [
+   "vvix 3 日 +25%",
+   "vix 3 日 +36%"
+  ],
+  "light": 2,
+  "light_name": "🔴 红灯",
+  "term_premium": 0.9066713981547196,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-06T08:30:00-05:00",
+   "title": "Non-Farm Employment Change",
+   "forecast": "65K",
+   "previous": "29K"
+  }
+ ],
+ "event_eve": [
+  {
+   "time": "2026-11-06T08:30:00-05:00",
+   "title": "Non-Farm Employment Change",
+   "forecast": "65K",
+   "previous": "29K"
+  }
+ ],
+ "can_open": false,
+ "why_not": [
+  "尾部灯 🔴 红灯",
+  "明日（2026-11-06）Non-Farm Employment Change，事件前一交易日不新开"
+ ],
+ "scale": [
+  "实盘账本 0 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-05T08:50:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-05T09:10:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-06T04:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-06T09:10:00-05:00",
+    "speaker": "Musalem",
+    "title": "FOMC Member Musalem Speaks"
+   },
+   {
+    "time": "2026-11-06T12:15:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-05T16:33+00:00",
+    "source": "GuruFocus",
+    "headline": "Richmond Fed's Barkin Supports Gradual Rate Hikes Amid Inflation Concerns - GuruFocus",
+    "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPbVRLVHpZbllKenBuVDRFdEFaZlpvenljNHlPSGE1ajhYenA5QWpybDRCcHpxaDlCMzhKSlNzQ1hLNXVRdFZpTXFZbXpqTm5VUG9CV09WU2hORzdSMFRMUGozcmZNekpXYlBnZ0F5a2pvMEl6eGZWVGkxU0xiUlg2Ymw5QmJoeXN5UHd3T2JJVFZFbWMyZTd3R1BmbEl2d2dBejBJLWlEQkJjbGtma0hXMg?oc=5"
+   },
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-05T15:48+00:00",
+    "source": "FXStreet",
+    "headline": "Fed’s Barkin backs gradual rate hikes as inflation stays too high - FXStreet",
+    "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZ2hPR2RHTkxORzZ4c3FOM3dweVdsTnc4S1NTN29NZXlQVXZxNjN0OTlsMS1nRjdWd2I1NFpFN1l0TFBqYXgwMlJYWHE4YmJXc0RSeFVNNGswTmhHS1I1azBDazhJQ0I0YXZyQVVXX3NRY1FqWUlMYm9ISUJzNzlST0s4ODJVbVZmd2szVTdUQTdwT1FvX2prdGN4dEZlQndrZDFmcVlpX0haZ28?oc=5"
+   },
+   {
+    "speaker": "Hammack",
+    "time_utc": "2026-11-05T15:41+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Fed’s Hammack Says Restrictive Rates Needed to Cool Inflation - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPU2c2UERBM24tYnJsM3UxR3pvTG9mYmZNZ0dDN3k4OHp6SUl3aUxKRXZkNlJVeFU4dTFoS1NtSHBZN0xIVG1GRnBNNmxxWU9MWUNWNmhkZXZPT1A5ZHN2RHZRWS1tMmtZV1BzSDJLLWpERnFoZTVLNDFsdWVlaENTdE5UZVZDanpTbTFtNDQ5WHJJYWt1Y0hGNnd5eEhXaVplZWJNcXFXVHpIMXVqa0c5Z2tn?oc=5"
+   },
+   {
+    "speaker": "Hammack",
+    "time_utc": "2026-11-05T15:35+00:00",
+    "source": "BigGo Finance",
+    "headline": "Cleveland Fed's Hammack Says Rates Must Turn Restrictive as Inflation Runs Near 6-Year High - BigGo Finance",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE05bDVSZEFqVERlOHYyZlVOTE9PU2ptUkRzTnljbHpFdFltLWREX0FrYTRpRWJpeWJ1VE0wYTFQVmROLXJDWURTbDViRThnR19QUUVKejBkVmdBZnY0Um9qTmpZb3QxRUdDTjEwaV8yZjJuWlZHbVE?oc=5"
+   },
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-05T15:23+00:00",
+    "source": "Seeking Alpha",
+    "headline": "Rate path is straightforward; the question is timing, Richmond Fed's Barkin says - Seeking Alpha",
+    "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNMjNMSXpmQ191WTltbzBPaVI4NEVneVRNRTc0a2RkRFBoRk51YzQwSi0xX0piZHFBdEZNbWhtcnl6bllnZUtRV3JyR1VrMHAyX1l0WTlDNzhmX0JOb0t4SHNsWHQxZGJFZXhqUldmU05VUXB5MzZFQzVQNk52M1RQUmJpSWRXZ05PaWVmOXZkckhLWDlJY3BVZnBVWXF4MDBEV25ZRHpMRXIyQXhESU1QN0hPLXpTQQ?oc=5"
+   },
+   {
+    "speaker": "Hammack",
+    "time_utc": "2026-11-05T15:10+00:00",
+    "source": "Investing.com",
+    "headline": "Fed’s Hammack backs restrictive rates, cites persistent inflation pressures - Investing.com",
+    "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQXzdHUi14VGZBZ2lTVzBaSG5nUHVlRFhyNGYtcEd0UFFYOFRvMXRUdWJPcjFrQUUtczBreDlicmpHR3NmRGpmR1pLUzJlaWVPQjNhRmxxQUFiYjdvdmV5eHdtXzllMDN2UlBwaDVDX3RzRzk5X0Q2SmJXSXp5ekJIQzJGNFZqVVhVdnZVRlk3aHFqYXFGSi1CQTRpUFhvY0daNGNMNXJrSzE4TmxwaVZoTnZXSk9lclpRQzFjejJMTVo0UzA?oc=5"
+   },
+   {
+    "speaker": "Hammack",
+    "time_utc": "2026-11-05T15:03+00:00",
+    "source": "marketscreener.com",
+    "headline": "Fed's Hammack Repeats Call for Small Rate Increases to Curb Inflation - marketscreener.com",
+    "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPejJENnpxVldCamdPNmtHM1BHdFg4SXpERE43ZXBoRUk0bTBfODRiV1NUcWU4d2ZCY1hMWDNfREYzUnpQZjJ6ZnRDMjN5Z0ttTVlhNXJWWEtQN3BRQmlWdk9mMmkwaWZQbkdwWFhHWU9SZFJLU2lnZTFXc3VpMzNKUGZUdVRwNUZ1SUpxY01KOTJyMUpydGZHY25KSWtTUXZSaGY3ejZoQUhzQVEyd2pkVUhNZ2hMMHRKY1pjOTNGZw?oc=5"
+   },
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-05T14:29+00:00",
+    "source": "CNBC",
+    "headline": "Barkin sees interest rate hikes ahead, but at a gradual pace - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPdEZaWEtSWXFFb2N4RUNSdXRrbktjX1JvWnoyWGM2c1p2dnNrWGMzeTAwdkU3UDlmV2g3aDJvZVVxdG5BZ09RbU1DZWs3MmxodWRka0NXSE1YQmNOMjViTzhKbE9Qa1Y4SExQQzROdkFzWnJJeExoZ0h0aFNFRWdHU0NxM2Y4SXFMYlF3V2UxaTN2aXRTOHVvdVdoNGTSAaIBQVVfeXFMTUZ0M1g5R2p1V2hibU0xWHRfcnBDSkVzWGlZNk92OWNKZkRtV1JubEhWVnp4M0RSTWhaSGV5VlR6cjRtT3FMRWI5eFdBcDJoakxBSHVhMWZFdGxsZG90ZFl3SU1OYW92ajZGRkdkRXFZUnZOZFhFd09fQlgtVFctNmF2THlhNzgteDQ3STFZbmV2QXZSWG9Ldi1IOUJSSWNvWFdB?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-05T16:48+00:00",
+   "source": "CNBC",
+   "headline": "Las Vegas Raiders owner Mark Davis says he's 'not a fan' of sports gambling amid prediction market boom",
+   "summary": "In an interview with CNBC Sport, Las Vegas Raiders owner Mark Davis expressed concerns about the expansion of sports gambling, particularly proposition bets.",
+   "url": "https://www.cnbc.com/2026/11/05/las-vegas-raiders-owner-mark-davis-on-sports-gambling-not-a-fan.html"
+  },
+  {
+   "time_utc": "2026-11-05T16:47+00:00",
+   "source": "Reuters",
+   "headline": "Tankers hit in Hormuz as Iran keeps up pressure after US vote - Reuters",
+   "summary": "Tankers hit in Hormuz as Iran keeps up pressure after US vote  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQS25WaGR6RHltaldweFlqblRLWTQwanRGbVY4Vm5YZXBVdUVacG5DSTU3SXd1N00zTDROTTlYaGlnQzZPQUlmeUNPRlExc01kSUUwTFkwQUpWTWlXZEtkdTZmQktpWXUwcGt6dVBHbjkyb25ISjB1N0tOaWNJRHBoNk9iSzBJMURrM2dlemVvVnU5aHplVko3aGlQc296enRpdDlLNWJDWGtLWDZZVWc?oc=5"
+  },
+  {
+   "time_utc": "2026-11-05T16:22+00:00",
+   "source": "CNBC",
+   "headline": "We're booking big profits in 2 outperformers in Thursday's terrible market",
+   "summary": "They have nothing to do with tech and data centers, which are getting slaughtered.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/05/were-booking-big-profits-in-2-outperformers-in-thursdays-terrible-market.html"
+  },
+  {
+   "time_utc": "2026-11-05T15:59+00:00",
+   "source": "Reuters",
+   "headline": "Bank of England raises rates for first time since 2023, warns another move likely - Reuters",
+   "summary": "Bank of England raises rates for first time since 2023, warns another move likely  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNcEhfdUpzSlRCb2JiYmFYMjdxaEZySFE1cEJFcVlEWG1qajB4V2VGTXNmcGhRNHdBSF9Wa3FKcFpwMUpVVEc5NnQtaEhnQy0xUHpBc1lpZWp3TlZoUEhMQ1NHcFplMndKcmJJNEJrYlg2VnhoZlVJSkxnUDZzRzh2N0FuSlRHcl9JQTZ0LUhVMmxOaS1NWV9uWE15X19TN3pDMHFUeWNIdkRVQlYtemNsTQ?oc=5"
+  },
+  {
+   "time_utc": "2026-11-05T15:43+00:00",
+   "source": "Reuters",
+   "headline": "Netanyahu's position weakens as rival secures broad backing to try to form government - Reuters",
+   "summary": "Netanyahu's position weakens as rival secures broad backing to try to form government  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxONXl2TW1pRDd2eEFya2FTU0pkOWJWd3lFZG1PdUdSNlBWTVR5VGp3UWtLb2E0Ri1iTmt1SWhRckdOVVhkN2ItZ1Y2QlhjT2NrcGR0ZTg3MklhcENpZUFOM0I1SDRYdTZwMFlYeGMwMTM1SWF5ZzNnd2h4ZnJ1bC1BZWhlNDlYUXM3S3FRdXVyR1p3SE5GYUFoMm1wSWRYSlBYY3NkcTBpVklrTnZibm51eURCWkszdHBtdU9vYQ?oc=5"
+  },
+  {
+   "time_utc": "2026-11-05T15:34+00:00",
+   "source": "CNBC",
+   "headline": "Expedia CEO says AI agents aren't changing booking habits — yet",
+   "summary": "Expedia CEO Ariane Gorin told CNBC that AI agents present an exciting time for the travel industry but that they haven't yet impacted bookings.",
+   "url": "https://www.cnbc.com/2026/11/05/expedia-ai-agents-booking-habits.html"
+  },
+  {
+   "time_utc": "2026-11-05T15:27+00:00",
+   "source": "Reuters",
+   "headline": "Investors eye risk of debt-ceiling standoff after Democratic sweep - Reuters",
+   "summary": "Investors eye risk of debt-ceiling standoff after Democratic sweep  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNSFJkY2Voejd3d3ZVOXgxOEMtS3U3eXZFUUdDancxUDdiVEEtOW1HMXE2dFhfcTRzR292NTJBNUltNTNhRmVzdTdHLXUtMXoteGdFLTJZNVhlLUs0Zm5CT0lWMVFxM1o0aWxKVUloYnpVNUZZS2VyZmRfZlJRZEs1SWdPUEZ6aGFnbS1XWHRmeXFjS1hMSlFBOTVXWFdFekIwT2tfaU50eTBoVzY0OFk3M3dQQkRrU3B1OHpV?oc=5"
+  },
+  {
+   "time_utc": "2026-11-05T15:25+00:00",
+   "source": "Reuters",
+   "headline": "New wave of bomb hoaxes hits 27 passenger flights across Europe - Reuters",
+   "summary": "New wave of bomb hoaxes hits 27 passenger flights across Europe  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNSUllcFZWajRSZE9PZE82Zl9aMHl5SlF6b09IejNjUjdqLTRJb2hKemVORDZGVDdkZkFaUksyV3hxMXNCNXlHZnR2QjY5anN0RkFpeC1UMzBQcjkxRC05S0tBcVhSOTA1dWw5d2s3ZDNkX1FadkI3SGh0Ti1zaWloUFVteWRfNlJNQl9uUkRVY0FyXzNDTEo2dkI5R3NveEd2eVVSeHFTOXhGQ0V3ZjRGOFpfcWJ6dm9VUXR3bGNxXzhrLXYtV29sRkR1NTc?oc=5"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5470.0,
+   "rows_total": 1477,
+   "ok": [
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-27",
+     "strike": 79.0,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.12055011827158446,
+     "ivhv": 1.159135752611389,
+     "z": 1.2500818300101917,
+     "p_otm": 0.8959894129758657,
+     "income": 11.0,
+     "margin": 1347.4,
+     "spread": 0.09090909090909087,
+     "mark": "✅",
+     "spot": 82.045,
+     "t": 0.06065382420091324,
+     "right": "P",
+     "hv30": 0.104,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.579184961457945,
+       "buyback": 0.9511270816610775,
+       "flat": 0.6760052603216771,
+       "loss": 84.11270816610775,
+       "x_credit": 8.646609833282524,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.631974935763243,
+       "buyback": 1.8096795280284965,
+       "flat": 1.552108676365016,
+       "loss": 169.96795280284965,
+       "x_credit": 16.45163207298633,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.9001504755900323,
+       "buyback": 0.6250968495231781,
+       "flat": 0.3815794717090597,
+       "loss": 51.50968495231781,
+       "x_credit": 5.682698632028892,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "assign_1": 7900,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-05T11:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "AI Gold Rush: Digging For Gold Or Digging A Grave?"
+      },
+      {
+       "time_utc": "2026-11-05T10:12+00:00",
+       "source": "SeekingAlpha",
+       "headline": "There's A New Kid In Town In The Bond Market"
+      },
+      {
+       "time_utc": "2026-11-05T09:45+00:00",
+       "source": "Benzinga",
+       "headline": "Five Signals That Preceded Past Recessions Are Back — and AI Is at the Center"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔报价差": 39,
+    "⛔IV不贵": 30,
+    "⚠链不够宽": 22,
+    "⛔财报": 10,
+    "z不够": 9,
+    "⛔基本面": 5,
+    "⛔利率敏感": 2
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔报价差",
+    "HYG": "⛔报价差",
+    "XLE": "⛔IV不贵",
+    "SLV": "⛔IV不贵",
+    "USO": "⛔报价差",
+    "SMCI": "⛔报价差",
+    "UAL": "⛔报价差",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔报价差",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔报价差",
+    "NKE": "⛔报价差",
+    "BABA": "⛔报价差",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔报价差",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔财报",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔财报",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔报价差",
+    "DKNG": "⛔财报",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔报价差",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔报价差",
+    "PDD": "⛔财报",
+    "MP": "⛔财报",
+    "SLB": "⛔报价差",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔财报",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5470.0,
+   "rows_total": 1659,
+   "ok": [
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 87.0,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.14970270669025182,
+     "ivhv": 1.439449102790883,
+     "z": 1.4278205774629098,
+     "p_otm": 0.920362595161706,
+     "income": 13.0,
+     "margin": 1158.4000000000005,
+     "spread": 0.07692307692307698,
+     "mark": "✅",
+     "spot": 82.045,
+     "t": 0.07983190639269407,
+     "right": "C",
+     "hv30": 0.104,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.579184961457945,
+       "buyback": 0.8910829012618358,
+       "flat": 0.5291491629556404,
+       "loss": 76.10829012618358,
+       "x_credit": 6.854483855860275,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.631974935763243,
+       "buyback": 1.5029032940361589,
+       "flat": 1.0738175944366972,
+       "loss": 137.29032940361589,
+       "x_credit": 11.560794569508914,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8543586259754528,
+       "buyback": 0.6369754271271688,
+       "flat": 0.33120266066574366,
+       "loss": 50.69754271271688,
+       "x_credit": 4.899810977901298,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "assign_1": 8700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-05T11:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "AI Gold Rush: Digging For Gold Or Digging A Grave?"
+      },
+      {
+       "time_utc": "2026-11-05T10:12+00:00",
+       "source": "SeekingAlpha",
+       "headline": "There's A New Kid In Town In The Bond Market"
+      },
+      {
+       "time_utc": "2026-11-05T09:45+00:00",
+       "source": "Benzinga",
+       "headline": "Five Signals That Preceded Past Recessions Are Back — and AI Is at the Center"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-27",
+     "strike": 86.0,
+     "bid": 0.14,
+     "ask": 0.15,
+     "iv": 0.1488678940845053,
+     "ivhv": 1.4314220585048587,
+     "z": 1.3148137270705595,
+     "p_otm": 0.9036166210655949,
+     "income": 14.000000000000002,
+     "margin": 1259.4000000000005,
+     "spread": 0.07142857142857129,
+     "mark": "✅",
+     "spot": 82.045,
+     "t": 0.06065382420091324,
+     "right": "C",
+     "hv30": 0.104,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.579184961457945,
+       "buyback": 0.982337602030892,
+       "flat": 0.639766531679161,
+       "loss": 84.2337602030892,
+       "x_credit": 7.016697157363514,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.631974935763243,
+       "buyback": 1.711165790339848,
+       "flat": 1.3338798145641846,
+       "loss": 157.1165790339848,
+       "x_credit": 12.22261278814177,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8543586259754528,
+       "buyback": 0.6825264195737297,
+       "flat": 0.3877926269707821,
+       "loss": 54.25264195737297,
+       "x_credit": 4.875188711240926,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      14,
+      42,
+      84
+     ],
+     "assign_1": 8600,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-05T11:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "AI Gold Rush: Digging For Gold Or Digging A Grave?"
+      },
+      {
+       "time_utc": "2026-11-05T10:12+00:00",
+       "source": "SeekingAlpha",
+       "headline": "There's A New Kid In Town In The Bond Market"
+      },
+      {
+       "time_utc": "2026-11-05T09:45+00:00",
+       "source": "Benzinga",
+       "headline": "Five Signals That Preceded Past Recessions Are Back — and AI Is at the Center"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-30",
+     "strike": 87.0,
+     "bid": 0.1,
+     "ask": 0.11,
+     "iv": 0.15176646598000454,
+     "ivhv": 1.4592929421154284,
+     "z": 1.5163212129188282,
+     "p_otm": 0.9321781485122276,
+     "income": 10.0,
+     "margin": 1155.4000000000003,
+     "spread": 0.09999999999999995,
+     "mark": "✅",
+     "spot": 82.045,
+     "t": 0.06887300228310503,
+     "right": "C",
+     "hv30": 0.104,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.579184961457945,
+       "buyback": 0.796485629322806,
+       "flat": 0.46345875470752773,
+       "loss": 69.6485629322806,
+       "x_credit": 7.96485629322806,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.631974935763243,
+       "buyback": 1.3939721128630183,
+       "flat": 0.9909916839922701,
+       "loss": 129.39721128630183,
+       "x_credit": 13.939721128630183,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8543586259754528,
+       "buyback": 0.554698017741547,
+       "flat": 0.2791117616410279,
+       "loss": 45.4698017741547,
+       "x_credit": 5.54698017741547,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "assign_1": 8700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-05T11:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "AI Gold Rush: Digging For Gold Or Digging A Grave?"
+      },
+      {
+       "time_utc": "2026-11-05T10:12+00:00",
+       "source": "SeekingAlpha",
+       "headline": "There's A New Kid In Town In The Bond Market"
+      },
+      {
+       "time_utc": "2026-11-05T09:45+00:00",
+       "source": "Benzinga",
+       "headline": "Five Signals That Preceded Past Recessions Are Back — and AI Is at the Center"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔报价差": 40,
+    "⛔IV不贵": 36,
+    "z不够": 16,
+    "⛔财报": 10,
+    "⚠链不够宽": 4,
+    "⛔利率敏感": 2
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔报价差",
+    "DAL": "⛔报价差",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔报价差",
+    "SLV": "⛔IV不贵",
+    "USO": "⛔报价差",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔报价差",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔报价差",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔报价差",
+    "PFE": "⛔报价差",
+    "RIVN": "z不够",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔财报",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "F": "⛔IV不贵",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔报价差",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔财报",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔IV不贵",
+    "C": "⛔IV不贵",
+    "DKNG": "⛔财报",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔报价差",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔报价差",
+    "JD": "⛔报价差",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔财报",
+    "MP": "⛔财报",
+    "SLB": "⛔报价差",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔财报",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-05_1745Z.md",
+  "report_sha256": "b91682241d812f65b392d2b0808b98ab017070622fe56e83ff4419d5ba024143",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天不开新仓：尾部灯 🔴 红灯（VIX 加速上行），且明日 11/06 08:30 ET 非农，事件前一交易日不新开。（11/05 12:45 ET 数据"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=False why_not=['尾部灯 🔴 红灯', '明日（2026-11-06）Non-Farm Employment Change，事件前一交易日不新开']｜首行：结论：今天不开新仓：尾部灯 🔴 红灯（VIX 加速上行），且明日 11/06 08:30 ET 非农，事件前一交易日不新"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-05T17:40:40+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-06T01:02:24.039993Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-05T17:42:54+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-05T17:44:15+00:00"
+     },
+     "quote_age_min": 3.7
+    }
+   }
+  ]
+ }
+}

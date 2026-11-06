@@ -167,6 +167,12 @@ class ScanAndVerify(unittest.TestCase):
         import scan
         self.assertTrue(scan.PRESSURE_RE.search("Acme announces $2 billion secondary offering"))
         self.assertIsNone(scan.PRESSURE_RE.search("Uber Beat on 20% Bookings Growth"))
+        # 11/06 回放：TLT 属利率敏感板块，📰 素材必须带上联储讲话；草稿里卖 call 不能写「接货」；同标的多张要提醒第 16 条
+        self.assertTrue(all(x.get("fed_channel") for side in "PC" for x in s["sides"][side]["ok"]))
+        draft = open(os.path.join(self.out, "2026-11-05_1745Z.draft.md")).read()
+        call_blocks = [b for b in draft.split("\n- ") if "C｜收入" in b]
+        self.assertTrue(call_blocks and all("接货" not in b for b in call_blocks))
+        self.assertIn("第 16 条", draft)
 
     def test_verify_good_report_passes(self):
         sp, s = self.scan()
