@@ -52,6 +52,7 @@
 - 11/05 新闻标注：`scripts/fetch_news.py`（Finnhub 要闻 + 60 只个股，随 fetch-options 产出 `news.json`）+ `us-options-agent/references/news-channels.md` + pipeline 步骤 7b。**只标注不否决**（用户要求「加以说明标注」）。
 - 11/05 重跑优化：`tools/tail_light.py`（机械灯色）；`option_quote.py --all`（全清单汇总）/ `--dte-max` / ⛔期限溢价 / ⚠链不够宽 / ⚠无HV；fetch_options 用 yfinance 算 hv30（原 49/60 只无 HV，IV/HV 过滤静默失效）；candidate_ledger 加「闸门」裁定；band 0.35。
 - 11/05 跳空压力 `tools/gap_stress.py`（option_quote 汇总自动附）；美联储讲话源 `scripts/fetch_fed.py` → `fed_speak.json`（FF 周历日程 + 理事会 RSS + Google News RSS 按讲话人搜，随 fetch-options 产出；Google News 是非官方 RSS，失效时 errors 会写明，退回 WebSearch）。
+- **11/06 期权 Skill 改造**：主文件 = 工作地图 + 验收标准（用户确认）；旧文件进 `references/archive/`；统一入口 `tools/scan.py fetch/run/verify`；报告核对 `tools/verify_scan.py`（V1–V10）；回归 `python3 -m unittest tests/test_options_regression.py`（冻结 11/05 数据，15 条）；反馈台账 `memory/state/feedback.jsonl` + self_check C11/C12。用户定：期权线做完后同法推广到全部 Skill（下一步）。
 - INTC 财报 Earner 报告 `reports/intc_Copilot_Report.html`（Critic 后修正）。
 
 ## 4. 待办

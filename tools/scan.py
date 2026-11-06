@@ -27,6 +27,9 @@ sys.path.insert(0, HERE)
 BRANCH = "claude/install-claude-hud-d51E6"
 ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
+# position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
+PRESSURE_RE = re.compile(r"offering|secondary|dilut|insider sell|stake sale|sells? .*stake|cuts? (?:guidance|outlook|forecast)|"
+                         r"lowers? (?:guidance|outlook|forecast)|downgrade|SEC (?:probe|charges)|investigation|fine[sd]? ", re.I)
 EVENT_RE = re.compile(r"Non-Farm|CPI|PPI|FOMC|Federal Funds|Fed Chair .* Testifies", re.I)
 
 
@@ -131,6 +134,9 @@ def cmd_run(a):
         for x in res["ok"]:
             x["gap"] = gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])
             x["stop_loss_1_3_6"] = [round(x["bid"] * 100 * n) for n in (1, 3, 6)]  # 2× 止损成交 = 亏 1× 收入 × 张数
+            x["assign_1"] = round(x["strike"] * 100)  # R5 接货金额（每张）：只提示，profile 1.1t
+            x["pressure"] = [n.get("headline") for n in news.get("tickers", {}).get(x["ticker"], [])
+                             if PRESSURE_RE.search(n.get("headline") or "")]
             tn = news.get("tickers", {}).get(x["ticker"], [])[:3]
             x["news"] = [{k: n.get(k) for k in ("time_utc", "source", "headline")} for n in tn]
         sides[right] = res
@@ -158,7 +164,8 @@ def draft(s, gs):
     L = []
     concl = "今天可以开新仓（见候选）" if s["can_open"] else "今天不开新仓：" + "；".join(s["why_not"])
     L += [f"结论：{concl}", "", "## 今日消息面"]
-    for h in s["fed"]["headlines"][:4]:
+    seen = set()
+    for h in [h for h in s["fed"]["headlines"] if not (h["headline"] in seen or seen.add(h["headline"]))][:4]:  # 同一篇多人命中只列一次
         L.append(f"- {h['time_utc']} · {h['source']} · {h['headline']} → 【待判断：鹰/鸽、影响板块】")
     for n in s["market_news"][:3]:
         L.append(f"- {n['time_utc']} · {n['source']} · {n['headline']} → 【待判断】")
@@ -167,12 +174,18 @@ def draft(s, gs):
         for x in res["ok"]:
             L.append(f"- {x['ticker']} {x['expiry']} {x['strike']:g}{r_}｜收入 ${x['income']:.0f}/张｜保证金 ${x['margin']:.0f}"
                      f"｜z {x['z']:.2f}｜报价差 {x['spread']:.0%}{'｜' + x['mark'][1:] if len(x['mark']) > 1 else ''}")
-            L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}")
+            L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}"
+                     f"｜接货 ${x['assign_1']:,}/张（只提示）")
+            if x["pressure"]:
+                L.append(f"  ⚠ 事件压力初筛命中（第 4 条，人工判断是否只观察）：{'；'.join(x['pressure'][:2])}")
             L.append(f"  跳空：{gs.fmt(x['gap'])}")
             nh = "；".join(f"{n['headline']}（{n['source']} {n['time_utc']}）" for n in x["news"][:2])
             L.append(f"  📰 {nh + ' → 【待判断：不利/有利/中性】' if nh else '无'}")
     if not any(res["ok"] for res in s["sides"].values()):
-        L.append("- 无过关合约。主因：" + json.dumps(s["sides"]["P"]["main_cause"], ensure_ascii=False)[:300])
+        from collections import Counter
+        for r_, res in s["sides"].items():
+            c = Counter(res["main_cause"].values()).most_common()
+            L.append(f"- {r_} 侧无过关合约。各标的主因计数：" + "、".join(f"{k} {v} 只" for k, v in c))
     L += ["", "## 请在平台核实", f"- 可取现金（本次按 ${s['bp']:,.0f}）", "- 下单前在平台预览保证金与报价"]
     return "\n".join(L) + "\n"
 

@@ -158,6 +158,16 @@ class ScanAndVerify(unittest.TestCase):
         self.assertTrue(any("红灯" in w for w in s["why_not"]) and any("Non-Farm" in w for w in s["why_not"]))
         self.assertTrue(s["freshness"]["ok"])
 
+    def test_scan_rows_carry_assign_and_pressure(self):
+        """11/06 前后对比：旧主文件要求的 R5 接货额、第 4 条事件压力，新底稿里必须有字段承载。"""
+        _, s = self.scan()
+        x = s["sides"]["P"]["ok"][0]
+        self.assertEqual(x["assign_1"], round(x["strike"] * 100))
+        self.assertIn("pressure", x)
+        import scan
+        self.assertTrue(scan.PRESSURE_RE.search("Acme announces $2 billion secondary offering"))
+        self.assertIsNone(scan.PRESSURE_RE.search("Uber Beat on 20% Bookings Growth"))
+
     def test_verify_good_report_passes(self):
         sp, s = self.scan()
         x = s["sides"]["P"]["ok"][0]
