@@ -1,13 +1,9 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。2026-11-06 首单：海底捞 AI 导购提纲。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。2026-11-06 首单：海底捞 AI 导购提纲。 11/06 第二单：官方宏观日程（BLS / FOMC）格式探测。",
   "urls": [
-    "https://hznews.hangzhou.com.cn/jingji/content/2026-04/23/content_9210743_0.htm",
-    "https://www.jiemian.com/article/13556393.html",
-    "https://www.woshipm.com/ai/6232493.html",
-    "https://www.woshipm.com/ai/6378754.html",
-    "https://www.yicai.com/news/103175075.html",
-    "https://www.bbtnews.com.cn/2026/0511/593045.shtml",
-    "https://sspai.com/post/102160",
-    "https://m.tech.china.com/redian/2025/1030/102025_1756854.html"
+    "https://www.bls.gov/schedule/news_release/cpi.htm",
+    "https://www.bls.gov/schedule/news_release/empsit.htm",
+    "https://www.bls.gov/schedule/news_release/ppi.htm",
+    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
   ]
 }
