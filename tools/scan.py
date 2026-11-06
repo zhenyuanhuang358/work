@@ -25,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 BRANCH = "claude/install-claude-hud-d51E6"
-ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json"]
+ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json", "voices.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
 PRESSURE_RE = re.compile(r"offering|secondary|dilut|insider sell|stake sale|sells? .*stake|cuts? (?:guidance|outlook|forecast)|"
@@ -101,6 +101,7 @@ def cmd_run(a):
     screen = load("memory/state/options-screen.json") if os.path.exists("memory/state/options-screen.json") else {}
     fed = load("fed_speak.json") if os.path.exists("fed_speak.json") else {}
     macro = load("macro_actuals.json") if os.path.exists("macro_actuals.json") else {}
+    voices = load("voices.json") if os.path.exists("voices.json") else {}
     trig = open("price_fetch_trigger.txt").read().strip() if os.path.exists("price_fetch_trigger.txt") else None
 
     # 1 新鲜度：四份产物是不是同一次触发、报价多老
@@ -161,7 +162,9 @@ def cmd_run(a):
            "event_eve": eve, "macro_today": macro_today, "macro_source": macro.get("source"),
            "macro_errors": macro.get("errors"), "can_open": can_open, "why_not": why_not, "scale": scale,
            "fed": {"schedule": fed.get("schedule", []), "headlines": fed.get("headlines", [])[:8], "errors": fed.get("errors")},
-           "market_news": news.get("market", [])[:8], "sides": sides, "verification": None}
+           "market_news": news.get("market", [])[:8],
+           "voices": [{"name": p["name"], "role": p["role"], "sectors": p["sectors"], "headline": h["headline"], "source": h["source"],
+                       "time_utc": h["time_utc"]} for p in voices.get("people", []) for h in p["headlines"][:1]], "sides": sides, "verification": None}
     od = a.out or SCANS
     os.makedirs(od, exist_ok=True)
     jp = os.path.join(od, f"{sid}.json")
@@ -185,6 +188,8 @@ def draft(s, gs):
     seen = set()
     for h in [h for h in s["fed"]["headlines"] if not (h["headline"] in seen or seen.add(h["headline"]))][:4]:  # 同一篇多人命中只列一次
         L.append(f"- {h['time_utc']} · {h['source']} · {h['headline']} → 【待判断：鹰/鸽、影响板块】")
+    for v in s.get("voices", [])[:4]:  # 政要与知名投资人（fetch_voices.py）：每人最新一条
+        L.append(f"- {v['time_utc']} · {v['source']} · 【{v['role']} {v['name']}】{v['headline']} → 【待判断：是否本人表态、影响{v['sectors']}】")
     for n in s["market_news"][:3]:
         L.append(f"- {n['time_utc']} · {n['source']} · {n['headline']} → 【待判断】")
     L += ["", "## 候选" + ("" if s["can_open"] else "（今日不开，供下个可开仓日参考）")]

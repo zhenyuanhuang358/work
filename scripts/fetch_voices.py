@@ -29,8 +29,10 @@ PEOPLE = [
     ("Jamie Dimon", "Dimon", "摩根大通 CEO", "银行 / 信用 / 宏观"),
     ("Elon Musk", "Musk", "特斯拉 CEO", "TSLA / 自动驾驶 / AI"),
 ]
-MARKET = re.compile(r"tariff|sanction|rate|Fed|inflation|stock|market|shares|bond|Treasury|yield|dollar|oil|China|chip|"
-                    r"export|trade|deal|recession|economy|bubble|short|AI|bank|buy|sell|stake|earnings|price", re.I)
+# 词边界 + 去掉 price / deal / buy / growth 这类泛词（11/06 首跑：「pay the price」让 Dalio 职场八卦混进来）
+MARKET = re.compile(r"\b(?:tariffs?|sanctions?|rates?|Fed|inflation|stocks?|markets?|shares|bonds?|Treasury|yields?|dollar|oil|"
+                    r"China|chips?|exports?|trade|recession|economy|bubble|puts?|short(?:ing)?|AI|banks?|stake|earnings|bearish|bullish|"
+                    r"stablecoins?|crash|correction)\b", re.I)
 
 
 def search(name, surname):

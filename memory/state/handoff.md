@@ -35,7 +35,7 @@
 | 第三档（viral / risk-radar / polanyi / sop / expansion） | 不动（少用） | 真用到出问题再改 |
 | 第三方（guizang / kami / huashu / humanizer） | 不动（上游冲突） | — |
 
-**新数据源（全在 Actions 跑）**：`fetch_news.py`（Finnhub）· `fetch_fed.py`（FF 周历 + 理事会 RSS + Google News）· `fetch_macro.py`（BLS 官方 API：非农 / CPI / PPI 实际值，FRED 兜底）· `fetch_transcript.py`（Motley Fool 电话会原文，`transcript_request.json`）· `fetch_pages.py`（任意网页原文，`pages_request.json`）。
+**新数据源（全在 Actions 跑）**：`fetch_news.py`（Finnhub）· `fetch_fed.py`（FF 周历 + 理事会 RSS + Google News）· `fetch_macro.py`（BLS 官方 API：非农 / CPI / PPI 实际值，FRED 兜底）· `fetch_transcript.py`（Motley Fool 电话会原文，`transcript_request.json`）· `fetch_pages.py`（任意网页原文，`pages_request.json`）· `fetch_voices.py`（政要与知名投资人发言标题）。
 `self_check` 新增 C11（反馈台账）· C12（扫描报告已核对）· C13（交付报告已 report_check）· C14（筛选器不变量）。
 
 ## 3. 已做（勿重做）
@@ -46,7 +46,7 @@
 
 ## 4. 待办
 
-1. **feedback open 3 条**：FB-20261105-12「z≥1.2 + 报价差 ≤10% 几乎只剩 TLT」——平静日数据后请用户定第 7 条口径；FB-20261105-13 可取现金截图；FB-20261105-14 政要 / 知名投资人发言源（可仿 fetch_fed）。
+1. **feedback open 3 条**：FB-20261105-12「z≥1.2 + 报价差 ≤10% 几乎只剩 TLT」——平静日数据后请用户定第 7 条口径；FB-20261105-13 可取现金截图；~~FB-20261105-14~~ 已做：`fetch_voices.py` → voices.json。
 2. 期权首个可开仓日 11/11（11/09 CPI 前一日、11/10 CPI 当天视灯）；开仓前 `scan.py fetch → run → verify`。
 3. predictions 待记分：XLE 11/13 ≥63、UBER 11/20 ≥62、UBER 三情景（2027-11-05）、UBER Q4 指引两条（2027-02-15）、INTC Q4 等。
 4. INTC 最后一张平仓价（等用户）；uSMART API 文档域名放行后评估。

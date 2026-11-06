@@ -19,7 +19,8 @@
 3. WebSearch 只补 fed_speak / news.json 都没有的（搜不到写「未搜到」而不是「无事」）：
    - 地缘与大宗：`Iran Israel US oil price today` / `OPEC` / 当期热点冲突
    - 美联储讲话：只在 fed_speak.json 缺失或 errors 非空时才搜
-   - 知名人士与政要：总统 / 财长 / 商务部长关税与制裁表态；知名投资人（如巴菲特、达利欧、伯里、阿克曼）公开发言
+   - 知名人士与政要：先读 `voices.json`（fetch_voices.py：总统 / 财长 / 商务部长 / 贸易代表 / 巴菲特 / 达利欧 / 伯里 / 阿克曼 / 戴蒙 / 马斯克近 2 天标题，人名 + 市场词双过滤）；
+     **标题常是 SEO 拼盘（「巴菲特的 3 句话」）不等于本人表态——只采用本人说了或做了什么的条目**；voices.json 缺失或 errors 非空才 WebSearch
 4. 只采用**有时间戳 + 有出处**的条目；只有搜索摘要、找不到原文时间的，标「未核实」。
 
 ## 消息 → 受影响板块（板块名对应 `memory/state/options-screen.json` 的 sectors）

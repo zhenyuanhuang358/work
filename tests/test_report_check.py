@@ -149,6 +149,17 @@ class Format(unittest.TestCase):
         bad = [c["id"] for c in r["checks"] if not c["pass"] and c["id"] != "C2"]  # C2 依赖本地 PDF（被 .gitignore）
         self.assertEqual(bad, [], r["checks"])
 
+    def test_voices_market_filter(self):
+        """fetch_voices 11/06 首跑真实标题：职场八卦 / 人生感悟不进；对华贸易、芯片看跌期权要进。"""
+        sys.path.insert(0, os.path.join(REPO, "scripts"))
+        import fetch_voices as fv
+        noise = ["Billionaires Ray Dalio and Richard Branson hate workplace gossip—and men could pay the price at work",
+                 "Ray Dalio: Open-minded people seek growth through questioning and learning"]
+        signal = ["Bessent, Greer Raise Concerns on China Trade Deal Actions",
+                  "Michael Burry Sold 25% of His Chip Puts and Says He’s Still Very Bearish"]
+        self.assertFalse(any(fv.MARKET.search(x) for x in noise))
+        self.assertTrue(all(fv.MARKET.search(x) for x in signal))
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")
