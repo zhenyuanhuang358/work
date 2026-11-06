@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-06T15:54:49Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-06T16:07:01Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-06 15:54 UTC
+自检器 · 2026-11-06 16:06 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -27,7 +27,7 @@
   long-running-agent-sop   hub 109 行   spoke 引用  3 处
   guizang-social-card-skill hub 338 行   spoke 引用 30 处
   viral-content-agent      hub 141 行   spoke 引用  7 处
-  critic                   hub 128 行   spoke 引用  2 处
+  critic                   hub 140 行   spoke 引用  2 处
   michael-polanyi-perspective hub 184 行   spoke 引用 16 处
   buffett-analyst          hub 153 行   spoke 引用 10 处
   合计 211 处 spoke 引用，0 处失效
@@ -66,7 +66,7 @@
 [C6] 可证伪判断的登记规则是否还有承载物
   CLAUDE.md 含把握档规则   ✅
   predictions.md 有把握列  ✅
-  产出可证伪判断的 skill   6 个，靠 CLAUDE.md 统一约束（各自 SKILL.md 不重复写，避免 upstream 冲突）
+  产出可证伪判断的 skill   7 个，靠 CLAUDE.md 统一约束（各自 SKILL.md 不重复写，避免 upstream 冲突）
 
 [C7] 分项加总校验  (1.1s：加不平就写明差额去向)
   共 48 个文件｜加平 2｜舍入或已说明 1｜**差额未说明 0**｜跳过 30
@@ -91,10 +91,13 @@
   运行记录：10 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  23 条｜未关闭 3｜已修有测试 16
+  28 条｜未关闭 3｜已修有测试 21
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 4 份
+
+[C13] 报告机械检查记录 memory/state/report_checks.jsonl
+  11/07 起改动的报告 0 份｜有检查记录 0
 
 ==========================================================================
 发现 7 项：
