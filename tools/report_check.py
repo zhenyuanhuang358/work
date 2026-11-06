@@ -32,6 +32,7 @@ NONPUBLIC = re.compile(r"内部数据|内部口径|内部资料|内部人士|据
 # 只认明确的合规否定 / 请求短语（「不对外公布的内部数据」这类真违规里也有「不」字，不能单字匹配）
 NEGATION = re.compile(r"不应|不披露|不含|不涉及|不使用|不抖现|不得|不能说|不可说|不透露|不提供|不包括|未使用|禁止|避免|拒绝|"
                       r"请受访者|请提供|若客户方|如有|target|do(?:es)? not|without", re.I)
+POST_NEGATION = re.compile(r"^[^。；]{0,8}(?:不展开|不讲|不谈|不涉及|不透露|不披露|不便|不能说)")
 # 来源：摘要级 / 无出处的转述措辞（profile 1.1y：搜索摘要不是来源）
 SUMMARY_LEVEL = re.compile(r"据搜索|搜索结果显示|网上资料显示|据网络|有消息称|据悉")
 # Merlin / restaurant-research 正文禁用句（两份 SKILL.md 明文）
@@ -61,7 +62,8 @@ def run(path, kind=None, pdf=None):
     for m in NONPUBLIC.finditer(t):
         sent = re.split(r"[。；;\n!?！？]", t[max(0, m.start() - 60):m.start()])[-1] + t[m.start():m.end() + 40].split("。")[0]
         before = t[max(0, m.start() - 80):m.start()]
-        if COMPLIANCE_ENTITIES.search(sent) and not NEGATION.search(before):
+        after = t[m.end():m.end() + 15]  # 后置否定：「……内部数据我不展开」（11/06 AI 导购提纲开场口径）
+        if COMPLIANCE_ENTITIES.search(sent) and not NEGATION.search(before) and not POST_NEGATION.search(after):
             hits.append(re.sub(r"\s+", " ", sent.strip())[:80])
     chk("G1", "FAIL", "同一句里把海底捞 / 绿茶与「内部 / 未公开」数据连在一起且非否定（交付前须人工确认）", not hits, hits[:3])
 
@@ -83,6 +85,9 @@ def run(path, kind=None, pdf=None):
     chk("C1", "FAIL", "零 Markdown 符号（**、#、`）", not md, md[:3])
     chk("C2", "WARN", "手机交付附 PDF（profile 1.1zb）", (pdf and os.path.exists(pdf)) or
         os.path.exists(os.path.splitext(path)[0] + ".pdf"), pdf or "未给 --pdf，同名 .pdf 不存在")
+    # C5（11/06 AI 导购报告 Critic flag 1）：占位符残留——「评审后填写」「待补」「TODO」「XX」进了交付件
+    ph = sorted({m.group(0) for m in re.finditer(r"（[^）]{0,20}后填写）|待填写|待补充|TODO|TBD|\[待定\]|X+/10|XX(?:元|%|家|万)", t)})
+    chk("C5", "FAIL", "无占位符残留（待填写 / TODO / XX）", not ph, ph)
     chk("C4", "WARN", "反馈链接（Critic D4：netlify 反馈页）", "spontaneous-youtiao-b9cde9.netlify.app" in s, "")
     target = re.search(r"目标价|Target Price|三情景|安全边际|PoP", t)
     if target:
@@ -133,7 +138,7 @@ def run(path, kind=None, pdf=None):
         paras = [H.unescape(re.sub(r"<[^>]+>", "", p)).strip() for p in re.findall(r"<p[^>]*>(.*?)</p>", s, re.S)]
         paras = [p for p in paras if len(p) > 20]
         first = paras[0] if paras else ""
-        chk("R3", "WARN", "答案前置：第一段正文含结论或数字", re.search(r"\d|结论|判断|答案|建议", first[:80]), first[:60])
+        chk("R3", "WARN", "答案前置：第一段正文含结论或数字", re.search(r"\d|结论|判断|答案|建议|区别|根本|核心|关键|在于", first[:80]), first[:60])
         chk("R4", "WARN", "趋势 / 拆分数据有 SVG 图（restaurant-research 规则）", "<svg" in s, f"{s.count('<svg')} 个")
 
     fails = [r for r in res if not r["pass"] and r["level"] == "FAIL"]

@@ -41,6 +41,21 @@ class Compliance(unittest.TestCase):
         for f in ("catering_2026_greentea_positioning_Research_Report.html", "greentea_ai_spend_survey_2026.html"):
             self.assertNotIn("G1", ids(rc.run(os.path.join(FX, f))), f)
 
+    def test_placeholder_caught(self):
+        """11/06 AI 导购报告：裁决区留着「见交付说明（Critic 独立评审后填写）」。"""
+        p = synth("<p>评审裁定：见交付说明（Critic 独立评审后填写）。</p>")
+        self.assertIn("C5", ids(rc.run(p)))
+        os.unlink(p)
+
+    def test_post_negation_disclaimer_not_flagged(self):
+        """11/06 AI 导购提纲：开场口径「海底捞、绿茶的内部数据和合作细节我不展开」否定词在后，不能误报；真违规仍要抓。"""
+        p = synth("<p>我讲的都是公开信息；海底捞、绿茶的内部数据和合作细节我不展开。</p>")
+        self.assertNotIn("G1", ids(rc.run(p)))
+        os.unlink(p)
+        p = synth("<p>海底捞的内部数据显示，华南人效 12 万，这个我可以展开讲。</p>")
+        self.assertIn("G1", ids(rc.run(p)))
+        os.unlink(p)
+
     def test_known_listed_disclaimer_still_flagged_for_human(self):
         """botinkit 的「不应披露」清单否定词在 80 字外：宁可多报交人工，不放宽窗口（合规优先）。"""
         self.assertIn("G1", ids(rc.run(os.path.join(FX, "botinkit_Research_Report.html"))))
