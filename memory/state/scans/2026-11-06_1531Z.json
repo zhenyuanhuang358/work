@@ -1,0 +1,725 @@
+{
+ "id": "2026-11-06_1531Z",
+ "asof": "2026-11-06T15:31:54+00:00",
+ "bp": 5470.0,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-06T15:27:56+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-06T15:28:38.638535Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-06T15:30:08+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-06T15:31:41+00:00"
+  },
+  "quote_age_min": 3.4,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-06T15:28:38.638535Z",
+  "ref_day": "2026-11-05",
+  "readings": {
+   "term_structure": 1.027491408934708,
+   "skew": 149.37,
+   "vvix": 118.29,
+   "vix": 23.92
+  },
+  "scores": {
+   "term_structure": 2,
+   "skew": 1,
+   "vvix": 1,
+   "vix": 1
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [
+   "term_structure",
+   "vvix",
+   "vix"
+  ],
+  "base": 2,
+  "accel": [],
+  "light": 2,
+  "light_name": "🔴 红灯",
+  "term_premium": 0.9732441471571907,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-06T08:30:00-05:00",
+   "title": "Non-Farm Employment Change",
+   "forecast": "65K",
+   "previous": "29K"
+  }
+ ],
+ "event_eve": [],
+ "can_open": false,
+ "why_not": [
+  "尾部灯 🔴 红灯"
+ ],
+ "scale": [
+  "实盘账本 0 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-05T08:50:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-05T09:10:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-06T04:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-06T09:10:00-05:00",
+    "speaker": "Musalem",
+    "title": "FOMC Member Musalem Speaks"
+   },
+   {
+    "time": "2026-11-06T12:15:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-06T13:00:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Musalem",
+    "time_utc": "2026-11-06T15:24+00:00",
+    "source": "bloomingbit",
+    "headline": "St. Louis Fed President Musalem Says Concerns Over Current Inflation Level Persist - bloomingbit",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE01SFVrN3VEc29GVlpPeWhYU01IQTRsWUROaVdhTldjWjhRQ0oyQ2xWUXJFZm1YN0N2ejhtUHdzV0F4SXBoQk9OYTFjaVZoQkFHeGJvSQ?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-06T15:18+00:00",
+    "source": "The Hill",
+    "headline": "Fed’s Williams says inflation too high, targets 2 percent - The Hill",
+    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5xeVNpR3NDODlWakp1RmVYYmRtT0xic0NXdnc4RU1YTFRfdW9uZlhNNnZVN0wzamN6ZXpfelo3OVhYUHBHbXJIZUg5VDdoTFNaR0FEZDhpTFo3TDhsbW1jUmNDc0pDd281c08xZkxyUktQc09MMmhxd9IBfkFVX3lxTE1IeWFOYlN3MGpkMG5PZGtkQ1VMZ2lyZmZRTkEwT3BaRnJ0c3p2OU9hVWZNNGYwcXIwNHl1a1lxNWtHc1FrMHNaZUE5Z2dHRWFfU25ZeDk4Z09BR2NteWVpTDd1N2ZET29mYU9OZHNRYjVOVm5VRmt0SEdJZlZDZw?oc=5"
+   },
+   {
+    "speaker": "Musalem",
+    "time_utc": "2026-11-06T15:16+00:00",
+    "source": "FXStreet",
+    "headline": "Fed’s Musalem: People remain concerned about inflation at the current level - FXStreet",
+    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVHV1UVVBV2xNS2p0WDg5OUFlMW4tX2ZRNUhkYVRTams0MHB4LW9XWVJxVFJkanZxQUFSUUVxU0ZJejc1Zm9hN1V5U1I2d2Q4WndYZVJYdjBWYndpQTc2c2gzdlhpNWM2V1c3c25LZ1dKZ0I3anVrTXRTV1RvYXNBRUV2R0piZWN5S2RtQXBtZnF2OVc3dk9jVzU1b3FETGpJLU1BT2RYb3FGUGtJb1JObzZHM2hyZTQ?oc=5"
+   },
+   {
+    "speaker": "Musalem",
+    "time_utc": "2026-11-06T15:09+00:00",
+    "source": "marketscreener.com",
+    "headline": "Fed's Musalem: Businesses say inflation remains top concern - marketscreener.com",
+    "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPVzgyc1RYSHFhU3RhR0lzTFJ4OXNIUE1BY3ZtVDRxVUZkTm05aG9KNERhU3JVZFNTa3gxVVZyRlV3WG1LZUFCNktTNEpvdHFZczJ6cTFYcVNEbWJpRXhHNjA5emhjOEc3NnVvM0trbUhxSHJUNmdjT3pTMUpHLXpNOEtTTGNJWXdvb2hLdHVhUnJLc2xOdW80OHVWVVV2bW5CWkRleUZBR2tKUzlZVFJ3NA?oc=5"
+   },
+   {
+    "speaker": "Musalem",
+    "time_utc": "2026-11-06T14:10+00:00",
+    "source": "Forex Factory",
+    "headline": "Musalem: Your Fed: Decentralized by Design - Forex Factory",
+    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMkRnTi1CaDduNERGNlVwbGpCb0hraHU3Ukg2b2FaNlpVRWE2XzdMcVRwYW1QUlBIeC1HRklSMERpYkJUZmQxcDdGVVczSlhjVldFZlFhWjk5ZkVUYzBERWZRN2dCeVFjVDFOd1FsTktiOFhSZ1o4Q0o3Zk5CM0hjNUFDODE1SGNONFHSAY8BQVVfeXFMUC03bTQwdERNY1J1SjdfTVRHN2VleGMwSG5mT2d2bng2OGpQaGh5NkhxNFk5YkJkUHpqOEdsY2Q0cWxKeHRVN2wtN3o2eXpZTUhIaFI1eHAyU09kS25qT25vUFY1OUVqTU82dDFjb2lwbG0xQnh3QkZseFNjMDVmcHAySEZ2WTE0Nm40NTd6R1E?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-06T13:00+00:00",
+    "source": "IndexBox",
+    "headline": "New York Fed's Williams: Inflation Too High, Must Return to 2% Target - News and Statistics - IndexBox",
+    "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNVU9HNVM3TVh1c1FCQ2JkcTN3LUt4WmQtbFF5cXRTRjNYc1dnQmU2UWtINklzc3lKNGVlbTlfbHo1R3NYczRlY2JlVnh0MkFVTWpvTjV4bHFlTEN5U09EQWZ2LV9iT3B6ZXlna0FxV2JQV0dCZjBTTF80ZWpfc2RNQ2VmQkJlVWdydVJVN2p5ajNJSzVPa2p3UVZ0RFVVRVdwZXc?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-06T11:40+00:00",
+    "source": "SRN News",
+    "headline": "US inflation too high; essential to get back to 2%: Fed’s Williams - SRN News",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQTh1bUpaYVNQTi1VdmFSVXRJNHpMaUlWRHVhcF9fS0JPYlVWYkVnaUpNZzUxR0VNbXV5cUhiNE84LV9kdUdfdUhSLXQ3a0h3WW9Rdm12U1NNNEYwUnRlTXFJdmF0TUhHd3pFZ0hXbC1KaGFyWlZBUW1vMFNMalhlZU5BVlZyOFJYWDJr?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-06T10:31+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Williams Says Fed Should Gather Data to Judge Price Risks - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQOEY1M1BpVlBYRnp6bmtkbGpGM1BTQkFpeVduVVFCaThyeW1FSUw3SmpmQWZTdnlzaEVYMHV0c05YU0RHTUVEQzFFMW1TRHNoVkRkaVExTFR1SVdRTXlRMDRMVnJELTVfUnRhcWJWbWxBYjVjdUN2VUkwM1ptRnp5S3N6YUtYN0RoYTNaem9USV84Y3F0ZUt5bWliOUJRc3ZPRzdydUh5VG1oaGJ3V291elh2TGNOdw?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-06T14:02+00:00",
+   "source": "CNBC",
+   "headline": "Family offices boost startup investments in October, backing women's health and caregivers",
+   "summary": "Laurene Powell Jobs' Emerson Collective was the most active family-office investor with three startup bets.",
+   "url": "https://www.cnbc.com/2026/11/06/family-offices-boost-startup-investments-in-october.html"
+  },
+  {
+   "time_utc": "2026-11-06T14:02+00:00",
+   "source": "CNBC",
+   "headline": "Wall Street's fear gauge may be flashing a buy sign",
+   "summary": "History shows that similar spikes in the VIX have been good entry points for stocks",
+   "url": "https://www.cnbc.com/2026/11/06/wall-streets-fear-gauge-may-be-flashing-a-buy-sign.html"
+  },
+  {
+   "time_utc": "2026-11-06T14:01+00:00",
+   "source": "CNBC",
+   "headline": "Our top 10 things to watch in the stock market Friday",
+   "summary": "Nasdaq futures are rebounding, and the October jobs report came in strong.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/06/our-top-10-things-to-watch-in-the-stock-market-friday.html"
+  },
+  {
+   "time_utc": "2026-11-06T13:57+00:00",
+   "source": "Reuters",
+   "headline": "Iran war spurs crackdown on clerics in tiny Gulf state Bahrain - Reuters",
+   "summary": "Iran war spurs crackdown on clerics in tiny Gulf state Bahrain  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNb3pBXzVOVlNRSEJ6MG95Y3ZyQU1wc2VWMmU3RlQ1ZjlEdDd3alhQUzJ6Q18yNy1aVXYwcHV2YlVWLWFaWGxLMjdhenZqbjBFOVFVVnVWdTVibXI2dTBpSGc0aDg0akpQZXpDbWl0SmFEZHAxMEJfQWVpN1p1MGtjWUo2ZG9POUE5dXd4U3phMk1VTUFRVmRPeEtZQmNGUzZFYnNiZ2k3a1pmSHFtWnFz?oc=5"
+  },
+  {
+   "time_utc": "2026-11-06T13:35+00:00",
+   "source": "CNBC",
+   "headline": "Market sell-off hits hard: Advisors say 'stay the course with an eye on buying'",
+   "summary": "As retail investors pulled money out of individual stocks, more than three-quarters of advisors in a CNBC flash poll said investors should check their allocation against their goals or stay invested.",
+   "url": "https://www.cnbc.com/2026/11/06/market-sell-off-hits-hard-advisors-say-stay-the-course-with-an-eye-on-buying-.html"
+  },
+  {
+   "time_utc": "2026-11-06T13:20+00:00",
+   "source": "CNBC",
+   "headline": "'The whole landscape changed': Gaming CEOs see new opportunities post-midterms",
+   "summary": "Midterm results opened new gambling opportunities in Texas and other states while raising scrutiny of prediction-market operators.",
+   "url": "https://www.cnbc.com/2026/11/06/midterm-gambling-prediction-markets.html"
+  },
+  {
+   "time_utc": "2026-11-06T13:12+00:00",
+   "source": "CNBC",
+   "headline": "Tesla to wind down Cybertruck production in Texas next year to ramp Cybercab, Musk says",
+   "summary": "The Cybertruck and its polarizing design gained a niche following, but it did not achieve mass-market sales and Tesla has issued several voluntary recalls.",
+   "url": "https://www.cnbc.com/2026/11/06/tesla-cybertruck-texas-musk.html"
+  },
+  {
+   "time_utc": "2026-11-06T12:00+00:00",
+   "source": "CNBC",
+   "headline": "Small retailers brace for 'huge hit' this holiday season as shipping costs spike",
+   "summary": "As shipping costs surge due to high fuel prices, smaller and medium-sized retailers struggle to keep up, and they face a difficult holiday season.",
+   "url": "https://www.cnbc.com/2026/11/06/small-business-holiday-shipping-costs.html"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5470.0,
+   "rows_total": 1345,
+   "ok": [
+    {
+     "ticker": "SLV",
+     "expiry": "2026-11-27",
+     "strike": 40.0,
+     "bid": 0.22,
+     "ask": 0.24,
+     "iv": 0.5022607938137136,
+     "ivhv": 1.17487904985664,
+     "z": 1.2175284542998552,
+     "p_otm": 0.8955653114165103,
+     "income": 22.0,
+     "margin": 422.0,
+     "spread": 0.09090909090909087,
+     "mark": "✅",
+     "spot": 46.92,
+     "t": 0.05816736428209031,
+     "right": "P",
+     "hv30": 0.4275,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 1.114000552027196,
+       "buyback": 0.7783731813316166,
+       "flat": 0.3788568753888848,
+       "loss": 55.83731813316166,
+       "x_credit": 3.538059915143712,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 1.8566675867119937,
+       "buyback": 0.9685763382104202,
+       "flat": 0.5189712612717656,
+       "loss": 74.85763382104203,
+       "x_credit": 4.402619719138274,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −28.5%",
+       "gap": 0.2854,
+       "sigmas": 10.597858584952059,
+       "buyback": 6.850066851570887,
+       "flat": 6.614144762489271,
+       "loss": 663.0066851570887,
+       "x_credit": 31.136667507140395,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      22,
+      66,
+      132
+     ],
+     "assign_1": 4000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-05T17:00+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Precious Metal Selloff: Remember The All-Weather Portfolio"
+      },
+      {
+       "time_utc": "2026-11-04T23:58+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Post-Midterm ETF Action"
+      },
+      {
+       "time_utc": "2026-11-04T07:47+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Precious Metals Royalty And Streaming Companies - September 2026 Report"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-27",
+     "strike": 79.0,
+     "bid": 0.1,
+     "ask": 0.11,
+     "iv": 0.11786605773497111,
+     "ivhv": 1.1377032599900687,
+     "z": 1.272528298080108,
+     "p_otm": 0.900061424078997,
+     "income": 10.0,
+     "margin": 1352.7999999999997,
+     "spread": 0.09999999999999995,
+     "mark": "✅",
+     "spot": 81.965,
+     "t": 0.05816745941146626,
+     "right": "P",
+     "hv30": 0.1036,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.596865212274386,
+       "buyback": 0.9327211815883132,
+       "flat": 0.6683040862254117,
+       "loss": 83.27211815883132,
+       "x_credit": 9.327211815883132,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.66144202045731,
+       "buyback": 1.8101509947183558,
+       "flat": 1.5685565628352265,
+       "loss": 171.01509947183558,
+       "x_credit": 18.10150994718356,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.9113479677737777,
+       "buyback": 0.602839620185609,
+       "flat": 0.3690660542772548,
+       "loss": 50.2839620185609,
+       "x_credit": 6.02839620185609,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "assign_1": 7900,
+     "pressure": [],
+     "fed_channel": "St. Louis Fed President Musalem Says Concerns Over Current Inflation Level Persist - bloomingbit",
+     "news": [
+      {
+       "time_utc": "2026-11-06T07:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Democrats Can't Afford To Kill AI"
+      },
+      {
+       "time_utc": "2026-11-06T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Strong Productivity Data Fails To Calm Markets As Oil And Political Risks To AI Buildout Dominate"
+      },
+      {
+       "time_utc": "2026-11-06T00:20+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Treasury Heat From Tech Flight - But For How Long?"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔报价差": 42,
+    "⚠链不够宽": 32,
+    "⛔IV不贵": 27,
+    "⛔基本面": 7,
+    "z不够": 6,
+    "⛔财报": 5,
+    "⛔报价过期": 4,
+    "⛔利率敏感": 2
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔报价过期",
+    "HYG": "⛔报价差",
+    "XLE": "⛔报价差",
+    "USO": "⛔报价差",
+    "SMCI": "⛔报价差",
+    "UAL": "⛔报价差",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔报价差",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔报价差",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔报价差",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔报价差",
+    "OXY": "⛔财报",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔报价差",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔报价过期",
+    "LYFT": "⛔报价过期",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔报价差",
+    "DKNG": "⛔基本面",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔IV不贵",
+    "KO": "⛔报价差",
+    "CMCSA": "⛔报价差",
+    "PEP": "⛔报价差",
+    "ARKK": "⛔报价差",
+    "JD": "⛔报价差",
+    "UPS": "⛔报价差",
+    "PDD": "⛔财报",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价差",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔报价差",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5470.0,
+   "rows_total": 1407,
+   "ok": [
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-30",
+     "strike": 86.0,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.13604544097444948,
+     "ivhv": 1.3131799321858058,
+     "z": 1.4043998264599082,
+     "p_otm": 0.9175003273299533,
+     "income": 11.0,
+     "margin": 1246.8000000000004,
+     "spread": 0.09090909090909087,
+     "mark": "✅",
+     "spot": 81.965,
+     "t": 0.06638663749365804,
+     "right": "C",
+     "hv30": 0.1036,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.596865212274386,
+       "buyback": 0.8867840712665895,
+       "flat": 0.565641144281674,
+       "loss": 77.67840712665895,
+       "x_credit": 8.061673375150814,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.66144202045731,
+       "buyback": 1.5956900320252885,
+       "flat": 1.2349024742995809,
+       "loss": 148.56900320252885,
+       "x_credit": 14.506273018411713,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.865379315651034,
+       "buyback": 0.6018959418936518,
+       "flat": 0.33112821561755723,
+       "loss": 49.18959418936518,
+       "x_credit": 5.471781289942289,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "assign_1": 8600,
+     "pressure": [],
+     "fed_channel": "St. Louis Fed President Musalem Says Concerns Over Current Inflation Level Persist - bloomingbit",
+     "news": [
+      {
+       "time_utc": "2026-11-06T07:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Democrats Can't Afford To Kill AI"
+      },
+      {
+       "time_utc": "2026-11-06T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Strong Productivity Data Fails To Calm Markets As Oil And Political Risks To AI Buildout Dominate"
+      },
+      {
+       "time_utc": "2026-11-06T00:20+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Treasury Heat From Tech Flight - But For How Long?"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔报价差": 41,
+    "⛔IV不贵": 37,
+    "⚠链不够宽": 19,
+    "z不够": 6,
+    "⛔财报": 5,
+    "⛔报价过期": 4,
+    "⛔利率敏感": 2
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔报价差",
+    "DAL": "⛔报价过期",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔IV不贵",
+    "SLV": "⛔IV不贵",
+    "USO": "⛔报价差",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔报价差",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔报价差",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔报价差",
+    "PFE": "⛔报价差",
+    "RIVN": "⛔报价差",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔财报",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔IV不贵",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "F": "⛔IV不贵",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔报价过期",
+    "LYFT": "⛔报价过期",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔IV不贵",
+    "DKNG": "⛔IV不贵",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔报价差",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔财报",
+    "MP": "⛔报价差",
+    "SLB": "⛔IV不贵",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-06_1531Z.md",
+  "report_sha256": "65e8bfaba8f0f06594fc682cd7278d9b91d9316510d599e72f01afb8197b40da",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天不开新仓：尾部灯 🔴 红灯（VIX 23.9、VVIX 118、期限结构 1.027 倒挂，三项共振）。下个可开仓日按规则是 11/11（11/09 "
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=False why_not=['尾部灯 🔴 红灯']｜首行：结论：今天不开新仓：尾部灯 🔴 红灯（VIX 23.9、VVIX 118、期限结构 1.027 倒挂，三项共振）。下个可"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-06T15:27:56+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-06T15:28:38.638535Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-06T15:30:08+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-06T15:31:41+00:00"
+     },
+     "quote_age_min": 3.4
+    }
+   }
+  ]
+ }
+}
