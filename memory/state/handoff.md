@@ -58,7 +58,7 @@
 ## 4. 待办
 
 1. **11/05 15:45Z 已排定的提醒**（trig_01NhjWbDsQdfWfs1EdsPyM2r）：盘中验证 60 只买卖报价差——改 `options_seed.json` 的 `_note` 推送触发 `options-liquidity.yml`，读 `options_liquidity_seed.json`；报价差 >10% 的用排名靠后且达标的替换，保持 60 只；同步 options-screen sectors；向用户汇报。
-0. **每日定时扫描（11/05 用户定）**：trig_01GTgKrEFkqcZfyHtiLsGaTh，`CRON_TZ=America/New_York 31 10 * * 1-5`（开盘后 1 小时，夏令时自动跟随），**绑定专用会话 session_01GpMt1vxpGD6pxsrhb5hEbN**（挂了仓库、能推送），跑完 PushNotification。⚠ 不要改成「每次新开会话」模式：11/05 首跑实测新会话不挂仓库、推送 403、拿不到 add_repo，整条流水线跑不动。改时间 / 休市表用 update_trigger。
+0. **每日定时扫描：已于 11/06 按用户要求删除**（原 trig_01GTgKrEFkqcZfyHtiLsGaTh，工作日 10:31 ET，绑定 session_01GpMt1vxpGD6pxsrhb5hEbN）。现在没有自动扫描，期权扫描改为用户手动喊。要恢复须用户明确要求；注意 11/05 实测「每次新开会话」模式不挂仓库、推送 403。
 1b. **新仓到期 20–45 天**（11/05 用户定，第 19 条；options_watch `dte` 窗口自动滚动）。待观察：平静日 z≥1.2 时报价差 ≤10% 能过几只；过的太少就请用户定第 7 条口径（÷bid 还是 ÷mid、挂中间价）。
 2. **新规则首个可开仓日 = 11/11**（11/05 = NFP 前一日、11/09 = CPI 前一日，均不新开）。开仓前跑 tail-risk 灯 + option_quote。
 3. 实盘每笔用 `scale_check.py open/close` 记账；满 20 簇复盘。
