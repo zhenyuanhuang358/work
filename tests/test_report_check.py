@@ -91,6 +91,16 @@ class Format(unittest.TestCase):
         self.assertFalse({"E1", "E2", "E3", "E4", "E5", "E6"} & ids(r), ids(r))
         os.unlink(p)
 
+    def test_c3_requires_each_scenario_price(self):
+        """11/06 首次实测：UBER 报告三情景未登记，但 predictions.md 里有一条 UBER 期权旧预测，C3 只查标的名就放行了。"""
+        p = synth("<p>熊市 $11 基准 $22 牛市 $33 目标价</p>", suffix="_Copilot_Report.html")
+        stem_path = os.path.join(os.path.dirname(p), "uber_" + os.path.basename(p).split("_", 1)[1])
+        os.rename(p, stem_path)
+        r = rc.run(stem_path)
+        c3 = [c for c in r["checks"] if c["id"] == "C3"][0]
+        self.assertFalse(c3["pass"], c3)  # 11/22/33 不在任何 UBER 预测行里
+        os.unlink(stem_path)
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")

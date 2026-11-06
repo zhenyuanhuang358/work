@@ -86,10 +86,14 @@ def run(path, kind=None, pdf=None):
     chk("C4", "WARN", "反馈链接（Critic D4：netlify 反馈页）", "spontaneous-youtiao-b9cde9.netlify.app" in s, "")
     target = re.search(r"目标价|Target Price|三情景|安全边际|PoP", t)
     if target:
-        pred = open(os.path.join(REPO, "memory/state/predictions.md"), encoding="utf-8").read()
+        pred = open(os.path.join(REPO, "memory/state/predictions.md"), encoding="utf-8").read().lower().splitlines()
         stem = os.path.basename(path).split("_")[0].lower()
-        chk("C3", "FAIL", "含目标价 / 三情景 → predictions.md 已登记（CLAUDE.md 铁律）",
-            stem in pred.lower(), f"报告前缀「{stem}」在 predictions.md 中{'出现' if stem in pred.lower() else '未出现'}")
+        # 11/06 首次实测发现：只查「标的名出现过」会被同标的的旧预测（UBER 期权那条）糊弄过去。
+        # 改为：报告里每个情景目标价，都要在 predictions.md 找到一行同时含标的名与该价。
+        tps = sorted({m.group(2) for m in re.finditer(r"(熊市|基准|牛市)\s*\$?\s*(\d+(?:\.\d+)?)", t)})
+        missing = [p_ for p_ in tps if not any(stem in l and re.search(rf"(?<![\d.]){re.escape(p_)}(?![\d])", l) for l in pred)]
+        chk("C3", "FAIL", "含目标价 / 三情景 → 每个情景价都已登记 predictions.md（CLAUDE.md 铁律）",
+            tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")
 
     if kind == "earner":
         secs = [int(x) for x in re.findall(r'data-sec="(\d+)"', s)]
