@@ -1,0 +1,7 @@
+{
+  "_note": "电话会原文抓取请求（scripts/fetch_transcript.py，Actions 跑）。改这里并推送即触发；产物在 transcripts/。",
+  "jobs": [
+    {"ticker": "UBER", "company": "Uber", "period": "Q3 2026",
+     "url": "https://www.fool.com/earnings/call-transcripts/2026/11/04/uber-uber-q3-2026-earnings-call-transcript/"}
+  ]
+}
