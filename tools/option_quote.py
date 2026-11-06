@@ -51,6 +51,20 @@ def implied_vol(px, s, k, t, right="P"):
 
 
 _HV_CACHE = {}
+
+
+def macro_events(path="memory/state/macro_calendar.json"):
+    """{日期: 事件名}：FOMC 决议日 + BLS 人工段（CPI / PPI / NFP）。文件缺失返回空（self_check C15 会报）。"""
+    try:
+        cal = json.load(open(path))
+    except (OSError, ValueError):
+        return {}
+    ev = {m["date"]: "FOMC" for m in cal.get("fomc", [])}
+    for name, ds in (cal.get("manual") or {}).items():
+        if not name.startswith("_"):
+            for d in ds:
+                ev.setdefault(d, name)
+    return ev
 NOW = None  # --asof / 回归测试固定时刻（11/06 改造：结果可复现）
 
 
@@ -147,7 +161,8 @@ def run(a, j, r):
     # 利率敏感（macro-events：HOOD / SOFI 持有期含 CPI / FOMC 只观察）与「谨慎」名单（只提示）——11/05 第三次重跑发现都靠手工
     try:
         rs = scr.get("rate_sensitive", {})
-        rate_hit = [f"{d} {n}" for d, n in rs.get("events", {}).items() if a.ticker.upper() in rs.get("tickers", [])
+        ev = macro_events()  # 统一日历 memory/state/macro_calendar.json（2026-11-06 起唯一来源）
+        rate_hit = [f"{d} {n}" for d, n in ev.items() if n in ("CPI", "FOMC") and a.ticker.upper() in rs.get("tickers", [])
                     and now.date().isoformat() <= d <= a.expiry]
         caution = scr.get("caution", {}).get(a.ticker.upper())
     except NameError:  # options-screen.json 读不到

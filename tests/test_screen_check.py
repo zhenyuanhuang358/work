@@ -90,6 +90,26 @@ class StageA(unittest.TestCase):
         self.assertEqual([r["cik"] for r in na], ["neg"])
 
 
+class MacroCalendar(unittest.TestCase):
+    def test_fomc_parser(self):
+        """美联储页面结构：年份面板 + month / date；决议日取会期第二天，* 表示含经济预测，跨月取后一个月。"""
+        import fetch_calendar as fc
+        html = ('<h4>2027 FOMC Meetings</h4><div class="fomc-meeting__month"><strong>January</strong></div>'
+                '<div class="fomc-meeting__date">26-27</div><div class="fomc-meeting__month"><strong>Apr/May</strong></div>'
+                '<div class="fomc-meeting__date">30-1*</div><h4>2026 FOMC Meetings</h4>'
+                '<div class="fomc-meeting__month"><strong>December</strong></div><div class="fomc-meeting__date">8-9*</div>')
+        self.assertEqual(fc.parse_fomc(html), [("2026-12-09", True), ("2027-01-27", False), ("2027-05-01", True)])
+
+    def test_option_quote_reads_unified_calendar(self):
+        """利率敏感拦截读 macro_calendar.json（options-screen 里不再有日期副本）。"""
+        import option_quote as oq
+        ev = oq.macro_events(os.path.join(REPO, "memory", "state", "macro_calendar.json"))
+        self.assertEqual(ev.get("2026-12-09"), "FOMC")
+        self.assertEqual(ev.get("2026-11-10"), "CPI")
+        screen = json.load(open(os.path.join(REPO, "memory", "state", "options-screen.json")))
+        self.assertNotIn("events", screen["rate_sensitive"])
+
+
 class Ses(unittest.TestCase):
     def test_flags_and_window(self):
         d = json.load(open(os.path.join(REPO, "ses_screen.json")))

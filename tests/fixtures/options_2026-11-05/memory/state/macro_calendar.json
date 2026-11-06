@@ -1,0 +1,245 @@
+{
+ "_note": "宏观事件日历唯一来源（2026-11-06）。fomc 段由 scripts/fetch_calendar.py 从美联储官网自动解析；manual 段（BLS 的 CPI / PPI / 非农）人工维护——BLS 网站拒绝自动访问。self_check C15 检查未来 45 天覆盖。macro-events.md 与 option_quote 都读这里。",
+ "manual": {
+  "CPI": [
+   "2026-11-10",
+   "2026-12-10"
+  ],
+  "PPI": [
+   "2026-11-13",
+   "2026-12-15"
+  ],
+  "NFP": [
+   "2026-11-06",
+   "2026-12-04"
+  ],
+  "_source": "macro-events.md 2026-10-16 起记录的 BLS 官方日程；11/06 非农经 FF 周历与 BLS API 发布日交叉验证"
+ },
+ "fomc": [
+  {
+   "date": "2021-01-27",
+   "sep": false
+  },
+  {
+   "date": "2021-03-17",
+   "sep": true
+  },
+  {
+   "date": "2021-04-28",
+   "sep": false
+  },
+  {
+   "date": "2021-06-16",
+   "sep": true
+  },
+  {
+   "date": "2021-07-28",
+   "sep": false
+  },
+  {
+   "date": "2021-09-22",
+   "sep": true
+  },
+  {
+   "date": "2021-11-03",
+   "sep": false
+  },
+  {
+   "date": "2021-12-15",
+   "sep": true
+  },
+  {
+   "date": "2022-01-26",
+   "sep": false
+  },
+  {
+   "date": "2022-03-16",
+   "sep": true
+  },
+  {
+   "date": "2022-05-04",
+   "sep": false
+  },
+  {
+   "date": "2022-06-15",
+   "sep": true
+  },
+  {
+   "date": "2022-07-27",
+   "sep": false
+  },
+  {
+   "date": "2022-09-21",
+   "sep": true
+  },
+  {
+   "date": "2022-11-02",
+   "sep": false
+  },
+  {
+   "date": "2022-12-14",
+   "sep": true
+  },
+  {
+   "date": "2023-03-22",
+   "sep": true
+  },
+  {
+   "date": "2023-05-03",
+   "sep": false
+  },
+  {
+   "date": "2023-06-14",
+   "sep": true
+  },
+  {
+   "date": "2023-07-26",
+   "sep": false
+  },
+  {
+   "date": "2023-09-20",
+   "sep": true
+  },
+  {
+   "date": "2023-12-13",
+   "sep": true
+  },
+  {
+   "date": "2024-01-31",
+   "sep": false
+  },
+  {
+   "date": "2024-03-20",
+   "sep": true
+  },
+  {
+   "date": "2024-05-01",
+   "sep": false
+  },
+  {
+   "date": "2024-06-12",
+   "sep": true
+  },
+  {
+   "date": "2024-07-31",
+   "sep": false
+  },
+  {
+   "date": "2024-09-18",
+   "sep": true
+  },
+  {
+   "date": "2024-11-07",
+   "sep": false
+  },
+  {
+   "date": "2024-12-18",
+   "sep": true
+  },
+  {
+   "date": "2025-01-29",
+   "sep": false
+  },
+  {
+   "date": "2025-03-19",
+   "sep": true
+  },
+  {
+   "date": "2025-05-07",
+   "sep": false
+  },
+  {
+   "date": "2025-06-18",
+   "sep": true
+  },
+  {
+   "date": "2025-07-30",
+   "sep": false
+  },
+  {
+   "date": "2025-08-22",
+   "sep": false
+  },
+  {
+   "date": "2025-09-17",
+   "sep": true
+  },
+  {
+   "date": "2025-10-29",
+   "sep": false
+  },
+  {
+   "date": "2025-12-10",
+   "sep": true
+  },
+  {
+   "date": "2026-01-28",
+   "sep": false
+  },
+  {
+   "date": "2026-03-18",
+   "sep": true
+  },
+  {
+   "date": "2026-04-29",
+   "sep": false
+  },
+  {
+   "date": "2026-06-17",
+   "sep": true
+  },
+  {
+   "date": "2026-07-29",
+   "sep": false
+  },
+  {
+   "date": "2026-09-16",
+   "sep": true
+  },
+  {
+   "date": "2026-10-28",
+   "sep": false
+  },
+  {
+   "date": "2026-12-09",
+   "sep": true
+  },
+  {
+   "date": "2027-01-27",
+   "sep": false
+  },
+  {
+   "date": "2027-03-17",
+   "sep": true
+  },
+  {
+   "date": "2027-04-28",
+   "sep": false
+  },
+  {
+   "date": "2027-06-09",
+   "sep": true
+  },
+  {
+   "date": "2027-07-28",
+   "sep": false
+  },
+  {
+   "date": "2027-09-15",
+   "sep": true
+  },
+  {
+   "date": "2027-10-27",
+   "sep": false
+  },
+  {
+   "date": "2027-12-08",
+   "sep": true
+  }
+ ],
+ "fomc_source": {
+  "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+  "fetched_at": "2026-11-06T18:28:37+00:00",
+  "error": null
+ }
+}

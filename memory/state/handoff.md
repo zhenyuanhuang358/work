@@ -35,7 +35,7 @@
 | 第三档（viral / risk-radar / polanyi / sop / expansion） | 不动（少用） | 真用到出问题再改 |
 | 第三方（guizang / kami / huashu / humanizer） | 不动（上游冲突） | — |
 
-**新数据源（全在 Actions 跑）**：`fetch_news.py`（Finnhub）· `fetch_fed.py`（FF 周历 + 理事会 RSS + Google News）· `fetch_macro.py`（BLS 官方 API：非农 / CPI / PPI 实际值，FRED 兜底）· `fetch_transcript.py`（Motley Fool 电话会原文，`transcript_request.json`）· `fetch_pages.py`（任意网页原文，`pages_request.json`）· `fetch_voices.py`（政要与知名投资人发言标题）。
+**新数据源（全在 Actions 跑）**：`fetch_news.py`（Finnhub）· `fetch_fed.py`（FF 周历 + 理事会 RSS + Google News）· `fetch_macro.py`（BLS 官方 API：非农 / CPI / PPI 实际值，FRED 兜底）· `fetch_transcript.py`（Motley Fool 电话会原文，`transcript_request.json`）· `fetch_pages.py`（任意网页原文，`pages_request.json`）· `fetch_voices.py`（政要与知名投资人发言标题）· `fetch_calendar.py`（FOMC 日历 → **`memory/state/macro_calendar.json` 宏观日历唯一来源**，BLS 的 CPI / PPI / 非农在 manual 段人工维护，C15 查 45 天覆盖；12 月中旬前要补 2027 年 BLS 日期）。
 `self_check` 新增 C11（反馈台账）· C12（扫描报告已核对）· C13（交付报告已 report_check）· C14（筛选器不变量）。
 
 ## 3. 已做（勿重做）

@@ -124,11 +124,6 @@
    "HOOD",
    "SOFI"
   ],
-  "events": {
-   "2026-11-10": "CPI",
-   "2026-12-09": "FOMC",
-   "2026-12-10": "CPI"
-  },
   "_note": "macro-events.md：利率敏感标的持有期含 CPI / FOMC 一律只观察（option_quote 标 ⛔利率敏感）。日期随 macro-events.md 日历更新。"
  }
 }

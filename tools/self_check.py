@@ -505,6 +505,29 @@ def check_screens():
             flag("P1", f, f"{c['id']} {c['check']}｜{c['evidence']}")
 
 
+# ── C15 · 宏观日历覆盖（2026-11-06：三份手抄副本合一后，过期不能再静默）──────────────────
+def check_macro_calendar():
+    import datetime as dt
+    say("\n[C15] 宏观日历 memory/state/macro_calendar.json")
+    p = os.path.join(REPO, "memory/state/macro_calendar.json")
+    if not os.path.exists(p):
+        flag("P1", "macro_calendar.json", "统一宏观日历不存在——option_quote 的利率敏感拦截与 scan 事件闸门会失效")
+        return
+    cal = json.load(open(p, encoding="utf-8"))
+    today = dt.date.today()
+    horizon = (today + dt.timedelta(days=45)).isoformat()
+    for name in ("CPI", "NFP", "PPI"):
+        ds = [d for d in (cal.get("manual") or {}).get(name, []) if today.isoformat() <= d <= horizon]
+        say(f"  {name} 未来 45 天：{ds}")
+        if not ds:
+            flag("P2", "macro_calendar.json", f"{name} 未来 45 天无日期——从 BLS 发布日程补到 manual 段（持有期 20–45 天的事件判断依赖它）")
+    fut = [m["date"] for m in cal.get("fomc", []) if m["date"] >= today.isoformat()]
+    src = cal.get("fomc_source") or {}
+    say(f"  FOMC 未来 {len(fut)} 次｜来源 {src.get('fetched_at')}｜错误 {src.get('error')}")
+    if len(fut) < 2 or src.get("error"):
+        flag("P2", "macro_calendar.json", f"FOMC 日历不足或抓取失败：{src.get('error')}")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -523,6 +546,7 @@ def main():
     check_scan_reports()
     check_report_records()
     check_screens()
+    check_macro_calendar()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

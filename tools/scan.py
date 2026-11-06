@@ -121,6 +121,9 @@ def cmd_run(a):
     today = now.astimezone(timezone(timedelta(hours=-5))).date()
     ntd = next_trading_day(today)
     events = [e for e in fed.get("usd_high", []) if EVENT_RE.search(e["title"])]
+    cal_ev = oq.macro_events()  # 统一日历补 FF 周历只看两周的盲区（持有期 20–45 天）
+    events += [{"time": d + "T08:30:00-05:00", "title": f"{n}（macro_calendar）"} for d, n in cal_ev.items()
+               if not any(e["time"][:10] == d for e in events)]
     eve = [e for e in events if e["time"][:10] == ntd.isoformat()]
     can_open = light["light"] < 2 and not eve and fresh["ok"]
     why_not = ([f"尾部灯 {light['light_name']}"] if light["light"] >= 2 else []) + \
