@@ -1,8 +1,8 @@
 {
- "updated_at": "2026-11-05T17:41:32+00:00",
+ "updated_at": "2026-11-06T05:09:26+00:00",
  "window": [
-  "2026-11-05",
-  "2027-01-04"
+  "2026-11-06",
+  "2027-01-05"
  ],
  "tickers": {
   "INTC": {
@@ -207,12 +207,7 @@
   },
   "LYFT": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-05",
-     "hour": "amc"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "CCL": {
@@ -247,12 +242,7 @@
   },
   "DKNG": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-05",
-     "hour": "amc"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "VZ": {
@@ -317,12 +307,7 @@
   },
   "MP": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-05",
-     "hour": "amc"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "SLB": {
@@ -337,12 +322,7 @@
   },
   "DVN": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-05",
-     "hour": "amc"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "NCLH": {
