@@ -1,7 +1,14 @@
 {
- "trigger": "scan-2026-11-06T15:27:34+00:00",
- "updated_at": "2026-11-06T15:30:08+00:00",
+ "trigger": "scan-2026-11-06T15:45:31Z-macrotest",
+ "updated_at": "2026-11-06T15:47:49+00:00",
  "market": [
+  {
+   "time_utc": "2026-11-06T15:28+00:00",
+   "source": "CNBC",
+   "headline": "Watch live: Jim Cramer shares his next investing moves for this tough market",
+   "summary": "At the Investing Club's 4th annual meeting, Cramer also reveals his outlook for 2027 and answers questions from the live audience and members at home.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/06/watch-jim-cramer-live.html"
+  },
   {
    "time_utc": "2026-11-06T14:02+00:00",
    "source": "CNBC",
