@@ -53,7 +53,8 @@ description: |
 2. 推荐合约全部过工具：单腿、价外、保证金 ×1.15 ≤ 可取现金、第 1–19 条无 ⛔（option_quote；verify V5）
 3. 不出现自己估的 IV / 权利金：数字只能来自链或平台（verify V5、V6）
 4. 候选全量登记，含否决（candidate_ledger；self_check C9）
-5. 报告首行是结论且与闸门一致；每个合约带 📰、1/3/6 张止损亏损、跳空压力；有「今日消息面」「平台核实」（verify V1–V4、V7–V9）
+5. 报告首行是结论且与闸门一致；每个合约写明「卖出 X K put/call」并带 📰、1/3/6 张止损亏损、跳空压力；有「今日消息面」「平台核实」（verify V1–V4、V7–V9、V11）
+6. 当天公布的非农 / CPI / PPI 等，报告写出实际值与预期（macro_actuals；verify V12）
 
 **最不能接受**（历史上反复出现，每条都已有工具或测试挡住，见 `memory/state/feedback.jsonl`）：
 读了过时价格（main 分支）｜财报日记错（INTC）｜未核实财报就开仓（AMD）｜估算的 IV 当实测｜张数记错（5 记成 6）｜
@@ -81,7 +82,7 @@ description: |
 
 **数据产物**（GitHub Actions 写，读工作分支 `claude/install-claude-hud-d51E6`，不读 main）：
 `options_chain.json`（CBOE 延迟报价 + hv30 + 一年单日最大涨跌）｜`stock_prices.json`（价格 + VIX 族）｜`news.json`（Finnhub）｜
-`fed_speak.json`（讲话日程 + 理事原文 + 报道标题 + 高影响数据）｜`earnings_calendar.json`｜`options_iv_history.jsonl`
+`fed_speak.json`（讲话日程 + 理事原文 + 报道标题 + 高影响数据预期）｜`macro_actuals.json`（BLS 官方：非农 / 失业率 / 时薪 / CPI / PPI 实际值，对照预期）｜`earnings_calendar.json`｜`options_iv_history.jsonl`
 
 ---
 

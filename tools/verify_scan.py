@@ -76,6 +76,14 @@ def run(report_path, scan_path=None):
         if not re.search(rf"卖出\s*{k[0]}\s*{k[2]:g}\s*{want}", near):
             no_act.append(f"{k[0]} {k[2]:g}{k[3]}（应写「卖出 {k[0]} {k[2]:g} {want}」）")
     check("V7", "每个合约带 📰 行", not no_news, no_news)
+    # V12（11/06 用户：非农抓不到不能算了）：当天公布的高影响数据，报告必须写出实际值
+    miss_macro = []
+    for m in s.get("macro_today", []):
+        num = f"{m['actual']:g}"
+        alt = {f"{m['actual'] / 10:g}", f"{m['actual'] * 1000:,.0f}", f"{m['actual']:.1f}", f"{round(m['actual'], 1):g}"}
+        if m["name"] not in text or not any(x in text for x in {num} | alt):
+            miss_macro.append(f"{m['name']} 实际 {num}{m['unit']}")
+    check("V12", "当天公布的宏观数据写出了实际值", not miss_macro, miss_macro)
     check("V11", "每个合约写明买卖方向与 put / call（不能只写代码）", not no_act, no_act)
     check("V8", "每个合约带跳空压力", not no_gap, no_gap)
     check("V9", "每个合约带 1/3/6 张止损亏损", not no_stop, no_stop)

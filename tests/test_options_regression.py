@@ -174,6 +174,19 @@ class ScanAndVerify(unittest.TestCase):
         self.assertTrue(call_blocks and all("接货" not in b for b in call_blocks))
         self.assertIn("第 16 条", draft)
 
+    def test_verify_requires_macro_actual_on_release_day(self):
+        """11/06：非农当天报告只写「数字未核实」。当天有 macro_today 时，报告不写实际值 → V12 不通过。"""
+        sp, s = self.scan()
+        s["macro_today"] = [{"key": "payrolls", "name": "非农就业", "month": "2026-10", "actual": 165.0, "unit": "千人",
+                             "forecast": "65K", "surprise": 100.0}]
+        json.dump(s, open(sp, "w"), ensure_ascii=False)
+        base = "结论：今天不开新仓。\n\n## 今日消息面\n- 非农{}\n\n## 请在平台核实\n- 可取现金\n"
+        _, r = self.verify(sp, base.format("偏强，具体数字未核实"))
+        self.assertFalse(r["V12"])
+        s = json.load(open(sp))
+        _, r = self.verify(sp, base.format("就业 +165 千人（预期 65K）"))
+        self.assertTrue(r["V12"])
+
     def test_verify_good_report_passes(self):
         sp, s = self.scan()
         x = s["sides"]["P"]["ok"][0]

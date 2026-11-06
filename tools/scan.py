@@ -25,7 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 BRANCH = "claude/install-claude-hud-d51E6"
-ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json"]
+ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
 PRESSURE_RE = re.compile(r"offering|secondary|dilut|insider sell|stake sale|sells? .*stake|cuts? (?:guidance|outlook|forecast)|"
@@ -100,6 +100,7 @@ def cmd_run(a):
     news = load("news.json") if os.path.exists("news.json") else {}
     screen = load("memory/state/options-screen.json") if os.path.exists("memory/state/options-screen.json") else {}
     fed = load("fed_speak.json") if os.path.exists("fed_speak.json") else {}
+    macro = load("macro_actuals.json") if os.path.exists("macro_actuals.json") else {}
     trig = open("price_fetch_trigger.txt").read().strip() if os.path.exists("price_fetch_trigger.txt") else None
 
     # 1 新鲜度：四份产物是不是同一次触发、报价多老
@@ -146,10 +147,19 @@ def cmd_run(a):
         sides[right] = res
 
     scale = sh("python3", os.path.join(HERE, "scale_check.py"), "report", check=False).strip().splitlines()[:1]
+    # 当天（美东）已公布的高影响数据：实际值必须进报告（11/06 用户：「非农这么重要，怎么可以抓不到就算了」）
+    names = {"payrolls": "非农就业", "unrate": "失业率", "ahe": "平均时薪", "cpi": "CPI", "core_cpi": "核心 CPI", "ppi": "PPI"}
+    macro_today = [{"key": k, "name": names[k], **v} for k, v in macro.get("indicators", {}).items()
+                   if (v.get("release_et") or "")[:10] == today.isoformat()]
+    released_today = [e for e in events if e["time"][:10] == today.isoformat()]
+    if released_today and not macro_today:
+        why_not.append("今日有高影响数据公布但 macro_actuals.json 没拿到实际值——先查 errors，补齐再出报告")
+        can_open = False
     sid = now.strftime("%Y-%m-%d_%H%MZ")
     out = {"id": sid, "asof": now.isoformat(timespec="seconds"), "bp": a.bp, "freshness": fresh, "light": light,
            "events_next": [e for e in events if today.isoformat() <= e["time"][:10] <= (today + timedelta(days=7)).isoformat()],
-           "event_eve": eve, "can_open": can_open, "why_not": why_not, "scale": scale,
+           "event_eve": eve, "macro_today": macro_today, "macro_source": macro.get("source"),
+           "macro_errors": macro.get("errors"), "can_open": can_open, "why_not": why_not, "scale": scale,
            "fed": {"schedule": fed.get("schedule", []), "headlines": fed.get("headlines", [])[:8], "errors": fed.get("errors")},
            "market_news": news.get("market", [])[:8], "sides": sides, "verification": None}
     od = a.out or SCANS
@@ -168,6 +178,10 @@ def draft(s, gs):
     L = []
     concl = "今天可以开新仓（见候选）" if s["can_open"] else "今天不开新仓：" + "；".join(s["why_not"])
     L += [f"结论：{concl}", "", "## 今日消息面"]
+    for m in s.get("macro_today", []):
+        L.append(f"- 【{m['name']}】{m['month']} 实际 {m['actual']:g}{m['unit']}，预期 {m.get('forecast') or '—'}"
+                 + (f"，差 {m['surprise']:+g}" if m.get("surprise") is not None else "")
+                 + f"（{s.get('macro_source')}）→ 【待判断：对利率 / 板块的含义】")
     seen = set()
     for h in [h for h in s["fed"]["headlines"] if not (h["headline"] in seen or seen.add(h["headline"]))][:4]:  # 同一篇多人命中只列一次
         L.append(f"- {h['time_utc']} · {h['source']} · {h['headline']} → 【待判断：鹰/鸽、影响板块】")
