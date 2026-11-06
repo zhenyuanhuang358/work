@@ -1,0 +1,11 @@
+{
+ "_note": "宏观事件日历唯一来源（2026-11-06）。fomc 段由 scripts/fetch_calendar.py 从美联储官网自动解析；manual 段（BLS 的 CPI / PPI / 非农）人工维护——BLS 网站拒绝自动访问。self_check C15 检查未来 45 天覆盖。macro-events.md 与 option_quote 都读这里。",
+ "manual": {
+  "CPI": ["2026-11-10", "2026-12-10"],
+  "PPI": ["2026-11-13", "2026-12-15"],
+  "NFP": ["2026-11-06", "2026-12-04"],
+  "_source": "macro-events.md 2026-10-16 起记录的 BLS 官方日程；11/06 非农经 FF 周历与 BLS API 发布日交叉验证"
+ },
+ "fomc": [{"date": "2026-12-09", "sep": true}],
+ "fomc_source": null
+}
