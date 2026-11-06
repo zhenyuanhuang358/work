@@ -178,7 +178,7 @@ class ScanAndVerify(unittest.TestCase):
         sp, s = self.scan()
         x = s["sides"]["P"]["ok"][0]
         good = (f"结论：今天不开新仓，红灯且明日非农。\n\n## 今日消息面\n- Hammack、Barkin 主张加息 → 利率敏感板块不利\n\n"
-                f"## 候选\n- TLT {x['expiry']} {x['strike']:g}P｜收入 ${x['income']:.0f}/张\n  止损亏损 1/3/6 张：…\n"
+                f"## 候选\n- 卖出 TLT {x['strike']:g} put（看跌）\n  代码 TLT {x['expiry']} {x['strike']:g}P｜收入 ${x['income']:.0f}/张\n  止损亏损 1/3/6 张：…\n"
                 f"  跳空：…\n  📰 鹰派讲话 → 不利\n\n## 请在平台核实\n- 可取现金\n")
         code, r = self.verify(sp, good)
         self.assertEqual(code, 0, r)
@@ -192,7 +192,7 @@ class ScanAndVerify(unittest.TestCase):
                f"- HOOD 2026-11-27 55P｜收入 $49/张\n\n## 请在平台核实\n")
         code, r = self.verify(sp, bad)
         self.assertEqual(code, 1)
-        for vid in ("V2", "V4", "V5", "V6", "V7", "V9"):
+        for vid in ("V2", "V4", "V5", "V6", "V7", "V9", "V11"):
             self.assertFalse(r[vid], vid)
 
 

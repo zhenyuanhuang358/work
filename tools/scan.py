@@ -176,7 +176,12 @@ def draft(s, gs):
     L += ["", "## 候选" + ("" if s["can_open"] else "（今日不开，供下个可开仓日参考）")]
     for r_, res in s["sides"].items():
         for x in res["ok"]:
-            L.append(f"- {x['ticker']} {x['expiry']} {x['strike']:g}{r_}｜收入 ${x['income']:.0f}/张｜保证金 ${x['margin']:.0f}"
+            # 11/06 用户反馈：「79P」看不出买卖与看涨看跌 → 每行先写动作与亏损方向，代码放后面
+            act = (f"卖出 {x['ticker']} {x['strike']:g} put（看跌），{x['expiry'][5:].replace('-', '/')} 到期：{x['ticker']} 跌破 {x['strike']:g} 才亏"
+                   if r_ == "P" else
+                   f"卖出 {x['ticker']} {x['strike']:g} call（看涨），{x['expiry'][5:].replace('-', '/')} 到期：{x['ticker']} 涨破 {x['strike']:g} 才亏")
+            L.append(f"- **{act}**（现价 {x['spot']:.2f}）")
+            L.append(f"  代码 {x['ticker']} {x['expiry']} {x['strike']:g}{r_}｜收入 ${x['income']:.0f}/张｜保证金 ${x['margin']:.0f}"
                      f"｜z {x['z']:.2f}｜报价差 {x['spread']:.0%}{'｜' + x['mark'][1:] if len(x['mark']) > 1 else ''}")
             L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}"
                      + (f"｜接货 ${x['assign_1']:,}/张（只提示）" if r_ == "P" else f"｜被行权需按 ${x['strike']:g} 交付股票（未持股即卖空，只提示）"))

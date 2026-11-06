@@ -718,7 +718,7 @@
  },
  "verification": {
   "report": "2026-11-05_1745Z.md",
-  "report_sha256": "b91682241d812f65b392d2b0808b98ab017070622fe56e83ff4419d5ba024143",
+  "report_sha256": "cf26e9e57732138d4040b3d1b36ca25d1034eb80df36806fdf3f879673bd58c3",
   "pass": true,
   "checks": [
    {
@@ -760,6 +760,12 @@
    {
     "id": "V7",
     "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
     "pass": true,
     "evidence": []
    },

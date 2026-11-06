@@ -66,7 +66,17 @@ def run(report_path, scan_path=None):
         if "1/3/6" not in block and "止损亏损" not in block:
             no_stop.append(f"{k[0]} {k[2]:g}{k[3]}")
     check("V6", "合约收入与底稿一致（±$1）", not bad_num, bad_num)
+    # V11（11/06 用户反馈「看不出是卖 put 还是买 put」）：每个合约附近必须写明「卖出 … put / call」，且与底稿方向一致
+    no_act = []
+    for i, k in mentioned:
+        if k not in ok_rows:
+            continue
+        near = "\n".join(lines[max(0, i - 1):i + 1])
+        want = "put" if k[3] == "P" else "call"
+        if not re.search(rf"卖出\s*{k[0]}\s*{k[2]:g}\s*{want}", near):
+            no_act.append(f"{k[0]} {k[2]:g}{k[3]}（应写「卖出 {k[0]} {k[2]:g} {want}」）")
     check("V7", "每个合约带 📰 行", not no_news, no_news)
+    check("V11", "每个合约写明买卖方向与 put / call（不能只写代码）", not no_act, no_act)
     check("V8", "每个合约带跳空压力", not no_gap, no_gap)
     check("V9", "每个合约带 1/3/6 张止损亏损", not no_stop, no_stop)
     f = s["freshness"]
