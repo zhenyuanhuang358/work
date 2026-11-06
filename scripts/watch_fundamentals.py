@@ -81,9 +81,9 @@ def main():
         if not p:
             return None
         mcap = p * r["shares"]
-        return {"ev_ebitda": (mcap + r["net_debt"]) / r["ebitda"], "fcf_yield": r["fcf"] / mcap,
+        return {"ev_ebitda": (mcap + r["net_debt"]) / r["ebitda"], "fcf_yield_mcap": r["fcf"] / mcap,
                 "pb": mcap / r["equity"]}[key]
-    base = {k: [mk_val(r, k) for r in full] for k in ("ev_ebitda", "fcf_yield", "pb")}
+    base = {k: [mk_val(r, k) for r in full] for k in ("ev_ebitda", "fcf_yield_mcap", "pb")}
     base["sbc_ratio"] = [r["sbc_ratio"] for r in full]
     base["net_debt_ebitda"] = [r["net_debt_ebitda"] for r in full]
 
@@ -123,7 +123,8 @@ def main():
                 "shares_source": shares_src.get(t, "期末股本"),
                 "price": p,
                 "ev_ebitda": (mcap + r["net_debt"]) / r["ebitda"] if mcap else None,
-                "fcf_yield": r["fcf"] / mcap if mcap else None,
+                # 股东口径 FCF ÷ 市值；与 burry_screener 的 fcf_yield（FCF ÷ EV）不是一回事，2026-11-06 改名消歧义
+                "fcf_yield_mcap": r["fcf"] / mcap if mcap else None,
                 "pb": mcap / r["equity"] if mcap else None,
             })
             rec["pct"] = {k: bs.rank_pct(base[k], rec.get(k)) for k in base}
@@ -132,7 +133,7 @@ def main():
         json.dump(out, f, ensure_ascii=False, indent=1)
     for t, r in out["tickers"].items():
         print(t, r.get("status"), {k: (round(v, 3) if isinstance(v, float) else v)
-                                   for k, v in r.items() if k in ("ev_ebitda", "fcf_yield", "roe_approx", "share_change", "rev_growth")})
+                                   for k, v in r.items() if k in ("ev_ebitda", "fcf_yield_mcap", "roe_approx", "share_change", "rev_growth")})
 
 
 if __name__ == "__main__":
