@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-06T16:47:11Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-06T16:56:17Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-06 16:47 UTC
+自检器 · 2026-11-06 16:56 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -91,7 +91,7 @@
   运行记录：10 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  30 条｜未关闭 3｜已修有测试 22
+  31 条｜未关闭 3｜已修有测试 23
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 4 份
