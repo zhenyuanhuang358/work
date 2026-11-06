@@ -35,12 +35,14 @@ jobs:
         run: python3 scripts/fetch_fed.py
       - name: Fetch US macro actuals (BLS API, FRED fallback)
         run: python3 scripts/fetch_macro.py
+      - name: Fetch policymaker & investor remarks (Google News RSS)
+        run: python3 scripts/fetch_voices.py
       - name: Commit options_chain.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # 顺序 add → commit → pull --rebase → push，理由见 fetch-prices.yml（2026-09-18）
-          git add options_chain.json earnings_calendar.json options_iv_history.jsonl news.json fed_speak.json macro_actuals.json
+          git add options_chain.json earnings_calendar.json options_iv_history.jsonl news.json fed_speak.json macro_actuals.json voices.json
           git diff --cached --quiet && echo "nothing to commit" || \
             git commit -m "chore: refresh options chain $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
           # ⚠ 2026-10-30：fetch-prices 与 fetch-options 被同一次推送同时触发，先推的那个让另一个的 push 被拒
