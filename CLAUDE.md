@@ -33,7 +33,8 @@
 
 # Earnings Copilot 报告模板标准
 
-**模板规范内嵌于本节**（14节顺序 + 视觉规范），无独立模板文件；参考实现见 `reports/00538_Copilot_Report.html` / `reports/avgo_Copilot_Report.html`。
+**模板规范内嵌于本节**（14节顺序 + 视觉规范），无独立模板文件；**参考实现：`reports/uber_Copilot_Report.html`**（2026-11-06 用户认可的新样例：14 节编号、来源索引、电话会原话、真实分析师问答、Critic 五轮后 PASS；冻结副本与生成脚本在 `tests/fixtures/reports/`）。
+旧样例 `00538` / `avgo` 早于节编号与来源索引规则（report_check 基线 E1 / S1 不过），只作视觉风格参考。
 
 每次生成财报分析 HTML 报告，必须严格遵守以下规范：
 

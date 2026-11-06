@@ -128,6 +128,12 @@ class Format(unittest.TestCase):
         old = "Dara Khosrowshahi -- Chief Executive Officer\nThanks everyone.\nJohn Doe -- Analyst\nA question."
         self.assertEqual([t["speaker"].split("（")[0] for t in ft.speakers(old)], ["Dara Khosrowshahi", "John Doe"])
 
+    def test_uber_reference_sample_full_pass(self):
+        """用户 11/06 认可的 Earner 新样例：E1–E8 全过、无 WARN（14 节、来源索引、原话逐字出自原文、三情景已登记）。"""
+        r = rc.run(os.path.join(FX, "uber_Copilot_Report.html"), pdf=os.path.join(REPO, "reports", "uber_Copilot_Report.pdf"))
+        bad = [c["id"] for c in r["checks"] if not c["pass"] and c["id"] != "C2"]  # C2 依赖本地 PDF（被 .gitignore）
+        self.assertEqual(bad, [], r["checks"])
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")
@@ -138,7 +144,7 @@ class Format(unittest.TestCase):
 
     def test_good_samples_pass(self):
         """好样例：11/06 基线中无 FAIL 的两份。规则改了导致它们失败，要么规则错，要么写进 feedback 说明。"""
-        for f in ("haichang_it_Research_Report.html", "greentea_ai_spend_survey_2026.html"):
+        for f in ("haichang_it_Research_Report.html", "greentea_ai_spend_survey_2026.html", "uber_Copilot_Report.html"):
             self.assertTrue(rc.run(os.path.join(FX, f))["pass"], f)
 
 
