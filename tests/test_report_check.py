@@ -101,6 +101,33 @@ class Format(unittest.TestCase):
         self.assertFalse(c3["pass"], c3)  # 11/22/33 不在任何 UBER 预测行里
         os.unlink(stem_path)
 
+    def test_e7_e8_transcript_quotes(self):
+        """11/06 用户：「电话会原话一定要拿到」。美股无引语 → E7；引语被改写 → E8（对照 transcripts/ 原文逐字核对）。"""
+        secs = "".join(f'<section data-sec="{i}"></section>' for i in range(1, 15))
+        no_q = synth(secs + "<p>熊市 基准 牛市</p>", suffix="_Copilot_Report.html")
+        r = rc.run(no_q)
+        self.assertIn("E7", ids(r))
+        os.unlink(no_q)
+        real = "We are very optimistic about the trends as we see them in October and going into Q4."
+        for quote, ok in ((real, True), (real.replace("very optimistic", "extremely confident"), False)):
+            body = secs + f'<div class="quote">“{quote}”</div><div class="quote">“{quote}”</div>' \
+                   '<a href="https://www.fool.com/earnings/call-transcripts/x/">t</a>'
+            p = synth(body, suffix="_Copilot_Report.html")
+            up = os.path.join(os.path.dirname(p), "uber_" + os.path.basename(p))
+            os.rename(p, up)
+            e8 = [c for c in rc.run(up)["checks"] if c["id"] == "E8"][0]
+            self.assertEqual(e8["pass"], ok, e8)
+            os.unlink(up)
+
+    def test_transcript_speaker_parsing_both_formats(self):
+        """fetch_transcript：2026 版 Motley Fool 为「Name: 发言」同段（UBER 实测），旧版为「Name -- Title」单独成段。"""
+        sys.path.insert(0, os.path.join(REPO, "scripts"))
+        import fetch_transcript as ft
+        new = open(os.path.join(REPO, "tests", "fixtures", "transcripts", "uber_excerpt.txt")).read()
+        self.assertIn("Operator", {t["speaker"] for t in ft.speakers(new)})
+        old = "Dara Khosrowshahi -- Chief Executive Officer\nThanks everyone.\nJohn Doe -- Analyst\nA question."
+        self.assertEqual([t["speaker"].split("（")[0] for t in ft.speakers(old)], ["Dara Khosrowshahi", "John Doe"])
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")

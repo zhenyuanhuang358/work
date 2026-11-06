@@ -106,6 +106,23 @@ def run(path, kind=None, pdf=None):
         miss = [f for f in EARNER_FONTS if f not in s] + [c for c in EARNER_COLORS if c.lower() not in s.lower()]
         chk("E5", "FAIL", "字体与配色符合视觉规范", not miss, f"缺 {miss}")
         chk("E6", "FAIL", "有 Verdict 裁决框", re.search(r"verdict", s, re.I), "")
+        # E7（11/06 用户：「电话会原话一定要拿到」）：美股报告必须引用电话会原话（class="quote" ≥ 2）且来源索引有原文链接；
+        # 港股 / A 股常无电话会（文件名前缀为数字），不强制
+        stem_ = os.path.basename(path).split("_")[0]
+        if not stem_.isdigit():
+            nq = len(re.findall(r'class="quote"', s))
+            has_tr = bool(re.search(r"https?://[^\s\"'<>]*transcript", s, re.I))
+            # E8：每段引语必须在 transcripts/<stem>_*.txt 原文里逐字找到（防编造 / 防改写后仍打引号）
+            import glob as _g
+            norm = lambda x: re.sub(r"\s+", " ", x.replace("’", "'").replace("‘", "'")).strip().lower()  # noqa: E731
+            src_txt = " ".join(norm(open(f, encoding="utf-8").read()) for f in _g.glob(os.path.join(REPO, "transcripts", f"{stem_.lower()}_*.txt")))
+            qs = [H.unescape(q) for q in re.findall(r'class="quote">\s*[“"]([^”"<]{10,400})[”"]', s)]
+            bad_q = [q[:50] for q in qs if not src_txt or norm(q) not in src_txt]
+            if qs:
+                chk("E8", "FAIL", "引语逐字出自电话会原文（transcripts/）", not bad_q,
+                    f"{len(qs)} 段引语，原文 {'已找到' if src_txt else '缺失'}；对不上：{bad_q}")
+            chk("E7", "FAIL", "美股：引用电话会原话（class=\"quote\" ≥ 2）且来源索引有原文链接（scripts/fetch_transcript.py）",
+                nq >= 2 and has_tr, f"原话 {nq} 段，原文链接 {'有' if has_tr else '无'}")
     else:
         notes = re.search(r"分析师附注|Analyst'?s Note", t)
         chk("R1", "FAIL", "末尾有「分析师附注」板块", notes and notes.start() > len(t) * 0.5,

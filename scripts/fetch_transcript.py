@@ -62,11 +62,13 @@ def speakers(text):
     """Motley Fool 格式：说话人单独成段「Name -- Title」或「Name: 」；返回 [(说话人, 发言)]。"""
     out, cur, buf = [], None, []
     for line in text.splitlines():
+        # 两种格式：「Name -- Title」单独成段（旧版）；「Name: 发言」同段（2026 版，11/06 UBER 实测）
         m = re.match(r"^([A-Z][A-Za-z.'\- ]{2,40}) -- (.{2,80})$", line.strip())
-        if m:
+        m2 = re.match(r"^([A-Z][A-Za-z.'\-]+(?: [A-Z][A-Za-z.'\-]+){0,3}): (.+)$", line.strip())
+        if m or m2:
             if cur and buf:
                 out.append({"speaker": cur, "text": " ".join(buf)})
-            cur, buf = f"{m.group(1)}（{m.group(2)}）", []
+            cur, buf = (f"{m.group(1)}（{m.group(2)}）", []) if m else (m2.group(1), [m2.group(2)])
         elif cur:
             buf.append(line.strip())
     if cur and buf:
@@ -98,7 +100,10 @@ def main():
         base = f"transcripts/{t.lower()}_{period.lower().replace(' ', '')}"
         if text:
             out["chars"] = len(text)
-            out["speakers"] = [s["speaker"] for s in speakers(text)][:40]
+            sp = speakers(text)
+            out["speakers"] = sorted({s["speaker"] for s in sp})
+            out["turns"] = len(sp)
+            json.dump(sp, open(base + ".turns.json", "w"), ensure_ascii=False, indent=1)
             open(base + ".txt", "w").write(text)
         json.dump(out, open(base + ".json", "w"), ensure_ascii=False, indent=1)
         print(t, period, out["source"], out["chars"], "字符", out["errors"])

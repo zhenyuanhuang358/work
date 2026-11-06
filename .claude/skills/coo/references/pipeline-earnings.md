@@ -9,6 +9,7 @@
 | # | 步骤 | 做什么 | 交接 |
 |---|---|---|---|
 | 1 | 继承 | `grep -n -A30 "<ticker 或公司名>" memory/state/research-ledger.md`；predictions.md 里该标的还有没有待验项 | 上次结论；**上次的预测这次财报能不能记分**——能就先记分再分析 |
+| 1b | 电话会原文 | 美股必做：改 `transcript_request.json`（ticker / company / period，知道 Motley Fool 链接就填 url）并推送 → Actions 跑 `scripts/fetch_transcript.py` → 读 `transcripts/<ticker>_<period>.txt` 与 `.turns.json`（按说话人分段）。**拿不到不许写语气评分**，先查 errors 换源（IR PDF 填 pdf_url）。2026-11-06 用户：「电话会原话一定要拿到」 | 原文 + 说话人分段 |
 | 2 | 生产 | `earner` 完整跑：Step 0「现价已经假设了什么」→ 五维度 → 14 节 HTML（CLAUDE.md 模板） | `reports/{slug}_Copilot_Report.html` |
 | 3 | G2 Critic | 子 agent，报告类型写「Earner」（D5 查 14 节与 4 张必需图表） | 裁定 |
 | 4 | G3 PDF | `node tools/render_pdf.js <html>` | — |
