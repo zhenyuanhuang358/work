@@ -18,6 +18,18 @@ description: |
 
 ---
 
+## Step 0 · 机械检查（2026-11-06 起，先于五维评审）
+
+```
+python3 tools/report_check.py <报告.html> [--pdf <同名.pdf>] --record
+```
+- **有 ❌ FAIL → 直接 REWRITE**，不进入五维评审（省掉 AI 评审，修完再来）
+- ⚠️ WARN 写进裁定的 flags；**G1（海底捞 / 绿茶 + 内部 / 未公开数据）即使只是声明，也要在裁定里写「人工确认：是合规声明」**
+- 机械项已覆盖、五维评审**不再重复**：零 Markdown、来源索引有无、摘要级措辞、Earner 14 节 / 双语 / SVG / 三情景 / 字体配色、
+  分析师附注、正文禁用句、预测登记、PDF。五维评审只做**判断**：来源是否可信（D1 三关）、数字口径是否一致（D2）、置信度是否校准（D3）、
+  结论是否真的回答了问题（D3b）
+- `--record` 写 `memory/state/report_checks.jsonl`（含 sha256）；报告改了要重跑，self_check C13 会点名
+
 ## 五维评审（每次必跑，顺序不变）
 
 ### D1 · 数据来源完整性
@@ -61,8 +73,8 @@ D3 要求置信度可追溯，**不等于**要求正文逐句自证。若发现�
 
 ---
 
-### D4 · 格式合规（通用）
-- 零 Markdown 符号（`*` `**` `#` `---` 等不得出现在 HTML 报告正文中）？
+### D4 · 格式合规（通用）—— 机械部分已由 Step 0 覆盖，这里只看 Step 0 查不了的
+- ~~零 Markdown 符号~~ → report_check C1
 - 反馈链接存在且 URL 格式正确：
   `https://spontaneous-youtiao-b9cde9.netlify.app?product=X&report=Y`
 - Verdict Box / 裁定区块存在？

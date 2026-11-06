@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botinkit 不停科技 · 核心尽调16问（Merlin 模式B）</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:15px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:30px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:23px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 7px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;}
+.b-hi{background:var(--green);} .b-mid{background:var(--copper);} .b-lo{background:var(--amber);} .b-red{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.chart-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+svg{width:100%;height:auto;display:block;}
+.q{margin:24px 0 0;border:1px solid var(--border);background:var(--card);}
+.q-head{background:var(--ink);color:var(--paper);padding:11px 16px;display:flex;gap:12px;align-items:baseline;}
+.q-no{font-family:'IM Fell English',Georgia,serif;font-size:19px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;}
+.q-txt{font-size:14px;font-weight:700;}
+.q-body{padding:15px 18px;}
+.ans{background:#fff;border-left:4px solid var(--green);padding:12px 16px;margin-bottom:11px;}
+.ans-lab{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:3px;}
+.ans-txt{font-size:15px;font-weight:700;line-height:1.65;}
+.ans-num{color:var(--copper);}
+.basis{font-size:13.2px;color:#3a352f;margin:9px 0;}
+.basis b{color:var(--ink);}
+.q-foot{border-top:1px solid var(--border);margin-top:11px;padding-top:8px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);}
+.ask{background:rgba(139,108,66,.07);border:1px dashed var(--copper);padding:10px 14px;margin-top:11px;font-size:12.8px;}
+.ask .at{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--copper);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:4px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:23px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.note{background:#efece5;border:2px solid var(--ink);padding:22px 26px;margin:34px 0 0;}
+.note-h{font-size:19px;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:7px;margin-bottom:14px;}
+.note-h .en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;font-style:italic;display:block;font-weight:400;}
+.note-sub{font-weight:700;font-size:14px;margin:16px 0 5px;color:var(--copper);}
+.note p,.note li{font-size:13.2px;color:#2c2926;}
+.note ul{margin:6px 0 0 20px;}
+.feedback{text-align:center;margin:22px 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .chart-grid2{grid-template-columns:1fr;}
+  .title-zh{font-size:23px;} body{font-size:14px;} .ans-txt{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Merlin</b> · 模式B 客户提纲研究</span>
+  <span>Botinkit 不停科技（深圳市不停科技有限公司）</span>
+  <span>主题：核心尽调 16 问 · 投资机构投前尽调</span>
+  <span>研究日 2026-08-15</span>
+  <span><b>两处公开数字互相矛盾，已量化</b></span>
+</div>
+
+<!-- 2 标题 -->
+<div class="title-block">
+  <div class="title-en">Botinkit — Sixteen Diligence Questions, Sixteen Answers · And Two Numbers That Cannot Both Be True</div>
+  <div class="title-zh">Botinkit 不停科技<br>核心尽调 16 问逐条作答</div>
+  <div class="tags">
+    <span class="tag dark">Merlin 模式B · 五智能体</span>
+    <span class="tag green">16 问全部给出结论</span>
+    <span class="tag red">ROI 宣称值与回收期不可能同时成立</span>
+    <span class="tag red">「40%渗透率」口径存疑</span>
+    <span class="tag amber">综合置信 6.5 / 10</span>
+    <span class="tag">数据截止 2026-08-15</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar -->
+<div class="stat-bar">
+  <div class="stat"><div class="num">¥37亿</div><div class="lab">2025 中国市场规模<span class="en">2024 ¥31.7亿 → 2030E ¥110亿 · CAGR 24.3%</span></div></div>
+  <div class="stat"><div class="num red">42%</div><div class="lab">ROI 真实兑现率（反推）<span class="en">宣称年省¥12万 vs 反推¥5万</span></div></div>
+  <div class="stat"><div class="num">1,500 家</div><div class="lab">国内已部署门店<span class="en">海外 22-24 国 · 33 城展厅</span></div></div>
+  <div class="stat"><div class="num green">≈¥5万</div><div class="lab">单台设备价<span class="en">行业中位，非价格优势</span></div></div>
+</div>
+
+<!-- 4 前提纠正 -->
+<div class="notice red">
+  <div class="nt">上场前必须先拆掉的两个数字陷阱</div>
+  <strong>陷阱一：ROI 的两个宣称值互斥。</strong>行业口径同时说「单台约 ¥5 万」「年省人工约 ¥12 万」「回收期 8-18 个月」。<strong>但 5 万 ÷ 12 万 = 5.0 个月</strong>，与 8-18 个月差 1.6 到 3.6 倍。<strong>反向解：若回收期 12 个月为真，真实年净收益约 ¥5 万，仅为宣称值的 42%。那消失的 58% 在哪里，是这场访谈最值钱的问题。</strong><br>
+  <strong>陷阱二：「2025 连锁餐饮智能烹饪设备渗透率 40%」几乎肯定不是门店口径。</strong>2025 全市场 ¥37 亿 ÷ ¥5 万/台 ≈ <strong>7.4 万台</strong>；全国连锁餐饮门店百万量级 → <strong>门店渗透率约 7%</strong>。<strong>两个口径差约 50 倍。「40%」大概率指「多少个品牌试过」，不是「多少家门店在用」。</strong>拿这个数字做 TAM 推演会直接高估一个数量级。
+</div>
+
+<!-- 5 五智能体流程 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五智能体协作流程</span><span class="section-en">Merlin Mode-B Pipeline</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">客户提纲 16 问 → 四路并行取证 → 交叉验证与打假 → 逐条作答 → 独立裁定</div>
+    <svg viewBox="0 0 800 210" font-family="'IM Fell English',Georgia,serif">
+      <rect x="14" y="78" width="96" height="48" fill="#0a0a0b"/>
+      <text x="62" y="99" font-size="12" fill="#f1efea" text-anchor="middle">客户提纲</text>
+      <text x="62" y="115" font-size="10" fill="#c9a84c" text-anchor="middle">16 问</text>
+      <line x1="110" y1="102" x2="140" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <g fill="#faf8f4" stroke="#8b6c42">
+        <rect x="140" y="8" width="150" height="38"/><rect x="140" y="55" width="150" height="38"/>
+        <rect x="140" y="102" width="150" height="38"/><rect x="140" y="149" width="150" height="38"/>
+      </g>
+      <g font-size="11" fill="#0a0a0b" text-anchor="middle">
+        <text x="215" y="26">Scout A · 公司与融资</text><text x="215" y="40" font-size="9" fill="#6b6460">B++轮·近$5000万·24国</text>
+        <text x="215" y="73">Scout B · 行业与单位经济</text><text x="215" y="87" font-size="9" fill="#6b6460">白皮书·ROI·渗透率</text>
+        <text x="215" y="120">Scout C · 竞争格局</text><text x="215" y="134" font-size="9" fill="#6b6460">橡鹿/优特/佩厨/黑菠萝</text>
+        <text x="215" y="167">Scout D · 供应链侧</text><text x="215" y="181" font-size="9" fill="#6b6460">蜀海·净菜·解决方案中心</text>
+      </g>
+      <line x1="290" y1="102" x2="326" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="326" y="55" width="128" height="38" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="390" y="79" font-size="11" fill="#0a0a0b" text-anchor="middle">Analyst 分析师</text>
+      <rect x="326" y="110" width="128" height="38" fill="#faf8f4" stroke="#8b2e2e"/>
+      <text x="390" y="128" font-size="11" fill="#0a0a0b" text-anchor="middle">Forensic 侦探</text>
+      <text x="390" y="141" font-size="9" fill="#8b2e2e" text-anchor="middle">两处数字矛盾打假</text>
+      <line x1="454" y1="102" x2="490" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="490" y="78" width="140" height="48" fill="#8b6c42"/>
+      <text x="560" y="98" font-size="11.5" fill="#faf8f4" text-anchor="middle">Strategist 战略家</text>
+      <text x="560" y="113" font-size="9" fill="#f1efea" text-anchor="middle">16 问逐条给结论</text>
+      <line x1="630" y1="102" x2="666" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="666" y="78" width="120" height="48" fill="#2a5c3f"/>
+      <text x="726" y="98" font-size="11.5" fill="#f1efea" text-anchor="middle">Critic 评审</text>
+      <text x="726" y="113" font-size="9" fill="#c9a84c" text-anchor="middle">6.5 / 10</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 6 两张图 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">市场规模与 ROI 矛盾</span><span class="section-en">TAM &amp; the ROI Contradiction</span></div>
+  <div class="chart-grid2">
+    <div class="chart-wrap">
+      <div class="chart-title">中国炒菜机器人市场规模（亿元）</div>
+      <svg viewBox="0 0 400 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="46" y1="14" x2="46" y2="180" stroke="#d4cec6"/>
+        <line x1="46" y1="180" x2="380" y2="180" stroke="#d4cec6"/>
+        <rect x="80"  y="135.9" width="70" height="44.1"  fill="#8b6c42" opacity="0.5"/>
+        <rect x="175" y="128.5" width="70" height="51.5"  fill="#8b6c42" opacity="0.7"/>
+        <rect x="270" y="27.0"  width="70" height="153.0" fill="#2a5c3f"/>
+        <g font-size="14" fill="#0a0a0b" text-anchor="middle" font-weight="700">
+          <text x="115" y="129">31.7</text><text x="210" y="121">37.0</text><text x="305" y="20" fill="#2a5c3f">110</text>
+        </g>
+        <g font-size="11" fill="#6b6460" text-anchor="middle">
+          <text x="115" y="196">2024</text><text x="210" y="196">2025</text><text x="305" y="196">2030E</text>
+        </g>
+        <text x="210" y="218" font-size="12" fill="#2a5c3f" text-anchor="middle" font-weight="700">2025-2030 CAGR 24.3%</text>
+      </svg>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">年化净收益：行业宣称 vs 由回收期反推（元）</div>
+      <svg viewBox="0 0 400 230" font-family="'IM Fell English',Georgia,serif">
+        <line x1="120" y1="14" x2="120" y2="180" stroke="#d4cec6"/>
+        <rect x="120" y="34" width="230.8" height="34" fill="#8b6c42" opacity="0.45"/>
+        <text x="114" y="55" font-size="11.5" fill="#0a0a0b" text-anchor="end">行业宣称</text>
+        <text x="358" y="55" font-size="13" fill="#0a0a0b" font-weight="700">¥120,000</text>
+        <rect x="120" y="96" width="96.2" height="34" fill="#8b2e2e"/>
+        <text x="114" y="117" font-size="11.5" fill="#0a0a0b" text-anchor="end">反推（12个月）</text>
+        <text x="224" y="117" font-size="13" fill="#8b2e2e" font-weight="700">¥50,000</text>
+        <line x1="216.2" y1="88" x2="350.8" y2="88" stroke="#8b2e2e" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="283" y="82" font-size="12" fill="#8b2e2e" text-anchor="middle" font-weight="700">差额 ¥70,000（58%）</text>
+        <text x="120" y="160" font-size="10.5" fill="#6b6460">设备 ¥50,000 ÷ 年省 ¥120,000 = 回收 5.0 个月</text>
+        <text x="120" y="176" font-size="10.5" fill="#8b2e2e">但白皮书口径回收期为 8-18 个月 → 两数互斥</text>
+        <text x="120" y="206" font-size="11" fill="#0a0a0b" font-weight="700">这 58% 的去向 = 本次访谈最高价值问题</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 7 十六问逐条作答 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">十六问逐条作答</span><span class="section-en">Sixteen Questions · Answer First</span></div>
+
+  <!-- Q1 -->
+  <div class="q"><div class="q-head"><span class="q-no">1</span><span class="q-txt">市场空间：TAM 如何按地区、菜系、场景划分？能否进入非亚洲菜系、QSR、高端餐厅、中央厨房、团餐？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt">中国市场 <strong class="ans-num">2025 年 ¥37 亿 → 2030 年 ¥110 亿（CAGR 24.3%）</strong>。<strong>但 TAM 不该按地区或菜系切，该按「这家餐厅的后厨是否已经标准化」切。</strong></div></div>
+    <div class="basis">
+      <b>已标准化（有央厨或用料包）</b>：设备是执行终端，替代的只是复烤动作，阻力最小、渗透最快。<br>
+      <b>未标准化（真现炒）</b>：设备要同时解决「标准化」和「执行」两件事，落地成本翻倍。<br>
+      <b>五个场景的适配排序</b>：
+      <table>
+        <tr><th>场景</th><th>适配度</th><th>判断依据</th></tr>
+        <tr><td class="k">团餐</td><td><span style="color:#2a5c3f;font-weight:700">最高</span></td><td>SKU 固定、单锅量大、人力短缺最严重、成本敏感 —— 千喜鹤/德宝正在这一类</td></tr>
+        <tr><td class="k">QSR</td><td><span style="color:#2a5c3f;font-weight:700">高</span></td><td>SKU 少、标准化程度已高、峰值压力大</td></tr>
+        <tr><td class="k">正餐连锁</td><td><span style="color:#c47a1e;font-weight:700">中</span></td><td>菜单宽，覆盖率是瓶颈 —— 绿茶属此类</td></tr>
+        <tr><td class="k">中央厨房</td><td><span style="color:#8b2e2e;font-weight:700">低</span></td><td>央厨已是产线，用工业级连续设备，不用单台炒锅</td></tr>
+        <tr><td class="k">高端餐厅</td><td><span style="color:#8b2e2e;font-weight:700">最低</span></td><td><b>卖的就是厨师手艺，设备是反卖点</b></td></tr>
+      </table>
+      <b>非亚洲菜系</b>：技术上 OMNI 已覆盖 30+ 菜系、10,000+ 菜谱，但<b>欧美市场的对手不同</b>——那里的自动化集中在炸物与烤物（Miso Robotics 类），<b>中式炒锅反而是差异化优势而非劣势</b>。
+    </div>
+    <div class="q-foot"><span>来源：NCBD《2026中国炒菜机器人行业发展白皮书》· Botinkit OMNI 产品页</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q2 -->
+  <div class="q"><div class="q-head"><span class="q-no">2</span><span class="q-txt">产品反馈/复购：绿茶、千喜鹤、德宝主要有哪些正负面反馈？什么推动复购，什么导致首批后停购？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>这三家买的根本不是同一个东西，所以反馈必然不同 —— 这是提纲最该拆开问的一条。</strong></div></div>
+    <div class="basis">
+      <b>绿茶（正餐连锁）</b>：<b>无自建央厨、205 家 OEM 代工、客单价 ¥54.6、首个自建央厨 2026Q2 才完工</b>。它买设备<b>不是替代厨师，是把 OEM 送来的半成品在门店标准化复烤</b>。<br>
+      → 正面反馈会集中在<b>出品一致性</b>；负面集中在<b>菜单覆盖率</b>（绿茶 SKU 宽）。<br>
+      <b>千喜鹤 / 德宝（团餐）</b>：SKU 固定、单次出餐量大、人力成本刚性。<br>
+      → 正面在<b>人效</b>；负面在<b>大锅菜适配</b>（团餐单锅出餐量远超正餐，圆锅容量是硬约束）。<br>
+      <b>推动复购的唯一可靠指标</b>：首批部署后 <b>3-6 个月的实际开机率</b>。<br>
+      <b>首批后不再采购的三种典型情形</b>：① 菜单覆盖率低于 40%，设备只能做补充产能 ② 高峰期出餐速度不如熟练厨师 ③ 日常清洁维护占用的人力抵消了节省。
+    </div>
+    <div class="ask"><span class="at">Interview · 拆开问</span>
+      <b>不要问「客户反馈怎么样」</b>——会得到一堆正面套话。<br>
+      <b>改问</b>：「绿茶那边<strong>装了多少家店、覆盖了菜单上多少道菜</strong>？」「千喜鹤的<strong>单锅出餐份数</strong>够不够？」「有没有客户<strong>装了之后没续订</strong>的？为什么？」<br>
+      <b>最有效的一问</b>：「三家客户里，<strong>哪一家的开机率最低</strong>？」——愿意答这个的，是真在跟进客户的人。
+    </div>
+    <div class="q-foot"><span>来源：绿茶招股书（无央厨/205家OEM/客单54.6元）· 本报告历史研究台账 · 行业白皮书</span><span class="badge b-lo">中低置信</span></div>
+  </div></div>
+
+  <!-- Q3 -->
+  <div class="q"><div class="q-head"><span class="q-no">3</span><span class="q-txt">订单转化/铺设：试点→首批→全面铺设通常多久？旧店动线受影响，框架订单转化确定性取决于什么？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt">试点到全面铺设典型 <strong class="ans-num">9-18 个月</strong>：试点 2-3 个月 + 评估 3-6 个月 + 分批铺设 6-12 个月。<strong>框架订单能否转化，主要不取决于产品，取决于厨房改造预算有没有进年度资本开支。</strong></div></div>
+    <div class="basis">
+      <b>旧店动线是最大变量</b>：新店可在设计阶段预留电力、排烟、上下水与操作位；旧店必须改造，<b>改造成本可达设备价的 30%-80%</b>，且改造期间门店停业或降效。<br>
+      <b>转化确定性的三个决定条件</b>：<br>
+      ① 试点门店开机率是否稳定 <b>&gt;60%</b><br>
+      ② 厨房改造预算是否<b>已进入年度资本开支</b>（这是最硬的门槛，未进预算的框架单会推迟一整年）<br>
+      ③ 是否有<b>单一高管 owner</b>（COO 或供应链 VP）为这件事背书 —— 无 owner 的项目在试点后自然消亡
+    </div>
+    <div class="q-foot"><span>来源：行业部署周期惯例 · 餐饮连锁资本开支流程（推断）</span><span class="badge b-lo">中低置信</span></div>
+  </div></div>
+
+  <!-- Q4 -->
+  <div class="q"><div class="q-head"><span class="q-no">4</span><span class="q-txt">用户行为：实际开机率、每日使用时长、日均出餐量、菜单覆盖率、复购率如何？用于核心菜品还是高峰补充？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>开机率是这个品类唯一真正的先行指标，也是全行业没有一家厂商披露的数字。</strong>推算区间：正餐日均开机 <strong class="ans-num">3-5 小时</strong>、团餐 <strong class="ans-num">2-4 小时</strong>；菜单覆盖率正餐 <strong class="ans-num">30-50%</strong>、团餐 <strong class="ans-num">60-80%</strong>。</div></div>
+    <div class="basis">
+      <b>推算依据</b>：正餐门店午晚两个高峰各约 2 小时，设备主要在高峰使用；团餐出餐集中在单一时段但强度更高。<br>
+      <b>用途判断</b>：<b>核心菜品与高峰补充产能兼有，但重心在后者。</b>原因是核心菜品一旦改由设备出品，<b>口味变化的舆情风险最高</b>——绿茶 2025 年 9 月因预制菜国标撤下「现点现做」招牌就是同类风险的先例。<br>
+      <b>为什么这一问最重要</b>：设备卖出去只是开始，<b>开机率跌破 40% 时，设备实质上已经失败，但账面上仍是「已部署」</b>。所有「1500 家门店」类的部署数字，都必须除以真实开机率才有意义。
+    </div>
+    <div class="ask"><span class="at">Interview · 唯一必须问到的数</span>
+      「你们后台能看到<strong>每台设备的开机时长</strong>吗？<strong>装了一年以上的门店，平均日开机几小时</strong>？」<br>
+      <b>如果对方说看不到</b> → 说明 KMES 的数据闭环没打通，第 12、13 问的答案要相应打折。<br>
+      <b>如果对方给不出一年期数据</b> → 说明最早一批客户还没跑满一年，或者跑满的那批数据不好看。
+    </div>
+    <div class="q-foot"><span>来源：本报告推算（公开渠道无任何厂商披露开机率）</span><span class="badge b-lo">低置信 · 推测</span></div>
+  </div></div>
+
+  <!-- Q5 -->
+  <div class="q"><div class="q-head"><span class="q-no">5</span><span class="q-txt">客户 ROI 拆分：收益主要来自翻台、节省人工、降低培训、减少浪费中的哪些？计入改造/维护/能耗/停机后的实际回收期？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>行业宣称的两个数字不可能同时为真。</strong>设备 ¥5 万 ÷ 宣称年省人工 ¥12 万 = 回收期 <strong class="ans-num">5.0 个月</strong>，但白皮书给的是 <strong class="ans-num">8-18 个月</strong>。<strong>反推：若 12 个月为真，真实年净收益约 ¥5 万 —— 仅为宣称值的 42%，中间消失了 58%。</strong></div></div>
+    <div class="basis">
+      <b>反推表</b>：
+      <table>
+        <tr><th>回收期口径</th><th>隐含年净收益</th><th>占宣称 ¥12 万的比例</th></tr>
+        <tr><td class="k">8 个月</td><td>¥75,000</td><td>62%</td></tr>
+        <tr><td class="k">12 个月</td><td><strong>¥50,000</strong></td><td><strong>42%</strong></td></tr>
+        <tr><td class="k">18 个月</td><td>¥33,333</td><td>28%</td></tr>
+      </table>
+      <b>58% 的差额只能来自这五项</b>（按可能性排序）：<br>
+      <b>① 一台机器替代不了两个厨师</b> —— 最可能。宣称的「4 人降到 2 人」通常需要多台设备，而非一台。<br>
+      ② 厨房与动线改造（旧店尤其重）<br>
+      ③ 安装、调试、菜谱录入与员工培训<br>
+      ④ 维护、备件、能耗<br>
+      ⑤ 停机损失（高峰期停机 1 小时约等于损失该时段全部炒制产能）<br>
+      <b>ROI 来源的真实排序（推断）</b>：<b>节省人工 &gt; 降低培训成本 &gt; 减少食材浪费 &gt; 翻台提升</b>。<br>
+      <b>翻台排最后，因为炒制通常不是瓶颈工序</b> —— 正餐的瓶颈在前厅与洗碗，团餐的瓶颈在打饭窗口。<b>把 ROI 讲成「提升翻台」的，多半没做过门店。</b>
+    </div>
+    <div class="ask"><span class="at">Interview · 直击差额</span>
+      <b>1</b>「一家门店<strong>装几台</strong>才能把 4 个厨师降到 2 个？」（这一问直接检验「年省 12 万」的分母）<br>
+      <b>2</b>「旧店改造<strong>平均花多少</strong>？占设备价多少比例？」<br>
+      <b>3</b>「你们算 ROI 的时候，<strong>把清洁工时算进去了吗</strong>？」<br>
+      <b>4</b>「有没有客户算完发现<strong>回收期超过 18 个月</strong>的？是什么类型的店？」<br>
+      <b>有效答案的特征</b>：能说出「几台设备对应几个人」的，是真跑过项目的；只会说「降本 50%」的，是销售口径。
+    </div>
+    <div class="q-foot"><span>来源：NCBD 白皮书（回收期8-18个月、人力降50-60%）· 佩厨行业测算 · 本报告反推</span><span class="badge b-hi">中高置信 · 矛盾已量化</span></div>
+  </div></div>
+
+  <!-- Q6 -->
+  <div class="q"><div class="q-head"><span class="q-no">6</span><span class="q-txt">厨房/人员替代：使用前后厨房与人员配置如何？替代了哪些岗位，哪些环节仍需人工？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>替代的是「炒」这一个动作，不是「厨师」这个岗位。</strong>典型变化：4 名厨师 → <strong class="ans-num">2 名</strong>（1 名设备操作 + 1 名备餐），<strong>但新增了设备清洁与维护的隐性工时</strong>。</div></div>
+    <div class="basis">
+      <table>
+        <tr><th>环节</th><th>是否被替代</th><th>说明</th></tr>
+        <tr><td class="k">备餐 / 切配</td><td><span style="color:#8b2e2e;font-weight:700">未替代</span></td><td>除非上游用净菜（这正是第 14 问的切入点）</td></tr>
+        <tr><td class="k">投料</td><td><span style="color:#c47a1e;font-weight:700">半自动</span></td><td>多数机型需人工把料盒放入</td></tr>
+        <tr><td class="k">炒制</td><td><span style="color:#2a5c3f;font-weight:700">已替代</span></td><td>自动控温、翻炒、调味</td></tr>
+        <tr><td class="k">装盘</td><td><span style="color:#c47a1e;font-weight:700">部分</span></td><td>自动出餐到盘，但摆盘仍需人工</td></tr>
+        <tr><td class="k">清洁</td><td><span style="color:#8b2e2e;font-weight:700">未替代</span></td><td>自清洁解决日常，<b>深度清洁每日必做且仍需人工</b></td></tr>
+        <tr><td class="k">设备操作</td><td><span style="color:#8b2e2e;font-weight:700">新增岗位</span></td><td>需要能读懂报错、会换配件的人</td></tr>
+      </table>
+      <b>关键补充</b>：<b>蜀海已设立八个「解决方案中心团队」，专门为餐饮企业提供后厨动线与设备化设计咨询。</b>这说明行业里已有共识——<b>这类设备真正落地靠的是动线重构，不是设备本身。</b>
+    </div>
+    <div class="q-foot"><span>来源：行业白皮书人力口径 · 蜀海供应链公开资料（八个解决方案中心团队）</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q7 -->
+  <div class="q"><div class="q-head"><span class="q-no">7</span><span class="q-txt">采购决策：由哪些部门或人员主导？试点期最重要的评估指标是什么，达到什么条件才扩大铺设？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>主导的是运营与供应链，不是采购部。</strong>采购通常只在<strong>商务谈判阶段</strong>才介入。</div></div>
+    <div class="basis">
+      <b>决策链</b>：运营部门发起（痛点是人力与出品一致性）→ 供应链/研发评估（菜谱适配与原料标准化）→ <b>COO 或 CEO 拍板</b>（因为涉及资本开支与动线改造，超出部门权限）→ 采购部执行商务条款。<br>
+      <b>试点期评估指标的真实排序</b>：<b>开机率 &gt; 出品一致性 &gt; 出餐速度 &gt; 人力节省</b>。<br>
+      <b>人力节省排最后，因为它最容易被高估</b>（见第 5 问的 58% 差额）——而开机率是骗不了人的。<br>
+      <b>扩大铺设的条件</b>：试点门店开机率稳定 &gt;60%，且连续 3 个月无导致停业的重大故障。
+    </div>
+    <div class="q-foot"><span>来源：餐饮连锁资本开支决策惯例（推断）· 蜀海解决方案中心角色反推</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q8 -->
+  <div class="q"><div class="q-head"><span class="q-no">8</span><span class="q-txt">竞争格局：主要玩家有哪些？Botinkit 在技术、菜品覆盖、效率、价格、稳定性、部署规模、软件、售后上各有何优劣？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt">国内三大阵营，<strong>Botinkit 的差异化在「海外 + 全栈软件」，不在国内单机性能，也不在价格。</strong></div></div>
+    <div class="basis">
+      <table>
+        <tr><th>玩家</th><th>定位</th><th>已知特点</th></tr>
+        <tr><td class="k">橡鹿科技</td><td>专业商用厂商</td><td>技术积累领先，2025 年获融资</td></tr>
+        <tr><td class="k">优特智厨</td><td>专业商用厂商</td><td>2025 年获融资</td></tr>
+        <tr><td class="k">佩厨（K9）</td><td>中式商用炒菜</td><td><b>工业级温控</b>是其宣称优势</td></tr>
+        <tr><td class="k">黑菠萝科技</td><td>大锅菜</td><td>能耗低、出餐效率高 —— <b>直接对标团餐场景</b></td></tr>
+        <tr><td class="k">杭州智膳云联</td><td>食堂模块化</td><td>模块化适配不同规模 + AI 视觉识别</td></tr>
+        <tr><td class="k">家电巨头</td><td>家用为主</td><td>渠道与品牌强，但不做商用重设备</td></tr>
+      </table>
+      <b>Botinkit 的优势（可核实）</b>：22-24 国部署、33 城展厅、<b>KMES 软件层</b>、10,000+ 菜谱 / 30+ 菜系库、国内 1,500 家门店、累计融资近 $5,000 万。<br>
+      <b>Botinkit 的劣势</b>：<b>单机 ¥5 万属行业中位，无价格优势</b>；国内部署规模在头部但非碾压；<b>团餐场景直面黑菠萝这类专攻大锅菜的对手</b>。<br>
+      <b>客户选型的真实排序</b>：<b>菜品适配度 &gt; 售后响应 &gt; 价格 &gt; 品牌</b>。
+    </div>
+    <div class="q-foot"><span>来源：36氪《2026中国炒菜机器人行业发展白皮书》· 中国工控网厂商盘点 · Botinkit 官网与 InvestHK</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q9 -->
+  <div class="q"><div class="q-head"><span class="q-no">9</span><span class="q-txt">价格风险：如果竞品价格低 30%-50%，客户是否仍愿意选择 Botinkit？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>拿不走已铺设客户，但会拿走绝大部分增量订单。</strong>因为 ¥5 万 → ¥2.5-3.5 万，<strong>直接把回收期从 12 个月压到 6-8 个月</strong>——在一个 ROI 本身就有争议的品类里，这个差距足以改变决策。</div></div>
+    <div class="basis">
+      <b>已部署客户的切换成本</b>：菜谱重录 + 员工再培训 + 动线再适配，<b>通常高于设备差价</b>——所以存量安全。<br>
+      <b>首次采购客户</b>：对价格<b>极度敏感</b>，恰恰因为第 5 问的 ROI 差额存在，客户自己也算不准收益，此时<b>价格成为最容易量化的决策锚</b>。<br>
+      <b>唯一的防御</b>：菜谱库深度（10,000+ 是真门槛）、KMES 粘性（但见第 12 问的限制）、售后网络密度。<b>硬件本身防不住。</b>
+    </div>
+    <div class="q-foot"><span>来源：本报告分析（基于第5问 ROI 反推与切换成本结构）</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q10 -->
+  <div class="q"><div class="q-head"><span class="q-no">10</span><span class="q-txt">稳定性/售后：最常见的故障、清洁与维护问题是什么？停机、维修响应、备件、售后成本是否影响大规模铺设？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>最常见的问题是清洁，不是故障。而售后网络密度是限制铺设速度的第一约束——不是需求。</strong></div></div>
+    <div class="basis">
+      <b>核心痛点</b>：油污积碳、锅体清洁、传感器污染。自清洁能解决日常，<b>深度清洁每日必做且仍需人工</b>——这项工时若未计入 ROI，就是第 5 问 58% 差额的来源之一。<br>
+      <b>停机成本的真实量级</b>：高峰期停机 1 小时 ≈ 损失该时段全部炒制产能。<b>对翻台高的门店，一次高峰停机的损失可超过设备月折旧。</b><br>
+      <b>为什么售后是铺设的第一约束</b>：单店 1 台可容忍 24 小时响应；<b>100 店 200 台则必须有区域备件仓 + 驻区工程师</b>。这套网络的建设速度，决定了年度铺设上限——<b>而它是重资产、慢变量，融资解决不了。</b>
+    </div>
+    <div class="ask"><span class="at">Interview · 问网络不问故障率</span>
+      <b>不要问「故障率多少」</b>——会得到一个漂亮的百分比。<br>
+      <b>改问</b>：「你们现在<strong>有几个区域备件仓、几个驻区工程师</strong>？」「<strong>平均响应时效</strong>是多少小时？一线城市和三线城市差多少？」<br>
+      「如果明年要铺到 <strong>5,000 家门店</strong>，售后团队要扩到多少人？」——这一问能直接测出他们对规模化约束的认知深度。
+    </div>
+    <div class="q-foot"><span>来源：炒锅类设备维护特性 · 行业售后网络结构（推断）</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q11 -->
+  <div class="q"><div class="q-head"><span class="q-no">11</span><span class="q-txt">出海壁垒：认证、厨房改造、本地菜谱、服务网络、渠道、供应链配套的障碍是什么？国内优势能否延续？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt">Botinkit 已在 <strong class="ans-num">22-24 国</strong>部署、<strong class="ans-num">33 城</strong>设展厅，出海不是「能不能」的问题，是「能不能规模化」的问题。<strong>菜谱库优势能延续，服务网络优势不能——后者是出海的真瓶颈。</strong></div></div>
+    <div class="basis">
+      <table>
+        <tr><th>壁垒</th><th>难度</th><th>说明</th></tr>
+        <tr><td class="k">认证</td><td><span style="color:#c47a1e;font-weight:700">中</span></td><td>欧美 NSF / UL / CE 是硬门槛，周期 6-12 个月，一次性成本</td></tr>
+        <tr><td class="k">厨房改造</td><td><span style="color:#c47a1e;font-weight:700">中高</span></td><td>海外电力与排烟标准与国内不同，<b>改造成本高于国内</b></td></tr>
+        <tr><td class="k">本地菜谱</td><td><span style="color:#c47a1e;font-weight:700">中</span></td><td>10,000 菜谱以中式为主，非亚洲菜系需重建库；<b>但这是可投入解决的</b></td></tr>
+        <tr><td class="k">服务网络</td><td><span style="color:#8b2e2e;font-weight:700">最高</span></td><td><b>海外单店密度低，备件与工程师覆盖成本极高</b></td></tr>
+        <tr><td class="k">渠道</td><td><span style="color:#8b2e2e;font-weight:700">高</span></td><td>目前靠代理（马来 fnbequipment、香港 Green Kitchen、Cognitron 等）；<b>代理模式做不了深度服务</b></td></tr>
+      </table>
+      <b>核心判断</b>：<b>展厅数（33 城）是销售前端指标，不是服务能力指标。</b>用展厅数论证出海进展，会高估实际交付与留存能力。<b>要看的是海外的复购与开机率，不是国家数。</b>
+    </div>
+    <div class="q-foot"><span>来源：Botinkit 官网 / InvestHK / RestaurantTechnologyNews · 海外代理页面（马来西亚、香港、美国）</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q12 -->
+  <div class="q"><div class="q-head"><span class="q-no">12</span><span class="q-txt">KMES/软件采用：餐厅已有 KDS 与 POS 时，KMES 能提供什么额外价值？客户愿否额外付费？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>KMES 的不可替代价值只有一条：把订单翻译成设备动作。</strong>KDS 告诉<strong>人</strong>做什么，KMES 告诉<strong>机器</strong>怎么做（火候曲线、投料时序、多机排产）。<strong>但现阶段客户更可能把它当硬件配套功能，独立收费需要单客户 20 台以上的规模。</strong></div></div>
+    <div class="basis">
+      <b>与 Oracle 等成熟 KDS 的边界</b>：订单自动分流、负载管理——<b>这些 KDS 已有，KMES 在此不增值</b>。<br>
+      <b>KMES 真正增量</b>：<b>①</b> 把菜品订单转成设备可执行的参数序列 <b>②</b> 多台设备之间的排产与产能均衡 <b>③</b> 云端菜谱版本同步与跨店一致性。<br>
+      <b>付费意愿的分界线在规模</b>：单店 1-2 台，人脑就能排产，软件无价值；<b>单客户 20 台以上，多机排产与跨店菜谱同步才产生可量化收益</b>。<br>
+      <b>因此现实定位</b>：<b>目前是硬件的附加值，不是独立产品。</b>把 KMES 讲成 SaaS 收入来源，在当前部署密度下站不住。
+    </div>
+    <div class="q-foot"><span>来源：Botinkit KMES 产品说明（Kitchen Manufacturing Execution System，数字厨房调度中枢）· Oracle KDS 功能集</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q13 -->
+  <div class="q"><div class="q-head"><span class="q-no">13</span><span class="q-txt">数据壁垒：能积累哪些有价值的菜谱、设备与运营数据？品牌是否愿共享？数据能否真正改善出品与粘性？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt">真正构成壁垒的只有一类数据：<strong>同一道菜在不同门店、不同原料批次下的火候补偿参数。</strong>菜谱本身不是壁垒，运营数据品牌自己就有。</div></div>
+    <div class="basis">
+      <b>三类数据的价值分层</b>：<br>
+      <b>菜谱数据</b>——<b>不构成壁垒</b>。可复制、可通过挖角厨师重录，且品牌视其为核心资产，<b>不会共享</b>。<br>
+      <b>设备运行数据</b>（温度曲线、故障模式）——对<b>Botinkit 自己的产品迭代</b>有价值，对客户无价值，因此<b>品牌愿意共享</b>（无敏感性）。<br>
+      <b>运营数据</b>（出餐量、时段分布）——品牌自己的 POS 早已具备，<b>不会为此付费</b>。<br>
+      <b>唯一的真壁垒：补偿参数库。</b>同一道菜，冬春的菜梗含水率不同、不同产地的肉质不同，火候要相应调整。<b>这套参数只能靠跨门店、跨批次、跨季节的真实运行累积，新进入者无法冷启动，也无法靠钱买。</b><br>
+      <b>但它的前提是开机率</b>——设备不开机就没有数据。<b>所以第 4 问的开机率，同时决定了第 13 问的壁垒能否成立。</b>
+    </div>
+    <div class="q-foot"><span>来源：本报告分析（基于烹饪工艺变量与数据资产分类）</span><span class="badge b-lo">中低置信 · 分析</span></div>
+  </div></div>
+
+  <!-- Q14 -->
+  <div class="q"><div class="q-head"><span class="q-no">14</span><span class="q-txt">供应链协同：能否将炒菜机器人与净菜、料包、标准化菜谱结合做一体化方案？能否提升复购并形成壁垒？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>能，而且这是唯一可能建立真壁垒的方向。但主导权不在 Botinkit 手上，在蜀海这类供应链公司手上——这个组合提升的是蜀海的复购，不是 Botinkit 的。</strong></div></div>
+    <div class="basis">
+      <b>蜀海已经具备全部要件</b>：净菜生产、菜品研发、餐饮标准工业化；<b>八个「解决方案中心团队」提供后厨动线与设备化设计咨询</b>；服务 500+ 连锁客户（含 7-11、新白鹿、西贝）；8 亿元 B 轮（中银投、中垦基金）。<br>
+      <b>更关键的一条</b>：<b>蜀海是「第三届智能炒菜机应用开发者大会」的联办单位</b>——它已经站在这个赛道里，不是旁观者。<br>
+      <b>一体化的逻辑成立</b>：净菜与料包把「标准化」做在上游，设备把「执行」做在门店，<b>两者合起来才是完整解</b>。单独卖设备，客户仍要自己解决备餐与切配（见第 6 问）。<br>
+      <b>但要问一个更硬的问题：这个组合里，谁绑定客户？</b><br>
+      客户与蜀海签的是<b>长期食材供应合同</b>——高频、高金额、高黏性；<br>
+      客户与 Botinkit 签的是<b>一次性设备采购</b>——低频、低金额、低黏性。<br>
+      <b>结论：在「净菜 + 设备」的一体化方案里，Botinkit 更可能成为「被集成方」而非「集成方」。</b>这个模式确实能提升设备复购，但复购的<b>渠道控制权</b>会转移到供应链公司手上。
+    </div>
+    <div class="ask"><span class="at">Interview · 本次访谈最高价值的一组问题</span>
+      <b>1</b>「蜀海这类供应链公司找过你们吗？<strong>是想采购，还是想做渠道</strong>？」<br>
+      <b>2</b>「如果供应链公司把设备打包进它的食材方案里卖，<strong>你们拿硬件毛利还是分成</strong>？」<br>
+      <b>3</b>「有没有客户是<strong>先有净菜合同、后买设备</strong>的？比例多少？」<br>
+      <b>4</b>「你们自己做不做料包？」——<strong>答「做」意味着要和蜀海竞争，答「不做」意味着接受被集成。这一问的答案决定了公司的天花板形态。</strong>
+    </div>
+    <div class="q-foot"><span>来源：蜀海供应链公开资料（八个解决方案中心团队、500+客户、8亿元B轮、智能炒菜机开发者大会联办）· 21经济网 / 36氪</span><span class="badge b-mid">中置信 · 本报告核心判断</span></div>
+  </div></div>
+
+  <!-- Q15 -->
+  <div class="q"><div class="q-head"><span class="q-no">15</span><span class="q-txt">消费端机会：ToC 市场潜力与 GTM 如何？能否利用现有 B 端渠道，例如与绿茶合作推出独有菜谱与配套机器？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>不建议现在做，而且绿茶是最不适合的合作对象。</strong></div></div>
+    <div class="basis">
+      <b>ToC 是完全不同的生意</b>：价格带 ¥2,000-5,000（B 端的 4%-10%）、渠道是电商与家电卖场、售后是消费级标准。<b>Botinkit 在这三项上没有任何积累。</b><br>
+      <b>对手也不同</b>：家电巨头（美的、九阳、苏泊尔）凭品牌、渠道与供应链已在布局家用，<b>而它们恰恰不做商用重设备——双方目前互不侵犯，主动进入等于挑起一场自己没有筹码的战争。</b><br>
+      <b>为什么绿茶最不适合</b>：<b>客单价 ¥54.6</b>（品牌溢价不足以带动数千元家电）、<b>无自建央厨、205 家 OEM 代工</b>（自身供应链尚未闭环）、<b>IPO 募投的自建央厨 2026Q2 才完工且仅 10% 用于外售</b>（零售业务刚起步）。<b>它自己的预制菜零售都还在验证期，没有余力带一个硬件品类。</b><br>
+      <b>若一定要做联名</b>：<b>海底捞、西贝这类有自有供应链、品牌溢价更高、零售业务已跑通的品牌更合适。</b>
+    </div>
+    <div class="q-foot"><span>来源：绿茶招股书（客单54.6元/205家OEM/央厨募投90%自供10%外售）· 本报告历史研究台账</span><span class="badge b-mid">中置信</span></div>
+  </div></div>
+
+  <!-- Q16 -->
+  <div class="q"><div class="q-head"><span class="q-no">16</span><span class="q-txt">主要下行风险：未来未能大规模普及最可能的原因是什么？哪些问题导致试用后不采购、低频使用或停止复购？</span></div>
+  <div class="q-body">
+    <div class="ans"><span class="ans-lab">Answer</span><div class="ans-txt"><strong>最可能的失败原因不是产品做得不好，是 ROI 兑现不了宣称值——第 5 问那个 58% 的差额。</strong></div></div>
+    <div class="basis">
+      <b>风险按可能性排序</b>：
+      <table>
+        <tr><th>序</th><th>风险</th><th>触发时点</th><th>后果</th></tr>
+        <tr><td class="k">1</td><td><b>ROI 落差</b>：宣称年省 ¥12 万，实际约 ¥5 万</td><td>试点结束算总账时</td><td><b>试用后不采购</b></td></tr>
+        <tr><td class="k">2</td><td><b>开机率衰减</b>：新鲜期过后跌破 40%</td><td>部署后 3-6 个月</td><td>设备变摆设，且<b>第13问的数据壁垒随之落空</b></td></tr>
+        <tr><td class="k">3</td><td><b>清洁负担</b>抵消人力节省</td><td>日常运营中持续</td><td>低频使用</td></tr>
+        <tr><td class="k">4</td><td><b>菜单覆盖不足</b>（宽菜单 &lt;40%）</td><td>菜谱适配阶段</td><td>只能做补充产能，不复购</td></tr>
+        <tr><td class="k">5</td><td><b>价格战</b>：竞品低 30-50%</td><td>增量订单竞标时</td><td>丢失新客</td></tr>
+        <tr><td class="k">6</td><td><b>被集成</b>：供应链公司主导渠道</td><td>一体化方案成型时</td><td>沦为硬件供应商，<b>失去定价权</b></td></tr>
+      </table>
+      <b>这六条里，第 1 条是根</b>：ROI 讲得太满，导致客户预期与实际之间产生落差，而落差一旦发生，后面五条都会被归因到「这个东西不划算」。<b>把 ROI 讲实，反而是这个品类最好的防御。</b>
+    </div>
+    <div class="q-foot"><span>来源：本报告综合分析（基于第5、4、10、8、14问的结论链）</span><span class="badge b-hi">中高置信</span></div>
+  </div></div>
+</div>
+
+<!-- 8 风险信号表 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">风险信号表</span><span class="section-en">Risk Signals · Forensic Findings</span></div>
+  <table>
+    <tr><th>信号</th><th>性质</th><th>处置</th></tr>
+    <tr><td class="k">「年省 ¥12 万」与「回收期 8-18 个月」互斥</td><td><span style="color:#8b2e2e;font-weight:700">数字矛盾</span></td><td>已量化：真实年净收益约 ¥5 万（42%）。访谈直接问差额去向</td></tr>
+    <tr><td class="k">「2025 渗透率 40%」与市场规模不自洽</td><td><span style="color:#8b2e2e;font-weight:700">口径陷阱</span></td><td>按 ¥37亿÷¥5万 ≈ 7.4 万台，门店渗透约 7%，差 50 倍。<b>「40%」应为品牌口径</b></td></tr>
+    <tr><td class="k">「1,500 家门店」未除以开机率</td><td><span style="color:#c47a1e;font-weight:700">虚高风险</span></td><td>部署数不等于使用数。开机率是全行业无人披露的数字，必须访谈索取</td></tr>
+    <tr><td class="k">「33 城展厅 / 22-24 国」是销售前端指标</td><td><span style="color:#c47a1e;font-weight:700">指标误用</span></td><td>不代表交付与服务能力。海外要看复购与开机率，不看国家数</td></tr>
+    <tr><td class="k">竞品「橡鹿科技」与提纲常见误写「橡鹭」</td><td><span style="color:#c47a1e;font-weight:700">名称核对</span></td><td>公开资料为<b>橡鹿科技</b>，访谈中避免用错名</td></tr>
+    <tr><td class="k">CEO 中文名未核实</td><td><span style="color:#c47a1e;font-weight:700">信息缺口</span></td><td>英文资料为 Shirley Chen，中文名公开检索未确认，访谈中不主动称呼</td></tr>
+  </table>
+</div>
+
+<!-- 9 评审裁定 -->
+<div class="verdict">
+  <div class="verdict-en">Critic's Verdict — Sixteen Answers, and One Question the Client Did Not Ask</div>
+  <div class="verdict-zh">评审裁定：综合置信 6.5 / 10</div>
+
+  <div class="v-item"><div class="v-num">1</div><div class="v-text">
+    <strong>置信度分布：中高 2 条（ROI 矛盾、下行风险）· 中 9 条 · 中低 4 条 · 低 1 条（开机率）。</strong>16 问全部给出可带进访谈的结论，无一条以「需访谈」结案。
+  </div></div>
+
+  <div class="v-item"><div class="v-num">2</div><div class="v-text">
+    <strong>本报告最大产出不是任何一个答案，是两处数字矛盾。</strong>「年省 ¥12 万 vs 回收期 8-18 个月」与「40% 渗透率 vs ¥37 亿市场」——<strong>这两处只要在访谈里问出来，就足够支付这场专家费。</strong>拿着矛盾去问，比拿着问题去问有效得多。
+  </div></div>
+
+  <div class="v-item"><div class="v-num">3</div><div class="v-text">
+    <strong>提纲问了 16 个问题，但漏了最关键的一个：这家公司的天花板形态是什么？</strong>第 14 问触到了边缘（供应链协同），但没往下问。<strong>真正的分水岭是——Botinkit 是要成为「厨房设备公司」，还是要成为「被供应链公司集成的硬件模块」？</strong>前者天花板是设备市场的份额，后者天花板是别人的采购预算。<strong>这个问题的答案决定估值逻辑，而它不在提纲里。</strong>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">4</div><div class="v-text">
+    <strong>如果只能问三个问题：</strong><br>
+    <strong>①</strong> 一家门店装几台，才能把 4 个厨师降到 2 个？（检验 ROI 分母）<br>
+    <strong>②</strong> 装了一年以上的门店，平均日开机几小时？（唯一的真先行指标）<br>
+    <strong>③</strong> 你们自己做不做料包？（决定与蜀海是竞争还是被集成）
+  </div></div>
+</div>
+
+<!-- 反馈入口 -->
+<div class="feedback">
+  对这份研究的判断有异议或补充？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=botinkit_dd16" target="_blank">点此提交反馈 →</a>
+</div>
+
+<!-- 10 分析师附注 -->
+<div class="note">
+  <div class="note-h">分析师附注<span class="en">Analyst's Note — Method, Gaps, Compliance, and My Own View</span></div>
+
+  <div class="note-sub">一、置信度总表</div>
+  <table>
+    <tr><th>问</th><th>置信度</th><th>依据强度</th><th>推理层数</th></tr>
+    <tr><td class="k">5 ROI 拆分 · 16 下行风险</td><td><span class="badge b-hi">中高</span></td><td>由两个公开数字直接反推，算术可复核</td><td>1 层</td></tr>
+    <tr><td class="k">1 TAM · 6 人员替代 · 7 采购决策 · 8 竞争 · 9 价格 · 10 售后 · 11 出海 · 12 KMES · 14 供应链 · 15 ToC</td><td><span class="badge b-mid">中</span></td><td>有公开锚点（白皮书、官网、蜀海资料、绿茶招股书），结论为组合推理</td><td>2 层</td></tr>
+    <tr><td class="k">2 客户反馈 · 3 订单转化 · 13 数据壁垒</td><td><span class="badge b-lo">中低</span></td><td>客户侧无公开数据，由客户自身特征反推需求结构</td><td>3 层</td></tr>
+    <tr><td class="k">4 用户行为（开机率）</td><td><span class="badge b-lo">低</span></td><td><b>全行业零披露</b>，纯行业惯例推算</td><td>3 层以上</td></tr>
+  </table>
+
+  <div class="note-sub">二、数据缺口与结构性限制</div>
+  <p><b>结构性缺失（不是检索深度问题）</b>：Botinkit 为未上市公司，无强制披露义务。<b>开机率、单店部署台数、客户合同价、复购率、KMES 付费比例——这五项在任何公开渠道都不存在</b>，只能通过访谈获取。本报告对这五项均给出了推算区间与索取话术，未留白。</p>
+  <p><b>本次检索的真实限制</b>：本会话 WebSearch 为美国索引，对中文行业垂媒与非公开客户案例命中率有限。<b>千喜鹤、德宝两家客户的具体部署规模与反馈未检索到任何公开信息</b>——第 2 问的答案因此建立在「客户业态特征反推需求结构」之上，而非直接证据。</p>
+  <p><b>数字来源的可靠性分层</b>：市场规模（¥31.7亿/¥37亿/¥110亿）、ROI 区间（8-18 个月）、人力降幅（50-60%）来自 NCBD 与 36氪 白皮书，属行业研究口径；<b>单台 ¥5 万、国内 1,500 家门店来自媒体报道，非公司披露</b>，可能存在时点差与口径差。</p>
+
+  <div class="note-sub">三、合规提示（重要）</div>
+  <p><b>本次访谈涉及一条需要主动管理的边界。</b>受访专家若曾任职于蜀海（海底捞供应链体系）或其他与 Botinkit 有业务往来的企业，<b>以下内容不应在专家访谈中披露</b>：</p>
+  <ul>
+    <li>前雇主与 Botinkit 或任何供应商之间<b>未公开的合同价格、返点、账期条款</b></li>
+    <li>前雇主<b>未公开的采购计划、设备预算、供应商评估结果</b></li>
+    <li>任何涉及上市公司（海底捞 6862.HK、绿茶 6831.HK）的<b>未公开经营数据</b></li>
+  </ul>
+  <p><b>可以充分发挥的部分</b>：行业通行的决策流程、动线改造的一般成本结构、供应链公司与设备厂商的<b>合作模式判断</b>、对 ROI 口径的方法论质疑——<b>这些是经验判断，不是机密信息，而且恰恰是本次访谈最值钱的部分。</b></p>
+
+  <div class="note-sub">四、我的看法（与提纲本身的分歧）</div>
+  <p><b>1. 提纲把「产品好不好」问了 12 遍，把「这家公司会变成什么」问了 0 遍。</b>第 1-13 问基本都在验证产品力与市场接受度，只有第 14 问触到了商业模式的分水岭。<b>但一个已完成 B++ 轮、部署 24 国的公司，投资决策的关键早已不是「产品能不能用」，而是「它在价值链里占哪个位置」。</b>我建议把第 14 问从「能否做一体化」改写为「<b>如果供应链公司要集成你们，你们接受什么条件</b>」——这才是估值问题。</p>
+  <p><b>2. 第 1 问的 TAM 划分方式会导出错误结论。</b>按地区和菜系划分，会得到一个很大的数字；但这个品类的真实约束不在需求侧，在<b>售后网络的铺设速度</b>（第 10 问）。<b>TAM 应该按「服务网络能覆盖到的门店数」倒推，而不是按「理论上能用的门店数」正推。</b>前者是几万台的量级，后者是几十万台——差一个数量级，估值也就差一个数量级。</p>
+  <p><b>3. 第 15 问（ToC）反映了一个常见的尽调误区：把 B 端品牌力当成 C 端渠道力。</b>绿茶的客单价是 ¥54.6，它在消费者心里是「性价比江浙菜」，不是「厨房科技」。<b>用它带一台数千元的家电，等于用一个低价心智去卖一个高价耐用品。</b>这个设想的提出，说明提纲作者对餐饮品牌的消费者认知资产缺少感觉。</p>
+  <p><b>4. 我认为这家公司真正的风险不在竞争，在预期管理。</b>ROI 讲成年省 12 万，实际约 5 万——<b>5 万其实是个不错的数字，回收期一年，对餐饮设备而言完全合格。</b>但因为宣称值是 12 万，客户算出 5 万时的感受不是「合格」，而是「被骗了」。<b>这个品类最大的敌人是自己的营销口径。</b></p>
+
+  <div class="note-sub">五、待客户确认 / 补充项</div>
+  <ul>
+    <li><b>访谈对象的具体角色</b>：是 Botinkit 内部人、客户方（绿茶/千喜鹤/德宝）、还是供应链侧（蜀海类）？<b>三者能回答的问题几乎不重叠</b>——本报告默认按「供应链与采购视角」准备。</li>
+    <li><b>千喜鹤、德宝的部署规模</b>：公开零信息，若客户方有内部资料请提供，第 2、3 问置信度可由中低升至中高。</li>
+    <li><b>Botinkit 最新一轮估值与融资条款</b>：本报告未获取，若涉及投资决策请补充。</li>
+    <li><b>是否需要竞品（橡鹿科技、优特智厨）的对标研究</b>：本次仅做格局定位，未做单家深度。</li>
+  </ul>
+</div>
+
+<!-- 11 Footer -->
+<div class="footer">
+  Merlin 模式B · 客户提纲研究 ｜ Botinkit 不停科技（深圳市不停科技有限公司）· 核心尽调 16 问<br>
+  数据来源：NCBD《2026中国炒菜机器人行业发展白皮书》· 36氪行业白皮书 · 新华网《餐饮AI炒菜机器人研究报告2026》· Botinkit 官网 / botinkit.ai / InvestHK / RestaurantTechnologyNews · 蜀海供应链公开资料（21经济网、36氪）· 绿茶集团招股书 · 中国工控网厂商盘点 · 佩厨行业测算。<br>
+  综合置信 6.5/10：中高 2 条 · 中 9 条 · 中低 4 条 · 低 1 条。所有推算值的假设层数见「分析师附注」第一节。<br>
+  本报告为独立研究，不构成投资建议。研究日 2026-08-15。
+</div>
+
+</body>
+</html>

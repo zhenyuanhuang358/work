@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>味千（中国）FY2025 · Earner 财报分析</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1040px;margin:0 auto;padding:0 24px 72px}
+
+/* PUB BAR */
+.pub-bar{display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--copper);padding:10px 0;margin-bottom:28px;
+  font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted)}
+.pub-bar .brand{font-size:14px;color:var(--copper);font-style:italic;letter-spacing:.04em}
+
+/* TITLE BLOCK */
+.title-block{margin-bottom:32px}
+.title-zh{font-family:'IM Fell English',Georgia,serif;font-size:32px;font-weight:400;
+  color:var(--ink);line-height:1.3;margin-bottom:6px}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:15px;
+  color:var(--muted);font-style:italic;margin-bottom:14px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag{padding:3px 10px;border-radius:2px;font-size:11px;letter-spacing:.06em;
+  font-family:'IM Fell English',Georgia,serif}
+.tag-listed{background:#e8f0e8;color:var(--green);border:1px solid var(--green)}
+.tag-data{background:#fdf3e3;color:var(--amber);border:1px solid var(--amber)}
+.tag-sector{background:#f0ece6;color:var(--copper);border:1px solid var(--copper)}
+
+/* STAT BAR */
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);margin-bottom:36px}
+.stat-cell{background:var(--card);padding:18px 16px}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.stat-value{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:400}
+.stat-delta{font-size:12px;margin-top:4px}
+.up{color:var(--green)} .down{color:var(--red)} .neutral{color:var(--amber)}
+
+/* NOTICE */
+.notice{border-left:4px solid var(--amber);background:#fdf6ec;
+  padding:14px 18px;margin-bottom:32px;font-size:13px;color:#5a4010}
+.notice strong{color:var(--amber)}
+
+/* SECTION */
+section{margin-bottom:40px}
+.section-header{margin-bottom:18px;border-bottom:1px solid var(--border);padding-bottom:8px}
+.section-zh{font-family:'IM Fell English',Georgia,serif;font-size:19px;font-weight:400}
+.section-en{font-size:11px;color:var(--muted);font-style:italic;letter-spacing:.06em}
+
+/* CHART WRAP */
+.chart-wrap{background:var(--card);border:1px solid var(--border);
+  border-radius:2px;padding:20px;margin-bottom:12px}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+
+/* DATA TABLE */
+table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:20px}
+thead tr{background:var(--ink);color:var(--paper)}
+th{padding:10px 12px;text-align:left;font-weight:400;
+  font-family:'IM Fell English',Georgia,serif;font-size:13px}
+tbody tr:nth-child(even){background:#f5f2ed}
+td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+
+/* BADGES */
+.badge{display:inline-block;padding:1px 7px;border-radius:2px;font-size:10px;
+  letter-spacing:.06em;vertical-align:middle;margin-left:4px;
+  font-family:'IM Fell English',Georgia,serif}
+.badge-official{background:var(--green);color:#fff}
+.badge-predict{background:var(--amber);color:#fff}
+.badge-gap{background:var(--red);color:#fff}
+
+/* ANALYSIS TEXT */
+.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+.analysis-card{background:var(--card);border:1px solid var(--border);padding:20px}
+.label-zh{font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.04em;display:block;margin-bottom:2px}
+.label-en{font-size:10px;color:var(--muted);font-style:italic;display:block;margin-bottom:10px}
+
+/* SCENARIO / TARGET PRICE */
+.scenario-svg-wrap{margin-bottom:20px}
+.scenario-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px}
+.s-card{padding:18px;border:1px solid var(--border);background:var(--card);border-radius:2px}
+.s-card.bear{border-top:3px solid var(--red)}
+.s-card.base{border-top:3px solid var(--gold)}
+.s-card.bull{border-top:3px solid var(--green)}
+.s-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-family:'IM Fell English',Georgia,serif}
+.s-price{font-family:'IM Fell English',Georgia,serif;font-size:28px;font-weight:400;margin-bottom:4px}
+.s-delta{font-size:12px;margin-bottom:12px}
+.s-logic{font-size:12px;color:var(--muted);line-height:1.6}
+.assumption-table{width:100%;border-collapse:collapse;font-size:13px}
+.assumption-table th{background:#e8e4dd;padding:8px 12px;text-align:left;font-weight:400}
+.assumption-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+
+/* VERDICT */
+.verdict{background:var(--ink);color:var(--paper);padding:32px 36px;margin-bottom:36px;border-radius:2px}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--gold);
+  letter-spacing:.1em;margin-bottom:6px;font-style:italic}
+.verdict-zh{font-family:'IM Fell English',Georgia,serif;font-size:20px;margin-bottom:24px;
+  color:var(--paper);font-weight:400}
+.v-item{display:flex;gap:18px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #2a2a2b}
+.v-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:32px;color:var(--gold);
+  font-weight:400;line-height:1;flex-shrink:0;width:28px}
+.v-text{font-size:14px;line-height:1.7;color:#d4cec6}
+.v-text strong{color:var(--paper)}
+.v-source{color:var(--gold);font-size:11px;display:block;margin-top:6px;font-style:italic}
+
+/* TONE */
+.tone-wrap{background:var(--card);border:1px solid var(--border);padding:24px;margin-bottom:12px}
+.tone-score-row{display:flex;align-items:center;gap:20px;margin-bottom:18px}
+.tone-score-num{font-family:'IM Fell English',Georgia,serif;font-size:48px;color:var(--amber);font-weight:400}
+.tone-bar-bg{flex:1;height:10px;background:#e0dbd4;border-radius:5px;overflow:hidden}
+.tone-bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--green),var(--amber))}
+.tone-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px}
+.tone-dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.tone-dim{background:#f0ece6;padding:12px;font-size:12px}
+.tone-dim-label{color:var(--muted);font-size:10px;letter-spacing:.06em;margin-bottom:4px}
+.tone-dim-score{font-family:'IM Fell English',Georgia,serif;font-size:20px;color:var(--ink)}
+
+/* THEMES */
+.theme-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px}
+.chip{padding:6px 14px;background:var(--card);border:1px solid var(--border);
+  border-radius:20px;font-size:13px;cursor:default}
+.chip.red{border-color:var(--red);color:var(--red)}
+.chip.amber{border-color:var(--amber);color:var(--amber)}
+.chip.green{border-color:var(--green);color:var(--green)}
+
+/* RISK MATRIX */
+.risk-table{width:100%;border-collapse:collapse;font-size:13px}
+.risk-table th{background:var(--ink);color:var(--paper);padding:10px 12px;font-weight:400;text-align:left}
+.risk-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.risk-high{color:var(--red);font-weight:700}
+.risk-med{color:var(--amber);font-weight:700}
+.risk-low{color:var(--green);font-weight:700}
+
+/* QA */
+.qa-item{border-left:3px solid var(--copper);padding:16px 18px;
+  background:var(--card);margin-bottom:14px}
+.qa-q{font-family:'IM Fell English',Georgia,serif;font-size:14px;
+  font-style:italic;color:var(--copper);margin-bottom:8px}
+.qa-a{font-size:13px;color:var(--muted);line-height:1.7}
+.qa-tension{font-size:11px;color:var(--red);margin-top:6px;font-style:italic}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding-top:18px;margin-top:56px;
+  font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:1fr 1fr}
+  .chart-grid,.analysis-grid,.scenario-grid,.tone-dim-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- 1. PUB BAR -->
+<div class="pub-bar">
+  <span class="brand">Earner · 财报猎手</span>
+  <span>年度业绩分析 · FY2025</span>
+  <span>报告日期：2026-06-01</span>
+  <span>数据截至：2026-03-27 年报发布</span>
+</div>
+
+<!-- 2. TITLE BLOCK -->
+<div class="title-block">
+  <div class="title-zh">扭亏背后的利润陷阱</div>
+  <div class="title-en">Ajisen (China) FY2025 · Behind the Turnaround, a Profitability Trap in Plain Sight</div>
+  <div class="tag-row">
+    <span class="tag tag-listed">港股上市 00538.HK</span>
+    <span class="tag tag-data">⚠ 中等数据质量（无财报电话，基于年报）</span>
+    <span class="tag tag-sector">餐饮连锁 · 快餐拉面</span>
+  </div>
+</div>
+
+<!-- 3. STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-cell">
+    <div class="stat-label">FY2025 营业额</div>
+    <div class="stat-value">¥18.32亿</div>
+    <div class="stat-delta up">▲ +6.68% YoY <span class="badge badge-official">官方</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">净利润</div>
+    <div class="stat-value">¥2,800万</div>
+    <div class="stat-delta up">▲ 扭亏为盈（2024 亏损¥2022万）<span class="badge badge-official">官方</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">净利率</div>
+    <div class="stat-value">1.76%</div>
+    <div class="stat-delta neutral">◈ 极度薄利，行业低位 <span class="badge badge-official">官方</span></div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">期末门店数</div>
+    <div class="stat-value">617家</div>
+    <div class="stat-delta up">▲ 净增 21家，15年千店目标仍遥远 <span class="badge badge-official">官方</span></div>
+  </div>
+</div>
+
+<!-- DATA QUALITY NOTICE -->
+<div class="notice">
+  <strong>数据质量声明</strong>：本报告基于味千（中国）2025年年报（2026-03-27发布）及2025中期报告，无财报电话会议记录。标注
+  <span class="badge badge-official">官方</span> 为年报直接披露数字；
+  <span class="badge badge-predict">推算</span> 为H1/H2拆分估算；
+  <span class="badge badge-gap">缺口</span> 为公司已停止披露指标（如翻台率）。
+  股本数据约 10.92亿股（待核实，目标价测算已注明估算口径）。
+</div>
+
+<!-- 4. 季度营收走势图 (Annual, 5Y) -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">年度营收走势</div>
+    <div class="section-en">Annual Revenue Trend · FY2021–FY2025</div>
+  </div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 800 260" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <style>.ax{fill:#6b6460;font-size:10px}.val{font-size:11px}.grid{stroke:#d4cec6;stroke-dasharray:4,3}</style>
+      <!-- grid lines -->
+      <line x1="80" y1="40" x2="760" y2="40" class="grid" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="80" y1="90" x2="760" y2="90" class="grid" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="80" y1="140" x2="760" y2="140" class="grid" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="80" y1="190" x2="760" y2="190" class="grid" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <!-- y axis -->
+      <text x="72" y="43" text-anchor="end" class="ax">¥20亿</text>
+      <text x="72" y="93" text-anchor="end" class="ax">¥18亿</text>
+      <text x="72" y="143" text-anchor="end" class="ax">¥15亿</text>
+      <text x="72" y="193" text-anchor="end" class="ax">¥10亿</text>
+      <!-- axis baseline -->
+      <line x1="80" y1="220" x2="760" y2="220" stroke="#0a0a0b" stroke-width="1.5"/>
+      <!-- Bars: scale: 0→220px, 20亿→40px, 14亿→220*(1-14/20)=... use linear: 0亿=220, 20亿=40 → y=220-revenue/20*180 -->
+      <!-- 2021: 19.96亿 → y=220-19.96/20*180=220-179.6=40.4, height=179.6 -->
+      <rect x="110" y="40" width="70" height="180" fill="#8b6c42" opacity="0.7"/>
+      <text x="145" y="35" text-anchor="middle" class="val" fill="#0a0a0b">¥19.96亿</text>
+      <text x="145" y="237" text-anchor="middle" class="ax">2021</text>
+      <!-- 2022: 14.3亿 → y=220-14.3/20*180=220-128.7=91.3, height=128.7 -->
+      <rect x="220" y="91" width="70" height="129" fill="#8b2e2e" opacity="0.8"/>
+      <text x="255" y="86" text-anchor="middle" class="val" fill="#8b2e2e">¥14.3亿</text>
+      <text x="255" y="237" text-anchor="middle" class="ax">2022</text>
+      <!-- 2023: 18.15亿 → y=220-18.15/20*180=220-163.4=56.6, height=163.4 -->
+      <rect x="330" y="57" width="70" height="163" fill="#2a5c3f" opacity="0.8"/>
+      <text x="365" y="52" text-anchor="middle" class="val" fill="#2a5c3f">¥18.15亿</text>
+      <text x="365" y="237" text-anchor="middle" class="ax">2023</text>
+      <!-- 2024: 17.17亿 → y=220-17.17/20*180=220-154.5=65.5, height=154.5 -->
+      <rect x="440" y="65" width="70" height="155" fill="#c47a1e" opacity="0.8"/>
+      <text x="475" y="60" text-anchor="middle" class="val" fill="#c47a1e">¥17.17亿</text>
+      <text x="475" y="237" text-anchor="middle" class="ax">2024</text>
+      <!-- 2025: 18.32亿 → y=220-18.32/20*180=220-164.9=55.1, height=164.9 -->
+      <rect x="550" y="55" width="70" height="165" fill="#2a5c3f" opacity="0.9"/>
+      <text x="585" y="50" text-anchor="middle" class="val" fill="#2a5c3f">¥18.32亿</text>
+      <text x="585" y="237" text-anchor="middle" class="ax">2025</text>
+      <!-- YoY arrows -->
+      <text x="700" y="100" class="ax" fill="#6b6460">YoY增速</text>
+      <text x="700" y="116" font-size="10" fill="#8b2e2e">2022: -28%</text>
+      <text x="700" y="130" font-size="10" fill="#2a5c3f">2023: +27%</text>
+      <text x="700" y="144" font-size="10" fill="#c47a1e">2024: -5.4%</text>
+      <text x="700" y="158" font-size="10" fill="#2a5c3f">2025: +6.7%</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 5. 分部营收图 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">分部营收对比</div>
+    <div class="section-en">Segment Revenue · FY2024 vs FY2025</div>
+  </div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 800 220" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <style>.seg-label{font-size:11px;fill:#0a0a0b}.seg-val{font-size:10px}</style>
+      <!-- 内地餐厅 2024: 14.53亿 → bar width 14.53/20*620=449 -->
+      <!-- 2025: 15.18亿 → bar width 15.18/20*620=470 -->
+      <!-- 香港餐厅 2024: 1.97亿 → 61 -->
+      <!-- 2025: 2.66亿 → 82 -->
+      <!-- 产品销售 2024: 0.675亿 → 21 -->
+      <!-- 2025: 0.481亿 → 15 -->
+      <text x="10" y="38" class="seg-label" fill="#6b6460" font-style="italic">内地餐厅</text>
+      <rect x="130" y="18" width="449" height="22" fill="#8b6c42" opacity="0.6"/>
+      <text x="585" y="34" class="seg-val" fill="#6b6460">2024 ¥14.53亿</text>
+      <rect x="130" y="44" width="470" height="22" fill="#8b6c42"/>
+      <text x="606" y="60" class="seg-val" fill="#2a5c3f">2025 ¥15.18亿 +4.5%</text>
+
+      <text x="10" y="108" class="seg-label" fill="#6b6460" font-style="italic">香港餐厅</text>
+      <rect x="130" y="88" width="61" height="22" fill="#c9a84c" opacity="0.6"/>
+      <text x="197" y="104" class="seg-val" fill="#6b6460">2024 ¥1.97亿</text>
+      <rect x="130" y="114" width="82" height="22" fill="#c9a84c"/>
+      <text x="218" y="130" class="seg-val" fill="#2a5c3f">2025 ¥2.66亿 +35%</text>
+
+      <text x="10" y="168" class="seg-label" fill="#6b6460" font-style="italic">对外产品销售</text>
+      <rect x="130" y="148" width="21" height="22" fill="#6b6460" opacity="0.6"/>
+      <text x="157" y="164" class="seg-val" fill="#6b6460">2024 ¥0.675亿</text>
+      <rect x="130" y="174" width="15" height="22" fill="#8b2e2e" opacity="0.8"/>
+      <text x="151" y="190" class="seg-val" fill="#8b2e2e">2025 ¥0.481亿 -28.6%</text>
+
+      <line x1="130" y1="8" x2="130" y2="210" stroke="#d4cec6" stroke-width="1"/>
+      <text x="130" y="210" text-anchor="middle" font-size="9" fill="#6b6460">0</text>
+      <text x="750" y="210" text-anchor="middle" font-size="9" fill="#6b6460">¥20亿</text>
+    </svg>
+  </div>
+</section>
+
+<!-- 6. 净利润趋势 + 毛利率（两列） -->
+<div class="chart-grid">
+  <div class="chart-wrap">
+    <div style="font-size:12px;color:#6b6460;font-style:italic;margin-bottom:8px">净利润趋势 2021–2025（单位：百万RMB）</div>
+    <svg viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <!-- baseline at y=120 = zero -->
+      <line x1="40" y1="10" x2="340" y2="10" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="60" x2="340" y2="60" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="120" x2="340" y2="120" stroke="#0a0a0b" stroke-width="1.5"/>
+      <line x1="40" y1="160" x2="340" y2="160" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <text x="34" y="13" text-anchor="end" font-size="9" fill="#6b6460">+200M</text>
+      <text x="34" y="63" text-anchor="end" font-size="9" fill="#6b6460">+100M</text>
+      <text x="34" y="123" text-anchor="end" font-size="9" fill="#6b6460">0</text>
+      <text x="34" y="163" text-anchor="end" font-size="9" fill="#6b6460">-100M</text>
+      <!-- 2021: 20.94M → 20.94/200*110=11.5 above zero → y=120-11.5=108.5 h=11.5 -->
+      <rect x="55" y="109" width="30" height="11" fill="#2a5c3f" opacity="0.8"/>
+      <text x="70" y="105" text-anchor="middle" font-size="8" fill="#2a5c3f">+20.9M</text>
+      <text x="70" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2021</text>
+      <!-- 2022: -144M → 144/200*110=79.2 below zero → y=120, h=79.2 -->
+      <rect x="115" y="120" width="30" height="79" fill="#8b2e2e" opacity="0.8"/>
+      <text x="130" y="204" text-anchor="middle" font-size="8" fill="#8b2e2e">-144M</text>
+      <text x="130" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2022</text>
+      <!-- 2023: 181M → 181/200*110=99.6 above zero → y=120-99.6=20.4 h=99.6 -->
+      <rect x="175" y="20" width="30" height="100" fill="#2a5c3f" opacity="0.8"/>
+      <text x="190" y="16" text-anchor="middle" font-size="8" fill="#2a5c3f">+181M</text>
+      <text x="190" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2023</text>
+      <!-- 2024: -20.2M → 20.2/200*110=11.1 below zero → y=120, h=11 -->
+      <rect x="235" y="120" width="30" height="11" fill="#8b2e2e" opacity="0.8"/>
+      <text x="250" y="135" text-anchor="middle" font-size="8" fill="#8b2e2e">-20M</text>
+      <text x="250" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2024</text>
+      <!-- 2025: 28M → 28/200*110=15.4 above zero → y=120-15.4=104.6 h=15.4 -->
+      <rect x="295" y="105" width="30" height="15" fill="#2a5c3f" opacity="0.9"/>
+      <text x="310" y="101" text-anchor="middle" font-size="8" fill="#2a5c3f">+28M</text>
+      <text x="310" y="178" text-anchor="middle" font-size="9" fill="#6b6460">2025</text>
+    </svg>
+  </div>
+  <div class="chart-wrap">
+    <div style="font-size:12px;color:#6b6460;font-style:italic;margin-bottom:8px">毛利率 vs 净利率趋势（%）</div>
+    <svg viewBox="0 0 360 200" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <!-- scale: 0% = 190, 80% = 20 → y = 190 - pct/80*170 -->
+      <line x1="40" y1="20" x2="340" y2="20" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="70" x2="340" y2="70" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="120" x2="340" y2="120" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="170" x2="340" y2="170" stroke="#d4cec6" stroke-dasharray="4,3"/>
+      <line x1="40" y1="190" x2="340" y2="190" stroke="#0a0a0b" stroke-width="1.5"/>
+      <text x="34" y="23" text-anchor="end" font-size="9" fill="#6b6460">80%</text>
+      <text x="34" y="73" text-anchor="end" font-size="9" fill="#6b6460">50%</text>
+      <text x="34" y="123" text-anchor="end" font-size="9" fill="#6b6460">20%</text>
+      <text x="34" y="173" text-anchor="end" font-size="9" fill="#6b6460">5%</text>
+      <!-- Gross margin line approx: 75% historically, 77% 2025 -->
+      <!-- y = 190 - gm/80*170 -->
+      <!-- 2021: ~75% → y=190-75/80*170=190-159.4=30.6 -->
+      <!-- 2022: ~72% → y=190-72/80*170=190-153=37 -->
+      <!-- 2023: ~76% → y=190-76/80*170=190-161.5=28.5 -->
+      <!-- 2024: ~75% → y=190-75/80*170=30.6 -->
+      <!-- 2025: 76.98% → y=190-76.98/80*170=190-163.6=26.4 -->
+      <polyline points="70,31 130,37 190,29 250,31 310,26" stroke="#8b6c42" stroke-width="2" fill="none"/>
+      <circle cx="70" cy="31" r="3" fill="#8b6c42"/>
+      <circle cx="130" cy="37" r="3" fill="#8b6c42"/>
+      <circle cx="190" cy="29" r="3" fill="#8b6c42"/>
+      <circle cx="250" cy="31" r="3" fill="#8b6c42"/>
+      <circle cx="310" cy="26" r="3" fill="#8b6c42"/>
+      <text x="316" y="23" font-size="9" fill="#8b6c42">毛利率</text>
+      <!-- Net margin: 2021:1.05%→y=190-1.05/80*170=187.8, 2022:-7.2%→off chart(below), 2023:9.97%→190-9.97/80*170=169, 2024:-1.18%→off, 2025:1.76%→190-1.76/80*170=186.3 -->
+      <!-- 2022 and 2024 are negative, show below x axis? Use clamp to 190 for those -->
+      <polyline points="70,188 130,195 190,169 250,195 310,186" stroke="#2a5c3f" stroke-width="2" fill="none" stroke-dasharray="6,3"/>
+      <circle cx="70" cy="188" r="3" fill="#2a5c3f"/>
+      <circle cx="130" cy="195" r="3" fill="#8b2e2e"/>
+      <circle cx="190" cy="169" r="3" fill="#2a5c3f"/>
+      <circle cx="250" cy="195" r="3" fill="#8b2e2e"/>
+      <circle cx="310" cy="186" r="3" fill="#2a5c3f"/>
+      <text x="316" y="183" font-size="9" fill="#2a5c3f">净利率</text>
+      <!-- x labels -->
+      <text x="70" y="206" text-anchor="middle" font-size="9" fill="#6b6460">2021</text>
+      <text x="130" y="206" text-anchor="middle" font-size="9" fill="#6b6460">2022</text>
+      <text x="190" y="206" text-anchor="middle" font-size="9" fill="#6b6460">2023</text>
+      <text x="250" y="206" text-anchor="middle" font-size="9" fill="#6b6460">2024</text>
+      <text x="310" y="206" text-anchor="middle" font-size="9" fill="#6b6460">2025</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 7. 核心分析 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">核心分析</div>
+    <div class="section-en">Core Analysis · Four Dimensions</div>
+  </div>
+  <div class="analysis-grid">
+    <div class="analysis-card">
+      <span class="label-zh">营收质量</span>
+      <span class="label-en">Revenue Quality</span>
+      <p>营业额¥18.32亿（+6.68%），增长真实但结构分化：香港门店录得+35%高增速，主因2024年基数低叠加旅游复苏；内地仅+4.47%，低于名义消费增速，意味着内地实质上处于存量博弈。对外产品销售（即速食拉面等To-B/C渠道）同比下滑-28.63%，第二曲线持续萎缩，凸显品牌在餐饮之外几乎无定价权。</p>
+    </div>
+    <div class="analysis-card">
+      <span class="label-zh">利润结构</span>
+      <span class="label-en">Profit Architecture</span>
+      <p>毛利率76.98%看似亮眼，但净利率仅1.76%——高达75%的毛利被房租、人工、营销及外卖平台费用几近耗尽。更具警示意义的是H2 vs H1结构：上半年净利润¥3700万，下半年净亏损约¥900万。全年"扭亏"的成绩依赖淡季（H1）支撑，旺季（H2）反而拖累——这与常规餐饮消费规律相悖，值得深度追踪。</p>
+    </div>
+    <div class="analysis-card">
+      <span class="label-zh">成本压力与预期差</span>
+      <span class="label-en">Cost Inflation Gap</span>
+      <p>外卖平台配送费2025H1同比+25.4%（至¥3560万），营销费用+38.2%（至¥1050万）。收入增速6.7%远低于核心成本膨胀率，意味着每新增一元营收，成本扩张已超过利润留存空间。若2026年外卖渗透率继续提升，这一剪刀差将进一步扩大，净利率面临回落至负值的真实风险。</p>
+    </div>
+    <div class="analysis-card">
+      <span class="label-zh">战略执行力</span>
+      <span class="label-en">Strategic Execution</span>
+      <p>管理层于2010年前后喊出「千店目标」，15年后门店数617家，距1000家仍差38%。2025年净增21家，以此速度需再等18年。翻台率自2022年起停止披露（末次已知：内地2.5次/天），从信息披露角度判断，数据大概率未有实质改善。竞争层面，遇见小面以相近营收规模实现味千净利润4倍，差距不在赛道而在运营效率与品牌溢价。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 目标价三情景 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">目标价三情景</div>
+    <div class="section-en">Target Price · Three Scenarios (12-Month)</div>
+  </div>
+  <div class="scenario-svg-wrap chart-wrap">
+    <svg viewBox="0 0 800 100" font-family="'IM Fell English',Georgia,serif" xmlns="http://www.w3.org/2000/svg">
+      <!-- Price range bar: HK$0.40 to HK$2.00 → 560px wide starting at x=120 -->
+      <!-- scale: price → x = 120 + (price-0.40)/(2.00-0.40)*560 -->
+      <!-- Bear:0.55 → x=120+(0.55-0.40)/1.60*560=120+52.5=172.5 -->
+      <!-- Base:1.00 → x=120+(1.00-0.40)/1.60*560=120+210=330 -->
+      <!-- Bull:1.55 → x=120+(1.55-0.40)/1.60*560=120+402=522 -->
+      <!-- Current:1.06 → x=120+(1.06-0.40)/1.60*560=120+231=351 -->
+      <rect x="120" y="40" width="560" height="20" rx="3" fill="#e8e4dd"/>
+      <!-- Bear zone -->
+      <rect x="120" y="40" width="53" height="20" fill="#8b2e2e" opacity="0.3" rx="3"/>
+      <!-- Base zone -->
+      <rect x="173" y="40" width="157" height="20" fill="#c9a84c" opacity="0.3"/>
+      <!-- Bull zone -->
+      <rect x="330" y="40" width="192" height="20" fill="#2a5c3f" opacity="0.3"/>
+      <!-- markers -->
+      <line x1="173" y1="30" x2="173" y2="70" stroke="#8b2e2e" stroke-width="2"/>
+      <text x="173" y="25" text-anchor="middle" font-size="11" fill="#8b2e2e" font-style="italic">熊 HK$0.55</text>
+      <line x1="330" y1="30" x2="330" y2="70" stroke="#c9a84c" stroke-width="2"/>
+      <text x="330" y="25" text-anchor="middle" font-size="11" fill="#c47a1e" font-style="italic">基准 HK$1.00</text>
+      <line x1="522" y1="30" x2="522" y2="70" stroke="#2a5c3f" stroke-width="2"/>
+      <text x="522" y="25" text-anchor="middle" font-size="11" fill="#2a5c3f" font-style="italic">牛 HK$1.55</text>
+      <!-- Current price arrow -->
+      <polygon points="351,72 344,85 358,85" fill="#0a0a0b"/>
+      <text x="351" y="96" text-anchor="middle" font-size="10" fill="#0a0a0b">现价 HK$1.06</text>
+      <!-- axis labels -->
+      <text x="120" y="90" text-anchor="middle" font-size="9" fill="#6b6460">$0.40</text>
+      <text x="680" y="90" text-anchor="middle" font-size="9" fill="#6b6460">$2.00</text>
+    </svg>
+  </div>
+  <div class="scenario-grid">
+    <div class="s-card bear">
+      <div class="s-label">Bear Case · 悲观情景</div>
+      <div class="s-price" style="color:var(--red)">HK$0.55</div>
+      <div class="s-delta down">较现价 -48%</div>
+      <div class="s-logic">H2亏损持续扩大，外卖成本失控，内地同店销售负增长，品牌失去溢价。P/S下修至0.27x，营收收缩至¥16亿。</div>
+    </div>
+    <div class="s-card base">
+      <div class="s-label">Base Case · 基准情景</div>
+      <div class="s-price" style="color:var(--amber)">HK$1.00</div>
+      <div class="s-delta neutral">较现价 -5.7%</div>
+      <div class="s-logic">营收维持+5%增长，净利率稳在1.5-2%，门店净增15-20家/年。P/S维持0.5x，市场给予温和复苏溢价。</div>
+    </div>
+    <div class="s-card bull">
+      <div class="s-label">Bull Case · 乐观情景</div>
+      <div class="s-price" style="color:var(--green)">HK$1.55</div>
+      <div class="s-delta up">较现价 +46%</div>
+      <div class="s-logic">净利率突破3%，香港高增速延续，H2扭转亏损，门店加速至净增40家+/年，P/S提升至0.75x。</div>
+    </div>
+  </div>
+  <table class="assumption-table">
+    <thead>
+      <tr>
+        <th>关键假设</th>
+        <th style="color:var(--red)">熊市</th>
+        <th style="color:var(--amber)">基准</th>
+        <th style="color:var(--green)">牛市</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FY2026营收增速</td>
+        <td style="color:var(--red)">-8%（¥16.8亿）</td>
+        <td style="color:var(--amber)">+5%（¥19.2亿）</td>
+        <td style="color:var(--green)">+10%（¥20.2亿）</td>
+      </tr>
+      <tr>
+        <td>净利率</td>
+        <td style="color:var(--red)">亏损（-1%）</td>
+        <td style="color:var(--amber)">1.5-2%</td>
+        <td style="color:var(--green)">3%+</td>
+      </tr>
+      <tr>
+        <td>净增门店数</td>
+        <td style="color:var(--red)">净减少（关店加速）</td>
+        <td style="color:var(--amber)">净增15-20家</td>
+        <td style="color:var(--green)">净增35-45家</td>
+      </tr>
+      <tr>
+        <td>估值倍数（P/S）</td>
+        <td style="color:var(--red)">0.27x</td>
+        <td style="color:var(--amber)">0.50x</td>
+        <td style="color:var(--green)">0.75x</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px">注：目标价基于P/S估值法。股本约10.92亿股（待核实）；RMB/HKD换算约1:1.1。所有情景均为12个月参考区间，非精确预测。</div>
+</section>
+
+<!-- 9. VERDICT BOX -->
+<div class="verdict">
+  <div class="verdict-en">Earner Research Verdict · Executive Summary</div>
+  <div class="verdict-zh">执行摘要：3条关键判断</div>
+  <div class="v-item">
+    <div class="v-num">1</div>
+    <div class="v-text">
+      <strong>「扭亏」是技术性的，不是结构性的。</strong>
+      全年净利润¥2800万，但H1贡献¥3700万、H2亏损约¥900万——意味着全年盈利完全依靠上半年，而通常被视为旺季的下半年反而更弱。这一"反季节盈利"结构无法支撑持续复苏叙事。
+      <span class="v-source">依据：2025年报（¥18.32亿收入，¥2800万净利）+ 2025中期报告（H1净利¥3700万）</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">2</div>
+    <div class="v-text">
+      <strong>成本通胀正在蚕食毛利优势。</strong>
+      76.98%的毛利率在餐饮业属于高位，但外卖配送费（+25.4%）和营销费用（+38.2%）的增速是营收增速（+6.7%）的4-6倍。若此趋势延续，净利率将在2026年重回负值。高毛利的外表掩盖了真实的盈利脆弱性。
+      <span class="v-source">依据：2025中期报告成本拆分数据</span>
+    </div>
+  </div>
+  <div class="v-item">
+    <div class="v-num">3</div>
+    <div class="v-text">
+      <strong>现价隐含「基准情景」，安全边际极低。</strong>
+      HK$1.06对应P/S约0.5x（基准估值），上行空间受限于净利率天花板，下行风险在H2亏损证实后可能引发估值重估至P/S 0.27x（HK$0.55区间）。当前股价已反映复苏预期，但复苏的可持续性尚未被财务数据证实。
+      <span class="v-source">依据：P/S估值模型 + H2 2025盈利结构分析</span>
+    </div>
+  </div>
+</div>
+
+<!-- 10. 管理层语气 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">管理层语气评分</div>
+    <div class="section-en">Management Tone · Based on Annual Report Language (No Earnings Call)</div>
+  </div>
+  <div class="tone-wrap">
+    <div style="font-size:12px;color:var(--amber);margin-bottom:12px;font-style:italic">⚠ 味千中国为港股，无季度财报电话会议。语气评分基于年报措辞与信息披露完整度推断。</div>
+    <div class="tone-score-row">
+      <div class="tone-score-num">48</div>
+      <div style="flex:1">
+        <div class="tone-bar-bg"><div class="tone-bar-fill" style="width:48%"></div></div>
+        <div class="tone-labels"><span>悲观 0</span><span>中性 50</span><span>乐观 100</span></div>
+      </div>
+      <div style="font-size:13px;color:var(--muted);font-style:italic">谨慎防御型<br>Cautious-Defensive</div>
+    </div>
+    <div class="tone-dim-grid">
+      <div class="tone-dim">
+        <div class="tone-dim-label">前瞻指引完整度</div>
+        <div class="tone-dim-score" style="color:var(--red)">35<span style="font-size:12px">/100</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">无量化2026指引，无同店销售目标，无新开店计划数字</div>
+      </div>
+      <div class="tone-dim">
+        <div class="tone-dim-label">数据透明度</div>
+        <div class="tone-dim-score" style="color:var(--amber)">52<span style="font-size:12px">/100</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">翻台率已停止披露（2022后）；H2亏损结构未单独说明</div>
+      </div>
+      <div class="tone-dim">
+        <div class="tone-dim-label">战略清晰度</div>
+        <div class="tone-dim-score" style="color:var(--amber)">55<span style="font-size:12px">/100</span></div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">扩张节奏维持，香港复苏叙事清晰，内地策略模糊</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. 核心主题 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">核心主题</div>
+    <div class="section-en">Key Themes · FY2025</div>
+  </div>
+  <div class="theme-chips">
+    <span class="chip red">H2利润逆转 ⚠</span>
+    <span class="chip red">外卖成本失控</span>
+    <span class="chip red">千店目标失信</span>
+    <span class="chip amber">净利率极薄（1.76%）</span>
+    <span class="chip amber">翻台率不再披露</span>
+    <span class="chip amber">产品线收缩</span>
+    <span class="chip green">香港高增速（+35%）</span>
+    <span class="chip green">内地运营利润+548%</span>
+    <span class="chip green">毛利率稳定（77%）</span>
+  </div>
+</section>
+
+<!-- 12. 风险矩阵 -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">风险矩阵</div>
+    <div class="section-en">Risk Matrix</div>
+  </div>
+  <table class="risk-table">
+    <thead>
+      <tr><th>风险项</th><th>概率</th><th>影响</th><th>对策信号</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>外卖平台费用持续飙升，2026H1净利再度为负</td>
+        <td class="risk-high">高</td>
+        <td class="risk-high">高</td>
+        <td>观察H1 2026中报外卖费用占比是否超过收入的4%</td>
+      </tr>
+      <tr>
+        <td>内地同店销售增速转负（消费降级 + 竞争加剧）</td>
+        <td class="risk-high">中高</td>
+        <td class="risk-high">高</td>
+        <td>若翻台率恢复披露且低于3次/天，确认信号</td>
+      </tr>
+      <tr>
+        <td>香港复苏红利消退，2026H1港区增速回落至个位数</td>
+        <td class="risk-med">中</td>
+        <td class="risk-med">中</td>
+        <td>港区门店单店日均收入环比变化</td>
+      </tr>
+      <tr>
+        <td>管理层以并购或引进新品牌稀释股权</td>
+        <td class="risk-low">低</td>
+        <td class="risk-med">中</td>
+        <td>关注公告中的资产收购条款</td>
+      </tr>
+      <tr>
+        <td>速食产品线加速萎缩，To-B/C第二曲线彻底放弃</td>
+        <td class="risk-high">高</td>
+        <td class="risk-low">低</td>
+        <td>该分部占比仅2.6%，对整体影响有限</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 13. 分析师 Q&A 张力区（无财报电话，改为关键问题推演） -->
+<section>
+  <div class="section-header">
+    <div class="section-zh">假设你是分析师：5个核心追问</div>
+    <div class="section-en">Key Analyst Questions · If There Were an Earnings Call</div>
+  </div>
+  <div class="notice" style="margin-bottom:20px">味千中国无投资者财报电话。以下为若有电话会议，分析师最可能追问的核心张力点，以及基于年报数据的推断答案。</div>
+  <div class="qa-item">
+    <div class="qa-q">Q1：全年盈利¥2800万，但下半年亏损约¥900万——管理层如何解释H2的盈利逆转？</div>
+    <div class="qa-a">年报对H1/H2拆分未作专项说明。可能原因：H2食材、能源成本季节性走高 + 外卖费用集中爆发 + 部分新开店试营业亏损。但结构性原因（品牌号召力下降→H2客流恢复慢于预期）同样不可排除。</div>
+    <div class="qa-tension">张力：管理层"全年扭亏"的表述在技术上正确，但掩盖了H2运营质量的真实状态。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q2：为何自2022年起不再披露翻台率？</div>
+    <div class="qa-a">公司未作官方解释。翻台率在2022年已跌至2.5次/天（2010年为5.1次），停止披露通常发生在核心KPI持续走弱的情况下。</div>
+    <div class="qa-tension">张力：停止披露本身即是负面信号——如数据改善，管理层有动力重新发布。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q3：外卖平台配送费同比+25.4%，营收仅+5.9%，如何维持利润率？</div>
+    <div class="qa-a">目前靠毛利率高（77%）和绝对成本控制勉强维持净正值，但边际空间极薄。若2026年外卖渗透率继续从当前水平上升5个百分点，每百万元收入对应的配送成本增量约¥4-6万，净利润将完全被抹平。</div>
+    <div class="qa-tension">张力：外卖是结构性趋势，非周期性成本波动，管理层无力反转。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q4：千店目标已提出15年，2025年仅617家，是否会正式放弃或修订？</div>
+    <div class="qa-a">年报维持扩张方向，但未给出具体开店数目标。按2025年净增21家速度，距1000家需18年，管理层公信力受损。</div>
+    <div class="qa-tension">张力：坚持不切实际的目标会持续削弱投资者对管理层判断力的信任。</div>
+  </div>
+  <div class="qa-item">
+    <div class="qa-q">Q5：遇见小面净利润是味千的4倍，具体差距在哪里？</div>
+    <div class="qa-a">主要差距在于：品牌复购率 → 客流稳定性 → 对外卖平台议价权（遇见小面自带粉丝流量，减少平台依赖）；以及产品迭代速度（遇见小面持续推新，味千产品线老化）。</div>
+    <div class="qa-tension">张力：拉面赛道竞争已经升维，味千的"先发优势"在运营效率上并未形成护城河。</div>
+  </div>
+</section>
+
+<!-- 14. FOOTER -->
+<footer>
+  <span>Earner 财报猎手 · 味千（中国）00538.HK · FY2025 年度业绩分析</span>
+  <span>报告生成：2026-06-01 · 数据截至年报发布日 2026-03-27</span>
+  <span style="color:var(--amber)">本报告仅供参考，不构成投资建议</span>
+</footer>
+
+</body>
+</html>

@@ -463,6 +463,32 @@ def check_scan_reports():
     say(f"  已交付报告 {n} 份")
 
 
+# ── C13 · 报告交付前必须过 report_check，且检查后未改（2026-11-06 推广到报告线）─────────────
+def check_report_records():
+    import hashlib
+    say("\n[C13] 报告机械检查记录 memory/state/report_checks.jsonl")
+    rec = {}
+    fp = os.path.join(REPO, "memory/state/report_checks.jsonl")
+    if os.path.exists(fp):
+        for l in open(fp, encoding="utf-8"):
+            if l.strip():
+                r = json.loads(l)
+                rec[r["file"]] = r  # 同一文件以最后一次为准
+    out = subprocess.run(["git", "log", "--since=2026-11-07", "--name-only", "--format=", "--", "reports/"],
+                         capture_output=True, text=True, cwd=REPO).stdout.split()
+    changed = sorted({f for f in out if f.endswith(".html") and os.path.exists(os.path.join(REPO, f))})
+    say(f"  11/07 起改动的报告 {len(changed)} 份｜有检查记录 {sum(1 for f in changed if f in rec)}")
+    for f in changed:
+        r = rec.get(f)
+        sha = hashlib.sha256(open(os.path.join(REPO, f), encoding="utf-8", errors="ignore").read().encode("utf-8", "ignore")).hexdigest()
+        if not r:
+            flag("P1", f, "交付的报告没跑过 report_check --record（Critic Step 0）")
+        elif r["sha256"] != sha:
+            flag("P1", f, "报告在检查后被改过——重跑 report_check --record")
+        elif not r["pass"]:
+            flag("P1", f, "report_check 有 FAIL 仍交付：" + ", ".join(c["id"] for c in r["checks"] if not c["pass"] and c["level"] == "FAIL"))
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -479,6 +505,7 @@ def main():
     check_coo_pipelines()
     check_feedback()
     check_scan_reports()
+    check_report_records()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

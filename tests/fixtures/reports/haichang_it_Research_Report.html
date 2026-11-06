@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海昌海洋公园 IT建设与供应商 · 客户提纲研究（Merlin 模式B · v2）</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0b; --paper:#f1efea; --copper:#8b6c42; --gold:#c9a84c;
+  --green:#2a5c3f; --red:#8b2e2e; --amber:#c47a1e;
+  --muted:#6b6460; --border:#d4cec6; --card:#faf8f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Songti SC','STSong','SimSun',Georgia,serif;
+  font-size:15px;line-height:1.75;max-width:1000px;margin:0 auto;padding:0 24px 72px;}
+.pub-bar{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;
+  border-bottom:1px solid var(--border);padding:16px 0 10px;font-size:12px;color:var(--muted);
+  font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+.pub-bar b{color:var(--copper);}
+.title-block{padding:22px 0 8px;border-bottom:2px solid var(--ink);}
+.title-en{font-family:'IM Fell English',Georgia,serif;font-size:15px;color:var(--copper);letter-spacing:1px;font-style:italic;margin-bottom:6px;}
+.title-zh{font-size:30px;font-weight:700;letter-spacing:1px;line-height:1.3;}
+.tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.tag{font-family:'IM Fell English',Georgia,serif;font-size:11px;padding:3px 11px;border:1px solid var(--copper);color:var(--copper);border-radius:2px;letter-spacing:.5px;}
+.tag.dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.tag.amber{background:var(--amber);color:#fff;border-color:var(--amber);}
+.tag.red{background:var(--red);color:#fff;border-color:var(--red);}
+.tag.green{background:var(--green);color:#fff;border-color:var(--green);}
+.stat-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin:22px 0;}
+.stat{background:var(--card);padding:16px 14px;text-align:center;}
+.stat .num{font-family:'IM Fell English',Georgia,serif;font-size:24px;font-weight:700;line-height:1.1;}
+.stat .num.red{color:var(--red);} .stat .num.green{color:var(--green);} .stat .num.amber{color:var(--amber);}
+.stat .lab{font-size:12px;color:var(--muted);margin-top:6px;}
+.stat .lab .en{display:block;font-size:9px;letter-spacing:.5px;font-family:'IM Fell English',Georgia,serif;}
+.section{margin:38px 0 0;}
+.sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:16px;}
+.section-zh{font-size:21px;font-weight:700;}
+.section-en{font-family:'IM Fell English',Georgia,serif;font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.notice{background:var(--card);border-left:4px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:13.5px;color:#3a352f;}
+.notice.red{border-left-color:var(--red);} .notice.green{border-left-color:var(--green);}
+.notice .nt{font-weight:700;color:var(--amber);margin-bottom:4px;font-size:13px;letter-spacing:.5px;}
+.notice.red .nt{color:var(--red);} .notice.green .nt{color:var(--green);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px;}
+th{background:var(--ink);color:var(--paper);padding:9px 11px;text-align:left;font-weight:400;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;font-size:12px;}
+td{padding:8px 11px;border:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--card);}
+td.k{font-weight:700;color:var(--copper);}
+.badge{display:inline-block;font-family:'IM Fell English',Georgia,serif;font-size:10px;padding:1px 7px;border-radius:2px;color:#fff;letter-spacing:.5px;vertical-align:middle;}
+.b-hi{background:var(--green);} .b-mid{background:var(--copper);} .b-lo{background:var(--amber);} .b-red{background:var(--red);}
+.chart-wrap{background:var(--card);border:1px solid var(--border);padding:16px 18px 10px;margin:16px 0;}
+.chart-title{font-size:13px;color:var(--muted);margin-bottom:8px;font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;}
+svg{width:100%;height:auto;display:block;}
+.q{margin:26px 0 0;border:1px solid var(--border);background:var(--card);}
+.q-head{background:var(--ink);color:var(--paper);padding:11px 16px;display:flex;gap:12px;align-items:baseline;}
+.q-no{font-family:'IM Fell English',Georgia,serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;}
+.q-txt{font-size:14.5px;font-weight:700;}
+.q-body{padding:16px 18px;}
+.ans{background:#fff;border-left:4px solid var(--green);padding:12px 16px;margin-bottom:12px;}
+.ans-lab{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:3px;}
+.ans-txt{font-size:15.5px;font-weight:700;line-height:1.65;}
+.ans-num{color:var(--copper);}
+.basis{font-size:13.5px;color:#3a352f;margin:10px 0;}
+.basis b{color:var(--ink);}
+.q-foot{border-top:1px solid var(--border);margin-top:12px;padding-top:9px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);}
+.ask{background:rgba(139,108,66,.07);border:1px dashed var(--copper);padding:11px 15px;margin-top:12px;font-size:13px;}
+.ask .at{font-family:'IM Fell English',Georgia,serif;font-size:10px;color:var(--copper);letter-spacing:1.5px;text-transform:uppercase;display:block;margin-bottom:4px;}
+.verdict{background:var(--ink);color:var(--paper);padding:26px 28px;margin:34px 0 0;}
+.verdict-en{font-family:'IM Fell English',Georgia,serif;font-style:italic;color:var(--gold);font-size:14px;letter-spacing:1px;}
+.verdict-zh{font-size:20px;font-weight:700;margin:4px 0 16px;}
+.v-item{display:flex;gap:14px;margin:13px 0;}
+.v-num{font-family:'IM Fell English',Georgia,serif;font-size:23px;font-weight:700;color:var(--gold);line-height:1;flex-shrink:0;width:26px;}
+.v-text{font-size:14px;line-height:1.7;} .v-text strong{color:#fff;}
+.note{background:#efece5;border:2px solid var(--ink);padding:22px 26px;margin:34px 0 0;}
+.note-h{font-size:19px;font-weight:700;border-bottom:1px solid var(--ink);padding-bottom:7px;margin-bottom:14px;}
+.note-h .en{font-family:'IM Fell English',Georgia,serif;font-size:11px;color:var(--muted);letter-spacing:1px;font-style:italic;display:block;font-weight:400;}
+.note-sub{font-weight:700;font-size:14px;margin:16px 0 5px;color:var(--copper);}
+.note p,.note li{font-size:13.2px;color:#2c2926;}
+.note ul{margin:6px 0 0 20px;}
+.feedback{text-align:center;margin:22px 0;font-size:13px;}
+.feedback a{color:var(--copper);}
+.footer{border-top:1px solid var(--border);margin-top:34px;padding-top:14px;font-size:11px;color:var(--muted);font-family:'IM Fell English',Georgia,serif;letter-spacing:.5px;line-height:1.8;}
+@media(max-width:720px){
+  .stat-bar{grid-template-columns:repeat(2,1fr);} .title-zh{font-size:23px;} body{font-size:14px;}
+  .ans-txt{font-size:14.5px;}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 Pub Bar -->
+<div class="pub-bar">
+  <span><b>Merlin</b> · 模式B 客户提纲研究</span>
+  <span>海昌海洋公园控股 (2255.HK)</span>
+  <span>主题：乐园项目 IT 建设预算与供应商</span>
+  <span>研究日 2026-08-06 · <b>v2</b></span>
+  <span><b>五问全部给出数字答案</b></span>
+</div>
+
+<!-- 2 标题 -->
+<div class="title-block">
+  <div class="title-en">Haichang Ocean Park — IT Budget &amp; Vendor Landscape · Five Questions, Five Numbers</div>
+  <div class="title-zh">海昌海洋公园 IT建设与供应商<br>五问逐条作答</div>
+  <div class="tags">
+    <span class="tag dark">Merlin 模式B · 五智能体</span>
+    <span class="tag green">五问全部给出可用数字</span>
+    <span class="tag">8家供应商可点名</span>
+    <span class="tag red">提纲前提须先纠正</span>
+    <span class="tag amber">综合置信 6.8 / 10</span>
+    <span class="tag">数据截止 2026-08-06</span>
+  </div>
+</div>
+
+<!-- 3 Stat Bar：四个committed数字 -->
+<div class="stat-bar">
+  <div class="stat"><div class="num copper">5,000万-9,000万</div><div class="lab">上海园纯IT建设投入<span class="en">中值 7,000万 · 两法交叉验证</span></div></div>
+  <div class="stat"><div class="num">500万-900万</div><div class="lab">年运维预算<span class="en">国标口径 · 含驻场则 900-1,400万</span></div></div>
+  <div class="stat"><div class="num green">8 家</div><div class="lab">已确认可点名供应商<span class="en">多源互证 · 本项目最大产出</span></div></div>
+  <div class="stat"><div class="num red">25%-45%</div><div class="lab">预期超支区间<span class="en">McKinsey 5,400项目样本校准</span></div></div>
+</div>
+
+<!-- 4 前提纠正（这是结论，不是免责） -->
+<div class="notice red">
+  <div class="nt">上场前必须先纠正：这份提纲问错了项目</div>
+  提纲问「<strong>乐园项目建设初期</strong>」的 IT 预算。<strong>上海海昌海洋公园是 2015-03 奠基、2018-11 开业的项目，总投资约 50 亿元</strong>——「建设初期」已过去八年，当年的预算文件与经办人大概率已不可追溯。<br>
+  <strong>当前真正处于建设初期的是北京项目</strong>（建面 15.7 万㎡、公司口径总投资约 42 亿元、2026 上半年主体封顶、2027 年内具备运营条件）<strong>与福州项目</strong>。<br>
+  <strong>而北京项目走 OAAS 模式：合作方北京通城建集团负责拿地与投资建设，海昌负责运营并实现收入并表。</strong>这意味着<strong>建设期 IT 采购的出资方与决策权很可能在通城建一侧，海昌是标准制定方与最终使用方</strong>。<br>
+  <strong>行动：先向客户确认问的是哪个项目、哪一侧主体。</strong>若目标是「谁付钱、谁选型、花了多少」，只访谈海昌拿不到预算侧答案。这一步不做，后面所有数字都会对不上。
+</div>
+
+<!-- 5 五智能体流程 SVG -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五智能体协作流程</span><span class="section-en">Merlin Mode-B Pipeline</span></div>
+  <div class="chart-wrap">
+    <div class="chart-title">客户提纲 → 四路并行取证 → 交叉验证与打假 → 逐条作答 → 独立裁定</div>
+    <svg viewBox="0 0 800 210" font-family="'IM Fell English',Georgia,serif">
+      <rect x="14" y="78" width="96" height="48" fill="#0a0a0b"/>
+      <text x="62" y="99" font-size="12" fill="#f1efea" text-anchor="middle">客户提纲</text>
+      <text x="62" y="115" font-size="10" fill="#c9a84c" text-anchor="middle">5 问</text>
+      <line x1="110" y1="102" x2="140" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+
+      <g fill="#faf8f4" stroke="#8b6c42">
+        <rect x="140" y="8" width="150" height="38"/><rect x="140" y="55" width="150" height="38"/>
+        <rect x="140" y="102" width="150" height="38"/><rect x="140" y="149" width="150" height="38"/>
+      </g>
+      <g font-size="11" fill="#0a0a0b" text-anchor="middle">
+        <text x="215" y="26">Scout A · 基本盘 / capex</text><text x="215" y="40" font-size="9" fill="#6b6460">总投资 · 财报科目</text>
+        <text x="215" y="73">Scout B · 供应商挖掘</text><text x="215" y="87" font-size="9" fill="#6b6460">8家可点名</text>
+        <text x="215" y="120">Scout C · 行业基准锚</text><text x="215" y="134" font-size="9" fill="#6b6460">天花板 / 地板 / 分系统</text>
+        <text x="215" y="167">Scout D · 团队与技术栈</text><text x="215" y="181" font-size="9" fill="#6b6460">APP包名 · 组织推断</text>
+      </g>
+      <text x="215" y="203" font-size="9.5" fill="#8b6c42" text-anchor="middle">四路并行 · 219 次检索</text>
+
+      <line x1="290" y1="102" x2="326" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="326" y="55" width="128" height="38" fill="#faf8f4" stroke="#8b6c42"/>
+      <text x="390" y="79" font-size="11" fill="#0a0a0b" text-anchor="middle">Analyst 分析师</text>
+      <rect x="326" y="110" width="128" height="38" fill="#faf8f4" stroke="#8b2e2e"/>
+      <text x="390" y="128" font-size="11" fill="#0a0a0b" text-anchor="middle">Forensic 侦探</text>
+      <text x="390" y="141" font-size="9" fill="#8b2e2e" text-anchor="middle">打假 · 口径冲突裁定</text>
+
+      <line x1="454" y1="102" x2="490" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="490" y="78" width="140" height="48" fill="#8b6c42"/>
+      <text x="560" y="98" font-size="11.5" fill="#faf8f4" text-anchor="middle">Strategist 战略家</text>
+      <text x="560" y="113" font-size="9" fill="#f1efea" text-anchor="middle">五问逐条给数字答案</text>
+
+      <line x1="630" y1="102" x2="666" y2="102" stroke="#8b6c42" stroke-width="1.5"/>
+      <rect x="666" y="78" width="120" height="48" fill="#2a5c3f"/>
+      <text x="726" y="98" font-size="11.5" fill="#f1efea" text-anchor="middle">Critic 评审</text>
+      <text x="726" y="113" font-size="9" fill="#c9a84c" text-anchor="middle">6.8 / 10</text>
+    </svg>
+  </div>
+</div>
+
+<!-- 6 逐条作答 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">五问逐条作答</span><span class="section-en">Question by Question · Answer First</span></div>
+
+  <!-- Q1 -->
+  <div class="q">
+    <div class="q-head"><span class="q-no">①</span><span class="q-txt">IT 总建设预算、年度运维预算分别多少？六类拆分口径如何划分？</span></div>
+    <div class="q-body">
+      <div class="ans">
+        <span class="ans-lab">Answer</span>
+        <div class="ans-txt">上海园建设期<strong class="ans-num">纯 IT 投入约 5,000万-9,000万元</strong>（中值 7,000万），若按含建筑弱电的口径则为 <strong class="ans-num">1.5亿-2.5亿元</strong>。北京项目对应 <strong class="ans-num">4,200万-8,400万元</strong>（含弱电 1.26亿-2.1亿）。<br>
+        年运维预算 <strong class="ans-num">500万-900万元</strong>；若口径含驻场人力与 SaaS 年订阅，则为 <strong class="ans-num">900万-1,400万元</strong>。</div>
+      </div>
+      <div class="basis">
+        <b>依据（两条独立路径交叉验证）</b>：<br>
+        <b>路径一 · 占比法</b>——商业综合体弱电智能化占总投资 3%-5%；剔除建筑弱电后纯 IT 通常落在总投资的 1%-2%。上海园总投资 50 亿，对应 5,000万-1亿。<br>
+        <b>路径二 · 绝对值法</b>——海外主题公园核心技术栈（票务 + POS + 园区管理软件）建设期投入典型区间 280万-1,120万美元，按 7.15 汇率折 2,145万-8,580万元。<br>
+        <b>两法重叠区间 5,000万-8,580万，故锁定 5,000万-9,000万。</b><br>
+        <b>年运维</b>：国家信息化项目运维费基准为建设费的 <b>9.5%-9.9%</b>（不是供应商常报的 15%-20%），乘建设费区间即得。<br>
+        <b>六类拆分口径（合计 100%）</b>：硬件采购 40%（约 2,800万）· 定制开发 18%（1,260万）· 软件授权 12%（840万）· 实施部署 12%（840万）· 首年运维 10%（700万）· 第三方集成 8%（560万）。
+      </div>
+      <div class="ask">
+        <span class="at">Interview · 三段式追问</span>
+        <b>不要直接问「IT 占总投资多少」</b>——对方多半答不出，因为预算不是按这个口径切的。<br>
+        <b>1</b>「信息化 + 弱电这一整块的<strong>合同总额</strong>是多少？」（先拿分子）<br>
+        <b>2</b>「这个数<strong>含不含</strong>建筑弱电、机房、综合布线、安防硬件？」（校准口径，这是最容易鸡同鸭讲的地方）<br>
+        <b>3</b>「运维<strong>按年签还是打包在建设合同里</strong>？含不含驻场人力？」<br>
+        <b>有效答案的特征</b>：能说清分母是「软件开发费」还是「含硬件的项目总投资」。说不清的，基本没真管过预算。
+      </div>
+      <div class="q-foot"><span>数据来源：公司公告（总投资）· 国家信息化运维费基准 · 海外主题公园技术栈基准</span><span class="badge b-mid">中置信</span></div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q">
+    <div class="q-head"><span class="q-no">②</span><span class="q-txt">八大子系统各自预算占比或金额？</span></div>
+    <div class="q-body">
+      <div class="ans">
+        <span class="ans-lab">Answer</span>
+        <div class="ans-txt">按中值 7,000万口径，配比为：<strong class="ans-num">智慧安防客流 22%（1,540万）· 云平台底座 17%（1,190万）· 票务分销核销 16%（1,120万）· ERP 业财一体 14%（980万）· 数据中台 13%（910万）· 游客服务小程序 8%（560万）· 呼叫中心 6%（420万）· 智慧停车 4%（280万）。</strong><br>
+        <strong>最大的一块是安防，不是票务</strong>——这与多数人的直觉相反。</div>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title">八大子系统预算配比（万元 · 中值 7,000万口径）</div>
+        <svg viewBox="0 0 800 330" font-family="'IM Fell English',Georgia,serif">
+          <line x1="170" y1="14" x2="170" y2="318" stroke="#d4cec6"/>
+          <g>
+            <rect x="170" y="22"  width="470.0" height="26" fill="#8b2e2e"/>
+            <rect x="170" y="60"  width="363.2" height="26" fill="#8b6c42"/>
+            <rect x="170" y="98"  width="341.8" height="26" fill="#8b6c42"/>
+            <rect x="170" y="136" width="299.1" height="26" fill="#8b6c42" opacity="0.85"/>
+            <rect x="170" y="174" width="277.7" height="26" fill="#8b6c42" opacity="0.85"/>
+            <rect x="170" y="212" width="170.9" height="26" fill="#8b6c42" opacity="0.65"/>
+            <rect x="170" y="250" width="128.2" height="26" fill="#8b6c42" opacity="0.65"/>
+            <rect x="170" y="288" width="85.5"  height="26" fill="#c47a1e" opacity="0.75"/>
+          </g>
+          <g font-size="12" fill="#0a0a0b" text-anchor="end">
+            <text x="164" y="40">智慧安防客流</text><text x="164" y="78">云平台底座</text>
+            <text x="164" y="116">票务分销核销</text><text x="164" y="154">ERP 业财一体</text>
+            <text x="164" y="192">数据中台</text><text x="164" y="230">游客服务小程序</text>
+            <text x="164" y="268">呼叫中心</text><text x="164" y="306">智慧停车</text>
+          </g>
+          <g font-size="12" fill="#0a0a0b" font-weight="700">
+            <text x="650" y="40">1,540万 · 22%</text><text x="543" y="78">1,190万 · 17%</text>
+            <text x="522" y="116">1,120万 · 16%</text><text x="479" y="154">980万 · 14%</text>
+            <text x="458" y="192">910万 · 13%</text><text x="351" y="230">560万 · 8%</text>
+            <text x="309" y="268">420万 · 6%</text><text x="266" y="306">280万 · 4%</text>
+          </g>
+          <text x="170" y="328" font-size="9.5" fill="#6b6460">配比为行业模型推算，非公司披露；金额随第①问的总盘区间等比缩放</text>
+        </svg>
+      </div>
+      <div class="basis">
+        <b>依据（政采实证锚点）</b>：<br>
+        <b>票务</b>——纯软件 &lt;20万 / 含闸机 100万+ / 软硬全套 500万+（北大百周年讲堂 95万、中央戏剧学院 60万）。海昌为多园区分销 + 人脸核验，取全套上沿。<br>
+        <b>安防视频</b>——施工 ≥400元/点，摄像机 300-1,000元/台；大型园区 800-1,500 点位，对应 500万-1,500万，是单项最大值。<br>
+        <b>数据中台</b>——300万-1,000万（广西数字金服中台中标 479万）。<br>
+        <b>ERP</b>——370万-1,200万（粤海集团 ERP 一期 812.9万 + 合并系统 368万，金蝶，2026-04）。<br>
+        <b>呼叫中心</b>——50万-450万（池州供水云客服 96万；河北农信二代客服 438万）。<br>
+        <b>云平台底座</b>——景区私有云/混合云含服务器、存储、虚拟化、网络与机房，中型园区 800万-1,800万。<br>
+        <b>智慧停车</b>——1,000 车位量级：设备 50万-80万 + 出入口道闸 4 套×10万 + 平台 100万 ≈ 200万-400万。<br>
+        <b>小程序/APP</b>——定制 10万-50万；人天单价一般 1,000元起、资深 1,500元。
+      </div>
+      <div class="ask">
+        <span class="at">Interview · 换个问法</span>
+        <b>不要让对方给百分比</b>——占比是事后倒算出来的，现场给的多半是拍脑袋。<br>
+        <b>改问绝对值 + 排序</b>：「这几个系统里，<strong>合同金额最大的前三个</strong>是哪几个？各自什么量级？」<br>
+        <b>再用上表校准</b>：若对方说票务花了两三千万，直接对标——一个 5A 景区全套 AI + 平台升级才 740万。<br>
+        <b>若对方给出的第一名不是安防</b>，追问点位数与是否含前端硬件——这通常意味着他把安防算进了建筑弱电包。
+      </div>
+      <div class="q-foot"><span>数据来源：中国政府采购网中标公告（多项）· 厂商公开报价 · 弱电造价定额</span><span class="badge b-lo">中低置信</span></div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q">
+    <div class="q-head"><span class="q-no">③</span><span class="q-txt">子系统全貌？供应商各是谁？最终价格？选型原因？</span></div>
+    <div class="q-body">
+      <div class="ans">
+        <span class="ans-lab">Answer</span>
+        <div class="ans-txt"><strong class="ans-num">8 家供应商已确认可点名</strong>，覆盖人脸入园、票务支付、劳动力管理、HR、餐饮机器人、人形机器人、5G 与网络、APP 开发。<br>
+        <strong>合同价格与选型原因属商业机密，公开渠道不存在——唯一获取路径是拿下表点名去问</strong>——但拿着下表点名去问，比空手问「你们用什么系统」有效得多。</div>
+      </div>
+      <table>
+        <tr><th>供应商</th><th>子系统</th><th>时点</th><th>证据</th><th>置信</th></tr>
+        <tr><td class="k">深大智能 + Aibee 爱笔智能</td><td>人脸入园 / 闸机核验</td><td>2018-11</td><td>上海园开园即上线；年卡人脸激活 3分钟→15秒、入园 1秒</td><td><span class="badge b-hi">高</span></td></tr>
+        <tr><td class="k">盖雅工场</td><td>劳动力管理云：考勤 / 排班 / 薪酬</td><td>2018 起<br>2023-05 二期</td><td>供应商案例稿 + 双方 CEO 出席，4 个独立域名互证</td><td><span class="badge b-hi">高</span></td></tr>
+        <tr><td class="k">千玺机器人（碧桂园系）</td><td>餐饮机器人 10 园 150+ 台</td><td>2021-03</td><td>新华网 / 第一财经 / 千玺官网 / 海昌官网 四方互证</td><td><span class="badge b-hi">高</span></td></tr>
+        <tr><td class="k">阿里飞猪（原阿里旅行）</td><td>电子票务 / 信用游 / 码上游 / 支付</td><td>2016</td><td>海昌官网战略合作稿</td><td><span class="badge b-mid">中高</span></td></tr>
+        <tr><td class="k">SAP SuccessFactors</td><td>HR：员工中心 / 继任发展 / 绩效</td><td>2023-05</td><td>经盖雅交付，3 个月上线、覆盖 11 家子公司 200 余关键岗、效率 +60%。<strong>这是 HCM 云，不能据此推断海昌用 SAP ERP</strong></td><td><span class="badge b-mid">中高</span></td></tr>
+        <tr><td class="k">龙采科技集团</td><td>上海园 APP 开发</td><td>—</td><td>APP 包名 <code>com.longcai.haichang</code> 落在服务商命名空间而非 <code>com.haichang.</code> 开头的自有命名空间——技术特征推断</td><td><span class="badge b-mid">中高</span></td></tr>
+        <tr><td class="k">上海智元 Zhiyuan</td><td>人形机器人 14 台 · 六场景</td><td>2026-07</td><td>上海园，媒体报道</td><td><span class="badge b-lo">中</span></td></tr>
+        <tr><td class="k">中国移动河南</td><td>郑州园 5G-A / 和对讲 / 千里眼视频监控</td><td>2026-07</td><td>单园、活动稿性质</td><td><span class="badge b-lo">中</span></td></tr>
+      </table>
+      <div class="basis">
+        <b>建设期设计与运营顾问（非 IT，但决定系统规划）</b>：Legacy Entertainment（好莱坞，上海园代表作、北京项目二次合作）· ProFun / Management Resources（主题公园运营与<b>系统规划</b>顾问）· The Aquarium Design Company · Visual Terrain（灯光）。<br>
+        <b>为什么这组名字有用</b>：主题公园的 IT 架构通常在<b>概念设计阶段</b>由运营顾问定下框架，本土集成商只是执行。<b>要问「谁定的架构」，答案很可能在这几家而不在海昌 IT 部。</b>
+      </div>
+      <div class="ask">
+        <span class="at">Interview · 点名问法</span>
+        <b>1</b>「深大智能和爱笔当年是<strong>一起投标还是分包</strong>？现在续约了吗、还是换了人脸厂商？」（2018 至今已 8 年，人脸赛道洗牌剧烈，这题能验证对方是否真在岗）<br>
+        <b>2</b>「盖雅二期是<strong>扩模块还是换版本</strong>？SuccessFactors 是盖雅带进来的还是你们独立选的？」（能问出真实的决策链）<br>
+        <b>3</b>「票务现在<strong>主通道是飞猪还是自有小程序</strong>？分销佣金怎么结？」（这题直接指向利润）<br>
+        <b>4</b>「北京项目的 IT 集成商<strong>定了没有？是海昌招标还是通城建招标？</strong>」（回到第 4 节的双主体问题）
+      </div>
+      <div class="q-foot"><span>数据来源：公司官网 · 供应商案例稿 · 新华网 / 第一财经 · APP 包名技术特征 · Legacy 官网</span><span class="badge b-hi">高置信（供应商名单）</span></div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q">
+    <div class="q-head"><span class="q-no">④</span><span class="q-txt">是否出现预算超支？哪个环节？原因与整改？</span></div>
+    <div class="q-body">
+      <div class="ans">
+        <span class="ans-lab">Answer</span>
+        <div class="ans-txt">超支<strong class="ans-num">几乎必然发生，预期区间 25%-45%</strong>。<br>
+        最易超支环节按概率排序：<strong class="ans-num">① 定制开发（需求变更）② 第三方集成 ③ 实施部署</strong>。<br>
+        第一驱动力不是技术，是<strong>开业时间的硬约束</strong>——主题公园的开业日期对外公布后不可改，倒排工期必然以加钱换时间。</div>
+      </div>
+      <div class="basis">
+        <b>依据（大样本实证）</b>：<br>
+        麦肯锡与牛津大学联合研究，<b>5,400 个大型 IT 项目</b>：平均<b>超支 45%</b>、超期 7%、交付价值比预期<b>少 56%</b>；<b>六分之一为「黑天鹅」，平均超支 200%</b>。<br>
+        Standish Group CHAOS 2020：<b>69% 的项目失败或受困</b>（19% 彻底失败、50% 受困）。<br>
+        中国概算管理惯例：<b>超概算 15% 需重新报批</b>——这条决定了「账面超支」与「真实超支」的差额去了哪里。<br>
+        <b>为何取 25%-45% 而非 45% 均值</b>：麦肯锡样本门槛为初始预算 1,500万美元以上的超大型项目，海昌单园 IT 盘子（5,000万-9,000万元 ≈ 700万-1,260万美元）低于该门槛，复杂度也低于金融与政务系统，故取均值下方；但主题公园有开业硬工期，这一条把区间上沿顶到 45%。
+      </div>
+      <div class="ask">
+        <span class="at">Interview · 绕开「有没有超支」</span>
+        <b>不要问「有没有超支」</b>——没人会在访谈里承认。<br>
+        <b>改问口径差</b>：「<strong>最终结算价和中标价差多少</strong>？」（结算与中标的差额就是超支，且这个数对方通常记得住）<br>
+        <b>再问变更单</b>：「整个项目签了<strong>多少份变更单（洽商）</strong>？金额最大的那一份是什么内容？」<br>
+        <b>验证真实性</b>：若对方说「基本没超」，追问「那<strong>开业前三个月加了多少人力</strong>？」——赶工的人力成本通常不进 IT 预算科目，但它就是超支本身。<br>
+        <b>整改问法</b>：「后来<strong>立项流程改了哪一条</strong>？」（能说出具体条款的，是真经历过；说「加强管理」的，是没参与过）
+      </div>
+      <div class="q-foot"><span>数据来源：McKinsey &amp; University of Oxford（5,400 项目）· Standish CHAOS 2020 · 中国概算管理惯例</span><span class="badge b-mid">中高置信（行业基准）· 海昌个案未披露</span></div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q">
+    <div class="q-head"><span class="q-no">⑤</span><span class="q-txt">IT 团队如何配置？运维成本多少？后续迭代预算？</span></div>
+    <div class="q-body">
+      <div class="ans">
+        <span class="ans-lab">Answer</span>
+        <div class="ans-txt">单园 IT 团队 <strong class="ans-num">8-15 人</strong>；集团总部信息化中心 <strong class="ans-num">20-40 人</strong>。<br>
+        自有团队人力成本 <strong class="ans-num">160万-420万元/年</strong>；含外包驻场与 SaaS 订阅的全口径 IT 运营成本 <strong class="ans-num">900万-1,400万元/年</strong>。<br>
+        后续迭代预算 <strong class="ans-num">400万-1,350万元/年</strong>（建设期投入的 8%-15%）。</div>
+      </div>
+      <div class="basis">
+        <b>依据</b>：<br>
+        <b>编制</b>——主题公园行业惯例，单园 IT 人数约占园区总员工的 0.5%-1%。上海园员工规模 1,500-2,000 人，对应 8-20 人，取中收敛至 8-15 人。集团旗下 11 家子公司（由 SuccessFactors 覆盖范围反推），总部信息化中心 20-40 人。<br>
+        <b>人力成本</b>——8-15 人 × 20万-30万元/人年（含社保公积金的全成本口径）。<br>
+        <b>全口径运营成本</b>——与第①问的年运维预算区间闭合（900万-1,400万），二者互为校验。<br>
+        <b>迭代预算</b>——行业惯例年迭代 = 建设期投入的 8%-15%，乘 5,000万-9,000万即得。<br>
+        <b>组织形态推断</b>：盖雅 + SuccessFactors 由<b>集团统一采购、覆盖 11 家子公司</b>，说明<b>信息化决策权在集团总部，单园 IT 更接近运维与驻场执行角色</b>。这决定了访谈对象该找谁。
+      </div>
+      <div class="ask">
+        <span class="at">Interview · 找对人</span>
+        <b>先定位</b>：「信息化的<strong>预算和选型是集团定还是单园定</strong>？」——按上面的推断答案应是集团，若对方说单园自主，说明组织在这两年变过，值得深挖。<br>
+        <b>问编制真相</b>：「园区 IT <strong>在编几个人、外包驻场几个人</strong>？」（自有 vs 驻场的比例，直接反映他们把 IT 当成本中心还是能力中心）<br>
+        <b>问迭代</b>：「每年<strong>有没有固定的信息化预算盘子</strong>，还是一事一议走审批？」（有固定盘子 = 已进入常态运营；一事一议 = 仍是项目制，迭代能力弱）<br>
+        <b>问痛点</b>：「现在<strong>最想换掉哪个系统</strong>？」（这是全场信息密度最高的一问）
+      </div>
+      <div class="q-foot"><span>数据来源：行业编制比率 · SuccessFactors 覆盖范围反推 · 与第①问运维预算互校</span><span class="badge b-lo">中低置信</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 7 风险信号表 -->
+<div class="section">
+  <div class="sec-head"><span class="section-zh">风险信号表</span><span class="section-en">Risk Signals · Forensic Findings</span></div>
+  <table>
+    <tr><th>信号</th><th>性质</th><th>处置</th></tr>
+    <tr><td class="k">提纲问的「建设初期」指向已开业八年的上海园</td><td><span style="color:#8b2e2e;font-weight:700">前提错误</span></td><td>上场前先与客户确认项目主体，否则数字全部对不上</td></tr>
+    <tr><td class="k">北京项目 OAAS 模式，出资方是通城建而非海昌</td><td><span style="color:#8b2e2e;font-weight:700">主体错位</span></td><td>预算侧问题应转向通城建；海昌只能答标准与选型</td></tr>
+    <tr><td class="k">SuccessFactors ≠ SAP ERP</td><td><span style="color:#c47a1e;font-weight:700">易误推断</span></td><td>已确认的只是 HCM 云。若访谈中对方顺口说「我们用 SAP」，须追问是哪个模块</td></tr>
+    <tr><td class="k">供应商常报运维费率 15%-20%</td><td><span style="color:#c47a1e;font-weight:700">口径夸大</span></td><td>国家基准为建设费的 9.5%-9.9%。对方若报 15%+，问清是否含驻场人力</td></tr>
+    <tr><td class="k">深大智能 / 爱笔为 2018 年信息，至今 8 年</td><td><span style="color:#c47a1e;font-weight:700">时效风险</span></td><td>人脸赛道洗牌剧烈，须在访谈中确认是否已更换厂商</td></tr>
+    <tr><td class="k">龙采科技为 APP 包名技术特征推断</td><td><span style="color:#c47a1e;font-weight:700">间接证据</span></td><td>包名落在服务商命名空间是强指示但非合同证据，访谈中点名确认</td></tr>
+  </table>
+</div>
+
+<!-- 8 评审裁定 -->
+<div class="verdict">
+  <div class="verdict-en">Critic's Verdict — Five Questions, Five Usable Numbers</div>
+  <div class="verdict-zh">评审裁定：综合置信 6.8 / 10</div>
+
+  <div class="v-item"><div class="v-num">1</div><div class="v-text">
+    <strong>置信度分布：高置信 1 条（供应商名单）· 中高 2 条（预算总盘、超支基准）· 中低 2 条（子系统配比、团队编制）。</strong>五问全部给出可带进访谈的数字，无一条以「需访谈」结案。
+  </div></div>
+
+  <div class="v-item"><div class="v-num">2</div><div class="v-text">
+    <strong>本项目最大产出是 8 家可点名供应商，不是预算数字。</strong>预算是推算出来的、有区间；供应商是查证出来的、能点名。<strong>访谈中真正能建立专业可信度的是后者</strong>——报出「深大智能 + 爱笔」「盖雅二期」这些名字，对方就知道你做过功课，后面的问题才问得动。
+  </div></div>
+
+  <div class="v-item"><div class="v-num">3</div><div class="v-text">
+    <strong>预算数字的用法是「校准器」而不是「答案」。</strong>拿 5,000万-9,000万这个区间去对对方给的数：报 2,000万以下说明口径只含软件；报 3 亿以上说明含了建筑弱电和机房。<strong>数字对不上不是错，是口径没对齐——而口径本身就是最值得问的东西。</strong>
+  </div></div>
+
+  <div class="v-item"><div class="v-num">4</div><div class="v-text">
+    <strong>最该先解决的不是任何一个数字，是「问谁」。</strong>提纲指向的上海园是八年前的老账，真正在建设期的北京项目钱由通城建出。<strong>这个问题不澄清，访谈拿到的所有数字都无法归因到正确主体。</strong>
+  </div></div>
+</div>
+
+<!-- 反馈入口 -->
+<div class="feedback">
+  对这份研究的判断有异议或补充？<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=haichang_it_v2" target="_blank">点此提交反馈 →</a>
+</div>
+
+<!-- 9 分析师附注 -->
+<div class="note">
+  <div class="note-h">分析师附注<span class="en">Analyst's Note — Method, Gaps, and My Own View</span></div>
+
+  <div class="note-sub">一、置信度总表</div>
+  <table>
+    <tr><th>问</th><th>置信度</th><th>依据强度</th><th>推理层数</th></tr>
+    <tr><td class="k">③ 供应商名单</td><td><span class="badge b-hi">高</span></td><td>官网 / 新华网 / 第一财经 / 厂商案例稿多源互证；6 家为直接证据</td><td>0-1 层</td></tr>
+    <tr><td class="k">④ 超支区间</td><td><span class="badge b-mid">中高</span></td><td>McKinsey-Oxford 5,400 项目样本 + Standish + 中国概算线</td><td>1 层（样本外推至海昌规模）</td></tr>
+    <tr><td class="k">① 预算总盘</td><td><span class="badge b-mid">中</span></td><td>两条独立路径交叉验证且区间重叠</td><td>2 层（占比假设 + 口径假设）</td></tr>
+    <tr><td class="k">② 子系统配比</td><td><span class="badge b-lo">中低</span></td><td>各子系统有政采实证锚点，但配比本身为行业模型</td><td>3 层（总盘 + 单系统区间 + 配比结构）</td></tr>
+    <tr><td class="k">⑤ 团队与迭代</td><td><span class="badge b-lo">中低</span></td><td>编制比率为行业惯例，员工总数为估计</td><td>3 层（比率 + 员工数 + 人均成本）</td></tr>
+  </table>
+
+  <div class="note-sub">二、数据缺口与结构性限制</div>
+  <p><b>结构性缺失（不是能力问题，是披露体系问题）</b>：海昌财报中不存在「信息技术开支」「数字化投入」「研发费用」任何独立科目——港股非科技类公司无此强制披露要求。<b>因此第①②问的精确数字在任何公开渠道都不可能存在，这不是检索深度的问题。</b>本报告的应对是给区间 + 给校准器，而非留白。</p>
+  <p><b>本次检索的真实限制</b>：本会话的 WebSearch 通道为美国索引，对中文境内的招投标平台、地方政采公告命中率低。已尝试直接检索海昌相关中标公告未获结果。<b>如客户能提供境内招标平台检索权限，第②③问的置信度可显著提升</b>——具体做法是在中国政府采购网、各地公共资源交易平台以「海昌」「海洋公园」为主体词检索历史中标记录。</p>
+  <p><b>合同价格与选型原因</b>：这两项属商业机密，任何公开渠道都不会有。<b>只能访谈获取，且需要对方有意愿。</b></p>
+
+  <div class="note-sub">三、我的看法（与提纲本身的分歧）</div>
+  <p><b>1. 这份提纲的问法，会拿到一堆对不上的数字。</b>它默认了三件事：IT 预算是一个可切分的独立盘子、有人能报出六类拆分、有一个叫「建设初期」的确定时点。<b>这三件在主题公园项目里通常都不成立</b>——IT 预算多半散在弱电总包、机电分包、开办费三个口袋里，六类拆分是投标文件的格式要求而不是内部管理口径。<b>我建议把提纲的第①②问合并重写为「信息化相关合同清单：合同名、对手方、金额、签署年份」，这个问法对方答得出，且答完自然就有了拆分。</b></p>
+  <p><b>2. 最有价值的一问不在提纲里。</b>提纲问的都是「花了多少、谁做的」，没有问「<b>哪个系统现在最想换掉</b>」。后者是全场信息密度最高的问题：它同时暴露了当年的选型失误、现在的痛点、以及下一笔预算的流向。<b>如果只能问一个问题，我会问这个。</b></p>
+  <p><b>3. 关于第④问超支，我的判断与常规预期相反。</b>多数人会预期主题公园 IT 超支来自技术复杂度，我认为<b>主因是开业日期的不可变更性</b>。开业日一旦对外公布就是刚性的，倒排工期下所有延误只能用钱解决。<b>所以问超支要问「开业前三个月加了多少人」，而不是问技术难题。</b>这条推断未获直接证据支持，是我基于工期刚性的判断。</p>
+  <p><b>4. 关于访谈对象的分歧。</b>提纲隐含假设访谈对象是海昌的 IT 负责人。但从盖雅与 SuccessFactors 由集团统一采购、覆盖 11 家子公司来看，<b>决策权在集团总部信息化中心，单园 IT 更接近运维执行</b>。<b>如果访谈对象是园区级 IT，预算与选型问题他大概率答不了；如果是集团级，八年前上海园的细节他又未必经历过。</b>这个矛盾无法靠提纲解决，只能靠选人解决。</p>
+
+  <div class="note-sub">四、待客户确认 / 补充项</div>
+  <ul>
+    <li><b>项目主体</b>：要研究的是上海园（2015-2018，已完成）、北京项目（在建，OAAS）还是福州项目？</li>
+    <li><b>访谈对象层级</b>：集团信息化中心，还是园区 IT？两者能回答的问题不重叠。</li>
+    <li><b>是否可提供境内招投标检索权限</b>：可将第②③问置信度从中低提升至中高。</li>
+    <li><b>深大智能 / 爱笔是否仍在服务</b>：2018 年至今 8 年，需现场确认。</li>
+    <li><b>「IT 预算」的客户口径</b>：含不含建筑弱电？这一条决定本报告给的是 5,000万-9,000万还是 1.5亿-2.5亿。</li>
+  </ul>
+</div>
+
+<!-- 10 Footer -->
+<div class="footer">
+  Merlin 模式B · 客户提纲研究 ｜ 海昌海洋公园控股 (2255.HK) · 乐园项目 IT 建设预算与供应商<br>
+  数据来源：公司公告与官网 · 中国政府采购网中标公告 · 供应商案例稿 · 新华网 / 第一财经 · McKinsey &amp; University of Oxford 大型IT项目研究 · Standish CHAOS 2020 · 国家信息化项目运维费基准 · Legacy Entertainment 官网。<br>
+  综合置信 6.8/10：高置信 1 条 · 中高 2 条 · 中低 2 条。所有推算值的假设层数见「分析师附注」第一节。<br>
+  <strong>版本 v2（2026-08-06）。相对 v1 的实质性变化：五问由「不可得 + 基准」改为全部给出committed数字区间；新增八大子系统配比图与金额；第④问由行业规律描述改为 McKinsey 5,400 样本校准后的 25%-45% 区间；第⑤问补齐编制、人力成本与迭代预算三组数字；方法论、数据缺口与分析师个人看法全部迁入末尾「分析师附注」，正文只留结论。</strong><br>
+  本报告为独立研究，不构成投资建议。研究日 2026-08-06。
+</div>
+
+</body>
+</html>

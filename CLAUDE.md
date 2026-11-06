@@ -87,6 +87,9 @@
 13. 分析师 Q&A 张力区域
 14. Footer
 
+**节编号约定（2026-11-06 起，新报告必须）**：每节根元素加 `data-sec="1"` … `data-sec="14"`，按上面顺序。
+`tools/report_check.py` 的 E1 据此核对；11/06 抽查已交付 13 份财报报告，没有一份正好 14 节——规则只写不查就会漂移。
+
 ---
 
 # 工作原则
@@ -212,6 +215,7 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 # Critic 质量门控
 
 **每次 `SendUserFile` 推送 HTML 研究报告前，必须先运行 `.claude/skills/critic/SKILL.md`，输出裁定结果（PASS / CONDITIONAL / REWRITE），再决定是否推送。**
+**Critic 的第一步是机械检查 `python3 tools/report_check.py <报告> --record`**（2026-11-06）：有 FAIL 直接 REWRITE；用户定「数据来源与合规最不能错」，对应 S / G 项。
 
 适用范围：Merlin / Earner / restaurant-research / buffett-analyst 生成的所有 HTML 报告。
 
