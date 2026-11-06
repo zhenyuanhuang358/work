@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-06T18:22:03+00:00",
+ "updated_at": "2026-11-06T18:28:30+00:00",
  "schedule": [
   {
    "time": "2026-11-05T08:50:00-05:00",
@@ -60,6 +60,13 @@
  ],
  "board": [],
  "headlines": [
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-06T18:22+00:00",
+   "source": "Seeking Alpha",
+   "headline": "Cybersecurity is a major concern for bankers - Fed's Bowman - Seeking Alpha",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNZ1hLTWYyVU54ZEtfX3MwbWZPYUpwc1lWVWo4SW1qa2dCclN5eVBZTnU1LTFBVmR3NFVNT19KdkhmeVRSNG9vNzFXME81ZW9EUkF5eWFQQzFDOU5DQjdRekZaMDVpNE1tQUlGbVdheTB6ZDZOZWE2TmllcVBLYXJWcXFDS3Q4Y1NiU0NrNDQ2NkkwTncwRURNQWp0alA?oc=5"
+  },
   {
    "speaker": "Daly",
    "time_utc": "2026-11-06T18:13+00:00",
@@ -125,17 +132,17 @@
   },
   {
    "speaker": "Williams",
-   "time_utc": "2026-11-06T11:40+00:00",
-   "source": "SRN News",
-   "headline": "US inflation too high; essential to get back to 2%: Fed’s Williams - SRN News",
-   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQTh1bUpaYVNQTi1VdmFSVXRJNHpMaUlWRHVhcF9fS0JPYlVWYkVnaUpNZzUxR0VNbXV5cUhiNE84LV9kdUdfdUhSLXQ3a0h3WW9Rdm12U1NNNEYwUnRlTXFJdmF0TUhHd3pFZ0hXbC1KaGFyWlZBUW1vMFNMalhlZU5BVlZyOFJYWDJr?oc=5"
+   "time_utc": "2026-11-06T10:55+00:00",
+   "source": "Fort Worth Star-Telegram",
+   "headline": "US inflation too high; essential to get back to 2%: Fed's Williams - Fort Worth Star-Telegram",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOYTlMS3l5dHFZV3VYeTZkc1FscC02SDNSd0g4UEFXR0U5RjBzdk11ZGplWmM4SGNhdmZ6X0dSZ2pwTFd3cTB0T212OUlFMlJPLVpIN05hd094dDJ4OFpGT2J0dHZ5UDNLQzJ0clV0RHA2ckRpbkpHVW1pLXd2OTJCbHlGV0E?oc=5"
   },
   {
    "speaker": "Williams",
-   "time_utc": "2026-11-06T10:15+00:00",
-   "source": "Breakingthenews.net",
-   "headline": "Fed's Williams: Inflation too high for too long - Breakingthenews.net",
-   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPWWJNT3hlXzRtUE9NSkoybkhia2haOU1paFFuVVYxbUJ3dVVUOG5QVTZ5NzQ1THlPamNUeXVKN21nTExhdkV4TG1Vb3F5LXdGQ1N0bktXcjRtdlpSOXIyZmpkRVMxY1M3enQ3SnB2VVdYVko5TkdxX3M1NFhNWUpvSTZXWm9TdjNZYXU4SG9manMtTWtLNVp3?oc=5"
+   "time_utc": "2026-11-06T10:31+00:00",
+   "source": "Yahoo Finance",
+   "headline": "US inflation too high; essential to get back to 2%: Fed's Williams - Yahoo Finance",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQN1pUOHF6eV9iRDBFREVrUDZRVktrUWRYNVpWZzR2TEFYYjFscmdObHYwMGpGbkpFc3VHcXd6OGNlcEhZRlB2QlBxem4wLW1vajFUU0xCSlhwTWVjU3lZT0dYSU1oZlY3REw5UGVrejhWMXZmR3FuN3E4ZWMwTmxmOUx1dk5WekxBMmlvOHF2Z0hfTFpwVHVVbkVrMlM?oc=5"
   },
   {
    "speaker": "Williams",
@@ -223,5 +230,5 @@
   }
  ],
  "errors": [],
- "trigger": "scan-2026-11-06T18:18:28Z-voicestest"
+ "trigger": "scan-2026-11-06T18:24:44Z-caltest"
 }
