@@ -489,6 +489,22 @@ def check_report_records():
             flag("P1", f, "report_check 有 FAIL 仍交付：" + ", ".join(c["id"] for c in r["checks"] if not c["pass"] and c["level"] == "FAIL"))
 
 
+# ── C14 · 筛选器产物不变量（2026-11-06 推广到 burry / sleeper）──────────────────────────
+def check_screens():
+    say("\n[C14] 筛选器产物不变量 tools/screen_check.py")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    import screen_check as sc
+    for name, fn, f in (("burry", sc.check_burry, "burry_screen.json"), ("ses", sc.check_ses, "ses_screen.json")):
+        p = os.path.join(REPO, f)
+        if not os.path.exists(p):
+            continue
+        rs = fn(json.load(open(p, encoding="utf-8")))
+        bad = [c for c in rs if not c["pass"] and c["level"] == "FAIL"]
+        say(f"  {name}：{len(rs)} 项，FAIL {len(bad)}")
+        for c in bad:
+            flag("P1", f, f"{c['id']} {c['check']}｜{c['evidence']}")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -506,6 +522,7 @@ def main():
     check_feedback()
     check_scan_reports()
     check_report_records()
+    check_screens()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")

@@ -588,6 +588,11 @@ def main():
         results.sort(key=lambda r: (-len(r["passed"]), not r.get("drawdown_pass", False),
                                     r["ev_ebitda"] or 9e9))
 
+    # 样本计数去重（2026-11-06 tools/screen_check B1 发现）：Stage B 会把 Stage A 的完整样本移进「不适用」（市值下限、EV≤0）
+    #   或「缺失」（无 ticker），但同一个 dict 仍留在 full 里 → 完整 + 缺失 + 不适用 比全集多 137，缺失率也停在 Stage A 的值。
+    _moved = {id(r) for r in not_applicable} | {id(r) for r in missing_data}
+    full_final = [r for r in full if id(r) not in _moved]
+    miss_ratio_final = len(missing_data) / max(len(full_final) + len(missing_data), 1)
     out = {
         "updated_at": now,
         "year": YEAR,
@@ -595,9 +600,9 @@ def main():
         "coverage_note": ("EDGAR 仅覆盖向 SEC 报送的主体，扫描范围为美股。"
                           "伯里本人选股不限国别（历史上做过波兰、英国、墨西哥小盘股）。"
                           "本扫描器范围小于其真实选股范围——这是数据源的收窄，不是选股标准的收窄。"),
-        "sample": {"universe": len(uni), "complete": len(full),
+        "sample": {"universe": len(uni), "complete": len(full_final), "complete_stage_a": len(full),
                    "missing_data": len(missing_data), "not_applicable": len(not_applicable),
-                   "missing_ratio": round(miss_ratio, 4),
+                   "missing_ratio": round(miss_ratio_final, 4), "missing_ratio_stage_a": round(miss_ratio, 4),
                    "financials_excluded": sum(1 for r in not_applicable
                                               if "金融" in (r.get("reason") or "")),
                    "stage_a_survivors": len(survivors), "stage_b_priced": len(priced)},

@@ -49,8 +49,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin "$GITHUB_REF_NAME" || true
           git add ses_screen.json ses_universe.json
-          git diff --cached --quiet && echo "nothing to commit" || \
-            git commit -m "chore: SES phase-1 screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          git diff --cached --quiet && { echo "nothing to commit"; exit 0; }
+          git commit -m "chore: SES phase-1 screen $(date -u +%Y-%m-%dT%H:%M:%SZ) [skip ci]"
+          for i in 1 2 3 4 5; do  # 2026-11-06：与 fetch-*.yml 同步——rebase 失败不再吞掉，推送被拒时重新同步再推
+            git pull --rebase origin "$GITHUB_REF_NAME" || { echo "::error::rebase 失败，本轮产物未写回"; exit 1; }
+            git push origin "HEAD:$GITHUB_REF_NAME" && break
+            [ $i = 5 ] && { echo "::error::重试 5 次仍推送失败"; exit 1; }
+            sleep $((i * 3))
+          done
+      # 产物不变量检查（tools/screen_check.py）：放在提交之后——结果照常落盘可追溯，但不变量不过时本次运行标红，不会静默
+      - name: Screen invariants
+        run: python3 tools/screen_check.py --only=ses
