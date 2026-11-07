@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>可口可乐 KO 巴菲特模型分析</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;--green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Songti SC','Noto Serif SC','IM Fell English',serif;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+.pub{display:flex;justify-content:space-between;font-size:12px;color:var(--copper);border-bottom:1px solid var(--copper);padding-bottom:6px}
+h1{font-size:30px;margin:18px 0 2px} .en{font-family:'IM Fell English',serif;color:var(--copper);font-style:italic}
+h2{font-size:20px;margin:34px 0 8px;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
+.stat div{background:#fff;border:1px solid #e2dccf;padding:10px} .stat b{display:block;font-size:20px} .stat span{font-size:12px;color:var(--copper)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0} th,td{border-bottom:1px solid #e2dccf;padding:6px 6px;text-align:left;vertical-align:top} th{color:var(--copper);font-weight:normal}
+.verdict{background:var(--ink);color:var(--paper);padding:20px 22px;margin:26px 0} .verdict .en{color:var(--gold);opacity:.8}
+.src{font-size:12px;color:var(--copper)} .warn{border-left:3px solid var(--amber);padding:6px 12px;background:#fff8ec;margin:10px 0}
+.quote{border-left:3px solid var(--gold);padding:4px 12px;font-style:italic;font-family:'IM Fell English',serif;margin:8px 0}
+.note{margin-top:36px;border-top:1px solid var(--copper);padding-top:12px;font-size:13px}
+@media(max-width:600px){.stat{grid-template-columns:repeat(2,1fr)} table{font-size:12px}}
+</style></head>
+<body><div class="wrap" data-valuation="memory/state/valuations/ko_2026-11-07.json">
+<div class="pub"><span>巴菲特模型分析报告 · Buffett Model Report</span><span>分析日期 2026-11-07 · 股价日期 2026-11-06</span></div>
+<h1>可口可乐（KO）</h1><div class="en">The Coca-Cola Company — Moat, Owner Earnings and Margin of Safety</div>
+
+<div class="stat">
+<div><b>48.59–66.13</b><span>内在价值区间（美元 / 股）</span></div>
+<div><b>95.67</b><span>现价（2026-11-06 收盘）</span></div>
+<div><b style="color:var(--red)">-96.9%</b><span>安全边际（按下沿；门槛 30%）</span></div>
+<div><b>58 / 100</b><span>巴菲特评分 → 观察名单</span></div>
+</div>
+
+<h2>一句话结论 <span class="en">Bottom Line</span></h2>
+<p><strong>结论：高估区间，不买。</strong>护城河宽（7 / 10），但现价 95.67 比内在价值上沿 66.13 还高；
+按下沿算安全边际 -96.9%。要回到 30% 安全边际，价格需在 34.01 以下。现价隐含未来 5 年 FCF 年增 12.7%，
+是过去两年（剔除一次性项）8.1% 的约 1.6 倍。</p>
+<svg viewBox="0 0 660 150" style="font-family:'IM Fell English',Georgia,serif;width:100%"><line x1="40" y1="80" x2="620" y2="80" stroke="#8b6c42" stroke-width="1"/><line x1="40.0" y1="77" x2="40.0" y2="83" stroke="#8b6c42"/><text x="40.0" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">0</text><line x1="92.7" y1="77" x2="92.7" y2="83" stroke="#8b6c42"/><text x="92.7" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">10</text><line x1="145.5" y1="77" x2="145.5" y2="83" stroke="#8b6c42"/><text x="145.5" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">20</text><line x1="198.2" y1="77" x2="198.2" y2="83" stroke="#8b6c42"/><text x="198.2" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">30</text><line x1="250.9" y1="77" x2="250.9" y2="83" stroke="#8b6c42"/><text x="250.9" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">40</text><line x1="303.6" y1="77" x2="303.6" y2="83" stroke="#8b6c42"/><text x="303.6" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">50</text><line x1="356.4" y1="77" x2="356.4" y2="83" stroke="#8b6c42"/><text x="356.4" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">60</text><line x1="409.1" y1="77" x2="409.1" y2="83" stroke="#8b6c42"/><text x="409.1" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">70</text><line x1="461.8" y1="77" x2="461.8" y2="83" stroke="#8b6c42"/><text x="461.8" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">80</text><line x1="514.5" y1="77" x2="514.5" y2="83" stroke="#8b6c42"/><text x="514.5" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">90</text><line x1="567.3" y1="77" x2="567.3" y2="83" stroke="#8b6c42"/><text x="567.3" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">100</text><line x1="620.0" y1="77" x2="620.0" y2="83" stroke="#8b6c42"/><text x="620.0" y="98" font-size="10" text-anchor="middle" fill="#8b6c42">110</text><rect x="296.2" y="62" width="92.5" height="36" fill="#c9a84c" opacity="0.35"/><line x1="219.3" y1="56" x2="219.3" y2="104" stroke="#2a5c3f" stroke-width="2"/><text x="219.3" y="50" font-size="12" text-anchor="middle" fill="#2a5c3f">建仓线 34.01</text><line x1="296.2" y1="36" x2="296.2" y2="104" stroke="#0a0a0b" stroke-width="2"/><text x="296.2" y="30" font-size="12" text-anchor="middle" fill="#0a0a0b">下沿 48.59</text><line x1="388.7" y1="56" x2="388.7" y2="104" stroke="#0a0a0b" stroke-width="2"/><text x="388.7" y="50" font-size="12" text-anchor="middle" fill="#0a0a0b">基准 IV 66.13</text><line x1="544.4" y1="36" x2="544.4" y2="104" stroke="#8b2e2e" stroke-width="2"/><text x="544.4" y="30" font-size="12" text-anchor="middle" fill="#8b2e2e">现价 95.67</text><text x="40" y="132" font-size="11" fill="#8b6c42">每股美元。金色带 = 内在价值区间（保守 → 基准，owner_value 两情景 DCF）；建仓线 = 下沿 × 70%（安全边际 30%）</text></svg>
+
+<h2>一、护城河分析 <span class="en">Moat</span></h2>
+<svg viewBox="0 0 660 70" style="font-family:'IM Fell English',Georgia,serif;width:100%"><rect x="40" y="14" width="52" height="22" fill="#c9a84c"/><text x="66" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">1</text><rect x="98" y="14" width="52" height="22" fill="#c9a84c"/><text x="124" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">2</text><rect x="156" y="14" width="52" height="22" fill="#c9a84c"/><text x="182" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">3</text><rect x="214" y="14" width="52" height="22" fill="#c9a84c"/><text x="240" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">4</text><rect x="272" y="14" width="52" height="22" fill="#c9a84c"/><text x="298" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">5</text><rect x="330" y="14" width="52" height="22" fill="#c9a84c"/><text x="356" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">6</text><rect x="388" y="14" width="52" height="22" fill="#c9a84c"/><text x="414" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">7</text><rect x="446" y="14" width="52" height="22" fill="#ddd6c8"/><text x="472" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">8</text><rect x="504" y="14" width="52" height="22" fill="#ddd6c8"/><text x="530" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">9</text><rect x="562" y="14" width="52" height="22" fill="#ddd6c8"/><text x="588" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">10</text><text x="40" y="66" font-size="11" fill="#8b6c42">护城河评分 7 / 10（7–8 = 宽护城河：阶段 1 增速上限 18%，终端增长上限 8%）</text></svg>
+<p>护城河类型：<strong>无形资产（品牌定价权）+ 规模壁垒（全球装瓶分销体系）</strong>。评分 7 / 10，宽护城河；未触发侵蚀信号，不下调。</p>
+<table><tr><th>信号</th><th>数据</th><th>判定</th></tr>
+<tr><td>毛利率高于同行</td><td>KO FY2025 毛利率 61.6%；PEP 54.1%、KDP 54.2%，同行均值 54.2%（高 7.5 个百分点，相对高 14%）</td><td>按相对口径成立；按百分点口径未到 10 个点</td></tr>
+<tr><td>涨价后销量不掉</td><td>FY2024 price/mix +11%，其中约 5 个点来自高通胀市场定价，其余约 6 个点来自市场定价与结构；同年单位箱量 +1%。FY2025 price/mix +4%，单位箱量持平</td><td>成立（剔除高通胀市场后仍 > 5% 一次；FY2025 低于 5%）</td></tr>
+<tr><td>份额</td><td>FY2025 与 2026 Q3 均在无酒精即饮饮料（NARTD）赢得价值份额；但 2026 Q3 EMEA 份额下滑（法国、英国）</td><td>整体成立，EMEA 局部承压</td></tr>
+<tr><td>侵蚀信号</td><td>毛利率三年 59.5% → 61.6%，无压缩；无连续两年份额流失</td><td>未触发</td></tr>
+</table>
+<p class="src">来源：SEC companyfacts（毛利 GrossProfit / 营收）；2024、2025 年业绩新闻稿（price/mix、单位箱量、份额）；2026 Q3 新闻稿（份额）。</p>
+<p>为什么给 7 而不是 8：涨价证据里有一半来自高通胀市场，不完全是品牌溢价；EMEA 份额在最近一个季度下滑。两种评分落在同一档（7–8），估值上限相同，结论不受影响。</p>
+<p>主要挑战：减糖与健康饮品趋势对含糖碳酸饮料的长期压力；装瓶体系议价（再特许经营后营收口径变化）。</p>
+
+<h2>二、核心财务指标 <span class="en">Financials, FY2023–FY2025</span></h2>
+<svg viewBox="0 0 660 230" style="font-family:'IM Fell English',Georgia,serif;width:100%"><line x1="60" y1="180.0" x2="640" y2="180.0" stroke="#e2dccf"/><text x="54" y="184.0" font-size="10" text-anchor="end" fill="#8b6c42">0B</text><line x1="60" y1="157.1" x2="640" y2="157.1" stroke="#e2dccf"/><text x="54" y="161.1" font-size="10" text-anchor="end" fill="#8b6c42">2B</text><line x1="60" y1="134.3" x2="640" y2="134.3" stroke="#e2dccf"/><text x="54" y="138.3" font-size="10" text-anchor="end" fill="#8b6c42">4B</text><line x1="60" y1="111.4" x2="640" y2="111.4" stroke="#e2dccf"/><text x="54" y="115.4" font-size="10" text-anchor="end" fill="#8b6c42">6B</text><line x1="60" y1="88.6" x2="640" y2="88.6" stroke="#e2dccf"/><text x="54" y="92.6" font-size="10" text-anchor="end" fill="#8b6c42">8B</text><line x1="60" y1="65.7" x2="640" y2="65.7" stroke="#e2dccf"/><text x="54" y="69.7" font-size="10" text-anchor="end" fill="#8b6c42">10B</text><line x1="60" y1="42.9" x2="640" y2="42.9" stroke="#e2dccf"/><text x="54" y="46.9" font-size="10" text-anchor="end" fill="#8b6c42">12B</text><line x1="60" y1="20.0" x2="640" y2="20.0" stroke="#e2dccf"/><text x="54" y="24.0" font-size="10" text-anchor="end" fill="#8b6c42">14B</text><rect x="100" y="57.6" width="38" height="122.4" fill="#0a0a0b" opacity="0.85"/><text x="119" y="53.6" font-size="10" text-anchor="middle" fill="#0a0a0b">10.7</text><rect x="144" y="68.6" width="38" height="111.4" fill="#8b2e2e" opacity="0.85"/><text x="163" y="64.6" font-size="10" text-anchor="middle" fill="#8b2e2e">9.7</text><rect x="188" y="68.6" width="38" height="111.4" fill="#2a5c3f" opacity="0.85"/><text x="207" y="64.6" font-size="10" text-anchor="middle" fill="#2a5c3f">9.7</text><text x="163" y="196" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2023</text><rect x="290" y="58.5" width="38" height="121.5" fill="#0a0a0b" opacity="0.85"/><text x="309" y="54.5" font-size="10" text-anchor="middle" fill="#0a0a0b">10.6</text><rect x="334" y="125.8" width="38" height="54.2" fill="#8b2e2e" opacity="0.85"/><text x="353" y="121.8" font-size="10" text-anchor="middle" fill="#8b2e2e">4.7</text><rect x="378" y="57.2" width="38" height="122.8" fill="#2a5c3f" opacity="0.85"/><text x="397" y="53.2" font-size="10" text-anchor="middle" fill="#2a5c3f">10.7</text><text x="353" y="196" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2024</text><rect x="480" y="30.2" width="38" height="149.8" fill="#0a0a0b" opacity="0.85"/><text x="499" y="26.2" font-size="10" text-anchor="middle" fill="#0a0a0b">13.1</text><rect x="524" y="119.5" width="38" height="60.5" fill="#8b2e2e" opacity="0.85"/><text x="543" y="115.5" font-size="10" text-anchor="middle" fill="#8b2e2e">5.3</text><rect x="568" y="49.8" width="38" height="130.2" fill="#2a5c3f" opacity="0.85"/><text x="587" y="45.8" font-size="10" text-anchor="middle" fill="#2a5c3f">11.4</text><text x="543" y="196" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2025</text><rect x="60" y="212" width="10" height="10" fill="#0a0a0b"/><text x="74" y="221" font-size="11" fill="#0a0a0b">净利润</text><rect x="250" y="212" width="10" height="10" fill="#8b2e2e"/><text x="264" y="221" font-size="11" fill="#0a0a0b">FCF（报告值）</text><rect x="440" y="212" width="10" height="10" fill="#2a5c3f"/><text x="454" y="221" font-size="11" fill="#0a0a0b">FCF（剔除一次性项）</text></svg>
+<table><tr><th>指标</th><th>FY2023</th><th>FY2024</th><th>FY2025</th></tr><tr><td>营收</td><td>$45.8B</td><td>$47.1B</td><td>$47.9B</td></tr><tr><td>毛利率</td><td>59.5%</td><td>61.1%</td><td>61.6%</td></tr><tr><td>净利润（GAAP）</td><td>$10.7B</td><td>$10.6B</td><td>$13.1B</td></tr><tr><td>营业利润（EBIT）</td><td>$11.3B</td><td>$10.0B</td><td>$13.8B</td></tr><tr><td>FCF（报告值 = CFO − Capex）</td><td>$9.7B</td><td>$4.7B</td><td>$5.3B</td></tr><tr><td>FCF（剔除一次性项）</td><td>$9.7B</td><td>$10.7B</td><td>$11.4B</td></tr><tr><td>FCF / 净利润（剔除后）</td><td>91%</td><td>101%</td><td>87%</td></tr><tr><td>FCF / 净利润（报告值）</td><td>91%</td><td>45%</td><td>40%</td></tr><tr><td>ROE（GAAP）</td><td>41.3%</td><td>42.8%</td><td>40.7%</td></tr><tr><td>ROIC（EBIT × (1 − 20.8%) ÷ 投入资本；20.8% = 2024 新闻稿对 2025 年 underlying 税率的预估）</td><td>14.9%</td><td>13.2%</td><td>15.7%</td></tr><tr><td>有息负债 / 股东权益</td><td>162%</td><td>179%</td><td>141%</td></tr></table>
+<p class="src">来源：SEC companyfacts 10-K（单位百万美元换算为十亿）；有息负债 = 长期债务含一年内到期部分 + 应付票据及借款（KO 2024 年起改报 LongTermDebtAndCapitalLeaseObligations 标签）。</p>
+<div class="warn"><strong>两笔一次性现金流出（公司在业绩新闻稿中自己列出金额）：</strong>FY2024 向美国国税局（IRS）缴纳税务诉讼保证金 $6.0B；FY2025 支付 fairlife 并购或有对价 $6.1B。
+它们把 FCF 压到 $4.7B / $5.3B。估值按剔除后的 $10.7B / $11.4B 计算（与公司公布的 $10.8B / $11.4B 一致）。
+不剔除时 FCF 复合增速为 -26.3%，内在价值降到 17.92–20.83：<strong>结论不变，仍是高估</strong>。</div>
+<p class="quote">“Both decreased versus the prior year, primarily due to a $6.0 billion deposit made to the U.S. Internal Revenue Service … related to ongoing tax litigation.” — 2024 年业绩新闻稿</p>
+<p class="quote">“… which reflects $6.1 billion of the contingent consideration payment made during the first quarter in conjunction with the acquisition of fairlife, LLC.” — 2025 年业绩新闻稿</p>
+<p>FCF 转化率（剔除后）91% / 101% / 87%：正常偏优。ROIC 15.7% 高于折现率 9%：价值创造。
+ROE 三年均值 41.6% 有杠杆成分（有息负债约为股东权益的 1.4 倍），用 ROIC 复核后仍 > 12%，不降档。</p>
+
+<h2>三、管理层评估 <span class="en">Management</span></h2>
+<p><strong>资本分配（近 3 年实际行为）：</strong></p>
+<table><tr><th>行为</th><th>数据</th><th>评分影响</th></tr>
+<tr><td>分红</td><td>支付普通股股息 $7.6B → $8.0B → $8.4B → $8.8B，连续增长</td><td>+2</td></tr>
+<tr><td>回购</td><td>FY2023–FY2025 回购 $2.3B / $1.8B / $0.7B；当时估值远高于 PE 15 / PB 2，不符合低估回购</td><td>0</td></tr>
+<tr><td>并购后减值</td><td>2025 Q4 计提 BODYARMOR 商标非现金减值 $960M（2021 年收购的品牌）</td><td>−4</td></tr>
+<tr><td>股权激励稀释</td><td>稀释后股数 4.35B → 4.31B，逐年下降，无稀释</td><td>0</td></tr>
+</table>
+<p>3A = 6 + 2 − 4 = 4。3B：职业经理人；未取得 DEF 14A 持股数据，按「少量持股」保守档 3 分（见 §七）。</p>
+<div class="warn">管理层变动：James Quincey（CEO 九年）2026-03-31 卸任、改任执行董事长 → Henrique Braun（原 COO，1996 年加入公司）接任，在任约 7 个月，不满 1 年。按评分规则 3C 取中性 3 分，新任的纠正或加分行为暂不计入。</div>
+<p class="src">来源：SEC companyfacts（PaymentsOfDividendsCommonStock、PaymentsForRepurchaseOfCommonStock、WeightedAverageNumberOfDilutedSharesOutstanding）；2025 年业绩新闻稿（BODYARMOR 减值）；CEO 交接公告；2026 Q3 新闻稿（Braun 以 CEO 身份发言）。</p>
+
+<h2>四、内在价值估算 <span class="en">Owner Earnings DCF</span></h2>
+<p><strong>所有者盈余（FY2025）</strong>：净利润 $13.1B + D&amp;A $1.1B − 维护性资本支出 $1.1B − 营运资本增加 $1.1B（报告值 $7.2B，已加回 fairlife 支付 $6.1B）= <strong>$12.0B</strong>。
+维护性资本支出取总资本支出的 50%：轻资产消费品，D&amp;A 不能代表维护性资本支出；50% 后的 $1.1B 与 D&amp;A $1.1B 几乎相等，两种口径结论相同。</p>
+<table><tr><th>参数</th><th>保守情景</th><th>基准情景</th><th>依据</th></tr>
+<tr><td>阶段 1 增速（1–5 年）</td><td>4.88%</td><td>6.91%</td><td>剔除后 FCF 复合增速 8.13% × 60% / × 85%，未触 18% 上限</td></tr>
+<tr><td>阶段 2 增速（6–10 年）</td><td>2.44%</td><td>4.15%</td><td>阶段 1 × 50% / × 60%</td></tr>
+<tr><td>终端增长率</td><td>2.5%</td><td>4.0%</td><td>护城河上限 8% × 60% / × 80%，再受 2.5% / 4% 封顶</td></tr>
+<tr><td>折现率</td><td>9%</td><td>9%</td><td>美股大盘股 9%；10 年期美债 4.86% 在 4–5% 区间，不调整</td></tr>
+<tr><td>每股内在价值</td><td>48.59</td><td>66.13</td><td>两情景 DCF ÷ 4.30B 股</td></tr>
+<tr><td>终值占比</td><td>55%</td><td>63%</td><td>基准 > 60% → 出口倍数交叉验证</td></tr>
+</table>
+<p>出口倍数交叉验证（基准情景）：第 10 年所有者盈余 $20.5B × 同行 EV/FCF 均值 36.8x 折现 = 每股 74.06，与 DCF 的 66.13 相差 12%（< 30%，通过，不替换）。</p>
+<table><tr><th>价格锚点</th><th>价位</th><th>说明</th></tr>
+<tr><td>内在价值下沿（保守情景）</td><td>48.59</td><td>安全边际的计算基准</td></tr>
+<tr><td>当前股价</td><td>95.67</td><td>2026-11-06</td></tr>
+<tr><td>当前安全边际</td><td>-96.9%</td><td>(下沿 − 现价) ÷ 下沿；现价比下沿高 97%</td></tr>
+<tr><td>目标买入价（安全边际 30%）</td><td>34.01</td><td>下沿 × 70%，严格建仓线</td></tr>
+<tr><td>目标买入价（安全边际 35%）</td><td>31.58</td><td>下沿 × 65%，保守建仓线</td></tr>
+</table>
+<p><strong>逆向验证：现价隐含什么？</strong>按基准情景结构倒推，现价 95.67 要成立，需要阶段 1 增速 12.7%、阶段 2 7.6%、终端 4%。
+即市场在为「一家营收两年复合增长 2.4% 的公司，未来五年 FCF 每年增长约 13%」定价。这没有超过宽护城河 18% 的上限，但远高于它自己的历史：属于<strong>激进</strong>假设。
+公司 2026 年前三季度 FCF 已达 $11.4B（Q3 新闻稿），新闻稿称已更新全年指引（updated full year guidance）；若 2026 全年 FCF 增速明显高于 13%，这个判断需要重估。</p>
+<p class="src">来源：owner_value 底稿 memory/state/valuations/ko_2026-11-07.json（每个输入带来源）；FY2025 财务数据 SEC companyfacts；同行 EV/FCF 由 financials/pep.json、kdp.json 计算。</p>
+
+<div class="verdict"><strong>裁决：观察名单，当前不买。</strong>好生意，贵价格：现价 95.67 高于内在价值上沿，安全边际（下沿）-96.9%，不买；34.01 以下才进入买入区间。
+<div class="en">Wonderful business, demanding price: shares trade above the base-case intrinsic value; no margin of safety at the conservative bound.</div></div>
+
+<h2>五、巴菲特评分卡 <span class="en">Berkshire Score</span></h2>
+<table><tr><th>维度</th><th>满分</th><th>得分</th><th>关键依据</th></tr><tr><td>Business Quality</td><td>30</td><td>21</td><td>1A / 1B / 1C = 12 / 2 / 7：宽护城河；营收 CAGR 2.4%（< 5%、无负增长）；毛利率三年 > 50%</td></tr><tr><td>Financial Health</td><td>30</td><td>24</td><td>2A / 2B / 2C = 12 / 10 / 2：ROE 三年均值 41.6%，负债率 > 40% 但 ROIC 均 > 12% 不降档；FCF 三年为正、剔除后 FCF / 净利润 > 80%；负债率 59%（40–60% 档）</td></tr><tr><td>Management Quality</td><td>25</td><td>10</td><td>3A / 3B / 3C = 4 / 3 / 3：基础 6 + 分红连增 2 − BODYARMOR 减值 4；持股数据未取得按保守档；新 CEO 在任不满 1 年按中性</td></tr><tr><td>Price vs Value</td><td>15</td><td>3</td><td>4A / 4B = 0 / 3：安全边际为负；EV/FCF 39.4x 与同行均值 36.8x 相差 ±20% 以内</td></tr><tr><td>总分</td><td>100</td><td>58</td><td>55–69 = 观察名单；未触发自动降级</td></tr></table>
+<p>相对估值：KO EV/FCF 39.4x（FCF 按剔除一次性项；按报告值则为 85x）；PEP 30.3x、KDP 43.2x。同行只有两家，相对估值仅作辅助。</p>
+<p>一致性提示：2B 按剔除一次性项的 FCF 打 10 分；按报告值 FCF（FY2024、FY2025 转化率 45% / 40%）只能打 2–5 分，总分变为 50–53（谨慎档）。两种口径都落在「不买」。</p>
+
+<h2>六、主要风险 <span class="en">Risks</span></h2>
+<table><tr><th>风险</th><th>说明</th><th>对估值的影响</th></tr>
+<tr><td>IRS 税务诉讼</td><td>$6.0B 保证金已付；若最终败诉，保证金转为真实税款，后续年度税率也可能上升。2025 新闻稿的 20.9% 税率预估不含败诉影响</td><td>本估值把保证金当一次性项加回、未扣除潜在负债；败诉会直接压低内在价值，幅度取决于 10-K 附注（未取得）</td></tr>
+<tr><td>健康与减糖趋势</td><td>含糖碳酸饮料长期需求压力；公司靠无糖版本与非碳酸品类对冲（2026 Q3 Coca-Cola Zero Sugar +16%）</td><td>压低长期增速；增速 −3 个百分点 → 下沿约 −16%</td></tr>
+<tr><td>汇率</td><td>FY2025 EPS 受 8 个点汇率逆风</td><td>影响报告期利润，不改变长期判断</td></tr>
+<tr><td>利率</td><td>折现率随 10 年期美债变化</td><td>r +1 个百分点 → 下沿约 −13%</td></tr>
+</table>
+<p>需要重估内在价值的情况：2026 全年 FCF（剔除一次性项）同比增速 > 13%；IRS 诉讼判决公布；股价跌破 34.01。</p>
+
+<h2>七、数据盲区与敏感性 <span class="en">Gaps and Sensitivity</span></h2>
+<ul>
+<li>管理层持股比例（DEF 14A 代理声明）未取得 → 3B 按保守档；补齐后最多 +2 分，不改变结论。</li>
+<li>IRS 诉讼潜在负债金额（10-K 附注）未取得 → 风险未量化进内在价值。</li>
+<li>10-K 原文在会话容器打不开，财务数字来自 SEC XBRL（与 10-K 同源，每个值带 accession 号）。</li>
+</ul>
+<table><tr><th>变量（以保守情景为底）</th><th>变动</th><th>每股内在价值</th><th>变化</th></tr><tr><td>折现率 r</td><td>+1.0 个百分点</td><td>42.05</td><td>-13%</td></tr><tr><td>折现率 r</td><td>-1.0 个百分点</td><td>57.52</td><td>+18%</td></tr><tr><td>阶段 1 增速 g1</td><td>+3.0 个百分点</td><td>57.93</td><td>+19%</td></tr><tr><td>阶段 1 增速 g1</td><td>-3.0 个百分点</td><td>40.73</td><td>-16%</td></tr><tr><td>终端增长率</td><td>+0.5 个百分点</td><td>50.95</td><td>+5%</td></tr></table>
+
+<h2>来源索引 <span class="en">Sources</span></h2>
+<ol class="src"><li>SEC EDGAR companyfacts：可口可乐 10-K XBRL（每个值带 accession 号）：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json</a></li><li>SEC EDGAR companyfacts：百事 PEP 10-K XBRL：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json</a></li><li>SEC EDGAR companyfacts：Keurig Dr Pepper KDP 10-K XBRL：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0001418135.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0001418135.json</a></li><li>可口可乐 2024 年第四季度及全年业绩新闻稿：<a href="https://investors.coca-colacompany.com/news-events/press-releases/detail/1128/coca-cola-reports-fourth-quarter-and-full-year-2024-results">https://investors.coca-colacompany.com/news-events/press-releases/detail/1128/coca-cola-reports-fourth-quarter-and-full-year-2024-results</a></li><li>可口可乐 2025 年第四季度及全年业绩新闻稿：<a href="https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results">https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results</a></li><li>可口可乐 CEO 交接公告（2025-12-10）：<a href="https://investors.coca-colacompany.com/news-events/press-releases/detail/1147/the-coca-cola-company-announces-ceo-succession-plan-chief-operating-officer-henrique-braun-to-succeed-james-quincey-as-ceo-in-2026">https://investors.coca-colacompany.com/news-events/press-releases/detail/1147/the-coca-cola-company-announces-ceo-succession-plan-chief-operating-officer-henrique-braun-to-succeed-james-quincey-as-ceo-in-2026</a></li><li>可口可乐 2026 年第三季度业绩新闻稿（2026-10-27）：<a href="https://www.coca-colacompany.com/media-center/coca-cola-reports-third-quarter-2026-results">https://www.coca-colacompany.com/media-center/coca-cola-reports-third-quarter-2026-results</a></li><li>股价：Yahoo Finance 2026-11-06 收盘（GitHub Actions 抓取，financials/*.json）；10 年期美债 4.86%（stock_prices.json）：<a href="https://finance.yahoo.com/quote/KO/">https://finance.yahoo.com/quote/KO/</a></li></ol>
+
+<div class="note"><p><strong>分析师附注 Analyst's Note</strong></p>
+<p>本报告所有估值数字由 tools/owner_value.py 计算（底稿 memory/state/valuations/ko_2026-11-07.json），报告生成脚本只读取、不手算。已登记一条可证伪判断：KO 2030 财年 FCF（公司剔除一次性项口径）低于现价隐含路径 $20.7B，把握中，2031-02-28 验证（memory/state/predictions.md）。
+本报告是价值框架下的研究意见，不构成投资建议。</p>
+<p>反馈：<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report=ko">https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&amp;report=ko</a></p></div>
+</div></body></html>
