@@ -1,6 +1,7 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。2026-11-06 首单：海底捞 AI 导购提纲。 11/07 第三单：OMB FY2027 主要联邦经济指标发布时间表（补 2027 年 CPI / PPI / 非农日期）。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。",
   "urls": [
-    "https://www.whitehouse.gov/wp-content/uploads/2026/10/FY2027-PFEI.pdf"
+    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1128/coca-cola-reports-fourth-quarter-and-full-year-2024-results",
+    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1151/coca-cola-reports-fourth-quarter-and-full-year-2025-results"
   ]
 }
