@@ -9,6 +9,7 @@ import os
 REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 VAL = "memory/state/valuations/ko_2026-11-07.json"
 V = json.load(open(os.path.join(REPO, VAL), encoding="utf-8"))
+M4 = json.load(open(os.path.join(REPO, "memory/state/valuations/ko_2026-11-07-moat4.json"), encoding="utf-8"))
 INP = V["input"]
 F = {t: json.load(open(os.path.join(REPO, f"financials/{t}.json"))) for t in ("ko", "pep", "kdp")}
 FONT = "font-family:'IM Fell English',Georgia,serif"
@@ -179,7 +180,7 @@ def score_svg():  # 评分卡分段进度条（output-template）
                  f'<rect x="170" y="{y}" width="{mx * 14}" height="20" fill="#ddd6c8"/>'
                  f'<rect x="170" y="{y}" width="{v_ * 14}" height="20" fill="{GOLD}"/>'
                  f'<text x="{176 + mx * 14}" y="{y + 15}" font-size="12" fill="{COPPER}">{v_} / {mx}</text>')
-    o.append(f'<text x="0" y="154" font-size="11" fill="{COPPER}">总分 {total} / 100 → 40–54 = 谨慎（按 berkshire-score.md 字面口径；见 §五一致性说明）</text>')
+    o.append(f'<text x="0" y="154" font-size="11" fill="{COPPER}">总分 {total} / 100 → 40–54 = 谨慎（按 berkshire-score.md 字面口径；见 §五口径说明）</text>')
     return "".join(o) + "</svg>"
 
 
@@ -207,7 +208,7 @@ sens_rows = "".join(tr([{"r": "折现率 r", "g1": "阶段 1 增速 g1", "g_term
                     for x in V["sensitivity"]["rows"])
 alt_total = total - SD["2B"] + 10 - SD["4B"] + 3  # 仅作附注（用户 11/07 定：一次性项只用于估值）  # 若 2B / 4B 改用剔除一次性项的 FCF
 score_rows = "".join(tr(r) for r in [
-    ("Business Quality", 30, V["scorecard"]["business"], f"1A / 1B / 1C = {SD['1A']} / {SD['1B']} / {SD['1C']}：护城河 {INP['moat_score']} 分（宽）；营收 CAGR {pct(rev_cagr)}（< 5%、无负增长 → 2）；毛利率三年 > 50% → 7"),
+    ("Business Quality", 30, V["scorecard"]["business"], f"1A / 1B / 1C = {SD['1A']} / {SD['1B']} / {SD['1C']}：护城河 {INP['moat_score']} 分（宽）；营收 CAGR {pct(rev_cagr)}（&lt; 5%、无负增长 → 2）；毛利率三年 > 50% → 7"),
     ("Financial Health", 30, V["scorecard"]["financial"], f"2A / 2B / 2C = {SD['2A']} / {SD['2B']} / {SD['2C']}：ROE 三年均值 {pct(roe_avg)}，负债率 > 40% 用 ROIC 复核均 > 12%，不降档 → 12；报告值 FCF / 净利润 {pct(rows['2023']['conv_rep'], 0)} / {pct(rows['2024']['conv_rep'], 0)} / {pct(rows['2025']['conv_rep'], 0)}，两年低于 50% → 2；负债率 {pct(rows['2025']['dr'], 0)}（40–60% 档）→ 2"),
     ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + 分红连增 2 − BodyArmor 并购后两年减值 4；职业经理人 + PSU / RSU 激励、持股数据缺失 → 少量持股档 3；新 CEO 在任不满 1 年取中性 3"),
     ("Price vs Value", 15, V["scorecard"]["price"], f"4A / 4B = {SD['4A']} / {SD['4B']}：安全边际为负 → 0；EV/FCF（报告值）{ko_evf_rep:.0f}x，高于同行均值 {peer_avg:.1f}x 逾 20% → 1"),
@@ -277,7 +278,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <p>份额：FY2025 与 2026 Q3 均在无酒精即饮饮料（NARTD）赢得价值份额；2026 Q3 EMEA 份额下滑（法国、英国）。侵蚀信号：毛利率三年 {pct(rows['2023']['gm'])} → {pct(rows['2025']['gm'])}，无压缩；没有连续两年份额流失，未触发。</p>
 <p>为什么给 7：两个核心信号都成立，但信号①不是年年成立，信号②掺有通胀定价。如果评 6（中等护城河）：1A 从 12 降到 8，总分 {total - 4}，仍在「谨慎」档；
 内在价值不变，因为两个情景的增速都没碰到 12% / 18% 的上限，终端增长被 2.5% / 3% 封顶。
-按百分点口径读信号①，无形资产只剩一个信号，不满足「至少 2 个」，应评窄护城河 3–4：1A 降为 5，总分 {total - 7}；终端增长上限降为 1.8% / 2.4%，内在价值约 45.8–55.5（owner_value 以护城河 4 重跑，底稿 memory/state/valuations/ko_2026-11-07-moat4.json）；结论不变。</p>
+按百分点口径读信号①，无形资产只剩一个信号，不满足「至少 2 个」，应评窄护城河 3–4：1A 降为 5，总分 {total - 7}；终端增长上限降为 {pct(M4['scenarios']['conservative']['g_terminal'])} / {pct(M4['scenarios']['base']['g_terminal'])}，内在价值约 {M4['iv_range'][0]:.1f}–{M4['iv_range'][1]:.1f}（owner_value 以护城河 4 重跑，底稿 memory/state/valuations/ko_2026-11-07-moat4.json，评分 {M4['scorecard']['total']}）；现价隐含增速 {pct(M4['implied_g1']['g1'])}，超过窄护城河 8% 的增速上限，高估更明显；结论不变。</p>
 <p class="src">来源：SEC companyfacts（GrossProfit ÷ 营收）；2022–2025 年业绩新闻稿（price/mix、单位箱量、份额）；2026 Q3 新闻稿（份额）。</p>
 <p>主要挑战：减糖与健康饮品趋势对含糖碳酸饮料的长期压力。</p>
 
