@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""按公司取 10-K 年报关键科目（SEC companyfacts），写 financials/<ticker>.json——巴菲特估值的带来源原始数据
+
+为什么（2026-11-07 buffett-analyst 实测）：owner_value 要求每个数字带来源；10-K 原文在会话容器打不开，
+companyfacts 是 SEC 官方 XBRL（每个值带 accession 号与报送日期，就是可追溯的来源）。复用 ses_screener 的抓取与缓存。
+请求：financials_request.json {"tickers": ["KO"], "years": 3}
+"""
+import json
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import ses_screener as ss  # noqa: E402
+
+# 科目：按优先级取第一个有数的标签
+TAGS = {
+    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
+    "net_income": ["NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic"],
+    "ebit": ["OperatingIncomeLoss"],
+    "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet"],
+    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+    "cfo": ["NetCashProvidedByUsedInOperatingActivities"],
+    "interest": ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt"],
+    "sbc": ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"],
+    "dwc_increase": ["IncreaseDecreaseInOperatingCapital"],  # 营运资本增加为正 → OE 里取负
+    "assets": ["Assets"],
+    "liabilities": ["Liabilities"],
+    "equity": ["StockholdersEquity"],
+    "cash": ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
+    "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt"],
+    "debt_st": ["LongTermDebtCurrent", "DebtCurrent", "ShortTermBorrowings"],
+    "commercial_paper": ["CommercialPaper", "ShortTermBorrowings"],
+}
+
+
+def annual(facts, tags):
+    """返回 {fy: {"v", "tag", "accn", "filed", "end"}}，只取 10-K 的 FY 值，同 FY 取最新报送。"""
+    gaap = facts.get("facts", {}).get("us-gaap", {})
+    for tag in tags:
+        units = gaap.get(tag, {}).get("units", {})
+        rows = units.get("USD") or units.get("USD/shares") or []
+        out = {}
+        for r in rows:
+            if r.get("form") == "10-K" and r.get("fp") == "FY" and r.get("fy"):
+                # 同一 10-K 会带前两年对比值：用 end 年份对应真实财年
+                fy = int(r["end"][:4])
+                if fy not in out or r["filed"] > out[fy]["filed"]:
+                    if "start" in r and int(r["end"][:4]) - int(r["start"][:4]) > 1:
+                        continue
+                    out[fy] = {"v": r["val"], "tag": tag, "accn": r["accn"], "filed": r["filed"], "end": r["end"]}
+        if out:
+            return out
+    return {}
+
+
+def main():
+    req = json.load(open("financials_request.json"))
+    os.makedirs("financials", exist_ok=True)
+    for t in req["tickers"]:
+        cik = ss.get_cik(t)
+        facts = ss.fetch_company_facts(cik)
+        data = {k: annual(facts, tags) for k, tags in TAGS.items()}
+        shares = facts.get("facts", {}).get("dei", {}).get("EntityCommonStockSharesOutstanding", {}).get("units", {}).get("shares", [])
+        latest_sh = max(shares, key=lambda r: r["filed"]) if shares else None
+        yrs = sorted({fy for d in data.values() for fy in d})[-int(req.get("years", 3)) - 1:]
+        out = {"ticker": t, "cik": cik, "entity": facts.get("entityName"),
+               "source": f"SEC EDGAR companyfacts https://data.sec.gov/api/xbrl/companyfacts/CIK{cik}.json",
+               "shares_outstanding": latest_sh and {"v": latest_sh["val"], "accn": latest_sh["accn"], "filed": latest_sh["filed"]},
+               "years": {fy: {k: d.get(fy) for k, d in data.items()} for fy in yrs},
+               "missing": {fy: [k for k, d in data.items() if fy not in d] for fy in yrs}}
+        json.dump(out, open(f"financials/{t.lower()}.json", "w"), ensure_ascii=False, indent=1)
+        print(t, out["entity"], "年份", yrs, "缺", out["missing"])
+
+
+if __name__ == "__main__":
+    main()

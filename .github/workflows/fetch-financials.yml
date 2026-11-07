@@ -1,0 +1,34 @@
+name: Fetch Company Financials (SEC)
+
+# 10-K 关键科目（scripts/fetch_financials.py，SEC companyfacts）。
+on:
+  push:
+    branches: [claude/install-claude-hud-d51E6]
+    paths: [financials_request.json]
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests beautifulsoup4 lxml pypdf -q
+      - run: python3 scripts/fetch_financials.py
+      - name: Commit transcripts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add financials/
+          git diff --cached --quiet && echo "nothing to commit" || git commit -m "chore: fetch financials [skip ci]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "$GITHUB_REF_NAME" || { echo "::error::rebase 失败"; exit 1; }
+            git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
+            sleep $((i * 3))
+          done
+          exit 1
