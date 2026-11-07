@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""巴菲特估值计算器回归（2026-11-07）。期望值用独立循环按 owner-earnings-model.md 公式重算，不复用被测函数。
+运行：python3 -m unittest tests/test_owner_value.py -v
+"""
+import copy
+import os
+import sys
+import unittest
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(REPO, "tools"))
+import owner_value as ov  # noqa: E402
+
+S = "测试来源"
+BASE = {
+    "ticker": "TST", "as_of": "2026-11-07", "price": {"v": 100.0, "src": S}, "shares": {"v": 10.0, "src": S},
+    "r": {"v": 0.10, "src": S}, "debt_ratio": {"v": 0.3, "src": S}, "moat_score": 8, "tech_disruption": False,
+    "maint_capex": {"method": "da_proxy"},
+    "years": [{"fy": 2023, "src": S, "net_income": 90, "da": 20, "capex": 30, "dwc": 0, "fcf": 100.0, "revenue": 1000, "ebit": 150, "interest": 10},
+              {"fy": 2024, "src": S, "net_income": 95, "da": 20, "capex": 30, "dwc": 0, "fcf": 121.0, "revenue": 1100, "ebit": 160, "interest": 10},
+              {"fy": 2025, "src": S, "net_income": 100, "da": 20, "capex": 30, "dwc": 0, "fcf": 146.41, "revenue": 1200, "ebit": 170, "interest": 10}],
+    "peer_ev_fcf": {"v": 1000.0, "src": S},  # 极大值：交叉验证不会取代 DCF，便于核算
+    "scores": {"business": 25, "financial": 24, "management": 18, "price": 8},
+}
+
+
+def ref_iv(oe0, g1, ratio2, gt, r, shares):
+    pv, oe = 0.0, oe0
+    for t in range(1, 11):
+        oe *= 1 + (g1 if t <= 5 else g1 * ratio2)
+        pv += oe / (1 + r) ** t
+    return (pv + oe * (1 + gt) / (r - gt) / (1 + r) ** 10) / shares
+
+
+class OwnerValue(unittest.TestCase):
+    def test_formula_and_margin_on_lower_bound(self):
+        """CAGR 21% → 保守 g1=12.6%（×60%）、基准 17.85%（×85%，未触 18% 上限）；终端 2.5% / 4%。
+        用户 11/07 定：安全边际按下沿（保守 IV）算，不按中值。"""
+        out = ov.run(copy.deepcopy(BASE))
+        oe = 100 + 20 - 20  # 净利润 + D&A − 维护性 Capex（D&A 代理）
+        lo = ref_iv(oe, 0.21 * 0.6, 0.5, 0.025, 0.10, 10)
+        hi = ref_iv(oe, 0.21 * 0.85, 0.6, 0.04, 0.10, 10)
+        self.assertAlmostEqual(out["iv_range"][0], lo, places=6)
+        self.assertAlmostEqual(out["iv_range"][1], hi, places=6)
+        m = out["margin_of_safety"]
+        self.assertAlmostEqual(m["value"], (lo - 100) / lo, places=9)
+        self.assertNotAlmostEqual(m["value"], ((lo + hi) / 2 - 100) / ((lo + hi) / 2), places=3)
+        self.assertEqual(out["scorecard"]["total"], 75)
+
+    def test_no_source_refused(self):
+        bad = copy.deepcopy(BASE)
+        bad["price"]["src"] = ""
+        with self.assertRaises(ov.NoSource):
+            ov.run(bad)
+        bad = copy.deepcopy(BASE)
+        bad["years"][1]["src"] = ""
+        with self.assertRaises(ov.NoSource):
+            ov.run(bad)
+
+    def test_anomalous_growth_needs_override(self):
+        """CAGR > 50%：照公式会得荒谬增速（270% × 60%），必须给共识 / FCF yield 反推的 g_override，门槛升到 40%。"""
+        d = copy.deepcopy(BASE)
+        d["years"][2]["fcf"] = 400.0
+        with self.assertRaises(ov.NoSource):
+            ov.run(d)
+        d["g_override"] = {"g1": 0.30, "g2": 0.40, "src": "共识"}
+        out = ov.run(d)
+        self.assertEqual(out["scenarios"]["conservative"]["g1"], 0.18)  # 被护城河上限截断
+        self.assertEqual(out["margin_of_safety"]["hurdle"], 0.40)
+
+    def test_failure_conditions_block_buy(self):
+        d = copy.deepcopy(BASE)
+        d["years"][0]["revenue"] = 600  # 1200 / 600 − 1 = 100% 波动
+        out = ov.run(d)
+        self.assertTrue(any("营收波动" in f for f in out["failure_conditions"]))
+        self.assertTrue(out["zone"].startswith("估值失效"))
+
+    def test_terminal_growth_clamped_below_r_minus_2(self):
+        d = copy.deepcopy(BASE)
+        d["r"]["v"] = 0.03  # r − 2% = 1%：两个情景的终端增长都必须被压到 1%
+        out = ov.run(d)
+        for sc in ("conservative", "base"):
+            self.assertAlmostEqual(out["scenarios"][sc]["g_terminal"], 0.01, places=12)
+
+    def test_moat_below_3_stops(self):
+        d = copy.deepcopy(BASE)
+        d["moat_score"] = 2
+        self.assertIn("终止", ov.run(d)["verdict"])
+
+    def test_score_out_of_range_refused(self):
+        d = copy.deepcopy(BASE)
+        d["scores"]["price"] = 20
+        with self.assertRaises(ov.NoSource):
+            ov.run(d)
+
+
+if __name__ == "__main__":
+    unittest.main()

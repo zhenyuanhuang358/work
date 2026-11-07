@@ -1,0 +1,191 @@
+#!/usr/bin/env python3
+"""巴菲特估值计算器（buffett-analyst Phase 2–3 的确定性部分；2026-11-07 改造）
+
+为什么：所有者盈余、两情景 DCF、终值集中度、安全边际、估值失效条件、评分卡加总全是确定性计算，过去全靠模型心算、无人核对；
+而且主文件（安全边际用下沿）与 owner-earnings-model.md（用中值）互相矛盾。用户 11/07 定：**安全边际按内在价值下沿（保守 IV）计算，
+门槛 30% 不变**（路径 B 正态化估值 40%）。公式严格照 owner-earnings-model.md，改公式先改 spoke 再改这里。
+
+输入（JSON，**每个数字都要有 src**，缺来源直接拒算——「无来源 = 不可用」）：
+{
+ "ticker": "KO", "market": "美股大盘股", "currency": "USD", "as_of": "2026-11-07",
+ "price":  {"v": 70.1, "src": "..."},   "shares": {"v": 4.3e9, "src": "..."},
+ "r":      {"v": 0.09, "src": "owner-earnings-model 折现率表：美股大盘股 9%（10Y 4.x%）"},
+ "years": [  # 最近 3 个完整财年，旧 → 新；每年一个 src
+   {"fy": 2023, "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": .., "revenue": .., "ebit": .., "interest": ..}
+ ],
+ "maint_capex": {"method": "da_proxy | pct_of_capex | total | disclosed", "pct": 0.5, "value": null, "why": "..."},
+ "moat_score": 8,
+ "debt_ratio": {"v": 0.35, "src": "..."},
+ "tech_disruption": false,
+ "g_override": null,          # 异常增速（CAGR>50% 或 FCF 由负转正）时必须给：{"g1": .., "g2": .., "src": "共识 / FCF yield 反推"}
+ "peer_ev_fcf": {"v": 22, "src": "..."},   # 终值占比 > 60% 时出口倍数交叉验证用，可选
+ "scores": {"business": 0-30, "financial": 0-30, "management": 0-25, "price": 0-15}
+}
+用法：python3 tools/owner_value.py <输入.json> [--out memory/state/valuations/]
+输出：屏幕摘要 + <ticker>_<as_of>.json（报告用 data-valuation 引用，report_check 核对报告数字与它一致）
+"""
+import json
+import os
+import sys
+
+MOAT_CAPS = [(3, 4, 0.08, 0.03), (5, 6, 0.12, 0.05), (7, 8, 0.18, 0.08), (9, 10, 0.25, 0.10)]
+SCORE_MAX = {"business": 30, "financial": 30, "management": 25, "price": 15}
+
+
+class NoSource(Exception):
+    pass
+
+
+def need(obj, name):
+    if not isinstance(obj, dict) or obj.get("v") is None or not str(obj.get("src", "")).strip():
+        raise NoSource(f"{name} 缺数值或来源（无来源 = 不可用）")
+    return obj["v"]
+
+
+def caps(moat):
+    for lo, hi, g1, gt in MOAT_CAPS:
+        if lo <= moat <= hi:
+            return g1, gt
+    return None
+
+
+def dcf(oe0, g1, ratio2, gt, r, years1=5, years2=5):
+    """5 年 g1 + 5 年 g1×ratio2，第 10 年后按 gt 永续。返回 (PV 现金流合计, PV 终值, 第 10 年 OE)。"""
+    pv, oe = 0.0, oe0
+    for t in range(1, years1 + years2 + 1):
+        oe *= 1 + (g1 if t <= years1 else g1 * ratio2)
+        pv += oe / (1 + r) ** t
+    tv = oe * (1 + gt) / (r - gt)
+    return pv, tv / (1 + r) ** (years1 + years2), oe
+
+
+def run(inp):
+    price, shares, r = need(inp.get("price"), "现价"), need(inp.get("shares"), "股数"), need(inp.get("r"), "折现率")
+    ys = inp["years"]
+    if len(ys) < 3:
+        raise NoSource("需要最近 3 个完整财年")
+    for y in ys:
+        if not str(y.get("src", "")).strip():
+            raise NoSource(f"FY{y.get('fy')} 财务数据缺来源")
+    last = ys[-1]
+    out = {"ticker": inp["ticker"], "as_of": inp.get("as_of"), "currency": inp.get("currency"), "flags": [], "route": "标准 DCF"}
+
+    # 估值失效条件（hub Phase 2）
+    fcfs = [y["fcf"] for y in ys]
+    revs = [y["revenue"] for y in ys]
+    fail = []
+    if all(f < 0 for f in fcfs):
+        fail.append("FCF 三年连负")
+    if max(revs) / min(revs) - 1 > 0.5:
+        fail.append(f"营收波动 {max(revs) / min(revs) - 1:.0%} > 50%")
+    dr = need(inp.get("debt_ratio"), "负债率")
+    cover = last["ebit"] / last["interest"] if last.get("interest") else float("inf")
+    if dr > 0.5 and cover < 3:
+        fail.append(f"负债率 {dr:.0%} > 50% 且 EBIT / 利息 {cover:.1f}x < 3")
+    if inp.get("tech_disruption"):
+        fail.append("技术颠覆期（分析师判断）")
+    out["failure_conditions"] = fail
+
+    # 护城河门槛
+    moat = inp["moat_score"]
+    if moat < 3:
+        out.update(verdict="终止：护城河 < 3，不进入估值（心智模型 1）")
+        return out
+    g1cap, gtcap = caps(moat)
+
+    # 所有者盈余（基准年 = 最近完整财年）
+    m = inp["maint_capex"]
+    meth = m["method"]
+    mc = {"da_proxy": last["da"], "total": last["capex"], "disclosed": m.get("value"),
+          "pct_of_capex": last["capex"] * (m.get("pct") or 0.5)}[meth]
+    if mc is None:
+        raise NoSource("维护性资本支出：method=disclosed 但没给 value")
+    oe = last["net_income"] + last["da"] - mc + last.get("dwc", 0)
+    out["owner_earnings"] = {"value": oe, "maint_capex": mc, "method": meth, "why": m.get("why")}
+    if oe <= 0:
+        fail.append("所有者盈余 ≤ 0（靠外部资本维持运营）")
+
+    # 增速：近 3 年 FCF CAGR（两段：最旧 → 最新）
+    anomaly = fcfs[0] <= 0 or (fcfs[-1] > 0 and (fcfs[-1] / fcfs[0]) ** 0.5 - 1 > 0.5)
+    cagr = (fcfs[-1] / fcfs[0]) ** 0.5 - 1 if fcfs[0] > 0 and fcfs[-1] > 0 else None
+    out["fcf_cagr"] = cagr
+    if anomaly:
+        go = inp.get("g_override")
+        if not go or not str(go.get("src", "")).strip():
+            raise NoSource("异常增速（CAGR>50% 或 FCF 由负转正）：必须给 g_override {g1, g2, src}（共识锚定 / FCF yield 反推）")
+        g_cons, g_base = min(go["g1"], g1cap), min(go["g2"], g1cap)
+        out["flags"].append("历史增速异常，DCF 基于正态化增速，可信度中等")
+        out["route"] = "正态化增速 DCF（路径 B）"
+    else:
+        g_cons, g_base = min(max(cagr, 0) * 0.60, g1cap), min(max(cagr, 0) * 0.85, g1cap)
+
+    # 终端增长率：上限的 60% / 80%，且分别不超过 2.5% / 4%，并硬性 ≤ r − 2%
+    gt_cons = min(gtcap * 0.6, 0.025, r - 0.02)
+    gt_base = min(gtcap * 0.8, 0.04, r - 0.02)
+    res = {}
+    for name, g, ratio2, gt in (("conservative", g_cons, 0.5, gt_cons), ("base", g_base, 0.6, gt_base)):
+        pv, pvtv, oe10 = dcf(oe, g, ratio2, gt, r)
+        iv = (pv + pvtv) / shares
+        res[name] = {"g1": g, "g2": g * ratio2, "g_terminal": gt, "pv_cash": pv, "pv_terminal": pvtv,
+                     "terminal_share": pvtv / (pv + pvtv), "oe_year10": oe10, "iv_per_share": iv}
+        if pvtv / (pv + pvtv) > 0.6:
+            peer = inp.get("peer_ev_fcf")
+            if peer:
+                cross = oe10 * need(peer, "同行 EV/FCF") / (1 + r) ** 10 / shares
+                res[name]["exit_multiple_iv"] = cross
+                if abs(cross - iv) / iv > 0.3:
+                    res[name]["iv_per_share"] = min(cross, iv)
+                    out["flags"].append(f"{name} 终值占比 > 60% 且出口倍数法差 > 30%：取较低值")
+            else:
+                out["flags"].append(f"{name} 终值占比 {pvtv / (pv + pvtv):.0%} > 60%：需同行 EV/FCF 交叉验证（未给 peer_ev_fcf）")
+    out["scenarios"] = res
+    lo, hi = res["conservative"]["iv_per_share"], res["base"]["iv_per_share"]
+    out["iv_range"] = [lo, hi]
+    out["iv_mid_reference"] = (lo + hi) / 2
+
+    # 安全边际：按下沿（用户 11/07 定）
+    mos = (lo - price) / lo
+    hurdle = 0.40 if out["route"].startswith("正态化") else 0.30
+    out["margin_of_safety"] = {"basis": "内在价值下沿（保守情景）", "value": mos, "hurdle": hurdle, "price": price}
+    zone = "买入区间" if mos >= hurdle else ("观察区间" if mos >= 0.15 else "高估区间（不买）")
+    out["zone"] = zone if not fail else f"估值失效（{'；'.join(fail)}）→ 按替代估值顺序，不出买入结论"
+
+    # 三个检验（可算的部分）
+    out["checks"] = {"fcf_conversion": [y["fcf"] / y["net_income"] if y["net_income"] else None for y in ys],
+                     "interest_cover": cover}
+
+    # 评分卡
+    sc = inp.get("scores") or {}
+    bad = [k for k, mx in SCORE_MAX.items() if not (0 <= sc.get(k, -1) <= mx)]
+    if bad:
+        raise NoSource(f"评分卡维度缺失或越界：{bad}（满分 {SCORE_MAX}）")
+    out["scorecard"] = dict(sc, total=sum(sc[k] for k in SCORE_MAX))
+    return out
+
+
+def main():
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    od = next((a.split("=", 1)[1] for a in sys.argv if a.startswith("--out=")), "memory/state/valuations")
+    inp = json.load(open(args[0], encoding="utf-8"))
+    try:
+        out = run(inp)
+    except NoSource as e:
+        sys.exit(f"拒算：{e}")
+    os.makedirs(od, exist_ok=True)
+    fp = os.path.join(od, f"{out['ticker'].lower()}_{out.get('as_of') or 'na'}.json")
+    out["input"] = inp
+    json.dump(out, open(fp, "w"), ensure_ascii=False, indent=1)
+    if "iv_range" in out:
+        lo, hi = out["iv_range"]
+        m = out["margin_of_safety"]
+        print(f"{out['ticker']}：内在价值 {lo:.2f}–{hi:.2f}（中值 {out['iv_mid_reference']:.2f} 仅参考）｜现价 {m['price']}｜"
+              f"安全边际（下沿）{m['value']:.1%}，门槛 {m['hurdle']:.0%} → {out['zone']}｜评分 {out['scorecard']['total']}/100")
+    else:
+        print(out.get("verdict"))
+    for f in out["flags"]:
+        print("  ⚠", f)
+    print("→", fp)
+
+
+if __name__ == "__main__":
+    main()

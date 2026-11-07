@@ -160,6 +160,27 @@ class Format(unittest.TestCase):
         self.assertFalse(any(fv.MARKET.search(x) for x in noise))
         self.assertTrue(all(fv.MARKET.search(x) for x in signal))
 
+    def test_buffett_numbers_must_match_valuation(self):
+        """巴菲特报告：数字必须来自 owner_value 底稿；按中值说安全边际要报（用户 11/07 定按下沿）。"""
+        import json as _j
+        vdir = tempfile.mkdtemp(dir=os.path.join(REPO, "memory", "state"))
+        vp = os.path.join(vdir, "tst_2026-11-07.json")
+        _j.dump({"iv_range": [80.0, 120.0], "margin_of_safety": {"value": 0.125}, "zone": "高估区间（不买）"}, open(vp, "w"))
+        rel = os.path.relpath(vp, REPO)
+        good = (f'<div data-valuation="{rel}"><p>内在价值 80.00–120.00，安全边际（下沿）12.5%，高估区间。</p>'
+                '<div>来源：10-K</div><p>…</p><p>分析师附注</p></div>')
+        for body, expect_fail in ((good, set()),
+                                  (good.replace("80.00", "85.00"), {"B2"}),
+                                  (good.replace("安全边际（下沿）12.5%", "按中值的安全边际 30%"), {"B3", "B5"})):
+            f = tempfile.NamedTemporaryFile("w", suffix="_Buffett_Report.html", delete=False, encoding="utf-8")
+            f.write(f"<html><body>{body}</body></html>")
+            f.close()
+            got = {i for i in ids(rc.run(f.name)) if i.startswith("B")}
+            self.assertEqual(got, expect_fail, body[:80])
+            os.unlink(f.name)
+        import shutil
+        shutil.rmtree(vdir)
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")

@@ -88,7 +88,9 @@ description: |
 - **⚠️ 先检查「估值失效条件」**（FCF 三年连负 / 营收波动 > 50% / 负债率 > 50% 且 EBIT/利息 < 3x / 技术颠覆期）
   - 条件触发 → 跳过标准 DCF，按替代估值顺序执行（EV/FCF → 正态化 FCF → EV/EBITDA）
   - 条件未触发 → 正常运行两情景 DCF（保守 / 基准）
-- 输出：**内在价值区间** + **当前安全边际（%）**
+- 输出：**内在价值区间** + **当前安全边际（%，按下沿）**
+- **⛔ 不心算**：把采集到的数字（每个带来源）写成输入 JSON，跑 `python3 tools/owner_value.py <输入.json>`——
+  所有者盈余、两情景 DCF、终值检验、失效条件、安全边际、评分卡加总都由它算；缺来源它会拒算（2026-11-07 起）
 
 ---
 
@@ -103,8 +105,11 @@ description: |
 
 加载 `references/output-template.md`，生成结构化报告。
 
-用户说「出 HTML」时：用深色编辑风格输出 HTML——配色 ink `#0a0a0b` / paper `#f1efea` / copper `#8b6c42` / gold `#c9a84c`，字体 IM Fell English + Songti SC，SVG 图表（价格锚点区间图、护城河评分条、三年财务趋势图），零 Markdown 符号，结论区块下方必附反馈链接 `https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report={slug}`，完整规范见 `references/output-template.md`。
-默认输出：Markdown 结构化报告。
+**默认输出 HTML + PDF**（2026-11-07 用户定，原默认 Markdown——Markdown 不在报告检查与 Critic 覆盖范围内，等于不查）：
+文件名 `reports/{slug}_Buffett_Report.html`，根元素写 `data-valuation="memory/state/valuations/<ticker>_<日期>.json"`；
+交付前 `python3 tools/report_check.py <报告> --record`（B 项核对报告里的内在价值与安全边际与底稿一致）→ Critic → `node tools/render_pdf.js`。
+HTML 风格：用深色编辑风格输出 HTML——配色 ink `#0a0a0b` / paper `#f1efea` / copper `#8b6c42` / gold `#c9a84c`，字体 IM Fell English + Songti SC，SVG 图表（价格锚点区间图、护城河评分条、三年财务趋势图），零 Markdown 符号，结论区块下方必附反馈链接 `https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report={slug}`，完整规范见 `references/output-template.md`。
+（对话里只问一句「值不值得买」时可直接文字作答，但数字仍须来自 owner_value 底稿。）
 
 ---
 
@@ -138,7 +143,7 @@ description: |
 □ 所有者盈余是「净利润 + 折旧摊销 − 维护性资本支出」，维护性资本支出是**估的还是抄的总资本支出**？抄总资本支出会系统性低估所有者盈余。
 □ 护城河五维度是否逐项给了分，还是只给了总分？**只给总分等于没做维度分析。**
 □ 内在价值给的是**区间**还是单点？单点值在贴现率 ±1% 下会移动多少？
-□ 安全边际用的是「内在价值下沿」还是「中值」？**用中值算安全边际等于没有安全边际。**
+□ 安全边际按「内在价值下沿」（owner_value 已固定；2026-11-07 用户定，spoke 公式已统一）——报告里不得出现按中值算的安全边际。
 □ 遇到看不懂的商业模式，是否直接写「超出能力圈」？**强行分析比不分析伤害更大。**
 □ 有没有把「便宜」当成「有护城河」？两者是独立判断，不能互相替代。
 ```

@@ -49,7 +49,8 @@ def text_of(s):
 def run(path, kind=None, pdf=None):
     s = open(path, encoding="utf-8", errors="ignore").read()
     t = text_of(s)
-    kind = kind or ("earner" if path.endswith("_Copilot_Report.html") else "research")
+    kind = kind or ("earner" if path.endswith("_Copilot_Report.html") else
+                    "buffett" if path.endswith("_Buffett_Report.html") else "research")
     res = []
 
     def chk(cid, level, name, ok, evidence=""):
@@ -100,6 +101,26 @@ def run(path, kind=None, pdf=None):
         chk("C3", "FAIL", "含目标价 / 三情景 → 每个情景价都已登记 predictions.md（CLAUDE.md 铁律）",
             tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")
 
+    if kind == "buffett":  # 2026-11-07：报告数字必须来自 owner_value 底稿（不心算），安全边际按下沿（用户定）
+        vm = re.search(r'data-valuation="([^"]+)"', s)
+        vp = os.path.join(REPO, vm.group(1)) if vm else None
+        chk("B1", "FAIL", "引用 owner_value 估值底稿（data-valuation）且文件存在", vp and os.path.exists(vp), vm.group(1) if vm else "无")
+        if vp and os.path.exists(vp):
+            v = json.load(open(vp, encoding="utf-8"))
+
+            def shown(x, pct=False):  # 完整数字匹配（11/07 测试抓到：子串匹配让「120.00」冒充「12」）；百分比必须带 %
+                forms = {f"{x:.2f}", f"{x:.1f}", f"{x:,.0f}", f"{round(x):d}"}
+                tail = r"\s*%" if pct else r"(?![\d.])"
+                return any(re.search(rf"(?<![\d.]){re.escape(f)}{tail}", t) for f in forms)
+            if "iv_range" in v:
+                lo, hi = v["iv_range"]
+                mos = v["margin_of_safety"]["value"] * 100
+                chk("B2", "FAIL", "内在价值区间与底稿一致", shown(lo) and shown(hi), f"底稿 {lo:.2f}–{hi:.2f}")
+                chk("B3", "FAIL", "安全边际数值与底稿一致", shown(mos, pct=True), f"底稿 {mos:.1f}%")
+                zone_kw = v["zone"].split("（")[0][:4]
+                chk("B4", "FAIL", "结论区间与底稿一致（买入 / 观察 / 高估 / 估值失效）", zone_kw in t, f"底稿：{v['zone'][:30]}")
+        bad_mid = re.search(r"安全边际[^。；\n]{0,30}中值|中值[^。；\n]{0,20}安全边际", t)
+        chk("B5", "FAIL", "没有按中值算的安全边际（用户 11/07 定：按下沿）", not bad_mid, bad_mid.group(0) if bad_mid else "")
     if kind == "earner":
         secs = [int(x) for x in re.findall(r'data-sec="(\d+)"', s)]
         chk("E1", "FAIL", "14 节固定顺序（每节根元素 data-sec=\"1\"…\"14\"）", secs == list(range(1, 15)),
@@ -128,7 +149,7 @@ def run(path, kind=None, pdf=None):
                     f"{len(qs)} 段引语，原文 {'已找到' if src_txt else '缺失'}；对不上：{bad_q}")
             chk("E7", "FAIL", "美股：引用电话会原话（class=\"quote\" ≥ 2）且来源索引有原文链接（scripts/fetch_transcript.py）",
                 nq >= 2 and has_tr, f"原话 {nq} 段，原文链接 {'有' if has_tr else '无'}")
-    else:
+    if kind != "earner":
         notes = re.search(r"分析师附注|Analyst'?s Note", t)
         chk("R1", "FAIL", "末尾有「分析师附注」板块", notes and notes.start() > len(t) * 0.5,
             f"位置 {notes.start() / len(t):.0%}" if notes else "无")
