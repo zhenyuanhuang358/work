@@ -100,6 +100,18 @@ class MacroCalendar(unittest.TestCase):
                 '<div class="fomc-meeting__month"><strong>December</strong></div><div class="fomc-meeting__date">8-9*</div>')
         self.assertEqual(fc.parse_fomc(html), [("2026-12-09", True), ("2027-01-27", False), ("2027-05-01", True)])
 
+    def test_omb_schedule_parser(self):
+        """11/07：BLS 网站拒绝自动访问，2027 年 CPI / PPI / 非农取自 OMB 官方时间表 PDF。
+        搜索摘要把 3 月 PPI 写成 14 日、漏了 2 月 CPI——解析原文必须给出 12 / 11。"""
+        import fetch_calendar as fc
+        from datetime import date
+        y, rows = fc.parse_omb(open(os.path.join(REPO, "tests", "fixtures", "omb", "pfei_2027_excerpt.txt")).read())
+        self.assertEqual(y, 2027)
+        self.assertEqual({k: len(v) for k, v in rows.items()}, {"NFP": 12, "PPI": 12, "CPI": 12})
+        self.assertIn("2027-03-12", rows["PPI"])
+        self.assertIn("2027-02-11", rows["CPI"])
+        self.assertTrue(all(date.fromisoformat(d).weekday() == 4 for d in rows["NFP"]))  # 非农全是周五
+
     def test_option_quote_reads_unified_calendar(self):
         """利率敏感拦截读 macro_calendar.json（options-screen 里不再有日期副本）。"""
         import option_quote as oq

@@ -37,6 +37,23 @@ def parse_fomc(html):
     return sorted(set(out))
 
 
+OMB_ROWS = {"NFP": "The Employment Situation", "PPI": "Producer Price Indexes", "CPI": "Consumer Price Index"}
+
+
+def parse_omb(text):
+    """OMB《主要联邦经济指标发布时间表》PDF 文本 → {"CPI": [ISO 日期…], …}。
+    格式：标题含年份；每个指标名后两行内有一行 12 个数（1–12 月的日，'--' 为当月无）。
+    2026-11-07 起 BLS 三项用它自动化（BLS 网站拒绝自动访问，OMB 时间表是政府统一公布的口径）。"""
+    year = int(re.search(r"PRINCIPAL FEDERAL ECONOMIC INDICATORS FOR (\d{4})", text).group(1))
+    lines = text.splitlines()
+    out = {}
+    for key, name in OMB_ROWS.items():
+        i = next(i for i, l in enumerate(lines) if l.strip() == name)
+        row = next(l for l in lines[i + 1:i + 4] if len(re.findall(r"\d+|--", l)) == 12)
+        out[key] = [date(year, m, int(d)).isoformat() for m, d in enumerate(re.findall(r"\d+|--", row), 1) if d != "--"]
+    return year, out
+
+
 def main():
     cal = json.load(open(PATH)) if os.path.exists(PATH) else {"manual": {}, "fomc": [], "fomc_source": None}
     try:
@@ -50,6 +67,18 @@ def main():
     except Exception as e:  # 失败保留上次结果，写明原因
         cal.setdefault("fomc_source", {})
         cal["fomc_source"] = dict(cal.get("fomc_source") or {}, error=repr(e)[:200])
+    # BLS 三项：解析已抓取的 OMB 时间表（pages/ 里由 fetch_pages.py 抓到的 PFEI PDF），并入 manual 段
+    import glob
+    for f in sorted(glob.glob("pages/*pfei*.txt")):
+        try:
+            year, rows = parse_omb(open(f, encoding="utf-8").read())
+        except Exception as e:
+            print("OMB 解析失败", f, repr(e)[:120])
+            continue
+        for k, ds in rows.items():
+            cal["manual"][k] = sorted(set(cal["manual"].get(k, [])) | set(ds))
+        cal["manual"]["_source"] = (cal["manual"].get("_source", "").split("；OMB")[0]
+                                    + f"；OMB 主要联邦经济指标发布时间表 {year}（{f}）")
     json.dump(cal, open(PATH, "w"), ensure_ascii=False, indent=1)
     print("FOMC", len(cal["fomc"]), "次", (cal["fomc_source"] or {}).get("error"))
     print("未来:", [m["date"] for m in cal["fomc"] if m["date"] >= date.today().isoformat()][:4])
