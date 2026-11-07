@@ -1,0 +1,439 @@
+{
+ "ticker": "KO",
+ "cik": "0000021344",
+ "entity": "COCA COLA CO",
+ "source": "SEC EDGAR companyfacts https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json",
+ "shares_outstanding": {
+  "v": 4301902335,
+  "accn": "0001628280-26-067844",
+  "filed": "2026-10-28"
+ },
+ "years": {
+  "2022": {
+   "revenue": {
+    "v": 43004000000,
+    "tag": "Revenues",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "net_income": {
+    "v": 9542000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "ebit": {
+    "v": 10909000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "da": {
+    "v": 1260000000,
+    "tag": "DepreciationDepletionAndAmortization",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "capex": {
+    "v": 1484000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "cfo": {
+    "v": 11018000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "interest": {
+    "v": 882000000,
+    "tag": "InterestExpense",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "sbc": {
+    "v": 356000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "dwc_increase": {
+    "v": 605000000,
+    "tag": "IncreaseDecreaseInOperatingCapital",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "assets": {
+    "v": 92763000000,
+    "tag": "Assets",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   },
+   "liabilities": null,
+   "equity": {
+    "v": 24105000000,
+    "tag": "StockholdersEquity",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   },
+   "cash": {
+    "v": 9519000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "debt_lt": {
+    "v": 36377000000,
+    "tag": "LongTermDebtNoncurrent",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   },
+   "debt_st": {
+    "v": 399000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   },
+   "commercial_paper": {
+    "v": 2146000000,
+    "tag": "CommercialPaper",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   }
+  },
+  "2023": {
+   "revenue": {
+    "v": 45754000000,
+    "tag": "Revenues",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "net_income": {
+    "v": 10714000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "ebit": {
+    "v": 11311000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "da": {
+    "v": 1128000000,
+    "tag": "DepreciationDepletionAndAmortization",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "capex": {
+    "v": 1852000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "cfo": {
+    "v": 11599000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "interest": {
+    "v": 1527000000,
+    "tag": "InterestExpense",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "sbc": {
+    "v": 254000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "dwc_increase": {
+    "v": 846000000,
+    "tag": "IncreaseDecreaseInOperatingCapital",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "assets": {
+    "v": 97703000000,
+    "tag": "Assets",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2023-12-31"
+   },
+   "liabilities": null,
+   "equity": {
+    "v": 25941000000,
+    "tag": "StockholdersEquity",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2023-12-31"
+   },
+   "cash": {
+    "v": 9366000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "debt_lt": {
+    "v": 35547000000,
+    "tag": "LongTermDebtNoncurrent",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2023-12-31"
+   },
+   "debt_st": {
+    "v": 1960000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2023-12-31"
+   },
+   "commercial_paper": {
+    "v": 4209000000,
+    "tag": "CommercialPaper",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2023-12-31"
+   }
+  },
+  "2024": {
+   "revenue": {
+    "v": 47061000000,
+    "tag": "Revenues",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "net_income": {
+    "v": 10631000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "ebit": {
+    "v": 9992000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "da": {
+    "v": 1075000000,
+    "tag": "DepreciationDepletionAndAmortization",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "capex": {
+    "v": 2064000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "cfo": {
+    "v": 6805000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "interest": {
+    "v": 1656000000,
+    "tag": "InterestExpense",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "sbc": {
+    "v": 286000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "dwc_increase": {
+    "v": 6234000000,
+    "tag": "IncreaseDecreaseInOperatingCapital",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "assets": {
+    "v": 100549000000,
+    "tag": "Assets",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "liabilities": null,
+   "equity": {
+    "v": 24856000000,
+    "tag": "StockholdersEquity",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "cash": {
+    "v": 10828000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "debt_lt": null,
+   "debt_st": null,
+   "commercial_paper": {
+    "v": 1139000000,
+    "tag": "CommercialPaper",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   }
+  },
+  "2025": {
+   "revenue": {
+    "v": 47941000000,
+    "tag": "Revenues",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "net_income": {
+    "v": 13107000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "ebit": {
+    "v": 13762000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "da": {
+    "v": 1050000000,
+    "tag": "DepreciationDepletionAndAmortization",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "capex": {
+    "v": 2112000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "cfo": {
+    "v": 7408000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "interest": {
+    "v": 1654000000,
+    "tag": "InterestExpense",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "sbc": {
+    "v": 279000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "dwc_increase": {
+    "v": 7208000000,
+    "tag": "IncreaseDecreaseInOperatingCapital",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "assets": {
+    "v": 104816000000,
+    "tag": "Assets",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "liabilities": null,
+   "equity": {
+    "v": 32169000000,
+    "tag": "StockholdersEquity",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "cash": {
+    "v": 10270000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "debt_lt": null,
+   "debt_st": null,
+   "commercial_paper": {
+    "v": 1495000000,
+    "tag": "CommercialPaper",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   }
+  }
+ },
+ "missing": {
+  "2022": [
+   "liabilities"
+  ],
+  "2023": [
+   "liabilities"
+  ],
+  "2024": [
+   "liabilities",
+   "debt_lt",
+   "debt_st"
+  ],
+  "2025": [
+   "liabilities",
+   "debt_lt",
+   "debt_st"
+  ]
+ }
+}
