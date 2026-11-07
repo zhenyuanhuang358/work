@@ -115,6 +115,55 @@
     "accn": "0000021344-24-000009",
     "filed": "2024-02-20",
     "end": "2022-12-31"
+   },
+   "gross_profit": {
+    "v": 25004000000,
+    "tag": "GrossProfit",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "cogs": {
+    "v": 18000000000,
+    "tag": "CostOfGoodsAndServicesSold",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "buyback": {
+    "v": 1418000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "dividends": {
+    "v": 7616000000,
+    "tag": "PaymentsOfDividends",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
+   },
+   "nci": {
+    "v": 1721000000,
+    "tag": "MinorityInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2022-12-31"
+   },
+   "equity_total": {
+    "v": 25826000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0000021344-24-000009",
+    "filed": "2024-02-20",
+    "end": "2022-12-31"
+   },
+   "diluted_shares": {
+    "v": 4350000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2022-12-31"
    }
   },
   "2023": {
@@ -223,6 +272,55 @@
     "accn": "0000021344-25-000011",
     "filed": "2025-02-20",
     "end": "2023-12-31"
+   },
+   "gross_profit": {
+    "v": 27234000000,
+    "tag": "GrossProfit",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "cogs": {
+    "v": 18520000000,
+    "tag": "CostOfGoodsAndServicesSold",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "buyback": {
+    "v": 2289000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "dividends": {
+    "v": 7952000000,
+    "tag": "PaymentsOfDividends",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "nci": {
+    "v": 1539000000,
+    "tag": "MinorityInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
+   },
+   "equity_total": {
+    "v": 27480000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0000021344-25-000011",
+    "filed": "2025-02-20",
+    "end": "2023-12-31"
+   },
+   "diluted_shares": {
+    "v": 4339000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2023-12-31"
    }
   },
   "2024": {
@@ -316,6 +414,55 @@
    "commercial_paper": {
     "v": 1139000000,
     "tag": "CommercialPaper",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "gross_profit": {
+    "v": 28737000000,
+    "tag": "GrossProfit",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "cogs": {
+    "v": 18324000000,
+    "tag": "CostOfGoodsAndServicesSold",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "buyback": {
+    "v": 1795000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "dividends": {
+    "v": 8359000000,
+    "tag": "PaymentsOfDividends",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "nci": {
+    "v": 1516000000,
+    "tag": "MinorityInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "equity_total": {
+    "v": 26372000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2024-12-31"
+   },
+   "diluted_shares": {
+    "v": 4320000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
     "accn": "0001628280-26-010047",
     "filed": "2026-02-20",
     "end": "2024-12-31"
@@ -415,6 +562,55 @@
     "accn": "0001628280-26-010047",
     "filed": "2026-02-20",
     "end": "2025-12-31"
+   },
+   "gross_profit": {
+    "v": 29544000000,
+    "tag": "GrossProfit",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "cogs": {
+    "v": 18397000000,
+    "tag": "CostOfGoodsAndServicesSold",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "buyback": {
+    "v": 746000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "dividends": {
+    "v": 8779000000,
+    "tag": "PaymentsOfDividends",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "nci": {
+    "v": 2106000000,
+    "tag": "MinorityInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "equity_total": {
+    "v": 34275000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
+   },
+   "diluted_shares": {
+    "v": 4313000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001628280-26-010047",
+    "filed": "2026-02-20",
+    "end": "2025-12-31"
    }
   }
  },
@@ -435,5 +631,202 @@
    "debt_lt",
    "debt_st"
   ]
+ },
+ "debt_tags": {
+  "AvailableForSaleDebtSecuritiesAmortizedCostBasis": {
+   "2022": 979000000,
+   "2023": 1136000000,
+   "2024": 1728000000,
+   "2025": 1816000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsAmortizedCost": {
+   "2022": 38000000,
+   "2023": 37000000,
+   "2024": 35000000,
+   "2025": 38000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterFiveThroughTenYearsFairValue": {
+   "2022": 49000000,
+   "2023": 48000000,
+   "2024": 42000000,
+   "2025": 46000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsAmortizedCost": {
+   "2022": 621000000,
+   "2023": 420000000,
+   "2024": 1217000000,
+   "2025": 1182000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterOneThroughFiveYearsFairValue": {
+   "2022": 598000000,
+   "2023": 427000000,
+   "2024": 1132000000,
+   "2025": 1147000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsAmortizedCost": {
+   "2022": 174000000,
+   "2023": 195000000,
+   "2024": 177000000,
+   "2025": 179000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesAfterTenYearsFairValue": {
+   "2022": 152000000,
+   "2023": 176000000,
+   "2024": 161000000,
+   "2025": 166000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearAmortizedCost": {
+   "2022": 146000000,
+   "2023": 484000000,
+   "2024": 299000000,
+   "2025": 417000000
+  },
+  "AvailableForSaleSecuritiesDebtMaturitiesWithinOneYearFairValue": {
+   "2022": 145000000,
+   "2023": 483000000,
+   "2024": 296000000,
+   "2025": 415000000
+  },
+  "CommercialPaper": {
+   "2022": 2146000000,
+   "2023": 4209000000,
+   "2024": 1139000000,
+   "2025": 1495000000
+  },
+  "DebtSecurities": {
+   "2022": 983000000,
+   "2023": 1175000000,
+   "2024": 1676000000,
+   "2025": 1824000000
+  },
+  "DebtSecuritiesTradingAndEquitySecuritiesFvNiCost": {
+   "2023": 1179000000,
+   "2024": 1773000000,
+   "2025": 1865000000
+  },
+  "DebtSecuritiesUnrealizedGainLoss": {
+   "2023": 26000000,
+   "2024": 22000000,
+   "2025": 24000000
+  },
+  "ExtinguishmentOfDebtAmount": {
+   "2024": 485000000
+  },
+  "GainsLossesOnExtinguishmentOfDebt": {
+   "2024": 22000000
+  },
+  "LongTermDebt": {
+   "2022": 36776000000,
+   "2023": 37507000000
+  },
+  "LongTermDebtCurrent": {
+   "2022": 399000000,
+   "2023": 1960000000
+  },
+  "LongTermDebtFairValue": {
+   "2022": 32698000000,
+   "2023": 33445000000,
+   "2024": 38052000000,
+   "2025": 39385000000
+  },
+  "LongTermDebtNoncurrent": {
+   "2022": 36377000000,
+   "2023": 35547000000
+  },
+  "NotesAndLoansPayable": {
+   "2022": 2373000000,
+   "2023": 4557000000,
+   "2024": 1499000000,
+   "2025": 1551000000
+  },
+  "OtherShortTermBorrowings": {
+   "2022": 227000000,
+   "2023": 348000000,
+   "2024": 360000000,
+   "2025": 56000000
+  },
+  "ShortTermBorrowings": {
+   "2022": 2373000000
+  },
+  "DisposalGroupIncludingDiscontinuedOperationAccountsNotesAndLoansReceivableNet": {
+   "2022": 12000000,
+   "2023": 95000000,
+   "2024": 0,
+   "2025": 389000000
+  },
+  "AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedGainBeforeTax": {
+   "2023": 26000000,
+   "2024": 21000000,
+   "2025": 23000000
+  },
+  "AvailableForSaleDebtSecuritiesAccumulatedGrossUnrealizedLossBeforeTax": {
+   "2023": 28000000,
+   "2024": 118000000,
+   "2025": 65000000
+  },
+  "AvailableForSaleSecuritiesDebtSecurities": {
+   "2022": 944000000,
+   "2023": 1134000000,
+   "2024": 1631000000,
+   "2025": 1774000000
+  },
+  "DebtSecuritiesTradingUnrealizedGain": {
+   "2023": 0,
+   "2024": 1000000,
+   "2025": 1000000
+  },
+  "DebtSecuritiesTradingUnrealizedLoss": {
+   "2023": 2000000,
+   "2024": 1000000,
+   "2025": 0
+  },
+  "TradingSecuritiesDebt": {
+   "2023": 41000000,
+   "2024": 45000000,
+   "2025": 50000000
+  },
+  "TradingSecuritiesDebtAmortizedCost": {
+   "2023": 43000000,
+   "2024": 45000000,
+   "2025": 49000000
+  },
+  "DebtAndEquitySecuritiesGainLoss": {
+   "2022": -371000000,
+   "2023": 289000000,
+   "2024": 290000000,
+   "2025": 409000000
+  },
+  "DebtSecuritiesAvailableForSaleRealizedGain": {
+   "2022": 5000000,
+   "2023": 3000000,
+   "2024": 14000000,
+   "2025": 4000000
+  },
+  "DebtSecuritiesAvailableForSaleRealizedLoss": {
+   "2022": 136000000,
+   "2023": 10000000,
+   "2024": 12000000,
+   "2025": 6000000
+  },
+  "LongTermDebtAndCapitalLeaseObligations": {
+   "2023": 35547000000,
+   "2024": 42375000000,
+   "2025": 42119000000
+  },
+  "LongTermDebtAndCapitalLeaseObligationsCurrent": {
+   "2023": 1960000000,
+   "2024": 648000000,
+   "2025": 1822000000
+  },
+  "LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities": {
+   "2023": 37507000000,
+   "2024": 43023000000,
+   "2025": 43941000000
+  }
+ },
+ "price": {
+  "v": 95.67,
+  "date": "2026-11-06",
+  "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取）"
  }
 }
