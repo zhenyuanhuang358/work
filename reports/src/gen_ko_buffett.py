@@ -254,7 +254,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <ul>
 <li><strong>结论：高估区间，不买。</strong>护城河宽（{INP['moat_score']} / 10），但现价 {price:.2f} 比内在价值上沿 {hi:.2f} 还高。按下沿算，安全边际 {mos * 100:.1f}%；要回到 30% 安全边际，价格需在 {buy30:.2f} 以下。换任何一种口径结论都不变：不剔除一次性项、代入 2026 指引、IRS 败诉。{badge("高")}</li>
 <li>评分 {total} / 100，落在「谨慎」档。生意质量高；扣分主要来自三处：报告值 FCF 被两笔一次性支出压低，估值偏贵，管理层数据有缺口。{badge("中")}</li>
-<li>现价隐含未来 5 年 FCF 每年增长 {pct(ig['g1'])}。2026 年指引 +{pct(g26)}，第一年接近兑现；之后能否持续，是多空分歧所在。{badge("中")}</li>
+<li>现价隐含未来 5 年所有者盈余每年增长 {pct(ig['g1'])}（FCF 作可观测代理）。2026 年 FCF 指引比 FY2025 正态化 FCF 高 {pct(g26)}；若指引兑现，第一年接近隐含增速。之后能否持续，是多空分歧所在。{badge("中")}</li>
 </ul>
 {price_svg()}
 
@@ -276,14 +276,15 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <table>{tr(["财年", "全年 price/mix", "单位箱量", "> 5%", "出处（业绩新闻稿）"], True)}{price_table}</table>
 <p>份额：FY2025 与 2026 Q3 均在无酒精即饮饮料（NARTD）赢得价值份额；2026 Q3 EMEA 份额下滑（法国、英国）。侵蚀信号：毛利率三年 {pct(rows['2023']['gm'])} → {pct(rows['2025']['gm'])}，无压缩；没有连续两年份额流失，未触发。</p>
 <p>为什么给 7：两个核心信号都成立，但信号①不是年年成立，信号②掺有通胀定价。如果评 6（中等护城河）：1A 从 12 降到 8，总分 {total - 4}，仍在「谨慎」档；
-内在价值不变，因为两个情景的增速都没碰到 12% / 18% 的上限，终端增长被 2.5% / 3% 封顶。</p>
+内在价值不变，因为两个情景的增速都没碰到 12% / 18% 的上限，终端增长被 2.5% / 3% 封顶。
+按百分点口径读信号①，无形资产只剩一个信号，不满足「至少 2 个」，应评窄护城河 3–4：1A 降为 5，总分 {total - 7}；终端增长上限降为 1.8% / 2.4%，内在价值约 45.8–55.5（owner_value 以护城河 4 重跑，底稿 memory/state/valuations/ko_2026-11-07-moat4.json）；结论不变。</p>
 <p class="src">来源：SEC companyfacts（GrossProfit ÷ 营收）；2022–2025 年业绩新闻稿（price/mix、单位箱量、份额）；2026 Q3 新闻稿（份额）。</p>
 <p>主要挑战：减糖与健康饮品趋势对含糖碳酸饮料的长期压力。</p>
 
 <h2>二、核心财务指标 <span class="en">Financials, FY2023–FY2025</span></h2>
 {trend_svg()}
 <table>{tr(["指标"] + [f"FY{f}" for f in FY], True)}{"".join(tr([n] + v) for n, v in fin_rows)}</table>
-<p class="src">来源：SEC companyfacts 10-K（百万美元换算为十亿）。有息负债 = 长期债务含一年内到期部分 + 应付票据及借款（KO 2024 年起改报 LongTermDebtAndCapitalLeaseObligations 标签）；实际税率 = IncomeTaxExpenseBenefit ÷ 税前利润；投入资本 = 有息负债 + 股东权益 + 少数股东权益 − 现金（不扣现金时 FY2024 ROIC 约为 11.7%，「三年都 > 12%」依赖这个口径）。</p>
+<p class="src">来源：SEC companyfacts 10-K（百万美元换算为十亿）。有息负债 = 长期债务含一年内到期部分 + 应付票据及借款（KO 2024 年起改报 LongTermDebtAndCapitalLeaseObligations 标签）；实际税率 = IncomeTaxExpenseBenefit ÷ 税前利润；投入资本 = 有息负债 + 股东权益 + 少数股东权益 − 现金（少数股东权益是保守加入的，spoke 公式本身不含；含少数股东权益而不扣现金时，FY2024 ROIC 约为 {pct(rows['2024']['ebit'] * (1 - rows['2024']['etr']) / (rows['2024']['debt'] + rows['2024']['eq'] + val('ko', '2024', 'nci')))}，「三年都 > 12%」依赖扣现金的口径）。</p>
 <div class="warn"><strong>两笔一次性现金流出（金额是公司在业绩新闻稿里自己列的）：</strong>FY2024 向美国国税局（IRS）缴纳税务诉讼保证金 $6.0B；FY2025 支付 fairlife 并购或有对价 $6.1B。
 这两笔把 FCF 压到 {m(rows['2024']['fcf_rep'])} / {m(rows['2025']['fcf_rep'])}。<strong>只有估值</strong>按剔除后的 {m(rows['2024']['fcf_n'])} / {m(rows['2025']['fcf_n'])} 计算，与公司公布的 $10.8B / $11.4B 接近，差额是取整。
 评分卡仍按规则用报告值。不剔除时 FCF 复合增速为 {pct(wa['fcf_cagr'])}，内在价值降到 {wa['iv_range'][0]:.2f}–{wa['iv_range'][1]:.2f}：<strong>结论不变，仍是高估</strong>。</div>
@@ -327,7 +328,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 指引里没有再列一次性项。Q1 多出的 6 天和 Q4 少掉的 6 天在全年层面相互抵消。<br>
 重估结果有三点：
 <br>① 粗算：所有者盈余与 FCF 同比例上调，内在价值下沿约为 {lo:.2f} × {FCF26_GUIDE / rows['2025']['fcf_n']:.3f} ≈ {lo26:.1f}，安全边际仍约 {(lo26 - price) / lo26 * 100:.0f}%，不买的结论不变。
-<br>② 定性：第一年基本兑现隐含增速，不能叫「激进」。准确的说法是：现价要求 2027–2030 年 FCF 每年再增长约 {pct(need_after26)}。
+<br>② 定性：若指引兑现，第一年接近隐含增速，不能叫「激进」。两个数口径不同：{pct(g26)} 是 FCF 对正态化 FCF 的增速，{pct(ig['g1'])} 是所有者盈余的增速，只能近似比较。准确的说法是：以 FCF 作代理，现价要求 2027–2030 年每年再增长约 {pct(need_after26)}。
 <br>③ 反方证据：公司提示 2027 年收购与剥离会带来约 8% 的营收逆风（Q3 新闻稿）。</div>
 <p class="src">来源：owner_value 底稿 {VAL}（每个输入带来源）；2026 Q3 新闻稿指引表（FCF 至少 $13.0B，经营现金流至少 $15.2B，资本支出约 $2.2B）。</p>
 
@@ -337,9 +338,8 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <h2>五、巴菲特评分卡 <span class="en">Berkshire Score</span></h2>
 {score_svg()}
 <table>{tr(["维度", "满分", "得分", "关键依据"], True)}{score_rows}</table>
-<p>口径说明：berkshire-score.md 没有授权用正态化 FCF 打分，所以 2B、4B 按报告值 FCF 打分，KO 和同行两边都用 CFO − Capex。
-如果两项都改用剔除一次性项的 FCF（KO 为 {ko_evf:.1f}x，同行未做正态化），2B 为 10 分、4B 为 3 分，总分 {alt_total}，进入「观察名单」。
-这个分歧只影响评级的档位，不影响「不买」。规则是否应允许正态化，留给你定（见分析师附注）。</p>
+<p>口径说明：按 berkshire-score.md 2B 注（用户 11/07 定：一次性项只用于估值），2B、4B 用报告值 FCF，KO 和同行两边都用 CFO − Capex。
+正态化口径只作参考：2B 为 10 分、4B 为 3 分（KO {ko_evf:.1f}x），总分为 {alt_total}。</p>
 
 <h2>六、主要风险 <span class="en">Risks</span></h2>
 <table>{tr(["风险", "说明", "对估值的影响"], True)}
@@ -366,10 +366,10 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["高估、不买", "高", "四种口径（报告值、剔除一次性项、2026 指引、IRS 败诉）都给出负的安全边际"])}
 {tr(["护城河 7 / 10（宽）", "中", "两个核心信号成立，但毛利率信号不是年年成立，涨价证据掺有通胀定价；评 6 时结论不变"])}
 {tr([f"评分 {total}（谨慎）", "中", f"按规则字面口径；若允许正态化 FCF 则为 {alt_total}（观察名单）"])}
-{tr(["现价隐含增速难以持续 5 年", "中", f"已登记 predictions.md：FY2030 FCF < ${thr30 / 1000:.1f}B，2031-02-28 验证"])}
+{tr(["现价隐含增速难以持续 5 年", "中", f"已登记 predictions.md：FY2030 FCF &lt; ${thr30 / 1000:.1f}B（所有者盈余隐含增速，FCF 作可观测代理），2031-02-28 验证"])}
 </table>
 <p><strong>待核实：</strong>DEF 14A 管理层持股；IRS 上诉进展与败诉后的税率；FY2026 年报 FCF（预计 2027 年 2 月）。</p>
-<p><strong>分析师看法与分歧：</strong>KO 是巴菲特意义上的好生意，问题只在价格。最强的反方论据是 2026 年 FCF 指引 +{pct(g26)}，已接近现价的隐含增速；
+<p><strong>分析师看法与分歧：</strong>KO 是巴菲特意义上的好生意，问题只在价格。最强的反方论据是 2026 年 FCF 指引 +{pct(g26)}，若兑现就接近现价隐含的所有者盈余增速；
 但这需要连续 5 年做到，而 2027 年公司自己提示约 8% 的收购剥离营收逆风。本报告按用户 11/07 定的三条规则计算：
 ① 一次性项只用于估值，不用于评分卡（若用于评分卡为 {alt_total} 分）；
 ② 基准终端增长封顶 3%；

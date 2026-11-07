@@ -101,8 +101,13 @@ def run(path, kind=None, pdf=None):
         if kind == "buffett" and not tps:
             # 11/07 KO 实测：巴菲特报告给的是内在价值区间，不是带日期的情景价，按情景价查必然 FAIL。
             # 它的可证伪判断是「现价隐含增速不兑现」这类带门槛 + 时点的命题 → 查同标的、来源为 buffett 的登记行。
-            reg = [l for l in pred if stem in l and "buffett" in l]
-            chk("C3", "FAIL", "巴菲特报告的可证伪判断已登记 predictions.md（同标的、注明 buffett 来源）", reg, f"{len(reg)} 条")
+            # 11/07 KO Critic R3：登记行门槛被写成 $0.0B（单位换算两次），只查「有登记行」拦不住 →
+            # 报告里写的门槛（「< $22.7B」这类）必须原样出现在某条待验登记行里。
+            reg = [l for l in pred if stem in l and "buffett" in l and "待验" in l]
+            ths = sorted({m.group(1) for m in re.finditer(r"[<>≥≤]\s*\$\s*(\d+(?:\.\d+)?)\s*B", t)})
+            miss = [x for x in ths if not any(re.search(rf"[<>≥≤]\s*\$\s*{re.escape(x)}\s*b", l) for l in reg)]
+            chk("C3", "FAIL", "巴菲特报告的可证伪判断已登记 predictions.md（同标的、buffett 来源、待验，且门槛与报告一致）",
+                reg and not miss, f"{len(reg)} 条；报告门槛 {ths}；登记行里找不到 {miss}")
         else:
             chk("C3", "FAIL", "含目标价 / 三情景 → 每个情景价都已登记 predictions.md（CLAUDE.md 铁律）",
                 tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")

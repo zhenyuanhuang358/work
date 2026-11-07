@@ -183,9 +183,10 @@ class Format(unittest.TestCase):
 
     def test_buffett_c3_requires_registered_claim(self):
         """11/07 KO 实测：巴菲特报告没有情景价，C3 应改查同标的的 buffett 登记行，而不是一律 FAIL。"""
-        for stem, ok in (("ko", True), ("zzq", False)):  # predictions.md 有 KO buffett 行，无 zzq
+        # 11/07 Critic R3：登记行门槛写成 $0.0B，报告写 $22.7B —— 门槛对不上也要 FAIL
+        for stem, thr, ok in (("ko", "22.7", True), ("ko", "0.0", False), ("ko", "99.9", False), ("zzq", "22.7", False)):
             f = tempfile.NamedTemporaryFile("w", prefix=f"{stem}_", suffix="_Buffett_Report.html", delete=False, encoding="utf-8")
-            f.write("<html><body><p>安全边际 10%</p></body></html>")
+            f.write(f"<html><body><p>安全边际 10%</p><p>已登记：FY2030 FCF &lt; ${thr}B</p></body></html>")
             f.close()
             os.rename(f.name, os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html"))
             fp = os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html")
