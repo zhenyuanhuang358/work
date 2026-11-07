@@ -152,6 +152,20 @@
     "accn": "0000077476-25-000007",
     "filed": "2025-02-04",
     "end": "2022-12-31"
+   },
+   "tax": {
+    "v": 1727000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0000077476-25-000007",
+    "filed": "2025-02-04",
+    "end": "2022-12-31"
+   },
+   "pretax": {
+    "v": 10705000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0000077476-25-000007",
+    "filed": "2025-02-04",
+    "end": "2022-12-31"
    }
   },
   "2023": {
@@ -294,6 +308,20 @@
    "diluted_shares": {
     "v": 1383000000,
     "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2023-12-30"
+   },
+   "tax": {
+    "v": 2262000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2023-12-30"
+   },
+   "pretax": {
+    "v": 11417000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
     "accn": "0000077476-26-000007",
     "filed": "2026-02-03",
     "end": "2023-12-30"
@@ -442,6 +470,20 @@
     "accn": "0000077476-26-000007",
     "filed": "2026-02-03",
     "end": "2024-12-28"
+   },
+   "tax": {
+    "v": 2320000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2024-12-28"
+   },
+   "pretax": {
+    "v": 11946000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2024-12-28"
    }
   },
   "2025": {
@@ -584,6 +626,20 @@
    "diluted_shares": {
     "v": 1373000000,
     "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2025-12-27"
+   },
+   "tax": {
+    "v": 1949000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0000077476-26-000007",
+    "filed": "2026-02-03",
+    "end": "2025-12-27"
+   },
+   "pretax": {
+    "v": 10244000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
     "accn": "0000077476-26-000007",
     "filed": "2026-02-03",
     "end": "2025-12-27"
