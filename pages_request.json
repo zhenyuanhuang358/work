@@ -1,7 +1,9 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第五单：KO CEO 交接公告 + 2026 Q3 业绩新闻稿（管理层评分与最新现金流）。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第六单：KO Critic R1 返修——FY2022 / FY2023 新闻稿（price/mix 涨价证据）、2026 Q3 IR 版（指引数字）、FY2025 10-K（IRS 负债、BODYARMOR）。",
   "urls": [
-    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1147/the-coca-cola-company-announces-ceo-succession-plan-chief-operating-officer-henrique-braun-to-succeed-james-quincey-as-ceo-in-2026",
-    "https://www.coca-colacompany.com/media-center/coca-cola-reports-third-quarter-2026-results"
+    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1076/coca-cola-reports-fourth-quarter-and-full-year-2022-results",
+    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1101/coca-cola-reports-fourth-quarter-and-full-year-2023-results",
+    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1176/coca-cola-reports-third-quarter-2026-results-and-raises-full-year-guidance",
+    "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
   ]
 }

@@ -38,6 +38,9 @@ TAGS = {
     "nci": ["MinorityInterest"],
     "equity_total": ["StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
     "diluted_shares": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
+    "tax": ["IncomeTaxExpenseBenefit"],  # 11/07 Critic：ROIC 按各年实际税率，不套一个预估税率
+    "pretax": ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+               "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments"],
 }
 
 DEBT_HINT = ("Debt", "Borrowings", "CommercialPaper", "Notes")
