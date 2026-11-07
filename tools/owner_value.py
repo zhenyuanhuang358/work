@@ -11,7 +11,8 @@
  "price":  {"v": 70.1, "src": "..."},   "shares": {"v": 4.3e9, "src": "..."},
  "r":      {"v": 0.09, "src": "owner-earnings-model 折现率表：美股大盘股 9%（10Y 4.x%）"},
  "years": [  # 最近 3 个完整财年，旧 → 新；每年一个 src
-   {"fy": 2023, "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": .., "revenue": .., "ebit": .., "interest": ..}
+   {"fy": 2023, "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": .., "revenue": .., "ebit": .., "interest": ..,
+    "adjustments": [{"item": "IRS 保证金", "amount": 6000, "src": "...", "why": "..."}]}   # 可选：一次性现金项，同时加回 FCF 与 ΔWC
  ],
  "maint_capex": {"method": "da_proxy | pct_of_capex | total | disclosed", "pct": 0.5, "value": null, "why": "..."},
  "moat_score": 8,
@@ -59,6 +60,30 @@ def dcf(oe0, g1, ratio2, gt, r, years1=5, years2=5):
     return pv, tv / (1 + r) ** (years1 + years2), oe
 
 
+def normalize(ys, out):
+    """一次性现金项正态化（owner-earnings-model.md「一次性现金项正态化」）：每笔 adjustments 必须带 amount / src / why；
+    同一金额同时加回 FCF 与 ΔWC（dwc 按现金口径，流出为负）。原始值留在 fcf_reported / dwc_reported。"""
+    norm, res = [], []
+    for y in ys:
+        y = dict(y)
+        adj = y.get("adjustments") or []
+        tot = 0.0
+        for a in adj:
+            if a.get("amount") is None or not str(a.get("src", "")).strip() or not str(a.get("why", "")).strip():
+                raise NoSource(f"FY{y.get('fy')} 一次性调整缺金额、来源或理由：{a.get('item')}")
+            tot += a["amount"]
+        if adj:
+            y["fcf_reported"], y["dwc_reported"] = y["fcf"], y.get("dwc", 0)
+            y["fcf"], y["dwc"] = y["fcf"] + tot, y.get("dwc", 0) + tot
+            res.append({"fy": y["fy"], "fcf_reported": y["fcf_reported"], "fcf_normalized": y["fcf"],
+                        "items": [{k: a.get(k) for k in ("item", "amount", "src", "why")} for a in adj]})
+            out["flags"].append(f"FY{y['fy']} FCF 一次性项调整 {tot:+,.0f}：{y['fcf_reported']:,.0f} → {y['fcf']:,.0f}"
+                                f"（{'；'.join(str(a.get('item')) for a in adj)}）")
+        norm.append(y)
+    out["normalization"] = res
+    return norm
+
+
 def run(inp):
     price, shares, r = need(inp.get("price"), "现价"), need(inp.get("shares"), "股数"), need(inp.get("r"), "折现率")
     ys = inp["years"]
@@ -67,8 +92,9 @@ def run(inp):
     for y in ys:
         if not str(y.get("src", "")).strip():
             raise NoSource(f"FY{y.get('fy')} 财务数据缺来源")
-    last = ys[-1]
     out = {"ticker": inp["ticker"], "as_of": inp.get("as_of"), "currency": inp.get("currency"), "flags": [], "route": "标准 DCF"}
+    ys = normalize(ys, out)
+    last = ys[-1]
 
     # 估值失效条件（hub Phase 2）
     fcfs = [y["fcf"] for y in ys]

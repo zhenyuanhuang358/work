@@ -94,5 +94,24 @@ class OwnerValue(unittest.TestCase):
             ov.run(d)
 
 
+    def test_one_off_adjustment_normalizes_fcf_and_dwc(self):
+        """11/07 KO 实测：一次性现金流出（IRS 保证金、fairlife 或有对价）把 FCF 与 ΔWC 压低，
+        不调会把 CAGR 和 OE 基准一起算错。调整同时加回 FCF 与 ΔWC；缺来源拒算。"""
+        d = copy.deepcopy(BASE)
+        d["years"][2]["fcf"] = 146.41 - 50
+        d["years"][2]["dwc"] = -50
+        raw = ov.run(copy.deepcopy(d))
+        d["years"][2]["adjustments"] = [{"item": "保证金", "amount": 50, "src": S, "why": "一次性"}]
+        out = ov.run(copy.deepcopy(d))
+        ref = ov.run(copy.deepcopy(BASE))
+        self.assertAlmostEqual(out["iv_range"][0], ref["iv_range"][0], places=6)
+        self.assertAlmostEqual(out["owner_earnings"]["value"], 100, places=9)
+        self.assertLess(raw["iv_range"][0], out["iv_range"][0])
+        self.assertEqual(out["normalization"][0]["fcf_reported"], 146.41 - 50)
+        self.assertTrue(any("一次性项调整" in f for f in out["flags"]))
+        d["years"][2]["adjustments"][0]["src"] = ""
+        with self.assertRaises(ov.NoSource):
+            ov.run(d)
+
 if __name__ == "__main__":
     unittest.main()

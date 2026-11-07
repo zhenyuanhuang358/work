@@ -30,7 +30,17 @@ TAGS = {
     "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt"],
     "debt_st": ["LongTermDebtCurrent", "DebtCurrent", "ShortTermBorrowings"],
     "commercial_paper": ["CommercialPaper", "ShortTermBorrowings"],
+    # 11/07 KO 实测补：护城河（毛利率对比同行）、管理层（回购 / 分红 / 股数）、负债率（少数股东权益）
+    "gross_profit": ["GrossProfit"],
+    "cogs": ["CostOfGoodsAndServicesSold", "CostOfRevenue"],
+    "buyback": ["PaymentsForRepurchaseOfCommonStock"],
+    "dividends": ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"],
+    "nci": ["MinorityInterest"],
+    "equity_total": ["StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
+    "diluted_shares": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
 }
+
+DEBT_HINT = ("Debt", "Borrowings", "CommercialPaper", "Notes")
 
 
 def annual(facts, tags):
@@ -38,7 +48,7 @@ def annual(facts, tags):
     gaap = facts.get("facts", {}).get("us-gaap", {})
     for tag in tags:
         units = gaap.get(tag, {}).get("units", {})
-        rows = units.get("USD") or units.get("USD/shares") or []
+        rows = units.get("USD") or units.get("USD/shares") or units.get("shares") or []
         out = {}
         for r in rows:
             if r.get("form") == "10-K" and r.get("fp") == "FY" and r.get("fy"):
@@ -68,6 +78,18 @@ def main():
                "shares_outstanding": latest_sh and {"v": latest_sh["val"], "accn": latest_sh["accn"], "filed": latest_sh["filed"]},
                "years": {fy: {k: d.get(fy) for k, d in data.items()} for fy in yrs},
                "missing": {fy: [k for k, d in data.items() if fy not in d] for fy in yrs}}
+        # 债务标签各家各年不同（KO 2024 起 LongTermDebtNoncurrent 缺）：列出所有含 Debt 的标签最近 10-K 值，供人工挑口径
+        gaap = facts.get("facts", {}).get("us-gaap", {})
+        out["debt_tags"] = {tag: {fy: v["v"] for fy, v in annual(facts, [tag]).items() if fy in yrs}
+                            for tag in gaap if any(h in tag for h in DEBT_HINT) and "Repayments" not in tag and "Proceeds" not in tag}
+        out["debt_tags"] = {k: v for k, v in out["debt_tags"].items() if v}
+        try:
+            import yfinance as yf
+            h = yf.Ticker(t).history(period="5d")
+            out["price"] = {"v": round(float(h["Close"].iloc[-1]), 2), "date": str(h.index[-1].date()),
+                            "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取）"}
+        except Exception as e:  # 价格只是辅助，失败不挡财报数据
+            out["price"] = {"v": None, "error": str(e)[:200]}
         json.dump(out, open(f"financials/{t.lower()}.json", "w"), ensure_ascii=False, indent=1)
         print(t, out["entity"], "年份", yrs, "缺", out["missing"])
 
