@@ -86,21 +86,26 @@
  },
  "scores": {
   "business": 21,
-  "financial": 24,
-  "management": 10,
-  "price": 3
+  "financial": 16,
+  "management": 8,
+  "price": 1
  },
  "scores_detail": {
   "1A": 12,
   "1B": 2,
   "1C": 7,
   "2A": 12,
-  "2B": 10,
+  "2B": 2,
   "2C": 2,
   "3A": 4,
-  "3B": 3,
+  "3B": 1,
   "3C": 3,
   "4A": 0,
-  "4B": 3
- }
+  "4B": 1
+ },
+ "net_debt": {
+  "v": 35222.0,
+  "src": "FY2025 有息负债 45492 − 现金及等价物 10270（SEC companyfacts，单位百万美元；未扣短期投资，偏保守）"
+ },
+ "scores_basis": "按 berkshire-score.md 字面：2B / 4B 用报告值 FCF（规则未授权正态化口径，11/07 Critic R1）；3B 持股数据缺失取 1"
 }
