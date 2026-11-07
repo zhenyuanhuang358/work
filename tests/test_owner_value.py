@@ -20,6 +20,7 @@ BASE = {
               {"fy": 2024, "src": S, "net_income": 95, "da": 20, "capex": 30, "dwc": 0, "fcf": 121.0, "revenue": 1100, "ebit": 160, "interest": 10},
               {"fy": 2025, "src": S, "net_income": 100, "da": 20, "capex": 30, "dwc": 0, "fcf": 146.41, "revenue": 1200, "ebit": 170, "interest": 10}],
     "peer_ev_fcf": {"v": 1000.0, "src": S},  # 极大值：交叉验证不会取代 DCF，便于核算
+    "net_debt": {"v": 0.0, "src": S},
     "scores": {"business": 25, "financial": 24, "management": 18, "price": 8},
 }
 
@@ -122,6 +123,19 @@ class OwnerValue(unittest.TestCase):
         rows = {(x["var"], x["delta"]): x for x in out["sensitivity"]["rows"]}
         self.assertLess(rows[("r", 0.01)]["change"], 0)
         self.assertAlmostEqual(rows[("g1", 0.03)]["iv_per_share"], ref_iv(100, 0.21 * 0.6 + 0.03, 0.5, 0.025, 0.10, 10), places=6)
+
+    def test_exit_multiple_subtracts_net_debt(self):
+        """11/07 KO Critic：EV/FCF 倍数乘出来的是企业价值，交叉验证要扣净负债。"""
+        d = copy.deepcopy(BASE)
+        d["r"]["v"] = 0.06  # 让终值占比 > 60%，触发交叉验证
+        d["peer_ev_fcf"]["v"] = 20.0
+        a = ov.run(copy.deepcopy(d))["scenarios"]["base"]["exit_multiple_iv"]
+        d["net_debt"]["v"] = 100.0
+        b = ov.run(copy.deepcopy(d))["scenarios"]["base"]["exit_multiple_iv"]
+        self.assertAlmostEqual(a - b, 100.0 / 10, places=9)
+        del d["net_debt"]
+        with self.assertRaises(ov.NoSource):
+            ov.run(d)
 
 
 if __name__ == "__main__":

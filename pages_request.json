@@ -1,9 +1,7 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第六单：KO Critic R1 返修——FY2022 / FY2023 新闻稿（price/mix 涨价证据）、2026 Q3 IR 版（指引数字）、FY2025 10-K（IRS 负债、BODYARMOR）。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第七单：FY2025 10-K（sec.gov 对浏览器 UA 403，改 IR 站 PDF 副本；FY2024 10-K PDF 备选）。",
   "urls": [
-    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1076/coca-cola-reports-fourth-quarter-and-full-year-2022-results",
-    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1101/coca-cola-reports-fourth-quarter-and-full-year-2023-results",
-    "https://investors.coca-colacompany.com/news-events/press-releases/detail/1176/coca-cola-reports-third-quarter-2026-results-and-raises-full-year-guidance",
-    "https://www.sec.gov/Archives/edgar/data/21344/000162828026010047/ko-20251231.htm"
+    "https://investors.coca-colacompany.com/filings-reports/all-sec-filings/content/0001628280-26-010047/0001628280-26-010047.pdf",
+    "https://investors.coca-colacompany.com/_assets/_633a0d1f4596400b1212988f17af667c/cocacolacompany/db/1008/10477/document/2024_10-K_%28Bookmarked%29.pdf"
   ]
 }

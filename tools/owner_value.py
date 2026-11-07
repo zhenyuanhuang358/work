@@ -20,6 +20,7 @@
  "tech_disruption": false,
  "g_override": null,          # 异常增速（CAGR>50% 或 FCF 由负转正）时必须给：{"g1": .., "g2": .., "src": "共识 / FCF yield 反推"}
  "peer_ev_fcf": {"v": 22, "src": "..."},   # 终值占比 > 60% 时出口倍数交叉验证用，可选
+ "net_debt": {"v": 35000, "src": "..."},  # 给 peer_ev_fcf 时必填：交叉验证 IV = (OE10 × 倍数 ÷ (1+r)^10 − 净负债) ÷ 股数
  "scores": {"business": 0-30, "financial": 0-30, "management": 0-25, "price": 0-15}
 }
 用法：python3 tools/owner_value.py <输入.json> [--out memory/state/valuations/]
@@ -157,7 +158,8 @@ def run(inp):
         if pvtv / (pv + pvtv) > 0.6:
             peer = inp.get("peer_ev_fcf")
             if peer:
-                cross = oe10 * need(peer, "同行 EV/FCF") / (1 + r) ** 10 / shares
+                nd = need(inp.get("net_debt"), "净负债（EV 倍数换股权价值要扣）")
+                cross = (oe10 * need(peer, "同行 EV/FCF") / (1 + r) ** 10 - nd) / shares
                 res[name]["exit_multiple_iv"] = cross
                 if abs(cross - iv) / iv > 0.3:
                     res[name]["iv_per_share"] = min(cross, iv)
