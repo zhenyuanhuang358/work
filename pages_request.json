@@ -1,9 +1,6 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。2026-11-06 首单：海底捞 AI 导购提纲。 11/06 第二单：官方宏观日程（BLS / FOMC）格式探测。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。2026-11-06 首单：海底捞 AI 导购提纲。 11/07 第三单：OMB FY2027 主要联邦经济指标发布时间表（补 2027 年 CPI / PPI / 非农日期）。",
   "urls": [
-    "https://www.bls.gov/schedule/news_release/cpi.htm",
-    "https://www.bls.gov/schedule/news_release/empsit.htm",
-    "https://www.bls.gov/schedule/news_release/ppi.htm",
-    "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+    "https://www.whitehouse.gov/wp-content/uploads/2026/10/FY2027-PFEI.pdf"
   ]
 }

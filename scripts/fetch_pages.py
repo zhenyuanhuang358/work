@@ -39,8 +39,15 @@ def main():
         try:
             r = requests.get(url, headers=H, timeout=40)
             r.raise_for_status()
-            r.encoding = r.apparent_encoding or r.encoding
-            title, text = extract(r.text)
+            if "pdf" in r.headers.get("Content-Type", "").lower() or url.lower().endswith(".pdf"):
+                # PDF（11/07：OMB 主要经济指标发布时间表）——逐页抽文字，保留换行便于解析表格
+                import io
+                from pypdf import PdfReader
+                pages = PdfReader(io.BytesIO(r.content)).pages
+                title, text = url.rsplit("/", 1)[-1], "\n".join(f"=== p{i + 1}\n" + (pg.extract_text() or "") for i, pg in enumerate(pages))
+            else:
+                r.encoding = r.apparent_encoding or r.encoding
+                title, text = extract(r.text)
             if len(text) < 300:
                 raise RuntimeError(f"正文过短 {len(text)} 字符（可能需要登录或被拦）")
             open(rec["file"], "w", encoding="utf-8").write(f"TITLE: {title}\nURL: {url}\n\n{text}")
