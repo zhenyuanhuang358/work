@@ -19,8 +19,7 @@ BASE = {
     "years": [{"fy": 2023, "src": S, "net_income": 90, "da": 20, "capex": 30, "dwc": 0, "fcf": 100.0, "revenue": 1000, "ebit": 150, "interest": 10},
               {"fy": 2024, "src": S, "net_income": 95, "da": 20, "capex": 30, "dwc": 0, "fcf": 121.0, "revenue": 1100, "ebit": 160, "interest": 10},
               {"fy": 2025, "src": S, "net_income": 100, "da": 20, "capex": 30, "dwc": 0, "fcf": 146.41, "revenue": 1200, "ebit": 170, "interest": 10}],
-    "peer_ev_fcf": {"v": 1000.0, "src": S},  # 极大值：交叉验证不会取代 DCF，便于核算
-    "net_debt": {"v": 0.0, "src": S},
+    "peer_p_fcf": {"v": 1000.0, "src": S},  # 极大值：交叉验证不会取代 DCF，便于核算
     "scores": {"business": 25, "financial": 24, "management": 18, "price": 8},
 }
 
@@ -40,7 +39,7 @@ class OwnerValue(unittest.TestCase):
         out = ov.run(copy.deepcopy(BASE))
         oe = 100 + 20 - 20  # 净利润 + D&A − 维护性 Capex（D&A 代理）
         lo = ref_iv(oe, 0.21 * 0.6, 0.5, 0.025, 0.10, 10)
-        hi = ref_iv(oe, 0.21 * 0.85, 0.6, 0.04, 0.10, 10)
+        hi = ref_iv(oe, 0.21 * 0.85, 0.6, 0.03, 0.10, 10)  # 基准终端封顶 3%（用户 11/07 定）
         self.assertAlmostEqual(out["iv_range"][0], lo, places=6)
         self.assertAlmostEqual(out["iv_range"][1], hi, places=6)
         m = out["margin_of_safety"]
@@ -124,18 +123,13 @@ class OwnerValue(unittest.TestCase):
         self.assertLess(rows[("r", 0.01)]["change"], 0)
         self.assertAlmostEqual(rows[("g1", 0.03)]["iv_per_share"], ref_iv(100, 0.21 * 0.6 + 0.03, 0.5, 0.025, 0.10, 10), places=6)
 
-    def test_exit_multiple_subtracts_net_debt(self):
-        """11/07 KO Critic：EV/FCF 倍数乘出来的是企业价值，交叉验证要扣净负债。"""
+    def test_exit_multiple_equity_basis(self):
+        """11/07 KO Critic R2 + 用户定：交叉验证用股权口径，前 10 年 OE 现值必须计入（原公式只比终值，KO 碰巧「差 0%」实为 36%）。"""
         d = copy.deepcopy(BASE)
-        d["r"]["v"] = 0.06  # 让终值占比 > 60%，触发交叉验证
-        d["peer_ev_fcf"]["v"] = 20.0
-        a = ov.run(copy.deepcopy(d))["scenarios"]["base"]["exit_multiple_iv"]
-        d["net_debt"]["v"] = 100.0
-        b = ov.run(copy.deepcopy(d))["scenarios"]["base"]["exit_multiple_iv"]
-        self.assertAlmostEqual(a - b, 100.0 / 10, places=9)
-        del d["net_debt"]
-        with self.assertRaises(ov.NoSource):
-            ov.run(d)
+        d["r"]["v"] = 0.06  # 终值占比 > 60%，触发交叉验证
+        d["peer_p_fcf"]["v"] = 20.0
+        sc = ov.run(copy.deepcopy(d))["scenarios"]["base"]
+        self.assertAlmostEqual(sc["exit_multiple_iv"], (sc["pv_cash"] + sc["oe_year10"] * 20.0 / 1.06 ** 10) / 10, places=9)
 
 
 if __name__ == "__main__":

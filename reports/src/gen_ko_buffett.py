@@ -88,7 +88,7 @@ def ev_fcf(t, fcf=None):
 ko_mcap, ko_ev, ko_evf = ev_fcf("ko", rows["2025"]["fcf_n"])
 _, _, ko_evf_rep = ev_fcf("ko", rows["2025"]["fcf_rep"])
 pep_evf, kdp_evf = ev_fcf("pep")[2], ev_fcf("kdp")[2]
-peer_avg = INP["peer_ev_fcf"]["v"]
+peer_avg = (pep_evf + kdp_evf) / 2  # 4B 用 EV/FCF（berkshire-score.md）；交叉验证另用 P/FCF（底稿）
 
 lo, hi = V["iv_range"]
 price = V["margin_of_safety"]["price"]
@@ -105,6 +105,11 @@ lo26 = lo * FCF26_GUIDE / rows["2025"]["fcf_n"]
 need_after26 = (rows["2025"]["fcf_n"] * (1 + ig["g1"]) ** 5 / FCF26_GUIDE) ** 0.25 - 1
 sh = INP["shares"]["v"]
 irs_ps, dep_ps = IRS_REMAIN / sh, IRS_DEPOSIT / sh
+IRS_ETR_UP = 0.035  # 10-K：继续适用 Tax Court 方法，2026 年实际税率约 +3.5%
+irs_tax = val("ko", "2025", "pretax") * IRS_ETR_UP
+lo_irs = lo * (1 - irs_tax / oe["value"]) - irs_ps
+pb = ko_mcap / rows["2025"]["eq"]
+thr30 = rows["2025"]["fcf_n"] * (1 + ig["g1"]) ** 5
 wa = V["without_adjustments"]
 SD = INP["scores_detail"]
 total = V["scorecard"]["total"]
@@ -155,7 +160,7 @@ def trend_svg():  # 三年趋势折线（output-template：财务指标用趋势
         o.append(f'<polyline points="{pts}" fill="none" stroke="{c}" stroke-width="2.5" stroke-dasharray="{dash}"/>')
         for i, fy in enumerate(FY):
             v_ = rows[fy][k]
-            dy = -8 if k != "fcf_rep" else 16
+            dy = -8 if k == "ni" else 16
             o.append(f'<circle cx="{X(i):.1f}" cy="{Y(v_):.1f}" r="3.5" fill="{c}"/><text x="{X(i) + 6:.1f}" y="{Y(v_) + dy:.1f}" font-size="10" fill="{c}">{v_ / 1000:.1f}</text>')
     for i, fy in enumerate(FY):
         o.append(f'<text x="{X(i):.1f}" y="{y0 + 18}" font-size="12" text-anchor="middle" fill="{INK}">FY{fy}</text>')
@@ -200,11 +205,11 @@ fin_rows = [
 sens_rows = "".join(tr([{"r": "折现率 r", "g1": "阶段 1 增速 g1", "g_terminal": "终端增长率"}[x["var"]],
                         f"{x['delta'] * 100:+.1f} 个百分点", f"{x['iv_per_share']:.2f}", f"{x['change'] * 100:+.0f}%"])
                     for x in V["sensitivity"]["rows"])
-alt_total = total - SD["2B"] + 10 - SD["4B"] + 3  # 若 2B / 4B 改用剔除一次性项的 FCF
+alt_total = total - SD["2B"] + 10 - SD["4B"] + 3  # 仅作附注（用户 11/07 定：一次性项只用于估值）  # 若 2B / 4B 改用剔除一次性项的 FCF
 score_rows = "".join(tr(r) for r in [
     ("Business Quality", 30, V["scorecard"]["business"], f"1A / 1B / 1C = {SD['1A']} / {SD['1B']} / {SD['1C']}：护城河 {INP['moat_score']} 分（宽）；营收 CAGR {pct(rev_cagr)}（< 5%、无负增长 → 2）；毛利率三年 > 50% → 7"),
     ("Financial Health", 30, V["scorecard"]["financial"], f"2A / 2B / 2C = {SD['2A']} / {SD['2B']} / {SD['2C']}：ROE 三年均值 {pct(roe_avg)}，负债率 > 40% 用 ROIC 复核均 > 12%，不降档 → 12；报告值 FCF / 净利润 {pct(rows['2023']['conv_rep'], 0)} / {pct(rows['2024']['conv_rep'], 0)} / {pct(rows['2025']['conv_rep'], 0)}，两年低于 50% → 2；负债率 {pct(rows['2025']['dr'], 0)}（40–60% 档）→ 2"),
-    ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + 分红连增 2 − BodyArmor 并购后两年减值 4；持股数据缺失取最保守 1；新 CEO 在任不满 1 年取中性 3"),
+    ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + 分红连增 2 − BodyArmor 并购后两年减值 4；职业经理人 + PSU / RSU 激励、持股数据缺失 → 少量持股档 3；新 CEO 在任不满 1 年取中性 3"),
     ("Price vs Value", 15, V["scorecard"]["price"], f"4A / 4B = {SD['4A']} / {SD['4B']}：安全边际为负 → 0；EV/FCF（报告值）{ko_evf_rep:.0f}x，高于同行均值 {peer_avg:.1f}x 逾 20% → 1"),
     ("总分", 100, total, "40–54 = 谨慎；未触发自动降级"),
 ])
@@ -246,29 +251,39 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 </div>
 
 <h2>一句话结论 <span class="en">Bottom Line</span></h2>
-<p><strong>结论：高估区间，不买。</strong>{badge("高")} 护城河宽（{INP['moat_score']} / 10），但现价 {price:.2f} 比内在价值上沿 {hi:.2f} 还高；
-按下沿算安全边际 {mos * 100:.1f}%，要回到 30% 安全边际价格需在 {buy30:.2f} 以下。换任何一种口径（不剔除一次性项、2026 指引代入、IRS 败诉）结论都不变。
-评分 {total} / 100 落在「谨慎」档 {badge("中")}：生意质量高，扣分主要来自报告值 FCF 被两笔一次性支出压低、估值偏贵与管理层数据缺口。</p>
+<ul>
+<li><strong>结论：高估区间，不买。</strong>护城河宽（{INP['moat_score']} / 10），但现价 {price:.2f} 比内在价值上沿 {hi:.2f} 还高。按下沿算，安全边际 {mos * 100:.1f}%；要回到 30% 安全边际，价格需在 {buy30:.2f} 以下。换任何一种口径结论都不变：不剔除一次性项、代入 2026 指引、IRS 败诉。{badge("高")}</li>
+<li>评分 {total} / 100，落在「谨慎」档。生意质量高；扣分主要来自三处：报告值 FCF 被两笔一次性支出压低，估值偏贵，管理层数据有缺口。{badge("中")}</li>
+<li>现价隐含未来 5 年 FCF 每年增长 {pct(ig['g1'])}。2026 年指引 +{pct(g26)}，第一年接近兑现；之后能否持续，是多空分歧所在。{badge("中")}</li>
+</ul>
 {price_svg()}
 
 <h2>一、护城河分析 <span class="en">Moat</span></h2>
 {moat_svg()}
-<p>护城河类型：<strong>无形资产（品牌定价权）</strong>。评分 {INP['moat_score']} / 10，宽护城河 {badge("中")}；未触发侵蚀信号，不下调。规模壁垒（全球装瓶分销体系）本报告没有 CR3 与新进入者退出数据，不计分。</p>
+<p>护城河类型：<strong>无形资产（品牌定价权）</strong>。评分 {INP['moat_score']} / 10，属宽护城河；未触发侵蚀信号，不下调。{badge("中")}</p>
+<table>{tr(["维度（moat-framework 五类）", "证据", "判定"], True)}
+{tr(["无形资产（品牌）", "信号①毛利率高于同行、信号②连续三年 > 5% 涨价且销量增长，见下两表", "成立，主护城河；决定 7 分"])}
+{tr(["成本优势", f"浓缩液模式毛利率比同行高 {(rows['2025']['gm'] - peer_gm25) * 100:.1f} 个百分点，但这反映商业模式（卖浓缩液、装瓶外包），框架要求的「单位成本低于对手 15%+」没有可比数据", "不计分（数据不足）"])}
+{tr(["转换成本", "消费者换饮料几乎零成本；框架明说消费端「习惯 ≠ 转换成本」", "不成立"])}
+{tr(["网络效应", "饮料不因用户多而对单个用户更有价值", "不成立"])}
+{tr(["规模壁垒", "全球装瓶分销体系是规模优势，但本报告没有 CR3 与新进入者退出数据", "不计分（数据不足）"])}
+</table>
 <p><strong>信号①：毛利率持续高于同行均值 10% 以上</strong>（同行 = PEP、KDP 两家均值；相对口径）：四年里 {gm_ok} 年达标，基本成立，但不是每年都成立。</p>
 <table>{tr(["财年", "KO 毛利率", "同行均值", "KO 相对高出", "≥ 10%"], True)}{gm_table}</table>
+<p class="src">两种读法：按相对口径（KO ÷ 同行 − 1）四年 {gm_ok} 年达标；按百分点口径，KO 只高 {min((a - b) for a, b in gm_cmp.values()) * 100:.1f}–{max((a - b) for a, b in gm_cmp.values()) * 100:.1f} 个点，四年都不达标。PEP 含大量零食业务，毛利率可比性有限，所以这条信号按「基本成立」处理，不作强证据。</p>
 <p><strong>信号②：5 年内至少 2 次 > 5% 的实质性涨价，且客户没有流失</strong>（用单位箱量代替流失率）：FY2022–FY2024 连续三年全年 price/mix ≥ 10%，同期箱量 +5% / +2% / +1%，成立。
 需要打折扣的地方：涨价里有一部分来自高通胀市场，FY2024 公司明说约 5 个点来自高通胀市场定价。</p>
 <table>{tr(["财年", "全年 price/mix", "单位箱量", "> 5%", "出处（业绩新闻稿）"], True)}{price_table}</table>
 <p>份额：FY2025 与 2026 Q3 均在无酒精即饮饮料（NARTD）赢得价值份额；2026 Q3 EMEA 份额下滑（法国、英国）。侵蚀信号：毛利率三年 {pct(rows['2023']['gm'])} → {pct(rows['2025']['gm'])}，无压缩；没有连续两年份额流失，未触发。</p>
 <p>为什么给 7：两个核心信号都成立，但信号①不是年年成立，信号②掺有通胀定价。如果评 6（中等护城河）：1A 从 12 降到 8，总分 {total - 4}，仍在「谨慎」档；
-内在价值不变，因为两个情景的增速都没碰到 12% / 18% 的上限，终端增长被 2.5% / 4% 封顶。</p>
+内在价值不变，因为两个情景的增速都没碰到 12% / 18% 的上限，终端增长被 2.5% / 3% 封顶。</p>
 <p class="src">来源：SEC companyfacts（GrossProfit ÷ 营收）；2022–2025 年业绩新闻稿（price/mix、单位箱量、份额）；2026 Q3 新闻稿（份额）。</p>
 <p>主要挑战：减糖与健康饮品趋势对含糖碳酸饮料的长期压力。</p>
 
 <h2>二、核心财务指标 <span class="en">Financials, FY2023–FY2025</span></h2>
 {trend_svg()}
 <table>{tr(["指标"] + [f"FY{f}" for f in FY], True)}{"".join(tr([n] + v) for n, v in fin_rows)}</table>
-<p class="src">来源：SEC companyfacts 10-K（百万美元换算为十亿）。有息负债 = 长期债务含一年内到期部分 + 应付票据及借款（KO 2024 年起改报 LongTermDebtAndCapitalLeaseObligations 标签）；实际税率 = IncomeTaxExpenseBenefit ÷ 税前利润。</p>
+<p class="src">来源：SEC companyfacts 10-K（百万美元换算为十亿）。有息负债 = 长期债务含一年内到期部分 + 应付票据及借款（KO 2024 年起改报 LongTermDebtAndCapitalLeaseObligations 标签）；实际税率 = IncomeTaxExpenseBenefit ÷ 税前利润；投入资本 = 有息负债 + 股东权益 + 少数股东权益 − 现金（不扣现金时 FY2024 ROIC 约为 11.7%，「三年都 > 12%」依赖这个口径）。</p>
 <div class="warn"><strong>两笔一次性现金流出（金额是公司在业绩新闻稿里自己列的）：</strong>FY2024 向美国国税局（IRS）缴纳税务诉讼保证金 $6.0B；FY2025 支付 fairlife 并购或有对价 $6.1B。
 这两笔把 FCF 压到 {m(rows['2024']['fcf_rep'])} / {m(rows['2025']['fcf_rep'])}。<strong>只有估值</strong>按剔除后的 {m(rows['2024']['fcf_n'])} / {m(rows['2025']['fcf_n'])} 计算，与公司公布的 $10.8B / $11.4B 接近，差额是取整。
 评分卡仍按规则用报告值。不剔除时 FCF 复合增速为 {pct(wa['fcf_cagr'])}，内在价值降到 {wa['iv_range'][0]:.2f}–{wa['iv_range'][1]:.2f}：<strong>结论不变，仍是高估</strong>。</div>
@@ -279,11 +294,11 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <h2>三、管理层评估 <span class="en">Management</span></h2>
 <table>{tr(["行为（近 3 年）", "数据", "评分影响"], True)}
 {tr(["分红", f"支付普通股股息 {m(divs[0])} → {m(divs[1])} → {m(divs[2])} → {m(divs[3])}，连续增长", "+2"])}
-{tr(["回购", f"FY2023–FY2025 回购 {m(bb[0])} / {m(bb[1])} / {m(bb[2])}；未取得回购时点的估值，无「低估时回购」证据", "0"])}
+{tr(["回购", f"FY2023–FY2025 回购 {m(bb[0])} / {m(bb[1])} / {m(bb[2])}；现价市净率约 {pb:.1f}x（市值 ÷ FY2025 股东权益），PB 要降到 2 以下，股价需下跌约 {(1 - 2 / pb) * 100:.0f}%；没有「低估时回购」的证据", "0"])}
 {tr(["并购后减值", "2021 年 11 月收购 BodyArmor 剩余 85% 股权；BodyArmor 商标 FY2024、FY2025 分别计提减值 $760M、$960M（10-K）", "−4"])}
 {tr(["股权激励稀释", f"稀释后股数 {dil[0] / 1000:.2f}B → {dil[3] / 1000:.2f}B，逐年下降", "0"])}
 </table>
-<p>3A = 6 + 2 − 4 = {SD['3A']}。3B：职业经理人，但未取得 DEF 14A 代理声明里的持股数据。规则里「少量持股」要有证据，所以取最保守的 {SD['3B']} 分。</p>
+<p>3A = 6 + 2 − 4 = {SD['3A']}。3B：职业经理人，有绑定激励（10-K 披露 PSU / RSU 等股权激励，FY2025 股权激励费用 {m(val('ko', '2025', 'sbc'))}）。未取得 DEF 14A 里的持股数据，按「职业经理人 + 少量持股」取 {SD['3B']} 分。</p>
 <div class="warn">管理层变动：James Quincey 任 CEO 九年后，2026-03-31 卸任，改任执行董事长；由原 COO Henrique Braun 接任（1996 年加入公司）。Braun 在任约 7 个月，不满 1 年。按规则 3C 取中性 {SD['3C']} 分，新任 CEO 的加分行为暂不计入。</div>
 <p class="src">来源：SEC companyfacts（PaymentsOfDividendsCommonStock、PaymentsForRepurchaseOfCommonStock、WeightedAverageNumberOfDilutedSharesOutstanding）；FY2025 10-K（BodyArmor 收购与两次减值）；CEO 交接公告；2026 Q3 新闻稿（Braun 以 CEO 身份发言）。</p>
 
@@ -293,13 +308,13 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <table>{tr(["参数", "保守情景", "基准情景", "依据"], True)}
 {tr(["阶段 1 增速（1–5 年）", pct(sc['g1'], 2), pct(scn['g1'], 2), f"剔除后 FCF 复合增速 {pct(V['fcf_cagr'], 2)} × 60% / × 85%，未触 18% 上限"])}
 {tr(["阶段 2 增速（6–10 年）", pct(sc['g2'], 2), pct(scn['g2'], 2), "阶段 1 × 50% / × 60%"])}
-{tr(["终端增长率", pct(sc['g_terminal'], 1), pct(scn['g_terminal'], 1), "护城河上限 8% × 60% / × 80%，再受 2.5% / 4% 封顶"])}
+{tr(["终端增长率", pct(sc['g_terminal'], 1), pct(scn['g_terminal'], 1), "护城河上限 8% × 60% / × 80%，再受 2.5% / 3% 封顶（3% = 全球 GDP 参考值上限，用户 11/07 定）"])}
 {tr(["折现率", "9%", "9%", "美股大盘股 9%；10 年期美债 4.86% 在 4–5% 区间，不调整"])}
 {tr(["每股内在价值", f"{lo:.2f}", f"{hi:.2f}", "两情景 DCF ÷ 4.30B 股"])}
-{tr(["终值占比", pct(sc['terminal_share'], 0), pct(scn['terminal_share'], 0), "基准 > 60% → 出口倍数交叉验证"])}
+{tr(["终值占比", pct(sc['terminal_share'], 0), pct(scn['terminal_share'], 0), "两个情景都 ≤ 60%，不触发出口倍数交叉验证"])}
 </table>
-<p>出口倍数交叉验证（基准情景）：第 10 年所有者盈余 {m(scn['oe_year10'])}，乘以同行 EV/FCF 均值 {peer_avg:.1f}x，折现后扣净负债 {m(INP['net_debt']['v'])}，得每股 {scn['exit_multiple_iv']:.2f}。
-与 DCF 的 {hi:.2f} 相差 {abs(scn['exit_multiple_iv'] / hi - 1) * 100:.0f}%，小于 30%，通过，不替换。</p>
+<p>终值集中度：基准情景终值占比 {pct(scn['terminal_share'], 0)}，两个情景都在 60% 以内，结果不过度依赖终值，不需要做出口倍数交叉验证。
+交叉验证公式已按用户 11/07 的决定改为股权口径（前 10 年所有者盈余现值 + 第 10 年所有者盈余 × 同行市值 / FCF，再折现）；底稿备有同行 P/FCF {INP['peer_p_fcf']['v']:.1f}x。</p>
 <table>{tr(["价格锚点", "价位", "说明"], True)}
 {tr(["内在价值下沿（保守情景）", f"{lo:.2f}", "安全边际的计算基准"])}
 {tr(["当前股价", f"{price:.2f}", F['ko']['price']['date']])}
@@ -307,12 +322,12 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["目标买入价（安全边际 30%）", f"{buy30:.2f}", "下沿 × 70%，严格建仓线"])}
 {tr(["目标买入价（安全边际 35%）", f"{lo * 0.65:.2f}", "下沿 × 65%，保守建仓线"])}
 </table>
-<p><strong>逆向验证：现价隐含什么？</strong>{badge("中")} 按基准情景的结构倒推，现价 {price:.2f} 要成立，需要阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}、终端增长 {pct(ig['g_terminal'], 0)}。这个增速是过去两年 FCF 复合增速 {pct(V['fcf_cagr'])}（剔除一次性项）的约 {ig['g1'] / V['fcf_cagr']:.1f} 倍。</p>
-<div class="warn"><strong>2026 年数据已经触发重估条件：</strong>Q3 新闻稿把 2026 全年 FCF 指引上调到至少 {m(FCF26_GUIDE)}，原指引约 $12.4B；比 FY2025 剔除一次性项后的 {m(rows['2025']['fcf_n'])} 高 {pct(g26)}，超过上面 13% 的隐含增速。
+<p><strong>逆向验证：现价隐含什么？</strong>按基准情景的结构倒推，现价 {price:.2f} 要成立，需要阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}、终端增长 {pct(ig['g_terminal'], 0)}。这个增速是过去两年 FCF 复合增速 {pct(V['fcf_cagr'])}（剔除一次性项）的约 {ig['g1'] / V['fcf_cagr']:.1f} 倍。{badge("中")}</p>
+<div class="warn"><strong>2026 年指引代入：</strong>Q3 新闻稿把 2026 全年 FCF 指引上调到至少 {m(FCF26_GUIDE)}，原指引约 $12.4B；比 FY2025 剔除一次性项后的 {m(rows['2025']['fcf_n'])} 高 {pct(g26)}，与现价隐含的 {pct(ig['g1'])} 接近，但没有超过。
 指引里没有再列一次性项。Q1 多出的 6 天和 Q4 少掉的 6 天在全年层面相互抵消。<br>
 重估结果有三点：
 <br>① 粗算：所有者盈余与 FCF 同比例上调，内在价值下沿约为 {lo:.2f} × {FCF26_GUIDE / rows['2025']['fcf_n']:.3f} ≈ {lo26:.1f}，安全边际仍约 {(lo26 - price) / lo26 * 100:.0f}%，不买的结论不变。
-<br>② 定性修正：现价隐含的增速第一年就被指引覆盖，不能再叫「激进」。准确的说法是：现价要求 2027–2030 年 FCF 每年再增长约 {pct(need_after26)}。
+<br>② 定性：第一年基本兑现隐含增速，不能叫「激进」。准确的说法是：现价要求 2027–2030 年 FCF 每年再增长约 {pct(need_after26)}。
 <br>③ 反方证据：公司提示 2027 年收购与剥离会带来约 8% 的营收逆风（Q3 新闻稿）。</div>
 <p class="src">来源：owner_value 底稿 {VAL}（每个输入带来源）；2026 Q3 新闻稿指引表（FCF 至少 $13.0B，经营现金流至少 $15.2B，资本支出约 $2.2B）。</p>
 
@@ -328,7 +343,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 
 <h2>六、主要风险 <span class="en">Risks</span></h2>
 <table>{tr(["风险", "说明", "对估值的影响"], True)}
-{tr(["IRS 税务诉讼", f"2007–2009 税年的负债 $6.0B 已作为保证金支付。10-K 估计 2010–2025 税年剩余的潜在税款与利息「可能约 $14B」，利息继续累计。公司认为上诉「more likely than not」胜诉", f"败诉：每股约 −{irs_ps:.2f}（$14B ÷ 4.30B 股），下沿 {lo:.2f} → 约 {lo - irs_ps:.1f}，此后税率上升未计入。胜诉：保证金退回，每股约 +{dep_ps:.2f}。两种结果都不改变结论"])}
+{tr(["IRS 税务诉讼", f"2007–2009 税年的负债 $6.0B 已作为保证金支付。10-K 估计 2010–2025 税年剩余的潜在税款与利息「可能约 $14B」，利息继续累计。公司认为上诉「more likely than not」胜诉", f"败诉：一次性负债每股约 −{irs_ps:.2f}（$14B ÷ 4.30B 股）。10-K 还估计，继续适用 Tax Court 方法会使实际税率上升约 3.5%：按 FY2025 税前利润算，每年约 {m(irs_tax)}，所有者盈余约 −{irs_tax / oe['value'] * 100:.1f}%。两项合计，下沿 {lo:.2f} → 约 {lo_irs:.1f}。胜诉：保证金退回，每股约 +{dep_ps:.2f}。两种结果都不改变结论"])}
 {tr(["健康与减糖趋势", "含糖碳酸饮料的长期需求承压；公司靠无糖产品与非碳酸品类对冲（2026 Q3 Coca-Cola Zero Sugar +16%）", "压低长期增速；增速 −3 个百分点 → 下沿约 −16%"])}
 {tr(["收购与剥离", "公司提示 2027 年收购剥离带来约 8% 营收逆风、约 2% 可比 EPS 逆风", "营收基数缩小，FCF 增速可能放缓"])}
 {tr(["利率", "折现率随 10 年期美债变化", "r +1 个百分点 → 下沿约 −13%"])}
@@ -337,10 +352,9 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 
 <h2>七、数据盲区与敏感性 <span class="en">Gaps and Sensitivity</span></h2>
 <ul>
-<li>管理层持股比例（DEF 14A）未取得 → 3B 取最保守的 1 分。补齐后最多 +7 分（总分 ≤ 53，仍在「谨慎」档），不改变「不买」。</li>
-<li>IRS 败诉后的税率上升幅度未量化 → 风险段只计了一次性负债。</li>
+<li>管理层持股比例（DEF 14A）未取得 → 3B 取 3 分。补齐后最多 +5 分（总分 ≤ {total + 5}，仍在「谨慎」档），不改变「不买」。</li>
+<li>IRS 上诉的时间表与结果未知 → 风险段给出败诉 / 胜诉两端。</li>
 <li>规模壁垒的 CR3 与新进入者数据未取得 → 规模壁垒不计分。</li>
-<li>回购时点的估值未取得 → 3A 不加「低估回购」分。</li>
 </ul>
 <table>{tr(["变量（以保守情景为底）", "变动", "每股内在价值", "变化"], True)}{sens_rows}</table>
 
@@ -352,12 +366,14 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["高估、不买", "高", "四种口径（报告值、剔除一次性项、2026 指引、IRS 败诉）都给出负的安全边际"])}
 {tr(["护城河 7 / 10（宽）", "中", "两个核心信号成立，但毛利率信号不是年年成立，涨价证据掺有通胀定价；评 6 时结论不变"])}
 {tr([f"评分 {total}（谨慎）", "中", f"按规则字面口径；若允许正态化 FCF 则为 {alt_total}（观察名单）"])}
-{tr(["现价隐含增速难以兑现", "中", "已登记 predictions.md：FY2030 FCF < $20.7B，2031-02-28 验证"])}
+{tr(["现价隐含增速难以持续 5 年", "中", f"已登记 predictions.md：FY2030 FCF < ${thr30 / 1000:.1f}B，2031-02-28 验证"])}
 </table>
 <p><strong>待核实：</strong>DEF 14A 管理层持股；IRS 上诉进展与败诉后的税率；FY2026 年报 FCF（预计 2027 年 2 月）。</p>
-<p><strong>分析师看法与分歧：</strong>KO 是巴菲特意义上的好生意，问题只在价格。规则本身有两处需要你定：
-① 公司自列的一次性项能否用于评分卡（目前只用于估值）；
-② owner-earnings-model.md 一边说终端增长参考全球 GDP 2.5–3%，一边又允许基准情景到 4%，两条互相冲突，本报告按工具现行公式取 4%。如果改成 3%，上沿会下降，结论不变。</p>
+<p><strong>分析师看法与分歧：</strong>KO 是巴菲特意义上的好生意，问题只在价格。最强的反方论据是 2026 年 FCF 指引 +{pct(g26)}，已接近现价的隐含增速；
+但这需要连续 5 年做到，而 2027 年公司自己提示约 8% 的收购剥离营收逆风。本报告按用户 11/07 定的三条规则计算：
+① 一次性项只用于估值，不用于评分卡（若用于评分卡为 {alt_total} 分）；
+② 基准终端增长封顶 3%；
+③ 交叉验证用股权口径。</p>
 <p>本报告所有估值数字由 tools/owner_value.py 计算，底稿为 {VAL}；生成脚本只读取，不手算。本报告是价值框架下的研究意见，不构成投资建议。</p>
 <p>反馈：<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report=ko">https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&amp;report=ko</a></p></div>
 </div></body></html>"""

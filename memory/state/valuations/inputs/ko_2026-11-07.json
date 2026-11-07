@@ -80,14 +80,10 @@
   "src": "有息负债 / (有息负债 + 股东权益)，FY2025：LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities 43941 + NotesAndLoansPayable 1551 = 45492；StockholdersEquity 32169（SEC companyfacts 10-K（CIK0000021344））"
  },
  "tech_disruption": false,
- "peer_ev_fcf": {
-  "v": 36.7525,
-  "src": "同行 FY2025 EV/FCF 均值：PEP 30.3x、KDP 43.2x（EV = 2026-11-06 收盘市值 + 有息负债 − 现金 + 少数股东权益；FCF = CFO − Capex；SEC companyfacts + Yahoo 收盘，financials/pep.json / kdp.json）"
- },
  "scores": {
   "business": 21,
   "financial": 16,
-  "management": 8,
+  "management": 10,
   "price": 1
  },
  "scores_detail": {
@@ -98,14 +94,14 @@
   "2B": 2,
   "2C": 2,
   "3A": 4,
-  "3B": 1,
+  "3B": 3,
   "3C": 3,
   "4A": 0,
   "4B": 1
  },
- "net_debt": {
-  "v": 35222.0,
-  "src": "FY2025 有息负债 45492 − 现金及等价物 10270（SEC companyfacts，单位百万美元；未扣短期投资，偏保守）"
- },
- "scores_basis": "按 berkshire-score.md 字面：2B / 4B 用报告值 FCF（规则未授权正态化口径，11/07 Critic R1）；3B 持股数据缺失取 1"
+ "scores_basis": "按 berkshire-score.md：2B / 4B 用报告值 FCF（用户 11/07 定一次性项只用于估值）；3B 有 PSU / RSU 激励、无持股数据 → 职业经理人 + 少量持股 3（Critic R2）",
+ "peer_p_fcf": {
+  "v": 29.113262329901374,
+  "src": "同行 FY2025 市值 / FCF 均值：PEP 25.1x、KDP 33.1x（市值 = 2026-11-06 收盘 × 在外股数；FCF = CFO − Capex；SEC companyfacts + Yahoo，financials/pep.json / kdp.json）"
+ }
 }

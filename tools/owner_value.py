@@ -19,8 +19,7 @@
  "debt_ratio": {"v": 0.35, "src": "..."},
  "tech_disruption": false,
  "g_override": null,          # 异常增速（CAGR>50% 或 FCF 由负转正）时必须给：{"g1": .., "g2": .., "src": "共识 / FCF yield 反推"}
- "peer_ev_fcf": {"v": 22, "src": "..."},   # 终值占比 > 60% 时出口倍数交叉验证用，可选
- "net_debt": {"v": 35000, "src": "..."},  # 给 peer_ev_fcf 时必填：交叉验证 IV = (OE10 × 倍数 ÷ (1+r)^10 − 净负债) ÷ 股数
+ "peer_p_fcf": {"v": 22, "src": "..."},   # 终值占比 > 60% 时交叉验证：(PV 前 10 年 OE + OE10 × 同行 市值/FCF ÷ (1+r)^10) ÷ 股数
  "scores": {"business": 0-30, "financial": 0-30, "management": 0-25, "price": 0-15}
 }
 用法：python3 tools/owner_value.py <输入.json> [--out memory/state/valuations/]
@@ -148,7 +147,7 @@ def run(inp):
 
     # 终端增长率：上限的 60% / 80%，且分别不超过 2.5% / 4%，并硬性 ≤ r − 2%
     gt_cons = min(gtcap * 0.6, 0.025, r - 0.02)
-    gt_base = min(gtcap * 0.8, 0.04, r - 0.02)
+    gt_base = min(gtcap * 0.8, 0.03, r - 0.02)  # 用户 11/07 定：封顶 3%（与全球 GDP 参考值统一）
     res = {}
     for name, g, ratio2, gt in (("conservative", g_cons, 0.5, gt_cons), ("base", g_base, 0.6, gt_base)):
         pv, pvtv, oe10 = dcf(oe, g, ratio2, gt, r)
@@ -156,16 +155,15 @@ def run(inp):
         res[name] = {"g1": g, "g2": g * ratio2, "g_terminal": gt, "pv_cash": pv, "pv_terminal": pvtv,
                      "terminal_share": pvtv / (pv + pvtv), "oe_year10": oe10, "iv_per_share": iv}
         if pvtv / (pv + pvtv) > 0.6:
-            peer = inp.get("peer_ev_fcf")
-            if peer:
-                nd = need(inp.get("net_debt"), "净负债（EV 倍数换股权价值要扣）")
-                cross = (oe10 * need(peer, "同行 EV/FCF") / (1 + r) ** 10 - nd) / shares
+            peer = inp.get("peer_p_fcf")
+            if peer:  # 股权口径（用户 11/07 定）：前 10 年 OE 现值 + 第 10 年 OE × 同行 P/FCF 折现
+                cross = (pv + oe10 * need(peer, "同行 P/FCF") / (1 + r) ** 10) / shares
                 res[name]["exit_multiple_iv"] = cross
                 if abs(cross - iv) / iv > 0.3:
                     res[name]["iv_per_share"] = min(cross, iv)
                     out["flags"].append(f"{name} 终值占比 > 60% 且出口倍数法差 > 30%：取较低值")
             else:
-                out["flags"].append(f"{name} 终值占比 {pvtv / (pv + pvtv):.0%} > 60%：需同行 EV/FCF 交叉验证（未给 peer_ev_fcf）")
+                out["flags"].append(f"{name} 终值占比 {pvtv / (pv + pvtv):.0%} > 60%：需同行 P/FCF 交叉验证（未给 peer_p_fcf）")
     out["scenarios"] = res
 
     # 敏感性（以保守情景 = 安全边际基准为底）与逆向验证（现价隐含的阶段 1 增速，基准情景结构、不设护城河上限）
