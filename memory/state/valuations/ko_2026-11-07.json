@@ -1,0 +1,254 @@
+{
+ "ticker": "KO",
+ "as_of": "2026-11-07",
+ "currency": "USD",
+ "flags": [
+  "FY2024 FCF 一次性项调整 +6,000：4,741 → 10,741（IRS 税务诉讼保证金）",
+  "FY2025 FCF 一次性项调整 +6,100：5,296 → 11,396（fairlife 或有对价支付）"
+ ],
+ "route": "标准 DCF",
+ "normalization": [
+  {
+   "fy": 2024,
+   "fcf_reported": 4741.0,
+   "fcf_normalized": 10741.0,
+   "items": [
+    {
+     "item": "IRS 税务诉讼保证金",
+     "amount": 6000.0,
+     "src": "KO 2024 年报新闻稿 investors.coca-colacompany.com/news-events/press-releases/detail/1128（原文 pages/investors_coca_colacompany_com_news_events_press_releases_de_f09f6c.txt）：「a $6.0 billion deposit made to the U.S. Internal Revenue Service … related to ongoing tax litigation」；剔除后 FCF $10.8B",
+     "why": "诉讼保证金，单年支付、非经常性经营现金流；若最终败诉则转为真实税款（另列风险，不在 IV 中扣除）"
+    }
+   ]
+  },
+  {
+   "fy": 2025,
+   "fcf_reported": 5296.0,
+   "fcf_normalized": 11396.0,
+   "items": [
+    {
+     "item": "fairlife 或有对价支付",
+     "amount": 6100.0,
+     "src": "KO 2025 年报新闻稿 investors.coca-colacompany.com/news-events/press-releases/detail/1151（原文 pages/investors_coca_colacompany_com_news_events_press_releases_de_415220.txt）：「$6.1 billion of the contingent consideration payment … in conjunction with the acquisition of fairlife」；剔除后 FCF $11.4B",
+     "why": "2020 年并购的一次性对价尾款，计入经营现金流但属收购成本，非经常性"
+    }
+   ]
+  }
+ ],
+ "failure_conditions": [],
+ "owner_earnings": {
+  "value": 11993.0,
+  "maint_capex": 1056.0,
+  "method": "pct_of_capex",
+  "why": "轻资产消费品（浓缩液 + 授权），spoke 规定用总 Capex 40–60%；取中值 50%（= 1,056，与 D&A 1,050 几乎相等，两种口径结论相同）"
+ },
+ "fcf_cagr": 0.08128639156932094,
+ "scenarios": {
+  "conservative": {
+   "g1": 0.04877183494159256,
+   "g2": 0.02438591747079628,
+   "g_terminal": 0.025,
+   "pv_cash": 94699.63603111308,
+   "pv_terminal": 114339.53957403633,
+   "terminal_share": 0.5469766097337198,
+   "oe_year10": 17165.28069874684,
+   "iv_per_share": 48.59226438136918
+  },
+  "base": {
+   "g1": 0.06909343283392279,
+   "g2": 0.041456059700353674,
+   "g_terminal": 0.04,
+   "pv_cash": 104177.542807141,
+   "pv_terminal": 180305.61622659463,
+   "terminal_share": 0.6338006679868631,
+   "oe_year10": 20521.58491248978,
+   "iv_per_share": 66.12961822010672,
+   "exit_multiple_iv": 74.05804773557855
+  }
+ },
+ "sensitivity": {
+  "basis": "保守情景",
+  "rows": [
+   {
+    "var": "r",
+    "delta": 0.01,
+    "iv_per_share": 42.047395254195656,
+    "change": -0.13468952744838336
+   },
+   {
+    "var": "r",
+    "delta": -0.01,
+    "iv_per_share": 57.52012965483166,
+    "change": 0.18373017572084005
+   },
+   {
+    "var": "g1",
+    "delta": 0.03,
+    "iv_per_share": 57.92789348852254,
+    "change": 0.19212171373377585
+   },
+   {
+    "var": "g1",
+    "delta": -0.03,
+    "iv_per_share": 40.72970582930807,
+    "change": -0.16180679480900484
+   },
+   {
+    "var": "g_terminal",
+    "delta": 0.005,
+    "iv_per_share": 50.94762429302451,
+    "change": 0.0484719109438827
+   }
+  ]
+ },
+ "implied_g1": {
+  "g1": 0.12716308058316017,
+  "g2": 0.0762978483498961,
+  "g_terminal": 0.04,
+  "moat_cap": 0.18,
+  "exceeds_cap": false,
+  "fcf_cagr": 0.08128639156932094
+ },
+ "iv_range": [
+  48.59226438136918,
+  66.12961822010672
+ ],
+ "iv_mid_reference": 57.36094130073795,
+ "margin_of_safety": {
+  "basis": "内在价值下沿（保守情景）",
+  "value": -0.9688318957344361,
+  "hurdle": 0.3,
+  "price": 95.67
+ },
+ "zone": "高估区间（不买）",
+ "checks": {
+  "fcf_conversion": [
+   0.9097442598469293,
+   1.010347098109303,
+   0.8694590676737621
+  ],
+  "interest_cover": 8.32043530834341
+ },
+ "without_adjustments": {
+  "iv_range": [
+   17.91604615525787,
+   20.827066972845387
+  ],
+  "fcf_cagr": -0.26287947337596584,
+  "margin_of_safety": -4.339905868233291,
+  "zone": "高估区间（不买）"
+ },
+ "scorecard": {
+  "business": 21,
+  "financial": 24,
+  "management": 10,
+  "price": 3,
+  "total": 58
+ },
+ "input": {
+  "ticker": "KO",
+  "market": "美股大盘股",
+  "currency": "USD",
+  "as_of": "2026-11-07",
+  "price": {
+   "v": 95.67,
+   "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取），2026-11-06 收盘；与 stock_prices.json 一致"
+  },
+  "shares": {
+   "v": 4301.902335,
+   "src": "dei EntityCommonStockSharesOutstanding，accn 0001628280-26-067844（2026-10-28 报送）；单位百万股"
+  },
+  "r": {
+   "v": 0.09,
+   "src": "owner-earnings-model 折现率表：美股大盘股 9%；10 年期美债 4.86%（stock_prices.json treasury_10y，2026-11-06）在 4–5% 区间内，不调整"
+  },
+  "years": [
+   {
+    "fy": 2023,
+    "src": "SEC companyfacts 10-K（CIK0000021344），accn 0000021344-24-000009/0000021344-25-000011/0001628280-26-010047；单位百万美元",
+    "net_income": 10714.0,
+    "da": 1128.0,
+    "capex": 1852.0,
+    "dwc": -846.0,
+    "fcf": 9747.0,
+    "revenue": 45754.0,
+    "ebit": 11311.0,
+    "interest": 1527.0
+   },
+   {
+    "fy": 2024,
+    "src": "SEC companyfacts 10-K（CIK0000021344），accn 0001628280-26-010047；单位百万美元",
+    "net_income": 10631.0,
+    "da": 1075.0,
+    "capex": 2064.0,
+    "dwc": -6234.0,
+    "fcf": 4741.0,
+    "revenue": 47061.0,
+    "ebit": 9992.0,
+    "interest": 1656.0,
+    "adjustments": [
+     {
+      "item": "IRS 税务诉讼保证金",
+      "amount": 6000.0,
+      "src": "KO 2024 年报新闻稿 investors.coca-colacompany.com/news-events/press-releases/detail/1128（原文 pages/investors_coca_colacompany_com_news_events_press_releases_de_f09f6c.txt）：「a $6.0 billion deposit made to the U.S. Internal Revenue Service … related to ongoing tax litigation」；剔除后 FCF $10.8B",
+      "why": "诉讼保证金，单年支付、非经常性经营现金流；若最终败诉则转为真实税款（另列风险，不在 IV 中扣除）"
+     }
+    ]
+   },
+   {
+    "fy": 2025,
+    "src": "SEC companyfacts 10-K（CIK0000021344），accn 0001628280-26-010047；单位百万美元",
+    "net_income": 13107.0,
+    "da": 1050.0,
+    "capex": 2112.0,
+    "dwc": -7208.0,
+    "fcf": 5296.0,
+    "revenue": 47941.0,
+    "ebit": 13762.0,
+    "interest": 1654.0,
+    "adjustments": [
+     {
+      "item": "fairlife 或有对价支付",
+      "amount": 6100.0,
+      "src": "KO 2025 年报新闻稿 investors.coca-colacompany.com/news-events/press-releases/detail/1151（原文 pages/investors_coca_colacompany_com_news_events_press_releases_de_415220.txt）：「$6.1 billion of the contingent consideration payment … in conjunction with the acquisition of fairlife」；剔除后 FCF $11.4B",
+      "why": "2020 年并购的一次性对价尾款，计入经营现金流但属收购成本，非经常性"
+     }
+    ]
+   }
+  ],
+  "maint_capex": {
+   "method": "pct_of_capex",
+   "pct": 0.5,
+   "why": "轻资产消费品（浓缩液 + 授权），spoke 规定用总 Capex 40–60%；取中值 50%（= 1,056，与 D&A 1,050 几乎相等，两种口径结论相同）"
+  },
+  "moat_score": 7,
+  "debt_ratio": {
+   "v": 0.5857766446478928,
+   "src": "有息负债 / (有息负债 + 股东权益)，FY2025：LongTermDebtAndCapitalLeaseObligationsIncludingCurrentMaturities 43941 + NotesAndLoansPayable 1551 = 45492；StockholdersEquity 32169（SEC companyfacts 10-K（CIK0000021344））"
+  },
+  "tech_disruption": false,
+  "peer_ev_fcf": {
+   "v": 36.7525,
+   "src": "同行 FY2025 EV/FCF 均值：PEP 30.3x、KDP 43.2x（EV = 2026-11-06 收盘市值 + 有息负债 − 现金 + 少数股东权益；FCF = CFO − Capex；SEC companyfacts + Yahoo 收盘，financials/pep.json / kdp.json）"
+  },
+  "scores": {
+   "business": 21,
+   "financial": 24,
+   "management": 10,
+   "price": 3
+  },
+  "scores_detail": {
+   "1A": 12,
+   "1B": 2,
+   "1C": 7,
+   "2A": 12,
+   "2B": 10,
+   "2C": 2,
+   "3A": 4,
+   "3B": 3,
+   "3C": 3,
+   "4A": 0,
+   "4B": 3
+  }
+ }
+}

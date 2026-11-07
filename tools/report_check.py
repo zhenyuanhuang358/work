@@ -98,8 +98,14 @@ def run(path, kind=None, pdf=None):
         # 改为：报告里每个情景目标价，都要在 predictions.md 找到一行同时含标的名与该价。
         tps = sorted({m.group(2) for m in re.finditer(r"(熊市|基准|牛市)\s*\$?\s*(\d+(?:\.\d+)?)", t)})
         missing = [p_ for p_ in tps if not any(stem in l and re.search(rf"(?<![\d.]){re.escape(p_)}(?![\d])", l) for l in pred)]
-        chk("C3", "FAIL", "含目标价 / 三情景 → 每个情景价都已登记 predictions.md（CLAUDE.md 铁律）",
-            tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")
+        if kind == "buffett" and not tps:
+            # 11/07 KO 实测：巴菲特报告给的是内在价值区间，不是带日期的情景价，按情景价查必然 FAIL。
+            # 它的可证伪判断是「现价隐含增速不兑现」这类带门槛 + 时点的命题 → 查同标的、来源为 buffett 的登记行。
+            reg = [l for l in pred if stem in l and "buffett" in l]
+            chk("C3", "FAIL", "巴菲特报告的可证伪判断已登记 predictions.md（同标的、注明 buffett 来源）", reg, f"{len(reg)} 条")
+        else:
+            chk("C3", "FAIL", "含目标价 / 三情景 → 每个情景价都已登记 predictions.md（CLAUDE.md 铁律）",
+                tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")
 
     if kind == "buffett":  # 2026-11-07：报告数字必须来自 owner_value 底稿（不心算），安全边际按下沿（用户定）
         vm = re.search(r'data-valuation="([^"]+)"', s)

@@ -165,6 +165,27 @@ def run(inp):
             else:
                 out["flags"].append(f"{name} 终值占比 {pvtv / (pv + pvtv):.0%} > 60%：需同行 EV/FCF 交叉验证（未给 peer_ev_fcf）")
     out["scenarios"] = res
+
+    # 敏感性（以保守情景 = 安全边际基准为底）与逆向验证（现价隐含的阶段 1 增速，基准情景结构、不设护城河上限）
+    def iv_of(g, ratio2, gt, rr):
+        a, b, _ = dcf(oe, g, ratio2, min(gt, rr - 0.02), rr)
+        return (a + b) / shares
+    c = res["conservative"]
+    base_iv = iv_of(c["g1"], 0.5, c["g_terminal"], r)
+    sens = []
+    for var, d, args in (("r", +0.01, (c["g1"], 0.5, c["g_terminal"], r + 0.01)), ("r", -0.01, (c["g1"], 0.5, c["g_terminal"], r - 0.01)),
+                         ("g1", +0.03, (c["g1"] + 0.03, 0.5, c["g_terminal"], r)), ("g1", -0.03, (c["g1"] - 0.03, 0.5, c["g_terminal"], r)),
+                         ("g_terminal", +0.005, (c["g1"], 0.5, c["g_terminal"] + 0.005, r))):
+        v = iv_of(*args)
+        sens.append({"var": var, "delta": d, "iv_per_share": v, "change": v / base_iv - 1})
+    out["sensitivity"] = {"basis": "保守情景", "rows": sens}
+    lo_g, hi_g = -0.5, 2.0
+    if iv_of(lo_g, 0.6, res["base"]["g_terminal"], r) < price < iv_of(hi_g, 0.6, res["base"]["g_terminal"], r):
+        for _ in range(200):
+            mid = (lo_g + hi_g) / 2
+            lo_g, hi_g = (mid, hi_g) if iv_of(mid, 0.6, res["base"]["g_terminal"], r) < price else (lo_g, mid)
+        out["implied_g1"] = {"g1": lo_g, "g2": lo_g * 0.6, "g_terminal": res["base"]["g_terminal"], "moat_cap": g1cap,
+                             "exceeds_cap": lo_g > g1cap, "fcf_cagr": cagr}
     lo, hi = res["conservative"]["iv_per_share"], res["base"]["iv_per_share"]
     out["iv_range"] = [lo, hi]
     out["iv_mid_reference"] = (lo + hi) / 2
@@ -179,6 +200,16 @@ def run(inp):
     # 三个检验（可算的部分）
     out["checks"] = {"fcf_conversion": [y["fcf"] / y["net_income"] if y["net_income"] else None for y in ys],
                      "interest_cover": cover}
+
+    # 不调一次性项时的对照（spoke：报告须说明「不调」时结论是否改变）
+    if out["normalization"] and not inp.get("_no_adj"):
+        raw = dict(inp, _no_adj=True, years=[{k: v for k, v in y.items() if k != "adjustments"} for y in inp["years"]])
+        try:
+            ro = run(raw)
+            out["without_adjustments"] = {"iv_range": ro.get("iv_range"), "fcf_cagr": ro.get("fcf_cagr"),
+                                          "margin_of_safety": ro.get("margin_of_safety", {}).get("value"), "zone": ro.get("zone")}
+        except NoSource as e:  # 例如不调后 FCF 由正转负触发 g_override 要求
+            out["without_adjustments"] = {"error": str(e)}
 
     # 评分卡
     sc = inp.get("scores") or {}

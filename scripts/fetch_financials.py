@@ -27,8 +27,8 @@ TAGS = {
     "liabilities": ["Liabilities"],
     "equity": ["StockholdersEquity"],
     "cash": ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents"],
-    "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt"],
-    "debt_st": ["LongTermDebtCurrent", "DebtCurrent", "ShortTermBorrowings"],
+    "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt", "LongTermDebtAndCapitalLeaseObligations"],
+    "debt_st": ["LongTermDebtCurrent", "DebtCurrent", "ShortTermBorrowings", "LongTermDebtAndCapitalLeaseObligationsCurrent"],
     "commercial_paper": ["CommercialPaper", "ShortTermBorrowings"],
     # 11/07 KO 实测补：护城河（毛利率对比同行）、管理层（回购 / 分红 / 股数）、负债率（少数股东权益）
     "gross_profit": ["GrossProfit"],

@@ -109,9 +109,20 @@ class OwnerValue(unittest.TestCase):
         self.assertLess(raw["iv_range"][0], out["iv_range"][0])
         self.assertEqual(out["normalization"][0]["fcf_reported"], 146.41 - 50)
         self.assertTrue(any("一次性项调整" in f for f in out["flags"]))
+        self.assertAlmostEqual(out["without_adjustments"]["iv_range"][0], raw["iv_range"][0], places=6)
         d["years"][2]["adjustments"][0]["src"] = ""
         with self.assertRaises(ov.NoSource):
             ov.run(d)
+
+    def test_sensitivity_and_implied_growth(self):
+        """逆向验证：把隐含增速代回基准结构必须得到现价；r +1% 必须压低 IV。"""
+        out = ov.run(copy.deepcopy(BASE))
+        ig = out["implied_g1"]
+        self.assertAlmostEqual(ref_iv(100, ig["g1"], 0.6, ig["g_terminal"], 0.10, 10), 100.0, places=4)
+        rows = {(x["var"], x["delta"]): x for x in out["sensitivity"]["rows"]}
+        self.assertLess(rows[("r", 0.01)]["change"], 0)
+        self.assertAlmostEqual(rows[("g1", 0.03)]["iv_per_share"], ref_iv(100, 0.21 * 0.6 + 0.03, 0.5, 0.025, 0.10, 10), places=6)
+
 
 if __name__ == "__main__":
     unittest.main()

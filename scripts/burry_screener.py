@@ -98,8 +98,10 @@ INSTANT_PERIODS = _instant_periods()
 # 时点科目（frames 需 I 后缀）
 CONCEPTS_INSTANT = {
     "cash": ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsAndShortTermInvestments"],
-    "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt"],
-    "debt_st": ["LongTermDebtCurrent", "ShortTermBorrowings"],
+    # 11/07 KO 实测：KO 2024 起改报 LongTermDebtAndCapitalLeaseObligations(Current)，原两标签都缺 → 债务按 0 算，
+    # 净负债 = −现金（KO 显示 −0.9x，真实约 +2.2x）。缺债务标签的公司会被当成净现金混过杠杆筛选。按公司先到先得，追加不改已有公司。
+    "debt_lt": ["LongTermDebtNoncurrent", "LongTermDebt", "LongTermDebtAndCapitalLeaseObligations"],
+    "debt_st": ["LongTermDebtCurrent", "ShortTermBorrowings", "LongTermDebtAndCapitalLeaseObligationsCurrent", "DebtCurrent"],
     "equity": ["StockholdersEquity",
                "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"],
     # shares 是首要缺失瓶颈（首跑缺 62%，5 期回退后仍占缺失样本 67%）。

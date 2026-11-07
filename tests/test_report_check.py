@@ -181,6 +181,18 @@ class Format(unittest.TestCase):
         import shutil
         shutil.rmtree(vdir)
 
+    def test_buffett_c3_requires_registered_claim(self):
+        """11/07 KO 实测：巴菲特报告没有情景价，C3 应改查同标的的 buffett 登记行，而不是一律 FAIL。"""
+        for stem, ok in (("ko", True), ("zzq", False)):  # predictions.md 有 KO buffett 行，无 zzq
+            f = tempfile.NamedTemporaryFile("w", prefix=f"{stem}_", suffix="_Buffett_Report.html", delete=False, encoding="utf-8")
+            f.write("<html><body><p>安全边际 10%</p></body></html>")
+            f.close()
+            os.rename(f.name, os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html"))
+            fp = os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html")
+            c3 = [c for c in rc.run(fp)["checks"] if c["id"] == "C3"][0]
+            self.assertEqual(c3["pass"], ok, (stem, c3))
+            os.unlink(fp)
+
     def test_research_rules(self):
         """Merlin / restaurant-research：无分析师附注、正文禁用句 → FAIL。"""
         p = tempfile.NamedTemporaryFile("w", suffix="_Research_Report.html", delete=False, encoding="utf-8")
