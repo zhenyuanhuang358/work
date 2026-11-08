@@ -113,6 +113,7 @@ def run(path, kind=None, pdf=None):
                 tps and not missing, f"情景价 {tps or '未解析到'}；未登记 {missing}")
 
     if kind == "buffett":  # 2026-11-07：报告数字必须来自 owner_value 底稿（不心算），安全边际按下沿（用户定）
+        v = None
         vm = re.search(r'data-valuation="([^"]+)"', s)
         vp = os.path.join(REPO, vm.group(1)) if vm else None
         chk("B1", "FAIL", "引用 owner_value 估值底稿（data-valuation）且文件存在", vp and os.path.exists(vp), vm.group(1) if vm else "无")
@@ -132,6 +133,26 @@ def run(path, kind=None, pdf=None):
                 chk("B4", "FAIL", "结论区间与底稿一致（买入 / 观察 / 高估 / 估值失效）", zone_kw in t, f"底稿：{v['zone'][:30]}")
         bad_mid = re.search(r"安全边际[^。；\n]{0,30}中值|中值[^。；\n]{0,20}安全边际", t)
         chk("B5", "FAIL", "没有按中值算的安全边际（用户 11/07 定：按下沿）", not bad_mid, bad_mid.group(0) if bad_mid else "")
+        # 2026-11-08 PLTR Critic R2：B2–B5 只查 DCF；估值失效时替代估值才是结论依据，必须一起查，
+        # 否则「报告手算替代估值、单位错 1000×」能靠 DCF 部分拿绿灯（首版实测 pass=true）。
+        alt = v.get("alternative_valuation") if v else None
+        if alt:
+            at = alt.get("trailing") or {}
+            af = alt.get("forward") or {}
+            chk("B6", "FAIL", "替代估值：历史/前瞻每股内在价值与底稿一致",
+                shown(at.get("iv_per_share", float("nan"))) and (not af or shown(af["iv_per_share"])),
+                f"底稿 {at.get('iv_per_share')}/{af.get('iv_per_share')}")
+            chk("B7", "FAIL", "替代估值：安全边际与底稿一致",
+                shown(at.get("mos", float("nan")) * 100, pct=True) and (not af or shown(af["mos"] * 100, pct=True)),
+                f"底稿 {at.get('mos')}/{af.get('mos')}")
+            chk("B8", "FAIL", "替代估值：±20% 区间与底稿一致",
+                shown(at.get("band", [float("nan")])[0]) and shown(at.get("band", [0, float("nan")])[1])
+                and (not af or (shown(af["band"][0]) and shown(af["band"][1]))),
+                f"底稿 {at.get('band')}/{af.get('band')}")
+            chk("B9", "FAIL", "替代估值：同行倍数与敏感性行已写入报告",
+                shown(alt.get("peer_p_fcf", float("nan")))
+                and all(shown(r["peer_p_fcf"]) for r in alt.get("peer_sensitivity", [])),
+                f"同行 {alt.get('peer_p_fcf')}；敏感性 {len(alt.get('peer_sensitivity', []))} 行")
     if kind == "earner":
         secs = [int(x) for x in re.findall(r'data-sec="(\d+)"', s)]
         chk("E1", "FAIL", "14 节固定顺序（每节根元素 data-sec=\"1\"…\"14\"）", secs == list(range(1, 15)),

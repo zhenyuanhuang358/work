@@ -1,0 +1,93 @@
+{
+ "ticker": "PLTR",
+ "market": "美股大盘股",
+ "currency": "USD",
+ "as_of": "2026-11-08",
+ "price": {
+  "v": 160.38,
+  "src": "stock_prices.json（GitHub Actions fetch-prices，2026-11-06 收盘）；PLTR 现价 $160.38"
+ },
+ "shares": {
+  "v": 2571.225,
+  "src": "SEC 10-Q（2026-09-30，2026-11-03 报送）前 9 个月加权平均稀释股数 2,571,225,000（2,571.225M）。基本口径 2,409,153,000 为 2026-09-30 流通在外 A+B 股（9 个月基本加权平均 2,399,846K）。本报告每股数字与 P/FCF 统一用稀释股数（更保守）。"
+ },
+ "r": {
+  "v": 0.09,
+  "src": "owner-earnings-model 折现率表：美股大盘股 9%；10 年期美债 4.86%（stock_prices.json treasury_10y，2026-11-06）在 4–5% 区间内，不调整"
+ },
+ "moat_score": 6,
+ "maint_capex": {
+  "method": "pct_of_capex",
+  "pct": 0.5,
+  "why": "轻资产软件：FY2025 总 Capex $33.9M（10-K 现金流量表），按 spokes 40–60% 取中值 50% = $16.9M；与 D&A $26.1M 量级相近"
+ },
+ "debt_ratio": {
+  "v": 0.0,
+  "src": "SEC 10-K FY2025（2026-02-17）：As of December 31, 2025, no outstanding debt balances；有息负债/(有息负债+权益)=0"
+ },
+ "years": [
+  {
+   "fy": 2023,
+   "revenue": 2225.012,
+   "net_income": 209.825,
+   "ebit": 119.966,
+   "da": 33.354,
+   "capex": 15.114,
+   "dwc": 6.236,
+   "fcf": 697.069,
+   "interest": 0.0,
+   "sbc": 475.903,
+   "src": "SEC 10-K FY2025（CIK0001321655，accn 0001321655-26-000011，2026-02-17）合并报表；ΔWC=现金流量表 Changes in operating assets and liabilities 各行合计（FY2023 +$6.2M）"
+  },
+  {
+   "fy": 2024,
+   "revenue": 2865.507,
+   "net_income": 462.19,
+   "ebit": 310.403,
+   "da": 31.587,
+   "capex": 12.634,
+   "dwc": -70.097,
+   "fcf": 1141.231,
+   "interest": 0.0,
+   "sbc": 691.638,
+   "src": "同上 10-K FY2025 三年对比列；ΔWC（FY2024 -$70.1M）"
+  },
+  {
+   "fy": 2025,
+   "revenue": 4475.446,
+   "net_income": 1625.033,
+   "ebit": 1414.015,
+   "da": 26.145,
+   "capex": 33.882,
+   "dwc": -209.963,
+   "fcf": 2100.591,
+   "interest": 0.0,
+   "sbc": 684.033,
+   "src": "同上 10-K FY2025；ΔWC（FY2025 -$210.0M）；无有息负债（10-K：no outstanding debt）"
+  }
+ ],
+ "g_override": {
+  "g1": 0.91,
+  "g2": 0.6,
+  "src": "Q3 2026 业绩发布（SEC 8-K ex99.1，2026-11-02）：FY2026 营收指引 $8.530–8.534B（+91%）；近 3 年 FCF CAGR 73.6% 属异常增速，按 spokes 以指引为锚、再由护城河上限截断（min）"
+ },
+ "peer_p_fcf": {
+  "v": 74.52,
+  "src": "vcpscanner.com/valuation/pltr/relative（2026-11-08 读取）：P/FCF 同行业中值 74.52x。该聚合页未注明期限，按 TTM/trailing 口径处理（P/FCF 通常为 TTM）；因此「trailing 同行倍数 × FY2026 FCF」的前瞻口径偏乐观，报告已标注。股权口径（2026-11-07 用户定，不用 EV/FCF）"
+ },
+ "flags": [
+  "SBC：FY2023/24/25 = $475.9M/$691.6M/$684.0M（营收占比 21.4%/24.1%/15.3%）；FCF/NI 129% 含 SBC 加回，剔 SBC 后 (FCF-SBC)/NI=87%",
+  "FY2025 营收/最高-最低 = 4,475.4/2,225.0-1 = 101% → 触发『营收波动>50%』估值失效条件，按 spokes 转替代估值（EV/FCF 同行比较）",
+  "无有息负债；现金+短期美债 $10.4B（Q3 2026 业绩发布）"
+ ],
+ "scores": {
+  "business": 23,
+  "financial": 24,
+  "management": 11,
+  "price": 1
+ },
+ "fcf_forward": {
+  "v": 4900.0,
+  "src": "Q3 2026 业绩发布（SEC 8-K，2026-11-02，exhibit 99.1，原文 pages/sec_pltr_8k_2026q3_ex991.htm）：FY2026 adjusted free cash flow 指引上调至 $4.8–5.0B，取中值 $4.9B。注：2026-02-02（FY2025 Q4）8-K 原指引为 $3.925–4.125B；$4.8–5.0B 是 Q3 上调后的口径。FY2025 adjusted FCF $2,270,436K 与 GAAP FCF $2,100,591K 的差额 +8.1% 来自 FY2025 业绩发布（pages/sec_pltr_8k_2025q4_ex991.htm）"
+ }
+}

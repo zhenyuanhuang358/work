@@ -2001,3 +2001,11 @@ Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。仓库 `mrmps/class
 - **关键事实**：FY2024 IRS 保证金 6.0B、FY2025 fairlife 6.1B 两笔一次性（正态化只用于估值）；10-K：IRS 2010–2025 剩余潜在负债约 14B、败诉税率 +3.5%；2026 FCF 指引 ≥13.0B（+14.1%）；现价隐含所有者盈余增速 14.7%。
 - **规则改动（用户 11/07 定）**：一次性项只用于估值；基准终端封顶 3%；交叉验证股权口径 P/FCF 含前 10 年现值。
 - **预测**：FY2030 FCF < $22.7B（中，2031-02-28）。
+
+## PLTR Palantir · 巴菲特模型（2026-11-08，buffett-analyst 第二个真实任务）
+- **交付**：`reports/pltr_Buffett_Report.html` + PDF；底稿 `memory/state/valuations/pltr_2026-11-08.json`（含 alternative_valuation）；输入 `memory/state/valuations/inputs/pltr_2026-11-08.json`；生成脚本 `reports/src/pltr_buffett_report.py`；SEC 原文存档 `pages/sec_pltr_*`。report_check 22 项无 FAIL（--record）；Critic R1–R5 REWRITE（15/13/12/1/1 flags）→ R6 终审。
+- **结论**：估值失效（营收两年 +101%，DCF 不可用）；替代估值（股权 P/FCF）：历史口径 60.88（48.70–73.06）、前瞻口径 142.01（113.61–170.42，偏乐观上沿）；现价 160.38（11/06）；安全边际 -163.4% / -12.9%；不买入，观察名单。评分 59（Business 23 / Financial 24 / Management 11 / Price 1）。
+- **关键事实**：FY2025 营收 $4.475B（+56%）、GM 82.4%、GAAP 净利 $1.625B、FCF $2.10B、SBC $684M（15.3% 营收）、客户 954（2024: 711）、政府 54%/美国 74%、无有息负债；FY2026 指引营收 $8.530–8.534B（+91%）、调整后 FCF $4.8–5.0B；Q3 2026 营收 $2.313B（+96%）、美国商业 +148% 首超政府。护城河 6（转换成本主 + 政府侧无形资产，未触发侵蚀）；3B=5（创始人控制但经济持股 <10%，直接 7.36% / 含期权 9.62%）。
+- **规则/工具改动（2026-11-08，dsh 分支）**：`tools/owner_value.py` 新增 alternative_valuation（股权 P/FCF × 历史/前瞻 FCF、±20% 区间、MoS、买入线、同行倍数敏感性）并写入底稿；`tools/report_check.py` 新增 B6–B9（替代估值 IV/MoS/区间/同行倍数必须与底稿一致），修复「DCF 绿灯掩盖替代估值 1000× 单位错」的检查盲区。
+- **预测**：FY2027 营收 < $16.3B（中，2028-02-28）。
+- **待核实**：FY2027–29 共识；NDR/续约率；2026 股东信；同行 P/FCF 聚合未逐家复核。

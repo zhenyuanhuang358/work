@@ -197,6 +197,40 @@ def run(inp):
     zone = "买入区间" if mos >= hurdle else ("观察区间" if mos >= 0.15 else "高估区间（不买）")
     out["zone"] = zone if not fail else f"估值失效（{'；'.join(fail)}）→ 按替代估值顺序，不出买入结论"
 
+    # 替代估值（spokes「估值失效」第 1 选：同行 EV/FCF；2026-11-07 用户定股权口径 P/FCF，不用 EV/FCF、不扣净负债）
+    # 为什么放进工具：Critic 2026-11-08 PLTR 实测——报告手算替代估值，单位错 1000× 且机械检查抓不到；
+    # 底稿必须是报告数字的唯一来源（含替代估值），否则 B1–B5 只覆盖 DCF 部分。
+    alt = None
+    peer = inp.get("peer_p_fcf")
+    fwd = inp.get("fcf_forward")
+    if isinstance(peer, dict) and peer.get("v") is not None:
+        p = peer["v"]
+
+        def _ps(fcf_m):  # fcf 与股数同为百万口径，倍数×FCF(M$)/股数(M) = 每股美元
+            return p * fcf_m / shares
+
+        trail = _ps(last["fcf"])
+        alt = {"basis": "股权口径 P/FCF（2026-11-07 用户定：不用 EV/FCF、不再扣净负债）",
+               "peer_p_fcf": p, "peer_src": peer.get("src", ""),
+               "pltr_p_fcf_trailing": price / (last["fcf"] / shares),
+               "trailing": {"fcf": last["fcf"], "iv_per_share": trail,
+                            "band": [trail * 0.8, trail * 1.2],
+                            "mos": (trail - price) / trail,
+                            "buy_mos30": trail * 0.70, "buy_mos40": trail * 0.60}}
+        if isinstance(fwd, dict) and fwd.get("v"):
+            f = fwd["v"]
+            fwd_iv = _ps(f)
+            alt["forward"] = {"fcf": f, "src": fwd.get("src", ""), "iv_per_share": fwd_iv,
+                              "band": [fwd_iv * 0.8, fwd_iv * 1.2],
+                              "mos": (fwd_iv - price) / fwd_iv,
+                              "buy_mos30": fwd_iv * 0.70, "buy_mos40": fwd_iv * 0.60,
+                              "pltr_p_fcf_forward": price / (f / shares)}
+        alt["peer_sensitivity"] = [
+            {"peer_p_fcf": p * f, "iv_trailing": _ps(last["fcf"]) * f,
+             "iv_forward": (_ps(fwd["v"]) * f) if isinstance(fwd, dict) and fwd.get("v") else None}
+            for f in (0.8, 1.0, 1.2, 1.75)]
+        out["alternative_valuation"] = alt
+
     # 三个检验（可算的部分）
     out["checks"] = {"fcf_conversion": [y["fcf"] / y["net_income"] if y["net_income"] else None for y in ys],
                      "interest_cover": cover}
