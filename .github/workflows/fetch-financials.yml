@@ -3,7 +3,7 @@ name: Fetch Company Financials (SEC)
 # 10-K 关键科目（scripts/fetch_financials.py，SEC companyfacts）。
 on:
   push:
-    branches: [claude/install-claude-hud-d51E6]
+    branches: [claude/install-claude-hud-d51E6, dsh/work]
     paths: [financials_request.json]
   workflow_dispatch:
 
