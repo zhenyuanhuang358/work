@@ -78,3 +78,16 @@ python3 tools/skill_index.py --check                    # 改了任何 SKILL.md 
 - 工作流会并发提交，推送前先 `git fetch && git merge`。
 - 不合并 `claude/us-stock-opportunities-htj5ur`。
 - 不开 PR，除非用户要求。
+
+## 9. 可编辑 PPTX：PPTAgent（2026-11-08 最小验证通过，未入路由表）
+
+客户要能在 PowerPoint 里改的 .pptx 时用 [icip-cas/PPTAgent](https://github.com/icip-cas/PPTAgent)（MIT）。
+它是一个 skill：宿主 agent 写 HTML 幻灯片，它负责渲染审图、转成可编辑 PPTX、核对交付文件与审过的源一致。不需要专用模型。
+
+- 安装：`git clone` 后在 `skills/pptagent/` 建 venv，执行 `pip install -r requirements.txt` 和 `npm ci`，然后跑 `python scripts/install.py --client opencode`（或 claude / codex）。
+- 宿主只能处理文字时：config 改 `mode: text`，并配一个视觉模型（OpenAI 兼容接口，密钥放 `VISUAL_API_KEY`）。
+- 流程：`init → 写 slides/*.html → review-slides → record-slide-review → build → review-deck → record-deck-review → finalize`。只有 `complete=true` 才交付。
+- 样例：`reports/ko_Buffett_Deck.pptx`，生成脚本 `reports/src/gen_ko_deck.py`，数字读估值底稿。
+- 已知问题：
+  - 字体按渲染机上实际装的字体写入。在没有微软雅黑的机器上导出，PowerPoint 打开时会替换字体，所以最好在装有微软雅黑的电脑上跑。
+  - Playwright 版本被锁定为 1.62，需要 Chromium 1234。机器上的浏览器版本不同时，可用 `PLAYWRIGHT_BROWSERS_PATH` 指向一个符号链接目录。
