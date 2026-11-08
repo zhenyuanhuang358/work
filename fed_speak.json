@@ -1,234 +1,152 @@
 {
- "updated_at": "2026-11-06T18:28:30+00:00",
+ "updated_at": "2026-11-08T10:23:51+00:00",
  "schedule": [
   {
-   "time": "2026-11-05T08:50:00-05:00",
-   "speaker": "Hammack",
-   "title": "FOMC Member Hammack Speaks"
-  },
-  {
-   "time": "2026-11-05T09:10:00-05:00",
-   "speaker": "Barkin",
-   "title": "FOMC Member Barkin Speaks"
-  },
-  {
-   "time": "2026-11-06T04:30:00-05:00",
-   "speaker": "Williams",
-   "title": "FOMC Member Williams Speaks"
-  },
-  {
-   "time": "2026-11-06T09:10:00-05:00",
-   "speaker": "Musalem",
-   "title": "FOMC Member Musalem Speaks"
-  },
-  {
-   "time": "2026-11-06T12:15:00-05:00",
+   "time": "2026-11-09T08:40:00-05:00",
    "speaker": "Bowman",
    "title": "FOMC Member Bowman Speaks"
   },
   {
-   "time": "2026-11-06T13:00:00-05:00",
+   "time": "2026-11-09T10:00:00-05:00",
+   "speaker": "Goolsbee",
+   "title": "FOMC Member Goolsbee Speaks"
+  },
+  {
+   "time": "2026-11-09T12:15:00-05:00",
+   "speaker": "Barkin",
+   "title": "FOMC Member Barkin Speaks"
+  },
+  {
+   "time": "2026-11-10T04:00:00-05:00",
+   "speaker": "Waller",
+   "title": "FOMC Member Waller Speaks"
+  },
+  {
+   "time": "2026-11-10T10:50:00-05:00",
+   "speaker": "Logan",
+   "title": "FOMC Member Logan Speaks"
+  },
+  {
+   "time": "2026-11-10T13:30:00-05:00",
+   "speaker": "Schmid",
+   "title": "FOMC Member Schmid Speaks"
+  },
+  {
+   "time": "2026-11-10T15:30:00-05:00",
+   "speaker": "Bowman",
+   "title": "FOMC Member Bowman Speaks"
+  },
+  {
+   "time": "2026-11-10T18:30:00-05:00",
+   "speaker": "Bowman",
+   "title": "FOMC Member Bowman Speaks"
+  },
+  {
+   "time": "2026-11-10T18:30:00-05:00",
+   "speaker": "Paulson",
+   "title": "FOMC Member Paulson Speaks"
+  },
+  {
+   "time": "2026-11-12T09:00:00-05:00",
+   "speaker": "Hammack",
+   "title": "FOMC Member Hammack Speaks"
+  },
+  {
+   "time": "2026-11-12T10:00:00-05:00",
+   "speaker": "Barr",
+   "title": "FOMC Member Barr Speaks"
+  },
+  {
+   "time": "2026-11-12T11:30:00-05:00",
+   "speaker": "Goolsbee",
+   "title": "FOMC Member Goolsbee Speaks"
+  },
+  {
+   "time": "2026-11-12T13:10:00-05:00",
    "speaker": "Daly",
    "title": "FOMC Member Daly Speaks"
+  },
+  {
+   "time": "2026-11-12T13:30:00-05:00",
+   "speaker": "Schmid",
+   "title": "FOMC Member Schmid Speaks"
+  },
+  {
+   "time": "2026-11-12T18:30:00-05:00",
+   "speaker": "Williams",
+   "title": "FOMC Member Williams Speaks"
+  },
+  {
+   "time": "2026-11-13T09:10:00-05:00",
+   "speaker": "Collins",
+   "title": "FOMC Member Collins Speaks"
+  },
+  {
+   "time": "2026-11-13T10:50:00-05:00",
+   "speaker": "Bowman",
+   "title": "FOMC Member Bowman Speaks"
+  },
+  {
+   "time": "2026-11-13T12:00:00-05:00",
+   "speaker": "Daly",
+   "title": "FOMC Member Daly Speaks"
+  },
+  {
+   "time": "2026-11-13T19:00:00-05:00",
+   "speaker": "Jefferson",
+   "title": "FOMC Member Jefferson Speaks"
   }
  ],
  "usd_high": [
   {
-   "time": "2026-11-03T10:16:00-05:00",
-   "title": "Congressional Elections",
-   "forecast": "",
-   "previous": ""
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "Core CPI m/m",
+   "forecast": "0.2%",
+   "previous": "0.3%"
   },
   {
-   "time": "2026-11-06T08:30:00-05:00",
-   "title": "Average Hourly Earnings m/m",
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "CPI m/m",
    "forecast": "0.3%",
-   "previous": "0.1%"
+   "previous": "0.6%"
   },
   {
-   "time": "2026-11-06T08:30:00-05:00",
-   "title": "Non-Farm Employment Change",
-   "forecast": "65K",
-   "previous": "29K"
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "Core PPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.7%"
   },
   {
-   "time": "2026-11-06T08:30:00-05:00",
-   "title": "Unemployment Rate",
-   "forecast": "4.2%",
-   "previous": "4.2%"
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "PPI m/m",
+   "forecast": "0.4%",
+   "previous": "1.3%"
   }
  ],
  "board": [],
  "headlines": [
+  {
+   "speaker": "Powell",
+   "time_utc": "2026-11-08T06:28+00:00",
+   "source": "WXLV",
+   "headline": "Fed likely to hold rates steady amid oil spike ahead of Powell’s exit - WXLV",
+   "url": "https://news.google.com/rss/articles/CBMingJBVV95cUxQYWRzVkhpOXdEV1RJSFU0RWJTbkhlUE55VW5kYms5WmZoRGdMTE9CNUNwOGRYVHpPTWI0ZjFpYnZyaDBCcWlLczRzRm45cEtpVGxuaTZqeFNfWGl1a19UVlc2NW9TM0I5Vi1fWU5oa0hwOWpaQ1BweEwzRnR1UmlaVFU5SjhldXRES0F5S21xWnVyV29KRkNxaExzaXFpQWh5bHNrbUYtbXVPX1BOeV9VYnY3ZDVPRmRjNlBudWpLZWlzd0NqRVJkaDF4WDVicGM4SjVwTTRPSEFlclV3anFGbWg4T3pudkJCR29UTGE1VFBjZU1JeG9Rd2tHamtodTNPQnVhNHpvUFJOZkRUVWU5Y3V6U2ZkbnpLWGhqZGxn?oc=5"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-06T22:14+00:00",
+   "source": "www.tokenpost.com",
+   "headline": "Richmond Fed President Thomas Barkin Says Gradual Rate Hikes Remain Reasonable - www.tokenpost.com",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9kU3locXBERDJNN1NsQUZZRUdlTndQU0pUOGhiSlhzT3RjS01uZkd3TC1LVzg5aG1Yajh1RVBrdjNtWlE4T2tEQmlZd0JKbTNjUmZaZ0l3N3VRN1U?oc=5"
+  },
   {
    "speaker": "Bowman",
    "time_utc": "2026-11-06T18:22+00:00",
    "source": "Seeking Alpha",
    "headline": "Cybersecurity is a major concern for bankers - Fed's Bowman - Seeking Alpha",
    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNZ1hLTWYyVU54ZEtfX3MwbWZPYUpwc1lWVWo4SW1qa2dCclN5eVBZTnU1LTFBVmR3NFVNT19KdkhmeVRSNG9vNzFXME81ZW9EUkF5eWFQQzFDOU5DQjdRekZaMDVpNE1tQUlGbVdheTB6ZDZOZWE2TmllcVBLYXJWcXFDS3Q4Y1NiU0NrNDQ2NkkwTncwRURNQWp0alA?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-06T18:13+00:00",
-   "source": "StreetInsider",
-   "headline": "Fed's Daly: will have to tighten policy further, prepared to raise rates - StreetInsider",
-   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPamZ5R2xBRTl0bEJIQjBPdVFIQ0d5LThvZzFNemFXUnFZbXd1V3prNkwzZHZQMEExcjFVcXJfSExzWFVjaFMzVmFZQ01sR1ZCLXdfdU1MS2h5cFNGYTFaU0ZBOXFfOTJDM0dDUllJWmQ3X2UzN0tnbUJHQWpYQWI4a2dPcU9aNFFtU0JpckhoZjNSM3hyYUtVVU5qc25faS1YemkybDdnSHFWRkd1LTJ4QmtwNEhTQ2NWVHc5NUZQMXVMalVqcmR6eHdyZw?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-06T18:13+00:00",
-   "source": "StreetInsider",
-   "headline": "Fed's Daly: real wages are falling - StreetInsider",
-   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPX1lETGZvTUsyTm96WnVWQ2lXaUpSRElUcHVROEJJZDgxUXlhQ3I3MU0zNVo0OE1DQmFNMTRQRUloc053a1hMd0dMWFhhOEgwaUZOU1VfUUpLdUwyNWY3TkgxQlhzLVVodmU5VE01eVZ2OTVRdXczVUtEMWt2OEkxSkhEUU9xTVdDXzdqclozOGdrUDJTU3c?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-06T18:07+00:00",
-   "source": "investingLive",
-   "headline": "Fed's Daly: Jobs report is good news - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPbC12V0w4SGdHdmhUUEd1dW9VN19uWkIwLXlNNDVMSFYxeUlDSDQ2UTRfWVJLTGY0ZmluODhMVExyVVVQTzVYN0hiMFBzcUxhVnpMMWRVU0dxRllhZHlScTZ4MjJBM0RSUjVpcTRvXzZoc2pCQUpGOW1WMHBkVTJ6MXd3?oc=5"
-  },
-  {
-   "speaker": "Musalem",
-   "time_utc": "2026-11-06T15:24+00:00",
-   "source": "bloomingbit",
-   "headline": "St. Louis Fed President Musalem Says Concerns Over Current Inflation Level Persist - bloomingbit",
-   "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE01SFVrN3VEc29GVlpPeWhYU01IQTRsWUROaVdhTldjWjhRQ0oyQ2xWUXJFZm1YN0N2ejhtUHdzV0F4SXBoQk9OYTFjaVZoQkFHeGJvSQ?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T15:18+00:00",
-   "source": "The Hill",
-   "headline": "Fed’s Williams says inflation too high, targets 2 percent - The Hill",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5xeVNpR3NDODlWakp1RmVYYmRtT0xic0NXdnc4RU1YTFRfdW9uZlhNNnZVN0wzamN6ZXpfelo3OVhYUHBHbXJIZUg5VDdoTFNaR0FEZDhpTFo3TDhsbW1jUmNDc0pDd281c08xZkxyUktQc09MMmhxd9IBfkFVX3lxTE1IeWFOYlN3MGpkMG5PZGtkQ1VMZ2lyZmZRTkEwT3BaRnJ0c3p2OU9hVWZNNGYwcXIwNHl1a1lxNWtHc1FrMHNaZUE5Z2dHRWFfU25ZeDk4Z09BR2NteWVpTDd1N2ZET29mYU9OZHNRYjVOVm5VRmt0SEdJZlZDZw?oc=5"
-  },
-  {
-   "speaker": "Musalem",
-   "time_utc": "2026-11-06T15:16+00:00",
-   "source": "FXStreet",
-   "headline": "Fed’s Musalem: People remain concerned about inflation at the current level - FXStreet",
-   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVHV1UVVBV2xNS2p0WDg5OUFlMW4tX2ZRNUhkYVRTams0MHB4LW9XWVJxVFJkanZxQUFSUUVxU0ZJejc1Zm9hN1V5U1I2d2Q4WndYZVJYdjBWYndpQTc2c2gzdlhpNWM2V1c3c25LZ1dKZ0I3anVrTXRTV1RvYXNBRUV2R0piZWN5S2RtQXBtZnF2OVc3dk9jVzU1b3FETGpJLU1BT2RYb3FGUGtJb1JObzZHM2hyZTQ?oc=5"
-  },
-  {
-   "speaker": "Musalem",
-   "time_utc": "2026-11-06T14:10+00:00",
-   "source": "Forex Factory",
-   "headline": "Musalem: Your Fed: Decentralized by Design - Forex Factory",
-   "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMkRnTi1CaDduNERGNlVwbGpCb0hraHU3Ukg2b2FaNlpVRWE2XzdMcVRwYW1QUlBIeC1HRklSMERpYkJUZmQxcDdGVVczSlhjVldFZlFhWjk5ZkVUYzBERWZRN2dCeVFjVDFOd1FsTktiOFhSZ1o4Q0o3Zk5CM0hjNUFDODE1SGNONFHSAY8BQVVfeXFMUC03bTQwdERNY1J1SjdfTVRHN2VleGMwSG5mT2d2bng2OGpQaGh5NkhxNFk5YkJkUHpqOEdsY2Q0cWxKeHRVN2wtN3o2eXpZTUhIaFI1eHAyU09kS25qT25vUFY1OUVqTU82dDFjb2lwbG0xQnh3QkZseFNjMDVmcHAySEZ2WTE0Nm40NTd6R1E?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T13:00+00:00",
-   "source": "IndexBox",
-   "headline": "New York Fed's Williams: Inflation Too High, Must Return to 2% Target - News and Statistics - IndexBox",
-   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNVU9HNVM3TVh1c1FCQ2JkcTN3LUt4WmQtbFF5cXRTRjNYc1dnQmU2UWtINklzc3lKNGVlbTlfbHo1R3NYczRlY2JlVnh0MkFVTWpvTjV4bHFlTEN5U09EQWZ2LV9iT3B6ZXlna0FxV2JQV0dCZjBTTF80ZWpfc2RNQ2VmQkJlVWdydVJVN2p5ajNJSzVPa2p3UVZ0RFVVRVdwZXc?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T12:39+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Watch Fed Should Gather Data to Judge Price Risks, Williams Says - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNcklaT3VwUlZrdk9ZRWktTElKTlBRM1hTMVBNdkhtRWtrR2Q0S1NoeVQzSEU4WGJNN3dkZENRZmRJclk2N0VaUjN1OXQ1RElwWnVpQjdDcDVpS0VUR2FvTkdrTVVYTjRKYlN0WnRJbU5aUmdwYkVKZ0RNbTNMZ1djaVpVOVJFeVNYWlRKbnNuMmdlUnBrTFhuMU1TbkJ4SHJqRUxsLVYybURWbDA?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T10:55+00:00",
-   "source": "Fort Worth Star-Telegram",
-   "headline": "US inflation too high; essential to get back to 2%: Fed's Williams - Fort Worth Star-Telegram",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOYTlMS3l5dHFZV3VYeTZkc1FscC02SDNSd0g4UEFXR0U5RjBzdk11ZGplWmM4SGNhdmZ6X0dSZ2pwTFd3cTB0T212OUlFMlJPLVpIN05hd094dDJ4OFpGT2J0dHZ5UDNLQzJ0clV0RHA2ckRpbkpHVW1pLXd2OTJCbHlGV0E?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T10:31+00:00",
-   "source": "Yahoo Finance",
-   "headline": "US inflation too high; essential to get back to 2%: Fed's Williams - Yahoo Finance",
-   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQN1pUOHF6eV9iRDBFREVrUDZRVktrUWRYNVpWZzR2TEFYYjFscmdObHYwMGpGbkpFc3VHcXd6OGNlcEhZRlB2QlBxem4wLW1vajFUU0xCSlhwTWVjU3lZT0dYSU1oZlY3REw5UGVrejhWMXZmR3FuN3E4ZWMwTmxmOUx1dk5WekxBMmlvOHF2Z0hfTFpwVHVVbkVrMlM?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-06T09:54+00:00",
-   "source": "investingLive",
-   "headline": "Fed's Williams says US economy remains resilient, appropriate time to gather more information - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQUTBFTmhKclFIb1RnS0RzTktBV0lRZmV4T0dJcktVYTNPd1hMM0IwemduQWhPem1lV1loTHVoSWxPaFVWRDRBYkRkQksyUkczUWREVDZoMjJrdlE5Y0N1XzFCTTVaSVRiZFZGb19HRFJGczlCY2ZyY1VmM3ZpdHhxR243MUwwbkpsX3E3UEF5cEtTT05GNk9aaEMzTFJoSGEzUExMQkIwNHZGR2lMWEJPRmh0cEZuX216Ri10UlU4R1RjYWpnT0RnYlQ2cW5Gdw?oc=5"
-  },
-  {
-   "speaker": "Hammack",
-   "time_utc": "2026-11-06T04:02+00:00",
-   "source": "Briefs Finance",
-   "headline": "Fed's Hammack backs restrictive rates, favors smaller, more frequent moves - Briefs Finance",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPeFFsbmRDamFjT3k5R1Bza1ZqNE1rc2prcm5IeXBTS3p0NmItTmdtQnE0aEpNajE0cWhqUUVCZVE2aTNHeW4wcWh2cE9zaDR5cG1KLVhnbzZTZG5scld6TDRHMFFkZ0VMbjJzczNzcGlpVm1EUU1acTRUQktUZHFLTklzNHp2czlZaU1WQWZDY0IzZw?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-05T22:58+00:00",
-   "source": "Briefs Finance",
-   "headline": "Richmond Fed's Barkin expects more rate hikes, favors a measured approach - Briefs Finance",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNNGJsVDJBY2Rta1VZeE5rVVdsUjVRTm1kVGNqck1zRnZnbXJrRExkRHBFT3NXeU1kdGZKS0NTYkhsQlhhcjdLRGRzUjd2MkVFSEx5ZDZ6eWxHblhMUHVlNnNGQnVPUDVtVVNEdVBiOWIzMzhWRGpQLUgxbE9nR2ZsZTZiQnR4M3llLW1PYnNSbUE3QQ?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-05T20:58+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Hammack, Barkin favor gradual rate-hike path to lower inflation - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTDI4cDU1ODdtRUFrTlZiTjZUbUlKNjZicWpjOHp0YnhONENvNEhMemJ3bWNyR1Rpd0d5akp3Yk1FVElzaDlBenRLRkttdjFvOXFZaGt6dm05WWdZZXpqcU5vazJSY2p3UEx6dkFtM18tNU5nVFZEb0dFY3NHUkRGZlAxS2xJVHZPWWFYOWNUd1lsU2VnbEliTXZDYnp1Um5aX2M1a3Fn?oc=5"
-  },
-  {
-   "speaker": "Hammack",
-   "time_utc": "2026-11-05T20:58+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Hammack, Barkin favor gradual rate-hike path to lower inflation - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTDI4cDU1ODdtRUFrTlZiTjZUbUlKNjZicWpjOHp0YnhONENvNEhMemJ3bWNyR1Rpd0d5akp3Yk1FVElzaDlBenRLRkttdjFvOXFZaGt6dm05WWdZZXpqcU5vazJSY2p3UEx6dkFtM18tNU5nVFZEb0dFY3NHUkRGZlAxS2xJVHZPWWFYOWNUd1lsU2VnbEliTXZDYnp1Um5aX2M1a3Fn?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-05T19:16+00:00",
-   "source": "Federal Reserve Bank of San Francisco",
-   "headline": "Keynote Remarks by Mary C. Daly at SIEPR’s Policy Forum - Federal Reserve Bank of San Francisco",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPQTVMLTg3VVZVczl4TEVJRXFhTkM2QjZ0a0otZGJxNm1GMHZJdV90RWlLLTlvRXR1dGxkdy1SemJOd1FldTMxM3ZUc0pKQ0c5UDE5SUJJcVZuQkEwMVB6RzdnQmh2Qkl5dmJXSVBjU3M3aFdMOGpwVWhRZTVmNl92d3JwRkp6WVhLZG1BSWwwdGVrZw?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-05T15:48+00:00",
-   "source": "FXStreet",
-   "headline": "Fed’s Barkin backs gradual rate hikes as inflation stays too high - FXStreet",
-   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZ2hPR2RHTkxORzZ4c3FOM3dweVdsTnc4S1NTN29NZXlQVXZxNjN0OTlsMS1nRjdWd2I1NFpFN1l0TFBqYXgwMlJYWHE4YmJXc0RSeFVNNGswTmhHS1I1azBDazhJQ0I0YXZyQVVXX3NRY1FqWUlMYm9ISUJzNzlST0s4ODJVbVZmd2szVTdUQTdwT1FvX2prdGN4dEZlQndrZDFmcVlpX0haZ28?oc=5"
-  },
-  {
-   "speaker": "Hammack",
-   "time_utc": "2026-11-05T15:41+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Hammack Says Restrictive Rates Needed to Cool Prices - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPU2c2UERBM24tYnJsM3UxR3pvTG9mYmZNZ0dDN3k4OHp6SUl3aUxKRXZkNlJVeFU4dTFoS1NtSHBZN0xIVG1GRnBNNmxxWU9MWUNWNmhkZXZPT1A5ZHN2RHZRWS1tMmtZV1BzSDJLLWpERnFoZTVLNDFsdWVlaENTdE5UZVZDanpTbTFtNDQ5WHJJYWt1Y0hGNnd5eEhXaVplZWJNcXFXVHpIMXVqa0c5Z2tn?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-05T15:23+00:00",
-   "source": "Seeking Alpha",
-   "headline": "Rate path is straightforward; the question is timing, Richmond Fed's Barkin says - Seeking Alpha",
-   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNMjNMSXpmQ191WTltbzBPaVI4NEVneVRNRTc0a2RkRFBoRk51YzQwSi0xX0piZHFBdEZNbWhtcnl6bllnZUtRV3JyR1VrMHAyX1l0WTlDNzhmX0JOb0t4SHNsWHQxZGJFZXhqUldmU05VUXB5MzZFQzVQNk52M1RQUmJpSWRXZ05PaWVmOXZkckhLWDlJY3BVZnBVWXF4MDBEV25ZRHpMRXIyQXhESU1QN0hPLXpTQQ?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-05T14:29+00:00",
-   "source": "CNBC",
-   "headline": "Barkin sees interest rate hikes ahead, but at a gradual pace - CNBC",
-   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPdEZaWEtSWXFFb2N4RUNSdXRrbktjX1JvWnoyWGM2c1p2dnNrWGMzeTAwdkU3UDlmV2g3aDJvZVVxdG5BZ09RbU1DZWs3MmxodWRka0NXSE1YQmNOMjViTzhKbE9Qa1Y4SExQQzROdkFzWnJJeExoZ0h0aFNFRWdHU0NxM2Y4SXFMYlF3V2UxaTN2aXRTOHVvdVdoNGTSAaIBQVVfeXFMTUZ0M1g5R2p1V2hibU0xWHRfcnBDSkVzWGlZNk92OWNKZkRtV1JubEhWVnp4M0RSTWhaSGV5VlR6cjRtT3FMRWI5eFdBcDJoakxBSHVhMWZFdGxsZG90ZFl3SU1OYW92ajZGRkdkRXFZUnZOZFhFd09fQlgtVFctNmF2THlhNzgteDQ3STFZbmV2QXZSWG9Ldi1IOUJSSWNvWFdB?oc=5"
-  },
-  {
-   "speaker": "Hammack",
-   "time_utc": "2026-11-05T14:01+00:00",
-   "source": "Modesto Bee",
-   "headline": "Fed's Hammack favors gradual rate-hike path to lower inflation - Modesto Bee",
-   "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE16YWpiN2ZuSW9xb1k1ODYxNXBEYmdtMnJQckdfUzJFMWtHZDU1V1RRNnFPOU1YOTB4QjdySHgxdk5MeXhWQWJtd0tDYlp6Q1ZZZzgxUlNqQm9kcGlHam1zQTVQWTVJLU1obVlKOURUNnBBVXJzOXJkdTB6Yw?oc=5"
-  },
-  {
-   "speaker": "Hammack",
-   "time_utc": "2026-11-05T05:00+00:00",
-   "source": "Federal Reserve Bank of Cleveland",
-   "headline": "Cleveland Fed’s Hammack: Dollar’s status depends on rule of law, effective capital markets, and central bank independence - Federal Reserve Bank of Cleveland",
-   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNbGpQUGRBZEtYZFluTWhYblhtd283bWd2S2NSaU5JaUJhRW91ZzJ5bmR4RFZad1F1MVBMRzRXaXVUbVFoYmVPRjY3YlI2SHJGWmc3UndCM1R6bk9BTkVSM1NzNWFlR2ZuWWtOUHlTcHFmNTJ2VElTSEVrdnpPMjFxYkxVNTE2c0prSTBCcFRwOXljUlVVTU5QbDZXM3ZEbVoyZlNLYlpQdEk2NmlvZDFnYQ?oc=5"
   }
  ],
  "errors": [],
- "trigger": "scan-2026-11-06T18:24:44Z-caltest"
+ "trigger": "scan-2026-11-08T10:20:12+00:00"
 }
