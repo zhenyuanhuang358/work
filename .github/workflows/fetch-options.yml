@@ -4,7 +4,7 @@ name: Fetch Options Chain
 # 触发：改 options_watch.json（换候选）或 price_fetch_trigger.txt（每次扫描前的抓价触发）。
 on:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [main, claude/install-claude-hud-d51E6, dsh/work]
     paths:
       - options_watch.json
       - price_fetch_trigger.txt

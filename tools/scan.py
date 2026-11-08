@@ -24,7 +24,17 @@ from datetime import date, datetime, timedelta, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-BRANCH = "claude/install-claude-hud-d51E6"
+def _current_branch():
+    """取当前分支：DSH 在 dsh/work 上独立跑，不能再把触发文件推到 Claude 的默认分支。"""
+    try:
+        b = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=REPO,
+                           capture_output=True, text=True).stdout.strip()
+        return b if b and b != "HEAD" else "claude/install-claude-hud-d51E6"
+    except Exception:
+        return "claude/install-claude-hud-d51E6"
+
+
+BRANCH = _current_branch()
 ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json", "voices.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
