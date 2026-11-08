@@ -79,12 +79,12 @@ python3 tools/skill_index.py --check                    # 改了任何 SKILL.md 
 - 不合并 `claude/us-stock-opportunities-htj5ur`。
 - 不开 PR，除非用户要求。
 
-## 9. 可编辑 PPTX：PPTAgent（2026-11-08 最小验证通过，未入路由表）
+## 9. 可编辑 PPTX：PPTAgent（2026-11-08 验证通过，用户认可，已入 CLAUDE.md 路由表；skill 已收进 `.claude/skills/pptagent/`）
 
 客户要能在 PowerPoint 里改的 .pptx 时用 [icip-cas/PPTAgent](https://github.com/icip-cas/PPTAgent)（MIT）。
 它是一个 skill：宿主 agent 写 HTML 幻灯片，它负责渲染审图、转成可编辑 PPTX、核对交付文件与审过的源一致。不需要专用模型。
 
-- 安装：`git clone` 后在 `skills/pptagent/` 建 venv，执行 `pip install -r requirements.txt` 和 `npm ci`，然后跑 `python scripts/install.py --client opencode`（或 claude / codex）。
+- 安装：在 `.claude/skills/pptagent/` 建 venv，执行 `pip install -r requirements.txt` 和 `npm ci`（Claude Code 直接从仓库读取；opencode 等再跑 `python scripts/install.py --client opencode` 注册）。
 - 宿主只能处理文字时：config 改 `mode: text`，并配一个视觉模型（OpenAI 兼容接口，密钥放 `VISUAL_API_KEY`）。
 - 流程：`init → 写 slides/*.html → review-slides → record-slide-review → build → review-deck → record-deck-review → finalize`。只有 `complete=true` 才交付。
 - 样例：`reports/ko_Buffett_Deck.pptx`，生成脚本 `reports/src/gen_ko_deck.py`，数字读估值底稿。

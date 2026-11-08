@@ -160,6 +160,7 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 | 财报季度分析 | Earner | 单篇 HTML（14 节模板） |
 | 品牌 / 渠道 / 消费行业调研（非提纲非访谈） | restaurant-research | 单篇 HTML |
 | 横向翻页网页 PPT（杂志风 / 瑞士风 / 发布会分享页） | `guizang-ppt-skill` | 单 HTML |
+| **可编辑 PPTX**（客户 / 面试方要在 PowerPoint 里打开改的演示文件） | `pptagent` | `answer.pptx`（finalize `complete=true` 才交付；环境与字体问题见 AGENTS.md §9） |
 | **简历 / 求职信 / 推荐信 / 一页纸方案 / 作品集**（单份排版好的 PDF） | `kami` | PDF（`tools/setup_kami.sh` 先装依赖） |
 | 单篇文章排成网页 / 文章要出 PDF 或长图 | `guizang-page-skill` | 单 HTML（PDF / 长图另导出） |
 | 小红书组图 / 公众号头图与分享卡 / 社交图文卡片 | `guizang-social-card-skill` | PNG |

@@ -8,6 +8,7 @@
 | guizang-page-skill | github.com/op7418/guizang-pages-skill | bb39103 | AGPL-3.0 | 2026-10-31 | 无 |
 | guizang-social-card-skill | github.com/op7418/guizang-social-card-skill | 64d02d4 | AGPL-3.0（另有商业授权说明） | 2026-10-31 | 无 |
 | humanizer-zh | github.com/op7418/Humanizer-zh | f4518a8 | MIT | 2026-10-31 | 无 |
+| pptagent | github.com/icip-cas/PPTAgent（skills/pptagent） | acf703e | MIT | 2026-11-08 | 无。运行时依赖（.venv、node_modules）不入库，按 AGENTS.md §9 安装；用户 11/08 认可 KO 样例后接入路由 |
 
 经由 op7418/dsh-guizang-design（DeepSeek Harness 插件，2398333）获取。插件本体（作品库、语气档案 guizang-voice）依赖 dsh 主进程工具，**不可移植，未安装**。
 
