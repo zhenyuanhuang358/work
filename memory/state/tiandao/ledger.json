@@ -1,0 +1,6 @@
+{
+ "_note": "天道台账（tools/tiandao_check.py 读）。只记用户本人确认过的事实：借出 / 入股 / 天道期权持仓。金额单位：loans 与 equity 为人民币，option_positions 为美元。",
+ "loans": [],
+ "equity": [],
+ "option_positions": []
+}

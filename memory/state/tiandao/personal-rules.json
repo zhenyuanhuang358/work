@@ -1,0 +1,15 @@
+{
+ "_note": "天道 · Heong 个人规则的数值（硬约束，tools/tiandao_check.py 读这里）。改任何数字 = 修订规则：先在 personal-rules.md 的修订记录写明日期与原因，再改这里，不在决策当场改（天道 §一）。与 us-options-agent 无关（用户 2026-11-08 定）。",
+ "version": "2026-11-08",
+ "lending": {"loan_outstanding_cap": 5000, "equity_principal_cap": 50000, "currency": "CNY"},
+ "gold": {"max_share": 0.20},
+ "options": {
+  "account": 5500,
+  "currency": "USD",
+  "per_trade_max_loss": 275,
+  "open_max_loss_total": 550,
+  "halt_equity": 4400,
+  "stop_loss_share_of_capital": 0.15,
+  "structures_allowed": ["credit_spread", "debit_spread", "long_option"]
+ }
+}

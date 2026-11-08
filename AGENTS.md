@@ -64,7 +64,7 @@ DeepSeek API 兼容 OpenAI 格式。要换就改用 OpenAI SDK 并设置它的 b
 ## 7. 验证（改了东西就跑；没有证据不说「通过」）
 
 ```
-python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py
+python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py
 python3 tools/self_check.py --quiet
 python3 tools/report_check.py <报告.html> --record     # 交付任何 HTML 报告前
 python3 tools/skill_index.py --check                    # 改了任何 SKILL.md / agent 后

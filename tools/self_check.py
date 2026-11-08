@@ -528,6 +528,27 @@ def check_macro_calendar():
         flag("P2", "macro_calendar.json", f"FOMC 日历不足或抓取失败：{src.get('error')}")
 
 
+# ── C16 · 天道决策卡过了复核日仍 open（2026-11-08：没有复盘的决策卡等于没有卡）────────────────
+def check_tiandao_cards():
+    import datetime as dt
+    import glob
+    say("\n[C16] 天道决策卡 memory/state/tiandao/cards/")
+    today = dt.date.today().isoformat()
+    n = 0
+    for p in sorted(glob.glob(os.path.join(REPO, "memory/state/tiandao/cards/*.md"))):
+        if os.path.basename(p) == "README.md":
+            continue
+        n += 1
+        head = open(p, encoding="utf-8").read()[:600]
+        st = re.search(r"status:\s*(\w+)", head)
+        rd = re.search(r"review_date:\s*(\d{4}-\d{2}-\d{2})", head)
+        if not st or not rd:
+            flag("P2", os.path.relpath(p, REPO), "决策卡首部缺 status / review_date，复盘无从提醒")
+        elif st.group(1) == "open" and rd.group(1) < today:
+            flag("P2", os.path.relpath(p, REPO), f"复核日 {rd.group(1)} 已过仍 open：下次涉及同类决策时先问这张卡的结果")
+    say(f"  共 {n} 张")
+
+
 def main():
     print("自检器 · " + subprocess.run(["date", "-u", "+%Y-%m-%d %H:%M UTC"],
                                      capture_output=True, text=True).stdout.strip())
@@ -547,6 +568,7 @@ def main():
     check_report_records()
     check_screens()
     check_macro_calendar()
+    check_tiandao_cards()
     print("\n" + "=" * 74)
     if not findings:
         print("全部通过。")
