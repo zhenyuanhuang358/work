@@ -1,16 +1,17 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-08T09:50:00Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-08T12:21:45Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-08 09:49 UTC
+自检器 · 2026-11-08 12:21 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
   tail-risk-monitor        hub 200 行   spoke 引用 12 处
   guizang-page-skill       hub 208 行   spoke 引用  5 处
+  pptagent                 hub  57 行   spoke 引用  0 处
   sleeper                  hub 164 行   spoke 引用  5 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
   kami                     hub 210 行   spoke 引用 32 处
@@ -61,7 +62,8 @@
   huashu-report            无触发词  ✅ 已在 CLAUDE.md 路由表
   humanizer-zh             无触发词  ✅ 已在 CLAUDE.md 路由表
   kami                     无触发词  ✅ 已在 CLAUDE.md 路由表
-  路由表点名的 skill 4 个，不存在 0 个
+  pptagent                 无触发词  ✅ 已在 CLAUDE.md 路由表
+  路由表点名的 skill 5 个，不存在 0 个
 
 [C6] 可证伪判断的登记规则是否还有承载物
   CLAUDE.md 含把握档规则   ✅
@@ -88,7 +90,7 @@
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
   期权基本面名单：上次复核 2026-11-05（3 天前）
-  运行记录：10 份｜超过 2 天未完成 0 份
+  运行记录：11 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
   49 条｜未关闭 2｜已修有测试 33
