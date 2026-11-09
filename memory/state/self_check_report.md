@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T04:03:33Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T07:58:09Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-09 04:03 UTC
+自检器 · 2026-11-09 07:58 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -29,7 +29,7 @@
   earner                   hub 132 行   spoke 引用  6 处
   critic                   hub 140 行   spoke 引用  2 处
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
-  tiandao                  hub 108 行   spoke 引用  6 处
+  tiandao                  hub 128 行   spoke 引用  6 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
   burry                    hub 183 行   spoke 引用  8 处
   合计 217 处 spoke 引用，0 处失效
@@ -94,13 +94,13 @@
   运行记录：11 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  54 条｜未关闭 3｜已修有测试 33
+  56 条｜未关闭 4｜已修有测试 33
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 4 份
 
 [C13] 报告机械检查记录 memory/state/report_checks.jsonl
-  11/07 起改动的报告 2 份｜有检查记录 2
+  11/07 起改动的报告 1 份｜有检查记录 1
 
 [C14] 筛选器产物不变量 tools/screen_check.py
   burry：7 项，FAIL 0
@@ -116,7 +116,7 @@
   共 1 张
 
 ==========================================================================
-发现 7 项：
+发现 8 项：
 
   [P3] guizang-page-skill/SKILL.md
         hub 208 行，超 CLAUDE.md 的 200 行目标 8 行
@@ -138,6 +138,9 @@
 
   [P3] FB-20261109-B10
         未关闭：TTM 规则（11/09）对 11/07 已交付的 KO 同样适用（FY2025 已结束 10 个月），KO 未重跑｜KO 安全边际 −97%，换基数不改变结论；用户要求时重跑
+
+  [P3] FB-20261109-T02
+        未关闭：台账 ledger.json 为空，借款合计上限检查目前不准（只算本笔）｜需用户提供现有未还借款与入股本金
 
 ```
 
