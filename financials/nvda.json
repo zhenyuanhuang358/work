@@ -737,6 +737,16 @@
    "2026": 7500000000
   }
  },
+ "capex_tags": {
+  "BusinessAcquisitionPurchasePriceAllocationPropertyPlantAndEquipment": {},
+  "PaymentsToAcquireProductiveAssets": {
+   "2023": 1833000000,
+   "2024": 1069000000,
+   "2025": 3236000000,
+   "2026": 6042000000
+  },
+  "PaymentsToAcquirePropertyPlantAndEquipment": {}
+ },
  "price": {
   "v": 186.64,
   "date": "2026-11-06",
