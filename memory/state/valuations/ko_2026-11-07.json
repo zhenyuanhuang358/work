@@ -43,6 +43,10 @@
   "stdev": 0.006976791590338474
  },
  "failure_conditions": [],
+ "base": {
+  "kind": "最近完整财年",
+  "fy": 2025
+ },
  "owner_earnings": {
   "value": 11993.0,
   "maint_capex": 1056.0,

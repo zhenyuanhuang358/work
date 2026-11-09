@@ -234,7 +234,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <h2>一句话结论 <span class="en">Bottom Line</span></h2>
 <ul>
 <li><strong>结论：高估区间，不买。</strong>英伟达是一门极好的生意，评分 {total}，落在「等待买入」档。但现价 {price:.2f} 高于内在价值上沿 {hi:.2f}，安全边际（下沿）{mos * 100:.1f}%。异常增速路径要求 {hurdle:.0%}，价格需在 {buy:.2f} 以下。{badge("高")}</li>
-<li>「不买」在框架内很稳：护城河评 6、7、9 分，安全边际都达不到 {hurdle:.0%}。「高估」取决于护城河分数：按证据评 6 分时成立；评 7 分时价格约等于保守估值。{badge("中")}</li>
+<li>「不买」在框架内很稳：护城河评 6、7、9 分，安全边际都达不到 {hurdle:.0%}。「价格高于内在价值上沿」取决于护城河分数：6 分时成立；7 分时价格约等于保守估值。按框架的区间定义，6、7 分都属「高估区间」（安全边际 &lt; 15%），9 分为观察区间。{badge("中")}</li>
 <li>现价隐含未来 5 年所有者盈余每年增长 {pct(ig['g1'])}，超过中等护城河 {pct(ig['moat_cap'], 0)} 的增速上限。</li>
 </ul>
 {price_svg()}
@@ -250,7 +250,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["成本优势", "Fabless 模式，制造在代工厂，没有单位成本对比", "不计分"])}
 </table>
 <p>侵蚀信号：毛利率 FY2024–FY2026 {pct(rows['2024']['gm'])} → {pct(rows['2026']['gm'])}，回落 {(rows['2024']['gm'] - rows['2026']['gm']) * 100:.1f} 个点，未到 5 个点；同行营收增速 AMD {pct(peer_growth['amd'], 0)}、AVGO {pct(peer_growth['avgo'], 0)}，低于英伟达的 {pct(nv_growth, 0)}。份额是否连续流失无法检验（份额数据停在 2023 年）。其余信号未触发。</p>
-<p>为什么给 6：毛利率高出同行是唯一有数据的信号，其余维度都缺数据或证据偏弱。这是按框架取的保守分，不是认为它的护城河窄。分数决定增速上限（6 分 12%，7 分 18%，9 分 25%），对估值影响很大。不论 6、7、9 分，结论都是「不买、等待买入档」。</p>
+<p>为什么给 6：毛利率高出同行是唯一有数据的信号，其余维度都缺数据或证据偏弱。这是按框架取的保守分，不是认为它的护城河窄。分数决定增速上限（6 分 12%，7 分 18%，9 分 25%），对估值影响很大。6、7 分为等待买入档；9 分时总分 {M9['scorecard']['total']}（强力买入区域），但异常增速路径下安全边际 {M9['margin_of_safety']['value'] * 100:.0f}% 低于 {hurdle:.0%}，按规则为观察、非买入。三种分数下都不买。</p>
 <p class="src">来源：SEC companyfacts（GrossProfit、营业利润 ÷ 营收）；HPCwire 转述的 TechInsights 研究。</p>
 
 <h2>二、核心财务指标 <span class="en">Financials, FY2024–FY2026</span></h2>
@@ -280,7 +280,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <p><strong>估值路径：异常增速 DCF（路径 B，门槛 {hurdle:.0%}）。</strong>FCF 两期复合 {pct(V['fcf_cagr'], 0)}，超过 50%。按规则逐步处理：</p>
 <ul>
 <li><strong>第 1 步 · 增速性质</strong>：属于「结构性平台跃迁」。spoke 的例子直接列了「AI 加速器 2023-」。但需求依赖客户的资本开支周期，这一点放在风险里跟踪。</li>
-<li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。FY2028–29 的共识是付费内容；只要那两年增速合计高于 −43 个百分点，三年均值就高于 {pct(ig['moat_cap'], 0)}，所以取护城河上限。</li>
+<li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。FY2028–29 的共识是付费内容；只要那两年增速合计高于 {(3 * ig['moat_cap'] - (CONS_FCF27 / rows['2026']['fcf'] - 1)) * 100:.0f} 个百分点，三年均值就高于 {pct(ig['moat_cap'], 0)}，所以取护城河上限。</li>
 <li><strong>第 3 步 · FCF yield 反推（对照，不采用）</strong>：得增速 4.15% / 7.15%，内在价值 {FY['iv_range'][0]:.2f}–{FY['iv_range'][1]:.2f}。它与上半年已实现的 FCF 同比 +{pct(h1 / h1p - 1, 0)} 严重背离。</li>
 <li><strong>第 4 步 · 标注</strong>：历史增速异常，DCF 基于正态化增速，可信度中等；当前估值主要由市场对增速的预期驱动，安全边际计算意义有限。</li>
 <li><strong>估值失效条件</strong>：营收增速 {', '.join(pct(r, 0) for r in rg['rates'])}，增速标准差 {rg['stdev'] * 100:.0f} 个百分点，低于 50（口径由用户 11/09 确定），DCF 有效。</li>
@@ -288,7 +288,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <table>{tr(["参数", "保守情景", "基准情景", "依据"], True)}
 {tr(["阶段 1 增速（1–5 年）", pct(sc['g1'], 0), pct(scn['g1'], 0), "共识锚定，被护城河上限截断"])}
 {tr(["阶段 2 增速（6–10 年）", pct(sc['g2'], 1), pct(scn['g2'], 1), "阶段 1 × 50% / × 60%"])}
-{tr(["终端增长率", pct(sc['g_terminal'], 1), pct(scn['g_terminal'], 1), "上限 8% × 60% / × 80%，再受 2.5% / 3% 封顶"])}
+{tr(["终端增长率", pct(sc['g_terminal'], 1), pct(scn['g_terminal'], 1), f"上限 {BAND[2]} × 60% / × 80%，再受 2.5% / 3% 封顶"])}
 {tr(["折现率", "9%", "9%", "美股大盘股；10 年期美债 4.86%"])}
 {tr(["每股内在价值", f"{lo:.2f}", f"{hi:.2f}", f"两情景 DCF ÷ {INP['shares']['v'] / 1000:.1f}B 股"])}
 {tr(["终值占比", pct(sc['terminal_share'], 0), pct(scn['terminal_share'], 0), "&gt; 60% → 交叉验证"])}
@@ -302,7 +302,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["当前安全边际", f"{mos * 100:.1f}%", "(下沿 − 现价) ÷ 下沿"])}
 {tr([f"目标买入价（安全边际 {hurdle:.0%}）", f"{buy:.2f}", f"下沿 × {1 - hurdle:.0%}"])}
 </table>
-<p><strong>逆向验证：</strong>按基准情景结构倒推，现价要求阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}，比中等护城河的上限高 {(ig['g1'] - ig['moat_cap']) * 100:.1f} 个百分点，在宽护城河（18%）上限之内。这是计算值，本报告不对它能否兑现下判断。</p>
+<p><strong>逆向验证：</strong>按基准情景结构倒推，现价要求阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}，比中等护城河的上限高 {(ig['g1'] - ig['moat_cap']) * 100:.1f} 个百分点，在宽护城河（18%）上限之内。</p>
 <p class="src">来源：owner_value 主底稿 {VAL}；护城河 7 / 9 分与 FCF yield 对照底稿在同一目录；TTM 的分项来自两份新闻稿的现金流量表。</p>
 
 <div class="verdict"><strong>裁决：等待买入档，当前不买。</strong>{verdict_zh}
@@ -337,8 +337,8 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 
 <div class="note"><p><strong>分析师附注 Analyst's Note</strong></p>
 <table>{tr(["结论", "置信", "为什么"], True)}
-{tr(["当前不买", "高", f"框架内：任何护城河分数对应的增速上限下，安全边际都达不到 {hurdle:.0%}（最高的 9 分时为 {M9['margin_of_safety']['value'] * 100:.0f}%）"])}
-{tr(["高估（价格高于内在价值上沿）", "中", f"按证据评 6 分时成立；评 7 分时价格约等于保守估值（安全边际 {M7['margin_of_safety']['value'] * 100:.1f}%）"])}
+{tr(["当前不买", "高", f"框架内：任何护城河分数对应的增速上限下，安全边际都达不到 {hurdle:.0%}；9 分时总分 {M9['scorecard']['total']}，安全边际 {M9['margin_of_safety']['value'] * 100:.0f}%，路径 B 下观察、非买入"])}
+{tr(["价格高于内在价值上沿", "中", f"按证据评 6 分时成立；评 7 分时价格约等于保守估值（安全边际 {M7['margin_of_safety']['value'] * 100:.1f}%）"])}
 </table>
 <p><strong>待核实：</strong>FY2028–29 共识；最新 AI 加速器份额（含自研芯片）；FY2027 年报（预计 2027 年 2 月）。</p>
 <p><strong>分析师看法：</strong>英伟达是看得懂的好生意。按能拿到的证据给护城河打分，现价偏贵；按巴菲特的纪律，没有安全边际就不买。

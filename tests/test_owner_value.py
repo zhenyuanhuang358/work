@@ -156,6 +156,17 @@ class OwnerValue(unittest.TestCase):
         d["base_fy_end"] = "2025-12-31"
         self.assertTrue(any("TTM" in f for f in ov.run(d)["flags"]))
 
+    def test_4a_must_match_margin_of_safety(self):
+        """11/09 NVDA Critic R3：对照底稿抄了主底稿的 4A，安全边际 34% 时仍写 0 → 拒算。"""
+        d = copy.deepcopy(BASE)
+        d["scores_detail"] = {"4A": 0, "4B": 0}
+        d["scores"]["price"] = 0
+        with self.assertRaises(ov.NoSource):  # BASE 安全边际 57%，4A 应为 10
+            ov.run(copy.deepcopy(d))
+        d["scores_detail"]["4A"] = 10
+        d["scores"]["price"] = 10
+        ov.run(d)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -71,7 +71,7 @@
   "g1": 0.9673962513964169,
   "g2": 0.9673962513964169,
   "method": "分析师共识锚定（owner-earnings-model 异常增速第 2 步），再与护城河上限取 min",
-  "src": "stockanalysis.com NVDA forecast（S&P Global 汇总，54 位分析师；原文 pages/stockanalysis_com_stocks_nvda_forecast__748951.txt）：FY2027 FCF 共识 $190.20B，对 FY2026 实际 96.68B 增长 96.7%。FY2028–29 共识为付费内容未取得；只要其后两年增速不为负，三年均值 ≥ 32%，均高于护城河上限 18%，取上限。对照：FCF yield 法（第 3 步）给 g1 4.15% / 7.15%，与已实现的 FY2027 上半年 FCF 同比 +77%（Q2 新闻稿）严重背离，故不用"
+  "src": "stockanalysis.com NVDA forecast（S&P Global 汇总，54 位分析师；原文 pages/stockanalysis_com_stocks_nvda_forecast__748951.txt）：FY2027 FCF 共识 $190.20B，对 FY2026 实际 96.68B 增长 96.7%。FY2028–29 共识为付费内容未取得；只要其后两年增速不为负，三年均值 ≥ 32%，高于任何护城河档的阶段 1 上限，取上限。对照：FCF yield 法（第 3 步）给 g1 4.15% / 7.15%，与已实现的 FY2027 上半年 FCF 同比 +77%（Q2 新闻稿）严重背离，故不用"
  },
  "peer_p_fcf": {
   "v": 80.71976296069997,

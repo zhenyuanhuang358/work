@@ -240,6 +240,16 @@ def run(inp):
     if bad:
         raise NoSource(f"评分卡维度缺失或越界：{bad}（满分 {SCORE_MAX}）")
     out["scorecard"] = dict(sc, total=sum(sc[k] for k in SCORE_MAX))
+    # 4A 由安全边际机械决定（berkshire-score 4A 表）：11/09 NVDA 护城河 9 分对照底稿复制了主底稿的 4A = 0，
+    # 实际安全边际 34% 应得 8，总分错 8 分。给了 scores_detail 就核对，对不上直接拒算。
+    sd = inp.get("scores_detail") or {}
+    if "4A" in sd and "iv_range" in out:
+        mv = out["margin_of_safety"]["value"]
+        exp4a = 10 if mv >= 0.40 else 8 if mv >= 0.30 else 5 if mv >= 0.20 else 3 if mv >= 0.10 else 0
+        if sd["4A"] != exp4a:
+            raise NoSource(f"评分卡 4A = {sd['4A']} 与安全边际 {mv:.1%} 不符（应为 {exp4a}，berkshire-score 4A 表）")
+        if "4B" in sd and sc.get("price") != sd["4A"] + sd["4B"]:
+            raise NoSource(f"price = {sc.get('price')} ≠ 4A {sd['4A']} + 4B {sd['4B']}")
     return out
 
 
