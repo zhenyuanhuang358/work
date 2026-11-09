@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-08T17:13:09Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T03:24:04Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-08 17:13 UTC
+自检器 · 2026-11-09 03:24 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -90,17 +90,17 @@
   pipeline-earnings.md       ✅ 2 个 skill
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
-  期权基本面名单：上次复核 2026-11-05（3 天前）
+  期权基本面名单：上次复核 2026-11-05（4 天前）
   运行记录：11 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  49 条｜未关闭 2｜已修有测试 33
+  50 条｜未关闭 2｜已修有测试 33
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 4 份
 
 [C13] 报告机械检查记录 memory/state/report_checks.jsonl
-  11/07 起改动的报告 0 份｜有检查记录 0
+  11/07 起改动的报告 1 份｜有检查记录 1
 
 [C14] 筛选器产物不变量 tools/screen_check.py
   burry：7 项，FAIL 0
@@ -113,7 +113,7 @@
   FOMC 未来 9 次｜来源 2026-11-06T18:28:37+00:00｜错误 None
 
 [C16] 天道决策卡 memory/state/tiandao/cards/
-  共 0 张
+  共 1 张
 
 ==========================================================================
 发现 6 项：
