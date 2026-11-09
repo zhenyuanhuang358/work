@@ -1,0 +1,165 @@
+TITLE: HPCwire - Since 1987 – Covering the Fastest Computers in the World and the People Who Run Them
+URL: https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/
+
+Off the Wire Press Releases
+November 6, 2026
+Women in HPC Introduces Its SC26 Rising Stars Cohort
+EuroHPC Requires Bidders to Resubmit AI Gigafactory Proposals
+UChicago Receives $10M Grant to Build Open-Source AI Weather Forecasting Platform
+Kevin Hayden: The Network Engineer Leading SC26
+AWS Targets Metadata-Intensive HPC Workloads with FSx for Lustre Intelligent-Tiering Update
+Smartbird Expands Enterprise AI Infrastructure Partner Network with Supermicro
+NQCC and STFC Select 13 Projects for UK Quantum Computing Grants
+Kihan Launches Constitutional Computing to Bring Enforceable Authority to Enterprise AI Agents
+NIST Tests AI Tool to Map Building Interiors for First Responders
+Cerabyte Completes S3 Integration Testing in Collaboration with CERN openlab
+Nvidia Shipped 3.76 Million Data-center GPUs in 2023, According to Study
+Nvidia had an explosive 2023 in data-center GPU shipments, which totaled roughly 3.76 million units, according to a study conducted by semiconductor analyst firm TechInsights . Nvidia’s GPU shipments in 2023 grew by more than 1 million units compared to 2022, when Nvidia’s data-center GPU shipments totaled 2.64 million units, according to the study.
+Nvidia had a dominant 98% market share in data-center GPU shipments in 2023, similar to market share numbers in 2022.
+When including AMD and Intel, the total data-center GPU unit shipments in 2023 totaled 3.85 million, growing from about 2.67 million units in 2022, according to TechInsights.
+Nvidia also had a 98% revenue share of the data-center GPU revenue market with $36.2 billion, more than three times the growth from $10.9 billion in 2022.
+AI alternatives to Nvidia GPUs are emerging in the form of Google TPUs, AMD’s GPUs, Intel’s AI chips, and even CPUs said James Sanders, an analyst at TechInsights.
+Sanders said there isn’t enough AI hardware to match the rapid progress in AI software.
+“I suspect that because of the growth of AI, it is a little bit inevitable that it will have to diversify from Nvidia,” Sanders said.
+The shortage and cost of Nvidia GPUs helped AMD and Intel, which showed signs of life with their own AI chips in 2023.
+AMD shipped about 500,000 units in 2023, with Intel filling in the rest with 400,000 units, according to TechInsights.
+AMD’s data-center GPU shipments are poised to go up this year.
+AMD’s MI300-series GPUs are doing well, with purchases from Microsoft, Meta, and Oracle locked in. On an April earnings call, AMD CEO Lisa Su said MI300 sales totaled $1 billion in less than two quarters.
+“We now expect data center GPU revenue to exceed $4 billion in 2024, up from the $3.5 billion we guided in January,” Su said, according to the earnings call transcript on The Motley Fool .
+At Computex this month, AMD also said it would release new GPUs on a yearly cycle, with the MI325X planned for this year, the MI350 in 2025, and MI400 in 2026.
+AMD is following Nvidia’s a-GPU-a-year blueprint. Nvidia has already announced its Blackwell GPU for this year, an incremental upgrade in 2025, and new GPUs from the new Rubin family in 2026 and 2027.
+Nvida Blackwell GPU (Source Nvidia)
+Intel’s GPU future remains a question mark. The company recently discontinued its Ponte Vecchio GPU, which is redesigning its Falcon Shore GPU for release in 2025. The company also offers the Flex series of inferencing and media-serving data-center GPUs.
+Intel is now focusing on the Gaudi AI chips, which aren’t as flexible as GPUs. Generative AI models must be specially programmed to run on Gaudi chips, which requires a lot of effort. Nvidia’s GPUs are better adapted to run a wide range of models.
+Falcon Shores will “combine the great systolic performance of Gaudi 3 with a fully programmable architecture… and then we have a very aggressive cadence of Falcon Shores products following that,” said Intel CEO Pat Gelsinger during an April earnings call, according to a transcript on The Motley Fool .
+Gaudi 3 is giving Intel a foothold in the AI chip market, and Intel now expects “over $500 million in accelerated revenue in the second half of 2024,” Gelsinger said.
+“There’s also a lot of action outside of GPUs, especially with Google’s TPUs, given the capacity and price issues attached to Nvidia’s GPUs,” TechInsights’ Sanders said.
+“Google’s custom silicon efforts generate more revenue than custom silicon efforts from AWS and merchant silicon vendors like AMD and Ampere,” Sanders said.
+Google has equipped its Google Cloud data centers with its homegrown chips, including the recently announced Axion CPU and sixth-generation TPU, an AI chip which is branded as Trillium. The new chips weren’t considered in the study by TechInsights.
+“That’s how Google wound up in a position where they’re technically the third largest data center silicon provider [by revenue] because of just kind of a weird confluence of market forces,” Sanders said.
+Google introduced its TPU in 2015 and has gradually captured market share. A captive audience for Google’s TPUs includes internal applications and Google Cloud users.
+“Argos, the video encoder that they made for YouTube, think about all of the video that YouTube has to ingest on an hourly basis. For every Argos video encoder ASIC they’ve been able to deploy, they displaced 10 Xeon CPUs in the process. From a power consumption standpoint, that is a massive change,” Sanders said.
+Amazon, which has its own Graviton CPUs and AI chips called Trainium and Inferentia, has kept its AI chips as cheap as possible for the customer.
+In 2023, TechInsights said in a research note that AWS rented the equivalent of 2.3 million homegrown processors to its customers, of which Graviton accounted for 17%, exceeding the usage of AMD chips on the platform.
+“Their total revenue for that isn’t going to be super high even with high volumes. They want to keep … a pretty consistent 10% to 20% discount compared to an Intel or AMD-powered instance,” Sanders said.
+All major cloud providers and hyperscalers are developing homegrown chips, which are replacing chips made by Intel and AMD.
+Nvidia’s sheer dominance is forcing cloud providers to assign dedicated space controlled by Nvidia, which is putting its DGX servers and CUDA software stack in those spaces.
+“The cloud platforms won’t get completely away from Intel, AMD, or Nvidia because there’s always going to be customer demand for chips from those companies in these clouds,” Sanders said.
+Microsoft also introduced its own chips, the Cobalt CPU and the Maia AI accelerator, close to 10 years after Google started its homegrown chip efforts in 2013 to fill a need to accelerate internal workloads.
+The ramp of internal chips developed by cloud companies depends on the software infrastructure. Google’s LLMs were developed to run on their TPUs, which will ensure the chips ramp up quickly.
+Microsoft relies on Nvidia GPUs for its AI infrastructure and is now adapting its software stack to homegrown chips. AWS mostly rents out its chips to companies deploying their own software stacks.
+Related Articles
+Most Popular
+Most Recent
+The Race We’re Actually Running, Part 3: Beyond the Chatbot
+The first two parts looked at where the US and China stand and what the...
+Anti-Data Center Sentiment Rides Blue Wave, Threatening AI Boom
+The election this week dealt a major victory for the Democratic party and a crushing...
+Argonne Expands AI Inference Infrastructure as Scientific Demand Grows
+A lot of attention has gone into the computing power needed to train AI models....
+Inside a Turbulent Vortex: How Supercomputing Reveals the Hidden Physics of Flow
+The Navier–Stokes equations have described the motion of fluids for nearly two centuries, yet they...
+Sales of HPC and AI4S Servers Accelerated This Year, Hyperion Says
+The AI boom may be showing signs of slowing on Wall Street, where stock market...
+NCSA Industry Conference: Driving Innovation with AI, Quantum, and Supercomputing
+The National Center for Supercomputing Applications (NCSA) Industry Conference convenes researchers, technology providers and industry...
+It’s Not an HPC System, But Cerebras’ New CS-4 Is an AI Monster
+Cerebras builds the biggest, most powerful chips in the industry with its Wafer Scale Engine...
+New GPU Method Compresses Scientific Simulation Data at 60 GB/s
+Scientists running large simulations can end up with terabytes of data that then has to...
+DOE’s $215M Quantum Competition Ties Awards to Verified Performance
+The U.S. Department of Energy is launching a competition with up to $215 million in planned...
+What Hyperscalers Should Know About CXL
+The AI infrastructure conversation has shifted as AI inference becomes a larger part of workloads...
+IBM Nighthawk r2 Tops 100,000 Circuits per Second with New Reset Architecture
+IBM has made its Nighthawk r2 quantum processor available through the IBM Quantum Platform, with...
+Nvidia to Nab Hugging Face, the ‘GitHub for AI,’ for $12.9B: Report
+GPU giant Nvidia has agreed to buy Hugging Face, an AI model, data, collaboration and...
+China Finally Debuts Fourth Exascale System, Sugon 8000
+The Chinese surprised the HPC community earlier this year when they took the top spot...
+FP64 Performance and the Limits of Ozaki Emulation on HPC Systems
+The rapid adoption and use of artificial intelligence is having a transformative effect on GPU...
+October 2026 HPC Career News
+Once again, it is time for HPC Career Notes, our monthly feature that’s designed to...
+The Race We’re Actually Running, Part 2: Good Enough at a Fraction of the Price
+What the AI race is a contest over, and why the cheapest capable model may...
+AI and Medicine: Who’s the Doctor?
+Editor’s note: AI’s growing role in medicine raises a question that goes beyond whether computers...
+NIST Details How to Prepare for Post-Quantum Cryptography
+Quantum computers aren’t powerful enough yet to break the encryption we use today. But researchers...
+MEET OUR EDITORS
+Alex Woodie Editorial Director + HPCwire Managing Editor
+Jaime Hampton AIwire Managing Editor
+Ali Azhar BigDATAwire Managing Editor
+Drew Jolly QCwire Managing Editor
+Douglas Eadline Contributing Editor
+Addison Snell Contributing Editor
+Elizabeth Leake Contributing Editor
+Off the Wire
+November 6, 2026
+Women in HPC Introduces Its SC26 Rising Stars Cohort
+EuroHPC Requires Bidders to Resubmit AI Gigafactory Proposals
+UChicago Receives $10M Grant to Build Open-Source AI Weather Forecasting Platform
+Kevin Hayden: The Network Engineer Leading SC26
+AWS Targets Metadata-Intensive HPC Workloads with FSx for Lustre Intelligent-Tiering Update
+Smartbird Expands Enterprise AI Infrastructure Partner Network with Supermicro
+NQCC and STFC Select 13 Projects for UK Quantum Computing Grants
+Kihan Launches Constitutional Computing to Bring Enforceable Authority to Enterprise AI Agents
+NIST Tests AI Tool to Map Building Interiors for First Responders
+Cerabyte Completes S3 Integration Testing in Collaboration with CERN openlab
+Off The Wire
+Off The Wire
+Quantum Computing Headlines
+NQCC and STFC Select 13 Projects for UK Quantum Computing Grants
+Fraunhofer ITWM at SC26: HPC Is Becoming Smarter and More Energy-Efficient
+ORNL, IBM, and AMD Launch New Co-Design Platform for Quantum Error Correction
+Cologne and RWTH Aachen Researchers Test Predictions for Topological Quantum Computing
+Quantinuum Outlines Nexus Roadmap for Fault-Tolerant Quantum Computing
+Universal Quantum Launches iQPU Integrated Trapped-Ion Processor
+IonQ Partners with QuantumCT to Expand Quantum Computing Access
+D-Wave Updates Stride Solver and Launches Quantum Optimization Courses
+Quint Computing Raises €9.1M to Advance Fault-Tolerant Quantum Computing
+HKMA and HKUST Launch PQC Toolkit to Support Banks’ Quantum Preparedness
+More Off The Wire
+HPCwire Weekly Roundup
+CLICK FOR BREAKING NEWS ON LEADING VENDORS
+HPC Data Infrastructure Wasn’t Built for HPC + AI
+For decades, research computing organizations have built infrastructure for demanding modeling, simulation, and scientific computing workloads. These environments now span generations...
+FP64 Performance and the Limits of Ozaki Emulation on HPC Systems
+The rapid adoption and use of artificial intelligence is having a transformative effect on GPU designs, with accelerators nowadays being optimized...
+FEATURED ADVANCE SCALE JOB
+Position: High Performance Computing Engineer
+Location: Switzerland
+FEATURED EVENT
+SC26 is the largest international HPC conference, attracting more than 18,000 attendees from around the world who come to see the latest innovations in HPC and related fields.
+UPCOMING EVENTS
+09 nov All Day 10 Agentic AI Conference (All Day) (GMT+00:00) Online Event
+Event Details
+What stands between an impressive AI agent demo and a system an enterprise will trust to act on its own? That question is at the center
+Event Details
+What stands between an impressive AI agent demo and a system an enterprise will trust to act on its own? That question is at the center of the Agentic AI Conference, a free, two-day virtual event hosted by Data Science Dojo on November 9–10, 2026, from 9 AM to 2 PM PT.
+This edition focuses on four pillars: security, compliance, governance, and alignment. Sessions take on the real tradeoffs teams face when moving agents into production, from poisoned context and sandboxing to agent permissions, accountability, and sovereign AI.
+The program opens with a keynote from Mat Velloso, CPO at Docker, on running AI agents at scale without breaking the systems they touch. It’s followed by expert panels and hands-on tutorials with leaders from Google, Google DeepMind, Databricks, LandingAI, deepset, Zilliz, GitGuardian, Arcade.dev, Crusoe, and more.
+The conference has drawn 178,000+ attendees across its three previous editions joining from 150+ countries.
+more
+Learn More
+Calendar GoogleCal
+09 nov All Day 12 Web Summit (All Day) (GMT+00:00) Lisbon, Portugal
+Learn More
+Calendar GoogleCal
+15 nov All Day 20 SC26 (All Day) (GMT-06:00) Chicago, IL
+Event Details
+SC26 is where the HPC community comes together to make technological and research progress, enlighten and empower all people, eliminate barriers to opportunities, chart the course for computing’s impact in
+Event Details
+SC26 is where the HPC community comes together to make technological and research progress, enlighten and empower all people, eliminate barriers to opportunities, chart the course for computing’s impact in the world – and we have fun doing it!
+Learn More
+Calendar GoogleCal
+NIST Details How to Prepare for Post-Quantum Cryptography
+Quantinuum Says Helios Results Strengthen Its Path to Apollo
+Atom Computing, Diraq, IBM and IonQ Advance to DARPA QBI Stage C
+Hugging Face Launches ProtoStar to Tackle Science’s Data Problem
+AI and Medicine: Who’s the Doctor?
+Dataiku Headless Tackles a Growing Problem With AI Coding Agents
+The Data Stack Consolidation: Confluent, EDB and Google Take Different Routes
+CrowdStrike and Dynatrace Want Security Teams to Search Data Where It Already Lives
+Who Controls Enterprise AI Agents? Data Platform Vendors Race to Provide the Answer

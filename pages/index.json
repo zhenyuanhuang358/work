@@ -201,7 +201,7 @@
  },
  "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026": {
   "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
-  "fetched_at": "2026-11-09T03:05:55+00:00",
+  "fetched_at": "2026-11-09T03:37:17+00:00",
   "file": "pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt",
   "title": "NVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2026 | NVIDIA Newsroom",
   "chars": 31455,
@@ -246,5 +246,29 @@
   "title": null,
   "chars": 0,
   "error": "HTTPError('403 Client Error: Forbidden for url: https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/')"
+ },
+ "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf": {
+  "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf",
+  "fetched_at": "2026-11-09T03:37:05+00:00",
+  "file": "pages/s201_q4cdn_com_141608511_files_doc_financials_2026_ar_2026_a_927e3b.txt",
+  "title": "2026-Annual-Report-Web.pdf",
+  "chars": 637915,
+  "error": null
+ },
+ "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/": {
+  "url": "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/",
+  "fetched_at": "2026-11-09T03:37:16+00:00",
+  "file": "pages/www_hpcwire_com_2024_06_10_nvidia_shipped_3_76_million_data__c24aad.txt",
+  "title": "HPCwire - Since 1987 – Covering the Fastest Computers in the World and the People Who Run Them",
+  "chars": 15013,
+  "error": null
+ },
+ "https://www.datacenterdynamics.com/en/news/nvidia-gpu-shipments-totaled-376m-in-2023-equating-to-a-98-market-share-report/": {
+  "url": "https://www.datacenterdynamics.com/en/news/nvidia-gpu-shipments-totaled-376m-in-2023-equating-to-a-98-market-share-report/",
+  "fetched_at": "2026-11-09T03:37:16+00:00",
+  "file": "pages/www_datacenterdynamics_com_en_news_nvidia_gpu_shipments_tota_d0fd15.txt",
+  "title": "Nvidia data center GPU shipments totaled 3.76m in 2023, equating to a 98% market share - report - DCD",
+  "chars": 2797,
+  "error": null
  }
 }
