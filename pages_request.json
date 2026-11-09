@@ -1,7 +1,7 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第七单：FY2025 10-K（sec.gov 对浏览器 UA 403，改 IR 站 PDF 副本；FY2024 10-K PDF 备选）。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文。",
   "urls": [
-    "https://investors.coca-colacompany.com/filings-reports/all-sec-filings/content/0001628280-26-010047/0001628280-26-010047.pdf",
-    "https://investors.coca-colacompany.com/_assets/_633a0d1f4596400b1212988f17af667c/cocacolacompany/db/1008/10477/document/2024_10-K_%28Bookmarked%29.pdf"
+    "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx",
+    "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx"
   ]
 }
