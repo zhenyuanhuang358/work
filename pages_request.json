@@ -1,8 +1,7 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文（investor.nvidia.com 为 JS 渲染、抓到 0 字，改 nvidianews 与 ?output=1）。",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文（investor.nvidia.com 为 JS 渲染、抓到 0 字，改 nvidianews 与 ?output=1）。（重抓：表格行入正文）",
   "urls": [
     "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
-    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
-    "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027?output=1"
+    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
   ]
 }

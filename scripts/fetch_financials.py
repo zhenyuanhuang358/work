@@ -50,7 +50,13 @@ DEBT_HINT = ("Debt", "Borrowings", "CommercialPaper", "Notes")
 
 def annual(facts, tags):
     """返回 {fy: {"v", "tag", "accn", "filed", "end"}}，只取 10-K 的 FY 值，同 FY 取最新报送。"""
-    gaap = facts.get("facts", {}).get("us-gaap", {})
+    # 11/09 NVDA：capex 用公司自建扩展标签（不在 us-gaap 里），只查 us-gaap 会静默缺失 → us-gaap 优先，再查其他分类
+    ns = facts.get("facts", {})
+    gaap = dict(ns.get("us-gaap", {}))
+    for k, v in ns.items():
+        if k not in ("us-gaap", "dei"):
+            for t, val in v.items():
+                gaap.setdefault(t, val)
     for tag in tags:
         units = gaap.get(tag, {}).get("units", {})
         rows = units.get("USD") or units.get("USD/shares") or units.get("shares") or []
