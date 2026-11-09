@@ -46,6 +46,7 @@ TAGS = {
 }
 
 DEBT_HINT = ("Debt", "Borrowings", "CommercialPaper", "Notes")
+CAPEX_HINT = ("PropertyPlantAndEquipment", "PropertyAndEquipment", "ProductiveAssets")  # 11/09 NVDA capex 标签找不到时供人工挑
 
 
 def annual(facts, tags):
@@ -94,6 +95,9 @@ def main():
         out["debt_tags"] = {tag: {fy: v["v"] for fy, v in annual(facts, [tag]).items() if fy in yrs}
                             for tag in gaap if any(h in tag for h in DEBT_HINT) and "Repayments" not in tag and "Proceeds" not in tag}
         out["debt_tags"] = {k: v for k, v in out["debt_tags"].items() if v}
+        allns = {t for v in facts.get("facts", {}).values() for t in v}
+        out["capex_tags"] = {f"{tag}": {fy: v["v"] for fy, v in annual(facts, [tag]).items() if fy in yrs}
+                             for tag in sorted(allns) if any(h in tag for h in CAPEX_HINT) and ("Payment" in tag or "Purchase" in tag)}
         try:
             import yfinance as yf
             h = yf.Ticker(t).history(period="5d")
