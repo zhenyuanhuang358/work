@@ -127,10 +127,11 @@ def price_svg():
     o.append(f'<rect x="{X(lo):.1f}" y="72" width="{X(hi) - X(lo):.1f}" height="36" fill="{GOLD}" opacity="0.35"/>')
     o.append(f'<rect x="{X(M9["iv_range"][0]):.1f}" y="118" width="{X(M9["iv_range"][1]) - X(M9["iv_range"][0]):.1f}" height="8" fill="{GOLD}" opacity="0.7"/>'
              f'<text x="{X(M9["iv_range"][0]) - 4:.1f}" y="126" font-size="10" text-anchor="end" fill="{COPPER}">护城河 9 分时</text>')
-    for v_, lab, c, y in ((buy, f"建仓线 {buy:.2f}", GREEN, 60), (lo, f"下沿 {lo:.2f}", INK, 40), (hi, f"上沿 {hi:.2f}", INK, 60),
-                          (price, f"现价 {price:.2f}", RED, 24)):
+    # 现价与下沿相距很近：现价标签靠左（end）、下沿靠右（start），避免重叠
+    for v_, lab, c, y, anc in ((buy, f"建仓线 {buy:.2f}", GREEN, 60, "middle"), (lo, f"下沿 {lo:.2f}", INK, 40, "start"),
+                               (hi, f"上沿 {hi:.2f}", INK, 60, "start"), (price, f"现价 {price:.2f}", RED, 24, "end")):
         o.append(f'<line x1="{X(v_):.1f}" y1="{y + 6}" x2="{X(v_):.1f}" y2="114" stroke="{c}" stroke-width="2"/>'
-                 f'<text x="{X(v_):.1f}" y="{y}" font-size="12" text-anchor="middle" fill="{c}">{lab}</text>')
+                 f'<text x="{X(v_) + (4 if anc == "start" else -4 if anc == "end" else 0):.1f}" y="{y}" font-size="12" text-anchor="{anc}" fill="{c}">{lab}</text>')
     o.append(f'<text x="{x0}" y="150" font-size="11" fill="{COPPER}">每股美元。金色带 = 内在价值区间（护城河 7 分，两情景 DCF，TTM 基数）；建仓线 = 下沿 × {1 - hurdle:.0%}（异常增速路径门槛 {hurdle:.0%}）</text>')
     return "".join(o) + "</svg>"
 
