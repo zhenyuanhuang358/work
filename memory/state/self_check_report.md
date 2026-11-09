@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T03:41:03Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T04:03:33Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-09 03:41 UTC
+自检器 · 2026-11-09 04:03 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -94,7 +94,7 @@
   运行记录：11 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  50 条｜未关闭 2｜已修有测试 33
+  54 条｜未关闭 3｜已修有测试 33
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 4 份
@@ -116,7 +116,7 @@
   共 1 张
 
 ==========================================================================
-发现 6 项：
+发现 7 项：
 
   [P3] guizang-page-skill/SKILL.md
         hub 208 行，超 CLAUDE.md 的 200 行目标 8 行
@@ -135,6 +135,9 @@
 
   [P3] FB-20261107-B04
         未关闭：burry_screener 债务标签只认 LongTermDebtNoncurrent / LongTermDebt；｜debt_lt / debt_st 追加 LongTermDebtAndCapitalLeaseOb
+
+  [P3] FB-20261109-B10
+        未关闭：TTM 规则（11/09）对 11/07 已交付的 KO 同样适用（FY2025 已结束 10 个月），KO 未重跑｜KO 安全边际 −97%，换基数不改变结论；用户要求时重跑
 
 ```
 
