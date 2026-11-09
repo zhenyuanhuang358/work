@@ -230,5 +230,21 @@
   "title": "NVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2025 | NVIDIA Newsroom",
   "chars": 27490,
   "error": null
+ },
+ "https://stockanalysis.com/stocks/nvda/forecast/": {
+  "url": "https://stockanalysis.com/stocks/nvda/forecast/",
+  "fetched_at": "2026-11-09T03:24:10+00:00",
+  "file": "pages/stockanalysis_com_stocks_nvda_forecast__748951.txt",
+  "title": "NVIDIA (NVDA) Stock Forecast & Analyst Price Targets",
+  "chars": 3354,
+  "error": null
+ },
+ "https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/": {
+  "url": "https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/",
+  "fetched_at": "2026-11-09T03:24:10+00:00",
+  "file": "pages/www_marketbeat_com_stocks_nasdaq_nvda_forecast__455016.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/')"
  }
 }
