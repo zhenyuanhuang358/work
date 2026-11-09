@@ -10,7 +10,13 @@
  },
  "years": {
   "2022": {
-   "revenue": null,
+   "revenue": {
+    "v": 33203000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
    "net_income": {
     "v": 11495000000,
     "tag": "NetIncomeLoss",
@@ -77,7 +83,13 @@
     "filed": "2023-12-14",
     "end": "2022-10-30"
    },
-   "debt_lt": null,
+   "debt_lt": {
+    "v": 39075000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
    "debt_st": {
     "v": 403000000,
     "tag": "LongTermDebtCurrent",
@@ -93,7 +105,13 @@
     "filed": "2024-12-20",
     "end": "2022-10-30"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 11108000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
    "buyback": {
     "v": 7000000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -139,7 +157,13 @@
    }
   },
   "2023": {
-   "revenue": null,
+   "revenue": {
+    "v": 35819000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
    "net_income": {
     "v": 14082000000,
     "tag": "NetIncomeLoss",
@@ -206,7 +230,13 @@
     "filed": "2024-12-20",
     "end": "2023-10-29"
    },
-   "debt_lt": null,
+   "debt_lt": {
+    "v": 37621000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
    "debt_st": {
     "v": 1563000000,
     "tag": "LongTermDebtCurrent",
@@ -222,7 +252,13 @@
     "filed": "2025-12-18",
     "end": "2023-10-29"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 11129000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
    "buyback": {
     "v": 5824000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -268,7 +304,13 @@
    }
   },
   "2024": {
-   "revenue": null,
+   "revenue": {
+    "v": 51574000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
    "net_income": {
     "v": 5895000000,
     "tag": "NetIncomeLoss",
@@ -335,7 +377,13 @@
     "filed": "2025-12-18",
     "end": "2024-11-03"
    },
-   "debt_lt": null,
+   "debt_lt": {
+    "v": 66295000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
    "debt_st": {
     "v": 1245000000,
     "tag": "LongTermDebtCurrent",
@@ -351,7 +399,13 @@
     "filed": "2025-12-18",
     "end": "2024-11-03"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 19065000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
    "buyback": {
     "v": 7176000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -397,8 +451,20 @@
    }
   },
   "2025": {
-   "revenue": null,
-   "net_income": null,
+   "revenue": {
+    "v": 63887000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "net_income": {
+    "v": 23126000000,
+    "tag": "ProfitLoss",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
    "ebit": {
     "v": 25484000000,
     "tag": "OperatingIncomeLoss",
@@ -421,7 +487,13 @@
     "filed": "2025-12-18",
     "end": "2025-11-02"
    },
-   "interest": null,
+   "interest": {
+    "v": 3210000000,
+    "tag": "InterestExpenseNonoperating",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
    "sbc": {
     "v": 7568000000,
     "tag": "ShareBasedCompensation",
@@ -452,7 +524,13 @@
     "filed": "2025-12-18",
     "end": "2025-11-02"
    },
-   "debt_lt": null,
+   "debt_lt": {
+    "v": 61984000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
    "debt_st": {
     "v": 3152000000,
     "tag": "LongTermDebtCurrent",
@@ -468,7 +546,13 @@
     "filed": "2025-12-18",
     "end": "2025-11-02"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 20593000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
    "buyback": {
     "v": 2450000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -516,45 +600,31 @@
  },
  "missing": {
   "2022": [
-   "revenue",
    "da",
    "dwc_increase",
    "equity",
-   "debt_lt",
    "commercial_paper",
-   "cogs",
    "nci"
   ],
   "2023": [
-   "revenue",
    "da",
    "dwc_increase",
    "equity",
-   "debt_lt",
    "commercial_paper",
-   "cogs",
    "nci"
   ],
   "2024": [
-   "revenue",
    "da",
    "dwc_increase",
    "equity",
-   "debt_lt",
    "commercial_paper",
-   "cogs",
    "nci"
   ],
   "2025": [
-   "revenue",
-   "net_income",
    "da",
-   "interest",
    "dwc_increase",
    "equity",
-   "debt_lt",
    "commercial_paper",
-   "cogs",
    "nci"
   ]
  },
@@ -598,6 +668,14 @@
    "2023": 37621000000,
    "2024": 66295000000,
    "2025": 61984000000
+  }
+ },
+ "capex_tags": {
+  "PaymentsToAcquirePropertyPlantAndEquipment": {
+   "2022": 424000000,
+   "2023": 452000000,
+   "2024": 548000000,
+   "2025": 623000000
   }
  },
  "price": {

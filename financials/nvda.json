@@ -38,7 +38,13 @@
     "filed": "2025-02-26",
     "end": "2023-01-29"
    },
-   "capex": null,
+   "capex": {
+    "v": 1833000000,
+    "tag": "PaymentsToAcquireProductiveAssets",
+    "accn": "0001045810-25-000023",
+    "filed": "2025-02-26",
+    "end": "2023-01-29"
+   },
    "cfo": {
     "v": 5641000000,
     "tag": "NetCashProvidedByUsedInOperatingActivities",
@@ -117,7 +123,13 @@
     "filed": "2025-02-26",
     "end": "2023-01-29"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 11618000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001045810-25-000023",
+    "filed": "2025-02-26",
+    "end": "2023-01-29"
+   },
    "buyback": {
     "v": 10039000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -185,7 +197,13 @@
     "filed": "2026-02-25",
     "end": "2024-01-28"
    },
-   "capex": null,
+   "capex": {
+    "v": 1069000000,
+    "tag": "PaymentsToAcquireProductiveAssets",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2024-01-28"
+   },
    "cfo": {
     "v": 28090000000,
     "tag": "NetCashProvidedByUsedInOperatingActivities",
@@ -264,7 +282,13 @@
     "filed": "2026-02-25",
     "end": "2024-01-28"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 16621000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2024-01-28"
+   },
    "buyback": {
     "v": 9533000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -332,7 +356,13 @@
     "filed": "2026-02-25",
     "end": "2025-01-26"
    },
-   "capex": null,
+   "capex": {
+    "v": 3236000000,
+    "tag": "PaymentsToAcquireProductiveAssets",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2025-01-26"
+   },
    "cfo": {
     "v": 64089000000,
     "tag": "NetCashProvidedByUsedInOperatingActivities",
@@ -340,7 +370,13 @@
     "filed": "2026-02-25",
     "end": "2025-01-26"
    },
-   "interest": null,
+   "interest": {
+    "v": 247000000,
+    "tag": "InterestExpenseNonoperating",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2025-01-26"
+   },
    "sbc": {
     "v": 4737000000,
     "tag": "ShareBasedCompensation",
@@ -405,7 +441,13 @@
     "filed": "2026-02-25",
     "end": "2025-01-26"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 32639000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2025-01-26"
+   },
    "buyback": {
     "v": 33706000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -473,7 +515,13 @@
     "filed": "2026-02-25",
     "end": "2026-01-25"
    },
-   "capex": null,
+   "capex": {
+    "v": 6042000000,
+    "tag": "PaymentsToAcquireProductiveAssets",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2026-01-25"
+   },
    "cfo": {
     "v": 102718000000,
     "tag": "NetCashProvidedByUsedInOperatingActivities",
@@ -481,7 +529,13 @@
     "filed": "2026-02-25",
     "end": "2026-01-25"
    },
-   "interest": null,
+   "interest": {
+    "v": 259000000,
+    "tag": "InterestExpenseNonoperating",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2026-01-25"
+   },
    "sbc": {
     "v": 6386000000,
     "tag": "ShareBasedCompensation",
@@ -540,7 +594,13 @@
     "filed": "2026-02-25",
     "end": "2026-01-25"
    },
-   "cogs": null,
+   "cogs": {
+    "v": 62475000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001045810-26-000021",
+    "filed": "2026-02-25",
+    "end": "2026-01-25"
+   },
    "buyback": {
     "v": 40086000000,
     "tag": "PaymentsForRepurchaseOfCommonStock",
@@ -582,33 +642,23 @@
  },
  "missing": {
   "2023": [
-   "capex",
    "dwc_increase",
-   "cogs",
    "nci",
    "equity_total"
   ],
   "2024": [
-   "capex",
    "dwc_increase",
-   "cogs",
    "nci",
    "equity_total"
   ],
   "2025": [
-   "capex",
-   "interest",
    "dwc_increase",
-   "cogs",
    "nci",
    "equity_total"
   ],
   "2026": [
-   "capex",
-   "interest",
    "dwc_increase",
    "commercial_paper",
-   "cogs",
    "nci",
    "equity_total"
   ]

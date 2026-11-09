@@ -90,7 +90,13 @@
     "filed": "2024-01-31",
     "end": "2022-12-31"
    },
-   "debt_st": null,
+   "debt_st": {
+    "v": 0,
+    "tag": "ShortTermBorrowings",
+    "accn": "0000002488-24-000012",
+    "filed": "2024-01-31",
+    "end": "2022-12-31"
+   },
    "commercial_paper": {
     "v": 0,
     "tag": "ShortTermBorrowings",
@@ -573,7 +579,6 @@
    "da",
    "dwc_increase",
    "liabilities",
-   "debt_st",
    "dividends",
    "nci",
    "equity_total"
@@ -698,6 +703,19 @@
    "2022": 0,
    "2023": 0,
    "2024": 100000000
+  }
+ },
+ "capex_tags": {
+  "PaymentsForProceedsFromProductiveAssets": {
+   "2023": 0,
+   "2024": 0,
+   "2025": 38000000
+  },
+  "PaymentsToAcquirePropertyPlantAndEquipment": {
+   "2022": 450000000,
+   "2023": 546000000,
+   "2024": 636000000,
+   "2025": 974000000
   }
  },
  "price": {
