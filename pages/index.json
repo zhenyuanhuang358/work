@@ -182,5 +182,21 @@
   "title": "2024_10-K_%28Bookmarked%29.pdf",
   "chars": 609970,
   "error": null
+ },
+ "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx": {
+  "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx",
+  "fetched_at": "2026-11-09T02:53:37+00:00",
+  "file": "pages/investor_nvidia_com_news_press_release_details_2026_nvidia_a_26e709.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx": {
+  "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx",
+  "fetched_at": "2026-11-09T02:53:38+00:00",
+  "file": "pages/investor_nvidia_com_news_press_release_details_2026_nvidia_a_8d82dd.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
  }
 }
