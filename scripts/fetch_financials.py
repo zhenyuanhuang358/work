@@ -14,11 +14,13 @@ import ses_screener as ss  # noqa: E402
 
 # 科目：按优先级取第一个有数的标签
 TAGS = {
-    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
-    "net_income": ["NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic"],
+    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet",
+                "RevenueFromContractWithCustomerIncludingAssessedTax"],
+    "net_income": ["NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic", "ProfitLoss"],
     "ebit": ["OperatingIncomeLoss"],
     "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet"],
-    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets",
+              "PurchasesRelatedToPropertyAndEquipmentAndIntangibleAssets"],  # 11/09：NVDA 只报这个
     "cfo": ["NetCashProvidedByUsedInOperatingActivities"],
     "interest": ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt"],
     "sbc": ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"],
