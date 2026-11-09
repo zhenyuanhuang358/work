@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-08T12:21:45Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-08T17:13:09Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-08 12:21 UTC
+自检器 · 2026-11-08 17:13 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -29,9 +29,10 @@
   earner                   hub 132 行   spoke 引用  6 处
   critic                   hub 140 行   spoke 引用  2 处
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
+  tiandao                  hub 108 行   spoke 引用  6 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
   burry                    hub 183 行   spoke 引用  8 处
-  合计 211 处 spoke 引用，0 处失效
+  合计 217 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -110,6 +111,9 @@
   NFP 未来 45 天：['2026-12-04']
   PPI 未来 45 天：['2026-11-13', '2026-12-15']
   FOMC 未来 9 次｜来源 2026-11-06T18:28:37+00:00｜错误 None
+
+[C16] 天道决策卡 memory/state/tiandao/cards/
+  共 0 张
 
 ==========================================================================
 发现 6 项：
