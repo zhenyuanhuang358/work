@@ -15,6 +15,7 @@
     "adjustments": [{"item": "IRS 保证金", "amount": 6000, "src": "...", "why": "..."}]}   # 可选：一次性现金项，同时加回 FCF 与 ΔWC
  ],
  "maint_capex": {"method": "da_proxy | pct_of_capex | total | disclosed", "pct": 0.5, "value": null, "why": "..."},
+ "revenue_prior": {"v": .., "src": "..."},   # 可选：最旧财年的前一年营收，让增速波动率有 3 个增速样本
  "moat_score": 8,
  "debt_ratio": {"v": 0.35, "src": "..."},
  "tech_disruption": false,
@@ -98,12 +99,18 @@ def run(inp):
 
     # 估值失效条件（hub Phase 2）
     fcfs = [y["fcf"] for y in ys]
-    revs = [y["revenue"] for y in ys]
+    revs = ([inp["revenue_prior"]["v"]] if inp.get("revenue_prior") else []) + [y["revenue"] for y in ys]
     fail = []
     if all(f < 0 for f in fcfs):
         fail.append("FCF 三年连负")
-    if max(revs) / min(revs) - 1 > 0.5:
-        fail.append(f"营收波动 {max(revs) / min(revs) - 1:.0%} > 50%")
+    # 营收增速波动率 = 各年营收增速的样本标准差（用户 2026-11-09 定）。原实现用「最高 ÷ 最低 − 1」，
+    # 会把任何持续高增长误判为波动（NVDA +126% / +114% / +65% 被判 254% 失效）；高增长另由异常增速路径处理。
+    import statistics
+    grs = [revs[i] / revs[i - 1] - 1 for i in range(1, len(revs))]
+    vol = statistics.stdev(grs) if len(grs) >= 2 else 0.0
+    out["revenue_growth"] = {"rates": grs, "stdev": vol}
+    if vol > 0.5:
+        fail.append(f"营收增速波动率（标准差）{vol * 100:.0f} 个百分点 > 50")
     dr = need(inp.get("debt_ratio"), "负债率")
     cover = last["ebit"] / last["interest"] if last.get("interest") else float("inf")
     if dr > 0.5 and cover < 3:

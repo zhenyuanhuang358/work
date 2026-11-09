@@ -70,9 +70,11 @@ class OwnerValue(unittest.TestCase):
 
     def test_failure_conditions_block_buy(self):
         d = copy.deepcopy(BASE)
-        d["years"][0]["revenue"] = 600  # 1200 / 600 − 1 = 100% 波动
+        d["revenue_prior"] = {"v": 400, "src": S}
+        for y, r in zip(d["years"], (720, 432, 691)):  # +80% / −40% / +60%：增速标准差约 64 个点
+            y["revenue"] = r
         out = ov.run(d)
-        self.assertTrue(any("营收波动" in f for f in out["failure_conditions"]))
+        self.assertTrue(any("营收增速波动率" in f for f in out["failure_conditions"]))
         self.assertTrue(out["zone"].startswith("估值失效"))
 
     def test_terminal_growth_clamped_below_r_minus_2(self):
@@ -130,6 +132,18 @@ class OwnerValue(unittest.TestCase):
         d["peer_p_fcf"]["v"] = 20.0
         sc = ov.run(copy.deepcopy(d))["scenarios"]["base"]
         self.assertAlmostEqual(sc["exit_multiple_iv"], (sc["pv_cash"] + sc["oe_year10"] * 20.0 / 1.06 ** 10) / 10, places=9)
+
+    def test_revenue_volatility_is_growth_stdev_not_level_swing(self):
+        """11/09 NVDA + 用户定：持续高增长不是波动（原实现按最高 ÷ 最低把 NVDA 判成 254% 失效）；忽高忽低才触发。"""
+        d = copy.deepcopy(BASE)
+        d["revenue_prior"] = {"v": 400, "src": S}
+        for y, r in zip(d["years"], (900, 1900, 3200)):  # +125% / +111% / +68%：标准差约 30 个点
+            y["revenue"] = r
+        d["g_override"] = {"g1": 0.1, "g2": 0.15, "src": S}
+        self.assertFalse(any("营收" in f for f in ov.run(copy.deepcopy(d))["failure_conditions"]))
+        for y, r in zip(d["years"], (720, 432, 691)):  # +80% / −40% / +60%
+            y["revenue"] = r
+        self.assertTrue(any("营收增速波动率" in f for f in ov.run(d)["failure_conditions"]))
 
 
 if __name__ == "__main__":
