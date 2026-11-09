@@ -14,6 +14,8 @@
    {"fy": 2023, "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": .., "revenue": .., "ebit": .., "interest": ..,
     "adjustments": [{"item": "IRS 保证金", "amount": 6000, "src": "...", "why": "..."}]}   # 可选：一次性现金项，同时加回 FCF 与 ΔWC
  ],
+ "ttm": {"period_end": "2026-07-26", "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": ..},  # 可选：近 12 个月实际
+ "base_fy_end": "2026-01-25",   # 可选：最近完整财年的结束日；超过 6 个月仍没给 ttm 会报 flag
  "maint_capex": {"method": "da_proxy | pct_of_capex | total | disclosed", "pct": 0.5, "value": null, "why": "..."},
  "revenue_prior": {"v": .., "src": "..."},   # 可选：最旧财年的前一年营收，让增速波动率有 3 个增速样本
  "moat_score": 8,
@@ -126,14 +128,28 @@ def run(inp):
         return out
     g1cap, gtcap = caps(moat)
 
-    # 所有者盈余（基准年 = 最近完整财年）
+    # 所有者盈余基数：最近完整财年；结束超过 6 个月且有季报时用近 12 个月（TTM）实际值（用户 2026-11-09 定）。
+    # 只用已发生的现金流，不用预测。NVDA：FY2026 已过 9 个月，上半年 FCF 同比 +77%，用完整财年会把已实现的增长截掉。
+    import datetime as _dt
+    base = last
+    out["base"] = {"kind": "最近完整财年", "fy": last.get("fy")}
+    if inp.get("ttm"):
+        t = inp["ttm"]
+        if not str(t.get("src", "")).strip():
+            raise NoSource("TTM 基数缺来源")
+        base = dict(t)
+        out["base"] = {"kind": "近 12 个月（TTM）", "period_end": t.get("period_end"), "src": t["src"]}
+    elif inp.get("base_fy_end") and inp.get("as_of"):
+        age = (_dt.date.fromisoformat(inp["as_of"][:10]) - _dt.date.fromisoformat(inp["base_fy_end"])).days
+        if age > 183:
+            out["flags"].append(f"最近完整财年已结束 {age} 天（> 6 个月）：规则要求改用 TTM 实际值作基数（给 ttm 输入）")
     m = inp["maint_capex"]
     meth = m["method"]
-    mc = {"da_proxy": last["da"], "total": last["capex"], "disclosed": m.get("value"),
-          "pct_of_capex": last["capex"] * (m.get("pct") or 0.5)}[meth]
+    mc = {"da_proxy": base["da"], "total": base["capex"], "disclosed": m.get("value"),
+          "pct_of_capex": base["capex"] * (m.get("pct") or 0.5)}[meth]
     if mc is None:
         raise NoSource("维护性资本支出：method=disclosed 但没给 value")
-    oe = last["net_income"] + last["da"] - mc + last.get("dwc", 0)
+    oe = base["net_income"] + base["da"] - mc + base.get("dwc", 0)
     out["owner_earnings"] = {"value": oe, "maint_capex": mc, "method": meth, "why": m.get("why")}
     if oe <= 0:
         fail.append("所有者盈余 ≤ 0（靠外部资本维持运营）")

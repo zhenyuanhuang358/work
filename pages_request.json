@@ -1,7 +1,9 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文（investor.nvidia.com 为 JS 渲染、抓到 0 字，改 nvidianews 与 ?output=1）。（重抓：表格行入正文）；补 FY2025 Q4 新闻稿（含 FY2024 现金流）；第九单：NVDA 分析师共识（异常增速第 2 步）",
+  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文（investor.nvidia.com 为 JS 渲染、抓到 0 字，改 nvidianews 与 ?output=1）。（重抓：表格行入正文）；补 FY2025 Q4 新闻稿（含 FY2024 现金流）；第九单：NVDA 分析师共识（异常增速第 2 步）；第十单：NVDA Critic R1 返修——年报 PDF（10-K：客户集中度、持股、dwc 拆分）、TechInsights 份额报道原文、FY26 Q4 重抓（含表格）",
   "urls": [
-    "https://stockanalysis.com/stocks/nvda/forecast/",
-    "https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/"
+    "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf",
+    "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/",
+    "https://www.datacenterdynamics.com/en/news/nvidia-gpu-shipments-totaled-376m-in-2023-equating-to-a-98-market-share-report/",
+    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026"
   ]
 }

@@ -145,6 +145,17 @@ class OwnerValue(unittest.TestCase):
             y["revenue"] = r
         self.assertTrue(any("营收增速波动率" in f for f in ov.run(d)["failure_conditions"]))
 
+    def test_ttm_base_replaces_stale_fiscal_year(self):
+        """11/09 NVDA + 用户定：完整财年结束超过 6 个月时用 TTM 实际值作 OE 基数；不给 TTM 要报 flag。"""
+        d = copy.deepcopy(BASE)
+        d["ttm"] = {"period_end": "2026-07-31", "src": S, "net_income": 150, "da": 20, "capex": 30, "dwc": 0}
+        out = ov.run(copy.deepcopy(d))
+        self.assertAlmostEqual(out["owner_earnings"]["value"], 150 + 20 - 20, places=9)  # da_proxy：维护 capex = TTM D&A
+        self.assertEqual(out["base"]["kind"], "近 12 个月（TTM）")
+        del d["ttm"]
+        d["base_fy_end"] = "2025-12-31"
+        self.assertTrue(any("TTM" in f for f in ov.run(d)["flags"]))
+
 
 if __name__ == "__main__":
     unittest.main()
