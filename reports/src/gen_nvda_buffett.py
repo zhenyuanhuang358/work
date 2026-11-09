@@ -192,7 +192,7 @@ moat_rows = "".join(tr([f"{mm} 分", f"{v['scenarios']['conservative']['g1'] * 1
                         f"{v['margin_of_safety']['value'] * 100:.1f}%", f"{v['scorecard']['total']}"]) for mm, v in ((6, V), (7, M7), (9, M9)))
 score_rows = "".join(tr(r) for r in [
     ("Business Quality", 30, V["scorecard"]["business"], f"1A / 1B / 1C = {SD['1A']} / {SD['1B']} / {SD['1C']}：护城河 {INP['moat_score']} 分；营收 CAGR {pct(rev_cagr, 0)}（&gt; 20%、无负增长 → 8）；毛利率三年 &gt; 50% → 7"),
-    ("Financial Health", 30, V["scorecard"]["financial"], f"2A / 2B / 2C = {SD['2A']} / {SD['2B']} / {SD['2C']}：ROE 三年均值 {pct(roe_avg, 0)}、负债率 {pct(INP['debt_ratio']['v'])}（无杠杆驱动）→ 12；FCF 三年为正且 FCF / 净利润均 &gt; 80% → 10；现金 {m(rows['2026']['cash'])} &gt; 有息负债 {m(rows['2026']['debt'])}（净现金）→ 8"),
+    ("Financial Health", 30, V["scorecard"]["financial"], f"2A / 2B / 2C = {SD['2A']} / {SD['2B']} / {SD['2C']}：ROE 三年均值 {pct(roe_avg, 0)}、负债率 {pct(INP['debt_ratio']['v'])}（无杠杆驱动）→ 12；FCF 三年为正且 FCF / 净利润均 &gt; 80% → 10；现金及等价物 {m(rows['2026']['cash'])}（含有价证券 {m(CASH_MS26)}）&gt; 有息负债 {m(rows['2026']['debt'])}（净现金）→ 8"),
     ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + ROIC &gt; 20% 的内部投资 2（分红 FY2023→FY2024 未增长，不加分）；创始人持股 3.58%（&gt; 1% 股本）→ 5；沟通未评估，取中性 3（3C 取 0–5 时总分 {total - SD['3C']}–{total - SD['3C'] + 5}，评级不变）"),
     ("Price vs Value", 15, V["scorecard"]["price"], f"4A / 4B = {SD['4A']} / {SD['4B']}：安全边际 {mos * 100:.1f}%（&lt; 10%）→ 0；EV/FCF {nv_evf:.1f}x，低于同行均值 {peer_evf:.1f}x 逾 20% → 5"),
     ("总分", 100, total, "70–84 = 等待买入；未触发自动降级"),
@@ -274,16 +274,17 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <p class="src">来源：SEC companyfacts（股息、回购、稀释股数、税费与税前利润）；NVIDIA 2026 年报 PDF（创始人简介与持股表）。</p>
 
 <h2>四、内在价值估算 <span class="en">Owner Earnings DCF</span></h2>
-<p><strong>基数：近 12 个月（TTM，截至 2026-07-26）实际值。</strong>最近完整财年 FY2026 已结束 9 个多月，按用户 11/09 定的规则改用 TTM：TTM = FY2026 + FY2027 上半年 − FY2026 上半年，全部是已发生的现金流，不用预测。</p>
+<p><strong>内在价值 {lo:.2f}–{hi:.2f} 美元（TTM 基数、护城河 {INP['moat_score']} 分），现价高于上沿，安全边际（下沿）{mos * 100:.1f}%。</strong></p>
+<p><strong>基数：近 12 个月（TTM，截至 2026-07-26）实际值。</strong>最近完整财年 FY2026 已结束 9 个多月，按框架规则（完整财年结束超过 6 个月用 TTM）改用 TTM：TTM = FY2026 + FY2027 上半年 − FY2026 上半年，全部是已发生的现金流，不用预测。</p>
 <p><strong>所有者盈余（TTM）</strong>：净利润 {m(T['net_income'])} + D&amp;A {m(T['da'])} − 维护性资本支出 {m(oe['maint_capex'])} − 营运资本与非现金项调整 {m(-T['dwc'])} = <strong>{m(oe['value'])}</strong>，等价于经营现金流 {m(T['cfo'])} − SBC {m(T['sbc'])} − 维护性资本支出。
 维护性资本支出取总资本支出的 50%（Fabless）。调整项以 FY2026 为例拆分如下：营运资本变动 {m(DWC26['营运资本变动'])}，权益证券非现金收益 {m(DWC26['权益证券收益（非现金）'])}，递延所得税 {m(DWC26['递延所得税'])}，其他 {m(DWC26['其他'])}；SBC 视为真实成本，不加回。</p>
 <p><strong>估值路径：异常增速 DCF（路径 B，门槛 {hurdle:.0%}）。</strong>FCF 两期复合 {pct(V['fcf_cagr'], 0)}，超过 50%。按规则逐步处理：</p>
 <ul>
-<li><strong>第 1 步 · 增速性质</strong>：属于「结构性平台跃迁」。spoke 的例子直接列了「AI 加速器 2023-」。但需求依赖客户的资本开支周期，这一点放在风险里跟踪。</li>
+<li><strong>第 1 步 · 增速性质</strong>：属于「结构性平台跃迁」。框架示例直接列了「AI 加速器 2023-」。但需求依赖客户的资本开支周期，这一点放在风险里跟踪。</li>
 <li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。FY2028–29 的共识是付费内容；只要那两年增速合计高于 {(3 * ig['moat_cap'] - (CONS_FCF27 / rows['2026']['fcf'] - 1)) * 100:.0f} 个百分点，三年均值就高于 {pct(ig['moat_cap'], 0)}，所以取护城河上限。</li>
 <li><strong>第 3 步 · FCF yield 反推（对照，不采用）</strong>：得增速 4.15% / 7.15%，内在价值 {FY['iv_range'][0]:.2f}–{FY['iv_range'][1]:.2f}。它与上半年已实现的 FCF 同比 +{pct(h1 / h1p - 1, 0)} 严重背离。</li>
 <li><strong>第 4 步 · 标注</strong>：历史增速异常，DCF 基于正态化增速，可信度中等；当前估值主要由市场对增速的预期驱动，安全边际计算意义有限。</li>
-<li><strong>估值失效条件</strong>：营收增速 {', '.join(pct(r, 0) for r in rg['rates'])}，增速标准差 {rg['stdev'] * 100:.0f} 个百分点，低于 50（口径由用户 11/09 确定），DCF 有效。</li>
+<li><strong>估值失效条件</strong>：营收增速 {', '.join(pct(r, 0) for r in rg['rates'])}，增速标准差 {rg['stdev'] * 100:.0f} 个百分点，低于 50（框架口径），DCF 有效。</li>
 </ul>
 <table>{tr(["参数", "保守情景", "基准情景", "依据"], True)}
 {tr(["阶段 1 增速（1–5 年）", pct(sc['g1'], 0), pct(scn['g1'], 0), "共识锚定，被护城河上限截断"])}
@@ -307,6 +308,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 
 <div class="verdict"><strong>裁决：等待买入档，当前不买。</strong>{verdict_zh}
 <div class="en">An exceptional business priced above its intrinsic value on evidence-based moat scoring; no margin of safety against a 40% hurdle.</div></div>
+<p class="src">未核实项：FY2028–29 分析师共识（付费内容）；最新 AI 加速器份额（含云厂商自研芯片）。两项都不改变「不买」。</p>
 
 <h2>五、巴菲特评分卡 <span class="en">Berkshire Score</span></h2>
 {score_svg()}

@@ -34,7 +34,7 @@
 | 期权（us-options-agent / coo 期权 / tail-risk） | ✅ 完成，盘中实跑通过 | `tools/scan.py fetch / run / verify`；`verify_scan.py` V1–V12；`tests/test_options_regression.py`（冻结 11/05 数据）；主文件 = 工作地图 + 验收标准，旧文件在 `references/archive/` |
 | 报告（Earner / Merlin / restaurant-research / Critic） | ✅ 完成，两份真实报告走通 | `tools/report_check.py`（G1 合规、S1–S3 来源、C1–C5 格式与占位符、E1–E8 财报模板与电话会原话逐字、R1–R4 调研）；Critic Step 0 先跑、`--record` 存档；`tests/test_report_check.py`；Earner 新样例 `reports/uber_Copilot_Report.html`（冻结在 tests/fixtures/reports） |
 | 筛选器（burry / sleeper） | ✅ 完成，Actions 实跑通过 | `tools/screen_check.py`（计数闭合、缺失率、派生指标重算、阈值、SES 窗口）；两份 workflow 提交后跑检查、修了推送竞态；`tests/test_screen_check.py` |
-| 巴菲特（buffett-analyst） | ✅ 工具 + 检查完成，KO 实测交付（11/07，Critic 4 轮；规则三处改动见 research-ledger） | `tools/owner_value.py`（所有者盈余 / 两情景 DCF / 终值检验 / 失效条件 / 安全边际按**下沿**（用户 11/07 定）/ 评分卡；缺来源拒算）→ `memory/state/valuations/`；默认 HTML + PDF `*_Buffett_Report.html`，report_check B1–B5 核对报告数字与底稿一致；`tests/test_owner_value.py` |
+| 巴菲特（buffett-analyst） | ✅ 工具 + 检查完成，KO 实测交付（11/07）、NVDA 实测交付（11/09，Critic 4 轮；TTM 基数、增速波动率口径、4A 自动核对，见 research-ledger） | `tools/owner_value.py`（所有者盈余 / 两情景 DCF / 终值检验 / 失效条件 / 安全边际按**下沿**（用户 11/07 定）/ 评分卡；缺来源拒算）→ `memory/state/valuations/`；默认 HTML + PDF `*_Buffett_Report.html`，report_check B1–B5 核对报告数字与底稿一致；`tests/test_owner_value.py` |
 | 第三档（viral / risk-radar / polanyi / sop / expansion） | 不动（少用） | 真用到出问题再改 |
 | 第三方（guizang / kami / huashu / humanizer） | 不动（上游冲突） | — |
 

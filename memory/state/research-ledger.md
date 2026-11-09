@@ -2006,3 +2006,10 @@ Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。仓库 `mrmps/class
 - 用户需要交「可编辑 PPTX」→ 最小验证：KO 结论 6 页中文，finalize complete=true，文本均为可编辑文本框（无图片化），版面与 HTML 一致。
 - 取舍：MIT；宿主写 HTML、它转 PPTX + 逐页视觉审查；依赖 LibreOffice / Playwright 1.62 / npm；DeepSeek 文字宿主需另配视觉模型。
 - 未决：字体写成渲染机实际字体（容器里为文泉驿），用户 PowerPoint 会替换；用户确认成品质量前不接入路由表。
+
+## NVDA 英伟达 · 巴菲特模型（2026-11-09，buffett-analyst 第二个真实任务）
+- **交付**：`reports/nvda_Buffett_Report.html` + PDF；主底稿 `memory/state/valuations/nvda_2026-11-09.json`（TTM 基数、护城河 6），对照底稿 moat7 / moat9 / fcfyield；生成脚本 `reports/src/gen_nvda_buffett.py`。Critic R1–R3 REWRITE，R4 CONDITIONAL → 修完交付。
+- **结论**：内在价值 135.27–148.38，现价 186.64（11/06），安全边际（下沿）−38.0%，路径 B 门槛 40%，建仓线 81.16；高估区间，不买。评分 74（等待买入）。护城河 7 分时 190.87–214.60（+2.2%），9 分时 282.89–327.16（+34%，总分 89，路径 B 下观察非买入）——三档都不买。
+- **关键事实**：TTM FCF 127.0B（FY2027 上半年 FCF 同比 +77%）；FY2027 共识 FCF 190.2B（stockanalysis / S&P Global）；客户集中 22% / 14%（10-K）；创始人持股 3.58%；TechInsights 2023 数据中心 GPU 出货份额 98%（不含自研芯片）；TTM 净利润含约 30.6B 非现金权益投资收益（OE 按 CFO 口径剔除）。
+- **规则改动（用户 11/09 定）**：营收增速波动率 = 增速标准差；完整财年结束 > 6 个月用 TTM；护城河按证据打分（不足即降档）。工具新增：4A 与安全边际一致性检查、fetch_financials 按年合并标签、fetch_pages 保留表格。
+- **预测**：不登记（报告无可证伪主张；原登记一条已同日撤回）。
