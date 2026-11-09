@@ -270,5 +270,37 @@
   "title": "Nvidia data center GPU shipments totaled 3.76m in 2023, equating to a 98% market share - report - DCD",
   "chars": 2797,
   "error": null
+ },
+ "https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html": {
+  "url": "https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cnbc_com_2026_11_08_nvidia_jensen_huang_investigation_ch_18eb0d.txt",
+  "title": "Nvidia investigates CEO Jensen Huang's relationship with alleged Chinese spy",
+  "chars": 3003,
+  "error": null
+ },
+ "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company": {
+  "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_axios_com_2026_11_08_nvidia_ceo_jensen_huang_affair_emai_5e9708.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company')"
+ },
+ "https://www.cbsnews.com/news/nvidia-jensen-huang-investigation-china-intelligence/": {
+  "url": "https://www.cbsnews.com/news/nvidia-jensen-huang-investigation-china-intelligence/",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cbsnews_com_news_nvidia_jensen_huang_investigation_china_a37890.txt",
+  "title": "Nvidia investigates CEO Jensen Huang amid allegations he was target of Chinese intelligence effort - CBS News",
+  "chars": 3809,
+  "error": null
+ },
+ "https://www.cnn.com/2026/11/08/business/nvidia-investigation-ceo-jensen-huang": {
+  "url": "https://www.cnn.com/2026/11/08/business/nvidia-investigation-ceo-jensen-huang",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cnn_com_2026_11_08_business_nvidia_investigation_ceo_jen_6af7ad.txt",
+  "title": "Nvidia CEO Jensen Huang admits affair as company launches investigation into foreign spy accusations | CNN Business",
+  "chars": 6847,
+  "error": null
  }
 }
