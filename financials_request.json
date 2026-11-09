@@ -1,1 +1,1 @@
-{"_note": "按公司取 10-K 关键科目（scripts/fetch_financials.py，Actions 跑）；2026-11-07 首单 KO 巴菲特实测；第二单补毛利 / 回购 / 债务标签 / 价格；第三单补税率；11/09 第四单：NVDA 巴菲特（同行 AMD / AVGO）；第五单补 NVDA capex 标签；第六单：查扩展分类标签；第七单：capex 候选标签诊断", "tickers": ["NVDA"], "years": 3}
+{"_note": "按公司取 10-K 关键科目（scripts/fetch_financials.py，Actions 跑）；2026-11-07 首单 KO 巴菲特实测；第二单补毛利 / 回购 / 债务标签 / 价格；第三单补税率；11/09 第四单：NVDA 巴菲特（同行 AMD / AVGO）；第五单补 NVDA capex 标签；第六单：查扩展分类标签；第七单：capex 候选标签诊断；第八单：annual() 按年合并标签后重抓", "tickers": ["NVDA", "AMD", "AVGO"], "years": 3}
