@@ -222,5 +222,13 @@
   "title": null,
   "chars": 0,
   "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025": {
+  "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+  "fetched_at": "2026-11-09T03:16:43+00:00",
+  "file": "pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_fa3748.txt",
+  "title": "NVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2025 | NVIDIA Newsroom",
+  "chars": 27490,
+  "error": null
  }
 }
