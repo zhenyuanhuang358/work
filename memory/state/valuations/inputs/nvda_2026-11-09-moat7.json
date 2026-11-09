@@ -2,7 +2,7 @@
  "ticker": "NVDA",
  "market": "美股大盘股",
  "currency": "USD",
- "as_of": "2026-11-09-moat6",
+ "as_of": "2026-11-09-moat7",
  "price": {
   "v": 186.64,
   "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取），2026-11-06 收盘"
@@ -61,7 +61,7 @@
   "pct": 0.5,
   "why": "Fabless（晶圆代工外包），spoke 规定轻资产用总 Capex 40–60%，取 50%"
  },
- "moat_score": 6,
+ "moat_score": 7,
  "debt_ratio": {
   "v": 0.05108559914575805,
   "src": "FY2026 有息负债 8468（LongTermDebtNoncurrent + 一年内到期）÷（+ 股东权益 157293），SEC companyfacts 10-K（CIK0001045810）"
@@ -78,7 +78,7 @@
   "src": "同行 FY2025 市值 / FCF 均值：AMD 109.3x、AVGO 52.1x（2026-11-06 收盘 × 在外股数；FCF = CFO − Capex；financials/amd.json、avgo.json）"
  },
  "scores": {
-  "business": 23,
+  "business": 27,
   "financial": 30,
   "management": 16,
   "price": 5
@@ -88,7 +88,7 @@
   "src": "SEC companyfacts FY2023（截至 2023-01-29）营收，用于营收增速波动率的第 3 个样本"
  },
  "scores_detail": {
-  "1A": 8,
+  "1A": 12,
   "1B": 8,
   "1C": 7,
   "2A": 12,
@@ -113,5 +113,5 @@
   "src": "TTM = FY2026 + FY2027 上半年 − FY2026 上半年；FY2026 来自 FY2026 Q4 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt） 与 SEC companyfacts，上半年来自 FY2027 Q2 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt，六个月列）。dwc = CFO − 净利润 − D&A − SBC（含营运资本、权益投资非现金收益、递延税）"
  },
  "base_fy_end": "2026-01-25",
- "_note": "敏感性：护城河 6 分"
+ "_note": "敏感性：护城河 7 分"
 }

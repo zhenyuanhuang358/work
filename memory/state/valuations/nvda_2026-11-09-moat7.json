@@ -1,9 +1,10 @@
 {
  "ticker": "NVDA",
- "as_of": "2026-11-09-moat6",
+ "as_of": "2026-11-09-moat7",
  "currency": "USD",
  "flags": [
   "历史增速异常，DCF 基于正态化增速，可信度中等",
+  "conservative 终值占比 > 60% 且出口倍数法差 > 30%：取较低值",
   "base 终值占比 > 60% 且出口倍数法差 > 30%：取较低值"
  ],
  "route": "正态化增速 DCF（路径 B）",
@@ -31,25 +32,26 @@
  "fcf_cagr": 0.8915099395977031,
  "scenarios": {
   "conservative": {
-   "g1": 0.12,
-   "g2": 0.06,
+   "g1": 0.18,
+   "g2": 0.09,
    "g_terminal": 0.025,
-   "pv_cash": 1320760.6568569017,
-   "pv_terminal": 1939223.7372591335,
-   "terminal_share": 0.5948567547621546,
-   "oe_year10": 291126.9357191346,
-   "iv_per_share": 135.26906199651597
+   "pv_cash": 1705726.3287322207,
+   "pv_terminal": 2894349.719920219,
+   "terminal_share": 0.6291960587843105,
+   "oe_year10": 434515.70268568303,
+   "iv_per_share": 190.87452484035018,
+   "exit_multiple_iv": 685.5338124714857
   },
   "base": {
-   "g1": 0.12,
-   "g2": 0.072,
+   "g1": 0.18,
+   "g2": 0.108,
    "g_terminal": 0.03,
-   "pv_cash": 1342772.8651445513,
-   "pv_terminal": 2233304.7240371443,
-   "terminal_share": 0.624512379371552,
-   "oe_year10": 307983.173474593,
-   "iv_per_share": 148.38496220670936,
-   "exit_multiple_iv": 491.4541243079512
+   "pv_cash": 1752204.9342746818,
+   "pv_terminal": 3419737.5957752815,
+   "terminal_share": 0.6612095118818433,
+   "oe_year10": 471597.8190801198,
+   "iv_per_share": 214.60342448340094,
+   "exit_multiple_iv": 739.9265024142692
   }
  },
  "sensitivity": {
@@ -58,32 +60,32 @@
    {
     "var": "r",
     "delta": 0.01,
-    "iv_per_share": 115.80382681842747,
-    "change": -0.14390012683454445
+    "iv_per_share": 162.1702310169893,
+    "change": -0.15038305319879386
    },
    {
     "var": "r",
     "delta": -0.01,
-    "iv_per_share": 161.9301810609215,
-    "change": 0.1970969464184813
+    "iv_per_share": 230.29965597918925,
+    "change": 0.20654998969513994
    },
    {
     "var": "g1",
     "delta": 0.03,
-    "iv_per_share": 160.804734743929,
-    "change": 0.18877688933830816
+    "iv_per_share": 226.19643614292585,
+    "change": 0.18505304116470933
    },
    {
     "var": "g1",
     "delta": -0.03,
-    "iv_per_share": 113.63732630452752,
-    "change": -0.1599163576113628
+    "iv_per_share": 160.804734743929,
+    "change": -0.1575369480111184
    },
    {
     "var": "g_terminal",
     "delta": 0.005,
-    "iv_per_share": 142.39976359086359,
-    "change": 0.052714948186239896
+    "iv_per_share": 201.51731131511,
+    "change": 0.05575802472153679
    }
   ]
  },
@@ -91,18 +93,18 @@
   "g1": 0.15717820672961882,
   "g2": 0.09430692403777129,
   "g_terminal": 0.03,
-  "moat_cap": 0.12,
-  "exceeds_cap": true,
+  "moat_cap": 0.18,
+  "exceeds_cap": false,
   "fcf_cagr": 0.8915099395977031
  },
  "iv_range": [
-  135.26906199651597,
-  148.38496220670936
+  190.87452484035018,
+  214.60342448340094
  ],
- "iv_mid_reference": 141.82701210161267,
+ "iv_mid_reference": 202.73897466187555,
  "margin_of_safety": {
   "basis": "内在价值下沿（保守情景）",
-  "value": -0.37976856825404126,
+  "value": 0.022184861200791457,
   "hurdle": 0.4,
   "price": 186.64
  },
@@ -116,17 +118,17 @@
   "interest_cover": 503.42471042471044
  },
  "scorecard": {
-  "business": 23,
+  "business": 27,
   "financial": 30,
   "management": 16,
   "price": 5,
-  "total": 74
+  "total": 78
  },
  "input": {
   "ticker": "NVDA",
   "market": "美股大盘股",
   "currency": "USD",
-  "as_of": "2026-11-09-moat6",
+  "as_of": "2026-11-09-moat7",
   "price": {
    "v": 186.64,
    "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取），2026-11-06 收盘"
@@ -185,7 +187,7 @@
    "pct": 0.5,
    "why": "Fabless（晶圆代工外包），spoke 规定轻资产用总 Capex 40–60%，取 50%"
   },
-  "moat_score": 6,
+  "moat_score": 7,
   "debt_ratio": {
    "v": 0.05108559914575805,
    "src": "FY2026 有息负债 8468（LongTermDebtNoncurrent + 一年内到期）÷（+ 股东权益 157293），SEC companyfacts 10-K（CIK0001045810）"
@@ -202,7 +204,7 @@
    "src": "同行 FY2025 市值 / FCF 均值：AMD 109.3x、AVGO 52.1x（2026-11-06 收盘 × 在外股数；FCF = CFO − Capex；financials/amd.json、avgo.json）"
   },
   "scores": {
-   "business": 23,
+   "business": 27,
    "financial": 30,
    "management": 16,
    "price": 5
@@ -212,7 +214,7 @@
    "src": "SEC companyfacts FY2023（截至 2023-01-29）营收，用于营收增速波动率的第 3 个样本"
   },
   "scores_detail": {
-   "1A": 8,
+   "1A": 12,
    "1B": 8,
    "1C": 7,
    "2A": 12,
@@ -237,6 +239,6 @@
    "src": "TTM = FY2026 + FY2027 上半年 − FY2026 上半年；FY2026 来自 FY2026 Q4 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt） 与 SEC companyfacts，上半年来自 FY2027 Q2 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt，六个月列）。dwc = CFO − 净利润 − D&A − SBC（含营运资本、权益投资非现金收益、递延税）"
   },
   "base_fy_end": "2026-01-25",
-  "_note": "敏感性：护城河 6 分"
+  "_note": "敏感性：护城河 7 分"
  }
 }
