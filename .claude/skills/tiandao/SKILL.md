@@ -95,6 +95,26 @@ python3 tools/tiandao_check.py size --max-loss L --stop-drop D
 | 结论为「做」或「等」；用户贴回旧决策卡；到复核日 | `references/decision-card.md` |
 | 自己模式（每次） | `memory/state/tiandao/personal-rules.md` |
 
+## 验收标准（用户 2026-11-09 确认）
+
+**必须满足**（括号内为自动检查，`tools/tiandao_verify.py`）：
+1. 涉及个人规则的数字必须有 `tiandao_check.py` 输出为证（A6）
+2. 每个结论带置信度和否定条件，关键依据 ≤ 3 条（A1–A4）
+3. 「做 / 等」附决策卡；第 4 项是可观测的事实并写明执行机制（A5、K4、K5）
+4. 目标不清先诊断，最多 3 问，不出方案（A9）
+
+**最不能接受**（每条都有反例测试挡住，`tests/test_tiandao_verify.py`）：
+突破个人规则上限（A6b）｜替用户填认错线或理由（K3）｜迎合或没有否定条件（A3、A8）｜法律 / 合规问题给确定结论（A7、A7b）
+
+**交付前**：把回答存为 `memory/state/tiandao/answers/YYYY-MM-DD-<短名>.md`，跑 `python3 tools/tiandao_verify.py answer <文件>`；
+有决策卡时再跑 `tiandao_verify.py card <卡>`。有 ❌ 就改，不交付。
+**状态四类**：自动验证（verify / 测试输出为证）｜AI 评估（规则用得对不对、判断质量）｜人工确认（用户确认的决策卡、台账数字）｜尚未验证。
+
+## 反馈 → 改进
+
+用户指出错误时按顺序处理，能往前就不往后：工具修复 → 程序检查（tiandao_verify 加项）→ 冻结样例（`tests/fixtures/tiandao/`，先撤掉修复确认测试会失败）→ 改本文件。
+每条记进 `memory/state/feedback.jsonl`（skill 填 tiandao）。
+
 ## 质量自检（出结论前过一遍）
 
 ```

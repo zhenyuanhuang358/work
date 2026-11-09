@@ -15,5 +15,6 @@ effort: high
 2. 目标不清就停下诊断。
 3. 涉及个人规则的数字一律跑 `tools/tiandao_check.py`。
 4. 结论为「做」或「等」时附决策卡，用户确认后存档。
+5. 交付前把回答存到 `memory/state/tiandao/answers/`，跑 `python3 tools/tiandao_verify.py answer <文件>`（有卡再跑 `card`）；有 ❌ 不交付。
 
 天道里的期权条款与 us-options-agent 无关，不读也不改期权扫描系统的规则或台账。
