@@ -18,9 +18,14 @@
   "stdev": 0.32031788980380405
  },
  "failure_conditions": [],
+ "base": {
+  "kind": "近 12 个月（TTM）",
+  "period_end": "2026-07-26",
+  "src": "TTM = FY2026 + FY2027 上半年 − FY2026 上半年；FY2026 来自 FY2026 Q4 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt） 与 SEC companyfacts，上半年来自 FY2027 Q2 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt，六个月列）。dwc = CFO − 净利润 − D&A − SBC（含营运资本、权益投资非现金收益、递延税）"
+ },
  "owner_earnings": {
-  "value": 93311.0,
-  "maint_capex": 3021.0,
+  "value": 123442.0,
+  "maint_capex": 3677.0,
   "method": "pct_of_capex",
   "why": "Fabless（晶圆代工外包），spoke 规定轻资产用总 Capex 40–60%，取 50%"
  },
@@ -30,23 +35,23 @@
    "g1": 0.25,
    "g2": 0.125,
    "g_terminal": 0.025,
-   "pv_cash": 1735347.5360323787,
-   "pv_terminal": 3418149.4744496355,
-   "terminal_share": 0.6632679649366734,
-   "oe_year10": 513151.40342339873,
-   "iv_per_share": 213.83805022746947,
-   "exit_multiple_iv": 798.0174161178509
+   "pv_cash": 2295707.5858463515,
+   "pv_terminal": 4521902.106129094,
+   "terminal_share": 0.6632679649366733,
+   "oe_year10": 678852.8205826879,
+   "iv_per_share": 282.88836896163673,
+   "exit_multiple_iv": 1055.7047494981275
   },
   "base": {
    "g1": 0.25,
    "g2": 0.15,
    "g_terminal": 0.03,
-   "pv_cash": 1806800.0532054543,
-   "pv_terminal": 4153298.1195208067,
-   "terminal_share": 0.6968506221133285,
-   "oe_year10": 572759.2484216688,
-   "iv_per_share": 247.3069781214216,
-   "exit_multiple_iv": 885.3159746030714
+   "pv_cash": 2390232.7932161014,
+   "pv_terminal": 5494437.16678513,
+   "terminal_share": 0.6968506221133284,
+   "oe_year10": 757708.5996685023,
+   "iv_per_share": 327.16472863075654,
+   "exit_multiple_iv": 1171.1928340383483
   }
  },
  "sensitivity": {
@@ -55,55 +60,55 @@
    {
     "var": "r",
     "delta": 0.01,
-    "iv_per_share": 180.32868849430565,
-    "change": -0.1567043924012511
+    "iv_per_share": 238.55851898612246,
+    "change": -0.15670439240125122
    },
    {
     "var": "r",
     "delta": -0.01,
-    "iv_per_share": 259.9861030613623,
-    "change": 0.21580842504317177
+    "iv_per_share": 343.9380623302792,
+    "change": 0.21580842504317155
    },
    {
     "var": "g1",
     "delta": 0.03,
-    "iv_per_share": 252.3451588923291,
-    "change": 0.1800760370939496
+    "iv_per_share": 333.82978538421924,
+    "change": 0.18007603709394937
    },
    {
     "var": "g1",
     "delta": -0.03,
-    "iv_per_share": 180.87070964341905,
-    "change": -0.15416966507589047
+    "iv_per_share": 239.27556386495635,
+    "change": -0.15416966507589014
    },
    {
     "var": "g_terminal",
     "delta": 0.005,
-    "iv_per_share": 226.40689591498457,
-    "change": 0.05877740502284334
+    "iv_per_share": 299.51581320034643,
+    "change": 0.058777405022843565
    }
   ]
  },
  "implied_g1": {
-  "g1": 0.20308923217965236,
-  "g2": 0.12185353930779141,
+  "g1": 0.15717820672961882,
+  "g2": 0.09430692403777129,
   "g_terminal": 0.03,
   "moat_cap": 0.25,
   "exceeds_cap": false,
   "fcf_cagr": 0.8915099395977031
  },
  "iv_range": [
-  213.83805022746947,
-  247.3069781214216
+  282.88836896163673,
+  327.16472863075654
  ],
- "iv_mid_reference": 230.57251417444553,
+ "iv_mid_reference": 305.0265487961966,
  "margin_of_safety": {
   "basis": "内在价值下沿（保守情景）",
-  "value": 0.12718994677765558,
+  "value": 0.34023445118978807,
   "hurdle": 0.4,
   "price": 186.64
  },
- "zone": "高估区间（不买）",
+ "zone": "观察区间",
  "checks": {
   "fcf_conversion": [
    0.9079637096774194,
@@ -115,9 +120,9 @@
  "scorecard": {
   "business": 30,
   "financial": 30,
-  "management": 14,
+  "management": 16,
   "price": 5,
-  "total": 79
+  "total": 81
  },
  "input": {
   "ticker": "NVDA",
@@ -201,7 +206,7 @@
   "scores": {
    "business": 30,
    "financial": 30,
-   "management": 14,
+   "management": 16,
    "price": 5
   },
   "revenue_prior": {
@@ -216,12 +221,24 @@
    "2B": 10,
    "2C": 8,
    "3A": 8,
-   "3B": 3,
+   "3B": 5,
    "3C": 3,
    "4A": 0,
    "4B": 5
   },
-  "scores_basis": "berkshire-score.md；2B / 4B 用报告值 FCF（无一次性项）；3B 未取得 DEF 14A 持股原文，按职业经理人 + 少量持股 3（创始人仍任 CEO，补齐数据后可上调）",
-  "_note": "敏感性：护城河 9 分重跑"
+  "scores_basis": "berkshire-score.md；3B：创始人（1993 年创立并任 CEO 至今）持股 3.58%（2026 年报 PDF 代理声明表），>1% 股本属「大量持股」，表中无「创始人 + <10%」行，取相邻的 5 分；2B / 4B 用报告值 FCF",
+  "ttm": {
+   "period_end": "2026-07-26",
+   "net_income": 192880,
+   "da": 3687,
+   "capex": 7354,
+   "dwc": -69448,
+   "fcf": 127006,
+   "cfo": 134360,
+   "sbc": 7241,
+   "src": "TTM = FY2026 + FY2027 上半年 − FY2026 上半年；FY2026 来自 FY2026 Q4 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt） 与 SEC companyfacts，上半年来自 FY2027 Q2 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt，六个月列）。dwc = CFO − 净利润 − D&A − SBC（含营运资本、权益投资非现金收益、递延税）"
+  },
+  "base_fy_end": "2026-01-25",
+  "_note": "敏感性：护城河 9 分"
  }
 }

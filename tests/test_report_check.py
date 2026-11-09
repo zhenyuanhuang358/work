@@ -186,7 +186,7 @@ class Format(unittest.TestCase):
         # 11/07 Critic R3：登记行门槛写成 $0.0B，报告写 $22.7B —— 门槛对不上也要 FAIL
         for stem, thr, ok in (("ko", "22.7", True), ("ko", "0.0", False), ("ko", "99.9", False), ("zzq", "22.7", False)):
             f = tempfile.NamedTemporaryFile("w", prefix=f"{stem}_", suffix="_Buffett_Report.html", delete=False, encoding="utf-8")
-            f.write(f"<html><body><p>安全边际 10%</p><p>已登记：FY2030 FCF &lt; ${thr}B</p></body></html>")
+            f.write(f"<html><body><p>安全边际 10%</p><p>已登记 predictions.md：FY2030 FCF &lt; ${thr}B</p></body></html>")
             f.close()
             os.rename(f.name, os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html"))
             fp = os.path.join(os.path.dirname(f.name), f"{stem}_Buffett_Report.html")
@@ -206,6 +206,16 @@ class Format(unittest.TestCase):
         """好样例：11/06 基线中无 FAIL 的两份。规则改了导致它们失败，要么规则错，要么写进 feedback 说明。"""
         for f in ("haichang_it_Research_Report.html", "greentea_ai_spend_survey_2026.html", "uber_Copilot_Report.html"):
             self.assertTrue(rc.run(os.path.join(FX, f))["pass"], f)
+
+
+    def test_buffett_c3_no_claim_no_registration(self):
+        """11/09 NVDA：报告不主张可证伪判断时，C3 不强制登记；一旦声明已登记，仍要核对门槛。"""
+        d = tempfile.mkdtemp()
+        fp = os.path.join(d, "zzq_Buffett_Report.html")
+        open(fp, "w", encoding="utf-8").write("<html><body><p>安全边际 10%</p></body></html>")
+        self.assertTrue([c for c in rc.run(fp)["checks"] if c["id"] == "C3"][0]["pass"])
+        open(fp, "w", encoding="utf-8").write("<html><body><p>安全边际 10%，已登记 predictions.md：FY2030 FCF &lt; $9.9B</p></body></html>")
+        self.assertFalse([c for c in rc.run(fp)["checks"] if c["id"] == "C3"][0]["pass"])
 
 
 if __name__ == "__main__":

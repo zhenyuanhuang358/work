@@ -24,6 +24,8 @@ SRC = [
     ("NVIDIA FY2026 第四季度及全年业绩新闻稿（现金流量表、FCF 调节表）", "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026"),
     ("NVIDIA FY2027 第二季度业绩新闻稿（上半年现金流量表）", "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"),
     ("NVIDIA FY2025 第四季度及全年业绩新闻稿（FY2024 现金流对照）", "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025"),
+    ("NVIDIA 2026 年度报告 PDF（含 FY2026 10-K 与代理声明：客户集中度、创始人持股）", "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf"),
+    ("HPCwire：TechInsights 研究，2023 年 NVIDIA 数据中心 GPU 出货份额 98%（2024-06-10）", "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/"),
     ("stockanalysis.com NVDA 预测页（S&P Global 汇总的分析师共识，2026-11-09 抓取）", "https://stockanalysis.com/stocks/nvda/forecast/"),
     ("股价：Yahoo Finance 2026-11-06 收盘（GitHub Actions 抓取，financials/*.json）；10 年期美债 4.86%（stock_prices.json）", "https://finance.yahoo.com/quote/NVDA/"),
 ]
@@ -97,7 +99,12 @@ H1P_CFO, H1P_CAPEX, H1P_PP = 42779, 3122, 73
 h1 = H1_CFO - H1_CAPEX - H1_PP
 h1p = H1P_CFO - H1P_CAPEX - H1P_PP
 CONS_FCF27 = 190200
-thr = rows["2026"]["fcf"] * (1 + ig["g1"]) ** 5
+T = INP["ttm"]
+CASH_MS26 = 62556  # FY2026 Q4 新闻稿资产负债表：现金、现金等价物与有价证券
+DWC26 = {"营运资本变动": -15399 - 11324 + 577 + 3096 + 5257 + 1844, "权益证券收益（非现金）": -8918, "递延所得税": -1424, "其他": -287}
+GAIN_TTM = 8918 + 23707 - 2073
+OPM = {fy: rows[fy]["ebit"] / rows[fy]["rev"] for fy in YRS}
+M7 = V
 
 
 def tr(cells, head=False):
@@ -111,20 +118,28 @@ def badge(level):
 
 
 def price_svg():
-    W, x0, x1, vmax = 660, 40, 620, 260.0
+    W, x0, x1, vmax = 660, 40, 600, 340.0
     X = lambda v: x0 + (x1 - x0) * v / vmax  # noqa: E731
     o = [f'<svg viewBox="0 0 {W} 160" style="{FONT};width:100%">',
          f'<line x1="{x0}" y1="90" x2="{x1}" y2="90" stroke="{COPPER}"/>']
-    for t in range(0, 261, 20):
+    for t in range(0, 341, 40):
         o.append(f'<line x1="{X(t):.1f}" y1="87" x2="{X(t):.1f}" y2="93" stroke="{COPPER}"/><text x="{X(t):.1f}" y="108" font-size="10" text-anchor="middle" fill="{COPPER}">{t}</text>')
     o.append(f'<rect x="{X(lo):.1f}" y="72" width="{X(hi) - X(lo):.1f}" height="36" fill="{GOLD}" opacity="0.35"/>')
     o.append(f'<rect x="{X(M9["iv_range"][0]):.1f}" y="118" width="{X(M9["iv_range"][1]) - X(M9["iv_range"][0]):.1f}" height="8" fill="{GOLD}" opacity="0.7"/>'
-             f'<text x="{X(M9["iv_range"][1]) + 4:.1f}" y="126" font-size="10" fill="{COPPER}">护城河 9 分时</text>')
+             f'<text x="{X(M9["iv_range"][0]) - 4:.1f}" y="126" font-size="10" text-anchor="end" fill="{COPPER}">护城河 9 分时</text>')
     for v_, lab, c, y in ((buy, f"建仓线 {buy:.2f}", GREEN, 60), (lo, f"下沿 {lo:.2f}", INK, 40), (hi, f"上沿 {hi:.2f}", INK, 60),
                           (price, f"现价 {price:.2f}", RED, 24)):
         o.append(f'<line x1="{X(v_):.1f}" y1="{y + 6}" x2="{X(v_):.1f}" y2="114" stroke="{c}" stroke-width="2"/>'
                  f'<text x="{X(v_):.1f}" y="{y}" font-size="12" text-anchor="middle" fill="{c}">{lab}</text>')
-    o.append(f'<text x="{x0}" y="150" font-size="11" fill="{COPPER}">每股美元。金色带 = 内在价值区间（护城河 8 分，两情景 DCF）；建仓线 = 下沿 × {1 - hurdle:.0%}（异常增速路径门槛 {hurdle:.0%}）</text>')
+    o.append(f'<text x="{x0}" y="150" font-size="11" fill="{COPPER}">每股美元。金色带 = 内在价值区间（护城河 7 分，两情景 DCF，TTM 基数）；建仓线 = 下沿 × {1 - hurdle:.0%}（异常增速路径门槛 {hurdle:.0%}）</text>')
+    return "".join(o) + "</svg>"
+
+
+def moat_svg():
+    o = [f'<svg viewBox="0 0 660 70" style="{FONT};width:100%">']
+    for i in range(10):
+        o.append(f'<rect x="{40 + i * 58}" y="14" width="52" height="22" fill="{GOLD if i < INP["moat_score"] else "#ddd6c8"}"/><text x="{66 + i * 58}" y="52" font-size="10" text-anchor="middle" fill="{COPPER}">{i + 1}</text>')
+    o.append(f'<text x="40" y="66" font-size="11" fill="{COPPER}">护城河评分 {INP["moat_score"]} / 10（7–8 = 宽护城河：阶段 1 增速上限 18%，终端增长上限 8%）</text>')
     return "".join(o) + "</svg>"
 
 
@@ -170,15 +185,16 @@ fin_rows = [
 sens_rows = "".join(tr([{"r": "折现率 r", "g1": "阶段 1 增速 g1", "g_terminal": "终端增长率"}[x["var"]], f"{x['delta'] * 100:+.1f} 个百分点",
                         f"{x['iv_per_share']:.2f}", f"{x['change'] * 100:+.0f}%"]) for x in V["sensitivity"]["rows"])
 moat_rows = "".join(tr([f"{mm} 分", f"{v['scenarios']['conservative']['g1'] * 100:.0f}%", f"{v['iv_range'][0]:.2f}–{v['iv_range'][1]:.2f}",
-                        f"{v['margin_of_safety']['value'] * 100:.1f}%", f"{v['scorecard']['total']}"]) for mm, v in ((6, M6), (8, V), (9, M9)))
+                        f"{v['margin_of_safety']['value'] * 100:.1f}%", f"{v['scorecard']['total']}"]) for mm, v in ((6, M6), (7, V), (9, M9)))
 score_rows = "".join(tr(r) for r in [
     ("Business Quality", 30, V["scorecard"]["business"], f"1A / 1B / 1C = {SD['1A']} / {SD['1B']} / {SD['1C']}：护城河 {INP['moat_score']} 分；营收 CAGR {pct(rev_cagr, 0)}（&gt; 20%、无负增长 → 8）；毛利率三年 &gt; 50% → 7"),
     ("Financial Health", 30, V["scorecard"]["financial"], f"2A / 2B / 2C = {SD['2A']} / {SD['2B']} / {SD['2C']}：ROE 三年均值 {pct(roe_avg, 0)}、负债率 {pct(INP['debt_ratio']['v'])}（无杠杆驱动）→ 12；FCF 三年为正且 FCF / 净利润均 &gt; 80% → 10；现金 {m(rows['2026']['cash'])} &gt; 有息负债 {m(rows['2026']['debt'])}（净现金）→ 8"),
-    ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + ROIC &gt; 20% 的内部投资 2（分红 FY2023→FY2024 未增长，不加分）；持股数据未取得 → 3；沟通中性 3"),
+    ("Management Quality", 25, V["scorecard"]["management"], f"3A / 3B / 3C = {SD['3A']} / {SD['3B']} / {SD['3C']}：6 + ROIC &gt; 20% 的内部投资 2（分红 FY2023→FY2024 未增长，不加分）；创始人持股 3.58%（&gt; 1% 股本）→ 5；沟通未评估，中性 3"),
     ("Price vs Value", 15, V["scorecard"]["price"], f"4A / 4B = {SD['4A']} / {SD['4B']}：安全边际为负 → 0；EV/FCF {nv_evf:.1f}x，低于同行均值 {peer_evf:.1f}x 逾 20% → 5"),
     ("总分", 100, total, "70–84 = 等待买入；未触发自动降级"),
 ])
-verdict_zh = f"好生意，价格还没到：现价 {price:.2f} 高于内在价值上沿 {hi:.2f}，安全边际（下沿）{mos * 100:.1f}%，离 {hurdle:.0%} 的门槛很远；{buy:.2f} 以下才进入买入区间。"
+verdict_zh = f"好生意，价格合理但没有安全边际：现价 {price:.2f} 略低于内在价值下沿 {lo:.2f}，安全边际 {mos * 100:.1f}%，离 {hurdle:.0%} 的门槛很远；{buy:.2f} 以下才进入买入区间。"
+alt3b = total  # 3B 已按创始人持股取 5
 
 html = f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -207,55 +223,61 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 <div class="stat">
 <div><b>{lo:.2f}–{hi:.2f}</b><span>内在价值区间（美元 / 股）</span></div>
 <div><b>{price:.2f}</b><span>现价（{F['nvda']['price']['date']} 收盘）</span></div>
-<div><b style="color:var(--red)">{mos * 100:.1f}%</b><span>安全边际（按下沿；门槛 {hurdle:.0%}）</span></div>
+<div><b>{mos * 100:.1f}%</b><span>安全边际（按下沿；门槛 {hurdle:.0%}）</span></div>
 <div><b>{total} / 100</b><span>巴菲特评分 → 等待买入</span></div>
 </div>
 
 <h2>一句话结论 <span class="en">Bottom Line</span></h2>
 <ul>
-<li><strong>结论：高估区间，不买。</strong>英伟达是一门极好的生意，评分 {total}，落在「等待买入」档。但现价 {price:.2f} 比内在价值上沿 {hi:.2f} 还高。异常增速路径要求 {hurdle:.0%} 的安全边际，价格需在 {buy:.2f} 以下。{badge("中")}</li>
-<li>「不买」很稳：护城河评 6、8、9 分，安全边际都达不到 {hurdle:.0%}。「高估」不稳：评 9 分时内在价值升到 {M9['iv_range'][0]:.2f}–{M9['iv_range'][1]:.2f}，高于现价。{badge("高")}</li>
-<li>现价隐含未来 5 年所有者盈余每年增长 {pct(ig['g1'])}（FCF 作可观测代理），超过宽护城河允许的 {pct(ig['moat_cap'], 0)} 上限。但近端证据站在市场一边：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}，上半年实际 FCF 同比 +{pct(h1 / h1p - 1, 0)}。{badge("低")}</li>
+<li><strong>结论：不买。</strong>英伟达是一门极好的生意，评分 {total}，落在「等待买入」档。现价 {price:.2f} 只比内在价值下沿 {lo:.2f} 低一点，安全边际 {mos * 100:.1f}%。异常增速路径要求 {hurdle:.0%}，价格需在 {buy:.2f} 以下。护城河评 6、7、9 分，安全边际都达不到门槛。{badge("高")}</li>
+<li>价格大致等于保守情景下的内在价值，<strong>不是明显高估</strong>。按框架，安全边际低于 15% 记为「高估区间」，这是框架的标签，不是说价格高于价值。{badge("中")}</li>
+<li>现价隐含未来 5 年所有者盈余每年增长 {pct(ig['g1'])}（FCF 作可观测代理），没有超过宽护城河 {pct(ig['moat_cap'], 0)} 的上限。按规则，当前估值主要由市场对增速的预期驱动，安全边际计算意义有限。{badge("中")}</li>
 </ul>
 {price_svg()}
 
 <h2>一、护城河分析 <span class="en">Moat</span></h2>
-<p>护城河评分 <strong>{INP['moat_score']} / 10（宽）</strong>，主类型为无形资产（定价权）加转换成本（软件生态）。未触发侵蚀信号。{badge("中")}</p>
+{moat_svg()}
+<p>护城河评分 <strong>{INP['moat_score']} / 10（宽）</strong>。有数据证明的主类型是规模壁垒；无形资产只有一个信号，记为待验证。未触发侵蚀信号。{badge("中")}</p>
 <table>{tr(["维度（moat-framework 五类）", "证据", "判定"], True)}
-{tr(["无形资产（定价权）", f"FY2026 毛利率 {pct(rows['2026']['gm'])}，同行 AMD {pct(peer_gm['amd'])}、AVGO {pct(peer_gm['avgo'])}，均值 {pct(peer_gm_avg)}；高 {(rows['2026']['gm'] - peer_gm_avg) * 100:.1f} 个百分点，相对高 {(rows['2026']['gm'] / peer_gm_avg - 1) * 100:.0f}%，两种读法都成立。营收三年扩大约 {rows['2026']['rev'] / rows['2024']['rev']:.1f} 倍，毛利率仍在 71–75%", "成立"])}
-{tr(["转换成本（软件生态）", "开发者与软件栈的锁定是常见论点，但本报告没有取得留存率、迁移成本等可量化数据", "方向成立，数据待验证，不单独加分"])}
-{tr(["网络效应", "开发者越多、库越全，平台价值越高；同样缺乏可量化数据", "待验证"])}
-{tr(["成本优势 / 规模壁垒", "规模带来研发摊薄，但 Fabless 模式的制造在代工厂，没有单位成本对比数据", "不计分（数据不足）"])}
-{tr(["侵蚀信号", f"毛利率 FY2024–FY2026 {pct(rows['2024']['gm'])} → {pct(rows['2026']['gm'])}，回落 {(rows['2024']['gm'] - rows['2026']['gm']) * 100:.1f} 个点，未到 5 个点；同行增速 AMD {pct(peer_growth['amd'], 0)}、AVGO {pct(peer_growth['avgo'], 0)}，低于英伟达的 {pct(nv_growth, 0)}", "未触发"])}
+{tr(["规模壁垒", f"TechInsights：2023 年 NVIDIA 数据中心 GPU 出货份额 98%，与 2022 年相近；该统计不含云厂商自研芯片。营业利润率 {pct(OPM['2024'], 0)} → {pct(OPM['2025'], 0)} → {pct(OPM['2026'], 0)}，规模扩大，利润率同步抬高", "成立（CR3 &gt; 70% 且多年稳定；规模摊薄效应）"])}
+{tr(["无形资产（定价权）", f"信号①：FY2026 毛利率 {pct(rows['2026']['gm'])}，同行 AMD {pct(peer_gm['amd'])}、AVGO {pct(peer_gm['avgo'])}，均值 {pct(peer_gm_avg)}；高 {(rows['2026']['gm'] - peer_gm_avg) * 100:.1f} 个百分点，相对高 {(rows['2026']['gm'] / peer_gm_avg - 1) * 100:.0f}%。信号②「5 年内 2 次 &gt; 5% 提价」没有单价数据", "待验证（只有 1 个信号）"])}
+{tr(["转换成本", "开发者与软件栈锁定是常见论点，没有留存率或迁移成本数据", "待验证"])}
+{tr(["网络效应", "开发者越多、库越全，平台价值越高；没有可量化数据", "待验证"])}
+{tr(["成本优势", "Fabless 模式，制造在代工厂，没有单位成本对比", "不计分"])}
 </table>
-<p>为什么给 8 而不是 9：框架提醒「技术领先的护城河衰减快」。需求集中在少数大客户、客户自研芯片（定性判断，未取得 10-K 客户集中度原文），加上转换成本缺数据，都压着评分。这一分差决定增速上限是 18% 还是 25%，对估值影响很大，见 §四的敏感性表。</p>
-<p class="src">来源：SEC companyfacts（GrossProfit ÷ 营收，NVDA FY2024–FY2026；AMD、AVGO FY2025）。</p>
+<p>侵蚀信号：毛利率 FY2024–FY2026 {pct(rows['2024']['gm'])} → {pct(rows['2026']['gm'])}，回落 {(rows['2024']['gm'] - rows['2026']['gm']) * 100:.1f} 个点，未到 5 个点；同行营收增速 AMD {pct(peer_growth['amd'], 0)}、AVGO {pct(peer_growth['avgo'], 0)}，低于英伟达的 {pct(nv_growth, 0)}。未触发。</p>
+<p>为什么给 7：规模壁垒有两个信号支撑，但份额数据停在 2023 年，且不含自研芯片；无形资产只有一个信号。评 7 和评 8 在同一档（增速上限都是 18%），估值不受影响。评 9 时上限升到 25%，见 §四的敏感性表。</p>
+<p class="src">来源：SEC companyfacts（GrossProfit、营业利润 ÷ 营收）；HPCwire 转述的 TechInsights 研究。</p>
 
 <h2>二、核心财务指标 <span class="en">Financials, FY2024–FY2026</span></h2>
 {trend_svg()}
 <table>{tr(["指标"] + [f"FY{f}" for f in YRS], True)}{"".join(tr([n] + v) for n, v in fin_rows)}</table>
-<p class="src">来源：SEC companyfacts 10-K（财年截至每年 1 月下旬）。投入资本 = 有息负债 + 股东权益 − 现金及等价物。FCF 与公司新闻稿口径的差额是租赁类本金支付，FY2026 为 $0.1B。</p>
-<p>FCF 转化率三年都超过 80%，没有一次性项需要剔除。SBC 占营收约 3%，低于 5% 的标注线。现金 {m(rows['2026']['cash'])}，有息负债 {m(rows['2026']['debt'])}，是净现金公司。</p>
-<div class="warn"><strong>FY2027 已经发生的数据：</strong>上半年 FCF 为 {m(h1)}，上年同期为 {m(h1p)}，同比增长 {pct(h1 / h1p - 1, 0)}（Q2 新闻稿现金流量表）。分析师共识的 FY2027 FCF 为 {m(CONS_FCF27)}，对 FY2026 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。基准年按规则用最近一个完整财年 FY2026，这部分增长通过下面的增速假设体现。</div>
+<p class="src">来源：SEC companyfacts 10-K（财年截至每年 1 月下旬）。投入资本 = 有息负债 + 股东权益 − 现金及等价物；若再扣有价证券（FY2026 现金、等价物与有价证券合计 {m(CASH_MS26)}），ROIC 更高。FCF 与公司口径相差租赁类本金支付，FY2026 为 $0.1B。</p>
+<p>FCF 没有一次性现金项。净利润里含权益投资的非现金收益：FY2026 为 {m(8918)}，近 12 个月约 {m(GAIN_TTM)}。所有者盈余按经营现金流口径计算，已把它们剔出。SBC 约占营收 3%，低于 5% 的标注线。现金、等价物与有价证券 {m(CASH_MS26)}，有息负债 {m(rows['2026']['debt'])}，是净现金公司。</p>
+<p>增速说明：FY2024→FY2026 是两期复合。营收两年扩大约 {rows['2026']['rev'] / rows['2024']['rev']:.1f} 倍，复合 {pct(rev_cagr, 0)}；FCF 复合 {pct(V['fcf_cagr'], 0)}。</p>
 
 <h2>三、管理层评估 <span class="en">Management</span></h2>
 <table>{tr(["行为（近 3 年）", "数据", "评分影响"], True)}
 {tr(["内部投资回报", f"ROIC {pct(rows['2024']['roic'], 0)} / {pct(rows['2025']['roic'], 0)} / {pct(rows['2026']['roic'], 0)}，远高于 20%", "+2"])}
-{tr(["分红", f"支付股息 {m(divs[0])} → {m(divs[1])} → {m(divs[2])} → {m(divs[3])}；FY2023 到 FY2024 没有增长，不满足「连续增长 3 年」", "0"])}
-{tr(["回购", f"FY2024–FY2026 回购 {m(bbk[0])} / {m(bbk[1])} / {m(bbk[2])}，期间市盈率远高于 15，不算低估回购", "0"])}
+{tr(["分红", f"支付股息 {m(divs[0])} → {m(divs[1])} → {m(divs[2])} → {m(divs[3])}；FY2023 到 FY2024 没有增长", "0"])}
+{tr(["回购", f"FY2024–FY2026 回购 {m(bbk[0])} / {m(bbk[1])} / {m(bbk[2])}，期间市盈率远高于 15", "0"])}
 {tr(["股权激励稀释", f"稀释后股数 {dil[0] / 1000:.2f}B → {dil[3] / 1000:.2f}B，逐年下降", "0"])}
 </table>
-<p>3A = 6 + 2 = {SD['3A']}。3B：创始人仍任 CEO，但没有取得 DEF 14A 代理声明里的持股数据，按「职业经理人 + 少量持股」取 {SD['3B']} 分。补齐数据后最多可加 5 分，评级不变。3C 取中性 {SD['3C']} 分。</p>
-<p class="src">来源：SEC companyfacts（PaymentsOfDividends、PaymentsForRepurchaseOfCommonStock、WeightedAverageNumberOfDilutedSharesOutstanding、税费与税前利润）。</p>
+<p>3A = 6 + 2 = {SD['3A']}。3B：黄仁勋 1993 年创立公司，并一直任 CEO；持股 8.71 亿股，占 3.58%（2026 年报的代理声明表）。占股本超过 1%，属于「大量持股」。评分表没有「创始人 + 持股低于 10%」这一行，取相邻的「大量持股」档 {SD['3B']} 分。
+3C 取中性 {SD['3C']} 分：本报告没有做电话会的沟通质量评估。</p>
+<p class="src">来源：SEC companyfacts（股息、回购、稀释股数、税费与税前利润）；NVIDIA 2026 年报 PDF（创始人简介与持股表）。</p>
 
 <h2>四、内在价值估算 <span class="en">Owner Earnings DCF</span></h2>
-<p><strong>所有者盈余（FY2026）</strong>：净利润 {m(last['net_income'])} + D&amp;A {m(last['da'])} − 维护性资本支出 {m(oe['maint_capex'])} − 营运资本等现金占用 {m(-last['dwc'])} = <strong>{m(oe['value'])}</strong>。
-维护性资本支出取总资本支出的 50%，因为英伟达是 Fabless，制造外包。英伟达不报营运资本变动这一科目，所以用「经营现金流 − 净利润 − D&amp;A − SBC」倒推现金占用。SBC 视为真实成本，不加回。</p>
-<p><strong>估值路径：异常增速 DCF（路径 B，安全边际门槛 {hurdle:.0%}）。</strong>三年 FCF 复合增速 {pct(V['fcf_cagr'], 0)}，超过 50%，照公式外推会失真，所以增速按规则另行锚定：</p>
+<p><strong>基数：近 12 个月（TTM，截至 2026-07-26）实际值。</strong>最近完整财年 FY2026 已结束 9 个多月，按用户 11/09 定的规则改用 TTM：TTM = FY2026 + FY2027 上半年 − FY2026 上半年，全部是已发生的现金流，不用预测。</p>
+<p><strong>所有者盈余（TTM）</strong>：净利润 {m(T['net_income'])} + D&amp;A {m(T['da'])} − 维护性资本支出 {m(oe['maint_capex'])} − 营运资本与非现金项调整 {m(-T['dwc'])} = <strong>{m(oe['value'])}</strong>，等价于经营现金流 {m(T['cfo'])} − SBC {m(T['sbc'])} − 维护性资本支出。
+维护性资本支出取总资本支出的 50%（Fabless）。调整项以 FY2026 为例拆分如下：营运资本变动 {m(DWC26['营运资本变动'])}，权益证券非现金收益 {m(DWC26['权益证券收益（非现金）'])}，递延所得税 {m(DWC26['递延所得税'])}，其他 {m(DWC26['其他'])}；SBC 视为真实成本，不加回。</p>
+<p><strong>估值路径：异常增速 DCF（路径 B，门槛 {hurdle:.0%}）。</strong>FCF 两期复合 {pct(V['fcf_cagr'], 0)}，超过 50%。按规则逐步处理：</p>
 <ul>
-<li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。FY2028–29 的共识是付费内容，没有取得。只要那两年增速不为负，三年均值就不低于 32%，都高于宽护城河 {pct(ig['moat_cap'], 0)} 的上限，所以取上限。</li>
-<li><strong>第 3 步 · FCF yield 反推（对照，不采用）</strong>：yield 约 2.1%，得增速 4.15% / 7.15%，内在价值 {FY['iv_range'][0]:.2f}–{FY['iv_range'][1]:.2f}。这个结果和上半年已经实现的 +{pct(h1 / h1p - 1, 0)} 严重背离。</li>
-<li><strong>估值失效条件</strong>：营收增速 {', '.join(pct(r, 0) for r in rg['rates'])}，增速标准差 {rg['stdev'] * 100:.0f} 个百分点，低于 50，DCF 有效。口径由用户 11/09 确定；原工具按营收最高 ÷ 最低算，会把持续高增长误判为波动。</li>
+<li><strong>第 1 步 · 增速性质</strong>：属于「结构性平台跃迁」。spoke 的例子直接列了「AI 加速器 2023-」。但需求依赖客户的资本开支周期，这一点放在风险里跟踪。</li>
+<li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 {pct(CONS_FCF27 / rows['2026']['fcf'] - 1, 0)}。FY2028–29 的共识是付费内容；只要那两年增速合计不低于 −43 个百分点，三年均值就高于 {pct(ig['moat_cap'], 0)}，所以取护城河上限。</li>
+<li><strong>第 3 步 · FCF yield 反推（对照，不采用）</strong>：得增速 4.15% / 7.15%，内在价值 {FY['iv_range'][0]:.2f}–{FY['iv_range'][1]:.2f}。它与上半年已实现的 FCF 同比 +{pct(h1 / h1p - 1, 0)} 严重背离。</li>
+<li><strong>第 4 步 · 标注</strong>：历史增速异常，DCF 基于正态化增速，可信度中等；当前估值主要由市场对增速的预期驱动，安全边际计算意义有限。</li>
+<li><strong>估值失效条件</strong>：营收增速 {', '.join(pct(r, 0) for r in rg['rates'])}，增速标准差 {rg['stdev'] * 100:.0f} 个百分点，低于 50（口径由用户 11/09 确定），DCF 有效。</li>
 </ul>
 <table>{tr(["参数", "保守情景", "基准情景", "依据"], True)}
 {tr(["阶段 1 增速（1–5 年）", pct(sc['g1'], 0), pct(scn['g1'], 0), "共识锚定，被护城河上限截断"])}
@@ -265,8 +287,8 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["每股内在价值", f"{lo:.2f}", f"{hi:.2f}", f"两情景 DCF ÷ {INP['shares']['v'] / 1000:.1f}B 股"])}
 {tr(["终值占比", pct(sc['terminal_share'], 0), pct(scn['terminal_share'], 0), "&gt; 60% → 交叉验证"])}
 </table>
-<p>交叉验证（股权口径）：前 10 年所有者盈余的现值，加上第 10 年所有者盈余乘以同行市值 / FCF 均值 {INP['peer_p_fcf']['v']:.1f}x 后折现，得每股 {sc['exit_multiple_iv']:.2f} / {scn['exit_multiple_iv']:.2f}，和 DCF 相差超过 30%。按规则取较低值，也就是 DCF 值。
-同行倍数本身很高（AMD 约 109 倍），说明可比公司也被定价在高增长上，相对估值在这里不是可靠的锚。</p>
+<p>增速被上限截断的代价：共识的 FY2027 FCF 为 {m(CONS_FCF27)}，而模型第 1 年的所有者盈余是 TTM × 1.18 = {m(oe['value'] * 1.18)}。框架有意不为超过上限的增长付钱，这部分差距是安全垫，也是可能的低估来源。</p>
+<p>交叉验证（股权口径）：前 10 年所有者盈余现值，加上第 10 年所有者盈余 × 同行市值 / FCF 均值 {INP['peer_p_fcf']['v']:.1f}x 后折现，得每股 {sc['exit_multiple_iv']:.2f} / {scn['exit_multiple_iv']:.2f}，与 DCF 相差超过 30%。按规则取较低值，即 DCF 值。同行倍数本身很高（AMD 约 109 倍），相对估值在这里不是可靠的锚。</p>
 <table>{tr(["护城河评分", "阶段 1 增速上限", "内在价值区间", "安全边际（下沿）", "总分"], True)}{moat_rows}</table>
 <table>{tr(["价格锚点", "价位", "说明"], True)}
 {tr(["内在价值下沿（保守情景）", f"{lo:.2f}", "安全边际的计算基准"])}
@@ -274,32 +296,32 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 {tr(["当前安全边际", f"{mos * 100:.1f}%", "(下沿 − 现价) ÷ 下沿"])}
 {tr([f"目标买入价（安全边际 {hurdle:.0%}）", f"{buy:.2f}", f"下沿 × {1 - hurdle:.0%}"])}
 </table>
-<p><strong>逆向验证：</strong>按基准情景的结构倒推，现价要成立，需要阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}，比宽护城河的上限高 {(ig['g1'] - ig['moat_cap']) * 100:.1f} 个百分点。市场在定价「增长比框架允许的上限还快」。
-它在近两年并非不可能：共识第一年就是 +97%。分歧在于第 3 到第 5 年，云厂商的资本开支周期和自研芯片会不会把增速拉回来。{badge("低")}</p>
-<p class="src">来源：owner_value 主底稿 {VAL}，护城河 6 / 9 分与 FCF yield 对照底稿在同一目录；共识见来源索引。</p>
+<p><strong>逆向验证：</strong>按基准情景结构倒推，现价要求阶段 1 增速 {pct(ig['g1'])}、阶段 2 增速 {pct(ig['g2'])}，在宽护城河上限之内。近端证据支持这个速度（FY2027 共识 +97%）。分歧在第 3 到第 5 年：客户资本开支和自研芯片会不会把增速拉回来。</p>
+<p class="src">来源：owner_value 主底稿 {VAL}；护城河 6 / 9 分与 FCF yield 对照底稿在同一目录；TTM 的分项来自两份新闻稿的现金流量表。</p>
 
 <div class="verdict"><strong>裁决：等待买入档，当前不买。</strong>{verdict_zh}
-<div class="en">An exceptional business priced for growth beyond what a wide-moat framework allows; no margin of safety at the conservative bound.</div></div>
+<div class="en">An exceptional business priced close to its conservative intrinsic value; no margin of safety against a 40% hurdle.</div></div>
 
 <h2>五、巴菲特评分卡 <span class="en">Berkshire Score</span></h2>
 {score_svg()}
 <table>{tr(["维度", "满分", "得分", "关键依据"], True)}{score_rows}</table>
-<p>相对估值：英伟达 EV/FCF {nv_evf:.1f}x，AMD {amd_evf:.1f}x，AVGO {avgo_evf:.1f}x。英伟达比同行便宜，但同行同样被高增长定价，所以 4B 的 5 分只作辅助，不能覆盖 DCF 的结论。</p>
+<p>相对估值：英伟达 EV/FCF {nv_evf:.1f}x，AMD {amd_evf:.1f}x，AVGO {avgo_evf:.1f}x。英伟达比同行便宜，但同行同样被高增长定价，4B 的 5 分只作辅助，不能覆盖 DCF 的结论。</p>
 
 <h2>六、主要风险 <span class="en">Risks</span></h2>
 <table>{tr(["风险", "说明", "对估值的影响"], True)}
-{tr(["客户资本开支周期", "需求集中在少数云厂商与 AI 公司的资本开支，开支放缓会同时压营收和毛利率", "增速 −3 个百分点 → 下沿约 −16%（见敏感性表）"])}
-{tr(["自研芯片与定制 ASIC", f"AVGO 等定制芯片厂商是直接竞争者（AVGO FY2025 总营收 {pct(peer_growth['avgo'], 0)}，含软件业务，未拆分 AI 芯片）；云厂商自研芯片的规模本报告未取得原文", "护城河从 8 分降到 6 分 → 内在价值 {0}–{1}".format(f"{M6['iv_range'][0]:.2f}", f"{M6['iv_range'][1]:.2f}")])}
-{tr(["投资与生态融资", f"FY2027 上半年投资活动现金流出 {m(35124)}，上年同期 {m(12343)}（Q2 新闻稿）；为生态伙伴提供资金会让需求的独立性变弱", "暂未量化，需跟踪承诺转为收入的比例"])}
-{tr(["利率", "折现率随 10 年期美债变化", "r +1 个百分点 → 下沿约 −15%"])}
+{tr(["客户集中", "FY2026 两家直接客户分别占营收 22% 和 14%（10-K）；需求依赖少数客户的资本开支周期", "增速 −3 个百分点 → 下沿约 {0:.0f}%".format([x for x in V['sensitivity']['rows'] if x['var'] == 'g1' and x['delta'] < 0][0]['change'] * 100)])}
+{tr(["自研芯片与定制 ASIC", f"TechInsights 指出 Google TPU 等替代方案在出现；AVGO 是直接竞争者（FY2025 总营收 {pct(peer_growth['avgo'], 0)}，含软件，未拆分）", "护城河降到 6 分 → 内在价值 {0}–{1}".format(f"{M6['iv_range'][0]:.2f}", f"{M6['iv_range'][1]:.2f}")])}
+{tr(["投资与生态融资", f"FY2027 上半年投资活动现金流出 {m(35124)}，上年同期 {m(12343)}（Q2 新闻稿）；为生态伙伴提供资金会让需求的独立性变弱", "暂未量化，跟踪承诺转为收入的比例"])}
+{tr(["利率", "折现率随 10 年期美债变化", "r +1 个百分点 → 下沿约 {0:.0f}%".format([x for x in V['sensitivity']['rows'] if x['var'] == 'r' and x['delta'] > 0][0]['change'] * 100)])}
 </table>
-<p>需要重估内在价值的情况：FY2027 年报公布（基准年切换）；毛利率连续两个季度低于 70%；股价跌破 {buy:.2f}。</p>
+<p>需要重估内在价值的情况：每次季报更新 TTM；毛利率连续两个季度低于 70%；股价跌破 {buy:.2f}。</p>
 
 <h2>七、数据盲区与敏感性 <span class="en">Gaps and Sensitivity</span></h2>
 <ul>
-<li>FY2028–29 的分析师共识为付费内容，未取得。只用了 FY2027 一年；增速被护城河上限截断，所以不影响结论。</li>
-<li>管理层持股（DEF 14A）、客户集中度（10-K 附注）没有取得原文：3B 按保守档，客户集中只作定性风险。</li>
-<li>转换成本、网络效应缺少可量化数据，只作方向判断，不单独加分。</li>
+<li>FY2028–29 的分析师共识为付费内容，未取得；增速被上限截断，不影响结论。</li>
+<li>市场份额只有 2023 年的 TechInsights 数据，且不含云厂商自研芯片；最新份额未取得。</li>
+<li>转换成本、网络效应、单价提价没有可量化数据，相关维度记为待验证。</li>
+<li>电话会沟通质量未评估，3C 取中性。</li>
 </ul>
 <table>{tr(["变量（以保守情景为底）", "变动", "每股内在价值", "变化"], True)}{sens_rows}</table>
 
@@ -308,13 +330,13 @@ table{{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}} th,td{{
 
 <div class="note"><p><strong>分析师附注 Analyst's Note</strong></p>
 <table>{tr(["结论", "置信", "为什么"], True)}
-{tr(["当前不买", "高", f"护城河评 6、8、9 分，安全边际都达不到 {hurdle:.0%}"])}
-{tr(["高估（价格高于内在价值上沿）", "中", "成立的前提是护城河 8 分；评 9 分时不成立"])}
-{tr([f"现价隐含的 {pct(ig['g1'])} 增速难以持续 5 年", "低", f"近端证据支持市场；已登记 predictions.md：FY2031 FCF &lt; ${thr / 1000:.1f}B，2031-03-31 验证"])}
+{tr(["当前不买", "高", f"护城河评 6、7、9 分，安全边际都达不到 {hurdle:.0%}（9 分时 {M9['margin_of_safety']['value'] * 100:.0f}%）"])}
+{tr(["价格大致等于保守内在价值", "中", "依赖 TTM 基数和 18% 的增速上限；基数或上限变化会明显移动内在价值"])}
+{tr([f"现价隐含 {pct(ig['g1'])} 增速", "中", "在框架上限之内，近端证据支持；不作方向判断，本报告不登记预测"])}
 </table>
-<p><strong>待核实：</strong>FY2028–29 共识；DEF 14A 持股；10-K 客户集中度；FY2027 年报 FCF（预计 2027 年 2 月）。</p>
-<p><strong>分析师看法：</strong>在巴菲特框架里，英伟达是「看得懂的好生意，但价格要求的增长超出框架上限」。框架给的是买入纪律，不是对股价的方向判断。
-如果你认为它的护城河配得上 9 分，内在价值大约在 {M9['iv_range'][0]:.0f}–{M9['iv_range'][1]:.0f}，现价有约 {M9['margin_of_safety']['value'] * 100:.0f}% 的安全边际，但仍然低于 {hurdle:.0%} 的门槛。这一分是本报告最关键的主观判断。</p>
+<p><strong>待核实：</strong>FY2028–29 共识；最新 AI 加速器份额（含自研芯片）；FY2027 年报（预计 2027 年 2 月）。</p>
+<p><strong>分析师看法：</strong>英伟达是看得懂的好生意，价格大约在保守估值附近，谈不上便宜也谈不上离谱。按巴菲特的纪律，没有安全边际就不买。
+最关键的主观判断是护城河分数：如果你认为它配得上 9 分，内在价值约 {M9['iv_range'][0]:.0f}–{M9['iv_range'][1]:.0f}，安全边际约 {M9['margin_of_safety']['value'] * 100:.0f}%，仍然低于 {hurdle:.0%}。</p>
 <p>本报告的估值数字全部由 tools/owner_value.py 计算，生成脚本只读取、不手算。本报告是价值框架下的研究意见，不构成投资建议。</p>
 <p>反馈：<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report=nvda">https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&amp;report=nvda</a></p></div>
 </div></body></html>"""
