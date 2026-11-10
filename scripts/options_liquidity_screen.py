@@ -31,7 +31,7 @@ import burry_screener as bs  # noqa: E402
 MIN_REV = 1e9
 PRICE_MIN, PRICE_MAX = 10, 150
 MIN_MCAP = 5e9
-MAX_SPREAD = 0.10
+MAX_SPREAD = 0.20  # 与 position-discipline 第 7 条一致（÷ 中间价 ≤ 20%，2026-11-10 用户定）
 MIN_OI, MIN_VOL = 10_000, 1_000
 MIN_DTE = 14       # 报价差按 ≥14 天到期日量（11/05 实测：1 周到期价外 put 权利金太小，报价差占比普遍 15–50%；2 周档明显收窄）
 MIN_OTM = 0.03     # 只量价外 3% 以外（我们卖的区间），平值附近报价差窄会拉低中位数、高估可做性

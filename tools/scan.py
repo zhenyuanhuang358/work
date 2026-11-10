@@ -171,6 +171,9 @@ def cmd_run(a):
     od = a.out or SCANS
     os.makedirs(od, exist_ok=True)
     jp = os.path.join(od, f"{sid}.json")
+    # 11/10：用 --asof 复盘 11/09 时同 id 覆盖了当天的正式底稿（事后改了当天记录）。底稿是当日事实，已存在就拒绝覆盖。
+    if os.path.exists(jp) and not getattr(a, "force", False):
+        sys.exit(f"拒绝覆盖：{jp} 已存在（当日正式底稿）。复盘请用 --out 指向别的目录；确需重写加 --force")
     json.dump(out, open(jp, "w"), ensure_ascii=False, indent=1, default=str)
     open(os.path.join(od, f"{sid}.draft.md"), "w").write(draft(out, gs))
     print(f"scan 底稿：{jp}｜草稿：{sid}.draft.md")
@@ -241,6 +244,7 @@ def main():
     r.add_argument("--root", help="数据目录（回归测试用固定样例目录）")
     r.add_argument("--history", help="tail_risk 历史 JSON（不读 git，回归测试用）")
     r.add_argument("--out", help="产物目录（默认 memory/state/scans）")
+    r.add_argument("--force", action="store_true", help="允许覆盖同 id 的已有底稿（默认拒绝）")
     v = sub.add_parser("verify")
     v.add_argument("report")
     v.add_argument("--scan")

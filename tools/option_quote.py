@@ -22,6 +22,8 @@ from datetime import datetime, timezone
 from statistics import NormalDist
 from zoneinfo import ZoneInfo
 
+SPREAD_MAX = 0.20  # position-discipline 第 7 条：买卖报价差 ÷ 中间价 上限（2026-11-10 用户定，原 ÷ 买价 0.10）
+
 N = NormalDist()
 ET = ZoneInfo("America/New_York")
 
@@ -238,10 +240,12 @@ def run(a, j, r):
         # 2026-10-29 校准：SPY 744P（现价 769、权利金 1.0）→ $12,980，与盈立实际要求「一万多」吻合
         otm_amt = max(s - k, 0) if a.right == "P" else max(k - s, 0)
         margin = max(0.2 * s - otm_amt + b, 0.1 * (k if a.right == "P" else s) + b) * 100
-        spread = (ak - b) / b  # 买卖报价差占收入比例（不是价差策略）；>10% 不推（position-discipline 第 7 条）
+        # 买卖报价差 ÷ 中间价（不是价差策略）；> SPREAD_MAX 不推（position-discipline 第 7 条；用户 2026-11-10 定：
+        # 原「÷ 买价 ≤ 10%」——11/09 数据显示 z≥1.2 的合约 bid 中位 $0.04，换分母救回 0 行，瓶颈是阈值；改为 ÷ 中间价 ≤ 20%）
+        spread = (ak - b) / mid
         mark = "✅" if z >= a.z_min else "  "
         ratio = iv / hv if hv else None
-        if spread > 0.10:
+        if spread > SPREAD_MAX:
             mark = "⛔报价差"
         if ratio is not None and ratio < 1.1:
             mark = "⛔IV不贵"
