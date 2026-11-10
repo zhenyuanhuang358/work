@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-09T22:57:32Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-10T01:46:55Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-09 22:57 UTC
+自检器 · 2026-11-10 01:46 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -90,17 +90,17 @@
   pipeline-earnings.md       ✅ 2 个 skill
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
-  期权基本面名单：上次复核 2026-11-05（4 天前）
+  期权基本面名单：上次复核 2026-11-05（5 天前）
   运行记录：11 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  56 条｜未关闭 3｜已修有测试 33
+  57 条｜未关闭 2｜已修有测试 33
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 5 份
 
 [C13] 报告机械检查记录 memory/state/report_checks.jsonl
-  11/07 起改动的报告 1 份｜有检查记录 1
+  11/07 起改动的报告 2 份｜有检查记录 2
 
 [C14] 筛选器产物不变量 tools/screen_check.py
   burry：7 项，FAIL 0
@@ -116,7 +116,7 @@
   共 1 张
 
 ==========================================================================
-发现 7 项：
+发现 6 项：
 
   [P3] guizang-page-skill/SKILL.md
         hub 208 行，超 CLAUDE.md 的 200 行目标 8 行
@@ -129,9 +129,6 @@
 
   [P3] guizang-social-card-skill/SKILL.md
         hub 338 行，超 CLAUDE.md 的 200 行目标 138 行
-
-  [P3] FB-20261105-12
-        未关闭：z ≥ 1.2 + 报价差 ≤ 10% 组合下几乎只剩 TLT，收入 $10–16｜待平静日数据后由用户定第 7 条口径（÷bid 还是 ÷mid、挂中间价）｜11/09 数据已交用户
 
   [P3] FB-20261107-B04
         未关闭：burry_screener 债务标签只认 LongTermDebtNoncurrent / LongTermDebt；｜debt_lt / debt_st 追加 LongTermDebtAndCapitalLeaseOb
