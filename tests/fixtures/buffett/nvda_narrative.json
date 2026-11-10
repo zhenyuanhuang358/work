@@ -1,0 +1,128 @@
+{
+ "name_zh": "英伟达",
+ "name_en": "NVIDIA",
+ "price_date": "2026-11-06",
+ "sensitivity_moats": [
+  7,
+  9
+ ],
+ "bottom_line": [
+  {
+   "text": "<strong>结论：高估区间，不买。</strong>现价 {price} 高于内在价值上沿 {hi}，安全边际（下沿）{mos}，门槛 {hurdle}；价格需在 {buy} 以下。",
+   "conf": "高"
+  },
+  {
+   "text": "评分 {total}，落在「{rating}」档：生意质量好，等价格到位。",
+   "conf": "中"
+  }
+ ],
+ "moat": {
+  "lead": "护城河评分 {moat} / 10：五类护城河里没有一类能用现有数据证明成立，按框架取保守分。",
+  "dims": [
+   [
+    "规模壁垒",
+    "TechInsights：2023 年数据中心 GPU 出货份额 98%，不含云厂商自研芯片；份额数据已过时",
+    "待验证"
+   ],
+   [
+    "无形资产（定价权）",
+    "毛利率高于同行均值；没有单价提价数据",
+    "待验证（只有 1 个信号）"
+   ],
+   [
+    "转换成本",
+    "没有留存率或迁移成本数据",
+    "待验证"
+   ],
+   [
+    "网络效应",
+    "没有可量化数据",
+    "待验证"
+   ],
+   [
+    "成本优势",
+    "Fabless 模式，没有单位成本对比",
+    "不计分"
+   ]
+  ],
+  "why": "分数决定增速上限（本报告为 {cap}），对估值影响很大，见第四节敏感性表。",
+  "src": "SEC companyfacts；HPCwire 转述的 TechInsights 研究。"
+ },
+ "fin": {
+  "lead": "财务健康：高增长、高现金转化、净现金，FCF 没有一次性现金项。",
+  "notes": [
+   "净利润含权益投资的非现金收益，所有者盈余按经营现金流口径计算，已剔出。"
+  ],
+  "src": "SEC companyfacts 10-K；FY2026 Q4 与 FY2027 Q2 业绩新闻稿。"
+ },
+ "mgmt": {
+  "lead": "创始人长期执掌，内部投资回报极高；分红未连续增长，回购不在低估时点。",
+  "rows": [
+   [
+    "内部投资回报",
+    "ROIC 三年均远高于 20%",
+    "+2"
+   ],
+   [
+    "分红",
+    "FY2023 到 FY2024 没有增长",
+    "0"
+   ],
+   [
+    "回购",
+    "期间市盈率远高于 15",
+    "0"
+   ]
+  ],
+  "src": "SEC companyfacts；NVIDIA 2026 年报 PDF。"
+ },
+ "valuation_notes": [
+  "增速锚定分析师共识（FY2027 共识 FCF 190.2B），再按护城河上限 {cap} 截断。"
+ ],
+ "verdict_en": "An exceptional business priced above its intrinsic value on evidence-based moat scoring.",
+ "unverified": "FY2028–29 分析师共识（付费内容）；最新 AI 加速器份额（含云厂商自研芯片）。",
+ "risks": [
+  [
+   "客户集中",
+   "FY2026 两家直接客户分别占营收 22% 和 14%（10-K）",
+   "增速下降会直接压低内在价值，见敏感性表"
+  ],
+  [
+   "自研芯片与定制 ASIC",
+   "云厂商自研芯片是对定价权的直接威胁",
+   "护城河分数下调"
+  ]
+ ],
+ "retrigger": "需要重估的情况：每次季报更新 TTM；毛利率连续两个季度低于 70%；股价跌破 {buy}。",
+ "gaps": [
+  "FY2028–29 共识未取得；增速被上限截断，不影响结论。",
+  "市场份额只有 2023 年数据，且不含自研芯片。"
+ ],
+ "notes": [
+  [
+   "当前不买",
+   "高",
+   "任何护城河分数下，安全边际都达不到 {hurdle}"
+  ],
+  [
+   "价格高于内在价值上沿",
+   "中",
+   "按证据评 {moat} 分时成立；评 7 分时价格约等于保守估值"
+  ]
+ ],
+ "analyst_view": "英伟达是看得懂的好生意。按能拿到的证据给护城河打分，现价偏贵；没有安全边际就不买。",
+ "sources": [
+  [
+   "SEC EDGAR companyfacts：NVIDIA 10-K XBRL",
+   "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json"
+  ],
+  [
+   "NVIDIA FY2027 第二季度业绩新闻稿",
+   "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
+  ],
+  [
+   "stockanalysis.com NVDA 预测页",
+   "https://stockanalysis.com/stocks/nvda/forecast/"
+  ]
+ ]
+}

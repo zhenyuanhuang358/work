@@ -12,7 +12,7 @@
 
 | 时机 | 读 |
 |------|----|
-| 每个会话第一次执行任务前 | `profile.md`（偏好/可复用规则/配置/教训，**必读**） |
+| 每个会话第一次执行任务前 | `profile-core.md`（**必读**，约 3 KB）；`profile.md` 是完整档案，按索引 grep 按需读（2026-11-10 起，省每会话约 4 万 token） |
 | 期权扫描 / 持仓相关 | `state/options-journal.md` |
 | 研究某公司前（Merlin / Earner / restaurant-research） | **先 grep `state/research-ledger.md`**，有沉淀就继承，不从零重做 |
 

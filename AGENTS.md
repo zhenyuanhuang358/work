@@ -7,7 +7,7 @@
 ## 1. 开场必读（按顺序）
 
 1. `CLAUDE.md`：全部工作规则。文件名带 Claude，但内容与模型无关，**全部适用**：第一性原理、预测登记、报告路由、COO 流水线、Critic 门控、记忆约定。
-2. `memory/profile.md`：历史教训与用户偏好。每个会话第一次干活前必读。
+2. `memory/profile-core.md`：用户偏好、交付与数据规则、配置（约 3 KB）。每个会话第一次干活前必读。完整档案 `memory/profile.md` 有 86 KB，不要整读，按核心档案里的索引 grep。
 3. `memory/state/handoff.md`：当前状态、硬约束、待办，以及已排除、不要再提的路线。
 4. `SKILLS.md`：全部 skill 与子代理的索引，由 `tools/skill_index.py` 从 frontmatter 自动生成。
 
@@ -64,7 +64,7 @@ DeepSeek API 兼容 OpenAI 格式。要换就改用 OpenAI SDK 并设置它的 b
 ## 7. 验证（改了东西就跑；没有证据不说「通过」）
 
 ```
-python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py
+python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py tests/test_buffett_report.py
 python3 tools/self_check.py --quiet
 python3 tools/report_check.py <报告.html> --record     # 交付任何 HTML 报告前
 python3 tools/skill_index.py --check                    # 改了任何 SKILL.md / agent 后

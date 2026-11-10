@@ -5,7 +5,7 @@ CLAUDE.md 里的路由规则（报告类路由、COO 流水线、Critic 门控�
 
 | skill | 入口 | 何时用（frontmatter 原文） | spoke 数 | hub 行数 |
 |---|---|---|---|---|
-| `buffett-analyst` | `.claude/skills/buffett-analyst/SKILL.md` | 巴菲特模型投资分析智能体。针对港股/美股/A股，运行护城河分析 + 所有者盈余估值 + 安全边际测算，输出「巴菲特评分卡」和投资结论。 触发词：「巴菲特分析」「价值分析」「帮我估值」「护城河分析」「安全边际」 「内在价值」「帮我分析 [股票代码]」「这个股票值多少钱」「值不值得买」 「ROE 分析」「自由现金流估值」「巴菲特评分」「帮我做价值投资分析」 | 4 | 158 |
+| `buffett-analyst` | `.claude/skills/buffett-analyst/SKILL.md` | 巴菲特模型投资分析智能体。针对港股/美股/A股，运行护城河分析 + 所有者盈余估值 + 安全边际测算，输出「巴菲特评分卡」和投资结论。 触发词：「巴菲特分析」「价值分析」「帮我估值」「护城河分析」「安全边际」 「内在价值」「帮我分析 [股票代码]」「这个股票值多少钱」「值不值得买」 「ROE 分析」「自由现金流估值」「巴菲特评分」「帮我做价值投资分析」 | 4 | 161 |
 | `burry` | `.claude/skills/burry/SKILL.md` | 蒸馏版伯里决策模型。不是归因器、不是跟单器——是从 Scion 32 期 13F（2015Q4–2025Q3） 实证提炼出的八条操作规律，用来回答「他会怎么看这个标的 / 这个市场状态」。 唤醒口令：「Burry」「Burry 看 <标的>」「Burry 状态」「Burry 证据 <规律号>」 「Burry 扫描」（Layer 1 全市场选股器）「Burry 归因 <季度>」（逐季还原，次要功能）。 触发词：「伯里」「Michael Burry」「Scion」「大空头」「他会怎么看」「深度价值」「绝对便宜」。 | 6 | 183 |
 | `coo` | `.claude/skills/coo/SKILL.md` | 一人公司总调度（COO）。不产出内容，只负责把一件活从接单串到交付：路由到正确的 skill、 按顺序跑完每一步、过公共关卡（Critic / PDF / 预测登记 / 台账 / 推送）、写运行记录供跨会话续跑。 四条流水线：客户调研报告、期权日常扫描、内容生产、财报分析。 唤醒口令：「COO」「/coo」「/coo 调研」「/coo 期权」「/coo 内容」「/coo 财报」「/coo 续跑」。 触发词：「一条龙」「跑完整流程」「从头到尾做完」「接着上次没做完的」「今天的活」。 另：CLAUDE.md「流水线总调度」一节规定，上述四类任务即使没喊 COO 也先走本 skill。 | 6 | 104 |
 | `critic` | `.claude/skills/critic/SKILL.md` | 跨 skill 质量门控。任何 HTML 研究报告（Merlin / Earner / restaurant-research / buffett） 在 SendUserFile 之前必须通过本 Critic 评审。 不产生内容，只验证：数据来源、内部一致性、置信度校准、格式合规、反馈链接。 输出结构化裁定：PASS / CONDITIONAL / REWRITE。 | 1 | 140 |

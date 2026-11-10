@@ -237,8 +237,9 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 
 | 文件 | 何时读 |
 |------|--------|
-| `memory/profile.md` | **每个会话第一次执行任何任务前必读**——历史教训、UI/产品偏好、可复用规则（R-D/R-R/R-E/R-C）、配置速查 |
+| `memory/profile-core.md` | **每个会话第一次执行任何任务前必读**（约 3 KB）——偏好、交付与数据规则、配置、完整档案索引 |
+| `memory/profile.md` | 完整档案（86 KB）。**不整读**：按 profile-core 的索引找编号，grep 定位到那一节再读 |
 | `memory/state/options-journal.md` | 期权扫描 / 持仓相关任务前 |
 | `memory/state/research-ledger.md` | 研究某公司前 grep，继承已有结论，不从零重做 |
 
-**写入**：出现新事故/纠正 → 追加 `profile.md`；开平仓 → 更新 `options-journal.md`；交付研究报告 → 追加 `research-ledger.md`。详见 `memory/README.md`。
+**写入**：出现新事故/纠正 → 追加 `profile.md`，并在 `profile-core.md` 索引加一行；开平仓 → 更新 `options-journal.md`；交付研究报告 → 追加 `research-ledger.md`。详见 `memory/README.md`。

@@ -1,6 +1,7 @@
 # 会话交接单（2026-11-06 · 第四版，替换 11-05 v3）
 
 > **非 Claude Code 的 harness 先读根目录 `AGENTS.md`**（2026-11-08 搬家准备：入口、Claude 专有功能的替代做法、SKILLS.md 索引）。
+> **必读档案是 `memory/profile-core.md`，不是 86 KB 的 `profile.md`**（2026-11-10，后者按索引 grep）。
 > **新 Agent 开场必做**：① 读本文件 ② `git log -1` 对照基线（之后只应有本交接单 + Actions 的 `chore:` 自动提交）
 > ③ `git status` 干净 ④ 跑 §5 命令复核 ⑤ 再动手。**§3「已做」不要重做；§4 才是待办。**
 

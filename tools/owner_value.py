@@ -87,6 +87,63 @@ def normalize(ys, out):
     return norm
 
 
+def auto_scores(inp, sf, out, ys, revs, dr, cover):
+    """评分卡里能查表的 8 项由工具算（berkshire-score.md；2026-11-10）。
+    为什么：KO、NVDA 两份报告共 8 轮 Critic，反复退回的就是查表查错、敏感性底稿抄旧分数。3A / 3B / 3C 是判断，仍由分析师给（带理由）。
+    score_facts: {"gross_margin": [三年], "roe": [三年], "roic": [三年，可选], "cash": .., "debt": .., "ev_fcf": .., "peer_ev_fcf": ..,
+                  "management": {"3A": {"v": .., "why": ..}, "3B": {...}, "3C": {...}}}
+    2B 与 4B 一律用报告值 FCF（一次性项只用于估值）。"""
+    d, why = {}, {}
+    moat = inp["moat_score"]
+    d["1A"] = 5 if moat <= 4 else 8 if moat <= 6 else 12 if moat <= 8 else 15
+    why["1A"] = f"护城河 {moat} 分"
+    grs = [revs[i] / revs[i - 1] - 1 for i in range(len(revs) - len(ys) + 1, len(revs))] or [0.0]
+    cagr = (ys[-1]["revenue"] / ys[0]["revenue"]) ** (1 / (len(ys) - 1)) - 1
+    neg = sum(1 for g in grs if g < 0)
+    d["1B"] = (8 if cagr > 0.20 and neg == 0 else 6 if 0.10 <= cagr <= 0.20 and neg <= 1 else 4 if 0.05 <= cagr < 0.10 and neg == 0
+               else 2 if (0.05 <= cagr < 0.10 and neg == 1) or (0 <= cagr < 0.05 and neg == 0) else 0)
+    why["1B"] = f"营收复合增速 {cagr:.1%}，负增长 {neg} 年"
+    gm = sf["gross_margin"]
+    d["1C"] = 7 if min(gm) > 0.50 else 5 if min(gm) >= 0.35 else 3 if min(gm) >= 0.20 and gm[-1] >= gm[0] - 0.05 else 1
+    why["1C"] = "毛利率 " + " / ".join(f"{g:.1%}" for g in gm)
+    roe = sum(sf["roe"]) / len(sf["roe"])
+    tiers = [12, 9, 6, 3, 0]
+    i = 0 if roe > 0.25 else 1 if roe >= 0.18 else 2 if roe >= 0.12 else 3 if roe >= 0.08 else 4
+    note = ""
+    if dr > 0.40:
+        if not sf.get("roic"):
+            raise NoSource("负债率 > 40%：2A 需要 ROIC 复核（score_facts.roic）")
+        if min(sf["roic"]) < 0.12:
+            i, note = min(i + 2, 4), "；ROIC < 12%，降两档"
+        else:
+            note = "；负债率 > 40%，ROIC 复核均 ≥ 12%，不降档"
+    d["2A"] = tiers[i]
+    why["2A"] = f"ROE 三年均值 {roe:.1%}{note}"
+    fr = [y.get("fcf_reported", y["fcf"]) for y in ys]
+    ratios = [f / y["net_income"] for f, y in zip(fr, ys) if y["net_income"] > 0]
+    pos = sum(1 for f in fr if f > 0)
+    d["2B"] = (0 if pos <= 1 else 5 if pos == 2 else 10 if ratios and min(ratios) > 0.80 else 7 if ratios and min(ratios) >= 0.60 else 2)
+    why["2B"] = "报告值 FCF / 净利润 " + " / ".join(f"{r:.0%}" for r in ratios) + "（按三年最低值查表）"
+    last = ys[-1]
+    d["2C"] = (0 if last["ebit"] < 0 else 8 if sf["cash"] > sf["debt"] else 6 if dr < 0.20 and cover > 10 else 4 if dr <= 0.40 and cover > 5
+               else 0 if dr > 0.60 or cover < 3 else 2)
+    why["2C"] = f"现金 {sf['cash']:,.0f}，有息负债 {sf['debt']:,.0f}，负债率 {dr:.0%}，利息覆盖 {cover:.1f}x"
+    mv = out["margin_of_safety"]["value"]
+    d["4A"] = 10 if mv >= 0.40 else 8 if mv >= 0.30 else 5 if mv >= 0.20 else 3 if mv >= 0.10 else 0
+    why["4A"] = f"安全边际 {mv:.1%}"
+    rel = sf["ev_fcf"] / sf["peer_ev_fcf"] - 1
+    d["4B"] = 5 if rel <= -0.20 else 3 if rel <= 0.20 else 1
+    why["4B"] = f"EV/FCF {sf['ev_fcf']:.1f}x，同行均值 {sf['peer_ev_fcf']:.1f}x（{rel:+.0%}）"
+    for k in ("3A", "3B", "3C"):
+        m = (sf.get("management") or {}).get(k) or {}
+        if m.get("v") is None or not str(m.get("why", "")).strip():
+            raise NoSource(f"评分 {k} 是判断项：需给分数和理由（score_facts.management.{k}）")
+        d[k], why[k] = m["v"], m["why"]
+    sc = {"business": d["1A"] + d["1B"] + d["1C"], "financial": d["2A"] + d["2B"] + d["2C"],
+          "management": d["3A"] + d["3B"] + d["3C"], "price": d["4A"] + d["4B"]}
+    return sc, d, why
+
+
 def run(inp):
     price, shares, r = need(inp.get("price"), "现价"), need(inp.get("shares"), "股数"), need(inp.get("r"), "折现率")
     ys = inp["years"]
@@ -234,7 +291,11 @@ def run(inp):
         except NoSource as e:  # 例如不调后 FCF 由正转负触发 g_override 要求
             out["without_adjustments"] = {"error": str(e)}
 
-    # 评分卡
+    # 评分卡：给了 score_facts 就由工具查表（3A–3C 除外），并覆盖手填分数
+    if inp.get("score_facts"):
+        asc, asd, awhy = auto_scores(inp, inp["score_facts"], out, ys, revs, dr, cover)
+        inp["scores"], inp["scores_detail"] = asc, asd
+        out["scorecard_detail"] = {k: {"score": asd[k], "why": awhy[k]} for k in asd}
     sc = inp.get("scores") or {}
     bad = [k for k, mx in SCORE_MAX.items() if not (0 <= sc.get(k, -1) <= mx)]
     if bad:

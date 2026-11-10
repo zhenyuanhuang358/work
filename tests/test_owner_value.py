@@ -167,6 +167,29 @@ class OwnerValue(unittest.TestCase):
         d["scores"]["price"] = 10
         ov.run(d)
 
+    def test_auto_scores_table_lookup(self):
+        """11/10：能查表的 8 项由工具算。用 KO 的真实口径核对（Critic 四轮确认过的分数：12/2/7、12/2/2、4A 0、4B 1）。"""
+        d = copy.deepcopy(BASE)
+        d["price"]["v"] = 1e9  # 远高于内在价值：安全边际为负 → 4A = 0
+        d["moat_score"] = 7
+        d["debt_ratio"]["v"] = 0.586
+        for y, (rev, ni, fcf, ebit, it) in zip(d["years"], ((45754, 10714, 9747, 11311, 1527), (47061, 10631, 4741, 9992, 1656), (47941, 13107, 5296, 13762, 1654))):
+            y.update(revenue=rev, net_income=ni, fcf=fcf, ebit=ebit, interest=it)
+        d["g_override"] = {"g1": 0.05, "g2": 0.07, "src": S}
+        d["score_facts"] = {"gross_margin": [0.595, 0.611, 0.616], "roe": [0.413, 0.428, 0.407], "roic": [0.155, 0.135, 0.163],
+                            "cash": 10270, "debt": 45492, "ev_fcf": 84.8, "peer_ev_fcf": 36.75,
+                            "management": {k: {"v": v, "why": S} for k, v in (("3A", 4), ("3B", 3), ("3C", 3))}}
+        d.pop("scores", None)
+        out = ov.run(copy.deepcopy(d))
+        got = {k: v["score"] for k, v in out["scorecard_detail"].items()}
+        self.assertEqual(got, {"1A": 12, "1B": 2, "1C": 7, "2A": 12, "2B": 2, "2C": 2, "3A": 4, "3B": 3, "3C": 3, "4A": 0, "4B": 1})
+        self.assertEqual(out["scorecard"]["total"], 48)
+        d["moat_score"] = 4  # 敏感性底稿：1A 必须跟着护城河分数变，不能沿用旧值
+        self.assertEqual(ov.run(copy.deepcopy(d))["scorecard_detail"]["1A"]["score"], 5)
+        del d["score_facts"]["management"]["3B"]
+        with self.assertRaises(ov.NoSource):
+            ov.run(d)
+
 
 if __name__ == "__main__":
     unittest.main()
