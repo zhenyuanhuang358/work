@@ -326,5 +326,29 @@
   "title": "SPYI ETF Stock Price & Overview",
   "chars": 7329,
   "error": null
+ },
+ "https://neosfunds.com/spyi-distributions/": {
+  "url": "https://neosfunds.com/spyi-distributions/",
+  "fetched_at": "2026-11-10T18:24:17+00:00",
+  "file": "pages/neosfunds_com_spyi_distributions__d800ac.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://neosfunds.com/spyi-distributions/')"
+ },
+ "https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf": {
+  "url": "https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf",
+  "fetched_at": "2026-11-10T18:24:19+00:00",
+  "file": "pages/neosfunds_com_wp_content_uploads_spyi_19a_1_notice_pdf_49bafa.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf')"
+ },
+ "https://www.irs.gov/individuals/international-taxpayers/nra-withholding": {
+  "url": "https://www.irs.gov/individuals/international-taxpayers/nra-withholding",
+  "fetched_at": "2026-11-10T18:24:19+00:00",
+  "file": "pages/www_irs_gov_individuals_international_taxpayers_nra_withhold_154eb9.txt",
+  "title": "NRA withholding | Internal Revenue Service",
+  "chars": 6259,
+  "error": null
  }
 }
