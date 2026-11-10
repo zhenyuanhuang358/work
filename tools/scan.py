@@ -25,6 +25,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 BRANCH = "claude/install-claude-hud-d51E6"
+YELLOW_DTE, YELLOW_RISK = 21, 0.025  # 黄灯：到期 ≤ 3 周；单笔最大跳空亏损 ≤ 净值 2.5%（regime-playbook，用户 11/10 定）
 ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json", "voices.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
@@ -148,6 +149,18 @@ def cmd_run(a):
             if screen.get("sectors", {}).get(x["ticker"]) in RATE_SECTORS and fed.get("headlines"):
                 x["fed_channel"] = fed["headlines"][0]["headline"]  # 11/05 回放：TLT 的个股新闻全是无关长文，真相关的是联储讲话
             x["news"] = [{k: n.get(k) for k in ("time_utc", "source", "headline")} for n in tn]
+        # 黄灯缩量（tail-risk regime-playbook；用户 11/10 定：取消「只做熟标的」，保留两条）：
+        # 到期 ≤ 3 周，且最大跳空亏损（一年最差 / ±5% 等压力情景取最大）≤ 净值 2.5%（净值按可取现金）。
+        # 11/10 午盘：草稿写「可以开」并列 21 行，全靠会话手工再筛——规则写在 skill 里、工具不执行。
+        if light["light"] == 1:
+            cap = YELLOW_RISK * a.bp
+            keep, cut = [], []
+            for x in res["ok"]:
+                dte = (date.fromisoformat(x["expiry"]) - today).days
+                worst = max(g["loss"] for g in x["gap"])
+                (keep if dte <= YELLOW_DTE and worst <= cap else cut).append(x)
+                x["yellow"] = {"dte": dte, "worst_loss": worst, "cap": cap}
+            res["ok"], res["yellow_cut"] = keep, [(x["ticker"], x["expiry"], x["strike"], x["yellow"]) for x in cut]
         sides[right] = res
 
     scale = sh("python3", os.path.join(HERE, "scale_check.py"), "report", check=False).strip().splitlines()[:1]
@@ -199,6 +212,10 @@ def draft(s, gs):
     for n in s["market_news"][:3]:
         L.append(f"- {n['time_utc']} · {n['source']} · {n['headline']} → 【待判断】")
     L += ["", "## 候选" + ("" if s["can_open"] else "（今日不开，供下个可开仓日参考）")]
+    cut = [c for r_ in ("P", "C") for c in s["sides"][r_].get("yellow_cut", [])]
+    if s["light"]["light"] == 1:
+        L.append(f"- 🟡 黄灯缩量：只留到期 ≤ {YELLOW_DTE} 天、最大跳空亏损 ≤ 净值 {YELLOW_RISK:.1%}（${YELLOW_RISK * s['bp']:.0f}）的合约；"
+                 f"另有 {len(cut)} 张过关但超限，已剔除（底稿 yellow_cut）。")
     for r_, res in s["sides"].items():
         for x in res["ok"]:
             # 11/06 用户反馈：「79P」看不出买卖与看涨看跌 → 每行先写动作与亏损方向，代码放后面
