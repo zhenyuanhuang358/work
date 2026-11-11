@@ -32,6 +32,7 @@
 - 改了 skill 要验证 spoke 路径存在（R-E3），跑 `python3 tools/skill_index.py --check`。
 - 只推 `claude/install-claude-hud-d51E6`（R-E4）。
 - 规则要有承载物（工具、检查或测试）才算立住（1.2a）；检查器要建在真实产物上（1.2m）；记分由机器做（1.2c）。
+- 动手前：先唱反调、先审会翻转结论的假设、说清完成线和上限（CLAUDE.md 工作原则 6–9，2026-11-11）。
 - 撤销验证：改测试相关代码后，先撤掉修复确认测试会失败（`PYTHONDONTWRITEBYTECODE=1`，清 `__pycache__`）。
 
 ## 配置速查
