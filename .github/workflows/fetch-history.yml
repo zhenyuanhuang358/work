@@ -20,7 +20,7 @@ jobs:
           python-version: '3.11'
       - run: pip install requests beautifulsoup4 lxml pypdf yfinance -q
       - run: python3 scripts/fetch_history.py
-      - name: Commit transcripts
+      - name: Commit history
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

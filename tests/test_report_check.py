@@ -163,7 +163,9 @@ class Format(unittest.TestCase):
     def test_buffett_numbers_must_match_valuation(self):
         """巴菲特报告：数字必须来自 owner_value 底稿；按中值说安全边际要报（用户 11/07 定按下沿）。"""
         import json as _j
+        import shutil
         vdir = tempfile.mkdtemp(dir=os.path.join(REPO, "memory", "state"))
+        self.addCleanup(shutil.rmtree, vdir, True)  # 11/11：断言失败时原来的 rmtree 不执行，临时目录被提交进了仓库
         vp = os.path.join(vdir, "tst_2026-11-07.json")
         _j.dump({"iv_range": [80.0, 120.0], "margin_of_safety": {"value": 0.125}, "zone": "高估区间（不买）"}, open(vp, "w"))
         rel = os.path.relpath(vp, REPO)
@@ -178,8 +180,6 @@ class Format(unittest.TestCase):
             got = {i for i in ids(rc.run(f.name)) if i.startswith("B")}
             self.assertEqual(got, expect_fail, body[:80])
             os.unlink(f.name)
-        import shutil
-        shutil.rmtree(vdir)
 
     def test_buffett_c3_requires_registered_claim(self):
         """11/07 KO 实测：巴菲特报告没有情景价，C3 应改查同标的的 buffett 登记行，而不是一律 FAIL。"""
