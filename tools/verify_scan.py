@@ -55,7 +55,11 @@ def run(report_path, scan_path=None):
         if k not in ok_rows:
             continue
         x = ok_rows[k]
-        block = "\n".join(lines[i:i + 5])
+        # 候选块 = 本行到下一个顶层条目 / 小节为止（11/11：固定 5 行窗口在草稿加一行警示后就漏判）
+        j = i + 1
+        while j < len(lines) and not lines[j].startswith(("- ", "## ")):
+            j += 1
+        block = "\n".join(lines[i:j])
         m = re.search(r"收入\s*\$?(\d+(?:\.\d+)?)", lines[i])
         if m and abs(float(m.group(1)) - x["income"]) > 1:
             bad_num.append(f"{k[0]} {k[2]:g}{k[3]} 报告 {m.group(1)} vs 底稿 {x['income']:.0f}")

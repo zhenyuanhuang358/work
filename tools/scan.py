@@ -230,8 +230,14 @@ def draft(s, gs):
                      + (f"｜接货 ${x['assign_1']:,}/张（只提示）" if r_ == "P" else f"｜被行权需按 ${x['strike']:g} 交付股票（未持股即卖空，只提示）"))
             al = x.get("stop_alert")
             if al:
-                L.append(f"  止损（第 8 条，平台无期权条件单）：正股提醒设 ${al[1]:.2f}（IV +10 个点时期权到 2× 收入；IV 不变约 ${al[0]:.2f}），"
-                         f"触发后手动看卖价 ≥ {2 * x['bid']:.2f} 即买回｜止盈：挂限价买回 {0.5 * x['bid']:.2f}")
+                # 11/11 USO 120P：IV +10 个点时提醒价 = 现价，说明光 IV 上升就会触发止损 → 提醒价改用 IV 不变那档，另起一行警示
+                iv_only = abs(al[1] - x["spot"]) / x["spot"] < 0.005
+                alert = al[0] if iv_only else al[1]
+                L.append(f"  止损（第 8 条，平台无期权条件单）：正股提醒设 ${alert:.2f}"
+                         + (f"（IV 不变时期权到 2× 收入）" if iv_only else f"（IV +10 个点时期权到 2× 收入；IV 不变约 ${al[0]:.2f}）")
+                         + f"，触发后手动看卖价 ≥ {2 * x['bid']:.2f} 即买回｜止盈：挂限价买回 {0.5 * x['bid']:.2f}")
+                if iv_only:
+                    L.append(f"  ⚠ IV 再升 10 个点，现价不动也会触及止损——股价提醒管不住这种情形，要盯期权价")
             if x["pressure"]:
                 L.append(f"  ⚠ 事件压力初筛命中（第 4 条，人工判断是否只观察）：{'；'.join(x['pressure'][:2])}")
             L.append(f"  跳空：{gs.fmt(x['gap'])}")

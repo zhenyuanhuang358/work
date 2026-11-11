@@ -1,0 +1,2104 @@
+{
+ "id": "2026-11-11_1836Z",
+ "asof": "2026-11-11T18:36:45+00:00",
+ "bp": 1824.69,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T18:32:13+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T18:33:03.068407Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T18:34:23+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T18:35:40+00:00"
+  },
+  "quote_age_min": 4.4,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-11T18:33:03.068407Z",
+  "ref_day": "2026-11-10",
+  "readings": {
+   "term_structure": 0.8991769547325102,
+   "skew": 151.12,
+   "vvix": 92.55,
+   "vix": 17.48
+  },
+  "scores": {
+   "term_structure": 0,
+   "skew": 2,
+   "vvix": 0,
+   "vix": 0
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [],
+  "base": 0,
+  "accel": [],
+  "light": 0,
+  "light_name": "🟢 绿灯",
+  "term_premium": 1.1121281464530892,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "Core PPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.7%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "PPI m/m",
+   "forecast": "0.4%",
+   "previous": "1.3%"
+  }
+ ],
+ "event_eve": [],
+ "macro_today": [],
+ "macro_source": "BLS API",
+ "macro_errors": [],
+ "can_open": true,
+ "why_not": [],
+ "scale": [
+  "实盘账本 1 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-09T08:40:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-09T10:00:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-09T12:15:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-10T04:00:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-10T10:50:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-10T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-10T15:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Paulson",
+    "title": "FOMC Member Paulson Speaks"
+   },
+   {
+    "time": "2026-11-12T08:30:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-12T10:00:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-12T11:15:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-12T13:10:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-12T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-12T18:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-13T09:10:00-05:00",
+    "speaker": "Collins",
+    "title": "FOMC Member Collins Speaks"
+   },
+   {
+    "time": "2026-11-13T09:40:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-13T10:50:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-13T12:00:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-13T19:00:00-05:00",
+    "speaker": "Jefferson",
+    "title": "FOMC Member Jefferson Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-11T18:30+00:00",
+    "source": "qz.com",
+    "headline": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5RdGE5ekJHT3dFR0FoOGRKNjNXSkNjOUZOUllKUnh5cFdYZ3ItWUpTeHJ5dkZoYjIyY244cTlBX2dyUGNQVjBQSWMzeG8xeDB2VnlUX0QyV0w0bVF5TGZPeWVDRHY5OWxPM00xWDNrOWZ3Yl9LcnJxMHo1cw?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-11T17:42+00:00",
+    "source": "Scotsman Guide",
+    "headline": "Fed’s Goolsbee flags October inflation data as ‘borderline disturbing’ - Scotsman Guide",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNa1k3TTBCeHZzUXNTUHpYQ0JTTW5ncU4tNDVWV2EwYUZlQVc1TWNrcUhrOFhmb3pqbmphSmJnRkUxSzloR0dTNy1KMHE3ZlJQeWZkUy1XN2N2eGp2SWgzWkhaQW5SX3QzSWFVbW8ydFgzck1iTlc5SkpGVGNZd1ItQnY4LURrTFdSOUVBS0VFdGNqWEdFUEsyQ3ZmREVEa0ttSFo5OVBB?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-11T16:19+00:00",
+    "source": "Seeking Alpha",
+    "headline": "NY Fed's Williams retirement date is debatable - report - Seeking Alpha",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPQlBOSWxUSWZJU3lIYWFaMjl6aWtTaFdCbGR2Q3RmYTVVY0R1Rm5NeHNQQ3p4VER0QU5FUmxhYmdMRV8teGpVdEdQRTJ4LVhuNEFYNTBQOGhNQXNLajB0WDFhSHRQNUNDWG9la0tuc294N2NocG11OHFOWHFselFuNmdLMkpHVG5EZjNyQ1dlXzVmRkthdFFN?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-11T15:34+00:00",
+    "source": "Forex Factory",
+    "headline": "Internal Fed debate emerges over Williams exit date; Fed debate over 2027 vs 2028 departure - Sources - Forex Factory",
+    "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNNGppRk0tcXNpaDF5eERHSWF0U3M5aVdWdkppekVjTFI1Q2tGUnJteFlHN2hZN0kySWtHSkZKb2lOaEZCbDNZX0dSbEZXTTUxMFoxMXZXTHowNWhCd1FpVW9fUDJnTzV1eUJBeEYtRE9yZmdOaEJ6WkhMbldCeEFUc3U3SDFfRWE5cmxnQlRER2tRMlg2anpub9IBngFBVV95cUxQdDFCQkkzeG5oS3V2c1AzOTZ0dDRXYmc5NHQxbjdzczRETlA3YW1XU0JWTHcwQWxKVVdPbl8zb0xaZHlhMjVjeEFsbjZmdWF4bTdGVnpDa1JqcWpEOE0wRUN0dDdYeUlZeUl2WTFSTHUxSXk0RnBwdExXQVRXOWhDOFJ5aF80RlctMHdHQ2hJeHhGaFcyd2p0Tlozcy1jUQ?oc=5"
+   },
+   {
+    "speaker": "Williams",
+    "time_utc": "2026-11-11T15:33+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Retirement Rules Spark Exit Date Debate for NY Fed’s Williams - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPZ2NKVHZEelhYREk2aTlSSjgzbTdwdXdrWDd3NThIUUZ3bGhncVFOODdnLUE2SVY4Tkp4Wm5HSmdZdTZ2cHlhakFPZWxjYWp2MTQxMDIwLUdhWTRudUpjU05sRkFlalRWMlYtT3NfRGRxUmJka3llZmNMeE1mTW1rSWJlcklKNmgwdXVIcWhxeWhNb2Y1RHJLTWpIOUlzYlltRi0wR3hDQVVNOXo5MjhHcGdn?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-11T13:16+00:00",
+    "source": "CNBC",
+    "headline": "Fed's Goolsbee calls inflation report 'borderline disturbing' as central bank weighs more hikes - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTGliNnhINWdOb0RYdm54M2dIWGNuazZhZ01USkpfZzFKUHIwVTZBZ3RjNm5iUzRjcEFJcF94V01McUE5OUtWZFVJVi02b1VzR2RIbjY2QzNUb3I0V01nbzRhS2FEZ29nLUJQOEUzTGtJd3NwNkRlamVubHNuTkhadFVBV0h4QUhEd2xLSFB1eWpGX3VmQWNoOHozbUc?oc=5"
+   },
+   {
+    "speaker": "Paulson",
+    "time_utc": "2026-11-11T09:14+00:00",
+    "source": "Seeking Alpha",
+    "headline": "Fed Speak: Goolsbee calls CPI 'borderline disturbing,' Paulson backs gradual tightening - Seeking Alpha",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLURBZ1FNVG9GUEQ3RXg1NXlMMk95SnZ5UkNZYWNIQTNIc1JyOVNzZkhCNTJ4ZG9lVWsxMkx0VEtJNDIxYVBsX3RMOEhiQWhFaUQ1S2FMZk10YWp6ZFBYZTI3cjM3ZWhFajI5UjZXZGFiXzJXaC0zU0piTEdfVUNEWkVwLUtzYTQ3?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-11T07:05+00:00",
+    "source": "SeekingAlpha",
+    "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case",
+    "url": "https://finnhub.io/api/news?id=0140d7c132707c622469d48a8631c9fa50d89e4019f0bdf07d3aa1b09462a246"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-11T18:24+00:00",
+   "source": "CNBC",
+   "headline": "Bouncing Wynn Shares might be primed for the 'wheel strategy'",
+   "summary": "From a valuation standpoint, WYNN is trading very close to its five-year historical averages across key metrics. So how should traders play this setup?",
+   "url": "https://www.cnbc.com/2026/11/11/bouncing-wynn-shares-might-be-primed-for-the-wheel-strategy.html"
+  },
+  {
+   "time_utc": "2026-11-11T18:10+00:00",
+   "source": "CNBC",
+   "headline": "Meta head of infrastructure will leave and be succeeded by former AWS cloud exec",
+   "summary": "Meta's head of infrastructure and co-head of engineering Santosh Janardhan will leave in 2027, with former AWS senior vice president David Brown taking over.",
+   "url": "https://www.cnbc.com/2026/11/11/meta-infrastructure-departure-aws-cloud.html"
+  },
+  {
+   "time_utc": "2026-11-11T17:34+00:00",
+   "source": "CNBC",
+   "headline": "American Airlines brings fresh food back to NY-Chicago first class for first time since 2019",
+   "summary": "American Airlines' first class food options include sandwiches, fruit and chia bowls",
+   "url": "https://www.cnbc.com/2026/11/11/american-airlines-first-class-chicago-new-york.html"
+  },
+  {
+   "time_utc": "2026-11-11T17:11+00:00",
+   "source": "Reuters",
+   "headline": "Russia and Ukraine say some progress made at talks, US cites a lack of trust - Reuters",
+   "summary": "Russia and Ukraine say some progress made at talks, US cites a lack of trust  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPdEZkalllTkswSW1lWVlXanFsVFBfVnBSUmE0U1VNWTJ4c3BrS3dzTDZWQUhwM3NfOTFMdjVuaHBqZVRTVFBYU2JEOWtpX2VoR1ZtUzZVcDlTN0tKVzVtczFhYThSSHpDTjJXSHV4U1Rqc0doRElpcW1WTGQwdmF6bE1VN3BpU2J4U3V1Rld3S25XNXZxWkVVNVlRZDAzLWpIVGFHWG9Bd2M?oc=5"
+  },
+  {
+   "time_utc": "2026-11-11T16:59+00:00",
+   "source": "CNBC",
+   "headline": "Jim Cramer's plan for our Intel position. Plus, a rotation loser to buy here",
+   "summary": "The Investing Club holds its \"Morning Meeting\" every weekday at 10:20 a.m. ET.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/11/jim-cramers-plan-for-our-intel-position-plus-a-rotation-loser-to-buy-here.html"
+  },
+  {
+   "time_utc": "2026-11-11T16:05+00:00",
+   "source": "CNBC",
+   "headline": "Tired of spending time fixing other people's AI slop at work? How to talk to them about it",
+   "summary": "Executive coach Melody Wilding shares four ways to address the extra work landing on your plate without the conversation becoming confrontational.",
+   "url": "https://www.cnbc.com/make-it/2026/11/11/push-back-coworker-boss-extra-work-ai.html"
+  },
+  {
+   "time_utc": "2026-11-11T15:00+00:00",
+   "source": "CNBC",
+   "headline": "JetBlue's CEO has pushed back on creditor fears and is betting on premium to return to profitability",
+   "summary": "JetBlue will give reporters a look at its new first class seats on Wednesday.",
+   "url": "https://www.cnbc.com/2026/11/11/jetblue-ceo-premium.html"
+  },
+  {
+   "time_utc": "2026-11-11T14:14+00:00",
+   "source": "Reuters",
+   "headline": "OPEC+ oil output in October nears pre-Iran war rate, led by Saudi Arabia - Reuters",
+   "summary": "OPEC+ oil output in October nears pre-Iran war rate, led by Saudi Arabia  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSDZlTWwtdThPTnp0UjFXeXowU3I2SzZTbDA1Zk9BZUJER0dMV1o3S2oza0sxUmxlT2xhb2k4Ykx1TDlORm5zNVdJSk8wVzZBM2VRV2xFUlpJQTdiTTJJY1ZULXJNbjIyaWVudGx5UUNjZWlMaGRJcXZHVjBmUkUxVmVxZC1FUWk0SUFmZkFQZGhaeFVPdWtkV2xIQ0hRT1ZDWGYySlk3RHdRTDloMDlLdQ?oc=5"
+  }
+ ],
+ "voices": [
+  {
+   "name": "Donald Trump",
+   "role": "美国总统",
+   "sectors": "关税 / 制裁 / 能源 / 中概",
+   "headline": "Spy scandal highlights contradictions at heart of Trump’s China policy - The Washington Post",
+   "source": "The Washington Post",
+   "time_utc": "2026-11-11T16:41+00:00"
+  },
+  {
+   "name": "Scott Bessent",
+   "role": "财长",
+   "sectors": "美债 / 美元 / 关税",
+   "headline": "Treasury Secretary Scott Bessent moved to a military base, sources say - ABC News - Breaking News, Latest News and Videos",
+   "source": "ABC News - Breaking News, Latest News and Videos",
+   "time_utc": "2026-11-11T17:40+00:00"
+  },
+  {
+   "name": "Howard Lutnick",
+   "role": "商务部长",
+   "sectors": "关税 / 出口管制 / 半导体",
+   "headline": "Scoop: Inside Bessent's Situation Room confrontation with Lutnick over China chip security - Axios",
+   "source": "Axios",
+   "time_utc": "2026-11-11T15:12+00:00"
+  },
+  {
+   "name": "Jamieson Greer",
+   "role": "贸易代表",
+   "sectors": "关税 / 中概",
+   "headline": "“Hurting Us Badly”: Sen. Peter Welch EXPLODES At Trade Rep Greer Over Trump’s Canada Tariffs - Oneindia",
+   "source": "Oneindia",
+   "time_utc": "2026-11-11T11:34+00:00"
+  },
+  {
+   "name": "Warren Buffett",
+   "role": "伯克希尔",
+   "sectors": "宽基 / 金融 / 消费",
+   "headline": "Is the Stock Market Going to Crash? Warren Buffett's Warning Is Hard to Ignore. - The Motley Fool",
+   "source": "The Motley Fool",
+   "time_utc": "2026-11-11T10:25+00:00"
+  },
+  {
+   "name": "Ray Dalio",
+   "role": "桥水创始人",
+   "sectors": "美债 / 黄金 / 宏观",
+   "headline": "Billionaire investor Ray Dalio says the midterms present new fiscal challenges that will rattle markets - Business Insider",
+   "source": "Business Insider",
+   "time_utc": "2026-11-10T20:38+00:00"
+  },
+  {
+   "name": "Michael Burry",
+   "role": "Scion",
+   "sectors": "个股做空 / AI 估值",
+   "headline": "Michael Burry says he's still bearish after Nvidia's 10% plunge — but the market may see it as a 'heck of a trade' soon - Business Insider",
+   "source": "Business Insider",
+   "time_utc": "2026-11-11T13:29+00:00"
+  },
+  {
+   "name": "Bill Ackman",
+   "role": "潘兴广场",
+   "sectors": "个股 / 美债",
+   "headline": "Seth Klarman’s Baupost Loads Up On AMZN, GOOGL — Takes New Stake In Bill Ackman’s Pershing Square - Stocktwits",
+   "source": "Stocktwits",
+   "time_utc": "2026-11-11T00:12+00:00"
+  },
+  {
+   "name": "Jamie Dimon",
+   "role": "摩根大通 CEO",
+   "sectors": "银行 / 信用 / 宏观",
+   "headline": "JPMorgan's CEO Jamie Dimon Demands Bank Rules for Stablecoin Yield - CoinMarketCap",
+   "source": "CoinMarketCap",
+   "time_utc": "2026-11-09T23:44+00:00"
+  },
+  {
+   "name": "Elon Musk",
+   "role": "特斯拉 CEO",
+   "sectors": "TSLA / 自动驾驶 / AI",
+   "headline": "Elon Musk just exposed AI’s profitability problem - Curzio Research",
+   "source": "Curzio Research",
+   "time_utc": "2026-11-11T18:07+00:00"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 1824.69,
+   "rows_total": 650,
+   "ok": [
+    {
+     "ticker": "HOOD",
+     "expiry": "2026-12-04",
+     "strike": 65.0,
+     "bid": 0.38,
+     "ask": 0.43,
+     "iv": 0.7338604569639666,
+     "ivhv": 1.204629771772762,
+     "z": 1.3082360901016619,
+     "p_otm": 0.9200018621925139,
+     "income": 38.0,
+     "margin": 688.0,
+     "spread": 0.12345679012345676,
+     "mark": "✅⚠谨慎",
+     "spot": 85.7,
+     "t": 0.06329651826484019,
+     "right": "P",
+     "hv30": 0.6092,
+     "move": {
+      "worst_down": -0.1324,
+      "worst_up": 0.1657,
+      "p01": -0.1011,
+      "p99": 0.1129,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 0.7817387327505357,
+       "buyback": 1.3950154396654568,
+       "flat": 0.574792440062506,
+       "loss": 101.5015439665457,
+       "x_credit": 3.671093262277518,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 1.3028978879175597,
+       "buyback": 1.6270408851153473,
+       "flat": 0.7216632439226798,
+       "loss": 124.70408851153474,
+       "x_credit": 4.28168653977723,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −13.2%",
+       "gap": 0.1324,
+       "sigmas": 3.4500736072056974,
+       "buyback": 2.9900404215354897,
+       "flat": 1.7437742497347202,
+       "loss": 261.004042153549,
+       "x_credit": 7.868527425093394,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      38,
+      114,
+      228
+     ],
+     "stop_alert": [
+      81.02,
+      84.76
+     ],
+     "assign_1": 6500,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T17:00+00:00",
+       "source": "Yahoo",
+       "headline": "OKXICE targets Nov. 23 launch for tokenized securities trading"
+      },
+      {
+       "time_utc": "2026-11-11T15:34+00:00",
+       "source": "Yahoo",
+       "headline": "OKXICE to Launch Tokenized Stock Trading with Coinbase, Circle, Strategy"
+      },
+      {
+       "time_utc": "2026-11-11T09:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Robinhood: The Hidden Risk Behind Record Revenue"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 120.0,
+     "bid": 0.54,
+     "ask": 0.65,
+     "iv": 0.4939001197557169,
+     "ivhv": 1.1286565807945999,
+     "z": 1.2854079932856892,
+     "p_otm": 0.9096115219193925,
+     "income": 54.0,
+     "margin": 1254.0,
+     "spread": 0.18487394957983191,
+     "mark": "✅",
+     "spot": 142.81,
+     "t": 0.06329553526128869,
+     "right": "P",
+     "hv30": 0.4376,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 1.088288930511029,
+       "buyback": 2.130921725551751,
+       "flat": 0.982970639092887,
+       "loss": 159.0921725551751,
+       "x_credit": 3.9461513436143534,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 1.8138148841850485,
+       "buyback": 2.6531289593176375,
+       "flat": 1.3505215283803977,
+       "loss": 211.31289593176373,
+       "x_credit": 4.913201776514144,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −9.8%",
+       "gap": 0.0978,
+       "sigmas": 3.5478219134659548,
+       "buyback": 4.34944945029163,
+       "flat": 2.722986004534924,
+       "loss": 380.94494502916297,
+       "x_credit": 8.054536019058572,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      54,
+      162,
+      324
+     ],
+     "stop_alert": [
+      137.69,
+      142.81
+     ],
+     "assign_1": 12000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "XLF",
+     "expiry": "2026-12-04",
+     "strike": 54.5,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.20286236990056727,
+     "ivhv": 1.1170835346947536,
+     "z": 1.3147195133309233,
+     "p_otm": 0.9091252700469441,
+     "income": 11.0,
+     "margin": 787.4,
+     "spread": 0.0869565217391304,
+     "mark": "✅",
+     "spot": 58.42,
+     "t": 0.06329651826484019,
+     "right": "P",
+     "hv30": 0.1816,
+     "move": {
+      "worst_down": -0.0335,
+      "worst_up": 0.0351,
+      "p01": -0.0253,
+      "p99": 0.0218,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 2.622440726826136,
+       "buyback": 0.634200825460665,
+       "flat": 0.3629792399763083,
+       "loss": 52.4200825460665,
+       "x_credit": 5.76546204964241,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 4.370734544710227,
+       "buyback": 1.0102251827317268,
+       "flat": 0.6903875192460411,
+       "loss": 90.02251827317268,
+       "x_credit": 9.183865297561153,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −3.4%",
+       "gap": 0.0335,
+       "sigmas": 2.928392144955852,
+       "buyback": 0.6907106306052704,
+       "flat": 0.4090669771815225,
+       "loss": 58.07106306052704,
+       "x_credit": 6.279187550957004,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "stop_alert": [
+      57.47,
+      58.42
+     ],
+     "assign_1": 5450,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T20:58+00:00",
+       "source": "Yahoo",
+       "headline": "Sector Update: Financial Stocks Advance Late Afternoon"
+      },
+      {
+       "time_utc": "2026-11-10T18:41+00:00",
+       "source": "Yahoo",
+       "headline": "Sector Update: Financial Stocks Advance Tuesday Afternoon"
+      },
+      {
+       "time_utc": "2026-11-10T18:21+00:00",
+       "source": "Yahoo",
+       "headline": "Sector Update: Financial"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 77.5,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.129394526127744,
+     "ivhv": 1.2382251304090335,
+     "z": 1.2818960165946847,
+     "p_otm": 0.9020177452590317,
+     "income": 11.0,
+     "margin": 1291.0,
+     "spread": 0.0869565217391304,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "P",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.8960269573261748,
+       "flat": 0.608164715806403,
+       "loss": 78.60269573261748,
+       "x_credit": 8.145699612056134,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.6643124931228286,
+       "flat": 1.3717983688704365,
+       "loss": 155.43124931228286,
+       "x_credit": 15.130113573843897,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.886274157525008,
+       "buyback": 0.6027506344629359,
+       "flat": 0.35241427113553314,
+       "loss": 49.275063446293586,
+       "x_credit": 5.479551222390326,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "stop_alert": [
+      80.02,
+      80.88
+     ],
+     "assign_1": 7750,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 77.0,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.13361827565281675,
+     "ivhv": 1.2786437861513567,
+     "z": 1.4252818976323005,
+     "p_otm": 0.9255953446519234,
+     "income": 8.0,
+     "margin": 1238.0,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "P",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.751999495045542,
+       "flat": 0.4741830134833549,
+       "loss": 67.1999495045542,
+       "x_credit": 9.399993688069275,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.4269446163181598,
+       "flat": 1.1180507936994815,
+       "loss": 134.69446163181598,
+       "x_credit": 17.836807703976998,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.886274157525008,
+       "buyback": 0.5008635092333371,
+       "flat": 0.26876733297213384,
+       "loss": 42.08635092333371,
+       "x_credit": 6.260793865416714,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "stop_alert": [
+      80.07,
+      80.88
+     ],
+     "assign_1": 7700,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.5,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.13881972611618465,
+     "ivhv": 1.3284184317338243,
+     "z": 1.548894363682402,
+     "p_otm": 0.9423603455281186,
+     "income": 6.0,
+     "margin": 1186.0000000000002,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "P",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.6387762064923237,
+       "flat": 0.37346390198775126,
+       "loss": 57.87762064923236,
+       "x_credit": 10.646270108205396,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.2291977212331275,
+       "flat": 0.9106836781823304,
+       "loss": 116.91977212331275,
+       "x_credit": 20.486628687218793,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.886274157525008,
+       "buyback": 0.42333909990914975,
+       "flat": 0.20866520676460532,
+       "loss": 36.333909990914975,
+       "x_credit": 7.055651665152496,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "stop_alert": [
+      80.1,
+      80.88
+     ],
+     "assign_1": 7650,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.0,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.14673020811796617,
+     "ivhv": 1.40411682409537,
+     "z": 1.6328639909319906,
+     "p_otm": 0.9521124951374218,
+     "income": 5.0,
+     "margin": 1135.0000000000002,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "P",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.5653975784782581,
+       "flat": 0.3083707331721346,
+       "loss": 51.539757847825804,
+       "x_credit": 11.307951569565162,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.0846537251528012,
+       "flat": 0.7582011015487815,
+       "loss": 103.46537251528012,
+       "x_credit": 21.693074503056025,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.886274157525008,
+       "buyback": 0.37709692069949163,
+       "flat": 0.1728628467307427,
+       "loss": 32.70969206994916,
+       "x_credit": 7.541938413989833,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "stop_alert": [
+      80.1,
+      80.88
+     ],
+     "assign_1": 7600,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 30,
+    "⛔报价差": 30,
+    "⛔保证金": 18,
+    "⛔报价过期": 14,
+    "z不够": 8,
+    "⛔基本面": 7,
+    "⛔财报": 3,
+    "⚠链不够宽": 1
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔报价差",
+    "XLE": "⛔IV不贵",
+    "SLV": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔报价过期",
+    "SOFI": "⛔IV不贵",
+    "ORCL": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔IV不贵",
+    "NKE": "z不够",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔报价过期",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔报价过期",
+    "FXI": "⛔IV不贵",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "z不够",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔报价过期",
+    "CVS": "⛔报价过期",
+    "DIS": "⛔报价过期",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔IV不贵",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔保证金",
+    "DKNG": "⛔基本面",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔IV不贵",
+    "KO": "⛔报价差",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔保证金",
+    "ARKK": "⛔报价过期",
+    "JD": "⛔报价过期",
+    "UPS": "⛔报价差",
+    "PDD": "⛔报价过期",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价过期",
+    "SCHW": "⛔报价过期",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔报价过期",
+    "XLU": "⛔报价过期",
+    "BIDU": "⛔财报",
+    "NEM": "⛔保证金"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 1824.69,
+   "rows_total": 628,
+   "ok": [
+    {
+     "ticker": "RIVN",
+     "expiry": "2026-12-04",
+     "strike": 16.0,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.5812491291482365,
+     "ivhv": 1.1478063371805618,
+     "z": 1.245390241649012,
+     "p_otm": 0.8882414211851446,
+     "income": 13.0,
+     "margin": 148.35000000000002,
+     "spread": 0.07407407407407414,
+     "mark": "✅",
+     "spot": 13.535,
+     "t": 0.06329680365296804,
+     "right": "C",
+     "hv30": 0.5064,
+     "move": {
+      "worst_down": -0.1812,
+      "worst_up": 0.2664,
+      "p01": -0.0957,
+      "p99": 0.107,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 0.9404329304731958,
+       "buyback": 0.38803491305748317,
+       "flat": 0.20263839623512503,
+       "loss": 25.803491305748317,
+       "x_credit": 2.984883946596024,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.5673882174553264,
+       "buyback": 0.4642217995176354,
+       "flat": 0.259806024120913,
+       "loss": 33.42217995176354,
+       "x_credit": 3.570936919366426,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +26.6%",
+       "gap": 0.2664,
+       "sigmas": 8.35104442260198,
+       "buyback": 1.9063569304807881,
+       "flat": 1.6411393639692715,
+       "loss": 177.63569304807882,
+       "x_credit": 14.664284080621446,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "stop_alert": [
+      14.21,
+      13.74
+     ],
+     "assign_1": 1600,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T12:27+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Wall Street Lunch: Cancer Could Become History Thanks To AI, Says Anthropic CEO"
+      },
+      {
+       "time_utc": "2026-11-11T01:16+00:00",
+       "source": "Yahoo",
+       "headline": "What Are Rivian Stock Bulls Not Worried About?"
+      },
+      {
+       "time_utc": "2026-11-11T00:50+00:00",
+       "source": "Yahoo",
+       "headline": "Rivian's Deliveries Jumped 58%. Why Didn't Gross Profit Follow?"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 167.0,
+     "bid": 1.12,
+     "ask": 1.3,
+     "iv": 0.5290204546464843,
+     "ivhv": 1.2089132875833737,
+     "z": 1.2726771489305884,
+     "p_otm": 0.8929271987102502,
+     "income": 112.00000000000001,
+     "margin": 1540.1,
+     "spread": 0.14876033057851235,
+     "mark": "✅",
+     "spot": 142.81,
+     "t": 0.06329553526128869,
+     "right": "C",
+     "hv30": 0.4376,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.088288930511029,
+       "buyback": 3.6513759440066167,
+       "flat": 1.894386387513066,
+       "loss": 253.13759440066167,
+       "x_credit": 3.26015709286305,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8138148841850485,
+       "buyback": 4.443307720716803,
+       "flat": 2.4880702160644397,
+       "loss": 332.33077207168026,
+       "x_credit": 3.9672390363542878,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.694152920270905,
+       "buyback": 8.688362189609649,
+       "flat": 6.14937204012049,
+       "loss": 756.8362189609649,
+       "x_credit": 7.757466240722899,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      112,
+      336,
+      672
+     ],
+     "stop_alert": [
+      148.83,
+      143.69
+     ],
+     "assign_1": 16700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 168.0,
+     "bid": 1.1,
+     "ask": 1.24,
+     "iv": 0.5374760947207469,
+     "ivhv": 1.2282360482649608,
+     "z": 1.3044392467677453,
+     "p_otm": 0.8977732271313992,
+     "income": 110.00000000000001,
+     "margin": 1538.1,
+     "spread": 0.11965811965811958,
+     "mark": "✅",
+     "spot": 142.81,
+     "t": 0.06329553526128869,
+     "right": "C",
+     "hv30": 0.4376,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.088288930511029,
+       "buyback": 3.579403408774752,
+       "flat": 1.8272991196845396,
+       "loss": 247.9403408774752,
+       "x_credit": 3.254003098886138,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8138148841850485,
+       "buyback": 4.350501951604905,
+       "flat": 2.3973581927754104,
+       "loss": 325.05019516049043,
+       "x_credit": 3.9550017741862766,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.694152920270905,
+       "buyback": 8.484170021920818,
+       "flat": 5.91944423876285,
+       "loss": 738.4170021920818,
+       "x_credit": 7.712881838109833,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      110,
+      330,
+      660
+     ],
+     "stop_alert": [
+      149.02,
+      143.83
+     ],
+     "assign_1": 16800,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 172.0,
+     "bid": 0.81,
+     "ask": 0.95,
+     "iv": 0.5473290991458746,
+     "ivhv": 1.25075205472092,
+     "z": 1.4843639526055346,
+     "p_otm": 0.9221174638414957,
+     "income": 81.0,
+     "margin": 1509.1000000000001,
+     "spread": 0.15909090909090898,
+     "mark": "✅",
+     "spot": 142.81,
+     "t": 0.06329553526128869,
+     "right": "C",
+     "hv30": 0.4376,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.088288930511029,
+       "buyback": 2.992231096124172,
+       "flat": 1.3969798045212656,
+       "loss": 218.2231096124172,
+       "x_credit": 3.6941124643508294,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8138148841850485,
+       "buyback": 3.6568000442714776,
+       "flat": 1.8527378645755803,
+       "loss": 284.68000442714776,
+       "x_credit": 4.514567955890713,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.694152920270905,
+       "buyback": 7.2859143773292345,
+       "flat": 4.769491759287554,
+       "loss": 647.5914377329234,
+       "x_credit": 8.994956021394117,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      81,
+      243,
+      486
+     ],
+     "stop_alert": [
+      148.57,
+      142.9
+     ],
+     "assign_1": 17200,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 177.5,
+     "bid": 0.59,
+     "ask": 0.71,
+     "iv": 0.5713179639232469,
+     "ivhv": 1.305571215546725,
+     "z": 1.689978822819806,
+     "p_otm": 0.9434887969734658,
+     "income": 59.0,
+     "margin": 1487.1000000000001,
+     "spread": 0.18461538461538463,
+     "mark": "✅",
+     "spot": 142.81,
+     "t": 0.06329553526128869,
+     "right": "C",
+     "hv30": 0.4376,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.088288930511029,
+       "buyback": 2.4820795295746905,
+       "flat": 1.0393708866708735,
+       "loss": 189.20795295746905,
+       "x_credit": 4.206914456906255,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8138148841850485,
+       "buyback": 3.0386309852870923,
+       "flat": 1.3864763528109982,
+       "loss": 244.86309852870926,
+       "x_credit": 5.150222008961173,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.694152920270905,
+       "buyback": 6.118521880490732,
+       "flat": 3.6723165049562283,
+       "loss": 552.8521880490732,
+       "x_credit": 10.37037606862836,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      59,
+      177,
+      354
+     ],
+     "stop_alert": [
+      148.33,
+      142.81
+     ],
+     "assign_1": 17750,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-04",
+     "strike": 58.5,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.46990850668050077,
+     "ivhv": 1.120163305555425,
+     "z": 2.0856451112038688,
+     "p_otm": 0.9727823950385488,
+     "income": 7.000000000000001,
+     "margin": 476.28700000000003,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 46.9287,
+     "t": 0.06329651826484019,
+     "right": "C",
+     "hv30": 0.4195,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.1352449010527446,
+       "buyback": 0.4197942422447367,
+       "flat": 0.14110262710034283,
+       "loss": 34.97942422447367,
+       "x_credit": 5.997060603496238,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8920748350879077,
+       "buyback": 0.5468452212335579,
+       "flat": 0.20729569813426796,
+       "loss": 47.68452212335579,
+       "x_credit": 7.812074589050827,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.4246554515091128,
+       "buyback": 0.8898747681701256,
+       "flat": 0.4165026957103244,
+       "loss": 81.98747681701255,
+       "x_credit": 12.71249668814465,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "stop_alert": [
+      48.32,
+      46.93
+     ],
+     "assign_1": 5850,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T15:05+00:00",
+       "source": "Yahoo",
+       "headline": "Could Silver Skyrocket Before the End of 2026?"
+      },
+      {
+       "time_utc": "2026-11-09T13:09+00:00",
+       "source": "SeekingAlpha",
+       "headline": "The Precious Metals Sector's Impressive Relative Breakout - And What It Portends"
+      },
+      {
+       "time_utc": "2026-11-09T12:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Gold And Silver Bounce Back As Tech Stocks Stumble"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.0,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.11746675331285991,
+     "ivhv": 1.124083763759425,
+     "z": 1.307464728075128,
+     "p_otm": 0.9027899334799676,
+     "income": 11.0,
+     "margin": 1316.0,
+     "spread": 0.0869565217391304,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "C",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.962845331631506,
+       "flat": 0.6759659311333834,
+       "loss": 85.2845331631506,
+       "x_credit": 8.753139378468235,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.8053464827862058,
+       "flat": 1.5218172784495394,
+       "loss": 169.53464827862058,
+       "x_credit": 16.41224075260187,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8407014076693504,
+       "buyback": 0.6276336269993621,
+       "flat": 0.3782228209367702,
+       "loss": 51.76336269993621,
+       "x_credit": 5.705760245448746,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "stop_alert": [
+      81.65,
+      80.88
+     ],
+     "assign_1": 8400,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.5,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.1212117637960374,
+     "ivhv": 1.1599211846510757,
+     "z": 1.469799736982141,
+     "p_otm": 0.9268964461907092,
+     "income": 8.0,
+     "margin": 1263.0,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "C",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.812727778090995,
+       "flat": 0.531329214394443,
+       "loss": 73.2727778090995,
+       "x_credit": 10.159097226137437,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.559427013970776,
+       "flat": 1.2534131204383883,
+       "loss": 147.9427013970776,
+       "x_credit": 19.4928376746347,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8407014076693504,
+       "buyback": 0.5236152848811102,
+       "flat": 0.28985928210526524,
+       "loss": 44.36152848811102,
+       "x_credit": 6.5451910610138775,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "stop_alert": [
+      81.61,
+      80.88
+     ],
+     "assign_1": 8450,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.0,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.1257336551461007,
+     "ivhv": 1.20319287221149,
+     "z": 1.6123797576669352,
+     "p_otm": 0.9439047193049541,
+     "income": 6.0,
+     "margin": 1211.0000000000002,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "C",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.6941284243849211,
+       "flat": 0.42171461991626913,
+       "loss": 63.4128424384921,
+       "x_credit": 11.568807073082018,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.3534747460663539,
+       "flat": 1.0319902864211912,
+       "loss": 129.3474746066354,
+       "x_credit": 22.55791243443923,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8407014076693504,
+       "buyback": 0.4442290465393519,
+       "flat": 0.22608338922167626,
+       "loss": 38.42290465393519,
+       "x_credit": 7.4038174423225325,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "stop_alert": [
+      81.58,
+      80.88
+     ],
+     "assign_1": 8500,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.5,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.13262237220250217,
+     "ivhv": 1.2691136095933222,
+     "z": 1.7139173316585417,
+     "p_otm": 0.9538497355580513,
+     "income": 5.0,
+     "margin": 1160.0000000000002,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.875,
+     "t": 0.06329677194317605,
+     "right": "C",
+     "hv30": 0.1045,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.557274985565802,
+       "buyback": 0.6167480600085327,
+       "flat": 0.3500593845496489,
+       "loss": 56.67480600085326,
+       "x_credit": 12.334961200170653,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.595458309276338,
+       "buyback": 1.2019633050624705,
+       "flat": 0.8671805303810771,
+       "loss": 115.19633050624705,
+       "x_credit": 24.03926610124941,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.8407014076693504,
+       "buyback": 0.3967510611703524,
+       "flat": 0.187841890506812,
+       "loss": 34.67510611703524,
+       "x_credit": 7.935021223407048,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "stop_alert": [
+      81.57,
+      80.88
+     ],
+     "assign_1": 8550,
+     "pressure": [],
+     "fed_channel": "Fed debates if New York Fed's John Williams must retire in 2027 - qz.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T11:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "What Do The Midterm Results Mean For Rates?"
+      },
+      {
+       "time_utc": "2026-11-11T10:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Inflation Fears Push Treasury Yields Further Above Fair Value"
+      },
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 38,
+    "⛔保证金": 17,
+    "⛔报价差": 17,
+    "⛔报价过期": 14,
+    "z不够": 8,
+    "⛔财报": 3
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔IV不贵",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔报价过期",
+    "SOFI": "⛔IV不贵",
+    "HOOD": "⛔IV不贵",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔IV不贵",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔IV不贵",
+    "PFE": "⛔报价过期",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔报价过期",
+    "FXI": "⛔IV不贵",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔IV不贵",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "F": "z不够",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔报价过期",
+    "CVS": "⛔报价过期",
+    "DIS": "⛔报价过期",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔IV不贵",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔IV不贵",
+    "C": "⛔保证金",
+    "DKNG": "⛔IV不贵",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔保证金",
+    "ARKK": "⛔报价过期",
+    "JD": "⛔报价过期",
+    "UPS": "⛔保证金",
+    "PDD": "⛔报价过期",
+    "MP": "⛔IV不贵",
+    "SLB": "⛔报价过期",
+    "SCHW": "⛔报价过期",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔报价过期",
+    "XLU": "⛔报价过期",
+    "BIDU": "⛔财报",
+    "NEM": "⛔保证金"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-11_1836Z.md",
+  "report_sha256": "87b7829ed5fbc09ab1bd67f2914fffe99318746e16925b4793bd419a4ea6069e",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天可以开新仓（见候选）"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=True why_not=[]｜首行：结论：今天可以开新仓（见候选）"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V12",
+    "check": "当天公布的宏观数据写出了实际值",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T18:32:13+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T18:33:03.068407Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T18:34:23+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T18:35:40+00:00"
+     },
+     "quote_age_min": 4.4
+    }
+   }
+  ]
+ }
+}
