@@ -232,5 +232,20 @@ class FedSpeakFilter(unittest.TestCase):
         self.assertIn("同姓误匹配", src)  # 过滤仍在生产代码里
 
 
+class StopAlert(unittest.TestCase):
+    """第 8 条（11/11）：平台无期权条件单，止损提醒价 = 期权涨到 2× 收入时的正股价。"""
+    def test_call_alert_reprices_to_double_credit(self):
+        s, k, t, iv, cr = 83.4, 108, 23 / 365, 0.65, 0.42
+        base, shock = gs.stop_alert("C", s, k, t, iv, cr)
+        self.assertAlmostEqual(gs.bs("C", base, k, iv, t), 2 * cr, places=3)
+        self.assertAlmostEqual(gs.bs("C", shock, k, iv + gs.ALERT_IV_BUMP, t), 2 * cr, places=3)
+        self.assertTrue(s < shock < base < k)  # IV 升时更早触发
+
+    def test_put_alert_below_spot(self):
+        base, shock = gs.stop_alert("P", 47.2, 40, 23 / 365, 0.40, 0.18)
+        self.assertTrue(40 < base < shock < 47.2)
+        self.assertAlmostEqual(gs.bs("P", base, 40, 0.40, 23 / 365), 0.36, places=3)
+
+
 if __name__ == "__main__":
     unittest.main()

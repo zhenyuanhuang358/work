@@ -142,6 +142,7 @@ def cmd_run(a):
         for x in res["ok"]:
             x["gap"] = gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])
             x["stop_loss_1_3_6"] = [round(x["bid"] * 100 * n) for n in (1, 3, 6)]  # 2× 止损成交 = 亏 1× 收入 × 张数
+            x["stop_alert"] = gs.stop_alert(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"])
             x["assign_1"] = round(x["strike"] * 100)  # R5 接货金额（每张）：只提示，profile 1.1t
             x["pressure"] = [n.get("headline") for n in news.get("tickers", {}).get(x["ticker"], [])
                              if PRESSURE_RE.search(n.get("headline") or "")]
@@ -227,6 +228,10 @@ def draft(s, gs):
                      f"｜z {x['z']:.2f}｜报价差 {x['spread']:.0%}{'｜' + x['mark'][1:] if len(x['mark']) > 1 else ''}")
             L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}"
                      + (f"｜接货 ${x['assign_1']:,}/张（只提示）" if r_ == "P" else f"｜被行权需按 ${x['strike']:g} 交付股票（未持股即卖空，只提示）"))
+            al = x.get("stop_alert")
+            if al:
+                L.append(f"  止损（第 8 条，平台无期权条件单）：正股提醒设 ${al[1]:.2f}（IV +10 个点时期权到 2× 收入；IV 不变约 ${al[0]:.2f}），"
+                         f"触发后手动看卖价 ≥ {2 * x['bid']:.2f} 即买回｜止盈：挂限价买回 {0.5 * x['bid']:.2f}")
             if x["pressure"]:
                 L.append(f"  ⚠ 事件压力初筛命中（第 4 条，人工判断是否只观察）：{'；'.join(x['pressure'][:2])}")
             L.append(f"  跳空：{gs.fmt(x['gap'])}")

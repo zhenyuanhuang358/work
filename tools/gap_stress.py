@@ -21,6 +21,7 @@ from statistics import NormalDist
 
 N = NormalDist()
 IV_SHOCK = 1.3
+ALERT_IV_BUMP = 0.10  # 止损提醒价按 IV +10 个点算（×1.3 在高 IV 标的上常常直接落在现价，提醒失去意义：HOOD 11/11 实测）
 
 
 def bs(right, s, k, sig, t):
@@ -37,6 +38,26 @@ def implied(right, px, s, k, t):
         m = (lo + hi) / 2
         lo, hi = (m, hi) if bs(right, s, k, m, t) < px else (lo, m)
     return (lo + hi) / 2
+
+
+def stop_alert(right, s, k, t, iv, credit, mult=2.0):
+    """第 8 条（11/11 改）：盈立没有期权条件单，止损靠正股价格提醒 + 手动买回。
+    返回 (IV 不变, IV +10 个点) 两种情形下期权涨到 mult × 收入时的正股价；提醒价取离现价更近的后者。"""
+    target = mult * credit
+    out = []
+    for sig in (iv, iv + ALERT_IV_BUMP):
+        lo, hi = (s, k * 3) if right == "C" else (k * 0.2, s)
+        if (bs(right, s, k, sig, t) >= target):
+            out.append(round(s, 2)); continue
+        for _ in range(80):
+            m = (lo + hi) / 2
+            v = bs(right, m, k, sig, t)
+            if right == "C":
+                lo, hi = (m, hi) if v < target else (lo, m)
+            else:
+                lo, hi = (lo, m) if v < target else (m, hi)
+        out.append(round((lo + hi) / 2, 2))
+    return out
 
 
 def scenarios(r):
