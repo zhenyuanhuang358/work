@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-10T17:16:55+00:00",
+ "updated_at": "2026-11-11T15:35:40+00:00",
  "schedule": [
   {
    "time": "2026-11-09T08:40:00-05:00",
@@ -82,6 +82,11 @@
    "title": "FOMC Member Collins Speaks"
   },
   {
+   "time": "2026-11-13T09:40:00-05:00",
+   "speaker": "Logan",
+   "title": "FOMC Member Logan Speaks"
+  },
+  {
    "time": "2026-11-13T10:50:00-05:00",
    "speaker": "Bowman",
    "title": "FOMC Member Bowman Speaks"
@@ -125,6 +130,12 @@
  ],
  "board": [
   {
+   "time_utc": "2026-11-10T20:30+00:00",
+   "title": "Bowman, The U.S. Economy and Considerations for Monetary Policy",
+   "where": "Speech At the C. Peter McColough Series on International Economics Council on Foreign Relations, Washington, D.C.",
+   "url": "https://www.federalreserve.gov/newsevents/speech/bowman20261110a.htm"
+  },
+  {
    "time_utc": "2026-11-10T09:00+00:00",
    "title": "Waller, The Economic Outlook and Some Thoughts on Labor Market Dynamism",
    "where": "Speech At the Bank of England Watchers Conference  King’s Business School and Money, Macro and Finance Society, London, United Kingdom",
@@ -133,18 +144,179 @@
  ],
  "headlines": [
   {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-11T15:22+00:00",
+   "source": "SchiffGold.com",
+   "headline": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQRlc4MVlQUW9iY1JfQTVHRmlFcTZNYjA5bWJ5VzBaNm1TYUhvVFVsZFdCTHVOcEFUYkNVTUdKUWlyd1RsTGZIZEM1em9Xcnh5LUpTWkx0SDZhN0Z3M2V1Y3dzWExEVnA0Y1I2N09QTmxMT1ZtbXBDOWF5N0JIejNURmQ5ZkRRRzJCR0J1cHk2NllkYXNyQXh6WW1zZGtkcHhvRDhBcGlLU0J3bnhvcElVSmZZelN4TGM?oc=5"
+  },
+  {
+   "speaker": "Goolsbee",
+   "time_utc": "2026-11-11T13:16+00:00",
+   "source": "CNBC",
+   "headline": "Fed's Goolsbee calls inflation report 'borderline disturbing' as central bank weighs more hikes - CNBC",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTGliNnhINWdOb0RYdm54M2dIWGNuazZhZ01USkpfZzFKUHIwVTZBZ3RjNm5iUzRjcEFJcF94V01McUE5OUtWZFVJVi02b1VzR2RIbjY2QzNUb3I0V01nbzRhS2FEZ29nLUJQOEUzTGtJd3NwNkRlamVubHNuTkhadFVBV0h4QUhEd2xLSFB1eWpGX3VmQWNoOHozbUc?oc=5"
+  },
+  {
+   "speaker": "Goolsbee",
+   "time_utc": "2026-11-11T09:14+00:00",
+   "source": "Seeking Alpha",
+   "headline": "Fed Speak: Goolsbee calls CPI 'borderline disturbing,' Paulson backs gradual tightening - Seeking Alpha",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLURBZ1FNVG9GUEQ3RXg1NXlMMk95SnZ5UkNZYWNIQTNIc1JyOVNzZkhCNTJ4ZG9lVWsxMkx0VEtJNDIxYVBsX3RMOEhiQWhFaUQ1S2FMZk10YWp6ZFBYZTI3cjM3ZWhFajI5UjZXZGFiXzJXaC0zU0piTEdfVUNEWkVwLUtzYTQ3?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-11T09:14+00:00",
+   "source": "Seeking Alpha",
+   "headline": "Fed Speak: Goolsbee calls CPI 'borderline disturbing,' Paulson backs gradual tightening - Seeking Alpha",
+   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLURBZ1FNVG9GUEQ3RXg1NXlMMk95SnZ5UkNZYWNIQTNIc1JyOVNzZkhCNTJ4ZG9lVWsxMkx0VEtJNDIxYVBsX3RMOEhiQWhFaUQ1S2FMZk10YWp6ZFBYZTI3cjM3ZWhFajI5UjZXZGFiXzJXaC0zU0piTEdfVUNEWkVwLUtzYTQ3?oc=5"
+  },
+  {
    "speaker": "Waller",
-   "time_utc": "2026-11-10T16:36+00:00",
+   "time_utc": "2026-11-11T07:05+00:00",
+   "source": "SeekingAlpha",
+   "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case",
+   "url": "https://finnhub.io/api/news?id=0140d7c132707c622469d48a8631c9fa50d89e4019f0bdf07d3aa1b09462a246"
+  },
+  {
+   "speaker": "Barkin",
+   "time_utc": "2026-11-11T02:12+00:00",
+   "source": "TOKENPOST",
+   "headline": "Richmond Fed’s Tom Barkin Says Rates May Need to Rise Further - TOKENPOST",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5kVkltTElielNaaWxCWVlJcWxKRk1aSG5pOEswX2huc2daY0RtcjEtQ01CLThEeERfQWNBZ3VJcmNiMDhjUmYtaW1TbTB1dFdWUFFrSnhqaGhtRjg?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-11T02:00+00:00",
+   "source": "Investing.com",
+   "headline": "Fed’s Paulson says more, gradual rate hikes needed to curb inflation - Investing.com",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPV2hIWV9SZXNkalhmNFZEZGNFc1c3N0ZVZll2ZnpUZjcwaVFIS01zRU8zVTlwMEx0VjR3blc2cjg0T2VjQmdkV2dZX3ROeE5kWFFsczczc2pwYXVLMm1DQ2ZnVVZIajE5Q3NmdlhWa21kbmNSZDNPNU5aaHcza09mdXNXX3VDQ0FkeTZ4czQwVlBUUC1BY1hYQ3lWdkgwMjUydXVlcTRZY0ViNkhnQXNObHgxaTBVY1ZaVXc?oc=5"
+  },
+  {
+   "speaker": "Goolsbee",
+   "time_utc": "2026-11-11T00:51+00:00",
    "source": "Bloomberg.com",
-   "headline": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOZkZoTlZOa05oRHYwaUNCM1pDVHdhNnF3ajlxMzBBd1R0Z3plbEVKbm4xemxmbm1penlwS1hrY09URU4zbDZoZFlWV213ZnZkWVlseUE1U0JyeE8zQWpqcU9YVUlKbUJldG9NT21UVkpmN2F6eFlWZWtiZlhrZUZGLUFpUTRlcmdWYnduUDB5MTNOY0xFQW5TSDZfaDNac0N5VVpuUE43WTJYeEZIZTBDbFRKdw?oc=5"
+   "headline": "Fed’s Goolsbee Says October CPI Report ‘Borderline Disturbing’ - Bloomberg.com",
+   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxObGpsRG5EcFB6RTE5NmYzZnphSEE4V1MxbXJqZm1oQ0hWWUhobUJ5Wm9XX0dfUGpDcFdCYmhWNFAxTUVfUjU1Tlp3cnlOSndhX2pXbjE3eWctdWozbkY0VmcyVXIzcTZRaXhQUE5tZTFNMkx5T0ZUUUp5cVd0WFh3Uk9kVHpKaGYtSkdhNjE3bFF1ak1mME13Y24zN283WkJkQUVIbDRXMnRrSUNsTEJaeGNPV2psbDQ4M0taNQ?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-11T00:12+00:00",
+   "source": "Myrtle Beach Sun News",
+   "headline": "Fed's Paulson calls for gradual rate hikes amid ongoing high inflation - Myrtle Beach Sun News",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5QVVdGSGltY2lFMUZHdmpXN3V5eEdKRVpNMVgyNVU1NlpRaXo0bXVCam1CMGdBUXNmUWhkZ0Z5LS1xMWloNGJxS2gwUjBJSTVEMzdybTdONDlFMmRJRVNCWGdsSEltd0Z1YlAtVjVUeEhQazJoOWNjMg?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-10T23:58+00:00",
+   "source": "WSJ",
+   "headline": "Fed’s Paulson Urges Gradual Approach to Rate Hikes - WSJ",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQRHhlMkc2YmRSN3F5b3Ftd3RNQ2N0cV9HUV9ZVV9ORGtvUjdhWWVqdlExbVM0SEZSWi05cmdrb3psM2xXQlNTeThfUk9hdlI2SnU3dW04SGk3TkkyeHFoUVFUUUc1VGpubDJNMFdOdjVRRXZSTEg4ay1naXI0eGsyYkFQcE4wUUxQYl9qUWRuMGpvNXZJbTRzdV9SNGpBTHVqRS1sSw?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-10T23:34+00:00",
+   "source": "Reuters",
+   "headline": "Fed's Paulson calls for gradual rate hikes amid ongoing high inflation - Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOc1l4X293em5tbkV6SmFadllsbWlmU25jQmxZeWtMRHFDREhLcE5wVXZiM29uVnZ6eGRPUnAtWmVMcndFTmZkUVhERG1yQVpKQTFlNzlWNy1TalhycGcyb01xOFFzWnZwLWhYRWZ4UkZ0LU5hV3V0Z0UzbFV5RE5DOFdYVEdHN0liaktqTlNfdWxuekZ4Rk1tOGFIMUp1OVZlbGpIa3Mzamc2Y1NxRWZZ?oc=5"
+  },
+  {
+   "speaker": "Paulson",
+   "time_utc": "2026-11-10T23:30+00:00",
+   "source": "Bloomberg.com",
+   "headline": "Fed’s Paulson Says Gradual Tightening Seems Appropriate for Now - Bloomberg.com",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPMjBxR0x4NjlidlNkNFJpTFdvcF9Xa0lIQ0Itcklrd1lJeDd0bjA0NE5pTzg2X21VcGxJZ21FVFJkb01zYmI1QVN5d3dIakVjQWh3c2lGQ0JiVXh3ek1jV2N5a21ETWVqMWNKSnlTTm5tNmh5YWJFZEg1Q2NKQVFLZ2dGVm5TaEliQUg4UXJNWHNKV3dXQ2h5ZUc4X3o5M3dDdlVWd09nWk1BcmJNWHlRV2psZ0Y?oc=5"
   },
   {
    "speaker": "Logan",
-   "time_utc": "2026-11-10T16:00+00:00",
+   "time_utc": "2026-11-10T23:25+00:00",
+   "source": "EnergyNow.com",
+   "headline": "Fed’s Logan Warns US Oil Production Won’t Fill Global Supply Gap - EnergyNow.com",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNYXllZ1RYeVh5Y0NtdGZ0T0VjYlZfckppQjBkaGJzZk80ejNkZkRoTXJvNzI3NHNYeW95c0NtY2x3MGFMNml4SXV5RXlWeW5vVzNfUWpwT3J1T1p5OWV0Y3paU0MtdU8zNUpnSk5OUHZtcTNOeEJTZDJhWk1ia1IybWxjU0l5N2NsOV9vSUVKSjU4QmdjOVJZeA?oc=5"
+  },
+  {
+   "speaker": "Schmid",
+   "time_utc": "2026-11-10T22:41+00:00",
+   "source": "www.tmgm.com",
+   "headline": "Fed’s Schmid warns inflation goes beyond energy as policy stays loose - www.tmgm.com",
+   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPUDV6V3FudlE2a280QnQzdGZtNlJFMXpGdjgzaUxXeGxpUUZsXy00LXNJU3NQVDdKTVhkVmhjOG1MbDVDZFlwSHN5N1ZHV2JyUE1ZeDFYV1NkMXc2M3RHME9ibUZfY2lpcmZwR2NpcWxkRkw5U3ZSRl9lSkdLb2JFWTVnSnZwaUZKUGRIdVo2RGJGenJuX2lrYW9qMy1rWkp0QUpmYS16MVg2RUc2QUM5QXNFVFR3Vy14MEM3aGJQNi03bUR2RU5XelFLQUVJTGc?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T22:02+00:00",
+   "source": "American Banker",
+   "headline": "Fed's Bowman says 'there is still work to do' on inflation - American Banker",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQd1p6VzBrNFBFdHBuWVBjVFphclp5OVNEM3NTVTJYdzJsSm1qQllxaHNENE54TzRvY3FqeDdlR1pya0F2a3hRQjNfSEZxcEoxN0FCcVNjMTNvLVROLWlocV9IaGtJRkN2SDBzZ2J3SDFVMmtBNVVDWjZxUkJXTU5tcS0tSTR2RmR0aVFZTEREQjkzVTY3Q3c?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T21:43+00:00",
+   "source": "Yahoo Finance",
+   "headline": "Fed's Bowman says inflation is broadening: 'There's more work to do' on rates - Yahoo Finance",
+   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPMDY4QS1wak9TZEl3LTNlWUgyT0V6Um91OXAtc0dDQjN4MmdoNHNRdGxnTFNUTWVFMWlJSjdqVVYtSEFhckV4bTRUWUR4aXNCcFg0UC0zSEpMUkhzMHRaN2FZSENiNGR4OWhhR2J4LU0xVnQ2RmJKV2U4a3hGbXJqbjNSalAzcFFKZzNOZFROUWFrQXdrVVVtVzM4ZnVfSnljcDdQck90R1daQWtMbURlNlN6c090a0RRc2pPX3Y2ZUdJSzFDeWRWMjJxaVRCaFdKWXc?oc=5"
+  },
+  {
+   "speaker": "Waller",
+   "time_utc": "2026-11-10T20:55+00:00",
+   "source": "The Hill",
+   "headline": "Fed’s Waller opens door to half-point rate hike in December - The Hill",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE00OGhHMHZ3Ykhhc295bHlRcGxIR3VxNDk4SUVqMGlyRUNMeHFfVVBueS0wbmhuYndTREtibEFaWG5pS081dFpTZG10NkVUbmU4a3JQSzkwZ1BjMF84WXhwMkNLMTQ2ZEFmUnpxT2JoUdIBdEFVX3lxTE0tZFFPSmY3NFNwX0xMV3JRUzFydVNhT3ZXNkFwTko2c3ZmXzZjMzZZZnlRTXh5ci1mRUpQRExHdFVLNEs4NTBleklIZDFWOTlJOEVKOUhSbzVzcXFzMDRTR2NieTVyMVRHbTVLVjdwcE1sSjRG?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T20:54+00:00",
+   "source": "WSJ",
+   "headline": "Fed’s Bowman: Still Work to Do to Bring Inflation Closer to 2% - WSJ",
+   "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQRnJkMVFRd1dWT055SVFSQmhqNEJqV0NMeFZadEVpcVB2bFZCRkJlay1rRTRpSDM4LWFCNV9hYkl3Y1BCMUFkRTlXVmtlcnFjeHdPZWctVGJvWXFlSU1qYjRWWi1MT1VydVY1YnFjMndrZS1sOGtibWV3QmlPZ0N1OFNpdnJTU2U0R3RhQjVxdUJ2cE9KVV9CSVRxaEczX2F6bjJEYk9HVUlfNE5R?oc=5"
+  },
+  {
+   "speaker": "Waller",
+   "time_utc": "2026-11-10T20:54+00:00",
+   "source": "Bloomberg.com",
+   "headline": "Interest-Rate Hike Debate Sparked by Fed's Waller, Logan After Hot Inflation - Bloomberg.com",
+   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOZkZoTlZOa05oRHYwaUNCM1pDVHdhNnF3ajlxMzBBd1R0Z3plbEVKbm4xemxmbm1penlwS1hrY09URU4zbDZoZFlWV213ZnZkWVlseUE1U0JyeE8zQWpqcU9YVUlKbUJldG9NT21UVkpmN2F6eFlWZWtiZlhrZUZGLUFpUTRlcmdWYnduUDB5MTNOY0xFQW5TSDZfaDNac0N5VVpuUE43WTJYeEZIZTBDbFRKdw?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T20:36+00:00",
+   "source": "CNBC",
+   "headline": "Fed's Bowman: Persistent inflation, firming labor market indicate 'there's still work to do' - CNBC",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNVG1YRTZZa0UyVENiVkVKSERzc3Nkay1JemRDdXJjZlpOVXJXXy1TVmw4b2xHRHZkQlhYS0hMM2lXaVc5ZlBuR0E0WnFWWndVOEV5a2RDOUdtbjRxdDVjeUJZMHplQk5pcTdWYmNRTW5NR0tJRTNUd0xqcmFfdWJZT2tPOTJNZU5vWHFLb3dDcWt2UWUyNENETDFpUnpvR0dOSGNHbTNJZk9BdWEycWg0Mm5laHpBZVRqclFxMk16TXlDdEFLX3RlZw?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T20:31+00:00",
+   "source": "Reuters",
+   "headline": "Fed's Bowman says 'still work to do' on inflation - Reuters",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNcnFXOHU2M2xkVFhGQmpoU3dwaGV2SmMyWUVQX2RaeXc0RGczN0hIMk5SclpOQUFnUXgzb0VzOUZfZHJGT0hOUTlmU0ZRNExfR2hMbHZXWWJ6WDM4aV94anhYQ1dsc3loZ2JUblZKTThMNGgzWUE0bzNzTG1rbFo1c0RoTXlEZzRYc3pwSl93?oc=5"
+  },
+  {
+   "speaker": "Bowman",
+   "time_utc": "2026-11-10T20:30+00:00",
+   "source": "Bloomberg.com",
+   "headline": "Fed’s Bowman Warns of Stock Correction If AI Bets Don’t Pan Out - Bloomberg.com",
+   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZnFNTUx0RzRjMFpzM1FBRlh5TVFiT1dBSm0ybWx1cngzVW9UVllIOHl5OFNKckRDdGZybDRMYjh5dWZiQ3JTYlFsaGZsaFdYTURmdUZ5MldUa2ZDMmlBbEZWMk9KV2ZoSU1sOUx1UnV4d0JZMjJpa2ZybHJmSzlYT3hXenhYelM0ZmNrV2NEMjM3T055UF9iSUJsa2xKQ0Q5S2M2SWlSeW5ZMUpfN1BoekJvbGI?oc=5"
+  },
+  {
+   "speaker": "Schmid",
+   "time_utc": "2026-11-10T19:47+00:00",
    "source": "Investing.com",
-   "headline": "Fed’s Logan calls for two more rate hikes to combat inflation - Investing.com",
-   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPd0RMdmRyZmdjN3NUZC1XcGZGZEhaN0F6bDVZbk1OWEprd0EtSG9RSndsVGRabDVHbXE1ZmVhZk5BQk1GRDNsdXZpZVA2SmRlWkdoNmJDZkZmRzU0blduMExMVUMyckRoczBiM0RjUmZCbUVDMWZqaFJRSjU0MS02N1d3WjZvd3BMTjZXcXZhTVVvcWRmNk41QmVQdWp5TWdIRVNrajQtb2dib09CTVh6R3ZR?oc=5"
+   "headline": "Fed’s Schmid calls for tighter policy to control inflation - Investing.com",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQbWtYd21QRDh1V0hTdFlXazZ5YndJeXlzeDh4NWFaVTI4NUc2YjBMQ0xHN3JxVE82Zlg2emNxeTdtdWxfdzgxc3VDaEVpai10SEw2cWxsUHJjdHlTcGRzT1hCY0lZLVAxQjhaMHp0eUIyU2oya2hndFV2aGFoME1sa0VIOV9rUnJLT0Z3ejBDY3NJUVdzUlJmOEdSZ1ZVeWY4NG83SXBSRDAwVmpiYXc?oc=5"
+  },
+  {
+   "speaker": "Schmid",
+   "time_utc": "2026-11-10T19:34+00:00",
+   "source": "Yahoo Finance",
+   "headline": "Fed’s Schmid calls for tighter policy to control inflation - Yahoo Finance",
+   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQSWgwVnFZc09kallhZXpCMDJQTDc0N1NWaXdrYTBfTTFxRWF6UXdxelY4amhqSXdkWVFZZlp3MTgzbEJQMDlGN1dablNvSlY3YmVUdDd4YUdQSHhMV0c1LVJnaS1IX0doeVo3c2hOQVFiNDZHSnpsUzdYZWV6Q1JTaHpLSjc3WUd0WFNiUE5JV0h5aWFoMklwNEJVc0k?oc=5"
+  },
+  {
+   "speaker": "Schmid",
+   "time_utc": "2026-11-10T18:58+00:00",
+   "source": "TradingView",
+   "headline": "Kansas City Fed's Schmid sees no major economic restriction from policy - TradingView",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNeFNQd2NGMjBKajA0NWlaM0VjWTdoZk01WUREYUdBY051RFNmZ01wV3RtMjVPMkRrWEFPdW5iVXlSZE9oNU5JSTVGVUZMcURoSzl5aUlBVjJTVXZ0OWN5Mk10bWdDeUFkY1lLcW5lY011WHdvb0FhNzFYTHFDbTd2bHpqUF9NLWd2MG40T3d4Y29hZmRSeHR2dndIMmN3RllfUXBXNXhRT0h0aE9RMzlfUVdvcmlnbUtoQzVyRGpPTWMwUVRfLWxoYUdrdHdtZw?oc=5"
   },
   {
    "speaker": "Logan",
@@ -156,23 +328,9 @@
   {
    "speaker": "Logan",
    "time_utc": "2026-11-10T15:55+00:00",
-   "source": "CNBC",
-   "headline": "Fed's Logan: Possible to hike rates 'more rapidly this winter' than in the fall - CNBC",
-   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPRHQ0OV84dnRmdVNSemNBaUVoQlIydDNzR0FvVzNFc2FQQzBTOGVENTgwX1hoSGI2T01YcXl6ZEJYYkRtQlI5SENNM0dvVkNmeUh3TzR2U2xxX0dGNjA2Nlo4WWI5Z0JwSVFvWHBFMVVpN3B0cENEbHJ0QnhPTjlrUnFYOTdCMER5TWpWUjVfTm9KZ1VrOG10VS1CbFdfQ0hOdjFqa3BOOHZDQzg0TlRqQnhMS0JLMjlWR2c?oc=5"
-  },
-  {
-   "speaker": "Logan",
-   "time_utc": "2026-11-10T15:50+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Logan Favors at Least Two Hikes, Says Pace Could Quicken - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPZ3hmQUhBdy04d2piMlV6b2lfVmt6dklNYzdoQUZBeUxrVTNtQWMyUVNGNVpBdDZ5MnpLY2g0MldVUXp2cFdqU2JOVmJwcmQ2ODI1dkc2TE85ejN5cXFoei0zNUF3NUFGOUJtZnV5OHV3WXJJX1p2TVh5TmI5SmJ4SUh0Z1V2QmxlQ0R5aUtRVnVKWWFaNXlNcFRoTWYxSFQ1ZzdZb0t0b21LQkxuRU52TVp3?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-10T15:38+00:00",
-   "source": "24/7 Wall St.",
-   "headline": "Fed’s Goolsbee Says AI Data Centers Look Like ‘Old-Fashioned Overheating’ - 24/7 Wall St.",
-   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOMmV6a2NONkpnVnJYYUVIN3RiTVNaRjl4Tm95WVpzcmdHY1RiVFROaUF1RUVDQUV1REE3c1lhdVNoTnB6Z2RHTm5pbHJtMXJvWGxvbkREdVJpMDhpXzhibG9CMGpwM2sxN2hsMm1mRlZsVUZXRldpSmdOcjEyakpVcGNBRDUzbTdOTFpOZkJtN3RMNkVZZ1J4NDJManMtZ0JsRkNQRHV1WGJDUGxhYUlYd3k1bkk?oc=5"
+   "source": "Reuters",
+   "headline": "Fed's Logan calls for two more rate hikes, possibly rapidly - Reuters",
+   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPZ0xfUlI5TmlGa3Z4Z0QtTF9FcVRjZ0hwNEFSOVNTX0otSERvdUdrZzBKazRheFd2Vlc3bWZhazZfY2haNFNKVi1WOWNnWWVfTmgyVk9iSXFqRTR3aHcwRV93UkF0ejRGVFdOdVR4N2NWalZkYkFhS3NTLWtsY1FjazJld1JBX0lBRmM4M1RhdHk3UDBjZFFWOUNQVm40bkU?oc=5"
   },
   {
    "speaker": "Waller",
@@ -180,27 +338,6 @@
    "source": "Reuters",
    "headline": "Fed's Waller plans to support at least a quarter-point rate hike in December - Reuters",
    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNR3RjbDlfcXFBbHp0SVRSeHIzZHFTTnY5bjBuWGszTTMzUmxLUXNzRTFid29sbXV1emJSZWMwTEo4V2dWYjJ3TGlESmRlRzdFcDdQU3RxWi1QVEZrRlNBU0N3NG50WUNBWVdXbnZFS0RuVDNyRVdGWm1aRjFjWGRlRFRoTFhlbFMwQ1NjbTZMd2x0cnlHR0F4d2JNV3dKcHFOOE5TRFVsSlc5ekxoQ0E?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-10T13:41+00:00",
-   "source": "MarketWatch",
-   "headline": "Fed’s Waller puts half-point rate hike into the mix for December - MarketWatch",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQUJIeWdYUTVoMVRrQTYxRklXZ1IyWmp3VlFtajV3b0JHV1oxUkJhcGc1Q1EtV20yc0RyZnlwa2d2bmpPdFVTUEw3MmhHVmJyYWZEWmJMT0MwMGt6X0ZwN3hXbHRpQ1pybEhIX2tqSHRiUTVsX0Q4eWVXWXNNRHdKTVl0aXV4NlJDME4tb2xSdldtV2NCUHkyMmE4SUowb0Ffc05nWFp2V2dqdw?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-10T12:50+00:00",
-   "source": "Benzinga",
-   "headline": "Fed’s Goolsbee Warns AI Data Center Boom Is Starting to Look Like ‘Demand Overheating,’ Says Central Bank - Benzinga",
-   "url": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxQT3dPVF9Eb3BqYWJqQ2NGYUJZSm1WRU80TXJSQTVXenAzNzk1WURNajBubWNIYWxzY1VuTnN2aDVEdnhWdWxSd0U0aXV6Mm1LOXR0cy1JbWxnTFFfWHpyaTkxWmVvR2s2YVRESUVkV2JZVndqdU9aczZ2TDdIdWJpblpja3A3VnNBVDROR19JYjd2Q0RkMkZVb0hZakJBQ0dmS1dLZTVyb1MxUF9JR2h0TXhsQWtFUGw4Szg0WmczX29jZTZ3ekZpNFdpaVlReTBRRXRjcXdDV1VVeWFRZEp3NEc3UFV4emZXYjNrTDRmamtUaEg1WTBHWmRyZW5aNlo5OWV3TmdvZUN3UE5hNVM5NUdDZzUzLVJXQ3hKU1VQSWU3UEZCNFZ4Q1p3?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-10T11:56+00:00",
-   "source": "Barron's",
-   "headline": "Fed’s Waller Backs Big Rate Increase if Inflation Remains Stubborn - Barron's",
-   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHJsWFA4SGF3dHpWLXcwbVhld3doR2cxdC1VQUN6bGFMeWJGWXp1ZUtZendfQnhyRmdMUDY5Zk5DanAxYkREcm1zenlNakM1TWNwUEFtRkhqR2lnWFZkWkRjeHppYkVhZ1NBN3lFdVpjTS1wclZneGNNWU1leTUyalY4S2FMREhnY2lrWUwyckNEYzQ?oc=5"
   },
   {
    "speaker": "Waller",
@@ -231,20 +368,6 @@
    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOb0dkQlJ3Nm5XZEI5OHRFVEUyQ2xrWFJUR3lYSERGSTgzMXd4ejhxVjVJQmFDSThkQWliQXlSOTZ6QVpaVEFZUUtYU3hLaDB0VklwdG1FQjdvZ3gxTVJ6Z0Z5aU1BNlFfd1dEd2lRMmFSYVBIdUdGQndyOEVOZ0ZNdnhPTFk2ZnU5N1ZfazZWWnI0dw?oc=5"
   },
   {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-10T02:24+00:00",
-   "source": "Forex Factory",
-   "headline": "Fed's Barkin: Current policy rate likely around or slightly below neutral - Forex Factory",
-   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQWnNOdDJ1UmVWNUtqNzhkMW11eXRNbWM4QzRuU1pwbV94T2FibVk1SDYwUlRwekYxZlQ0d1dzZUdWNjFWZXBnUmdoYU1UVlBSczBNdVQ2NW1HTlRmdFJNTWs1WWJiTkJhVl9qSV9HelF6WC1UUzVKQXJVMG9UVTZ0NUVJa01oOVVpWWNlQzBTVWdrdV940gGaAUFVX3lxTE56RllZMVVxcjdZMjVHQzFHREo3VXVjR2prYVN1MFBXcVFWNTNCX1RGa1NhS2N6Qi1PWWdUejRQM2lHOWJiY2Y2SEEtdUJfUHdGcWRpc0MxR09mOTM4QmJjSVQxMHdVVU5hNFg4clN6QXZEbFVpMXlSbERKMFduNmpxVEt5U25scURMd3BiUFVQR24taXV0Z0ctb2c?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-09T22:35+00:00",
-   "source": "BigGo Finance",
-   "headline": "Chicago Fed's Goolsbee Warns AI Data Center Boom Is Overheating the U.S. Economy - BigGo Finance",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFAxZmVBUTVweGJZSGV1VWVxU3RrX2wzb0FIYk9vOE5qYUZ1amMzWTc1UUp1SV9iTm93UW9RRlBaV0UyTHJKa05fYmc2UmVPR3IzM2E0TzNuS2o5UF9uZ0xVeEF3WEx0aDIxSWtCc0ZTby03RzBnZFE?oc=5"
-  },
-  {
    "speaker": "Goolsbee",
    "time_utc": "2026-11-09T22:05+00:00",
    "source": "The Hill",
@@ -252,18 +375,11 @@
    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNNU5OTWxiVWpIY0lTb2ZzaWtlWEdROHBhTV9IclRtX3lnRU1QY2pLdGhxT201d0Z1a2tkdXVvenkwNXNsNmNqSjByMXhPMWhsbWswaDdvYUFFNGtUQVRWU2F1M1diV1pud2YzTzIyM0gtNGFmd1ZlWTdsWEwtekY5LWlKZmQwOEd40gGOAUFVX3lxTE5UZ0JSWVotZVdvRERqMl82SG5hSGFUdUtzdzNCVndTUnFwWDlOVEgwcEJQZjF2VFVtZWlnZEJwT3diSVJVcUNGcUxoWDF4UTVydHQ0U0hoX2xacGVMTjgwVzlTM1B3anNBNmhZek5sV2xjNW1MV015VU5BanlaaU1mMUtMeGliR185eTdHeEE?oc=5"
   },
   {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-09T18:46+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Goolsbee Says Officials Must Address Inflation Failure - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNR0Q1dF91TjRsdE8tTy0wZ3hOSEtjYUxwVHJzd2N5YmUxcmFMbG9YMEp2UHZJbUZERUh3cGFrcEthM25rNHF6U0pJTnNuUXJYeGdWRWNvbEJ4TC1yNTNPUGZfT3NRM3JNRjlVOXBhaHRCNDAydEQxQW5hTXFTcXo1NjQ2aXdkRjFhdHNmZDBxUnhjZi11azgwLWJxV2wxTUZPY3dwWmROaE9aX2NJVGlwbw?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-09T18:35+00:00",
-   "source": "American Banker",
-   "headline": "Fed's Goolsbee says AI spending resembles demand shock - American Banker",
-   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOSG4tbWRBSlZGLWJXdmJaUGZ0SHVpRHBudjI3RmZZTXBEQUh3V0ZCZzhtQW15eVRpc1ZwdVl4X1UzRUt1aHNXT3lLek1KUlE2Y2h5UkNyU2hLRi0ybmFpZlEtakZDdE0tSkh4eEg2a1RJMy1ZTS1tLUxEclFxX0cxS2s1Q1dQdXF3WmYwck5LZm51aEE?oc=5"
+   "speaker": "Daly",
+   "time_utc": "2026-11-09T20:13+00:00",
+   "source": "Mortgage Professional America",
+   "headline": "Fed’s Daly signals more rate hikes - Mortgage Professional America",
+   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOQVNvb3Z2enJDNGpJTFhzbTl6ck8yVEpBT2VublJRUi0zNFZUQTBSUVp3QmFJX09LLS1MRlBjbHotVWF6V2hUaTB6N2pNQnJrZjVSTzVOUjNJam1Hank3V3hPaUM4ZHNnN2xONnNYYnpRU2tMR2xLenB4TnR6QzExcm56ZUI0ZVk4Sm9CTGRxNEN4eG1pVFNrNUpiXzh2bEM0V1E?oc=5"
   },
   {
    "speaker": "Barkin",
@@ -273,18 +389,18 @@
    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNTUZwUzlMT0N3OEFwczhQUXNoa3N6cFRqTUVLaVhlQUxiUjVwemYzd3R1VVJOMVV6V2g5NjZqdEJ0QTg0dUtpQU5mWThEdXMzcGJHZGwwdEdjSFlEUEVUZ2FCc3BURkcwQ0ZRNzBGc3E0VXozTEZINFFsNUZQR0E3RXRSZnBHakRGcktPems4cTNvR29EYlBDWjRPSDBLODZ0NTZWZl9oTUJHSDdCZEpZOERsZEk?oc=5"
   },
   {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-09T17:40+00:00",
-   "source": "WSJ",
-   "headline": "Barkin Says Appropriate Direction of Monetary Policy Relatively Straightforward - WSJ",
-   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOMFNTVlVFX2VicmdHVjZRLTRvZHgtQXotblhUV2xRMmNfWjVudTdFUGRZM2pzQkVzTlFoS00zZlBiaU1adENXX3BqN3dhN2xud3Qzdl9SUWRfeVRqOGlkQ2JBSmtkamxfSEhxM1NFOG1pN1piWEpuMFNEYnNHQVBTOEM2REtucnN4T3BQNUVZSExkQVRGaFdUQ3I1WjRzMjZQRF9ORk9vaFAxMHdZNGhwNjQwcVBzblFIelZWd0ZDQzhaNG1Idi0zcmFSWXI?oc=5"
+   "speaker": "Daly",
+   "time_utc": "2026-11-09T18:12+00:00",
+   "source": "RV PRO",
+   "headline": "Federal Reserve’s Mary Daly Says More Rate Hikes Are Likely - RV PRO",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOWl9vY2duRUFxODhyb1hNRDF5TEJ1anotR3BXeW1fMF9FSVpZS1NLTzFMckI1NWFfT3pHcS1xY01EZDFyQl9qUUM4d1dOdTRtTEFSTGtrVGV1Z0JuR2lFMjNBa1gxY1l6QW9IRlZaZkVuYWMxR3I4eVdOT1Z6MU1adkNaTU9MbGZhVC1F?oc=5"
   },
   {
    "speaker": "Barkin",
-   "time_utc": "2026-11-09T17:25+00:00",
-   "source": "Tri-City Herald",
-   "headline": "Fed should move policy 'with care' as it responds to inflation, Barkin says - Tri-City Herald",
-   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNQXoyVjBILTJueExFU1NINDdoMzV4RjFJS1hPckhLcjc1OGl3OGN1UEhhNTBDdHU4bGFPZXBQeEtyVDBrS1VyRW82VzNwdUVhZG03LXNEZnNwS0QySkplRFZNOGduU0xrbVJlQ0IybGJwRXdIc0xwR0JNM2tURmZ5RkU1N0pldw?oc=5"
+   "time_utc": "2026-11-09T17:41+00:00",
+   "source": "WSJ",
+   "headline": "Barkin Says Appropriate Direction of Monetary Policy Relatively Straightforward - WSJ",
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOMFNTVlVFX2VicmdHVjZRLTRvZHgtQXotblhUV2xRMmNfWjVudTdFUGRZM2pzQkVzTlFoS00zZlBiaU1adENXX3BqN3dhN2xud3Qzdl9SUWRfeVRqOGlkQ2JBSmtkamxfSEhxM1NFOG1pN1piWEpuMFNEYnNHQVBTOEM2REtucnN4T3BQNUVZSExkQVRGaFdUQ3I1WjRzMjZQRF9ORk9vaFAxMHdZNGhwNjQwcVBzblFIelZWd0ZDQzhaNG1Idi0zcmFSWXI?oc=5"
   },
   {
    "speaker": "Barkin",
@@ -302,5 +418,5 @@
   }
  ],
  "errors": [],
- "trigger": "scan-2026-11-10T17:12:58+00:00"
+ "trigger": "scan-2026-11-11T15:31:46+00:00"
 }
