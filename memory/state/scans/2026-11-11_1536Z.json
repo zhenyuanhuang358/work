@@ -1,0 +1,1954 @@
+{
+ "id": "2026-11-11_1536Z",
+ "asof": "2026-11-11T15:36:02+00:00",
+ "bp": 5468.69,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T15:32:12+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T15:32:47.984911Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T15:34:21+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-11T15:35:40+00:00"
+  },
+  "quote_age_min": 3.4,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-11T15:32:47.984911Z",
+  "ref_day": "2026-11-10",
+  "readings": {
+   "term_structure": 0.9128256513026051,
+   "skew": 151.12,
+   "vvix": 95.12,
+   "vix": 18.22
+  },
+  "scores": {
+   "term_structure": 0,
+   "skew": 2,
+   "vvix": 0,
+   "vix": 0
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [],
+  "base": 0,
+  "accel": [],
+  "light": 0,
+  "light_name": "🟢 绿灯",
+  "term_premium": 1.0954994511525797,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "Core PPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.7%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "PPI m/m",
+   "forecast": "0.4%",
+   "previous": "1.3%"
+  }
+ ],
+ "event_eve": [],
+ "macro_today": [],
+ "macro_source": "BLS API",
+ "macro_errors": [],
+ "can_open": true,
+ "why_not": [],
+ "scale": [
+  "实盘账本 0 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-09T08:40:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-09T10:00:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-09T12:15:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-10T04:00:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-10T10:50:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-10T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-10T15:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Paulson",
+    "title": "FOMC Member Paulson Speaks"
+   },
+   {
+    "time": "2026-11-12T08:30:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-12T10:00:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-12T11:15:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-12T13:10:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-12T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-12T18:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-13T09:10:00-05:00",
+    "speaker": "Collins",
+    "title": "FOMC Member Collins Speaks"
+   },
+   {
+    "time": "2026-11-13T09:40:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-13T10:50:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-13T12:00:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-13T19:00:00-05:00",
+    "speaker": "Jefferson",
+    "title": "FOMC Member Jefferson Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-11T15:22+00:00",
+    "source": "SchiffGold.com",
+    "headline": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQRlc4MVlQUW9iY1JfQTVHRmlFcTZNYjA5bWJ5VzBaNm1TYUhvVFVsZFdCTHVOcEFUYkNVTUdKUWlyd1RsTGZIZEM1em9Xcnh5LUpTWkx0SDZhN0Z3M2V1Y3dzWExEVnA0Y1I2N09QTmxMT1ZtbXBDOWF5N0JIejNURmQ5ZkRRRzJCR0J1cHk2NllkYXNyQXh6WW1zZGtkcHhvRDhBcGlLU0J3bnhvcElVSmZZelN4TGM?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-11T13:16+00:00",
+    "source": "CNBC",
+    "headline": "Fed's Goolsbee calls inflation report 'borderline disturbing' as central bank weighs more hikes - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQTGliNnhINWdOb0RYdm54M2dIWGNuazZhZ01USkpfZzFKUHIwVTZBZ3RjNm5iUzRjcEFJcF94V01McUE5OUtWZFVJVi02b1VzR2RIbjY2QzNUb3I0V01nbzRhS2FEZ29nLUJQOEUzTGtJd3NwNkRlamVubHNuTkhadFVBV0h4QUhEd2xLSFB1eWpGX3VmQWNoOHozbUc?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-11T09:14+00:00",
+    "source": "Seeking Alpha",
+    "headline": "Fed Speak: Goolsbee calls CPI 'borderline disturbing,' Paulson backs gradual tightening - Seeking Alpha",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLURBZ1FNVG9GUEQ3RXg1NXlMMk95SnZ5UkNZYWNIQTNIc1JyOVNzZkhCNTJ4ZG9lVWsxMkx0VEtJNDIxYVBsX3RMOEhiQWhFaUQ1S2FMZk10YWp6ZFBYZTI3cjM3ZWhFajI5UjZXZGFiXzJXaC0zU0piTEdfVUNEWkVwLUtzYTQ3?oc=5"
+   },
+   {
+    "speaker": "Paulson",
+    "time_utc": "2026-11-11T09:14+00:00",
+    "source": "Seeking Alpha",
+    "headline": "Fed Speak: Goolsbee calls CPI 'borderline disturbing,' Paulson backs gradual tightening - Seeking Alpha",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLURBZ1FNVG9GUEQ3RXg1NXlMMk95SnZ5UkNZYWNIQTNIc1JyOVNzZkhCNTJ4ZG9lVWsxMkx0VEtJNDIxYVBsX3RMOEhiQWhFaUQ1S2FMZk10YWp6ZFBYZTI3cjM3ZWhFajI5UjZXZGFiXzJXaC0zU0piTEdfVUNEWkVwLUtzYTQ3?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-11T07:05+00:00",
+    "source": "SeekingAlpha",
+    "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case",
+    "url": "https://finnhub.io/api/news?id=0140d7c132707c622469d48a8631c9fa50d89e4019f0bdf07d3aa1b09462a246"
+   },
+   {
+    "speaker": "Barkin",
+    "time_utc": "2026-11-11T02:12+00:00",
+    "source": "TOKENPOST",
+    "headline": "Richmond Fed’s Tom Barkin Says Rates May Need to Rise Further - TOKENPOST",
+    "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5kVkltTElielNaaWxCWVlJcWxKRk1aSG5pOEswX2huc2daY0RtcjEtQ01CLThEeERfQWNBZ3VJcmNiMDhjUmYtaW1TbTB1dFdWUFFrSnhqaGhtRjg?oc=5"
+   },
+   {
+    "speaker": "Paulson",
+    "time_utc": "2026-11-11T02:00+00:00",
+    "source": "Investing.com",
+    "headline": "Fed’s Paulson says more, gradual rate hikes needed to curb inflation - Investing.com",
+    "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPV2hIWV9SZXNkalhmNFZEZGNFc1c3N0ZVZll2ZnpUZjcwaVFIS01zRU8zVTlwMEx0VjR3blc2cjg0T2VjQmdkV2dZX3ROeE5kWFFsczczc2pwYXVLMm1DQ2ZnVVZIajE5Q3NmdlhWa21kbmNSZDNPNU5aaHcza09mdXNXX3VDQ0FkeTZ4czQwVlBUUC1BY1hYQ3lWdkgwMjUydXVlcTRZY0ViNkhnQXNObHgxaTBVY1ZaVXc?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-11T00:51+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Fed’s Goolsbee Says October CPI Report ‘Borderline Disturbing’ - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxObGpsRG5EcFB6RTE5NmYzZnphSEE4V1MxbXJqZm1oQ0hWWUhobUJ5Wm9XX0dfUGpDcFdCYmhWNFAxTUVfUjU1Tlp3cnlOSndhX2pXbjE3eWctdWozbkY0VmcyVXIzcTZRaXhQUE5tZTFNMkx5T0ZUUUp5cVd0WFh3Uk9kVHpKaGYtSkdhNjE3bFF1ak1mME13Y24zN283WkJkQUVIbDRXMnRrSUNsTEJaeGNPV2psbDQ4M0taNQ?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-11T15:00+00:00",
+   "source": "CNBC",
+   "headline": "JetBlue's CEO has pushed back on creditor fears and is betting on premium to return to profitability",
+   "summary": "JetBlue will give reporters a look at its new first class seats on Wednesday.",
+   "url": "https://www.cnbc.com/2026/11/11/jetblue-ceo-premium.html"
+  },
+  {
+   "time_utc": "2026-11-11T14:14+00:00",
+   "source": "Reuters",
+   "headline": "OPEC+ oil output in October nears pre-Iran war rate, led by Saudi Arabia - Reuters",
+   "summary": "OPEC+ oil output in October nears pre-Iran war rate, led by Saudi Arabia  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOSDZlTWwtdThPTnp0UjFXeXowU3I2SzZTbDA1Zk9BZUJER0dMV1o3S2oza0sxUmxlT2xhb2k4Ykx1TDlORm5zNVdJSk8wVzZBM2VRV2xFUlpJQTdiTTJJY1ZULXJNbjIyaWVudGx5UUNjZWlMaGRJcXZHVjBmUkUxVmVxZC1FUWk0SUFmZkFQZGhaeFVPdWtkV2xIQ0hRT1ZDWGYySlk3RHdRTDloMDlLdQ?oc=5"
+  },
+  {
+   "time_utc": "2026-11-11T14:13+00:00",
+   "source": "CNBC",
+   "headline": "Jim Cramer's top 10 things to watch in the stock market Wednesday",
+   "summary": "CoreWeave lifts the AI trade, and my advice to Nvidia.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/11/jim-cramers-top-10-things-to-watch-in-the-stock-market-wednesday.html"
+  },
+  {
+   "time_utc": "2026-11-11T13:58+00:00",
+   "source": "Reuters",
+   "headline": "Hoax bomb alerts sent to schools in Italy, UK and Ireland in latest disruption - Reuters",
+   "summary": "Hoax bomb alerts sent to schools in Italy, UK and Ireland in latest disruption  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOLUZHS1hQdFNsS21tSW0zXzRnRDNsVEN2T1hITTBwX1l3d3VCWmw5MXVMaEYwM2ROMXpYNnR6cTNwMlVuSUNsekp2YmZtX1h2VE9wNnc2RThjc05OV2tBc0VNNzNicWNGcGtKVG9VTGo2Yzl5eUFxeE9IQ3JlZWpHb25vcWk5VmlWZkRwbmQzRmhzbDF2cmhWM1F0RmNlTGhtM0Zv?oc=5"
+  },
+  {
+   "time_utc": "2026-11-11T13:27+00:00",
+   "source": "Reuters",
+   "headline": "Gulf markets rise as investors assess Iran war, shipping risks - Reuters",
+   "summary": "Gulf markets rise as investors assess Iran war, shipping risks  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWWkyUzNlRjFqUnhRdUdhVG5sR2Iyam5Sby00V3FXeHc5aDZGdmhjN2JvdlpBRUtTVTBqSWdoMEVzSjVJZklPUEo5SGhwZ2VGVWp3UnhESUlUUVZlUG5ybTk5NF9MMWt6RW5uOTg1MHRrUnk3bm8tVFpPc3oxVnlQYjdzay1NSGJoTFBkODk4SzgzbUJnX25rS3E3SktwcVYwVk81RHBFS0ZXdmFoOHQ0TEdDSVIxQ1ZUQlI4N3N2M1dOWGdhVXJN?oc=5"
+  },
+  {
+   "time_utc": "2026-11-11T12:38+00:00",
+   "source": "CNBC",
+   "headline": "Mortgage rates jump sharply higher, after easing for four straight weeks. Here's why",
+   "summary": "After falling for a month, mortgage rates jumped sharply higher on a hotter-than-expected inflation report.",
+   "url": "https://www.cnbc.com/2026/11/11/mortgage-rates-jump-sharply-higher-after-easing-for-4-straight-weeks.html"
+  },
+  {
+   "time_utc": "2026-11-11T12:27+00:00",
+   "source": "CNBC",
+   "headline": "Consumers are showing signs of strain even as they keep spending, CNBC/NRF Retail Monitor shows",
+   "summary": "Retail sales rose at their slowest pace in nearly a year in October as American consumers showed signs of strain from high prices.",
+   "url": "https://www.cnbc.com/2026/11/11/october-retail-sales-cnbc-nrf-2026.html"
+  },
+  {
+   "time_utc": "2026-11-11T12:04+00:00",
+   "source": "Reuters",
+   "headline": "Iran will not allow enriched nuclear material to leave the country, security chief says - Reuters",
+   "summary": "Iran will not allow enriched nuclear material to leave the country, security chief says  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNSmRMSFZZUld1UEFab291N25WYXZVNENjbmtrWVU0OEEwZm84Z2RONXZHM0JnY2FId2ROLTRvek9lWmZiSFNQNlMwVVpVQ0Q1V3NsSDk1alc5Z0JoMExVY3NpYjVSVDhXd3RtYmo2M2lsdHoydlUteHlDMkp5QlZsWGQxam1JUXFuRkV0UHhOTVB0ZWtxeUhCTkNHNkRMMG5TaUdQaHBUYTlmMkhBRjBWUkZUTlNMVU1ISzFfVlduXzBJd3p0U0psdDNTa1F4Zw?oc=5"
+  }
+ ],
+ "voices": [
+  {
+   "name": "Donald Trump",
+   "role": "美国总统",
+   "sectors": "关税 / 制裁 / 能源 / 中概",
+   "headline": "Spy scandal highlights contradictions at heart of Trump’s China policy - The Washington Post",
+   "source": "The Washington Post",
+   "time_utc": "2026-11-11T14:32+00:00"
+  },
+  {
+   "name": "Scott Bessent",
+   "role": "财长",
+   "sectors": "美债 / 美元 / 关税",
+   "headline": "US Treasury chief Scott Bessent is reportedly latest Trump official to move to military base - The Guardian",
+   "source": "The Guardian",
+   "time_utc": "2026-11-11T08:09+00:00"
+  },
+  {
+   "name": "Howard Lutnick",
+   "role": "商务部长",
+   "sectors": "关税 / 出口管制 / 半导体",
+   "headline": "Scoop: Inside Bessent's Situation Room confrontation with Lutnick over China chip security - Axios",
+   "source": "Axios",
+   "time_utc": "2026-11-11T15:12+00:00"
+  },
+  {
+   "name": "Jamieson Greer",
+   "role": "贸易代表",
+   "sectors": "关税 / 中概",
+   "headline": "“Hurting Us Badly”: Sen. Peter Welch EXPLODES At Trade Rep Greer Over Trump’s Canada Tariffs - Oneindia",
+   "source": "Oneindia",
+   "time_utc": "2026-11-11T11:34+00:00"
+  },
+  {
+   "name": "Warren Buffett",
+   "role": "伯克希尔",
+   "sectors": "宽基 / 金融 / 消费",
+   "headline": "Is the Stock Market Going to Crash? Warren Buffett's Warning Is Hard to Ignore. - The Motley Fool",
+   "source": "The Motley Fool",
+   "time_utc": "2026-11-11T10:25+00:00"
+  },
+  {
+   "name": "Ray Dalio",
+   "role": "桥水创始人",
+   "sectors": "美债 / 黄金 / 宏观",
+   "headline": "Billionaire investor Ray Dalio says the midterms present new fiscal challenges that will rattle markets - Business Insider",
+   "source": "Business Insider",
+   "time_utc": "2026-11-10T20:38+00:00"
+  },
+  {
+   "name": "Michael Burry",
+   "role": "Scion",
+   "sectors": "个股做空 / AI 估值",
+   "headline": "Michael Burry says he's still bearish after Nvidia's 10% plunge — but the market may see it as a 'heck of a trade' soon - Business Insider",
+   "source": "Business Insider",
+   "time_utc": "2026-11-11T13:29+00:00"
+  },
+  {
+   "name": "Bill Ackman",
+   "role": "潘兴广场",
+   "sectors": "个股 / 美债",
+   "headline": "Seth Klarman’s Baupost Loads Up On AMZN, GOOGL — Takes New Stake In Bill Ackman’s Pershing Square - Stocktwits",
+   "source": "Stocktwits",
+   "time_utc": "2026-11-11T00:12+00:00"
+  },
+  {
+   "name": "Jamie Dimon",
+   "role": "摩根大通 CEO",
+   "sectors": "银行 / 信用 / 宏观",
+   "headline": "JPMorgan's CEO Jamie Dimon Demands Bank Rules for Stablecoin Yield - CoinMarketCap",
+   "source": "CoinMarketCap",
+   "time_utc": "2026-11-09T23:44+00:00"
+  },
+  {
+   "name": "Elon Musk",
+   "role": "特斯拉 CEO",
+   "sectors": "TSLA / 自动驾驶 / AI",
+   "headline": "Democrats have been waiting to put Elon Musk under oath. Their chance is coming. - NBC News",
+   "source": "NBC News",
+   "time_utc": "2026-11-10T17:00+00:00"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 714,
+   "ok": [
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-04",
+     "strike": 40.0,
+     "bid": 0.18,
+     "ask": 0.2,
+     "iv": 0.4700055440308111,
+     "ivhv": 1.1148139089914875,
+     "z": 1.2873028608626689,
+     "p_otm": 0.909480399834431,
+     "income": 18.0,
+     "margin": 418.0,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 47.205,
+     "t": 0.06363917427701675,
+     "right": "P",
+     "hv30": 0.4216,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 1.129590218196457,
+       "buyback": 0.6897910861679035,
+       "flat": 0.32118685956214144,
+       "loss": 50.979108616790356,
+       "x_credit": 3.8321727009327975,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 1.8826503636607619,
+       "buyback": 0.8671184582074254,
+       "flat": 0.4471718160054188,
+       "loss": 68.71184582074254,
+       "x_credit": 4.81732476781903,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −28.5%",
+       "gap": 0.2854,
+       "sigmas": 10.746168275775629,
+       "buyback": 6.6508081527828224,
+       "flat": 6.414164711991088,
+       "loss": 647.0808152782822,
+       "x_credit": 36.94893418212679,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      18,
+      54,
+      108
+     ],
+     "assign_1": 4000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T15:05+00:00",
+       "source": "Yahoo",
+       "headline": "Could Silver Skyrocket Before the End of 2026?"
+      },
+      {
+       "time_utc": "2026-11-09T13:09+00:00",
+       "source": "SeekingAlpha",
+       "headline": "The Precious Metals Sector's Impressive Relative Breakout - And What It Portends"
+      },
+      {
+       "time_utc": "2026-11-09T12:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Gold And Silver Bounce Back As Tech Stocks Stumble"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 77.5,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.12696247067612493,
+     "ivhv": 1.2022961238269405,
+     "z": 1.2008483157351395,
+     "p_otm": 0.8865796118538346,
+     "income": 13.0,
+     "margin": 1315.0000000000007,
+     "spread": 0.07407407407407414,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "P",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.9804266174725171,
+       "flat": 0.6905557119063239,
+       "loss": 85.04266174725171,
+       "x_credit": 7.541743211327055,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.7979266593565697,
+       "flat": 1.5183771116922955,
+       "loss": 166.79266593565697,
+       "x_credit": 13.830205071973612,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.856208801717456,
+       "buyback": 0.66367988810104,
+       "flat": 0.40552359007440586,
+       "loss": 53.367988810103995,
+       "x_credit": 5.105229908469538,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "assign_1": 7750,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 77.0,
+     "bid": 0.09,
+     "ask": 0.1,
+     "iv": 0.1296221641623534,
+     "ivhv": 1.227482615173801,
+     "z": 1.3659193494680804,
+     "p_otm": 0.9163626457924816,
+     "income": 9.0,
+     "margin": 1261.0000000000007,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "P",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.8083353129735471,
+       "flat": 0.5290320146014942,
+       "loss": 71.83353129735471,
+       "x_credit": 8.981503477483857,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.5283660676677044,
+       "flat": 1.2312865116000253,
+       "loss": 143.83660676677044,
+       "x_credit": 16.981845196307827,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.856208801717456,
+       "buyback": 0.5382122308830652,
+       "flat": 0.3009254701425732,
+       "loss": 44.821223088306525,
+       "x_credit": 5.980135898700725,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      9,
+      27,
+      54
+     ],
+     "assign_1": 7700,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.5,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.1359526415937372,
+     "ivhv": 1.2874303181225115,
+     "z": 1.4831942422137183,
+     "p_otm": 0.9338508236992615,
+     "income": 7.000000000000001,
+     "margin": 1209.0000000000007,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "P",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.6950051569826492,
+       "flat": 0.4230292161956015,
+       "loss": 62.50051569826491,
+       "x_credit": 9.92864509975213,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.3265063408600994,
+       "flat": 1.0124999935938561,
+       "loss": 125.65063408600994,
+       "x_credit": 18.950090583715703,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.856208801717456,
+       "buyback": 0.46210956268462766,
+       "flat": 0.23834953337200382,
+       "loss": 39.210956268462766,
+       "x_credit": 6.601565181208966,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "assign_1": 7650,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.0,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.13991739757566019,
+     "ivhv": 1.3249753558301154,
+     "z": 1.6169177830764745,
+     "p_otm": 0.9502460514199893,
+     "income": 5.0,
+     "margin": 1157.0000000000007,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "P",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.5803085486981097,
+       "flat": 0.32590838059231686,
+       "loss": 53.03085486981096,
+       "x_credit": 11.606170973962193,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.1298029470391526,
+       "flat": 0.8131173121254527,
+       "loss": 107.98029470391526,
+       "x_credit": 22.596058940783053,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.856208801717456,
+       "buyback": 0.38230949540120385,
+       "flat": 0.1799209150616079,
+       "loss": 33.230949540120385,
+       "x_credit": 7.646189908024077,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "assign_1": 7600,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 37,
+    "⛔报价差": 35,
+    "z不够": 7,
+    "⛔基本面": 6,
+    "⛔报价过期": 6,
+    "⛔财报": 5,
+    "⚠链不够宽": 4
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔报价差",
+    "XLE": "⛔IV不贵",
+    "USO": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔IV不贵",
+    "HOOD": "z不够",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔报价差",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔IV不贵",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔IV不贵",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔IV不贵",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔报价差",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔报价过期",
+    "CCL": "⛔报价差",
+    "EEM": "⛔IV不贵",
+    "BMY": "⛔报价过期",
+    "WFC": "⛔报价差",
+    "C": "⛔报价过期",
+    "DKNG": "⛔报价过期",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔报价差",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔报价过期",
+    "PDD": "⛔财报",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价过期",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔IV不贵",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 720,
+   "ok": [
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 170.0,
+     "bid": 1.12,
+     "ask": 1.3,
+     "iv": 0.5513998973316141,
+     "ivhv": 1.2452572207127688,
+     "z": 1.3098343568604616,
+     "p_otm": 0.8984597214564668,
+     "income": 112.00000000000001,
+     "margin": 1550.0000000000005,
+     "spread": 0.14876033057851235,
+     "mark": "✅",
+     "spot": 143.8,
+     "t": 0.06363831811263318,
+     "right": "C",
+     "hv30": 0.4428,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0755086630343864,
+       "buyback": 3.676707789958563,
+       "flat": 1.8686457907562755,
+       "loss": 255.6707789958563,
+       "x_credit": 3.2827748124630025,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7925144383906442,
+       "buyback": 4.4482260992890374,
+       "flat": 2.436167729865094,
+       "loss": 332.8226099289037,
+       "x_credit": 3.971630445793783,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.639027366554987,
+       "buyback": 8.55662935694287,
+       "flat": 5.911330269838587,
+       "loss": 743.6629356942871,
+       "x_credit": 7.639847640127562,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      112,
+      336,
+      672
+     ],
+     "assign_1": 17000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 171.0,
+     "bid": 1.12,
+     "ask": 1.29,
+     "iv": 0.5639904812005787,
+     "ivhv": 1.2736912402903764,
+     "z": 1.3294710880097396,
+     "p_otm": 0.9012615797624577,
+     "income": 112.00000000000001,
+     "margin": 1550.0000000000005,
+     "spread": 0.1410788381742738,
+     "mark": "✅",
+     "spot": 143.8,
+     "t": 0.06363831811263318,
+     "right": "C",
+     "hv30": 0.4428,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0755086630343864,
+       "buyback": 3.67595245704247,
+       "flat": 1.8482815890465183,
+       "loss": 255.59524570424702,
+       "x_credit": 3.282100408073634,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7925144383906442,
+       "buyback": 4.434418621821543,
+       "flat": 2.400688118981332,
+       "loss": 331.44186218215424,
+       "x_credit": 3.959302340912091,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.639027366554987,
+       "buyback": 8.459658477046396,
+       "flat": 5.770712674369399,
+       "loss": 733.9658477046396,
+       "x_credit": 7.553266497362853,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      112,
+      336,
+      672
+     ],
+     "assign_1": 17100,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 175.0,
+     "bid": 0.9,
+     "ask": 1.04,
+     "iv": 0.5809436819689537,
+     "ivhv": 1.3119776015559026,
+     "z": 1.4804792623826086,
+     "p_otm": 0.9211948071823323,
+     "income": 90.0,
+     "margin": 1528.0000000000002,
+     "spread": 0.1443298969072165,
+     "mark": "✅",
+     "spot": 143.8,
+     "t": 0.06363831811263318,
+     "right": "C",
+     "hv30": 0.4428,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0755086630343864,
+       "buyback": 3.212274819558086,
+       "flat": 1.497846354286171,
+       "loss": 231.22748195580863,
+       "x_credit": 3.569194243953429,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7925144383906442,
+       "buyback": 3.8821000683231333,
+       "flat": 1.9552752585410893,
+       "loss": 298.21000683231335,
+       "x_credit": 4.313444520359037,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.639027366554987,
+       "buyback": 7.474571269039764,
+       "flat": 4.807877675215451,
+       "loss": 657.4571269039764,
+       "x_credit": 8.30507918782196,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      90,
+      270,
+      540
+     ],
+     "assign_1": 17500,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:42+00:00",
+       "source": "Benzinga",
+       "headline": "Iran's IRGC Navy Says Two More Oil Tankers Struck Mines In The Strait Of Hormuz - IRNA"
+      },
+      {
+       "time_utc": "2026-11-11T09:10+00:00",
+       "source": "Benzinga",
+       "headline": "OPEC October Crude Oil Production Rose By 1.96M B/D To 27.16M B/D; Reaffirms 2027 Global Crude Demand Growth Forecast at 2.55M B/D"
+      },
+      {
+       "time_utc": "2026-11-11T07:54+00:00",
+       "source": "Benzinga",
+       "headline": "Russia-Ukraine Prisoner Swap To Involve 1K+ POWs From Each Side, May Occur In 2-3 Weeks; U.S. Envoys Kushner And Witkoff To Travel To Moscow To Meet With Putin"
+      }
+     ]
+    },
+    {
+     "ticker": "F",
+     "expiry": "2026-12-04",
+     "strike": 13.5,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.3280291929088769,
+     "ivhv": 1.264568978060435,
+     "z": 1.3039114752233212,
+     "p_otm": 0.8996606824116753,
+     "income": 5.0,
+     "margin": 126.85000000000002,
+     "spread": 0.18181818181818174,
+     "mark": "✅⚠谨慎",
+     "spot": 12.185,
+     "t": 0.06366184677828514,
+     "right": "C",
+     "hv30": 0.2594,
+     "move": {
+      "worst_down": -0.0746,
+      "worst_up": 0.1318,
+      "p01": -0.0497,
+      "p99": 0.0573,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.8359107015868397,
+       "buyback": 0.20758135786738974,
+       "flat": 0.11193863527803538,
+       "loss": 15.758135786738976,
+       "x_credit": 4.151627157347795,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 3.0598511693114,
+       "buyback": 0.27991321159086757,
+       "flat": 0.16927827212954494,
+       "loss": 22.99132115908676,
+       "x_credit": 5.598264231817351,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +13.2%",
+       "gap": 0.1318,
+       "sigmas": 8.06576768230485,
+       "buyback": 0.7423851232226051,
+       "flat": 0.6107816914213986,
+       "loss": 69.2385123222605,
+       "x_credit": 14.847702464452102,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "assign_1": 1350,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-11T04:29+00:00",
+       "source": "Benzinga",
+       "headline": "Ford Recalls 33,578 2026-2027 Explorer Police Interceptor Vehicles Because Overhead Map Lights May Stay Illuminated, Violating FMVSS 101 Controls And Displays Standard"
+      },
+      {
+       "time_utc": "2026-11-11T01:16+00:00",
+       "source": "Yahoo",
+       "headline": "What Are Rivian Stock Bulls Not Worried About?"
+      },
+      {
+       "time_utc": "2026-11-10T19:22+00:00",
+       "source": "Yahoo",
+       "headline": "Rising Q3 transportation costs squeeze manufacturers, reward railroads and reshape trade"
+      }
+     ]
+    },
+    {
+     "ticker": "HOOD",
+     "expiry": "2026-12-04",
+     "strike": 108.0,
+     "bid": 0.33,
+     "ask": 0.4,
+     "iv": 0.6478704579614418,
+     "ivhv": 1.1003234680051661,
+     "z": 1.8199858668157929,
+     "p_otm": 0.9530340723764634,
+     "income": 33.0,
+     "margin": 865.4,
+     "spread": 0.19178082191780824,
+     "mark": "✅⚠谨慎",
+     "spot": 83.24,
+     "t": 0.06363920598680872,
+     "right": "C",
+     "hv30": 0.5888,
+     "move": {
+      "worst_down": -0.1324,
+      "worst_up": 0.1657,
+      "p01": -0.1011,
+      "p99": 0.1129,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 0.8088234306923001,
+       "buyback": 1.4355273152248618,
+       "flat": 0.5597398458649891,
+       "loss": 110.55273152248617,
+       "x_credit": 4.350082773408672,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.3480390511538336,
+       "buyback": 1.7268909690665488,
+       "flat": 0.7293348773329811,
+       "loss": 139.68909690665487,
+       "x_credit": 5.233002936565299,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +16.6%",
+       "gap": 0.1657,
+       "sigmas": 4.467401415523804,
+       "buyback": 4.263121546354608,
+       "flat": 2.5724837012375836,
+       "loss": 393.3121546354608,
+       "x_credit": 12.918550140468508,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      33,
+      99,
+      198
+     ],
+     "assign_1": 10800,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Robinhood: The Hidden Risk Behind Record Revenue"
+      },
+      {
+       "time_utc": "2026-11-11T05:50+00:00",
+       "source": "Yahoo",
+       "headline": "Robinhood's Latest Earnings Report Tells You All You Need to Know About the Future of Crypto. These 2 Numbers Really Stood Out."
+      },
+      {
+       "time_utc": "2026-11-10T22:52+00:00",
+       "source": "Yahoo",
+       "headline": "5 Best AI-Powered Financial Stocks to Buy According to Analysts"
+      }
+     ]
+    },
+    {
+     "ticker": "HOOD",
+     "expiry": "2026-12-04",
+     "strike": 110.0,
+     "bid": 0.26,
+     "ask": 0.31,
+     "iv": 0.6494518231496094,
+     "ivhv": 1.1030092105122442,
+     "z": 1.9622065498602816,
+     "p_otm": 0.9627336201885375,
+     "income": 26.0,
+     "margin": 858.4,
+     "spread": 0.175438596491228,
+     "mark": "✅⚠谨慎",
+     "spot": 83.24,
+     "t": 0.06363920598680872,
+     "right": "C",
+     "hv30": 0.5888,
+     "move": {
+      "worst_down": -0.1324,
+      "worst_up": 0.1657,
+      "p01": -0.1011,
+      "p99": 0.1129,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 0.8088234306923001,
+       "buyback": 1.2289995007235284,
+       "flat": 0.44334495682710706,
+       "loss": 96.89995007235284,
+       "x_credit": 4.726921156628955,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.3480390511538336,
+       "buyback": 1.4859965617021373,
+       "flat": 0.5829965716112522,
+       "loss": 122.59965617021373,
+       "x_credit": 5.7153713911620665,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +16.6%",
+       "gap": 0.1657,
+       "sigmas": 4.467401415523804,
+       "buyback": 3.7674423710792944,
+       "flat": 2.1568014671213795,
+       "loss": 350.74423710792945,
+       "x_credit": 14.490162965689594,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      26,
+      78,
+      156
+     ],
+     "assign_1": 11000,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T09:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Robinhood: The Hidden Risk Behind Record Revenue"
+      },
+      {
+       "time_utc": "2026-11-11T05:50+00:00",
+       "source": "Yahoo",
+       "headline": "Robinhood's Latest Earnings Report Tells You All You Need to Know About the Future of Crypto. These 2 Numbers Really Stood Out."
+      },
+      {
+       "time_utc": "2026-11-10T22:52+00:00",
+       "source": "Yahoo",
+       "headline": "5 Best AI-Powered Financial Stocks to Buy According to Analysts"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-04",
+     "strike": 59.0,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.47269915659276873,
+     "ivhv": 1.1212029330948026,
+     "z": 2.0953802580884497,
+     "p_otm": 0.9731971112724871,
+     "income": 7.000000000000001,
+     "margin": 479.05000000000007,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 47.205,
+     "t": 0.06363917427701675,
+     "right": "C",
+     "hv30": 0.4216,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.129590218196457,
+       "buyback": 0.4208391540382568,
+       "flat": 0.14055775492645717,
+       "loss": 35.08391540382568,
+       "x_credit": 6.011987914832239,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8826503636607619,
+       "buyback": 0.5473579781114992,
+       "flat": 0.2060645223109301,
+       "loss": 47.73579781114992,
+       "x_credit": 7.819399687307131,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.407597158225979,
+       "buyback": 0.8884687739689578,
+       "flat": 0.4127163867360757,
+       "loss": 81.84687739689578,
+       "x_credit": 12.692411056699397,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "assign_1": 5900,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T15:05+00:00",
+       "source": "Yahoo",
+       "headline": "Could Silver Skyrocket Before the End of 2026?"
+      },
+      {
+       "time_utc": "2026-11-09T13:09+00:00",
+       "source": "SeekingAlpha",
+       "headline": "The Precious Metals Sector's Impressive Relative Breakout - And What It Portends"
+      },
+      {
+       "time_utc": "2026-11-09T12:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Gold And Silver Bounce Back As Tech Stocks Stumble"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.0,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.12484072397501436,
+     "ivhv": 1.1822038255209693,
+     "z": 1.3394436974927986,
+     "p_otm": 0.9078629161373606,
+     "income": 11.0,
+     "margin": 1282.9999999999995,
+     "spread": 0.0869565217391304,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "C",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.9287449154380099,
+       "flat": 0.6304602907839119,
+       "loss": 81.87449154380099,
+       "x_credit": 8.443135594890999,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.7149090647532006,
+       "flat": 1.4039661568762867,
+       "loss": 160.49090647532006,
+       "x_credit": 15.590082406847278,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.811110768006128,
+       "buyback": 0.6149159125759383,
+       "flat": 0.358918830323411,
+       "loss": 50.491591257593825,
+       "x_credit": 5.590144659781257,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "assign_1": 8400,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.5,
+     "bid": 0.09,
+     "ask": 0.1,
+     "iv": 0.13146752898523933,
+     "ivhv": 1.2449576608450694,
+     "z": 1.4589752730242338,
+     "p_otm": 0.9252583425222984,
+     "income": 9.0,
+     "margin": 1230.9999999999995,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "C",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.8191817474779306,
+       "flat": 0.5212183544722322,
+       "loss": 72.91817474779306,
+       "x_credit": 9.102019416421452,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.5203517520420249,
+       "flat": 1.185027332263786,
+       "loss": 143.0351752042025,
+       "x_credit": 16.89279724491139,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.811110768006128,
+       "buyback": 0.5430049289669157,
+       "flat": 0.29505863482163974,
+       "loss": 45.300492896691566,
+       "x_credit": 6.033388099632396,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      9,
+      27,
+      54
+     ],
+     "assign_1": 8450,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.0,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.136275662071916,
+     "ivhv": 1.2904892241658712,
+     "z": 1.5879477214144953,
+     "p_otm": 0.9410100116560083,
+     "income": 7.000000000000001,
+     "margin": 1178.9999999999995,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "C",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.7106465226507765,
+       "flat": 0.4222364783627519,
+       "loss": 64.06465226507765,
+       "x_credit": 10.152093180725378,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.3342648920424836,
+       "flat": 0.9875204456471707,
+       "loss": 126.42648920424836,
+       "x_credit": 19.060927029178334,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.811110768006128,
+       "buyback": 0.469043172732448,
+       "flat": 0.2359992624008882,
+       "loss": 39.9043172732448,
+       "x_credit": 6.700616753320685,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "assign_1": 8500,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.5,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.13877131221727645,
+     "ivhv": 1.314122274784815,
+     "z": 1.736593653955795,
+     "p_otm": 0.9557493227637623,
+     "income": 5.0,
+     "margin": 1126.9999999999995,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.6,
+     "t": 0.06363942795535261,
+     "right": "C",
+     "hv30": 0.1056,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.509803371132825,
+       "buyback": 0.5983105332273375,
+       "flat": 0.329304234895762,
+       "loss": 54.831053322733744,
+       "x_credit": 11.96621066454675,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.516338951888042,
+       "buyback": 1.1481195097642,
+       "flat": 0.8032941662791941,
+       "loss": 109.81195097642001,
+       "x_credit": 22.962390195284,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.811110768006128,
+       "buyback": 0.39017304855504165,
+       "flat": 0.1797274300111802,
+       "loss": 34.017304855504165,
+       "x_credit": 7.803460971100833,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "assign_1": 8550,
+     "pressure": [],
+     "fed_channel": "Fed’s Barkin Admits Inflation Fight Isn’t Over, Warns of “Patch and Pray” Economy - SchiffGold.com",
+     "news": [
+      {
+       "time_utc": "2026-11-11T07:05+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Waller Threatens A Half-Point Hike While Oil Falls And Productivity Surges Beneath His Inflation Case"
+      },
+      {
+       "time_utc": "2026-11-11T05:43+00:00",
+       "source": "Benzinga",
+       "headline": "‘Fed Is Fighting the Wrong Inflation’: Strategist Warns Kevin Warsh Against ‘Reckless’ 50-Basis-Point Rate Hike After Hotter-Than-Expected October CPI"
+      },
+      {
+       "time_utc": "2026-11-11T04:40+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rates Spark: Back To A 5% 10Y UST On Inflation Fears"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 43,
+    "⛔报价差": 25,
+    "z不够": 12,
+    "⛔报价过期": 6,
+    "⛔财报": 5,
+    "⚠链不够宽": 4
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔IV不贵",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔IV不贵",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔IV不贵",
+    "NKE": "⛔报价差",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔IV不贵",
+    "PFE": "⛔IV不贵",
+    "RIVN": "⛔报价差",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔IV不贵",
+    "FXI": "⛔IV不贵",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔IV不贵",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔报价过期",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔IV不贵",
+    "BMY": "⛔报价过期",
+    "WFC": "⛔IV不贵",
+    "C": "⛔报价过期",
+    "DKNG": "⛔报价过期",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔报价过期",
+    "PDD": "⛔财报",
+    "MP": "⛔IV不贵",
+    "SLB": "⛔报价过期",
+    "SCHW": "⛔报价差",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-11_1536Z.md",
+  "report_sha256": "e59485929426ef8bfc991b9d24c1270fed71e86b04ad8746070fe3d88a021a9c",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天可以开新仓（见候选）"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=True why_not=[]｜首行：结论：今天可以开新仓（见候选）"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V12",
+    "check": "当天公布的宏观数据写出了实际值",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T15:32:12+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T15:32:47.984911Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T15:34:21+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-11T15:35:40+00:00"
+     },
+     "quote_age_min": 3.4
+    }
+   }
+  ]
+ }
+}
