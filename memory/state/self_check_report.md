@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-11T17:37:34Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-11T18:27:06Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-11 17:37 UTC
+自检器 · 2026-11-11 18:27 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -31,8 +31,9 @@
   guizang-ppt-skill        hub 193 行   spoke 引用 22 处
   tiandao                  hub 128 行   spoke 引用  6 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
+  sunzi-36ji               hub  65 行   spoke 引用  6 处
   burry                    hub 183 行   spoke 引用  8 处
-  合计 217 处 spoke 引用，0 处失效
+  合计 222 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
