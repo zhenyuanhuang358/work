@@ -212,6 +212,8 @@ def draft(s, gs):
         L.append(f"- {v['time_utc']} · {v['source']} · 【{v['role']} {v['name']}】{v['headline']} → 【待判断：是否本人表态、影响{v['sectors']}】")
     for n in s["market_news"][:3]:
         L.append(f"- {n['time_utc']} · {n['source']} · {n['headline']} → 【待判断】")
+    L += ["", "## 公司关键数据发布",
+          "- 【待判断：查持仓与拟推荐标的官方日历至到期日的月度运营、产销交付、交易量、净入金及业务更新；列美东/北京时间、盘前盘后、来源与确认状态，并同步相关 📰 行。未找到写未核实。】"]
     L += ["", "## 候选" + ("" if s["can_open"] else "（今日不开，供下个可开仓日参考）")]
     cut = [c for r_ in ("P", "C") for c in s["sides"][r_].get("yellow_cut", [])]
     if s["light"]["light"] == 1:
