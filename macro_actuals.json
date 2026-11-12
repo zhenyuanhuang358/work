@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-08T10:23:53+00:00",
+ "updated_at": "2026-11-11T18:35:44+00:00",
  "source": "BLS API",
  "indicators": {
   "payrolls": {
@@ -21,24 +21,24 @@
    "unit": "% 环比"
   },
   "cpi": {
-   "month": "2026-09",
-   "actual": 0.65,
-   "previous_recomputed": 0.4,
+   "month": "2026-10",
+   "actual": 0.35,
+   "previous_recomputed": 0.65,
    "unit": "% 环比",
    "release_et": "2026-11-10T08:30:00-05:00",
    "forecast": "0.3%",
    "ff_previous": "0.6%",
-   "surprise": 0.35
+   "surprise": 0.05
   },
   "core_cpi": {
-   "month": "2026-09",
-   "actual": 0.33,
-   "previous_recomputed": 0.29,
+   "month": "2026-10",
+   "actual": 0.3,
+   "previous_recomputed": 0.33,
    "unit": "% 环比",
    "release_et": "2026-11-10T08:30:00-05:00",
    "forecast": "0.2%",
    "ff_previous": "0.3%",
-   "surprise": 0.13
+   "surprise": 0.1
   },
   "ppi": {
    "month": "2026-09",
@@ -52,5 +52,5 @@
   }
  },
  "errors": [],
- "trigger": "scan-2026-11-08T10:20:12+00:00"
+ "trigger": "scan-2026-11-11T18:31:41+00:00"
 }

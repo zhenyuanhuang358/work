@@ -1,0 +1,115 @@
+{
+ "ticker": "NVDA",
+ "market": "美股大盘股",
+ "currency": "USD",
+ "as_of": "2026-11-09-fcfyield",
+ "price": {
+  "v": 186.64,
+  "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取），2026-11-06 收盘"
+ },
+ "shares": {
+  "v": 24100.0,
+  "src": "dei EntityCommonStockSharesOutstanding，accn 0001045810-26-000075（2026-08-26 报送）；单位百万股"
+ },
+ "r": {
+  "v": 0.09,
+  "src": "owner-earnings-model 折现率表：美股大盘股 9%；10 年期美债 4.86%（stock_prices.json，2026-11-06）在 4–5% 区间"
+ },
+ "years": [
+  {
+   "fy": 2024,
+   "src": "SEC companyfacts 10-K（CIK0001045810），accn 0001045810-24-000029/0001045810-25-000023/0001045810-26-000021；单位百万美元；财年截至 2024-01-28",
+   "net_income": 29760.0,
+   "da": 1508.0,
+   "capex": 1069.0,
+   "dwc": -6727.0,
+   "fcf": 27021.0,
+   "revenue": 60922.0,
+   "ebit": 32972.0,
+   "interest": 257.0,
+   "_dwc_note": "NVDA 不报 IncreaseDecreaseInOperatingCapital；dwc = CFO − 净利润 − D&A − SBC（SBC 视为真实成本不加回，差额含营运资本变动与其他非现金项）"
+  },
+  {
+   "fy": 2025,
+   "src": "SEC companyfacts 10-K（CIK0001045810），accn 0001045810-25-000023/0001045810-26-000021；单位百万美元；财年截至 2025-01-26",
+   "net_income": 72880.0,
+   "da": 1864.0,
+   "capex": 3236.0,
+   "dwc": -15392.0,
+   "fcf": 60853.0,
+   "revenue": 130497.0,
+   "ebit": 81453.0,
+   "interest": 247.0,
+   "_dwc_note": "NVDA 不报 IncreaseDecreaseInOperatingCapital；dwc = CFO − 净利润 − D&A − SBC（SBC 视为真实成本不加回，差额含营运资本变动与其他非现金项）"
+  },
+  {
+   "fy": 2026,
+   "src": "SEC companyfacts 10-K（CIK0001045810），accn 0001045810-26-000021；单位百万美元；财年截至 2026-01-25",
+   "net_income": 120067.0,
+   "da": 2843.0,
+   "capex": 6042.0,
+   "dwc": -26578.0,
+   "fcf": 96676.0,
+   "revenue": 215938.0,
+   "ebit": 130387.0,
+   "interest": 259.0,
+   "_dwc_note": "NVDA 不报 IncreaseDecreaseInOperatingCapital；dwc = CFO − 净利润 − D&A − SBC（SBC 视为真实成本不加回，差额含营运资本变动与其他非现金项）"
+  }
+ ],
+ "maint_capex": {
+  "method": "pct_of_capex",
+  "pct": 0.5,
+  "why": "Fabless（晶圆代工外包），spoke 规定轻资产用总 Capex 40–60%，取 50%"
+ },
+ "moat_score": 6,
+ "debt_ratio": {
+  "v": 0.05108559914575805,
+  "src": "FY2026 有息负债 8468（LongTermDebtNoncurrent + 一年内到期）÷（+ 股东权益 157293），SEC companyfacts 10-K（CIK0001045810）"
+ },
+ "tech_disruption": false,
+ "g_override": {
+  "g1": 0.041492993367754374,
+  "g2": 0.07149299336775437,
+  "src": "FCF yield 2.15%（FY2026 FCF ÷ 市值）；保守 +2%、基准 +5%"
+ },
+ "peer_p_fcf": {
+  "v": 80.71976296069997,
+  "src": "同行 FY2025 市值 / FCF 均值：AMD 109.3x、AVGO 52.1x（2026-11-06 收盘 × 在外股数；FCF = CFO − Capex；financials/amd.json、avgo.json）"
+ },
+ "scores": {
+  "business": 23,
+  "financial": 30,
+  "management": 16,
+  "price": 5
+ },
+ "revenue_prior": {
+  "v": 26974.0,
+  "src": "SEC companyfacts FY2023（截至 2023-01-29）营收，用于营收增速波动率的第 3 个样本"
+ },
+ "scores_detail": {
+  "1A": 8,
+  "1B": 8,
+  "1C": 7,
+  "2A": 12,
+  "2B": 10,
+  "2C": 8,
+  "3A": 8,
+  "3B": 5,
+  "3C": 3,
+  "4A": 0,
+  "4B": 5
+ },
+ "scores_basis": "berkshire-score.md；3B：创始人（1993 年创立并任 CEO 至今）持股 3.58%（2026 年报 PDF 代理声明表），>1% 股本属「大量持股」，表中无「创始人 + <10%」行，取相邻的 5 分；2B / 4B 用报告值 FCF",
+ "ttm": {
+  "period_end": "2026-07-26",
+  "net_income": 192880,
+  "da": 3687,
+  "capex": 7354,
+  "dwc": -69448,
+  "fcf": 127006,
+  "cfo": 134360,
+  "sbc": 7241,
+  "src": "TTM = FY2026 + FY2027 上半年 − FY2026 上半年；FY2026 来自 FY2026 Q4 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt） 与 SEC companyfacts，上半年来自 FY2027 Q2 新闻稿（pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt，六个月列）。dwc = CFO − 净利润 − D&A − SBC（含营运资本、权益投资非现金收益、递延税）"
+ },
+ "base_fy_end": "2026-01-25"
+}

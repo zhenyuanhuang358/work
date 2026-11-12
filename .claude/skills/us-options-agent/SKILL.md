@@ -24,7 +24,7 @@ description: |
 | 目标 | 每个交易日给出「开 / 不开」结论；能开时给出过全部规则、平台收得下的单腿合约 |
 | 输入 | 期权链 / 价格 / 新闻 / 美联储讲话（GitHub Actions 抓，四份产物带同一 trigger）；`options_watch.json`（60 只、到期 20–45 天）；`options-screen.json`（基本面 / 利率敏感 / 行业）；journal 最新可取现金 |
 | 输出 | `memory/state/scans/<id>.json`（事实底稿）+ `<id>.md`（交付报告，已 verify）+ 候选登记 + 运行记录 + journal |
-| 调度 | 每交易日 10:31 ET 定时（专用会话）或用户说「今日期权」；流程编排见 `coo/references/pipeline-options.md` |
+| 调度 | 用户说「今日期权」时扫（每日定时已于 2026-11-06 由用户删除，不得擅自重建；开盘 1 小时后扫才有参考价值）；流程编排见 `coo/references/pipeline-options.md` |
 
 **主流程**（确定性步骤全在工具里，会话只做标 ✍ 的两步）：
 
@@ -43,6 +43,7 @@ description: |
 - 用户问单个标的 → `option_quote.py --ticker X` 看全表 + `gap_stress.py`；不走全清单。
 - 用户报开平仓 → `scale_check.py open/close` + journal；张数以用户截图为准，不凭记忆。
 - 用户问价差 / 铁鹰 → 说明盈立无组合单，position-discipline 第 3 条。
+- 用户要看事件前（财报等）几种看涨组合的盈亏 → `tools/combo_payoff.py`，按 `references/combo-analysis.md`；**只做分析，不进候选、不改规则**。
 
 ---
 
@@ -79,6 +80,7 @@ description: |
 | `tools/scale_check.py report / open / close` | 实盘账本与加码阶段（每笔张数） |
 | `tools/candidate_ledger.py add / report` | 候选全量登记（推荐 / 否决 / 闸门）与到期结算 |
 | `tools/put_backtest.py` / `stop_replay.py` | 满 20 簇复盘 |
+| `tools/combo_payoff.py X --expiry D [--pre D0]` | 只做分析：牛市看涨价差 / 熊市看涨价差 / 看涨比例反向价差的到期盈亏表（买按卖价、卖按买价；现价按平价核对） |
 
 **数据产物**（GitHub Actions 写，读工作分支 `claude/install-claude-hud-d51E6`，不读 main）：
 `options_chain.json`（CBOE 延迟报价 + hv30 + 一年单日最大涨跌）｜`stock_prices.json`（价格 + VIX 族）｜`news.json`（Finnhub）｜
@@ -109,6 +111,7 @@ description: |
 | 步骤 3 新闻标注 | `references/news-channels.md` |
 | 美联储 / CPI / PPI 日历、发布后搜索与记录 | `references/macro-events.md` |
 | 市场极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
+| 事件前组合结构盈亏（只做分析，不影响策略） | `references/combo-analysis.md` |
 | 开平仓记录、账户快照 | `memory/state/options-journal.md` |
 | 查旧设计 / 事故背景（不按它执行） | `references/archive/README.md` |
 
@@ -118,7 +121,7 @@ description: |
 
 | 能做 | 不能做 |
 |---|---|
-| 每交易日定时扫描、推送结论 | 下单（只给建议，在盈立手动执行） |
+| 用户喊「今日期权」时扫描、给出结论 | 下单（只给建议，在盈立手动执行） |
 | 链上延迟约 15 分钟的报价反解 IV、z、保证金估算 | 实时报价；平台保证金以下单预览为准（估算 ×1.15） |
 | 跳空压力、事件 / 财报 / 利率敏感过滤 | 看到你在平台挂了什么单——要你截图 |
 

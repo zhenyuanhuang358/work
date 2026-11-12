@@ -1,0 +1,686 @@
+{
+ "ticker": "AVGO",
+ "cik": "0001730168",
+ "entity": "Broadcom Inc.",
+ "source": "SEC EDGAR companyfacts https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json",
+ "shares_outstanding": {
+  "v": 4773629865,
+  "accn": "0001730168-26-000080",
+  "filed": "2026-09-10"
+ },
+ "years": {
+  "2022": {
+   "revenue": {
+    "v": 33203000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "net_income": {
+    "v": 11495000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "ebit": {
+    "v": 14225000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "da": null,
+   "capex": {
+    "v": 424000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "cfo": {
+    "v": 16736000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "interest": {
+    "v": 1737000000,
+    "tag": "InterestExpense",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "sbc": {
+    "v": 1533000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "dwc_increase": null,
+   "assets": {
+    "v": 73249000000,
+    "tag": "Assets",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
+   "liabilities": {
+    "v": 50540000000,
+    "tag": "Liabilities",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
+   "equity": null,
+   "cash": {
+    "v": 12416000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
+   "debt_lt": {
+    "v": 39075000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
+   "debt_st": {
+    "v": 403000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0001730168-23-000096",
+    "filed": "2023-12-14",
+    "end": "2022-10-30"
+   },
+   "commercial_paper": null,
+   "gross_profit": {
+    "v": 22095000000,
+    "tag": "GrossProfit",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "cogs": {
+    "v": 11108000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "buyback": {
+    "v": 7000000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "dividends": {
+    "v": 6733000000,
+    "tag": "PaymentsOfDividendsCommonStock",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "nci": null,
+   "equity_total": {
+    "v": 22709000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2022-10-30"
+   },
+   "diluted_shares": {
+    "v": 4232000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "tax": {
+    "v": 939000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   },
+   "pretax": {
+    "v": 12434000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2022-10-30"
+   }
+  },
+  "2023": {
+   "revenue": {
+    "v": 35819000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "net_income": {
+    "v": 14082000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "ebit": {
+    "v": 16207000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "da": null,
+   "capex": {
+    "v": 452000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "cfo": {
+    "v": 18085000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "interest": {
+    "v": 1622000000,
+    "tag": "InterestExpense",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "sbc": {
+    "v": 2171000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "dwc_increase": null,
+   "assets": {
+    "v": 72861000000,
+    "tag": "Assets",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "liabilities": {
+    "v": 48873000000,
+    "tag": "Liabilities",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "equity": null,
+   "cash": {
+    "v": 14189000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "debt_lt": {
+    "v": 37621000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "debt_st": {
+    "v": 1563000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2023-10-29"
+   },
+   "commercial_paper": null,
+   "gross_profit": {
+    "v": 24690000000,
+    "tag": "GrossProfit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "cogs": {
+    "v": 11129000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "buyback": {
+    "v": 5824000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "dividends": {
+    "v": 7645000000,
+    "tag": "PaymentsOfDividendsCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "nci": null,
+   "equity_total": {
+    "v": 23988000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "diluted_shares": {
+    "v": 4272000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "tax": {
+    "v": 1015000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   },
+   "pretax": {
+    "v": 15097000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2023-10-29"
+   }
+  },
+  "2024": {
+   "revenue": {
+    "v": 51574000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "net_income": {
+    "v": 5895000000,
+    "tag": "NetIncomeLoss",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2024-11-03"
+   },
+   "ebit": {
+    "v": 13463000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "da": null,
+   "capex": {
+    "v": 548000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "cfo": {
+    "v": 19962000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "interest": {
+    "v": 3953000000,
+    "tag": "InterestExpense",
+    "accn": "0001730168-24-000139",
+    "filed": "2024-12-20",
+    "end": "2024-11-03"
+   },
+   "sbc": {
+    "v": 5741000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "dwc_increase": null,
+   "assets": {
+    "v": 165645000000,
+    "tag": "Assets",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "liabilities": {
+    "v": 97967000000,
+    "tag": "Liabilities",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "equity": null,
+   "cash": {
+    "v": 9348000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "debt_lt": {
+    "v": 66295000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "debt_st": {
+    "v": 1245000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "commercial_paper": null,
+   "gross_profit": {
+    "v": 32509000000,
+    "tag": "GrossProfit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "cogs": {
+    "v": 19065000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "buyback": {
+    "v": 7176000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "dividends": {
+    "v": 9814000000,
+    "tag": "PaymentsOfDividendsCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "nci": null,
+   "equity_total": {
+    "v": 67678000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "diluted_shares": {
+    "v": 4778000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "tax": {
+    "v": 3748000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   },
+   "pretax": {
+    "v": 9916000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2024-11-03"
+   }
+  },
+  "2025": {
+   "revenue": {
+    "v": 63887000000,
+    "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "net_income": {
+    "v": 23126000000,
+    "tag": "ProfitLoss",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "ebit": {
+    "v": 25484000000,
+    "tag": "OperatingIncomeLoss",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "da": null,
+   "capex": {
+    "v": 623000000,
+    "tag": "PaymentsToAcquirePropertyPlantAndEquipment",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "cfo": {
+    "v": 27537000000,
+    "tag": "NetCashProvidedByUsedInOperatingActivities",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "interest": {
+    "v": 3210000000,
+    "tag": "InterestExpenseNonoperating",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "sbc": {
+    "v": 7568000000,
+    "tag": "ShareBasedCompensation",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "dwc_increase": null,
+   "assets": {
+    "v": 171092000000,
+    "tag": "Assets",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "liabilities": {
+    "v": 89800000000,
+    "tag": "Liabilities",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "equity": null,
+   "cash": {
+    "v": 16178000000,
+    "tag": "CashAndCashEquivalentsAtCarryingValue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "debt_lt": {
+    "v": 61984000000,
+    "tag": "LongTermDebtAndCapitalLeaseObligations",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "debt_st": {
+    "v": 3152000000,
+    "tag": "LongTermDebtCurrent",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "commercial_paper": null,
+   "gross_profit": {
+    "v": 43294000000,
+    "tag": "GrossProfit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "cogs": {
+    "v": 20593000000,
+    "tag": "CostOfRevenue",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "buyback": {
+    "v": 2450000000,
+    "tag": "PaymentsForRepurchaseOfCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "dividends": {
+    "v": 11142000000,
+    "tag": "PaymentsOfDividendsCommonStock",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "nci": null,
+   "equity_total": {
+    "v": 81292000000,
+    "tag": "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "diluted_shares": {
+    "v": 4853000000,
+    "tag": "WeightedAverageNumberOfDilutedSharesOutstanding",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "tax": {
+    "v": -397000000,
+    "tag": "IncomeTaxExpenseBenefit",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   },
+   "pretax": {
+    "v": 22729000000,
+    "tag": "IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
+    "accn": "0001730168-25-000121",
+    "filed": "2025-12-18",
+    "end": "2025-11-02"
+   }
+  }
+ },
+ "missing": {
+  "2022": [
+   "da",
+   "dwc_increase",
+   "equity",
+   "commercial_paper",
+   "nci"
+  ],
+  "2023": [
+   "da",
+   "dwc_increase",
+   "equity",
+   "commercial_paper",
+   "nci"
+  ],
+  "2024": [
+   "da",
+   "dwc_increase",
+   "equity",
+   "commercial_paper",
+   "nci"
+  ],
+  "2025": [
+   "da",
+   "dwc_increase",
+   "equity",
+   "commercial_paper",
+   "nci"
+  ]
+ },
+ "debt_tags": {
+  "DebtInstrumentCarryingAmount": {
+   "2022": 41218000000,
+   "2023": 40815000000,
+   "2024": 69847000000,
+   "2025": 67120000000
+  },
+  "DebtInstrumentUnamortizedDiscountPremiumAndDebtIssuanceCostsNet": {
+   "2022": 1762000000,
+   "2023": 1635000000,
+   "2024": 2320000000,
+   "2025": 1984000000
+  },
+  "DebtLongtermAndShorttermCombinedAmount": {
+   "2024": 69847000000,
+   "2025": 67120000000
+  },
+  "GainsLossesOnExtinguishmentOfDebt": {
+   "2022": -100000000,
+   "2023": 0,
+   "2024": -157000000,
+   "2025": -138000000
+  },
+  "LongTermDebtAndCapitalLeaseObligationsCurrent": {
+   "2022": 440000000,
+   "2023": 1608000000,
+   "2024": 1271000000,
+   "2025": 3152000000
+  },
+  "LongTermDebtCurrent": {
+   "2022": 403000000,
+   "2023": 1563000000,
+   "2024": 1245000000,
+   "2025": 3152000000
+  },
+  "LongTermDebtAndCapitalLeaseObligations": {
+   "2022": 39075000000,
+   "2023": 37621000000,
+   "2024": 66295000000,
+   "2025": 61984000000
+  }
+ },
+ "capex_tags": {
+  "PaymentsToAcquirePropertyPlantAndEquipment": {
+   "2022": 424000000,
+   "2023": 452000000,
+   "2024": 548000000,
+   "2025": 623000000
+  }
+ },
+ "price": {
+  "v": 293.69,
+  "date": "2026-11-06",
+  "src": "Yahoo Finance 日收盘（yfinance，Actions 抓取）"
+ }
+}

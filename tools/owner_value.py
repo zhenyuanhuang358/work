@@ -14,7 +14,10 @@
    {"fy": 2023, "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": .., "revenue": .., "ebit": .., "interest": ..,
     "adjustments": [{"item": "IRS 保证金", "amount": 6000, "src": "...", "why": "..."}]}   # 可选：一次性现金项，同时加回 FCF 与 ΔWC
  ],
+ "ttm": {"period_end": "2026-07-26", "src": "...", "net_income": .., "da": .., "capex": .., "dwc": .., "fcf": ..},  # 可选：近 12 个月实际
+ "base_fy_end": "2026-01-25",   # 可选：最近完整财年的结束日；超过 6 个月仍没给 ttm 会报 flag
  "maint_capex": {"method": "da_proxy | pct_of_capex | total | disclosed", "pct": 0.5, "value": null, "why": "..."},
+ "revenue_prior": {"v": .., "src": "..."},   # 可选：最旧财年的前一年营收，让增速波动率有 3 个增速样本
  "moat_score": 8,
  "debt_ratio": {"v": 0.35, "src": "..."},
  "tech_disruption": false,
@@ -84,6 +87,63 @@ def normalize(ys, out):
     return norm
 
 
+def auto_scores(inp, sf, out, ys, revs, dr, cover):
+    """评分卡里能查表的 8 项由工具算（berkshire-score.md；2026-11-10）。
+    为什么：KO、NVDA 两份报告共 8 轮 Critic，反复退回的就是查表查错、敏感性底稿抄旧分数。3A / 3B / 3C 是判断，仍由分析师给（带理由）。
+    score_facts: {"gross_margin": [三年], "roe": [三年], "roic": [三年，可选], "cash": .., "debt": .., "ev_fcf": .., "peer_ev_fcf": ..,
+                  "management": {"3A": {"v": .., "why": ..}, "3B": {...}, "3C": {...}}}
+    2B 与 4B 一律用报告值 FCF（一次性项只用于估值）。"""
+    d, why = {}, {}
+    moat = inp["moat_score"]
+    d["1A"] = 5 if moat <= 4 else 8 if moat <= 6 else 12 if moat <= 8 else 15
+    why["1A"] = f"护城河 {moat} 分"
+    grs = [revs[i] / revs[i - 1] - 1 for i in range(len(revs) - len(ys) + 1, len(revs))] or [0.0]
+    cagr = (ys[-1]["revenue"] / ys[0]["revenue"]) ** (1 / (len(ys) - 1)) - 1
+    neg = sum(1 for g in grs if g < 0)
+    d["1B"] = (8 if cagr > 0.20 and neg == 0 else 6 if 0.10 <= cagr <= 0.20 and neg <= 1 else 4 if 0.05 <= cagr < 0.10 and neg == 0
+               else 2 if (0.05 <= cagr < 0.10 and neg == 1) or (0 <= cagr < 0.05 and neg == 0) else 0)
+    why["1B"] = f"营收复合增速 {cagr:.1%}，负增长 {neg} 年"
+    gm = sf["gross_margin"]
+    d["1C"] = 7 if min(gm) > 0.50 else 5 if min(gm) >= 0.35 else 3 if min(gm) >= 0.20 and gm[-1] >= gm[0] - 0.05 else 1
+    why["1C"] = "毛利率 " + " / ".join(f"{g:.1%}" for g in gm)
+    roe = sum(sf["roe"]) / len(sf["roe"])
+    tiers = [12, 9, 6, 3, 0]
+    i = 0 if roe > 0.25 else 1 if roe >= 0.18 else 2 if roe >= 0.12 else 3 if roe >= 0.08 else 4
+    note = ""
+    if dr > 0.40:
+        if not sf.get("roic"):
+            raise NoSource("负债率 > 40%：2A 需要 ROIC 复核（score_facts.roic）")
+        if min(sf["roic"]) < 0.12:
+            i, note = min(i + 2, 4), "；ROIC < 12%，降两档"
+        else:
+            note = "；负债率 > 40%，ROIC 复核均 ≥ 12%，不降档"
+    d["2A"] = tiers[i]
+    why["2A"] = f"ROE 三年均值 {roe:.1%}{note}"
+    fr = [y.get("fcf_reported", y["fcf"]) for y in ys]
+    ratios = [f / y["net_income"] for f, y in zip(fr, ys) if y["net_income"] > 0]
+    pos = sum(1 for f in fr if f > 0)
+    d["2B"] = (0 if pos <= 1 else 5 if pos == 2 else 10 if ratios and min(ratios) > 0.80 else 7 if ratios and min(ratios) >= 0.60 else 2)
+    why["2B"] = "报告值 FCF / 净利润 " + " / ".join(f"{r:.0%}" for r in ratios) + "（按三年最低值查表）"
+    last = ys[-1]
+    d["2C"] = (0 if last["ebit"] < 0 else 8 if sf["cash"] > sf["debt"] else 6 if dr < 0.20 and cover > 10 else 4 if dr <= 0.40 and cover > 5
+               else 0 if dr > 0.60 or cover < 3 else 2)
+    why["2C"] = f"现金 {sf['cash']:,.0f}，有息负债 {sf['debt']:,.0f}，负债率 {dr:.0%}，利息覆盖 {cover:.1f}x"
+    mv = out["margin_of_safety"]["value"]
+    d["4A"] = 10 if mv >= 0.40 else 8 if mv >= 0.30 else 5 if mv >= 0.20 else 3 if mv >= 0.10 else 0
+    why["4A"] = f"安全边际 {mv:.1%}"
+    rel = sf["ev_fcf"] / sf["peer_ev_fcf"] - 1
+    d["4B"] = 5 if rel <= -0.20 else 3 if rel <= 0.20 else 1
+    why["4B"] = f"EV/FCF {sf['ev_fcf']:.1f}x，同行均值 {sf['peer_ev_fcf']:.1f}x（{rel:+.0%}）"
+    for k in ("3A", "3B", "3C"):
+        m = (sf.get("management") or {}).get(k) or {}
+        if m.get("v") is None or not str(m.get("why", "")).strip():
+            raise NoSource(f"评分 {k} 是判断项：需给分数和理由（score_facts.management.{k}）")
+        d[k], why[k] = m["v"], m["why"]
+    sc = {"business": d["1A"] + d["1B"] + d["1C"], "financial": d["2A"] + d["2B"] + d["2C"],
+          "management": d["3A"] + d["3B"] + d["3C"], "price": d["4A"] + d["4B"]}
+    return sc, d, why
+
+
 def run(inp):
     price, shares, r = need(inp.get("price"), "现价"), need(inp.get("shares"), "股数"), need(inp.get("r"), "折现率")
     ys = inp["years"]
@@ -98,12 +158,18 @@ def run(inp):
 
     # 估值失效条件（hub Phase 2）
     fcfs = [y["fcf"] for y in ys]
-    revs = [y["revenue"] for y in ys]
+    revs = ([inp["revenue_prior"]["v"]] if inp.get("revenue_prior") else []) + [y["revenue"] for y in ys]
     fail = []
     if all(f < 0 for f in fcfs):
         fail.append("FCF 三年连负")
-    if max(revs) / min(revs) - 1 > 0.5:
-        fail.append(f"营收波动 {max(revs) / min(revs) - 1:.0%} > 50%")
+    # 营收增速波动率 = 各年营收增速的样本标准差（用户 2026-11-09 定）。原实现用「最高 ÷ 最低 − 1」，
+    # 会把任何持续高增长误判为波动（NVDA +126% / +114% / +65% 被判 254% 失效）；高增长另由异常增速路径处理。
+    import statistics
+    grs = [revs[i] / revs[i - 1] - 1 for i in range(1, len(revs))]
+    vol = statistics.stdev(grs) if len(grs) >= 2 else 0.0
+    out["revenue_growth"] = {"rates": grs, "stdev": vol}
+    if vol > 0.5:
+        fail.append(f"营收增速波动率（标准差）{vol * 100:.0f} 个百分点 > 50")
     dr = need(inp.get("debt_ratio"), "负债率")
     cover = last["ebit"] / last["interest"] if last.get("interest") else float("inf")
     if dr > 0.5 and cover < 3:
@@ -119,14 +185,28 @@ def run(inp):
         return out
     g1cap, gtcap = caps(moat)
 
-    # 所有者盈余（基准年 = 最近完整财年）
+    # 所有者盈余基数：最近完整财年；结束超过 6 个月且有季报时用近 12 个月（TTM）实际值（用户 2026-11-09 定）。
+    # 只用已发生的现金流，不用预测。NVDA：FY2026 已过 9 个月，上半年 FCF 同比 +77%，用完整财年会把已实现的增长截掉。
+    import datetime as _dt
+    base = last
+    out["base"] = {"kind": "最近完整财年", "fy": last.get("fy")}
+    if inp.get("ttm"):
+        t = inp["ttm"]
+        if not str(t.get("src", "")).strip():
+            raise NoSource("TTM 基数缺来源")
+        base = dict(t)
+        out["base"] = {"kind": "近 12 个月（TTM）", "period_end": t.get("period_end"), "src": t["src"]}
+    elif inp.get("base_fy_end") and inp.get("as_of"):
+        age = (_dt.date.fromisoformat(inp["as_of"][:10]) - _dt.date.fromisoformat(inp["base_fy_end"])).days
+        if age > 183:
+            out["flags"].append(f"最近完整财年已结束 {age} 天（> 6 个月）：规则要求改用 TTM 实际值作基数（给 ttm 输入）")
     m = inp["maint_capex"]
     meth = m["method"]
-    mc = {"da_proxy": last["da"], "total": last["capex"], "disclosed": m.get("value"),
-          "pct_of_capex": last["capex"] * (m.get("pct") or 0.5)}[meth]
+    mc = {"da_proxy": base["da"], "total": base["capex"], "disclosed": m.get("value"),
+          "pct_of_capex": base["capex"] * (m.get("pct") or 0.5)}[meth]
     if mc is None:
         raise NoSource("维护性资本支出：method=disclosed 但没给 value")
-    oe = last["net_income"] + last["da"] - mc + last.get("dwc", 0)
+    oe = base["net_income"] + base["da"] - mc + base.get("dwc", 0)
     out["owner_earnings"] = {"value": oe, "maint_capex": mc, "method": meth, "why": m.get("why")}
     if oe <= 0:
         fail.append("所有者盈余 ≤ 0（靠外部资本维持运营）")
@@ -245,12 +325,26 @@ def run(inp):
         except NoSource as e:  # 例如不调后 FCF 由正转负触发 g_override 要求
             out["without_adjustments"] = {"error": str(e)}
 
-    # 评分卡
+    # 评分卡：给了 score_facts 就由工具查表（3A–3C 除外），并覆盖手填分数
+    if inp.get("score_facts"):
+        asc, asd, awhy = auto_scores(inp, inp["score_facts"], out, ys, revs, dr, cover)
+        inp["scores"], inp["scores_detail"] = asc, asd
+        out["scorecard_detail"] = {k: {"score": asd[k], "why": awhy[k]} for k in asd}
     sc = inp.get("scores") or {}
     bad = [k for k, mx in SCORE_MAX.items() if not (0 <= sc.get(k, -1) <= mx)]
     if bad:
         raise NoSource(f"评分卡维度缺失或越界：{bad}（满分 {SCORE_MAX}）")
     out["scorecard"] = dict(sc, total=sum(sc[k] for k in SCORE_MAX))
+    # 4A 由安全边际机械决定（berkshire-score 4A 表）：11/09 NVDA 护城河 9 分对照底稿复制了主底稿的 4A = 0，
+    # 实际安全边际 34% 应得 8，总分错 8 分。给了 scores_detail 就核对，对不上直接拒算。
+    sd = inp.get("scores_detail") or {}
+    if "4A" in sd and "iv_range" in out:
+        mv = out["margin_of_safety"]["value"]
+        exp4a = 10 if mv >= 0.40 else 8 if mv >= 0.30 else 5 if mv >= 0.20 else 3 if mv >= 0.10 else 0
+        if sd["4A"] != exp4a:
+            raise NoSource(f"评分卡 4A = {sd['4A']} 与安全边际 {mv:.1%} 不符（应为 {exp4a}，berkshire-score 4A 表）")
+        if "4B" in sd and sc.get("price") != sd["4A"] + sd["4B"]:
+            raise NoSource(f"price = {sc.get('price')} ≠ 4A {sd['4A']} + 4B {sd['4B']}")
     return out
 
 

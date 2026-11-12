@@ -100,18 +100,30 @@ class OptionQuote(Base):
         self.assertIn("⛔保证金", r["reasons_by_ticker"])
 
     def test_golden_pass_rows(self):
-        """当天真实结论：P 只有 TLT 79P 11/27 过关（金样例；规则改了这里要同步改并写进 feedback）。"""
+        """金样例（规则改了这里要同步改并写进 feedback）。
+        11/05 原规则（报价差 ÷ 买价 ≤ 10%）：P 只有 TLT 79P 11/27。
+        11/10 用户改第 7 条为 ÷ 中间价 ≤ 20%：同一天 P 过关 13 行 / 6 只标的，TLT 79P 仍在其中（FB-20261105-12）。"""
         r = self.collect(dte_max=29)
-        self.assertEqual([(x["ticker"], x["expiry"], x["strike"]) for x in r["ok"]], [("TLT", "2026-11-27", 79.0)])
-        x = r["ok"][0]
-        self.assertTrue(x["spread"] <= 0.10 and x["z"] >= 1.2 and x["margin"] * 1.15 <= 5470)
+        got = [(x["ticker"], x["expiry"], x["strike"]) for x in r["ok"]]
+        self.assertEqual(len(got), 13)
+        self.assertEqual({t for t, _, _ in got}, {"ORCL", "USO", "SLV", "BAC", "TLT"})
+        self.assertIn(("TLT", "2026-11-27", 79.0), got)
+        for x in r["ok"]:
+            self.assertAlmostEqual(x["spread"], (x["ask"] - x["bid"]) / ((x["ask"] + x["bid"]) / 2), places=12)
+            self.assertTrue(x["spread"] <= oq.SPREAD_MAX and x["z"] >= 1.2 and x["margin"] * 1.15 <= 5470)
+
+    def test_rule7_threshold_is_mid_20pct(self):
+        """第 7 条口径钉死：÷ 中间价、上限 20%。改回 ÷ 买价或 10% 都会让这条失败。"""
+        self.assertEqual(oq.SPREAD_MAX, 0.20)
+        ok = self.collect(dte_max=29)["ok"]
+        self.assertTrue(any(x["spread"] > 0.10 for x in ok))  # 旧阈值会挡掉、新阈值放行的行必须存在
 
 
 class GapStress(Base):
     def test_tlt_gap_numbers(self):
         """跳空压力：TLT 低波动，−3% 是 4–5 个日σ 的罕见事件，且一步跳过 2× 止损。"""
         r = self.collect(dte_max=29)
-        x = r["ok"][0]
+        x = next(x for x in r["ok"] if (x["ticker"], x["expiry"], x["strike"]) == ("TLT", "2026-11-27", 79.0))
         rows = gs.stress("P", x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])
         self.assertEqual([s["scenario"][:3] for s in rows][:2], ["−3%", "−5%"])
         self.assertTrue(4.0 < rows[0]["sigmas"] < 5.5, rows[0]["sigmas"])
@@ -168,7 +180,7 @@ class ScanAndVerify(unittest.TestCase):
         self.assertTrue(scan.PRESSURE_RE.search("Acme announces $2 billion secondary offering"))
         self.assertIsNone(scan.PRESSURE_RE.search("Uber Beat on 20% Bookings Growth"))
         # 11/06 回放：TLT 属利率敏感板块，📰 素材必须带上联储讲话；草稿里卖 call 不能写「接货」；同标的多张要提醒第 16 条
-        self.assertTrue(all(x.get("fed_channel") for side in "PC" for x in s["sides"][side]["ok"]))
+        self.assertTrue(all(x.get("fed_channel") for side in "PC" for x in s["sides"][side]["ok"] if x["ticker"] == "TLT"))
         draft = open(os.path.join(self.out, "2026-11-05_1745Z.draft.md")).read()
         call_blocks = [b for b in draft.split("\n- ") if "C｜收入" in b]
         self.assertTrue(call_blocks and all("接货" not in b for b in call_blocks))
@@ -189,7 +201,7 @@ class ScanAndVerify(unittest.TestCase):
 
     def test_verify_good_report_passes(self):
         sp, s = self.scan()
-        x = s["sides"]["P"]["ok"][0]
+        x = next(x for x in s["sides"]["P"]["ok"] if x["ticker"] == "TLT")
         good = (f"结论：今天不开新仓，红灯且明日非农。\n\n## 今日消息面\n- Hammack、Barkin 主张加息 → 利率敏感板块不利\n\n"
                 f"## 候选\n- 卖出 TLT {x['strike']:g} put（看跌）\n  代码 TLT {x['expiry']} {x['strike']:g}P｜收入 ${x['income']:.0f}/张\n  止损亏损 1/3/6 张：…\n"
                 f"  跳空：…\n  📰 鹰派讲话 → 不利\n\n## 请在平台核实\n- 可取现金\n")
@@ -199,7 +211,7 @@ class ScanAndVerify(unittest.TestCase):
     def test_verify_catches_bad_report(self):
         """防：红灯写开、编造合约、漏 📰、数字对不上、残留占位。"""
         sp, s = self.scan()
-        x = s["sides"]["P"]["ok"][0]
+        x = next(x for x in s["sides"]["P"]["ok"] if x["ticker"] == "TLT")
         bad = (f"结论：今天开 TLT。\n\n## 今日消息面\n- 【待判断】\n\n## 候选\n"
                f"- TLT {x['expiry']} {x['strike']:g}P｜收入 $99/张\n  跳空：…\n"
                f"- HOOD 2026-11-27 55P｜收入 $49/张\n\n## 请在平台核实\n")
@@ -218,6 +230,21 @@ class FedSpeakFilter(unittest.TestCase):
         self.assertIsNotNone(pat.search("Fed's Hammack favors gradual rate-hike path to lower inflation - Reuters"))
         src = open(os.path.join(REPO, "scripts", "fetch_fed.py")).read()
         self.assertIn("同姓误匹配", src)  # 过滤仍在生产代码里
+
+
+class StopAlert(unittest.TestCase):
+    """第 8 条（11/11）：平台无期权条件单，止损提醒价 = 期权涨到 2× 收入时的正股价。"""
+    def test_call_alert_reprices_to_double_credit(self):
+        s, k, t, iv, cr = 83.4, 108, 23 / 365, 0.65, 0.42
+        base, shock = gs.stop_alert("C", s, k, t, iv, cr)
+        self.assertAlmostEqual(gs.bs("C", base, k, iv, t), 2 * cr, places=3)
+        self.assertAlmostEqual(gs.bs("C", shock, k, iv + gs.ALERT_IV_BUMP, t), 2 * cr, places=3)
+        self.assertTrue(s < shock < base < k)  # IV 升时更早触发
+
+    def test_put_alert_below_spot(self):
+        base, shock = gs.stop_alert("P", 47.2, 40, 23 / 365, 0.40, 0.18)
+        self.assertTrue(40 < base < shock < 47.2)
+        self.assertAlmostEqual(gs.bs("P", base, 40, 0.40, 23 / 365), 0.36, places=3)
 
 
 if __name__ == "__main__":

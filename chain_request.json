@@ -1,0 +1,8 @@
+{
+ "_note": "临时期权链请求（scripts/fetch_chain_adhoc.py，Actions 跑），改后推送即触发；产物 chains/<TICKER>.json。11/12 第一单：NVDA 财报（11/17）定价跳空幅度——11/13 为财报前周度、11/20 为财报后第一个周五、11/27 作期限对照。",
+ "trigger": "adhoc-2026-11-12T0300Z",
+ "tickers": ["NVDA"],
+ "expiries": ["2026-11-13", "2026-11-20", "2026-11-27"],
+ "right": "PC",
+ "band": 0.25
+}

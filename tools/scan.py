@@ -35,6 +35,7 @@ def _current_branch():
 
 
 BRANCH = _current_branch()
+YELLOW_DTE, YELLOW_RISK = 21, 0.025  # 黄灯：到期 ≤ 3 周；单笔最大跳空亏损 ≤ 净值 2.5%（regime-playbook，用户 11/10 定）
 ARTIFACTS = ["options_chain.json", "stock_prices.json", "news.json", "fed_speak.json", "macro_actuals.json", "voices.json"]
 SCANS = os.path.join(REPO, "memory", "state", "scans")
 # position-discipline 第 4 条「事件压力」（增发 / 大股东减持 / 指引下调 / 监管处罚）的标题初筛——只标 ⚠ 交人工判断，不自动否决
@@ -151,6 +152,7 @@ def cmd_run(a):
         for x in res["ok"]:
             x["gap"] = gs.stress(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"], x["hv30"], x["move"])
             x["stop_loss_1_3_6"] = [round(x["bid"] * 100 * n) for n in (1, 3, 6)]  # 2× 止损成交 = 亏 1× 收入 × 张数
+            x["stop_alert"] = gs.stop_alert(x["right"], x["spot"], x["strike"], x["t"], x["iv"], x["bid"])
             x["assign_1"] = round(x["strike"] * 100)  # R5 接货金额（每张）：只提示，profile 1.1t
             x["pressure"] = [n.get("headline") for n in news.get("tickers", {}).get(x["ticker"], [])
                              if PRESSURE_RE.search(n.get("headline") or "")]
@@ -158,6 +160,18 @@ def cmd_run(a):
             if screen.get("sectors", {}).get(x["ticker"]) in RATE_SECTORS and fed.get("headlines"):
                 x["fed_channel"] = fed["headlines"][0]["headline"]  # 11/05 回放：TLT 的个股新闻全是无关长文，真相关的是联储讲话
             x["news"] = [{k: n.get(k) for k in ("time_utc", "source", "headline")} for n in tn]
+        # 黄灯缩量（tail-risk regime-playbook；用户 11/10 定：取消「只做熟标的」，保留两条）：
+        # 到期 ≤ 3 周，且最大跳空亏损（一年最差 / ±5% 等压力情景取最大）≤ 净值 2.5%（净值按可取现金）。
+        # 11/10 午盘：草稿写「可以开」并列 21 行，全靠会话手工再筛——规则写在 skill 里、工具不执行。
+        if light["light"] == 1:
+            cap = YELLOW_RISK * a.bp
+            keep, cut = [], []
+            for x in res["ok"]:
+                dte = (date.fromisoformat(x["expiry"]) - today).days
+                worst = max(g["loss"] for g in x["gap"])
+                (keep if dte <= YELLOW_DTE and worst <= cap else cut).append(x)
+                x["yellow"] = {"dte": dte, "worst_loss": worst, "cap": cap}
+            res["ok"], res["yellow_cut"] = keep, [(x["ticker"], x["expiry"], x["strike"], x["yellow"]) for x in cut]
         sides[right] = res
 
     scale = sh("python3", os.path.join(HERE, "scale_check.py"), "report", check=False).strip().splitlines()[:1]
@@ -181,6 +195,9 @@ def cmd_run(a):
     od = a.out or SCANS
     os.makedirs(od, exist_ok=True)
     jp = os.path.join(od, f"{sid}.json")
+    # 11/10：用 --asof 复盘 11/09 时同 id 覆盖了当天的正式底稿（事后改了当天记录）。底稿是当日事实，已存在就拒绝覆盖。
+    if os.path.exists(jp) and not getattr(a, "force", False):
+        sys.exit(f"拒绝覆盖：{jp} 已存在（当日正式底稿）。复盘请用 --out 指向别的目录；确需重写加 --force")
     json.dump(out, open(jp, "w"), ensure_ascii=False, indent=1, default=str)
     open(os.path.join(od, f"{sid}.draft.md"), "w").write(draft(out, gs))
     print(f"scan 底稿：{jp}｜草稿：{sid}.draft.md")
@@ -206,6 +223,10 @@ def draft(s, gs):
     for n in s["market_news"][:3]:
         L.append(f"- {n['time_utc']} · {n['source']} · {n['headline']} → 【待判断】")
     L += ["", "## 候选" + ("" if s["can_open"] else "（今日不开，供下个可开仓日参考）")]
+    cut = [c for r_ in ("P", "C") for c in s["sides"][r_].get("yellow_cut", [])]
+    if s["light"]["light"] == 1:
+        L.append(f"- 🟡 黄灯缩量：只留到期 ≤ {YELLOW_DTE} 天、最大跳空亏损 ≤ 净值 {YELLOW_RISK:.1%}（${YELLOW_RISK * s['bp']:.0f}）的合约；"
+                 f"另有 {len(cut)} 张过关但超限，已剔除（底稿 yellow_cut）。")
     for r_, res in s["sides"].items():
         for x in res["ok"]:
             # 11/06 用户反馈：「79P」看不出买卖与看涨看跌 → 每行先写动作与亏损方向，代码放后面
@@ -217,6 +238,16 @@ def draft(s, gs):
                      f"｜z {x['z']:.2f}｜报价差 {x['spread']:.0%}{'｜' + x['mark'][1:] if len(x['mark']) > 1 else ''}")
             L.append(f"  止损亏损 1/3/6 张：${x['stop_loss_1_3_6'][0]} / ${x['stop_loss_1_3_6'][1]} / ${x['stop_loss_1_3_6'][2]}"
                      + (f"｜接货 ${x['assign_1']:,}/张（只提示）" if r_ == "P" else f"｜被行权需按 ${x['strike']:g} 交付股票（未持股即卖空，只提示）"))
+            al = x.get("stop_alert")
+            if al:
+                # 11/11 USO 120P：IV +10 个点时提醒价 = 现价，说明光 IV 上升就会触发止损 → 提醒价改用 IV 不变那档，另起一行警示
+                iv_only = abs(al[1] - x["spot"]) / x["spot"] < 0.005
+                alert = al[0] if iv_only else al[1]
+                L.append(f"  止损（第 8 条，平台无期权条件单）：正股提醒设 ${alert:.2f}"
+                         + (f"（IV 不变时期权到 2× 收入）" if iv_only else f"（IV +10 个点时期权到 2× 收入；IV 不变约 ${al[0]:.2f}）")
+                         + f"，触发后手动看卖价 ≥ {2 * x['bid']:.2f} 即买回｜止盈：挂限价买回 {0.5 * x['bid']:.2f}")
+                if iv_only:
+                    L.append(f"  ⚠ IV 再升 10 个点，现价不动也会触及止损——股价提醒管不住这种情形，要盯期权价")
             if x["pressure"]:
                 L.append(f"  ⚠ 事件压力初筛命中（第 4 条，人工判断是否只观察）：{'；'.join(x['pressure'][:2])}")
             L.append(f"  跳空：{gs.fmt(x['gap'])}")
@@ -251,6 +282,7 @@ def main():
     r.add_argument("--root", help="数据目录（回归测试用固定样例目录）")
     r.add_argument("--history", help="tail_risk 历史 JSON（不读 git，回归测试用）")
     r.add_argument("--out", help="产物目录（默认 memory/state/scans）")
+    r.add_argument("--force", action="store_true", help="允许覆盖同 id 的已有底稿（默认拒绝）")
     v = sub.add_parser("verify")
     v.add_argument("report")
     v.add_argument("--scan")

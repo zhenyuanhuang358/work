@@ -1,67 +1,69 @@
-# 会话交接单（2026-11-06 · 第四版，替换 11-05 v3）
+# 会话交接单（2026-11-10 · 第五版，替换 11-06 v4）
 
-> **非 Claude Code 的 harness 先读根目录 `AGENTS.md`**（2026-11-08 搬家准备：入口、Claude 专有功能的替代做法、SKILLS.md 索引）。
-> **新 Agent 开场必做**：① 读本文件 ② `git log -1` 对照基线（之后只应有本交接单 + Actions 的 `chore:` 自动提交）
-> ③ `git status` 干净 ④ 跑 §5 命令复核 ⑤ 再动手。**§3「已做」不要重做；§4 才是待办。**
+> **开场必做**：① 读本文件和 `memory/profile-core.md`（不要整读 86 KB 的 `profile.md`，按索引 grep）② `git status` 干净、`git log -1` 正常
+> ③ 跑 §5 命令 ④ 再动手。**§3 已做的不要重做；§4 才是待办。** 非 Claude Code 的 harness 先读根目录 `AGENTS.md`。
 
 ## 0. 基线
 
 | 项 | 值 |
 |---|---|
-| 分支 | `claude/install-claude-hud-d51E6`（= GitHub 默认分支，定时工作流都跑这里；只在这里推送；不开 PR 除非用户要求） |
-| 交接时 HEAD | `687c3c7` 之后仅本交接单一个提交 + Actions 自动提交 |
-| 容器坑 | 可能浅克隆 → `git fetch --unshallow origin claude/install-claude-hud-d51E6`；容器封 sec.gov / cboe / fool.com / 界面 / 人人都是产品经理等 → **要联网的一律放 Actions**（推触发文件，读产物） |
-| 推送 | 工作流会并发提交：推前 `git fetch && git merge`，失败退避重试 |
-| 完整记录 | `/root/.claude/projects/-home-user-work/7655cc02-2eb8-57ac-a875-3308dbe0f1a9.jsonl`（索引用） |
+| 分支 | `claude/install-claude-hud-d51E6`（= GitHub 默认分支；只推这里；不开 PR，除非用户要求） |
+| 取数 | 容器封 sec.gov、cboe 等 → 要联网的一律走 GitHub Actions（改触发文件并推送，读产物；见 `AGENTS.md` §5） |
+| 推送 | 工作流会并发提交：推前 `git fetch && git merge` |
+| 用量 | 用户套餐用量有限（11/10）：一件事开一个新会话；能用工具和程序检查解决的，不靠多轮评审 |
 
-## 1. 用户目标与硬约束（原话或已确认）
+## 1. 硬约束（用户原话或已确认）
 
-- 期权：只做卖方单腿（盈立无组合单）；卖 put + 价外 call，绝不卖价内 call；不接货；保证金 ×1.15 ≤ **可取现金**（不是最大购买力）；资金 / R4 / R5 只提示不否决；不做回本单。无持仓，阶段 1 张，可取现金 **$5,468.69**（用户 11/07 告知）。
-- **每日定时扫描已被用户 11/06 在专用会话里删除**——不要擅自重建；用户说「今日期权」才扫（新流程约 6 分钟）。
-- 合规：绝不披露海底捞（6862）/ 绿茶（6831）未公开数据（用户前海底捞华南大区运营官、现绿茶品牌运营总经理）；客户文章不帮过 AI 检测；简历不编数字；uSMART 凭证只进 Secrets。
-- 另一分支 `origin/claude/us-stock-opportunities-htj5ur` 不合并、不再提。
-- 工作原则（CLAUDE.md）：第一性原理；目标不清先讨论；不熟的功能先搜开源再最小验证。
-- **COO 规则「Critic 两轮不过就停下问用户」**：11/06 UBER 报告 R3/R4 连续不过我没停（理由：纯忠实度更正），已告知用户，用户未表态——**下次严格照规则停下问**。
+- **期权（us-options-agent）**：只做卖方单腿（盈立无组合单）；卖 put 和价外 call，绝不卖价内 call；不接货；保证金 ×1.15 ≤ 可取现金；不做回本单。
+  无持仓，阶段 1 张，可取现金 **$5,468.69**（11/07）。用户说「今日期权」才扫；**不得擅自重建每日定时扫描**。
+- **天道的期权条款（只做价差、单笔 ≤ $275）与 us-options-agent 无关**，两套互不读取（用户 11/08 定）。「三源智囊团」不存在。
+- **合规**：不披露海底捞（6862）、绿茶（6831）未公开数据；不帮客户文章过 AI 检测；简历不编数字；凭证只进 GitHub Secrets。
+- 分支 `claude/us-stock-opportunities-htj5ur` 不合并、不再提。
+- Critic 两轮不过就停下问用户（COO 规则）。
+- 工作原则见 `CLAUDE.md`：第一性原理；目标不清先讨论；不熟的功能先搜开源、给取舍、做最小验证。
 
-## 2. 11/06 Skill 改造（「结构清晰 / 工具可靠 / 结果可验证 / 持续改进」，用户发起）
+## 2. 各条线现状（都有工具 + 程序检查 + 回归测试）
 
-**方法**（用户确认，推广到全部时同法）：先诊断 → 与用户确认验收标准（每轮 ≤3 问）→ 改工具 / 加检查 / 冻结好样例，最后才改说明 → 撤掉修复验证测试会失败 → 区分四类状态（自动验证 / AI 评估 / 人工确认 / 尚未验证）。
-反馈优先级：工具修复 > 程序检查 > 好样例 + 回归 > 改说明。每条进 `memory/state/feedback.jsonl`（40 条，3 条 open）。
-
-| 线 | 状态 | 入口与检查 |
+| 线 | 入口 | 检查 |
 |---|---|---|
-| 期权（us-options-agent / coo 期权 / tail-risk） | ✅ 完成，盘中实跑通过 | `tools/scan.py fetch / run / verify`；`verify_scan.py` V1–V12；`tests/test_options_regression.py`（冻结 11/05 数据）；主文件 = 工作地图 + 验收标准，旧文件在 `references/archive/` |
-| 报告（Earner / Merlin / restaurant-research / Critic） | ✅ 完成，两份真实报告走通 | `tools/report_check.py`（G1 合规、S1–S3 来源、C1–C5 格式与占位符、E1–E8 财报模板与电话会原话逐字、R1–R4 调研）；Critic Step 0 先跑、`--record` 存档；`tests/test_report_check.py`；Earner 新样例 `reports/uber_Copilot_Report.html`（冻结在 tests/fixtures/reports） |
-| 筛选器（burry / sleeper） | ✅ 完成，Actions 实跑通过 | `tools/screen_check.py`（计数闭合、缺失率、派生指标重算、阈值、SES 窗口）；两份 workflow 提交后跑检查、修了推送竞态；`tests/test_screen_check.py` |
-| 巴菲特（buffett-analyst） | ✅ 工具 + 检查完成，KO 实测交付（11/07，Critic 4 轮；规则三处改动见 research-ledger） | `tools/owner_value.py`（所有者盈余 / 两情景 DCF / 终值检验 / 失效条件 / 安全边际按**下沿**（用户 11/07 定）/ 评分卡；缺来源拒算）→ `memory/state/valuations/`；默认 HTML + PDF `*_Buffett_Report.html`，report_check B1–B5 核对报告数字与底稿一致；`tests/test_owner_value.py` |
-| 第三档（viral / risk-radar / polanyi / sop / expansion） | 不动（少用） | 真用到出问题再改 |
-| 第三方（guizang / kami / huashu / humanizer） | 不动（上游冲突） | — |
+| 期权扫描 | `tools/scan.py fetch → run --bp <可取现金> → verify`；规则唯一出处 `us-options-agent/references/position-discipline.md` 第 1–19 条 | `verify_scan.py` V1–V12；`tests/test_options_regression.py`（冻结 11/05 数据） |
+| 报告（Earner / Merlin / restaurant-research） | 各 skill；Critic 第 0 步 `tools/report_check.py <报告> --record` | `tests/test_report_check.py`；Earner 样例 `reports/uber_Copilot_Report.html` |
+| 巴菲特 | 估值 `tools/owner_value.py <输入.json>`；报告 `tools/buffett_report.py <输入.json> <叙述.json>`（通用模板，不再手写生成脚本） | `tests/test_owner_value.py`、`tests/test_buffett_report.py`；样例 `tests/fixtures/buffett/` |
+| 筛选器（burry / sleeper） | Actions 工作流 | `tools/screen_check.py`；`tests/test_screen_check.py` |
+| 天道 | `.claude/skills/tiandao/`；个人规则 `memory/state/tiandao/personal-rules.md` 与 `.json`；上限检查 `tools/tiandao_check.py` | 交付前 `tools/tiandao_verify.py answer / card`；`tests/test_tiandao_*.py`；样例 `tests/fixtures/tiandao/` |
+| 可编辑 PPTX | `.claude/skills/pptagent/`（第三方，MIT；安装见 `AGENTS.md` §9） | 它自带 `finalize`，`complete=true` 才交付 |
+| 取数脚本 | `scripts/fetch_*.py`（价格、期权链、新闻、美联储、宏观、电话会、网页、SEC 财务） | `tests/test_fetch_financials.py` |
 
-**新数据源（全在 Actions 跑）**：`fetch_news.py`（Finnhub）· `fetch_fed.py`（FF 周历 + 理事会 RSS + Google News）· `fetch_macro.py`（BLS 官方 API：非农 / CPI / PPI 实际值，FRED 兜底）· `fetch_transcript.py`（Motley Fool 电话会原文，`transcript_request.json`）· `fetch_pages.py`（任意网页原文，`pages_request.json`）· `fetch_voices.py`（政要与知名投资人发言标题）· `fetch_calendar.py`（FOMC 日历 → **`memory/state/macro_calendar.json` 宏观日历唯一来源**，BLS 的 CPI / PPI / 非农由 `parse_omb` 解析 OMB 年度时间表 PDF（已到 2027-12；2027 年秋 OMB 发 FY2028 版后把 PDF 链接放进 pages_request.json 重抓即可），C15 查 45 天覆盖）。
-`self_check` 新增 C11（反馈台账）· C12（扫描报告已核对）· C13（交付报告已 report_check）· C14（筛选器不变量）。
+反馈台账 `memory/state/feedback.jsonl`；自检 `tools/self_check.py`（C1–C16）；skill 索引 `SKILLS.md`（`tools/skill_index.py` 生成）。
 
 ## 3. 已做（勿重做）
 
-- 11/05–11/06 期权：规则第 19 条（新仓 20–45 天）、跳空压力、新闻 / 美联储 / 非农标注、HV 补全、`tail_light.py`；11/06 扫描：红灯 + 非农 +165K（预期 65K）→ 不开，闸门候选 TLT 79P / 86C、SLV 40P（已登记）。
-- 报告交付：`reports/uber_Copilot_Report.html`（UBER Q3，Critic 5 轮 PASS，三情景 $51 / $76 / $103 已登记 predictions）；`reports/haidilao_ai_guide_Research_Report.html`（海底捞 AI 导购七问答题准备，Critic R2 CONDITIONAL 已修）。生成脚本在 `reports/src/`。
-- burry 样本计数重复已修（完整 1699 / 缺失率 68.2%，原报 1835 / 66.1%）；`watch_fundamentals` 的 fcf_yield 改名 fcf_yield_mcap（与 burry 的 FCF÷EV 消歧义）。
+- **11/05–11/06**：期权、报告、筛选器三条线的 skill 改造；UBER 财报报告、海底捞 AI 导购提纲报告交付。
+- **11/07**：KO 巴菲特报告（高估不买，内在价值 48.59–58.81，评分 48）。
+- **11/08**：搬家准备（`AGENTS.md`、`SKILLS.md`、报告 PDF 入库）；PPTAgent 接入并验证；天道智能体布置。
+- **11/09**：NVDA 巴菲特报告（高估不买，135.27–148.38，评分 74）；天道验收标准与检查器；台账确认为空（无借款、无入股）。
+- **11/10**：
+  - 期权第 7 条改为**报价差 ÷ 中间价 ≤ 20%**（原 ÷ 买价 ≤ 10%），数值唯一出处 `option_quote.SPREAD_MAX`；`scan.py` 拒绝覆盖已有底稿。
+  - 巴菲特评分 8 项由工具查表（输入里给 `score_facts`）+ 通用报告模板；必读档案改为 `profile-core.md`。
+- **巴菲特规则（用户定，已进工具）**：安全边际按下沿；一次性项只用于估值；基准终端增长封顶 3%；交叉验证用股权口径；
+  营收增速波动率 = 增速标准差；完整财年结束超过 6 个月用 TTM；护城河按证据打分。
 
 ## 4. 待办
 
-1. **feedback open 3 条**：FB-20261105-12「z≥1.2 + 报价差 ≤10% 几乎只剩 TLT」——平静日数据后请用户定第 7 条口径；~~FB-20261105-13~~ 已做（$5,468.69）；~~FB-20261105-14~~ 已做：`fetch_voices.py` → voices.json。
-2. 期权首个可开仓日 11/11（11/09 CPI 前一日、11/10 CPI 当天视灯）；开仓前 `scan.py fetch → run → verify`。
-3. predictions 待记分：XLE 11/13 ≥63、UBER 11/20 ≥62、UBER 三情景（2027-11-05）、UBER Q4 指引两条（2027-02-15）、INTC Q4 等。
-4. INTC 最后一张平仓价（等用户）；uSMART API 文档域名放行后评估。
-5. 报告线待验证：restaurant-research（非提纲的品牌调研）还没跑过一次新流程。
+1. **期权**：11/10 红灯未开。11/13 PPI → 11/12 为事件前一交易日，不新开；按灯色最早 11/11。扫描在开盘 1 小时后（10:30 ET 起）才有参考价值。
+2. **predictions 待记分**：XLE 11/13 ≥ 63、UBER 11/20 ≥ 62、UBER 三情景（2027-11-05）、UBER Q4 指引两条（2027-02-15）、KO FY2030 FCF < $22.7B（2031-02-28）、INTC Q4 等。
+3. **feedback open 两条**：FB-20261107-B04（burry 债务标签修复，等下次 burry 实跑核对 KO 净负债为正）；FB-20261109-B10（KO 报告未按 TTM 规则重跑，结论不变，用户要求时再跑）。
+4. **尚未实测**：巴菲特通用模板还没用在新公司上；天道的资金类决策（借钱、入股、黄金）；restaurant-research 新流程。
+5. **NVDA**：11/17 财报、11/18 黄仁勋国会闭门作证、董事会调查——出结论后重评管理层评分（3C）和关键人风险，报告风险表尚未补这一项。
+6. INTC 最后一张平仓价（等用户）。仍调用 Anthropic API 的代码清单在 `AGENTS.md` §6，换 DeepSeek 时要改，未改。
 
 ## 5. 复核命令
 
-| 命令 | 交接时结果 |
-|---|---|
-| `python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py` | 全过 |
-| `python3 tools/self_check.py --quiet` | 无 P1 / P2（只剩第三方 hub 超长 P3 与 3 条 open 反馈） |
-| `python3 tools/screen_check.py` | burry / ses 全过 |
+```
+python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py tests/test_buffett_report.py tests/test_combo_payoff.py   # 11/12 起含组合分析
+python3 tools/self_check.py --quiet     # 交接时无 P1 / P2
+```
 
 ## 6. 已排除的路线（不要再提）
 
-帮文章过 AI 检测；编简历数字；回本单；价差 / 组合单；买实时期权数据；用最大购买力算张数；全市场期权初筛作常规；加收入门槛；擅自重建每日定时扫描。
+帮文章过 AI 检测；编简历数字；回本单；us-options-agent 里做价差或组合单；买实时期权数据；用最大购买力算张数；加收入门槛；擅自重建每日定时扫描；三源智囊团。

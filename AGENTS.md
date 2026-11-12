@@ -7,7 +7,7 @@
 ## 1. 开场必读（按顺序）
 
 1. `CLAUDE.md`：全部工作规则。文件名带 Claude，但内容与模型无关，**全部适用**：第一性原理、预测登记、报告路由、COO 流水线、Critic 门控、记忆约定。
-2. `memory/profile.md`：历史教训与用户偏好。每个会话第一次干活前必读。
+2. `memory/profile-core.md`：用户偏好、交付与数据规则、配置（约 3 KB）。每个会话第一次干活前必读。完整档案 `memory/profile.md` 有 86 KB，不要整读，按核心档案里的索引 grep。
 3. `memory/state/handoff.md`：当前状态、硬约束、待办，以及已排除、不要再提的路线。
 4. `SKILLS.md`：全部 skill 与子代理的索引，由 `tools/skill_index.py` 从 frontmatter 自动生成。
 
@@ -64,7 +64,7 @@ DeepSeek API 兼容 OpenAI 格式。要换就改用 OpenAI SDK 并设置它的 b
 ## 7. 验证（改了东西就跑；没有证据不说「通过」）
 
 ```
-python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py
+python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py tests/test_buffett_report.py tests/test_combo_payoff.py
 python3 tools/self_check.py --quiet
 python3 tools/report_check.py <报告.html> --record     # 交付任何 HTML 报告前
 python3 tools/skill_index.py --check                    # 改了任何 SKILL.md / agent 后
@@ -78,3 +78,16 @@ python3 tools/skill_index.py --check                    # 改了任何 SKILL.md 
 - 工作流会并发提交，推送前先 `git fetch && git merge`。
 - 不合并 `claude/us-stock-opportunities-htj5ur`。
 - 不开 PR，除非用户要求。
+
+## 9. 可编辑 PPTX：PPTAgent（2026-11-08 验证通过，用户认可，已入 CLAUDE.md 路由表；skill 已收进 `.claude/skills/pptagent/`）
+
+客户要能在 PowerPoint 里改的 .pptx 时用 [icip-cas/PPTAgent](https://github.com/icip-cas/PPTAgent)（MIT）。
+它是一个 skill：宿主 agent 写 HTML 幻灯片，它负责渲染审图、转成可编辑 PPTX、核对交付文件与审过的源一致。不需要专用模型。
+
+- 安装：在 `.claude/skills/pptagent/` 建 venv，执行 `pip install -r requirements.txt` 和 `npm ci`（Claude Code 直接从仓库读取；opencode 等再跑 `python scripts/install.py --client opencode` 注册）。
+- 宿主只能处理文字时：config 改 `mode: text`，并配一个视觉模型（OpenAI 兼容接口，密钥放 `VISUAL_API_KEY`）。
+- 流程：`init → 写 slides/*.html → review-slides → record-slide-review → build → review-deck → record-deck-review → finalize`。只有 `complete=true` 才交付。
+- 样例：`reports/ko_Buffett_Deck.pptx`，生成脚本 `reports/src/gen_ko_deck.py`，数字读估值底稿。
+- 已知问题：
+  - 字体按渲染机上实际装的字体写入。在没有微软雅黑的机器上导出，PowerPoint 打开时会替换字体，所以最好在装有微软雅黑的电脑上跑。
+  - Playwright 版本被锁定为 1.62，需要 Chromium 1234。机器上的浏览器版本不同时，可用 `PLAYWRIGHT_BROWSERS_PATH` 指向一个符号链接目录。

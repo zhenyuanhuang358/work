@@ -98,7 +98,11 @@ def run(path, kind=None, pdf=None):
         # 改为：报告里每个情景目标价，都要在 predictions.md 找到一行同时含标的名与该价。
         tps = sorted({m.group(2) for m in re.finditer(r"(熊市|基准|牛市)\s*\$?\s*(\d+(?:\.\d+)?)", t)})
         missing = [p_ for p_ in tps if not any(stem in l and re.search(rf"(?<![\d.]){re.escape(p_)}(?![\d])", l) for l in pred)]
-        if kind == "buffett" and not tps:
+        if kind == "buffett" and not tps and "predictions.md" not in t:
+            # 11/09 NVDA：报告没有声明任何可证伪判断时不强制登记（CLAUDE.md 铁律 1：不是主张就不登记、不说出口）。
+            # 一旦报告写了「已登记 predictions.md」，下面的分支照旧核对登记行与门槛。
+            chk("C3", "FAIL", "巴菲特报告未声明可证伪判断（无需登记）", True, "报告未提及 predictions.md")
+        elif kind == "buffett" and not tps:
             # 11/07 KO 实测：巴菲特报告给的是内在价值区间，不是带日期的情景价，按情景价查必然 FAIL。
             # 它的可证伪判断是「现价隐含增速不兑现」这类带门槛 + 时点的命题 → 查同标的、来源为 buffett 的登记行。
             # 11/07 KO Critic R3：登记行门槛被写成 $0.0B（单位换算两次），只查「有登记行」拦不住 →

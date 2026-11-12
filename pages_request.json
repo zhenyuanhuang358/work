@@ -1,7 +1,8 @@
 {
-  "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/07 第七单：FY2025 10-K（sec.gov 对浏览器 UA 403，改 IR 站 PDF 副本；FY2024 10-K PDF 备选）。",
-  "urls": [
-    "https://investors.coca-colacompany.com/filings-reports/all-sec-filings/content/0001628280-26-010047/0001628280-26-010047.pdf",
-    "https://investors.coca-colacompany.com/_assets/_633a0d1f4596400b1212988f17af667c/cocacolacompany/db/1008/10477/document/2024_10-K_%28Bookmarked%29.pdf"
-  ]
+ "_note": "网页原文抓取请求（scripts/fetch_pages.py，Actions 跑）。改 urls 并推送即触发；产物 pages/。11/07 第四单：KO FY2024 / FY2025 业绩新闻稿（核对 IRS 保证金与 fairlife 或有对价两笔一次性现金流出，巴菲特估值正态化 FCF 用）。 11/09 第八单：NVDA 巴菲特分析——FY2026 Q4 与 FY2027 Q2 业绩新闻稿原文（investor.nvidia.com 为 JS 渲染、抓到 0 字，改 nvidianews 与 ?output=1）。（重抓：表格行入正文）；补 FY2025 Q4 新闻稿（含 FY2024 现金流）；第九单：NVDA 分析师共识（异常增速第 2 步）；第十单：NVDA Critic R1 返修——年报 PDF（10-K：客户集中度、持股、dwc 拆分）、TechInsights 份额报道原文、FY26 Q4 重抓（含表格）；11/10 第十二单：SPYI 收益与分配（与期权策略对比）；11/12 第十三单：NVDA 11/11 盘后 −8.6%——WSJ 董事会拟撤换黄仁勋、NYT 婚外情报道原文（财报期权分析前核实事件）",
+ "urls": [
+  "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html",
+  "https://finance.yahoo.com/technology/live/nvidia-live-updates-nvidia-stock-tanks-in-after-hours-after-allegations-of-a-second-affair-surface-222438011.html",
+  "https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next"
+ ]
 }

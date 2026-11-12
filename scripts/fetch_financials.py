@@ -14,11 +14,13 @@ import ses_screener as ss  # noqa: E402
 
 # 科目：按优先级取第一个有数的标签
 TAGS = {
-    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"],
-    "net_income": ["NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic"],
+    "revenue": ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet",
+                "RevenueFromContractWithCustomerIncludingAssessedTax"],
+    "net_income": ["NetIncomeLoss", "NetIncomeLossAvailableToCommonStockholdersBasic", "ProfitLoss"],
     "ebit": ["OperatingIncomeLoss"],
     "da": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet"],
-    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+    "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets",
+              "PurchasesRelatedToPropertyAndEquipmentAndIntangibleAssets"],  # 11/09：NVDA 只报这个
     "cfo": ["NetCashProvidedByUsedInOperatingActivities"],
     "interest": ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt"],
     "sbc": ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"],
@@ -44,11 +46,23 @@ TAGS = {
 }
 
 DEBT_HINT = ("Debt", "Borrowings", "CommercialPaper", "Notes")
+CAPEX_HINT = ("PropertyPlantAndEquipment", "PropertyAndEquipment", "ProductiveAssets")  # 11/09 NVDA capex 标签找不到时供人工挑
 
 
 def annual(facts, tags):
-    """返回 {fy: {"v", "tag", "accn", "filed", "end"}}，只取 10-K 的 FY 值，同 FY 取最新报送。"""
-    gaap = facts.get("facts", {}).get("us-gaap", {})
+    """返回 {fy: {"v", "tag", "accn", "filed", "end"}}，只取 10-K 的 FY 值，同 FY 取最新报送。
+
+    按年合并多个标签：每个财年取 tags 里排在最前、且该年有值的那个标签（结果里带 tag，可追溯）。
+    11/09 NVDA 根因：原实现「返回第一个有任何数据的标签」——PaymentsToAcquirePropertyPlantAndEquipment 只有早年数据，
+    排在后面、覆盖 2023–2026 的 PaymentsToAcquireProductiveAssets 永远轮不到，capex 静默缺失；KO 2024–25 债务缺失同因。
+    """
+    ns = facts.get("facts", {})
+    gaap = dict(ns.get("us-gaap", {}))
+    for k, v in ns.items():  # 公司扩展分类兜底（us-gaap 优先）
+        if k not in ("us-gaap", "dei"):
+            for t, val in v.items():
+                gaap.setdefault(t, val)
+    merged = {}
     for tag in tags:
         units = gaap.get(tag, {}).get("units", {})
         rows = units.get("USD") or units.get("USD/shares") or units.get("shares") or []
@@ -57,13 +71,13 @@ def annual(facts, tags):
             if r.get("form") == "10-K" and r.get("fp") == "FY" and r.get("fy"):
                 # 同一 10-K 会带前两年对比值：用 end 年份对应真实财年
                 fy = int(r["end"][:4])
+                if "start" in r and int(r["end"][:4]) - int(r["start"][:4]) > 1:
+                    continue
                 if fy not in out or r["filed"] > out[fy]["filed"]:
-                    if "start" in r and int(r["end"][:4]) - int(r["start"][:4]) > 1:
-                        continue
                     out[fy] = {"v": r["val"], "tag": tag, "accn": r["accn"], "filed": r["filed"], "end": r["end"]}
-        if out:
-            return out
-    return {}
+        for fy, v in out.items():
+            merged.setdefault(fy, v)
+    return merged
 
 
 def main():
@@ -86,6 +100,9 @@ def main():
         out["debt_tags"] = {tag: {fy: v["v"] for fy, v in annual(facts, [tag]).items() if fy in yrs}
                             for tag in gaap if any(h in tag for h in DEBT_HINT) and "Repayments" not in tag and "Proceeds" not in tag}
         out["debt_tags"] = {k: v for k, v in out["debt_tags"].items() if v}
+        allns = {t for v in facts.get("facts", {}).values() for t in v}
+        out["capex_tags"] = {f"{tag}": {fy: v["v"] for fy, v in annual(facts, [tag]).items() if fy in yrs}
+                             for tag in sorted(allns) if any(h in tag for h in CAPEX_HINT) and ("Payment" in tag or "Purchase" in tag)}
         try:
             import yfinance as yf
             h = yf.Ticker(t).history(period="5d")

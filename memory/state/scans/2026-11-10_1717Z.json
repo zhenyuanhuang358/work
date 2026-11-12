@@ -1,0 +1,2371 @@
+{
+ "id": "2026-11-10_1717Z",
+ "asof": "2026-11-10T17:17:13+00:00",
+ "bp": 5468.69,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T17:13:22+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T17:14:05.203084Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T17:15:38+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T17:16:55+00:00"
+  },
+  "quote_age_min": 3.6,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-10T17:14:05.203084Z",
+  "ref_day": "2026-11-09",
+  "readings": {
+   "term_structure": 0.9668049792531119,
+   "skew": 150.34,
+   "vvix": 102.71,
+   "vix": 20.97
+  },
+  "scores": {
+   "term_structure": 1,
+   "skew": 2,
+   "vvix": 1,
+   "vix": 1
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [
+   "term_structure",
+   "vvix",
+   "vix"
+  ],
+  "base": 1,
+  "accel": [],
+  "light": 1,
+  "light_name": "🟡 黄灯",
+  "term_premium": 1.0343347639484979,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "Core CPI m/m",
+   "forecast": "0.2%",
+   "previous": "0.3%"
+  },
+  {
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "CPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.6%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "Core PPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.7%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "PPI m/m",
+   "forecast": "0.4%",
+   "previous": "1.3%"
+  }
+ ],
+ "event_eve": [],
+ "macro_today": [
+  {
+   "key": "cpi",
+   "name": "CPI",
+   "month": "2026-10",
+   "actual": 0.35,
+   "previous_recomputed": 0.65,
+   "unit": "% 环比",
+   "release_et": "2026-11-10T08:30:00-05:00",
+   "forecast": "0.3%",
+   "ff_previous": "0.6%",
+   "surprise": 0.05
+  },
+  {
+   "key": "core_cpi",
+   "name": "核心 CPI",
+   "month": "2026-10",
+   "actual": 0.3,
+   "previous_recomputed": 0.33,
+   "unit": "% 环比",
+   "release_et": "2026-11-10T08:30:00-05:00",
+   "forecast": "0.2%",
+   "ff_previous": "0.3%",
+   "surprise": 0.1
+  }
+ ],
+ "macro_source": "BLS API",
+ "macro_errors": [],
+ "can_open": true,
+ "why_not": [],
+ "scale": [
+  "实盘账本 0 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-09T08:40:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-09T10:00:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-09T12:15:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-10T04:00:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-10T10:50:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-10T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-10T15:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Paulson",
+    "title": "FOMC Member Paulson Speaks"
+   },
+   {
+    "time": "2026-11-12T08:30:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-12T10:00:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-12T11:15:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-12T13:10:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-12T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-12T18:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-13T09:10:00-05:00",
+    "speaker": "Collins",
+    "title": "FOMC Member Collins Speaks"
+   },
+   {
+    "time": "2026-11-13T10:50:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-13T12:00:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-13T19:00:00-05:00",
+    "speaker": "Jefferson",
+    "title": "FOMC Member Jefferson Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T16:36+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOZkZoTlZOa05oRHYwaUNCM1pDVHdhNnF3ajlxMzBBd1R0Z3plbEVKbm4xemxmbm1penlwS1hrY09URU4zbDZoZFlWV213ZnZkWVlseUE1U0JyeE8zQWpqcU9YVUlKbUJldG9NT21UVkpmN2F6eFlWZWtiZlhrZUZGLUFpUTRlcmdWYnduUDB5MTNOY0xFQW5TSDZfaDNac0N5VVpuUE43WTJYeEZIZTBDbFRKdw?oc=5"
+   },
+   {
+    "speaker": "Logan",
+    "time_utc": "2026-11-10T16:00+00:00",
+    "source": "Investing.com",
+    "headline": "Fed’s Logan calls for two more rate hikes to combat inflation - Investing.com",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPd0RMdmRyZmdjN3NUZC1XcGZGZEhaN0F6bDVZbk1OWEprd0EtSG9RSndsVGRabDVHbXE1ZmVhZk5BQk1GRDNsdXZpZVA2SmRlWkdoNmJDZkZmRzU0blduMExMVUMyckRoczBiM0RjUmZCbUVDMWZqaFJRSjU0MS02N1d3WjZvd3BMTjZXcXZhTVVvcWRmNk41QmVQdWp5TWdIRVNrajQtb2dib09CTVh6R3ZR?oc=5"
+   },
+   {
+    "speaker": "Logan",
+    "time_utc": "2026-11-10T15:55+00:00",
+    "source": "Reuters",
+    "headline": "Fed's Logan calls for two more rate hikes, possibly rapidly - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPZ0xfUlI5TmlGa3Z4Z0QtTF9FcVRjZ0hwNEFSOVNTX0otSERvdUdrZzBKazRheFd2Vlc3bWZhazZfY2haNFNKVi1WOWNnWWVfTmgyVk9iSXFqRTR3aHcwRV93UkF0ejRGVFdOdVR4N2NWalZkYkFhS3NTLWtsY1FjazJld1JBX0lBRmM4M1RhdHk3UDBjZFFWOUNQVm40bkU?oc=5"
+   },
+   {
+    "speaker": "Logan",
+    "time_utc": "2026-11-10T15:55+00:00",
+    "source": "CNBC",
+    "headline": "Fed's Logan: Possible to hike rates 'more rapidly this winter' than in the fall - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPRHQ0OV84dnRmdVNSemNBaUVoQlIydDNzR0FvVzNFc2FQQzBTOGVENTgwX1hoSGI2T01YcXl6ZEJYYkRtQlI5SENNM0dvVkNmeUh3TzR2U2xxX0dGNjA2Nlo4WWI5Z0JwSVFvWHBFMVVpN3B0cENEbHJ0QnhPTjlrUnFYOTdCMER5TWpWUjVfTm9KZ1VrOG10VS1CbFdfQ0hOdjFqa3BOOHZDQzg0TlRqQnhMS0JLMjlWR2c?oc=5"
+   },
+   {
+    "speaker": "Logan",
+    "time_utc": "2026-11-10T15:50+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Fed’s Logan Favors at Least Two Hikes, Says Pace Could Quicken - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPZ3hmQUhBdy04d2piMlV6b2lfVmt6dklNYzdoQUZBeUxrVTNtQWMyUVNGNVpBdDZ5MnpLY2g0MldVUXp2cFdqU2JOVmJwcmQ2ODI1dkc2TE85ejN5cXFoei0zNUF3NUFGOUJtZnV5OHV3WXJJX1p2TVh5TmI5SmJ4SUh0Z1V2QmxlQ0R5aUtRVnVKWWFaNXlNcFRoTWYxSFQ1ZzdZb0t0b21LQkxuRU52TVp3?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-10T15:38+00:00",
+    "source": "24/7 Wall St.",
+    "headline": "Fed’s Goolsbee Says AI Data Centers Look Like ‘Old-Fashioned Overheating’ - 24/7 Wall St.",
+    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOMmV6a2NONkpnVnJYYUVIN3RiTVNaRjl4Tm95WVpzcmdHY1RiVFROaUF1RUVDQUV1REE3c1lhdVNoTnB6Z2RHTm5pbHJtMXJvWGxvbkREdVJpMDhpXzhibG9CMGpwM2sxN2hsMm1mRlZsVUZXRldpSmdOcjEyakpVcGNBRDUzbTdOTFpOZkJtN3RMNkVZZ1J4NDJManMtZ0JsRkNQRHV1WGJDUGxhYUlYd3k1bkk?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T14:41+00:00",
+    "source": "Reuters",
+    "headline": "Fed's Waller plans to support at least a quarter-point rate hike in December - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNR3RjbDlfcXFBbHp0SVRSeHIzZHFTTnY5bjBuWGszTTMzUmxLUXNzRTFid29sbXV1emJSZWMwTEo4V2dWYjJ3TGlESmRlRzdFcDdQU3RxWi1QVEZrRlNBU0N3NG50WUNBWVdXbnZFS0RuVDNyRVdGWm1aRjFjWGRlRFRoTFhlbFMwQ1NjbTZMd2x0cnlHR0F4d2JNV3dKcHFOOE5TRFVsSlc5ekxoQ0E?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T13:41+00:00",
+    "source": "MarketWatch",
+    "headline": "Fed’s Waller puts half-point rate hike into the mix for December - MarketWatch",
+    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQUJIeWdYUTVoMVRrQTYxRklXZ1IyWmp3VlFtajV3b0JHV1oxUkJhcGc1Q1EtV20yc0RyZnlwa2d2bmpPdFVTUEw3MmhHVmJyYWZEWmJMT0MwMGt6X0ZwN3hXbHRpQ1pybEhIX2tqSHRiUTVsX0Q4eWVXWXNNRHdKTVl0aXV4NlJDME4tb2xSdldtV2NCUHkyMmE4SUowb0Ffc05nWFp2V2dqdw?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-10T16:30+00:00",
+   "source": "CNBC",
+   "headline": "Ex-Google recruiter: You're answering 'Tell me about yourself?' all wrong, and other job interview mistakes—do this instead",
+   "summary": "Former Google recruiter Farah Sharghi shares her best advice for how to turn coffee chats into real introductions and interviews.",
+   "url": "https://www.cnbc.com/make-it/2026/11/10/ex-google-recruiter-how-to-avoid-3-common-job-interview-mistakes.html"
+  },
+  {
+   "time_utc": "2026-11-10T16:29+00:00",
+   "source": "CNBC",
+   "headline": "U.S. gas prices fall below $4 for the first time since July",
+   "summary": "Americans may finally find some relief at the pump.",
+   "url": "https://www.cnbc.com/2026/11/10/us-gas-prices-below-four-dollars.html"
+  },
+  {
+   "time_utc": "2026-11-10T15:01+00:00",
+   "source": "Reuters",
+   "headline": "What are the impeachment articles facing Pete Hegseth? - Reuters",
+   "summary": "What are the impeachment articles facing Pete Hegseth?  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQV2NMbXZsZWM1TUpORFVzUVhKMFIyS3VPSk5SRHZkQ1VCcjhJU3JReEI3N3NSbW9vRGc0R3Z4WTZWWllUbEU0ODRJWkxxOXVLNy1uQTBCbWNtWlNYY0ZRUWstcWU4dlhUaVgtU2pqMW9wWkltVDBYUGxNblFDZU1aSmd5eXgzYzZfcy1TWDRNOEc1WlJIZ2IwVDJR?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T14:35+00:00",
+   "source": "Reuters",
+   "headline": "Wall St opens lower after October's hot inflation print - Reuters",
+   "summary": "Wall St opens lower after October's hot inflation print  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQSEE5eGJXT1lYRVFJMUpWb2VCTENjZ2hBNWk0QWl5QVZBNmJ4TFBodVUtRVRzV0JubVE0NFJYRFlmYkpuc0tlbTBValFhV0ppcGdYNEZERXV4ZnhLZUJKTF9fUzZEeHM3cDRwdmlMdUVIUWlERHprb3lKakQ1S1gzSmI5LVZYWWx2cTBjVC1sVEc1OG8tOS0ta0k5VQ?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T14:30+00:00",
+   "source": "CNBC",
+   "headline": "Does anyone feel safe from layoffs right now?",
+   "summary": "AI fears and a lackluster job market are fueling a looming worry that layoffs are around the corner, even if you do your job well.",
+   "url": "https://www.cnbc.com/make-it/2026/11/10/layoff-announcements-are-slowing-this-year-workers-are-still-worried.html"
+  },
+  {
+   "time_utc": "2026-11-10T14:28+00:00",
+   "source": "Reuters",
+   "headline": "Rubio says no need for major combat operations on Iran given US economic campaign - Reuters",
+   "summary": "Rubio says no need for major combat operations on Iran given US economic campaign  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOek5yNnd3UkRRS2RHYjY5MlR1NU9KQnFWcW43RGV1VHI5Yzhxc3RseUstNnVCbXVlUTN3T1hTcE9RUEFGT0R6Q0JUTmQxNW1aX2lZM0RXZkNjLTgwdWQ5aFN1OGM2LTBLcV91MlBkdDE0a2VCQk5nNUdDOGo1ZHI2TW9Pa010QjlrcjQwU0htVjlTMlVOUXJ2cThHQ0JHY09rSHFyYVgtNzNhMXNVVzJ3UTZTb1R6cmM?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T14:19+00:00",
+   "source": "Reuters",
+   "headline": "Pentagon chief Hegseth calls moves to impeach him a farce and sabotage - Reuters",
+   "summary": "Pentagon chief Hegseth calls moves to impeach him a farce and sabotage  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxObVFtR2hnZ2luVDdXU010VVB4UVpubVBIbUtJc0ZkQVkzLUkzaWxMRDJKaVVoTVNUbzRyRGQ4ZFh1dUZIUFhRVDRTVVNyZ3FWQkRIMm5UTVJOY2J0MDJ4bEFZNkh2MjdUZzRnRkVYbXBKSktfNElhWU42SEVRMktOd0JHYTQyU2N4ZUF2eWZicDRpVHBCTHRYUWFYOVRMT3lrVWNuQldMQkV0MVVGYXc?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T14:08+00:00",
+   "source": "CNBC",
+   "headline": "Jim Cramer's top 10 things to watch in the stock market Tuesday",
+   "summary": "Futures are down after a higher-than-expected consumer price index this morning stoked inflation concerns.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/10/jim-cramers-top-10-things-to-watch-in-the-stock-market-tuesday.html"
+  }
+ ],
+ "voices": [
+  {
+   "name": "Scott Bessent",
+   "role": "财长",
+   "sectors": "美债 / 美元 / 关税",
+   "headline": "Bessent Says Hormuz Will Be ‘Worthless’ as Oil Bypasses It - EnergyNow.com",
+   "source": "EnergyNow.com",
+   "time_utc": "2026-11-10T12:57+00:00"
+  },
+  {
+   "name": "Warren Buffett",
+   "role": "伯克希尔",
+   "sectors": "宽基 / 金融 / 消费",
+   "headline": "Bill Ackman and Warren Buffett Both Have the Same Warning About the Stock Market - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-10T13:09+00:00"
+  },
+  {
+   "name": "Michael Burry",
+   "role": "Scion",
+   "sectors": "个股做空 / AI 估值",
+   "headline": "Michael Burry Trims Bet on This Heavy Equipment Stock After Puts Nearly Quadrupled - TradingView",
+   "source": "TradingView",
+   "time_utc": "2026-11-10T15:16+00:00"
+  },
+  {
+   "name": "Bill Ackman",
+   "role": "潘兴广场",
+   "sectors": "个股 / 美债",
+   "headline": "Bill Ackman and Warren Buffett Both Have the Same Warning About the Stock Market - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-10T13:09+00:00"
+  },
+  {
+   "name": "Jamie Dimon",
+   "role": "摩根大通 CEO",
+   "sectors": "银行 / 信用 / 宏观",
+   "headline": "JPMorgan's CEO Jamie Dimon Demands Bank Rules for Stablecoin Yield - CoinMarketCap",
+   "source": "CoinMarketCap",
+   "time_utc": "2026-11-09T23:44+00:00"
+  },
+  {
+   "name": "Elon Musk",
+   "role": "特斯拉 CEO",
+   "sectors": "TSLA / 自动驾驶 / AI",
+   "headline": "Democrats have been waiting to put Elon Musk under oath. Their chance is coming. - NBC News",
+   "source": "NBC News",
+   "time_utc": "2026-11-10T17:00+00:00"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 786,
+   "ok": [
+    {
+     "ticker": "XLF",
+     "expiry": "2026-12-04",
+     "strike": 54.0,
+     "bid": 0.15,
+     "ask": 0.17,
+     "iv": 0.22438275991131307,
+     "ivhv": 1.2050631574184374,
+     "z": 1.2155417144348033,
+     "p_otm": 0.8909191588107912,
+     "income": 15.0,
+     "margin": 769.0,
+     "spread": 0.1250000000000001,
+     "mark": "✅",
+     "spot": 58.075,
+     "t": 0.0661847729578894,
+     "right": "P",
+     "hv30": 0.1862,
+     "move": {
+      "worst_down": -0.0335,
+      "worst_up": 0.0351,
+      "p01": -0.0253,
+      "p99": 0.0218,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 2.5576543286338684,
+       "buyback": 0.740127258133418,
+       "flat": 0.43017838397293495,
+       "loss": 59.012725813341795,
+       "x_credit": 4.934181720889454,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 4.262757214389781,
+       "buyback": 1.114478617555804,
+       "flat": 0.7570859357822144,
+       "loss": 96.44786175558039,
+       "x_credit": 7.429857450372026,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −3.4%",
+       "gap": 0.0335,
+       "sigmas": 2.856047333641153,
+       "buyback": 0.797443591540226,
+       "flat": 0.4774708997144881,
+       "loss": 64.7443591540226,
+       "x_credit": 5.316290610268174,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      15,
+      45,
+      90
+     ],
+     "assign_1": 5400,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:15+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Is A 50 Basis Point Hike Back On Table?"
+      },
+      {
+       "time_utc": "2026-11-10T06:11+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Sell The Bounce, AI Bubble Burst To Resume"
+      },
+      {
+       "time_utc": "2026-11-09T21:04+00:00",
+       "source": "Yahoo",
+       "headline": "Sector Update: Financial Stocks Rise Late Afternoon"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 77.0,
+     "bid": 0.11,
+     "ask": 0.12,
+     "iv": 0.13470334073764856,
+     "ivhv": 1.2146378786081926,
+     "z": 1.3059436140864102,
+     "p_otm": 0.9064306444809047,
+     "income": 11.0,
+     "margin": 1258.9999999999995,
+     "spread": 0.0869565217391304,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "P",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.8650753183042674,
+       "flat": 0.5681040230499725,
+       "loss": 75.50753183042674,
+       "x_credit": 7.86432107549334,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.5800302372873958,
+       "flat": 1.264043345763298,
+       "loss": 147.00302372873958,
+       "x_credit": 14.363911248067234,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.7197082909049897,
+       "buyback": 0.5908949929102221,
+       "flat": 0.33504156068780944,
+       "loss": 48.08949929102221,
+       "x_credit": 5.3717726628202005,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "assign_1": 7700,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.5,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.13838119087551193,
+     "ivhv": 1.247801540807141,
+     "z": 1.4453764065662427,
+     "p_otm": 0.928688146906795,
+     "income": 8.0,
+     "margin": 1205.9999999999998,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "P",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.726679784341755,
+       "flat": 0.4434801650351581,
+       "loss": 64.6679784341755,
+       "x_credit": 9.083497304271937,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.3554502952722771,
+       "flat": 1.0295484306153995,
+       "loss": 127.54502952722771,
+       "x_credit": 16.943128690903464,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.7197082909049897,
+       "buyback": 0.4912828447281754,
+       "flat": 0.255902596366802,
+       "loss": 41.12828447281754,
+       "x_credit": 6.141035559102193,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "assign_1": 7650,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 76.0,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.14312592520931666,
+     "ivhv": 1.2905854392183649,
+     "z": 1.5658298721759685,
+     "p_otm": 0.944573734167372,
+     "income": 6.0,
+     "margin": 1153.9999999999998,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "P",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.6181422996706054,
+       "flat": 0.35002179484948925,
+       "loss": 55.814229967060534,
+       "x_credit": 10.302371661176757,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.1691203294104184,
+       "flat": 0.8390986128511031,
+       "loss": 110.91203294104184,
+       "x_credit": 19.485338823506975,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.7197082909049897,
+       "buyback": 0.4156199176933413,
+       "flat": 0.19909525015753893,
+       "loss": 35.56199176933413,
+       "x_credit": 6.926998628222355,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "assign_1": 7600,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-30",
+     "strike": 77.0,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.12869265645633537,
+     "ivhv": 1.1604387417162794,
+     "z": 1.4964267706120438,
+     "p_otm": 0.9352687337788611,
+     "income": 6.0,
+     "margin": 1253.9999999999998,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.055227898274987315,
+     "right": "P",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.6997089118100455,
+       "flat": 0.4469622704992595,
+       "loss": 63.97089118100454,
+       "x_credit": 11.661815196834091,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.4055722029538416,
+       "flat": 1.1304793347949555,
+       "loss": 134.55722029538416,
+       "x_credit": 23.426203382564026,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.7197082909049897,
+       "buyback": 0.44584289335186966,
+       "flat": 0.23833328361168427,
+       "loss": 38.584289335186966,
+       "x_credit": 7.430714889197828,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "assign_1": 7700,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 38,
+    "⛔报价差": 35,
+    "z不够": 13,
+    "⛔基本面": 7,
+    "⛔财报": 5,
+    "⚠链不够宽": 4,
+    "⛔利率敏感": 2
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔报价差",
+    "XLE": "⛔IV不贵",
+    "SLV": "⛔IV不贵",
+    "USO": "z不够",
+    "SMCI": "⛔报价差",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔报价差",
+    "NKE": "z不够",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔IV不贵",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔报价差",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔报价差",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔IV不贵",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔IV不贵",
+    "DKNG": "⛔基本面",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔报价差",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔报价差",
+    "PDD": "⛔财报",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价差",
+    "SCHW": "z不够",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 814,
+   "ok": [
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 167.0,
+     "bid": 1.44,
+     "ask": 1.6,
+     "iv": 0.5689477795848004,
+     "ivhv": 1.29394537090016,
+     "z": 1.2028012466441378,
+     "p_otm": 0.881217469939989,
+     "income": 144.0,
+     "margin": 1564.0,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 4.260530190914437,
+       "flat": 2.26870898327293,
+       "loss": 282.05301909144373,
+       "x_credit": 2.958701521468359,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 5.086620265848097,
+       "flat": 2.8984551608243194,
+       "loss": 364.6620265848097,
+       "x_credit": 3.5323751846167344,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 9.3733483657481,
+       "flat": 6.5994133478369505,
+       "loss": 793.3348365748101,
+       "x_credit": 6.509269698436181,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      144,
+      432,
+      864
+     ],
+     "assign_1": 16700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "RIVN",
+     "expiry": "2026-12-04",
+     "strike": 16.5,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.5952332096158,
+     "ivhv": 1.181018273047222,
+     "z": 1.2918414760366737,
+     "p_otm": 0.8953189008823362,
+     "income": 13.0,
+     "margin": 150.75000000000003,
+     "spread": 0.07407407407407414,
+     "mark": "✅",
+     "spot": 13.775,
+     "t": 0.06618461440892948,
+     "right": "C",
+     "hv30": 0.504,
+     "move": {
+      "worst_down": -0.1812,
+      "worst_up": 0.2664,
+      "p01": -0.0957,
+      "p99": 0.107,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 0.9449111825230679,
+       "buyback": 0.3927271147346447,
+       "flat": 0.2002007906951082,
+       "loss": 26.272711473464472,
+       "x_credit": 3.020977805651113,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.57485197087178,
+       "buyback": 0.46736666524360704,
+       "flat": 0.25499362036071327,
+       "loss": 33.7366665243607,
+       "x_credit": 3.5951281941815925,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +26.6%",
+       "gap": 0.2664,
+       "sigmas": 8.390811300804845,
+       "buyback": 1.8701115276848697,
+       "flat": 1.57573065192528,
+       "loss": 174.01115276848697,
+       "x_credit": 14.385473289883612,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "assign_1": 1650,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T06:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rivian: Clear R2 Momentum Is Showing"
+      },
+      {
+       "time_utc": "2026-11-09T19:04+00:00",
+       "source": "Yahoo",
+       "headline": "Tesla Rises 5% Despite Musk’s Cybertruck Refund Warning, Lucid Jumps 8% Ahead of Earnings; Rivian Climbs 2%"
+      },
+      {
+       "time_utc": "2026-11-09T18:31+00:00",
+       "source": "Yahoo",
+       "headline": "Tesla Soars 5% as Robotaxi Reaches San Antonio and Cybertruck Order Rate “Far Exceeds” Production"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 167.5,
+     "bid": 1.31,
+     "ask": 1.6,
+     "iv": 0.5681550951401697,
+     "ivhv": 1.2921425861727762,
+     "z": 1.2285689708705405,
+     "p_otm": 0.8855101661015561,
+     "income": 131.0,
+     "margin": 1551.0000000000002,
+     "spread": 0.19931271477663232,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 4.141806734142548,
+       "flat": 2.1798222351010352,
+       "loss": 283.18067341425484,
+       "x_credit": 3.1616845298798077,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 4.951657240412011,
+       "flat": 2.791383223644509,
+       "loss": 364.1657240412011,
+       "x_credit": 3.7798910232152756,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 9.168485946312273,
+       "flat": 6.40696880326675,
+       "loss": 785.8485946312273,
+       "x_credit": 6.998844233826163,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      131,
+      393,
+      786
+     ],
+     "assign_1": 16750,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 168.0,
+     "bid": 1.29,
+     "ask": 1.48,
+     "iv": 0.5664683928786491,
+     "ivhv": 1.2883065564672485,
+     "z": 1.2563884436441566,
+     "p_otm": 0.8900118763615195,
+     "income": 129.0,
+     "margin": 1549.0000000000002,
+     "spread": 0.13718411552346566,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 4.01134894743231,
+       "flat": 2.0845683692124233,
+       "loss": 272.13489474323103,
+       "x_credit": 3.109572827466907,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 4.803948703659373,
+       "flat": 2.6770245066986718,
+       "loss": 351.39487036593727,
+       "x_credit": 3.7239912431468003,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 8.947752954779787,
+       "flat": 6.20416709398684,
+       "loss": 765.7752954779787,
+       "x_credit": 6.936242600604486,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      129,
+      387,
+      774
+     ],
+     "assign_1": 16800,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 170.0,
+     "bid": 1.17,
+     "ask": 1.36,
+     "iv": 0.5777798916445929,
+     "ivhv": 1.3140320483161085,
+     "z": 1.3265446608146703,
+     "p_otm": 0.9006170136709912,
+     "income": 117.0,
+     "margin": 1537.0,
+     "spread": 0.15019762845849816,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 3.794020740786422,
+       "flat": 1.9056151254677545,
+       "loss": 262.4020740786422,
+       "x_credit": 3.2427527699029253,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 4.543297512387049,
+       "flat": 2.449716650897603,
+       "loss": 337.32975123870494,
+       "x_credit": 3.883160266997478,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 8.474038421151938,
+       "flat": 5.715303810362975,
+       "loss": 730.4038421151938,
+       "x_credit": 7.242767881326444,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      117,
+      351,
+      702
+     ],
+     "assign_1": 17000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 171.0,
+     "bid": 1.07,
+     "ask": 1.27,
+     "iv": 0.5779156072350491,
+     "ivhv": 1.3143407032864434,
+     "z": 1.373598609194077,
+     "p_otm": 0.9072910828483598,
+     "income": 107.0,
+     "margin": 1527.0000000000002,
+     "spread": 0.17094017094017092,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 3.6093855897317617,
+       "flat": 1.7724934439921682,
+       "loss": 253.93855897317616,
+       "x_credit": 3.3732575604969735,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 4.330958444331515,
+       "flat": 2.286764717548543,
+       "loss": 326.09584443315146,
+       "x_credit": 4.047624714328518,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 8.137212512678175,
+       "flat": 5.4039687343555585,
+       "loss": 706.7212512678175,
+       "x_credit": 7.604871507175864,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      107,
+      321,
+      642
+     ],
+     "assign_1": 17100,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-04",
+     "strike": 173.0,
+     "bid": 1.02,
+     "ask": 1.19,
+     "iv": 0.5937779370298426,
+     "ivhv": 1.3504160496471291,
+     "z": 1.4291042312199733,
+     "p_otm": 0.914504448381147,
+     "income": 102.0,
+     "margin": 1522.0,
+     "spread": 0.15384615384615377,
+     "mark": "✅",
+     "spot": 142.0,
+     "t": 0.0661867072552004,
+     "right": "C",
+     "hv30": 0.4397,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.083091280399423,
+       "buyback": 3.4917634742614005,
+       "flat": 1.66703666561299,
+       "loss": 247.17634742614004,
+       "x_credit": 3.4232975237856866,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8051521339990386,
+       "buyback": 4.18128679657827,
+       "flat": 2.1463797766725925,
+       "loss": 316.128679657827,
+       "x_credit": 4.099300780959088,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.6717337227895115,
+       "buyback": 7.816253767870236,
+       "flat": 5.05640778215637,
+       "loss": 679.6253767870237,
+       "x_credit": 7.662993890068859,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      102,
+      306,
+      612
+     ],
+     "assign_1": 17300,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T10:15+00:00",
+       "source": "Benzinga",
+       "headline": "Yemen's Houthis Say They Attacked Oil Pumping Stations Of Saudi Arabia’s East-West Pipeline In Riyadh; Attacked King Khalid International Airport In Riyadh"
+      },
+      {
+       "time_utc": "2026-11-10T09:53+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'UAE Cuts Flagship Oil Price as Mideast Supply Jump Stirs Rivalry' - Bloomberg"
+      },
+      {
+       "time_utc": "2026-11-10T09:38+00:00",
+       "source": "Benzinga",
+       "headline": "U.S. Secretary Of State Rubio On Iran Says Told Economic Campaign Working So Well There’s Not Need For Major Combat Operations; Economic Pressure On Iran Is Going To Get Even Worse"
+      }
+     ]
+    },
+    {
+     "ticker": "RIVN",
+     "expiry": "2026-12-04",
+     "strike": 17.0,
+     "bid": 0.09,
+     "ask": 0.1,
+     "iv": 0.6019900789681498,
+     "ivhv": 1.19442475985744,
+     "z": 1.5117161611581529,
+     "p_otm": 0.9244591096224285,
+     "income": 9.0,
+     "margin": 146.75000000000003,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 13.775,
+     "t": 0.06618461440892948,
+     "right": "C",
+     "hv30": 0.504,
+     "move": {
+      "worst_down": -0.1812,
+      "worst_up": 0.2664,
+      "p01": -0.0957,
+      "p99": 0.107,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 0.9449111825230679,
+       "buyback": 0.3141934319706743,
+       "flat": 0.14391803899438416,
+       "loss": 22.41934319706743,
+       "x_credit": 3.491038133007492,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.57485197087178,
+       "buyback": 0.3766994404896611,
+       "flat": 0.18584927033942478,
+       "loss": 28.669944048966112,
+       "x_credit": 4.185549338774012,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +26.6%",
+       "gap": 0.2664,
+       "sigmas": 8.390811300804845,
+       "buyback": 1.6145891064193059,
+       "flat": 1.3000458210288794,
+       "loss": 152.45891064193057,
+       "x_credit": 17.93987896021451,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      9,
+      27,
+      54
+     ],
+     "assign_1": 1700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-10T06:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Rivian: Clear R2 Momentum Is Showing"
+      },
+      {
+       "time_utc": "2026-11-09T19:04+00:00",
+       "source": "Yahoo",
+       "headline": "Tesla Rises 5% Despite Musk’s Cybertruck Refund Warning, Lucid Jumps 8% Ahead of Earnings; Rivian Climbs 2%"
+      },
+      {
+       "time_utc": "2026-11-09T18:31+00:00",
+       "source": "Yahoo",
+       "headline": "Tesla Soars 5% as Robotaxi Reaches San Antonio and Cybertruck Order Rate “Far Exceeds” Production"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-04",
+     "strike": 57.0,
+     "bid": 0.1,
+     "ask": 0.12,
+     "iv": 0.4735496118638173,
+     "ivhv": 1.1248209307929151,
+     "z": 1.9078822882766404,
+     "p_otm": 0.9621641195956143,
+     "income": 10.0,
+     "margin": 472.49999999999994,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 46.25,
+     "t": 0.0661849632166413,
+     "right": "C",
+     "hv30": 0.421,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.1312000854907989,
+       "buyback": 0.5292810530994405,
+       "flat": 0.19761555666339792,
+       "loss": 42.92810530994405,
+       "x_credit": 5.292810530994405,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.8853334758179985,
+       "buyback": 0.6777809897990537,
+       "flat": 0.2822869554943841,
+       "loss": 57.778098979905366,
+       "x_credit": 6.777809897990537,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.4124535912305767,
+       "buyback": 1.0691190754691267,
+       "flat": 0.5391267199265855,
+       "loss": 96.91190754691267,
+       "x_credit": 10.691190754691267,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "assign_1": 5700,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-09T13:09+00:00",
+       "source": "SeekingAlpha",
+       "headline": "The Precious Metals Sector's Impressive Relative Breakout - And What It Portends"
+      },
+      {
+       "time_utc": "2026-11-09T12:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Gold And Silver Bounce Back As Tech Stocks Stumble"
+      },
+      {
+       "time_utc": "2026-11-08T23:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Weekly Commentary: Earthquakes And Chemical Reactions"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.0,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.12641175512611152,
+     "ivhv": 1.1398715520839633,
+     "z": 1.2772245983644843,
+     "p_otm": 0.8975423553974355,
+     "income": 13.0,
+     "margin": 1291.000000000001,
+     "spread": 0.07407407407407414,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.9922000096674779,
+       "flat": 0.6814562115185652,
+       "loss": 86.22000096674779,
+       "x_credit": 7.6323077666729064,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.7896633302233056,
+       "flat": 1.4691651033318536,
+       "loss": 165.96633302233056,
+       "x_credit": 13.766641001717735,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.6685529127546381,
+       "flat": 0.3980800731270726,
+       "loss": 53.85529127546381,
+       "x_credit": 5.142714713497216,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "assign_1": 8400,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 84.5,
+     "bid": 0.1,
+     "ask": 0.11,
+     "iv": 0.13077477136007332,
+     "ivhv": 1.1792134477914638,
+     "z": 1.4188833366809113,
+     "p_otm": 0.919673587438864,
+     "income": 10.0,
+     "margin": 1238.0000000000007,
+     "spread": 0.09523809523809518,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.856538761888828,
+       "flat": 0.55101955861835,
+       "loss": 75.6538761888828,
+       "x_credit": 8.56538761888828,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.568934625194693,
+       "flat": 1.2289199945728555,
+       "loss": 146.8934625194693,
+       "x_credit": 15.68934625194693,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.5731292794314449,
+       "flat": 0.3164409912638746,
+       "loss": 47.31292794314449,
+       "x_credit": 5.731292794314449,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "assign_1": 8450,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-30",
+     "strike": 84.0,
+     "bid": 0.09,
+     "ask": 0.1,
+     "iv": 0.12616196603233548,
+     "ivhv": 1.1376191707153787,
+     "z": 1.4009825599522823,
+     "p_otm": 0.9173540687270993,
+     "income": 9.0,
+     "margin": 1287.000000000001,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.055227898274987315,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.8724143040407526,
+       "flat": 0.5916945990525733,
+       "loss": 78.24143040407526,
+       "x_credit": 9.693492267119474,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.666526214915777,
+       "flat": 1.3757404817902241,
+       "loss": 157.6526214915777,
+       "x_credit": 18.516957943508633,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.562124708376718,
+       "flat": 0.32429298934841455,
+       "loss": 47.2124708376718,
+       "x_credit": 6.245830093074645,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      9,
+      27,
+      54
+     ],
+     "assign_1": 8400,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.0,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.13613970854186147,
+     "ivhv": 1.227589797491988,
+     "z": 1.5399774757719948,
+     "p_otm": 0.9354164323470864,
+     "income": 8.0,
+     "margin": 1186.000000000001,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.7512951893185189,
+       "flat": 0.45274796954147334,
+       "loss": 67.12951893185189,
+       "x_credit": 9.391189866481486,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.3874185401617396,
+       "flat": 1.0334108622198102,
+       "loss": 130.74185401617396,
+       "x_credit": 17.342731752021745,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.5017340253933966,
+       "flat": 0.2576459643282867,
+       "loss": 42.17340253933966,
+       "x_credit": 6.271675317417458,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "assign_1": 8500,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 85.5,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.13952652251001446,
+     "ivhv": 1.2581291479712755,
+     "z": 1.6753089038495919,
+     "p_otm": 0.9499961035706896,
+     "income": 6.0,
+     "margin": 1134.000000000001,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.6440361849679306,
+       "flat": 0.3614331917993461,
+       "loss": 58.40361849679305,
+       "x_credit": 10.733936416132178,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.2086453021029584,
+       "flat": 0.8530969351362288,
+       "loss": 114.86453021029584,
+       "x_credit": 20.14408836838264,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.42664161192117334,
+       "flat": 0.20208080216621838,
+       "loss": 36.664161192117334,
+       "x_credit": 7.110693532019556,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "assign_1": 8550,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-04",
+     "strike": 86.0,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.14558217892809971,
+     "ivhv": 1.3127338045816026,
+     "z": 1.7711506185321677,
+     "p_otm": 0.9585060902929461,
+     "income": 5.0,
+     "margin": 1083.000000000001,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.06618680238457636,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.5759928667278693,
+       "flat": 0.30321608565903624,
+       "loss": 52.599286672786924,
+       "x_credit": 11.519857334557386,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.0814002302500647,
+       "flat": 0.7231301746496008,
+       "loss": 103.14002302500647,
+       "x_credit": 21.628004605001294,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.38267521955563133,
+       "flat": 0.16940753361772742,
+       "loss": 33.26752195556313,
+       "x_credit": 7.653504391112627,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "assign_1": 8600,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-11-30",
+     "strike": 85.0,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.13577968829623432,
+     "ivhv": 1.224343447215819,
+     "z": 1.6903273547513888,
+     "p_otm": 0.9517708829494685,
+     "income": 5.0,
+     "margin": 1183.000000000001,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.65,
+     "t": 0.055227898274987315,
+     "right": "C",
+     "hv30": 0.1109,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0165,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.294276248797352,
+       "buyback": 0.6332587196656156,
+       "flat": 0.37028316128696304,
+       "loss": 58.32587196656156,
+       "x_credit": 12.665174393312313,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 7.1571270813289205,
+       "buyback": 1.2508817916101194,
+       "flat": 0.9286407947644406,
+       "loss": 120.08817916101194,
+       "x_credit": 25.017635832202387,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.6767655284170164,
+       "buyback": 0.4023304872131419,
+       "flat": 0.1957193196852085,
+       "loss": 35.23304872131419,
+       "x_credit": 8.046609744262838,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "assign_1": 8500,
+     "pressure": [],
+     "fed_channel": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+     "news": [
+      {
+       "time_utc": "2026-11-10T11:30+00:00",
+       "source": "SeekingAlpha",
+       "headline": "ING's Latest Views On The Major Central Banks"
+      },
+      {
+       "time_utc": "2026-11-10T11:17+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Hotter U.S. Inflation Strengthens The Case For A December Fed Hike"
+      },
+      {
+       "time_utc": "2026-11-10T10:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "October CPI: Wall Street Is Playing With Fire"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 46,
+    "⛔报价差": 28,
+    "z不够": 12,
+    "⛔财报": 5,
+    "⛔利率敏感": 2,
+    "⚠链不够宽": 1
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔IV不贵",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "⛔IV不贵",
+    "NKE": "z不够",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔IV不贵",
+    "PFE": "⛔IV不贵",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔IV不贵",
+    "FXI": "⛔IV不贵",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔IV不贵",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "F": "z不够",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "DIS": "⛔财报",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔IV不贵",
+    "C": "⛔IV不贵",
+    "DKNG": "⛔IV不贵",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔财报",
+    "MP": "⛔报价差",
+    "SLB": "⛔IV不贵",
+    "SCHW": "⛔IV不贵",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔IV不贵",
+    "BIDU": "⛔财报",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-10_1717Z.md",
+  "report_sha256": "7b075d12f474b6793ee088948a95166c12f72eeac3207c7c8f3bdcde645dca57",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：闸门允许开仓（🟡 黄灯），但按黄灯限制只剩 TLT 两张、每张收入 $5–6，不建议开；开不开、开几张由你定"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=True why_not=[]｜首行：结论：闸门允许开仓（🟡 黄灯），但按黄灯限制只剩 TLT 两张、每张收入 $5–6，不建议开；开不开、开几张由你定"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V12",
+    "check": "当天公布的宏观数据写出了实际值",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T17:13:22+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T17:14:05.203084Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T17:15:38+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T17:16:55+00:00"
+     },
+     "quote_age_min": 3.6
+    }
+   }
+  ]
+ }
+}

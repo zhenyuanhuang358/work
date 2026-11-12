@@ -1,0 +1,578 @@
+{
+ "id": "2026-11-10_1448Z",
+ "asof": "2026-11-10T14:48:20+00:00",
+ "bp": 5468.69,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T14:44:40+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T14:45:18.991581Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T14:46:49+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-10T14:48:05+00:00"
+  },
+  "quote_age_min": 3.1,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-10T14:45:18.991581Z",
+  "ref_day": "2026-11-09",
+  "readings": {
+   "term_structure": 1.0124700239808153,
+   "skew": 150.34,
+   "vvix": 98.43,
+   "vix": 21.11
+  },
+  "scores": {
+   "term_structure": 2,
+   "skew": 2,
+   "vvix": 0,
+   "vix": 1
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [
+   "term_structure",
+   "vix"
+  ],
+  "base": 2,
+  "accel": [],
+  "light": 2,
+  "light_name": "🔴 红灯",
+  "term_premium": 0.9876835622927523,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "Core CPI m/m",
+   "forecast": "0.2%",
+   "previous": "0.3%"
+  },
+  {
+   "time": "2026-11-10T08:30:00-05:00",
+   "title": "CPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.6%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "Core PPI m/m",
+   "forecast": "0.3%",
+   "previous": "0.7%"
+  },
+  {
+   "time": "2026-11-13T08:30:00-05:00",
+   "title": "PPI m/m",
+   "forecast": "0.4%",
+   "previous": "1.3%"
+  }
+ ],
+ "event_eve": [],
+ "macro_today": [
+  {
+   "key": "cpi",
+   "name": "CPI",
+   "month": "2026-10",
+   "actual": 0.35,
+   "previous_recomputed": 0.65,
+   "unit": "% 环比",
+   "release_et": "2026-11-10T08:30:00-05:00",
+   "forecast": "0.3%",
+   "ff_previous": "0.6%",
+   "surprise": 0.05
+  },
+  {
+   "key": "core_cpi",
+   "name": "核心 CPI",
+   "month": "2026-10",
+   "actual": 0.3,
+   "previous_recomputed": 0.33,
+   "unit": "% 环比",
+   "release_et": "2026-11-10T08:30:00-05:00",
+   "forecast": "0.2%",
+   "ff_previous": "0.3%",
+   "surprise": 0.1
+  }
+ ],
+ "macro_source": "BLS API",
+ "macro_errors": [],
+ "can_open": false,
+ "why_not": [
+  "尾部灯 🔴 红灯"
+ ],
+ "scale": [
+  "实盘账本 0 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-09T08:40:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-09T10:00:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-09T12:15:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-10T04:00:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-10T10:50:00-05:00",
+    "speaker": "Logan",
+    "title": "FOMC Member Logan Speaks"
+   },
+   {
+    "time": "2026-11-10T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-10T15:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-10T18:30:00-05:00",
+    "speaker": "Paulson",
+    "title": "FOMC Member Paulson Speaks"
+   },
+   {
+    "time": "2026-11-12T08:30:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-12T10:00:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-12T11:15:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-12T13:10:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-12T13:30:00-05:00",
+    "speaker": "Schmid",
+    "title": "FOMC Member Schmid Speaks"
+   },
+   {
+    "time": "2026-11-12T18:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-13T09:10:00-05:00",
+    "speaker": "Collins",
+    "title": "FOMC Member Collins Speaks"
+   },
+   {
+    "time": "2026-11-13T10:50:00-05:00",
+    "speaker": "Bowman",
+    "title": "FOMC Member Bowman Speaks"
+   },
+   {
+    "time": "2026-11-13T12:00:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-13T19:00:00-05:00",
+    "speaker": "Jefferson",
+    "title": "FOMC Member Jefferson Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T13:41+00:00",
+    "source": "MarketWatch",
+    "headline": "Fed’s Waller puts half-point rate hike into the mix for December - MarketWatch",
+    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOQUJIeWdYUTVoMVRrQTYxRklXZ1IyWmp3VlFtajV3b0JHV1oxUkJhcGc1Q1EtV20yc0RyZnlwa2d2bmpPdFVTUEw3MmhHVmJyYWZEWmJMT0MwMGt6X0ZwN3hXbHRpQ1pybEhIX2tqSHRiUTVsX0Q4eWVXWXNNRHdKTVl0aXV4NlJDME4tb2xSdldtV2NCUHkyMmE4SUowb0Ffc05nWFp2V2dqdw?oc=5"
+   },
+   {
+    "speaker": "Goolsbee",
+    "time_utc": "2026-11-10T12:50+00:00",
+    "source": "Benzinga",
+    "headline": "Fed’s Goolsbee Warns AI Data Center Boom Is Starting to Look Like ‘Demand Overheating,’ Says Central Bank - Benzinga",
+    "url": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxQT3dPVF9Eb3BqYWJqQ2NGYUJZSm1WRU80TXJSQTVXenAzNzk1WURNajBubWNIYWxzY1VuTnN2aDVEdnhWdWxSd0U0aXV6Mm1LOXR0cy1JbWxnTFFfWHpyaTkxWmVvR2s2YVRESUVkV2JZVndqdU9aczZ2TDdIdWJpblpja3A3VnNBVDROR19JYjd2Q0RkMkZVb0hZakJBQ0dmS1dLZTVyb1MxUF9JR2h0TXhsQWtFUGw4Szg0WmczX29jZTZ3ekZpNFdpaVlReTBRRXRjcXdDV1VVeWFRZEp3NEc3UFV4emZXYjNrTDRmamtUaEg1WTBHWmRyZW5aNlo5OWV3TmdvZUN3UE5hNVM5NUdDZzUzLVJXQ3hKU1VQSWU3UEZCNFZ4Q1p3?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T12:15+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Fed’s Waller Backs December Rate Hike, Open to Larger Move - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOZkZoTlZOa05oRHYwaUNCM1pDVHdhNnF3ajlxMzBBd1R0Z3plbEVKbm4xemxmbm1penlwS1hrY09URU4zbDZoZFlWV213ZnZkWVlseUE1U0JyeE8zQWpqcU9YVUlKbUJldG9NT21UVkpmN2F6eFlWZWtiZlhrZUZGLUFpUTRlcmdWYnduUDB5MTNOY0xFQW5TSDZfaDNac0N5VVpuUE43WTJYeEZIZTBDbFRKdw?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T11:56+00:00",
+    "source": "Barron's",
+    "headline": "Fed’s Waller Backs Big Rate Increase if Inflation Remains Stubborn - Barron's",
+    "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHJsWFA4SGF3dHpWLXcwbVhld3doR2cxdC1VQUN6bGFMeWJGWXp1ZUtZendfQnhyRmdMUDY5Zk5DanAxYkREcm1zenlNakM1TWNwUEFtRkhqR2lnWFZkWkRjeHppYkVhZ1NBN3lFdVpjTS1wclZneGNNWU1leTUyalY4S2FMREhnY2lrWUwyckNEYzQ?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T11:37+00:00",
+    "source": "Reuters",
+    "headline": "Fed's Waller plans to support at least a quarter-point rate hike in December - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNR3RjbDlfcXFBbHp0SVRSeHIzZHFTTnY5bjBuWGszTTMzUmxLUXNzRTFid29sbXV1emJSZWMwTEo4V2dWYjJ3TGlESmRlRzdFcDdQU3RxWi1QVEZrRlNBU0N3NG50WUNBWVdXbnZFS0RuVDNyRVdGWm1aRjFjWGRlRFRoTFhlbFMwQ1NjbTZMd2x0cnlHR0F4d2JNV3dKcHFOOE5TRFVsSlc5ekxoQ0E?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T09:00+00:00",
+    "source": "CNBC",
+    "headline": "Fed Governor Waller sees December hike likely, opens door to possible half-point increase - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNVzhITTE0cHpMYlk2X2F6bEJ4YWttUk5pcnltYVZmUzZlSDRVMUxQdmEzYncyZlA3MTVaLUxaZTlHTmNHcHJqM05IYVB4a3p1U29tMDNFclhQellnS0VRaGRWRkpBdWIzU0ROYXVyQU1sd0hLc2JRVFBQVGNaaEJDMFB4VDRtUEY3UXc?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-10T09:00+00:00",
+    "source": "Yahoo Finance",
+    "headline": "Fed’s Waller leans towards 25bp hike next month, says would consider 50 bp if inflation is hot for October - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNQnc1czU5azNCN1RQdzZkRV9sbkRrdkQyZ2RDWm84THNpY3VjcnhtX2lyMlBOY2JTTUxfSUNwb2I0WVRsVjFMM3JQclhsNHRUMlg0RFZLdzVqYnp5VXBFTXZUOTRTM2F2NGJEMjF3YzBTUEc0Z042Z25hMWxoRlNLNE1iYTU5LUxIdkRwSmd3dDlYQkp3LU5RcXAzenZJZXZvbUhDNlZ3QzBwZm1rMnE4YTQzNlNvWk14cko1LWc1djVYVGNLVFROUEtyeUpXdmRGT2dJQUNlU2U?oc=5"
+   },
+   {
+    "speaker": "Schmid",
+    "time_utc": "2026-11-10T07:15+00:00",
+    "source": "EnergyNow.com",
+    "headline": "Fed’s Schmid Warns Against Viewing Oil Shock as Transitory - EnergyNow.com",
+    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOb0dkQlJ3Nm5XZEI5OHRFVEUyQ2xrWFJUR3lYSERGSTgzMXd4ejhxVjVJQmFDSThkQWliQXlSOTZ6QVpaVEFZUUtYU3hLaDB0VklwdG1FQjdvZ3gxTVJ6Z0Z5aU1BNlFfd1dEd2lRMmFSYVBIdUdGQndyOEVOZ0ZNdnhPTFk2ZnU5N1ZfazZWWnI0dw?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-10T14:08+00:00",
+   "source": "CNBC",
+   "headline": "Jim Cramer's top 10 things to watch in the stock market Tuesday",
+   "summary": "Futures are down after a higher-than-expected consumer price index this morning stoked inflation concerns.",
+   "url": "https://www.cnbc.com/investingclub/2026/11/10/jim-cramers-top-10-things-to-watch-in-the-stock-market-tuesday.html"
+  },
+  {
+   "time_utc": "2026-11-10T13:47+00:00",
+   "source": "Reuters",
+   "headline": "Pentagon chief Hegseth calls moves to impeach him a farce that will fail - Reuters",
+   "summary": "Pentagon chief Hegseth calls moves to impeach him a farce that will fail  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxObVFtR2hnZ2luVDdXU010VVB4UVpubVBIbUtJc0ZkQVkzLUkzaWxMRDJKaVVoTVNUbzRyRGQ4ZFh1dUZIUFhRVDRTVVNyZ3FWQkRIMm5UTVJOY2J0MDJ4bEFZNkh2MjdUZzRnRkVYbXBKSktfNElhWU42SEVRMktOd0JHYTQyU2N4ZUF2eWZicDRpVHBCTHRYUWFYOVRMT3lrVWNuQldMQkV0MVVGYXc?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T13:47+00:00",
+   "source": "Reuters",
+   "headline": "S&P 500 futures fall sharply after October inflation data - Reuters",
+   "summary": "S&P 500 futures fall sharply after October inflation data  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQSEE5eGJXT1lYRVFJMUpWb2VCTENjZ2hBNWk0QWl5QVZBNmJ4TFBodVUtRVRzV0JubVE0NFJYRFlmYkpuc0tlbTBValFhV0ppcGdYNEZERXV4ZnhLZUJKTF9fUzZEeHM3cDRwdmlMdUVIUWlERHprb3lKakQ1S1gzSmI5LVZYWWx2cTBjVC1sVEc1OG8tOS0ta0k5VQ?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T13:26+00:00",
+   "source": "Reuters",
+   "headline": "France summons Iran envoy over supermarket fridge hack, warns of response - Reuters",
+   "summary": "France summons Iran envoy over supermarket fridge hack, warns of response  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPbFRPZy1SWjNiT21UM05JSTBmN3JnWW9Gb3pweVRYSFhxZzNfRlBtbEpCNEZ6VHJQZnhpaFZaZ05jTkpWOTNWaGhZMVlISGdxSzlVX2xKRmE2VXZzTmZ3ZElya0ZLQUs1UVM4MXRMNnR3al84MXZOREM1SzhjZHAzTTJYVkpiMzFTOUJ0VC1SNnJvRE5KTEVpUkE2SkJ1RklfSjREc1BzdGV5aGlWaElrYXVDUUt4bmh0dFE?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T13:19+00:00",
+   "source": "CNBC",
+   "headline": "'Markets bottom on bad news' maxim rings true as chip stocks rally amid Nvidia scandal",
+   "summary": "The cliche is one of those smart-sounding rules of thumb that proves true just often enough to remain a Wall Street cliché in good standing.",
+   "url": "https://www.cnbc.com/2026/11/10/chip-stocks-rally-nvidia-scandal.html"
+  },
+  {
+   "time_utc": "2026-11-10T13:14+00:00",
+   "source": "Reuters",
+   "headline": "Fed to raise rates once more in December as inflation risks stay high: Reuters poll - Reuters",
+   "summary": "Fed to raise rates once more in December as inflation risks stay high: Reuters poll  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQaGgwYzFvYzY1cndpc3FZRGZjLXRQTFp0WlktcmQwS2d6T1VhVVRBWkdpclUxd3Bvd1A4bWZOendzNXdhdmdtTnJ6S3AxMVNJN0hUbnRDZEF0NHE5QWtOZFUxc2JuZm1qbklMRjBtb2xmWlVSWVdNckxNSFQ3cnZLeC1KU1lrb2lBTFNKN2J1Uy1OYmRSczRoQmZsZlBtaHZPYzdnM1NSZTR5ODdsbEVV?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T13:14+00:00",
+   "source": "Reuters",
+   "headline": "Gulf stocks close higher as Trump dials back Iran strike talk - Reuters",
+   "summary": "Gulf stocks close higher as Trump dials back Iran strike talk  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNSVhYVkx5WEEtWEJFanhNSTZMMVdIQ0NHcjR2dTNNZXJwWXFDMUg0THpNV1BEdnl4dlhXaHRSdy1oUjgwekg3c01kTGVvWFhRYnhhbWRRelFHbFdzZms2TmYxWlJQRHBRRUFIYzMzallCTl9zT3hGSmRCY0hZMzJpRVVhY1dJWV8tX2ttQzZCa0Rod0dNRWtIVVpoVncwZWNJbW90eEpBeldyd2s?oc=5"
+  },
+  {
+   "time_utc": "2026-11-10T13:03+00:00",
+   "source": "Reuters",
+   "headline": "Rubio tells G7 US will keep imposing 'devastating' costs on Iran, diplomats say - Reuters",
+   "summary": "Rubio tells G7 US will keep imposing 'devastating' costs on Iran, diplomats say  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPMm1PTnVENERxQ3laRzBVcGVRVkQ0eHVqMDZzRllQSU4tSFphMU1QS3RzSDVld29NUWVjZDkwWlQ2MXJXVng2bDEyLVFRaXY5c0E2VV9udlZUYlFUT2FpR25tSjdkTXdxSnBoYmsycXBUbTh6U3VVbTJ0anhqN2xjSllSYUFKeDRud25PdDBXS0xhcl8zSFFVdDVBcTNVWnRLVUgxR193cG5JRTNSWW1rTmlrMGNwcTYyOU1tVnVZRQ?oc=5"
+  }
+ ],
+ "voices": [
+  {
+   "name": "Scott Bessent",
+   "role": "财长",
+   "sectors": "美债 / 美元 / 关税",
+   "headline": "Bessent Says Hormuz Will Be ‘Worthless’ as Oil Bypasses It - EnergyNow.com",
+   "source": "EnergyNow.com",
+   "time_utc": "2026-11-10T12:57+00:00"
+  },
+  {
+   "name": "Warren Buffett",
+   "role": "伯克希尔",
+   "sectors": "宽基 / 金融 / 消费",
+   "headline": "Bill Ackman and Warren Buffett Both Have the Same Warning About the Stock Market - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-10T13:09+00:00"
+  },
+  {
+   "name": "Michael Burry",
+   "role": "Scion",
+   "sectors": "个股做空 / AI 估值",
+   "headline": "Michael Burry refuses to chase AMD's 13% stock surge - Yahoo! Finance Canada",
+   "source": "Yahoo! Finance Canada",
+   "time_utc": "2026-11-10T11:25+00:00"
+  },
+  {
+   "name": "Bill Ackman",
+   "role": "潘兴广场",
+   "sectors": "个股 / 美债",
+   "headline": "Bill Ackman and Warren Buffett Both Have the Same Warning About the Stock Market - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-10T13:09+00:00"
+  },
+  {
+   "name": "Jamie Dimon",
+   "role": "摩根大通 CEO",
+   "sectors": "银行 / 信用 / 宏观",
+   "headline": "JPMorgan's CEO Jamie Dimon Demands Bank Rules for Stablecoin Yield - CoinMarketCap",
+   "source": "CoinMarketCap",
+   "time_utc": "2026-11-09T23:44+00:00"
+  },
+  {
+   "name": "Elon Musk",
+   "role": "特斯拉 CEO",
+   "sectors": "TSLA / 自动驾驶 / AI",
+   "headline": "Exclusive | Elon Musk, Michael Miebach are joining Trump at Apec. What about Jensen Huang? - South China Morning Post",
+   "source": "South China Morning Post",
+   "time_utc": "2026-11-10T06:16+00:00"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 208,
+   "ok": [],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 15,
+    "⛔报价差": 14,
+    "⛔报价过期": 10,
+    "⚠链不够宽": 3,
+    "⛔基本面": 2,
+    "z不够": 2
+   },
+   "main_cause": {
+    "DAL": "⛔报价过期",
+    "XLP": "⛔报价差",
+    "OXY": "⛔报价差",
+    "FXI": "⛔报价过期",
+    "CLF": "⛔基本面",
+    "XYZ": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "LYFT": "⛔IV不贵",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔报价差",
+    "C": "⛔报价过期",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔报价过期",
+    "KO": "z不够",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔报价过期",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价过期",
+    "UPS": "⛔报价差",
+    "PDD": "⛔报价过期",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价过期",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔IV不贵",
+    "BIDU": "⛔报价过期",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5468.69,
+   "rows_total": 215,
+   "ok": [],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 15,
+    "⛔报价差": 12,
+    "⛔报价过期": 10,
+    "z不够": 5,
+    "⚠链不够宽": 1
+   },
+   "main_cause": {
+    "DAL": "⛔报价过期",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔报价差",
+    "FXI": "⛔报价过期",
+    "CLF": "⛔IV不贵",
+    "XYZ": "⛔IV不贵",
+    "CVS": "⛔IV不贵",
+    "LYFT": "⛔IV不贵",
+    "BMY": "⛔IV不贵",
+    "WFC": "⛔IV不贵",
+    "C": "⛔报价过期",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔报价过期",
+    "T": "⛔报价过期",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔IV不贵",
+    "PEP": "⛔报价过期",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价过期",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔报价过期",
+    "MP": "⛔报价差",
+    "SLB": "⛔报价过期",
+    "DVN": "⛔报价差",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔报价过期",
+    "NEM": "⛔报价差"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-10_1448Z.md",
+  "report_sha256": "90b1d954700a5cf42cbed70e237248fb77da5f50946ba57726e3a507152b7628",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天不开新仓：尾部灯 🔴 红灯"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=False why_not=['尾部灯 🔴 红灯']｜首行：结论：今天不开新仓：尾部灯 🔴 红灯"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V12",
+    "check": "当天公布的宏观数据写出了实际值",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T14:44:40+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T14:45:18.991581Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T14:46:49+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-10T14:48:05+00:00"
+     },
+     "quote_age_min": 3.1
+    }
+   }
+  ]
+ }
+}

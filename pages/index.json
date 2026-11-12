@@ -182,5 +182,197 @@
   "title": "2024_10-K_%28Bookmarked%29.pdf",
   "chars": 609970,
   "error": null
+ },
+ "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx": {
+  "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2026/default.aspx",
+  "fetched_at": "2026-11-09T02:53:37+00:00",
+  "file": "pages/investor_nvidia_com_news_press_release_details_2026_nvidia_a_26e709.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx": {
+  "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx",
+  "fetched_at": "2026-11-09T02:53:38+00:00",
+  "file": "pages/investor_nvidia_com_news_press_release_details_2026_nvidia_a_8d82dd.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026": {
+  "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+  "fetched_at": "2026-11-09T03:37:17+00:00",
+  "file": "pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_1a7bc5.txt",
+  "title": "NVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2026 | NVIDIA Newsroom",
+  "chars": 31455,
+  "error": null
+ },
+ "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027": {
+  "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+  "fetched_at": "2026-11-09T03:05:56+00:00",
+  "file": "pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_16d9bc.txt",
+  "title": "NVIDIA Announces Financial Results for Second Quarter Fiscal 2027 | NVIDIA Newsroom",
+  "chars": 27263,
+  "error": null
+ },
+ "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027?output=1": {
+  "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027?output=1",
+  "fetched_at": "2026-11-09T02:54:50+00:00",
+  "file": "pages/investor_nvidia_com_news_press_release_details_2026_nvidia_a_a0980a.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025": {
+  "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+  "fetched_at": "2026-11-09T03:16:43+00:00",
+  "file": "pages/nvidianews_nvidia_com_news_nvidia_announces_financial_result_fa3748.txt",
+  "title": "NVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2025 | NVIDIA Newsroom",
+  "chars": 27490,
+  "error": null
+ },
+ "https://stockanalysis.com/stocks/nvda/forecast/": {
+  "url": "https://stockanalysis.com/stocks/nvda/forecast/",
+  "fetched_at": "2026-11-09T03:24:10+00:00",
+  "file": "pages/stockanalysis_com_stocks_nvda_forecast__748951.txt",
+  "title": "NVIDIA (NVDA) Stock Forecast & Analyst Price Targets",
+  "chars": 3354,
+  "error": null
+ },
+ "https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/": {
+  "url": "https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/",
+  "fetched_at": "2026-11-09T03:24:10+00:00",
+  "file": "pages/www_marketbeat_com_stocks_nasdaq_nvda_forecast__455016.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.marketbeat.com/stocks/NASDAQ/NVDA/forecast/')"
+ },
+ "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf": {
+  "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf",
+  "fetched_at": "2026-11-09T03:37:05+00:00",
+  "file": "pages/s201_q4cdn_com_141608511_files_doc_financials_2026_ar_2026_a_927e3b.txt",
+  "title": "2026-Annual-Report-Web.pdf",
+  "chars": 637915,
+  "error": null
+ },
+ "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/": {
+  "url": "https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/",
+  "fetched_at": "2026-11-09T03:37:16+00:00",
+  "file": "pages/www_hpcwire_com_2024_06_10_nvidia_shipped_3_76_million_data__c24aad.txt",
+  "title": "HPCwire - Since 1987 – Covering the Fastest Computers in the World and the People Who Run Them",
+  "chars": 15013,
+  "error": null
+ },
+ "https://www.datacenterdynamics.com/en/news/nvidia-gpu-shipments-totaled-376m-in-2023-equating-to-a-98-market-share-report/": {
+  "url": "https://www.datacenterdynamics.com/en/news/nvidia-gpu-shipments-totaled-376m-in-2023-equating-to-a-98-market-share-report/",
+  "fetched_at": "2026-11-09T03:37:16+00:00",
+  "file": "pages/www_datacenterdynamics_com_en_news_nvidia_gpu_shipments_tota_d0fd15.txt",
+  "title": "Nvidia data center GPU shipments totaled 3.76m in 2023, equating to a 98% market share - report - DCD",
+  "chars": 2797,
+  "error": null
+ },
+ "https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html": {
+  "url": "https://www.cnbc.com/2026/11/08/nvidia-jensen-huang-investigation-china-spy.html",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cnbc_com_2026_11_08_nvidia_jensen_huang_investigation_ch_18eb0d.txt",
+  "title": "Nvidia investigates CEO Jensen Huang's relationship with alleged Chinese spy",
+  "chars": 3003,
+  "error": null
+ },
+ "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company": {
+  "url": "https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_axios_com_2026_11_08_nvidia_ceo_jensen_huang_affair_emai_5e9708.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.axios.com/2026/11/08/nvidia-ceo-jensen-huang-affair-email-to-company')"
+ },
+ "https://www.cbsnews.com/news/nvidia-jensen-huang-investigation-china-intelligence/": {
+  "url": "https://www.cbsnews.com/news/nvidia-jensen-huang-investigation-china-intelligence/",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cbsnews_com_news_nvidia_jensen_huang_investigation_china_a37890.txt",
+  "title": "Nvidia investigates CEO Jensen Huang amid allegations he was target of Chinese intelligence effort - CBS News",
+  "chars": 3809,
+  "error": null
+ },
+ "https://www.cnn.com/2026/11/08/business/nvidia-investigation-ceo-jensen-huang": {
+  "url": "https://www.cnn.com/2026/11/08/business/nvidia-investigation-ceo-jensen-huang",
+  "fetched_at": "2026-11-09T06:10:05+00:00",
+  "file": "pages/www_cnn_com_2026_11_08_business_nvidia_investigation_ceo_jen_6af7ad.txt",
+  "title": "Nvidia CEO Jensen Huang admits affair as company launches investigation into foreign spy accusations | CNN Business",
+  "chars": 6847,
+  "error": null
+ },
+ "https://neosfunds.com/spyi/": {
+  "url": "https://neosfunds.com/spyi/",
+  "fetched_at": "2026-11-10T18:19:08+00:00",
+  "file": "pages/neosfunds_com_spyi__a421c7.txt",
+  "title": "SPYI - NEOS S&P 500 High Income ETF | NEOS Investments",
+  "chars": 5824,
+  "error": null
+ },
+ "https://stockanalysis.com/etf/spyi/dividend/": {
+  "url": "https://stockanalysis.com/etf/spyi/dividend/",
+  "fetched_at": "2026-11-10T18:19:08+00:00",
+  "file": "pages/stockanalysis_com_etf_spyi_dividend__8bf641.txt",
+  "title": "SPYI Dividend History, Dates & Yield",
+  "chars": 1333,
+  "error": null
+ },
+ "https://stockanalysis.com/etf/spyi/": {
+  "url": "https://stockanalysis.com/etf/spyi/",
+  "fetched_at": "2026-11-10T18:19:08+00:00",
+  "file": "pages/stockanalysis_com_etf_spyi__01d228.txt",
+  "title": "SPYI ETF Stock Price & Overview",
+  "chars": 7329,
+  "error": null
+ },
+ "https://neosfunds.com/spyi-distributions/": {
+  "url": "https://neosfunds.com/spyi-distributions/",
+  "fetched_at": "2026-11-10T18:24:17+00:00",
+  "file": "pages/neosfunds_com_spyi_distributions__d800ac.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://neosfunds.com/spyi-distributions/')"
+ },
+ "https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf": {
+  "url": "https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf",
+  "fetched_at": "2026-11-10T18:24:19+00:00",
+  "file": "pages/neosfunds_com_wp_content_uploads_spyi_19a_1_notice_pdf_49bafa.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://neosfunds.com/wp-content/uploads/SPYI-19a-1-Notice.pdf')"
+ },
+ "https://www.irs.gov/individuals/international-taxpayers/nra-withholding": {
+  "url": "https://www.irs.gov/individuals/international-taxpayers/nra-withholding",
+  "fetched_at": "2026-11-10T18:24:19+00:00",
+  "file": "pages/www_irs_gov_individuals_international_taxpayers_nra_withhold_154eb9.txt",
+  "title": "NRA withholding | Internal Revenue Service",
+  "chars": 6259,
+  "error": null
+ },
+ "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html": {
+  "url": "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html",
+  "fetched_at": "2026-11-12T02:56:28+00:00",
+  "file": "pages/www_cnbc_com_2026_11_11_nvidia_jensen_huang_affair_employee__c97de9.txt",
+  "title": "Nvidia prepares to oust Jensen Huang, WSJ reports — stock sinks",
+  "chars": 4951,
+  "error": null
+ },
+ "https://finance.yahoo.com/technology/live/nvidia-live-updates-nvidia-stock-tanks-in-after-hours-after-allegations-of-a-second-affair-surface-222438011.html": {
+  "url": "https://finance.yahoo.com/technology/live/nvidia-live-updates-nvidia-stock-tanks-in-after-hours-after-allegations-of-a-second-affair-surface-222438011.html",
+  "fetched_at": "2026-11-12T02:56:28+00:00",
+  "file": "pages/finance_yahoo_com_technology_live_nvidia_live_updates_nvidia_fae145.txt",
+  "title": "Nvidia live updates: Stock tanks after new affair allegations, board reportedly preparing to oust Jensen Huang",
+  "chars": 33701,
+  "error": null
+ },
+ "https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next": {
+  "url": "https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next",
+  "fetched_at": "2026-11-12T02:56:29+00:00",
+  "file": "pages/www_tipranks_com_news_why_nvidia_stock_is_plunging_7_in_afte_a46327.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next')"
  }
 }

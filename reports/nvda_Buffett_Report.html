@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>英伟达 NVDA 巴菲特模型分析</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a0a0b;--paper:#f1efea;--copper:#8b6c42;--gold:#c9a84c;--green:#2a5c3f;--red:#8b2e2e;--amber:#c47a1e}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Songti SC','Noto Serif SC','IM Fell English',serif;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+.pub{display:flex;justify-content:space-between;font-size:12px;color:var(--copper);border-bottom:1px solid var(--copper);padding-bottom:6px}
+h1{font-size:30px;margin:18px 0 2px} .en{font-family:'IM Fell English',serif;color:var(--copper);font-style:italic}
+h2{font-size:20px;margin:34px 0 8px;border-bottom:2px solid var(--gold);padding-bottom:4px}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:18px 0}
+.stat div{background:#fff;border:1px solid #e2dccf;padding:10px} .stat b{display:block;font-size:20px} .stat span{font-size:12px;color:var(--copper)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0} th,td{border-bottom:1px solid #e2dccf;padding:6px;text-align:left;vertical-align:top} th{color:var(--copper);font-weight:normal}
+.verdict{background:var(--ink);color:var(--paper);padding:20px 22px;margin:26px 0} .verdict .en{color:var(--gold);opacity:.8}
+.src{font-size:12px;color:var(--copper)} .warn{border-left:3px solid var(--amber);padding:6px 12px;background:#fff8ec;margin:10px 0}
+.badge{font-size:11px;padding:0 6px;margin-left:6px;white-space:nowrap}
+.note{margin-top:36px;border-top:1px solid var(--copper);padding-top:12px;font-size:13px}
+@media(max-width:600px){.stat{grid-template-columns:repeat(2,1fr)} table{font-size:12px}}
+</style></head>
+<body><div class="wrap" data-valuation="memory/state/valuations/nvda_2026-11-09.json">
+<div class="pub"><span>巴菲特模型分析报告 · Buffett Model Report</span><span>分析日期 2026-11-09 · 股价日期 2026-11-06</span></div>
+<h1>英伟达（NVDA）</h1><div class="en">NVIDIA — Moat, Owner Earnings and Margin of Safety</div>
+
+<div class="stat">
+<div><b>135.27–148.38</b><span>内在价值区间（美元 / 股）</span></div>
+<div><b>186.64</b><span>现价（2026-11-06 收盘）</span></div>
+<div><b>-38.0%</b><span>安全边际（按下沿；门槛 40%）</span></div>
+<div><b>74 / 100</b><span>巴菲特评分 → 等待买入</span></div>
+</div>
+
+<h2>一句话结论 <span class="en">Bottom Line</span></h2>
+<ul>
+<li><strong>结论：高估区间，不买。</strong>英伟达是一门极好的生意，评分 74，落在「等待买入」档。但现价 186.64 高于内在价值上沿 148.38，安全边际（下沿）-38.0%。异常增速路径要求 40%，价格需在 81.16 以下。<span class="badge" style="border:1px solid #2a5c3f;color:#2a5c3f">置信 高</span></li>
+<li>「不买」在框架内很稳：护城河评 6、7、9 分，安全边际都达不到 40%。「价格高于内在价值上沿」取决于护城河分数：6 分时成立；7 分时价格约等于保守估值。按框架的区间定义，6、7 分都属「高估区间」（安全边际 &lt; 15%），9 分为观察区间。<span class="badge" style="border:1px solid #c47a1e;color:#c47a1e">置信 中</span></li>
+<li>现价隐含未来 5 年所有者盈余每年增长 15.7%，超过中等护城河 12% 的增速上限。</li>
+</ul>
+<svg viewBox="0 0 660 160" style="font-family:'IM Fell English',Georgia,serif;width:100%"><line x1="40" y1="90" x2="600" y2="90" stroke="#8b6c42"/><line x1="40.0" y1="87" x2="40.0" y2="93" stroke="#8b6c42"/><text x="40.0" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">0</text><line x1="105.9" y1="87" x2="105.9" y2="93" stroke="#8b6c42"/><text x="105.9" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">40</text><line x1="171.8" y1="87" x2="171.8" y2="93" stroke="#8b6c42"/><text x="171.8" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">80</text><line x1="237.6" y1="87" x2="237.6" y2="93" stroke="#8b6c42"/><text x="237.6" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">120</text><line x1="303.5" y1="87" x2="303.5" y2="93" stroke="#8b6c42"/><text x="303.5" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">160</text><line x1="369.4" y1="87" x2="369.4" y2="93" stroke="#8b6c42"/><text x="369.4" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">200</text><line x1="435.3" y1="87" x2="435.3" y2="93" stroke="#8b6c42"/><text x="435.3" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">240</text><line x1="501.2" y1="87" x2="501.2" y2="93" stroke="#8b6c42"/><text x="501.2" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">280</text><line x1="567.1" y1="87" x2="567.1" y2="93" stroke="#8b6c42"/><text x="567.1" y="108" font-size="10" text-anchor="middle" fill="#8b6c42">320</text><rect x="262.8" y="72" width="21.6" height="36" fill="#c9a84c" opacity="0.35"/><rect x="505.9" y="118" width="72.9" height="8" fill="#c9a84c" opacity="0.7"/><text x="501.9" y="126" font-size="10" text-anchor="end" fill="#8b6c42">护城河 9 分时</text><line x1="173.7" y1="66" x2="173.7" y2="114" stroke="#2a5c3f" stroke-width="2"/><text x="173.7" y="60" font-size="12" text-anchor="middle" fill="#2a5c3f">建仓线 81.16</text><line x1="262.8" y1="46" x2="262.8" y2="114" stroke="#0a0a0b" stroke-width="2"/><text x="266.8" y="40" font-size="12" text-anchor="start" fill="#0a0a0b">下沿 135.27</text><line x1="284.4" y1="66" x2="284.4" y2="114" stroke="#0a0a0b" stroke-width="2"/><text x="288.4" y="60" font-size="12" text-anchor="start" fill="#0a0a0b">上沿 148.38</text><line x1="347.4" y1="30" x2="347.4" y2="114" stroke="#8b2e2e" stroke-width="2"/><text x="343.4" y="24" font-size="12" text-anchor="end" fill="#8b2e2e">现价 186.64</text><text x="40" y="150" font-size="11" fill="#8b6c42">每股美元。金色带 = 内在价值区间（护城河 6 分，两情景 DCF，TTM 基数）；建仓线 = 下沿 × 60%（异常增速路径门槛 40%）</text></svg>
+
+<h2>一、护城河分析 <span class="en">Moat</span></h2>
+<svg viewBox="0 0 660 70" style="font-family:'IM Fell English',Georgia,serif;width:100%"><rect x="40" y="14" width="52" height="22" fill="#c9a84c"/><text x="66" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">1</text><rect x="98" y="14" width="52" height="22" fill="#c9a84c"/><text x="124" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">2</text><rect x="156" y="14" width="52" height="22" fill="#c9a84c"/><text x="182" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">3</text><rect x="214" y="14" width="52" height="22" fill="#c9a84c"/><text x="240" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">4</text><rect x="272" y="14" width="52" height="22" fill="#c9a84c"/><text x="298" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">5</text><rect x="330" y="14" width="52" height="22" fill="#c9a84c"/><text x="356" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">6</text><rect x="388" y="14" width="52" height="22" fill="#ddd6c8"/><text x="414" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">7</text><rect x="446" y="14" width="52" height="22" fill="#ddd6c8"/><text x="472" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">8</text><rect x="504" y="14" width="52" height="22" fill="#ddd6c8"/><text x="530" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">9</text><rect x="562" y="14" width="52" height="22" fill="#ddd6c8"/><text x="588" y="52" font-size="10" text-anchor="middle" fill="#8b6c42">10</text><text x="40" y="66" font-size="11" fill="#8b6c42">护城河评分 6 / 10（5–6 = 中等：阶段 1 增速上限 12%，终端增长上限 5%）</text></svg>
+<p>护城河评分 <strong>6 / 10（中等）</strong>：五类护城河里，没有一类能用现有数据证明成立。按框架「不能脱离数据主观打分」取 6。7 分与 9 分的结果见 §四敏感性表。<span class="badge" style="border:1px solid #c47a1e;color:#c47a1e">置信 中</span></p>
+<table><tr><th>维度（moat-framework 五类）</th><th>证据</th><th>判定</th></tr>
+<tr><td>规模壁垒</td><td>TechInsights：2023 年 NVIDIA 数据中心 GPU 出货份额 98%，与 2022 年相近；该统计不含云厂商自研芯片。营业利润率 54% → 62% → 60%：FY2025 抬高，FY2026 营收增长 65% 时反而回落 2 个点。份额只有两年、已过时三年；口径为「数据中心 GPU」，三家合计本来就是 100%；同一报道写明云厂商都在做自研芯片</td><td>待验证（信号偏弱）</td></tr>
+<tr><td>无形资产（定价权）</td><td>信号①：FY2026 毛利率 71.1%，同行 AMD 49.5%、AVGO 67.8%，均值 58.6%；高 12.4 个百分点，相对高 21%。信号②「5 年内 2 次 &gt; 5% 提价」没有单价数据</td><td>待验证（只有 1 个信号）</td></tr>
+<tr><td>转换成本</td><td>开发者与软件栈锁定是常见论点，没有留存率或迁移成本数据</td><td>待验证</td></tr>
+<tr><td>网络效应</td><td>开发者越多、库越全，平台价值越高；没有可量化数据</td><td>待验证</td></tr>
+<tr><td>成本优势</td><td>Fabless 模式，制造在代工厂，没有单位成本对比</td><td>不计分</td></tr>
+</table>
+<p>侵蚀信号：毛利率 FY2024–FY2026 72.7% → 71.1%，回落 1.6 个点，未到 5 个点；同行营收增速 AMD 34%、AVGO 24%，低于英伟达的 65%。份额是否连续流失无法检验（份额数据停在 2023 年）。其余信号未触发。</p>
+<p>为什么给 6：毛利率高出同行是唯一有数据的信号，其余维度都缺数据或证据偏弱。这是按框架取的保守分，不是认为它的护城河窄。分数决定增速上限（6 分 12%，7 分 18%，9 分 25%），对估值影响很大。6、7 分为等待买入档；9 分时总分 89（强力买入区域），但异常增速路径下安全边际 34% 低于 40%，按规则为观察、非买入。三种分数下都不买。</p>
+<p class="src">来源：SEC companyfacts（GrossProfit、营业利润 ÷ 营收）；HPCwire 转述的 TechInsights 研究。</p>
+
+<h2>二、核心财务指标 <span class="en">Financials, FY2024–FY2026</span></h2>
+<p>财务健康满分：高增长、高转化（FCF / 净利润三年均 &gt; 80%）、净现金、无一次性现金项。</p>
+<svg viewBox="0 0 660 240" style="font-family:'IM Fell English',Georgia,serif;width:100%"><line x1="70" y1="190.0" x2="600" y2="190.0" stroke="#e2dccf"/><text x="62" y="194.0" font-size="10" text-anchor="end" fill="#8b6c42">0B</text><line x1="70" y1="163.8" x2="600" y2="163.8" stroke="#e2dccf"/><text x="62" y="167.8" font-size="10" text-anchor="end" fill="#8b6c42">20B</text><line x1="70" y1="137.7" x2="600" y2="137.7" stroke="#e2dccf"/><text x="62" y="141.7" font-size="10" text-anchor="end" fill="#8b6c42">40B</text><line x1="70" y1="111.5" x2="600" y2="111.5" stroke="#e2dccf"/><text x="62" y="115.5" font-size="10" text-anchor="end" fill="#8b6c42">60B</text><line x1="70" y1="85.4" x2="600" y2="85.4" stroke="#e2dccf"/><text x="62" y="89.4" font-size="10" text-anchor="end" fill="#8b6c42">80B</text><line x1="70" y1="59.2" x2="600" y2="59.2" stroke="#e2dccf"/><text x="62" y="63.2" font-size="10" text-anchor="end" fill="#8b6c42">100B</text><line x1="70" y1="33.1" x2="600" y2="33.1" stroke="#e2dccf"/><text x="62" y="37.1" font-size="10" text-anchor="end" fill="#8b6c42">120B</text><polyline points="70.0,151.1 335.0,94.7 600.0,33.0" fill="none" stroke="#0a0a0b" stroke-width="2.5"/><circle cx="70.0" cy="151.1" r="3.5" fill="#0a0a0b"/><text x="76.0" y="143.1" font-size="10" fill="#0a0a0b">29.8</text><circle cx="335.0" cy="94.7" r="3.5" fill="#0a0a0b"/><text x="341.0" y="86.7" font-size="10" fill="#0a0a0b">72.9</text><circle cx="600.0" cy="33.0" r="3.5" fill="#0a0a0b"/><text x="606.0" y="25.0" font-size="10" fill="#0a0a0b">120.1</text><polyline points="70.0,154.7 335.0,110.4 600.0,63.6" fill="none" stroke="#2a5c3f" stroke-width="2.5"/><circle cx="70.0" cy="154.7" r="3.5" fill="#2a5c3f"/><text x="76.0" y="170.7" font-size="10" fill="#2a5c3f">27.0</text><circle cx="335.0" cy="110.4" r="3.5" fill="#2a5c3f"/><text x="341.0" y="126.4" font-size="10" fill="#2a5c3f">60.9</text><circle cx="600.0" cy="63.6" r="3.5" fill="#2a5c3f"/><text x="606.0" y="79.6" font-size="10" fill="#2a5c3f">96.7</text><text x="70.0" y="208" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2024</text><text x="335.0" y="208" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2025</text><text x="600.0" y="208" font-size="12" text-anchor="middle" fill="#0a0a0b">FY2026</text><rect x="70" y="224" width="10" height="10" fill="#0a0a0b"/><text x="84" y="233" font-size="11" fill="#0a0a0b">净利润</text><rect x="250" y="224" width="10" height="10" fill="#2a5c3f"/><text x="264" y="233" font-size="11" fill="#0a0a0b">FCF</text></svg>
+<table><tr><th>指标</th><th>FY2024</th><th>FY2025</th><th>FY2026</th></tr><tr><td>营收</td><td>$60.9B</td><td>$130.5B</td><td>$215.9B</td></tr><tr><td>营收增速</td><td>126%</td><td>114%</td><td>65%</td></tr><tr><td>毛利率</td><td>72.7%</td><td>75.0%</td><td>71.1%</td></tr><tr><td>净利润（GAAP）</td><td>$29.8B</td><td>$72.9B</td><td>$120.1B</td></tr><tr><td>营业利润（EBIT）</td><td>$33.0B</td><td>$81.5B</td><td>$130.4B</td></tr><tr><td>FCF（CFO − Capex）</td><td>$27.0B</td><td>$60.9B</td><td>$96.7B</td></tr><tr><td>FCF / 净利润</td><td>91%</td><td>83%</td><td>81%</td></tr><tr><td>SBC / 营收</td><td>5.8%</td><td>3.6%</td><td>3.0%</td></tr><tr><td>ROE（GAAP）</td><td>69.2%</td><td>91.9%</td><td>76.3%</td></tr><tr><td>ROIC（EBIT × (1 − 当年税率) ÷ 投入资本）</td><td>63.9%（税率 12.0%）</td><td>89.2%（税率 13.3%）</td><td>71.3%（税率 15.1%）</td></tr></table>
+<p class="src">来源：SEC companyfacts 10-K（财年截至每年 1 月下旬）。投入资本 = 有息负债 + 股东权益 − 现金及等价物；若再扣有价证券（FY2026 现金、等价物与有价证券合计 $62.6B），ROIC 更高。FCF 与公司口径相差租赁类本金支付，FY2026 为 $0.1B。</p>
+<p>FCF 没有一次性现金项。净利润里含权益投资的非现金收益：FY2026 为 $8.9B，近 12 个月约 $30.6B。所有者盈余按经营现金流口径计算，已把它们剔出。SBC 约占营收 3%，低于 5% 的标注线。现金、等价物与有价证券 $62.6B，有息负债 $8.5B，是净现金公司。</p>
+<p>增速说明：FY2024→FY2026 是两期复合。营收两年扩大约 3.5 倍，复合 88%；FCF 复合 89%。</p>
+
+<h2>三、管理层评估 <span class="en">Management</span></h2>
+<p>管理层得分 16 / 25：创始人长期执掌、内部投资回报极高；分红未连续增长、回购不在低估时点。</p>
+<table><tr><th>行为（近 3 年）</th><th>数据</th><th>评分影响</th></tr>
+<tr><td>内部投资回报</td><td>ROIC 64% / 89% / 71%，远高于 20%</td><td>+2</td></tr>
+<tr><td>分红</td><td>支付股息 $0.4B → $0.4B → $0.8B → $1.0B；FY2023 到 FY2024 没有增长</td><td>0</td></tr>
+<tr><td>回购</td><td>FY2024–FY2026 回购 $9.5B / $33.7B / $40.1B，期间市盈率远高于 15</td><td>0</td></tr>
+<tr><td>股权激励稀释</td><td>稀释后股数 25.07B → 24.51B，逐年下降</td><td>0</td></tr>
+</table>
+<p>3A = 6 + 2 = 8。3B：黄仁勋 1993 年创立公司，并一直任 CEO；持股 8.71 亿股，占 3.58%（2026 年报的代理声明表）。占股本超过 1%，属于「大量持股」。评分表没有「创始人 + 持股低于 10%」这一行，取相邻的「大量持股」档 5 分。
+3C 取中性 3 分（见 §七）。</p>
+<p class="src">来源：SEC companyfacts（股息、回购、稀释股数、税费与税前利润）；NVIDIA 2026 年报 PDF（创始人简介与持股表）。</p>
+
+<h2>四、内在价值估算 <span class="en">Owner Earnings DCF</span></h2>
+<p><strong>内在价值 135.27–148.38 美元（TTM 基数、护城河 6 分），现价高于上沿，安全边际（下沿）-38.0%。</strong></p>
+<p><strong>基数：近 12 个月（TTM，截至 2026-07-26）实际值。</strong>最近完整财年 FY2026 已结束 9 个多月，按框架规则（完整财年结束超过 6 个月用 TTM）改用 TTM：TTM = FY2026 + FY2027 上半年 − FY2026 上半年，全部是已发生的现金流，不用预测。</p>
+<p><strong>所有者盈余（TTM）</strong>：净利润 $192.9B + D&amp;A $3.7B − 维护性资本支出 $3.7B − 营运资本与非现金项调整 $69.4B = <strong>$123.4B</strong>，等价于经营现金流 $134.4B − SBC $7.2B − 维护性资本支出。
+维护性资本支出取总资本支出的 50%（Fabless）。调整项以 FY2026 为例拆分如下：营运资本变动 $-15.9B，权益证券非现金收益 $-8.9B，递延所得税 $-1.4B，其他 $-0.3B；SBC 视为真实成本，不加回。</p>
+<p><strong>估值路径：异常增速 DCF（路径 B，门槛 40%）。</strong>FCF 两期复合 89%，超过 50%。按规则逐步处理：</p>
+<ul>
+<li><strong>第 1 步 · 增速性质</strong>：属于「结构性平台跃迁」。框架示例直接列了「AI 加速器 2023-」。但需求依赖客户的资本开支周期，这一点放在风险里跟踪。</li>
+<li><strong>第 2 步 · 分析师共识（采用）</strong>：FY2027 共识 FCF 增长 97%。FY2028–29 的共识是付费内容；只要那两年增速合计高于 -61 个百分点，三年均值就高于 12%，所以取护城河上限。</li>
+<li><strong>第 3 步 · FCF yield 反推（对照，不采用）</strong>：得增速 4.15% / 7.15%，内在价值 85.54–109.68。它与上半年已实现的 FCF 同比 +77% 严重背离。</li>
+<li><strong>第 4 步 · 标注</strong>：历史增速异常，DCF 基于正态化增速，可信度中等；当前估值主要由市场对增速的预期驱动，安全边际计算意义有限。</li>
+<li><strong>估值失效条件</strong>：营收增速 126%, 114%, 65%，增速标准差 32 个百分点，低于 50（框架口径），DCF 有效。</li>
+</ul>
+<table><tr><th>参数</th><th>保守情景</th><th>基准情景</th><th>依据</th></tr>
+<tr><td>阶段 1 增速（1–5 年）</td><td>12%</td><td>12%</td><td>共识锚定，被护城河上限截断</td></tr>
+<tr><td>阶段 2 增速（6–10 年）</td><td>6.0%</td><td>7.2%</td><td>阶段 1 × 50% / × 60%</td></tr>
+<tr><td>终端增长率</td><td>2.5%</td><td>3.0%</td><td>上限 5% × 60% / × 80%，再受 2.5% / 3% 封顶</td></tr>
+<tr><td>折现率</td><td>9%</td><td>9%</td><td>美股大盘股；10 年期美债 4.86%</td></tr>
+<tr><td>每股内在价值</td><td>135.27</td><td>148.38</td><td>两情景 DCF ÷ 24.1B 股</td></tr>
+<tr><td>终值占比</td><td>59%</td><td>62%</td><td>&gt; 60% → 交叉验证</td></tr>
+</table>
+<p>增速被上限截断的代价（同为 FCF 口径）：TTM FCF $127.0B × (1 + 12%) = $142.2B，共识的 FY2027 FCF 为 $190.2B（期间不完全相同：模型第 1 年截至 2027 年 7 月，FY2027 截至 2027 年 1 月）。框架有意不为超过上限的增长付钱，这部分差距是安全垫，也是可能的低估来源。</p>
+<p>交叉验证（股权口径）：前 10 年所有者盈余现值，加上第 10 年所有者盈余 × 同行市值 / FCF 均值 80.7x 后折现，得基准情景每股 491.45（保守情景终值占比 59%，未触发；基准情景触发），与 DCF 相差超过 30%。按规则取较低值，即 DCF 值。同行倍数本身很高（AMD 约 109 倍），相对估值在这里不是可靠的锚。</p>
+<table><tr><th>护城河评分</th><th>阶段 1 增速上限</th><th>内在价值区间</th><th>安全边际（下沿）</th><th>总分</th></tr><tr><td>6 分</td><td>12%</td><td>135.27–148.38</td><td>-38.0%</td><td>74</td></tr><tr><td>7 分</td><td>18%</td><td>190.87–214.60</td><td>2.2%</td><td>78</td></tr><tr><td>9 分</td><td>25%</td><td>282.89–327.16</td><td>34.0%</td><td>89</td></tr></table>
+<table><tr><th>价格锚点</th><th>价位</th><th>说明</th></tr>
+<tr><td>内在价值下沿（保守情景）</td><td>135.27</td><td>安全边际的计算基准</td></tr>
+<tr><td>当前股价</td><td>186.64</td><td>2026-11-06</td></tr>
+<tr><td>当前安全边际</td><td>-38.0%</td><td>(下沿 − 现价) ÷ 下沿</td></tr>
+<tr><td>目标买入价（安全边际 40%）</td><td>81.16</td><td>下沿 × 60%</td></tr>
+</table>
+<p><strong>逆向验证：</strong>按基准情景结构倒推，现价要求阶段 1 增速 15.7%、阶段 2 增速 9.4%，比中等护城河的上限高 3.7 个百分点，在宽护城河（18%）上限之内。</p>
+<p class="src">来源：owner_value 主底稿 memory/state/valuations/nvda_2026-11-09.json；护城河 7 / 9 分与 FCF yield 对照底稿在同一目录；TTM 的分项来自两份新闻稿的现金流量表。</p>
+
+<div class="verdict"><strong>裁决：等待买入档，当前不买。</strong>好生意，价格偏贵：现价 186.64 高于内在价值上沿 148.38，安全边际（下沿）-38.0%；81.16 以下才进入买入区间。
+<div class="en">An exceptional business priced above its intrinsic value on evidence-based moat scoring; no margin of safety against a 40% hurdle.</div></div>
+<p class="src">未核实项：FY2028–29 分析师共识（付费内容）；最新 AI 加速器份额（含云厂商自研芯片）。两项都不改变「不买」。</p>
+
+<h2>五、巴菲特评分卡 <span class="en">Berkshire Score</span></h2>
+<svg viewBox="0 0 660 160" style="font-family:'IM Fell English',Georgia,serif;width:100%"><text x="0" y="28" font-size="12" fill="#0a0a0b">Business Quality</text><rect x="170" y="14" width="420" height="20" fill="#ddd6c8"/><rect x="170" y="14" width="322" height="20" fill="#c9a84c"/><text x="596" y="29" font-size="12" fill="#8b6c42">23 / 30</text><text x="0" y="62" font-size="12" fill="#0a0a0b">Financial Health</text><rect x="170" y="48" width="420" height="20" fill="#ddd6c8"/><rect x="170" y="48" width="420" height="20" fill="#c9a84c"/><text x="596" y="63" font-size="12" fill="#8b6c42">30 / 30</text><text x="0" y="96" font-size="12" fill="#0a0a0b">Management Quality</text><rect x="170" y="82" width="350" height="20" fill="#ddd6c8"/><rect x="170" y="82" width="224" height="20" fill="#c9a84c"/><text x="526" y="97" font-size="12" fill="#8b6c42">16 / 25</text><text x="0" y="130" font-size="12" fill="#0a0a0b">Price vs Value</text><rect x="170" y="116" width="210" height="20" fill="#ddd6c8"/><rect x="170" y="116" width="70" height="20" fill="#c9a84c"/><text x="386" y="131" font-size="12" fill="#8b6c42">5 / 15</text><text x="0" y="154" font-size="11" fill="#8b6c42">总分 74 / 100 → 70–84 = 等待买入（质量优异，等安全边际达标后建仓）</text></svg>
+<table><tr><th>维度</th><th>满分</th><th>得分</th><th>关键依据</th></tr><tr><td>Business Quality</td><td>30</td><td>23</td><td>1A / 1B / 1C = 8 / 8 / 7：护城河 6 分；营收 CAGR 88%（&gt; 20%、无负增长 → 8）；毛利率三年 &gt; 50% → 7</td></tr><tr><td>Financial Health</td><td>30</td><td>30</td><td>2A / 2B / 2C = 12 / 10 / 8：ROE 三年均值 79%、负债率 5.1%（无杠杆驱动）→ 12；FCF 三年为正且 FCF / 净利润均 &gt; 80% → 10；现金及等价物 $10.6B（含有价证券 $62.6B）&gt; 有息负债 $8.5B（净现金）→ 8</td></tr><tr><td>Management Quality</td><td>25</td><td>16</td><td>3A / 3B / 3C = 8 / 5 / 3：6 + ROIC &gt; 20% 的内部投资 2（分红 FY2023→FY2024 未增长，不加分）；创始人持股 3.58%（&gt; 1% 股本）→ 5；沟通未评估，取中性 3（3C 取 0–5 时总分 71–76，评级不变）</td></tr><tr><td>Price vs Value</td><td>15</td><td>5</td><td>4A / 4B = 0 / 5：安全边际 -38.0%（&lt; 10%）→ 0；EV/FCF 46.5x，低于同行均值 81.5x 逾 20% → 5</td></tr><tr><td>总分</td><td>100</td><td>74</td><td>70–84 = 等待买入；未触发自动降级</td></tr></table>
+<p>相对估值：英伟达 EV/FCF 46.5x，AMD 109.0x，AVGO 53.9x。英伟达比同行便宜，但同行同样被高增长定价，4B 的 5 分只作辅助，不能覆盖 DCF 的结论。</p>
+
+<h2>六、主要风险 <span class="en">Risks</span></h2>
+<table><tr><th>风险</th><th>说明</th><th>对估值的影响</th></tr>
+<tr><td>客户集中</td><td>FY2026 两家直接客户分别占营收 22% 和 14%（10-K）；需求依赖少数客户的资本开支周期</td><td>增速 −3 个百分点 → 下沿约 -16%</td></tr>
+<tr><td>自研芯片与定制 ASIC</td><td>TechInsights 指出 Google TPU 等替代方案在出现；AVGO 是直接竞争者（FY2025 营收增速 24%，含软件业务，未拆分）</td><td>也是护城河只能评 6 分的原因之一；若证据补齐评到 7 分，内在价值为 190.87–214.60</td></tr>
+<tr><td>投资与生态融资</td><td>FY2027 上半年投资活动现金流出 $35.1B，上年同期 $12.3B（Q2 新闻稿）；为生态伙伴提供资金会让需求的独立性变弱</td><td>暂未量化，跟踪承诺转为收入的比例</td></tr>
+<tr><td>利率</td><td>折现率随 10 年期美债变化</td><td>r +1 个百分点 → 下沿约 -14%</td></tr>
+</table>
+<p>需要重估内在价值的情况：每次季报更新 TTM；毛利率连续两个季度低于 70%；股价跌破 81.16。</p>
+
+<h2>七、数据盲区与敏感性 <span class="en">Gaps and Sensitivity</span></h2>
+<ul>
+<li>FY2028–29 的分析师共识为付费内容，未取得；增速被上限截断，不影响结论。</li>
+<li>市场份额只有 2023 年的 TechInsights 数据，且不含云厂商自研芯片；最新份额未取得。</li>
+<li>转换成本、网络效应、单价提价没有可量化数据，相关维度记为待验证。</li>
+<li>电话会沟通质量未评估，3C 取中性 3 分；取 0–5 时总分 71–76，评级不变。</li>
+<li>护城河五类均缺少足够数据，按框架取 6 分；补齐份额（含自研芯片）、单价、留存率数据后应重评。</li>
+</ul>
+<table><tr><th>变量（以保守情景为底）</th><th>变动</th><th>每股内在价值</th><th>变化</th></tr><tr><td>折现率 r</td><td>+1.0 个百分点</td><td>115.80</td><td>-14%</td></tr><tr><td>折现率 r</td><td>-1.0 个百分点</td><td>161.93</td><td>+20%</td></tr><tr><td>阶段 1 增速 g1</td><td>+3.0 个百分点</td><td>160.80</td><td>+19%</td></tr><tr><td>阶段 1 增速 g1</td><td>-3.0 个百分点</td><td>113.64</td><td>-16%</td></tr><tr><td>终端增长率</td><td>+0.5 个百分点</td><td>142.40</td><td>+5%</td></tr></table>
+
+<h2>来源索引 <span class="en">Sources</span></h2>
+<ol class="src"><li>SEC EDGAR companyfacts：NVIDIA 10-K XBRL（每个值带 accession 号）：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json</a></li><li>SEC EDGAR companyfacts：AMD 10-K XBRL：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json</a></li><li>SEC EDGAR companyfacts：Broadcom AVGO 10-K XBRL：<a href="https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json">https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json</a></li><li>NVIDIA FY2026 第四季度及全年业绩新闻稿（现金流量表、FCF 调节表）：<a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026">https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026</a></li><li>NVIDIA FY2027 第二季度业绩新闻稿（上半年现金流量表）：<a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027">https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027</a></li><li>NVIDIA FY2025 第四季度及全年业绩新闻稿（FY2024 现金流对照）：<a href="https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025">https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025</a></li><li>NVIDIA 2026 年度报告 PDF（含 FY2026 10-K 与代理声明：客户集中度、创始人持股）：<a href="https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf">https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf</a></li><li>HPCwire：TechInsights 研究，2023 年 NVIDIA 数据中心 GPU 出货份额 98%（2024-06-10）：<a href="https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/">https://www.hpcwire.com/2024/06/10/nvidia-shipped-3-76-million-data-center-gpus-in-2023-according-to-study/</a></li><li>stockanalysis.com NVDA 预测页（S&P Global 汇总的分析师共识，2026-11-09 抓取）：<a href="https://stockanalysis.com/stocks/nvda/forecast/">https://stockanalysis.com/stocks/nvda/forecast/</a></li><li>股价：Yahoo Finance 2026-11-06 收盘（GitHub Actions 抓取，financials/*.json）；10 年期美债 4.86%（stock_prices.json）：<a href="https://finance.yahoo.com/quote/NVDA/">https://finance.yahoo.com/quote/NVDA/</a></li></ol>
+
+<div class="note"><p><strong>分析师附注 Analyst's Note</strong></p>
+<table><tr><th>结论</th><th>置信</th><th>为什么</th></tr>
+<tr><td>当前不买</td><td>高</td><td>框架内：任何护城河分数对应的增速上限下，安全边际都达不到 40%；9 分时总分 89，安全边际 34%，路径 B 下观察、非买入</td></tr>
+<tr><td>价格高于内在价值上沿</td><td>中</td><td>按证据评 6 分时成立；评 7 分时价格约等于保守估值（安全边际 2.2%）</td></tr>
+</table>
+<p><strong>待核实：</strong>FY2028–29 共识；最新 AI 加速器份额（含自研芯片）；FY2027 年报（预计 2027 年 2 月）。</p>
+<p><strong>分析师看法：</strong>英伟达是看得懂的好生意。按能拿到的证据给护城河打分，现价偏贵；按巴菲特的纪律，没有安全边际就不买。
+最关键的判断是护城河分数：评 7 分时价格约等于保守估值；评 9 分时内在价值约 283–327，安全边际约 34%，仍然低于 40%。本报告不登记预测。</p>
+<p>本报告的估值数字全部由 tools/owner_value.py 计算，生成脚本只读取、不手算。本报告是价值框架下的研究意见，不构成投资建议。</p>
+<p>反馈：<a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&report=nvda">https://spontaneous-youtiao-b9cde9.netlify.app?product=buffett&amp;report=nvda</a></p></div>
+</div></body></html>

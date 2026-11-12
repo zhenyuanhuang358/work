@@ -24,7 +24,14 @@ def extract(html):
         t.decompose()
     title = (soup.title.get_text(strip=True) if soup.title else "")
     body = max(soup.find_all(["article", "main", "div"]), key=lambda n: len(n.find_all("p")), default=soup)
-    paras = [p.get_text(" ", strip=True) for p in body.find_all(["p", "h1", "h2", "h3", "li"])]
+    # 11/09 NVDA 新闻稿：财务报表在 <table> 里，只取 p/li 会丢掉现金流量表 → 表格逐行输出（单元格用 | 分隔）
+    paras = []
+    for n in body.find_all(["p", "h1", "h2", "h3", "li", "tr"]):
+        if n.name == "tr":
+            cells = [c.get_text(" ", strip=True) for c in n.find_all(["td", "th"])]
+            paras.append(" | ".join(c for c in cells if c))
+        elif not n.find_parent("table"):
+            paras.append(n.get_text(" ", strip=True))
     return title, "\n".join(p for p in paras if len(p) > 1)
 
 
