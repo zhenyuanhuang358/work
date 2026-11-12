@@ -350,5 +350,29 @@
   "title": "NRA withholding | Internal Revenue Service",
   "chars": 6259,
   "error": null
+ },
+ "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html": {
+  "url": "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html",
+  "fetched_at": "2026-11-12T02:56:28+00:00",
+  "file": "pages/www_cnbc_com_2026_11_11_nvidia_jensen_huang_affair_employee__c97de9.txt",
+  "title": "Nvidia prepares to oust Jensen Huang, WSJ reports — stock sinks",
+  "chars": 4951,
+  "error": null
+ },
+ "https://finance.yahoo.com/technology/live/nvidia-live-updates-nvidia-stock-tanks-in-after-hours-after-allegations-of-a-second-affair-surface-222438011.html": {
+  "url": "https://finance.yahoo.com/technology/live/nvidia-live-updates-nvidia-stock-tanks-in-after-hours-after-allegations-of-a-second-affair-surface-222438011.html",
+  "fetched_at": "2026-11-12T02:56:28+00:00",
+  "file": "pages/finance_yahoo_com_technology_live_nvidia_live_updates_nvidia_fae145.txt",
+  "title": "Nvidia live updates: Stock tanks after new affair allegations, board reportedly preparing to oust Jensen Huang",
+  "chars": 33701,
+  "error": null
+ },
+ "https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next": {
+  "url": "https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next",
+  "fetched_at": "2026-11-12T02:56:29+00:00",
+  "file": "pages/www_tipranks_com_news_why_nvidia_stock_is_plunging_7_in_afte_a46327.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next')"
  }
 }
