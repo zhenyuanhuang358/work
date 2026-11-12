@@ -60,7 +60,7 @@
 ## 5. 复核命令
 
 ```
-python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py tests/test_buffett_report.py   # 交接时 90 条全过
+python3 -m unittest tests/test_options_regression.py tests/test_report_check.py tests/test_screen_check.py tests/test_owner_value.py tests/test_skill_index.py tests/test_tiandao_check.py tests/test_fetch_financials.py tests/test_tiandao_verify.py tests/test_buffett_report.py tests/test_combo_payoff.py   # 11/12 起含组合分析
 python3 tools/self_check.py --quiet     # 交接时无 P1 / P2
 ```
 

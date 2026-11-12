@@ -43,6 +43,7 @@ description: |
 - 用户问单个标的 → `option_quote.py --ticker X` 看全表 + `gap_stress.py`；不走全清单。
 - 用户报开平仓 → `scale_check.py open/close` + journal；张数以用户截图为准，不凭记忆。
 - 用户问价差 / 铁鹰 → 说明盈立无组合单，position-discipline 第 3 条。
+- 用户要看事件前（财报等）几种看涨组合的盈亏 → `tools/combo_payoff.py`，按 `references/combo-analysis.md`；**只做分析，不进候选、不改规则**。
 
 ---
 
@@ -79,6 +80,7 @@ description: |
 | `tools/scale_check.py report / open / close` | 实盘账本与加码阶段（每笔张数） |
 | `tools/candidate_ledger.py add / report` | 候选全量登记（推荐 / 否决 / 闸门）与到期结算 |
 | `tools/put_backtest.py` / `stop_replay.py` | 满 20 簇复盘 |
+| `tools/combo_payoff.py X --expiry D [--pre D0]` | 只做分析：牛市看涨价差 / 熊市看涨价差 / 看涨比例反向价差的到期盈亏表（买按卖价、卖按买价；现价按平价核对） |
 
 **数据产物**（GitHub Actions 写，读工作分支 `claude/install-claude-hud-d51E6`，不读 main）：
 `options_chain.json`（CBOE 延迟报价 + hv30 + 一年单日最大涨跌）｜`stock_prices.json`（价格 + VIX 族）｜`news.json`（Finnhub）｜
@@ -109,6 +111,7 @@ description: |
 | 步骤 3 新闻标注 | `references/news-channels.md` |
 | 美联储 / CPI / PPI 日历、发布后搜索与记录 | `references/macro-events.md` |
 | 市场极端波动 / VIX 暴涨 / 黑天鹅 | `references/extreme-market-protocol.md` |
+| 事件前组合结构盈亏（只做分析，不影响策略） | `references/combo-analysis.md` |
 | 开平仓记录、账户快照 | `memory/state/options-journal.md` |
 | 查旧设计 / 事故背景（不按它执行） | `references/archive/README.md` |
 
