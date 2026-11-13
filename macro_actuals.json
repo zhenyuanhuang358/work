@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-11T18:35:44+00:00",
+ "updated_at": "2026-11-13T15:12:07+00:00",
  "source": "BLS API",
  "indicators": {
   "payrolls": {
@@ -41,16 +41,16 @@
    "surprise": 0.1
   },
   "ppi": {
-   "month": "2026-09",
-   "actual": 1.11,
-   "previous_recomputed": 0.35,
+   "month": "2026-10",
+   "actual": 0.45,
+   "previous_recomputed": 1.18,
    "unit": "% 环比",
    "release_et": "2026-11-13T08:30:00-05:00",
    "forecast": "0.4%",
    "ff_previous": "1.3%",
-   "surprise": 0.71
+   "surprise": 0.05
   }
  },
  "errors": [],
- "trigger": "scan-2026-11-11T18:31:41+00:00"
+ "trigger": "scan-2026-11-13T15:02:27+00:00"
 }
