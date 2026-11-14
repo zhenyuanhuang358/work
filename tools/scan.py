@@ -176,7 +176,7 @@ def cmd_run(a):
 
     scale = sh("python3", os.path.join(HERE, "scale_check.py"), "report", check=False).strip().splitlines()[:1]
     # 当天（美东）已公布的高影响数据：实际值必须进报告（11/06 用户：「非农这么重要，怎么可以抓不到就算了」）
-    names = {"payrolls": "非农就业", "unrate": "失业率", "ahe": "平均时薪", "cpi": "CPI", "core_cpi": "核心 CPI", "ppi": "PPI"}
+    names = {"payrolls": "非农就业", "unrate": "失业率", "ahe": "平均时薪", "cpi": "CPI", "core_cpi": "核心 CPI", "ppi": "PPI", "core_ppi": "核心 PPI"}
     macro_today = [{"key": k, "name": names[k], **v} for k, v in macro.get("indicators", {}).items()
                    if (v.get("release_et") or "")[:10] == today.isoformat()]
     released_today = [e for e in events if e["time"][:10] == today.isoformat()]

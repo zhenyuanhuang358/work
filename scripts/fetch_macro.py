@@ -12,7 +12,9 @@
   UNRATE / LNS14000000    失业率
   CES0500000003           平均时薪（环比 %）
   CPIAUCSL / CUSR0000SA0  CPI（季调，环比 %）；CUSR0000SA0L1E 核心 CPI
-  PPIFIS / WPUFD4         PPI 最终需求（环比 %）
+  PPIFIS / WPSFD4         PPI 最终需求（**季调**，环比 %）。WPUFD4 是未季调：11/14 实测算出 0.45%，
+                          官方发布季调口径为 0.3%——2026-11-14 修正为 WPSFD4
+  WPSFD49104              核心 PPI（最终需求剔除食品与能源，季调，环比 %）
 """
 import csv
 import io
@@ -24,13 +26,14 @@ import requests
 
 H = {"User-Agent": "Mozilla/5.0 (options-research; macro actuals)", "Content-Type": "application/json"}
 BLS = {"payrolls": "CES0000000001", "unrate": "LNS14000000", "ahe": "CES0500000003",
-       "cpi": "CUSR0000SA0", "core_cpi": "CUSR0000SA0L1E", "ppi": "WPUFD4"}
+       "cpi": "CUSR0000SA0", "core_cpi": "CUSR0000SA0L1E", "ppi": "WPSFD4",
+       "core_ppi": "WPSFD49104"}
 FRED = {"payrolls": "PAYEMS", "unrate": "UNRATE", "ahe": "CES0500000003", "cpi": "CPIAUCSL", "core_cpi": "CPILFESL",
         "ppi": "PPIFIS"}
 # FF 周历标题 → 指标（预期值对照）
 FF_MAP = [(r"Non-Farm Employment Change", "payrolls"), (r"Unemployment Rate", "unrate"),
           (r"Average Hourly Earnings m/m", "ahe"), (r"^CPI m/m", "cpi"), (r"Core CPI m/m", "core_cpi"),
-          (r"^PPI m/m", "ppi")]
+          (r"^PPI m/m", "ppi"), (r"Core PPI m/m", "core_ppi")]
 
 
 def from_bls():
