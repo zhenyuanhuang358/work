@@ -374,5 +374,29 @@
   "title": null,
   "chars": 0,
   "error": "HTTPError('403 Client Error: Forbidden for url: https://www.tipranks.com/news/why-nvidia-stock-is-plunging-7-in-after-hours-trading-and-what-wall-street-sees-next')"
+ },
+ "https://www.bls.gov/news.release/ppi.nr0.htm": {
+  "url": "https://www.bls.gov/news.release/ppi.nr0.htm",
+  "fetched_at": "2026-11-14T05:57:14+00:00",
+  "file": "pages/www_bls_gov_news_release_ppi_nr0_htm_e6720d.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.bls.gov/news.release/ppi.nr0.htm')"
+ },
+ "https://www.bls.gov/news.release/archives/ppi_11132026.htm": {
+  "url": "https://www.bls.gov/news.release/archives/ppi_11132026.htm",
+  "fetched_at": "2026-11-14T05:57:14+00:00",
+  "file": "pages/www_bls_gov_news_release_archives_ppi_11132026_htm_ed6035.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://www.bls.gov/news.release/archives/ppi_11132026.htm')"
+ },
+ "https://tradingeconomics.com/united-states/producer-price-index": {
+  "url": "https://tradingeconomics.com/united-states/producer-price-index",
+  "fetched_at": "2026-11-14T05:57:14+00:00",
+  "file": "pages/tradingeconomics_com_united_states_producer_price_index_a9d3b9.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
  }
 }
