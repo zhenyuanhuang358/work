@@ -246,7 +246,7 @@
   },
   {
    "date": "2027-03-17",
-   "sep": true
+   "sep": false
   },
   {
    "date": "2027-04-28",
@@ -254,7 +254,7 @@
   },
   {
    "date": "2027-06-09",
-   "sep": true
+   "sep": false
   },
   {
    "date": "2027-07-28",
@@ -262,20 +262,20 @@
   },
   {
    "date": "2027-09-15",
-   "sep": true
+   "sep": false
   },
   {
    "date": "2027-10-27",
    "sep": false
   },
   {
-   "date": "2027-12-08",
-   "sep": true
+   "date": "2027-11-17",
+   "sep": false
   }
  ],
  "fomc_source": {
   "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
-  "fetched_at": "2026-11-12T05:30:34+00:00",
+  "fetched_at": "2026-11-13T15:12:12+00:00",
   "error": null
  }
 }

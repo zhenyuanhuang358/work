@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-12T03:02:29Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-12T09:34:31Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-12 03:02 UTC
+自检器 · 2026-11-12 09:34 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -92,7 +92,7 @@
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
   期权基本面名单：上次复核 2026-11-05（7 天前）
-  运行记录：11 份｜超过 2 天未完成 0 份
+  运行记录：12 份｜超过 2 天未完成 0 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
   62 条｜未关闭 3｜已修有测试 33
@@ -101,7 +101,7 @@
   已交付报告 9 份
 
 [C13] 报告机械检查记录 memory/state/report_checks.jsonl
-  11/07 起改动的报告 2 份｜有检查记录 2
+  11/07 起改动的报告 1 份｜有检查记录 1
 
 [C14] 筛选器产物不变量 tools/screen_check.py
   burry：7 项，FAIL 0
