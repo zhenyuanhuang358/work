@@ -1,0 +1,21 @@
+{
+ "source": "BLS API v2 https://api.bls.gov/publicAPI/v2/timeseries/data/",
+ "series": "WPSFD4 (PPI Final Demand, SA)",
+ "retrieved_at": "2026-11-14T05:57Z",
+ "values": {
+  "M10": 160.254,
+  "M09": 159.699,
+  "M08": 157.482,
+  "M07": 156.834,
+  "M06": 156.675,
+  "M05": 156.874,
+  "M04": 156.061,
+  "M03": 154.393,
+  "M02": 153.204,
+  "M01": 152.468
+ },
+ "yoy_base_2025_10": 150.439,
+ "computed_mom": 0.003475287885334133,
+ "computed_yoy": 0.06524239060350046,
+ "note": "BLS 网页对 Mac/Actions 均 403；API 可访问。10 月 PPI 官方发布：headline m/m +0.3%（预期+0.4%，前值修正+1.4%）、y/y +6.5%（预期+6.6%）；核心 m/m +0.3%、y/y +5.0%（符合预期）——多家报道交叉（Yonhap Infomax / TradingEconomics / Sharecast）"
+}
