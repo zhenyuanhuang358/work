@@ -35,6 +35,14 @@ rows 带 right 字段（C/P）；无 right 字段的旧链按 P 处理。put 与
 报告头也会列出窗口内全部事件；按 2026-11-03 用户决定，只标注提醒，
 不否决、不改分数。日期需按官方日程（BLS/美联储）定期核对维护。
 
+订单流异动标注（2026-11-11 用户决定加入）：用期权链快照自带的当日
+成交量与未平仓量算「量/OI 比」与单合约权利金（成交量 x 中间价 x 100），
+达到阈值的合约记为异动，汇总到标的层面标注在该标的信号上（强/中两档，
+并注明异动权利金集中在 Put 侧还是 Call 侧）。与宏观事件同口径：
+只标注、不否决、不改分数。注意数据局限：链快照没有逐笔成交与买卖
+方向，量/OI 与权利金只是订单流的粗粒度代理指标，深实值合约的权利金
+天然偏大也会触发，标注只作风险提示，不能当作知情资金方向的证据。
+
 风控否决（任何模块都适用）：bid<=0、买卖倒挂、价差/中间价 > 50%、
 卖方候选 OI < 20、索普 EV < -0.05/股；--live 模式下报价超过 30 分钟
 的标的整只否决（离线/回放模式只在报告头标注过期，不否决）。
@@ -200,6 +208,58 @@ def base(c):
             "margin": round(c["margin"])}
 
 
+# ---------------- 订单流异动标注（只标注，不改分、不否决） ----------------
+
+def compute_flow(rows):
+    """从一只标的的原始期权链行算订单流异动。无异动返回 None。
+
+    单合约异动口径（v1 启发式，阈值按 2026-11-10 链快照校准）：
+      中：成交量 >= 500 且 量/OI >= 0.9（OI >= 100）且 权利金 >= $5 万
+      强：成交量 >= 300 且 量/OI >= 2.0（OI >= 100）且 权利金 >= $10 万
+    权利金 = 成交量 x 中间价 x 100；中间价 <= 0 的行不计权利金。
+    方向只按异动合约的权利金在 Put/Call 两侧的分布描述（>= 2 倍为
+    「集中于」某侧），不区分买卖——链快照没有这个信息。
+    """
+    flagged = []
+    for row in rows:
+        vol = row.get("volume") or 0
+        oi = row.get("oi") or 0
+        if oi < 100 or vol <= 0:
+            continue
+        mid = ((row.get("bid") or 0) + (row.get("ask") or 0)) / 2
+        prem = vol * mid * 100 if mid > 0 else 0
+        ratio = vol / oi
+        level = None
+        if vol >= 300 and ratio >= 2.0 and prem >= 100_000:
+            level = "强"
+        elif vol >= 500 and ratio >= 0.9 and prem >= 50_000:
+            level = "中"
+        if level:
+            flagged.append({"expiry": row["expiry"], "strike": row["strike"],
+                            "right": row.get("right") or "P",
+                            "volume": vol, "oi": oi, "ratio": round(ratio, 2),
+                            "premium": round(prem), "level": level})
+    if not flagged:
+        return None
+    flagged.sort(key=lambda x: -x["premium"])
+    put_prem = sum(f["premium"] for f in flagged if f["right"] == "P")
+    call_prem = sum(f["premium"] for f in flagged if f["right"] == "C")
+    if put_prem >= 2 * max(call_prem, 1) and put_prem > 0:
+        side = "异动权利金集中于 Put 侧"
+    elif call_prem >= 2 * max(put_prem, 1) and call_prem > 0:
+        side = "异动权利金集中于 Call 侧"
+    else:
+        side = "异动权利金多空两侧都有"
+    level = "强" if any(f["level"] == "强" for f in flagged) else "中"
+    top = flagged[:2]
+    desc = "；".join(
+        f"{f['expiry'][5:]} {f['strike']:g}{f['right']} 成交 {f['volume']:,.0f} 张"
+        f"（量/OI {f['ratio']} 倍，权利金约 ${f['premium']:,.0f}）" for f in top)
+    note = f"{desc}；{side}（方向按合约类型计，链数据不含买卖方向）"
+    return {"level": level, "note": note, "contracts": flagged,
+            "put_premium": put_prem, "call_premium": call_prem}
+
+
 # ---------------- 风控 + 主流程 ----------------
 
 def load_events(explicit=None):
@@ -248,10 +308,14 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
     j = json.load(open(path))
     updated = j.get("updated_at")
     signals, vetoes, stale_notes = [], [], []
+    flow_by_ticker = {}
     for tkr, r in sorted(j["tickers"].items()):
         rows = r.get("rows") or []
         if not rows:
             continue
+        fl = compute_flow(rows)
+        if fl:
+            flow_by_ticker[tkr] = fl
         s = r["spot"]
         qt = r.get("quote_time_utc")
         qdt = (datetime.fromisoformat(qt).replace(tzinfo=timezone.utc) if qt
@@ -352,12 +416,25 @@ def run(path, bp=None, live=False, haircut=0.85, top=30, events=None, earnings=N
         for sg in signals:
             sg["events"] = [f"{e['date'][5:]} {e['name']}" for e in evs
                             if scan_date.isoformat() <= e["date"] <= sg["expiry"]]
+    # 订单流异动标注（2026-11-11 用户决定）：截断后给上榜信号的标的挂旗，
+    # 只标注、不改分、不否决；汇总一份 flow_alerts 供报告头与下游读取。
+    flow_alerts = []
+    for sg in signals:
+        fl = flow_by_ticker.get(sg["ticker"])
+        if fl:
+            sg["flow"] = {"level": fl["level"], "note": fl["note"]}
+    seen_flow = set()
+    for sg in signals:
+        if sg.get("flow") and sg["ticker"] not in seen_flow:
+            seen_flow.add(sg["ticker"])
+            flow_alerts.append({"ticker": sg["ticker"], **sg["flow"]})
     return {"generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "source_file": os.path.basename(path), "chain_updated_at": updated,
             "mode": "live" if live else "replay", "bp": bp, "ev_haircut": haircut,
             "margin_cap_ratio": cap_ratio, "margin_cap": margin_cap,
             "stale_notes": stale_notes, "window_events": window_events,
             "earnings_vetoes": earnings_vetoes, "margin_vetoes": margin_vetoes,
+            "flow_alerts": flow_alerts,
             "signals_put": signals_put, "signals_call": signals_call,
             "signals": signals, "vetoes": vetoes}
 
@@ -378,6 +455,9 @@ def render_md(res):
     if res.get("margin_vetoes"):
         lines.append(f"- 🔴 保证金否决：{'、'.join(res['margin_vetoes'])} 的信号因单张保证金超过购买力 "
                      f"{res['margin_cap_ratio']:.0%} 已直接否决（见否决区）")
+    if res.get("flow_alerts"):
+        fl_txt = "；".join(f"{a['ticker']}（{a['level']}）" for a in res["flow_alerts"])
+        lines.append(f"- 🌊 订单流异动：{fl_txt}（仅标注提醒，不改分、不否决；口径见各信号下明细）")
     puts = res.get("signals_put")
     calls = res.get("signals_call")
     if puts is None or calls is None:
@@ -401,12 +481,16 @@ def render_md(res):
             lines.append(f"- 理由：{sg['why']}")
             if sg.get("events"):
                 lines.append(f"- ⚠️ 事件窗口：持有期跨 {'、'.join(sg['events'])}")
+            if sg.get("flow"):
+                lines.append(f"- 🌊 订单流异动（{sg['flow']['level']}）：{sg['flow']['note']}")
             lines.append("")
     lines += [f"## 被风控否决（{len(res['vetoes'])} 条，仅列前 15）", ""]
     for v in res["vetoes"][:15]:
         lines.append(f"- {v['ticker']} {v['expiry']} {v['strike']:g}{v.get('right', 'P')}：{v['reason']}")
     lines += ["", "> 口径：IV 由中间价反解；卖方收入按 bid 计；EV 假设真实波动率 = IV x "
-              f"{res['ev_haircut']}。信号只用于研究筛选，下单前必须以交易平台实时报价复核。"]
+              f"{res['ev_haircut']}。订单流标注基于期权链快照的当日成交量与未平仓量"
+              "（量/OI 比与权利金），无逐笔买卖方向，仅为粗粒度提示。信号只用于研究筛选，"
+              "下单前必须以交易平台实时报价复核。"]
     return "\n".join(lines) + "\n"
 
 
