@@ -1,6 +1,6 @@
 {
- "trigger": "scan-2026-11-17T15:46:24+00:00",
- "updated_at": "2026-11-17T15:48:41+00:00",
+ "trigger": "scan-2026-11-17T16:09:30+00:00",
+ "updated_at": "2026-11-17T16:12:23+00:00",
  "market": [
   {
    "time_utc": "2026-11-17T15:00+00:00",
@@ -1716,6 +1716,48 @@
   "EWZ": [],
   "BAC": [
    {
+    "time_utc": "2026-11-17T15:43+00:00",
+    "source": "Yahoo",
+    "headline": "AI Bubble Panic: Wall Street Makes Its Biggest Tech Cut in 20 Years",
+    "summary": "An AI bubble is now the top market risk for fund managers, BofA finds, as optimism on European stocks hits a 9-month high.",
+    "url": "https://finnhub.io/api/news?id=03b8e1ed1d0012ca9091aba19bd62f71e46eda534b41c5c1c8f8f1185be92412"
+   },
+   {
+    "time_utc": "2026-11-17T15:09+00:00",
+    "source": "Yahoo",
+    "headline": "Investors cut tech exposure by the most since 2006: BofA survey",
+    "summary": "Bank of America's (BAC) Fund Managers Survey shows that net tech overweight fell from 37% to 12% — the largest monthly reduction in 20 years. \"The 8:30\" hosts Julie Hyman, Pras Subramanian, and Jake Conley discuss the details.",
+    "url": "https://finnhub.io/api/news?id=fc908060a7c58eb925b03d38413af7726fd3182bcd90b4f84a9ae58c10642a47"
+   },
+   {
+    "time_utc": "2026-11-17T14:36+00:00",
+    "source": "Yahoo",
+    "headline": "It's not just AI — the dollar 'wrecking ball' is leveling gold and bitcoin as the debasement trade unravels",
+    "summary": "While Wall Street watches AI stocks plummet, bets on a hawkish Fed are unraveling the dollar debasement trade.",
+    "url": "https://finnhub.io/api/news?id=05d7fe1fca8f9f7df2d6bbc57e9bacbe6cdae42a546fbe551517bd7dae47f92b"
+   },
+   {
+    "time_utc": "2026-11-17T14:02+00:00",
+    "source": "Yahoo",
+    "headline": "JPMorgan Faces Banking Outage: Will Operational Risks Rise?",
+    "summary": "JPM's banking outage disrupted transactions and payment services, raising concerns over operational resilience, technology costs and customer confidence.",
+    "url": "https://finnhub.io/api/news?id=f14b0391720c44fe72ab19e27ac451d273458038cf3b75ab1bb4c11bc4b90bfc"
+   },
+   {
+    "time_utc": "2026-11-17T14:00+00:00",
+    "source": "Yahoo",
+    "headline": "Bank of America Study: Business Owners Bet on Growth and AI Despite Rising Costs",
+    "summary": "Despite widespread cost pressures, small and mid-sized businesses are continuing to invest in expansion, technology and talent, according to the 2026 Bank of America Business Owner Report. In the face of persistent inflation and economic uncertainty, nearly half (49%) plan to expand their business a",
+    "url": "https://finnhub.io/api/news?id=ecaf86fa6e973065a9bfa1f27f14816de738aa3244e6b3b835fd173ff59a8c89"
+   },
+   {
+    "time_utc": "2026-11-17T13:59+00:00",
+    "source": "Yahoo",
+    "headline": "Berkshire Sells 27.5M Bank of America Shares: Should Investors Worry?",
+    "summary": "Berkshire Hathaway sells about 27.5 million BAC shares, raising concerns over investor sentiment despite the bank's promising earnings growth outlook.",
+    "url": "https://finnhub.io/api/news?id=cf33fd039028911911f5383121ca6c29288530496068319ef37afef3768d73cd"
+   },
+   {
     "time_utc": "2026-11-17T13:29+00:00",
     "source": "Yahoo",
     "headline": "Bank of America vs. JPMorgan Chase: Which Financial Stock Is a Better Buy for 2027?",
@@ -1728,48 +1770,6 @@
     "headline": "Bank of America doubles down on Nvidia ahead of earnings",
     "summary": "Bank of America is not waiting on Nvidia’s CEO search to make its call.",
     "url": "https://finnhub.io/api/news?id=7b392a2fdbc6457bcb59b43bf021536bbd080e561cd8838b67f39503232306d5"
-   },
-   {
-    "time_utc": "2026-11-17T12:48+00:00",
-    "source": "Yahoo",
-    "headline": "Bank of America Sees 39% Upside in AMD, and the Reason Has Nothing to Do With GPUs",
-    "summary": "Key TakeawaysBank of America raised its AMD price target to $700 from $650 on Nov. 12 and kept its Buy rating, 39% above the stock’s $504.",
-    "url": "https://finnhub.io/api/news?id=a3ce1180554252c873470732c049ff7e94378a97f5e260b2acf89ee4e9f024e8"
-   },
-   {
-    "time_utc": "2026-11-17T11:47+00:00",
-    "source": "Yahoo",
-    "headline": "3 Wall Street predictions for the stock market in 2027",
-    "summary": "The big calls on 2027 are trickling in. Here's a good view on the Wall Street vibe.",
-    "url": "https://finnhub.io/api/news?id=a9c500c99494799535298fd6bc23f53f72fd4649905d55a515a9ff1c9c971d46"
-   },
-   {
-    "time_utc": "2026-11-17T11:23+00:00",
-    "source": "Yahoo",
-    "headline": "Betting on chip stocks remains the most crowded trade by far, BofA’s survey finds",
-    "summary": "Investing.com -- Long global semiconductors remains the most crowded trade among investors, according to Bank of America’s November fund manager survey, though the share naming it has fallen sharply from its peak.",
-    "url": "https://finnhub.io/api/news?id=3c4fed6ab8412fe0d0d39ac9f83c14619eea368ed75c45f2f59235261c3e96b4"
-   },
-   {
-    "time_utc": "2026-11-17T11:15+00:00",
-    "source": "Yahoo",
-    "headline": "Bending Spoons (BSP) Stock May Be 16% Undervalued On AI Risk Warning",
-    "summary": "Bending Spoons has seen its share price lose ground over the past month, and the key issue now is whether that pullback lines up with what the business is generating in cash. With a Discounted Cash Flow (DCF) estimate available, investors are increasingly asking if the current market price still ref",
-    "url": "https://finnhub.io/api/news?id=cfdb4b6ac1b89845852df31a4afbbe832c04735af5e754ec954f0aba1b573f0d"
-   },
-   {
-    "time_utc": "2026-11-17T09:47+00:00",
-    "source": "Yahoo",
-    "headline": "Social Security Pays Nothing for the Month You Die, Even if You Die on the 31st. The Deposit That Arrives the Next Month Has to Go Back, and the Bank Returns It Whether or Not the Widow Has Spent It",
-    "summary": "The deposit lands right after the funeral, and the bank can pull it back whether or not the money is still there. One widow's October 31 loss shows how a quiet Treasury process can bounce her bills, and what to do before it does.",
-    "url": "https://finnhub.io/api/news?id=f024d907abb612aeaadc8ae232eec24eb56b8f7d3b8a9b9f6c617b639d515c41"
-   },
-   {
-    "time_utc": "2026-11-17T09:16+00:00",
-    "source": "Yahoo",
-    "headline": "How Investors Are Reacting To Bank of America (BAC) Online Banking Outages",
-    "summary": "Major U.S. banks, including Bank of America, recently faced repeated online and mobile outages that disrupted customer access to accounts, transfers and check cashing, raising fresh questions about the reliability of core digital infrastructure. These recurring service interruptions put a spotlight ",
-    "url": "https://finnhub.io/api/news?id=04767eae4bdce5c5a1fb3f15cc2f46baf6a178067708896b0d42932dfb3abd57"
    }
   ],
   "CLF": [
@@ -2179,6 +2179,27 @@
   ],
   "BMY": [
    {
+    "time_utc": "2026-11-17T14:13+00:00",
+    "source": "Yahoo",
+    "headline": "Can Regeneron Stock Hit $1,400?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=47caeb09c3274548716f38b0f3b71837d3a307862c4d2e0438f7c2089bbf240f"
+   },
+   {
+    "time_utc": "2026-11-17T14:13+00:00",
+    "source": "Yahoo",
+    "headline": "Should You Buy Pfizer Stock For Its Cash?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=c9257373b28e5ffad36e2b2c12aa9642f465206b5d161e3749c32e731fda467a"
+   },
+   {
+    "time_utc": "2026-11-17T13:00+00:00",
+    "source": "Yahoo",
+    "headline": "Here is What to Know Beyond Why Bristol Myers Squibb Company (BMY) is a Trending Stock",
+    "summary": "Recently, Zacks.com users have been paying close attention to Bristol Myers (BMY). This makes it worthwhile to examine what the stock has in store.",
+    "url": "https://finnhub.io/api/news?id=e75280d77eb20215f3c12ec80bc603f7deb0cdc9c3f6febb10217cb66621f6aa"
+   },
+   {
     "time_utc": "2026-11-17T12:19+00:00",
     "source": "Yahoo",
     "headline": "Merck Stock's $1.3 Billion China Problem Goes Quiet",
@@ -2212,27 +2233,6 @@
     "headline": "One Unsettled Question Sits Under Pfizer Stock",
     "summary": "For questions about this article or underlying research, email help@trefis.com.",
     "url": "https://finnhub.io/api/news?id=548ad14b435f4474e7ace55f8d9d98eb48bd68833001bacf5b9b3ec0f0477b8a"
-   },
-   {
-    "time_utc": "2026-11-15T00:16+00:00",
-    "source": "Yahoo",
-    "headline": "How Investors Are Reacting To Bristol Myers Squibb (BMY) R&D Leadership Overhaul",
-    "summary": "Bristol Myers Squibb announced that Cristian Massacesi will lead a unified, end-to-end research and development organization from January 2027, with current research chief Robert Plenge staying in an advisory role through March 2027 to support the transition. Pulling discovery and clinical developme",
-    "url": "https://finnhub.io/api/news?id=5d57a55afc5e66930136999b9fe68c7556e99f86be548c344155cc625cb03300"
-   },
-   {
-    "time_utc": "2026-11-14T20:35+00:00",
-    "source": "Yahoo",
-    "headline": "5 Dividend Stocks With High Yields That Are Safer Than You Might Think",
-    "summary": "A high yield is a sign that investors are worried about a business, but sometimes that concern is overwrought.",
-    "url": "https://finnhub.io/api/news?id=041255bd17d2a4168371749b82875b282091d0caed955c3d8da41f3e452f92dc"
-   },
-   {
-    "time_utc": "2026-11-14T15:50+00:00",
-    "source": "Yahoo",
-    "headline": "How Many Shares of Pfizer, Merck or Bristol Myers Squibb Pay $1,000 a Month in Dividends?",
-    "summary": "Key TakeawaysAt today’s prices, $1,000 a month in dividends takes 6,977 Pfizer shares (about $201,600), 4,762 Bristol Myers Squibb shares (about $302,100) or 3,530 Merck shares (about $521,600). Pfizer’s 6.",
-    "url": "https://finnhub.io/api/news?id=19f6393d6e978cb426997a865a0d52aa90b13885a3362388de88287c83d735df"
    }
   ],
   "WFC": [
@@ -2309,6 +2309,13 @@
     "url": "https://finnhub.io/api/news?id=05be02136684e325db6bad8776991d040407b7cabb3ecf5637bf241c890f5a22"
    },
    {
+    "time_utc": "2026-11-17T11:29+00:00",
+    "source": "Yahoo",
+    "headline": "Is The Bond Market Wrong About Fed Hikes?",
+    "summary": "For questions about this article or underlying research, email help@trefis.com.",
+    "url": "https://finnhub.io/api/news?id=fa4ccea9429d86958c6b03b19e72b049e85a9df7692fbb2cec968f3d21fa3f1b"
+   },
+   {
     "time_utc": "2026-11-17T10:11+00:00",
     "source": "Yahoo",
     "headline": "Market Chatter: Citigroup Targets $5 Trillion in Wealth Assets Held by Clients at Rivals, Rules Out Major Acquisitions",
@@ -2342,13 +2349,6 @@
     "headline": "Top Enterprise Software Stocks to Watch, According to Citi",
     "summary": "Investing.com -- Citi analysts have identified their preferred enterprise software stocks as the sector navigates a shifting landscape where the burden of proof for artificial intelligence-driven growth has intensified.",
     "url": "https://finnhub.io/api/news?id=9bc4d6fd443ef2004b374953b407ad23ba0b3af0b5e78788ef5fa0ed17b14a09"
-   },
-   {
-    "time_utc": "2026-11-16T17:34+00:00",
-    "source": "Yahoo",
-    "headline": "Citi names top infrastructure software stocks amid rising AI standards",
-    "summary": "Investing.com -- Infrastructure software companies with tangible AI-driven growth and durable distribution advantages should be prioritized by investors as the burden of proof for artificial intelligence benefits has increased following a volatile third-quarter earnings season, according to a Citi n",
-    "url": "https://finnhub.io/api/news?id=7a2d9400d7edb2194592a4cb5dda6498b90f70b3a5c908cd13d4699b2c640910"
    }
   ],
   "DKNG": [
@@ -2673,6 +2673,41 @@
   ],
   "CMCSA": [
    {
+    "time_utc": "2026-11-17T14:40+00:00",
+    "source": "Yahoo",
+    "headline": "Is Charter Stock Worth The Wait?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=f5e759fb6cfa5a393568d2e256e6a22f4a0126de2464f891535bbfe75b36338f"
+   },
+   {
+    "time_utc": "2026-11-17T14:40+00:00",
+    "source": "Yahoo",
+    "headline": "What Gave AT&T Stock Its Edge Over Verizon?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=338d9a52e81d2ac079a8a1393817060ccb7da0e388e5e7caf618e126282ceb6e"
+   },
+   {
+    "time_utc": "2026-11-17T14:13+00:00",
+    "source": "Yahoo",
+    "headline": "What Could Lift T-Mobile Stock?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=416757cac13694f5787d26260fbb6e080acf8c8431eb47b048815521cf6c15b7"
+   },
+   {
+    "time_utc": "2026-11-17T14:13+00:00",
+    "source": "Yahoo",
+    "headline": "Which Dates Could Move AT&T Stock Most?",
+    "summary": "Today's big story: Could Nvidia Stock Fall 50%? Follow The Cash.",
+    "url": "https://finnhub.io/api/news?id=19eae836fd5b8da1af38282ac8a80973e3a1e49ac9135bd171a7d4b6796a8004"
+   },
+   {
+    "time_utc": "2026-11-17T13:00+00:00",
+    "source": "Yahoo",
+    "headline": "Comcast Corporation (CMCSA) Is a Trending Stock: Facts to Know Before Betting on It",
+    "summary": "Recently, Zacks.com users have been paying close attention to Comcast (CMCSA). This makes it worthwhile to examine what the stock has in store.",
+    "url": "https://finnhub.io/api/news?id=7e45df0aedb740c097bd475bbec5b4f248ad508a0a4c80b31a352445f9248b84"
+   },
+   {
     "time_utc": "2026-11-17T12:19+00:00",
     "source": "Yahoo",
     "headline": "Netflix Stock Down 47%: Too Early To Buy?",
@@ -2692,41 +2727,6 @@
     "headline": "Why Netflix Stock Is At A One-Year Low",
     "summary": "Our Nov 16 piece, Can Netflix Stock Fall 50%, found that Netflix (NFLX) has fallen 50% or more from high to low in three of the 15 market shocks it has traded through. That is the crash question. The next question is the one owners live with every day: what is the real risk now, with no shock in sig",
     "url": "https://finnhub.io/api/news?id=4d7e552fd80ac242f64cae25b1b33a78a37f90096bdbf6cff1728f84f64dc11b"
-   },
-   {
-    "time_utc": "2026-11-17T07:38+00:00",
-    "source": "Benzinga",
-    "headline": "Disney Says Continued To See Headwinds In Q4 From Lower International Attendance At Domestic Parks; Now Expect Efficiency Program To Realize Annual Run-Rate Operating Expense Savings Of ~$3B By FY29; Efficiencies Will Be Used Primarily To Fund Future Growth, Expect Portion To Drop To Bottom Line Over Time",
-    "summary": "– Reuters ",
-    "url": "https://finnhub.io/api/news?id=5838d5511c7a4f9caaeb0dc103e4b250facd5a4c20983cba27108c74ade53154"
-   },
-   {
-    "time_utc": "2026-11-16T20:36+00:00",
-    "source": "SeekingAlpha",
-    "headline": "The Winners Inside SCHD - November 2026",
-    "summary": "The bull case for SCHD: 34 holdings screen at least 10% undervalued, with expected long-term returns above 10%; its YTD lead over SPY tops 20%.",
-    "url": "https://finnhub.io/api/news?id=c073735c337135254275f5275d9ff4c0cb3f56e0208a335369f819a0db8f5c97"
-   },
-   {
-    "time_utc": "2026-11-16T15:28+00:00",
-    "source": "Yahoo",
-    "headline": "Comcast Corp (CMCSA) Underperforms in Q3 as Market Weighs Increasing Broadband Competition",
-    "summary": "Hotchkis & Wiley, an investment management company, released its third-quarter 2026 investor letter for the “Focused Global Value Fund.” The letter can be downloaded here. US quarterly earnings increased over 30% year-over-year, a strong performance amid a non-recessionary recovery, while internatio",
-    "url": "https://finnhub.io/api/news?id=e401a1afc59e66d481f04befff73b808c24bca11aea08fa5ae582d404b293e8d"
-   },
-   {
-    "time_utc": "2026-11-16T15:00+00:00",
-    "source": "Yahoo",
-    "headline": "Comcast Business Delivers the Most Reliable Connectivity for Small Businesses, New Signal65 Report Finds",
-    "summary": "PHILADELPHIA, November 16, 2026--Comcast Business Delivers the Most Reliable Connectivity for Small Businesses, New Signal65 Report Finds",
-    "url": "https://finnhub.io/api/news?id=dea91f4a942b1e3557fa3f9eea70972e8e1322d96a7578a2144415b57f8128ce"
-   },
-   {
-    "time_utc": "2026-11-16T13:59+00:00",
-    "source": "Yahoo",
-    "headline": "The Cable Bill, the Car Radio and the Local News: $90,000 Across These 3 Media Stocks Pays $4,545 a Year",
-    "summary": "Your cable bill, car radio and local newscast may all send money to three dividend-paying media companies. Only one of them looks stretched, and its fat payout depends on election years, heavy debt and a shrinking audience.",
-    "url": "https://finnhub.io/api/news?id=e8f49f8325e65e9762e22f71927b487cb9b2714d2cfe5e13b87a3a27b5bb2282"
    }
   ],
   "PEP": [
