@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-17T16:13:45+00:00",
+ "updated_at": "2026-11-17T16:22:06+00:00",
  "schedule": [
   {
    "time": "2026-11-16T05:00:00-05:00",
@@ -192,6 +192,13 @@
    "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOcmIyS0RLbzZzaFMtWDlfa2liQ1ZPX21Jb0djTEViR3dkeVhZNERsRkxLY2VvZFhpdThQVHdPOEhXQk9TTWh1Q0dJZ0xzQjNfbld1QUhZODlXdVRQVHRwbnhLZy1sREEyRkZMMzRwcEN5OGZ0M19VRUEzR3FsOGRJY3BPYVI2anFLaWlVNGNmVFppeG1YTkFKUmk0bVhOMnRla19fUVNaQ1E4Vm1RUjVaQTRIbUgyMnBMVWZ5ODFvd0o4NTdnZGlzYjBlV3MzaDVvbGU2bEhBNA?oc=5"
   },
   {
+   "speaker": "Waller",
+   "time_utc": "2026-11-17T15:27+00:00",
+   "source": "Investing.com",
+   "headline": "Fed’s Waller backs responsible payment innovation as tokenization scales - Investing.com",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNcGZwVWdxaWlpcFdnNFphNl9JQTBuQV9VMjd6QzZSeEhDbXNPam1GOTFYQVRoeHFOQ2hnZGVDNnVneHozbmFTUmw4T0laeVhiWEh3YkV6VUI0WWlwcjg4MEE4bHZFaHlzYTJxdFR1V0wtY3pyNS1mNGNOLVZvVjF2TWlwaVlDNE15b3JnWVI2eVNheDJ1NEtQbkFHOC0xNlF4eWp2cVUyVTV3emdxR05SU2dxMWpjeHJxSW9xbFFxOGU?oc=5"
+  },
+  {
    "speaker": "Hammack",
    "time_utc": "2026-11-17T15:07+00:00",
    "source": "Mezha.net",
@@ -211,13 +218,6 @@
    "source": "Breakingthenews.net",
    "headline": "Hammack urges Fed to plan for Treasury market stress - Breakingthenews.net",
    "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQVzMyV2tTRzNlYjlDZ0lXbU1mMmRkUDQ3eUo0b3Z1QkpXYTJMcEgzdFh1N1QxckR4aXEwSFlVLTR0dDFfRk5OZXNqTHktbEtLb0NadExSb0w2U2JlaVA0Q3dOWWUzTFh4bEtMWW9rTEdLSTVURURxdTRLUldwLTEzUk05V3RBdnlUS2ZYbzBDX0FBSVptNlU3NzBlVWtzZw?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-17T14:55+00:00",
-   "source": "BigGo Finance",
-   "headline": "Fed's Waller: \"Payment Innovation Requires Private-Sector Partnership… Traditional Payment Rails Also Play a Key Role\" - BigGo Finance",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5neVBBallmUVlBY1B2ZXM0WVNfUGdFZ1BXOF9Wbkx4T2h2U0puSGUxa0hhbFhPX0hnOElucmlvMWJhOHlDU2R6bG9LQ25tcmVNMHBmbVNOel80ZVg2ZGExN2hVM1E2N3Bxc3pIMEFGemFoQ2hIa3c?oc=5"
   },
   {
    "speaker": "Hammack",
@@ -325,13 +325,6 @@
    "url": "https://finnhub.io/api/news?id=0c2c18443f5e61f1e8845cb5e2b8a0d2df44808e4ff2a1092265dc285dfa818d"
   },
   {
-   "speaker": "Barr",
-   "time_utc": "2026-11-17T01:05+00:00",
-   "source": "FindArticles",
-   "headline": "Fed Governor Barr Flags AI Financing Web as Stability Risk - FindArticles",
-   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNMlJFekxWcFpiblk4WkNQN1NCYmE3UlRob1BVOFdNb2VxbGk4dkQxZjlJUmg0Q3B5aHVMaE82dEExUWFiSlRrSEZPVzJMN1o4T1llWmctOF9oQzVSZjFvSzZBRGstaTRrVlM1Sm1VM2tuSUdtaXUzY0VmMHA4STFQQ2RVdlNndmN2UjRXdDAtUWJWaEpFZWfSAZYBQVVfeXFMTTJSRXpMVnBaYm5ZOFpDUDdTQmJhN1JUaG9QVThXTW9lcWxpOHZEMWY5SVJoNENweWh1TGhPNnRBMVFhYkpUa0hGT1cyTDdaOE9ZZVpnLThfaEM1UmYxb0s2QURrLWk0a1ZTNUptVTNrbklHbWl1M2NFZjBwOEkxUENkVXZTZ3ZjdlI0V3QwLVFiVmhKRWVn?oc=5"
-  },
-  {
    "speaker": "Williams",
    "time_utc": "2026-11-17T00:52+00:00",
    "source": "CoinMarketCap",
@@ -375,6 +368,13 @@
   },
   {
    "speaker": "Barr",
+   "time_utc": "2026-11-16T12:04+00:00",
+   "source": "Startup Fortune",
+   "headline": "Fed's Barr warns AI agents could turn bank runs into minutes-long events - Startup Fortune",
+   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQRTVwTnNZVkowT2tNOWdtZkFhejF3b2tjWm1PX1h6S2NRT29PaTVPdmpGWTVRT0QyN09XUzE2UDZwNzVwMmtlMXluRUx2b1BnMXcxOF9qOFRQQlRHUTBkOUMxazlMSGU0NmNHQUJJbjQ2RWZmX0tJTml2YW9nZnFkaklfMy1kUjJmV3Q0RUF6dVd0YWEwY0RNTGlWNl90OUpB?oc=5"
+  },
+  {
+   "speaker": "Barr",
    "time_utc": "2026-11-16T10:00+00:00",
    "source": "Bloomberg.com",
    "headline": "Fed’s Barr Says AI Agents Could Fuel Future Bank Runs - Bloomberg.com",
@@ -396,5 +396,5 @@
   }
  ],
  "errors": [],
- "trigger": "scan-2026-11-17T16:09:30+00:00"
+ "trigger": "scan-2026-11-17T16:18:11+00:00"
 }
