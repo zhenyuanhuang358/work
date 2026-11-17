@@ -1,8 +1,8 @@
 {
- "updated_at": "2026-11-13T15:09:11+00:00",
+ "updated_at": "2026-11-17T15:47:26+00:00",
  "window": [
-  "2026-11-13",
-  "2027-01-12"
+  "2026-11-17",
+  "2027-01-16"
  ],
  "tickers": {
   "INTC": {
@@ -162,7 +162,12 @@
   },
   "BAC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-15",
+     "hour": "bmo"
+    }
+   ],
    "errors": []
   },
   "CLF": {
@@ -232,12 +237,22 @@
   },
   "WFC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-14",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "C": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-14",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "DKNG": {
@@ -297,12 +312,7 @@
   },
   "PDD": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-16",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "MP": {
@@ -337,12 +347,7 @@
   },
   "BIDU": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-16",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "NEM": {
