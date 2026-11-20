@@ -1,8 +1,8 @@
 {
- "updated_at": "2026-11-19T18:53:09+00:00",
+ "updated_at": "2026-11-20T16:53:02+00:00",
  "window": [
-  "2026-11-19",
-  "2027-01-18"
+  "2026-11-20",
+  "2027-01-19"
  ],
  "tickers": {
   "INTC": {
@@ -112,22 +112,12 @@
   },
   "BABA": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-19",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "WMT": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-19",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "AAL": {
@@ -327,7 +317,12 @@
   },
   "SCHW": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-19",
+     "hour": "bmo"
+    }
+   ],
    "errors": []
   },
   "DVN": {
