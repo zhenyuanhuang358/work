@@ -30,20 +30,28 @@ jobs:
 
       - name: Resolve tickers
         id: tickers
+        env:
+          INPUT_TICKERS: ${{ inputs.tickers }}
         run: |
-          TICKERS="${{ github.event.inputs.tickers }}"
-          if [ -z "$TICKERS" ] && [ -f research_fetch_trigger.json ]; then
-            TICKERS=$(python3 -c "
-import json
-d = json.load(open('research_fetch_trigger.json'))
-print(','.join(d.get('tickers', [])))
-")
-          fi
-          echo "list=$TICKERS" >> "$GITHUB_OUTPUT"
-          echo "Tickers: $TICKERS"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          tickers = os.environ.get("INPUT_TICKERS", "")
+          trigger = Path("research_fetch_trigger.json")
+          if not tickers and trigger.is_file():
+              tickers = ",".join(json.loads(trigger.read_text(encoding="utf-8")).get("tickers", []))
+          if "\r" in tickers or "\n" in tickers:
+              raise SystemExit("Tickers must be a single comma-separated line.")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              print(f"list={tickers}", file=output)
+          PY
 
       - name: Fetch financial data
-        run: python3 scripts/fetch_research_data.py "${{ steps.tickers.outputs.list }}"
+        env:
+          TICKERS: ${{ steps.tickers.outputs.list }}
+        run: python3 scripts/fetch_research_data.py "$TICKERS"
 
       - name: Commit cache
         run: |
