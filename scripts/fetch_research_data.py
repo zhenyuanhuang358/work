@@ -13,6 +13,7 @@ Usage:
 
 import sys
 import json
+import math
 import os
 import re
 import time
@@ -276,6 +277,18 @@ def fetch(ticker: str) -> dict:
     return fetch_via_yfinance(ticker)
 
 
+def _has_research_data(data: dict) -> bool:
+    def has_number(value):
+        if isinstance(value, dict):
+            return any(has_number(item) for item in value.values())
+        return type(value) in (int, float) and math.isfinite(value)
+
+    return any(
+        has_number(data.get(section))
+        for section in ("market_data", "financials", "annual_income", "annual_balance", "market_data_eastmoney")
+    )
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -290,13 +303,20 @@ def main():
     for ticker in tickers:
         print(f"\nFetching {ticker}...")
         data = fetch(ticker)
+        if "error" not in data and not _has_research_data(data):
+            data["error"] = "Provider returned no usable market or financial data"
         slug = re.sub(r"[^A-Za-z0-9]", "_", ticker).lower()
         path = f"research_cache/{slug}.json"
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2, default=str)
-        status = "✓" if "error" not in data else f"✗ {data['error']}"
-        print(f"  {status} → {path}")
-        results.append({"ticker": ticker, "path": path, "ok": "error" not in data})
+        ok = "error" not in data
+        entry = {"ticker": ticker, "path": path, "ok": ok}
+        if ok:
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2, default=str)
+            print(f"  ✓ → {path}")
+        else:
+            entry["error"] = data["error"]
+            print(f"  ✗ {data['error']} (cache not overwritten)")
+        results.append(entry)
         time.sleep(0.5)  # polite rate-limiting
 
     # Write manifest so the agent can check what's cached
@@ -307,6 +327,8 @@ def main():
     with open("research_cache/_manifest.json", "w") as f:
         json.dump(manifest, f, indent=2)
     print(f"\nDone. {sum(r['ok'] for r in results)}/{len(results)} succeeded.")
+    if any(not entry["ok"] for entry in results):
+        sys.exit(1)
 
 
 if __name__ == "__main__":
