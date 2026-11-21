@@ -49,11 +49,13 @@ jobs:
           PY
 
       - name: Fetch financial data
+        id: fetch_data
         env:
           TICKERS: ${{ steps.tickers.outputs.list }}
         run: python3 scripts/fetch_research_data.py "$TICKERS"
 
       - name: Commit cache
+        if: ${{ !cancelled() && (steps.fetch_data.outcome == 'success' || steps.fetch_data.outcome == 'failure') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
