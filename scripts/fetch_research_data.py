@@ -14,6 +14,7 @@ Usage:
 import sys
 import json
 import math
+from numbers import Integral
 import os
 import re
 import time
@@ -39,16 +40,21 @@ def _now() -> str:
 
 
 def _safe(val):
-    """Convert pandas/numpy types to plain Python for JSON serialisation."""
-    if val is None or val != val:  # NaN check
+    """Convert provider numeric values without truncating fractions."""
+    if val is None or isinstance(val, bool):
         return None
-    try:
+    if isinstance(val, Integral):
         return int(val)
-    except (TypeError, ValueError):
+    if isinstance(val, str):
         try:
-            return float(val)
-        except (TypeError, ValueError):
-            return str(val)
+            return int(val)
+        except ValueError:
+            pass
+    try:
+        number = float(val)
+    except (TypeError, ValueError, OverflowError):
+        return str(val)
+    return number if math.isfinite(number) else None
 
 
 # ── yfinance fetcher (HK / US / some HK-listed China co's) ───────────────────
