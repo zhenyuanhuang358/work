@@ -1,143 +1,33 @@
 {
- "updated_at": "2026-11-20T16:54:17+00:00",
+ "updated_at": "2026-11-23T15:39:11+00:00",
  "schedule": [
   {
-   "time": "2026-11-16T05:00:00-05:00",
-   "speaker": "Barr",
-   "title": "FOMC Member Barr Speaks"
-  },
-  {
-   "time": "2026-11-16T09:05:00-05:00",
+   "time": "2026-11-23T16:00:00-05:00",
    "speaker": "Williams",
    "title": "FOMC Member Williams Speaks"
-  },
-  {
-   "time": "2026-11-16T12:00:00-05:00",
-   "speaker": "Warsh",
-   "title": "Fed Chairman Warsh Speaks"
-  },
-  {
-   "time": "2026-11-16T14:15:00-05:00",
-   "speaker": "Hammack",
-   "title": "FOMC Member Hammack Speaks"
-  },
-  {
-   "time": "2026-11-16T18:10:00-05:00",
-   "speaker": "Barkin",
-   "title": "FOMC Member Barkin Speaks"
-  },
-  {
-   "time": "2026-11-16T18:30:00-05:00",
-   "speaker": "Goolsbee",
-   "title": "FOMC Member Goolsbee Speaks"
-  },
-  {
-   "time": "2026-11-17T07:30:00-05:00",
-   "speaker": "Musalem",
-   "title": "FOMC Member Musalem Speaks"
-  },
-  {
-   "time": "2026-11-17T09:10:00-05:00",
-   "speaker": "Waller",
-   "title": "FOMC Member Waller Speaks"
-  },
-  {
-   "time": "2026-11-17T09:30:00-05:00",
-   "speaker": "Hammack",
-   "title": "FOMC Member Hammack Speaks"
-  },
-  {
-   "time": "2026-11-17T14:25:00-05:00",
-   "speaker": "Williams",
-   "title": "FOMC Member Williams Speaks"
-  },
-  {
-   "time": "2026-11-18T12:15:00-05:00",
-   "speaker": "Daly",
-   "title": "FOMC Member Daly Speaks"
-  },
-  {
-   "time": "2026-11-18T13:35:00-05:00",
-   "speaker": "Barr",
-   "title": "FOMC Member Barr Speaks"
-  },
-  {
-   "time": "2026-11-18T14:30:00-05:00",
-   "speaker": "Williams",
-   "title": "FOMC Member Williams Speaks"
-  },
-  {
-   "time": "2026-11-18T16:15:00-05:00",
-   "speaker": "Kashkari",
-   "title": "FOMC Member Kashkari Speaks"
-  },
-  {
-   "time": "2026-11-19T08:50:00-05:00",
-   "speaker": "Hammack",
-   "title": "FOMC Member Hammack Speaks"
-  },
-  {
-   "time": "2026-11-19T09:25:00-05:00",
-   "speaker": "Jefferson",
-   "title": "FOMC Member Jefferson Speaks"
-  },
-  {
-   "time": "2026-11-19T12:30:00-05:00",
-   "speaker": "Goolsbee",
-   "title": "FOMC Member Goolsbee Speaks"
-  },
-  {
-   "time": "2026-11-19T14:15:00-05:00",
-   "speaker": "Barr",
-   "title": "FOMC Member Barr Speaks"
-  },
-  {
-   "time": "2026-11-19T16:00:00-05:00",
-   "speaker": "Barkin",
-   "title": "FOMC Member Barkin Speaks"
-  },
-  {
-   "time": "2026-11-19T18:30:00-05:00",
-   "speaker": "Paulson",
-   "title": "FOMC Member Paulson Speaks"
-  },
-  {
-   "time": "2026-11-20T08:25:00-05:00",
-   "speaker": "Waller",
-   "title": "FOMC Member Waller Speaks"
-  },
-  {
-   "time": "2026-11-20T12:00:00-05:00",
-   "speaker": "Trump",
-   "title": "President Trump Speaks"
-  },
-  {
-   "time": "2026-11-20T12:15:00-05:00",
-   "speaker": "Cook",
-   "title": "FOMC Member Cook Speaks"
   }
  ],
  "usd_high": [
   {
-   "time": "2026-11-17T08:30:00-05:00",
-   "title": "Core Retail Sales m/m",
-   "forecast": "0.4%",
-   "previous": "0.9%"
+   "time": "2026-11-25T08:30:00-05:00",
+   "title": "Core PCE Price Index m/m",
+   "forecast": "0.3%",
+   "previous": "0.3%"
   },
   {
-   "time": "2026-11-17T08:30:00-05:00",
-   "title": "Retail Sales m/m",
-   "forecast": "0.1%",
-   "previous": "0.8%"
-  },
-  {
-   "time": "2026-11-18T14:00:00-05:00",
-   "title": "FOMC Meeting Minutes",
-   "forecast": "",
-   "previous": ""
+   "time": "2026-11-25T08:30:00-05:00",
+   "title": "Prelim GDP q/q",
+   "forecast": "3.5%",
+   "previous": "3.4%"
   }
  ],
  "board": [
+  {
+   "time_utc": "2026-11-20T17:15+00:00",
+   "title": "Cook, The U.S. Economy in Global Context",
+   "where": "Speech At the XXIX Annual Conference of the Central Bank of Chile, Santiago, Chile",
+   "url": "https://www.federalreserve.gov/newsevents/speech/cook20261120a.htm"
+  },
   {
    "time_utc": "2026-11-20T13:25+00:00",
    "title": "Waller, Opening Remarks",
@@ -179,351 +69,24 @@
    "title": "Jefferson, New Technology, Old Questions: Productivity Puzzles  and the Macroeconomy ",
    "where": "Speech At the University of California, San Diego Economic Roundtable, San Diego, California",
    "url": "https://www.federalreserve.gov/newsevents/speech/jefferson20261113a.htm"
-  },
-  {
-   "time_utc": "2026-11-12T15:00+00:00",
-   "title": "Barr, American Inequality and the Future of AI ",
-   "where": "Speech At Yale University, New Haven, Connecticut",
-   "url": "https://www.federalreserve.gov/newsevents/speech/barr20261112a.htm"
-  },
-  {
-   "time_utc": "2026-11-10T20:30+00:00",
-   "title": "Bowman, The U.S. Economy and Considerations for Monetary Policy",
-   "where": "Speech At the C. Peter McColough Series on International Economics Council on Foreign Relations, Washington, D.C.",
-   "url": "https://www.federalreserve.gov/newsevents/speech/bowman20261110a.htm"
   }
  ],
  "headlines": [
   {
-   "speaker": "Trump",
-   "time_utc": "2026-11-20T15:33+00:00",
-   "source": "investingLive",
-   "headline": "Bessent says Trump and Xi saw robust discussion on trade policy, AI - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPY0EtUzdLOWktNkJxZU55MDJpamRQcXY0YmxjWW81ekQ3S2xYX3BNRjVPMmFuQV9ZQk9MemRVdGJydTg4OWo2aVJ5VTh6ejBlUUwtdXJpb2pJMHllVWdMdTUwdmh2ZVdUUmVzOFQ5ZncxcEdqSDRkN09XcnQxZXZCTVZWZm5JVThMUVNSMTVrb1ltc0hpTGcycG81T3MtM0U?oc=5"
-  },
-  {
-   "speaker": "Cook",
-   "time_utc": "2026-11-20T09:48+00:00",
-   "source": "Semafor",
-   "headline": "Fed’s Lisa Cook speaks ahead of hearing - Semafor",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQTZpSUNTU2lOTWRvQWhJb016bWZzUGY4UXpQajFfX3dycHVwNTJuRGVhX3FDaTZvbmptdG9NRGxEbkdkS1YyVHV5MXNBaDlwWWR4UllRb0o4ZTh0dW45QTlnTFhLYkU4U01Cd21RZ2pMdXNjOGY1cVo5NU9IbkVQcXVMUkt6Mlg0?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-20T09:23+00:00",
-   "source": "www.tmgm.com",
-   "headline": "Fed's Paulson: Clear communication of perspectives is needed - www.tmgm.com",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPY0IxTEtzNXdRcUVIUXVwX0tsNEtmdy1wamJPT3ZSWEVPZnYxV0hnTC1pT0JnbG1HemROaUtlVnFwNklubFNZVUF3cmJSYTJJd21mV05Hb1d0MzJTOEFOX2RucTNsRFFXQllFcjJGLUp0di10MjlROWxUVWVTc2xVUDRyNmptZzlHeGMzY2JWb0FvZWdlSHZHNnRYaS1ZY0ZEUXdNLW9SVDVBazJWYnhlVHk2UWFtZTRUdG5JS3VUd05ORFdncFE?oc=5"
-  },
-  {
-   "speaker": "Barkin",
-   "time_utc": "2026-11-20T05:55+00:00",
-   "source": "WSJ",
-   "headline": "Barkin Says Appropriate Direction of Monetary Policy Relatively Straightforward - WSJ",
-   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOMFNTVlVFX2VicmdHVjZRLTRvZHgtQXotblhUV2xRMmNfWjVudTdFUGRZM2pzQkVzTlFoS00zZlBiaU1adENXX3BqN3dhN2xud3Qzdl9SUWRfeVRqOGlkQ2JBSmtkamxfSEhxM1NFOG1pN1piWEpuMFNEYnNHQVBTOEM2REtucnN4T3BQNUVZSExkQVRGaFdUQ3I1WjRzMjZQRF9ORk9vaFAxMHdZNGhwNjQwcVBzblFIelZWd0ZDQzhaNG1Idi0zcmFSWXI?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-20T04:10+00:00",
-   "source": "IndexBox",
-   "headline": "Fed's Anna Paulson: More Rate Hikes Needed to Curb Inflation - News and Statistics - IndexBox",
-   "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOZmlfRkJ5OHJXeGdBWUVraEdfUGpJblE2N0lfaHFLazQzYVViZlZGZUlFUHVNSXpteG5HblMtaDRpUmNkVldGeENQN0R6OWR1RHJHNTd0V0xqbUxwUmZqQ0YwVGxSTE8xMldDNVFOSzhxc1JDSS1EZ09ib0t0SmNmQzhhVlM0Ulo3WF9SOFRvbDZDMnRqcTVEU3g2c0RYX0szeXc?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-20T04:09+00:00",
-   "source": "investingLive",
-   "headline": "Paulson tells Q&A the Fed has more tightening to do, after a speech with no rate steer - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNeENSV0dZalo5SDg2ZmVFNTlSeklOcWxFNWVrTmpQY2s2SGdKdm9lM3d4TmpjVjlyUWR6TFRHSUgyRVltdmNXbXB5Z0tMZ09heU1wTWZtZ015d1pVWDJ6TnUza0xnMUFaNkVwXzd5cEpRVTMxQ1MyZDNLYmhWZllKZ21GTmhocWUzQVI2R1dSbjZSMENpSWJ1UFVFVHBNSnJPSjFhY19lTDNCYUFrV2MydFRVYjdWMEhIbzg3SFB6aVVFdFF1?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-20T01:06+00:00",
-   "source": "BigGo Finance",
-   "headline": "Fed Governor Waller Hints at 'Shock Therapy'… Odds of a Big December Rate Hike Triple - BigGo Finance",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE82ellSMTIwYnJkM0NOMTJMNHBMX3N3WjJ1MGZMOUtlLVp3dFpyam9TNGd3MjZIOFkyQmc1VWQ2d0pzR3J3ekdxMnlTalFpWmpXQ0hmOXBzUTB3cWduUzZHYl9qdFR4eFN6cWRPWk4ydGFmOV9JTVE?oc=5"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-20T01:05+00:00",
-   "source": "BigGo Finance",
-   "headline": "Fed Vice Chair Jefferson: AI Infrastructure Boom Is Propping Up Inflation for Now, Productivity Dividend Will Have to Wait - BigGo Finance",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1BNXpiTW9vWkl4VVFfemtzQ0lzSDlidk84SF8tM1JweS1OREVacTFpWVlzWVBHYTQxcDRLN1BHc2xYQWpSSklweHdaSUJtWHc1VEExYkxnNFhyYzlIVGotVUMwd1d6cFRFV3libV9ITEpORzJmc0E?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-19T23:49+00:00",
-   "source": "Merced Sun-Star",
-   "headline": "Fed's Paulson says understanding, not guidance, drives effective communication - Merced Sun-Star",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNbjIycU5ad0lIUG5GUk9QeGpIYU11MmR4RGVLREFjMzFjR0J1WjhxV1RxQ1dINzBqWXVSQjZ4WUJJMTR5alNQc0ltMnUxczlaRFNZWHV3ZXhPSzdfeGhXRUdvXzMyWjVKN045eDRWSnBhS2ItTloxa3BNaXVreFZNc1RWQmo?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-19T23:41+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Paulson backs further rate hikes, says shared understanding beats guidance - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNaTBVRUlUTV9PeXd4LVVTV0s1WXhjN2NwOERhbDFORGsxOHUtUGdJRjNwSUFLbG5LRzgxUy1RRUJ2MWZKVnZqV096cWdqZUwtSDd3R0tRdXctWWk5X3hNV1FQdlJUY3ZzUWVjZF9Yc1BFUm5DU3pYQnl2TEhtVkdoRTNuY2dDcUZzSERnT3hwN1FPdjY1ZFFULVoxa2VxRmxWM0VXSUFnOU5IM09XTDZWUTJNT2ZuYWl0TU5tbw?oc=5"
-  },
-  {
-   "speaker": "Paulson",
-   "time_utc": "2026-11-19T23:40+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Paulson Says Clear Communication Can Guide Rates - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOREw1c2FYRW4zMmdiMC1NMDVLeDN3UzRIQzhocDUtYmg2dHQ2UkpDNDk5TmQtaEE3encwQi1KcU9pVFE5UVQxbHV3dUNCQktvNmxldGpIZzNVYXNQNml2Vm9WeFRtZnIwOFV5V0ZGb1hlYjRadHZsemRCWWFiTE1sN0dEd25sM3VOcEZKc3BiMDgyUk5MajdLMEc2WnZqbDRheHBUVmFSbUs?oc=5"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-19T21:59+00:00",
-   "source": "The Hill",
-   "headline": "Fed’s Jefferson says AI build-out ‘exerting upward pressure’ on inflation - The Hill",
-   "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFA3UlA4MmVUaEFqenExU0QycTh3dmV3TE45NUdzck0zMUdDNmo0YmxMcFUtMlREaUV6UzlHSk5UQ0staDE3ODZwcHdfME0zbDJBbzgxcWRIWkJWZFJ0VXVocnQ3NlZPSzFkdE1hWUNXSHFGTW1J0gF6QVVfeXFMT0hUUmxwcnJTOTl3ckdPZXRMUlpIVUJDZkE4dXQ2aTRBWEdHNGZmdzlPTUdPTDhDWkRXc2JyUnhCemJyMmE5cmZDQWxUTU02UTVHOEJ6S1Rkd2ZzWTlvemxBUXlOUkx6RXFicURKdmRWRFNlMnpCdW9hUXc?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-19T21:44+00:00",
-   "source": "Barron's",
-   "headline": "Fed’s Goolsbee Won’t Rule Out Larger Rate Increases as Inflation Risks Mount - Barron's",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNMTFGMDRXN2VXbkQ4bzZYY21Sa2g1dG9ndTR1WjNkRXFlOW1ITktEcWMwcERsQXNkZUZQSlJiNk1zQ09VT1NreWNQT2EyNVp2THVyU1drS0QxRnFuRWRuUHhtOGI0UGNKV3FaUTRvM2dfSnVzaEVWWU1WTS14bXdfc1hPa1h5QmN6QlFLLUR6MU81Zw?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-19T21:35+00:00",
-   "source": "Reuters",
-   "headline": "AI surge could strain US capacity and overheat economy, Fed's Goolsbee says - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQZ2V1TTUwaFZ4T1pYN3VBVDlqZThZVHBvQ0VhNnRNNlpWVlZXLUYtVWh5T096NmxYbEsxdjF6T0JmZmZCM0lHQ01CT2NUcTdrUzJ0djdFbWRteWlNTWF4enhqajdoY2ZWcjBmc0lMYkpYczV1RDJVdmxZWFctNDI3bHFxOTBySmZvbHNDRXM5QmxqWUtieXFJYjZnUmNONVUzUnBTYTlMdlNqaDdzdkYweVRHZ2w?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T21:20+00:00",
-   "source": "American Banker",
-   "headline": "Barr says Fed downsizing could hamper response to future crises - American Banker",
-   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQajFTTVo0NUdtallRUnpPN0tSd2dobm0yZmFiTGdzd0c0QUkwdU01M1FZbDBRZnZrZU1keTJGWEtpRzR2S3JYOHRhNUxreUdYOVlDaVQ1UHRNQVBaZ0Y1eDlOVUN6WFJVZGZOSGMzaXFiREJpUTRHVDlidGdrNDhhXzN1dW4xbHZiWWJ6am5nc3QxeENFd09lUDZfS3JiNzNC?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T20:56+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Barr worried regulatory changes may increase financial sector risks - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxObGNlZHpfREZsS2VzTkI1dGxhQ1FLYk9ta0YzRHp6Wl9JRlF2ZVBFZTlJTmo3NjNoZXkyYUdQeFVwYVdGRW9wM25ldlozX3ZnRncyNktWTkk4RGdILXFaWGxnaVRMSUJvY0IzYUhuVGw3VmVyWGl2bmFXTVFZZ1FiblBqLXBsNThZMFRiRWxwYkg4Z2Y5Mk9YYkpWcHoyT1JhdnVXM01KeTYzaVBsUk9TUmZueTEzbU44?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-19T20:56+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Goolsbee Says All Options on FOMC Table Amid Hot Inflation - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQNXR0LTlxSDlZclBKRURtajdwUHZPcUhwcHhvNC1zYi1NWVhkamc2QURJYmNjWW1UcjlPSmNCVTBqX2ZXRjc0Z3p4NU5nQWJzYk5CZzd6RGFlOFdQTmxrZDlIOEdIdGNBQVV6R1FTcUgta3ZWakpoMFV2QkVOSHJHYkMtRVAyNjAtT0NMVVhuUDhTcTBQc0FtekRWRTRqVWE4aDlvM09mUDJkR3FDRVhCXzBkaV8ydw?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T19:57+00:00",
-   "source": "Investing.com",
-   "headline": "Fed’s Barr warns rule changes may weaken financial oversight - Investing.com",
-   "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQcVVnQ19fYlM5WTliUEYybWFvazN6TUhsc2xrUFNzamdVbHRFOF9Tc0lFbHNySlk4STZDZmphOERzN19lVTdJT00zd3YyNV9jUkRxY0l3RFQ4YVduZHNwanNtYlBlbFJwb2s3bGVBMUprSnpJa3ZsQ2xrcWdMWDhEelIzbzlONUh0eVlxQ256d2pHLVFyRGFYWHc4VmhKQThqVDNXZVo3UWQzaU92dG1qZg?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T19:56+00:00",
-   "source": "Fort Worth Star-Telegram",
-   "headline": "Fed's Barr worried regulation changes may increase financial sector risks - Fort Worth Star-Telegram",
-   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBxZkNoR1BTQ21UOEVFdW5IR2hiZmtyLVBuQmNGb0xmSlgyYmo1NkVNSnYwbVV4aW9EMlVxRVVwcUZncFU2LW44aGlJR1BldUhPZzBLdzZKSkUyNE5BNm5pdXI0NFFDbGFpeHZ4NGE1ZWF2Ums?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T19:41+00:00",
-   "source": "Newsquawk",
-   "headline": "Fed’s Barr says AI could expand access to financial services - Newsquawk",
-   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQNXdPQW5ZNHhmWXJHOXR1NEJreF8wWDRXQ1RPeElTU0Q4MUNyMEpPbEZvVlRYZUM5emQ1S2ZjVWF1a3U0Sk5QemN0NWxVNkxVRVBJM3N2Y1ZrSHlzQkNtLTl4RllNRWUwbVpLekh2ZmxZeklKMmpueHU0eDFBQnMtMnVzMFo0S1AxdFZLVzJYaVhMZjdWakJ3Rzdfdw?oc=5"
-  },
-  {
-   "speaker": "Barr",
-   "time_utc": "2026-11-19T19:00+00:00",
-   "source": "Arizona Digital Free Press",
-   "headline": "Fed’s Barr warns on AI risks to financial system - Arizona Digital Free Press",
-   "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQUllBWkI5RTNFYkhHclNydzBmMmd3TG54eUNoZjU0eTVvTGdUQi1PTHpVNFY1T18tR2JqV1JUckxobjR2U2RlWVNBZndMUFlSS0VlaWpLN0M0X3p3ejZLZmZNbl9LckxfSWxjVmJoZlNVWGNmSUptZHVBTExIZ0ExZ21CVDBuc3VkdFh0MA?oc=5"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-19T18:45+00:00",
-   "source": "marketscreener.com",
-   "headline": "Rapid AI Buildout Putting Upward Pressure on Inflation, Fed Vice Chair Jefferson Says - marketscreener.com",
-   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOaE9MRjB3N09EX1lLSzIyUlJkblo5cTBHZTBzVVhscW5RaXl1R3BHM2hsYk1wbng0X3Jxbm5mYUQyYnROb0JadmNjYkFPOGpEZzhVYVdqMmF3SGVLcmV3ZWcwNjhFbzlXOGhxencwb21hUk96X19udzRVVjVuNVdybEJlNDhxOG9ENk55RDNTTVlVU1VWYXFHWVFmZTlPdVZOd0dldjBSLUY0eUZveDBHUVVWaVJZdmx0QkM4VHhpNDIyb3UxLUJ6dDhQSW1kWnQyRDZr?oc=5"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-19T17:59+00:00",
-   "source": "American Banker",
-   "headline": "Jefferson: Inflation must return to 2% before Fed changes target - American Banker",
-   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNcENSOFdhVEcwS29EY0k1c0VEYVFMY2lQN1pOVnN2RTlkaWFVU0FrSmVkeFhDRGNBUjNaa2pnRW9Rb3BaZ1FMdVotbUVFYXpOMmVVanp2ZzFUcnN2M3h3aHBuQ1oxQjhLUUFHNUVIUTJQRkROLUJXOFQ4Uk8wazJNc0Y1bnctekxQU1I4VTBUN3Jmcl9ydDhCTEZrcUhkc00?oc=5"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-19T17:38+00:00",
-   "source": "TradingView",
-   "headline": "Fed’s Jefferson Says AI Buildout Exerting Upward Pressure On Inflation - TradingView",
-   "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOMjI0Vy1XeXJHb1UxQ0Y5TDduSGttbHJDUFJTOU5BX05BX0RDUUNsVU4zUXRqWlRQcDlMVkl5cTZxWFB3MTkya29jWDFPV3VmWU5SLTdzYlFKcDBRNzVMVWdoZ2ZHMXZsb0FOOVEwTF83NkhzMVNIRUUwbXFLY3VkWTVabVFNLW5meEFRbUVweFhQVUdJSnRqRC1RQVVFLWViQU9maHlNcE1uQUZ3MFhtZmVDUmVKVWpySy1lcm1oY2JWVGp4eEtMNHJXNGRXRm9TckpRYXdGS25wYUMzbFYwRmlWaTg?oc=5"
-  },
-  {
-   "speaker": "Goolsbee",
-   "time_utc": "2026-11-19T16:43+00:00",
-   "source": "Benzinga",
-   "headline": "Fed’s Goolsbee Said Inflation Has Proven To Be Far More Persistent Than Was Thought In 2025, And Data Center Demand And AI-Related Wealth Impact Is Adding To It; The Steepness Of The Interest-Rate Path Will Be Rooted In Whether ‘Borderline Disturbingly High’ Inflation Is Seen Returning To Fed’s 2% Target",
-   "url": "https://finnhub.io/api/news?id=c66314d28b11f02191ef36d2b0fb9a29e4f933dc59b6509233503f95d0f85e91"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-19T15:08+00:00",
-   "source": "Yahoo",
-   "headline": "Some Fed Officials Wanted to Hike in October. A Half-Point Hike Is on the Table.",
-   "url": "https://finnhub.io/api/news?id=7925e4cba97b7d4d19e01b5f15e09af9394868143051c8ec7a1dd3cf396efb73"
-  },
-  {
-   "speaker": "Jefferson",
-   "time_utc": "2026-11-19T14:27+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Jefferson says AI boosting inflation, productivity impact possible 'in the future' - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOcXEzRFlWTEdhd3lGQThDc1NRMGhfYWdMUDBlUVFzMlo1Vzl4b1Q5RG5iaXE0bzFaMTF4TGV6MjViSzBmYzl1UVVwLXU4QnZSa25WbkU1eEE2MkdsYjRYY01vQ2JCc1ZGUzNhd2lueFR3bGdGRExZbXRhcXp5Zlo4Y3Q3bnJURWlIYk9IRFdncDl2TW56ZHN1c0t0aXZucG5aMEFScGV3OEJ2RXdYZEZnQTNTMDR5c1VHMnRKYlkxMk9sejA?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-19T12:00+00:00",
-   "source": "Yahoo",
-   "headline": "Kraft Heinz CEO calls shoppers ‘fragile’ as 2027 price hikes loom. Fed’s Waller: Inflation ‘too high.’ Protect your cash",
-   "url": "https://finnhub.io/api/news?id=842f321e54662a3322ed3a2699d7b4bf7521017cfbc5e6348d736d9d84e70c3f"
-  },
-  {
-   "speaker": "Cook",
-   "time_utc": "2026-11-19T06:30+00:00",
-   "source": "TelegraphHerald.com",
-   "headline": "Federal Reserve's Cook declines to participate in White House hearing - TelegraphHerald.com",
-   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWjVrZlpuM0UwT2x5TVdyTF94eVR6WUt6WVF4SFBKYUFZMFdsQTk0c2RzVHFqdGpXeEJJZWxWR0J2OE0xQXlMQklSdDRxLTgwaHdPYTNhN09nN2QtT25tWnJtU1A1NXZUeGNmTGljZ29XWVFtOFBvRUlfVTFvT0pUVktrYUtQU1hLMm9CY2hOaUliZnVKU3RjYQ?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-19T03:50+00:00",
-   "source": "ClickOnDetroit | WDIV Local 4",
-   "headline": "Stopped trains on Beech Daly Road leave Taylor residents trapped, city frustrated - ClickOnDetroit | WDIV Local 4",
-   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOaTBiUTNFMDJfWDNmanJwTFk0aWtoUTROSXZ5WkFPeGI1MGxXZDgtZXBnRzFhWUU2VmlvQ0N2THI3NUQ4aHlTeHp3cmVaejFHaHVxd2tBY3J2R09HT0NDWjNmSWY5T0pLQTV2V041QTVkblUzUVB2LVZlUmFQWWQ3czhjVnRWSnNXRTRKYnlkanJGLVBieHc1aGRrSXZhZmt4VjNUeHAtY2htcTV1bHFmVWtjaXk1UFhCa3REUVhFZE9BaFQ1bml0dzRNOWh0LUk?oc=5"
-  },
-  {
-   "speaker": "Cook",
-   "time_utc": "2026-11-19T02:30+00:00",
-   "source": "Modern Ghana",
-   "headline": "‘Sham hearing’: Symone eviscerates bogus White House hearing targeting Fed's Lisa Cook - Modern Ghana",
-   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5mQlZONWxUUDhWcVQ0cVJjaXVkRWFrdF9tRWVjTlNDV1dlZzNnMUtONHRWNUVyQ2hLUUM3UVg2V3VjWG4xQk1Jdmw1LTZZSHBmbzdudFNyZ0p5UWR5TGtN0gFcQVVfeXFMTnk0YkFWajgxYnNFYnFxWGNaakNZR0Y5M3oxOS13RUkyc0pibFdlUXQtRWxVcjdncW9PNHpGajJJdW54bUpHdHR4ZEk2WUNEZWZNcmhNSTc2eExxT3Y?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-19T01:56+00:00",
-   "source": "www.tmgm.com",
-   "headline": "Fed’s Kashkari: Markets expect central bank to need more rate hikes than officials currently anticipate - www.tmgm.com",
-   "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxObW9pVkpCNnNfU0R2Y1pkbUhaendxV2toMjJLOHMyTnZWUDAxSEpRZVo1TGkzWE43dGt1YkVkMXRUTXFOTVp3VFFFRWI5elVPZVZxZVVnelpaSzJfNUluUldJWlNkc1JaV0c3bndGZVJseWM5YU9PdlpLQURCVWx6SWx1NmNwdDJQWmxic0p6UG9BNzVmcEtZMjIyMWdWUnZCTEhIbzBQUkstS2FPa25jeUFnQWc5V2MxRzVuUHhNd2dsYUp6QTlFZDlDZDA0LW5nOXIwaWlJNjNKYzRGWHd3OTB2Z3piUFlfTFlzSmRzZUdOQQ?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-18T23:06+00:00",
-   "source": "FXStreet",
-   "headline": "Fed’s Kashkari: Markets believe central bank will have to hike more than officials now expect - FXStreet",
-   "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPOW55eFcyRi1pd01QaVluS0R5bFFZeEZ0eEhlVmdjbnQ5VjNaNlBfeC1vSUZlUXNZWUkzUUFjdU8yd1MyekpOQm4wYUhMZl81Y1EwN3V6QzRjd0hrRTJPMFc1RUExRzA0S0JJNDlFRmFfNzZrNGFVNlBVUnhocEhuT0xENmJQLWJRS1lTRzY3cjd2XzBWLWRYQWdxczBsYVR3cUljdWV1N1dWd2tvZ0RJTEpVZFF5Z09rcUdsdXlOSTJ1RGJIekd4cnJYSDJZN2M?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-18T22:10+00:00",
-   "source": "Investing.com",
-   "headline": "Fed’s Kashkari says interest rates can impact tech investment By Investing.com - Investing.com",
-   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZVBjZUN6aVRRRllSNk9XTmVEQTNXSm9EelowOGNmTEpuUWFEVjV1dmdNUzVYeXZsV3hzcjMxZWFQUWcwYjRGcW4xRkU0RktZbXROZ1lLM1EtM2JRTlVwbDY5Q1k1QWlpRjJRWjc4MGlQbjNRR2YwazQ1Qy1RT09ucWlWR2xwU2JVZUd0VWhFMDVIRk5TVlNmd1RkUm80eHl6cUhISFFYeHRtOHRSQnhyU3R3?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-18T21:32+00:00",
-   "source": "investingLive",
-   "headline": "Kashkari says markets see more Fed hikes than officials do as four Fed voices turn hawkish - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPYnpMb2s5WHc3U2szbF9vdlZHVV8yalltNDdmcmhjSl9hN0xfRW5qbERqY0duaG13ZkhtdS04bS1sUkZiVWpReUVXRWw3Unl1V2ZmM19MTkNMSnQ0OXJJeHJiYjFfZzZjWjVocXZWOEFfWUljeW5hS0pRWmVmTl9tTEVnTm96dXFEUUVXS21hSGlwWWpRVGxNcnJNNlFnNEx3SllfekhBWWdwOFBNRFRCYzJQOWVPYUJiUzBjVk9lc0VsZ1l1SmRsUFhGbw?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-18T21:27+00:00",
-   "source": "TradingView",
-   "headline": "Fed's Kashkari says monetary policy can temper AI investment - TradingView",
-   "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPYzhkNUdneGZoUExIRjNPS3VFcWI0Q3JsbE02NEZadHNtMWc1dWowamZpNG8yNUx0dmdwVkxDT05HVTZ4U01pcV9CeTJBOThiY1Y3ZEh3UGoxdGJFMzdUUVBiZmNRei1mWmpyQ29xUXdJM0thUzhuMXFwTW51eTJKOEtMcXZyV1d2UFJ5OEdmSUJpTmw3b09wVHJ6TlJ1eUtKaHJnSnVweEVvLTlDMlhseGVpMW55ODhTY1pvVTlpWHRBWWtoZFJiYjZR?oc=5"
-  },
-  {
-   "speaker": "Kashkari",
-   "time_utc": "2026-11-18T21:15+00:00",
-   "source": "Federal Reserve Bank of Minneapolis",
-   "headline": "Neel Kashkari at the FinRegLab AI Symposium - Federal Reserve Bank of Minneapolis",
-   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNcG9pVUljUTFtVXFiQ2QxSFlrT0dJQkNvdDZIRFFrejQwNExqemtrdlVyNmFHTWVKdWhVaklxWGE2MFQ5YVk0aEd4T2xQQmREZFhXZjZoQ2pOdDZaSXBfMlR3YjBNVkpsNGhLN0dtNGlteThLczZOQ0wxUnNpYk0wNGtXeGY2ZmRaZ1FXdjljUGZhdw?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-18T20:10+00:00",
-   "source": "The Hill",
-   "headline": "Fed’s Waller says officials may need to ‘shock’ with half-point rate hike - The Hill",
-   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE56MzFOekFrVXJIek1aZU85UGZhODU0T056cDY0c3FrOG5HaE9pV3dUVTNxQTJHZFRVY3p6YVJjWHAyRnZ3NWJWaU5KN1NjY1hWdEZjSkU0SkJydXdBcHFpUDBnWTQ3M1lEQ3g3ZDhzZHjSAXZBVV95cUxNSEdoRmMxXzBYczExWUl6RkpiTFZSbDN1Q0xZV0dpWmxDMHlJMlh6MDVaNFQ2cmdFVDR4WmVaQUdpYjM0bWozRUN0ZmwzUUFOdkdvdk8zc2dOTGxMT1NRNVF0Wk1UUy1IX2ZMTmdVa0xOYnNJNUxB?oc=5"
-  },
-  {
-   "speaker": "Trump",
-   "time_utc": "2026-11-18T19:07+00:00",
-   "source": "FedScoop",
-   "headline": "Senate panel drops vote on Trump’s pick to head National Science Foundation - FedScoop",
-   "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxObzZtNFQ3NTlZOHBTUVBUNUZKWUZxY09JbUZnalNRZVY0cXlSTmNIMEk1bDZKVFRENk0zUng0NDQ4MnR4aU9yOFYtZ2xPbGZDQXpfVHA5eF92ZXJYSXMwcFczNVJBclBpM3EtX2xZSTRBQjJ0cGRfTUlYM1p5QWNqaURIS0swZjVsa1JrOXM4ekFMQXd4MWRQcVhVdTY?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-18T18:38+00:00",
-   "source": "Investing.com",
-   "headline": "Fed’s Daly urges cautious additional rate hikes - Investing.com",
-   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOQkRBSDRJbkltYklDYnRSVlMzaXlMZTNHQXpVdkpsUG9sTl9IbHhHYTdGaEZKSVJhb2xDWndQRFhhem5UaHVXVGpXczlqRHd0WVVueDU4UHVXbW1wT0xqZjNjTlNXLWtGb0t2N0xHUER3ZGt4TGd3TlozUjFOd0g0RnpJS3VTLWZqbmRSS2MyU21QVnJDZXh6djZDVEdaazQ?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-18T18:16+00:00",
-   "source": "Bloomberg.com",
-   "headline": "Fed’s Daly Urges Rate Hikes With a Thoughtful, Measured Approach - Bloomberg.com",
-   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNRDJGNGRIU0Q3NE5tbW9qVUpjd2NCUTRuZTdERXEwY2Q5bEQtZ1NNVjFLQmwwdnVMRERPSnN4cm1TcXBLRWxDcWtxS0tZdXdBanJVNVhhRVBOVWtKYlplWXFwcHFkUmJTRWtVQjBUaGRZUGpiWU1acVdESEZvck9TSzBiNHVhdk5rNlZDMEpKYk5zS1dxSVpDdGxZWjEyOEJKTTdldVo2Q3Z6dHpPOVF0cWJGSW4?oc=5"
-  },
-  {
-   "speaker": "Waller",
-   "time_utc": "2026-11-18T17:46+00:00",
-   "source": "Yahoo Finance",
-   "headline": "Fed's Waller doubles down on a jumbo rate hike in December, sees more hikes to come - Yahoo Finance",
-   "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQUXBONFpBZzU3Q3dNWTJzeEdEQ2U4d2Q5ZlZnaGNGVkpuamNqeVlfSnFNU3Nob1VybkNGcElDV3NwTUNVRkFKQjhrcERBMlJHdTlNSFJBc1NSa0pGVFRfdzRpR1RLTWJBdl9HMHB5Z2Z5QkdwRmFROER5NDVtQ1g3cnMtLWtmNDZCOTA0SzNoOG1pY3FVb0xwQjlWMWRYc0tvSVFSNkRBY21mbmpuMk1ETXRNUGxrTVZXX2hxLXQxbzFBMHVJVVF5b0ktektxSEZtR0JYVS1mVW1WWUZXLXc?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-18T17:37+00:00",
-   "source": "investingLive",
-   "headline": "Fed’s Daly says inflation has been too high for too long as consumer spending holds up - investingLive",
-   "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPcFVnTTZpQTFwdXY2RkpieEcwZEpQX0lsNTQ1cXNMUG1leEpQVWFQWW03QXlkNnRNUThadmZKYlZvb1pHVDUyczU4M0xHcTZsMDhwN0YwS3B2RVRUZDZlV3VxY1N3cjh6RFR2dThDZWZPY2RMaTNFMXhGZjlCbFRRT2NON0JDNVhUazMzNWd3bmlhZnhWVjhacmFRY2NRVXpMSlFxczlDMjBhRGNBWFJXOThZSkxKaW11dTNDakppc0VuMWFkMVE?oc=5"
+   "speaker": "Williams",
+   "time_utc": "2026-11-23T10:15+00:00",
+   "source": "CNBC",
+   "headline": "Treasury yields jump as stock futures rebound, investors await New York Fed President Williams speech - CNBC",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE9QemJ4Zi1KUVFXdk1NTDJLQWtnQmpPSnBiZTY3ZFV3SmRwZmFFay1kLTZoNk1MclNIZW5SVzh4MzlfRHBZTWR5N003aU9udHVCczNUd3R5SWxmMnIzb3QyS0R6akhuUzFJMlkyT2ZUd9IBdEFVX3lxTE1EVlVKZHJ6WUhjRGtoM2RrSjMtT0ZaanpZeThYZXNkdHRyY2FtNFc3SGJiREt5Rm5fc29DWWtMZ0FKVzNES09RMHBOVjVMY0Y4R0xHdW5ybW9fVW9CenRxWGtwYnRnVUZJQlNJR1RpUk9lbzNU?oc=5"
   },
   {
    "speaker": "Williams",
-   "time_utc": "2026-11-18T17:33+00:00",
-   "source": "Yahoo Finance",
-   "headline": "Fed’s Williams signals warning on jumbo rate hike in December - Yahoo Finance",
-   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQVWdQTlNmZnZYdGl4cFNOWTNNRnlvZ3RuRTNUWl9vT2N3T1I2SElHd2N3cDYwQWQwSmxLSE51STZmakVoeWZKVW9RUUpJVEU3NjA0OU1JYWlMQkltVTQwYjd3SDdtcGZhTENPWVF1MXVmV1RyNlFOSFlCVUFFUDBqd1hpMm92cHczTjdZTk5HUnQzVnM1RWVNUG5kTXdrMTRG?oc=5"
-  },
-  {
-   "speaker": "Daly",
-   "time_utc": "2026-11-18T17:30+00:00",
-   "source": "Breakingthenews.net",
-   "headline": "Fed's Daly says inflation has been 'too high for too long' - Breakingthenews.net",
-   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQQk5sLTBLQWFCbk9YelNxVVNndkYzSlAxYW4wZGRkSFhCYkw0UU5kMjAwc0Fac0xacHlfTGlrLXlxSXVpeWdZbWpja2Z4Umoxb2xOY05IazJPTVQzT0pxMG9mQW5LNlM2RW1PdFRhR1NNV1NpTGlrS2RLTC00T2gzMTN5eFV1WENBWnJHemUzTDFvSTJrZERScXpSdlhqcm5Yb240b1h3?oc=5"
-  },
-  {
-   "speaker": "Cook",
-   "time_utc": "2026-11-18T17:09+00:00",
-   "source": "CUToday",
-   "headline": "Fed's Cook Threatens To Boycott White House Hearing, Says Panel Is Biased - CUToday",
-   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQdmNXWHQ2ZXBJc1p5dUNwZENQNWFHT3dyaEZFZFBUX3l6MUhEVDhCZ3pjYTUydHJtOUhlTDNVaFpQLVdsbzQ5Zzd3bXh0bWx3b0lRUTdtREthWlpxRkY3bmRTSFUwWWRtMEpyU2UtWEItck90OGpSOGlEeldCYUVnN3FHUDIwTmI1RXRDMnVuSDcwSWpuQnVINzFhOVlpSkdQS1BNYklWRl9lT1NwbGc?oc=5"
-  },
-  {
-   "speaker": "Cook",
-   "time_utc": "2026-11-18T16:56+00:00",
-   "source": "TheGrio",
-   "headline": "Lisa Cook refuses to participate in Trump administration's latest effort to remove her from Fed - TheGrio",
-   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNQ3dyNXpMMHBmdDd4a0xFczZKcHpDU2xWVnpKSTJXOHBONUxjSVdyWHhjSk1FR2FUbGdDVWhndzhKUnM5czhJV1ZfdlRwY1hTYWNSV0dzSHc2SUNHSERWVmVkUjdONk5qLXpOMTQ4OV93Znd3ZFpERU9Wa3ZfTDVqYnA1NA?oc=5"
+   "time_utc": "2026-11-22T18:40+00:00",
+   "source": "Traders Union",
+   "headline": "Williams to give keynote before Fed blackout period begins, Tracy Shuchart notes - Traders Union",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPODZIN1Uwa0VaOEdoeVNjdlE1NWZHb3NUMF9VbkRPYkFYRzVQUTc2ODRGdGFMZ1ZfX2VJeE94S2JGT09YMGU5cERielBhTGdTbjM2eDlIS19FcFRsekdlZmxCZ0s1ZGVLQTR2S2VxcmIwUHNUU29jb0QzSDg4ZmJaTFN3QXZ5RWFsRC10TG1HNkI?oc=5"
   }
  ],
  "errors": [],
- "trigger": "scan-2026-11-20T16:52:36+00:00"
+ "trigger": "scan-2026-11-23T15:37:33+00:00"
 }

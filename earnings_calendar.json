@@ -1,13 +1,18 @@
 {
- "updated_at": "2026-11-20T16:53:02+00:00",
+ "updated_at": "2026-11-23T15:37:57+00:00",
  "window": [
-  "2026-11-20",
-  "2027-01-19"
+  "2026-11-23",
+  "2027-01-22"
  ],
  "tickers": {
   "INTC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-20",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "TLT": {
@@ -312,7 +317,12 @@
   },
   "SLB": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-21",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "SCHW": {
