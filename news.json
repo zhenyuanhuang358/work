@@ -1,6 +1,6 @@
 {
- "trigger": "scan-2026-11-23T15:37:33+00:00",
- "updated_at": "2026-11-23T15:37:57+00:00",
+ "trigger": "scan-2026-11-23T15:55:14+00:00",
+ "updated_at": "2026-11-23T15:55:46+00:00",
  "market": [
   {
    "time_utc": "2026-11-23T14:35+00:00",
@@ -2685,6 +2685,13 @@
   ],
   "ARKK": [
    {
+    "time_utc": "2026-11-23T10:16+00:00",
+    "source": "SeekingAlpha",
+    "headline": "PCE Week: What To Watch In Stocks, Chips, Gold And Bitcoin",
+    "summary": "US stocks head into the week in correction, and the market already prices a December rate hike as close to certain.",
+    "url": "https://finnhub.io/api/news?id=fb422e54fd05da51661251d4a4d72a35c21231c9c7d8885df759cdd7d9e8b531"
+   },
+   {
     "time_utc": "2026-11-23T07:45+00:00",
     "source": "SeekingAlpha",
     "headline": "Equity Market Dramatically Oversold; S&P 500 Earnings And Revenue Growth In 2027",
@@ -2732,13 +2739,6 @@
     "headline": "Cathie Wood Just Bought $22 Million of CoreWeave Across 2 ARK Funds",
     "summary": "Key TakeawaysCathie Wood’s ARK Invest bought 549,659 shares of CoreWeave on Friday in two of its ETFs, ARKK and ARKW. That’s about $22 million at Friday’s close.",
     "url": "https://finnhub.io/api/news?id=14a908ada40e8011ab7645433a07b0bfd94faeca500aa024def964cebcada0b3"
-   },
-   {
-    "time_utc": "2026-11-22T16:07+00:00",
-    "source": "Yahoo",
-    "headline": "Cathie Wood buys $145.9 million of tumbling AI stock",
-    "summary": "Here are Cathie Wood’s latest moves.",
-    "url": "https://finnhub.io/api/news?id=a988ad9b80a0fb17d9d5d9bf008cf88d3381d74f8e381bb45dd9d7ae49d035d8"
    }
   ],
   "JD": [
