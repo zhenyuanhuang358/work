@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T21:36:30.379992Z",
+  "generated_at": "2026-11-23T23:20:03.552941Z",
   "years": [
     2019,
     2020,
@@ -2409,6 +2409,50 @@
       "t1b": "✗无成本优势"
     },
     {
+      "window": "2020-2024",
+      "years": 4,
+      "revenue_latest": 2680112000,
+      "revenue_cagr": -0.2502145532540472,
+      "gm_trend": 0.6769697144069043,
+      "gm_latest": 0.8280083071155235,
+      "opm_trend": -0.10530915870790147,
+      "opm_latest": -0.08123914224480171,
+      "sga_trend": 0.28104633096239123,
+      "sga_latest": 0.403842824478977,
+      "gm_series": [
+        0.151,
+        0.1546,
+        0.1835,
+        0.8326,
+        0.828
+      ],
+      "opm_series": [
+        0.0241,
+        0.0377,
+        0.0144,
+        0.0522,
+        -0.0812
+      ],
+      "notes": [
+        "基期异常已丢弃 1 年（COVID 谷底类），窗口改为 2020-2024"
+      ],
+      "cik": "0000075252",
+      "ticker": "ACCH",
+      "name": "OWENS & MINOR, INC",
+      "flag": "赛道外",
+      "sic": "5047",
+      "sic_desc": "Wholesale-Medical, Dental & Hospital Equipment & Supplies",
+      "peer_n": 6,
+      "peer_gm_median": 0.22,
+      "gm_vs_peer": 0.608,
+      "peer_sga_median": 0.1622,
+      "sga_vs_peer": 0.2416,
+      "sga_pctile": 0.0,
+      "gm_pctile": 0.0,
+      "sga_gap_to_best": 0.3567,
+      "t1b": "✗无成本优势"
+    },
+    {
       "window": "2019-2025",
       "years": 6,
       "revenue_latest": 1524700000,
@@ -2446,50 +2490,6 @@
       "sic_desc": "Blankbooks, Looseleaf Binders & Bookbindg & Relatd Work",
       "t1b": "同业样本不足",
       "peer_n": 4
-    },
-    {
-      "window": "2020-2024",
-      "years": 4,
-      "revenue_latest": 2680112000,
-      "revenue_cagr": -0.2502145532540472,
-      "gm_trend": 0.6769697144069043,
-      "gm_latest": 0.8280083071155235,
-      "opm_trend": -0.10530915870790147,
-      "opm_latest": -0.08123914224480171,
-      "sga_trend": 0.28104633096239123,
-      "sga_latest": 0.403842824478977,
-      "gm_series": [
-        0.151,
-        0.1546,
-        0.1835,
-        0.8326,
-        0.828
-      ],
-      "opm_series": [
-        0.0241,
-        0.0377,
-        0.0144,
-        0.0522,
-        -0.0812
-      ],
-      "notes": [
-        "基期异常已丢弃 1 年（COVID 谷底类），窗口改为 2020-2024"
-      ],
-      "cik": "0000075252",
-      "ticker": "ACH",
-      "name": "OWENS & MINOR, INC",
-      "flag": "赛道外",
-      "sic": "5047",
-      "sic_desc": "Wholesale-Medical, Dental & Hospital Equipment & Supplies",
-      "peer_n": 6,
-      "peer_gm_median": 0.22,
-      "gm_vs_peer": 0.608,
-      "peer_sga_median": 0.1622,
-      "sga_vs_peer": 0.2416,
-      "sga_pctile": 0.0,
-      "gm_pctile": 0.0,
-      "sga_gap_to_best": 0.3567,
-      "t1b": "✗无成本优势"
     },
     {
       "window": "2019-2025",
@@ -25811,7 +25811,7 @@
       ],
       "notes": [],
       "cik": "0001041859",
-      "ticker": "PLCE",
+      "ticker": "PLCEQ",
       "name": "THE CHILDREN’S PLACE, INC.",
       "flag": "红",
       "sic": "5651",
