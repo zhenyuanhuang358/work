@@ -1,0 +1,2094 @@
+{
+ "id": "2026-11-18_1552Z",
+ "asof": "2026-11-18T15:52:58+00:00",
+ "bp": 5538.88,
+ "freshness": {
+  "options_chain.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-18T15:51:36+00:00"
+  },
+  "stock_prices.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-18T15:52:14.941127Z"
+  },
+  "news.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-18T15:51:37+00:00"
+  },
+  "fed_speak.json": {
+   "trigger_ok": true,
+   "updated_at": "2026-11-18T15:52:46+00:00"
+  },
+  "quote_age_min": 1.2,
+  "ok": true
+ },
+ "light": {
+  "asof": "2026-11-18T15:52:14.941127Z",
+  "ref_day": "2026-11-17",
+  "readings": {
+   "term_structure": 0.9991896272285251,
+   "skew": 145.11,
+   "vvix": 119.62,
+   "vix": 24.66
+  },
+  "scores": {
+   "term_structure": 1,
+   "skew": 1,
+   "vvix": 1,
+   "vix": 1
+  },
+  "resident": [
+   [
+    "skew",
+    1.0
+   ]
+  ],
+  "non_green": [
+   "term_structure",
+   "vvix",
+   "vix"
+  ],
+  "base": 1,
+  "accel": [
+   "vix 3 日 +28%"
+  ],
+  "light": 2,
+  "light_name": "🔴 红灯",
+  "term_premium": 1.0008110300081103,
+  "long_band_open": false,
+  "missing": []
+ },
+ "events_next": [
+  {
+   "time": "2026-11-18T14:00:00-05:00",
+   "title": "FOMC Meeting Minutes",
+   "forecast": "",
+   "previous": ""
+  }
+ ],
+ "event_eve": [],
+ "macro_today": [],
+ "macro_source": "BLS API",
+ "macro_errors": [],
+ "can_open": false,
+ "why_not": [
+  "尾部灯 🔴 红灯"
+ ],
+ "scale": [
+  "实盘账本 1 笔（已平 0）｜已完成 0 轮｜当前阶段：每笔 1 张"
+ ],
+ "fed": {
+  "schedule": [
+   {
+    "time": "2026-11-16T05:00:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-16T09:05:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-16T12:00:00-05:00",
+    "speaker": "Warsh",
+    "title": "Fed Chairman Warsh Speaks"
+   },
+   {
+    "time": "2026-11-16T14:15:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-16T18:10:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-16T18:30:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-17T07:30:00-05:00",
+    "speaker": "Musalem",
+    "title": "FOMC Member Musalem Speaks"
+   },
+   {
+    "time": "2026-11-17T09:10:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-17T09:30:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-17T14:25:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-18T12:15:00-05:00",
+    "speaker": "Daly",
+    "title": "FOMC Member Daly Speaks"
+   },
+   {
+    "time": "2026-11-18T13:35:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-18T14:30:00-05:00",
+    "speaker": "Williams",
+    "title": "FOMC Member Williams Speaks"
+   },
+   {
+    "time": "2026-11-18T16:15:00-05:00",
+    "speaker": "Kashkari",
+    "title": "FOMC Member Kashkari Speaks"
+   },
+   {
+    "time": "2026-11-19T08:50:00-05:00",
+    "speaker": "Hammack",
+    "title": "FOMC Member Hammack Speaks"
+   },
+   {
+    "time": "2026-11-19T09:25:00-05:00",
+    "speaker": "Jefferson",
+    "title": "FOMC Member Jefferson Speaks"
+   },
+   {
+    "time": "2026-11-19T12:30:00-05:00",
+    "speaker": "Goolsbee",
+    "title": "FOMC Member Goolsbee Speaks"
+   },
+   {
+    "time": "2026-11-19T14:15:00-05:00",
+    "speaker": "Barr",
+    "title": "FOMC Member Barr Speaks"
+   },
+   {
+    "time": "2026-11-19T16:00:00-05:00",
+    "speaker": "Barkin",
+    "title": "FOMC Member Barkin Speaks"
+   },
+   {
+    "time": "2026-11-19T18:30:00-05:00",
+    "speaker": "Paulson",
+    "title": "FOMC Member Paulson Speaks"
+   },
+   {
+    "time": "2026-11-20T08:25:00-05:00",
+    "speaker": "Waller",
+    "title": "FOMC Member Waller Speaks"
+   },
+   {
+    "time": "2026-11-20T12:15:00-05:00",
+    "speaker": "Cook",
+    "title": "FOMC Member Cook Speaks"
+   }
+  ],
+  "headlines": [
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T15:06+00:00",
+    "source": "Investor's Business Daily",
+    "headline": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+    "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQamtrQ2tpTmJkVFRpZGkza1pybUNhc3ExQWtBSGVyWUVvTUxxRHA4a004WlBpc2VtWFZvZ2dGdjFqelMxUUdDaW5kSzdHS29Ma1F4QTBWTE5PeWphTGRqVjZBeGFGZXRPdEs1NWJxSzdIZUlGSW5vVXJoLVBRbGZLMlJvQVhfVTR1V3FSZ2w0YkNaaXZOWnpvSw?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T15:00+00:00",
+    "source": "MarketWatch",
+    "headline": "Fed’s Waller says interest-rate hikes may be needed to ‘shock’ inflation out of the system - MarketWatch",
+    "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNMURESHotYzFzck1UMzlCXzNKdkthQUVJNVFZOHNlaExhR3IxSjhsazlZSHphalJnMlQ2VjNqWkVnRm1OTWFfSHl5ZkRiQ2dQLTF3SVpua18yMXp1cWhyWnNEdWZGcmFZczd6MmRxTDhsc0xPRnprd0tLUjhLWGprdWVyUnNKMEFDZWxJM0tfQmdaQm1QT2FGMlU1eE5iRUl2TzZENVZtNHpJTUJ6ckhHbEljXzJfXzctdjR4Rl9UQ0tvUzhSTk9IX29KYkdvNlFBbHFWNzNpbXFIa3M?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T14:08+00:00",
+    "source": "Charlotte Observer",
+    "headline": "Waller says on CNBC the Fed needs to get more aggressive in inflation response - Charlotte Observer",
+    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUk5JUHhDdVhBZTJFRnN5d21XUnVoYk9DWGJWUnFBbW9mTUFaeTJDUkpGSXBIOGhELUROQWdERGF4TmJIalE3djNWZWNuUjgycWtYdWZObXFERG9KNFlrVC10aE5NLWZ1YUR4VkVTdnJMSHVHeDdPRFc5REJBR0tLT2xMMEJqai1pZWc?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T13:36+00:00",
+    "source": "Yahoo Finance",
+    "headline": "Fed’s Waller warns inflation is worsening, floats 50-basis-point December hike - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPS0k5ZDdaVUJZb002RXdnbW5hMjRzdm1SS3lwdHc4WE1QNWdTaHFER0lyQVdTbWw2V3RRYnNJdkNLLU9YcjYxTU81MDRUN1NxSkVneGdrbXhjU1lXTDdBX0FCUEpWdWs1RlZoOEdabm03a2puS3dyOHdIYlAxTUNPRUU4aS1CR3hPeUdDLWRiSEl4Ml82eDJhRXpnSzh6SGZuVnpR?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T13:18+00:00",
+    "source": "Bloomberg.com",
+    "headline": "Waller Says Fed Should Consider Half-Point Rate Hike - Bloomberg.com",
+    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaG00RjB3SWxWcEJCcGZjb1ducUJDdWpSc0I0dU8zUFdnRVdOOE1DYXQwaUl0RHIxVEhnRVJBMUpHZWZMcjZ3VjNKVENQUkZkS2YwYjY2QlcyaFNINWhCZVVubkZyS09Qb3B6TjVvclJ1dnpOYnZXRE50ejhmUnBfY21OcU12SUs0VnN4VlVlVjhzYVJ1SDYxWnJXbHN2UDBfVlI1RXo4NDZBdmlkeWc?oc=5"
+   },
+   {
+    "speaker": "Waller",
+    "time_utc": "2026-11-18T12:20+00:00",
+    "source": "CNBC",
+    "headline": "Fed’s Waller says central bank may need to ‘shock people’ with half-point rate hike - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQQ0FXYWthQmJLZi05SXhQR1o2akNmbUo4WFAyUWVjbjdkNmdwWi05clFGakpLMEFkSi1oS2ljalM2N2NyclZWTE9temNQMTJjZk9EQTYwZUJiMVlPcE1zQzA4eE5OU0tNQTg5QU5fU3k4bGIxM2NIVVFGZUZzRlR6VXEwVjBLNmvSAYwBQVVfeXFMUDZSczNSbHAxcjNFa1FMNWU3STJRUVBRV0x6SjhFVFRBdGNqSFhqMGl5bGtMSkN0YzQyWUpWLVppMmxpQWNFbFF4VmY0eE5feTJ5UVotZnNPYVdEdXhzWWVmaTk3YmdXNGdtRHlRN1RqeElDMXBEbkw4Z1hyWWxnM3hBWm9MME5Xbm5MNU0?oc=5"
+   },
+   {
+    "speaker": "Warsh",
+    "time_utc": "2026-11-18T05:12+00:00",
+    "source": "Axios",
+    "headline": "Tech leaders tell Fed chairman Warsh how AI could transform the economy - Axios",
+    "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5zVnN2cmYyU2xHS0dXNTRtcTBTa2k0Skc5a1lBRnFjZklHdXZRZEdCZHVYZnlibndfTHllRFM1V2R3Ri1mZEZOdDV4LThpS0xhWWFxYjlRQnBhZ0dtcG9SeFJVVjVnX3pxZzJUMEl2bl96eGlx?oc=5"
+   },
+   {
+    "speaker": "Musalem",
+    "time_utc": "2026-11-17T22:59+00:00",
+    "source": "Briefs Finance",
+    "headline": "St. Louis Fed's Musalem Backs More Rate Hikes - Briefs Finance",
+    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOYkdzZ1hVY2RZTE4zSlNwcnJXR0swbFcydGZDLWhMQ0NLTkxZdjFhX3VERDdQdEhQbHRUb1VSckJQalN2VGtaWlNqNTlfS1pxdnczWVZ6blQ5VXVDaW9qTy1kYW02TVhGWWlLa0pQU2t5NThYOG9kZDlWTWY4YnJ2cTRtQmpiUk1kSEZkMUpFMUVodw?oc=5"
+   }
+  ],
+  "errors": []
+ },
+ "market_news": [
+  {
+   "time_utc": "2026-11-18T14:57+00:00",
+   "source": "CNBC",
+   "headline": "Tech outages are causing people to panic buy. Costco is benefitting",
+   "summary": "Shoppers are spending more at Costco as tech outages turn into a race to get emergency goods",
+   "url": "https://www.cnbc.com/2026/11/18/tech-outage-costco-panic-buying.html"
+  },
+  {
+   "time_utc": "2026-11-18T14:41+00:00",
+   "source": "Reuters",
+   "headline": "Israeli military begins a new thrust in Gaza, witnesses say - Reuters",
+   "summary": "Israeli military begins a new thrust in Gaza, witnesses say  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaVdVck4yZnVKU01QQ0Nrd1c2VXRReEloTk1IS0xKWjRkcUdrR3BiTlAyU2dQVm1POVg0MmM5anI0YWlIa0txYms3Sjh6QW9kRjU3bmk0ajlHZ3BZbHM5eHBqazVBbVRvYkt4NENBZ0VuU3NEREFaVGpEOXFyMkdPWEktNE41aUIzY2U3enZDX1dmTTZkQzJPNHh0WktQUV80M2ZTb2o0ZDBYUHR0YmIxRWlB?oc=5"
+  },
+  {
+   "time_utc": "2026-11-18T14:39+00:00",
+   "source": "Reuters",
+   "headline": "EXCLUSIVE: Saudis preparing for Yemen campaign to last well into 2027 - Reuters",
+   "summary": "EXCLUSIVE: Saudis preparing for Yemen campaign to last well into 2027  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNa0txUndxQmRJNU1nMUZSVFc5d29OSDkwSWMyOHB5VC1iVVZwY3IwaEs3VlRkbEtHVGRmazVueE1YSjA4N0N4OElZRVdfM0trQ0dnaVptanRtRWVoWERLMWlUUjlac2ozVlRjMWdqMDQ1ODBOZEtPb2FKVFA0UXJpeGdjck1OMDMzdEhhQ2piTDd4QnFXcm12Vlh2MHVKcXNQUTdJWVZlV1E?oc=5"
+  },
+  {
+   "time_utc": "2026-11-18T14:09+00:00",
+   "source": "CNBC",
+   "headline": "Small investor enthusiasm for Anthropic IPO to rival SpaceX debut",
+   "summary": "Anthropic is gearing up for a blockbuster initial public offering this week, and excitement among retail investors looks to be off the charts.",
+   "url": "https://www.cnbc.com/2026/11/18/anthropic-ipo-retail-investors.html"
+  },
+  {
+   "time_utc": "2026-11-18T14:06+00:00",
+   "source": "CNBC",
+   "headline": "Jim Cramer's top 10 things to watch in the stock market Wednesday",
+   "summary": "Can Nvidia hold these gains after earnings?",
+   "url": "https://www.cnbc.com/investingclub/2026/11/18/jim-cramers-top-10-things-to-watch-in-the-stock-market-wednesday.html"
+  },
+  {
+   "time_utc": "2026-11-18T14:02+00:00",
+   "source": "CNBC",
+   "headline": "Hims & Hers launches new peptide treatments — while admitting there's more to learn about efficacy",
+   "summary": "The telehealth company will now offer compounded forms of sermorelin, glutathione, NAD+,  vitamin B-12 and L-carnitine, none of which are approved by the FDA.",
+   "url": "https://www.cnbc.com/2026/11/18/hims-hers-peptides-plus-treatments.html"
+  },
+  {
+   "time_utc": "2026-11-18T13:19+00:00",
+   "source": "CNBC",
+   "headline": "Worried about the AI bubble popping? How investing pros say to adjust your strategy",
+   "summary": "Tech concentration and AI-stock volatility are rattling investors. Experts explain how to diversify without abandoning long-term stock exposure.",
+   "url": "https://www.cnbc.com/make-it/2026/11/18/how-to-diversify-your-portfolio-amid-ai-bubble-fears.html"
+  },
+  {
+   "time_utc": "2026-11-18T12:57+00:00",
+   "source": "Reuters",
+   "headline": "Luxury goods sales seen returning to growth in 2026, but outlook fragile - Reuters",
+   "summary": "Luxury goods sales seen returning to growth in 2026, but outlook fragile  Reuters",
+   "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPdWtJbHFlcVlYVkRpS01FLTFuaE9UWS1sN29vbXJmY09SWDN3QVQ4VEcxeTFleGhtYk5vZzl1UzhIdHIzSGhNdFlGMklmc0xkWjZpR0lrTHJXSW9sejlVSEtONUw3S3MwV3ZpUVhFeG10dk5idTI0a09wbFBCR2NTTVc2a1JDUktVek83WDlLa2FQdEt3aU1Xel9QN1VNUE5WMW50Y3JMcHRudnpDN1ROU0ZUaUxzR0pwZGhVNmEwQQ?oc=5"
+  }
+ ],
+ "voices": [
+  {
+   "name": "Donald Trump",
+   "role": "美国总统",
+   "sectors": "关税 / 制裁 / 能源 / 中概",
+   "headline": "Trump lands in China with key meetings with Xi and Putin on the agenda - NPR",
+   "source": "NPR",
+   "time_utc": "2026-11-18T10:32+00:00"
+  },
+  {
+   "name": "Scott Bessent",
+   "role": "财长",
+   "sectors": "美债 / 美元 / 关税",
+   "headline": "Bessent Takes Hawkish Turn in White House Debate on China - The New York Times",
+   "source": "The New York Times",
+   "time_utc": "2026-11-16T21:25+00:00"
+  },
+  {
+   "name": "Warren Buffett",
+   "role": "伯克希尔",
+   "sectors": "宽基 / 金融 / 消费",
+   "headline": "If a Bear Market Is Coming, History Says This Warren Buffett-Approved Investment Is the Smartest Buy - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-18T12:20+00:00"
+  },
+  {
+   "name": "Michael Burry",
+   "role": "Scion",
+   "sectors": "个股做空 / AI 估值",
+   "headline": "Michael Burry Donates Alphabet Shares, Then Buys the Software Stock Wall Street Fears Most - Yahoo Finance",
+   "source": "Yahoo Finance",
+   "time_utc": "2026-11-17T16:53+00:00"
+  },
+  {
+   "name": "Bill Ackman",
+   "role": "潘兴广场",
+   "sectors": "个股 / 美债",
+   "headline": "Bill Ackman Sold Over 2 Million Microsoft Shares In Q3 Months After Calling It 'Compellingly Cheap': What's Going On? - Benzinga",
+   "source": "Benzinga",
+   "time_utc": "2026-11-18T13:28+00:00"
+  },
+  {
+   "name": "Jamie Dimon",
+   "role": "摩根大通 CEO",
+   "sectors": "银行 / 信用 / 宏观",
+   "headline": "Jamie Dimon Declared the U.S. Will Hang On to Its Status as the World's Top Reserve Currency. Here's Why That Confidence Matters for Dollar-Denominated Assets JPMorgan Clients Hold. - The Motley Fool",
+   "source": "The Motley Fool",
+   "time_utc": "2026-11-17T12:00+00:00"
+  },
+  {
+   "name": "Elon Musk",
+   "role": "特斯拉 CEO",
+   "sectors": "TSLA / 自动驾驶 / AI",
+   "headline": "Elon Musk Says Grok Can ‘Do Your Accounting’ as SpaceXSI Adds Five Full-Time AI Bots, Cutting Invoice Pro - Benzinga",
+   "source": "Benzinga",
+   "time_utc": "2026-11-18T11:44+00:00"
+  }
+ ],
+ "sides": {
+  "P": {
+   "right": "P",
+   "z_min": 1.2,
+   "bp": 5538.88,
+   "rows_total": 608,
+   "ok": [
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 76.0,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.13611179854963945,
+     "ivhv": 1.1897884488604846,
+     "z": 1.4808007788275062,
+     "p_otm": 0.9335287012724036,
+     "income": 7.000000000000001,
+     "margin": 1201.4000000000005,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "P",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.692465043244578,
+       "flat": 0.4218121608501839,
+       "loss": 62.246504324457796,
+       "x_credit": 9.892357760636829,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.3204806981295647,
+       "flat": 1.0082545547157693,
+       "loss": 125.04806981295647,
+       "x_credit": 18.864009973279494,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.6365004323545747,
+       "buyback": 0.46069757474885265,
+       "flat": 0.23788442711100366,
+       "loss": 39.069757474885265,
+       "x_credit": 6.581393924983608,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "stop_alert": [
+      79.28,
+      80.07
+     ],
+     "assign_1": 7600,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 75.5,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.14015046979780882,
+     "ivhv": 1.2250915192116156,
+     "z": 1.6148033429121045,
+     "p_otm": 0.9500197847961696,
+     "income": 5.0,
+     "margin": 1149.4000000000008,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "P",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "−3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.5780044918051104,
+       "flat": 0.32477801543229745,
+       "loss": 52.80044918051103,
+       "x_credit": 11.560089836102208,
+       "skips_stop": true
+      },
+      {
+       "scenario": "−5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.124129983736701,
+       "flat": 0.8090884072426867,
+       "loss": 107.41299837367009,
+       "x_credit": 22.48259967473402,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 −1.9%",
+       "gap": 0.019,
+       "sigmas": 2.6365004323545747,
+       "buyback": 0.3810712562527332,
+       "flat": 0.17949341605052105,
+       "loss": 33.10712562527332,
+       "x_credit": 7.621425125054664,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "stop_alert": [
+      79.33,
+      80.07
+     ],
+     "assign_1": 7550,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔报价差": 40,
+    "⛔IV不贵": 33,
+    "⚠链不够宽": 24,
+    "z不够": 15,
+    "⛔基本面": 7,
+    "⛔利率敏感": 2,
+    "⛔财报": 2,
+    "⛔报价过期": 2
+   },
+   "main_cause": {
+    "INTC": "⛔基本面",
+    "RIOT": "⛔基本面",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔报价差",
+    "XLE": "⛔IV不贵",
+    "SLV": "⛔IV不贵",
+    "USO": "⛔IV不贵",
+    "SMCI": "⛔报价差",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔报价差",
+    "GDX": "⛔IV不贵",
+    "UBER": "z不够",
+    "NKE": "z不够",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔基本面",
+    "PFE": "⛔报价差",
+    "RIVN": "⛔基本面",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔IV不贵",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "z不够",
+    "CLF": "⛔基本面",
+    "KRE": "⛔报价差",
+    "F": "z不够",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔报价过期",
+    "DIS": "⛔报价差",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔报价差",
+    "EEM": "⛔报价差",
+    "BMY": "⛔IV不贵",
+    "WFC": "z不够",
+    "C": "⛔报价差",
+    "DKNG": "⛔基本面",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔报价差",
+    "CMCSA": "⛔报价过期",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔报价差",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔报价差",
+    "MP": "⛔基本面",
+    "SLB": "⛔报价差",
+    "SCHW": "z不够",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔报价差",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  },
+  "C": {
+   "right": "C",
+   "z_min": 1.2,
+   "bp": 5538.88,
+   "rows_total": 798,
+   "ok": [
+    {
+     "ticker": "USO",
+     "expiry": "2026-12-11",
+     "strike": 160.0,
+     "bid": 0.99,
+     "ask": 1.2,
+     "iv": 0.49846847497908786,
+     "ivhv": 1.118394603946798,
+     "z": 1.2694955848675744,
+     "p_otm": 0.8926389451134877,
+     "income": 99.0,
+     "margin": 1478.8,
+     "spread": 0.19178082191780818,
+     "mark": "✅",
+     "spot": 137.98,
+     "t": 0.06360109081684424,
+     "right": "C",
+     "hv30": 0.4457,
+     "move": {
+      "worst_down": -0.0978,
+      "worst_up": 0.1294,
+      "p01": -0.0873,
+      "p99": 0.0836,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0685107381458971,
+       "buyback": 3.367052681355858,
+       "flat": 1.7572233331265075,
+       "loss": 237.70526813558578,
+       "x_credit": 3.401063314500867,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.780851230243162,
+       "buyback": 4.138596303812619,
+       "flat": 2.340005121303758,
+       "loss": 314.8596303812619,
+       "x_credit": 4.180400306881434,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +12.9%",
+       "gap": 0.1294,
+       "sigmas": 4.608842983869303,
+       "buyback": 8.334870527206519,
+       "flat": 6.005178820320488,
+       "loss": 734.4870527206518,
+       "x_credit": 8.419061138592443,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      99,
+      297,
+      594
+     ],
+     "stop_alert": [
+      143.24,
+      138.23
+     ],
+     "assign_1": 16000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T06:41+00:00",
+       "source": "Benzinga",
+       "headline": "Reported Earlier, 'Russian petrol imports hit record as Ukraine strikes refineries; Shipments a ‘remarkable reversal’ from country’s traditional role as fuel exporter' - FT"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-18T03:50+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Commodities: Copper Hits 6-Month Low; Improving Supply Weighs On Oil"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 49.0,
+     "bid": 0.16,
+     "ask": 0.18,
+     "iv": 0.4936360763433648,
+     "ivhv": 1.1097933371028885,
+     "z": 1.626273959963645,
+     "p_otm": 0.9386098439270946,
+     "income": 16.0,
+     "margin": 423.49899999999997,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.6624154105083555,
+       "flat": 0.28910046059102346,
+       "loss": 50.24154105083555,
+       "x_credit": 4.140096315677222,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.8314279153005053,
+       "flat": 0.39918999360458773,
+       "loss": 67.14279153005053,
+       "x_credit": 5.196424470628158,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 1.263556260816987,
+       "flat": 0.7160895532557152,
+       "loss": 110.35562608169872,
+       "x_credit": 7.897226630106169,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      16,
+      48,
+      96
+     ],
+     "stop_alert": [
+      42.22,
+      40.75
+     ],
+     "assign_1": 4900,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 49.5,
+     "bid": 0.14,
+     "ask": 0.17,
+     "iv": 0.5034126320855674,
+     "ivhv": 1.131773003789495,
+     "z": 1.6913375635188583,
+     "p_otm": 0.9447161617552979,
+     "income": 14.000000000000002,
+     "margin": 421.4989999999999,
+     "spread": 0.19354838709677416,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.6260216569712247,
+       "flat": 0.2634637497860082,
+       "loss": 48.602165697122466,
+       "x_credit": 4.471583264080176,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.7853011693059315,
+       "flat": 0.36393191076059317,
+       "loss": 64.53011693059315,
+       "x_credit": 5.609294066470939,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 1.1931443499907584,
+       "flat": 0.6542987674852796,
+       "loss": 105.31443499907583,
+       "x_credit": 8.52245964279113,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      14,
+      42,
+      84
+     ],
+     "stop_alert": [
+      42.12,
+      40.75
+     ],
+     "assign_1": 4950,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 50.0,
+     "bid": 0.13,
+     "ask": 0.15,
+     "iv": 0.5117356100086763,
+     "ivhv": 1.1504847347317364,
+     "z": 1.7589041585777805,
+     "p_otm": 0.95049299755171,
+     "income": 13.0,
+     "margin": 420.49899999999997,
+     "spread": 0.14285714285714277,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.5881090297718536,
+       "flat": 0.23827703342968842,
+       "loss": 45.810902977185364,
+       "x_credit": 4.523915613629644,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.737843322559792,
+       "flat": 0.3295993103637711,
+       "loss": 60.7843322559792,
+       "x_credit": 5.675717865844554,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 1.1220880929880632,
+       "flat": 0.5948726505482469,
+       "loss": 99.20880929880632,
+       "x_credit": 8.631446869138948,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "stop_alert": [
+      42.19,
+      40.75
+     ],
+     "assign_1": 5000,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 50.5,
+     "bid": 0.11,
+     "ask": 0.13,
+     "iv": 0.5142187874353634,
+     "ivhv": 1.1560674177953314,
+     "z": 1.845026112734617,
+     "p_otm": 0.9571964351057767,
+     "income": 11.0,
+     "margin": 418.499,
+     "spread": 0.1666666666666667,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.5343847259952597,
+       "flat": 0.20625705931781368,
+       "loss": 42.438472599525966,
+       "x_credit": 4.858042963593269,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.6727423852232928,
+       "flat": 0.2871421522292925,
+       "loss": 56.27423852232928,
+       "x_credit": 6.115839865666298,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 1.0300031729756451,
+       "flat": 0.524794966184424,
+       "loss": 92.00031729756452,
+       "x_credit": 9.3636652088695,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      11,
+      33,
+      66
+     ],
+     "stop_alert": [
+      42.13,
+      40.75
+     ],
+     "assign_1": 5050,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 51.0,
+     "bid": 0.1,
+     "ask": 0.12,
+     "iv": 0.5234794482904228,
+     "ivhv": 1.1768872488543678,
+     "z": 1.9053284549654466,
+     "p_otm": 0.9612661961884026,
+     "income": 10.0,
+     "margin": 417.4989999999999,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.506844563998798,
+       "flat": 0.18887747898951357,
+       "loss": 40.6844563998798,
+       "x_credit": 5.06844563998798,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.6376155379578661,
+       "flat": 0.26293802593859805,
+       "loss": 53.76155379578661,
+       "x_credit": 6.376155379578661,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 0.9755953695816277,
+       "flat": 0.4811631410848012,
+       "loss": 87.55953695816278,
+       "x_credit": 9.755953695816277,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "stop_alert": [
+      42.11,
+      40.75
+     ],
+     "assign_1": 5100,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 52.0,
+     "bid": 0.09,
+     "ask": 0.1,
+     "iv": 0.5436440699974425,
+     "ivhv": 1.2222213803899338,
+     "z": 2.0136459582889654,
+     "p_otm": 0.9676051955558267,
+     "income": 9.0,
+     "margin": 416.49899999999997,
+     "spread": 0.10526315789473693,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.46402181752875915,
+       "flat": 0.16223868555446508,
+       "loss": 37.40218175287592,
+       "x_credit": 5.155797972541769,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.5821789574529319,
+       "flat": 0.2253546002502973,
+       "loss": 49.21789574529319,
+       "x_credit": 6.468655082810355,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 0.8875170759607816,
+       "flat": 0.41175841200094254,
+       "loss": 79.75170759607816,
+       "x_credit": 9.861300844008685,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      9,
+      27,
+      54
+     ],
+     "stop_alert": [
+      42.22,
+      40.75
+     ],
+     "assign_1": 5200,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 52.5,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.5494577582261968,
+     "ivhv": 1.2352917226308382,
+     "z": 2.0808876844865702,
+     "p_otm": 0.9711312007503572,
+     "income": 8.0,
+     "margin": 415.49899999999997,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.4334276232819594,
+       "flat": 0.14562757638582147,
+       "loss": 35.34276232819594,
+       "x_credit": 5.417845291024492,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.5443093577737219,
+       "flat": 0.2027637352094933,
+       "loss": 46.43093577737219,
+       "x_credit": 6.803866972171524,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 0.8316282269201309,
+       "flat": 0.3724494867658512,
+       "loss": 75.1628226920131,
+       "x_credit": 10.395352836501637,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "stop_alert": [
+      42.2,
+      40.75
+     ],
+     "assign_1": 5250,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 53.0,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.5658724695823965,
+     "ivhv": 1.272195300320136,
+     "z": 2.106504812044585,
+     "p_otm": 0.9721347485842005,
+     "income": 8.0,
+     "margin": 415.49899999999997,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.4345379606240565,
+       "flat": 0.14382379466469786,
+       "loss": 35.453796062405644,
+       "x_credit": 5.4317245078007055,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.5429587949351156,
+       "flat": 0.1988464690606202,
+       "loss": 46.295879493511556,
+       "x_credit": 6.7869849366889445,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 0.8224626859310185,
+       "flat": 0.36107026178485313,
+       "loss": 74.24626859310185,
+       "x_credit": 10.28078357413773,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "stop_alert": [
+      42.23,
+      40.75
+     ],
+     "assign_1": 5300,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "SLV",
+     "expiry": "2026-12-11",
+     "strike": 53.5,
+     "bid": 0.07,
+     "ask": 0.08,
+     "iv": 0.569672100181458,
+     "ivhv": 1.2807376353000406,
+     "z": 2.177860347600067,
+     "p_otm": 0.9753904891577575,
+     "income": 7.000000000000001,
+     "margin": 414.499,
+     "spread": 0.13333333333333325,
+     "mark": "✅",
+     "spot": 40.7499,
+     "t": 0.06360102739726027,
+     "right": "C",
+     "hv30": 0.4448,
+     "move": {
+      "worst_down": -0.2854,
+      "worst_up": 0.0905,
+      "p01": -0.1153,
+      "p99": 0.0758,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 1.0706727427869298,
+       "buyback": 0.4023093945523737,
+       "flat": 0.1275972352439454,
+       "loss": 33.23093945523737,
+       "x_credit": 5.747277065033909,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 1.7844545713115498,
+       "buyback": 0.503610921449476,
+       "flat": 0.17706248526630164,
+       "loss": 43.36109214494759,
+       "x_credit": 7.1944417349925125,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +9.0%",
+       "gap": 0.0905,
+       "sigmas": 3.2298627740739048,
+       "buyback": 0.7657325088673614,
+       "flat": 0.32393444466994037,
+       "loss": 69.57325088673613,
+       "x_credit": 10.939035840962305,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      7,
+      21,
+      42
+     ],
+     "stop_alert": [
+      42.2,
+      40.75
+     ],
+     "assign_1": 5350,
+     "pressure": [],
+     "news": [
+      {
+       "time_utc": "2026-11-18T10:46+00:00",
+       "source": "Yahoo",
+       "headline": "GLD, SLV Sink To Near 14-Month Lows – But This Commodities Expert Sees A ‘Relative Bright Spot’"
+      },
+      {
+       "time_utc": "2026-11-18T04:10+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Charting The Year Ahead: Investment Ideas For 2027"
+      },
+      {
+       "time_utc": "2026-11-17T23:48+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Silver Linings Can Be Hard To Find"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 83.5,
+     "bid": 0.13,
+     "ask": 0.14,
+     "iv": 0.13204669357088417,
+     "ivhv": 1.1542543144308057,
+     "z": 1.2863661005882874,
+     "p_otm": 0.8990623098006986,
+     "income": 13.0,
+     "margin": 1271.3999999999994,
+     "spread": 0.07407407407407414,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "C",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.9774299831399311,
+       "flat": 0.663876154071108,
+       "loss": 84.74299831399311,
+       "x_credit": 7.51869217799947,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.7517487564372303,
+       "flat": 1.423254184302209,
+       "loss": 162.17487564372303,
+       "x_credit": 13.47499043413254,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.5948714781595026,
+       "buyback": 0.6625180788001046,
+       "flat": 0.3905048253466816,
+       "loss": 53.25180788001046,
+       "x_credit": 5.096292913846958,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      13,
+      39,
+      78
+     ],
+     "stop_alert": [
+      80.95,
+      80.07
+     ],
+     "assign_1": 8350,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 84.0,
+     "bid": 0.1,
+     "ask": 0.11,
+     "iv": 0.13638241085108715,
+     "ivhv": 1.1921539410060067,
+     "z": 1.4270269819261536,
+     "p_otm": 0.9207757569805625,
+     "income": 10.0,
+     "margin": 1218.3999999999992,
+     "spread": 0.09523809523809518,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "C",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.8440463967906631,
+       "flat": 0.5369958966285253,
+       "loss": 74.4046396790663,
+       "x_credit": 8.44046396790663,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.535951774901534,
+       "flat": 1.1901735500758122,
+       "loss": 143.5951774901534,
+       "x_credit": 15.359517749015339,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.5948714781595026,
+       "buyback": 0.5680706407288731,
+       "flat": 0.3105699239955051,
+       "loss": 46.807064072887314,
+       "x_credit": 5.680706407288731,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      10,
+      30,
+      60
+     ],
+     "stop_alert": [
+      80.92,
+      80.07
+     ],
+     "assign_1": 8400,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 84.5,
+     "bid": 0.08,
+     "ask": 0.09,
+     "iv": 0.141779350676427,
+     "ivhv": 1.239329988430306,
+     "z": 1.5473506468907834,
+     "p_otm": 0.9362381203548478,
+     "income": 8.0,
+     "margin": 1166.3999999999992,
+     "spread": 0.11764705882352937,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "C",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.7407112577236035,
+       "flat": 0.4415345534048676,
+       "loss": 66.07112577236035,
+       "x_credit": 9.258890721545043,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.3588550083661488,
+       "flat": 1.0010083081925458,
+       "loss": 127.88550083661488,
+       "x_credit": 16.98568760457686,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.5948714781595026,
+       "buyback": 0.4974754053892134,
+       "flat": 0.2530456375038206,
+       "loss": 41.74754053892134,
+       "x_credit": 6.218442567365168,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      8,
+      24,
+      48
+     ],
+     "stop_alert": [
+      80.9,
+      80.07
+     ],
+     "assign_1": 8450,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 85.0,
+     "bid": 0.06,
+     "ask": 0.07,
+     "iv": 0.14514382595826708,
+     "ivhv": 1.2687397373974394,
+     "z": 1.6820788498120993,
+     "p_otm": 0.950592846773698,
+     "income": 6.0,
+     "margin": 1114.3999999999994,
+     "spread": 0.15384615384615397,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "C",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.6350473924714493,
+       "flat": 0.3525366302820707,
+       "loss": 57.50473924714492,
+       "x_credit": 10.584123207857488,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.183797105680938,
+       "flat": 0.8260834378271547,
+       "loss": 112.3797105680938,
+       "x_credit": 19.729951761348968,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.5948714781595026,
+       "buyback": 0.42305150643724687,
+       "flat": 0.19852454616969517,
+       "loss": 36.30515064372469,
+       "x_credit": 7.0508584406207815,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      6,
+      18,
+      36
+     ],
+     "stop_alert": [
+      80.86,
+      80.07
+     ],
+     "assign_1": 8500,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    },
+    {
+     "ticker": "TLT",
+     "expiry": "2026-12-11",
+     "strike": 85.5,
+     "bid": 0.05,
+     "ask": 0.06,
+     "iv": 0.15128694489784356,
+     "ivhv": 1.3224383295266045,
+     "z": 1.777445832137544,
+     "p_otm": 0.9589691208535792,
+     "income": 5.0,
+     "margin": 1063.3999999999994,
+     "spread": 0.18181818181818174,
+     "mark": "✅",
+     "spot": 80.07,
+     "t": 0.06360105910705226,
+     "right": "C",
+     "hv30": 0.1144,
+     "move": {
+      "worst_down": -0.019,
+      "worst_up": 0.0187,
+      "p01": -0.0158,
+      "p99": 0.0137,
+      "days": 251
+     },
+     "gap": [
+      {
+       "scenario": "+3%",
+       "gap": 0.03,
+       "sigmas": 4.162895419507223,
+       "buyback": 0.5683005830510695,
+       "flat": 0.29602712343802295,
+       "loss": 51.83005830510694,
+       "x_credit": 11.366011661021389,
+       "skips_stop": true
+      },
+      {
+       "scenario": "+5%",
+       "gap": 0.05,
+       "sigmas": 6.938159032512039,
+       "buyback": 1.0598584650588165,
+       "flat": 0.700673939288567,
+       "loss": 100.98584650588165,
+       "x_credit": 21.19716930117633,
+       "skips_stop": true
+      },
+      {
+       "scenario": "一年最差 +1.9%",
+       "gap": 0.0187,
+       "sigmas": 2.5948714781595026,
+       "buyback": 0.3796106408053195,
+       "flat": 0.16656207823715263,
+       "loss": 32.96106408053195,
+       "x_credit": 7.5922128161063895,
+       "skips_stop": true
+      }
+     ],
+     "stop_loss_1_3_6": [
+      5,
+      15,
+      30
+     ],
+     "stop_alert": [
+      80.84,
+      80.07
+     ],
+     "assign_1": 8550,
+     "pressure": [],
+     "fed_channel": "Fed Gov. Waller: 'Shock' Rate Hike May Be Needed With Inflation 'Spreading Out' - Investor's Business Daily",
+     "news": [
+      {
+       "time_utc": "2026-11-18T11:00+00:00",
+       "source": "Yahoo",
+       "headline": "When SPY Falls 10%, Do Treasury Bonds Still Help?"
+      },
+      {
+       "time_utc": "2026-11-18T10:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "Economic Momentum Continues Despite Market Turbulence"
+      },
+      {
+       "time_utc": "2026-11-18T07:25+00:00",
+       "source": "SeekingAlpha",
+       "headline": "2027 Macroeconomic Outlook: Testing The Limits Of Resilience"
+      }
+     ]
+    }
+   ],
+   "reasons_by_ticker": {
+    "⛔IV不贵": 41,
+    "⛔报价差": 35,
+    "z不够": 11,
+    "⚠链不够宽": 3,
+    "⛔利率敏感": 2,
+    "⛔财报": 2,
+    "⛔报价过期": 2
+   },
+   "main_cause": {
+    "INTC": "⛔IV不贵",
+    "RIOT": "⛔IV不贵",
+    "DAL": "⛔IV不贵",
+    "HYG": "⛔IV不贵",
+    "XLE": "⛔IV不贵",
+    "SMCI": "⛔IV不贵",
+    "UAL": "⛔IV不贵",
+    "SOFI": "⛔利率敏感",
+    "HOOD": "⛔利率敏感",
+    "ORCL": "⛔IV不贵",
+    "XLF": "⛔IV不贵",
+    "GDX": "⛔IV不贵",
+    "UBER": "z不够",
+    "NKE": "⛔IV不贵",
+    "BABA": "⛔财报",
+    "WMT": "⛔财报",
+    "AAL": "⛔IV不贵",
+    "PFE": "⛔报价差",
+    "RIVN": "⛔报价差",
+    "XLP": "⛔IV不贵",
+    "OXY": "⛔IV不贵",
+    "FXI": "⛔报价差",
+    "EWZ": "⛔IV不贵",
+    "BAC": "⛔IV不贵",
+    "CLF": "⛔IV不贵",
+    "KRE": "⛔报价差",
+    "F": "⛔报价差",
+    "XYZ": "⛔IV不贵",
+    "KHC": "⛔IV不贵",
+    "CVS": "⛔报价过期",
+    "DIS": "⛔报价差",
+    "LYFT": "⛔IV不贵",
+    "CCL": "⛔IV不贵",
+    "EEM": "⛔报价差",
+    "BMY": "⛔报价差",
+    "WFC": "⛔报价差",
+    "C": "⛔IV不贵",
+    "DKNG": "⛔IV不贵",
+    "VZ": "⛔IV不贵",
+    "PYPL": "⛔报价差",
+    "GM": "⛔IV不贵",
+    "T": "⛔IV不贵",
+    "KO": "⛔IV不贵",
+    "CMCSA": "⛔报价过期",
+    "PEP": "⛔IV不贵",
+    "ARKK": "⛔IV不贵",
+    "JD": "⛔IV不贵",
+    "UPS": "⛔IV不贵",
+    "PDD": "⛔报价差",
+    "MP": "⛔IV不贵",
+    "SLB": "⛔IV不贵",
+    "SCHW": "z不够",
+    "DVN": "⛔IV不贵",
+    "NCLH": "⛔IV不贵",
+    "XLU": "⛔报价差",
+    "BIDU": "⛔报价差",
+    "NEM": "⛔IV不贵"
+   },
+   "term_gate_tickers": 0
+  }
+ },
+ "verification": {
+  "report": "2026-11-18_1552Z.md",
+  "report_sha256": "4d330c3925b912f90ff8be8f0f9fb1a64cfa1c0dcc2a240aa8f4f9f16f4d5dce",
+  "pass": true,
+  "checks": [
+   {
+    "id": "V1",
+    "check": "首行是结论",
+    "pass": true,
+    "evidence": "结论：今天不开新仓：尾部灯 🔴 红灯"
+   },
+   {
+    "id": "V2",
+    "check": "结论与闸门一致（不能开时必须写不开）",
+    "pass": true,
+    "evidence": "can_open=False why_not=['尾部灯 🔴 红灯']｜首行：结论：今天不开新仓：尾部灯 🔴 红灯"
+   },
+   {
+    "id": "V3",
+    "check": "有「今日消息面」与「平台核实」两节",
+    "pass": true,
+    "evidence": ""
+   },
+   {
+    "id": "V4",
+    "check": "没有残留【待判断】占位",
+    "pass": true,
+    "evidence": "残留 0 处"
+   },
+   {
+    "id": "V5",
+    "check": "报告里的合约都在工具过关行里（防编造 / 防带 ⛔ 的合约混进来）",
+    "pass": true,
+    "evidence": "不在底稿：[]"
+   },
+   {
+    "id": "V6",
+    "check": "合约收入与底稿一致（±$1）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V7",
+    "check": "每个合约带 📰 行",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V12",
+    "check": "当天公布的宏观数据写出了实际值",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V11",
+    "check": "每个合约写明买卖方向与 put / call（不能只写代码）",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V8",
+    "check": "每个合约带跳空压力",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V9",
+    "check": "每个合约带 1/3/6 张止损亏损",
+    "pass": true,
+    "evidence": []
+   },
+   {
+    "id": "V10",
+    "check": "数据新鲜，或报告明说不新鲜",
+    "pass": true,
+    "evidence": {
+     "options_chain.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-18T15:51:36+00:00"
+     },
+     "stock_prices.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-18T15:52:14.941127Z"
+     },
+     "news.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-18T15:51:37+00:00"
+     },
+     "fed_speak.json": {
+      "trigger_ok": true,
+      "updated_at": "2026-11-18T15:52:46+00:00"
+     },
+     "quote_age_min": 1.2
+    }
+   }
+  ]
+ }
+}

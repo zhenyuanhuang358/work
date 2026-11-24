@@ -1,13 +1,18 @@
 {
- "updated_at": "2026-11-14T06:03:10+00:00",
+ "updated_at": "2026-11-23T16:05:35+00:00",
  "window": [
-  "2026-11-14",
-  "2027-01-13"
+  "2026-11-23",
+  "2027-01-22"
  ],
  "tickers": {
   "INTC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-20",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "TLT": {
@@ -57,7 +62,12 @@
   },
   "UAL": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-18",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "SOFI": {
@@ -107,22 +117,12 @@
   },
   "BABA": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-19",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "WMT": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-19",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "AAL": {
@@ -162,7 +162,12 @@
   },
   "BAC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-15",
+     "hour": "bmo"
+    }
+   ],
    "errors": []
   },
   "CLF": {
@@ -197,12 +202,7 @@
   },
   "DIS": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-17",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "LYFT": {
@@ -232,12 +232,22 @@
   },
   "WFC": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-14",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "C": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-14",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "DKNG": {
@@ -297,12 +307,7 @@
   },
   "PDD": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-16",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "MP": {
@@ -312,12 +317,22 @@
   },
   "SLB": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-21",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "SCHW": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-19",
+     "hour": "bmo"
+    }
+   ],
    "errors": []
   },
   "DVN": {
@@ -337,12 +352,7 @@
   },
   "BIDU": {
    "source": "finnhub",
-   "earnings": [
-    {
-     "date": "2026-11-16",
-     "hour": "bmo"
-    }
-   ],
+   "earnings": [],
    "errors": []
   },
   "NEM": {

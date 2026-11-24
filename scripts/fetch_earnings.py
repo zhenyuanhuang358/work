@@ -44,7 +44,26 @@ def main():
     to = (date.today() + timedelta(days=60)).isoformat()
     out = {"updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
            "window": [frm, to], "tickers": {}}
+    calendar = None
+    if TOKEN:
+        try:
+            response = requests.get("https://finnhub.io/api/v1/calendar/earnings",
+                                    params={"from": frm, "to": to, "token": TOKEN}, timeout=20)
+            response.raise_for_status()
+            payload = response.json()
+            calendar = payload["earningsCalendar"]
+            if not isinstance(calendar, list):
+                raise ValueError("earningsCalendar 必须为列表")
+        except (requests.RequestException, ValueError, KeyError) as error:
+            calendar = None
+            out["bulk_error"] = f"{type(error).__name__}: bulk calendar unavailable"
     for t in w["tickers"]:
+        if calendar is not None:
+            out["tickers"][t] = {"source": "finnhub", "earnings": [
+                {"date": event["date"], "hour": event.get("hour") or ""}
+                for event in calendar if event.get("symbol") == t and frm <= event.get("date", "") <= to
+            ], "errors": []}
+            continue
         time.sleep(1.1)  # Finnhub 免费档 60 次/分钟（关注清单 60 只）
         errs = []
         for name, fn in (("finnhub", from_finnhub), ("yfinance", from_yf)):
