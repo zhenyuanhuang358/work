@@ -11,10 +11,10 @@
 | 门禁 | 无 | `tools/dr_state.py` G0–G4 全过（假设/覆盖/冲突/红队/交付） |
 | 交付 | 报告 | 报告 + `decision_memo.md`（3 选项 + falsifier + 盲区影响）+ 三层切分（硬事实/推演/盲区） |
 | 机械检查 | Critic R2 抓到成本桥/页码 | `merlin_check` 0 FAIL、`report_check --record` 0 FAIL |
-| Critic | R1 CONDITIONAL → R2 CONDITIONAL（用户接受） | R1 CONDITIONAL（C7 引文/H3/成本桥/口径）→ 修 → R2 **REWRITE**（跨文件传播不一致：冲突表旧数、H3 两套状态、条件漏客单）→ 已修 P0/P1，未复评（两轮规则停） |
+| Critic | R1 CONDITIONAL → R2 CONDITIONAL（用户接受） | R1 CONDITIONAL → R2 REWRITE（跨文件传播不一致）→ 加 dr_consistency 一致性门禁 + 修 P0/P1 → R3 CONDITIONAL（仅剩增量口径/40–90 依据、PDF 版式）→ 已修，未复评（停止第三轮后） |
 | 增量成本 | — | +约 30–40% 时间（假设/冲突/红队/calc/门禁），换来可证伪、可回溯、可审计 |
 
 ## 首测结论
 - **优势已验证**：Decision Mode 产出「决策选项 + falsifier + 盲区影响」，旧 Mode B 只给研究结论；冲突表当场抓出「大排档回收期 vs 单店收入」口径不闭合（旧版不会发现）；calc.json 让数字可复算。
 - **暴露的缺口**：`dr_state` 门禁只查文件存在/字段完整，**不查跨文件数字一致性**——Critic R2 正是靠人工抽原文抓到 6 处旧数残留。下一版必须加「一致性门禁」：report/conflicts/memo/hypotheses 的同一指标必须同值。
-- **当前状态**：v0.1 可跑、可审计，但 Critic R2 判 REWRITE，**不能作为客户交付件**；作为「测试+对比」已完成。
+- **当前状态**：v0.2 已加 `dr_consistency`（facts.json 单一事实表，跨 report/conflicts/memo/hypotheses/redteam 校验），修完 R3 的 2 项 P1；机械+一致性 0 FAIL，Critic R3 仍为 CONDITIONAL（未复评）。作为「测试+对比」已完成；客户交付前建议再做一次终审。

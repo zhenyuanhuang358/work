@@ -1,0 +1,113 @@
+{
+ "facts": [
+  {
+   "id": "F1",
+   "desc": "2027 大排档门店区间",
+   "canonical": [
+    "40–90 家",
+    "40–90"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": [
+    "<30 店",
+    "30–99 家",
+    "高双位数"
+   ]
+  },
+  {
+   "id": "F2",
+   "desc": "2027 大排档收入体量",
+   "canonical": [
+    "4–9 亿元"
+   ],
+   "must_in": [
+    "report",
+    "conflicts",
+    "memo"
+   ],
+   "stale": [
+    "3–9.9 亿"
+   ]
+  },
+  {
+   "id": "F3",
+   "desc": "相对 2026 底增量",
+   "canonical": [
+    "−2 至 +5 亿元"
+   ],
+   "must_in": [
+    "report",
+    "conflicts",
+    "memo"
+   ],
+   "stale": [
+    "增量 0–3 亿元",
+    "0–3 亿元",
+    "增量 4–9 亿"
+   ]
+  },
+  {
+   "id": "F4",
+   "desc": "核心经营利润率",
+   "canonical": [
+    "11.25%"
+   ],
+   "must_in": [
+    "report",
+    "conflicts",
+    "memo"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F5",
+   "desc": "2027 大排档 falsifier",
+   "canonical": [
+    "<40 店",
+    "&lt;40 店"
+   ],
+   "must_in": [
+    "report",
+    "hypotheses",
+    "memo",
+    "redteam"
+   ],
+   "stale": [
+    "<30 店"
+   ]
+  },
+  {
+   "id": "F6",
+   "desc": "其他收益及亏损同比",
+   "canonical": [
+    "3.32 亿",
+    "−3.32"
+   ],
+   "must_in": [
+    "report"
+   ],
+   "stale": [
+    "0.74pct"
+   ]
+  },
+  {
+   "id": "F7",
+   "desc": "2027 大排档目标口径",
+   "canonical": [
+    "无公告",
+    "无量化"
+   ],
+   "must_in": [
+    "conflicts",
+    "report"
+   ],
+   "stale": [
+    "高双位数",
+    "三位数"
+   ]
+  }
+ ]
+}

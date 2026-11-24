@@ -73,5 +73,12 @@
    "share_of_annual_rev_pct": 2.01
   }
  },
+ "dapaidang_delta": {
+  "stores_2026": "40-60",
+  "stores_2027": "40-90",
+  "delta_stores": "-20 至 +30",
+  "delta_rev_yi": "-2.0 至 +5.0",
+  "note": "配对极值：40→40=0；60→90=+30 家（+3 亿）；区间未配对时 -2 至 +5 亿"
+ },
  "annual_rev_2026_assumption_yi": 447
 }

@@ -25,6 +25,8 @@ out["store_scenarios"]={"2026_low":round(base*1.03),"2026_high":round(base*1.07)
                         "assumption":"2026 中单位数 3–7%、2027 加快 8–12%，非公司指引"}
 # 大排档情景（2026 年底 40–60 店；2027 40–90 店；单店年收入 1,000 万=H1 500 万×2）
 out["dapaidang"]={str(n):{"revenue_yi":round(n*1000/10000,1),"share_of_annual_rev_pct":round(n*1000/10000/447*100,2)} for n in (40,60,90)}
+out["dapaidang_delta"]={"stores_2026":"40-60","stores_2027":"40-90","delta_stores":"-20 至 +30",
+                        "delta_rev_yi":"-2.0 至 +5.0","note":"配对极值：40→40=0；60→90=+30 家（+3 亿）；区间未配对时 -2 至 +5 亿"}
 out["annual_rev_2026_assumption_yi"]=447
 json.dump(out,open('memory/state/research/haidilao_2027_dd/calc.json','w',encoding='utf-8'),ensure_ascii=False,indent=1)
 print(json.dumps(out,ensure_ascii=False,indent=1))

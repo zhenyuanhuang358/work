@@ -133,6 +133,10 @@ def gate(task, phase, confirm=False):
                 gaps.append(f"报告缺 claim 绑定：{miss[:8]}")
         if not os.path.exists(os.path.join(d, "decision_memo.md")):
             gaps.append("缺 decision_memo.md")
+        import subprocess as _sp
+        cp = _sp.run([sys.executable, "tools/dr_consistency.py", task], capture_output=True, text=True)
+        if cp.returncode != 0:
+            gaps.append("跨文件一致性未过：" + (cp.stdout.strip().splitlines() or ["见 dr_consistency.py"])[0])
         rounds = st.get("loops", {}).get("source_rounds", 0)
         if rounds > 2:
             gaps.append(f"补采轮次 {rounds} >2")
