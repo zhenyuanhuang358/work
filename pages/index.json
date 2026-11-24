@@ -662,5 +662,29 @@
   "title": null,
   "chars": 0,
   "error": "HTTPError('403 Client Error: Forbidden for url: https://hk.investing.com/news/stock-market-news/article-1652919')"
+ },
+ "https://iis.aastocks.com/20260323/12063694-0.PDF": {
+  "url": "https://iis.aastocks.com/20260323/12063694-0.PDF",
+  "fetched_at": "2026-11-24T06:58:30+00:00",
+  "file": "pages/iis_aastocks_com_20260323_12063694_0_pdf_a52316.txt",
+  "title": "12063694-0.PDF",
+  "chars": 73058,
+  "error": null
+ },
+ "https://data.eastmoney.com/notices/detail/06831/AN202608241828372361.html": {
+  "url": "https://data.eastmoney.com/notices/detail/06831/AN202608241828372361.html",
+  "fetched_at": "2026-11-24T06:58:33+00:00",
+  "file": "pages/data_eastmoney_com_notices_detail_06831_an202608241828372361_b1bc9c.txt",
+  "title": "公告正文 _ 数据中心 _ 东方财富网",
+  "chars": 552,
+  "error": null
+ },
+ "https://www.cninfo.com.cn/new/disclosure/detail?plate=hke&orgId=9900062827&stockCode=06831&announcementId=1225201526&announcementTime=2026-04-27%2003:18": {
+  "url": "https://www.cninfo.com.cn/new/disclosure/detail?plate=hke&orgId=9900062827&stockCode=06831&announcementId=1225201526&announcementTime=2026-04-27%2003:18",
+  "fetched_at": "2026-11-24T06:58:35+00:00",
+  "file": "pages/www_cninfo_com_cn_new_disclosure_detail_plate_hke_orgid_9900_f62de0.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
  }
 }
