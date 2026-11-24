@@ -529,7 +529,7 @@
  },
  "https://www.ifnews.com/news.html?aid=864161": {
   "url": "https://www.ifnews.com/news.html?aid=864161",
-  "fetched_at": "2026-11-24T05:09:46+00:00",
+  "fetched_at": "2026-11-24T05:10:29+00:00",
   "file": "pages/www_ifnews_com_news_html_aid_864161_96cb35.txt",
   "title": null,
   "chars": 0,
@@ -542,5 +542,21 @@
   "title": "【券商聚焦】华创证券维持海底捞推荐评级 指多元驱动切换_港股频道_证券之星",
   "chars": 487,
   "error": null
+ },
+ "https://4g.stockstar.com/detail/IG2026092500005654": {
+  "url": "https://4g.stockstar.com/detail/IG2026092500005654",
+  "fetched_at": "2026-11-24T05:10:38+00:00",
+  "file": "pages/4g_stockstar_com_detail_ig2026092500005654_3c67a7.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 268 字符（可能需要登录或被拦）')"
+ },
+ "https://finance.sina.com.cn/stock/hkstock/2026-08-25/doc-inhciyax1234567.shtml": {
+  "url": "https://finance.sina.com.cn/stock/hkstock/2026-08-25/doc-inhciyax1234567.shtml",
+  "fetched_at": "2026-11-24T05:10:39+00:00",
+  "file": "pages/finance_sina_com_cn_stock_hkstock_2026_08_25_doc_inhciyax123_acc5b4.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://finance.sina.com.cn/stock/hkstock/2026-08-25/doc-inhciyax1234567.shtml')"
  }
 }
