@@ -774,5 +774,13 @@
   "title": null,
   "chars": 0,
   "error": "RuntimeError('正文过短 254 字符（可能需要登录或被拦）')"
+ },
+ "https://www.hkej.com/landing/articleprint/id/4522508": {
+  "url": "https://www.hkej.com/landing/articleprint/id/4522508",
+  "fetched_at": "2026-11-24T07:04:04+00:00",
+  "file": "pages/www_hkej_com_landing_articleprint_id_4522508_e6a7cb.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 74 字符（可能需要登录或被拦）')"
  }
 }
