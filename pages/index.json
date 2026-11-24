@@ -686,5 +686,29 @@
   "title": null,
   "chars": 0,
   "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://www.163.com/dy/article/L5JFBE5F05198R91.html": {
+  "url": "https://www.163.com/dy/article/L5JFBE5F05198R91.html",
+  "fetched_at": "2026-11-24T06:59:57+00:00",
+  "file": "pages/www_163_com_dy_article_l5jfbe5f05198r91_html_25644c.txt",
+  "title": "绿茶餐厅，上半年赚了2.9亿元|坪效|新店_网易订阅",
+  "chars": 7786,
+  "error": null
+ },
+ "https://gmg.9fzt.com/report/HKSE/06831/804682173580.html": {
+  "url": "https://gmg.9fzt.com/report/HKSE/06831/804682173580.html",
+  "fetched_at": "2026-11-24T06:59:58+00:00",
+  "file": "pages/gmg_9fzt_com_report_hkse_06831_804682173580_html_04732c.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 193 字符（可能需要登录或被拦）')"
+ },
+ "https://wap.stockstar.com/detail/AN2026032300040450": {
+  "url": "https://wap.stockstar.com/detail/AN2026032300040450",
+  "fetched_at": "2026-11-24T07:00:00+00:00",
+  "file": "pages/wap_stockstar_com_detail_an2026032300040450_9a545a.txt",
+  "title": "绿茶集团(06831.HK)：截至2025年12月31日止年度的年度业绩公告内容摘要_公告简述_数据解析_股票_证券之星",
+  "chars": 639,
+  "error": null
  }
 }
