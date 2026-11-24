@@ -1,0 +1,35 @@
+{
+ "revenue_per_store_2025_wan": 7.8,
+ "revenue_per_store_2026h1_wan": 3.6,
+ "revenue_per_store_annualized_2026_wan": 7.3,
+ "store_growth_pct": 20.4,
+ "rev_growth_2026h1_pct": 16.8,
+ "cost_ratio_2025_pct": {
+  "raw": 31.67,
+  "staff": 26.09,
+  "rent_rou_dep": 5.09,
+  "dep_other": 5.02,
+  "util": 3.56,
+  "delivery": 4.26,
+  "other": 9.75
+ },
+ "delivery_share_2025_pct": 25.3,
+ "delivery_share_2026h1_pct": 24.3,
+ "ue_sanity": {
+  "capex_wan": [
+   210,
+   350
+  ],
+  "payback_m": 12.5,
+  "implied_annual_cash_wan": [
+   201.6,
+   336.0
+  ]
+ },
+ "store_scenarios_2027": {
+  "2026_new_200": 809,
+  "2027_new_213": 1015,
+  "if_2026_160": 769,
+  "if_2027_180": 949
+ }
+}

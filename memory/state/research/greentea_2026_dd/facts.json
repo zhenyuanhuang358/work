@@ -1,0 +1,122 @@
+{
+ "facts": [
+  {
+   "id": "F1",
+   "desc": "2025 门店/新开",
+   "canonical": [
+    "609",
+    "157"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F2",
+   "desc": "2026H1 门店/新开",
+   "canonical": [
+    "733",
+    "131"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F3",
+   "desc": "2026H1 同店",
+   "canonical": [
+    "−9.7%",
+    "-9.7%"
+   ],
+   "must_in": [
+    "report",
+    "conflicts",
+    "memo"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F4",
+   "desc": "外卖占比",
+   "canonical": [
+    "25.3%",
+    "24.3%"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F5",
+   "desc": "回收期",
+   "canonical": [
+    "12.6",
+    "12.5"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F6",
+   "desc": "全直营",
+   "canonical": [
+    "全直营"
+   ],
+   "must_in": [
+    "report",
+    "conflicts",
+    "memo"
+   ],
+   "stale": [
+    "加盟店配比"
+   ]
+  },
+  {
+   "id": "F7",
+   "desc": "翻台/客单",
+   "canonical": [
+    "2.9",
+    "54.4"
+   ],
+   "must_in": [
+    "report"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F8",
+   "desc": "公司整体回收期",
+   "canonical": [
+    "17.0"
+   ],
+   "must_in": [
+    "report",
+    "conflicts"
+   ],
+   "stale": []
+  },
+  {
+   "id": "F9",
+   "desc": "2027 门店测算",
+   "canonical": [
+    "1,015"
+   ],
+   "must_in": [
+    "report"
+   ],
+   "stale": [
+    "1,022"
+   ]
+  }
+ ]
+}

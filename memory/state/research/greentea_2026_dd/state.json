@@ -1,0 +1,37 @@
+{
+ "task": "greentea_2026_dd",
+ "decision": "投资机构是否按「2027 拓店加速 + 外卖/海外增长」给绿茶集团估值溢价",
+ "decision_confirmed": true,
+ "phase": "done",
+ "loops": {
+  "source_rounds": 0,
+  "reframes": 0
+ },
+ "budget": {
+  "minutes_max": 90,
+  "sources_max": 30,
+  "pages_max": 8
+ },
+ "gates": {
+  "frame": {
+   "pass": true,
+   "gaps": []
+  },
+  "source": {
+   "pass": true,
+   "gaps": []
+  },
+  "triangulate": {
+   "pass": true,
+   "gaps": []
+  },
+  "redteam": {
+   "pass": true,
+   "gaps": []
+  },
+  "synthesize": {
+   "pass": true,
+   "gaps": []
+  }
+ }
+}
