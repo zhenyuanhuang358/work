@@ -526,5 +526,21 @@
   "title": "海底捞：巨人转身快 | 界面 · 财经号",
   "chars": 3328,
   "error": null
+ },
+ "https://www.ifnews.com/news.html?aid=864161": {
+  "url": "https://www.ifnews.com/news.html?aid=864161",
+  "fetched_at": "2026-11-24T05:09:46+00:00",
+  "file": "pages/www_ifnews_com_news_html_aid_864161_96cb35.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 199 字符（可能需要登录或被拦）')"
+ },
+ "https://hk.stockstar.com/IG2026083100012886.shtml": {
+  "url": "https://hk.stockstar.com/IG2026083100012886.shtml",
+  "fetched_at": "2026-11-24T05:09:47+00:00",
+  "file": "pages/hk_stockstar_com_ig2026083100012886_shtml_dc18d0.txt",
+  "title": "【券商聚焦】华创证券维持海底捞推荐评级 指多元驱动切换_港股频道_证券之星",
+  "chars": 487,
+  "error": null
  }
 }
