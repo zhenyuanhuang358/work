@@ -558,5 +558,29 @@
   "title": null,
   "chars": 0,
   "error": "HTTPError('404 Client Error: Not Found for url: https://finance.sina.com.cn/stock/hkstock/2026-08-25/doc-inhciyax1234567.shtml')"
+ },
+ "https://www.cninfo.com.cn/new/disclosure/detail?plate=hke&orgId=9900037651&stockCode=06862&announcementId=1225028486&announcementTime=2026-03-24%2010:50": {
+  "url": "https://www.cninfo.com.cn/new/disclosure/detail?plate=hke&orgId=9900037651&stockCode=06862&announcementId=1225028486&announcementTime=2026-03-24%2010:50",
+  "fetched_at": "2026-11-24T05:11:17+00:00",
+  "file": "pages/www_cninfo_com_cn_new_disclosure_detail_plate_hke_orgid_9900_3488e1.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://www.thepaper.cn/newsDetail_forward_32890000": {
+  "url": "https://www.thepaper.cn/newsDetail_forward_32890000",
+  "fetched_at": "2026-11-24T05:11:20+00:00",
+  "file": "pages/www_thepaper_cn_newsdetail_forward_32890000_8880d5.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('404 Client Error: Not Found for url: https://www.thepaper.cn/newsDetail_forward_32890000')"
+ },
+ "https://www.haidilao-inc.com/": {
+  "url": "https://www.haidilao-inc.com/",
+  "fetched_at": "2026-11-24T05:11:22+00:00",
+  "file": "pages/www_haidilao_inc_com__c5eda7.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
  }
 }
