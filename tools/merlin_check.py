@@ -72,7 +72,7 @@ def domains(s):
     return hosts
 
 
-def run(report, outline=None, pdf=None):
+def run(report, outline=None, pdf=None, evidence=None):
     s = open(report, encoding="utf-8", errors="ignore").read()
     t = text_of(s)
     res = []
@@ -155,6 +155,22 @@ def run(report, outline=None, pdf=None):
         nq > 0 and len(hosts) >= 2 * nq and not no_primary,
         f"域名 {len(hosts)}（需 ≥{2 * nq}）；无一手来源 {no_primary[:8]}；每 Q 来源计数 {per_q[:12]}")
 
+    # M10 证据底账（FAIL，对齐 evidence-and-sources.md：每 Q ≥2 条、每条有 url+quote）
+    if evidence:
+        rows, err = [], None
+        try:
+            rows = [json.loads(l) for l in open(evidence, encoding="utf-8") if l.strip()]
+        except Exception as e:
+            err = repr(e)[:120]
+        per = {}
+        for r in rows:
+            per[r.get("q", "")] = per.get(r.get("q", ""), 0) + 1
+        need = [q.get("id") for q in (json.load(open(outline, encoding="utf-8")).get("questions", []) if outline else [])] or [f"Q{n}" for n, _ in ids]
+        weak = [q for q in need if per.get(q, 0) < 2]
+        bad = [r for r in rows if not str(r.get("url", "")).strip() or not str(r.get("quote", "")).strip()]
+        chk("M10", "FAIL", "证据底账：每 Q ≥2 条、每条有 url+quote", not err and not weak and not bad,
+            err or f"证据不足 {weak[:8]}；缺 url/quote {len(bad)} 条")
+
     # M9 专业口径（WARN）
     marks = [m for m in PRO_MARKS if m in t]
     chk("M9", "WARN", "专业口径标记 ≥5 类", len(marks) >= 5, f"命中 {marks}")
@@ -170,9 +186,10 @@ def main():
     ap.add_argument("report")
     ap.add_argument("--outline")
     ap.add_argument("--pdf")
+    ap.add_argument("--evidence")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
-    r = run(a.report, a.outline, a.pdf)
+    r = run(a.report, a.outline, a.pdf, a.evidence)
     if a.json:
         print(json.dumps(r, ensure_ascii=False, indent=1))
     else:
