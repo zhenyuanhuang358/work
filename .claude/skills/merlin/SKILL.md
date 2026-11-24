@@ -18,7 +18,8 @@ description: |
 
 | 交付形态 | 走 | 产物 |
 |---|---|---|
-| 客户提纲 / 逐条回答 / 投资尽调问题清单 | **Merlin 模式 B** | `reports/{slug}_Research_Report.html` |
+| **客户调研要支撑一个决策**（尽调/立项/访谈决策） | **Decision Mode**（`references/decision-mode.md` + `tools/dr_state.py`） | 报告 + 决策备忘 + 假设/证据/冲突/红队 |
+| 客户提纲 / 逐条回答（研究型） | **Merlin 模式 B** | `reports/{slug}_Research_Report.html` |
 | 访谈准备、给背景资料准备见面 | **Merlin 模式 A** | `reports/{slug}_Merlin_Brief.html` |
 | 品牌 / 渠道 / 消费行业调研，**没有客户提纲**（自己定问题） | restaurant-research | 单 HTML |
 | 多章 ≥20 页、要目录页码/存档 | huashu-report | PDF |
@@ -35,8 +36,9 @@ description: |
 | 「按这个提纲研究」「客户发来提纲」「帮我回答这些问题」「做个尽调报告」 | B |
 | 用户粘贴问题清单 / 问卷 / 提纲格式内容 | B |
 
-## 通用流程（两种模式都走）
+## 通用流程（两种模式都走；决策类先走 Decision Mode）
 
+0. **决策类先分型**：任务服务一个具体决策 → 加载 `references/decision-mode.md`，`dr_state init` 建状态机；否则走 Mode A/B。
 1. **M0 输入契约（硬性）**：模式 B 先 `python3 tools/merlin_outline.py init <task> --questions <提纲>`，填好每题「真实想问 / 决策用途 / 答案形态 / 数据需求」并 `check` 通过、交用户确认，再开搜。
 2. **Scout 落原文**：每 Q ≥2 来源、≥1 一手；打不开的站点走 `pages_request.json`+Actions；写 `evidence.jsonl`（q/claim/src/url/file/quote）。
 3. **作答**：每题四段——结论（第一句，数字/判断）→ 依据 → 含义 → 置信（高/中/低+理由）。

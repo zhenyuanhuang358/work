@@ -163,7 +163,7 @@ PoP、安全边际、定价缺口、三情景区间、「X 季度内会 Y」—�
 | 交付形态 | 走谁 | 产物 |
 |---|---|---|
 | **多章、≥20 页、要目录页码 / Exhibit 编号 / 跨页表头、PDF、供引用或存档** | **huashu-report** | `数据表.json` + `build.py` + PDF |
-| 客户提纲 / 访谈准备 / 逐条回答 / 投资尽调准备 | Merlin | 单篇 HTML（R-E6） |
+| 客户提纲 / 访谈准备 / 逐条回答 / 投资尽调准备 | Merlin（**决策类=Decision Mode**：`dr_state` 门禁 + 决策备忘） | 单篇 HTML（R-E6） |
 | 财报季度分析 | Earner | 单篇 HTML（14 节模板） |
 | 品牌 / 渠道 / 消费行业调研（非提纲非访谈） | restaurant-research | 单篇 HTML |
 | 横向翻页网页 PPT（杂志风 / 瑞士风 / 发布会分享页） | `guizang-ppt-skill` | 单 HTML |

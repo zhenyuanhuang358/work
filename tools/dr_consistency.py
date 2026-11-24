@@ -16,7 +16,7 @@ import sys
 
 ROOT = os.path.join("memory", "state", "research")
 ARTIFACTS = {
-    "report": ["reports/${task}_Research_Report.html"],
+    "report": ["report.html", "reports/${task}_Research_Report.html"],
     "conflicts": ["conflicts.json"],
     "memo": ["decision_memo.md"],
     "hypotheses": ["hypotheses.json"],

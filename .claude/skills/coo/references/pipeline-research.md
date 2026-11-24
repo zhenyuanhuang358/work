@@ -8,7 +8,8 @@
 
 | 用户给的 | 走 | 产物 |
 |---|---|---|
-| 客户提纲 / 逐条回答 / 投资尽调问题清单 | `merlin` 模式 B | `reports/{slug}_Research_Report.html` |
+| **客户调研要支撑一个决策**（投资尽调、立项评估、访谈决策） | **Merlin Decision Mode**（`merlin` + `dr_state` 门禁） | 报告 + `decision_memo.md` + 假设/证据/冲突/红队 |
+| 客户提纲 / 逐条回答（研究型，不服务单一决策） | `merlin` 模式 B | `reports/{slug}_Research_Report.html` |
 | 访谈准备、给背景资料准备访谈 | `merlin` 模式 A | `reports/{slug}_Merlin_Brief.html` |
 | 品牌 / 渠道 / 消费行业调研（非提纲非访谈） | `restaurant-research-skill` | `reports/{slug}_research_{YYYY}.html` |
 | 专家访谈 Q&A 格式 | `restaurant-research-skill` 的 expert-interview-format | 同上 |
@@ -21,9 +22,9 @@
 |---|---|---|---|
 | 1 | 继承 | `grep -n -A30 "<公司/品牌名>" memory/state/research-ledger.md` | 已有事实与推测（带日期）；只补新的 |
 | 2 | 合规预检 | 提纲里有没有直接问 6862/6831 未公开数据的题 → 有就标出，口径框写「仅公开口径」 | 题目清单 + 合规标记 |
-| 3 | 生产 | 调用对应 skill 完整跑完；答案前置（profile 1.1d），客户提纲推测数值交付单值（R-R6） | HTML 路径 |
+| 3 | 生产 | 决策类先 `python3 tools/dr_state.py init <task> --decision "..."`，按 Decision Mode 五阶段跑（G0–G4）；非决策类走 Mode B。答案前置（profile 1.1d），客户提纲推测数值交付单值（R-R6） | HTML 路径 + 决策备忘 |
 | 4 | G1 合规终检 | 见 gates.md | — |
-| 5 | G2 Critic | 子 agent 裁定 | 裁定 + flags |
+| 5 | G2 Critic | 子 agent 裁定；Decision Mode 另需 `dr_consistency` 跨文件一致性 0 失败 | 裁定 + flags |
 | 6 | G3 PDF | `node tools/render_pdf.js <html>` | PDF 路径 |
 | 7 | 交付 | `SendUserFile` HTML + PDF；附一行「高 X / 中 Y / 低 Z · Critic <裁定>」 | — |
 | 8 | G4 | 报告里带门槛+时点的推测（门店数、收入、同店）逐条登记，当场定档 | — |
