@@ -11,8 +11,8 @@ GOOD = """<html><body>
 <p>数据截止 2026-11-24。</p>
 <p>Q1 翻台率多少？ 【推测】翻台 5–6 次/天，来源：公司公告（pages/a.txt），置信 中。</p>
 <p>Q2 利润率多少？ 稳定期利润率 10%–15%，来源：年报与行业均值（pages/b.txt），置信 低。</p>
-<p>Q3 竞争对手是谁？ 主要对手人均 100 元，来源：研报（pages/c.txt），置信 中。</p>
-<p>分析师附注</p><p>来源索引：https://a.example/1 https://b.example/2 https://c.example/3</p>
+<p>Q3 竞争对手是谁？ 主要对手人均 100 元，来源：招股书原文 p1（pages/c.txt），置信 中。</p>
+<p>分析师附注</p><p>来源索引：https://a.example/1 https://b.example/2 https://c.example/3 https://d.example/4 https://e.example/5 https://f.example/6</p>
 <p><a href="https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report=x">反馈</a></p>
 </body></html>"""
 

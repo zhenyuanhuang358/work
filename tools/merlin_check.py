@@ -27,6 +27,7 @@ import sys
 META_STARTS = ("本报告", "需要说明的是", "公开渠道未见", "关于这个问题", "先说", "由于无法", "本报告未能核实")
 SRC_MARKS = ("来源：", "来源:", "http", "《", "原文", "pages/", "公告", "年报", "官网", "招股书", "访谈", "研报", "数据来源")
 PRO_MARKS = ("口径", "定义", "单位", "期间", "可比", "行业均值", "基准", "区间", "敏感性", "假设")
+FIRST_HAND = ("招股书", "年报", "公告", "中报", "ESG", "官网", "港交所", "10-K", "SEC", "业绩公告", "中期报告", "年度报告")
 SKIP_HOSTS = ("fonts.googleapis.com", "spontaneous-youtiao-b9cde9.netlify.app", "www.w3.org", "localhost", "127.0.0.1")
 
 
@@ -146,12 +147,13 @@ def run(report, outline=None, pdf=None):
     pdf_path = pdf or (os.path.splitext(report)[0] + ".pdf")
     chk("M7", "FAIL", "HTML 附 PDF", os.path.exists(pdf_path), pdf_path)
 
-    # M8 搜索广度（WARN）
+    # M8 搜索广度（FAIL，对齐 quality-rubric：域名 ≥ 2×题数，每 Q ≥1 一手来源）
     hosts = domains(s)
     per_q = [len([m for m in SRC_MARKS if m in seg]) for _, seg in segs]
-    chk("M8", "WARN", "搜索广度：真实域名 ≥ 题数，且每 Q ≥2 类来源",
-        nq > 0 and len(hosts) >= nq and all(c >= 2 for c in per_q),
-        f"域名 {len(hosts)}（题 {nq}）；每 Q 来源计数 {per_q[:12]}")
+    no_primary = [f"Q{n}" for n, seg in segs if not any(m in seg for m in FIRST_HAND)]
+    chk("M8", "FAIL", "搜索广度：真实域名 ≥2×题数，且每 Q ≥1 一手来源",
+        nq > 0 and len(hosts) >= 2 * nq and not no_primary,
+        f"域名 {len(hosts)}（需 ≥{2 * nq}）；无一手来源 {no_primary[:8]}；每 Q 来源计数 {per_q[:12]}")
 
     # M9 专业口径（WARN）
     marks = [m for m in PRO_MARKS if m in t]
