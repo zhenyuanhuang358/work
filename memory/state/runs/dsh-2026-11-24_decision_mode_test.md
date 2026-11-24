@@ -1,6 +1,6 @@
 # Decision Mode 首测 · 海底捞 2027 开店/副品牌（客户尽调）· 2026-11-24
 
-状态：完成（v0.2；Critic R1 CONDITIONAL→R2 REWRITE→R3 CONDITIONAL；R3 的 2 项 P1 已修，机械+一致性 0 FAIL，未再复评；作为测试与对比交付）
+状态：完成（v0.2.1；Critic R1→R2→R3→R4→R5；R5 终审：客户 HTML/PDF 可交付；calc 字段/facts must_in/一致性归一化已补齐；机械/一致性 0 FAIL）
 来源：用户 2026-11-24「先测试。对比跟之前有什么不同和优势」
 
 ## 产物

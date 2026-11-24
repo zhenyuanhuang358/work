@@ -55,7 +55,8 @@ def check(task):
             if txt is None:
                 issues.append(f"{f['id']}：缺产物 {key}")
                 continue
-            if not any(c in txt for c in canon):
+            norm = txt.replace("−", "-").replace("至", "~")
+            if not any(c in txt or c.replace("−", "-").replace("至", "~") in norm for c in canon):
                 issues.append(f"{f['id']}（{f.get('desc','')}）：{key} 找不到 canonical {canon[:2]}")
             for s in stale:
                 if s in txt:
