@@ -726,5 +726,37 @@
   "title": null,
   "chars": 0,
   "error": "RuntimeError('正文过短 4 字符（可能需要登录或被拦）')"
+ },
+ "https://www.stcn.com/article/detail/3693729.html": {
+  "url": "https://www.stcn.com/article/detail/3693729.html",
+  "fetched_at": "2026-11-24T07:02:01+00:00",
+  "file": "pages/www_stcn_com_article_detail_3693729_html_155b3f.txt",
+  "title": null,
+  "chars": 0,
+  "error": "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='www.stcn.com', port=443): Read timed out. (read timeout=40)\"))"
+ },
+ "http://news.winshang.com/html/074/1812.html": {
+  "url": "http://news.winshang.com/html/074/1812.html",
+  "fetched_at": "2026-11-24T07:02:41+00:00",
+  "file": "pages/news_winshang_com_html_074_1812_html_56c697.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: http://news.winshang.com/html/074/1812.html')"
+ },
+ "https://m.zhitongcaijing.com/article/share.html?content_id=1228191": {
+  "url": "https://m.zhitongcaijing.com/article/share.html?content_id=1228191",
+  "fetched_at": "2026-11-24T07:02:42+00:00",
+  "file": "pages/m_zhitongcaijing_com_article_share_html_content_id_1228191_0ece04.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 0 字符（可能需要登录或被拦）')"
+ },
+ "https://4g.stockstar.com/detail/AN2026092400031700": {
+  "url": "https://4g.stockstar.com/detail/AN2026092400031700",
+  "fetched_at": "2026-11-24T07:02:43+00:00",
+  "file": "pages/4g_stockstar_com_detail_an2026092400031700_bc11b4.txt",
+  "title": "绿茶集团(06831.HK)：2026中期报告内容摘要_公告简述_数据解析_股票_证券之星",
+  "chars": 593,
+  "error": null
  }
 }
