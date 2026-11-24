@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-23T16:08:02+00:00",
+ "updated_at": "2026-11-24T04:53:53+00:00",
  "source": "BLS API",
  "indicators": {
   "payrolls": {
@@ -34,8 +34,14 @@
   },
   "ppi": {
    "month": "2026-10",
-   "actual": 0.45,
-   "previous_recomputed": 1.18,
+   "actual": 0.35,
+   "previous_recomputed": 1.41,
+   "unit": "% 环比"
+  },
+  "core_ppi": {
+   "month": "2026-10",
+   "actual": 0.33,
+   "previous_recomputed": 0.82,
    "unit": "% 环比"
   }
  },
