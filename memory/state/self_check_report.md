@@ -1,11 +1,11 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-24T06:32:03Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-24T06:35:27Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-24 06:32 UTC
+自检器 · 2026-11-24 06:35 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
@@ -18,7 +18,7 @@
   guizang-page-skill       hub 208 行   spoke 引用  5 处
   us-options-agent         hub 130 行   spoke 引用 10 处
   restaurant-risk-radar    hub 152 行   spoke 引用 12 处
-  merlin                   hub  80 行   spoke 引用  8 处
+  merlin                   hub  82 行   spoke 引用 10 处
   viral-content-agent      hub 141 行   spoke 引用  7 处
   tiandao                  hub 128 行   spoke 引用  6 处
   critic                   hub 140 行   spoke 引用  2 处
@@ -33,7 +33,7 @@
   sleeper                  hub 164 行   spoke 引用  5 处
   expansion-health-tracker hub 140 行   spoke 引用 11 处
   guizang-social-card-skill hub 338 行   spoke 引用 30 处
-  合计 232 处 spoke 引用，0 处失效
+  合计 234 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -91,7 +91,7 @@
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
   期权基本面名单：上次复核 2026-11-05（19 天前）
-  运行记录：20 份｜超过 2 天未完成 2 份
+  运行记录：21 份｜超过 2 天未完成 2 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
   64 条｜未关闭 3｜已修有测试 35
