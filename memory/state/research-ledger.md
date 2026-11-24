@@ -2034,3 +2034,4 @@ Jev 取代 LLM 链成为主力，LLM 链降为 fallback）。仓库 `mrmps/class
 - **工具/流程改动**：Merlin 新增 `references/quality-rubric.md` + `tools/merlin_check.py`（M0 输入契约、M1 覆盖、M2 答案前置、M3 每答来源、M4 置信、M5 数据截止、M6 附注/索引/反馈、M7 PDF、M8 广度（FAIL：域名≥2×题数、每 Q≥1 一手）、M9 专业口径）+ `tests/test_merlin_check.py` 5 项；M8 已按 rubric 从 WARN 收紧为 FAIL。本单为改造后首个实测。
 - **预测**：不登记（报告无「门槛数字+验证时点」的可证伪判断）。
 - **待核实**：四色卡四色维度/扣分权重；2023「区域教练/19 片区」；家族数量；单店投资额与回本周期；师徒抽成 2021 后是否调整。
+- **交付结论（用户 2026-11-24）**：用户接受当前版本，不送第三轮 Critic；报告 HTML+PDF 已入库（`reports/haidilao_hr_org_2026_Research_Report.*`），证据 `evidence.jsonl` 21 条，运行记录 `dsh-2026-11-24_haidilao_hr_research.md`。
