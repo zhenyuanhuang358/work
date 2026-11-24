@@ -13,7 +13,7 @@ on:
     - cron: '10 13 * * 1'
   workflow_dispatch:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       # 任何一处规则或工具改动，立刻重跑——「改动阈值后必须立刻回放」的落地
       - '.claude/skills/**/SKILL.md'

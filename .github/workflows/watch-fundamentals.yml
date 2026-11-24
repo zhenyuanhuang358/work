@@ -4,7 +4,7 @@ name: Watch Fundamentals
 # SEC 在会话容器出口被封，故在 Actions 跑；复用 burry_screener 的 frames 缓存。
 on:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       - fundamentals_trigger.txt
   workflow_dispatch:

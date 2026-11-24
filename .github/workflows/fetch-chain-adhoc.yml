@@ -3,7 +3,7 @@ name: Fetch Ad-hoc Option Chain
 # 单标的、指定到期日的期权链（scripts/fetch_chain_adhoc.py）。不影响每日扫描的 options_watch.json。
 on:
   push:
-    branches: [claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths: [chain_request.json]
   workflow_dispatch:
 

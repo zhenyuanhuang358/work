@@ -6,7 +6,7 @@ name: Burry Screen
 
 on:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       - burry_trigger.txt
       - scripts/burry_screener.py

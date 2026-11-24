@@ -7,7 +7,7 @@
 
 | 项 | 值 |
 |---|---|
-| 分支 | `claude/install-claude-hud-d51E6`（= GitHub 默认分支；只推这里；不开 PR，除非用户要求） |
+| 分支 | `dsh/work`（2026-11-24 起唯一活跃分支；Claude Code 已停用，`claude/*` 仅归档） |
 | 取数 | 容器封 sec.gov、cboe 等 → 要联网的一律走 GitHub Actions（改触发文件并推送，读产物；见 `AGENTS.md` §5） |
 | 推送 | 工作流会并发提交：推前 `git fetch && git merge` |
 | 用量 | 用户套餐用量有限（11/10）：一件事开一个新会话；能用工具和程序检查解决的，不靠多轮评审 |

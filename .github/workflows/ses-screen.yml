@@ -6,7 +6,7 @@ name: SES Phase 1 Screen
 
 on:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       - ses_screen_trigger.txt
       - scripts/ses_screener.py

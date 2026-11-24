@@ -40,7 +40,7 @@
 
 会话环境常常打不开 sec.gov、cboe、fool.com 等站点。做法是：
 
-1. 改触发文件并推送：
+1. 改触发文件并推送（单轨制：工作流只监听 `dsh/work`）：
    - `pages_request.json`：任意网页 / PDF 原文
    - `financials_request.json`：SEC 10-K 科目
    - `transcript_request.json`：电话会原文
@@ -72,11 +72,12 @@ python3 tools/skill_index.py --check                    # 改了任何 SKILL.md 
 
 结果按四类状态汇报：自动验证通过 / AI 评估通过 / 人工确认通过 / 尚未验证。
 
-## 8. 分支与提交
+## 8. 分支与提交（2026-11-24 单轨制）
 
-- 工作分支：`claude/install-claude-hud-d51E6`，它也是 GitHub 默认分支，定时工作流都跑在这里。
+- **工作分支：`dsh/work`（唯一活跃分支）**。Claude Code 已于 2026-11-24 停用；`claude/*` 分支只作历史归档，不再更新、不再合并。
+- 所有数据工作流（`.github/workflows/*.yml`）的 push 触发已统一为 `dsh/work`；定时任务不受影响。
 - 工作流会并发提交，推送前先 `git fetch && git merge`。
-- 不合并 `claude/us-stock-opportunities-htj5ur`。
+- 提交作者统一 `DSH Agent <dsh-agent@deepseek-harness.local>`；运行记录 `dsh-` 前缀。
 - 不开 PR，除非用户要求。
 
 ## 9. 可编辑 PPTX：PPTAgent（2026-11-08 验证通过，用户认可，已入 CLAUDE.md 路由表；skill 已收进 `.claude/skills/pptagent/`）

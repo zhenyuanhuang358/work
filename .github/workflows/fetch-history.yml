@@ -3,7 +3,7 @@ name: Fetch Price History
 # 日线历史（scripts/fetch_history.py，Yahoo Finance）。
 on:
   push:
-    branches: [claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths: [history_request.json]
   workflow_dispatch:
 

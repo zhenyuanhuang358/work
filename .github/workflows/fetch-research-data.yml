@@ -8,7 +8,7 @@ on:
         required: true
         type: string
   push:
-    branches: [main]
+    branches: [dsh/work]
     paths:
       - research_fetch_trigger.json
 

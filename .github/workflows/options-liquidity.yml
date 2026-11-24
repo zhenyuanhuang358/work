@@ -4,7 +4,7 @@ name: Options Liquidity Screen
 # 报价差与成交量只有盘中才有意义：定时放在周一美东 10:30 后；手动触发时注意时段。
 on:
   push:
-    branches: [main, claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       - liquidity_trigger.txt
       - options_seed.json

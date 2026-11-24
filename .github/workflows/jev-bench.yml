@@ -20,7 +20,7 @@ on:
   #   仓库里早有现成解法：fetch-prices.yml 靠 push 一个 trigger 文件自启动。
   #   照抄它 —— 我 dispatch 不了，但我能 push。
   push:
-    branches: [claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths:
       - jev_bench_trigger.txt
   workflow_dispatch:

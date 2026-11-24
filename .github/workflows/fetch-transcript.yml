@@ -3,7 +3,7 @@ name: Fetch Earnings Call Transcript
 # 电话会原文（scripts/fetch_transcript.py）。会话容器打不开 fool.com / sec.gov，统一在这里抓。
 on:
   push:
-    branches: [claude/install-claude-hud-d51E6]
+    branches: [dsh/work]
     paths: [transcript_request.json]
   workflow_dispatch:
 
