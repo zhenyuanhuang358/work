@@ -1,39 +1,39 @@
 # 自检报告（自动生成，勿手改）
 
-> 由 .github/workflows/self-check.yml 生成 · 2026-11-24T00:45:18Z
+> 由 .github/workflows/self-check.yml 生成 · 2026-11-24T06:21:26Z
 > 手动重跑：`python3 tools/self_check.py` 与 `python3 tools/rule_replay.py`
 
 ## 自检器
 ```
-自检器 · 2026-11-24 00:45 UTC
+自检器 · 2026-11-24 06:21 UTC
 ==========================================================================
 
 [C1] Skill spoke 路径校验  (R-E3)
   humanizer-zh             hub 408 行   spoke 引用  0 处
-  buffett-analyst          hub 161 行   spoke 引用 10 处
-  long-running-agent-sop   hub 109 行   spoke 引用  3 处
-  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
-  critic                   hub 140 行   spoke 引用  2 处
-  guizang-page-skill       hub 208 行   spoke 引用  5 处
-  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
-  sunzi-36ji               hub  65 行   spoke 引用  6 处
-  expansion-health-tracker hub 140 行   spoke 引用 11 处
-  tail-risk-monitor        hub 200 行   spoke 引用 12 处
-  earner                   hub 132 行   spoke 引用  6 处
-  coo                      hub 104 行   spoke 引用 11 处
-  tiandao                  hub 128 行   spoke 引用  6 处
-  kami                     hub 210 行   spoke 引用 32 处
-  huashu-report            hub 179 行   spoke 引用 15 处
-  pptagent                 hub  57 行   spoke 引用  0 处
   burry                    hub 183 行   spoke 引用  8 处
-  restaurant-risk-radar    hub 152 行   spoke 引用 12 处
-  merlin                   hub 181 行   spoke 引用  1 处
-  viral-content-agent      hub 141 行   spoke 引用  7 处
-  sleeper                  hub 164 行   spoke 引用  5 处
-  restaurant-research-skill hub 187 行   spoke 引用 16 处
-  guizang-social-card-skill hub 338 行   spoke 引用 30 处
+  tail-risk-monitor        hub 200 行   spoke 引用 12 处
+  huashu-report            hub 179 行   spoke 引用 15 处
+  sunzi-36ji               hub  65 行   spoke 引用  6 处
+  earner                   hub 132 行   spoke 引用  6 处
+  guizang-page-skill       hub 208 行   spoke 引用  5 处
   us-options-agent         hub 130 行   spoke 引用 10 处
-  合计 224 处 spoke 引用，0 处失效
+  restaurant-risk-radar    hub 152 行   spoke 引用 12 处
+  merlin                   hub  80 行   spoke 引用  8 处
+  viral-content-agent      hub 141 行   spoke 引用  7 处
+  tiandao                  hub 128 行   spoke 引用  6 处
+  critic                   hub 140 行   spoke 引用  2 处
+  long-running-agent-sop   hub 109 行   spoke 引用  3 处
+  coo                      hub 104 行   spoke 引用 11 处
+  restaurant-research-skill hub 188 行   spoke 引用 16 处
+  buffett-analyst          hub 161 行   spoke 引用 10 处
+  guizang-ppt-skill        hub 193 行   spoke 引用 22 处
+  kami                     hub 210 行   spoke 引用 32 处
+  pptagent                 hub  57 行   spoke 引用  0 处
+  michael-polanyi-perspective hub 184 行   spoke 引用 16 处
+  sleeper                  hub 164 行   spoke 引用  5 处
+  expansion-health-tracker hub 140 行   spoke 引用 11 处
+  guizang-social-card-skill hub 338 行   spoke 引用 30 处
+  合计 232 处 spoke 引用，0 处失效
 
 [C2] 孤儿规则检测：规则存在，但有没有承载物
   预测记分（1.1j）                 ✅ 承载物 predictions.md
@@ -48,9 +48,9 @@
   被测阈值 9 个，漂移 0 个
 
 [C4] 预测记分卡  (1.1j：不记分就学不到)
-  明细 18 条｜已记分 16（排除⊘）｜✅9 ❌5｜命中率 56.2%｜待验 28 条
+  明细 18 条｜已记分 16（排除⊘）｜✅9 ❌5｜命中率 56.2%｜待验 29 条
   分档：已分档 2 条｜建档前未分档 14 条（不参与分档统计）
-        待验 28 条中 25 条已填把握档  ← 新登记都在填，规则在执行
+        待验 29 条中 26 条已填把握档  ← 新登记都在填，规则在执行
     高 档  1 条｜✅1 ❌0｜命中率 100.0%
     中 档  1 条｜✅0 ❌0｜命中率 0.0%
   样本 2/20，**不对分档有效性下任何结论**（不到门槛就说「我高把握的准」是拿噪声当发现）
@@ -72,7 +72,7 @@
   产出可证伪判断的 skill   7 个，靠 CLAUDE.md 统一约束（各自 SKILL.md 不重复写，避免 upstream 冲突）
 
 [C7] 分项加总校验  (1.1s：加不平就写明差额去向)
-  共 52 个文件｜加平 2｜舍入或已说明 1｜**差额未说明 0**｜跳过 30
+  共 56 个文件｜加平 2｜舍入或已说明 1｜**差额未说明 0**｜跳过 30
   ✅ 无「加不平且未说明」的情形
   ⚠ 局限：只核**声明过**的关系。当前 1 份数据表有声明、0 份没有。
      忘了声明就不会触发 —— 这是把「每次记得加一遍」降为「记得声明一次」，不是消灭自觉。
@@ -91,16 +91,16 @@
   pipeline-options.md        ✅ 2 个 skill
   pipeline-research.md       ✅ 4 个 skill
   期权基本面名单：上次复核 2026-11-05（19 天前）
-  运行记录：13 份｜超过 2 天未完成 2 份
+  运行记录：20 份｜超过 2 天未完成 2 份
 
 [C11] 反馈台账 memory/state/feedback.jsonl
-  62 条｜未关闭 3｜已修有测试 33
+  64 条｜未关闭 3｜已修有测试 35
 
 [C12] 扫描报告核对 memory/state/scans
   已交付报告 10 份
 
 [C13] 报告机械检查记录 memory/state/report_checks.jsonl
-  11/07 起改动的报告 2 份｜有检查记录 2
+  11/07 起改动的报告 5 份｜有检查记录 2
 
 [C14] 筛选器产物不变量 tools/screen_check.py
   burry：7 项，FAIL 0
@@ -110,16 +110,28 @@
   CPI 未来 45 天：['2026-12-10']
   NFP 未来 45 天：['2026-12-04', '2027-01-08']
   PPI 未来 45 天：['2026-12-15']
-  FOMC 未来 9 次｜来源 2026-11-23T16:05:34+00:00｜错误 None
+  FOMC 未来 9 次｜来源 2026-11-24T04:52:35+00:00｜错误 None
 
 [C16] 天道决策卡 memory/state/tiandao/cards/
   共 1 张
 
 ==========================================================================
-发现 10 项：
+发现 14 项：
 
   [P1] predictions.md
         3 条预测已到验证时点但仍标「待验」：2026-11-13 XLE 收盘不低于 63（11/13 收盘；z 1.33；2026-11-20 UBER 收盘不低于 62（11/20 收盘；z 1.2；2026-11-13 AMD 收盘不低于 442.5（11/13 收盘；用户自
+
+  [P1] FB-20261124-M02
+        指向的测试不存在：tests/test_merlin_check.py::test_m10_evidence_gap_fails；fixtures good/bad 回归（测试被删或改名，修复失去保护）
+
+  [P1] reports/haidilao_2027_dd_Research_Report.html
+        交付的报告没跑过 report_check --record（Critic Step 0）
+
+  [P1] reports/haidilao_h1_2026_review_Research_Report.html
+        交付的报告没跑过 report_check --record（Critic Step 0）
+
+  [P1] reports/haidilao_hr_org_2026_Research_Report.html
+        交付的报告没跑过 report_check --record（Critic Step 0）
 
   [P2] memory/state/runs
         运行记录烂尾：2026-11-12_options_daily.md（未写状态，12 天） — 续跑或标「放弃」
@@ -152,66 +164,4 @@
 
 ## 规则回放
 ```
-规则回放 · 86 个交易日 · 2026-08-03 至 2026-11-24
-==============================================================================
-
-[1] 各指标在三档中的停留比例（死条款 / 恒触发条款检测）
-  term_structure   绿  82.6%   黄   7.0%   红  10.5%   观测 0.77–1.18  首档阈值 0.95  距极值 -19.3%
-                   └ 近 20 日非绿档占比 70%（常驻线 80%）
-  skew             绿  15.1%   黄  53.5%   红  31.4%   观测 126.41–168.59  首档阈值 140  距极值 -17.0%
-                   └ 近 20 日非绿档占比 90%（常驻线 80%）  → 判为常驻项，应剔除出共振计数
-  vvix             绿  75.6%   黄  17.4%   红   7.0%   观测 82.59–141.93  首档阈值 100  距极值 -29.5%
-                   └ 近 20 日非绿档占比 75%（常驻线 80%）
-  vix              绿  86.0%   黄   4.7%   红   9.3%   观测 14.21–37.70  首档阈值 20  距极值 -46.9%
-                   └ 近 20 日非绿档占比 60%（常驻线 80%）
-
-[2] 灯色分布
-  绿灯   62 天   72.1%
-  黄灯    2 天    2.3%
-  红灯   22 天   25.6%
-
-[3] 非绿档由谁贡献（共振规则的真实基础）
-  term_structure    15/86 天贡献非绿档  ( 17.4%)
-  skew              73/86 天贡献非绿档  ( 84.9%)
-  vvix              21/86 天贡献非绿档  ( 24.4%)
-  vix               12/86 天贡献非绿档  ( 14.0%)
-
-  非绿档组合分布：
-    skew                                52 天   60.5%
-    （全绿）                                11 天   12.8%
-    skew + term_structure + vix + vvix  10 天   11.6%
-    skew + vvix                          8 天    9.3%
-    skew + term_structure                2 天    2.3%
-    term_structure + vix + vvix          2 天    2.3%
-    skew + term_structure + vvix         1 天    1.2%
-
-[4] 加速度条款触发率（1.1o 的门槛校准检查）
-  任一触发：15/86 天  (17.4%)
-    term_structure   1d >10%    2 天    2.3%
-    term_structure   3d >20%    0 天    0.0%
-    skew             1d >10%    0 天    0.0%
-    skew             3d >20%    0 天    0.0%
-    vvix             1d >10%    6 天    7.0%
-    vvix             3d >20%    3 天    3.5%
-    vix              1d >10%    9 天   10.5%
-    vix              3d >20%   11 天   12.8%
-
-  各指标平均单日绝对变动（门槛是否该共用的依据）：
-    term_structure   3.07%   (10% 门槛 = 其常态的 3.3 倍)
-    skew             1.58%   (10% 门槛 = 其常态的 6.3 倍)
-    vvix             4.83%   (10% 门槛 = 其常态的 2.1 倍)
-    vix              6.59%   (10% 门槛 = 其常态的 1.5 倍)
-
-[5] 期限溢价开窗率（VIX3M/VIX ≥ 1.20）
-  开窗 22/86 天  (25.6%)   区间 0.849 – 1.295
-
-[6] 阈值漂移检查（本脚本 vs SKILL.md）
-  未发现漂移
-
-==============================================================================
-发现 1 项，按严重度排列：
-
-  1. [常驻项] skew
-     近 20 个交易日 90% 处于非绿档（全期 85%）— 它是常态水平不是异常信号，在共振计数里构成常驻 +1，使「≥2 项共振」退化为「≥1 项」。按 SKILL.md「常驻项剔除」应降为观察项
-
 ```
