@@ -60,6 +60,7 @@ description: |
 | 模式 B（客户提纲研究） | `references/mode-b.md` |
 | 来源/证据/抓原文/页码口径 | `references/evidence-and-sources.md` |
 | HTML/PDF/交付核对 | `references/output-spec.md` |
+| 客户调研决策类（尽调/立项/访谈决策） | `references/decision-mode.md`（假设台账/三角验真/红队/决策备忘 + `tools/dr_state.py` 门禁） |
 | 交付前评审 / 质量争议 | `references/critic-checklist.md` |
 | 质量问题归因（症状→检查项） | `references/quality-rubric.md` |
 

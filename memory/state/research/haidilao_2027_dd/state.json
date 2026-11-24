@@ -1,0 +1,38 @@
+{
+ "task": "haidilao_2027_dd",
+ "decision": "投资机构是否按「2027 开店加速+副品牌放量」给海底捞估值溢价（12–15x PE）",
+ "decision_confirmed": true,
+ "phase": "done",
+ "loops": {
+  "source_rounds": 0,
+  "reframes": 1
+ },
+ "budget": {
+  "minutes_max": 90,
+  "sources_max": 30,
+  "pages_max": 8
+ },
+ "gates": {
+  "frame": {
+   "pass": true,
+   "gaps": []
+  },
+  "source": {
+   "pass": true,
+   "gaps": []
+  },
+  "triangulate": {
+   "pass": true,
+   "gaps": []
+  },
+  "redteam": {
+   "pass": true,
+   "gaps": []
+  },
+  "synthesize": {
+   "pass": true,
+   "gaps": []
+  }
+ },
+ "reframe_note": "H3 客单继续下滑触发回环 2：决策条件加严为「同店+客单双止跌 + 大排档单店经济可复算」"
+}
