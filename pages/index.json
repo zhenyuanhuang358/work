@@ -638,5 +638,29 @@
   "title": "海底捞2022年度财报发布",
   "chars": 7533,
   "error": null
+ },
+ "https://m.jiemian.com/article/14999765.html": {
+  "url": "https://m.jiemian.com/article/14999765.html",
+  "fetched_at": "2026-11-24T06:01:11+00:00",
+  "file": "pages/m_jiemian_com_article_14999765_html_04593e.txt",
+  "title": "海底捞“红石榴计划”店数减至183家，对加盟业务更审慎，战略性寻求获取优质资产 | 界面 · 财经号",
+  "chars": 2590,
+  "error": null
+ },
+ "https://wap.stockstar.com/detail/IG2026090200018239": {
+  "url": "https://wap.stockstar.com/detail/IG2026090200018239",
+  "fetched_at": "2026-11-24T06:01:13+00:00",
+  "file": "pages/wap_stockstar_com_detail_ig2026090200018239_ae615b.txt",
+  "title": null,
+  "chars": 0,
+  "error": "RuntimeError('正文过短 266 字符（可能需要登录或被拦）')"
+ },
+ "https://hk.investing.com/news/stock-market-news/article-1652919": {
+  "url": "https://hk.investing.com/news/stock-market-news/article-1652919",
+  "fetched_at": "2026-11-24T06:01:14+00:00",
+  "file": "pages/hk_investing_com_news_stock_market_news_article_1652919_94b1ea.txt",
+  "title": null,
+  "chars": 0,
+  "error": "HTTPError('403 Client Error: Forbidden for url: https://hk.investing.com/news/stock-market-news/article-1652919')"
  }
 }
