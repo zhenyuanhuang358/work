@@ -71,14 +71,16 @@ description: |
 
 若公司名不明确，询问："请确认研究标的公司名称"
 
+**开工前先产出 `outline_map`（M0，硬性）**：写 `memory/state/research/<task>/outline_map.md`，逐题四列——客户原问 / 真实想问（决策场景）/ 答案形态 / 数据需求与可获取性；**交用户确认后再开搜**。没有这一步就是答非所问的高发区（2026-11-24 用户投诉「写不到痛点、答非所问」）。规范见 `references/quality-rubric.md`。
+
 ### 五智能体流程（均为 AI 逻辑，无外部脚本）
 
 ```
 提纲 → Orchestrator（分类问题：事实类/推断类/争议类）
-     → Scout 情报员（WebSearch，每个问题 2-3 个来源，采集原始情报）
+     → Scout 情报员（WebSearch 找线索 + pages/ 抓原文；每个问题 ≥2 个来源，其中 ≥1 个原文/一手；写 evidence.jsonl：Q / 结论 / 来源URL / pages文件 / 原文摘录 / 日期）
      → Analyst 分析师 + Forensic 侦探（并行推理提炼，输出结论和异常信号）
      → Strategist 战略家（汇总，逐条回答提纲问题）
-     → Critic 评审（独立视角验证，标注高/中/低置信度，出具裁定）
+     → Critic 评审（**必须独立上下文**：新会话或子代理；按 references/quality-rubric.md 五维打分，出具 PASS/CONDITIONAL/REWRITE 并落盘 critic_verdict.json；两轮不过停下问用户）
 ```
 
 生成 HTML 报告：`reports/{SLUG}_Research_Report.html`，用 `SendUserFile` 推送，附「高置信 X 条 / 中置信 Y 条 / 低置信 Z 条 · [data_verdict]」
@@ -105,6 +107,7 @@ description: |
 
 **通用要求**：
 - 零 Markdown 符号，格式全部 HTML/CSS，中英双语
+- **报告首段或标题下写明「数据截止」日期（M5，硬性）**；数据日期与来源日期不一致时必须标明
 - 视觉规范与 earner 报告一致（ink/paper/copper/gold 色板，IM Fell English + Songti SC）
 - 反馈链接必附：裁定/结论区块下方加反馈入口
   `https://spontaneous-youtiao-b9cde9.netlify.app?product=merlin&report={slug}`
@@ -157,13 +160,14 @@ description: |
 □ 访谈问题是否可被受访者回答？**问「贵司战略是什么」等于没问。**
 □ 有没有把二手源当一手用？**期间错标高发，必须用已知事实去戳它。**
 □ 红线检查：是否涉及受访者前雇主未公开的合同条款、采购计划、上市公司未公开经营数据？
+□ 机械检查：`python3 tools/merlin_check.py <报告> --outline <outline.json>` —— M1–M7 必须 0 FAIL；M8（搜索广度）/M9（专业口径）逐条处理
 ```
 
 ## Spoke 加载表
 
 | 场景 | 加载文件 |
 |------|---------|
-| 本 Hub 自洽，当前无外部 spoke 文件 | — |
+| 每次交付前 / 质量争议 / 改流程 | `references/quality-rubric.md`（症状→检查项、答案结构、来源矩阵、Critic 评分表） |
 
 > 所有分析逻辑（五维度推理、五智能体流程、HTML 输出规范）均内嵌于本 SKILL.md。若未来拆分参考资料（如访谈问题库、行业数据源索引），在此处新增对应行并创建 `references/` 文件。
 
