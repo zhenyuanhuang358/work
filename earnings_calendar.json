@@ -1,8 +1,8 @@
 {
- "updated_at": "2026-11-25T16:18:48+00:00",
+ "updated_at": "2026-11-28T00:20:15+00:00",
  "window": [
-  "2026-11-25",
-  "2027-01-24"
+  "2026-11-28",
+  "2027-01-27"
  ],
  "tickers": {
   "INTC": {
@@ -127,7 +127,12 @@
   },
   "AAL": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-25",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "PFE": {
@@ -267,12 +272,22 @@
   },
   "GM": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-27",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "T": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-26",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "KO": {
@@ -282,7 +297,12 @@
   },
   "CMCSA": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-27",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "PEP": {
@@ -302,7 +322,12 @@
   },
   "UPS": {
    "source": "finnhub",
-   "earnings": [],
+   "earnings": [
+    {
+     "date": "2027-01-26",
+     "hour": "amc"
+    }
+   ],
    "errors": []
   },
   "PDD": {

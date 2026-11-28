@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-25T16:20:03+00:00",
+ "updated_at": "2026-11-28T00:21:25+00:00",
  "schedule": [
   {
    "time": "2026-11-23T16:00:00-05:00",
@@ -56,126 +56,9 @@
    "title": "Barr, Investing in America’s Underserved Communities",
    "where": "Speech At Making Missing Markets: Catalyzing Capital and Igniting Innovation, Federal Reserve Bank of New York, New York, New York",
    "url": "https://www.federalreserve.gov/newsevents/speech/barr20261118a.htm"
-  },
-  {
-   "time_utc": "2026-11-17T14:10+00:00",
-   "title": "Waller, Considerations at the Intersection of Payments and Tokenized Markets",
-   "where": "Speech At “Navigating the Future of Banking and Payments,” The Clearing House Annual Conference 2026, New York, New York",
-   "url": "https://www.federalreserve.gov/newsevents/speech/waller20261117a.htm"
-  },
-  {
-   "time_utc": "2026-11-16T17:00+00:00",
-   "title": "Warsh, Opening Remarks",
-   "where": "Speech At the Productivity and Jobs Task Force Conference, hosted by the Federal Reserve Board and the Federal Reserve Bank of San Francisco, San Francisco, California",
-   "url": "https://www.federalreserve.gov/newsevents/speech/warsh20261116a.htm"
-  },
-  {
-   "time_utc": "2026-11-16T10:00+00:00",
-   "title": "Barr, Some Potential Financial Stability Implications of Artificial Intelligence",
-   "where": "Speech At the Seventh Annual Association for Computing Machinery International Conference on Artificial Intelligence in Finance, Milan, Italy",
-   "url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm"
   }
  ],
- "headlines": [
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-25T15:06+00:00",
-   "source": "bloomingbit",
-   "headline": "Fed’s Bowman Says Regulation Must Keep Pace With AI, Digital Asset Innovation - bloomingbit",
-   "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBZdzVrUkNaTjh5SThXMU9FZU5lUk9kMlEzUlpteFhEb0NyWlI5bDhfTkVQTjVDNWFZY0ZYRERrT1ZMck9aX19wamdrQTVvV2RDZ3hRaQ?oc=5"
-  },
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-25T14:59+00:00",
-   "source": "Crypto Briefing",
-   "headline": "Fed’s Michelle Bowman calls for regulatory clarity on AI and digital assets - Crypto Briefing",
-   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOT29ZLTVGdmdzQkszVDFZRmxuZGFjc0ZLeHk4UWhCY0ZRQnhiaWtfbnBRcjlmZGJIdExsWHlBVHhTZjVBT2drbk1JQXdHeW9GRExpYVRJZVNtSXc1X0dEclY0T0NKNkhORkxNa3hIZUVFbU5ZNEZLT0pad1RkMkE3RA?oc=5"
-  },
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-25T13:30+00:00",
-   "source": "IndexBox",
-   "headline": "Fed's Bowman Urges Latin American Regulators to Prioritize Material Risks - News and Statistics - IndexBox",
-   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxORTJuU01CazRNdkx0UDd1RjJNOEtmUjI2TTZ6SkNzMnNsT2JyX08xUlp6R2YzSkpjUGV0b2xjRVduN054RWRvZDhQVHJHYUE0T2hkN2dyYzR3RXhkWmZwRmo0NGZ2OFVORjEyQjJhR2VKWURqTXEyNER1WXNjN1BTMGJsak13Z0VwVjJtVGprZU80RE0?oc=5"
-  },
-  {
-   "speaker": "Warsh",
-   "time_utc": "2026-11-25T12:26+00:00",
-   "source": "CNBC",
-   "headline": "Liesman: Nvidia whiplash tests Kevin Warsh’s push to read market signals",
-   "url": "https://www.cnbc.com/2026/11/25/nvidia-kevin-warsh-fed-market-signals.html"
-  },
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-25T12:25+00:00",
-   "source": "American Banker",
-   "headline": "Fed’s Bowman says decisive action key to supervision modernization - American Banker",
-   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPZmxjRkoxNTFsdXJHY1NCcnFUVldOd0RvVmpJdjdfN2ZKVnB3Z0NsX1lNMFBENlBfazltUmkzRWxZQ3NkcWJhcmk2YUl2YXhkLVp4Y3NQN1dwV3dIR1F1aDJ2NktkRmRzZUg2WE9oNDJyRGRfRTRCVkY0X0ZhVlRSbXZBZ1NsLXRHUHdWd2twRGU5Y2NvZnJTN0thU05RVEpadWhONA?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-24T14:52+00:00",
-   "source": "24/7 Wall St.",
-   "headline": "The New York Fed’s John Williams Won’t Rule Out Back-to-Back Rate Hikes - 24/7 Wall St.",
-   "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQYWlCc2tRcGt0d191SHcxaVhjaFBwR204Um01Y3N3eTIzd0hRWlZEMTRBUWctYkxUYUFoN2hZcjVLenBzU1pveHNmVU9DLXpZUFljSXByLXlJTm9WUGgxNDRPMFFOeUJuQ3pFbjNSZWExSnVTd3ZzeGl4VHNycW1vNGFVbjV4SDVqazFucTR1a0w2dm9VYWtTLWtlOGp6bzZVWm85QVR0bDZQR3R2Z1BzQ3Vrcw?oc=5"
-  },
-  {
-   "speaker": "Powell",
-   "time_utc": "2026-11-24T12:01+00:00",
-   "source": "ABC News - Breaking News, Latest News and Videos",
-   "headline": "Fed chair Jerome Powell says he will stay on central bank's board after term expires next month - ABC News - Breaking News, Latest News and Videos",
-   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOVTRuNnNUUkdLNnBuVk9RQTBiS25xcTVBVVpjeFpTaDFUWjJuWFl4QjBkUnp0YkozM3ZXUXRfQ1RSTW1kU2h0OXZiU0M2MHJUQWZBdDNnWVU1am1yb1UxRWlpYWlpN1Y5VUFwd1oxUjF0UlFMeEt3SUx4UURpb1ZpYXY1c0lkYThrLUZtVlpUSWnSAZYBQVVfeXFMUEQwcFlXdjlTV3lqejM2WFFIQ25UWlhUM1FQNjIzTGtGV2ZQaElPZ2Izd0gwR2lLZ1pSdTZhWDVXMTg4d0V6RGxZdnZSak9walllOHRDOFlUT2pYSUJrdjc0NFYyekpfdjVIQUpVaDZjRGpJMlVwLXFHdFhnYzN5b2g3cWpZNkl5Ty11U29pbHllLUNLVjdR?oc=5"
-  },
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-24T11:49+00:00",
-   "source": "TheBanker.com",
-   "headline": "Fed’s Bowman investigated over BofA dinner; StanChart probed investment banking chief over staff complaints - TheBanker.com",
-   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFB4MXA2bTl6WXFTNmFwMi1FYXVXTjA4REpKMnNBNlE5cjkyVmdYcnYtYmdtSlJoNkNLV0VYcDlsVkZoZFlVaWpHUDV6NWFhT2tMSnVIamxjZFhUaVRYekxQTTVzSW9Ba3dBWmJBYWVSamh6QjF5VTdGeFB3?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-23T23:38+00:00",
-   "source": "Reuters",
-   "headline": "Fed's Williams says inflation still too high, signals more rate hikes possible - Reuters",
-   "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNa3lvbHFTMGFKUm9paUJYVzFoQzd1QnQtSzAtTlZmSlFyRW5Sc1hic3p2MVV0VWVrYjFkNDdQZlFTUWMzZGFueG5yMTVMcGhLWUxwQi16Ujk5b2ppMVRWTGowaHlMZDQ4Z19xbWpCQTRFVzFHSHhxeW9kbG80OTVtSEZsb3REX29FRFFPR0xzTnFjYXh6?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-23T22:55+00:00",
-   "source": "Bloomberg",
-   "headline": "Fed’s Williams Says Officials Must Act ‘Over Time’ On Inflation - Bloomberg",
-   "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPd2hFTElab1BSaGQzN2hEczFEakZGaGV3TW00N2laRU0zb3prdDc4am9uR3MwOGtucDNsRU9UT0d6eG5aZjYzcnpIUXRnOGJ0eFhuX0pCRnoyLXJCMEJnMnMtd01xVXd0MVItSVVPUWZ3QzE3UGdTNVVFWkZiUkxoNW9BcG94WnNnQ21FejZnQUs1Nm9HdFMyeUxlazZEY2hOSUhFaFl5dWNUdG5HdDBDM3ZR?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-23T21:27+00:00",
-   "source": "Asset Securitization Report",
-   "headline": "Fed’s Williams says officials must act ‘over time’ on inflation - Asset Securitization Report",
-   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNcU9KckRLaEg5cXdKSjIxWHVrbW84Rjg5bERZbng0TFNxVDBrWkVUcGdiWk80UnpZaUpIZmZ4bDBaaG1DNmtYRkYyT0FlbXNPaGFNRmUtemh0S1p3THhjYjg0RDdrTHRJdG5vbmRqOFpaVVEyS1NRc0xUTU5XQ2daUFd1RVZDZ0tLeGczMEFFVWtNVjdRQUNYSVJ0eEZmTll4S1hnNHZ1TXgzYk9rRERzY0lRMHM?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-23T21:25+00:00",
-   "source": "Yahoo Finance",
-   "headline": "Fed's Williams: Fed must be forward-looking to bring inflation down - Yahoo Finance",
-   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNSkpPSGswM0U3MVZfMHI0TW9Pel9sNi1Mc1VMQ09qYlF3WmNzd3llU3BFeGtsQUJrSHA1VFNsTXdTN004amQtcmtXcGVWMndRLWkxeDlYSko3bWp5cmd3ck9EZlpQeTIxNkpZY3RUX2xpTUJ2anZUUmhoTTN4THZFZy1yWl92M05xYmVfbmgtM2JaNmZqRGUtTzVIVmJ1ZFRvX3R6VEt0dkktNFg2bHRUaVVyRlMzZFVUZENwX3kyMHdQbHNUaHh0OQ?oc=5"
-  },
-  {
-   "speaker": "Bowman",
-   "time_utc": "2026-11-23T21:05+00:00",
-   "source": "Bloomberg",
-   "headline": "Fed’s Watchdog Probes Whether Bowman Broke Communications Rules - Bloomberg",
-   "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNeldtdVNDSGw4TDdRc1hDblF6bmhqWkV2SEw4NTFkNjZWMEg5LXBDOHMyUHVQM1BLRGJJYU1QeEdpTFdYNWpaR25tSFo3ZnVBS1JNOG02Z2dBUWtKUVlndEpCU1lwSWM3VFk1VUhqdDVwU3FnbkFPTzdfd1gyRndXdXV2NmNxcWdBWHp2TGdrR21HNm1ETzVpUkxxWVlpQVhobEFxeUxJZDhMajRsREZDVnBCam0?oc=5"
-  },
-  {
-   "speaker": "Williams",
-   "time_utc": "2026-11-23T21:00+00:00",
-   "source": "CNBC",
-   "headline": "Fed's John Williams indicates higher interest rates likely 'over time' to address inflation - CNBC",
-   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNTEpFREZWNnVpcVBFY3pxbHBnbkFJTWRxZjlBOHNLdFkxb1JEVWdUX2VfWlJhU0dwZEFJc0RUY2w2THFBaWVjbkxpSGRubWxQdHdSYWJFdmc2VVhUX0F1S1gwYXYxcUlsQUY0T0pIQnhhNkNFRXFCWHA3M2xVZWRITtIBhgFBVV95cUxNN0wxOFpVd01FWG9EWlppMC02d1RtcG5wZ1V1a3N1bklHZGFHWDYzUk80cnMwa00yblpXZUdfQV9SMk1fVVRrM0c0OWZuSDlGWjQtN0hUWW1mMTNHVTZObmhSeTllcDZIUE85S2duamlXdE5hNExsamtsaDU2LUJveEF0Q1ZIQQ?oc=5"
-  }
- ],
+ "headlines": [],
  "errors": [],
- "trigger": "scan-2026-11-25T16:18:27+00:00"
+ "trigger": "scan-2026-11-27T17:42:21+00:00"
 }
