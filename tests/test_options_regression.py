@@ -39,7 +39,8 @@ class Base(unittest.TestCase):
         os.chdir(FX)
         oq.NOW = datetime.fromisoformat(ASOF).replace(tzinfo=timezone.utc)
         oq._HV_CACHE.clear()
-        self.chain = json.load(open("options_chain.json"))
+        with open("options_chain.json", encoding="utf-8") as file:
+            self.chain = json.load(file)
 
     def tearDown(self):
         os.chdir(self.cwd)
@@ -62,7 +63,8 @@ class OptionQuote(Base):
 
     def test_fixture_has_hv_for_all_watch(self):
         """fetch_options 用 yfinance 算 hv30 后，60 只应全部有 HV。"""
-        w = json.load(open("options_watch.json"))["tickers"]
+        with open("options_watch.json", encoding="utf-8") as file:
+            w = json.load(file)["tickers"]
         self.assertEqual([t for t in w if not self.chain["tickers"].get(t, {}).get("hv30")], [])
 
     def test_term_premium_gate_blocks_30_45(self):
@@ -134,7 +136,11 @@ class GapStress(Base):
 class TailLight(Base):
     def test_red_with_skew_resident(self):
         """11/05 手算结果：红灯，SKEW 常驻项不计共振，期限溢价 < 1.20 → 30–45 天档关。"""
-        r = tl.compute(json.load(open("tail_history.json")), json.load(open("stock_prices.json")))
+        with open("tail_history.json", encoding="utf-8") as file:
+            history = json.load(file)
+        with open("stock_prices.json", encoding="utf-8") as file:
+            prices = json.load(file)
+        r = tl.compute(history, prices)
         self.assertEqual(r["light"], 2)
         self.assertIn("skew", [m for m, _ in r["resident"]])
         self.assertNotIn("skew", r["non_green"])
@@ -148,27 +154,115 @@ class ScanAndVerify(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.out)
 
-    def scan(self):
+    def scan(self, data_dir=FX):
         subprocess.run([sys.executable, os.path.join(REPO, "tools", "scan.py"), "run", "--bp", "5470", "--asof", ASOF,
-                        "--root", FX, "--history", os.path.join(FX, "tail_history.json"), "--out", self.out],
+                        "--root", data_dir, "--history", os.path.join(FX, "tail_history.json"), "--out", self.out],
                        check=True, capture_output=True)
         sid = "2026-11-05_1745Z"
-        return os.path.join(self.out, sid + ".json"), json.load(open(os.path.join(self.out, sid + ".json")))
+        path = os.path.join(self.out, sid + ".json")
+        with open(path, encoding="utf-8") as file:
+            result = json.load(file)
+        return path, result
 
     def verify(self, sp, text):
         rp = os.path.join(self.out, "r.md")
-        open(rp, "w").write(text)
+        with open(rp, "w", encoding="utf-8") as file:
+            file.write(text)
         with contextlib.redirect_stdout(io.StringIO()):
             import verify_scan
             code = verify_scan.run(rp, sp)
-        return code, {c["id"]: c["pass"] for c in json.load(open(sp))["verification"]["checks"]}
+        with open(sp, encoding="utf-8") as file:
+            scan = json.load(file)
+        return code, {c["id"]: c["pass"] for c in scan["verification"]["checks"]}
 
     def test_scan_gates(self):
-        """11/05：红灯 + 非农前一日 → can_open False，两条理由都要写出。四份产物 trigger 对上。"""
+        """11/05：红灯 + 非农前一日 → can_open False，两条理由都要写出。六份产物 trigger 对上。"""
         _, s = self.scan()
         self.assertFalse(s["can_open"])
         self.assertTrue(any("红灯" in w for w in s["why_not"]) and any("Non-Farm" in w for w in s["why_not"]))
         self.assertTrue(s["freshness"]["ok"])
+        self.assertEqual(sum(1 for key, value in s["freshness"].items()
+                             if key.endswith(".json") and value["trigger_ok"]), 6)
+
+    def test_same_run_twenty_times_reuses_one_manifest(self):
+        for _ in range(20):
+            self.scan()
+        path = os.path.join(self.out, "2026-11-05_1745Z.manifest.json")
+        with open(path, encoding="utf-8") as file:
+            manifest = json.load(file)
+        self.assertEqual(manifest["stage"], "DRAFTED")
+        self.assertEqual([row["stage"] for row in manifest["history"]],
+                         ["CREATED", "ANALYZING", "ANALYZED", "DRAFTED"])
+
+    def test_reserve_twenty_times_keeps_one_trigger(self):
+        command = [sys.executable, os.path.join(REPO, "tools", "scan.py"), "reserve",
+                   "--run-id", "repeat-001", "--out", self.out]
+        for _ in range(20):
+            subprocess.run(command, check=True, capture_output=True)
+        receipts = [name for name in os.listdir(self.out) if name.endswith(".fetch.json")]
+        self.assertEqual(receipts, ["repeat-001.fetch.json"])
+        with open(os.path.join(self.out, receipts[0]), encoding="utf-8") as file:
+            receipt = json.load(file)
+        self.assertEqual(receipt["trigger"], "scan-repeat-001")
+        self.assertEqual(receipt["status"], "RESERVED")
+
+    def test_interrupted_analysis_resumes_after_input_is_restored(self):
+        data_dir = os.path.join(self.out, "interrupted")
+        shutil.copytree(FX, data_dir)
+        chain_path = os.path.join(data_dir, "options_chain.json")
+        backup_path = os.path.join(data_dir, "options_chain.backup.json")
+        os.replace(chain_path, backup_path)
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.scan(data_dir)
+        manifest_path = os.path.join(self.out, "2026-11-05_1745Z.manifest.json")
+        with open(manifest_path, encoding="utf-8") as file:
+            self.assertEqual(json.load(file)["stage"], "FAILED_ANALYSIS")
+        os.replace(backup_path, chain_path)
+        self.scan(data_dir)
+        with open(manifest_path, encoding="utf-8") as file:
+            manifest = json.load(file)
+        self.assertEqual(manifest["stage"], "DRAFTED")
+        self.assertIn("FAILED_ANALYSIS", [row["stage"] for row in manifest["history"]])
+
+    def test_missing_sixth_artifact_blocks_freshness(self):
+        data_dir = os.path.join(self.out, "missing-voices")
+        shutil.copytree(FX, data_dir)
+        os.unlink(os.path.join(data_dir, "voices.json"))
+        _, scan = self.scan(data_dir)
+        self.assertFalse(scan["freshness"]["ok"])
+        self.assertFalse(scan["gates"]["data"]["pass"])
+        self.assertIn("voices.json 不是本次触发", "；".join(scan["why_not"]))
+
+    def test_weekend_is_a_hard_market_gate(self):
+        subprocess.run([sys.executable, os.path.join(REPO, "tools", "scan.py"), "run", "--bp", "5470",
+                        "--asof", "2026-11-07T15:00:00", "--root", FX,
+                        "--history", os.path.join(FX, "tail_history.json"), "--out", self.out],
+                       check=True, capture_output=True)
+        with open(os.path.join(self.out, "2026-11-07_1500Z.json"), encoding="utf-8") as file:
+            scan = json.load(file)
+        self.assertFalse(scan["can_open"])
+        self.assertEqual(scan["market_session"]["status"], "CLOSED_WEEKEND")
+        self.assertIn("美股周末休市", scan["why_not"])
+
+    def test_thanksgiving_is_a_hard_market_gate(self):
+        import scan as scan_tool
+        result = scan_tool.market_session(datetime(2026, 11, 26, 17, 0, tzinfo=timezone.utc))
+        self.assertFalse(result["pass"])
+        self.assertEqual(result["status"], "CLOSED_HOLIDAY")
+
+    def test_minutes_are_reminders_and_rate_decisions_still_gate(self):
+        data_dir = os.path.join(self.out, "data")
+        shutil.copytree(FX, data_dir)
+        time = "2026-11-06T14:00:00-05:00"
+        with open(os.path.join(data_dir, "fed_speak.json"), "w") as file:
+            json.dump({"usd_high": [
+                {"time": time, "title": "FOMC Meeting Minutes"},
+                {"time": time, "title": "FOMC Rate Decision"},
+            ]}, file)
+        _, scan = self.scan(data_dir)
+        self.assertIn("FOMC Meeting Minutes", [event["title"] for event in scan["events_next"]])
+        self.assertNotIn("FOMC Meeting Minutes", [event["title"] for event in scan["event_eve"]])
+        self.assertIn("FOMC Rate Decision", [event["title"] for event in scan["event_eve"]])
 
     def test_scan_rows_carry_assign_and_pressure(self):
         """11/06 前后对比：旧主文件要求的 R5 接货额、第 4 条事件压力，新底稿里必须有字段承载。"""
@@ -176,12 +270,14 @@ class ScanAndVerify(unittest.TestCase):
         x = s["sides"]["P"]["ok"][0]
         self.assertEqual(x["assign_1"], round(x["strike"] * 100))
         self.assertIn("pressure", x)
+        self.assertIn("earnings_check", x)
         import scan
         self.assertTrue(scan.PRESSURE_RE.search("Acme announces $2 billion secondary offering"))
         self.assertIsNone(scan.PRESSURE_RE.search("Uber Beat on 20% Bookings Growth"))
         # 11/06 回放：TLT 属利率敏感板块，📰 素材必须带上联储讲话；草稿里卖 call 不能写「接货」；同标的多张要提醒第 16 条
         self.assertTrue(all(x.get("fed_channel") for side in "PC" for x in s["sides"][side]["ok"] if x["ticker"] == "TLT"))
-        draft = open(os.path.join(self.out, "2026-11-05_1745Z.draft.md")).read()
+        with open(os.path.join(self.out, "2026-11-05_1745Z.draft.md"), encoding="utf-8") as file:
+            draft = file.read()
         call_blocks = [b for b in draft.split("\n- ") if "C｜收入" in b]
         self.assertTrue(call_blocks and all("接货" not in b for b in call_blocks))
         self.assertIn("第 16 条", draft)
@@ -191,22 +287,38 @@ class ScanAndVerify(unittest.TestCase):
         sp, s = self.scan()
         s["macro_today"] = [{"key": "payrolls", "name": "非农就业", "month": "2026-10", "actual": 165.0, "unit": "千人",
                              "forecast": "65K", "surprise": 100.0}]
-        json.dump(s, open(sp, "w"), ensure_ascii=False)
-        base = "结论：今天不开新仓。\n\n## 今日消息面\n- 非农{}\n\n## 请在平台核实\n- 可取现金\n"
+        with open(sp, "w", encoding="utf-8") as file:
+            json.dump(s, file, ensure_ascii=False)
+        base = (f"结论：今天不开新仓。\n运行编号：{s['run_id']}｜数据时点：{s['asof']}\n\n"
+                "## 今日消息面\n- 非农{}\n\n## 当前持仓\n- 状态：未确认\n\n"
+                "## 公司关键数据发布\n- 无\n\n## 候选\n- 无\n\n## 请在平台核实\n- 可取现金\n")
         _, r = self.verify(sp, base.format("偏强，具体数字未核实"))
         self.assertFalse(r["V12"])
-        s = json.load(open(sp))
+        with open(sp, encoding="utf-8") as file:
+            s = json.load(file)
         _, r = self.verify(sp, base.format("就业 +165 千人（预期 65K）"))
         self.assertTrue(r["V12"])
 
     def test_verify_good_report_passes(self):
         sp, s = self.scan()
         x = next(x for x in s["sides"]["P"]["ok"] if x["ticker"] == "TLT")
-        good = (f"结论：今天不开新仓，红灯且明日非农。\n\n## 今日消息面\n- Hammack、Barkin 主张加息 → 利率敏感板块不利\n\n"
+        good = (f"结论：今天不开新仓，红灯且明日非农。\n运行编号：{s['run_id']}｜数据时点：{s['asof']}\n\n"
+                "## 今日消息面\n- Hammack、Barkin 主张加息 → 利率敏感板块不利\n\n"
+                "## 当前持仓\n- 状态：未确认\n\n"
+                "## 公司关键数据发布\n- 无\n\n"
                 f"## 候选\n- 卖出 TLT {x['strike']:g} put（看跌）\n  代码 TLT {x['expiry']} {x['strike']:g}P｜收入 ${x['income']:.0f}/张\n  止损亏损 1/3/6 张：…\n"
+                "  财报/关键事件：持有期内无财报｜新闻压力初筛未命中\n"
                 f"  跳空：…\n  📰 鹰派讲话 → 不利\n\n## 请在平台核实\n- 可取现金\n")
         code, r = self.verify(sp, good)
         self.assertEqual(code, 0, r)
+        with open(sp, encoding="utf-8") as file:
+            verified = json.load(file)
+        self.assertEqual(verified["delivery_status"], "VERIFIED_WITH_BLOCKS")
+        self.assertFalse(verified["actionable"])
+        with open(os.path.join(self.out, "r.md.receipt.json"), encoding="utf-8") as file:
+            receipt = json.load(file)
+        self.assertTrue(receipt["verification_passed"])
+        self.assertEqual(receipt["report_sha256"], verified["verification"]["report_sha256"])
 
     def test_verify_catches_bad_report(self):
         """防：红灯写开、编造合约、漏 📰、数字对不上、残留占位。"""
@@ -217,7 +329,7 @@ class ScanAndVerify(unittest.TestCase):
                f"- HOOD 2026-11-27 55P｜收入 $49/张\n\n## 请在平台核实\n")
         code, r = self.verify(sp, bad)
         self.assertEqual(code, 1)
-        for vid in ("V2", "V4", "V5", "V6", "V7", "V9", "V11"):
+        for vid in ("V2", "V4", "V5", "V6", "V7", "V9", "V11", "V15"):
             self.assertFalse(r[vid], vid)
 
 
@@ -228,7 +340,8 @@ class FedSpeakFilter(unittest.TestCase):
         pat = re.compile(r"Fed|FOMC|[Rr]ate|[Ii]nflation|[Pp]olicy")
         self.assertIsNone(pat.search("Cheryl 'Sherrie' Anne Williams Okert - The Latrobe Bulletin"))
         self.assertIsNotNone(pat.search("Fed's Hammack favors gradual rate-hike path to lower inflation - Reuters"))
-        src = open(os.path.join(REPO, "scripts", "fetch_fed.py")).read()
+        with open(os.path.join(REPO, "scripts", "fetch_fed.py"), encoding="utf-8") as file:
+            src = file.read()
         self.assertIn("同姓误匹配", src)  # 过滤仍在生产代码里
 
 

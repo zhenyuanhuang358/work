@@ -28,6 +28,16 @@ N = NormalDist()
 ET = ZoneInfo("America/New_York")
 
 
+def load_json(path):
+    with open(path, encoding="utf-8") as file:
+        return json.load(file)
+
+
+def load_jsonl(path):
+    with open(path, encoding="utf-8") as file:
+        return [json.loads(line) for line in file if line.strip()]
+
+
 def put_price(s, k, sig, t):
     d1 = (math.log(s / k) + 0.5 * sig * sig * t) / (sig * math.sqrt(t))
     return k * N.cdf(-(d1 - sig * math.sqrt(t))) - s * N.cdf(-d1)
@@ -58,7 +68,7 @@ _HV_CACHE = {}
 def macro_events(path="memory/state/macro_calendar.json"):
     """{日期: 事件名}：FOMC 决议日 + BLS 人工段（CPI / PPI / NFP）。文件缺失返回空（self_check C15 会报）。"""
     try:
-        cal = json.load(open(path))
+        cal = load_json(path)
     except (OSError, ValueError):
         return {}
     ev = {m["date"]: "FOMC" for m in cal.get("fomc", [])}
@@ -93,7 +103,7 @@ def main():
     if a.asof:
         NOW = datetime.fromisoformat(a.asof).replace(tzinfo=timezone.utc)
 
-    j = json.load(open(a.file))
+    j = load_json(a.file)
     if a.all or not a.ticker:  # 不给 --ticker 默认走汇总（11/05：旧定时指令只写 --right P，免得逐只跑 120 次）
         return summary(a, j)
     r = j["tickers"].get(a.ticker.upper())
@@ -108,7 +118,7 @@ def main_one(a, j, r):
         run(a, j, r)
         return
     try:
-        lo, hi = json.load(open("options_watch.json")).get("dte", [20, 45])
+        lo, hi = load_json("options_watch.json").get("dte", [20, 45])
     except OSError:
         lo, hi = 20, 45
     if a.dte_max:
@@ -142,7 +152,7 @@ def run(a, j, r):
     # 2026-11-05 加：INTC 财报日记错、AMD 未核实就开仓——财报日不能再靠搜索记忆。
     earn_flag = ""
     try:
-        ec = json.load(open("earnings_calendar.json"))["tickers"].get(a.ticker.upper())
+        ec = load_json("earnings_calendar.json")["tickers"].get(a.ticker.upper())
     except (OSError, KeyError, ValueError):
         ec = None
     if ec is None or ec.get("earnings") is None:
@@ -154,7 +164,7 @@ def run(a, j, r):
 
     # 排雷三：基本面反向名单（options-screen.json；段永平 / 伯里原则，2026-11-05）
     try:
-        scr = json.load(open("memory/state/options-screen.json"))
+        scr = load_json("memory/state/options-screen.json")
         black = scr["no_sell_put" if a.right == "P" else "no_sell_call"].get(a.ticker.upper())
     except (OSError, KeyError, ValueError):
         black = None
@@ -174,7 +184,7 @@ def run(a, j, r):
 
     # 排雷四：IV 历史分位（Tastytrade：IV 处在自身高位才卖）。历史不足 15 个交易日时只显示「积累中」
     try:
-        hist = [json.loads(l) for l in open("options_iv_history.jsonl") if l.strip()]
+        hist = load_jsonl("options_iv_history.jsonl")
         ivs = sorted({h["date"]: h["atm_iv"] for h in hist if h["ticker"] == a.ticker.upper() and h.get("atm_iv")}.items())
         ivs = [v for _, v in ivs]
     except OSError:
@@ -197,7 +207,7 @@ def run(a, j, r):
     term_block = False
     if (exp.date() - now.date()).days >= 30:
         try:
-            tr = json.load(open("stock_prices.json"))
+            tr = load_json("stock_prices.json")
             prem = tr["tail_risk"]["vix3m"] / tr["vix"]
             term_block = prem < 1.20
         except (OSError, KeyError, TypeError, ZeroDivisionError):
@@ -271,7 +281,8 @@ def run(a, j, r):
             a.collect.append({"ticker": a.ticker.upper(), "expiry": a.expiry, "strike": k, "bid": b, "ask": ak, "iv": iv,
                               "ivhv": ratio, "z": z, "p_otm": p_otm, "income": b * 100, "margin": margin,
                               "spread": spread, "mark": mark.strip() or "z不够",
-                              "spot": s, "t": t, "right": a.right, "hv30": r.get("hv30"), "move": r.get("move_1y")})
+                              "spot": s, "t": t, "right": a.right, "hv30": r.get("hv30"), "move": r.get("move_1y"),
+                              "earnings_check": earn_flag or "持有期内无财报"})
         print(f"{k:8.2f} {b:6.2f} {ak:6.2f} {mid:6.3f} {iv:6.1%} {(f'{ratio:.2f}' if ratio else '—'):>6} {buf:6.1%} {z:5.2f} {p_otm:7.1%} {b*100:7.0f} {margin:7.0f} {spread:6.0%} {mark}")
     # 链不够宽：最远一档价外仍到不了 z 门槛（高 IV 标的 + 长到期，band 不够）——不能当成「没有合格行权价」
     if zmax is not None and zmax < a.z_min:
@@ -289,7 +300,7 @@ def collect(a, j):
     import contextlib
     import io
     from collections import Counter
-    tick = json.load(open("options_watch.json"))["tickers"]
+    tick = load_json("options_watch.json")["tickers"]
     a.collect, why = [], {}
     for t in tick:
         r = j["tickers"].get(t)

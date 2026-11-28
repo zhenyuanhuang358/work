@@ -1,4 +1,4 @@
-# 美股期权智能体 v1（研究信号版）
+# 美股期权智能体 v2（可恢复研究信号版）
 
 只筛选、只提示、不下单。输入与 GitHub 仓库 `zhenyuanhuang358/work` 的
 `fetch-options` 工作流产出的 `options_chain.json` 完全同格式，可直接接现有
@@ -31,6 +31,26 @@ python3 options-agent/agent.py --file options_chain.json --out options-agent/out
 2026-11-05 起关注清单改为双边（`options_watch.json` 的 `right: "PC"`），
 put/call 在 rows 的 right 字段区分，必须分开定价，不得混用。
 
+## 生产入口与四道门
+
+日常“今日期权”统一走 `tools/scan.py`，不直接把本目录的研究信号当成开仓建议：
+
+```bash
+python3 tools/scan.py reserve --run-id 2026-11-28-001
+# 用返回的 trigger 由现有 GitHub 连接器触发取数后：
+python3 tools/scan.py fetch --trigger scan-2026-11-28-001 --run-id 2026-11-28-001 --bp 5000
+python3 tools/scan.py verify memory/state/scans/2026-11-28-001.md --scan memory/state/scans/2026-11-28-001.json
+
+# 报告验证通过后登记交付；重复执行不会产生第二份回执
+python3 tools/deliver_scan.py \
+  --manifest memory/state/scans/2026-11-28-001.manifest.json \
+  --scan memory/state/scans/2026-11-28-001.json \
+  --report memory/state/scans/2026-11-28-001.report.md \
+  --verification-receipt memory/state/scans/2026-11-28-001.report.md.receipt.json
+```
+
+数据、市场、持仓、报告四道门全部通过，只得到 `READY_FOR_BROKER_CHECK`；它表示可以打开券商核实实时报价和保证金，不表示已经授权下单。当前持仓唯一机器入口是 `memory/state/current_positions.json`。未确认或超过24小时，市场扫描仍可运行，但不输出具体开仓张数。
+
 ## 事件日历（events.json）
 
 美国宏观事件日历（非农、CPI、PPI、FOMC、大选、PCE），日期按 BLS
@@ -38,17 +58,6 @@ put/call 在 rows 的 right 字段区分，必须分开定价，不得混用。
 持有期（扫描日到到期日）：报告头列出窗口内全部事件，每条跨事件的
 信号单独标注「事件窗口」。按 2026-11-03 用户决定：只标注提醒，
 不否决、不改分数。日历需每月核对官方日程后更新 events.json。
-
-## 订单流异动标注（2026-11-11 用户决定加入）
-
-用期权链快照自带的当日成交量与未平仓量，给上榜信号的标的挂异动旗：
-单合约「量/OI 比」与权利金（成交量 × 中间价 × 100）达到阈值即记异动——
-中档：成交 ≥500 张、量/OI ≥0.9、权利金 ≥$5 万；强档：成交 ≥300 张、
-量/OI ≥2.0、权利金 ≥$10 万。报告头汇总有异动的标的，每条相关信号下
-列明异动合约明细与异动权利金在 Put/Call 两侧的分布。与宏观事件同
-口径：只标注提醒，不否决、不改分数（回放验证：加标注前后信号排序、
-分数、否决数完全一致）。局限：链快照无逐笔成交与买卖方向，这是订单
-流的粗粒度代理指标，深实值合约权利金天然偏大也会触发，只作风险提示。
 
 ## 财报日历（earnings.json）
 
